@@ -70,10 +70,11 @@ Select GitHub
 Enter ODOP in search field; press search  
 Select the grumpys/odop  
 Deselect All; Select master; Next  
-Confirm/accept default location (C:\Users\Mike\git\odop)  
+Confirm/accept default location (C:\Users\username\git\odop)  
 Finish  
 
-Create new public / private encryption key or 
+Create new public / private encryption key  
+**or**    
 copy .ssh directory from old computer to new computer  
 This includes `id_rsa` and `id_rsa.pub` files.  
 No need to copy `known_hosts` or other files.  
@@ -88,16 +89,18 @@ File; New; Project ...; General - Project
 Enter project name ODOP  
 Uncheck "Use default location"  
 Select Browse  
-Instead use location: C:\Users\Mike\git\odop  
+Instead use location: C:\Users\username\git\odop  
 
 In Eclipse, test with pushing a trial change:  
 Enter passphrase when requested, 
 add to the Eclipse secure store, setting up a master password (and challenge questions)  
 Verify change successfully pushed.  
 
-<!---
-Configuration change to make searches faster
--->
+#### Configuration change to make Eclipse searches faster 
+For node_modules in **both** client and server,
+in Eclipse Project Explorer, right-click Properties  
+Enable (check in box) attribute "derived".  
+Apply and Close  
 
 _____
 
@@ -105,9 +108,7 @@ _____
 
 Required one time only
 
-<!---
-What ever happened to the npm init ?  
--->
+Note:  We are assuming that an `npm init` step is handled by NVM or is now optional.
 
 cd git\odop  
 npm install  
@@ -120,23 +121,22 @@ In Eclipse, in root directory for the server, create .env file
 In Eclipse Project Explorer panel, 
 select vertical 3 dot icon, select Filters and Customization...  
 uncheck the .* resource entry, click OK to show .env.dist file  
-Copy .env.dist contents into .env file and replace @@@ lines with password info  
-or  
-copy from previous instance.  
+Copy .env.dist contents into .env file and update lines containing @@@ with ID, password, etc. info.  
+**or**  
+copy the entire .env file from a previous instance.  
 
 #### For client:  
-In Eclipse, in client directory,  
-Copy .env.dist contents into .env file and 
-replace @@@ lines with password info.  
-or  
-copy entire .env file from a previous instance.  
+In Eclipse, in client directory, create .env file  
+Copy .env.dist contents into .env file and update lines containing @@@ with ID, password, etc. info.  
+**or**  
+copy the entire .env file from a previous instance.  
 
 _____
 
 ### Development startup in server command window  
 
 cd git\odop  
-npm run harp-compile  (first time and after every doc change)
+npm run harp-compile  (first time and after every doc change)  
 npm run server  
 Acknowledge Windows Firewall pop-up  (one-time only)  
 
@@ -145,7 +145,7 @@ _____
 ### Development startup in client command window  
 
 cd git\odop\client  
-npm start
+npm start  
 
 
 
@@ -179,6 +179,6 @@ _____
 
 ### Release Procedure
 
-See [Release Procedure](release.html)
+See: [Release Procedure](release.html)
 
 
