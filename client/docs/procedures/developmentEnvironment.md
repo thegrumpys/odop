@@ -95,9 +95,15 @@ Enter passphrase when requested,
 add to the Eclipse secure store, setting up a master password (and challenge questions)  
 Verify change successfully pushed.  
 
+<!---
+Configuration change to make searches faster
+-->
+
 _____
 
 ### Preparing for Development  
+
+Required one time only
 
 <!---
 What ever happened to the npm init ?  
