@@ -69,7 +69,7 @@ Clone a Get Repository
 Select GitHub  
 Enter ODOP in search field; press search  
 Select the grumpys/odop  
-Deselect All; Select master; Next  
+Next  
 Confirm/accept default location (C:\Users\username\git\odop)  
 Finish  
 
