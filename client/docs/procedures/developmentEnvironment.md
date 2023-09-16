@@ -102,11 +102,6 @@ in Eclipse Project Explorer, right-click Properties
 Enable (check in box) attribute "derived".  
 Apply and Close  
 
-#### Configure Git to allow heroku and heroku-staging
-Bring up command window; cd git\odop and run the following two commands (no output is given; just assume it works!)
-git remote add heroku https://git.heroku.com/odop.git
-git remote add heroku-staging https://git.heroku.com/odop-staging.git
-
 _____
 
 ### Preparing for Development  
@@ -158,11 +153,17 @@ _____
 
 ### Heroku  
 
+Bring up command window
 **Download CLI tools**  
 npm install -g heroku  
 **test:**  
 heroku --version  
 
+#### Configure Git to allow heroku and heroku-staging
+Bring up command window; cd git\odop and run the following two commands (no output is given; just assume it works!)  
+Note: These two things are used as part of the release process.
+git remote add heroku https://git.heroku.com/odop.git
+git remote add heroku-staging https://git.heroku.com/odop-staging.git
 
 _____
 
