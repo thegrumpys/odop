@@ -159,8 +159,9 @@ _____
 ### Heroku  
 
 Download CLI tools
-
-
+npm install -g heroku
+test
+heroku --version
 
 
 _____
