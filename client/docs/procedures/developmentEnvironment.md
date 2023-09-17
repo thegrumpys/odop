@@ -153,7 +153,7 @@ _____
 
 ### Heroku  
 
-Bring up command window
+Bring up command window  
 **Download CLI tools**  
 npm install -g heroku  
 **test:**  
@@ -161,18 +161,27 @@ heroku --version
 
 #### Configure Git to allow heroku and heroku-staging
 Bring up command window; cd git\odop and run the following two commands (no output is given; just assume it works!)  
-Note: These two things are used as part of the release process.
-git remote add heroku https://git.heroku.com/odop.git
-git remote add heroku-staging https://git.heroku.com/odop-staging.git
+Note: These two things are used as part of the [Release Procedure](release.html).  
+git remote add heroku https://git.heroku.com/odop.git  
+git remote add heroku-staging https://git.heroku.com/odop-staging.git  
 
 _____
 
 ### MySQL  
 
-Download administrative GUI utility MySQL Workbench:
-https://dev.mysql.com/downloads/workbench/
+Download administrative GUI utility MySQL Workbench:  
+https://dev.mysql.com/downloads/workbench/  
+The MSI based MySQL Workbench install process prompts for installation of Visual C++ 2019 Redistributable Package.
 
+**From:**  https://dev.mysql.com/doc/workbench/en/wb-installing-windows.html#wb-installing-windows-requirements  
+The general MySQL Installer download is available at https://dev.mysql.com/downloads/windows/installer/. 
+The MySQL Installer application can install, upgrade, and manage most MySQL products, including MySQL Workbench. 
+Managing all of your MySQL products, including Workbench, with MySQL Installer is the recommended approach. 
+It handles all requirements and prerequisites, configurations, and upgrades.
 
+Documentation is installed on path:  C:\Program Files (x86)\MySQL\MySQL Documentation 8.0
+
+Configure the home page MySQL Connections from the information contained in the .env file.
 
 _____
 
@@ -186,6 +195,7 @@ _____
 
 ### Release Procedure
 
+Test a release to the staging system to confirm that Git & Heroku are configured correctly.  
 See: [Release Procedure](release.html)
 
 
