@@ -1,5 +1,5 @@
 REM *** Production ***
-SET type=production
+SET type="production"
 SET user="@@@ PUT DATABASE USER HERE @@@"
 SET password="@@@ PUT DATABASE PASSWORD HERE @@@"
 SET host="@@@ PUT DATABASE HOST HERE @@@"

@@ -1,12 +1,13 @@
-# Production
+# *** Production ***
+type="production"
 user="@@@ PUT DATABASE USER HERE @@@"
 password="@@@ PUT DATABASE PASSWORD HERE @@@"
 host="@@@ PUT DATABASE HOST HERE @@@"
 database="@@@ PUT DATABASE NAME HERE @@@"
-# Staging
-# Test
-# Development
+# *** Staging ***
+# *** Test ***
+# *** Development ***
 
-filename="${database}_$(date +%F).sql"
+filename="${type}_$(date +%F).sql"
 
-mysqldump --user=$user --password=$password --host=$host $database --no-tablespaces > $filename
+mysqldump --user=$user --password=$password --host=$host $database --no-tablespaces --set-gtid-purged=OFF --single-transaction > $filename
