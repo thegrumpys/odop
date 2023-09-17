@@ -1,13 +1,13 @@
 REM *** Production ***
-SET type="production"
-SET user="@@@ PUT DATABASE USER HERE @@@"
-SET password="@@@ PUT DATABASE PASSWORD HERE @@@"
-SET host="@@@ PUT DATABASE HOST HERE @@@"
-SET database="@@@ PUT DATABASE NAME HERE @@@"
+SET type=production
+SET user=@@@ PUT DATABASE USER HERE @@@
+SET password=@@@ PUT DATABASE PASSWORD HERE @@@
+SET host=@@@ PUT DATABASE HOST HERE @@@
+SET database=@@@ PUT DATABASE NAME HERE @@@
 REM *** Staging ***
 REM *** Test ***
 REM *** Development ***
 
-SET filename="%type%_%date:~10,4%-%date:~4,2%-%date:~7,2%.sql"
+SET filename=%type%_%date:~10,4%-%date:~4,2%-%date:~7,2%.sql
 
 mysqldump --user=%user% --password=%password% --host=%host% %database% --no-tablespaces --set-gtid-purged=OFF --single-transaction > %filename%
