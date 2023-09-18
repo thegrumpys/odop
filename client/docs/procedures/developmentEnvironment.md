@@ -2,8 +2,8 @@
 
 The following steps set up a MS Windows programming development environment with the necessary tools to communicate, share screens, edit and control source code, compile, run and debug the ODOP software.
 
-Source control:  
-Web access to the [GitHub repository](https://github.com/thegrumpys/odop).  
+Source code is maintained on GitHub.  
+Web access is available at the ODOP [GitHub repository](https://github.com/thegrumpys/odop).  
 
 _____
 
