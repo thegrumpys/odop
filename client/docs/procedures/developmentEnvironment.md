@@ -7,13 +7,16 @@ Web access is available at the ODOP [GitHub repository](https://github.com/thegr
 
 _____
 
-Starting with fresh Windows install
+These steps assume a start with a fresh Windows install.  
 
-Install Zoom from https://zoom.us
+_____
 
+### Communications & screen sharing
 
 Slack can be used without an install: https://app.slack.com/  
 There is no problem being logged in to Slack on multiple computers concurrently.
+
+Install Zoom from https://zoom.us
 
 _____
 
@@ -45,7 +48,7 @@ _____
 ### GIT
 
 Go to: https://git-scm.com/download/win  
-Download (Git-2.42.0.2-64-bit.exe)  
+Download (example: Git-2.42.0.2-64-bit.exe)  
 Execute  
 Accept all defaults  
 Install  
@@ -106,7 +109,7 @@ _____
 
 ### Preparing for Development  
 
-Required one time only
+These steps are required one time only.  
 
 Note:  We are assuming that an `npm init` step is handled by NVM or is now optional.
 
@@ -147,8 +150,6 @@ _____
 cd git\odop\client  
 npm start  
 
-
-
 _____
 
 ### Heroku  
@@ -169,12 +170,12 @@ _____
 
 ### MySQL  
 
-Download administrative GUI utility MySQL Workbench:  
+To download the administrative GUI utility named "MySQL Workbench":  
 https://dev.mysql.com/downloads/workbench/  
-The MSI based MySQL Workbench install process prompts for installation of Visual C++ 2019 Redistributable Package.
+The MSI based MySQL Workbench install process prompts for manual installation of the Visual C++ 2019 Redistributable Package.
 
 **From:**  https://dev.mysql.com/doc/workbench/en/wb-installing-windows.html#wb-installing-windows-requirements  
-The general MySQL Installer download is available at https://dev.mysql.com/downloads/windows/installer/. 
+The general MySQL Installer download is available at https://dev.mysql.com/downloads/windows/installer/.  
 The MySQL Installer application can install, upgrade, and manage most MySQL products, including MySQL Workbench. 
 Managing all of your MySQL products, including Workbench, with MySQL Installer is the recommended approach. 
 It handles all requirements and prerequisites, configurations, and upgrades.
@@ -183,6 +184,18 @@ Documentation is installed on path:  C:\Program Files (x86)\MySQL\MySQL Document
 
 Configure the home page MySQL Connections from the information contained in the .env file.
 
+It will be helpful to add the MySQL directory to the Windows path.  
+Use these steps for Windows 11:
+
+#### Setup Path Environment Variable  
+Under System, click on "About".  
+Click on "Advanced system settings".  
+Click "Environment Variables...".  
+The environment variables panel shows up on the screen. ...  
+In System variables, click the New button to add new paths or edit to modify an existing path.  
+add:  C:\Program Files\MySQL\MySQL Workbench 8.0  
+Click OK and OK  
+
 _____
 
 ### Okta  
@@ -190,6 +203,9 @@ _____
 SpringDesignSoftware.org-dev-729070  
 
 Org URL: https://dev-729070.okta.com  
+
+It is necessary to have an Okta account with administrator privileges.  
+The only necessary software configuration happens with npm install
 
 _____
 
