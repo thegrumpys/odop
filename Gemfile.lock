@@ -3,3 +3,6 @@ GEM
 
 PLATFORMS
   ruby
+
+RUBY VERSION
+ ruby 3.1.4
