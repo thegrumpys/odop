@@ -1,19 +1,17 @@
 # Development Environment
 
-The following steps set up a MS Windows programming development environment with the necessary tools to communicate, share screens, edit and control source code, compile, run and debug the ODOP software.
-
-Source code is maintained on GitHub.  
-Web access is available at the ODOP [GitHub repository](https://github.com/thegrumpys/odop).  
-
-_____
-
+The following steps set up a MS Windows programming development environment with the necessary tools to communicate, share screens, edit and control source code, compile, run and debug the ODOP software. 
 These steps assume a start with a fresh Windows install.  
+
+Source code is maintained on GitHub. 
+Web access to source code, milestones, issues and documentation is available at the ODOP [GitHub repository](https://github.com/thegrumpys/odop).  
 
 _____
 
 ### Communications & screen sharing
 
 Slack can be used without an install: https://app.slack.com/  
+The existing Slack "workspace" is thegrumpys:  https://thegrumpys.slack.com/   
 There is no problem being logged in to Slack on multiple computers concurrently.
 
 Install Zoom from https://zoom.us
@@ -176,15 +174,15 @@ The MSI based MySQL Workbench install process prompts for manual installation of
 
 **From:**  https://dev.mysql.com/doc/workbench/en/wb-installing-windows.html#wb-installing-windows-requirements  
 The general MySQL Installer download is available at https://dev.mysql.com/downloads/windows/installer/.  
-The MySQL Installer application can install, upgrade, and manage most MySQL products, including MySQL Workbench. 
+_The MySQL Installer application can install, upgrade, and manage most MySQL products, including MySQL Workbench. 
 Managing all of your MySQL products, including Workbench, with MySQL Installer is the recommended approach. 
-It handles all requirements and prerequisites, configurations, and upgrades.
+It handles all requirements and prerequisites, configurations, and upgrades._
 
-Documentation is installed on path:  C:\Program Files (x86)\MySQL\MySQL Documentation 8.0
+Documentation is installed on the default path:  C:\Program Files (x86)\MySQL\MySQL Documentation 8.0
 
 Configure the home page MySQL Connections from the information contained in the .env file.
 
-It will be helpful to add the MySQL directory to the Windows path.  
+It will be helpful to add the MySQL directory to the Windows path. 
 Use these steps for Windows 11:
 
 #### Setup Path Environment Variable  
@@ -205,7 +203,7 @@ SpringDesignSoftware.org-dev-729070
 Org URL: https://dev-729070.okta.com  
 
 It is necessary to have an Okta account with administrator privileges.  
-The only necessary software configuration happens with npm install
+The only necessary software configuration happens with npm install.  
 
 _____
 
@@ -213,5 +211,4 @@ _____
 
 Test a release to the staging system to confirm that Git & Heroku are configured correctly.  
 See: [Release Procedure](release.html)
-
 
