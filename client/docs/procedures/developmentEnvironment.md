@@ -138,12 +138,13 @@ These steps are required one time only.
 
 Note:  We are assuming that an `npm init` step is handled by NVM or is now optional.
 
-In command window:  
+In server command window:  
     `cd git\odop`  
     `npm install`  
 
-    cd git\odop\client  
-    npm install  
+In client command window:  
+    `cd git\odop\client`  
+    `npm install`  
 
 #### For server:
 In Eclipse, in root directory for the server, create .env file  
