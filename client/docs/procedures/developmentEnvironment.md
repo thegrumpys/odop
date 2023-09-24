@@ -33,7 +33,7 @@ _____
 ### Encryption keys
 
 #### Create new public / private encryption key   
-See: github.com/settings/keys  
+See: https://github.com/settings/keys  
 
 **or**   
 
@@ -52,7 +52,8 @@ Execute
 Accept all defaults  
 Install  
 Finish  
-Test by opening new command window and entering "git"  
+Test by opening new command window and entering:  
+    git  
 
 _____
 
@@ -118,9 +119,9 @@ Click Install button
 Click Finish  
 
 Open command window  
-    nvm -v  
+     nvm -v  
 Observe version  
-    nvm ls  
+     nvm ls  
 
     nvm install 14  
     nvm install 16  
@@ -138,8 +139,8 @@ These steps are required one time only.
 Note:  We are assuming that an `npm init` step is handled by NVM or is now optional.
 
 In command window:  
-    cd git\odop  
-    npm install  
+    `cd git\odop`  
+    `npm install`  
 
     cd git\odop\client  
     npm install  
@@ -165,7 +166,7 @@ _____
 
 In Eclipse, for node_modules in **both** client and server,
 in Eclipse Project Explorer, right-click Properties  
-Enable (check in box) attribute "derived".  
+Enable (put check in box) attribute "derived".  
 Apply and Close  
 
 _____
@@ -190,13 +191,13 @@ _____
 
 In command window  
 **Download Heroku CLI tools**  
-npm install -g heroku  
+    npm install -g heroku  
 **test:**  
-heroku --version  
+    heroku --version  
 
 #### Configure Git to allow heroku and heroku-staging
 Bring up command window;   
-    cd git\odop 
+    cd git\odop  
 Run the following two commands (no output is given; just assume it works!)  
 Note: These two things are used as part of the [Release Procedure](release.html).  
 
@@ -212,8 +213,8 @@ https://dev.mysql.com/downloads/workbench/
 The MSI based MySQL Workbench install process prompts for manual installation of the Visual C++ 2019 Redistributable Package.
 
 **From:**  https://dev.mysql.com/doc/workbench/en/wb-installing-windows.html#wb-installing-windows-requirements  
-The general MySQL Installer download is available at https://dev.mysql.com/downloads/windows/installer/.  
-_The MySQL Installer application can install, upgrade, and manage most MySQL products, including MySQL Workbench. 
+_The general MySQL Installer download is available at https://dev.mysql.com/downloads/windows/installer/.  
+The MySQL Installer application can install, upgrade, and manage most MySQL products, including MySQL Workbench. 
 Managing all of your MySQL products, including Workbench, with MySQL Installer is the recommended approach. 
 It handles all requirements and prerequisites, configurations, and upgrades._
 
