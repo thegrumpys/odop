@@ -1,15 +1,13 @@
 # Install a new ODOP system
 
-This entry is a placeholder for instructions on the steps required to deploy a new ODOP system.   
-
-This procedure will allow a completely independent copy of the ODOP application code and design library database.
+This procedure describes how to create a completely independent copy of the ODOP application code and design library database. 
 Such a new version may be customized for any purpose.
 
 If necessary, install a new [development environment](developmentEnvironment.html).  
 
 Installing a new ODOP system starts with:
 * GitHub
-* Heroku ?
+* Heroku 
 
     1. Create Admin User
     1. Create Dyno
@@ -35,5 +33,5 @@ Installing a new ODOP system starts with:
     React application (via a second buildpack: https://github.com/thegrumpys/create-react-app-inner-buildpack.git), 
     and installs & starts a Nginx webserver.
 
-* MySQL database ?
+* [MySQL database](NewDB.html) 
 
