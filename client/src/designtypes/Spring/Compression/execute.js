@@ -5,6 +5,7 @@ export function getExecuteNames() {
       result = [
         'Br590TestScript',        // Script providing test cases for Issue / Branch 590 (Model validity determination & response) 
         'increasePrecision',      // Script to tweak Preference values for greater precision of search result
+        'mkCompressionStartups',  // Script to make multiple Startup entries from Load Initial State 
         'mkHotWound',             // Script to make Hot Wound Startup file from Load Initial State
         'mkHotWoundMetric',       // Script to make Hot Wound Startup Metric file from Load Initial State Metric
         'mkStartup',              // Script to make Startup file from Load Initial State

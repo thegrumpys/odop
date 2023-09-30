@@ -4,7 +4,7 @@ import {
     changeName,
     changeLabelsValue,
     startup,
-} from '../../store/actionCreators';
+} from '../../../store/actionCreators';
 export const execute = {
     steps: [
         {
@@ -12,16 +12,16 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    This session creates two Piston-Cylinder Startup designs; 
-                    US and metric units. 
+                    This session creates a set of extension spring Startup designs 
+                    including US and metric units.
                     While this session uses the Execute / Demo / Tutorial mechanism 
                     associated with end-user training, it is not intended for end-users. 
                     </p>
                     <p>Setting the following symbol table actions:</p>
                     <ol>
-                        <li>{'loadInitialState("Piston-Cylinder","US"),'}</li>
+                        <li>{'loadInitialState("Spring/Extension","US"),'}</li>
                         <li>{'changeName("Startup"),'}</li>
-                        <li>{'changeLabelsValue([{name: "COMMENT", value: "PCYL default start point - US units ..."}]),'}</li>
+                        <li>{'changeLabelsValue([{name: "COMMENT", value: "Extension Spring default start point - US units ..."}]),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
                     <p>
@@ -31,25 +31,25 @@ export const execute = {
                 </>
             ),
             actions: [
-                loadInitialState("Piston-Cylinder","US"),
+                loadInitialState("Spring/Extension","US"),
                 changeName("Startup"),
-                changeLabelsValue([{name: "COMMENT", value: "PCYL default start point - US units ..."}]),
+                changeLabelsValue([{name: "COMMENT", value: "Extension Spring default start point - US units ..."}]),
                 startup(),
             ]
         },
         {
-            title: "Make metric units Startup model",
+            title: "Make metric units Startup_Metric model",
             text: (
                 <>
                     <p>Setting the following symbol table actions:</p>
                     <ol>
-                        <li>{'loadInitialState("Piston-Cylinder","Metric"),'}</li>
+                        <li>{'loadInitialState("Spring/Extension","Metric"),'}</li>
                         <li>{'changeName("Startup_Metric"),'}</li>
-                        <li>{'changeLabelsValue([{name: "COMMENT", value: "PCYL default start point - Metric units ..."}]),'}</li>
+                        <li>{'changeLabelsValue([{name: "COMMENT", value: "Extension Spring default start point - Metric units ..."}]),'}</li>
                         <li>{'startup(),'}</li>
                     </ol>
                     <p>
-                    Ready to save with the name <b>"Startup_Metric"</b>.
+                    Ready to save with the name <b>"Startup_Metric"</b> now.
                     </p>
                     <p>
                     In order to make these designs available to all users as [ReadOnly],
@@ -61,9 +61,9 @@ export const execute = {
                 </>
             ),
             actions: [
-                loadInitialState("Piston-Cylinder","Metric"),
+                loadInitialState("Spring/Extension","Metric"),
                 changeName("Startup_Metric"),
-                changeLabelsValue([{name: "COMMENT", value: "PCYL default start point - Metric units ..."}]),
+                changeLabelsValue([{name: "COMMENT", value: "Extension Spring default start point - Metric units ..."}]),
                 startup(),
             ]
         }

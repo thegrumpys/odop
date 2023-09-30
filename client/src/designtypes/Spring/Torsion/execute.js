@@ -3,9 +3,10 @@ export function getExecuteNames() {
     var result;
     if (config.node.env !== "production") {
       result = [
+        'mkTorsionStartups',      // Script to make multiple Startup entries from Load Initial State 
         'mkStartup',              // Script to make Startup file from Load Initial State
         'mkStartup_Metric',       // Script to make Startup Metric file from Load Initial State Metric
-        'increasePrecision',             // Script to tweak Preference values for greater precision of search result
+        'increasePrecision',      // Script to tweak Preference values for greater precision of search result
         'welcomeAdv',             // Script to guide novice users - Advanced view; spring type neutral
         'welcomeCalc'             // Script to guide novice users - Calculator view; spring type neutral
       ];
