@@ -1,5 +1,3 @@
-import { displayMessage } from './components/MessageModal';
-
 var lastName = '';
 var lastValue = '';
 var lastSuffix = '';
@@ -27,7 +25,7 @@ function logIt(tag, action, note) {
   })
   .catch(error => {
 //      console.log('error=',error);
-      displayMessage('POST of usage_log of note \''+JSON.stringify(note)+'\' failed with message: \''+error.message+'\'');
+      console.error('POST of usage_log of note \''+JSON.stringify(note)+'\' failed with message: \''+error.message+'\'');
   });
 }
 
