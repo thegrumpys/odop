@@ -527,7 +527,7 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')
         console.log("SERVER: In USE Redirect PATH=",path.join(__dirname, 'client/build', 'index.html'));
         res.redirect(`https://${req.header('host')}${req.url}`);
       } else {
-        console.log("SERVER: In USE next");
+//        console.log("SERVER: In USE next");
         next();
       }
     })
