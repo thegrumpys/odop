@@ -520,7 +520,7 @@ function adjustSat(sat1, sat2, score) {
 }
 
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
-    console.log('process.env.NODE_ENV == production or staging');
+//    console.log('process.env.NODE_ENV == production or staging');
     // If it’s not https already, redirect the same url on https.
     app.use((req, res, next) => {
       if (req.header('x-forwarded-proto') !== 'https') {
@@ -541,7 +541,7 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')
         res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
     });
 } else {
-    console.log('process.env.NODE_ENV != production or staging');
+//    console.log('process.env.NODE_ENV != production or staging');
 }
 
 const port = process.env.PORT || 5000;
