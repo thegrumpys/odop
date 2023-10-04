@@ -292,7 +292,8 @@ ___
 
 Alert entry #ODOP09
 ## No Free Independent Variables 
-If all Independent Variables are in Fixed status, 
+If all [Independent Variables](/docs/Help/terminology.html#independentVar) (inputs) are in 
+[Fixed](/docs/Help/terminology.html#fix) status, 
 there is nothing left for Search to manipulate in order to achieve a feasible design. 
 This condition may block use of the Search, Seek and Trade features. 
 
@@ -304,11 +305,16 @@ Specifically, uncheck the checkbox that is positioned between the associated var
 value and its units label. 
 When in Calculator View, first click the variable in order to open its value change dialog box. 
 
+Rather than having a quantity set to a specific value with Fixed status,
+it may be appropriate to use [Constraints](/docs/Help/terminology.html#constraints) to 
+limit the range of values that quantity can achieve. 
+
 See also:  
- - [Terminology - Fix and Free](/docs/Help/terminology.html#fix)  
  - [Terminology - Independent Variables](/docs/Help/terminology.html#independentVar)  
+ - [Terminology - Fix and Free](/docs/Help/terminology.html#fix)  
+ - [Terminology - Constraints](/docs/Help/terminology.html#constraints)  
  - [Terminology - AutoFix](/docs/Help/terminology.html#autoFix)  
- - [Setting Values](/docs/Help/settingValues.html)
+ - [Setting Values](/docs/Help/settingValues.html)  
 
 ___
 

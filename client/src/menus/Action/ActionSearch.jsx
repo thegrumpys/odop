@@ -18,7 +18,7 @@ class ActionSearch extends Component {
     onSearchRequest(event) {
 //        console.log('In ActionSearch.onSearchRequest this=',this,'event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            displayMessage('No free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+            displayMessage('Search cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
             return;
         }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
