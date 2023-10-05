@@ -250,8 +250,8 @@ ___
 
 ## AUTOFIX 
 
-The AutoFix feature automatically applies "Fixed" status 
-to Independent Variables changed by user entry. 
+The AutoFix feature automatically applies ["Fixed"](terminology.html#fix) status 
+to [Independent Variables](terminology.html#independentVar) changed by user entry. 
 
 ODOP Search (invoked by the Search button or the **Action : Search** menu item) works to 
 hold or achieve values in Fixed status. 

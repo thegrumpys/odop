@@ -171,7 +171,8 @@ To resolve the situation, change one or both of the associated variable's constr
 Increase the MAX value and / or decrease the MIN value until there is no overlap. 
 
 See also: 
- - [Constraints](/docs/Help/terminology.html#constraints)
+ - [Constraints](/docs/Help/terminology.html#constraints)  
+ - [Setting Values](/docs/Help/settingValues.html)  
 
 ___
 
