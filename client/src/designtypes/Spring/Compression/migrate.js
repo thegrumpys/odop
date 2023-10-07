@@ -187,6 +187,12 @@ export function migrate(design) {
             if (element.lmin & FIXED || element.lmax & FIXED) { // If one is FIXED
                 element.lmin |= FIXED; // Set them both fixed because they are paired
                 element.lmax |= FIXED;
+                if (element.cmin === undefined) {
+                    element.cmin = element.value;
+                }
+                if (element.cmax === undefined) {
+                    element.cmax = element.value;
+                }
                 if (element.oldlmin === undefined) {
 //                    console.log('In migrate create oldlmin element=',element);
                     element.oldlmin = element.lmin & ~FIXED; // with FIXED turned off
