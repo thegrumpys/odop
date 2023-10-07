@@ -34,12 +34,17 @@ class ResultTable extends Component {
             displayMessage('Search cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
             return;
         }
+        var inverted_constraint = false;
         this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
             if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
+                inverted_constraint = true;
                 displayMessage((element.name + ' constraints are inconsistent. Help button provides more information.'), 'danger', 'Errors', '/docs/Help/alerts.html#Constraint_Inconsistency');
                 return;
             }
         });
+        if (inverted_constraint) {
+            return;
+        }
         var old_objective_value = this.props.objective_value.toPrecision(4);
         this.props.saveAutoSave();
         this.props.search();
@@ -55,12 +60,17 @@ class ResultTable extends Component {
             displayMessage('Seek cannot continue, because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
             return;
         }
+        var inverted_constraint = false;
         this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
             if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
+                inverted_constraint = true;
                 displayMessage((element.name + ' constraints are inconsistent. Help button provides more information.'), 'danger', 'Errors', '/docs/Help/alerts.html#Constraint_Inconsistency');
                 return;
             }
         });
+        if (inverted_constraint) {
+            return;
+        }
         var result = this.props.symbol_table.find( // Find free variable matching the current variable name
             (element) => this.state.seek_name === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
         );
