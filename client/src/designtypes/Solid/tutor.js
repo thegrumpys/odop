@@ -9,8 +9,9 @@ export const execute = {
                 <>
                     <p>
                     Welcome to the first ODOP tutorial session.
-                    This session will provide an introduction to basic ODOP features and concepts
-                    in the context of the <b>Rectangular Solid</b> design type.
+                    This session will provide an introduction to basic ODOP features and concepts in the context of the 
+                    &nbsp;<a href="/docs/Help/DesignTypes/Solid/description.html" target="_blank" rel="noopener noreferrer">Rectangular Solid</a>&nbsp; 
+                    design type.
                     </p>
                     
                     <p>
@@ -59,8 +60,9 @@ export const execute = {
                     
                     <p>
                     ODOP contains an On-line Help facility.
-                    It includes an overview of the program, a <b>Getting Started</b> section plus
-                    helpful hints and detailed explanations of major features.  
+                    It includes an overview of the program, a 
+                    &nbsp;<a href="/docs/Help/gettingStarted.html" target="_blank" rel="noopener noreferrer">Getting Started</a>&nbsp; 
+                    section plus helpful hints and detailed explanations of major features.
                     But first, a few words about what <b>not</b> to expect.
                     The on-line help facility is not intended to replace the documentation that comes 
                     with your browser or computer system. 
@@ -82,25 +84,28 @@ export const execute = {
                 <>
                     <p>
                     So, as you are reading, please click the Help menu above.
-                    It will drop down to provide a list of entries (topics) to choose from.
+                    It will drop down to provide a list of items (entries, topics) to choose from.
                     Selecting <b>Index</b> on this list will bring up a new browser tab with the
                     list of available Help entries. You can switch back and forth between the tabs.
                     </p>
-                    
                     <p>
                     Several of these entries are designed to bring new users up to speed
                     as quickly as possible.<br />
                     <br />
-                    <b>Features</b> and <b>Introduction</b> cover many of the concepts 
-                    behind the program.<br />
+                    <a href="/docs/Help/features.html" target="_blank" rel="noopener noreferrer">Features</a>&nbsp; 
+                    and 
+                    &nbsp;<a href="/docs/Help/features.html" target="_blank" rel="noopener noreferrer">Introduction</a>&nbsp; 
+                    cover many of the concepts behind the program.<br />
                     <br />
-                    <b>Terminology</b> explains some of the unique terms that the program
+                    <a href="/docs/Help/terminology.html" target="_blank" rel="noopener noreferrer">Terminology</a>&nbsp; 
+                    explains some of the unique terms that the program
                     and its supporting documentation insist on using. 
                     ODOP is structured to be general and extensible to new kinds of designs.
                     The expectation is that this generality will pay off in the program's 
                     ability to solve the really hard problems.<br />
                     <br />
-                    <b>Getting Started</b>  provides a tour of the main page plus makes 
+                    <a href="/docs/Help/gettingStarted.html" target="_blank" rel="noopener noreferrer">Getting Started</a>&nbsp; 
+                    provides a tour of the main page plus makes 
                     a few suggestions on how new users should approach learning the program.<br />
                     </p>
                 </>
@@ -229,7 +234,7 @@ export const execute = {
                     </p>
                     
                     <p>
-                    When you click on Next, the tutorial will impose a value of 12 inches on Height.<br />
+                    When you click on Next, the tutorial will impose a value of 12 inches for Height.<br />
                     <br />
                     CHANGE Height 12
                     </p>
@@ -243,16 +248,14 @@ export const execute = {
                     <p>
                     Well, that brought a little color into the ODOP world !
                     </p>
-                    
                     <p>
                     The design now exceeds the 70 pound constraint on Weight.
                     Since a constraint is violated, this design is considered to be
                     "Not Feasible".
-                    A Search (<b>Action : Search</b> menu) will be required to
+                    A Search (Search button or <b>Action : Search</b> menu) is required to
                     find values of free (not FIXed) Independent Variables such that 
                     constraints are not violated.
                     </p>
-                    
                     <p>
                     Before we get into Search, let's suppose that we really don't 
                     want the Search process to change the 20 inch value for Length that 
@@ -272,9 +275,17 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Now, the FIX checkbox for Length is checked.
+                    Now, the FIX checkbox for Length is checked. 
+                    The heavy black borders on both left and right provide another clue as to the Fixed status of Length.
                     </p>
-                    
+                    <p>
+                    Just a quick note on the subject of 
+                    &nbsp;<a href="/docs/Help//terminology.html#autoFix" target="_blank" rel="noopener noreferrer">AutoFix</a>&nbsp;...<br/> 
+                    By default, when the value of an Independent Variable is changed, 
+                    the software will automatically put that variable into Fixed status. 
+                    This behavior can be changed with the "enable_auto_fix" preference that is accessed through 
+                    the <b>File : Preferences...</b> menu item.
+                    </p>
                     <p>
                     By having Length in FIXed status, the search will be able to adjust
                     only the values of Width and Height to find a design that does not 
@@ -282,7 +293,7 @@ export const execute = {
                     Of course, the entire collection of Dependent Variables will respond 
                     to any changes in the Independent Variables.
                     </p>
-                    <br /><br />
+                    <br />
                 </>
             ),
             actions: [
@@ -295,17 +306,19 @@ export const execute = {
                 <>
                     <p>
                     Now that we have expressed what we want the design to accomplish,
-                    we will ask the Search algorithm (<b>Action : Search</b> menu) for a solution.
+                    we will ask the Search algorithm (Search button or <b>Action : Search</b> menu) for a solution.
                     Specifically, Search will find values of the free Independent Variables
                     that cause the Constraints and FIXes to be satisfied.
                     </p>
-
                     <p>
-                    If the program can find a solution that satisfies all the constraints,
-                    it will display "<b>FEASIBLE</b>" in the Result section (immediately below these words).  
-                    If a satisfactory solution is found, but one or more constraints remain violated by a
-                    trivial amount, the program will display "<b>MARGINALLY FEASIBLE</b>" in the Result section.
+                    Results of the search are displayed in the Result section (immediately below these words) 
+                    and with the multi-colored 
+                    &nbsp;<a href="/docs/Help/feasibilityIndicator.html" target="_blank" rel="noopener noreferrer">Feasibility Status Indicator</a>.&nbsp; 
                     </p>
+                    <p>
+                    A search runs in the process of transitioning to the next page. 
+                    </p>
+                    <br /><br />
                 </>
             ),
         },
@@ -424,12 +437,11 @@ export const execute = {
                     You are encouraged to experiment with the program. 
                     You are not likely to break it or wear it out !
                     </p>
-                    
-                    <p>Several more tutorial sessions are available for the compression spring
-                    design type. 
-                    They have names like tutor1, tutor2, ... etc. 
-                    Refer to the documentation section (On-line Help entry) covering the tutorial 
-                    for a list of the Tutorial and DEMO topics.</p>
+                    <p>
+                    Refer to the on-line documentation section (Help entry) covering the  
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    for a complete list of additional tutorial and demo topics.
+                    </p>
                     
                     <p>If you do not wish to continue with more demonstration problems, 
                     you can experiment with the various ODOP features, menus and reports. 
