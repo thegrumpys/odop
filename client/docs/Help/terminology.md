@@ -87,9 +87,16 @@ Dependent variables are the quantities that are affected by the independent vari
 The goal of optimization is to find the optimal values of the independent variables that 
 result in the best performance of the dependent variables
 
+The set of independent variables for the current design are easily identifiable in Advanced View.
+Look in the upper left under the heading "Independent Variable (IV)". 
+For example, independent variables for the Rectangular Solid sample problem appear as: 
+![Independent Variables](/docs/Help/img/Independent.png "Independent Variables") 
+In the Calculator View of spring design,
+Independent Variables are a white entry field without an asterisk in the upper left.
+
 For independent variables, a Fixed status reduces the computational demand 
 of the numerical search problem. 
-See the [Fix](terminology.html#fix) entry below for more details. 
+See the [Fix](terminology.html#fix) entry below for more details.  
 
 ___
 
@@ -110,9 +117,16 @@ dependent variables are the quantities that are affected by the independent vari
 The goal of optimization is to find the optimal values of the independent variables that 
 result in the best performance of the dependent variables .
 
+The set of dependent variables for the current design are easily identifiable in Advanced View.
+Look in the mid left under the heading "Dependent Variable (DV)". 
+For example, dependent variables for the Rectangular Solid sample problem appear as: 
+![Dependent Variables](/docs/Help/img/Dependent.png "Dependent Variables")   
+In the Calculator View of spring design,
+Dependent Variables are a white entry field with an asterisk in the upper left.
+
 A dependent variable in Fixed status increases the computational demand 
 of the numerical search problem. 
-See the [FIX](terminology.html#fix) entry below for more details. 
+See the [FIX](terminology.html#fix) entry below for more details.  
 
 ___
 
@@ -225,7 +239,9 @@ Establishing additional constraints and placing variables in Fix status
 can reduce the ability of Search to find a feasible solution. 
 Too many constraints and variables in Fix status can create an over-specified situation. 
 
-See also: [Design Situations](designSituations.html) 
+See also: 
+ - [Design Situations](designSituations.html)  
+ - [Setting Values](settingValues.html)  
 
 ___
 
@@ -234,22 +250,25 @@ ___
 
 ## AUTOFIX 
 
-The AutoFix feature automatically applies "Fixed" status 
-to Independent Variables whose values are changed by user input. 
+The AutoFix feature automatically applies ["Fixed"](terminology.html#fix) status 
+to [Independent Variables](terminology.html#independentVar) changed by user entry. 
 
-ODOP Search (invoked by the Search button or the Action : Search menu item) works to 
+ODOP Search (invoked by the Search button or the **Action : Search** menu item) works to 
 hold or achieve values in Fixed status. 
-In order to accomplish its mission, 
+In order to accomplish its mission to achieve a feasible design, 
 ODOP Search will manipulate the values of variables not in Fixed status 
-(a.k.a. "Free" status) in order to achieve a feasible design. 
+(a.k.a. "Free" status). 
 
 AutoFix behavior is enabled by default. 
 
-AutoFix may be controlled by a checkbox on the main pages (Advanced and Calculator Views) or 
-the preference value "enable_auto_fix", accessed through the **File : Preferences...** menu.  
+AutoFix may be controlled by: 
+ -  a checkbox on the main pages (Advanced and Calculator Views)  
+ **or** 
+ - the preference value "enable_auto_fix", accessed through the **File : Preferences...** menu. 
 In order to disable AutoFix, set the value of "enable_auto_fix" to 0. 
 
 See also: 
+ - [Independent Variables](terminology.html#independentVar)
  - [terminology Fix](terminology.html#fix)  
  - [SEARCH](terminology.html#search)  
  - [PREFERENCES](terminology.html#preferences)  

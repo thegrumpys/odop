@@ -31,12 +31,12 @@ class ResultTable extends Component {
     onSearchRequest(event) {
 //        console.log('In ResultTable.onSearchRequest this=',this,'event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            displayMessage('Search cannot continue because there are no free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+            displayMessage('Search cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
             return;
         }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
             if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
-                displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#searchErr');
+                displayMessage((element.name + ' constraints are inconsistent. Help button provides more information.'), 'danger', 'Errors', '/docs/Help/alerts.html#Constraint_Inconsistency');
                 return;
             }
         });
@@ -52,12 +52,12 @@ class ResultTable extends Component {
     onSeekRequest(event) {
 //        console.log('In ResultTable.onSeekRequest this=',this,'event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            displayMessage('Seek cannot continue because there are no free independent variables', 'danger', 'Errors', '/docs/Help/errors.html#seekErr');
+            displayMessage('Seek cannot continue, because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
             return;
         }
         this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
             if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
-                displayMessage((element.name + ' constraints are inconsistent'), 'danger', 'Errors', '/docs/Help/errors.html#seekErr');
+                displayMessage((element.name + ' constraints are inconsistent. Help button provides more information.'), 'danger', 'Errors', '/docs/Help/alerts.html#Constraint_Inconsistency');
                 return;
             }
         });
