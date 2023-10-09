@@ -90,6 +90,12 @@ export function migrate(design) {
             // FDCL definition in initialState for TORSION. The user cannot create 
             // FDCL if it is not already configured in initialState.
             // ***************************************************************
+            if (element.cmin === undefined) {
+                element.cmin = element.value;
+            }
+            if (element.cmax === undefined) {
+                element.cmax = element.value;
+            }
             if (element.lmin & FIXED || element.lmax & FIXED) { // If one is FIXED
                 element.lmin |= FIXED; // Set them both fixed because they are paired
                 element.lmax |= FIXED;

@@ -134,6 +134,12 @@ export function migrate(design) {
                 sink.cmaxchoice = sink.cmaxchoices.indexOf(source.name);
 //                console.log('In migrate.propgate source.name=',source.name,'sink.cmaxchoices=',sink.cmaxchoices,'sink.cmaxchoice=',sink.cmaxchoice);
             }
+            if (element.cmin === undefined) {
+                element.cmin = element.value;
+            }
+            if (element.cmax === undefined) {
+                element.cmax = element.value;
+            }
             if (element.lmin & FIXED || element.lmax & FIXED) { // If one is FIXED
                 element.lmin |= FIXED; // Set them both fixed because they are paired
                 element.lmax |= FIXED;
