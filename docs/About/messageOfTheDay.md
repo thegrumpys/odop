@@ -1,4 +1,4 @@
-**Message-of-the-day** &nbsp; updated September 3, 2023 
+**Message-of-the-day** &nbsp; updated October 14, 2023 
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
@@ -7,7 +7,7 @@ including recent and impending releases, planned outages, newly discovered issue
 
 Version  | &nbsp; | Date released  
 ---      | ---    | ---  
-[ODOP version 4.4.2](https://github.com/thegrumpys/odop/milestone/66?closed=1) | &nbsp; | September 3, 2023.  
+[ODOP version 4.4.3](https://github.com/thegrumpys/odop/milestone/67?closed=1) | &nbsp; | October 14, 2023.  
 
 Follow the link above to see change details in GitHub.  
 
@@ -26,10 +26,12 @@ Returning users should note that opening a design saved in a prior version of OD
 See: [MIGRATION](http://odop.springdesignsoftware.org/docs/Help/terminology.html#migration). 
 
 Thank you for your interest in the **O**pen **D**esign **O**ptimization **P**latform software and the ODOP:Spring app. 
+ODOP:Spring is designed to help you create custom helical coil springs that meet your specific needs. 
 Your success and feedback are important to us. 
-Please do not hesitate to let us know if we may be able to provide assistance. 
-If you are interested, 
-a free over-the-phone walk through of the app including assistance with your first spring design can be arranged. 
+As a new user, we want to make sure that you have all the information you need to get started. 
+If you have any questions or need assistance with your first design, please don't hesitate to contact us. 
+End-user technical support is free. 
+If you are interested, we can arrange a free over-the-phone or Zoom session overview of the app including assistance with your first ODOP:Spring design.
 [Contact Us](http://odop.springdesignsoftware.org/docs/About/ContactUs.html).   
 
 ___
@@ -53,6 +55,7 @@ Follow the links below to see change details in GitHub.
 
 Version  | &nbsp; | Date released  
 ---      | ---    | ---  
+[ODOP version 4.4.3](https://github.com/thegrumpys/odop/milestone/67?closed=1) | &nbsp; | October 14, 2023.  
 [ODOP version 4.4.2](https://github.com/thegrumpys/odop/milestone/66?closed=1) | &nbsp; | September 3, 2023.  
 [ODOP version 4.4.1](https://github.com/thegrumpys/odop/milestone/65?closed=1) | &nbsp; | June 4, 2023.  
 [ODOP version 4.4](https://github.com/thegrumpys/odop/milestone/64?closed=1)   | &nbsp; | April 16, 2023.  
