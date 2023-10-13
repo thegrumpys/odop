@@ -80,10 +80,11 @@ If they are already started, log off of Okta and re-log into Okta to ensure the 
      * client/public/dynoLoading.js.
      * client/src/__test__/performance.test.js
      * client/src/store/middleware/pxUpdateObjectiveValue.js
-     * client/src/store/middleware/seek.js, 
-     * client/src/store/middleware/updateObjectiveValue.js
-     * client/src/registerServiceWorker.js, 
-     * scripts/build_index.js and 
+     * client/src/store/middleware/seek.js 
+     * client/src/store/middleware/updateObjectiveValue.js 
+     * client/src/logUsage.js 
+     * client/src/registerServiceWorker.js 
+     * scripts/build_index.js 
      * server.js 
 1. Shutdown server and client under your development environment.  
 &nbsp;
