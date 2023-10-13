@@ -61,11 +61,6 @@ Version  | &nbsp; | Date released
 [ODOP version 4.4](https://github.com/thegrumpys/odop/milestone/64?closed=1)   | &nbsp; | April 16, 2023.  
 [ODOP version 4.3.3](https://github.com/thegrumpys/odop/milestone/62?closed=1) | &nbsp; | October 2, 2022   
 [ODOP version 4.3.2](https://github.com/thegrumpys/odop/milestone/61?closed=1) | &nbsp; | September 20, 2022   
-[ODOP version 4.3.1](https://github.com/thegrumpys/odop/milestone/60?closed=1) | &nbsp; | September 20, 2022   
-[ODOP version 4.3](https://github.com/thegrumpys/odop/milestone/54?closed=1)   | &nbsp; | September 17, 2022   
-[ODOP version 4.2.2](https://github.com/thegrumpys/odop/milestone/57?closed=1) | &nbsp; | May 24, 2022   
-[ODOP version 4.2](https://github.com/thegrumpys/odop/milestone/55?closed=1)   | &nbsp; | April 3, 2022   
-[ODOP version 4.1](https://github.com/thegrumpys/odop/milestone/37?closed=1)   | &nbsp; | January 15, 2022   
 [ODOP version 4.3](https://github.com/thegrumpys/odop/milestone/54?closed=1)   | &nbsp; | September 17, 2022   
 [ODOP version 4.2.2](https://github.com/thegrumpys/odop/milestone/57?closed=1) | &nbsp; | May 24, 2022   
 [ODOP version 4.2.1](https://github.com/thegrumpys/odop/milestone/56?closed=1) | &nbsp; | May 1, 2022   
@@ -94,6 +89,5 @@ Comment
 A "preview" of the next ODOP release (version 4.4) is now available. 
 Your feedback would be greatly appreciated. 
  [Contact Us](http://odop.springdesignsoftware.org/docs/About/ContactUs.html) for access. 
- See: [AutoFix](http://odop.springdesignsoftware.org/docs/Help/terminology.html#autoFix). 
  -->
  
