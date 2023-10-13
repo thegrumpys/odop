@@ -85,6 +85,7 @@ If they are already started, log off of Okta and re-log into Okta to ensure the 
      * client/src/logUsage.js 
      * client/src/registerServiceWorker.js 
      * scripts/build_index.js 
+     * scanner.js 
      * server.js 
 1. Shutdown server and client under your development environment.  
 &nbsp;
