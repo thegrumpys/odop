@@ -184,7 +184,7 @@ class SymbolValueWireDia extends Component {
     onSeekMinRequest(event) {
 //        console.log('In SymbolValueWireDia.onSeekMinRequest this=',this,'event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            displayMessage('Seek cannot continue, because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
+            displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
             return;
         }
         var inverted_constraint = false;
@@ -210,7 +210,7 @@ class SymbolValueWireDia extends Component {
     onSeekMaxRequest(event) {
 //        console.log('In SymbolValueWireDia.onSeekMaxRequest this=',this,'event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            displayMessage('Seek cannot continue, because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
+            displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
             return;
         }
         var inverted_constraint = false;

@@ -27,7 +27,7 @@ class ActionSeek extends Component {
     onSeekRequest() {
 //       console.log('In ActionSeek.onSeekRequest this=',this);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
-            displayMessage('Seek cannot continue, because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
+            displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
             return;
         }
         var inverted_constraint = false;
