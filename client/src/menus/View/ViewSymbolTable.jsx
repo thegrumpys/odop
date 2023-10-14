@@ -104,8 +104,8 @@ class ViewSymbolTable extends Component {
                                                 <td>{JSON.stringify(element.propagate)}</td>
                                                 <td>{String(element.validmin)}</td>
                                                 <td>{String(element.validmax)}</td>
-                                                <td>{flags[element.lmin]}</td>
-                                                <td>{flags[element.lmax]}</td>
+                                                <td>{String(element.lmin)}={String(flags[element.lmin])}</td>
+                                                <td>{String(element.lmax)}={String(flags[element.lmax])}</td>
                                                 <td>{String(element.cmin)}</td>
                                                 <td>{String(element.cmax)}</td>
                                                 <td>{String(element.vmin)}</td>

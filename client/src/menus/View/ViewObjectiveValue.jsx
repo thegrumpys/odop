@@ -56,9 +56,7 @@ class ViewObjectiveValue extends Component {
     }
     
     renderElement(viol_sum, element, i) {
-        var flags = [
-            '','CONSTRAINED','FIXED','CONSTRAINED|FIXED',
-            'FDCL','CONSTRAINED|FDCL','FIXED|FDCL','CONSTRAINED|FIXED|FDCL']
+        var flags = ['','CONSTRAINED','FIXED','CONSTRAINED|FIXED','FDCL','CONSTRAINED|FDCL','FIXED|FDCL','CONSTRAINED|FIXED|FDCL']
         var validity_vmin;
         var validity_vmax;
         var feasibility_vmin;
@@ -249,17 +247,17 @@ class ViewObjectiveValue extends Component {
                 <td>{feasibility_vmin <= 0.0 ? '' : feasibility_vmin}</td>
                 <td>{feasibility_vmax <= 0.0 ? '' : feasibility_vmax}</td>
                 <td>{element.value}</td>
-                <td>{element.lmin !== undefined ? element.validmin : ''}</td>
-                <td>{element.lmin !== undefined ? element.validmax : ''}</td>
-                <td>{element.lmin !== undefined ? flags[element.lmin] : ''}</td>
-                <td>{element.lmin !== undefined ? flags[element.lmax] : ''}</td>
-                <td>{element.lmin !== undefined ? element.cmin : ''}</td>
-                <td>{element.lmin !== undefined ? element.cmax : ''}</td>
-                <td>{element.lmin !== undefined ? element.vmin : ''}</td>
-                <td>{element.lmin !== undefined ? element.vmax : ''}</td>
-                <td>{element.lmin !== undefined ? element.sdlim : ''}</td>
-                <td>{element.lmin !== undefined ? element.smin : ''}</td>
-                <td>{element.lmin !== undefined ? element.smax : ''}</td>
+                <td>{String(element.validmin)}</td>
+                <td>{String(element.validmax)}</td>
+                <td>{String(element.lmin)+'='+flags[element.lmin]}</td>
+                <td>{String(element.lmax)+'='+flags[element.lmax]}</td>
+                <td>{String(element.cmin)}</td>
+                <td>{String(element.cmax)}</td>
+                <td>{String(element.vmin)}</td>
+                <td>{String(element.vmax)}</td>
+                <td>{element.sdlim}</td>
+                <td>{String(element.smin)}</td>
+                <td>{String(element.smax)}</td>
             </tr>
         );
     }

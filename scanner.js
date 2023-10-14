@@ -27,21 +27,21 @@ connection.query(stmt, function(err, rows, fields) {
 //            console.log('symbol_table=',row.value.symbol_table)
             row.value.symbol_table.forEach((entry) => {
                 if (entry.cmin === undefined && entry.cmax === undefined) {
-                    console.log('1 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'No cmin and cmax','name=',entry.name);
+                    console.log('1 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'name=',entry.name,'No cmin and cmax');
                     if (!(entry.lmin & FIXED) && !(entry.lmax & FIXED)) {
-                        console.log('@@@','lmin=',entry.lmin,'lmax=',entry.lmax);
+                        console.log('1a filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'name=',entry.name,'No cmin and cmax, but lmin or lmax NOT FIXED','lmin=',entry.lmin,'lmax=',entry.lmax);
                     }
                     count++;
                 } else if (entry.cmin === undefined) {
-                    console.log('2 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'No cmax','name=',entry.name);
+                    console.log('2 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'name=',entry.name,'No cmax');
                     if (!(entry.lmin & FIXED) && !(entry.lmax & FIXED)) {
-                        console.log('@@@','lmin=',entry.lmin,'lmax=',entry.lmax);
+                        console.log('2a filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'name=',entry.name,'No cmax, but lmin or lmax NOT FIXED','lmin=',entry.lmin,'lmax=',entry.lmax);
                     }
                     count++;
                 } else if (entry.cmax === undefined) {
-                    console.log('3 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'No cmax','name=',entry.name);
+                    console.log('3 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'name=',entry.name,'No cmax');
                     if (!(entry.lmin & FIXED) && !(entry.lmax & FIXED)) {
-                        console.log('@@@','lmin=',entry.lmin,'lmax=',entry.lmax);
+                        console.log('3a filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'name=',entry.name,'No cmax, but lmin or lmax NOT FIXED','lmin=',entry.lmin,'lmax=',entry.lmax);
                     }
                     count++;
                 }
