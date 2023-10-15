@@ -184,6 +184,12 @@ export function migrate(design) {
             // FDCL definition in initialState for COMPRESSION. The user cannot create 
             // FDCL if it is not already configured in initialState.
             // ***************************************************************
+            if (element.lmin === undefined) {
+                element.lmin = 0;
+            }
+            if (element.lmax === undefined) {
+                element.lmax = 0;
+            }
             if (element.cmin === undefined) {
                 element.cmin = element.value;
             }
