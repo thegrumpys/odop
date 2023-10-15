@@ -14,6 +14,7 @@ import {
     } from '../../store/actionCreators';
 import { reducers } from '../../store/reducers';
 import { dispatcher } from '../../store/middleware/dispatcher';
+import JSON5 from 'json5'
 
 //=====================================================================
 // STARTUP
@@ -760,7 +761,7 @@ it('reducers restore old auto save', () => {
     var design = store.getState(); // before
     state.name = design.name; // move name into model to save it ***FUDGE*** for compatibility with existing autosave files
     expect(typeof(Storage)).not.toEqual("undefined");
-    localStorage.setItem('autosave', JSON.stringify(state), null, 2); // create or replace auto save file with current state contents
+    localStorage.setItem('autosave', JSON5.stringify(state), null, 2); // create or replace auto save file with current state contents
     expect(localStorage.getItem('autosave')).not.toBeNull();
     delete state.name; // after saving it delete name from model ***FUDGE*** for compatibility with existing autosave files
 

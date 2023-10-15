@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavDropdown, Modal, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
+import JSON5 from 'json5'
 
 class ViewSymbolTable extends Component {
 
@@ -93,15 +94,15 @@ class ViewSymbolTable extends Component {
                                                 <td>{yn(element.hidden)}</td>
                                                 <td>{element.format}</td>
                                                 <td>{element.table}</td>
-                                                <td>{JSON.stringify(element.cminchoices)}</td>
+                                                <td>{JSON5.stringify(element.cminchoices)}</td>
                                                 <td>{element.cminchoice}</td>
-                                                <td>{JSON.stringify(element.cmaxchoices)}</td>
+                                                <td>{JSON5.stringify(element.cmaxchoices)}</td>
                                                 <td>{element.cmaxchoice}</td>
-                                                <td>{JSON.stringify(element.validminchoices)}</td>
+                                                <td>{JSON5.stringify(element.validminchoices)}</td>
                                                 <td>{element.validminchoice}</td>
-                                                <td>{JSON.stringify(element.validmaxchoices)}</td>
+                                                <td>{JSON5.stringify(element.validmaxchoices)}</td>
                                                 <td>{element.validmaxchoice}</td>
-                                                <td>{JSON.stringify(element.propagate)}</td>
+                                                <td>{JSON5.stringify(element.propagate)}</td>
                                                 <td>{String(element.validmin)}</td>
                                                 <td>{String(element.validmax)}</td>
                                                 <td>{String(element.lmin)}={String(flags[element.lmin])}</td>

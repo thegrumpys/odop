@@ -43,6 +43,7 @@ import {
 
     MIN,
 } from './actionTypes';
+import JSON5 from 'json5'
 
 export function actionDumper(action) {
     var flags = ['','CONSTRAINED','FIXED','CONSTRAINED|FIXED','FDCL','CONSTRAINED|FDCL','FIXED|FDCL','CONSTRAINED|FIXED|FDCL']
@@ -52,48 +53,48 @@ export function actionDumper(action) {
         result = 'startup()';
         break;
     case LOAD:
-        result = 'load('+JSON.stringify(action.payload.design)+')';
+        result = 'load('+JSON5.stringify(action.payload.design)+')';
         break;
     case LOAD_INITIAL_STATE:
-        result = 'loadInitialState('+JSON.stringify(action.payload.type)+','+JSON.stringify(action.payload.units)+')';
+        result = 'loadInitialState('+JSON5.stringify(action.payload.type)+','+JSON5.stringify(action.payload.units)+')';
         break;
     case CHANGE_NAME:
-        result = 'changeName('+JSON.stringify(action.payload.name)+')';
+        result = 'changeName('+JSON5.stringify(action.payload.name)+')';
         break;
     case CHANGE_USER:
-        result = 'changeUser('+JSON.stringify(action.payload.user)+')';
+        result = 'changeUser('+JSON5.stringify(action.payload.user)+')';
         break;
     case CHANGE_VIEW:
-        result = 'changeView('+JSON.stringify(action.payload.view)+')';
+        result = 'changeView('+JSON5.stringify(action.payload.view)+')';
         break;
     case CHANGE_SYMBOL_VALUE:
-        result = 'changeSymbolValue('+JSON.stringify(action.payload.name)+','+JSON.stringify(action.payload.value)+(action.payload.merit === undefined ? '' : JSON.stringify(action.payload.merit))+')';
+        result = 'changeSymbolValue('+JSON5.stringify(action.payload.name)+','+JSON5.stringify(action.payload.value)+(action.payload.merit === undefined ? '' : JSON5.stringify(action.payload.merit))+')';
         break;
     case FIX_SYMBOL_VALUE:
-        result = 'fixSymbolValue('+JSON.stringify(action.payload.name)+','+JSON.stringify(action.payload.value)+')';
+        result = 'fixSymbolValue('+JSON5.stringify(action.payload.name)+','+JSON5.stringify(action.payload.value)+')';
         break;
     case FREE_SYMBOL_VALUE:
-        result = 'freeSymbolValue('+JSON.stringify(action.payload.name)+')';
+        result = 'freeSymbolValue('+JSON5.stringify(action.payload.name)+')';
         break;
     case CHANGE_SYMBOL_VIOLATION:
-        result = 'changeSymbolViolation('+JSON.stringify(action.payload.name)+','+(action.payload.minmax === MIN ? 'MIN':'MAX')+','+action.payload.value+')'
+        result = 'changeSymbolViolation('+JSON5.stringify(action.payload.name)+','+(action.payload.minmax === MIN ? 'MIN':'MAX')+','+action.payload.value+')'
         break;
     case CHANGE_SYMBOL_CONSTRAINT:
-        result = 'changeSymbolConstraint('+JSON.stringify(action.payload.name)+','+(action.payload.minmax === MIN ? 'MIN':'MAX')+','+action.payload.value+')'
+        result = 'changeSymbolConstraint('+JSON5.stringify(action.payload.name)+','+(action.payload.minmax === MIN ? 'MIN':'MAX')+','+action.payload.value+')'
         break;
     case CHANGE_SYMBOL_CONSTRAINTS:
         break;
     case SET_SYMBOL_FLAG:
-        result = 'setSymbolFlag('+JSON.stringify(action.payload.name)+','+(action.payload.minmax === MIN ? 'MIN':'MAX')+','+flags[action.payload.mask]+(action.payload.source === undefined ? '' : +action.payload.source)+')'
+        result = 'setSymbolFlag('+JSON5.stringify(action.payload.name)+','+(action.payload.minmax === MIN ? 'MIN':'MAX')+','+flags[action.payload.mask]+(action.payload.source === undefined ? '' : +action.payload.source)+')'
         break;
     case RESET_SYMBOL_FLAG:
-        result = 'resetSymbolFlag('+JSON.stringify(action.payload.name)+','+(action.payload.minmax === MIN ? 'MIN':'MAX')+','+flags[action.payload.mask]+')'
+        result = 'resetSymbolFlag('+JSON5.stringify(action.payload.name)+','+(action.payload.minmax === MIN ? 'MIN':'MAX')+','+flags[action.payload.mask]+')'
         break;
     case CHANGE_SYMBOL_INPUT:
-        result = 'changeSymbolInput('+JSON.stringify(action.payload.name)+','+flags[action.payload.value]+')'
+        result = 'changeSymbolInput('+JSON5.stringify(action.payload.name)+','+flags[action.payload.value]+')'
         break;
     case CHANGE_SYMBOL_HIDDEN:
-        result = 'changeSymbolHidden('+JSON.stringify(action.payload.name)+','+flags[action.payload.value]+')'
+        result = 'changeSymbolHidden('+JSON5.stringify(action.payload.name)+','+flags[action.payload.value]+')'
         break;
     case CHANGE_INPUT_SYMBOL_VALUES:
         break;
@@ -114,16 +115,16 @@ export function actionDumper(action) {
     case CHANGE_RESULT_SEARCH_COMPLETED:
         break;
     case CHANGE_SYSTEM_CONTROLS_VALUE:
-        result = 'changeSystemControlsValue('+JSON.stringify(action.payload.system_controls)+')';
+        result = 'changeSystemControlsValue('+JSON5.stringify(action.payload.system_controls)+')';
         break;
     case CHANGE_LABELS_VALUE:
-        result = 'changeLabelsValue('+JSON.stringify(action.payload.labels)+')';
+        result = 'changeLabelsValue('+JSON5.stringify(action.payload.labels)+')';
         break;
     case SEARCH:
         result = 'search()';
         break;
     case SEEK:
-        result = 'seek('+JSON.stringify(action.payload.name)+','+(action.payload.minmax === MIN ? 'MIN':'MAX')+')';
+        result = 'seek('+JSON5.stringify(action.payload.name)+','+(action.payload.minmax === MIN ? 'MIN':'MAX')+')';
         break;
     case SAVE_AUTO_SAVE:
         break;

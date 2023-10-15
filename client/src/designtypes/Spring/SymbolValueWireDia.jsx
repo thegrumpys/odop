@@ -25,6 +25,7 @@ import { getAlertsByName } from '../../components/Alerts';
 import { load, search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../../store/actionCreators';
 import { displayMessage } from '../../components/MessageModal';
 import FeasibilityIndicator from '../../components/FeasibilityIndicator';
+import JSON5 from 'json5'
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -238,7 +239,7 @@ class SymbolValueWireDia extends Component {
         e.preventDefault();
         const { store } = this.context;
         var design = store.getState();
-        var reset = JSON.stringify(design);
+        var reset = JSON5.stringify(design);
         this.setState({
             modal: true,
             reset: reset,
@@ -269,7 +270,7 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.onResetButton this=',this);
         logUsage('event', 'SymbolValueWireDia', { event_label: 'Reset button' });
         const { store } = this.context;
-        store.dispatch(load(JSON.parse(this.state.reset)));
+        store.dispatch(load(JSON5.parse(this.state.reset)));
         this.setState({
             modified: false,
         });
@@ -350,7 +351,7 @@ class SymbolValueWireDia extends Component {
         var wire_dia_filename = m_tab[i][mo.wire_dia_filename];
 //        console.log('In SymbolValueWireDia.render wire_dia_filename=',wire_dia_filename);
         var wire_dia_table = require('./'+wire_dia_filename+'.json'); // Dynamically load table
-        wire_dia_table = JSON.parse(JSON.stringify(wire_dia_table)); // clone so these updates are fresh
+        wire_dia_table = JSON5.parse(JSON5.stringify(wire_dia_table)); // clone so these updates are fresh
         wire_dia_table.forEach((element) => {
             element.push(element[0].toString()); // add labels
         });

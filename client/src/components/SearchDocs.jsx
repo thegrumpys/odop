@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { logUsage } from '../logUsage';
 import { displayMessage } from './MessageModal';
 import { displaySpinner } from './Spinner';
+import JSON5 from 'json5'
 
 class SearchDocs extends Component {
 
@@ -104,7 +105,7 @@ class SearchDocs extends Component {
                         <ul>
                         {this.state.results !== undefined && this.state.results.map((element) => 
                             <li key={element.href}>
-                                <a href={'/docs/' + element.href + '?highlights=' + JSON.stringify(element.highlight_text)} target='_blank' rel="noopener noreferrer"><b>{element.title}</b></a>
+                                <a href={'/docs/' + element.href + '?highlights=' + JSON5.stringify(element.highlight_text)} target='_blank' rel="noopener noreferrer"><b>{element.title}</b></a>
                                 <div className="content" dangerouslySetInnerHTML={{__html: element.sentence_text}}></div>
                             </li>
                         )}

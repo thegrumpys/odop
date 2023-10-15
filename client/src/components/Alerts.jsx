@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { CONSTRAINED, MIN, MAX, FIXED, FDCL } from '../store/actionTypes';
 import Emitter from './Emitter';
+import JSON5 from 'json5'
 
 export const ERR = 'Err';
 export const WARN = 'Warn';
@@ -402,7 +403,7 @@ class Alerts extends Component {
     }
 
     render() {
-//        console.log('In Alerts.render this.state.alerts=',JSON.stringify(this.state.alerts));
+//        console.log('In Alerts.render this.state.alerts=',JSON5.stringify(this.state.alerts));
         return '';
     }
 }

@@ -42,6 +42,7 @@ import { STARTUP,
 import { sclden } from './middleware/sclden';
 import { initialSystemControls } from '../initialSystemControls';
 import { logUsage } from '../logUsage';
+import JSON5 from 'json5'
 
 export function reducers(state, action) {
     var i;
@@ -78,7 +79,7 @@ export function reducers(state, action) {
         } else {
             module = require('../designtypes/'+action.payload.type+'/initialState_metric_units.js'); // Dynamically load initialState
         }
-        module = JSON.parse(JSON.stringify(module)); // Make deep clone
+        module = JSON5.parse(JSON5.stringify(module)); // Make deep clone
         state = Object.assign({}, state, { 
             name: action.payload.units === 'US' ? 'initialState' : 'initialState_metric_units',
             model: {
@@ -510,13 +511,13 @@ export function reducers(state, action) {
 
     case SAVE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
-            localStorage.setItem(action.payload.name, JSON.stringify(state), null, 2); // create or replace auto save file with current state contents
+            localStorage.setItem(action.payload.name, JSON5.stringify(state), null, 2); // create or replace auto save file with current state contents
 //            console.log("In reducers.SAVE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
         return state; // state not changed
     case RESTORE_AUTO_SAVE:
         if (typeof(Storage) !== "undefined") {
-            var autosave = JSON.parse(localStorage.getItem(action.payload.name)); // get auto save file contents
+            var autosave = JSON5.parse(localStorage.getItem(action.payload.name)); // get auto save file contents
 //            console.log("In reducers.RESTORE_AUTO_SAVE autosave=",autosave);
             // Migrate autosave file from old (no model property) to new (with model property)
             if (autosave.model === undefined) { // Is it the old format

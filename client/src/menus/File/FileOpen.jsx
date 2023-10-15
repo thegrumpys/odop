@@ -8,6 +8,7 @@ import { logUsage } from '../../logUsage';
 import config from '../../config';
 import { withOktaAuth } from '@okta/okta-react';
 import { withRouter } from 'react-router-dom';
+import JSON5 from 'json5'
 
 class FileOpen extends Component {
 
@@ -112,7 +113,7 @@ class FileOpen extends Component {
                 this.props.deleteAutoSave();
                 logUsage('event', 'FileOpen', { event_label: type + ' ' + name });
             } else {
-                displayMessage('Invalid JSON type, function ignored');
+                displayMessage('Invalid JSON5 type, function ignored');
             }
         })
         .catch(error => {

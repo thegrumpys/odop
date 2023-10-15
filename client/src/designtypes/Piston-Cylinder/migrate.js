@@ -1,6 +1,7 @@
 import { displayMessage } from '../../components/MessageModal';
 import { initialState } from './initialState';
 import { initialSystemControls } from '../../initialSystemControls';
+import JSON5 from 'json5'
 
 export function migrate(design) {
     /*
@@ -79,7 +80,7 @@ export function migrate(design) {
         migrated_design.version = '3'; // last thing... set the migrated model version
     case '3':
 //        console.log('Convert from 3 to 4');
-        design['jsontype'] = "ODOP"; // Add in JSON type
+        design['jsontype'] = "ODOP"; // Add in JSON5 type
         if (design.symbol_table[0].units === "LB/SQ-IN") { // Add in units type
             design['units'] = "US";
         } else {

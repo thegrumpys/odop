@@ -7,6 +7,7 @@ import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import { withOktaAuth } from '@okta/okta-react';
 import { withRouter } from 'react-router-dom';
+import JSON5 from 'json5'
 
 class FileSaveAs extends Component {
 
@@ -97,7 +98,7 @@ class FileSaveAs extends Component {
                     'Content-Type': 'application/json',
                     Authorization: 'Bearer ' + user
                 },
-                body: JSON.stringify(this.props.state)
+                body: JSON5.stringify(this.props.state)
             })
             .then(res => {
                 displaySpinner(false);

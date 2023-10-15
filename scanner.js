@@ -20,7 +20,7 @@ connection.query(stmt, function(err, rows, fields) {
         connection.end();
         throw err;
     } else {
-        value = rows.map((row) => {return {type:row.type, name:row.name, user:row.user, value:JSON.parse(row.value)}});
+        value = rows.map((row) => {return {type:row.type, name:row.name, user:row.user, value:JSON5.parse(row.value)}});
 //        console.log('SERVER: After SELECT value=', value);
         var count = 0;
         value.forEach((row) => {

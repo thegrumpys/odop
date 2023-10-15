@@ -8,13 +8,14 @@ import { actionDumper } from '../store/actionDumper';
 import { logUsage } from '../logUsage';
 import config from '../config';
 import { outputStart, outputLine, outputStop } from '../menus/View/ViewExecuteToTest';
+import JSON5 from 'json5'
 
 export var startExecute = function(prefix,execute_name,steps) {
 //    console.log('In startExecute prefix=',prefix,'execute_name=',execute_name,'steps=',steps);
     if (steps !== undefined && steps[0] !== undefined) {
         const { store } = this.context;
         var design = store.getState();
-        steps = Object.assign([...steps], {0: Object.assign({}, steps[0], {state: JSON.stringify(design)})});
+        steps = Object.assign([...steps], {0: Object.assign({}, steps[0], {state: JSON5.stringify(design)})});
         var title = steps[0].title;
         var text = steps[0].text;
         var testGenerate = config.node.env !== "production" ? true : false;
@@ -124,7 +125,7 @@ class ExecutePanel extends Component {
         if (this.state.steps[next] !== undefined) {
             const { store } = this.context;
             var design = store.getState();
-            var steps = Object.assign([...this.state.steps], {[next]: Object.assign({}, this.state.steps[next], {state: JSON.stringify(design)})});
+            var steps = Object.assign([...this.state.steps], {[next]: Object.assign({}, this.state.steps[next], {state: JSON5.stringify(design)})});
             var title = steps[next].title;
             var text = steps[next].text;
 //            console.log('In ExecutePanel.onNext','title=',title,'steps=',steps);
@@ -175,8 +176,8 @@ class ExecutePanel extends Component {
         var title = steps[prev].title;
         var text = steps[prev].text;
 //        console.log('In ExecutePanel.onBack','title=',title,'steps=',steps);
-//        console.log('In ExecutePanel.onBack JSON.parse(steps[prev].state)=',JSON.parse(steps[prev].state));
-        store.dispatch(load(JSON.parse(steps[prev].state)));
+//        console.log('In ExecutePanel.onBack JSON5.parse(steps[prev].state)=',JSON5.parse(steps[prev].state));
+        store.dispatch(load(JSON5.parse(steps[prev].state)));
         this.setState({
             step: prev,
             title: title,

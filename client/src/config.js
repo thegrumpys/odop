@@ -1,5 +1,6 @@
 import runtimeEnv from '@mars/heroku-js-runtime-env';
 import queryString from 'query-string';
+import JSON5 from 'json5'
 require('dotenv').config();
 
 var node_env;
@@ -27,7 +28,7 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "
   issuer = process.env.REACT_APP_ISSUER || 'https://{yourOktaDomain}.com/oauth2/default';
   clientId = process.env.REACT_APP_CLIENT_ID || '{clientId}';
   env_types = process.env.REACT_APP_DESIGN_TYPES || '["Piston-Cylinder","Solid","Spring/Compression","Spring/Extension","Spring/Torsion"]';
-  env_types = JSON.parse(env_types);
+  env_types = JSON5.parse(env_types);
   env_type = process.env.REACT_APP_DESIGN_TYPE || 'Spring/Compression';
   env_name = process.env.REACT_APP_DESIGN_NAME || 'Startup';
   env_units = process.env.REACT_APP_DESIGN_UNITS || 'US';
@@ -48,7 +49,7 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "
   issuer = env.REACT_APP_ISSUER || 'https://{yourOktaDomain}.com/oauth2/default';
   clientId = env.REACT_APP_CLIENT_ID || '{clientId}';
   env_types =  env.REACT_APP_DESIGN_XXXX || '["Piston-Cylinder","Solid","Spring/Compression","Spring/Extension","Spring/Torsion"]';
-  env_types = JSON.parse(env_types);
+  env_types = JSON5.parse(env_types);
   env_type = env.REACT_APP_DESIGN_TYPE || 'Spring/Compression';
   env_name = env.REACT_APP_DESIGN_NAME || 'Startup';
   env_units = env.REACT_APP_DESIGN_UNITS || 'US';

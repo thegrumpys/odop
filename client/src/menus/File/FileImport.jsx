@@ -5,6 +5,7 @@ import { load, deleteAutoSave } from '../../store/actionCreators';
 import { displayMessage } from '../../components/MessageModal';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
+import JSON5 from 'json5'
 
 class FileImport extends Component {
 
@@ -54,7 +55,7 @@ class FileImport extends Component {
     onLoadEnd(event) {
 //        console.log('In FileImport.onLoadEnd event.target.value=',event.target.value);
         displaySpinner(false);
-        var design = JSON.parse(this.state.fileReader.result); // Convert file contents to JSON object
+        var design = JSON5.parse(this.state.fileReader.result); // Convert file contents to JSON5 object
 //        console.log('In FileImport.onLoadEnd design.type=',design.type,'design.name=',design.name);
         var path = require('path');
         var filename = path.basename(this.state.selectedFile.name,'.json'); // Drop prefix directories and suffix extension
@@ -65,7 +66,7 @@ class FileImport extends Component {
             this.props.deleteAutoSave();
             logUsage('event', 'FileImport', { event_label: migrated_design.type + ' ' + migrated_design.name });
         } else {
-            displayMessage('Invalid JSON type, function ignored');
+            displayMessage('Invalid JSON5 type, function ignored');
         }
     }
     

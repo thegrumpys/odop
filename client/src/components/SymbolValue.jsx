@@ -23,6 +23,7 @@ import { getAlertsByName } from './Alerts';
 import { load, search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../store/actionCreators';
 import { displayMessage } from '../components/MessageModal';
 import FeasibilityIndicator from './FeasibilityIndicator';
+import JSON5 from 'json5'
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -198,7 +199,7 @@ class SymbolValue extends Component {
         e.preventDefault();
         const { store } = this.context;
         var design = store.getState();
-        var reset = JSON.stringify(design);
+        var reset = JSON5.stringify(design);
         this.setState({
             modal: true,
             reset: reset,
@@ -229,7 +230,7 @@ class SymbolValue extends Component {
 //        console.log('In SymbolValue.onResetButton this=',this);
         logUsage('event', 'SymbolValue', { event_label: 'Reset button' });
         const { store } = this.context;
-        store.dispatch(load(JSON.parse(this.state.reset)));
+        store.dispatch(load(JSON5.parse(this.state.reset)));
         this.setState({
             modified: false,
         });

@@ -3,6 +3,7 @@ import { Button, Modal, NavDropdown, Container, Row, Col, Form } from 'react-boo
 import { connect } from 'react-redux';
 import { changeLabelsValue, saveAutoSave } from '../../store/actionCreators';
 import { logUsage, logValue } from '../../logUsage';
+import JSON5 from 'json5'
 
 class FileProperties extends Component {
 
@@ -38,7 +39,7 @@ class FileProperties extends Component {
             labels: this.state.labels.map((label) => {
                 if (label.name === name) {
                     return Object.assign({}, label, {
-                        value: value.replace(/["\\/]/ig, '') // replace invalid JSON characters with nothing throughout
+                        value: value.replace(/["\\/]/ig, '') // replace invalid JSON5 characters with nothing throughout
                     });
                 }
                 return label;

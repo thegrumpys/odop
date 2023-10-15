@@ -164,14 +164,14 @@ function main() {
     }
     var idx = buildIndex(docs);
     var previews = buildPreviews(docs);
-    var index_json = JSON.stringify(idx, null, 2);
+    var index_json = JSON5.stringify(idx, null, 2);
     fs.writeFile(LUNR_INDEX, index_json, function(err) {
         if(err) {
             return console.log(err);
         }
         console.log("Index saved as " + LUNR_INDEX);
     }); 
-    var pages_json = JSON.stringify(previews, null, 2);
+    var pages_json = JSON5.stringify(previews, null, 2);
     fs.writeFile(LUNR_PAGES, pages_json, function(err) {
         if(err) {
             return console.log(err);

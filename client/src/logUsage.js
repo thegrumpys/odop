@@ -1,3 +1,5 @@
+import JSON5 from 'json5'
+
 var lastName = '';
 var lastValue = '';
 var lastSuffix = '';
@@ -6,7 +8,7 @@ var sequence = 0;
 
 function logIt(tag, action, note) {
 //  console.log('In logIt tag=',tag,'action=',action,'note=',note);
-  var body = JSON.stringify({tag: tag, action: action, note: note});
+  var body = JSON5.stringify({tag: tag, action: action, note: note});
 //  console.log('body=',body);
   fetch('/api/v1/usage_log', {
       method: 'POST',
@@ -25,7 +27,7 @@ function logIt(tag, action, note) {
   })
   .catch(error => {
 //      console.log('error=',error);
-      console.error('POST of usage_log of note \''+JSON.stringify(note)+'\' failed with message: \''+error.message+'\'');
+      console.error('POST of usage_log of note \''+JSON5.stringify(note)+'\' failed with message: \''+error.message+'\'');
   });
 }
 

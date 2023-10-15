@@ -60,7 +60,7 @@ export default function register() {
 //  var data = {title: 'New!', content: 'Something new happened!'};
 //
 //  if (event.data) {
-//    data = JSON.parse(event.data.text());
+//    data = JSON5.parse(event.data.text());
 //  }
 //
 //  var options = {

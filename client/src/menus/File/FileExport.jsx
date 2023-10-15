@@ -3,6 +3,7 @@ import { NavDropdown, Modal, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
+import JSON5 from 'json5'
 
 class FileExport extends Component {
 
@@ -20,7 +21,7 @@ class FileExport extends Component {
     
     export(model, name, type) {
 //        console.log('In FileExport.export model=',model);
-        const url = window.URL.createObjectURL(new Blob([JSON.stringify(model, null, 2)]));
+        const url = window.URL.createObjectURL(new Blob([JSON5.stringify(model, null, 2)]));
 //        console.log('In FileExport.export','url=', url);
         const link = document.createElement('a');
         link.href = url;
@@ -45,7 +46,7 @@ class FileExport extends Component {
         });
     }
     
-    // I created a special modified version of File Export which outputs a JSON file 
+    // I created a special modified version of File Export which outputs a JSON5 file 
     // with all properties sorted in alphabetical order. 
     // It makes it easy to compare/diff two files and find the differences. 
     onSortedExport() {
