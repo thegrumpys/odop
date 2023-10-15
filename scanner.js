@@ -26,23 +26,24 @@ connection.query(stmt, function(err, rows, fields) {
         value.forEach((row) => {
 //            console.log('symbol_table=',row.value.symbol_table)
             row.value.symbol_table.forEach((entry) => {
+                if (entry.lmin === undefined && entry.lmax === undefined) {
+                    console.log('1 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'name=',entry.name,'No lmin and lmax');
+                    count++;
+                } else if (entry.lmin === undefined) {
+                    console.log('2 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'name=',entry.name,'No lmax');
+                    count++;
+                } else if (entry.lmax === undefined) {
+                    console.log('3 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'name=',entry.name,'No lmax');
+                    count++;
+                }
                 if (entry.cmin === undefined && entry.cmax === undefined) {
-                    console.log('1 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'No cmin and cmax','name=',entry.name);
-                    if (!(entry.lmin & FIXED) && !(entry.lmax & FIXED)) {
-                        console.log('@@@','lmin=',entry.lmin,'lmax=',entry.lmax);
-                    }
+                    console.log('4 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'name=',entry.name,'No cmin and cmax');
                     count++;
                 } else if (entry.cmin === undefined) {
-                    console.log('2 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'No cmax','name=',entry.name);
-                    if (!(entry.lmin & FIXED) && !(entry.lmax & FIXED)) {
-                        console.log('@@@','lmin=',entry.lmin,'lmax=',entry.lmax);
-                    }
+                    console.log('5 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'name=',entry.name,'No cmax');
                     count++;
                 } else if (entry.cmax === undefined) {
-                    console.log('3 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'No cmax','name=',entry.name);
-                    if (!(entry.lmin & FIXED) && !(entry.lmax & FIXED)) {
-                        console.log('@@@','lmin=',entry.lmin,'lmax=',entry.lmax);
-                    }
+                    console.log('6 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'name=',entry.name,'No cmax');
                     count++;
                 }
             })
