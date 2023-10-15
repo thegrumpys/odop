@@ -321,8 +321,22 @@ export function migrate(design) {
         // #589 Changes in initialState: remove ioclass; sdlimit mods to support #452
         // Remove ioclass from all Symbol Table entries
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
-                delete element.ioclass;
+            delete element.ioclass;
+            // Added to migration on 10/15/2023 after finding #862 Issue
+            if (element.value === null) {
+                element.value = 1;
+            }
+            if (element.cmin === null) {
+                element.cmin = element.value;
+            }
+            if (element.cmax === null) {
+                element.cmax = element.value;
+            }
         });
+        // Added to migration on 10/15/2023 after finding #862 Issue
+        if (design.result.objective_value === null) {
+            design.result.objective_value = 0.0;
+        }
         // #609 Add standard size table for metric Outside Diameters
         // Update Material_Type = 31 table and Material_File = 34 value
 //        console.log('Material_File.value=',design.symbol_table[34].value,'Material_Type.table=',design.symbol_table[31].table)

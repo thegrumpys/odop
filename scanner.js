@@ -25,6 +25,10 @@ connection.query(stmt, function(err, rows, fields) {
         var count = 0;
         value.forEach((row) => {
 //            console.log('symbol_table=',row.value.symbol_table)
+            if (row.value.result.objective_value === null) {
+                console.log('0 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'name=','Objective Value Null value');
+                count++;
+            }
             row.value.symbol_table.forEach((entry) => {
                 if (entry.lmin === undefined && entry.lmax === undefined) {
                     console.log('1 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'name=',entry.name,'No lmin and lmax');
@@ -44,6 +48,18 @@ connection.query(stmt, function(err, rows, fields) {
                     count++;
                 } else if (entry.cmax === undefined) {
                     console.log('6 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'name=',entry.name,'No cmax');
+                    count++;
+                }
+                if (entry.value === null) {
+                    console.log('7 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'name=',entry.name,'input=',entry.input,'Symbol Table Entry Null value');
+                    count++;
+                }
+                if (entry.cmin === null) {
+                    console.log('8 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'name=',entry.name,'input=',entry.input,'Symbol Table Entry Null cmin');
+                    count++;
+                }
+                if (entry.cmax === null) {
+                    console.log('9 filetype=',row.type,'filename=',row.name,'user=',row.user,'version=',row.value.version,'name=',entry.name,'input=',entry.input,'Symbol Table Entry Null cmax');
                     count++;
                 }
             })
