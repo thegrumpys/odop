@@ -322,7 +322,7 @@ export function migrate(design) {
             if (element.cmax === undefined) {
                 element.cmax = element.value;
             }
-        }
+        });
         // migrated_design.version = '9'; // last thing... set the migrated model version
 
         break; // Do not copy this break
