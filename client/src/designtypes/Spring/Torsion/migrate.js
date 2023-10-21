@@ -314,7 +314,7 @@ export function migrate(design) {
         if (design.result.objective_value === null) {
             design.result.objective_value = 0.0;
         }
->>>>>>> refs/remotes/origin/862
+        // To be defined - presently do nothing
         // migrated_design.version = '9'; // last thing... set the migrated model version
 
         break; // Do not copy this break
