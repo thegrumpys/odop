@@ -85,7 +85,7 @@ class ViewSymbolTable extends Component {
                                             <tr key={element.name}>
                                                 <td>{i}</td>
                                                 <td>{element.name}</td>
-                                                <td>{element.value}</td>
+                                                <td>{String(element.value)}</td>
                                                 <td>{element.oldvalue}</td>
                                                 <td>{element.units}</td>
                                                 <td>{element.type}</td>
