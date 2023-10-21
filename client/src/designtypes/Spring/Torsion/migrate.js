@@ -301,6 +301,7 @@ export function migrate(design) {
                 element.cmax = element.value;
             }
         });
+        // To be defined - presently do nothing
         // migrated_design.version = '9'; // last thing... set the migrated model version
 
         break; // Do not copy this break
