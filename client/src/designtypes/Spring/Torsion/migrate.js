@@ -90,18 +90,6 @@ export function migrate(design) {
             // FDCL definition in initialState for TORSION. The user cannot create 
             // FDCL if it is not already configured in initialState.
             // ***************************************************************
-            if (element.lmin === undefined) {
-                element.lmin = 0;
-            }
-            if (element.lmax === undefined) {
-                element.lmax = 0;
-            }
-            if (element.cmin === undefined) {
-                element.cmin = element.value;
-            }
-            if (element.cmax === undefined) {
-                element.cmax = element.value;
-            }
             if (element.lmin & FIXED || element.lmax & FIXED) { // If one is FIXED
                 element.lmin |= FIXED; // Set them both fixed because they are paired
                 element.lmax |= FIXED;
@@ -312,7 +300,21 @@ export function migrate(design) {
     case '8':
         // Current model version
         // console.log('Convert from 8 to 9');
-        // To be defined - presently do nothing
+        // Added to migration on 10/21/2023 after finding #855 Issue
+        design.symbol_table.forEach((element) => { // For each Symbol Table entry
+            if (element.lmin === undefined) {
+                element.lmin = 0;
+            }
+            if (element.lmax === undefined) {
+                element.lmax = 0;
+            }
+            if (element.cmin === undefined) {
+                element.cmin = element.value;
+            }
+            if (element.cmax === undefined) {
+                element.cmax = element.value;
+            }
+        }
         // migrated_design.version = '9'; // last thing... set the migrated model version
 
         break; // Do not copy this break
