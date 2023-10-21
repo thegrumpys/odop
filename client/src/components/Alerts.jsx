@@ -272,7 +272,7 @@ export var getFontClassBySeverityNumber = function(severityNumber) {
 
 export var getSeverityNumberBySeverity = function(severity) {
 //    console.log('In Alerts.getSeverityNumberBySeverity this=',this,'severity=',severity);
-    var severityNumber = {ERR: 3, WARN: 2, NOTICE: 1, INFO: 0};
+    var severityNumber = {Err: 3, Warn: 2, Notice: 1, Info: 0};
     return severityNumber[severity];
 }
 
