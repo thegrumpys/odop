@@ -87,7 +87,7 @@ export var checks = function(store) {
                 help_url: '[Help](/docs/Help/alerts.html#Validity_Above)'
             });
         }
-        if (element.format === undefined && Number.isNaN(element.value)) {
+        if (element.format === undefined && Number.isNaN(element.value)) { // Not a table and value is not a number
             addAlert({
                 element: element,
                 name: element.name,
