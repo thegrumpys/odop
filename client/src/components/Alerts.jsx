@@ -93,7 +93,7 @@ export var checks = function(store) {
                 name: element.name,
                 message: 'INVALID VALUE: ' + element.name + ' (NaN) is Not a Number',
                 severity: severity,
-                help_url: '[Help](/docs/Help/alerts.html)'
+                help_url: '[Help](/docs/Help/alerts.html#NotNumber)'
             });
         };
 

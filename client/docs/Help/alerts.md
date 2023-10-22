@@ -54,6 +54,7 @@ that will resolve the alerts.
  - [Constraint MIN violation](alerts.html#MIN_Violation)  
  - [Constraint MAX violation](alerts.html#MAX_Violation)  
  - [Fix violation](alerts.html#Fix_Violation)  
+ - [Not a Number (NaN)](alerts.html#NotNumber)  
  - [No Free Independent Variables](alerts.html#NoFreeIV)  
  - [Functionally Determined Constraint Level (FDCL) is enabled](alerts.html#FDCL)  
 
@@ -288,10 +289,36 @@ See also:
 
 ___
 
-<a id="NoFreeIV"></a>  
+<a id="NotNumber"></a>  
 ___
 
 Alert entry #ODOP09
+## Not a Number (NaN) 
+The value of the associated variable is Not a Number ([NaN](https://en.wikipedia.org/wiki/NaN)).  
+
+This is a computational error condition that may cascade to other variables.  
+
+The most likely source of this condition is user input that creates a mathematical difficulty such as division by zero.
+For example, in round wire coil springs, if the value of OD_Free is exactly twice the value of Wire_Dia, 
+the associated ID_Free will have a value of exactly 0.0.
+This will likely create a division by zero situation in the calculation of other variables such as Cycle_Life
+which then triggers this alert.
+
+As it is possible to Save or Export a design with this condition,
+it is possible to encounter this alert on File : Open or File : Import of a previously saved design.    
+
+If you feel that this alert is not appropriate for your situation, please contact customer support.
+
+See also: 
+ - [NaN](https://en.wikipedia.org/wiki/NaN)  
+ - [Contact Us](/docs/About/ContactUs.html)  
+
+___
+
+<a id="NoFreeIV"></a>  
+___
+
+Alert entry #ODOP10
 ## No Free Independent Variables 
 If all [Independent Variables](/docs/Help/terminology.html#independentVar) (inputs) are in 
 [Fixed](/docs/Help/terminology.html#fix) status, 
@@ -322,7 +349,7 @@ ___
 <a id="FDCL"></a>  
 ___
 
-Alert entry #ODOP10
+Alert entry #ODOP11
 ## Functionally Determined Constraint Level (FDCL) is enabled 
 This variable has a functionally Determined Constraint Level (FDCL) configured and enabled. 
 
