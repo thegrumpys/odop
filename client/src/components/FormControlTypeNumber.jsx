@@ -46,7 +46,7 @@ class FormControlTypeNumber extends Component {
             if (prevProps.value !== this.props.value) {
 //                console.log('In FormControlTypeNumber.componentDidUpdate prevProps.value=',prevProps.value,'props.value=',this.props.value,'value=',this.state.value,'valueString=',this.state.valueString);
                 if (this.props.value !== this.state.value) { // Only update our internal state value if they differ leaving the valueString unchanged.
-                    console.log('In FormControlTypeNumber.componentDidUpdate 0 prevProps.value=',prevProps.value,'props.value=',this.props.value,'value=',this.state.value,'valueString=',this.state.valueString);
+//                    console.log('In FormControlTypeNumber.componentDidUpdate 0 prevProps.value=',prevProps.value,'props.value=',this.props.value,'value=',this.state.value,'valueString=',this.state.valueString);
                     var value = parseFloat(this.props.value);
                     this.setState({
                         value: value,
@@ -56,21 +56,21 @@ class FormControlTypeNumber extends Component {
             }
         } else {
             if (Number.isNaN(this.props.value) && this.state.valueString !== 'NaN') {
-                console.log('In FormControlTypeNumber.componentDidUpdate 1 prevProps.value=',prevProps.value,'props.value=',this.props.value,'value=',this.state.value,'valueString=',this.state.valueString);
+//                console.log('In FormControlTypeNumber.componentDidUpdate 1 prevProps.value=',prevProps.value,'props.value=',this.props.value,'value=',this.state.value,'valueString=',this.state.valueString);
                 this.setState({
                     value: this.props.value,
                     valueString: this.props.value.toString(), // Update the display
                     isInvalid: true,
                 });
-            } else if (this.state.value === Number.POSITIVE_INFINITY && this.state.valueString !== 'Infinity') {
-                console.log('In FormControlTypeNumber.componentDidUpdate 2 prevProps.value=',prevProps.value,'props.value=',this.props.value,'value=',this.state.value,'valueString=',this.state.valueString);
+            } else if (this.props.value === Number.POSITIVE_INFINITY && this.state.valueString !== 'Infinity') {
+//                console.log('In FormControlTypeNumber.componentDidUpdate 2 prevProps.value=',prevProps.value,'props.value=',this.props.value,'value=',this.state.value,'valueString=',this.state.valueString);
                 this.setState({
                     value: this.props.value,
                     valueString: this.props.value.toString(), // Update the display
                     isInvalid: true,
                 });
-            } else if (this.state.value === Number.NEGATIVE_INFINITY && this.state.valueString !== '-Infinity') {
-                console.log('In FormControlTypeNumber.componentDidUpdate 3 prevProps.value=',prevProps.value,'props.value=',this.props.value,'value=',this.state.value,'valueString=',this.state.valueString);
+            } else if (this.props.value === Number.NEGATIVE_INFINITY && this.state.valueString !== '-Infinity') {
+//                console.log('In FormControlTypeNumber.componentDidUpdate 3 prevProps.value=',prevProps.value,'props.value=',this.props.value,'value=',this.state.value,'valueString=',this.state.valueString);
                 this.setState({
                     value: this.props.value,
                     valueString: this.props.value.toString(), // Update the display
@@ -110,13 +110,13 @@ class FormControlTypeNumber extends Component {
     onFocus(event) {
         if (!this.props.readOnly) {
             if (Number.isFinite(this.state.value)) {
-                console.log('In FormControlTypeNumber.onFocus 1 event.target.value=',event.target.value,'state=',this.state);
+//                console.log('In FormControlTypeNumber.onFocus 1 event.target.value=',event.target.value,'state=',this.state);
                 this.setState({
                     focused: true,
                     valueString: this.state.value.toString(), // Update the display with unformatted value
                 });
             } else {
-                console.log('In FormControlTypeNumber.onFocus 2 event.target.value=',event.target.value,'state=',this.state);
+//                console.log('In FormControlTypeNumber.onFocus 2 event.target.value=',event.target.value,'state=',this.state);
                 this.setState({
                     focused: true,
                     valueString: '', // Update the display with unformatted value
@@ -128,7 +128,7 @@ class FormControlTypeNumber extends Component {
     }
 
     onBlur(event) {
-        console.log('In FormControlTypeNumber.onBlur event.target.value=',event.target.value,'state=',this.state);
+//        console.log('In FormControlTypeNumber.onBlur event.target.value=',event.target.value,'state=',this.state);
         if (this.state.isInvalid) {
             event.target.value = this.state.value.toString();
             this.props.onChangeValid(event); // Pass valid number onward
@@ -151,8 +151,11 @@ class FormControlTypeNumber extends Component {
 //        console.log('In FormControlTypeNumber.render value=',this.state.value,'valueString=',this.state.valueString);
 //        console.log('In FormControlTypeNumber.render className=',this.props.className);
         var className = (this.props.className !== undefined ? this.props.className : '') + ' text-right';
-        if (this.state.focused && !Number.isFinite(parseFloat(this.state.valueString))) {
-            className += ' borders-invalid text-invalid';
+        if (!Number.isFinite(parseFloat(this.state.valueString))) {
+            className += ' text-not-feasible';
+            if (this.state.focused) {
+                className += ' borders-invalid';
+            }
         }
         var icon_alerts = this.props.icon_alerts; // start with the icon alerts 
         if (icon_alerts === undefined) {
