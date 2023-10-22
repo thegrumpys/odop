@@ -20,7 +20,7 @@ describe('Log Usage', () => {
         it('it should POST with 200 OK with note=test', (done) => {
             chai.request(server)
                 .post('/api/v1/usage_log')
-                .send({ note: 'test'})
+                .send({ note: "test"})
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(200);

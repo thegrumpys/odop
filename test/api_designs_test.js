@@ -207,6 +207,15 @@ describe('Designs with non-empty DB', () => {
             var type = copy.type; // Get the type from the blob
             delete copy.type; // Delete the type from the blob
             var value = JSON5.stringify(copy); // Convert blob to string
+            value = value.replace(/[']/ig,"''") // replace one single quote with an two single quotes throughout
+                         .replace(/\\n/g, "\\\\n")
+                         .replace(/\\'/g, "\\\\'")
+                         .replace(/\\"/g, '\\\\"')
+                         .replace(/\\&/g, "\\\\&")
+                         .replace(/\\r/g, "\\\\r")
+                         .replace(/\\t/g, "\\\\t")
+                         .replace(/\\b/g, "\\\\b")
+                         .replace(/\\f/g, "\\\\f");
 //            console.log('TEST: Before INSERT user=',user,'name=',name,'type=',type,'value=',value);
             var stmt = 'INSERT INTO design (user, name, type, value) VALUES (\''+user+'\',\''+name+'\',\''+type+'\',\''+value+'\')';
 //            console.log('TEST: stmt='+stmt);
@@ -215,6 +224,15 @@ describe('Designs with non-empty DB', () => {
                 if (err) throw err;
                 var ip_address = '::ffff:127.0.0.1';
                 var note = JSON5.stringify({ note: 'fill'});
+                note = note.replace(/[']/ig,"''") // replace one single quote with an two single quotes throughout
+                           .replace(/\\n/g, "\\\\n")
+                           .replace(/\\'/g, "\\\\'")
+                           .replace(/\\"/g, '\\\\"')
+                           .replace(/\\&/g, "\\\\&")
+                           .replace(/\\r/g, "\\\\r")
+                           .replace(/\\t/g, "\\\\t")
+                           .replace(/\\b/g, "\\\\b")
+                           .replace(/\\f/g, "\\\\f");
                 var stmt = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address+'\',\''+note+'\')';
 //                console.log('TEST: stmt='+stmt);
                 connection.query(stmt, function(err, rows, fields) {
@@ -363,6 +381,15 @@ describe('Designs with multiple DB entries', () => {
             var type1 = copy1.type; // Get the type from the blob
             delete copy1.type; // Delete the type from the blob
             var value1 = JSON5.stringify(copy1); // Convert blob to string
+            value1 = value1.replace(/[']/ig,"''") // replace one single quote with an two single quotes throughout
+                           .replace(/\\n/g, "\\\\n")
+                           .replace(/\\'/g, "\\\\'")
+                           .replace(/\\"/g, '\\\\"')
+                           .replace(/\\&/g, "\\\\&")
+                           .replace(/\\r/g, "\\\\r")
+                           .replace(/\\t/g, "\\\\t")
+                           .replace(/\\b/g, "\\\\b")
+                           .replace(/\\f/g, "\\\\f");
 //            console.log('TEST: Before INSERT user1=', user1,' name1=', name1,' type1=', type1,' value1=', value1);
             var stmt1 = 'INSERT INTO design (user, name, type, value) VALUES (\''+user1+'\',\''+name1+'\',\''+type1+'\',\''+value1+'\')';
 //            console.log('TEST: stmt1='+stmt1);
@@ -375,6 +402,15 @@ describe('Designs with multiple DB entries', () => {
                 var type2 = copy2.type; // Get the type from the blob
                 delete copy2.type; // Delete the type from the blob
                 var value2 = JSON5.stringify(copy2); // Convert blob to string
+                value2 = value2.replace(/[']/ig,"''") // replace one single quote with an two single quotes throughout
+                               .replace(/\\n/g, "\\\\n")
+                               .replace(/\\'/g, "\\\\'")
+                               .replace(/\\"/g, '\\\\"')
+                               .replace(/\\&/g, "\\\\&")
+                               .replace(/\\r/g, "\\\\r")
+                               .replace(/\\t/g, "\\\\t")
+                               .replace(/\\b/g, "\\\\b")
+                               .replace(/\\f/g, "\\\\f");
 //                console.log('TEST: Before INSERT user2=', user2,' name2=', name2,' type2=', type2,' value2=', value2);
                 var stmt2 = 'INSERT INTO design (user, name, type, value) VALUES (\''+user2+'\',\''+name2+'\',\''+type2+'\',\''+value2+'\')';
 //                console.log('TEST: stmt2='+stmt2);
@@ -387,7 +423,16 @@ describe('Designs with multiple DB entries', () => {
                     var type3 = copy3.type; // Get the type from the blob
                     delete copy3.type; // Delete the type from the blob
                     var value3 = JSON5.stringify(copy3); // Convert blob to string
-//                    console.log('TEST: Before INSERT user3=', user3,' type3=', name3=', name3,' type3=', type3,' value3=', value3);
+                    value3 = value3.replace(/[']/ig,"''") // replace one single quote with an two single quotes throughout
+                                   .replace(/\\n/g, "\\\\n")
+                                   .replace(/\\'/g, "\\\\'")
+                                   .replace(/\\"/g, '\\\\"')
+                                   .replace(/\\&/g, "\\\\&")
+                                   .replace(/\\r/g, "\\\\r")
+                                   .replace(/\\t/g, "\\\\t")
+                                   .replace(/\\b/g, "\\\\b")
+                                   .replace(/\\f/g, "\\\\f");
+//                    console.log('TEST: Before INSERT user3=', user3,' name3=', name3,' type3=', type3,' value3=', value3);
                     var stmt3 = 'INSERT INTO design (user, name, type, value) VALUES (\''+user3+'\',\''+name3+'\',\''+type3+'\',\''+value3+'\')';
 //                    console.log('TEST: stmt3='+stmt3);
                     connection.query(stmt3, function(err3, rows3, fields3) {
@@ -395,6 +440,15 @@ describe('Designs with multiple DB entries', () => {
                         if (err3) throw err3;
                         var ip_address4 = '::ffff:127.0.0.1';
                         var note4 = JSON5.stringify({ note: 'fill'});
+                        note4 = note4.replace(/[']/ig,"''") // replace one single quote with an two single quotes throughout
+                                     .replace(/\\n/g, "\\\\n")
+                                     .replace(/\\'/g, "\\\\'")
+                                     .replace(/\\"/g, '\\\\"')
+                                     .replace(/\\&/g, "\\\\&")
+                                     .replace(/\\r/g, "\\\\r")
+                                     .replace(/\\t/g, "\\\\t")
+                                     .replace(/\\b/g, "\\\\b")
+                                     .replace(/\\f/g, "\\\\f");
                         var stmt4 = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address4+'\',\''+note4+'\')';
 //                        console.log('TEST: stmt4='+stmt4);
                         connection.query(stmt4, function(err4, rows4, fields4) {
@@ -402,6 +456,15 @@ describe('Designs with multiple DB entries', () => {
                             if (err4) throw err4;
                             var ip_address5 = '::ffff:127.0.0.1';
                             var note5 = JSON5.stringify({ note: 'fill'});
+                            note5 = note5.replace(/[']/ig,"''") // replace one single quote with an two single quotes throughout
+                                         .replace(/\\n/g, "\\\\n")
+                                         .replace(/\\'/g, "\\\\'")
+                                         .replace(/\\"/g, '\\\\"')
+                                         .replace(/\\&/g, "\\\\&")
+                                         .replace(/\\r/g, "\\\\r")
+                                         .replace(/\\t/g, "\\\\t")
+                                         .replace(/\\b/g, "\\\\b")
+                                         .replace(/\\f/g, "\\\\f");
                             var stmt5 = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address5+'\',\''+note5+'\')';
 //                            console.log('TEST: stmt5='+stmt5);
                             connection.query(stmt5, function(err5, rows5, fields5) {
