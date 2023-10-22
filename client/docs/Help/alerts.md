@@ -315,7 +315,7 @@ In that case, it may be possible to clear the alert by making small changes to o
 If all else fails and a Search or Seek operation has been previously executed in the current design session, 
 the [AutoSave](/docs/Help/autoSave.html) feature may allow you to fall back to a previous design.
 
-If you feel that this alert is not appropriate for your situation, please contact customer support.
+If you feel that this alert is not appropriate for your situation, please contact customer support. 
 
 See also: 
  - [NaN](https://en.wikipedia.org/wiki/NaN)  
