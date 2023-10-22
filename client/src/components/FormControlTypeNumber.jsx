@@ -31,7 +31,7 @@ class FormControlTypeNumber extends Component {
                 isInvalid: false,
                 focused: false,
             };
-	    } else {
+        } else {
             this.state = {
                 value: this.props.value,
                 valueString: this.props.value.toString(), // Update the display
