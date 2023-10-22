@@ -12,7 +12,6 @@ import { logUsage } from '../logUsage';
 import { displayMessage } from './MessageModal';
 import { displaySpinner } from './Spinner';
 import { startExecute } from "./ExecutePanel";
-import JSON5 from 'json5'
 
 class Routes extends Component {
 
@@ -149,7 +148,7 @@ class Routes extends Component {
                   startExecute('Execute : ' + config.url.execute, config.url.execute, execute.steps);
               }
           } else {
-              displayMessage('Invalid JSON5 type, function ignored');
+              displayMessage('Invalid JSON type, function ignored');
           }
       })
       .catch(error => {

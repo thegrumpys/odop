@@ -1,4 +1,5 @@
 require('dotenv').config();
+const JSON5 = require('json5')
 
 // Load testTestDesign into the design table with name='test' and type='Test-Design'
 // Model this after the design/model used by the client, but without content

@@ -46,7 +46,7 @@ class FileExport extends Component {
         });
     }
     
-    // I created a special modified version of File Export which outputs a JSON5 file 
+    // I created a special modified version of File Export which outputs a JSON file 
     // with all properties sorted in alphabetical order. 
     // It makes it easy to compare/diff two files and find the differences. 
     onSortedExport() {

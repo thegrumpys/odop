@@ -66,7 +66,7 @@ class FileImport extends Component {
             this.props.deleteAutoSave();
             logUsage('event', 'FileImport', { event_label: migrated_design.type + ' ' + migrated_design.name });
         } else {
-            displayMessage('Invalid JSON5 type, function ignored');
+            displayMessage('Invalid JSON type, function ignored');
         }
     }
     
