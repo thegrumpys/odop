@@ -87,6 +87,15 @@ export var checks = function(store) {
                 help_url: '[Help](/docs/Help/alerts.html#Validity_Above)'
             });
         }
+        if (element.format === undefined && Number.isNaN(element.value)) { // Not a table and value is not a number
+            addAlert({
+                element: element,
+                name: element.name,
+                message: 'INVALID VALUE: ' + element.name + ' (NaN) is Not a Number',
+                severity: severity,
+                help_url: '[Help](/docs/Help/alerts.html#NotNumber)'
+            });
+        };
 
         // CONSTRAINT VALIDITY CHECKS (ONLY FOR INDEPENDENT AND DEPENDENT NUMERIC VARIABLES, NOT FOR CALC INPUTS)
         if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin <= element.validmin) {

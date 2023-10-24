@@ -54,6 +54,7 @@ that will resolve the alerts.
  - [Constraint MIN violation](alerts.html#MIN_Violation)  
  - [Constraint MAX violation](alerts.html#MAX_Violation)  
  - [Fix violation](alerts.html#Fix_Violation)  
+ - [Not a Number (NaN)](alerts.html#NotNumber)  
  - [No Free Independent Variables](alerts.html#NoFreeIV)  
  - [Functionally Determined Constraint Level (FDCL) is enabled](alerts.html#FDCL)  
 
@@ -288,10 +289,45 @@ See also:
 
 ___
 
-<a id="NoFreeIV"></a>  
+<a id="NotNumber"></a>  
 ___
 
 Alert entry #ODOP09
+## Not a Number (NaN) 
+The value of the associated variable is Not a Number ([NaN](https://en.wikipedia.org/wiki/NaN)).  
+
+This is a computational error condition that may cascade to other variables.  
+
+The most likely source of this condition is user input that creates a mathematical difficulty such as division by zero.
+For example, in round wire coil springs, if the value of OD_Free is exactly twice the value of Wire_Dia, 
+the associated ID_Free will have a value of exactly 0.0.
+This will likely create a division by zero situation in the calculation of other variables such as Cycle_Life
+which then triggers this alert.
+
+As it is possible to Save or Export a design with this condition,
+it is possible to encounter this alert on File : Open or File : Import of a previously saved design.    
+
+In most cases, the best way to resolve his alert is to revert the most recent change to a variable. 
+If that works, try establishing values that are part way to the value causing the problem. 
+It is possible that using the Search feature could resolve the alert. 
+It is also possible that use of the Search feature could create this alert.
+In that case, it may be possible to clear the alert by making small changes to one or more Independent Variables. 
+If all else fails and a Search or Seek operation has been previously executed in the current design session, 
+the [AutoSave](/docs/Help/autoSave.html) feature may allow you to fall back to a previous design.
+
+If you feel that this alert is not appropriate for your situation, please contact customer support. 
+
+See also: 
+ - [NaN](https://en.wikipedia.org/wiki/NaN)  
+ - [AutoSave](/docs/Help/autoSave.html)  
+ - [Contact Us](/docs/About/ContactUs.html)  
+
+___
+
+<a id="NoFreeIV"></a>  
+___
+
+Alert entry #ODOP10
 ## No Free Independent Variables 
 If all [Independent Variables](/docs/Help/terminology.html#independentVar) (inputs) are in 
 [Fixed](/docs/Help/terminology.html#fix) status, 
@@ -322,7 +358,7 @@ ___
 <a id="FDCL"></a>  
 ___
 
-Alert entry #ODOP10
+Alert entry #ODOP11
 ## Functionally Determined Constraint Level (FDCL) is enabled 
 This variable has a functionally Determined Constraint Level (FDCL) configured and enabled. 
 
