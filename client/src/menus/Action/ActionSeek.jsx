@@ -41,10 +41,6 @@ class ActionSeek extends Component {
         if (inverted_constraint) {
             return;
         }
-        if (!Number.isFinite(this.props.objective_value)) {
-            displayMessage('Search cannot continue because the Objective Value is not finite. Objective Value = ' + this.props.objective_value.toFixed(7) + '. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#ObjValueNotFinite');
-            return;
-        }
         var result = this.props.symbol_table.find( // Find free variable matching the current variable name
             (element) => this.state.seek_name === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
         );

@@ -127,10 +127,6 @@ class SymbolValue extends Component {
         if (inverted_constraint) {
             return;
         }
-        if (!Number.isFinite(this.props.objective_value)) {
-            displayMessage('Search cannot continue because the Objective Value is not finite. Objective Value = ' + this.props.objective_value.toFixed(7) + '. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#ObjValueNotFinite');
-            return;
-        }
         var old_objective_value = this.props.objective_value.toPrecision(4);
         this.props.saveAutoSave();
         this.props.search();
@@ -162,10 +158,6 @@ class SymbolValue extends Component {
         if (inverted_constraint) {
             return;
         }
-        if (!Number.isFinite(this.props.objective_value)) {
-            displayMessage('Search cannot continue because the Objective Value is not finite. Objective Value = ' + this.props.objective_value.toFixed(7) + '. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#ObjValueNotFinite');
-            return;
-        }
 //        this.setState({
 //            modal: !this.state.modal
 //        });
@@ -190,10 +182,6 @@ class SymbolValue extends Component {
             }
         });
         if (inverted_constraint) {
-            return;
-        }
-        if (!Number.isFinite(this.props.objective_value)) {
-            displayMessage('Search cannot continue because the Objective Value is not finite. Objective Value = ' + this.props.objective_value.toFixed(7) + '. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#ObjValueNotFinite');
             return;
         }
 //        this.setState({
