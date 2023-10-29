@@ -32,8 +32,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
 //            console.log('In patsh_explore 1 phi=',phi,'s_phi=',s_phi);
             if (s_phi < s) {
                 s = s_phi;
-            }
-            else {
+            } else {
                 xflag[k] = -xflag[k];
                 phi[k] = phi[k] + 2.0 * eps[k] * del * xflag[k];
                 s_phi = despak(phi, store, merit);
