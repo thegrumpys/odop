@@ -47,6 +47,25 @@ For examples, see:
 * [Piston-Cylinder](/docs/Help/DesignTypes/Piston-Cylinder/img/PCylDiagram.png) 
 * [Rectangular Solid](/docs/Help/DesignTypes/Solid/img/RectangularSolidDiagram.png).   
 
+### Common numerical issues associated with mathematical models 
+
+A general mathematical model with no limits or loose limits to its inputs will contain vulnerabilities to undesired behavior 
+created by ["pathological" cases](https://en.wikipedia.org/wiki/Pathological_(mathematics)). 
+Common examples are divide-by-zero and square root of a negative number. 
+These situations create [singularities](https://en.wikipedia.org/wiki/Singularity_(mathematics)) in the design space. 
+With ODOP, there are cases where a search will fail to find the correct result because a singularity lies between 
+the search start point and a known good solution.  
+
+### Spring Design Example 
+The analysis of round wire helical coil springs provides an example for the case where 
+coil outside diameter (OD_Free) is exactly twice the wire diameter (Wire_Dia). 
+In this situation, the inside diameter (ID_Free) is exactly zero and the spring index (Spring_Index) is exactly one. 
+That value of Spring_Index results in a divide-by-zero problem in the calculation of the Wahl curvature correction factor (kc). 
+[Javascript renders the result as infinity](https://tc39.es/ecma262/multipage/ecmascript-data-types-and-values.html#sec-ecmascript-language-types-number-type) 
+which then propagates through dependent equations. 
+Eventually, equations involving operations like subtraction of infinities create values of NaN which propagate to additional dependent equations.
+
+
 See also: 
  - [Design Types](terminology.html#designTypes)   
  - [Equation Sets](terminology.html#eqnSet)   
