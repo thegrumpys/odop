@@ -50,3 +50,10 @@ See:
 
 ### See also:
 Github issue #870 Add eqnset tests for pathological cases  
+
+### Philosophy / point of view
+A situation where the equations produce a value of infinity is undesirable.  
+A situation where the equations produce a value of NaN is much worse.
+
+
+
