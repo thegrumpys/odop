@@ -64,6 +64,7 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 * [Description of ODOP users](design/UserDescription.html)
 * [Functionally Determined Constraint Level - User Interface](design/FDCL_UI.html)
 * [SizeSearch - Enhanced SelectSize](design/SizeSearch.html) 
+* [Mathematical Concerns](design/MathematicalConcerns.html)  
 
 <!--- The following topics of this section are already implemented or otherwise no longer relevant.  They are maintained here to keep the thought history.  -->
 <!---  
