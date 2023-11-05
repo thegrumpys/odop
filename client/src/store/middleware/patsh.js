@@ -20,6 +20,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
     }
 
     function patsh_explore(phi, s, del) {
+//        console.log('In patsh_explore 0 phi=',phi,'s=',s);
         var eps = [];
         var s_phi;
         for (let k = 0; k < phi.length; k++) {
@@ -58,7 +59,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
         var s = s_psi; // s: the functional value before the move
         s = patsh_explore(phi, s, del); // explore
 //        console.log('After patsh_explore phi=',phi,'s=',s,'itno=',itno);
-//        console.log('@@@1@@@ itno=',itno,'s=',s,'calc=',s + tol * Math.abs(s_psi),'calc2=',Math.abs((s_psi-s)/s_psi),'s_psi=',s_psi,'compare=', s + tol * Math.abs(s_psi) <= s_psi);
+//        console.log('@@@1@@@ itno=',itno,'s=',s,'s_psi=',s_psi,'calc=',s + tol * Math.abs(s_psi),'compare=', s + tol * Math.abs(s_psi) <= s_psi);
         if (s < s_psi && s + tol * Math.abs(s_psi) <= s_psi) { // goto 2
             do { // [2]
                 itno++; // count the number of iterations
@@ -91,7 +92,7 @@ export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
                 s = s_phi; // s: the functional value before the move
                 s = patsh_explore(phi, s, del); // explore
 //                console.log('After patsh_explore phi=',phi,'s=',s,'itno=',itno);
-//                console.log('@@@2@@@ itno=',itno,'s=',s,'calc=',s + tol * Math.abs(s_psi),'calc2=',Math.abs((s_psi-s)/s_psi),'s_psi=',s_psi,'compare=', s + tol * Math.abs(s_psi) <= s_psi);
+//                console.log('@@@2@@@ itno=',itno,'s=',s,'s_psi=',s_psi,'calc=',s + tol * Math.abs(s_psi),'compare=', s + tol * Math.abs(s_psi) <= s_psi);
             } while (s < s_psi && s + tol * Math.abs(s_psi) <= s_psi); // goto 2 else s >= s_psi goto 1
         } else { // s >= s_psi && s + tol * Math.abs(s_psi) >= s_psi goto 3
             if (del < delmin) { // [3] Are we done? Leave by door #3
