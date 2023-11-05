@@ -240,13 +240,13 @@ class ViewObjectiveValue extends Component {
                 <td>{viol_sum.value}</td>
                 <td>{invalid ? 'true' : ''}</td>
                 <td>{infeasible ? 'true' : ''}</td>
-                <td>{(this.props.objective_value === 0.0 || (feasibility_vmin <= 0.0 && validity_vmin <= 0.0)) ? '' : (feasibility_vmin+validity_vmin)*(feasibility_vmin+validity_vmin)*100/this.props.objective_value}</td>
-                <td>{(this.props.objective_value === 0.0 || (feasibility_vmax <= 0.0 && validity_vmax <= 0.0)) ? '' : (feasibility_vmax+validity_vmax)*(feasibility_vmax+validity_vmax)*100/this.props.objective_value}</td>
-                <td>{validity_vmin <= 0.0 ? '' : validity_vmin}</td>
-                <td>{validity_vmax <= 0.0 ? '' : validity_vmax}</td>
-                <td>{feasibility_vmin <= 0.0 ? '' : feasibility_vmin}</td>
-                <td>{feasibility_vmax <= 0.0 ? '' : feasibility_vmax}</td>
-                <td>{element.value}</td>
+                <td>{(this.props.objective_value === 0.0 || (feasibility_vmin <= 0.0 && validity_vmin <= 0.0)) ? '' : String((feasibility_vmin+validity_vmin)*(feasibility_vmin+validity_vmin)*100/this.props.objective_value)}</td>
+                <td>{(this.props.objective_value === 0.0 || (feasibility_vmax <= 0.0 && validity_vmax <= 0.0)) ? '' : String((feasibility_vmax+validity_vmax)*(feasibility_vmax+validity_vmax)*100/this.props.objective_value)}</td>
+                <td>{validity_vmin <= 0.0 ? '' : String(validity_vmin)}</td>
+                <td>{validity_vmax <= 0.0 ? '' : String(validity_vmax)}</td>
+                <td>{feasibility_vmin <= 0.0 ? '' : String(feasibility_vmin)}</td>
+                <td>{feasibility_vmax <= 0.0 ? '' : String(feasibility_vmax)}</td>
+                <td>{String(element.value)}</td>
                 <td>{String(element.validmin)}</td>
                 <td>{String(element.validmax)}</td>
                 <td>{String(element.lmin)+'='+flags[element.lmin]}</td>
