@@ -155,13 +155,14 @@ If you see "NaN" where you expect to see a number,
 it is likely because the software has encountered a computational issue like division by zero. 
 It is possible that a single calculation problem will propagate NaN into many output values. 
 
-The Alerts facility (Alerts button) provides warning messages for physically unrealizable 
+The Alerts facility (Alerts button) provides warning messages for physically impossible 
 designs that may be the source of NaN and other computational difficulty. 
 So, if you encounter NaN where you expect a numeric value, 
 examine the Alerts for additional messages. 
 
 See Also:   
  - [Alerts](/docs/Help/alerts.html)   
+ - [Wikipedia NaN](https://en.wikipedia.org/wiki/NaN)  
 
 ___
 

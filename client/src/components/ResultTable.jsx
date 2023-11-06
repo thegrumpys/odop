@@ -61,7 +61,7 @@ class ResultTable extends Component {
 
     onSearchContextHelp() {
 //        console.log('In ResultTable.onSearchContinue this=',this);
-        window.open('/docs/Help/objNotFinite.html', '_blank');
+        window.open('/docs/Help/errors.html#objNotFinite', '_blank');
     }
 
     onSearchContinue() {
@@ -317,10 +317,10 @@ class ResultTable extends Component {
                     <Modal.Body>
                         <Alert variant="warning">
                             <p>This design has numeric issues.
-                            Some design variable values are causing the objective value to be infinite.</p>
+                            Some design variable values are causing the Objective Value to be infinite.</p>
                             <p>Continuing Search may not result in an improvement.</p>
-                            <p>Cancelling Search will allow you to examine the Alerts panel for invalid values and associated help.
-                            Freeing one or more independent variables may result in an improvement.</p>
+                            <p>Canceling Search will allow you to examine the Alerts panel for invalid values and associated help.
+                            Freeing one or more Independent Variables may result in an improvement.</p>
                         </Alert> 
                     </Modal.Body>
                     <Modal.Footer>

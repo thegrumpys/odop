@@ -121,8 +121,10 @@ Alert entry #S55
 ## Coils_A is less than 1 
 A warning alert is produced whenever the current design has less than one active coil.  
 
-This is not an error that will block operations like Search, Seek and Trade. 
-As less than one coil may not be the intent, the warning is intended to bring the situation to the designer's attention. 
+As long as Coils_A is greater than zero, this is not an error that will block operations like Search, Seek and Trade. 
+As less than one coil may not be the intent, the warning is intended to bring the situation to the designer's attention.  
+
+Values of Coils_A less than or equal to zero will trigger the associated validity alert.
 
 ___
 
