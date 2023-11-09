@@ -19,6 +19,15 @@ export function checks(store) {        /*    Compression  Spring  */
 
 // Alerts common to all round-wire coil springs 
 
+    if (design.model.symbol_table[o.OD_Free].value === 2.0 * design.model.symbol_table[o.Wire_Dia].value) {
+        addAlert({
+            element: design.model.symbol_table[o.OD_Free],
+            name: design.model.symbol_table[o.OD_Free].name, 
+            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.OD_Free].name + ' (' + design.model.symbol_table[o.OD_Free].value.toODOPPrecision() + ') = 2x ' + design.model.symbol_table[o.Wire_Dia].name,
+            severity: ERR, 
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#OD2xWire_Dia)'
+        });
+    }
     if (design.model.symbol_table[o.Wire_Dia].value > design.model.symbol_table[o.ID_Free].value) {
         addAlert({
             element: design.model.symbol_table[o.Wire_Dia],

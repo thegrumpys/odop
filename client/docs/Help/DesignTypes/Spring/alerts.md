@@ -3,6 +3,7 @@
 Alerts common to all round-wire coil springs 
 
 ### On this page:   
+ - [OD_Free 2x Wire_Dia](alerts.html#OD2xWire_Dia)  
  - [Wire_Dia > ID_Free](alerts.html#Wire_Dia_GT_ID_Free)  
  - [Material properties for this Wire_Dia may not be accurate](alerts.html#MatPropAccuracy)  
  - [FS_CycleLife MIN not set](alerts.html#FS_CycleLife_MIN_not_set)  
@@ -14,6 +15,28 @@ Alerts common to all round-wire coil springs
  - [Cycle_Life value is extrapolated](alerts.html#Cycle_LifeExtrapolated)  
  - [Default constraint not enabled](alerts.html#DefaultConstraint)  
  - [Value of Tensile is suspect](alerts.html#TensileValueSuspect)  
+
+___
+
+<a id="OD2xWire_Dia"></a>  
+___
+
+##  Outside diameter is exactly twice wire diameter
+This situation creates numerical difficulties.
+
+With round wire helical coil springs, 
+the case where coil outside diameter (OD_Free) is exactly twice the wire diameter (Wire_Dia) creates numerical problems. 
+In this situation, the inside diameter (ID_Free) is exactly zero and the spring index (Spring_Index) is exactly one. 
+That value of Spring_Index results in a divide-by-zero problem in the calculation of the Wahl curvature correction factor (kc). 
+Javascript renders the result as infinity which then propagates through dependent equations. 
+Eventually, equations involving operations like subtraction of infinities create values of NaN (Not a Number) 
+which propagate to additional dependent equations.  
+
+To resolve this Alert, increase the value of OD_Free or decrease the value of Wire_Dia.
+
+See also:
+ - [NaN](/docs/Help/htt.html#nan)  
+ - [Wikipedia NaN](https://en.wikipedia.org/wiki/NaN)  
 
 ___
 
