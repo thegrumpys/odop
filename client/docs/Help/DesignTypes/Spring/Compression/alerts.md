@@ -3,6 +3,7 @@
 Alerts specific to compression springs. 
 
 ### On this page:   
+ - [Coils_T = Inactive_Coils](alerts.html##Coils_T_eq_Inactive_Coils)  
  - [Force_1 > Force_2](alerts.html#F1_GT_F2)  
  - [Excess Force](alerts.html#Excess_Force)  
  - [L_Free < L_Solid](alerts.html#L_Free_LT_L_Solid)  
@@ -15,10 +16,34 @@ Alerts specific to compression springs.
 
 ___
 
-<a id="F1_GT_F2"></a>  
+<a id="#Coils_T_eq_Inactive_Coils"></a>  
 ___
 
 Alert entry #C101
+##  Total coils exactly equals inactive coils; Active coils is zero
+This situation creates numerical difficulties.
+
+With round wire helical coil compression springs, 
+the case where the total number of coils (Coils_T) is exactly equal the number of inactive coils (Inactive_Coils) 
+results in zero active coils (Coils_A) and that creates divide-by-zero problems in the calculations. 
+Javascript renders the result as infinity which then propagates through dependent equations. 
+Eventually, equations involving operations like subtraction of infinities create values of NaN (Not a Number) 
+which propagate to additional dependent equations.  
+
+To resolve this Alert, select a different end_type or increase the value of Coils_T 
+until it exceeds the value of Inactive_Coils associated with the selected end type.
+
+See also:
+ - [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes)  
+ - [NaN](/docs/Help/htt.html#nan)  
+ - [Wikipedia NaN](https://en.wikipedia.org/wiki/NaN)  
+
+___
+
+<a id="F1_GT_F2"></a>  
+___
+
+Alert entry #C102
 ## Force_1 > Force_2 
 The force (applied load) at operating point 1 (Force_1) is greater than the force at operating point 2 (Force_2). 
 
@@ -41,7 +66,7 @@ ___
 <a id="Excess_Force"></a>  
 ___
 
-Alert entry #C102
+Alert entry #C103
 ## Excess Force 
 The value of force specified at the second load point (Force_2) exceeds the amount of force necessary to drive the spring 
 to its solid condition (Force_Solid). 
@@ -71,7 +96,7 @@ ___
 <a id="L_Free_LT_L_Solid"></a>  
 ___
 
-Alert entry #C103
+Alert entry #C104
 ## L_Free < L_Solid 
 In a compression spring, 
 having free length (L_Free) specified as less than the solid height (L_Solid) is an impossible condition. 
@@ -95,7 +120,7 @@ ___
 <a id="L_2_LT_L_Solid"></a>  
 ___
 
-Alert entry #C104
+Alert entry #C105
 ## L_2 < L_Solid 
 In a compression spring, 
 having the length associated with the second operating load (L_2) as less than the solid height (L_Solid) 
@@ -123,7 +148,7 @@ ___
 <a id="FS_Solid_LT_1"></a>  
 ___
 
-Alert entry #C105
+Alert entry #C106
 ##  FS_Solid < 1.0 
 The factor of safety when compressed to solid is less than 1.0.
 
@@ -160,7 +185,7 @@ ___
 <a id="C_DefaultConstraint"></a>  
 ___
 
-Alert entry #C106
+Alert entry #C107
 ## Default constraint not enabled 
   
 Disabling default constraints is not recommended. 
@@ -200,7 +225,7 @@ ___
 <a id="PC_Avail_Deflect2_GT_80"></a>  
 ___
 
-Alert entry #C107
+Alert entry #C108
 ## %_Avail_Deflect @ 2 > 80% 
 Coil to coil contact may cause inaccuracy in operating point 2. 
 
@@ -230,7 +255,7 @@ ___
 <a id="PC_Avail_Deflect1_LT_20"></a>  
 ___
 
-Alert entry #C108
+Alert entry #C109
 ## %_Avail_Deflect @ 1 < 20% 
 End effects may cause inaccuracy in operating point 1.  
 
@@ -259,7 +284,7 @@ ___
 <a id="buckling"></a>  
 ___
 
-Alert entry #C109
+Alert entry #C110
 ## Buckling concern 
 A spring of these dimensions and loading has a tendency to buckle. 
 
