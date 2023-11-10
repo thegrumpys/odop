@@ -59,6 +59,8 @@ that will resolve the alerts.
  - [Functionally Determined Constraint Level (FDCL) is enabled](alerts.html#FDCL)  
 
 ### On other pages (design type specific alerts):   
+ - [OD_Free 2x Wire_Dia](/docs/Help/DesignTypes/Spring/alerts.html#OD2xWire_Dia)  
+ - [OD_Free equal to Wire_Dia](/docs/Help/DesignTypes/Spring/alerts.html#OD_eq_Wire_Dia)  
  - [Wire_Dia > ID_Free](/docs/Help/DesignTypes/Spring/alerts.html#Wire_Dia_GT_ID_Free)  
  - [Material properties for this Wire_Dia may not be accurate](/docs/Help/DesignTypes/Spring/alerts.html#MatPropAccuracy)  
  - [FS_CycleLife MIN not set](/docs/Help/DesignTypes/Spring/alerts.html#FS_CycleLife_MIN_not_set)  
@@ -67,8 +69,11 @@ that will resolve the alerts.
  - [Spring Index manufacturability concern](/docs/Help/DesignTypes/Spring/alerts.html#SI_manufacturability)  
  - [Cycle_Life calculation is not available](/docs/Help/DesignTypes/Spring/alerts.html#Cycle_LifeNA)  
  - [Cycle_Life not defined beyond yield](/docs/Help/DesignTypes/Spring/alerts.html#Cycle_LifeNA_FS_2)  
+ - [Cycle_Life value is extrapolated](/docs/Help/DesignTypes/Spring/alerts.html#Cycle_LifeExtrapolated)  
+ - [Over specification concern; Both OD and ID are fixed](/docs/Help/DesignTypes/Spring/alerts.html#OD_ID_BothFixed)  
  - [Default constraint not enabled](/docs/Help/DesignTypes/Spring/alerts.html#DefaultConstraint)  
  - [Value of Tensile is suspect](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)  
+ - [Coils_T = Inactive_Coils](/docs/Help/DesignTypes/Spring/Compression/alerts.html##Coils_T_eq_Inactive_Coils)  
  - [Force_1 >= Force_2](/docs/Help/DesignTypes/Spring/Compression/alerts.html#F1_GE_F2)  
  - [Excess Force](/docs/Help/DesignTypes/Spring/Compression/alerts.html#Excess_Force)  
  - [L_Free < L_Solid](/docs/Help/DesignTypes/Spring/Compression/alerts.html#L_Free_LT_L_Solid)  

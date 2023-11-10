@@ -1,6 +1,6 @@
 import * as o from './symbol_table_offsets';
 import { checks as commonChecks, clearAlerts, addAlert, check_message, check_DCD_alert, ERR, WARN, INFO } from '../../../components/Alerts';
-import { CONSTRAINED, MIN, MAX } from '../../../store/actionTypes';
+import { CONSTRAINED, FIXED, MIN, MAX } from '../../../store/actionTypes';
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
 Number.prototype.toODOPPrecision = function() {
@@ -19,6 +19,24 @@ export function checks(store) {        /*    Compression  Spring  */
 
 // Alerts common to all round-wire coil springs 
 
+    if (design.model.symbol_table[o.OD_Free].value === 2.0 * design.model.symbol_table[o.Wire_Dia].value) {
+        addAlert({
+            element: design.model.symbol_table[o.OD_Free],
+            name: design.model.symbol_table[o.OD_Free].name, 
+            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.OD_Free].name + ' (' + design.model.symbol_table[o.OD_Free].value.toODOPPrecision() + ') = 2x ' + design.model.symbol_table[o.Wire_Dia].name,
+            severity: ERR, 
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#OD2xWire_Dia)'
+        });
+    }
+    if (design.model.symbol_table[o.OD_Free].value === design.model.symbol_table[o.Wire_Dia].value) {
+        addAlert({
+            element: design.model.symbol_table[o.OD_Free],
+            name: design.model.symbol_table[o.OD_Free].name, 
+            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.OD_Free].name + ' (' + design.model.symbol_table[o.OD_Free].value.toODOPPrecision() + ') =  ' + design.model.symbol_table[o.Wire_Dia].name,
+            severity: ERR, 
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#OD_eq_Wire_Dia)'
+        });
+    }
     if (design.model.symbol_table[o.Wire_Dia].value > design.model.symbol_table[o.ID_Free].value) {
         addAlert({
             element: design.model.symbol_table[o.Wire_Dia],
@@ -87,6 +105,15 @@ export function checks(store) {        /*    Compression  Spring  */
             message: 'Manufacturability concern', 
             severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#SI_manufacturability)' 
+        });
+    }
+    if (design.model.symbol_table[o.OD_Free].lmin === FIXED && design.model.symbol_table[o.ID_Free].lmin === (CONSTRAINED|FIXED)) {
+        addAlert({
+            element: design.model.symbol_table[o.OD_Free], 
+            name: design.model.symbol_table[o.OD_Free].name, 
+            message: 'Over specification concern; Both OD and ID are fixed', 
+            severity: WARN,
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#OD_ID_BothFixed)' 
         });
     }
     if (design.model.symbol_table[o.Prop_Calc_Method].value !== 1) {
