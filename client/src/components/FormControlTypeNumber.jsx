@@ -7,9 +7,21 @@ import { connect } from 'react-redux';
 Number.prototype.toODOPPrecision = function() {
     var value = this.valueOf();
     var odopValue;
-    if (value < 10000.0 || value >= 1000000.0)
-         odopValue = value.toPrecision(4);
-    else odopValue = value.toFixed(0);
+    if (Math.abs(value) < 10000.0 || Math.abs(value) >= 1000000.0) {
+        if (value === Number.POSITIVE_INFINITY) {
+            odopValue = value.toPrecision(4);
+        } else if (value >= 1.7975e+308) {
+            odopValue = "1.797e+308";
+        } else if (value === Number.NEGATIVE_INFINITY) {
+            odopValue = value.toPrecision(4);
+        } else if (value <= -1.7975e+308) {
+            odopValue = "-1.797e+308";
+        } else {
+            odopValue = value.toPrecision(4);
+        }
+    } else {
+        odopValue = value.toFixed(0);
+    }
     return odopValue;
 };
 
@@ -148,7 +160,7 @@ class FormControlTypeNumber extends Component {
     }
 
     render() {
-        console.log('In FormControlTypeNumber.render value=',this.state.value,'valueString=',this.state.valueString);
+//        console.log('In FormControlTypeNumber.render value=',this.state.value,'valueString=',this.state.valueString);
 //        console.log('In FormControlTypeNumber.render className=',this.props.className);
         var className = (this.props.className !== undefined ? this.props.className : '') + ' text-right';
         if (!Number.isFinite(parseFloat(this.state.valueString))) {

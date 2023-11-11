@@ -2,10 +2,21 @@
 Number.prototype.toODOPPrecision = function() {
     var value = this.valueOf();
     var odopValue;
-//    if (Math.abs(value) < 10000.0 || Math.abs(value) >= 1000000.0)
-    if (value < 10000.0 || value >= 1000000.0)
-         odopValue = value.toPrecision(4);
-    else odopValue = value.toFixed(0);
+    if (Math.abs(value) < 10000.0 || Math.abs(value) >= 1000000.0) {
+        if (value === Number.POSITIVE_INFINITY) {
+            odopValue = value.toPrecision(4);
+        } else if (value >= 1.7975e+308) {
+            odopValue = "1.797e+308";
+        } else if (value === Number.NEGATIVE_INFINITY) {
+            odopValue = value.toPrecision(4);
+        } else if (value <= -1.7975e+308) {
+            odopValue = "-1.797e+308";
+        } else {
+            odopValue = value.toPrecision(4);
+        }
+    } else {
+        odopValue = value.toFixed(0);
+    }
     return odopValue;
 };
 
@@ -13,7 +24,7 @@ Number.prototype.toODOPPrecision = function() {
 
 it('toODOPPrecision = -1.7976931348623157e+308', () => {
     const value = -1.7976931348623157e+308;
-    expect(value.toODOPPrecision()).toEqual('-1.798e+308');
+    expect(value.toODOPPrecision()).toEqual('-1.797e+308');
 });
 
 it('toODOPPrecision > -1000000.0', () => {
@@ -100,7 +111,7 @@ it('toODOPPrecision > 1000000.0', () => {
 
 it('toODOPPrecision = 1.7976931348623157e+308', () => {
     const value = 1.7976931348623157e+308;
-    expect(value.toODOPPrecision()).toEqual('1.798e+308');
+    expect(value.toODOPPrecision()).toEqual('1.797e+308');
 });
 
 // Special
@@ -122,10 +133,12 @@ it('toODOPPrecision NEGATIVE_INFINITY', () => {
 
 it('toODOPPrecision MAX_VALUE', () => {
     const value = Number.MAX_VALUE;
-    expect(value.toODOPPrecision()).toEqual('1.798e+308');
+    expect(value.toODOPPrecision()).toEqual('1.797e+308');
 });
 
 it('toODOPPrecision MIN_VALUE', () => {
     const value = Number.MIN_VALUE;
     expect(value.toODOPPrecision()).toEqual('4.941e-324');
 });
+
+//    if (Math.abs(value) < 10000.0 || Math.abs(value) >= 1000000.0)
