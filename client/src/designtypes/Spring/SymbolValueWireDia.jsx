@@ -25,28 +25,7 @@ import { getAlertsByName } from '../../components/Alerts';
 import { load, search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../../store/actionCreators';
 import { displayMessage } from '../../components/MessageModal';
 import FeasibilityIndicator from '../../components/FeasibilityIndicator';
-
-/*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
-Number.prototype.toODOPPrecision = function() {
-    var value = this.valueOf();
-    var odopValue;
-    if (Math.abs(value) < 10000.0 || Math.abs(value) >= 1000000.0) {
-        if (value === Number.POSITIVE_INFINITY) {
-            odopValue = value.toPrecision(4);
-        } else if (value >= 1.7975e+308) {
-            odopValue = "1.797e+308";
-        } else if (value === Number.NEGATIVE_INFINITY) {
-            odopValue = value.toPrecision(4);
-        } else if (value <= -1.7975e+308) {
-            odopValue = "-1.797e+308";
-        } else {
-            odopValue = value.toPrecision(4);
-        }
-    } else {
-        odopValue = value.toFixed(0);
-    }
-    return odopValue;
-};
+import { toODOPPrecision } from '../../toODOPPrecision'
 
 class SymbolValueWireDia extends Component {
 
@@ -381,7 +360,7 @@ class SymbolValueWireDia extends Component {
         });
 //        console.log('In SymbolValueWireDia.render default_value=',default_value);
         if (default_value === undefined) {
-            wire_dia_table[0] = [needle, needle.toODOPPrecision()+" Non-std"]; // Replace column header with non-std value
+            wire_dia_table[0] = [needle, toODOPPrecision(needle)+" Non-std"]; // Replace column header with non-std value
         } else {
             wire_dia_table.shift(); // Remove column header if there is no non-std value
         }
@@ -490,7 +469,7 @@ class SymbolValueWireDia extends Component {
                            </OverlayTrigger>
                          :
                            ''}
-                        <Form.Control readOnly type="text" className={sv_value_class} value={default_value === undefined ? this.props.element.value.toODOPPrecision()+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
+                        <Form.Control readOnly type="text" className={sv_value_class} value={default_value === undefined ? toODOPPrecision(this.props.element.value)+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
                     </InputGroup>
                 </td>
                 <Modal show={this.state.modal} onHide={this.onClose}>

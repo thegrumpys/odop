@@ -7,28 +7,7 @@ import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
-
-/*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
-Number.prototype.toODOPPrecision = function() {
-    var value = this.valueOf();
-    var odopValue;
-    if (Math.abs(value) < 10000.0 || Math.abs(value) >= 1000000.0) {
-        if (value === Number.POSITIVE_INFINITY) {
-            odopValue = value.toPrecision(4);
-        } else if (value >= 1.7975e+308) {
-            odopValue = "1.797e+308";
-        } else if (value === Number.NEGATIVE_INFINITY) {
-            odopValue = value.toPrecision(4);
-        } else if (value <= -1.7975e+308) {
-            odopValue = "-1.797e+308";
-        } else {
-            odopValue = value.toPrecision(4);
-        }
-    } else {
-        odopValue = value.toFixed(0);
-    }
-    return odopValue;
-};
+import { toODOPPrecision } from '../toODOPPrecision'
 
 class ConstraintsMinRowDependentVariable extends Component {
 
@@ -214,9 +193,9 @@ class ConstraintsMinRowDependentVariable extends Component {
                         {this.props.system_controls.show_violations === 1 && this.props.element.vmin <= 0 ?
                             ''
                             : (this.props.element.lmin & FIXED ? 
-                                (this.props.element.vmin*100.0).toODOPPrecision() 
+                                toODOPPrecision(this.props.element.vmin*100.0)
                                 : (this.props.element.lmin & CONSTRAINED ? 
-                                    (this.props.element.vmin*100.0).toODOPPrecision()
+                                    toODOPPrecision(this.props.element.vmin*100.0)
                                     : ''))}
                     </td>
                 </tr>

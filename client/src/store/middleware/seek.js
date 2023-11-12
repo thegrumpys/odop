@@ -2,28 +2,7 @@ import { MAX, FIXED, CONSTRAINED } from '../actionTypes';
 import { saveInputSymbolValues, restoreInputSymbolValues, changeResultTerminationCondition } from '../actionCreators';
 import { search } from './search';
 import { despak } from './despak';
-
-/*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
-Number.prototype.toODOPPrecision = function() {
-    var value = this.valueOf();
-    var odopValue;
-    if (Math.abs(value) < 10000.0 || Math.abs(value) >= 1000000.0) {
-        if (value === Number.POSITIVE_INFINITY) {
-            odopValue = value.toPrecision(4);
-        } else if (value >= 1.7975e+308) {
-            odopValue = "1.797e+308";
-        } else if (value === Number.NEGATIVE_INFINITY) {
-            odopValue = value.toPrecision(4);
-        } else if (value <= -1.7975e+308) {
-            odopValue = "-1.797e+308";
-        } else {
-            odopValue = value.toPrecision(4);
-        }
-    } else {
-        odopValue = value.toFixed(0);
-    }
-    return odopValue;
-};
+import { toODOPPrecision } from '../../toODOPPrecision'
 
 export function seek(store, action) {
     /***************************************************************************
@@ -143,7 +122,7 @@ export function seek(store, action) {
         console.log('13 CURRENT VALUE OF '+name+' IS '+ending_value+' '+units);
     }
     var percent_improvement = Math.abs(starting_value - ending_value) / starting_value * 100.0;
-    ncode = 'Seek completed. ' + name + ' ' + (starting_value.toODOPPrecision()) + ' --> ' + (ending_value.toODOPPrecision()) + ' ' + units + '; ' + (percent_improvement.toODOPPrecision()) + '% improvement.';
+    ncode = 'Seek completed. ' + name + ' ' + (toODOPPrecision(starting_value)) + ' --> ' + (toODOPPrecision(ending_value)) + ' ' + units + '; ' + (toODOPPrecision(percent_improvement)) + '% improvement.';
     if (element.lmin & CONSTRAINED && SDIR === -1) {
         if (ending_value < element.cmin) {
             ncode += ' The MIN constraint on '+name+' is limiting further progress. You may want to relax or disable this constraint and then run Seek again.'

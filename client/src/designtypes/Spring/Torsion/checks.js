@@ -1,28 +1,7 @@
 import * as o from './symbol_table_offsets';
 import { checks as commonChecks, clearAlerts, addAlert, check_message, check_DCD_alert, ERR, WARN, INFO } from '../../../components/Alerts';
 import { CONSTRAINED, MIN, MAX } from '../../../store/actionTypes';
-
-/*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
-Number.prototype.toODOPPrecision = function() {
-    var value = this.valueOf();
-    var odopValue;
-    if (Math.abs(value) < 10000.0 || Math.abs(value) >= 1000000.0) {
-        if (value === Number.POSITIVE_INFINITY) {
-            odopValue = value.toPrecision(4);
-        } else if (value >= 1.7975e+308) {
-            odopValue = "1.797e+308";
-        } else if (value === Number.NEGATIVE_INFINITY) {
-            odopValue = value.toPrecision(4);
-        } else if (value <= -1.7975e+308) {
-            odopValue = "-1.797e+308";
-        } else {
-            odopValue = value.toPrecision(4);
-        }
-    } else {
-        odopValue = value.toFixed(0);
-    }
-    return odopValue;
-};
+import { toODOPPrecision } from '../../../toODOPPrecision'
 
 export function checks(store) {        /*    Compression  Spring  */
 //    console.log('<li>','@@@@@ Start check store=',store,'</li><ul>');
@@ -51,7 +30,7 @@ export function checks(store) {        /*    Compression  Spring  */
         addAlert({
             element: design.model.symbol_table[o.Wire_Dia],
             name: design.model.symbol_table[o.Wire_Dia].name, 
-            message: 'Material properties for this ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + design.model.symbol_table[o.Wire_Dia].value.toODOPPrecision() + ') may not be accurate.',
+            message: 'Material properties for this ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + toODOPPrecision(design.model.symbol_table[o.Wire_Dia].value) + ') may not be accurate.',
             severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#MatPropAccuracy)'
         });
@@ -60,7 +39,7 @@ export function checks(store) {        /*    Compression  Spring  */
         addAlert({
             element: design.model.symbol_table[o.Wire_Dia],
             name: design.model.symbol_table[o.Wire_Dia].name, 
-            message: 'Material properties for this ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + design.model.symbol_table[o.Wire_Dia].value.toODOPPrecision() + ') may not be accurate.',
+            message: 'Material properties for this ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + toODOPPrecision(design.model.symbol_table[o.Wire_Dia].value) + ') may not be accurate.',
             severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#MatPropAccuracy)'
         });
@@ -87,7 +66,7 @@ export function checks(store) {        /*    Compression  Spring  */
         addAlert({
             element: design.model.symbol_table[o.Coils_A],
             name: design.model.symbol_table[o.Coils_A].name, 
-            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Coils_A].name + ' (' + design.model.symbol_table[o.Coils_A].value.toODOPPrecision() + ') < 1.0',
+            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Coils_A].name + ' (' + toODOPPrecision(design.model.symbol_table[o.Coils_A].value) + ') < 1.0',
             severity: WARN, 
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Coils_A_LT_1)'
         });
@@ -159,7 +138,7 @@ export function checks(store) {        /*    Compression  Spring  */
         addAlert({
             element: design.model.symbol_table[o.Tensile],
             name: design.model.symbol_table[o.Tensile].name, 
-            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Tensile].name + ' (' + design.model.symbol_table[o.Tensile].value.toODOPPrecision() + ') <= ' + design.model.system_controls.smallnum.toODOPPrecision(),
+            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Tensile].name + ' (' + toODOPPrecision(design.model.symbol_table[o.Tensile].value) + ') <= ' + toODOPPrecision(design.model.system_controls.smallnum),
             severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)'
         });
@@ -191,7 +170,7 @@ export function checks(store) {        /*    Compression  Spring  */
         addAlert({
             element: design.model.symbol_table[o.PC_Safe_Deflect], 
             name: design.model.symbol_table[o.PC_Safe_Deflect].name + '@2', 
-            message: '%_Safe_Deflect@2 (' + design.model.symbol_table[o.PC_Safe_Deflect].value.toODOPPrecision() + ') > 80',
+            message: '%_Safe_Deflect@2 (' + toODOPPrecision(design.model.symbol_table[o.PC_Safe_Deflect].value) + ') > 80',
             severity: INFO,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Torsion/alerts.html#PC_Safe_Deflect2_GT_80)'
         });
@@ -201,7 +180,7 @@ export function checks(store) {        /*    Compression  Spring  */
 //        addAlert({
 //            value: PC_Safe_Deflect1, 
 //            name: '%_Safe_Deflect@1', 
-//            message: '%_Safe_Deflect@1 (' + PC_Safe_Deflect1.toODOPPrecision() + ') < 20 - Work in Progress',
+//            message: '%_Safe_Deflect@1 (' + toODOPPrecision(PC_Safe_Deflect1) + ') < 20 - Work in Progress',
 //            severity: INFO,
 //            help_url: '[Help](/docs/Help/DesignTypes/Spring/Torsion/alerts.html#PC_Safe_Deflect1_LT_20)'
 //        });
