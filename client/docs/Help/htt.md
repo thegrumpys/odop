@@ -155,13 +155,14 @@ If you see "NaN" where you expect to see a number,
 it is likely because the software has encountered a computational issue like division by zero. 
 It is possible that a single calculation problem will propagate NaN into many output values. 
 
-The Alerts facility (Alerts button) provides warning messages for physically unrealizable 
+The Alerts facility (Alerts button) provides warning messages for physically impossible 
 designs that may be the source of NaN and other computational difficulty. 
 So, if you encounter NaN where you expect a numeric value, 
 examine the Alerts for additional messages. 
 
 See Also:   
  - [Alerts](/docs/Help/alerts.html)   
+ - [Wikipedia NaN](https://en.wikipedia.org/wiki/NaN)  
 
 ___
 
@@ -192,13 +193,19 @@ The [AutoFix](/docs/Help/terminology.html#autoFix) feature
 automatically sets Fixed status on variables modified by the user. 
 It is enabled by default. 
 
-The AutoFix feature may be enabled / disabled via the preference value "enable_auto_fix"
-in File : Preferences. 
+AutoFix applies only to future changes.
+It does not affect any existing variables in Fixed status.
+
+The AutoFix feature may be enabled / disabled via 
+the checkbox to the right of the Alerts feature on a main page (Advanced View or Calculator View) 
+or via the preference value "enable_auto_fix" in File : Preferences. 
 
 The AutoFix feature is helpful in that it eliminates the surprise experienced by new users 
-when Search modifies a value that they thought that had established. 
-The downside of AutoFix is that tends to create over-specified design situations 
+when Search modifies a value that they thought they had established. 
+The downside of AutoFix is that tends to create over-specified [design situations](/docs/Help/designSituations.html) 
 which can be difficult to recognize. 
+Specifically, the [AutoFix](/docs/Help/terminology.html#autoFix) feature may contribute to unintentionally 
+placing [Independent Variables](/docs/Help/terminology.html#independentVar) in [Fixed](/docs/Help/terminology.html#fix) status.
 
 See Also:
  - [Terminology AutoFix](/docs/Help/terminology.html#autoFix)  

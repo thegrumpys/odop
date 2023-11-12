@@ -42,6 +42,10 @@ class SymbolValueWireDia extends Component {
         this.onClose = this.onClose.bind(this);
         this.onResetButton = this.onResetButton.bind(this);
         this.onSearchRequest = this.onSearchRequest.bind(this);
+        this.onSearchContextHelp = this.onSearchContextHelp.bind(this);
+        this.onSearchContinue = this.onSearchContinue.bind(this);
+        this.onSearchCancel = this.onSearchCancel.bind(this);
+        this.doSearch = this.doSearch.bind(this);
         this.onSeekMinRequest = this.onSeekMinRequest.bind(this);
         this.onSeekMaxRequest = this.onSeekMaxRequest.bind(this);
         this.onChangeValidValue = this.onChangeValidValue.bind(this);
@@ -53,7 +57,8 @@ class SymbolValueWireDia extends Component {
         this.onModifiedFlag = this.onModifiedFlag.bind(this);
         if (this.props.element.format === undefined && typeof this.props.element.value === 'number') {
             this.state = {
-                modal: false,
+                search_infinite_modal: false,
+                edit_modal: false,
                 isInvalidValue: false,
                 isInvalidMinConstraint: false,
                 isInvalidMaxConstraint: false,
@@ -62,7 +67,8 @@ class SymbolValueWireDia extends Component {
             };
         } else { // Table or String
             this.state = {
-                modal: false,
+                search_infinite_modal: false,
+                edit_modal: false,
                 isInvalidValue: false,
                 isInvalidMinConstraint: false,
                 isInvalidMaxConstraint: false,
@@ -158,19 +164,50 @@ class SymbolValueWireDia extends Component {
         if (inverted_constraint) {
             return;
         }
-        var old_objective_value = this.props.objective_value.toPrecision(4);
+        if (!Number.isFinite(this.props.objective_value)) {
+            this.setState({
+                search_infinite_modal: !this.state.search_infinite_modal,
+                edit_modal: !this.state.edit_modal,
+            });
+            return;
+        }
+        this.doSearch('FINITE');
+    }
+
+    onSearchContextHelp() {
+//        console.log('In SymbolValueWireDia.onSearchContinue this=',this);
+        window.open('/docs/Help/errors.html#objNotFinite', '_blank');
+    }
+
+    onSearchContinue() {
+//        console.log('In SymbolValueWireDia.onSearchContinue');
+        this.setState({
+            search_infinite_modal: !this.state.search_infinite_modal,
+            edit_modal: !this.state.edit_modal,
+        });
+        this.doSearch('NOT FINITE');
+    }
+    
+    onSearchCancel() {
+//        console.log('In SymbolValueWireDia.onSearchCancel');
+        this.setState({
+            search_infinite_modal: !this.state.search_infinite_modal,
+            edit_modal: !this.state.edit_modal,
+        });
+        // Noop - all done
+    }
+    
+    doSearch(type) {
+//        console.log('In SymbolValueWireDia.doSearch');
+        var old_objective_value = this.props.objective_value;
         this.props.saveAutoSave();
         this.props.search();
         const { store } = this.context;
         var design = store.getState();
-        var new_objective_value = design.model.result.objective_value.toPrecision(4)
-        logUsage('event', 'ActionSearch', { event_label: 'Element ' + this.props.element.name + ' ' + old_objective_value + ' --> ' + new_objective_value});
-//        if (new_objective_value <= this.props.system_controls.objmin) {
-//            this.setState({
-//                modal: !this.state.modal
-//            });
-//        }
+        var new_objective_value = design.model.result.objective_value;
+        logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' Element ' + this.props.element.name + ' ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4)});
     }
+
 
     onSeekMinRequest(event) {
 //        console.log('In SymbolValueWireDia.onSeekMinRequest this=',this,'event=',event);
@@ -190,7 +227,7 @@ class SymbolValueWireDia extends Component {
             return;
         }
 //        this.setState({
-//            modal: !this.state.modal
+//            edit_modal: !this.state.edit_modal
 //        });
 //        // Do seek
         this.props.saveAutoSave();
@@ -216,7 +253,7 @@ class SymbolValueWireDia extends Component {
             return;
         }
 //        this.setState({
-//            modal: !this.state.modal
+//            edit_modal: !this.state.edit_modal
 //        });
 //        // Do seek
         this.props.saveAutoSave();
@@ -231,7 +268,7 @@ class SymbolValueWireDia extends Component {
         var design = store.getState();
         var reset = JSON.stringify(design);
         this.setState({
-            modal: true,
+            edit_modal: true,
             reset: reset,
             error: '',
             modified: false,
@@ -242,7 +279,7 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.onContextHelp this=',this);
         logUsage('event', 'SymbolValueWireDia', { event_label: 'Context Help button' });
         this.setState({
-            modal: !this.state.modal,
+            edit_modal: !this.state.edit_modal,
             modified: false,
         });
         window.open('/docs/Help/settingValues.html', '_blank');
@@ -251,7 +288,7 @@ class SymbolValueWireDia extends Component {
     onClose() {
 //        console.log('In SymbolValueWireDia.onClose this=',this);
         this.setState({
-            modal: false,
+            edit_modal: false,
             modified: false,
         });
     }
@@ -472,7 +509,7 @@ class SymbolValueWireDia extends Component {
                         <Form.Control readOnly type="text" className={sv_value_class} value={default_value === undefined ? toODOPPrecision(this.props.element.value)+" Non-std" : this.props.element.value} onClick={this.onContextMenu} />
                     </InputGroup>
                 </td>
-                <Modal show={this.state.modal} onHide={this.onClose}>
+                <Modal show={this.state.edit_modal} onHide={this.onClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>
                         Edit {this.props.element.type === "equationset" ? (this.props.element.input ? 'Independent Variable' : 'Dependent Variable') : "Calculation Input"} {this.props.element.name}
@@ -628,6 +665,27 @@ class SymbolValueWireDia extends Component {
                                     <Button variant="primary" disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
                             )
                         }
+                    </Modal.Footer>
+                </Modal>
+                <Modal show={this.state.search_infinite_modal} onHide={this.onSearchCancel}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Search (solve)
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Alert variant="warning">
+                            <p>This design has numeric issues.
+                            Some design variable values are causing the Objective Value to be infinite.</p>
+                            <p>Continuing Search may not result in an improvement.</p>
+                            <p>Canceling Search will allow you to examine the Alerts panel for invalid values and associated help.
+                            Freeing one or more Independent Variables may result in an improvement.</p>
+                        </Alert> 
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="outline-info" onClick={this.onSearchContextHelp}>Help</Button>{' '}
+                        <Button variant="secondary" onClick={this.onSearchContinue}>Continue</Button>
+                        <Button variant="primary" onClick={this.onSearchCancel}>Cancel</Button>
                     </Modal.Footer>
                 </Modal>
             </>

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { NavDropdown } from 'react-bootstrap';
+import { NavDropdown, Modal, Alert, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED } from '../../store/actionTypes';
 import { search, saveAutoSave } from '../../store/actionCreators';
@@ -13,6 +13,13 @@ class ActionSearch extends Component {
 //        console.log('In ActionSearch.constructor props=',props)
         super(props);
         this.onSearchRequest = this.onSearchRequest.bind(this);
+        this.onSearchContextHelp = this.onSearchContextHelp.bind(this);
+        this.onSearchContinue = this.onSearchContinue.bind(this);
+        this.onSearchCancel = this.onSearchCancel.bind(this);
+        this.doSearch = this.doSearch.bind(this);
+        this.state = {
+            search_infinite_modal: false,
+        };
     }
 
     onSearchRequest(event) {
@@ -32,13 +39,45 @@ class ActionSearch extends Component {
         if (inverted_constraint) {
             return;
         }
-        var old_objective_value = this.props.objective_value.toPrecision(4);
+        if (!Number.isFinite(this.props.objective_value)) {
+            this.setState({
+                search_infinite_modal: !this.state.search_infinite_modal
+            });
+            return;
+        }
+        this.doSearch('FINITE');
+    }
+
+    onSearchContextHelp() {
+//        console.log('In ActionSearch.onSearchContinue this=',this);
+        window.open('/docs/Help/errors.html#objNotFinite', '_blank');
+    }
+
+    onSearchContinue() {
+//        console.log('In ActionSearch.onSearchContinue');
+        this.setState({
+            search_infinite_modal: !this.state.search_infinite_modal
+        });
+        this.doSearch('NOT FINITE');
+    }
+    
+    onSearchCancel() {
+//        console.log('In ActionSearch.onSearchCancel');
+        this.setState({
+            search_infinite_modal: !this.state.search_infinite_modal
+        });
+        // Noop - all done
+    }
+    
+    doSearch(type) {
+//        console.log('In ActionSearch.doSearch');
+        var old_objective_value = this.props.objective_value;
         this.props.saveAutoSave();
         this.props.search();
         const { store } = this.context;
         var design = store.getState();
-        var new_objective_value = design.model.result.objective_value.toPrecision(4)
-        logUsage('event', 'ActionSearch', { event_label: old_objective_value + ' --> ' + new_objective_value});
+        var new_objective_value = design.model.result.objective_value;
+        logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4)});
     }
 
     render() {
@@ -56,6 +95,27 @@ class ActionSearch extends Component {
                 <NavDropdown.Item onClick={this.onSearchRequest} disabled={!display_search_button}>
                     Search (solve)
                 </NavDropdown.Item>
+                <Modal show={this.state.search_infinite_modal} onHide={this.onSearchCancel}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Search
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Alert variant="warning">
+                            <p>This design has numeric issues.
+                            Some design variable values are causing the Objective Value to be infinite.</p>
+                            <p>Continuing Search may not result in an improvement.</p>
+                            <p>Canceling Search will allow you to examine the Alerts panel for invalid values and associated help.
+                            Freeing one or more Independent Variables may result in an improvement.</p>
+                        </Alert> 
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="outline-info" onClick={this.onSearchContextHelp}>Help</Button>{' '}
+                        <Button variant="secondary" onClick={this.onSearchContinue}>Continue</Button>
+                        <Button variant="primary" onClick={this.onSearchCancel}>Cancel</Button>
+                    </Modal.Footer>
+                </Modal>
             </>
         );
     }

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Table, OverlayTrigger, Tooltip, Modal, InputGroup, ButtonGroup, Button, Form } from 'react-bootstrap';
+import { Table, OverlayTrigger, Tooltip, Modal, InputGroup, ButtonGroup, Button, Form, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED, MIN, MAX } from '../store/actionTypes';
 import FeasibilityIndicator from './FeasibilityIndicator';
@@ -15,6 +15,10 @@ class ResultTable extends Component {
 //        console.log('In ResultTable.constructor props=',props);
         super(props);
         this.onSearchRequest = this.onSearchRequest.bind(this);
+        this.onSearchContextHelp = this.onSearchContextHelp.bind(this);
+        this.onSearchContinue = this.onSearchContinue.bind(this);
+        this.onSearchCancel = this.onSearchCancel.bind(this);
+        this.doSearch = this.doSearch.bind(this);
         this.onSeekRequest = this.onSeekRequest.bind(this);
         this.onSeekContextHelpButton = this.onSeekContextHelpButton.bind(this);
         this.onSeekCancelButton = this.onSeekCancelButton.bind(this);
@@ -22,6 +26,7 @@ class ResultTable extends Component {
         this.onSeekNameSelect = this.onSeekNameSelect.bind(this);
         this.onSeekButton = this.onSeekButton.bind(this);
         this.state = {
+            search_infinite_modal: false,
             seek_modal: false, // Default: do not display optimize modal
             seek_name: null,
             seek_minmax: MIN,
@@ -45,13 +50,45 @@ class ResultTable extends Component {
         if (inverted_constraint) {
             return;
         }
-        var old_objective_value = this.props.objective_value.toPrecision(4);
+        if (!Number.isFinite(this.props.objective_value)) {
+            this.setState({
+                search_infinite_modal: !this.state.search_infinite_modal
+            });
+            return;
+        }
+        this.doSearch('FINITE');
+    }
+
+    onSearchContextHelp() {
+//        console.log('In ResultTable.onSearchContinue this=',this);
+        window.open('/docs/Help/errors.html#objNotFinite', '_blank');
+    }
+
+    onSearchContinue() {
+//        console.log('In ResultTable.onSearchContinue');
+        this.setState({
+            search_infinite_modal: !this.state.search_infinite_modal
+        });
+        this.doSearch('NOT FINITE');
+    }
+    
+    onSearchCancel() {
+//        console.log('In ResultTable.onSearchCancel');
+        this.setState({
+            search_infinite_modal: !this.state.search_infinite_modal
+        });
+        // Noop - all done
+    }
+    
+    doSearch(type) {
+//        console.log('In ResultTable.doSearch');
+        var old_objective_value = this.props.objective_value;
         this.props.saveAutoSave();
         this.props.search();
         const { store } = this.context;
         var design = store.getState();
-        var new_objective_value = design.model.result.objective_value.toPrecision(4)
-        logUsage('event', 'ActionSearch', { event_label: 'Button ' + old_objective_value + ' --> ' + new_objective_value});
+        var new_objective_value = design.model.result.objective_value;
+        logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' Button ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4)});
     }
 
     onSeekRequest(event) {
@@ -269,6 +306,27 @@ class ResultTable extends Component {
                         <Button variant="outline-info" onClick={this.onSeekContextHelpButton}>Help</Button>{' '}
                         <Button variant="secondary" onClick={this.onSeekCancelButton}>Cancel</Button>{' '}
                         <Button variant="primary" onClick={this.onSeekButton}>Seek</Button>
+                    </Modal.Footer>
+                </Modal>
+                <Modal show={this.state.search_infinite_modal} onHide={this.onSearchCancel}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Search (solve)
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Alert variant="warning">
+                            <p>This design has numeric issues.
+                            Some design variable values are causing the Objective Value to be infinite.</p>
+                            <p>Continuing Search may not result in an improvement.</p>
+                            <p>Canceling Search will allow you to examine the Alerts panel for invalid values and associated help.
+                            Freeing one or more Independent Variables may result in an improvement.</p>
+                        </Alert> 
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="outline-info" onClick={this.onSearchContextHelp}>Help</Button>{' '}
+                        <Button variant="secondary" onClick={this.onSearchContinue}>Continue</Button>
+                        <Button variant="primary" onClick={this.onSearchCancel}>Cancel</Button>
                     </Modal.Footer>
                 </Modal>
             </>

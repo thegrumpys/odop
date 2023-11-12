@@ -253,8 +253,11 @@ ___
 The AutoFix feature automatically applies ["Fixed"](terminology.html#fix) status 
 to [Independent Variables](terminology.html#independentVar) changed by user entry. 
 
-ODOP Search (invoked by the Search button or the **Action : Search** menu item) works to 
-hold or achieve values in Fixed status. 
+AutoFix applies only to future changes.
+It does not affect any existing variables in Fixed status.
+
+ODOP [Search](terminology.html#search) (invoked by the Search button or the **Action : Search** menu item) 
+works to hold or achieve values in Fixed status. 
 In order to accomplish its mission to achieve a feasible design, 
 ODOP Search will manipulate the values of variables not in Fixed status 
 (a.k.a. "Free" status). 
@@ -270,7 +273,7 @@ In order to disable AutoFix, set the value of "enable_auto_fix" to 0.
 See also: 
  - [Independent Variables](terminology.html#independentVar)
  - [terminology Fix](terminology.html#fix)  
- - [SEARCH](terminology.html#search)  
+ - [SEARCH](/docs/Help/search.html)  
  - [PREFERENCES](terminology.html#preferences)  
 
 ___
