@@ -244,7 +244,9 @@ class ResultTable extends Component {
                         <tr>
                             {display_search_button ? 
                                 <td align="text-left">
-                                    <b className="pr-5">Action</b>
+                                    <OverlayTrigger placement="bottom" overlay={<Tooltip><b>Seek</b> (optimize) if feasible.<br /><b>Search</b> (solve) if not feasible.<br />Same functions as Action menu.</Tooltip>}>
+                                        <b className="pr-5">Action</b>
+                                    </OverlayTrigger>
                                     <Button variant="primary" size="sm" onClick={this.onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>&nbsp;
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>
                                         SEARCH alters the values of any free independent variables to find a design that 
@@ -259,7 +261,9 @@ class ResultTable extends Component {
                                 </td>
                             :
                                 <td align="text-left">
-                                    <b className="pr-5">Action</b>
+                                    <OverlayTrigger placement="bottom" overlay={<Tooltip><b>Seek</b> (optimize) if feasible.<br /><b>Search</b> (solve) if not feasible.<br />Same functions as Action menu.</Tooltip>}>
+                                        <b className="pr-5">Action</b>
+                                    </OverlayTrigger>
                                     <Button variant="primary" size="sm" onClick={this.onSeekRequest} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>
                                         If one feasible design exists there are likely many more available, each with varying 
