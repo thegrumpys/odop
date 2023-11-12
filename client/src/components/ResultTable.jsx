@@ -235,7 +235,9 @@ class ResultTable extends Component {
                     <tbody>
                         <tr>
                             <td className="text-left" id="ObjectiveValue">
-                                <OverlayTrigger placement="bottom" overlay={<Tooltip>Search works to minimize Objective Value.<br />Objective Value = {this.props.objective_value.toFixed(7)}<br />Search stops if Objective Value falls below<br />OBJMIN = {this.props.system_controls.objmin.toFixed(7)}</Tooltip>}>
+                                <OverlayTrigger placement="bottom" overlay={<Tooltip>
+Visual summary of feasibility status.<br />Search works to minimize Objective Value ({this.props.objective_value.toFixed(7)})<br />Search stops if Objective Value falls below<br />OBJMIN ({this.props.system_controls.objmin.toFixed(7)})
+</Tooltip>}>
                                     <b>Status</b>
                                 </OverlayTrigger>
                                 <FeasibilityIndicator />
