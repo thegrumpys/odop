@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class FeasibilityIndicator extends Component {
-    static defaultProps = { width: 238, height: 24 };
+    static defaultProps = { width: 242, height: 24 };
     
     render() {
 //        console.log('In FeasibilityIndicator.render this=',this);
@@ -17,6 +17,7 @@ class FeasibilityIndicator extends Component {
         const greenWidth = 55;
         const orangeWidth = 55;
         const redWidth = 100;
+        const purpleWidth = 4;
         const boxY = 8;
         const boxHeight = 16;
         const xOrigin = triangleWidth+blackWidth;
@@ -24,6 +25,8 @@ class FeasibilityIndicator extends Component {
         var x;
         if (this.props.objective_value <= 0) { // Black
             x = -blackWidth/2; // Center of black
+        } else if (!Number.isFinite(this.props.objective_value)) { // Purple
+            x = greenWidth + orangeWidth + redWidth + purpleWidth/2; // Scale and shift it
         } else if (this.props.objective_value > 4*this.props.system_controls.objmin) { // Red
             x = this.props.objective_value-4*this.props.system_controls.objmin; // Shift to Zero
             x = Math.log10(x); // log10
@@ -45,6 +48,7 @@ class FeasibilityIndicator extends Component {
                     <rect x={xOrigin} y={yOrigin+boxY} width={greenWidth} height={boxHeight} fill="#28a745" />
                     <rect x={xOrigin+greenWidth} y={yOrigin+boxY} width={orangeWidth} height={boxHeight} fill="#fd7e14" />
                     <rect x={xOrigin+greenWidth+orangeWidth} y={yOrigin+boxY} width={redWidth} height={boxHeight} fill="#dc3545" />
+                    <rect x={xOrigin+greenWidth+orangeWidth+redWidth} y={yOrigin+boxY} width={purpleWidth} height={boxHeight} fill="#8b299e" />
                     <polygon points={[[xOrigin+x, yOrigin+triangleHeight], [xOrigin+triangleWidth/2+x, yOrigin], [xOrigin-triangleWidth/2+x, yOrigin]]} fill="#05a4e8" stroke="white" strokeWidth={1} />
                 </svg>
             </>
