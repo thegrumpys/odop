@@ -23,17 +23,6 @@ import { getAlertsByName } from './Alerts';
 import { load, search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../store/actionCreators';
 import { displayMessage } from '../components/MessageModal';
 import FeasibilityIndicator from './FeasibilityIndicator';
-
-/*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
-Number.prototype.toODOPPrecision = function() {
-    var value = this.valueOf();
-    var odopValue;
-    if (value < 10000.0 || value >= 1000000.0)
-         odopValue = value.toPrecision(4);
-    else odopValue = value.toFixed(0);
-    return odopValue;
-};
-
 class SymbolValue extends Component {
 
     constructor(props) {

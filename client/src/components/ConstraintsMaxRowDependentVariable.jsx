@@ -7,16 +7,7 @@ import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
-
-/*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
-Number.prototype.toODOPPrecision = function() {
-    var value = this.valueOf();
-    var odopValue;
-    if (value < 10000.0 || value >= 1000000.0)
-         odopValue = value.toPrecision(4);
-    else odopValue = value.toFixed(0);
-    return odopValue;
-};
+import { toODOPPrecision } from '../toODOPPrecision'
 
 class ConstraintsMaxRowDependentVariable extends Component {
 
@@ -202,9 +193,9 @@ class ConstraintsMaxRowDependentVariable extends Component {
                         {this.props.system_controls.show_violations === 1 && this.props.element.vmax <= 0 ?
                             ''
                             : (this.props.element.lmax & FIXED ? 
-                                (this.props.element.vmax*100.0).toODOPPrecision() 
+                                toODOPPrecision(this.props.element.vmax*100.0) 
                                 : (this.props.element.lmax & CONSTRAINED ? 
-                                    (this.props.element.vmax*100.0).toODOPPrecision()
+                                    toODOPPrecision(this.props.element.vmax*100.0)
                                     : ''))}
                     </td>
                 </tr>

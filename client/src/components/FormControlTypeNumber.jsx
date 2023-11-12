@@ -2,16 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
-
-/*eslint no-extend-native: ["error", { "exceptions": ["Number"] }]*/
-Number.prototype.toODOPPrecision = function() {
-    var value = this.valueOf();
-    var odopValue;
-    if (value < 10000.0 || value >= 1000000.0)
-         odopValue = value.toPrecision(4);
-    else odopValue = value.toFixed(0);
-    return odopValue;
-};
+import { toODOPPrecision } from '../toODOPPrecision'
 
 class FormControlTypeNumber extends Component {
 
@@ -135,7 +126,7 @@ class FormControlTypeNumber extends Component {
             this.props.onChange(event); // Pass valid number onward
         }
         this.setState({
-            valueString: this.state.value.toODOPPrecision(), // Update the display with formatted value
+            valueString: toODOPPrecision(this.state.value), // Update the display with formatted value
             isInvalid: false,
             focused: false,
         });
@@ -197,7 +188,7 @@ class FormControlTypeNumber extends Component {
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
                 className={className}
-                value={this.props.disabledText ? '' : this.state.focused ? this.state.valueString : (Number.isFinite(this.state.value) ? this.state.value.toODOPPrecision() : this.state.valueString)} />
+                value={this.props.disabledText ? '' : this.state.focused ? this.state.valueString : (Number.isFinite(this.state.value) ? toODOPPrecision(this.state.value) : this.state.valueString)} />
         </>)
     }
 }

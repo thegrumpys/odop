@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { CONSTRAINED, MIN, MAX, FIXED, FDCL } from '../store/actionTypes';
 import Emitter from './Emitter';
+import { toODOPPrecision } from '../toODOPPrecision'
 
 export const ERR = 'Err';
 export const WARN = 'Warn';
@@ -9,7 +10,7 @@ export const NOTICE = 'Notice';
 export const INFO = 'Info';
 
 export var check_message = function(design, left, op, right) {
-  return 'RELATIONSHIP: ' + design.model.symbol_table[left].name + ' (' + design.model.symbol_table[left].value.toODOPPrecision() + ') ' + op + ' ' + design.model.symbol_table[right].name + ' (' + design.model.symbol_table[right].value.toODOPPrecision() +')';
+  return 'RELATIONSHIP: ' + design.model.symbol_table[left].name + ' (' + toODOPPrecision(design.model.symbol_table[left].value) + ') ' + op + ' ' + design.model.symbol_table[right].name + ' (' + toODOPPrecision(design.model.symbol_table[right].value) +')';
 }
 
 export var check_DCD_alert = function(element, minmax, urlCode) {
@@ -59,30 +60,30 @@ export var checks = function(store) {
         if (element.format === undefined && typeof element.value === 'number' && element.value <= element.validmin) {
             let validmin;
             if (element.validminchoice !== undefined) {
-                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validminchoices[element.validminchoice] + '(' + element.validmin.toODOPPrecision() + ')';
+                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validminchoices[element.validminchoice] + '(' + toODOPPrecision(element.validmin) + ')';
             } else {
-                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validmin.toODOPPrecision();
+                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : toODOPPrecision(element.validmin);
             }
             let relational = element.validmin === -Number.MIN_VALUE ? ' < ' : ' <= ';
             addAlert({
                 element: element,
                 name: element.name,
-                message: 'INVALID VALUE: ' + element.name + ' (' + element.value.toODOPPrecision() + ')' + relational + validmin,
+                message: 'INVALID VALUE: ' + element.name + ' (' + toODOPPrecision(element.value) + ')' + relational + validmin,
                 severity: severity,
                 help_url: '[Help](/docs/Help/alerts.html#Validity_Below)'
             });
         } else if (element.format === undefined && typeof element.value === 'number' && element.value >= element.validmax) {
             let validmax;
             if (element.validmaxchoice !== undefined) {
-                validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmaxchoices[element.validmaxchoice] + '(' + element.validmax.toODOPPrecision() + ')';
+                validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmaxchoices[element.validmaxchoice] + '(' + toODOPPrecision(element.validmax) + ')';
             } else {
-                validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax.toODOPPrecision();
+                validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : toODOPPrecision(element.validmax);
             }
             let relational = ' >= ';
             addAlert({
                 element: element,
                 name: element.name,
-                message: 'INVALID VALUE: ' + element.name + ' (' + element.value.toODOPPrecision() + ')' + relational + validmax,
+                message: 'INVALID VALUE: ' + element.name + ' (' + toODOPPrecision(element.value) + ')' + relational + validmax,
                 severity: severity,
                 help_url: '[Help](/docs/Help/alerts.html#Validity_Above)'
             });
@@ -101,30 +102,30 @@ export var checks = function(store) {
         if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin <= element.validmin) {
             let validmin;
             if (element.validminchoice !== undefined) {
-                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validminchoices[element.validminchoice] + '(' + element.validmin.toODOPPrecision() + ')';
+                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validminchoices[element.validminchoice] + '(' + toODOPPrecision(element.validmin) + ')';
             } else {
-                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validmin.toODOPPrecision();
+                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : toODOPPrecision(element.validmin);
             }
             let relational = element.validmin === -Number.MIN_VALUE ? ' < ' : ' <= ';
             addAlert({
                 element: element,
                 name: element.name+' MIN',
-                message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MIN  (' + element.cmin.toODOPPrecision() + ')'+ relational + validmin,
+                message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MIN  (' + toODOPPrecision(element.cmin) + ')'+ relational + validmin,
                 severity: ERR,
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)'
             });
         } else if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin >= element.validmax) {
             let validmax;
             if (element.validmaxchoice !== undefined) {
-                validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmaxchoices[element.validmaxchoice] + '(' + element.validmax.toODOPPrecision() + ')';
+                validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmaxchoices[element.validmaxchoice] + '(' + toODOPPrecision(element.validmax) + ')';
             } else {
-                validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax.toODOPPrecision();
+                validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : toODOPPrecision(element.validmax);
             }
             let relational = ' >= ';
             addAlert({
                 element: element,
                 name: element.name+' MIN',
-                message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MIN  (' + element.cmin.toODOPPrecision() + ')' + relational + validmax,
+                message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MIN  (' + toODOPPrecision(element.cmin) + ')' + relational + validmax,
                 severity: ERR,
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Above)'
             });
@@ -132,30 +133,30 @@ export var checks = function(store) {
         if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax <= element.validmin) {
             let validmin;
             if (element.validminchoice !== undefined) {
-                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validminchoices[element.validminchoice] + '(' + element.validmin.toODOPPrecision() + ')';
+                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validminchoices[element.validminchoice] + '(' + toODOPPrecision(element.validmin) + ')';
             } else {
-                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validmin.toODOPPrecision();
+                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : toODOPPrecision(element.validmin);
             }
             let relational = element.validmin === -Number.MIN_VALUE ? ' < ' : ' <= ';
             addAlert({
                 element: element,
                 name: element.name+' MAX',
-                message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MAX  (' + element.cmax.toODOPPrecision() + ')' + relational + validmin,
+                message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MAX  (' + toODOPPrecision(element.cmax) + ')' + relational + validmin,
                 severity: ERR,
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)'
             });
         } else if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax >= element.validmax) {
             let validmax;
             if (element.validmaxchoice !== undefined) {
-                validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmaxchoices[element.validmaxchoice] + '(' + element.validmax.toODOPPrecision() + ')';
+                validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmaxchoices[element.validmaxchoice] + '(' + toODOPPrecision(element.validmax) + ')';
             } else {
-                validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax.toODOPPrecision();
+                validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : toODOPPrecision(element.validmax);
             }
             let relational = ' >= ';
             addAlert({
                 element: element,
                 name: element.name+' MAX',
-                message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MAX  (' + element.cmax.toODOPPrecision() + ')' + relational + validmax,
+                message: 'INVALID CONSTRAINT VALUE: ' + element.name+' MAX  (' + toODOPPrecision(element.cmax) + ')' + relational + validmax,
                 severity: ERR,
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Above)'
             });
@@ -166,7 +167,7 @@ export var checks = function(store) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
-                message: 'FIX VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value < '+element.cmin.toODOPPrecision(),
+                message: 'FIX VIOLATION: ' + element.name + ' (' + toODOPPrecision(element.value) + ') Value < '+ toODOPPrecision(element.cmin),
                 severity: NOTICE,
                 help_url: '[Help](/docs/Help/alerts.html#Fix_Violation)'
             });
@@ -174,7 +175,7 @@ export var checks = function(store) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
-                message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value < '+element.cmin.toODOPPrecision(),
+                message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + toODOPPrecision(element.value) + ') Value < '+ toODOPPrecision(element.cmin),
                 severity: NOTICE,
                 help_url: '[Help](/docs/Help/alerts.html#MIN_Violation)'
             });
@@ -183,7 +184,7 @@ export var checks = function(store) {
             addAlert({
                 element: element,
                 name: element.name+' MAX',
-                message: 'FIX VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(),
+                message: 'FIX VIOLATION: ' + element.name + ' (' + toODOPPrecision(element.value) + ') Value > '+ toODOPPrecision(element.cmax),
                 severity: NOTICE,
                 help_url: '[Help](/docs/Help/alerts.html#Fix_Violation)'
             });
@@ -191,7 +192,7 @@ export var checks = function(store) {
             addAlert({
                 element: element,
                 name: element.name+' MAX',
-                message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + element.value.toODOPPrecision() + ') Value > '+element.cmax.toODOPPrecision(),
+                message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + toODOPPrecision(element.value) + ') Value > '+ toODOPPrecision(element.cmax),
                 severity: NOTICE,
                 help_url: '[Help](/docs/Help/alerts.html#MAX_Violation)'
             });
@@ -200,14 +201,14 @@ export var checks = function(store) {
             addAlert({
                 element: element,
                 name: element.name+' MIN',
-                message: 'INVERTED CONSTRAINT RANGE: from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision()+' for ' + element.name + ' (' + element.value.toODOPPrecision() + ')',
+                message: 'INVERTED CONSTRAINT RANGE: from '+ toODOPPrecision(element.cmin)+' to '+ toODOPPrecision(element.cmax)+' for ' + element.name + ' (' + toODOPPrecision(element.value) + ')',
                 severity: ERR,
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Inconsistency)'
             });
             addAlert({
                 element: element,
                 name: element.name+' MAX',
-                message: 'INVERTED CONSTRAINT RANGE: from '+element.cmin.toODOPPrecision()+' to '+element.cmax.toODOPPrecision()+' for ' + element.name + ' (' + element.value.toODOPPrecision() + ')',
+                message: 'INVERTED CONSTRAINT RANGE: from '+ toODOPPrecision(element.cmin)+' to '+ toODOPPrecision(element.cmax)+' for ' + element.name + ' (' + toODOPPrecision(element.value) + ')',
                 severity: ERR,
                 duplicate: true
             });
