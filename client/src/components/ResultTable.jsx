@@ -167,17 +167,23 @@ class ResultTable extends Component {
     render() {
 //        console.log('In ResultTable.render this=',this);
 
-//      From Issue #365:
+//      From Issue #365 and #869:
 //      The proposed terminology and color scheme:
 //          OBJ value       Category Term           Color            RGB
 //          zero            STRICTLY FEASIBLE       Black            #343a40
 //          < OBJMIN        FEASIBLE                Green (or cyan)  #28a745
 //          < 4x OBJMIN     CLOSE TO FEASIBLE       Orange           #fd7e14
 //          > 4x OBJMIN     NOT FEASIBLE            Red              #dc3545
+//          > Not finite    FEASIBILITY UNDEFINED   Purple           #8b299e
         var feasibility_string;
+        var feasibility_tooltip = <>Objective Value {this.props.objective_value.toFixed(7)}</>;;
         var feasibility_class;
         var display_search_button;
-        if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+        if (!Number.isFinite(this.props.objective_value)) {
+            feasibility_string = "FEASIBILITY UNDEFINED";
+            feasibility_class = "text-feasibility-undefined";
+            display_search_button = true;
+        } else if (this.props.objective_value > 4*this.props.system_controls.objmin) {
             feasibility_string = "NOT FEASIBLE";
             feasibility_class = "text-not-feasible ";
             display_search_button = true;
@@ -213,7 +219,9 @@ class ResultTable extends Component {
                                 </OverlayTrigger>
                             </th>
                             <td className={feasibility_class + " text-left"}>
-                                {feasibility_string}
+                                <OverlayTrigger placement="bottom" overlay={<Tooltip>{feasibility_tooltip}</Tooltip>}>
+                                    <span>{feasibility_string}</span>
+                                </OverlayTrigger>
                                 {feasibility_string === 'NOT FEASIBLE' && this.props.search_completed ?
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>
                                         This design may be over-specified. 
@@ -241,9 +249,7 @@ class ResultTable extends Component {
                         <tr>
                             <td className="text-left" id="ObjectiveValue">
                                 <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                                    Visual summary of feasibility status.<br />Search works to minimize Objective Value ({this.props.objective_value.toFixed(7)})<br />
-                                    Search stops if Objective Value falls below<br />
-                                    OBJMIN ({this.props.system_controls.objmin.toFixed(7)})</Tooltip>}>
+                                    Visual summary of feasibility status.</Tooltip>}>
                                     <b>Status</b>
                                 </OverlayTrigger>
                                 <FeasibilityIndicator />
@@ -257,10 +263,12 @@ class ResultTable extends Component {
                                     </OverlayTrigger>
                                     <Button variant="primary" size="sm" onClick={this.onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>&nbsp;
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                                        SEARCH alters the values of any free independent variables to find a design that 
+                                        Search alters the values of any free independent variables to find a design that 
                                         satisfies all constraints while also achieving the desired value for each fixed dependent 
-                                        variable.  Search stops when the first feasible solution is found.  The solution provided 
-                                        by SEARCH is a solution to the designer’s goals as expressed by constraints and fixes. If 
+                                        variable. Search stops when the first feasible solution is found. Specifically
+                                        when the Objective Value ({this.props.objective_value.toFixed(7)}) falls below 
+                                        OBJMIN ({this.props.system_controls.objmin.toFixed(7)}). The solution provided 
+                                        by Search is a solution to the designer’s goals as expressed by constraints and fixes. If 
                                         a solution that meets all of these goals is not available, the search process converges 
                                         to a compromise. Typically, this compromise violates multiple constraints.</Tooltip>}>
                                         <span><i className="fas fa-info-circle text-primary"></i></span>
@@ -274,7 +282,7 @@ class ResultTable extends Component {
                                     <Button variant="primary" size="sm" onClick={this.onSeekRequest} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>
                                         If one feasible design exists there are likely many more available, each with varying 
-                                        advantages / disadvantages. SEEK provides a “goal seeking” capability 
+                                        advantages / disadvantages. Seek provides a “goal seeking” capability 
                                         to optimize your design on the parameter that you specify. If starting with a default 
                                         design, additional constraints specific to your application are required to obtain 
                                         meaningful results.

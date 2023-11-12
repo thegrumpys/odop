@@ -169,7 +169,8 @@ class AlertsAccordion extends Component {
                                 <InputGroup.Checkbox aria-label="Checkbox for enabling Auto Fix" onChange={this.onAutoFixToggle} checked={this.props.enable_auto_fix}/>
                                 <OverlayTrigger placement="bottom" overlay={
                                     <Tooltip>
-                                        When checked, sets "Fixed" status of Independent Variables whose values are changed by user input.
+                                        When checked, sets "Fixed" status of Independent Variables whose values are changed by user input.<br />
+                                        Applies only to future value changes. Does not affect any existing variables already in "Fixed" status.<br />
                                         The behavior is the same as the File : Preferences enable_auto_fix value.
                                     </Tooltip>}>
                                     <span className="text-primary pl-2 pt-2"><i className="fas fa-info-circle"></i></span>
