@@ -203,7 +203,12 @@ class ResultTable extends Component {
                     <tbody>
                         <tr>
                             <th id="Feasibility">
-                                <OverlayTrigger placement="bottom" overlay={<Tooltip>NOT FEASIBLE: constraints significantly violated; <br />CLOSE TO FEASIBLE: constraints slightly violated; FEASIBLE: constraints not significantly violated; STRICTLY FEASIBLE: no constraints violated</Tooltip>}>
+                                <OverlayTrigger placement="bottom" overlay={<Tooltip>
+                                    STRICTLY FEASIBLE: no constraints violated;<br />
+                                    FEASIBLE: constraints not significantly violated;<br />
+                                    CLOSE TO FEASIBLE: constraints slightly violated;<br />
+                                    NOT FEASIBLE: constraints significantly violated;
+                                    FEASIBILITY UNDEFINED: computing constraints failed</Tooltip>}>
                                     <span>Feasibility</span>
                                 </OverlayTrigger>
                             </th>
@@ -223,7 +228,7 @@ class ResultTable extends Component {
                         </tr>
                         <tr>
                             <th width="10%" id="Message" className="pb-3">
-                                <OverlayTrigger placement="top" overlay={<Tooltip>Status feedback message from solution process</Tooltip>}>
+                                <OverlayTrigger placement="bottom" overlay={<Tooltip>Status feedback message from solution process</Tooltip>}>
                                     <span>Message</span>
                                 </OverlayTrigger>
                             </th>
@@ -236,8 +241,9 @@ class ResultTable extends Component {
                         <tr>
                             <td className="text-left" id="ObjectiveValue">
                                 <OverlayTrigger placement="bottom" overlay={<Tooltip>
-Visual summary of feasibility status.<br />Search works to minimize Objective Value ({this.props.objective_value.toFixed(7)})<br />Search stops if Objective Value falls below<br />OBJMIN ({this.props.system_controls.objmin.toFixed(7)})
-</Tooltip>}>
+                                    Visual summary of feasibility status.<br />Search works to minimize Objective Value ({this.props.objective_value.toFixed(7)})<br />
+                                    Search stops if Objective Value falls below<br />
+                                    OBJMIN ({this.props.system_controls.objmin.toFixed(7)})</Tooltip>}>
                                     <b>Status</b>
                                 </OverlayTrigger>
                                 <FeasibilityIndicator />
@@ -256,8 +262,7 @@ Visual summary of feasibility status.<br />Search works to minimize Objective Va
                                         variable.  Search stops when the first feasible solution is found.  The solution provided 
                                         by SEARCH is a solution to the designer’s goals as expressed by constraints and fixes. If 
                                         a solution that meets all of these goals is not available, the search process converges 
-                                        to a compromise. Typically, this compromise violates multiple constraints.
-                                        </Tooltip>}>
+                                        to a compromise. Typically, this compromise violates multiple constraints.</Tooltip>}>
                                         <span><i className="fas fa-info-circle text-primary"></i></span>
                                     </OverlayTrigger>
                                 </td>
