@@ -27,16 +27,19 @@ Alert entry #S51
 ##  Outside diameter is exactly twice wire diameter
 This situation creates numerical difficulties.
 
+To resolve this Alert, increase the value of OD_Free and / or decrease the value of Wire_Dia. 
+To achieve a feasible design, continue increasing OD_Free and decreasing Wire_Dia until 
+Spring_Index achieves a value within the range of [manufacturability](alerts.html#SI_manufacturability). 
+
 With round wire helical coil springs, 
 the case where coil outside diameter (OD_Free) is exactly twice the wire diameter (Wire_Dia) creates numerical problems. 
 In this situation, the inside diameter (ID_Free) is exactly zero and the spring index (Spring_Index) is exactly one. 
 That value of Spring_Index results in a divide-by-zero problem in the calculation of the Wahl curvature correction factor (kc). 
-Javascript renders the result as infinity which then propagates through dependent equations. 
-Eventually, equations involving operations like subtraction of infinities create values of NaN (Not a Number) 
+The result of infinity then propagates through dependent equations. 
+Subsequent operations like subtraction of infinities create values of NaN (Not a Number) 
 which propagate to additional dependent equations.  
 
-To resolve this Alert, increase the value of OD_Free and / or decrease the value of Wire_Dia
-until Spring_Index achieves a value within the range of [manufacturability](alerts.html#SI_manufacturability).
+The Search feature may or may not be successful in finding a solution when its start point has such numerical difficulties.  
 
 See also:
  - [Spring index manufacturability concern](alerts.html#SI_manufacturability)  
@@ -52,16 +55,19 @@ Alert entry #S52
 ##  Outside diameter exactly equals wire diameter
 This situation creates numerical difficulties.
 
+To resolve this Alert, increase the value of OD_Free and / or decrease the value of Wire_Dia. 
+To achieve a feasible design, continue increasing OD_Free and decreasing Wire_Dia until 
+Spring_Index achieves a value within the range of [manufacturability](alerts.html#SI_manufacturability). 
+
 With round wire helical coil springs, 
 the case where coil outside diameter (OD_Free) is exactly equal the wire diameter (Wire_Dia) creates numerical problems. 
-In this situation, the mean diameter (Mean_Dia) and spring index (Spring_Index) are both exactly zero. 
-The result is a divide-by-zero problem in the calculations. 
-Javascript renders the result as infinity which then propagates through dependent equations. 
-Eventually, equations involving operations like subtraction of infinities create values of NaN (Not a Number) 
+In this situation, the mean diameter (Mean_Dia) and spring index (Spring_Index) are both exactly zero, 
+creating a divide-by-zero problem in the calculations. 
+The result of infinity then propagates through dependent equations. 
+Subsequent operations like subtraction of infinities create values of NaN (Not a Number) 
 which propagate to additional dependent equations.  
 
-To resolve this Alert, increase the value of OD_Free and / or decrease the value of Wire_Dia
-until Spring_Index achieves a value within the range of [manufacturability](alerts.html#SI_manufacturability).
+The Search feature may or may not be successful in finding a solution when its start point has such numerical difficulties.  
 
 See also:
  - [Spring index manufacturability concern](alerts.html#SI_manufacturability)  
@@ -281,12 +287,15 @@ ___
 ___
 
 Alert entry #S61
-##  Cycle_Life value is extrapolated 
-  
+##  Cycle_Life value is extrapolated  
+This is an information alert. 
+No action is required.  
+
 The built-in material table provides allowable stress information derived from published s-n (stress versus number of cycles) data 
 that covers the range from 10,000 to 10,000,000 cycles.
 In order to facilitate proper operation of the search algorithm, 
-the allowable stress data has been extrapolated outside this range and is not supported by published data.
+the allowable stress data has been extrapolated outside this range and 
+thus the current cycle_Life value is not supported by published data.
 
 See also: 
  - [Cycle Life section of Spring Design Overview](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
@@ -298,15 +307,14 @@ ___
 
 Alert entry #S62
 ##  Over specification concern; Both OD and ID are fixed
-
-With a helical coil spring, having both outside diameter (OD_Free) and inside diameter (ID_Free) in Fixed status 
-raises a concern that the design may be unintentionally [over specified](/docs/Help/designSituations.html).
-
-In this situation, there is only one possible value of wire diameter (Wire_Dia) that will permit a feasible solution.
-This may not be the designer's intent.  
-
 To clear this Alert, remove Fixed status from either OD_Free or ID_Free by unchecking the checkbox
 immediately to the right of the value field. 
+
+With a helical coil spring, having both outside diameter (OD_Free) and inside diameter (ID_Free) in Fixed status 
+raises a concern that the design may be unintentionally [over specified](/docs/Help/designSituations.html). 
+In this situation, there is only one possible value of wire diameter (Wire_Dia) that will permit a feasible solution.
+That value is not likely a standard wire diameter. 
+As this may not be the designer's intent, this alert is intended to bring attention to the situation.
 
 See also: 
  - [Fix and Free](/docs/Help/terminology.html#fix)  
@@ -319,7 +327,6 @@ ___
 
 Alert entry #S63
 ## Default constraint not enabled 
-  
 Disabling default constraints is not recommended. 
 Adjust the constraint value instead. 
 
