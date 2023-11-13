@@ -78,7 +78,7 @@ it('eqnset initialState', () => {
     expect(x[o.Stress_Lim_Stat]).toEqual(130709.6116626882);
     expect(x[o.End_Type]).toEqual(4);
     expect(x[o.Inactive_Coils]).toEqual(2);
-    expect(x[o.Add_Coils_Solid]).toEqual(0);
+    expect(x[o.Add_Coils_Solid]).toEqual(0.0);
     expect(x[o.Catalog_Name]).toEqual('');
     expect(x[o.Catalog_Number]).toEqual('');
     expect(x[o.tbase010]).toEqual(0.01);
@@ -107,12 +107,15 @@ it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () 
     var x = eqnset(p, x);
 //    console.log('x=',x);
 
+    // Independent Variables
     expect(p[o.OD_Free]).toEqual(0.4);
     expect(p[o.Wire_Dia]).toEqual(0.2);
     expect(p[o.L_Free]).toEqual(3.25);
     expect(p[o.Coils_T]).toEqual(10.0);
     expect(p[o.Force_1]).toEqual(10.0);
     expect(p[o.Force_2]).toEqual(39.0);
+
+    // Dependent Variables
     expect(x[o.Mean_Dia]).toEqual(0.2);
     expect(x[o.Coils_A]).toEqual(8.0);
     expect(x[o.Rate]).toEqual(35937.5);
@@ -130,12 +133,14 @@ it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () 
     expect(x[o.Stress_1]).toEqual(Number.POSITIVE_INFINITY);
     expect(x[o.Stress_2]).toEqual(Number.POSITIVE_INFINITY);
     expect(x[o.Stress_Solid]).toEqual(Number.POSITIVE_INFINITY);
-    expect(x[o.FS_2]).toEqual(0);
-    expect(x[o.FS_Solid]).toEqual(0);
+    expect(x[o.FS_2]).toEqual(0.0);
+    expect(x[o.FS_Solid]).toEqual(0.0);
     expect(x[o.FS_CycleLife]).toEqual(Number.NaN);
     expect(x[o.Cycle_Life]).toEqual(Number.NaN);
     expect(x[o.PC_Avail_Deflect]).toEqual(0.08681739130434782);
     expect(x[o.Energy]).toEqual(0.01977043478260869);
+
+    // Calc Inputs
     expect(x[o.Spring_Type]).toEqual('Compression');
     expect(x[o.Prop_Calc_Method]).toEqual(1);
     expect(x[o.Material_Type]).toEqual(2);
@@ -153,7 +158,7 @@ it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () 
     expect(x[o.Stress_Lim_Stat]).toEqual(115971.65510027415);
     expect(x[o.End_Type]).toEqual(4);
     expect(x[o.Inactive_Coils]).toEqual(2);
-    expect(x[o.Add_Coils_Solid]).toEqual(0);
+    expect(x[o.Add_Coils_Solid]).toEqual(0.0);
     expect(x[o.Catalog_Name]).toEqual('');
     expect(x[o.Catalog_Number]).toEqual('');
     expect(x[o.tbase010]).toEqual(0.01);
@@ -182,6 +187,7 @@ it('eqnset pathological Coils_T === Inactive_Coils && Coils_A === 0.0', () => {
     var x = eqnset(p, x);
 //    console.log('x=',x);
 
+    // Independent Variables
     expect(p[o.OD_Free]).toEqual(1.1);
     expect(p[o.Wire_Dia]).toEqual(0.1055);
     expect(p[o.L_Free]).toEqual(3.25);
@@ -189,13 +195,13 @@ it('eqnset pathological Coils_T === Inactive_Coils && Coils_A === 0.0', () => {
     expect(p[o.Force_1]).toEqual(10.0);
     expect(p[o.Force_2]).toEqual(39.0);
     expect(x[o.Mean_Dia]).toEqual(0.9945);
-    expect(x[o.Coils_A]).toEqual(0);
+    expect(x[o.Coils_A]).toEqual(0.0);
     expect(x[o.Rate]).toEqual(Number.POSITIVE_INFINITY);
-    expect(x[o.Deflect_1]).toEqual(0);
-    expect(x[o.Deflect_2]).toEqual(0);
+    expect(x[o.Deflect_1]).toEqual(0.0);
+    expect(x[o.Deflect_2]).toEqual(0.0);
     expect(x[o.L_1]).toEqual(3.25);
     expect(x[o.L_2]).toEqual(3.25);
-    expect(x[o.L_Stroke]).toEqual(0);
+    expect(x[o.L_Stroke]).toEqual(0.0);
     expect(x[o.L_Solid]).toEqual(0.211);
     expect(x[o.Slenderness]).toEqual(3.2679738562091503);
     expect(x[o.ID_Free]).toEqual(0.889);
@@ -206,11 +212,13 @@ it('eqnset pathological Coils_T === Inactive_Coils && Coils_A === 0.0', () => {
     expect(x[o.Stress_2]).toEqual(97084.62174573533);
     expect(x[o.Stress_Solid]).toEqual(Number.POSITIVE_INFINITY);
     expect(x[o.FS_2]).toEqual(1.3463472310271418);
-    expect(x[o.FS_Solid]).toEqual(0);
+    expect(x[o.FS_Solid]).toEqual(0.0);
     expect(x[o.FS_CycleLife]).toEqual(1.3032217764849205);
     expect(x[o.Cycle_Life]).toEqual(1861893.4985282072);
-    expect(x[o.PC_Avail_Deflect]).toEqual(0);
+    expect(x[o.PC_Avail_Deflect]).toEqual(0.0);
     expect(x[o.Energy]).toEqual(Number.NaN);
+
+    // Calc Inputs
     expect(x[o.Spring_Type]).toEqual('Compression');
     expect(x[o.Prop_Calc_Method]).toEqual(1);
     expect(x[o.Material_Type]).toEqual(2);
@@ -228,7 +236,7 @@ it('eqnset pathological Coils_T === Inactive_Coils && Coils_A === 0.0', () => {
     expect(x[o.Stress_Lim_Stat]).toEqual(130709.6116626882);
     expect(x[o.End_Type]).toEqual(4);
     expect(x[o.Inactive_Coils]).toEqual(2);
-    expect(x[o.Add_Coils_Solid]).toEqual(0);
+    expect(x[o.Add_Coils_Solid]).toEqual(0.0);
     expect(x[o.Catalog_Name]).toEqual('');
     expect(x[o.Catalog_Number]).toEqual('');
     expect(x[o.tbase010]).toEqual(0.01);
@@ -260,6 +268,7 @@ it('eqnset pathological OD_Free === Wire_Dia && Mean_Dia === 0.0', () => {
     var x = eqnset(p, x);
 //    console.log('x=',x);
 
+    // Independent Variables
     expect(p[o.OD_Free]).toEqual(0.4);
     expect(p[o.Wire_Dia]).toEqual(0.4);
     expect(p[o.L_Free]).toEqual(3.25);
@@ -278,7 +287,7 @@ it('eqnset pathological OD_Free === Wire_Dia && Mean_Dia === 0.0', () => {
     expect(x[o.Slenderness]).toEqual(Number.POSITIVE_INFINITY);
     expect(x[o.ID_Free]).toEqual(-0.4);
     expect(x[o.Weight]).toEqual(0.11598760077053516);
-    expect(x[o.Spring_Index]).toEqual(0);
+    expect(x[o.Spring_Index]).toEqual(0.0);
     expect(x[o.Force_Solid]).toEqual(Number.NaN);
     expect(x[o.Stress_1]).toEqual(Number.NaN);
     expect(x[o.Stress_2]).toEqual(Number.NaN);
@@ -289,6 +298,8 @@ it('eqnset pathological OD_Free === Wire_Dia && Mean_Dia === 0.0', () => {
     expect(x[o.Cycle_Life]).toEqual(Number.NaN);
     expect(x[o.PC_Avail_Deflect]).toEqual(Number.NaN);
     expect(x[o.Energy]).toEqual(Number.NaN);
+
+    // Calc Inputs
     expect(x[o.Spring_Type]).toEqual('Compression');
     expect(x[o.Prop_Calc_Method]).toEqual(1);
     expect(x[o.Material_Type]).toEqual(2);
@@ -306,7 +317,7 @@ it('eqnset pathological OD_Free === Wire_Dia && Mean_Dia === 0.0', () => {
     expect(x[o.Stress_Lim_Stat]).toEqual(100000);
     expect(x[o.End_Type]).toEqual(4);
     expect(x[o.Inactive_Coils]).toEqual(2);
-    expect(x[o.Add_Coils_Solid]).toEqual(0);
+    expect(x[o.Add_Coils_Solid]).toEqual(0.0);
     expect(x[o.Catalog_Name]).toEqual('');
     expect(x[o.Catalog_Number]).toEqual('');
     expect(x[o.tbase010]).toEqual(0.01);
