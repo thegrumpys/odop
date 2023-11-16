@@ -46,6 +46,8 @@ Where possible, the linked detailed entries (below) provide specific guidance in
 that will resolve the alerts. 
 
 ### On this page (design type independent alerts):   
+ - [Objective Value is Infinity](alerts.html#OBJ_Infinite)
+ - [Objective Value is Not a Number (NaN)](alerts.html#OBJ_NaN)
  - [Invalid - Value less than limit](alerts.html#Validity_Below)  
  - [Invalid - Value greater than limit](alerts.html#Validity_Above)  
  - [Invalid Constraint - Less than limit](alerts.html#Constraint_Below)  
@@ -91,10 +93,45 @@ that will resolve the alerts.
 
 ___
 
-<a id="Validity_Below"></a>  
+<a id="OBJ_Infinite"></a>  
 ___
 
 Alert entry #ODOP01
+##  Objective Value is Infinity
+The Objective Value can become Infinity when numerical difficulties such as division be zero are encountered 
+while solving the design equations.  
+
+Other entries in the Alerts panel may provide more specific details about which variables are causing the problem 
+as well as specific guidance on how to resolve the situation.
+
+An Objective Value of Infinity will cause a warning message when using the Search (solve) feature 
+(Search button or Action : Search menu).  
+
+See also:
+ - [Terminology - Objective Function, Objective Value](/docs/Help/terminology.html#obj)  
+ 
+___
+
+<a id="OBJ_NaN"></a>  
+___
+
+Alert entry #ODOP02
+##  Objective Value is Not a Number (NaN)
+The Objective Value should not be able to achieve a value of NaN.
+If you are able to repeat this situation, 
+please contact customer support. 
+
+See also: 
+ - [Terminology - Objective Function, Objective Value](/docs/Help/terminology.html#obj)  
+ - [NaN](https://en.wikipedia.org/wiki/NaN)  
+ - [Contact Us](/docs/About/ContactUs.html)  
+
+___
+
+<a id="Validity_Below"></a>  
+___
+
+Alert entry #ODOP03
 ## Invalid - Value less than or equal to limit 
 The value of the associated variable is less than the validmin limit defined in the design type's initialState. 
 This means that, given the current input value (for example, a negative diameter), 
@@ -112,7 +149,7 @@ ___
 <a id="Validity_Above"></a>  
 ___
 
-Alert entry #ODOP02
+Alert entry #ODOP04
 ## Invalid - Value greater than limit 
 The value of the associated variable is greater than the validmax limit defined in the design type's initialState. 
 This means that, given the current input value, 
@@ -129,7 +166,7 @@ ___
 <a id="Constraint_Below"></a>  
 ___
 
-Alert entry #ODOP03
+Alert entry #ODOP05
 ## Invalid Constraint - Less than or equal to limit 
 The value of the associated constraint is less than the validmin limit for the associated variable as defined in the design type's initialState. 
 This means that, given the current input value (for example, a MIN value that allows a negative diameter), 
@@ -147,7 +184,7 @@ ___
 <a id="Constraint_Above"></a>  
 ___
 
-Alert entry #ODOP04
+Alert entry #ODOP06
 ## Invalid Constraint - Greater than limit 
 The value of the associated variable is greater than the validmax limit for the associated variable as defined in the design type's initialState. 
 This means that, given the current input value, 
@@ -166,7 +203,7 @@ ___
 <a id="Constraint_Inconsistency"></a>  
 ___
 
-Alert entry #ODOP05
+Alert entry #ODOP07
 ## Inverted Constraint Range / Constraint Inconsistency 
 Constraints on the associated variable are inconsistent. 
 Specifically, the MAX constraint value is less than the MIN constraint value. 
@@ -185,7 +222,7 @@ ___
 <a id="MIN_Violation"></a>  
 ___
 
-Alert entry #ODOP06
+Alert entry #ODOP08
 ## Constraint MIN violation 
 The associated variable's MIN constraint is violated by more than a trivial amount. 
 
@@ -222,7 +259,7 @@ ___
 <a id="MAX_Violation"></a>  
 ___
 
-Alert entry #ODOP07
+Alert entry #ODOP09
 ## Constraint MAX violation 
 The associated variable's MAX constraint is violated by more than a trivial amount. 
 
@@ -259,7 +296,7 @@ ___
 <a id="Fix_Violation"></a>  
 ___
 
-Alert entry #ODOP08
+Alert entry #ODOP10
 ## Fix Violation 
 The associated Dependent Variable is in Fixed status. 
 Its value differs from the target value established by the Fix by more than a trivial amount.   
@@ -297,28 +334,27 @@ ___
 <a id="NotNumber"></a>  
 ___
 
-Alert entry #ODOP09
+Alert entry #ODOP11
 ## Not a Number (NaN) 
-The value of the associated variable is Not a Number ([NaN](https://en.wikipedia.org/wiki/NaN)).  
-
+The value of the associated variable is Not a Number ([NaN](https://en.wikipedia.org/wiki/NaN)). 
 This is a computational error condition that may cascade to other variables.  
 
-The most likely source of this condition is user input that creates a mathematical difficulty such as division by zero.
-For example, in round wire coil springs, if the value of OD_Free is exactly twice the value of Wire_Dia, 
-the associated ID_Free will have a value of exactly 0.0.
-This will likely create a division by zero situation in the calculation of other variables such as Cycle_Life
-which then triggers this alert.
-
-As it is possible to Save or Export a design with this condition,
-it is possible to encounter this alert on File : Open or File : Import of a previously saved design.    
-
-In most cases, the best way to resolve his alert is to revert the most recent change to a variable. 
+In most cases, the best way to resolve this alert is to revert the most recent change to a variable. 
 If that works, try establishing values that are part way to the value causing the problem. 
 It is possible that using the Search feature could resolve the alert. 
 It is also possible that use of the Search feature could create this alert.
 In that case, it may be possible to clear the alert by making small changes to one or more Independent Variables. 
 If all else fails and a Search or Seek operation has been previously executed in the current design session, 
 the [AutoSave](/docs/Help/autoSave.html) feature may allow you to fall back to a previous design.
+
+The most likely source of this condition is user input that creates a mathematical difficulty such as division by zero.
+For example, in round wire coil springs, 
+if the value of OD_Free is exactly twice the value of Wire_Dia, the associated ID_Free will have a value of exactly 0.0.
+This will likely create a division by zero situation in the calculation of other variables. 
+NaN can appear when mathematical operations involve multiple infinities.
+
+As it is possible to Save or Export a design with this condition,
+it is possible to encounter this alert on File : Open or File : Import of a previously saved design.    
 
 If you feel that this alert is not appropriate for your situation, please contact customer support. 
 
@@ -332,7 +368,7 @@ ___
 <a id="NoFreeIV"></a>  
 ___
 
-Alert entry #ODOP10
+Alert entry #ODOP12
 ## No Free Independent Variables 
 If all [Independent Variables](/docs/Help/terminology.html#independentVar) (inputs) are in 
 [Fixed](/docs/Help/terminology.html#fix) status, 
@@ -363,7 +399,7 @@ ___
 <a id="FDCL"></a>  
 ___
 
-Alert entry #ODOP11
+Alert entry #ODOP13
 ## Functionally Determined Constraint Level (FDCL) is enabled 
 This variable has a functionally Determined Constraint Level (FDCL) configured and enabled. 
 

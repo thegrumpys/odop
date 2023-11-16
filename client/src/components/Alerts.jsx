@@ -12,6 +12,7 @@ export var check_message = function(design, left, op, right) {
   return 'RELATIONSHIP: ' + design.model.symbol_table[left].name + ' (' + design.model.symbol_table[left].value.toODOPPrecision() + ') ' + op + ' ' + design.model.symbol_table[right].name + ' (' + design.model.symbol_table[right].value.toODOPPrecision() +')';
 }
 
+        // DCD is Default Constraint Disabled 
 export var check_DCD_alert = function(element, minmax, urlCode) {
     if (element.lmin & FIXED) {
         return;
@@ -46,6 +47,25 @@ export var check_DCD_alert = function(element, minmax, urlCode) {
 export var checks = function(store) {
 //    console.log('In Alerts.checks store=',store);
     var design = store.getState();
+
+        // OBJECTIVE VALUE CHECKS 
+        if (design.model.result.objective_value === Number.POSITIVE_INFINITY || design.model.result.objective_value === Number.NEGATIVE_INFINITY) { // Check for objective value of Infinity
+            addAlert({
+                name: 'Objective Value', 
+                message: 'Objective Value is Infinity',
+                severity: ERR,
+                help_url: '[Help](/docs/Help/alerts.html#OBJ_Infinite)'
+            });
+        };
+        if (Number.isNaN(design.model.result.objective_value)) { // Check for objective value of NaN
+            addAlert({
+                name: 'Objective Value', 
+                message: 'Objective Value is Not a Number (NaN)',
+                severity: ERR,
+                help_url: '[Help](/docs/Help/alerts.html#OBJ_NaN)'
+            });
+        };
+
     var total = 0;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         var element = design.model.symbol_table[i];
