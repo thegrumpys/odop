@@ -23,7 +23,8 @@ export function checks(store) {        /*    Compression  Spring  */
         addAlert({
             element: design.model.symbol_table[o.OD_Free],
             name: design.model.symbol_table[o.OD_Free].name, 
-            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.OD_Free].name + ' (' + design.model.symbol_table[o.OD_Free].value.toODOPPrecision() + ') = 2x ' + design.model.symbol_table[o.Wire_Dia].name,
+            message: 'PATHOLOGICAL: ' + design.model.symbol_table[o.OD_Free].name + ' (' + design.model.symbol_table[o.OD_Free].value.toODOPPrecision() + ') is exactly twice ' 
+                + design.model.symbol_table[o.Wire_Dia].name + ' (' + design.model.symbol_table[o.Wire_Dia].value.toODOPPrecision() + ')',
             severity: ERR, 
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#OD2xWire_Dia)'
         });
@@ -32,7 +33,8 @@ export function checks(store) {        /*    Compression  Spring  */
         addAlert({
             element: design.model.symbol_table[o.OD_Free],
             name: design.model.symbol_table[o.OD_Free].name, 
-            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.OD_Free].name + ' (' + design.model.symbol_table[o.OD_Free].value.toODOPPrecision() + ') =  ' + design.model.symbol_table[o.Wire_Dia].name,
+            message: 'PATHOLOGICAL: ' + design.model.symbol_table[o.OD_Free].name + ' (' + design.model.symbol_table[o.OD_Free].value.toODOPPrecision() + ') =  ' 
+                + design.model.symbol_table[o.Wire_Dia].name + ' (' + design.model.symbol_table[o.Wire_Dia].value.toODOPPrecision() + ')',
             severity: ERR, 
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#OD_eq_Wire_Dia)'
         });

@@ -25,7 +25,8 @@ ___
 
 Alert entry #S51
 ##  Outside diameter is exactly twice wire diameter
-This situation creates numerical difficulties.
+This situation creates numerical difficulties. 
+In mathematics, this is sometimes referred to as a "pathological" case.
 
 To resolve this Alert, increase the value of OD_Free and / or decrease the value of Wire_Dia. 
 To achieve a feasible design, continue increasing OD_Free and decreasing Wire_Dia until 
@@ -45,6 +46,7 @@ See also:
  - [Spring index manufacturability concern](alerts.html#SI_manufacturability)  
  - [NaN](/docs/Help/htt.html#nan)  
  - [Wikipedia NaN](https://en.wikipedia.org/wiki/NaN)  
+ - [Wikipedia Pathological](https://en.wikipedia.org/wiki/Pathological_(mathematics))  
 
 ___
 
@@ -54,6 +56,7 @@ ___
 Alert entry #S52
 ##  Outside diameter exactly equals wire diameter
 This situation creates numerical difficulties.
+In mathematics, this is sometimes referred to as a "pathological" case.
 
 To resolve this Alert, increase the value of OD_Free and / or decrease the value of Wire_Dia. 
 To achieve a feasible design, continue increasing OD_Free and decreasing Wire_Dia until 
@@ -73,6 +76,7 @@ See also:
  - [Spring index manufacturability concern](alerts.html#SI_manufacturability)  
  - [NaN](/docs/Help/htt.html#nan)  
  - [Wikipedia NaN](https://en.wikipedia.org/wiki/NaN)  
+ - [Wikipedia Pathological](https://en.wikipedia.org/wiki/Pathological_(mathematics))  
 
 ___
 
