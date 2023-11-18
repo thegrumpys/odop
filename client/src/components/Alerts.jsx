@@ -8,8 +8,9 @@ export const WARN = 'Warn';
 export const NOTICE = 'Notice';
 export const INFO = 'Info';
 
-export var check_message = function(design, left, op, right) {
-  return 'RELATIONSHIP: ' + design.model.symbol_table[left].name + ' (' + design.model.symbol_table[left].value.toODOPPrecision() + ') ' + op + ' ' + design.model.symbol_table[right].name + ' (' + design.model.symbol_table[right].value.toODOPPrecision() +')';
+export var check_message = function(design, prefix, left, op, right, suffix = '') {
+  return prefix + ': ' + design.model.symbol_table[left].name + ' (' + design.model.symbol_table[left].value.toODOPPrecision() + ') ' + op + 
+  ' ' + design.model.symbol_table[right].name + ' (' + design.model.symbol_table[right].value.toODOPPrecision() +')' + (suffix !== '' ? suffix : '');
 }
 
         // DCD is Default Constraint Disabled 
@@ -79,11 +80,11 @@ export var checks = function(store) {
         if (element.format === undefined && typeof element.value === 'number' && element.value < element.validmin) {
             let validmin;
             if (element.validminchoice !== undefined) {
-                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validminchoices[element.validminchoice] + '(' + element.validmin.toODOPPrecision() + ')';
+                validmin = element.validmin === -Number.MIN_VALUE ? 'Number.MIN_VALUE' : element.validminchoices[element.validminchoice] + '(' + element.validmin.toODOPPrecision() + ')';
             } else {
-                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validmin.toODOPPrecision();
+                validmin = element.validmin === -Number.MIN_VALUE ? 'Number.MIN_VALUE' : element.validmin.toODOPPrecision();
             }
-            let relational = element.validmin === -Number.MIN_VALUE ? ' FixMe ' : ' < ';
+            let relational = ' < ';
             addAlert({
                 element: element,
                 name: element.name,
@@ -121,11 +122,11 @@ export var checks = function(store) {
         if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin < element.validmin) {
             let validmin;
             if (element.validminchoice !== undefined) {
-                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validminchoices[element.validminchoice] + '(' + element.validmin.toODOPPrecision() + ')';
+                validmin = element.validmin === -Number.MIN_VALUE ? 'Number.MIN_VALUE' : element.validminchoices[element.validminchoice] + '(' + element.validmin.toODOPPrecision() + ')';
             } else {
-                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validmin.toODOPPrecision();
+                validmin = element.validmin === -Number.MIN_VALUE ? 'Number.MIN_VALUE' : element.validmin.toODOPPrecision();
             }
-            let relational = element.validmin === -Number.MIN_VALUE ? ' FixMe ' : ' < ';
+            let relational = ' < ';
             addAlert({
                 element: element,
                 name: element.name+' MIN',
@@ -152,11 +153,11 @@ export var checks = function(store) {
         if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax < element.validmin) {
             let validmin;
             if (element.validminchoice !== undefined) {
-                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validminchoices[element.validminchoice] + '(' + element.validmin.toODOPPrecision() + ')';
+                validmin = element.validmin === -Number.MIN_VALUE ? 'Number.MAX_VALUE' : element.validminchoices[element.validminchoice] + '(' + element.validmin.toODOPPrecision() + ')';
             } else {
-                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validmin.toODOPPrecision();
+                validmin = element.validmin === -Number.MIN_VALUE ? 'Number.MIN_VALUE' : element.validmin.toODOPPrecision();
             }
-            let relational = element.validmin === -Number.MIN_VALUE ? ' FixMe ' : ' < ';
+            let relational = ' < ';
             addAlert({
                 element: element,
                 name: element.name+' MAX',
