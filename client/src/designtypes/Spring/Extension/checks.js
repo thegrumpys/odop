@@ -1,6 +1,6 @@
 import * as o from './symbol_table_offsets';
 import { checks as commonChecks, clearAlerts, addAlert, check_message, check_DCD_alert, ERR, WARN, INFO } from '../../../components/Alerts';
-import { CONSTRAINED, MIN, MAX } from '../../../store/actionTypes';
+import { CONSTRAINED, FIXED, MIN, MAX } from '../../../store/actionTypes';
 import { toODOPPrecision } from '../../../toODOPPrecision'
 
 export function checks(store) {        /*    Compression  Spring  */
@@ -10,18 +10,52 @@ export function checks(store) {        /*    Compression  Spring  */
 
 // Alerts common to all round-wire coil springs 
 
+    if (design.model.symbol_table[o.OD_Free].value === 2.0 * design.model.symbol_table[o.Wire_Dia].value) {
+        addAlert({
+            element: design.model.symbol_table[o.OD_Free],
+            name: design.model.symbol_table[o.OD_Free].name, 
+            message: check_message(design,'PATHOLOGICAL',o.OD_Free,'is exactly twice',o.Wire_Dia),
+            severity: ERR, 
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#OD2xWire_Dia)'
+        });
+        addAlert({
+            element: design.model.symbol_table[o.Wire_Dia],
+            name: design.model.symbol_table[o.Wire_Dia].name, 
+            message: check_message(design,'PATHOLOGICAL',o.Wire_Dia,'is exactly half',o.OD_Free),
+            severity: ERR, 
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#OD2xWire_Dia)',
+            duplicate: true
+        });
+    }
+    if (design.model.symbol_table[o.OD_Free].value === design.model.symbol_table[o.Wire_Dia].value) {
+        addAlert({
+            element: design.model.symbol_table[o.OD_Free],
+            name: design.model.symbol_table[o.OD_Free].name, 
+            message: check_message(design,'PATHOLOGICAL',o.OD_Free,'=',o.Wire_Dia),
+            severity: ERR, 
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#OD_eq_Wire_Dia)'
+        });
+        addAlert({
+            element: design.model.symbol_table[o.Wire_Dia],
+            name: design.model.symbol_table[o.Wire_Dia].name, 
+            message: check_message(design,'PATHOLOGICAL',o.Wire_Dia,'=',o.OD_Free),
+            severity: ERR, 
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#OD_eq_Wire_Dia)',
+            duplicate: true
+        });
+    }
     if (design.model.symbol_table[o.Wire_Dia].value > design.model.symbol_table[o.ID_Free].value) {
         addAlert({
             element: design.model.symbol_table[o.Wire_Dia],
             name: design.model.symbol_table[o.Wire_Dia].name, 
-            message: check_message(design,o.Wire_Dia,'>',o.ID_Free),
+            message: check_message(design,'RELATIONSHIP',o.Wire_Dia,'>',o.ID_Free),
             severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#Wire_Dia_GT_ID_Free)'
         });
         addAlert({
             element: design.model.symbol_table[o.ID_Free],
             name: design.model.symbol_table[o.ID_Free].name, 
-            message: check_message(design,o.ID_Free,'<=',o.Wire_Dia),
+            message: check_message(design,'RELATIONSHIP',o.ID_Free,'<=',o.Wire_Dia),
             severity: WARN,
             duplicate: true
         });
@@ -78,6 +112,15 @@ export function checks(store) {        /*    Compression  Spring  */
             message: 'Manufacturability concern', 
             severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#SI_manufacturability)' 
+        });
+    }
+    if (design.model.symbol_table[o.OD_Free].lmin === FIXED && design.model.symbol_table[o.ID_Free].lmin === (CONSTRAINED|FIXED)) {
+        addAlert({
+            element: design.model.symbol_table[o.OD_Free], 
+            name: design.model.symbol_table[o.OD_Free].name, 
+            message: 'Over specification concern; Both OD and ID are fixed', 
+            severity: WARN,
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#OD_ID_BothFixed)' 
         });
     }
     if (design.model.symbol_table[o.Prop_Calc_Method].value !== 1) {
@@ -150,14 +193,14 @@ export function checks(store) {        /*    Compression  Spring  */
         addAlert({
             element: design.model.symbol_table[o.Force_1], 
             name: design.model.symbol_table[o.Force_1].name, 
-            message: check_message(design,o.Force_1,'>',o.Force_2),
+            message: check_message(design,'RELATIONSHIP',o.Force_1,'>',o.Force_2),
             severity: ERR,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#F1_GT_F2)',
         });
         addAlert({
             element: design.model.symbol_table[o.Force_2], 
             name: design.model.symbol_table[o.Force_2].name, 
-            message: check_message(design,o.Force_2,'<',o.Force_1),
+            message: check_message(design,'RELATIONSHIP',o.Force_2,'<',o.Force_1),
             severity: ERR,
             duplicate: true
         });
@@ -166,14 +209,14 @@ export function checks(store) {        /*    Compression  Spring  */
         addAlert({
             element: design.model.symbol_table[o.Force_1],
             name: design.model.symbol_table[o.Force_1].name, 
-            message: check_message(design,o.Force_1,'<',o.Initial_Tension),
+            message: check_message(design,'RELATIONSHIP',o.Force_1,'<',o.Initial_Tension),
             severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#F1_LT_IT)'
         });
         addAlert({
             element: design.model.symbol_table[o.Initial_Tension],
             name: design.model.symbol_table[o.Initial_Tension].name, 
-            message: check_message(design,o.Initial_Tension,'>',o.Force_1),
+            message: check_message(design,'RELATIONSHIP',o.Initial_Tension,'>',o.Force_1),
             severity: WARN,
             duplicate: true
         });
@@ -182,14 +225,14 @@ export function checks(store) {        /*    Compression  Spring  */
         addAlert({
             element: design.model.symbol_table[o.Stress_Initial],
             name: design.model.symbol_table[o.Stress_Initial].name, 
-            message: check_message(design,o.Stress_Initial,'<',o.Stress_Init_Lo),
+            message: check_message(design,'RELATIONSHIP',o.Stress_Initial,'<',o.Stress_Init_Lo),
             severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#SInit_LT_SInit_Lo)'
         });
         addAlert({
             element: design.model.symbol_table[o.Stress_Init_Lo],
             name: design.model.symbol_table[o.Stress_Init_Lo].name, 
-            message: check_message(design,o.Stress_Init_Lo,'>=',o.Stress_Initial),
+            message: check_message(design,'RELATIONSHIP',o.Stress_Init_Lo,'>=',o.Stress_Initial),
             severity: WARN,
             duplicate: true
         });
@@ -198,14 +241,14 @@ export function checks(store) {        /*    Compression  Spring  */
         addAlert({
             element: design.model.symbol_table[o.Stress_Initial],
             name: design.model.symbol_table[o.Stress_Initial].name, 
-            message: check_message(design,o.Stress_Initial,'>',o.Stress_Init_Hi),
+            message: check_message(design,'RELATIONSHIP',o.Stress_Initial,'>',o.Stress_Init_Hi),
             severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Extension/alerts.html#SInit_GT_SInit_Hi)'
         });
         addAlert({
             element: design.model.symbol_table[o.Stress_Init_Hi],
             name: design.model.symbol_table[o.Stress_Init_Hi].name, 
-            message: check_message(design,o.Stress_Init_Hi,'<=',o.Stress_Initial),
+            message: check_message(design,'RELATIONSHIP',o.Stress_Init_Hi,'<=',o.Stress_Initial),
             severity: WARN,
             duplicate: true
         });

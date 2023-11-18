@@ -3,6 +3,8 @@
 Alerts common to all round-wire coil springs 
 
 ### On this page:   
+ - [OD_Free exactly twice Wire_Dia](alerts.html#OD2xWire_Dia)  
+ - [OD_Free equal to Wire_Dia](alerts.html#OD_eq_Wire_Dia)  
  - [Wire_Dia > ID_Free](alerts.html#Wire_Dia_GT_ID_Free)  
  - [Material properties for this Wire_Dia may not be accurate](alerts.html#MatPropAccuracy)  
  - [FS_CycleLife MIN not set](alerts.html#FS_CycleLife_MIN_not_set)  
@@ -12,15 +14,76 @@ Alerts common to all round-wire coil springs
  - [Cycle_Life calculation is not available](alerts.html#Cycle_LifeNA)  
  - [Cycle_Life not defined beyond yield](alerts.html#Cycle_LifeNA_FS_2)  
  - [Cycle_Life value is extrapolated](alerts.html#Cycle_LifeExtrapolated)  
+ - [Over specification concern; Both OD and ID are fixed](alerts.html#OD_ID_BothFixed)  
  - [Default constraint not enabled](alerts.html#DefaultConstraint)  
  - [Value of Tensile is suspect](alerts.html#TensileValueSuspect)  
+
+___
+
+<a id="OD2xWire_Dia"></a>  
+___
+
+Alert entry #S51
+##  Outside diameter is exactly twice wire diameter
+This situation creates numerical difficulties. 
+In mathematics, this is sometimes referred to as a "[pathological](https://en.wikipedia.org/wiki/Pathological_(mathematics))" case.
+
+To resolve this Alert, increase the value of OD_Free and / or decrease the value of Wire_Dia. 
+To achieve a feasible design, continue increasing OD_Free and decreasing Wire_Dia until 
+Spring_Index achieves a value within the range of [manufacturability](alerts.html#SI_manufacturability). 
+
+With round wire helical coil springs, 
+the case where coil outside diameter (OD_Free) is exactly twice the wire diameter (Wire_Dia) creates numerical problems. 
+In this situation, the inside diameter (ID_Free) is exactly zero and the spring index (Spring_Index) is exactly one. 
+That value of Spring_Index results in a divide-by-zero problem in the calculation of the Wahl curvature correction factor (kc). 
+The result of infinity then propagates through dependent equations. 
+Subsequent operations like subtraction of infinities create values of NaN (Not a Number) 
+which propagate to additional dependent equations.  
+
+The Search feature may or may not be successful in finding a solution when its start point has such numerical difficulties.  
+
+See also:
+ - [Spring index manufacturability concern](alerts.html#SI_manufacturability)  
+ - [NaN](/docs/Help/htt.html#nan)  
+ - [Wikipedia NaN](https://en.wikipedia.org/wiki/NaN)  
+ - [Wikipedia Pathological](https://en.wikipedia.org/wiki/Pathological_(mathematics))  
+
+___
+
+<a id="OD_eq_Wire_Dia"></a>  
+___
+
+Alert entry #S52
+##  Outside diameter exactly equals wire diameter
+This situation creates numerical difficulties.
+In mathematics, this is sometimes referred to as a "[pathological](https://en.wikipedia.org/wiki/Pathological_(mathematics))" case.
+
+To resolve this Alert, increase the value of OD_Free and / or decrease the value of Wire_Dia. 
+To achieve a feasible design, continue increasing OD_Free and decreasing Wire_Dia until 
+Spring_Index achieves a value within the range of [manufacturability](alerts.html#SI_manufacturability). 
+
+With round wire helical coil springs, 
+the case where coil outside diameter (OD_Free) is exactly equal the wire diameter (Wire_Dia) creates numerical problems. 
+In this situation, the mean diameter (Mean_Dia) and spring index (Spring_Index) are both exactly zero, 
+creating a divide-by-zero problem in the calculations. 
+The result of infinity then propagates through dependent equations. 
+Subsequent operations like subtraction of infinities create values of NaN (Not a Number) 
+which propagate to additional dependent equations.  
+
+The Search feature may or may not be successful in finding a solution when its start point has such numerical difficulties.  
+
+See also:
+ - [Spring index manufacturability concern](alerts.html#SI_manufacturability)  
+ - [NaN](/docs/Help/htt.html#nan)  
+ - [Wikipedia NaN](https://en.wikipedia.org/wiki/NaN)  
+ - [Wikipedia Pathological](https://en.wikipedia.org/wiki/Pathological_(mathematics))  
 
 ___
 
 <a id="Wire_Dia_GT_ID_Free"></a>  
 ___
 
-Alert entry #S51
+Alert entry #S53
 ## Wire_Dia > ID_Free 
 The wire diameter (Wire_Dia) is greater than the coil inside diameter (ID_Free).
 
@@ -40,7 +103,7 @@ ___
 <a id="MatPropAccuracy"></a>  
 ___
 
-Alert entry #S52
+Alert entry #S54
 ## Material properties for this Wire_Dia may not be accurate. 
 This message is provided to warn the user that the current value for wire diameter is well outside 
 the anticipated range for the selected material type and
@@ -69,7 +132,7 @@ ___
 <a id="FS_CycleLife_MIN_not_set"></a>  
 ___
 
-Alert entry #S53
+Alert entry #S55
 ## FS_CycleLife MIN is not set. 
 A more restrictive Life_Category has been selected but 
 the corresponding constraint on FS_CycleLife is not enabled. 
@@ -90,7 +153,7 @@ ___
 <a id="OverDesign"></a>  
 ___
 
-Alert entry #S54
+Alert entry #S56
 ## Over-design concern 
 The term "over-design" implies that this design may be too conservative. 
 Its Factor of Safety at operating point 2 exceeds the maximum constraint (FS_2 MAX). 
@@ -117,7 +180,7 @@ ___
 <a id="Coils_A_LT_1"></a>  
 ___
 
-Alert entry #S55
+Alert entry #S57
 ## Coils_A is less than 1 
 A warning alert is produced whenever the current design has less than one active coil.  
 
@@ -131,23 +194,10 @@ ___
 <a id="SI_manufacturability"></a>  
 ___
 
-Alert entry #S56
+Alert entry #S58
 ## Spring Index manufacturability concern 
 Spring_Index is the ratio of Mean Diameter to Wire Diameter. 
 Specifically: Mean_Dia / Wire_Dia. 
-
-The presence of this alert indicates that the current design is outside the range 
-of constraints Spring_Index MIN to Spring_Index MAX. 
-This design may be difficult to manufacture. 
-
-Spring index less than 4 is considered "difficult to manufacture". 
-Spring index greater than 25 is considered "difficult to control". 
-
-Ideally, spring index should be in the range of 6 to 12 in order to easily achieve spring industry standard tolerances. 
-Reduced coiling machine speeds, specialized fixtures and other tooling may be required outside this range. 
-For custom springs, check with the spring manufacturer regarding capabilities and costs. 
-
-The value of Mean_Dia can be controlled in the Advanced View and appears in Report 3. 
 
 **To resolve this alert:**  
  - If Spring_Index is less than Spring_Index MIN: decrease Wire_Dia or 
@@ -158,17 +208,28 @@ decrease the variable controlling coil diameter (OD_Free, Mean_Dia or ID_Free).
 
 Alternatively, confirm that either (or both) Wire_Dia and
 the variable controlling coil diameter (OD_Free, Mean_Dia or ID_Free) 
-are in Free status and (re-)run Search. 
+are in Free status and (re-)run Search.  
 
+The presence of this alert indicates that the current design is outside the range 
+of constraints Spring_Index MIN to Spring_Index MAX. 
+This design may be difficult to manufacture.  
 
-&nbsp; 
+Spring index less than 4 is considered "difficult to manufacture". 
+Spring index greater than 25 is considered "difficult to control".  
+
+Ideally, spring index should be in the range of 6 to 12 in order to easily achieve spring industry standard tolerances. 
+Reduced coiling machine speeds, specialized fixtures and other tooling may be required outside this range. 
+For custom springs with Spring_Index outside the range of easy manufacturability, 
+check with the spring manufacturer regarding capabilities and costs.  
+
+The value of Mean_Dia can be controlled in the Advanced View and appears in Report 3.  
 
 ___
 
 <a id="Cycle_LifeNA"></a>  
 ___
 
-Alert entry #S57
+Alert entry #S59
 ## Cycle_Life calculation is not available 
 The Cycle_Life variable (Modified Goodman calculation) is available only for materials contained in the internal materials table. 
 The current setting of Prop_Calc_Method indicates that material properties are user supplied, 
@@ -193,7 +254,7 @@ ___
 <a id="Cycle_LifeNA_FS_2"></a>  
 ___
 
-Alert entry #S58
+Alert entry #S60
 ## Cycle_Life not defined beyond yield 
 The load specified in the current design is sufficiently large to cause the wire to yield. 
 The notion of cycle life does not apply. 
@@ -229,25 +290,47 @@ ___
 <a id="Cycle_LifeExtrapolated"></a>  
 ___
 
-Alert entry #S59
-##  Cycle_Life value is extrapolated 
-  
+Alert entry #S61
+##  Cycle_Life value is extrapolated  
+This is an information alert. 
+No action is required.  
+
 The built-in material table provides allowable stress information derived from published s-n (stress versus number of cycles) data 
 that covers the range from 10,000 to 10,000,000 cycles.
 In order to facilitate proper operation of the search algorithm, 
-the allowable stress data has been extrapolated outside this range and is not supported by published data.
+the allowable stress data has been extrapolated outside this range and 
+thus the current cycle_Life value is not supported by published data.
 
 See also: 
  - [Cycle Life section of Spring Design Overview](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
 
 ___
 
+<a id="OD_ID_BothFixed"></a>  
+___
+
+Alert entry #S62
+##  Over specification concern; Both OD and ID are fixed
+To clear this Alert, remove Fixed status from either OD_Free or ID_Free by unchecking the checkbox
+immediately to the right of the value field. 
+
+With a helical coil spring, having both outside diameter (OD_Free) and inside diameter (ID_Free) in Fixed status 
+raises a concern that the design may be unintentionally [over specified](/docs/Help/designSituations.html). 
+In this situation, there is only one possible value of wire diameter (Wire_Dia) that will permit a feasible solution.
+That value is not likely a standard wire diameter. 
+As this may not be the designer's intent, this alert is intended to bring attention to the situation.
+
+See also: 
+ - [Fix and Free](/docs/Help/terminology.html#fix)  
+ - [Design situations](/docs/Help/designSituations.html)  
+
+___
+
 <a id="DefaultConstraint"></a>  
 ___
 
-Alert entry #S60
+Alert entry #S63
 ## Default constraint not enabled 
-  
 Disabling default constraints is not recommended. 
 Adjust the constraint value instead. 
 
@@ -281,7 +364,7 @@ ___
 <a id="TensileValueSuspect"></a>  
 ___
 
-Alert entry #S61
+Alert entry #S64
 ## Value of Tensile is suspect 
   
 The value of Tensile strength is close to or less than zero.

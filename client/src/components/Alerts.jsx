@@ -9,10 +9,12 @@ export const WARN = 'Warn';
 export const NOTICE = 'Notice';
 export const INFO = 'Info';
 
-export var check_message = function(design, left, op, right) {
-  return 'RELATIONSHIP: ' + design.model.symbol_table[left].name + ' (' + toODOPPrecision(design.model.symbol_table[left].value) + ') ' + op + ' ' + design.model.symbol_table[right].name + ' (' + toODOPPrecision(design.model.symbol_table[right].value) +')';
+export var check_message = function(design, prefix, left, op, right, suffix = '') {
+  return prefix + ': ' + design.model.symbol_table[left].name + ' (' + toODOPPrecision(design.model.symbol_table[left].value) + ') ' + op + 
+  ' ' + design.model.symbol_table[right].name + ' (' + toODOPPrecision(design.model.symbol_table[right].value) +')' + (suffix !== '' ? suffix : '');
 }
 
+        // DCD is Default Constraint Disabled 
 export var check_DCD_alert = function(element, minmax, urlCode) {
     if (element.lmin & FIXED) {
         return;
@@ -47,6 +49,25 @@ export var check_DCD_alert = function(element, minmax, urlCode) {
 export var checks = function(store) {
 //    console.log('In Alerts.checks store=',store);
     var design = store.getState();
+
+        // OBJECTIVE VALUE CHECKS 
+        if (design.model.result.objective_value === Number.POSITIVE_INFINITY || design.model.result.objective_value === Number.NEGATIVE_INFINITY) { // Check for objective value of Infinity
+            addAlert({
+                name: 'Objective Value', 
+                message: 'Objective Value is Infinity',
+                severity: ERR,
+                help_url: '[Help](/docs/Help/alerts.html#OBJ_Infinite)'
+            });
+        };
+        if (Number.isNaN(design.model.result.objective_value)) { // Check for objective value of NaN
+            addAlert({
+                name: 'Objective Value', 
+                message: 'Objective Value is Not a Number (NaN)',
+                severity: ERR,
+                help_url: '[Help](/docs/Help/alerts.html#OBJ_NaN)'
+            });
+        };
+
     var total = 0;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         var element = design.model.symbol_table[i];
@@ -57,14 +78,14 @@ export var checks = function(store) {
         if (element.type === 'equationset' && !element.input) { // Dependent Variable?
           severity = INFO; // Make Invalid Dependent Variable only Info
         }
-        if (element.format === undefined && typeof element.value === 'number' && element.value <= element.validmin) {
+        if (element.format === undefined && typeof element.value === 'number' && element.value < element.validmin) {
             let validmin;
             if (element.validminchoice !== undefined) {
-                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validminchoices[element.validminchoice] + '(' + toODOPPrecision(element.validmin) + ')';
+                validmin = element.validmin === -Number.MIN_VALUE ? 'Number.MIN_VALUE' : element.validminchoices[element.validminchoice] + '(' + toODOPPrecision(element.validmin) + ')';
             } else {
-                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : toODOPPrecision(element.validmin);
+                validmin = element.validmin === -Number.MIN_VALUE ? 'Number.MIN_VALUE' : toODOPPrecision(element.validmin);
             }
-            let relational = element.validmin === -Number.MIN_VALUE ? ' < ' : ' <= ';
+            let relational = ' < ';
             addAlert({
                 element: element,
                 name: element.name,
@@ -72,14 +93,14 @@ export var checks = function(store) {
                 severity: severity,
                 help_url: '[Help](/docs/Help/alerts.html#Validity_Below)'
             });
-        } else if (element.format === undefined && typeof element.value === 'number' && element.value >= element.validmax) {
+        } else if (element.format === undefined && typeof element.value === 'number' && element.value > element.validmax) {
             let validmax;
             if (element.validmaxchoice !== undefined) {
                 validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmaxchoices[element.validmaxchoice] + '(' + toODOPPrecision(element.validmax) + ')';
             } else {
                 validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : toODOPPrecision(element.validmax);
             }
-            let relational = ' >= ';
+            let relational = ' > ';
             addAlert({
                 element: element,
                 name: element.name,
@@ -99,14 +120,14 @@ export var checks = function(store) {
         };
 
         // CONSTRAINT VALIDITY CHECKS (ONLY FOR INDEPENDENT AND DEPENDENT NUMERIC VARIABLES, NOT FOR CALC INPUTS)
-        if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin <= element.validmin) {
+        if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin < element.validmin) {
             let validmin;
             if (element.validminchoice !== undefined) {
-                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validminchoices[element.validminchoice] + '(' + toODOPPrecision(element.validmin) + ')';
+                validmin = element.validmin === -Number.MIN_VALUE ? 'Number.MIN_VALUE' : element.validminchoices[element.validminchoice] + '(' + toODOPPrecision(element.validmin) + ')';
             } else {
-                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : toODOPPrecision(element.validmin);
+                validmin = element.validmin === -Number.MIN_VALUE ? 'Number.MIN_VALUE' : toODOPPrecision(element.validmin);
             }
-            let relational = element.validmin === -Number.MIN_VALUE ? ' < ' : ' <= ';
+            let relational = ' < ';
             addAlert({
                 element: element,
                 name: element.name+' MIN',
@@ -114,14 +135,14 @@ export var checks = function(store) {
                 severity: ERR,
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)'
             });
-        } else if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin >= element.validmax) {
+        } else if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin > element.validmax) {
             let validmax;
             if (element.validmaxchoice !== undefined) {
                 validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmaxchoices[element.validmaxchoice] + '(' + toODOPPrecision(element.validmax) + ')';
             } else {
                 validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : toODOPPrecision(element.validmax);
             }
-            let relational = ' >= ';
+            let relational = ' > ';
             addAlert({
                 element: element,
                 name: element.name+' MIN',
@@ -130,14 +151,14 @@ export var checks = function(store) {
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Above)'
             });
         }
-        if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax <= element.validmin) {
+        if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax < element.validmin) {
             let validmin;
             if (element.validminchoice !== undefined) {
-                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validminchoices[element.validminchoice] + '(' + toODOPPrecision(element.validmin) + ')';
+                validmin = element.validmin === -Number.MIN_VALUE ? 'Number.MAX_VALUE' : element.validminchoices[element.validminchoice] + '(' + toODOPPrecision(element.validmin) + ')';
             } else {
-                validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : toODOPPrecision(element.validmin);
+                validmin = element.validmin === -Number.MIN_VALUE ? 'Number.MIN_VALUE' : toODOPPrecision(element.validmin);
             }
-            let relational = element.validmin === -Number.MIN_VALUE ? ' < ' : ' <= ';
+            let relational = ' < ';
             addAlert({
                 element: element,
                 name: element.name+' MAX',
@@ -145,14 +166,14 @@ export var checks = function(store) {
                 severity: ERR,
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)'
             });
-        } else if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax >= element.validmax) {
+        } else if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax > element.validmax) {
             let validmax;
             if (element.validmaxchoice !== undefined) {
                 validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmaxchoices[element.validmaxchoice] + '(' + toODOPPrecision(element.validmax) + ')';
             } else {
                 validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : toODOPPrecision(element.validmax);
             }
-            let relational = ' >= ';
+            let relational = ' > ';
             addAlert({
                 element: element,
                 name: element.name+' MAX',
