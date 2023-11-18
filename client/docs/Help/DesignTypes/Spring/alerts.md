@@ -3,7 +3,7 @@
 Alerts common to all round-wire coil springs 
 
 ### On this page:   
- - [OD_Free 2x Wire_Dia](alerts.html#OD2xWire_Dia)  
+ - [OD_Free exactly twice Wire_Dia](alerts.html#OD2xWire_Dia)  
  - [OD_Free equal to Wire_Dia](alerts.html#OD_eq_Wire_Dia)  
  - [Wire_Dia > ID_Free](alerts.html#Wire_Dia_GT_ID_Free)  
  - [Material properties for this Wire_Dia may not be accurate](alerts.html#MatPropAccuracy)  
@@ -26,7 +26,7 @@ ___
 Alert entry #S51
 ##  Outside diameter is exactly twice wire diameter
 This situation creates numerical difficulties. 
-In mathematics, this is sometimes referred to as a "pathological" case.
+In mathematics, this is sometimes referred to as a "[pathological](https://en.wikipedia.org/wiki/Pathological_(mathematics))" case.
 
 To resolve this Alert, increase the value of OD_Free and / or decrease the value of Wire_Dia. 
 To achieve a feasible design, continue increasing OD_Free and decreasing Wire_Dia until 
@@ -56,7 +56,7 @@ ___
 Alert entry #S52
 ##  Outside diameter exactly equals wire diameter
 This situation creates numerical difficulties.
-In mathematics, this is sometimes referred to as a "pathological" case.
+In mathematics, this is sometimes referred to as a "[pathological](https://en.wikipedia.org/wiki/Pathological_(mathematics))" case.
 
 To resolve this Alert, increase the value of OD_Free and / or decrease the value of Wire_Dia. 
 To achieve a feasible design, continue increasing OD_Free and decreasing Wire_Dia until 
@@ -197,19 +197,6 @@ Alert entry #S58
 Spring_Index is the ratio of Mean Diameter to Wire Diameter. 
 Specifically: Mean_Dia / Wire_Dia. 
 
-The presence of this alert indicates that the current design is outside the range 
-of constraints Spring_Index MIN to Spring_Index MAX. 
-This design may be difficult to manufacture. 
-
-Spring index less than 4 is considered "difficult to manufacture". 
-Spring index greater than 25 is considered "difficult to control". 
-
-Ideally, spring index should be in the range of 6 to 12 in order to easily achieve spring industry standard tolerances. 
-Reduced coiling machine speeds, specialized fixtures and other tooling may be required outside this range. 
-For custom springs, check with the spring manufacturer regarding capabilities and costs. 
-
-The value of Mean_Dia can be controlled in the Advanced View and appears in Report 3. 
-
 **To resolve this alert:**  
  - If Spring_Index is less than Spring_Index MIN: decrease Wire_Dia or 
 increase the variable controlling coil diameter (OD_Free, Mean_Dia or ID_Free).  
@@ -219,10 +206,21 @@ decrease the variable controlling coil diameter (OD_Free, Mean_Dia or ID_Free).
 
 Alternatively, confirm that either (or both) Wire_Dia and
 the variable controlling coil diameter (OD_Free, Mean_Dia or ID_Free) 
-are in Free status and (re-)run Search. 
+are in Free status and (re-)run Search.  
 
+The presence of this alert indicates that the current design is outside the range 
+of constraints Spring_Index MIN to Spring_Index MAX. 
+This design may be difficult to manufacture.  
 
-&nbsp; 
+Spring index less than 4 is considered "difficult to manufacture". 
+Spring index greater than 25 is considered "difficult to control".  
+
+Ideally, spring index should be in the range of 6 to 12 in order to easily achieve spring industry standard tolerances. 
+Reduced coiling machine speeds, specialized fixtures and other tooling may be required outside this range. 
+For custom springs with Spring_Index outside the range of easy manufacturability, 
+check with the spring manufacturer regarding capabilities and costs.  
+
+The value of Mean_Dia can be controlled in the Advanced View and appears in Report 3.  
 
 ___
 

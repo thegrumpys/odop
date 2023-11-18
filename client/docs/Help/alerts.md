@@ -61,7 +61,7 @@ that will resolve the alerts.
  - [Functionally Determined Constraint Level (FDCL) is enabled](alerts.html#FDCL)  
 
 ### On other pages (design type specific alerts):   
- - [OD_Free 2x Wire_Dia](/docs/Help/DesignTypes/Spring/alerts.html#OD2xWire_Dia)  
+ - [OD_Free exactly twice Wire_Dia](/docs/Help/DesignTypes/Spring/alerts.html#OD2xWire_Dia)  
  - [OD_Free equal to Wire_Dia](/docs/Help/DesignTypes/Spring/alerts.html#OD_eq_Wire_Dia)  
  - [Wire_Dia > ID_Free](/docs/Help/DesignTypes/Spring/alerts.html#Wire_Dia_GT_ID_Free)  
  - [Material properties for this Wire_Dia may not be accurate](/docs/Help/DesignTypes/Spring/alerts.html#MatPropAccuracy)  
@@ -132,17 +132,24 @@ ___
 ___
 
 Alert entry #ODOP03
-## Invalid - Value less than or equal to limit 
-The value of the associated variable is less than the validmin limit defined in the design type's initialState. 
-This means that, given the current input value (for example, a negative diameter), 
-the design is likely outside the limits of physical reality. 
-The mathematical model for this design is not valid for these inputs. 
-This condition may block the Seek and Trade features from starting. 
+## Invalid - Value less than limit 
+The value of the associated variable is less than the validmin limit as defined in the design type's initialState.  
 
-Specific advice on how to resolve this condition is not available. 
+This is a generic alert message so guidance on how to resolve this condition is not available here. 
+Look for other alert messages as they might provide more specific advice. 
 Look for zero or negative values. 
-Look for other messages as they might provide more specific advice. 
 Undoing or reducing the size of recent changes may be helpful. 
+
+This alert means that the mathematical model for this design is not valid for the current set of inputs. 
+Given the current set of Independent Variables, the design is likely outside the limits of physical reality. 
+For example, in coil spring design, outside diameters (OD_FREE) less than twice the wire diameter (Wire_Dia) 
+will produce a negative inside diameter, an impossible situation. 
+Multiple Invalid messages may cascade out of a single out-of-range input value. 
+
+This condition may produce a warning message or even block the Seek and Trade features from starting. 
+
+See also:
+ - [Terminology - Validity](/docs/Help/terminology.html#validity)  
 
 ___
 
@@ -151,15 +158,23 @@ ___
 
 Alert entry #ODOP04
 ## Invalid - Value greater than limit 
-The value of the associated variable is greater than the validmax limit defined in the design type's initialState. 
-This means that, given the current input value, 
-the design is likely outside the limits of physical reality. 
-The mathematical model for this design is not valid for these inputs. 
-This condition may block the Seek and Trade features from starting. 
+The value of the associated variable is greater than the validmax limit defined in the design type's initialState.  
 
-Specific advice on how to resolve this condition is not available. 
-Look for other messages as they might provide more specific advice. 
+This is a generic alert message so guidance on how to resolve this condition is not available here. 
+Look for other alert messages as they might provide more specific advice. 
+Look for zero or negative values. 
 Undoing or reducing the size of recent changes may be helpful. 
+
+This alert means that the mathematical model for this design is not valid for the current set of inputs. 
+Given the current set of Independent Variables, the design is likely outside the limits of physical reality. 
+For example, in coil spring design, outside diameters (OD_FREE) less than twice the wire diameter (Wire_Dia) 
+will produce a negative inside diameter, an impossible situation.  
+Multiple Invalid messages may cascade out of a single out-of-range input value. 
+
+This condition may produce a warning message or even block the Seek and Trade features from starting. 
+
+See also:
+ - [Terminology - Validity](/docs/Help/terminology.html#validity)  
 
 ___
 
@@ -167,17 +182,21 @@ ___
 ___
 
 Alert entry #ODOP05
-## Invalid Constraint - Less than or equal to limit 
+## Invalid Constraint - Less than limit 
 The value of the associated constraint is less than the validmin limit for the associated variable as defined in the design type's initialState. 
-This means that, given the current input value (for example, a MIN value that allows a negative diameter), 
+The problem is in the constraint (MIN or MAX) value, not the value of the variable itself.  
+
+This means that, given the current constraint value (for example, a MIN value that allows a negative diameter), 
 the design could be taken outside the limits of physical reality. 
-The mathematical model for this design is not valid for these inputs. 
-If it were to occur, this condition may block the Seek and Trade features from starting. 
+The mathematical model for this design is not valid for values outside these these limits. 
 
 Look for zero or negative numbers in the MIN field of the associated variable. 
 Change to positive, non-zero numbers as appropriate. 
 Look for other messages as they might provide more specific advice. 
 Undoing or reducing the size of recent constraint changes may be helpful. 
+
+See also:
+ - [Terminology - Validity](/docs/Help/terminology.html#validity)  
 
 ___
 
@@ -186,17 +205,20 @@ ___
 
 Alert entry #ODOP06
 ## Invalid Constraint - Greater than limit 
-The value of the associated variable is greater than the validmax limit for the associated variable as defined in the design type's initialState. 
-This means that, given the current input value, 
-the design is likely outside the limits of physical reality. 
-The mathematical model for this design is not valid for these inputs. 
-This condition may block the Seek and Trade features from starting. 
+The value of the associated constraint is greater than the validmax limit for the associated variable as defined in the design type's initialState. 
+The problem is in the constraint (MIN or MAX) value, not the value of the variable itself.  
 
-Specific advice on how to resolve this condition is not available. 
+This means that, given the current input value, 
+the design could be taken outside the limits of physical reality. 
+The mathematical model for this design is not valid for values outside these these limits. 
+
 Look at the MAX constraint field of the associated variable. 
 Adjust it as appropriate. 
 Look for other messages as they might provide more specific advice. 
 Undoing or reducing the size of recent constraint changes may be helpful. 
+
+See also:
+ - [Terminology - Validity](/docs/Help/terminology.html#validity)  
 
 ___
 

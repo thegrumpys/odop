@@ -118,14 +118,14 @@ export var checks = function(store) {
         };
 
         // CONSTRAINT VALIDITY CHECKS (ONLY FOR INDEPENDENT AND DEPENDENT NUMERIC VARIABLES, NOT FOR CALC INPUTS)
-        if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin <= element.validmin) {
+        if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin < element.validmin) {
             let validmin;
             if (element.validminchoice !== undefined) {
                 validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validminchoices[element.validminchoice] + '(' + element.validmin.toODOPPrecision() + ')';
             } else {
                 validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validmin.toODOPPrecision();
             }
-            let relational = element.validmin === -Number.MIN_VALUE ? ' < ' : ' <= ';
+            let relational = element.validmin === -Number.MIN_VALUE ? ' FixMe ' : ' < ';
             addAlert({
                 element: element,
                 name: element.name+' MIN',
@@ -133,14 +133,14 @@ export var checks = function(store) {
                 severity: ERR,
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)'
             });
-        } else if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin >= element.validmax) {
+        } else if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin > element.validmax) {
             let validmax;
             if (element.validmaxchoice !== undefined) {
                 validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmaxchoices[element.validmaxchoice] + '(' + element.validmax.toODOPPrecision() + ')';
             } else {
                 validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax.toODOPPrecision();
             }
-            let relational = ' >= ';
+            let relational = ' > ';
             addAlert({
                 element: element,
                 name: element.name+' MIN',
@@ -149,14 +149,14 @@ export var checks = function(store) {
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Above)'
             });
         }
-        if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax <= element.validmin) {
+        if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax < element.validmin) {
             let validmin;
             if (element.validminchoice !== undefined) {
                 validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validminchoices[element.validminchoice] + '(' + element.validmin.toODOPPrecision() + ')';
             } else {
                 validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validmin.toODOPPrecision();
             }
-            let relational = element.validmin === -Number.MIN_VALUE ? ' < ' : ' <= ';
+            let relational = element.validmin === -Number.MIN_VALUE ? ' FixMe ' : ' < ';
             addAlert({
                 element: element,
                 name: element.name+' MAX',
@@ -164,14 +164,14 @@ export var checks = function(store) {
                 severity: ERR,
                 help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)'
             });
-        } else if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax >= element.validmax) {
+        } else if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax > element.validmax) {
             let validmax;
             if (element.validmaxchoice !== undefined) {
                 validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmaxchoices[element.validmaxchoice] + '(' + element.validmax.toODOPPrecision() + ')';
             } else {
                 validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax.toODOPPrecision();
             }
-            let relational = ' >= ';
+            let relational = ' > ';
             addAlert({
                 element: element,
                 name: element.name+' MAX',
