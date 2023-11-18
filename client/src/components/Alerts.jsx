@@ -76,14 +76,14 @@ export var checks = function(store) {
         if (element.type === 'equationset' && !element.input) { // Dependent Variable?
           severity = INFO; // Make Invalid Dependent Variable only Info
         }
-        if (element.format === undefined && typeof element.value === 'number' && element.value <= element.validmin) {
+        if (element.format === undefined && typeof element.value === 'number' && element.value < element.validmin) {
             let validmin;
             if (element.validminchoice !== undefined) {
                 validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validminchoices[element.validminchoice] + '(' + element.validmin.toODOPPrecision() + ')';
             } else {
                 validmin = element.validmin === -Number.MIN_VALUE ? ' 0' : element.validmin.toODOPPrecision();
             }
-            let relational = element.validmin === -Number.MIN_VALUE ? ' < ' : ' <= ';
+            let relational = element.validmin === -Number.MIN_VALUE ? ' FixMe ' : ' < ';
             addAlert({
                 element: element,
                 name: element.name,
@@ -91,14 +91,14 @@ export var checks = function(store) {
                 severity: severity,
                 help_url: '[Help](/docs/Help/alerts.html#Validity_Below)'
             });
-        } else if (element.format === undefined && typeof element.value === 'number' && element.value >= element.validmax) {
+        } else if (element.format === undefined && typeof element.value === 'number' && element.value > element.validmax) {
             let validmax;
             if (element.validmaxchoice !== undefined) {
                 validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmaxchoices[element.validmaxchoice] + '(' + element.validmax.toODOPPrecision() + ')';
             } else {
                 validmax = element.validmax === Number.MAX_VALUE ? 'Number.MAX_VALUE' : element.validmax.toODOPPrecision();
             }
-            let relational = ' >= ';
+            let relational = ' > ';
             addAlert({
                 element: element,
                 name: element.name,
