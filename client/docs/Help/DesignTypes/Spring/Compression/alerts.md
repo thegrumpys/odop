@@ -16,25 +16,33 @@ Alerts specific to compression springs.
 
 ___
 
-<a id="#Coils_T_eq_Inactive_Coils"></a>  
+<a id="Coils_T_eq_Inactive_Coils"></a>  
 ___
 
 Alert entry #C101
 ##  Total coils exactly equals inactive coils; Active coils is zero
-This situation creates numerical difficulties.
+This situation creates numerical difficulties. 
+In mathematics, this is sometimes referred to as a "[pathological](https://en.wikipedia.org/wiki/Pathological_(mathematics))" case.  
+
+To resolve this Alert, select a different end_type or increase the value of Coils_T. 
+In most cases, the value of Coils_T should be large enough to provide a number of active coils (Coils_A) 
+that is perhaps less than one but in any case, significantly greater than zero. 
 
 With round wire helical coil compression springs, 
 the case where the total number of coils (Coils_T) is exactly equal the number of inactive coils (Inactive_Coils) 
 results in zero active coils (Coils_A) and that creates divide-by-zero problems in the calculations. 
-Javascript renders the result as infinity which then propagates through dependent equations. 
+The resulting Infinity then propagates through dependent equations. 
 Eventually, equations involving operations like subtraction of infinities create values of NaN (Not a Number) 
-which propagate to additional dependent equations.  
+and those propagate to additional dependent equations.  
 
-To resolve this Alert, select a different end_type or increase the value of Coils_T 
-until it exceeds the value of Inactive_Coils associated with the selected end type.
+A [separate Alert](/docs/Help/DesignTypes/Spring/alerts.html#Coils_A_LT_1) 
+is provided for the case that Coils_A is less than one. 
+A situation where Coils_A is less that zero triggers a validity alert.  
 
 See also:
  - [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes)  
+ - [Coils_A is less than 1](/docs/Help/DesignTypes/Spring/alerts.html#Coils_A_LT_1)  
+ - [Wikipedia Pathological](https://en.wikipedia.org/wiki/Pathological_(mathematics))  
  - [NaN](/docs/Help/htt.html#nan)  
  - [Wikipedia NaN](https://en.wikipedia.org/wiki/NaN)  
 
