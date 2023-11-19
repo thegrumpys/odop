@@ -21,9 +21,16 @@ class NameValueUnitsHeaderIndependentVariable extends Component {
                             <span>Name</span>
                         </OverlayTrigger>
                     </th>
-                    <th className="text-center" colSpan="2" id="IVValueTitle">
-                        <OverlayTrigger placement="top" overlay={<Tooltip>Current values.<br />Check box at right to FIX. (Hold unchanged) <br /> Uncheck box to FREE <br /> (Allow Search to specify) <br /> See Help Terminology FIX</Tooltip>}>
-                            <span>Value (&nbsp;<i className="far fa-check-square"></i>&nbsp;Fix&nbsp;-&nbsp;<i className="far fa-square"></i>&nbsp;Free&nbsp;)</span>
+                    <th className="text-center" id="IVValueTitle">
+                        <OverlayTrigger placement="top" overlay={<Tooltip>Current values.</Tooltip>}>
+                            <span>Value</span>
+                        </OverlayTrigger>
+                    </th>
+                    <th className="text-center">
+                        <OverlayTrigger placement="right" overlay={<Tooltip>
+                        Check <i className="far fa-check-square"></i> to FIX and hold unchanged.<br /> 
+                        Uncheck <i className="far fa-square"></i> to FREE and allow Search to specify.<br /> See Help Terminology FIX</Tooltip>}>
+                            <span><i className="fas fa-info-circle text-primary"></i></span>
                         </OverlayTrigger>
                     </th>
                     <th className={"text-left " + (this.props.system_controls.show_units ? "" : "d-none")} id="IVUnitsTitle">

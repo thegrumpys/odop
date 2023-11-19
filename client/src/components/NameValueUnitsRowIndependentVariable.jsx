@@ -95,17 +95,13 @@ class NameValueUnitsRowIndependentVariable extends Component {
                             <span>{this.props.element.name}</span>
                         </OverlayTrigger>
                     </td>
-                    <td className="align-middle" colSpan="2">
-                        <InputGroup>
-                            <FormControlTypeNumber id={'nvuriv_'+this.props.element.name} icon_alerts={icon_alerts} className={className} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} />
-                            <InputGroup.Append>
-                                <InputGroup.Text>
-                                    <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>
-                                        <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
-                                    </OverlayTrigger>
-                                </InputGroup.Text>
-                            </InputGroup.Append>
-                        </InputGroup>
+                    <td className="align-middle">
+                        <FormControlTypeNumber id={'nvuriv_'+this.props.element.name} icon_alerts={icon_alerts} className={className} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} />
+                    </td>
+                    <td className="align-middle text-center">
+                        <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>
+                            <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
+                        </OverlayTrigger>
                     </td>
                     <td className={"text-nowrap align-middle small " + (this.props.system_controls.show_units ? "" : "d-none")} colSpan="1">{this.props.element.units}</td>
                 </tr>
