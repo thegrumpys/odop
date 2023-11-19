@@ -3,7 +3,7 @@
 Alerts specific to compression springs. 
 
 ### On this page:   
- - [Coils_T = Inactive_Coils](alerts.html##Coils_T_eq_Inactive_Coils)  
+ - [Coils_T = Inactive_Coils](alerts.html#Coils_T_eq_Inactive_Coils)  
  - [Force_1 > Force_2](alerts.html#F1_GT_F2)  
  - [Excess Force](alerts.html#Excess_Force)  
  - [L_Free < L_Solid](alerts.html#L_Free_LT_L_Solid)  
