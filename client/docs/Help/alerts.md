@@ -75,7 +75,7 @@ that will resolve the alerts.
  - [Over specification concern; Both OD and ID are fixed](/docs/Help/DesignTypes/Spring/alerts.html#OD_ID_BothFixed)  
  - [Default constraint not enabled](/docs/Help/DesignTypes/Spring/alerts.html#DefaultConstraint)  
  - [Value of Tensile is suspect](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)  
- - [Coils_T = Inactive_Coils](/docs/Help/DesignTypes/Spring/Compression/alerts.html##Coils_T_eq_Inactive_Coils)  
+ - [Coils_T = Inactive_Coils](/docs/Help/DesignTypes/Spring/Compression/alerts.html#Coils_T_eq_Inactive_Coils)  
  - [Force_1 >= Force_2](/docs/Help/DesignTypes/Spring/Compression/alerts.html#F1_GE_F2)  
  - [Excess Force](/docs/Help/DesignTypes/Spring/Compression/alerts.html#Excess_Force)  
  - [L_Free < L_Solid](/docs/Help/DesignTypes/Spring/Compression/alerts.html#L_Free_LT_L_Solid)  
