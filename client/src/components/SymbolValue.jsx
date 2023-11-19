@@ -346,28 +346,39 @@ class SymbolValue extends Component {
                 </OverlayTrigger>;
         }
 
-        var feasibility_string;
+        var feasibility_status;
+        var feasibility_tooltip;
         var feasibility_class;
         var display_search_button = false;
         var display_seek_button = false;
         if (this.props.element.type === 'equationset') {
-            if (this.props.objective_value > 4*this.props.system_controls.objmin) {
-                feasibility_string = "NOT FEASIBLE";
+            if (!Number.isFinite(this.props.objective_value)) {
+                feasibility_status = "FEASIBILITY UNDEFINED";
+                feasibility_tooltip = 'FEASIBILITY UNDEFINED: computing constraints failed';
+                feasibility_class = "text-feasibility-undefined";
+                display_search_button = true;
+                display_seek_button = false;
+            } else if (this.props.objective_value > 4*this.props.system_controls.objmin) {
+                feasibility_status = "NOT FEASIBLE";
+                feasibility_tooltip = 'NOT FEASIBLE: constraints significantly violated';
                 feasibility_class = "text-not-feasible ";
                 display_search_button = true;
                 display_seek_button = false;
             } else if (this.props.objective_value > this.props.system_controls.objmin) {
-                feasibility_string = "CLOSE TO FEASIBLE";
+                feasibility_status = "CLOSE TO FEASIBLE";
+                feasibility_tooltip = 'CLOSE TO FEASIBLE: constraints slightly violated';
                 feasibility_class = "text-close-to-feasible ";
                 display_search_button = true;
                 display_seek_button = false;
             } else if (this.props.objective_value > 0.0) {
-                feasibility_string = "FEASIBLE";
+                feasibility_status = "FEASIBLE";
+                feasibility_tooltip = 'FEASIBLE: constraints not significantly violated';
                 feasibility_class = "text-feasible ";
                 display_search_button = false;
                 display_seek_button = true;
             } else {
-                feasibility_string = "STRICTLY FEASIBLE";
+                feasibility_status = "STRICTLY FEASIBLE";
+                feasibility_tooltip = 'STRICTLY FEASIBLE: no constraints violated';
                 feasibility_class = "text-strictly-feasible ";
                 display_search_button = false;
                 display_seek_button = true;
@@ -379,7 +390,7 @@ class SymbolValue extends Component {
                 free_variables += element.name + ', ';
             }
         });
-//        console.log('feasibility_string=',feasibility_string,'feasibility_class=',feasibility_class,'display_search_button=',display_search_button,'display_seek_button=',display_seek_button);
+//        console.log('feasibility_status=',feasibility_status,'feasibility_class=',feasibility_class,'display_search_button=',display_search_button,'display_seek_button=',display_seek_button);
 
         return (
             <>
@@ -417,8 +428,10 @@ class SymbolValue extends Component {
                                 <tbody>
                                     <tr>
                                         <td className={feasibility_class + " text-center"}>
-                                            {feasibility_string}
-                                            {feasibility_string === 'NOT FEASIBLE' && this.props.search_completed ?
+                                            <OverlayTrigger placement="bottom" overlay={<Tooltip>{feasibility_tooltip}</Tooltip>}>
+                                                 <span>{feasibility_status}</span>
+                                            </OverlayTrigger>
+                                            {feasibility_status === 'NOT FEASIBLE' && this.props.search_completed ?
                                                 <OverlayTrigger placement="bottom" overlay={<Tooltip>
                                                     This design may be over-specified. 
                                                     See Help topics on Feasibility, Design Situations, Spring Design Technique and Hints, Tricks & Tips.
@@ -432,7 +445,7 @@ class SymbolValue extends Component {
                                     </tr>
                                     <tr>
                                         <td className="text-center" id="ObjectiveValue">
-                                            <OverlayTrigger placement="bottom" overlay={<Tooltip>Search works to minimize Objective Value.<br />Objective Value = {this.props.objective_value.toFixed(7)}<br />Search stops if Objective Value falls below<br />OBJMIN = {this.props.system_controls.objmin.toFixed(7)}</Tooltip>}>
+                                            <OverlayTrigger placement="bottom" overlay={<Tooltip>Visual summary of feasibility status.<br />Objective Value = {this.props.objective_value.toFixed(7)}</Tooltip>}>
                                                 <b>Status</b>
                                             </OverlayTrigger>
                                             <FeasibilityIndicator />
@@ -502,11 +515,14 @@ class SymbolValue extends Component {
                                     (this.props.search_completed ?
                                         <Button variant="secondary" onClick={this.onSearchRequest} disabled><b>Search</b> (solve)</Button>
                                     :
-                                        <OverlayTrigger placement="top" overlay={<Tooltip>
-                                            The Independent Variable {this.props.element.name} is Fixed. Search manipulates only the values of Free Independent Variables. Press this <img src="SearchButton.png" alt="SearchButton"/> button to alter the values, {free_variables} to locate a feasible solution (if available).
-                                            </Tooltip>}>
+                                        <>
                                             <Button variant="primary" onClick={this.onSearchRequest}><b>Search</b> (solve)</Button>
-                                        </OverlayTrigger>)
+                                            <OverlayTrigger placement="right" overlay={<Tooltip>
+                                                The Independent Variable {this.props.element.name} is Fixed. Search manipulates only the values of Free Independent Variables. Press this <img src="SearchButton.png" alt="SearchButton"/> button to alter the values, {free_variables} to locate a feasible solution (if available).</Tooltip>}>
+                                                <span><i className="fas fa-info-circle text-primary"></i></span>
+                                            </OverlayTrigger>
+                                        </>
+                                    )
                                 :
                                     <Button variant={this.props.search_completed ? "secondary" : "primary"} onClick={this.onSearchRequest} disabled={this.props.search_completed}><b>Search</b> (solve)</Button>}
                                 <Button variant={this.props.search_completed ? "primary" : "secondary"} disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
