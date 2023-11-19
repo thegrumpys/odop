@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED } from '../store/actionTypes';
 import { fixSymbolValue, freeSymbolValue } from '../store/actionCreators';
