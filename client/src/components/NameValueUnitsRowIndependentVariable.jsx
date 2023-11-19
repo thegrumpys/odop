@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
+import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED } from '../store/actionTypes';
 import { changeSymbolValue, fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../store/actionCreators';
@@ -96,7 +96,9 @@ class NameValueUnitsRowIndependentVariable extends Component {
                         </OverlayTrigger>
                     </td>
                     <td className="align-middle">
-                        <FormControlTypeNumber id={'nvuriv_'+this.props.element.name} icon_alerts={icon_alerts} className={className} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} />
+                        <InputGroup>
+                            <FormControlTypeNumber id={'nvuriv_'+this.props.element.name} icon_alerts={icon_alerts} className={className} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} />
+                        </InputGroup>
                     </td>
                     <td className="align-middle text-center">
                         <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>
