@@ -175,28 +175,33 @@ class ResultTable extends Component {
 //          < 4x OBJMIN     CLOSE TO FEASIBLE       Orange           #fd7e14
 //          > 4x OBJMIN     NOT FEASIBLE            Red              #dc3545
 //          > Not finite    FEASIBILITY UNDEFINED   Purple           #8b299e
-        var feasibility_string;
-        var feasibility_tooltip = <>Objective Value {this.props.objective_value.toFixed(7)}</>;;
+        var feasibility_status;
+        var feasibility_tooltip;
         var feasibility_class;
         var display_search_button;
         if (!Number.isFinite(this.props.objective_value)) {
-            feasibility_string = "FEASIBILITY UNDEFINED";
+            feasibility_status = "FEASIBILITY UNDEFINED";
+            feasibility_tooltip = 'FEASIBILITY UNDEFINED: computing constraints failed';
             feasibility_class = "text-feasibility-undefined";
             display_search_button = true;
         } else if (this.props.objective_value > 4*this.props.system_controls.objmin) {
-            feasibility_string = "NOT FEASIBLE";
+            feasibility_status = "NOT FEASIBLE";
+            feasibility_tooltip = 'NOT FEASIBLE: constraints significantly violated';
             feasibility_class = "text-not-feasible ";
             display_search_button = true;
         } else if (this.props.objective_value > this.props.system_controls.objmin) {
-            feasibility_string = "CLOSE TO FEASIBLE";
+            feasibility_status = "CLOSE TO FEASIBLE";
+            feasibility_tooltip = 'CLOSE TO FEASIBLE: constraints slightly violated';
             feasibility_class = "text-close-to-feasible ";
             display_search_button = true;
         } else if (this.props.objective_value > 0.0) {
-            feasibility_string = "FEASIBLE";
+            feasibility_status = "FEASIBLE";
+            feasibility_tooltip = 'FEASIBLE: constraints not significantly violated';
             feasibility_class = "text-feasible ";
             display_search_button = false;
         } else {
-            feasibility_string = "STRICTLY FEASIBLE";
+            feasibility_status = "STRICTLY FEASIBLE";
+            feasibility_tooltip = 'STRICTLY FEASIBLE: no constraints violated';
             feasibility_class = "text-strictly-feasible ";
             display_search_button = false;
         }
@@ -209,20 +214,15 @@ class ResultTable extends Component {
                     <tbody>
                         <tr>
                             <th id="Feasibility">
-                                <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                                    STRICTLY FEASIBLE: no constraints violated;<br />
-                                    FEASIBLE: constraints not significantly violated;<br />
-                                    CLOSE TO FEASIBLE: constraints slightly violated;<br />
-                                    NOT FEASIBLE: constraints significantly violated;
-                                    FEASIBILITY UNDEFINED: computing constraints failed</Tooltip>}>
+                                <OverlayTrigger placement="bottom" overlay={<Tooltip>Viability of the current design relative to constraints and fixed values</Tooltip>}>
                                     <span>Feasibility</span>
                                 </OverlayTrigger>
                             </th>
                             <td className={feasibility_class + " text-left"}>
                                 <OverlayTrigger placement="bottom" overlay={<Tooltip>{feasibility_tooltip}</Tooltip>}>
-                                    <span>{feasibility_string}</span>
+                                    <span>{feasibility_status}</span>
                                 </OverlayTrigger>
-                                {feasibility_string === 'NOT FEASIBLE' && this.props.search_completed ?
+                                {feasibility_status === 'NOT FEASIBLE' && this.props.search_completed ?
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>
                                         This design may be over-specified. 
                                         See Help topics on Feasibility, Design Situations, Spring Design Technique and Hints, Tricks & Tips.
@@ -248,8 +248,7 @@ class ResultTable extends Component {
                     <tbody>
                         <tr>
                             <td className="text-left" id="ObjectiveValue">
-                                <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                                    Visual summary of feasibility status.</Tooltip>}>
+                                <OverlayTrigger placement="bottom" overlay={<Tooltip>Visual summary of feasibility status.<br />Objective Value = {this.props.objective_value.toFixed(7)}</Tooltip>}>
                                     <b>Status</b>
                                 </OverlayTrigger>
                                 <FeasibilityIndicator />
@@ -263,14 +262,15 @@ class ResultTable extends Component {
                                     </OverlayTrigger>
                                     <Button variant="primary" size="sm" onClick={this.onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>&nbsp;
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                                        Search alters the values of any free independent variables to find a design that 
-                                        satisfies all constraints while also achieving the desired value for each fixed dependent 
-                                        variable. Search stops when the first feasible solution is found. Specifically
+                                        <p>Search alters the values of any free independent variables to find a design that 
+                                        satisfies all constraints and each fixed dependent 
+                                        variable. A feasible result is a solution to the designer’s
+                                        goals as expressed by constraints and fixed values.</p>
+                                        <p>Search stops when the first feasible solution is found. This happens
                                         when the Objective Value ({this.props.objective_value.toFixed(7)}) falls below 
-                                        OBJMIN ({this.props.system_controls.objmin.toFixed(7)}). The solution provided 
-                                        by Search is a solution to the designer’s goals as expressed by constraints and fixes. If 
-                                        a solution that meets all of these goals is not available, the search process converges 
-                                        to a compromise. Typically, this compromise violates multiple constraints.</Tooltip>}>
+                                        OBJMIN ({this.props.system_controls.objmin.toFixed(7)}).</p>
+                                        <p>If Search cannot achieve a feasible result it converges to a compromise.
+                                        This compromise tries to minimize violations.</p></Tooltip>}>
                                         <span><i className="fas fa-info-circle text-primary"></i></span>
                                     </OverlayTrigger>
                                 </td>

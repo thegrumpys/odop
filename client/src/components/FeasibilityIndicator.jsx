@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 class FeasibilityIndicator extends Component {
     static defaultProps = { width: 242, height: 24 };
@@ -44,12 +45,24 @@ class FeasibilityIndicator extends Component {
         return (
             <>
                 <svg width={this.props.width} height={this.props.height}>
-                    <rect x={xOrigin-blackWidth} y={yOrigin+boxY} width={blackWidth} height={boxHeight} fill="black" />
-                    <rect x={xOrigin} y={yOrigin+boxY} width={greenWidth} height={boxHeight} fill="#28a745" />
-                    <rect x={xOrigin+greenWidth} y={yOrigin+boxY} width={orangeWidth} height={boxHeight} fill="#fd7e14" />
-                    <rect x={xOrigin+greenWidth+orangeWidth} y={yOrigin+boxY} width={redWidth} height={boxHeight} fill="#dc3545" />
-                    <rect x={xOrigin+greenWidth+orangeWidth+redWidth} y={yOrigin+boxY} width={purpleWidth} height={boxHeight} fill="#8b299e" />
-                    <polygon points={[[xOrigin+x, yOrigin+triangleHeight], [xOrigin+triangleWidth/2+x, yOrigin], [xOrigin-triangleWidth/2+x, yOrigin]]} fill="#05a4e8" stroke="white" strokeWidth={1} />
+                    <OverlayTrigger placement="bottom" overlay={<Tooltip>STRICTLY FEASIBLE: no constraints violated</Tooltip>}>
+                        <rect x={xOrigin-blackWidth} y={yOrigin+boxY} width={blackWidth} height={boxHeight} fill="black" />
+                    </OverlayTrigger>)
+                    <OverlayTrigger placement="bottom" overlay={<Tooltip>FEASIBLE: constraints not significantly violated</Tooltip>}>
+                        <rect x={xOrigin} y={yOrigin+boxY} width={greenWidth} height={boxHeight} fill="#28a745" />
+                    </OverlayTrigger>)
+                    <OverlayTrigger placement="bottom" overlay={<Tooltip>CLOSE TO FEASIBLE: constraints slightly violated</Tooltip>}>
+                        <rect x={xOrigin+greenWidth} y={yOrigin+boxY} width={orangeWidth} height={boxHeight} fill="#fd7e14" />
+                    </OverlayTrigger>)
+                    <OverlayTrigger placement="bottom" overlay={<Tooltip>NOT FEASIBLE: constraints significantly violated</Tooltip>}>
+                        <rect x={xOrigin+greenWidth+orangeWidth} y={yOrigin+boxY} width={redWidth} height={boxHeight} fill="#dc3545" />
+                    </OverlayTrigger>)
+                    <OverlayTrigger placement="bottom" overlay={<Tooltip>FEASIBILITY UNDEFINED: computing constraints failed</Tooltip>}>
+                        <rect x={xOrigin+greenWidth+orangeWidth+redWidth} y={yOrigin+boxY} width={purpleWidth} height={boxHeight} fill="#8b299e" />
+                    </OverlayTrigger>)
+                    <OverlayTrigger placement="top" overlay={<Tooltip>Objective Value = {this.props.objective_value.toFixed(7)}</Tooltip>}>
+                        <polygon points={[[xOrigin+x, yOrigin+triangleHeight], [xOrigin+triangleWidth/2+x, yOrigin], [xOrigin-triangleWidth/2+x, yOrigin]]} fill="#05a4e8" stroke="white" strokeWidth={1} />
+                    </OverlayTrigger>)
                 </svg>
             </>
         );
