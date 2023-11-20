@@ -31,7 +31,7 @@ class NameValueUnitsHeaderIndependentVariable extends Component {
                             Check <i className="far fa-check-square"></i> to FIX it and hold it unchanged at this value.<br /> 
                             Uncheck <i className="far fa-square"></i> to FREE it and allow Search to find a value within its constraints.<br /> See Help Terminology FIX
                             </Tooltip>}>
-                            <span><i className="fas fa-info-circle text-primary"></i></span>
+                            <span>Fix</span>
                         </OverlayTrigger>
                     </th>
                     <th className={"text-left " + (this.props.system_controls.show_units ? "" : "d-none")} id="IVUnitsTitle">
