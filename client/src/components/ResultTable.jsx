@@ -248,7 +248,12 @@ class ResultTable extends Component {
                     <tbody>
                         <tr>
                             <td className="text-left" id="ObjectiveValue">
-                                <OverlayTrigger placement="bottom" overlay={<Tooltip>Visual summary of feasibility status.<br />Objective Value = {this.props.objective_value.toFixed(7)}</Tooltip>}>
+                                <OverlayTrigger placement="bottom" overlay={<Tooltip>
+	                                    <p>Visual summary of feasibility status.</p>
+	                                    <p>Objective Value = {this.props.objective_value.toFixed(7)}<br />
+	                                    OBJMIN = {this.props.system_controls.objmin.toFixed(7)}</p>
+	                                    <p>See on-line Help for details.  Try Help lookup <b>indicator</b></p>
+	                                    </Tooltip>}>
                                     <b>Status</b>
                                 </OverlayTrigger>
                                 <FeasibilityIndicator />
