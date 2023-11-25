@@ -28,7 +28,7 @@ class NameValueUnitsHeaderDependentVariable extends Component {
                     </th>
                     <th className="text-center">
                         <OverlayTrigger placement="top" overlay={<Tooltip>
-                            Check <i className="far fa-check-square"></i> to FIX it and hold it unchanged at the value specified by its constraints.<br /> 
+                            Check <i className="far fa-check-square"></i> to FIX the variable and hold it unchanged at the value specified by its constraints.<br /> 
                             Uncheck <i className="far fa-square"></i> to FREE it and allow Search to find a value within its constraints.<br /> See Help Terminology FIX
                             </Tooltip>}>
                             <span>Fix</span>
