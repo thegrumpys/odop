@@ -50,7 +50,6 @@ class SearchDocs extends Component {
         displaySpinner(true);
         fetch('/api/v1/search?terms='+encoded_text)
         .then(res => {
-            displaySpinner(false);
             if (!res.ok) {
                 throw Error(res.statusText);
             }
@@ -66,6 +65,9 @@ class SearchDocs extends Component {
         })
         .catch(error => {
             displayMessage('GET of search \''+text+'\' failed with message: \''+error.message+'\'');
+        })
+        .finally(() => {
+            displaySpinner(false);
         });
     }
 
