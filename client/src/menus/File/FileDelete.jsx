@@ -53,7 +53,6 @@ class FileDelete extends Component {
             }
         })
         .then(res => {
-            displaySpinner(false);
             if (!res.ok) {
 //                console.warn('In FileDelete.getDesignNames res=',res);
                 throw Error(res.statusText);
@@ -74,6 +73,9 @@ class FileDelete extends Component {
         })
         .catch(error => {
             displayMessage('GET of design names failed with message: \''+error.message+'\'');
+        })
+        .finally(() => {
+            displaySpinner(false);
         });
     }
 
@@ -89,7 +91,6 @@ class FileDelete extends Component {
             },
         })
         .then(res => {
-            displaySpinner(false);
             if (!res.ok) {
                 throw Error(res.statusText);
             }
@@ -98,6 +99,9 @@ class FileDelete extends Component {
         })
         .catch(error => {
             displayMessage('DELETE of \''+name+'\' design  \''+type+'\' design type failed with message: \''+error.message+'\'');
+        })
+        .finally(() => {
+            displaySpinner(false);
         });
     }
 

@@ -43,7 +43,6 @@ class HelpAbout extends Component {
             }
         })
         .then(res => {
-            displaySpinner(false);
             if (!res.ok) {
                 throw Error(res.statusText);
             }
@@ -65,6 +64,9 @@ class HelpAbout extends Component {
         })
         .catch(error => {
             displayMessage('GET of DB Size failed with message: \''+error.message+'\'');
+        })
+        .finally(() => {
+            displaySpinner(false);
         });
     }
 

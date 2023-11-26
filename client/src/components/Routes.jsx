@@ -126,7 +126,6 @@ class Routes extends Component {
           }
       })
       .then(res => {
-          displaySpinner(false);
           if (!res.ok) {
               throw Error(res.statusText);
           }
@@ -153,6 +152,9 @@ class Routes extends Component {
       })
       .catch(error => {
           displayMessage('GET of \''+name+'\' design failed for type \''+type+'\' with message: \''+error.message+'\'');
+      })
+      .finally(() => {
+          displaySpinner(false);
       });
   }
 
