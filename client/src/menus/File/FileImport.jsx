@@ -53,7 +53,6 @@ class FileImport extends Component {
     
     onLoadEnd(event) {
 //        console.log('In FileImport.onLoadEnd event.target.value=',event.target.value);
-        displaySpinner(false);
         var design = JSON.parse(this.state.fileReader.result); // Convert file contents to JSON object
 //        console.log('In FileImport.onLoadEnd design.type=',design.type,'design.name=',design.name);
         var path = require('path');
@@ -67,12 +66,13 @@ class FileImport extends Component {
         } else {
             displayMessage('Invalid JSON type, function ignored');
         }
+        displaySpinner(false);
     }
     
     onError(e) {
 //        console.log('In FileImport.onError e=',e);
-        displaySpinner(false);
         displayMessage('GET of design names failed with message: \''+this.state.fileReader.error.message+'\'');
+        displaySpinner(false);
     }
 
     onCancel() {
