@@ -21,6 +21,8 @@ import { STARTUP,
     
     RESTORE_AUTO_SAVE,
     
+    WORKER_TEST,
+
     MIN, MAX, FIXED, CONSTRAINED, FDCL
     } from '../actionTypes';
 import { setSclDen } from './setSclDen';
@@ -34,6 +36,7 @@ import { invokeCheck } from './invokeCheck';
 import { resetCatalogSelection } from './resetCatalogSelection';
 import { changeSymbolValue, setSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
          restoreOutputSymbolConstraints, changeResultTerminationCondition } from '../actionCreators';
+import { displaySpinner } from '../../components/Spinner';
 
 export const dispatcher = store => next => action => {
     
@@ -252,6 +255,26 @@ export const dispatcher = store => next => action => {
         updateObjectiveValue(store);
         store.dispatch(changeResultTerminationCondition(termination_condition));
         invokeCheck(store);
+        break;
+
+    case WORKER_TEST:
+        console.log('In dispatcher worker test');
+        let first = 3;
+        let second = 4;
+        let result = '';
+        if (window.Worker) {
+          const myWorker = new Worker("../worker.js");
+          myWorker.onmessage = function(e) {
+            result = e.data;
+            console.log('Message received from worker', result);
+            displaySpinner(false);
+          }
+          displaySpinner(true);
+          myWorker.postMessage([first, second]);
+          console.log('Message posted to worker',first,second);
+        } else {
+          console.log('Your browser doesn\'t support web workers.');
+        }
         break;
 
     default:

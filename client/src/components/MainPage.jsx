@@ -30,6 +30,7 @@ import ActionTrade from '../menus/Action/ActionTrade';
 import ActionSelectSize from '../menus/Action/ActionSelectSize';
 import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
 import ActionExecute from '../menus/Action/ActionExecute';
+import ActionWorkerTest from '../menus/Action/ActionWorkerTest';
 import ViewCADModel from '../menus/View/ViewCADModel';
 import ViewSelect from '../menus/View/ViewSelect';
 import ViewOffsets from '../menus/View/ViewOffsets';
@@ -151,6 +152,7 @@ class MainPage extends Component {
                                 <ActionSelectCatalog />
                                 <NavDropdown.Divider />
                                 <ActionExecute />
+                                <ActionWorkerTest />
                             </NavDropdown>
                             <NavDropdown title="View">
                                 {this.props.type === "Spring/Extension" && <ViewCADModel />}

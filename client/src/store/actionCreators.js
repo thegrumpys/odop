@@ -40,6 +40,8 @@ import {
     DELETE_AUTO_SAVE,
     
     LOG_USAGE,
+    
+    WORKER_TEST,
 } from './actionTypes';
 
 export function startup() {
@@ -355,6 +357,16 @@ export function logUsage(tag, action, note) {
             tag,
             action,
             note,
+        }
+    }
+}
+
+export function workerTest(value1, value2) {
+    return {
+        type: WORKER_TEST,
+        payload: {
+            value1,
+            value2,
         }
     }
 }

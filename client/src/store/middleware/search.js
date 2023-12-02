@@ -1,11 +1,13 @@
 import { FIXED } from '../actionTypes';
 import { changeInputSymbolValues, changeResultTerminationCondition, changeResultSearchCompleted } from '../actionCreators';
 import { patsh } from './patsh';
+import { displaySpinner } from '../../components/Spinner';
 
 // Search
 export function search(store, objmin, merit) {
-//    console.log('Entering search store=',store,'objmin=',objmin,'merit=',merit);
+    console.log('Entering search store=',store,'objmin=',objmin,'merit=',merit);
 //    console.trace();
+    displaySpinner(true);
     
     var design = store.getState();
     
@@ -46,6 +48,7 @@ export function search(store, objmin, merit) {
     
     design = store.getState();
     var obj = design.model.result.objective_value;
-//    console.log('Exiting search p=',p,'ncode=',ncode,'obj=',obj);
+    displaySpinner(false);
+    console.log('Exiting search p=',p,'ncode=',ncode,'obj=',obj);
     return obj;
 }

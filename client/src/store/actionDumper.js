@@ -41,6 +41,8 @@ import {
 
     LOG_USAGE,
 
+    WORKER_TEST,
+
     MIN,
 } from './actionTypes';
 
@@ -133,6 +135,8 @@ export function actionDumper(action) {
         break;
     case LOG_USAGE:
         result = undefined; // Don't generate in test case
+        break;
+    case WORKER_TEST:
         break;
     default:
         break;
