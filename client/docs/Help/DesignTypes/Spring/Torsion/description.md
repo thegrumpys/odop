@@ -1,4 +1,5 @@
 # Torsion Spring Design Type
+![Torsion spring image](/docs/Help/DesignTypes/Spring/img/SpringTorsion.png "Torsion spring image") 
 
 The Torsion Spring design type is a full-featured mathematical model enabling 
 the engineering design of round wire helical coil torsion springs. 
@@ -10,15 +11,16 @@ provides important supplemental information.
 ___
 
 ### On this page:   
- - [Torsion spring moment-deflection diagram](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springFD_Diag)  
- - [Torsion spring moment-deflection point names](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springFD_Names)  
+ - [Torsion spring variable names on Moment-Deflection diagram](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springFD_Diag)  
+ - [Torsion spring Moment-Deflection point names](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springFD_Names)  
  - [Torsion spring dimensions](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springDims)  
  - [Independent Variable names](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springIV_Names)  
  - [Dependent Variable names](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springDV_Names)  
  - [Calculation Input names](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springCalcInputNames)  
  - [Values in reports](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springOtherValues)  
  - [Torsion spring end types](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springEndTypes)  
-<!---  - [Constraints unique to torsion springs](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springConstraints)  -->
+<!---  - [Constraints unique to torsion springs](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springConstraints)  --> 
+ - [Related topics](/docs/Help/DesignTypes/Spring/Torsion/description.html#relatedTopics)  
 
 &nbsp;
 ___
@@ -26,7 +28,7 @@ ___
 <a id="t_springFD_Diag"></a>  
 ___
 
-## Torsion spring moment-deflection diagram   
+## Torsion spring variable names on Moment-Deflection diagram   
 
                  |                / 
          M_2 ----|---------------/  
@@ -58,7 +60,7 @@ ___
 <a id="t_springFD_Names"></a>  
 ___
 
-## Torsion spring moment-deflection point names   
+## Torsion spring Moment-Deflection point names   
 
  The torsion spring moment-deflection points and associated names are:
  &nbsp;           | moment (torque) | deflection | length  | outside diameter | inside diameter 
@@ -243,14 +245,21 @@ This diagram may be helpful.
 
 ![Torsion Spring Names](/docs/Help/DesignTypes/Spring/Torsion/img/TorsionNames.png "Torsion Spring Names")  
 
-&nbsp;
+___
+
+<a id="relatedTopics"></a>  
+___
+
+## Related topics 
 
  - [Design Types](/docs/Help/DesignTypes)   
  - [Spring Design Topics](/docs/Help/SpringDesign)   
  - [Restrictions](/docs/About/Legal/Restrictions.html)   
  - [Help](/docs/Help)   
 
-&nbsp; 
+&nbsp;  
+
+&nbsp;  
 
 <!---
 While single line comments work as expected, 
