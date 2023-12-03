@@ -58,7 +58,7 @@ by definition of the term "deflection", there is a requirement of zero force at 
 For compression and torsion springs, 
 the zero force at zero deflection point has to fall on the line 
 describing the 
-[relationship between force and deflection](/docs/Help/img/ForceVsDeflection.png).
+[relationship between force and deflection](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png).
 
 ODOP:Spring allows the user to specify force and deflection at two load points. 
 For compression and torsion springs, 

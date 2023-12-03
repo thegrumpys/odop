@@ -56,7 +56,7 @@ Alert entry #C102
 The force (applied load) at operating point 1 (Force_1) is greater than the force at operating point 2 (Force_2). 
 
 Compression spring forces are ordered from the smallest (free condition) to Force_1 to Force_2 to the largest (Force_Solid). 
-The [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png) provides more detail on this point. 
+The [Compression Spring Force - Deflection Diagram](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png) provides more detail on this point. 
 
 Resolve this alert by reducing the value of Force_1 below the value of Force_2. 
 
@@ -119,7 +119,7 @@ It may also possible to use Search (menu **Action : Search** or Search button) t
 If not immediately successful, confirm that Wire_Dia is in Free status and try Search again. 
 
 See also: 
- - [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png)
+ - [Compression Spring Force - Deflection Diagram](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png)
  - [Compression Spring Constraints](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)   
  - [Errors](/docs/Help/errors.html)   
 
@@ -145,7 +145,7 @@ It may also possible to use Search (menu **Action : Search** or Search button) t
 If not immediately successful, confirm that Wire_Dia is in Free status and try Search again. 
 
 Compression spring lengths are ordered from the largest (L_Free) to L_1 to L_2 to the smallest (L_Solid). 
-The [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png) provides more detail on this point. 
+The [Compression Spring Force - Deflection Diagram](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png) provides more detail on this point. 
 
 See also: 
  - [Compression Spring Constraints](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)   
