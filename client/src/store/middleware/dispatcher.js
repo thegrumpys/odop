@@ -263,14 +263,17 @@ export const dispatcher = store => next => action => {
         let second = 4;
         let result = '';
         if (window.Worker) {
-          const myWorker = new Worker("../worker.js");
+          const myWorker = new Worker("../worker.js", { type: "module" });
           myWorker.onmessage = function(e) {
+            console.log('Message received from worker e=', e);
             result = e.data;
-            console.log('Message received from worker', result);
+            console.log('Message received from worker result=', result);
             displaySpinner(false);
           }
           displaySpinner(true);
-          myWorker.postMessage([first, second]);
+//          var local_design = JSON.stringify(store.getState()); // local non-React clone
+//          console.log('store=',store,'local_design=',local_design);
+          myWorker.postMessage(store.getState());
           console.log('Message posted to worker',first,second);
         } else {
           console.log('Your browser doesn\'t support web workers.');
