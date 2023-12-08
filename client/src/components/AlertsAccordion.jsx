@@ -155,11 +155,13 @@ class AlertsAccordion extends Component {
                                 </ButtonGroup>
                                 <OverlayTrigger placement="bottom" overlay={
                                     <Tooltip>
-                                        <p>ALERTS are error, warning, notice and informational messages produced in response to design changes.</p>
-                                        <p><b>Error alerts</b> (Err) indicate a value outside its validity range.<br/>
-                                        <b>Warning alerts</b> (Warn) are produced if the relationship between two values is incorrect.<br/>
-                                        <b>Notice alerts</b> (Notice) summarize violated minimum or maximum constraints.<br/>
-                                        <b>Informational alerts</b> (Info) highlight other general conditions.</p>
+                                        <p>ALERTS are messages produced in response to design changes.
+                                        <ul>
+	                                        <li>Error alerts <b>(Err)</b> indicate a value outside its validity range.</li>
+	                                        <li>Warning alerts <b>(Warn)</b> are produced if the relationship between two values is incorrect.</li>
+	                                        <li>Notice alerts <b>(Notice)</b> summarize violated minimum or maximum constraints.</li>
+	                                        <li>Informational alerts <b>(Info)</b> highlight other general conditions.</li>
+                                        </ul></p>
                                         <p>A red "badge" on each Alert button indicates the total number of alerts of this type.
                                         Close the Alerts panel by a second click on the same Alerts button.</p>
                                     </Tooltip>}>
@@ -169,9 +171,9 @@ class AlertsAccordion extends Component {
                                 <InputGroup.Checkbox aria-label="Checkbox for enabling Auto Fix" onChange={this.onAutoFixToggle} checked={this.props.enable_auto_fix}/>
                                 <OverlayTrigger placement="bottom" overlay={
                                     <Tooltip>
-                                        When checked, sets "Fixed" status of Independent Variables whose values are changed by user input.<br />
-                                        Applies only to future value changes. Does not affect any existing variables already in "Fixed" status.<br />
-                                        The behavior is the same as the File : Preferences enable_auto_fix value.
+                                        <p>When checked, sets "Fixed" status of Independent Variables whose values are changed by user input.</p>
+                                        <p>Applies only to future value changes. Does not affect any existing variables already in "Fixed" status.</p>
+                                        <p>The behavior is the same as the File : Preferences enable_auto_fix value.</p>
                                     </Tooltip>}>
                                     <span className="text-primary pl-2 pt-2"><i className="fas fa-info-circle"></i></span>
                                 </OverlayTrigger>
