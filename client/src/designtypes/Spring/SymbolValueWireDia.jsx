@@ -536,9 +536,9 @@ class SymbolValueWireDia extends Component {
                                                 <span>{feasibility_status}</span>
                                             </OverlayTrigger>
                                             {feasibility_status === 'NOT FEASIBLE' && this.props.search_completed ?
-                                                <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                                                    This design may be over-specified. 
-                                                    See Help topics on Feasibility, Design Situations, Spring Design Technique and Hints, Tricks & Tips.
+                                                <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
+                                                    <p>This design may be over-specified. 
+                                                    See Help topics on Feasibility, Design Situations, Spring Design Technique and Hints, Tricks & Tips.</p>
                                                     </Tooltip>}>
                                                     <span>&nbsp;<i className="fas fa-info-circle text-primary"></i></span>
                                                 </OverlayTrigger>
@@ -549,7 +549,7 @@ class SymbolValueWireDia extends Component {
                                     </tr>
                                     <tr>
                                         <td className="text-center" id="ObjectiveValue">
-                                            <OverlayTrigger placement="bottom" overlay={<Tooltip>
+                                            <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
 				                                    <p>Visual summary of feasibility status.</p>
 				                                    <p>Objective Value = {this.props.objective_value.toFixed(7)}<br />
 				                                    OBJMIN = {this.props.system_controls.objmin.toFixed(7)}</p>
@@ -666,7 +666,11 @@ class SymbolValueWireDia extends Component {
                                         <>
                                             <Button variant="primary" onClick={this.onSearchRequest}><b>Search</b> (solve)</Button>
                                             <OverlayTrigger placement="right" overlay={<Tooltip>
-                                                The Independent Variable {this.props.element.name} is Fixed. Search manipulates only the values of Free Independent Variables. Press this <img src="SearchButton.png" alt="SearchButton"/> button to alter the values, {free_variables} to locate a feasible solution (if available).</Tooltip>}>
+                                                <p>The Independent Variable {this.props.element.name} is Fixed. 
+                                                Search manipulates only the values of Free Independent Variables. 
+                                                Press this <img src="SearchButton.png" alt="SearchButton"/> button to alter 
+                                                the values, {free_variables} to locate a feasible solution (if available).</p>
+                                                </Tooltip>}>
                                                 <span><i className="fas fa-info-circle text-primary"></i></span>
                                             </OverlayTrigger>
                                         </>

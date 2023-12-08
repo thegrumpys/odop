@@ -154,9 +154,9 @@ class AlertsAccordion extends Component {
                                     </Accordion.Toggle>
                                 </ButtonGroup>
                                 <OverlayTrigger placement="bottom" overlay={
-                                    <Tooltip>
-                                        <p>ALERTS are messages produced in response to design changes.
-                                        <ul>
+                                    <Tooltip className="tooltip-lg">
+                                        <p>ALERTS are messages produced in response to design changes.</p>
+                                        <p>Severity:<ul>
 	                                        <li>Error alerts <b>(Err)</b> indicate a value outside its validity range.</li>
 	                                        <li>Warning alerts <b>(Warn)</b> are produced if the relationship between two values is incorrect.</li>
 	                                        <li>Notice alerts <b>(Notice)</b> summarize violated minimum or maximum constraints.</li>
@@ -170,7 +170,7 @@ class AlertsAccordion extends Component {
                                 <InputGroup.Text className="ml-auto">Auto Fix</InputGroup.Text>
                                 <InputGroup.Checkbox aria-label="Checkbox for enabling Auto Fix" onChange={this.onAutoFixToggle} checked={this.props.enable_auto_fix}/>
                                 <OverlayTrigger placement="bottom" overlay={
-                                    <Tooltip>
+                                    <Tooltip className="tooltip-lg">
                                         <p>When checked, sets "Fixed" status of Independent Variables whose values are changed by user input.</p>
                                         <p>Applies only to future value changes. Does not affect any existing variables already in "Fixed" status.</p>
                                         <p>The behavior is the same as the File : Preferences enable_auto_fix value.</p>
@@ -197,15 +197,17 @@ class AlertsAccordion extends Component {
                                                 </OverlayTrigger>
                                             </th>
                                             <th>
-                                                <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                                                        <b>Error (Err):</b><br/>
-                                                        value outside valid range<br/>
-                                                        <b>Warning (Warn):</b><br/>
-                                                        relationship between two values is incorrect or invalid<br/>
-                                                        <b>Notice (Notice):</b><br/>
-                                                        significantly violated constraints<br/>
-                                                        <b>Information (Info):</b><br/>
+                                                <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
+                                 <p> className="text-left">Severity<ul>
+                                                        <li>Error (Err):</li>
+                                                        value outside valid range
+                                                        <li>Warning (Warn):</li>
+                                                        relationship between two values is incorrect or invalid
+                                                        <li>Notice (Notice):</li>
+                                                        significantly violated constraints
+                                                        <li>Information (Info):</li>
                                                         insights about aspects of system operation
+                                                        </ul></p>
                                                     </Tooltip>}>
                                                     <span>Severity</span>
                                                 </OverlayTrigger>

@@ -224,8 +224,8 @@ class ResultTable extends Component {
                                 </OverlayTrigger>
                                 {feasibility_status === 'NOT FEASIBLE' && this.props.search_completed ?
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                                        This design may be over-specified. 
-                                        See Help topics on Feasibility, Design Situations, Spring Design Technique and Hints, Tricks & Tips.
+                                        <p>This design may be over-specified. 
+                                        See Help topics on Feasibility, Design Situations, Spring Design Technique and Hints, Tricks & Tips.</p>
                                         </Tooltip>}>
                                         <span>&nbsp;<i className="fas fa-info-circle text-primary"></i></span>
                                     </OverlayTrigger>
@@ -266,16 +266,17 @@ class ResultTable extends Component {
                                         <b className="pr-5">Action</b>
                                     </OverlayTrigger>
                                     <Button variant="primary" size="sm" onClick={this.onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>&nbsp;
-                                    <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                                        <p>Search alters the values of any free independent variables to find a design that 
+                                    <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
+                                        <p><b>Search</b> alters the values of any free independent variables to find a design that 
                                         satisfies all constraints and each fixed dependent 
                                         variable. A feasible result is a solution to the designer’s
                                         goals as expressed by constraints and fixed values.</p>
-                                        <p>Search stops when the first feasible solution is found. This happens
+                                        <p><b>Search</b> stops when the first feasible solution is found. This happens
                                         when the Objective Value ({this.props.objective_value.toFixed(7)}) falls below 
                                         OBJMIN ({this.props.system_controls.objmin.toFixed(7)}).</p>
-                                        <p>If Search cannot achieve a feasible result it converges to a compromise.
-                                        This compromise tries to minimize violations.</p></Tooltip>}>
+                                        <p>If <b>Search</b> cannot achieve a feasible result it converges to a compromise.
+                                        This compromise tries to minimize violations.</p
+                                        ></Tooltip>}>
                                         <span><i className="fas fa-info-circle text-primary"></i></span>
                                     </OverlayTrigger>
                                 </td>
@@ -285,12 +286,12 @@ class ResultTable extends Component {
                                         <b className="pr-5">Action</b>
                                     </OverlayTrigger>
                                     <Button variant="primary" size="sm" onClick={this.onSeekRequest} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
-                                    <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                                        If one feasible design exists there are likely many more available, each with varying 
-                                        advantages / disadvantages. Seek provides a “goal seeking” capability 
+                                    <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
+                                        <p>If one feasible design exists there are likely many more available, each with varying 
+                                        advantages and disadvantages. <b>Seek</b> provides a “goal seeking” capability 
                                         to optimize your design on the parameter that you specify. If starting with a default 
                                         design, additional constraints specific to your application are required to obtain 
-                                        meaningful results.
+                                        meaningful results.</p>
                                         </Tooltip>}>
                                         <span><i className="fas fa-info-circle text-primary"></i></span>
                                     </OverlayTrigger>
@@ -342,8 +343,8 @@ class ResultTable extends Component {
                         <Alert variant="warning">
                             <p>This design has numeric issues.
                             Some design variable values are causing the Objective Value to be infinite.</p>
-                            <p>Continuing Search may not result in an improvement.</p>
-                            <p>Canceling Search will allow you to examine the Alerts panel for invalid values and associated help.
+                            <p>Continuing <b>Search</b> may not result in an improvement.</p>
+                            <p>Canceling <b>Search</b> will allow you to examine the Alerts panel for invalid values and associated help.
                             Freeing one or more Independent Variables may result in an improvement.</p>
                         </Alert> 
                     </Modal.Body>
