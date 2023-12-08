@@ -287,11 +287,9 @@ class ResultTable extends Component {
                                     </OverlayTrigger>
                                     <Button variant="primary" size="sm" onClick={this.onSeekRequest} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
-                                        <p>If one feasible design exists there are likely many more available, each with varying 
-                                        advantages and disadvantages. <b>Seek</b> provides a “goal seeking” capability 
-                                        to optimize your design on the parameter that you specify. If starting with a default 
-                                        design, additional constraints specific to your application are required to obtain 
-                                        meaningful results.</p>
+                                        <p>If one feasible design exists there are likely many more available, each with varying advantages / disadvantages. 
+                                        Seek provides a “goal seeking” capability to optimize your design on the parameter that you specify.</p> 
+                                        <p>If starting with a default design, additional constraints specific to your application are required to obtain meaningful results.</p>
                                         </Tooltip>}>
                                         <span><i className="fas fa-info-circle text-primary"></i></span>
                                     </OverlayTrigger>
