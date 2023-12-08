@@ -155,13 +155,13 @@ class AlertsAccordion extends Component {
                                 </ButtonGroup>
                                 <OverlayTrigger placement="bottom" overlay={
                                     <Tooltip>
-                                        ALERTS are error, warning, notice and informational messages produced in response to design changes.
-                                        Error alerts indicate a value outside its validity range.
-                                        Warning alerts are produced if the relationship between two values is incorrect.
-                                        Notice alerts summarize violated minimum or maximum constraints.
-                                        Informational alerts highlight other general conditions.
-                                        A red "badge" on each Alert button indicates the total number of alerts of this type.
-                                        Close the Alerts panel by a second click on the same Alerts button.
+                                        <p>ALERTS are error, warning, notice and informational messages produced in response to design changes.</p>
+                                        <p><b>Error alerts</b> (Err) indicate a value outside its validity range.<br/>
+                                        <b>Warning alerts</b> (Warn) are produced if the relationship between two values is incorrect.<br/>
+                                        <b>Notice alerts</b> (Notice) summarize violated minimum or maximum constraints.<br/>
+                                        <b>Informational alerts</b> (Info) highlight other general conditions.</p>
+                                        <p>A red "badge" on each Alert button indicates the total number of alerts of this type.
+                                        Close the Alerts panel by a second click on the same Alerts button.</p>
                                     </Tooltip>}>
                                     <span className="text-primary pl-2 pt-2"><i className="fas fa-info-circle"></i></span>
                                 </OverlayTrigger>
