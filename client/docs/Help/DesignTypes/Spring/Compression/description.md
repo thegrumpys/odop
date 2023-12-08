@@ -12,6 +12,7 @@ ___
 
 ### On this page:   
  - [Compression spring variable names on Force-Deflection diagram](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springFD_Diag)  
+ - [Compression Spring Variable Names on image of physical spring](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springImage)  
  - [Compression spring Force-Deflection point names](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springFD_Names)  
  - [Independent Variable names](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springIV_Names)  
  - [Dependent Variable names](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springDV_Names)  
@@ -59,7 +60,17 @@ ___
  -->
 ![Compression Spring Variable Names on Force - Deflection Diagram](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png "Compression Spring Variable Names on Force - Deflection Diagram")  
 
-Full size image: [Compression Spring Variable Names on Force - Deflection Diagram](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png)  
+**Full size image:** [Compression Spring Variable Names on Force - Deflection Diagram](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png)  
+
+___
+
+<a id="c_springImage"></a>  
+___
+
+## Compression Spring Variable Names on image of physical spring
+
+![Compression Spring Variable Names on on image of physical spring](/docs/Help/DesignTypes/Spring/img/AnnotatedCSpring.png "Compression Spring Variable Names on on image of physical spring")  
+
 
 ___
 
