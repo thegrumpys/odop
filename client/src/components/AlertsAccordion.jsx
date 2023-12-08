@@ -157,10 +157,10 @@ class AlertsAccordion extends Component {
                                     <Tooltip className="tooltip-lg">
                                         <p>ALERTS are messages produced in response to design changes.</p>
                                         <p>Severity:<ul>
-	                                        <li><b>Err</b> - Error alerts indicate a value outside its validity range.</li>
-	                                        <li><b>Warn</b> - Warning alerts are produced if the relationship between two values is incorrect.</li>
-	                                        <li><b>Notice</b> - Notice alerts summarize violated minimum or maximum constraints.</li>
-	                                        <li><b>Info</b> - Informational alerts highlight other general conditions.</li>
+                                        <li><b>Err</b> - Error alerts indicate a value outside its validity range.</li>
+                                        <li><b>Warn</b> - Warning alerts are produced if the relationship between two values is incorrect.</li>
+                                        <li><b>Notice</b> - Notice alerts summarize violated minimum or maximum constraints.</li>
+                                        <li><b>Info</b> - Informational alerts highlight other general conditions.</li>
                                         </ul></p>
                                         <p>A red "badge" on each Alert button indicates the total number of alerts of this type.
                                         Close the Alerts panel by a second click on the same Alerts button.</p>
@@ -198,15 +198,11 @@ class AlertsAccordion extends Component {
                                             </th>
                                             <th>
                                                 <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
-				                                    <p className="text-left">Severity:<ul>
-                                                        <li>Error (Err):</li>
-                                                        value outside valid range
-                                                        <li>Warning (Warn):</li>
-                                                        relationship between two values is incorrect or invalid
-                                                        <li>Notice (Notice):</li>
-                                                        significantly violated constraints
-                                                        <li>Information (Info):</li>
-                                                        insights about aspects of system operation
+                                                        <p className="text-left">Severity:<ul>
+                                                        <li><b>Err</b> - Error alerts indicate a value outside its validity range.</li>
+                                                        <li><b>Warn</b> - Warning alerts are produced if the relationship between two values is incorrect.</li>
+                                                        <li><b>Notice</b> - Notice alerts summarize violated minimum or maximum constraints.</li>
+                                                        <li><b>Info</b> - Informational alerts highlight other general conditions.</li>
                                                         </ul></p>
                                                     </Tooltip>}>
                                                     <span>Severity</span>
