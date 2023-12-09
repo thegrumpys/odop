@@ -6,18 +6,18 @@ import { workerTest } from '../../store/actionCreators';
 class ActionWorkerTest extends Component {
 
     constructor(props) {
-        console.log('In ActionWorkerTest.constructor props=',props)
+        console.log('In ActionWorkerTest.constructor: props=',props)
         super(props);
         this.onWorkerTestRequest = this.onWorkerTestRequest.bind(this);
     }
 
     onWorkerTestRequest(event) {
-        console.log('In ActionWorkerTest.onWorkerTestRequest this=',this,'event=',event);
+        console.log('In ActionWorkerTest.onWorkerTestRequest: this=',this,'event=',event);
         this.props.workerTest();
     }
 
     render() {
-        console.log('In ActionWorkerTest.render this=',this);
+        console.log('In ActionWorkerTest.render: this=',this);
         return (
             <>
                 <NavDropdown.Item onClick={this.onWorkerTestRequest}>

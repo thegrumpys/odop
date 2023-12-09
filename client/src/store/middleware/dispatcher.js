@@ -35,7 +35,7 @@ import { updateObjectiveValue } from './updateObjectiveValue';
 import { invokeCheck } from './invokeCheck';
 import { resetCatalogSelection } from './resetCatalogSelection';
 import { changeSymbolValue, setSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
-         restoreOutputSymbolConstraints, changeResultTerminationCondition } from '../actionCreators';
+         restoreOutputSymbolConstraints, changeResultTerminationCondition, load } from '../actionCreators';
 import { displaySpinner } from '../../components/Spinner';
 
 export const dispatcher = store => next => action => {
@@ -258,26 +258,27 @@ export const dispatcher = store => next => action => {
         break;
 
     case WORKER_TEST:
-        console.log('In dispatcher worker test');
-        let first = 3;
-        let second = 4;
-        let result = '';
+        console.log('In dispatcher: start worker test');
         if (window.Worker) {
-          const myWorker = new Worker("../worker.js", { type: "module" });
+          const myWorker = new Worker("worker.js", { type: "module" });
+          console.log('In dispatcher: myWorker=',myWorker);
+          myWorker.onerror = function(err) {
+            console.log('In worker.onerror err=',err);
+          }
           myWorker.onmessage = function(e) {
-            console.log('Message received from worker e=', e);
-            result = e.data;
-            console.log('Message received from worker result=', result);
+            console.log('In dispatcher: Message received from worker e=', e);
+            store.dispatch(load(e.data));
             displaySpinner(false);
           }
           displaySpinner(true);
 //          var local_design = JSON.stringify(store.getState()); // local non-React clone
 //          console.log('store=',store,'local_design=',local_design);
+          console.log('In dispatcher: Message posting to worker');
           myWorker.postMessage(store.getState());
-          console.log('Message posted to worker',first,second);
         } else {
-          console.log('Your browser doesn\'t support web workers.');
+          console.log('In dispatcher: Your browser doesn\'t support web workers.');
         }
+        console.log('In dispatcher: end worker test');
         break;
 
     default:
