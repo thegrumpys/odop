@@ -223,7 +223,7 @@ class ResultTable extends Component {
                                     <span>{feasibility_status}</span>
                                 </OverlayTrigger>
                                 {feasibility_status === 'NOT FEASIBLE' && this.props.search_completed ?
-                                    <OverlayTrigger placement="bottom" overlay={<Tooltip>
+                                    <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
                                         <p>This design may be over-specified. 
                                         See Help topics on Feasibility, Design Situations, Spring Design Technique and Hints, Tricks & Tips.</p>
                                         </Tooltip>}>
