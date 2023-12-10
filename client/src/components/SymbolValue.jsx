@@ -522,7 +522,7 @@ class SymbolValue extends Component {
                                     :
                                         <>
                                             <Button variant="primary" onClick={this.onSearchRequest}><b>Search</b> (solve)</Button>
-                                            <OverlayTrigger placement="right" overlay={<Tooltip className="tooltip-lg">
+                                            <OverlayTrigger placement="top" overlay={<Tooltip className="tooltip-lg">
                                                 <p>The Independent Variable {this.props.element.name} is Fixed. 
                                                 Search manipulates only the values of Free Independent Variables. 
                                                 Press this <img src="SearchButton.png" alt="SearchButton"/> button to alter 
