@@ -1,4 +1,5 @@
 # Compression Spring Design Type
+![Compression spring image](/docs/Help/DesignTypes/Spring/img/SpringCompression_.png "Compression spring image") 
 
 The Compression Spring design type is a full-featured mathematical model enabling 
 the engineering design of round wire helical coil compression springs. 
@@ -10,8 +11,9 @@ provides important supplemental information.
 ___
 
 ### On this page:   
- - [Compression spring force-deflection diagram](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springFD_Diag)  
- - [Compression spring force-deflection point names](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springFD_Names)  
+ - [Compression spring variable names on Force-Deflection diagram](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springFD_Diag)  
+ - [Compression Spring Variable Names on image of physical spring](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springImage)  
+ - [Compression spring Force-Deflection point names](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springFD_Names)  
  - [Independent Variable names](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springIV_Names)  
  - [Dependent Variable names](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springDV_Names)  
  - [Calculation Input names](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springCalcInputNames)  
@@ -21,6 +23,8 @@ ___
  - [Dead Coils](/docs/Help/DesignTypes/Spring/Compression/description.html#deadCoils)  
  - [User specified end type examples](/docs/Help/DesignTypes/Spring/Compression/description.html#userEndTypes)  
  - [Buckling](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springBuckling)  
+ - [Shot Peen](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springShotPeen)  
+ - [Related topics](/docs/Help/DesignTypes/Spring/Compression/description.html#relatedTopics)  
 
 &nbsp;
 ___
@@ -28,8 +32,8 @@ ___
 <a id="c_springFD_Diag"></a>  
 ___
 
-## Compression spring force-deflection diagram    
-
+## Compression spring variable names on Force-Deflection diagram  
+<!---
     Force_Solid -|---------------/.
                  |              / .
      Force_2 ----|-------------/  .
@@ -42,7 +46,7 @@ ___
                  |      /      :  .
     Force_1 -----|-----/       :  .
                  |    /:       :  .
-           C     |   / :<----->:------- L_Stroke
+           C     |   / :<----- >:------- L_Stroke
                  |  /  :       :  .
            E     | /   :       :  .
                  |/____:_______:__._______
@@ -53,16 +57,29 @@ ___
                  D E F L E C T I O N
 
 &nbsp;   
+ -->
+![Compression Spring Variable Names on Force - Deflection Diagram](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png "Compression Spring Variable Names on Force - Deflection Diagram")  
 
-See also: [Compression Spring Force - Deflection Diagram](/docs/Help/img/ForceVsDeflection.png) 
+**Full size image:** [Compression Spring Variable Names on Force - Deflection Diagram](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png)  
+
+___
+
+<a id="c_springImage"></a>  
+___
+
+## Compression Spring Variable Names on image of physical spring
+
+![Compression Spring Variable Names on on image of physical spring](/docs/Help/DesignTypes/Spring/img/AnnotatedCSpring.png "Compression Spring Variable Names on on image of physical spring")  
+
+
 ___
 
 <a id="c_springFD_Names"></a>  
 ___
 
-## Compression spring force-deflection point names 
+## Compression spring Force-Deflection point names 
 
- The compression spring force-deflection points and associated names are: 
+ The compression spring Force-Deflection points and associated names are: 
  &nbsp;           | length  | force       | outside diameter | inside diameter | stress       | factor of safety 
  ---              | ---     | ---         | ---              |  ---            | ---          |  ---             
 **free:**         | L_Free  |             | OD_Free          | ID_Free         |              |                  
@@ -312,7 +329,7 @@ To represent a spring with ten active coils, two dead coils and closed ends:
     CHANGE  Inactive_Coils   4.0
     CHANGE  Add_Coils@Solid  1.0
 
-&nbsp; 
+&nbsp;  
 
 ___
 
@@ -346,10 +363,43 @@ More precise treatments of this subject are available in the resources listed
 in the [Spring Design References](/docs/Help/SpringDesign/references.html) section 
 of the documentation. 
 
-&nbsp; 
+___
+
+<a id="c_springShotPeen"></a>  
+___
+
+## Shot Peen 
+
+Coil springs may be shot peened in order to introduce favorable (compressive)
+stress at the surface. 
+This improves cycle life at the cost of a secondary operation during manufacturing.  
+
+The Calculation Input **Life_Category** allows the user to specify that the 
+spring will be shot peened.  
+
+Selecting a non-default Life_Category that describes a shot peened spring in a 
+cyclic application works with the built-in materials table to select a value for 
+Stress_Lim_Endur.
+As described in [Cycle Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife), 
+to get the desired impact on the final spring design, 
+it is important to also enable the constraint on **FS_CycleLife**.
+
+See also: 
+ - [Cycle Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
+ - [Wikipedia shot peening](https://en.wikipedia.org/wiki/Shot_peening)  
+
+___
+
+<a id="relatedTopics"></a>  
+___
+
+## Related topics 
 
  - [Design Types](/docs/Help/DesignTypes)   
  - [Spring Design Topics](/docs/Help/SpringDesign)   
  - [Restrictions](/docs/About/Legal/Restrictions.html)   
  - [Help](/docs/Help)   
 
+&nbsp;  
+  
+&nbsp;  

@@ -538,7 +538,7 @@ ___
 ___
 
 ## SPRING DESIGN VARIABLE NAMES 
-[Variable names illustrated on compression spring Force-Deflection diagram:](/docs/Help/img/ForceVsDeflection.png) 
+[Variable names illustrated on compression spring Force-Deflection diagram:](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png) 
 
 See also: 
  - [Terms common to all spring types](SpringDesign/spring_oview.html) 

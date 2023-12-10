@@ -1,4 +1,5 @@
 # Extension Spring Design Type 
+![Extension spring image](/docs/Help/DesignTypes/Spring/img/SpringExtension_.png "Extension spring image") 
 
 The Extension Spring design type is a full-featured mathematical model enabling 
 the engineering design of round wire helical coil extension springs. 
@@ -10,8 +11,8 @@ provides important supplemental information.
 ___
 
 ### On this page: 
- - [Extension spring force-deflection diagram](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springFD_Diag)  
- - [Extension spring force-deflection point names](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springFD_Names)  
+ - [Extension spring variable names on Force-Deflection diagram](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springFD_Diag)  
+ - [Extension spring Force-Deflection point names](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springFD_Names)  
  - [Extension spring dimensions](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springDims)  
  - [Independent Variable names](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springIV_Names)  
  - [Dependent Variable names](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springDV_Names)  
@@ -22,6 +23,7 @@ ___
  - [Hook Stress](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springHookStress)  
  - [Extension spring cycle life](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springCycleLife)  
  - [Extension spring end types](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springEndTypes)  
+ - [Related topics](/docs/Help/DesignTypes/Spring/Extension/description.html#relatedTopics)  
 
 &nbsp; 
 ___
@@ -29,7 +31,7 @@ ___
 <a id="e_springFD_Diag"></a>  
 ___
 
-## Extension spring force-deflection diagram 
+## Extension spring variable names on Force-Deflection diagram 
                      
     
     
@@ -62,7 +64,7 @@ ___
 <a id="e_springFD_Names"></a>  
 ___
 
-## Extension spring force-deflection point names 
+## Extension spring Force-Deflection point names 
 
  The force-deflection points and associated names are:   
  &nbsp;           | length  | force       | outside diameter | inside diameter | stress       | factor of safety 
@@ -421,12 +423,19 @@ More precise treatments of extension spring end types are available in the resou
 listed in the [Spring Design References](/docs/Help/SpringDesign/references.html) section 
 of the documentation. 
 
-&nbsp; 
+___
+
+<a id="relatedTopics"></a>  
+___
+
+## Related topics 
 
  - [Design Types](/docs/Help/DesignTypes)   
  - [Spring Design Topics](/docs/Help/SpringDesign)   
  - [Restrictions](/docs/About/Legal/Restrictions.html)   
  - [Help](/docs/Help)   
+
+&nbsp;  
 
 <!---
 While single line comments work as expected, 
