@@ -154,24 +154,26 @@ class AlertsAccordion extends Component {
                                     </Accordion.Toggle>
                                 </ButtonGroup>
                                 <OverlayTrigger placement="bottom" overlay={
-                                    <Tooltip>
-                                        ALERTS are error, warning, notice and informational messages produced in response to design changes.
-                                        Error alerts indicate a value outside its validity range.
-                                        Warning alerts are produced if the relationship between two values is incorrect.
-                                        Notice alerts summarize violated minimum or maximum constraints.
-                                        Informational alerts highlight other general conditions.
-                                        A red "badge" on each Alert button indicates the total number of alerts of this type.
-                                        Close the Alerts panel by a second click on the same Alerts button.
+                                    <Tooltip className="tooltip-lg">
+                                        <p>ALERTS are messages produced in response to design changes.</p>
+                                        <p>Severity:<ul>
+                                        <li><b>Err</b> - Error alerts indicate a value outside its validity range.</li>
+                                        <li><b>Warn</b> - Warning alerts are produced if the relationship between two values is incorrect.</li>
+                                        <li><b>Notice</b> - Notice alerts summarize violated minimum or maximum constraints.</li>
+                                        <li><b>Info</b> - Informational alerts highlight other general conditions.</li>
+                                        </ul></p>
+                                        <p>A red "badge" on each Alert button indicates the total number of alerts of this type.
+                                        Close the Alerts panel by a second click on the same Alerts button.</p>
                                     </Tooltip>}>
                                     <span className="text-primary pl-2 pt-2"><i className="fas fa-info-circle"></i></span>
                                 </OverlayTrigger>
                                 <InputGroup.Text className="ml-auto">Auto Fix</InputGroup.Text>
                                 <InputGroup.Checkbox aria-label="Checkbox for enabling Auto Fix" onChange={this.onAutoFixToggle} checked={this.props.enable_auto_fix}/>
                                 <OverlayTrigger placement="bottom" overlay={
-                                    <Tooltip>
-                                        When checked, sets "Fixed" status of Independent Variables whose values are changed by user input.<br />
-                                        Applies only to future value changes. Does not affect any existing variables already in "Fixed" status.<br />
-                                        The behavior is the same as the File : Preferences enable_auto_fix value.
+                                    <Tooltip className="tooltip-lg">
+                                        <p>When checked, sets "Fixed" status of Independent Variables whose values are changed by user input.</p>
+                                        <p>Applies only to future value changes. Does not affect any existing variables already in "Fixed" status.</p>
+                                        <p>The behavior is the same as the File : Preferences enable_auto_fix value.</p>
                                     </Tooltip>}>
                                     <span className="text-primary pl-2 pt-2"><i className="fas fa-info-circle"></i></span>
                                 </OverlayTrigger>
@@ -195,15 +197,13 @@ class AlertsAccordion extends Component {
                                                 </OverlayTrigger>
                                             </th>
                                             <th>
-                                                <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                                                        <b>Error (Err):</b><br/>
-                                                        value outside valid range<br/>
-                                                        <b>Warning (Warn):</b><br/>
-                                                        relationship between two values is incorrect or invalid<br/>
-                                                        <b>Notice (Notice):</b><br/>
-                                                        significantly violated constraints<br/>
-                                                        <b>Information (Info):</b><br/>
-                                                        insights about aspects of system operation
+                                                <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
+                                                        <p className="text-left">Severity:<ul>
+                                                        <li><b>Err</b> - Error alerts indicate a value outside its validity range.</li>
+                                                        <li><b>Warn</b> - Warning alerts are produced if the relationship between two values is incorrect.</li>
+                                                        <li><b>Notice</b> - Notice alerts summarize violated minimum or maximum constraints.</li>
+                                                        <li><b>Info</b> - Informational alerts highlight other general conditions.</li>
+                                                        </ul></p>
                                                     </Tooltip>}>
                                                     <span>Severity</span>
                                                 </OverlayTrigger>
