@@ -84,7 +84,7 @@ The software calculates the dependent variables Stress_Init_Lo and Stress_Init_H
 These values are then applied as MIN and MAX constraints on Stress_Initial. 
 
 Also, if the Stress_Init_Lo and Stress_Init_Hi constraints are in place, 
-the Search feature will work to generate designs that fall within the preferred range of Initial_Tension.
+the Search feature works to generate designs that fall within the preferred range of Initial_Tension.
 
 Before finalizing a design that has this alert outstanding, 
 check with the spring manufacturer regarding capabilities and costs. 
@@ -115,7 +115,7 @@ The software calculates the dependent variables Stress_Init_Lo and Stress_Init_H
 These values are then applied as MIN and MAX constraints on Stress_Initial. 
 
 Also, if the Stress_Init_Lo and Stress_Init_Hi constraints are in place, 
-the Search feature will work to generate designs that fall within the preferred range of Initial_Tension.
+the Search feature works to generate designs that fall within the preferred range of Initial_Tension. 
 
 Before finalizing a design that has this alert outstanding, 
 check with the spring manufacturer regarding capabilities and costs. 
@@ -151,7 +151,7 @@ Increase  | &nbsp; | Decrease
 Alternatively, use Advanced View to enable the minimum constraint on FS_Hook with a constraint level of 1.0 or greater, 
 enable the maximum constraint on Stress_Hook (defaults to the FDCL of Stress_Lim_Bend) 
 and then use the Search feature (menu Action : Search or Search button). 
-It will likely be necessary to clear some or most seemingly unrelated constraint violations in order to achieve 
+It may be necessary to clear some or most seemingly unrelated constraint violations in order to achieve 
 no violation on the FS_Hook constraint (and thus achieve a design considered to be feasible). 
 
 See also:
@@ -235,10 +235,18 @@ Helical coil compression, extension and torsion springs that have the properties
 follow Hooke's Law in that they provide a nominally linear relationship between force and deflection. 
 However, in the real world there are limitations. 
 
-When extension springs are extended less than roughly 20% of safe deflection 
-various factors such as deviation from perfect coil straightness (cylindrical form) and 
-any lack of perfect form in the ends will become a factor in the real (as opposed to theoretical) force-deflection relationship. 
-Thus when operating within the first 20% of the available deflection expect forces to be somewhat lower (or deflections to be somewhat greater)
+When extension springs are extended less than roughly 20% of safe deflection, 
+various factors such as 
+geometric asymmetry,  
+deviation from perfect coil straightness (cylindrical form) and 
+deflection in the ends (hooks, loops) 
+become a factor in the real (as opposed to theoretical) force-deflection relationship. 
+Significantly, wound coil springs (as opposed to double-start machined springs) are not symmetric at the ends. 
+Because the load is is transmitted at an offset (Mean_Dia/2) from the centerline of the spring,
+a moment is generated contributing to coil to coil contact and the real force-deflection relationship.
+
+Thus, when operating an extension spring within the first 20% of the available deflection, 
+expect forces to be somewhat lower (or deflections to be somewhat greater)
 than the linear behavior predicted by the equations.  
 
  See also: 

@@ -166,7 +166,7 @@ it may yield or "take a set" as in not return to its original free length.
 
 The current release of the ODOP:Spring app does not support the design of compression springs intended for "pre-set". 
 Springs intended for pre-set are wound with a free length that is somewhat longer than intended. 
-A secondary operation deflects the spring into a solid condition where it will yield, taking a permanent "set", 
+A secondary operation deflects the spring into a solid condition where it yields, taking a permanent "set", 
 just enough to achieve the desired final free length. 
 This operation creates favorable stresses within the cross-section of the spring wire, 
 improving performance of the spring at the cost of the pre-set operation. 
@@ -237,18 +237,24 @@ Alert entry #C108
 ## %_Avail_Deflect @ 2 > 80% 
 Coil to coil contact may cause inaccuracy in operating point 2. 
 
-**Even if the application requires that this design operate outside the range of 20% to 80% of
-available deflection, the inspection (acceptance) criteria should be specified within this range.** 
+**Even if the application requires that this design operate outside the range of 20% to 80% of available deflection, 
+the manufacturing inspection (acceptance) criteria should be specified within this range.** 
 
 Helical coil compression, extension and torsion springs that have the properties of uniform pitch and cylindrical shape 
 follow Hooke's Law in that they provide a nominally linear relationship between force and deflection. 
 However, in the real world there are limitations. 
 
 When compression springs are compressed beyond roughly 80% of available deflection, 
-geometric imperfections such as a lack uniformity in coil pitch, minor deviation from cylindrical shape 
-or failure of the ends to be precisely perpendicular to the coil axis 
+geometric asymmetry and imperfections such as 
+a lack uniformity in coil pitch, 
+minor deviation from cylindrical shape or 
+failure of the ends to be precisely perpendicular to the coil axis 
 become a factor in the real (as opposed to theoretical) force-deflection relationship. 
-Beyond the 80% point, coil to coil contact will produce an increase in spring rate that continues to increase 
+Significantly, wound coil springs (as opposed to double-start machined springs) are not symmetric at the ends. 
+Because the load is is transmitted at an offset (Mean_Dia/2) from the centerline of the spring,
+a moment is generated contributing to coil to coil contact and the real force-deflection relationship.
+
+Beyond the 80% point, coil to coil contact produces an increase in spring rate that continues to increase 
 with additional deflection until the solid condition is reached. 
 Thus, when operating beyond 80% of the available deflection, 
 expect forces to be somewhat higher (or deflections to be somewhat lower) 
@@ -267,20 +273,27 @@ Alert entry #C109
 ## %_Avail_Deflect @ 1 < 20% 
 End effects may cause inaccuracy in operating point 1.  
 
-**Even if the application requires that this design operate outside the range of 20% to 80% of
-available deflection, the inspection (acceptance) criteria should be specified within this range.** 
+**Even if the application requires that this design operate outside the range of 20% to 80% of available deflection, 
+the manufacturing inspection (acceptance) criteria should be specified within this range.** 
 
 Helical coil compression, extension and torsion springs that have the properties of uniform pitch and cylindrical shape 
 follow Hooke's Law in that they provide a nominally linear relationship between force and deflection. 
 However, in the real world there are limitations. 
 
-When compression springs are compressed less than roughly 20% of available deflection 
-geometric imperfections such as minor deviation from cylindrical shape 
-or failure of the ends to be precisely perpendicular to the coil axis 
+When compression springs are compressed less than roughly 20% of available deflection, 
+geometric asymmetry and imperfections such as 
+a lack uniformity in coil pitch, 
+minor deviation from cylindrical shape or 
+failure of the ends to be precisely perpendicular to the coil axis 
 become a factor in the real (as opposed to theoretical) force-deflection relationship. 
-For example, ends that are ground imperfectly perpendicular with the coil axis will decrease the apparent spring rate 
+Significantly, wound coil springs (as opposed to double-start machined springs) are not symmetric at the ends. 
+Because the load is is transmitted at an offset (Mean_Dia/2) from the centerline of the spring,
+a moment is generated contributing to coil to coil contact and the real force-deflection relationship.
+
+For example, ends that are ground imperfectly perpendicular with the coil axis decrease the apparent spring rate 
 in a way that that diminishes with additional deflection until the ends are fully seated. 
-Thus, when operating within the first 20% of the available deflection expect forces to be somewhat lower (or deflections to be somewhat greater)
+Thus, when operating within the first 20% of the available deflection, 
+expect forces to be somewhat lower (or deflections to be somewhat greater)
 than the linear behavior predicted by the equations.  
 
  See also: 
@@ -301,7 +314,7 @@ Friction may reduce the spring force.
 Cyclic applications may need lubrication. 
 
 The spring end conditions influence buckling tendency. 
-Freedom to rotate on one or both ends will increase the tendency to buckle.
+Freedom to rotate on one or both ends increases the tendency to buckle.
 Fixed ends reduce the tendency to buckle.
 
 Increase OD_Free or reduce L_Free in order to reduce the tendency to buckle. 
