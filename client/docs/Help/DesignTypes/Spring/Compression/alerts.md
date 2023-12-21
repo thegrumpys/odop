@@ -56,14 +56,15 @@ Alert entry #C102
 The force (applied load) at operating point 1 (Force_1) is greater than the force at operating point 2 (Force_2). 
 
 Compression spring forces are ordered from the smallest (free condition) to Force_1 to Force_2 to the largest (Force_Solid). 
-The [Compression Spring Force - Deflection Diagram](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png) provides more detail on this point. 
+The [Compression Spring Force - Deflection Diagram](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png) 
+provides more detail on this point. 
 
 Resolve this alert by reducing the value of Force_1 below the value of Force_2. 
 
 It should also be possible to 
 confirm that Force_1 is in Free status, 
 confirm that the constraint L_Stroke MIN is enabled with a greater-than-zero constraint level 
-and then use the Search feature (menu **Action : Search** or Search button). 
+and then use the Search feature (Search button or **Action : Search** menu item). 
 
 See also: 
  - [Compression Spring Constraints](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)   
@@ -88,7 +89,7 @@ Wire_Dia | &nbsp; | Force_2
  
 Depending on the Fixes and constraints on lengths and deflections associated with the second operating point, 
 it should also be possible to confirm that Force_2 is in Free status, 
-and then use the Search feature (menu **Action : Search** or Search button). 
+and then use the Search feature (Search button or **Action : Search** menu item). 
 
 <sup>*</sup> There are circumstances where running a search can produce this alert.
 Specifically, if all the physical dimensions (OD_Free, Wire_Dia, L_Free & Coils_T) of a 
@@ -241,7 +242,7 @@ Coil to coil contact may cause inaccuracy in operating point 2.
 the manufacturing inspection (acceptance) criteria should be specified within this range.** 
 
 Helical coil compression, extension and torsion springs that have the properties of uniform pitch and cylindrical shape 
-follow Hooke's Law in that they provide a nominally linear relationship between force and deflection. 
+follow Hooke's Law which provides a nominally linear relationship between force and deflection. 
 However, in the real world there are limitations. 
 
 When compression springs are compressed beyond roughly 80% of available deflection, 
@@ -277,7 +278,7 @@ End effects may cause inaccuracy in operating point 1.
 the manufacturing inspection (acceptance) criteria should be specified within this range.** 
 
 Helical coil compression, extension and torsion springs that have the properties of uniform pitch and cylindrical shape 
-follow Hooke's Law in that they provide a nominally linear relationship between force and deflection. 
+follow Hooke's Law which provides a nominally linear relationship between force and deflection. 
 However, in the real world there are limitations. 
 
 When compression springs are compressed less than roughly 20% of available deflection, 
