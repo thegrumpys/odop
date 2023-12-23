@@ -55,16 +55,16 @@ Alert entry #C102
 ## Force_1 > Force_2 
 The force (applied load) at operating point 1 (Force_1) is greater than the force at operating point 2 (Force_2). 
 
-Compression spring forces are ordered from the smallest (free condition) to Force_1 to Force_2 to the largest (Force_Solid). 
-The [Compression Spring Force - Deflection Diagram](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png) 
-provides more detail on this point. 
-
 Resolve this alert by reducing the value of Force_1 below the value of Force_2. 
 
 It should also be possible to 
 confirm that Force_1 is in Free status, 
 confirm that the constraint L_Stroke MIN is enabled with a greater-than-zero constraint level 
 and then use the Search feature (Search button or **Action : Search** menu item). 
+
+Compression spring forces are ordered from the smallest (free condition) to Force_1 to Force_2 to the largest (Force_Solid). 
+The [Compression Spring Force - Deflection Diagram](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png) 
+provides more detail on this point. 
 
 See also: 
  - [Compression Spring Constraints](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)   
@@ -98,7 +98,7 @@ in order to attempt to satisfy the default maximum constraint on factor of safet
 the search process may select a value of Force_2 that is larger than the force required to achieve 
 the solid condition and thus trigger this alert. 
 If a heavy, low stress design is truly desired, this alert can be resolved by increasing the FS_2 MAX constraint level
-and then running search again.
+and then running Search again.
 
 ___
 
@@ -165,13 +165,6 @@ This design may be over-stressed if deflected to solid.
 If deflected to solid, 
 it may yield or "take a set" as in not return to its original free length. 
 
-The current release of the ODOP:Spring app does not support the design of compression springs intended for "pre-set". 
-Springs intended for pre-set are wound with a free length that is somewhat longer than intended. 
-A secondary operation deflects the spring into a solid condition where it yields, taking a permanent "set", 
-just enough to achieve the desired final free length. 
-This operation creates favorable stresses within the cross-section of the spring wire, 
-improving performance of the spring at the cost of the pre-set operation. 
-
 In order to resolve this alert, 
 where practical, change these values in the direction specified. 
 Increase  | &nbsp; | Decrease  
@@ -184,6 +177,13 @@ In order to design a spring that is not over-stressed when deflected to the soli
  - confirm that the lower constraint on factor of safety in the solid condition (FS_Solid MIN) is enabled (it is enabled by default) 
  - set that FS_Solid MIN constraint to a value slightly above 1.0 (perhaps 1.1; the default is 1.0) 
  - run the Search feature (menu **Action : Search** or Search button). 
+
+The current release of the ODOP:Spring app does not support the design of compression springs intended for "pre-set". 
+Springs intended for pre-set are wound with a free length that is somewhat longer than the intended final free length. 
+A secondary operation deflects the spring into a solid condition where it yields, taking a permanent "set" of  
+just enough to achieve the desired final free length. 
+This operation creates favorable stresses within the cross-section of the spring wire, 
+improving performance of the spring at the cost of the pre-set operation. 
 
 See also: 
  - [Factor of Safety](/docs/Help/terminology.html#FactorOfSafety)  
@@ -310,6 +310,8 @@ Alert entry #C110
 ## Buckling concern 
 A spring of these dimensions and loading has a tendency to buckle. 
 
+Increase OD_Free or reduce L_Free in order to reduce the tendency to buckle. 
+
 Operation in a hole (tube) or over a post (rod) may resist the buckling. 
 Friction may reduce the spring force. 
 Cyclic applications may need lubrication. 
@@ -318,12 +320,13 @@ The spring end conditions influence buckling tendency.
 Freedom to rotate on one or both ends increases the tendency to buckle.
 Fixed ends reduce the tendency to buckle.
 
-Increase OD_Free or reduce L_Free in order to reduce the tendency to buckle. 
-
 In order to design a spring that does not have a tendency to buckle, 
 enable the Slenderness MAX constraint, 
 set that MAX constraint to a value close to 4.0 
-and run the Search feature (menu **Action : Search** or Search button). 
+and run the Search feature (Search button or **Action : Search** menu item). 
+
+See also:
+ - [Wikipedia - buckling](https://en.wikipedia.org/wiki/Buckling)  
 
 ___
 

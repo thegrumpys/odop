@@ -137,12 +137,12 @@ Alert entry #S55
 A more restrictive Life_Category has been selected but 
 the corresponding constraint on FS_CycleLife is not enabled. 
 
+Enable the FS_CycleLife MIN constraint to utilize the selected Life_Category. 
+
 Selecting a Life_Category gets a corresponding value of %_Tensile_Endur from the internal material table. 
 This value is then used to calculate Stress_Lim_Endur. 
 The MIN constraint on FS_CycleLife must be enabled in order to have Search achieve designs 
 that do not exceed the designated Stress_Lim_Endur. 
-
-Suggest enabling the FS_CycleLife MIN constraint. 
 
 See also: 
  - [Cycle Life section of Spring Design Overview](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
@@ -265,11 +265,6 @@ This means that the current set of inputs have resulted in a stress at point 2
 For this design, the wire is at or perhaps even beyond its yield point. 
 In this situation, the direct cycle life calculation (Cycle_Life variable - Modified Goodman calculation) is not meaningful. 
 
-**Note:**   
-In this case of unrealistically high stress at point 2, 
-if Cycle_Life is Fixed or has either MIN or MAX constraints enabled, 
-Search is not likely to find a solution that is judged to be FEASIBLE. 
-
 **Recommendations:**   
 Change inputs such that stress at working point 2 (maximum operating load) is reduced. 
 
@@ -280,6 +275,11 @@ Wire_Dia | &nbsp; | Force_2 or M_2
 
 Perhaps the best approach is to to confirm that one or more of these variables is in Free status 
 and then run Search. 
+
+**Note:**   
+In this case of unrealistically high stress at point 2, 
+if Cycle_Life is Fixed or has either MIN or MAX constraints enabled, 
+Search is not likely to find a solution that is judged to be FEASIBLE. 
 
 See also: 
  - [Cycle Life section of Spring Design Overview](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
