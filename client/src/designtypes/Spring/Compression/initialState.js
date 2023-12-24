@@ -13,7 +13,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Outside diameter in free (no load) condition",
+            "tooltip": "<Table><tr><td>Outside diameter in free (no load) condition</td><td width=\"15%\"><Image fluid src=\"http://localhost:3000/designtypes/Spring/Compression/favicon.ico\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
