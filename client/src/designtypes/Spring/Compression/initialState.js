@@ -13,7 +13,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "<Table><tr><td>Outside diameter in free (no load) condition</td><td width=\"15%\"><Image fluid src=\"http://localhost:3000/designtypes/Spring/Compression/favicon.ico\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Outside diameter in free (no load) condition</td></tr><tr><td><Image fluid src=\"http://localhost:3000/designtypes/Spring/Compression/Tooltip_C_OD_Arrows64.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -77,7 +77,7 @@ export const initialState = {
             "validmin": -Number.MAX_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.01,
-            "tooltip": "Minimum operating load (Length L_1)",
+            "tooltip": "<Table><tr><td>Minimum operating load (Length L_1)</td></tr><tr><td><Image fluid src=\"http://localhost:3000/designtypes/Spring/Compression/Tooltip_C_Force_1_160.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
