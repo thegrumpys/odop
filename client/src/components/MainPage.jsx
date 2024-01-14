@@ -47,6 +47,8 @@ import { withOktaAuth } from '@okta/okta-react';
 import { changeUser, changeView, deleteAutoSave } from '../store/actionCreators';
 import config from '../config';
 import ResultTable from './ResultTable';
+import DesignTable from "./DesignTable"
+import Calculator from "../designtypes/Spring/Compression/Calculator"
 
 class MainPage extends Component {
     
@@ -121,94 +123,8 @@ class MainPage extends Component {
         const logOnOff = this.props.authState.isAuthenticated ? <SignOut /> : <SignIn />;
         return (
             <>
-                <Navbar variant="light" bg="light" expand="md" fixed="top">
-                  <OverlayTrigger placement="bottom" overlay={<Tooltip>Reset app.<br/>Save your work first!<br/>See Help AutoSave.</Tooltip>}>
-                    <Navbar.Brand href="/"><img className="d-none d-md-inline" src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</Navbar.Brand>
-                  </OverlayTrigger>
-                  <Navbar.Toggle onClick={this.toggle} />
-                    <Navbar.Collapse in={this.state.isOpen}>
-                        <Nav className="mr-auto">
-                            {logOnOff}
-                            <NavDropdown title="File" renderMenuOnMount={true}>
-                                <FileOpen />
-                                <FileRecent />
-                                <FileSave />
-                                <FileSaveAs />
-                                <FileDelete />
-                                <NavDropdown.Divider />
-                                <FileImport />
-                                <FileExport />
-                                <NavDropdown.Divider />
-                                <FilePreferences />
-                                <FileProperties />
-                            </NavDropdown>
-                            <NavDropdown title="Action">
-                                <ActionSearch />
-                                <ActionSeek />
-                                <ActionTrade />
-                                <NavDropdown.Divider />
-                                <ActionSelectSize />
-                                <ActionSelectCatalog />
-                                <NavDropdown.Divider />
-                                <ActionExecute />
-                            </NavDropdown>
-                            <NavDropdown title="View">
-                                {this.props.type === "Spring/Extension" && <ViewCADModel />}
-                                {this.props.type === "Spring/Extension" && <NavDropdown.Divider />}
-                                <NavDropdown.Item disabled>
-                                    Define  Sub-Problems&hellip;
-                                </NavDropdown.Item>
-                                <NavDropdown.Item disabled>
-                                    Display Sub-Problems&hellip;
-                                </NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <ViewSelect viewNames={viewNames}/>
-                                <NavDropdown.Divider />
-                                {config.node.env !== "production" && <ViewOffsets />}
-                                {config.node.env !== "production" && <ViewSymbolTableOffsets />}
-                                {config.node.env !== "production" && <ViewSymbolTable />}
-                                {config.node.env !== "production" && <ViewObjectiveValue />}
-                                {config.node.env !== "production" && <ViewExecuteToTest />}
-                            </NavDropdown>
-                            <NavDropdown title="Help">
-                                <HelpMotd />
-                                <HelpIndex />
-                                <HelpDemo />
-                                <HelpTutorial />
-                                <HelpAbout />
-                            </NavDropdown>
-                        </Nav>
-                        <Nav>
-                            <Nav.Item>
-                                <SearchDocs />
-                            </Nav.Item>
-                            <Nav.Item className="d-flex align-items-center">
-                                <a href={"/docs/Help/DesignTypes/"+this.props.type+"/description.html"} target="_blank" rel="noopener noreferrer">
-                                    <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {this.props.type}. Select icon for full description.</Tooltip>}>
-                                        <img className="d-none d-md-inline" src={src} alt={alt} height="30px"/>
-                                    </OverlayTrigger>
-                                </a>
-                                &nbsp;{this.props.name}
-                            </Nav.Item>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Navbar>
-                <Container style={{backgroundColor: '#eee', paddingTop: '60px'}}>
-                    <ExecutePanel />
-                    <Row>
-                        <ResultTable />
-                    </Row>
-                    <Tabs defaultActiveKey={config.url.view} activeKey={this.state.activeTab}>
-                        {viewNames.map((element) => {return (
-                            <Tab key={element.title} eventKey={element.name}>
-                                <div id={'main_'+element.name}>
-                                    {element.component}
-                                </div>
-                            </Tab>
-                            );
-                        })}
-                    </Tabs>
-                </Container>
+                <DesignTable />
+                <Calculator />
             </>
         );
     }

@@ -13,10 +13,7 @@ class NameValueUnitsTable extends Component {
         return (
             <>
                 <Table className="col-md-6 border border-secondary" size="sm">
-                    <NameValueUnitsHeaderIndependentVariable />
                     {this.props.symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden && <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={index} />)}
-                    <NameValueUnitsHeaderDependentVariable />
-                    {this.props.symbol_table.map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <NameValueUnitsRowDependentVariable key={element.name} element={element} index={index} />)}
                 </Table>
             </>
         );
