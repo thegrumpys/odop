@@ -50,7 +50,7 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 * [URL syntax](design/URLsyntax.html)  
 * [Documentation structure](design/Docs.html)
 * [Okta Registration Flow](design/OktaRegistrationFlow.html)   
-* [Version Number Guidelines](design/VersionNumbers.html) 
+* [ODOP Development Guidelines](design/Guidelines.html) 
 * [Ideas for a web page menu structure](design/menu.html)
 * [Ideas regarding the web user-interface for FIX](design/WebUI_for_Fix.html)
 * [Auto-Search feature and preferences](design/AutoSearch.html)
@@ -90,5 +90,4 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 * [Install a new system](procedures/NewSystem.html) 
 * [New database](procedures/NewDB.html) 
 * [Okta Registration Flow](design/OktaRegistrationFlow.html) 
-* [Image locations](procedures/ImageLocations.html)   
 
