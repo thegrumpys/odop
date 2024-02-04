@@ -8,7 +8,7 @@ class SymbolName extends Component {
 //        console.log('In SymbolName.render this=',this);
         return (
             <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')} id={'sn_'+this.props.index}>
-                <OverlayTrigger placement="top" overlay={this.props.element.tooltip !== undefined && <Tooltip>{this.props.element.tooltip}</Tooltip>}>
+                <OverlayTrigger placement="top" overlay={this.props.element.tooltip !== undefined && <Tooltip><div dangerouslySetInnerHTML={{__html: this.props.element.tooltip}}></div></Tooltip>}>
                     <span>{this.props.element.name}</span>
                 </OverlayTrigger>
             </td>

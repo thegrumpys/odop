@@ -132,7 +132,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
             <tbody>
                 <tr key={this.props.element.name}>
                     <td className="align-middle d-lg-none" id={'dependent_variable_max_constrain_'+this.props.index}>
-                        <OverlayTrigger placement="top" overlay={this.props.element.tooltip !== undefined && <Tooltip className="d-lg-none">{this.props.element.tooltip}</Tooltip>}>
+                        <OverlayTrigger placement="top" overlay={this.props.element.tooltip !== undefined && <Tooltip className="d-lg-none"><div dangerouslySetInnerHTML={{__html: this.props.element.tooltip}}></div></Tooltip>}>
                             <span>{this.props.element.name}</span>
                         </OverlayTrigger>
                     </td>
