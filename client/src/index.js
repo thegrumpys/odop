@@ -4,15 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Spinner } from './components/Spinner';
 import { MessageModal } from './components/MessageModal';
 import Alerts from './components/Alerts';
-import { createStore, applyMiddleware, compose } from 'redux';
-import { dispatcher } from './store/middleware/dispatcher';
-import { reducers } from './store/reducers';
 import { Provider, connect } from 'react-redux'
 import Routes from './components/Routes';
 import './odop.css';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { initialSystemControls } from './initialSystemControls';
-import config from './config';
 import { Beforeunload } from 'react-beforeunload';
 import { logUsage } from './logUsage';
 import { wrap, transferHandlers} from "comlink";
@@ -42,25 +37,14 @@ transferHandlers.set("IGNORE_FUNCTIONS", ignoreFunctionsTransferHandler);
 //console.log('In index.js CLIENT: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'Starting on port =', process.env.PORT, 'Node version =', process.version);
 //console.log('<li>','Start index.js','</li><ul>');
 
-/* eslint-disable no-underscore-dangle */
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-/* eslint-enable */
-const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
-
-// Create a store with an empty model where type is null
-const store = createStore(reducers, {
-    user: null,
-    name: config.url.name,
-    view: config.url.view,
-    model: {
-        type: null,
-        result: {
-            objective_value: 0
-        },
-        system_controls: initialSystemControls
-    }
-}, middleware);
-console.log('in index.js ODOPDemo=',ODOPDemo);
+const worker = new Worker(
+  /* webpackChunkName: "odop-worker" */ new URL('./store/worker.js', import.meta.url)
+);
+console.log('in index.js worker=',worker);
+const remoteStore = wrap(worker);
+console.log('in index.js remoteStore=',remoteStore);
+const store = await remoteStoreWrapper(remoteStore);
+console.log('in index.js store=',store);
 
 logUsage('event', 'Index', { event_label: 'window.location.search=' + window.location.search });
 
