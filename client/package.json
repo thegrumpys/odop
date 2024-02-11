@@ -28,6 +28,7 @@
     "@okta/okta-signin-widget": "^5.0.2",
     "@types/react-router-dom": "^5.1.6",
     "bootstrap": "^4.5.3",
+    "comlink": "^4.4.1",
     "eventemitter3": "^4.0.7",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
