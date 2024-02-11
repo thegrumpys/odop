@@ -75,12 +75,13 @@ ___
 - use the initialState spring dimensions (proportions) with reduced coil count as basis for rendered images
 - coil count should be an integer (not fractional); perhaps 3 or 4
 - to the extent possible, keep spring dimensions, orientation, coil count, etc. consistent between tooltip images
-- to the extent practical, avoid text in the image
-- use FreeCAD to render spring images
+- to the extent practical, avoid or reduce text in the image
+- use rendered spring images (FreeCAD rendering of imported IGES files?)
 - green witness lines; turquoise dimension lines
 - rendered spring images to be grey
 - if multiple springs in one image, use light grey to distinguish the "for reference" instances
-- (other?) 
+- Use open arrows to illustrate forces, curved open arrows for moments; size of arrows to reflect relative size of force
+- (other?)  
 
 ___
 
