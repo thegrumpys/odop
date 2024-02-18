@@ -43,7 +43,7 @@ class ConstraintsMinRowDependentVariable extends Component {
     }
 
     onChangeValidMinConstraint(event) {
-//        console.log("In ConstraintMinRowDependentVariable.onChangeValidMinConstraint event.target.value=", event.target.value);
+//        console.log("In ConstraintsMinRowDependentVariable.onChangeValidMinConstraint event.target.value=", event.target.value);
         var value = parseFloat(event.target.value);
         this.props.changeSymbolConstraint(this.props.element.name, MIN, value); // Update the model
         if (this.props.element.lmin & FIXED) {
@@ -56,7 +56,7 @@ class ConstraintsMinRowDependentVariable extends Component {
     }
     
     onChangeInvalidMinConstraint(event) {
-//        console.log("In ConstraintMinRowDependentVariable.onChangeInvalidMinConstraint event.target.value=", event.target.value);
+//        console.log("In ConstraintsMinRowDependentVariable.onChangeInvalidMinConstraint event.target.value=", event.target.value);
         this.props.onChangeInvalid();
     }
 
@@ -81,7 +81,7 @@ class ConstraintsMinRowDependentVariable extends Component {
     }
 
     onChangeInvalidValue(event) {
-//        console.log("In ConstraintMinRowDependentVariable.onChangeInvalidValue event=",event);
+//        console.log("In ConstraintsMinRowDependentVariable.onChangeInvalidValue event=",event);
         this.setState({
             isInvalidValue: true,
         });

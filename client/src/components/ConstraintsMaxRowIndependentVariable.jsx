@@ -9,10 +9,10 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 import { toODOPPrecision } from '../toODOPPrecision'
 
-class ConstraintMaxRowIndependentVariable extends Component {
+class ConstraintsMaxRowIndependentVariable extends Component {
 
     constructor(props) {
-//        console.log("In ConstraintMaxRowIndependentVariable.constructor props=",props);
+//        console.log("In ConstraintsMaxRowIndependentVariable.constructor props=",props);
         super(props);
         this.onChangeValidMaxConstraint = this.onChangeValidMaxConstraint.bind(this);
         this.onChangeInvalidMaxConstraint = this.onChangeInvalidMaxConstraint.bind(this);
@@ -43,7 +43,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
     }
 
     onChangeValidMaxConstraint(event) {
-//        console.log("In ConstraintMaxRowIndependentVariable.onChangeValidMaxConstraint event.target.value=", event.target.value);
+//        console.log("In ConstraintsMaxRowIndependentVariable.onChangeValidMaxConstraint event.target.value=", event.target.value);
         var value = parseFloat(event.target.value);
         this.props.changeSymbolConstraint(this.props.element.name, MAX, value); // Update the model
         logValue(this.props.element.name,event.target.value,'MaxConstraint');
@@ -51,12 +51,12 @@ class ConstraintMaxRowIndependentVariable extends Component {
     }
 
     onChangeInvalidMaxConstraint(event) {
-//        console.log("In ConstraintMaxRowIndependentVariable.onChangeInvalidMaxConstraint event.target.value=", event.target.value);
+//        console.log("In ConstraintsMaxRowIndependentVariable.onChangeInvalidMaxConstraint event.target.value=", event.target.value);
         this.props.onChangeInvalid();
     }
 
     onClick(event) {
-//        console.log("In ConstraintMaxRowIndependentVariable.onClick event.target.value=",event.target.value);
+//        console.log("In ConstraintsMaxRowIndependentVariable.onClick event.target.value=",event.target.value);
         // Show modal only if there are cmaxchoices
         if (this.props.element.cmaxchoices !== undefined && this.props.element.cmaxchoices.length > 0) {
             this.setState({
@@ -67,7 +67,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
     }
 
     onChangeValidValue(event) {
-//        console.log("In ConstraintMaxRowIndependentVariable.onChangeValidValue event.target.value=",event.target.value);
+//        console.log("In ConstraintsMaxRowIndependentVariable.onChangeValidValue event.target.value=",event.target.value);
         this.setState({
             valueString: event.target.value,
             isInvalidValue: false,
@@ -76,7 +76,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
     }
 
     onChangeInvalidValue(event) {
-//        console.log("In ConstraintMaxRowIndependentVariable.onChangeInvalidValue event=",event);
+//        console.log("In ConstraintsMaxRowIndependentVariable.onChangeInvalidValue event=",event);
         this.setState({
             isInvalidValue: true,
         });
@@ -84,7 +84,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
     }
 
     onEnterButton(event) {
-//        console.log("In ConstraintMaxRowIndependentVariable.onEnterButton event.target.value=",event.target.value);
+//        console.log("In ConstraintsMaxRowIndependentVariable.onEnterButton event.target.value=",event.target.value);
         this.setState({
             modal: !this.state.modal
         });
@@ -98,7 +98,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
     }
 
     onVariableButton(event, source_name) {
-//        console.log("In ConstraintMaxRowIndependentVariable.onVariableButton event.target.value=",event.target.value," source_name=",source_name);
+//        console.log("In ConstraintsMaxRowIndependentVariable.onVariableButton event.target.value=",event.target.value," source_name=",source_name);
         this.setState({
             modal: !this.state.modal
         });
@@ -109,14 +109,14 @@ class ConstraintMaxRowIndependentVariable extends Component {
     }
 
     onCancel(event) {
-//        console.log("In ConstraintMaxRowIndependentVariable.onCancel event.target.value=",event.target.value);
+//        console.log("In ConstraintsMaxRowIndependentVariable.onCancel event.target.value=",event.target.value);
         this.setState({
             modal: !this.state.modal
         });
     }
 
     render() {
-//        console.log('In ConstraintMaxRowIndependentVariable.render this=',this);
+//        console.log('In ConstraintsMaxRowIndependentVariable.render this=',this);
         // =======================================
         // Constraint Maximum Column
         // =======================================
@@ -199,7 +199,7 @@ class ConstraintMaxRowIndependentVariable extends Component {
     }
 }
 
-ConstraintMaxRowIndependentVariable.propTypes = {
+ConstraintsMaxRowIndependentVariable.propTypes = {
     element: PropTypes.object,
     onChangeValid: PropTypes.func,
     onChangeInvalid: PropTypes.func,
@@ -207,7 +207,7 @@ ConstraintMaxRowIndependentVariable.propTypes = {
     onReset: PropTypes.func,
 }
 
-ConstraintMaxRowIndependentVariable.defaultProps = {
+ConstraintsMaxRowIndependentVariable.defaultProps = {
     element: null,
     onChangeValid: (()=>{}),
     onChangeInvalid: (()=>{}),
@@ -226,4 +226,4 @@ const mapDispatchToProps = {
     resetSymbolFlag: resetSymbolFlag
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConstraintMaxRowIndependentVariable);
+export default connect(mapStateToProps, mapDispatchToProps)(ConstraintsMaxRowIndependentVariable);

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-class ConstraintMaxHeaderDependentVariable extends Component {
+class ConstraintsMaxHeaderDependentVariable extends Component {
 
     render() {
-//        console.log('In ConstraintMaxHeaderDependentVariable.render this=',this);
+//        console.log('In ConstraintsMaxHeaderDependentVariable.render this=',this);
         return (
             <thead>
                 <tr>
@@ -49,4 +49,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConstraintMaxHeaderDependentVariable);
+export default connect(mapStateToProps, mapDispatchToProps)(ConstraintsMaxHeaderDependentVariable);

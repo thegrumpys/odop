@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-class ConstraintMinHeaderDependentVariable extends Component {
+class ConstraintsMinHeaderDependentVariable extends Component {
 
     render() {
-//        console.log('In ConstraintMinHeaderDependentVariable.render this=',this);
+//        console.log('In ConstraintsMinHeaderDependentVariable.render this=',this);
         return (
             <thead>
                 <tr>
@@ -49,4 +49,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConstraintMinHeaderDependentVariable);
+export default connect(mapStateToProps, mapDispatchToProps)(ConstraintsMinHeaderDependentVariable);

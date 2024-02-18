@@ -43,7 +43,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
     }
 
     onChangeValidMaxConstraint(event) {
-//        console.log("In ConstraintMaxRowDependentVariable.onChangeValidMaxConstraint event.target.value=", event.target.value);
+//        console.log("In ConstraintsMaxRowDependentVariable.onChangeValidMaxConstraint event.target.value=", event.target.value);
         var value = parseFloat(event.target.value);
         if (this.props.element.lmax & FIXED) {
             this.props.changeSymbolConstraint(this.props.element.name, MIN, value); // Update the model
@@ -56,7 +56,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
     }
 
     onChangeInvalidMaxConstraint(event) {
-//        console.log("In ConstraintMaxRowDependentVariable.onChangeInvalidMaxConstraint event.target.value=", event.target.value);
+//        console.log("In ConstraintsMaxRowDependentVariable.onChangeInvalidMaxConstraint event.target.value=", event.target.value);
         this.props.onChangeInvalid();
     }
 
@@ -81,7 +81,7 @@ class ConstraintsMaxRowDependentVariable extends Component {
     }
 
     onChangeInvalidValue(event) {
-//        console.log("In ConstraintMaxRowDependentVariable.onChangeInvalidValue event=",event);
+//        console.log("In ConstraintsMaxRowDependentVariable.onChangeInvalidValue event=",event);
         this.setState({
             isInvalidValue: true,
         });

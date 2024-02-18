@@ -9,10 +9,10 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 import { toODOPPrecision } from '../toODOPPrecision'
 
-class ConstraintMinRowIndependentVariable extends Component {
+class ConstraintsMinRowIndependentVariable extends Component {
 
     constructor(props) {
-//        console.log("In ConstraintMinRowIndependentVariable.constructor props=",props);
+//        console.log("In ConstraintsMinRowIndependentVariable.constructor props=",props);
         super(props);
         this.onChangeValidMinConstraint = this.onChangeValidMinConstraint.bind(this);
         this.onChangeInvalidMinConstraint = this.onChangeInvalidMinConstraint.bind(this);
@@ -43,7 +43,7 @@ class ConstraintMinRowIndependentVariable extends Component {
     }
 
     onChangeValidMinConstraint(event) {
-//        console.log("In ConstraintMinRowIndependentVariable.onChangeValidMinConstraint event.target.value=", event.target.value);
+//        console.log("In ConstraintsMinRowIndependentVariable.onChangeValidMinConstraint event.target.value=", event.target.value);
         var value = parseFloat(event.target.value);
         this.props.changeSymbolConstraint(this.props.element.name, MIN, value); // Update the model
         logValue(this.props.element.name,event.target.value,'MinConstraint');
@@ -51,12 +51,12 @@ class ConstraintMinRowIndependentVariable extends Component {
     }
     
     onChangeInvalidMinConstraint(event) {
-//        console.log("In ConstraintMinRowIndependentVariable.onChangeInvalidMinConstraint event.target.value=", event.target.value);
+//        console.log("In ConstraintsMinRowIndependentVariable.onChangeInvalidMinConstraint event.target.value=", event.target.value);
         this.props.onChangeInvalid();
     }
 
     onClick(event) {
-//        console.log("In ConstraintMinRowIndependentVariable.onClick event.target.value=",event.target.value);
+//        console.log("In ConstraintsMinRowIndependentVariable.onClick event.target.value=",event.target.value);
         // Show modal only if there are cminchoices
         if (this.props.element.cminchoices !== undefined && this.props.element.cminchoices.length > 0) {
             this.setState({
@@ -67,7 +67,7 @@ class ConstraintMinRowIndependentVariable extends Component {
     }
 
     onChangeValidValue(event) {
-//        console.log("In ConstraintMinRowIndependentVariable.onChangeValidValue event=",event);
+//        console.log("In ConstraintsMinRowIndependentVariable.onChangeValidValue event=",event);
         this.setState({
             valueString: event.target.value,
             isInvalidValue: false,
@@ -76,7 +76,7 @@ class ConstraintMinRowIndependentVariable extends Component {
     }
 
     onChangeInvalidValue(event) {
-//        console.log("In ConstraintMinRowIndependentVariable.onChangeInvalidValue event=",event);
+//        console.log("In ConstraintsMinRowIndependentVariable.onChangeInvalidValue event=",event);
         this.setState({
             isInvalidValue: true,
         });
@@ -84,7 +84,7 @@ class ConstraintMinRowIndependentVariable extends Component {
     }
 
     onEnterButton(event) {
-//        console.log("In ConstraintMinRowIndependentVariable.onEnterButton event.target.value=",event.target.value);
+//        console.log("In ConstraintsMinRowIndependentVariable.onEnterButton event.target.value=",event.target.value);
         this.setState({
             modal: !this.state.modal
         });
@@ -98,7 +98,7 @@ class ConstraintMinRowIndependentVariable extends Component {
     }
 
     onVariableButton(event, source_name) {
-//        console.log("In ConstraintMinRowIndependentVariable.onVariableButton event.target.value=",event.target.value," source_name=",source_name);
+//        console.log("In ConstraintsMinRowIndependentVariable.onVariableButton event.target.value=",event.target.value," source_name=",source_name);
         this.setState({
             modal: !this.state.modal
         });
@@ -109,14 +109,14 @@ class ConstraintMinRowIndependentVariable extends Component {
     }
 
     onCancel(event) {
-//        console.log("In ConstraintMinRowIndependentVariable.onCancel event.target.value=",event.target.value);
+//        console.log("In ConstraintsMinRowIndependentVariable.onCancel event.target.value=",event.target.value);
         this.setState({
             modal: !this.state.modal
         });
     }
 
     render() {
-//        console.log('In ConstraintMinRowIndependentVariable.render this=',this);
+//        console.log('In ConstraintsMinRowIndependentVariable.render this=',this);
         // =======================================
         // Constraint Minimum Column
         // =======================================
@@ -199,7 +199,7 @@ class ConstraintMinRowIndependentVariable extends Component {
     }
 }
 
-ConstraintMinRowIndependentVariable.propTypes = {
+ConstraintsMinRowIndependentVariable.propTypes = {
     element: PropTypes.object,
     onChangeValid: PropTypes.func,
     onChangeInvalid: PropTypes.func,
@@ -207,7 +207,7 @@ ConstraintMinRowIndependentVariable.propTypes = {
     onReset: PropTypes.func,
 }
 
-ConstraintMinRowIndependentVariable.defaultProps = {
+ConstraintsMinRowIndependentVariable.defaultProps = {
     element: null,
     onChangeValid: (()=>{}),
     onChangeInvalid: (()=>{}),
@@ -226,4 +226,4 @@ const mapDispatchToProps = {
     resetSymbolFlag: resetSymbolFlag
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConstraintMinRowIndependentVariable);
+export default connect(mapStateToProps, mapDispatchToProps)(ConstraintsMinRowIndependentVariable);
