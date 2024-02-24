@@ -113,8 +113,8 @@
 
 &nbsp; 
 
-[Spring Design Topics](/docs/Help/SpringDesign/)   
-[Help](/docs/Help)   
+[Spring Design Topics](/docs/Help/SpringDesign/index.html)   
+[Help](/docs/Help/index.html)   
 
 <!---
 Depending on Eclipse version or Markdown interpreter, a multi-line comment must be the last thing in the file.

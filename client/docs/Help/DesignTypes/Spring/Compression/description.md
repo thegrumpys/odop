@@ -395,10 +395,10 @@ ___
 
 ## Related topics 
 
- - [Design Types](/docs/Help/DesignTypes)   
- - [Spring Design Topics](/docs/Help/SpringDesign)   
+ - [Design Types](/docs/Help/DesignTypes/index.html)   
+ - [Spring Design Topics](/docs/Help/SpringDesign/index.html)   
  - [Restrictions](/docs/About/Legal/Restrictions.html)   
- - [Help](/docs/Help)   
+ - [Help](/docs/Help/index.html)   
 
 &nbsp;  
   

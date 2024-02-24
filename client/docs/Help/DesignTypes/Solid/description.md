@@ -16,5 +16,5 @@ The default starting point supplied with the Rectangular Solid problem includes 
 Thus, the user can experiment with various materials to see what will fit within USPS regulations.
 
 
-[Design Types](/docs/Help/DesignTypes)   
-[Help](/docs/Help)   
+[Design Types](/docs/Help/DesignTypes/index.html)   
+[Help](/docs/Help/index.html)   

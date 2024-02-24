@@ -73,7 +73,7 @@ See:
 
 ## Design Types   
 
-Five [Design Types](/docs/Help/DesignTypes) are currently available. 
+Five [Design Types](/docs/Help/DesignTypes/index.html) are currently available. 
 
 ![Compression Spring Design Type icon](https://odop.springdesignsoftware.org/designtypes/Spring/Compression/favicon.ico "Compression Spring Design Type") 
 ![Extension Spring Design Type icon](https://odop.springdesignsoftware.org/designtypes/Spring/Extension/favicon.ico "Extension Spring Design Type") 
@@ -82,7 +82,7 @@ The **Compression, Extension and Torsion Spring** design types are full-featured
 enabling the engineering design of helical coil springs. 
 While best saved for a time after your initial introduction to ODOP is complete, 
 a comprehensive introduction to coil spring design with ODOP is available at 
-[Spring Design Topics](/docs/Help/SpringDesign). 
+[Spring Design Topics](/docs/Help/SpringDesign/index.html). 
 
 ![Rectangular Solid Design Type icon](https://odop.springdesignsoftware.org/designtypes/Solid/favicon.ico "Rectangular Solid Design Type") 
 The [Rectangular Solid](/docs/Help/DesignTypes/Solid/description.html) design type is intended as an 
@@ -106,4 +106,4 @@ go to: [Spring design tutorial and demo](/docs/Help/gettingStartedSpring.html)
 
 &nbsp; 
 
-[About](/docs/About) 
+[About](/docs/About/index.html) 

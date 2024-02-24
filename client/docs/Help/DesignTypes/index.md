@@ -11,7 +11,7 @@ These are:
 * [Torsion Spring](/docs/Help/DesignTypes/Spring/Torsion/description.html)   
 &nbsp;
 
-See [Spring Design Topics](/docs/Help/SpringDesign) for more detail on spring design with ODOP.   
+See [Spring Design Topics](/docs/Help/SpringDesign/index.html) for more detail on spring design with ODOP.   
 
 &nbsp;
 
@@ -23,4 +23,4 @@ These are:
 
 &nbsp;
 
-[Help](/docs/Help)
+[Help](/docs/Help/index.html)

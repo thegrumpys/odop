@@ -14,4 +14,4 @@ The entries appear in an order ranked from more general and introductory to more
 * [Privacy Statement](Legal/PrivacyStatement.html)
 * [User Accounts](userAccounts.html)
 * [Contact Us](ContactUs.html)
-* [Help topics](/docs/Help)
+* [Help topics](/docs/Help/index.html)

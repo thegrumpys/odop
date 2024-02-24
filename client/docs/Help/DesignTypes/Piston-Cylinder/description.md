@@ -9,6 +9,6 @@ This diagram illustrates the Piston-Cylinder design variables:
 ![Piston-Cylinder Design Type](/docs/Help/DesignTypes/Piston-Cylinder/img/PCylDiagram.png "Piston-Cylinder Design Type")
 
 
-[Design Types](/docs/Help/DesignTypes)   
-[Help](/docs/Help)   
+[Design Types](/docs/Help/DesignTypes/index.html)   
+[Help](/docs/Help/index.html)   
 

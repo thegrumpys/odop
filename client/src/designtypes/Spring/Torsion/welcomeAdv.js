@@ -105,7 +105,7 @@ export const execute = {
                     <p>
                     The <b>File : Open</b> menu above provides the ability to open existing designs of 
                     supported spring 
-                    &nbsp;<a href="/docs/Help/DesignTypes" target="_blank" rel="noopener noreferrer">types</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/DesignTypes/index.html" target="_blank" rel="noopener noreferrer">types</a>&nbsp; 
                     (
                     <a href="/docs/Help/DesignTypes/Spring/Compression/description.html" target="_blank" rel="noopener noreferrer">compression,</a>&nbsp; 
                     <a href="/docs/Help/DesignTypes/Spring/Extension/description.html" target="_blank" rel="noopener noreferrer">extension</a>&nbsp;

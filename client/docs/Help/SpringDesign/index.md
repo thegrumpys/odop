@@ -14,4 +14,4 @@ The entries appear in an order ranked from more general and introductory to more
 
 &nbsp;
 
-[Help](/docs/Help)
+[Help](/docs/Help/index.html)
