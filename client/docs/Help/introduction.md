@@ -68,5 +68,5 @@ An explanation of how to select a design type and open a design of that type is 
 
 &nbsp;
 
-[Help](/docs/Help)
+[Help](/docs/Help/index.html)
 

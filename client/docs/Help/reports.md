@@ -22,4 +22,4 @@ and documentation on your browser's print function.
 
 &nbsp;
 
-[Help](/docs/Help)
+[Help](/docs/Help/index.html)

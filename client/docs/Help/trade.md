@@ -125,4 +125,4 @@ assigned are negative.
 
  Additional information on TRADE is available in the [Tutorial and Demo](/docs/Help/tutordemo.html) feature. 
 
-[Help](/docs/Help)
+[Help](/docs/Help/index.html) 

@@ -554,15 +554,16 @@ The Help : About menu item displays information about the ODOP software.
 
 This information includes: 
  - a link to the "About: articles in the on-line Help 
+ - a link to the description page for the current design type
  - a link to the SpringDesignSoftware.org website home page 
  - a link to the Wikipedia article describing open-source software 
  - a description of the ODOP license 
  - the current ODOP software version 
- - the current design type (Model) version and associated units 
+ - the current design type (Model), version and associated units 
 
 ___
 
 &nbsp; 
  
-[Help](/docs/Help) 
+[Help](/docs/Help/index.html) 
 

@@ -89,5 +89,5 @@ See also:
 
 &nbsp; 
 
- [Help](/docs/Help) 
+ [Help](/docs/Help/index.html) 
  

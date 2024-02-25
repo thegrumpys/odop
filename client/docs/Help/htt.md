@@ -410,7 +410,7 @@ ___
 
 &nbsp;
  
-[Help](/docs/Help) 
+[Help](/docs/Help/index.html) 
 
 &nbsp;
  

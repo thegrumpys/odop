@@ -68,4 +68,4 @@ To continue, use your browser's **Back** button to return to the previous page n
 
 &nbsp;
 
-[Help](/docs/Help)
+[Help](/docs/Help/index.html)

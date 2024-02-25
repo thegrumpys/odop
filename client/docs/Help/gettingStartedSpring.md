@@ -129,6 +129,6 @@ For the compression spring design type, those include
   
 &nbsp;   
     
-[Help](/docs/Help)
+[Help](/docs/Help/index.html)
 
  

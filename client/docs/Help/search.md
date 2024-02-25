@@ -109,5 +109,5 @@ that are too inaccurate to be used effectively by SEEK, and TRADE.
  
 &nbsp;
  
- [Help](/docs/Help)
+ [Help](/docs/Help/index.html)
  

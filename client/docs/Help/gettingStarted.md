@@ -210,5 +210,5 @@ See: &nbsp; [Spring design tutorial and demo](gettingStartedSpring.html)
 
 &nbsp;
  
-[Help](/docs/Help)
+[Help](/docs/Help/index.html)
  

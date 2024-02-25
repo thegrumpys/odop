@@ -116,7 +116,7 @@ Additional design optimization resources available on the Internet include:
 
 &nbsp;
 
-[Spring Design Topics](/docs/Help/SpringDesign)   
-[Help](/docs/Help)   
+[Spring Design Topics](/docs/Help/SpringDesign/index.html)   
+[Help](/docs/Help/index.html)   
 
 
