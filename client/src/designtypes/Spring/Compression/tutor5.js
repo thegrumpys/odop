@@ -51,7 +51,7 @@ export const execute = {
                     
                     <p>
                     The on-line documentation sections (Help entries) titled 
-                    &nbsp;<a href="/docs/Help/SpringDesign" target="_blank" rel="noopener noreferrer">Spring Design</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/SpringDesign/index.html" target="_blank" rel="noopener noreferrer">Spring Design</a>&nbsp; 
                     and 
                     &nbsp;<a href="/docs/Help/DesignTypes/Spring/Compression/description.html" target="_blank" rel="noopener noreferrer">Compression Spring</a>&nbsp; 
                     provide a more detailed definition for each of the Calculation Inputs.  

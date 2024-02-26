@@ -68,7 +68,7 @@ export const execute = {
                     &nbsp;<a href="/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png" target="_blank" rel="noopener noreferrer">Force-Deflection diagram</a>&nbsp; 
                     illustrates selected variable names.  
                     Additional insights are available in the  
-                    &nbsp;<a href="/docs/Help" target="_blank" rel="noopener noreferrer">on-line Help</a>&nbsp; 
+                    &nbsp;<a href="/docs/Help/index.html" target="_blank" rel="noopener noreferrer">on-line Help</a>&nbsp; 
                     plus 
                     &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
                     sessions. 
