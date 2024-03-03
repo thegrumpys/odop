@@ -5,7 +5,7 @@ The Compression Spring design type is a full-featured mathematical model enablin
 the engineering design of round wire helical coil compression springs. 
 
 This section presents material unique to the Compression Spring design type. 
-The more general material available at [Spring Design Topics](/docs/Help/SpringDesign) 
+The more general material available at [Spring Design Topics](/docs/Help/SpringDesign/index.html) 
 provides important supplemental information. 
 
 ___
