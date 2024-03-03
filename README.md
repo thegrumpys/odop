@@ -5,7 +5,7 @@ of a broad range of problems that have a mathematical model available.
 
 [SpringDesignSoftware.org](https://springdesignsoftware.org) provides the best introduction to the spring design app.
 
-Read [About ODOP](https://odop.springdesignsoftware.org/docs/About), including the Introduction, Requirements, Getting Started and Contact Us pages. 
+Read [About ODOP](https://odop.springdesignsoftware.org/docs/About/index.html), including the Introduction, Requirements, Getting Started and Contact Us pages. 
 More detail is available in the [On-line Help](https://odop.springdesignsoftware.org/docs/Help) facility.   
 
 **Currently available apps include:**

@@ -31,4 +31,4 @@ Open a new issue by clicking the green "New issue" button (upper right).
 
 &nbsp;
 
-[About](/docs/About)
+[About](/docs/About/index.html)

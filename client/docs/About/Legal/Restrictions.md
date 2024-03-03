@@ -68,5 +68,5 @@ any impact to saved designs.
    
 &nbsp;
    
-[About](/docs/About)
+[About](/docs/About/index.html)
 

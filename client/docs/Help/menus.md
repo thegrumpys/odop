@@ -30,7 +30,7 @@ This topic covers the ODOP menu structure.
  * [Help : Index](menus.html#HelpIndex) 
  * [Help : Demo...](menus.html#HelpDemo) 
  * [Help : Tutorial...](menus.html#HelpTutorial) 
- * [Help : About](menus.html#HelpAbout) 
+ * [Help : About](menus.html#HelpAbout/index.html) 
 
 ___
 
@@ -511,7 +511,7 @@ Most of these articles are common to all design types.
 An entry describing [Available Design Types](DesignTypes) is near the bottom of the list. 
 
 A link to a list of [Spring Design Topics](SpringDesign) is near the bottom of the list.
-The last link on the list is an alternate way to reach the [About](/docs/About) articles.
+The last link on the list is an alternate way to reach the [About](/docs/About/index.html) articles.
 
 ___
 
