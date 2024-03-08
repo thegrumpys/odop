@@ -1,6 +1,6 @@
 import { MIN, MAX, CONSTRAINED, FIXED } from '../actionTypes';
 import { changeSymbolViolation,
-    changeResultObjectiveValue, changeResultSearchCompleted } from '../actionCreators';
+    changeResultObjectiveValue, changeResultSearchCompleted } from '../modelSlice';
 
 // Update Violations and Objective Value
 export function updateObjectiveValue(store, merit) {
@@ -24,7 +24,7 @@ export function updateObjectiveValue(store, merit) {
     var viol_sum;
     var debug = false;
 
-    var design = store.getState(); // Re-access store to get latest element values
+    var design = store.getState().model; // Re-access store to get latest element values
 //    console.log('In updateObjectiveValue design=',design);
 
     // Determine all constraint violations

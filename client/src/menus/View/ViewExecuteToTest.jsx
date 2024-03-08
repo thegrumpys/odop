@@ -96,8 +96,8 @@ it('${this.state.execute_name}', () => {
         {"user": "USERID0123456789", name: "initialState", model: state},
         applyMiddleware(dispatcher));
 
-    var design = store.getState(); // before
-    design = store.getState();
+    var design = store.getState().model; // before
+    design = store.getState().model;
     expect(design.model.result.objective_value).toEqual(0.0);
 
 `;

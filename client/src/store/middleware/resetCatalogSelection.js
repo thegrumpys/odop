@@ -1,4 +1,4 @@
-import { changeSymbolValue } from '../actionCreators';
+import { changeSymbolValue } from '../modelSlice';
 
 // If any of the Catalog entries are changed,
 // then reset Catalog Name and Number to blank

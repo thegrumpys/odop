@@ -86,7 +86,7 @@ class ResultTable extends Component {
         this.props.saveAutoSave();
         this.props.search();
         const { store } = this.context;
-        var design = store.getState();
+        var design = store.getState().model;
         var new_objective_value = design.model.result.objective_value;
         logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' Button ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4)});
     }

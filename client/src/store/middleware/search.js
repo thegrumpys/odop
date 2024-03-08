@@ -1,5 +1,5 @@
 import { FIXED } from '../actionTypes';
-import { changeInputSymbolValues, changeResultTerminationCondition, changeResultSearchCompleted } from '../actionCreators';
+import { changeInputSymbolValues, changeResultTerminationCondition, changeResultSearchCompleted } from '../modelSlice';
 import { patsh } from './patsh';
 
 // Search
@@ -7,7 +7,7 @@ export function search(store, objmin, merit) {
 //    console.log('Entering search store=',store,'objmin=',objmin,'merit=',merit);
 //    console.trace();
     
-    var design = store.getState();
+    var design = store.getState().model;
     
     // Compress P into PC
     var element;
@@ -44,7 +44,7 @@ export function search(store, objmin, merit) {
     store.dispatch(changeResultSearchCompleted(true));
     store.dispatch(changeResultTerminationCondition(ncode));
     
-    design = store.getState();
+    design = store.getState().model;
     var obj = design.model.result.objective_value;
 //    console.log('Exiting search p=',p,'ncode=',ncode,'obj=',obj);
     return obj;

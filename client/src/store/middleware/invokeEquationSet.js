@@ -1,4 +1,4 @@
-import { changeOutputSymbolValues } from '../actionCreators';
+import { changeOutputSymbolValues } from '../modelSlice';
 
 // Invoke Equation Set
 export function invokeEquationSet(store) {
@@ -7,7 +7,7 @@ export function invokeEquationSet(store) {
     
     var element;
 
-    var design = store.getState();
+    var design = store.getState().model;
 //    console.log('In invokeEquationSet design=',design);
     
     // Loop to create p and x from symbol_table
@@ -24,6 +24,7 @@ export function invokeEquationSet(store) {
 
     // Compute outputs x from inputs p using equations
     var { eqnset } = require('../../designtypes/'+design.model.type+'/eqnset.js'); // Dynamically load eqnset
+//    console.log('In invokeEquationSet','eqnset=',eqnset);
     x = eqnset(p, x);
 
     // Compute and dispatch output changes

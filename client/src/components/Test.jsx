@@ -28,10 +28,15 @@ export const Test = () => {
   const name = useSelector((state) => state.model.name);
   const user = useSelector((state) => state.model.user);
   const view = useSelector((state) => state.model.view);
+  const symbol_table = useSelector((state) => state.model.model.symbol_table);
 
   return (
     <>
       <h1>Test Page: Name: {name}, User: {user}, View: {view}</h1>
+      <ul style={{ textAlign: "left" }}>
+        <li>Home is mounted only on startup page: Name: {name}, User: {user}, View: {view}</li>
+        {symbol_table.map((element,index) => <li key={index}>{element.name} {element.value}</li>)}
+      </ul>
       <button type="button" onClick={linkPage}>Go to Home</button>
     </>
   );

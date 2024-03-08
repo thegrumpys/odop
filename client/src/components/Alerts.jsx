@@ -48,7 +48,7 @@ export var check_DCD_alert = function(element, minmax, urlCode) {
 
 export var checks = function(store) {
 //    console.log('In Alerts.checks store=',store);
-    var design = store.getState();
+    var design = store.getState().model;
 
         // OBJECTIVE VALUE CHECKS 
         if (design.model.result.objective_value === Number.POSITIVE_INFINITY || design.model.result.objective_value === Number.NEGATIVE_INFINITY) { // Check for objective value of Infinity

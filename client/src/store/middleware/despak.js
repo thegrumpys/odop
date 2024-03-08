@@ -6,7 +6,7 @@ import { pxPropagate } from './pxPropagate';
  */
 export function despak(pc, store, merit) {
 //    console.log('<li>!!!!! Start despak pc=',pc,'</li><ul>');
-    var design = store.getState();
+    var design = store.getState().model;
     var kd = 0;
     var p = [];
     var x = [];

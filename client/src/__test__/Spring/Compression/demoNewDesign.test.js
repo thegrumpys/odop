@@ -25,8 +25,8 @@ it('demoNewDesign', () => {
         {"user": "USERID0123456789", name: "initialState", model: state},
         applyMiddleware(dispatcher));
 
-    var design = store.getState(); // before
-    design = store.getState();
+    var design = store.getState().model; // before
+    design = store.getState().model;
     expect(design.model.result.objective_value).toEqual(0.0);
 
     // Execute File: demoNewDesign
@@ -37,7 +37,7 @@ it('demoNewDesign', () => {
     store.dispatch(loadInitialState("Spring/Compression","US"));
     store.dispatch(changeLabelsValue([{"name":"COMMENT","value":"Compression Spring demoNewDesign"}]));
 
-    design = store.getState();
+    design = store.getState().model;
     expect(design.model.result.objective_value).toBeCloseTo(0.0000000,7);
 
     // title: "Page 03 of 14"
@@ -69,7 +69,7 @@ it('demoNewDesign', () => {
     store.dispatch(fixSymbolValue("Force_1",30));
     store.dispatch(fixSymbolValue("Force_2",60));
 
-    design = store.getState();
+    design = store.getState().model;
     expect(design.model.result.objective_value).toBeCloseTo(1.5384420,7);
 
     // title: "Page 08 of 14"
@@ -78,13 +78,13 @@ it('demoNewDesign', () => {
     // title: "Page 09 of 14"
     store.dispatch(search());
 
-    design = store.getState();
+    design = store.getState().model;
     expect(design.model.result.objective_value).toBeCloseTo(0.0000000,7);
 
     // title: "Page 10 of 14"
     store.dispatch(fixSymbolValue("Wire_Dia",0.135));
 
-    design = store.getState();
+    design = store.getState().model;
     expect(design.model.result.objective_value).toBeCloseTo(0.0148411,7);
 
     // title: "Page 11 of 14"
@@ -93,7 +93,7 @@ it('demoNewDesign', () => {
     // title: "Page 12 of 14"
     store.dispatch(search());
 
-    design = store.getState();
+    design = store.getState().model;
     expect(design.model.result.objective_value).toBeCloseTo(0.0000018,7);
 
     // title: "Page 13 of 14"

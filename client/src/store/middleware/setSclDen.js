@@ -1,12 +1,12 @@
 import { MIN, MAX } from '../actionTypes';
-import { changeSymbolConstraints } from '../actionCreators';
+import { changeSymbolConstraints } from '../modelSlice';
 
 // Startup
 export function setSclDen(store) {
 
 //    console.log('Entering setSclDen');
 
-    var design = store.getState();
+    var design = store.getState().model;
 //    console.log('In setSclDen design=',design);
 
     // Loop to create cmin and cmax arrays from symbol_table

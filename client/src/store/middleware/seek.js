@@ -1,5 +1,5 @@
 import { MAX, FIXED, CONSTRAINED } from '../actionTypes';
-import { saveInputSymbolValues, restoreInputSymbolValues, changeResultTerminationCondition } from '../actionCreators';
+import { saveInputSymbolValues, restoreInputSymbolValues, changeResultTerminationCondition } from '../modelSlice';
 import { search } from './search';
 import { despak } from './despak';
 import { toODOPPrecision } from '../../toODOPPrecision'
@@ -13,7 +13,7 @@ export function seek(store, action) {
     var SDIR = 0;
     var M_DEN;
     var M_NUM;
-    var design = store.getState(); // Re-access store to get latest element values
+    var design = store.getState().model; // Re-access store to get latest element values
     if (design.model.system_controls.ioopt > 5) {
         console.log("00 In seek", action);
     }
@@ -71,7 +71,7 @@ export function seek(store, action) {
     store.dispatch(saveInputSymbolValues());
 //    console.log('In seek SOUGHT=',SOUGHT,'SDIR=',SDIR,'temp=',temp,'M_NUM=',M_NUM,'M-DEN=',M_DEN);
     obj = search(store, -1.0, merit);
-    design = store.getState(); // Re-access store to get latest element values
+    design = store.getState().model; // Re-access store to get latest element values
     M_NUM = design.model.symbol_table[SOUGHT - 1].value;
     if (design.model.system_controls.ioopt > 5) {
         temp = design.model.symbol_table[SOUGHT - 1].value;
@@ -92,7 +92,7 @@ export function seek(store, action) {
         }
     }
     obj = despak(pc, store);
-    design = store.getState(); // Re-access store to get latest element values
+    design = store.getState().model; // Re-access store to get latest element values
     if (obj < design.model.system_controls.objmin) {
         store.dispatch(restoreInputSymbolValues());
     } else {
@@ -100,7 +100,7 @@ export function seek(store, action) {
             console.log('08 SEARCHING FOR A FEASIBLE START POINT ...');
         }
         obj = search(store, design.model.system_controls.objmin);
-        design = store.getState(); // Re-access store to get latest element values
+        design = store.getState().model; // Re-access store to get latest element values
         if (design.model.system_controls.ioopt > 5) {
             temp = design.model.symbol_table[SOUGHT - 1].value;
             console.log('09 THE CURRENT VALUE OF '+name+' IS: '+temp+' '+units);
@@ -115,7 +115,7 @@ export function seek(store, action) {
         M_DEN = 1.0;
     }
     obj = search(store, design.model.system_controls.objmin, merit);
-    design = store.getState(); // Re-access store to get latest element values
+    design = store.getState().model; // Re-access store to get latest element values
     var ending_value = design.model.symbol_table[SOUGHT - 1].value;
     if (design.model.system_controls.ioopt > 5) {
         console.log('12 RETURN ON: '+design.model.result.termination_condition+'     OBJ ='+design.model.result.objective_value);

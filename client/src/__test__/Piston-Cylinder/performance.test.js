@@ -21,7 +21,7 @@ it('reducers change symbol value 1000000x', () => {
         reducers,
         {"user": "USERID0123456789", name: "initialState", model: state});
 
-    var design = store.getState(); // before
+    var design = store.getState().model; // before
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.4);
     expect(design.model.symbol_table[sto.AREA].name).toEqual("AREA");
@@ -60,7 +60,7 @@ it('invokeEquationSet 100000x', () => {
     const duration = Date.now()-start;
     console.log('invokeEquationSet 100000x duration=',duration);
 
-    var design = store.getState(); // after
+    var design = store.getState().model; // after
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
     expect(design.model.version).toEqual("7");
@@ -121,7 +121,7 @@ it('search without merit 1000x', () => {
     store.dispatch(changeSymbolValue("STRESS", 789));
     store.dispatch(changeResultObjectiveValue(0.560511));
 
-    var design = store.getState(); // before
+    var design = store.getState().model; // before
 
 //    var obj = search(store, design.model.system_controls.objmin);
     var obj;
@@ -132,7 +132,7 @@ it('search without merit 1000x', () => {
     const duration = Date.now()-start;
     console.log('search without merit 1000x duration=',duration);
 
-    var design = store.getState(); // after
+    var design = store.getState().model; // after
     expect(obj).toEqual(0.14664205223346785);
 
     expect(design.name).toEqual("initialState");
