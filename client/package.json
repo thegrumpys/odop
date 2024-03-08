@@ -4,9 +4,9 @@
   "description": "Open Design Optimization Platform (ODOP) Client",
   "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom",
     "coverage": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject",
     "analyze": "source-map-explorer 'build/static/js/*.js'"
@@ -21,33 +21,41 @@
     "url": "https://github.com/thegrumpys/odop/issues"
   },
   "homepage": "https://odop.heroku.com/",
-  "dependencies": {
-    "@mars/heroku-js-runtime-env": "^3.0.2",
-    "@okta/okta-auth-js": "^4.2.0",
-    "@okta/okta-react": "^4.0.0",
-    "@okta/okta-signin-widget": "^5.0.2",
-    "@types/react-router-dom": "^5.1.6",
-    "bootstrap": "^4.5.3",
-    "eventemitter3": "^4.0.7",
-    "jquery": "^3.5.1",
-    "popper.js": "^1.16.1",
-    "query-string": "^6.14.0",
-    "react": "^16.14.0",
-    "react-beforeunload": "^2.4.0",
-    "react-bootstrap": "^1.4.0",
-    "react-dom": "^16.14.0",
-    "react-redux": "^5.1.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "^2.0.5",
-    "redux": "^4.0.5",
-    "source-map-explorer": "^2.5.1",
-    "typescript": "^3.9.7"
-  },
   "proxy": "http://localhost:5000",
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "dependencies": {
+    "@mars/heroku-js-runtime-env": "^3.0.2",
+    "@reduxjs/toolkit": "^2.2.1",
+    "bootstrap": "^5.3.3",
+    "popper.js": "^1.16.1",
+    "query-string": "^9.0.0",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.10.1",
+    "react-dom": "^18.2.0",
+    "react-redux": "^9.1.0",
+    "react-router-dom": "^6.22.1",
+    "react-scripts": "^5.0.1",
+    "redux-logger": "^3.0.6",
+    "util": "^0.12.5"
+  },
+  "devDependencies": {
+    "assert": "^2.1.0",
+    "browserify-fs": "^1.0.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.0",
+    "fs": "^0.0.1-security",
+    "https-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
+    "react-app-rewired": "^2.2.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.3"
+  }
 }
