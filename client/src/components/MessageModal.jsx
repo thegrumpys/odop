@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Modal, Button, Alert } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
-import { enableMessage, disableMessage } from "../store/messageModalSlice";
+import { addMessage, disableMessage } from "../store/messageModalSlice";
 import store from "../store/store";
 
 export const displayMessage = (message, variant = 'danger', header = '', help_url = '') => {
 //  console.log('In displayMessage this=',this);
 //  logUsage('event', 'DisplayMessage', { event_label: 'message: ' + message + ', variant: ' + variant});
-  store.dispatch(enableMessage({message, variant, header, help_url}));
+  store.dispatch(addMessage({message, variant, header, help_url}));
 }
 
 const MessageModal = () => {

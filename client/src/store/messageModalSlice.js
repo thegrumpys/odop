@@ -9,7 +9,7 @@ export const messageModalSlice = createSlice({
     help_url: '', // Default: no Help URL
   },
   reducers: {
-    enableMessage: (state, action) => {
+    addMessage: (state, action) => {
 //      console.log('messageModal enabled','state=',state,'state.show=',state.show,'action=',action);
       if (!state.show) { // If state not showing, then initialize else append
         state.show = true;
@@ -27,6 +27,6 @@ export const messageModalSlice = createSlice({
   }
 });
 
-export const { enableMessage, disableMessage } = messageModalSlice.actions;
+export const { addMessage, disableMessage } = messageModalSlice.actions;
 
 export default messageModalSlice.reducer;
