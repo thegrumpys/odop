@@ -36,7 +36,7 @@ class FileImport extends Component {
     // On file select (from the pop up)
     onFileChange(event) {
 //        console.log('In FileImport.onFileChange event.target.value=',event.target.value);
-        this.setState({ 
+        this.setState({
             selectedFile: event.target.files[0]
         });
     };
@@ -50,7 +50,7 @@ class FileImport extends Component {
         displaySpinner(true);
         this.state.fileReader.readAsText(this.state.selectedFile); // Begin Reading Text File
     };
-    
+
     onLoadEnd(event) {
 //        console.log('In FileImport.onLoadEnd event.target.value=',event.target.value);
         var design = JSON.parse(this.state.fileReader.result); // Convert file contents to JSON object
@@ -68,7 +68,7 @@ class FileImport extends Component {
         }
         displaySpinner(false);
     }
-    
+
     onError(e) {
 //        console.log('In FileImport.onError e=',e);
         displayMessage('GET of design names failed with message: \''+this.state.fileReader.error.message+'\'');

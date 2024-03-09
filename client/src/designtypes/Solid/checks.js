@@ -10,7 +10,7 @@ export function checks(store) {
     if (design.model.symbol_table[o.Density].value <= 0.0) {
         store.dispatch(addAlert({
             element: design.model.symbol_table[o.Density],
-            name: design.model.symbol_table[o.Density].name, 
+            name: design.model.symbol_table[o.Density].name,
             message: 'Density (' + toODOPPrecision(design.model.symbol_table[o.Density].value) + ') < zero',
             severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Solid/alerts.html#D_LE_Zero)'

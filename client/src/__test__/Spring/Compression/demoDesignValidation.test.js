@@ -31,19 +31,19 @@ it('demoDesignValidation', () => {
 // title: "Page 02 of 10"
     store.dispatch(loadInitialState("Spring/Compression","US"));
     store.dispatch(changeLabelsValue([{"name":"COMMENT","value":"Compression Spring demoDesignValidation"}]));
-    
+
     design = store.getState().model;
     expect(design.model.result.objective_value).toBeCloseTo(0.0000000,7);
-    
+
 // title: "Page 03 of 10"
     // No-op
-    
+
 // title: "Page 04 of 10"
     // No-op
-    
+
 // title: "Page 05 of 10"
     // No-op
-    
+
 // title: "Page 06 of 10"
     store.dispatch(fixSymbolValue("Wire_Dia",0.0395));
     store.dispatch(fixSymbolValue("OD_Free",0.357));
@@ -51,22 +51,22 @@ it('demoDesignValidation', () => {
     store.dispatch(fixSymbolValue("Coils_T",8));
     store.dispatch(fixSymbolValue("L_1",0.689));
     store.dispatch(fixSymbolValue("L_2",0.394));
-    
+
     design = store.getState().model;
     expect(design.model.result.objective_value).toBeCloseTo(24.4388745,7);
-    
+
 // title: "Page 07 of 10"
     // No-op
-    
+
 // title: "Page 08 of 10"
     store.dispatch(search());
-    
+
     design = store.getState().model;
     expect(design.model.result.objective_value).toBeCloseTo(0.0000033,7);
 
 // title: "Page 09 of 10"
     // No-op
-    
+
 // title: "Page 10 of 10 (last page)"
     // No-op
 });

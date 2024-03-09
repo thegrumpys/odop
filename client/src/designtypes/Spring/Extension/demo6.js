@@ -11,23 +11,23 @@ export const execute = {
                 <>
                     <p>
                     The following example briefly illustrates the use of ODOP:Spring in
-                    the design of an extension spring. 
+                    the design of an extension spring.
                     While the difference in difficulty between calculating compression and
                     extension springs by hand may be substantial, you should find that
-                    ODOP:Spring makes the design of extension springs no more difficult 
+                    ODOP:Spring makes the design of extension springs no more difficult
                     or time consuming than the design of compression springs.
                     </p>
-                    
+
                     <p>
-                    This demo session is written with the assumption that the reader is already familiar with 
+                    This demo session is written with the assumption that the reader is already familiar with
                     basic ODOP concepts and terminology.
-                    To get a more introductory experience, 
-                    the compression spring demo sessions named "demoDesignValidation" and "demoNewDesign" are a good place to get started. 
+                    To get a more introductory experience,
+                    the compression spring demo sessions named "demoDesignValidation" and "demoNewDesign" are a good place to get started.
                     </p>
-                    
+
                     <p>
-                    As with the other tutorial and demo sessions, 
-                    this session needs to start from a known state.  
+                    As with the other tutorial and demo sessions,
+                    this session needs to start from a known state.
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     </p>
@@ -45,7 +45,7 @@ export const execute = {
                     <p>
                     The initial conditions expected by this demo session are now established.
                     </p>
-                    
+
                     <p>This problem appears in the  HANDBOOK of SPRING DESIGN  published by:<br />
                     <br />
                     Spring Manufacturers Institute, Inc.<br />
@@ -73,7 +73,7 @@ export const execute = {
                 <br />
                 Example 1: Design an extension spring to meet the following requirements:
                 </p>
-                
+
                 <table>
                     <tbody>
                         <tr><th>Material</th><td>&nbsp;=</td><td>&nbsp;</td><td>oil-tempered wire</td><td>&nbsp;</td></tr>
@@ -88,7 +88,7 @@ export const execute = {
                     </tbody>
                 </table>
                 <br />
-               
+
                 <p>
                 </p>
                 </>
@@ -99,7 +99,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The demo session has now entered what is known about the problem. 
+                    The demo session has now entered what is known about the problem.
                     <br />
                     We'll allow a clearance, say 0.015 inch, on the coil diameters.<br />
                     For the inside  diameter: 0.750 + 0.015 = 0.765<br />
@@ -115,7 +115,7 @@ export const execute = {
                     &nbsp; FIX  Force_2  35<br />
                     &nbsp; FIX  L_2    6.6
                     </p>
-                    
+
                     <p>
                     This is a good time to scroll down and confirm these changes are now in place.
                     </p>
@@ -141,7 +141,7 @@ export const execute = {
                     <p>
                     In the process of transitioning to the next page, the demo session will run Search.
                     </p>
-                    
+
                     <p>
                     <br /><br />
                     </p>
@@ -183,7 +183,7 @@ export const execute = {
                     The <b>Action : Select Size</b> menu item can be used to select the nearest standard wire diameter.
                     You can experiment with that now.
                     </p>
-                   
+
                     <p>
                     In the process of transitioning to the next page, the demo session will
                     FIX a value of 0.105 inch on Wire_Dia and then
@@ -197,7 +197,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    This is your opportunity for a detailed look at the numbers. 
+                    This is your opportunity for a detailed look at the numbers.
                     Don't forget to review the Report(s).
                     </p>
 
@@ -212,10 +212,10 @@ export const execute = {
                     <p>
                     The two solutions are in reasonable agreement.
                     </p>
-                   
+
                     <p>
                     The next page will go one step further by entering the handbook solution and comparing predictions.
-                    In the process, 
+                    In the process,
                     ODOP:Spring's calculation of deflection in the loops (Hook_Deflect_All) will be disabled.
                     </p>
                 </>
@@ -234,7 +234,7 @@ export const execute = {
                     &nbsp; CHANGE END_TYPE User_Specified<br />
                     &nbsp; CHANGE Hook_Deflect_All 0.0
                     </p>
-                    
+
                     <p>
                     The handbook solution produced:<br />
                     <br />

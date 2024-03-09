@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { displaySpinner } from "./Spinner";
 
-export default function Test() {
+export default Test = () => {
 //  console.log("Test - Mounting...");
   const navigate = useNavigate();
 

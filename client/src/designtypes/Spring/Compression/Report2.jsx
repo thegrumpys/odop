@@ -304,7 +304,7 @@ class Report2 extends ReportBase {
                     <>{this.clWarnString}</>
                 }
                 <br/>
-                <sup>*</sup>Source data for %_Tensile_Endur (Stress_Lim_Endur) based on Stress Ratio = 0. 
+                <sup>*</sup>Source data for %_Tensile_Endur (Stress_Lim_Endur) based on Stress Ratio = 0.
                 <br/>
                 <br/>
             </>

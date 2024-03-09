@@ -8,7 +8,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    This script provides multiple test cases exploring how Search responds to validity. 
+                    This script provides multiple test cases exploring how Search responds to validity.
                     Specifically, cases where a search started from a valid or invalid start point will produce a valid or invalid result.
                     The last three cases are examples where Search in ODOP:Spring v4.0.x and earlier would start valid but end invalid.
                     </p>
@@ -133,9 +133,9 @@ export const execute = {
                 <>
                     <p>
                     Original Case 1:<br />
-                    Starting Search from this point in v4.0.x produced negative Wire_Dia and other variables. 
-                    Improved default constraints and sdlim values permit v4.2.2 to produce a valid and feasible result 
-                    from this start point. 
+                    Starting Search from this point in v4.0.x produced negative Wire_Dia and other variables.
+                    Improved default constraints and sdlim values permit v4.2.2 to produce a valid and feasible result
+                    from this start point.
                     </p>
                     <p>
                     Loaded Compression spring initialState.<br />
@@ -171,9 +171,9 @@ export const execute = {
                 <>
                     <p>
                     Original Case 2:<br />
-                    Starting Search from this point in v4.0.x produced negative Coils_A and other variables. 
-                    Improved default constraints and sdlim values permit v4.2.2 to produce a valid and feasible result 
-                    from this start point. 
+                    Starting Search from this point in v4.0.x produced negative Coils_A and other variables.
+                    Improved default constraints and sdlim values permit v4.2.2 to produce a valid and feasible result
+                    from this start point.
                     </p>
                     <p>
                     Loaded Compression spring initialState.<br />
@@ -195,7 +195,7 @@ export const execute = {
                 <>
                     <p>
                     In v4.3 (post branches 590 & 569), console.log diagnostics show that
-                    Search goes from a INVALID to VALID to INVALID to VALID solution. 
+                    Search goes from a INVALID to VALID to INVALID to VALID solution.
                     </p>
                 </>
             ),
@@ -208,10 +208,10 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Original Case 3:<br /> 
-                    Starting Search from this point in v4.0.x produced negative ID_Free and other variables. 
-                    Improved default constraints and sdlim values permit v4.2.2 to produce a valid and feasible result 
-                    from this start point. 
+                    Original Case 3:<br />
+                    Starting Search from this point in v4.0.x produced negative ID_Free and other variables.
+                    Improved default constraints and sdlim values permit v4.2.2 to produce a valid and feasible result
+                    from this start point.
                     </p>
                     <p>
                     Loaded Compression spring initialState.<br />

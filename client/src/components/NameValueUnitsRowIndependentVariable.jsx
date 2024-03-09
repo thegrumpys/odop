@@ -7,7 +7,7 @@ import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
-export default function NameValueUnitsRowIndependentVariable({ element, index, onChangeValid, onChangeInvalid, onSet, onReset }) {
+export default NameValueUnitsRowIndependentVariable = ({ element, index, onChangeValid = () => {}, onChangeInvalid = () => {}, onSet = () => {}, onReset = () => {} }) => {
 //  console.log("NameValueUnitsRowIndependentVariable - Mounting...");
   const system_controls = useSelector((state) => state.model.model.system_controls);
   const dispatch = useDispatch();
@@ -33,26 +33,26 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
     if (auto_fixed) {
       dispatch(changeResultTerminationCondition('The value of ' + element.name + ' has been automatically fixed.'));
     }
-    if (typeof onChangeValid === "function") onChangeValid(event);
+    onChangeValid(event);
   }
 
   const onChangeInvalidLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onChangeInvalid event.target.value=', event.target.value);
-    if (typeof onChangeInvalid === "function") onChangeInvalid(event);
+    onChangeInvalid(event);
   }
 
   const onSetLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onSet');
     dispatch(fixSymbolValue(element.name));
     logValue(element.name, 'FIXED', 'FixedFlag', false);
-    if (typeof onSet === "function") onSet(event);
+    onSet(event);
   }
 
   const onResetLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onReset');
     dispatch(freeSymbolValue(element.name));
     logValue(element.name, 'FREE', 'FixedFlag', false);
-    if (typeof onReset === "function") onReset(event);
+    onReset(event);
   }
 
   var results = getAlertsByName(element.name);

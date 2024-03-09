@@ -13,7 +13,7 @@ class ViewCADModel extends Component {
             modal: false
         };
     }
-    
+
     toggle() {
 //        console.log('In ViewCADModel.toggle this=',this);
         this.setState({
@@ -115,7 +115,7 @@ class ViewCADModel extends Component {
             </>
         );
     }
-}  
+}
 
 const mapStateToProps = state => ({
     symbol_table: state.model.symbol_table,

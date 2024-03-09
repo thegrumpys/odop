@@ -13,7 +13,7 @@ export function migrate(design) {
     var source;
     var sink;
     var previous_version = design.version;
-    var migrated_design = design; // Assume no-op as default 
+    var migrated_design = design; // Assume no-op as default
 
     /* eslint-disable no-fallthrough */
 //    console.log('In migrate design.version=',design.version);
@@ -68,26 +68,26 @@ export function migrate(design) {
         migrated_design.version = '3';
     case '3':
         // console.log('Convert from 3 to 4');
-        design.symbol_table[27].sdlim = 10000; 
+        design.symbol_table[27].sdlim = 10000;
         // Add Energy calculation
         design.symbol_table.splice(34,0,Object.assign({},design.symbol_table[27]));  //  Duplicate Cycle_Life in target position
         design.symbol_table[34].name = 'Energy'; // Rename it to Energy
         if (design.symbol_table[0].units === 'mm') { // Check for metric units - is there a better approach?
-            design.symbol_table[34].value = 0.0; 
+            design.symbol_table[34].value = 0.0;
             design.symbol_table[34].units = 'N-mm';
-            design.symbol_table[34].lmin = 0; 
-            design.symbol_table[34].lmax = 0; 
-            design.symbol_table[34].cmin = 1.0; 
-            design.symbol_table[34].cmax = 1000000; 
+            design.symbol_table[34].lmin = 0;
+            design.symbol_table[34].lmax = 0;
+            design.symbol_table[34].cmin = 1.0;
+            design.symbol_table[34].cmax = 1000000;
         } else {
-            design.symbol_table[34].value = 0.0; 
+            design.symbol_table[34].value = 0.0;
             design.symbol_table[34].units = 'in-lb';
-            design.symbol_table[34].lmin = 0; 
-            design.symbol_table[34].lmax = 0; 
-            design.symbol_table[34].cmin = 1.0; 
-            design.symbol_table[34].cmax = 1000000; 
+            design.symbol_table[34].lmin = 0;
+            design.symbol_table[34].lmax = 0;
+            design.symbol_table[34].cmin = 1.0;
+            design.symbol_table[34].cmax = 1000000;
         }
-        design.symbol_table[34].sdlim = 0.0; 
+        design.symbol_table[34].sdlim = 0.0;
         design.symbol_table[34].tooltip = "Change in elastic potential energy between 1 and 2";
         // Make Catalog_Name and Catalog_Number not available for input
         design.symbol_table[62].input = false;
@@ -95,14 +95,14 @@ export function migrate(design) {
         migrated_design.version = '4'; // last thing... set the migrated model version
     case '4':
 //        console.log('Convert from 4 to 5');
-        if (design.symbol_table[0].units === 'mm') { // Check for units 
-            design.symbol_table[23].lmax = FDCL; 
-            design.symbol_table[23].cmax = 52; 
-            design.symbol_table[23].sdlim = 1000; 
+        if (design.symbol_table[0].units === 'mm') { // Check for units
+            design.symbol_table[23].lmax = FDCL;
+            design.symbol_table[23].cmax = 52;
+            design.symbol_table[23].sdlim = 1000;
         } else {
-            design.symbol_table[23].lmax = FDCL; 
-            design.symbol_table[23].cmax = 52; 
-            design.symbol_table[23].sdlim = 150000; 
+            design.symbol_table[23].lmax = FDCL;
+            design.symbol_table[23].cmax = 52;
+            design.symbol_table[23].sdlim = 150000;
         }
         design['jsontype'] = "ODOP"; // Add in model type
         if (design.symbol_table[0].units === "inches") { // Add in units type
@@ -350,7 +350,7 @@ export function migrate(design) {
     }
 //    console.log('In migrate migrated_design.version=',migrated_design.version);
     /* eslint-enable */
-    
+
 //    console.log('In migrate migrated_design=',migrated_design);
     return migrated_design;
 }

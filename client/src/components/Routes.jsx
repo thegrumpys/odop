@@ -43,7 +43,7 @@ class Routes extends Component {
           this.loadDefaultDesign();
       }
   }
-  
+
   componentDidUpdate(prevProps) {
 //      console.log('In Routes.componentDidUpdate this=',this,'prevProps=',prevProps);
       if (prevProps.user !== this.props.user) {
@@ -56,7 +56,7 @@ class Routes extends Component {
 //          console.log('In Routes.componentDidUpdate prevProps.type=',prevProps.type,'this.props.type=',this.props.type);
       }
   }
-  
+
   loadRedirect() {
 //      console.log('In Routes.loadRedirect this=',this);
       this.props.restoreAutoSave("redirect");
@@ -70,7 +70,7 @@ class Routes extends Component {
       this.props.history.push('/');
       logUsage('event', 'Routes', { event_label: 'type: ' + this.props.type + ' load redirect' });
   }
-  
+
   promptLoadAutoSave() {
 //      console.log('In Routes.promptLoadAutoSave this=',this);
       this.setState({
@@ -79,7 +79,7 @@ class Routes extends Component {
       });
       logUsage('event', 'Routes', { event_label: 'type: ' + this.props.type + ' prompt autoSave' });
   }
-  
+
   loadAutoSaveDesign() {
 //      console.log('In Routes.loadAutoSaveDesign this=',this);
       this.setState({
@@ -95,7 +95,7 @@ class Routes extends Component {
       this.props.history.push('/')
       logUsage('event', 'Routes', { event_label: 'type: ' + this.props.type + ' load autoSave' });
   }
-  
+
   loadDefaultDesign() {
 //      console.log('In Routes.loadDefaultDesign this=',this);
 //      console.log('In Routes.loadDefaultDesign config.url.execute=',config.url.execute);
@@ -108,7 +108,7 @@ class Routes extends Component {
       this.getDesign(this.props.user, config.url.type, config.url.name);
       logUsage('event', 'Routes', { event_label: 'type: ' + this.props.type + ' load defaultDesign' });
   }
-  
+
   loadInitialState(type, units) {
 //      console.log('In Routes.loadInitialState this=',this,'type=',type,'units=',units);
       this.props.loadInitialState(type, units);
@@ -116,7 +116,7 @@ class Routes extends Component {
       this.props.deleteAutoSave();
       logUsage('event', 'Routes', { event_label: 'type: ' + type + ' load initialState ' + units});
   }
-  
+
   getDesign(user, type, name) {
 //      console.log('In Routes.getDesign user=',user,'type=',type,'name=',name);
       displaySpinner(true);

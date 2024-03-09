@@ -23,7 +23,7 @@ export function seek(store, action) {
             console.log('02 NOTE:  THE SEEK PROCESS MAY PRODUCE BETTER RESULTS WITH A FEASIBLE START POINT.');
         }
     }
-    
+
     if (design.model.system_controls.ioopt > 5) {
         console.log("02A THE NUMBER OF FIXED INDEPENDENT VARIABLES IS:", design.model.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && element.lmin & FIXED ? total+1 : total+0}, 0));
         console.log("02B THE NUMBER OF FREE INDEPENDENT VARIABLES IS:", design.model.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0));
@@ -34,7 +34,7 @@ export function seek(store, action) {
         store.dispatch(changeResultTerminationCondition(ncode));
         return;
     }
-    
+
     if (action.payload.minmax === MAX) {
         SDIR = +1;
     } else {
@@ -152,7 +152,7 @@ export function seek(store, action) {
         }
         console.log('14 Merit Function = ', merit(p, x, design));  // Merit Function contribution to OBJ may be negative
     }
-    
+
     function merit(p, x, design) {
         var m_funct;
         if (SOUGHT === 0) {

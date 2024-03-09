@@ -9,7 +9,7 @@ export function init(store, p, x) {
  var m_tab;
  const ten3 = 1000.0;
  var tensile_400;
- 
+
    /*  Bring in material properties table  */
  if (x[o.Material_File] === "mat_metric.json") m_tab = require('../mat_metric.json');
     else m_tab = require('../mat_us.json');
@@ -17,10 +17,10 @@ export function init(store, p, x) {
  var et_tab = require('./endtypes.json');
 //    console.log("et_tab=", et_tab);
 
- 
+
      x[o.Spring_Type] = "Compression";
      j = x[o.End_Type];
- 
+
  switch(x[o.Prop_Calc_Method]){
  default:
  case 1:      // Prop_Calc_Method = 1 - Use values from material table
@@ -68,7 +68,7 @@ export function init(store, p, x) {
     x[o.tensile_010]   = ten3 * m_tab[i][mo.t010];
 //    tensile_400      = m_tab(i).t400;
     tensile_400        = ten3 * m_tab[i][mo.t400];
-    
+
     switch(x[o.Life_Category]){
         default:
         case 1:
@@ -93,7 +93,7 @@ export function init(store, p, x) {
         case 8:
             x[o.PC_Tensile_Endur] = m_tab[i][mo.pte8];
     }
-    
+
 //    pc_tensile_stat  = m_tab(i).fy;
     x[o.PC_Tensile_Stat]  = m_tab[i][mo.pte1];
 //    pc_tensile_bend  = m_tab(i).ptb(life_catagory);

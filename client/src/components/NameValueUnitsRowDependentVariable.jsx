@@ -7,7 +7,7 @@ import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
-export default function NameValueUnitsRowIndependentVariable({ element, index, onSet, onReset }) {
+export default NameValueUnitsRowIndependentVariable = ({ element, index, onSet = () => {}, onReset = () => {} }) => {
 //  console.log("NameValueUnitsRowIndependentVariable - Mounting...");
   const system_controls = useSelector((state) => state.model.model.system_controls);
   const dispatch = useDispatch();
@@ -22,14 +22,14 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
 //    console.log('In NameValueUnitsRowDependentVariable.onSet');
     dispatch(fixSymbolValue(element.name));
     logValue(element.name, 'FIXED', 'FixedFlag', false);
-    if (typeof onSet === "function") onSet(event);
+    onSet(event);
   }
 
   const onResetLocal = (event) => {
 //    console.log('In NameValueUnitsRowDependentVariable.onReset');
     dispatch(freeSymbolValue(element.name));
     logValue(element.name, 'FREE', 'FixedFlag', false);
-    if (typeof onReset === "function") onReset(event);
+    onReset(event);
   }
 
   var results = getAlertsByName(element.name);

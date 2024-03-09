@@ -54,10 +54,10 @@ class HelpDemo extends Component {
     onSelect(event) {
 //      console.log('In HelpDemo.onSelect event.target.value=',event.target.value);
       this.setState({
-          execute_name: event.target.value 
+          execute_name: event.target.value
       });
   }
-  
+
     onExecute() {
 //        console.log('In HelpDemo.onExecute');
         this.setState({
@@ -70,7 +70,7 @@ class HelpDemo extends Component {
 //        console.log('In HelpDemo.onExecute execute=',execute);
         startExecute('Help : Demo : ' + this.state.execute_name, this.state.execute_name, execute.steps);
     }
-    
+
     onCancel() {
 //        console.log('In HelpDemo.onCancel');
         this.setState({
@@ -78,7 +78,7 @@ class HelpDemo extends Component {
         });
         // Noop - all done
     }
-    
+
     render() {
 //        console.log('In HelpDemo.render this=',this);
         return (
@@ -109,7 +109,7 @@ class HelpDemo extends Component {
             </>
         );
     }
-}  
+}
 
 const mapStateToProps = state => ({
     type: state.model.type,

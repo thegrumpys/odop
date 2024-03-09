@@ -10,10 +10,10 @@ export const execute = {
             text: (
                 <>
                     <p>Welcome back !</p>
-                    
+
                     <p>
-                    As with the other tutorial and demo sessions, 
-                    this session needs to start from a known state.  
+                    As with the other tutorial and demo sessions,
+                    this session needs to start from a known state.
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     </p>
@@ -31,13 +31,13 @@ export const execute = {
                     <p>
                     The initial conditions expected by this demo session are now established.
                     </p>
-                    
+
                     <p>The following example briefly illustrates the use of ODOP:Spring in
                     the design of a compression spring. </p>
-                    
+
                     <p>
                     To continue with this example, just click the "Next" button as you finish
-                    reading each page (step). 
+                    reading each page (step).
                     </p>
                     <br />
                 </>
@@ -89,7 +89,7 @@ export const execute = {
                     mention is made of the fact that the spring is never compressed
                     beyond its "normal" length of .385 inch.
                     </p>
-                   
+
                     <p>
                     As a hint, it is mentioned that a music wire spring of 0.035 inch
                     wire diameter operated satisfactorily.  This fact was used to aid
@@ -103,7 +103,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The demo has now entered what is known about the problem. 
+                    The demo has now entered what is known about the problem.
                     In summary, the changes were:<br />
                     <br />
                     CHANGE  Material_Type  302_STAINLESS<br />
@@ -147,7 +147,7 @@ export const execute = {
                     <p>
                     CHANGE  FS_Solid MIN  0.7
                     </p>
-                    
+
                     <p>
                     After the click on Next, the demo will run Search.
                     </p>

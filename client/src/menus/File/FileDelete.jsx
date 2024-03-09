@@ -67,7 +67,7 @@ class FileDelete extends Component {
             var name = '';
             if (this.state.names.length > 0)
                 name = this.state.names[0].name; // Default to first name
-            this.setState({ 
+            this.setState({
                 name: name
             });
         })
@@ -160,7 +160,7 @@ class FileDelete extends Component {
         });
         this.deleteDesign(this.props.user, this.state.type, this.state.name);
     }
-    
+
     render() {
 //        console.log('In FileDelete.render this=',this);
         return (

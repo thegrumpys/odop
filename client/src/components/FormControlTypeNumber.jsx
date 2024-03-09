@@ -148,7 +148,7 @@ class FormControlTypeNumber extends Component {
                 className += ' borders-invalid';
             }
         }
-        var icon_alerts = this.props.icon_alerts; // start with the icon alerts 
+        var icon_alerts = this.props.icon_alerts; // start with the icon alerts
         if (icon_alerts === undefined) {
           icon_alerts = [];
         }

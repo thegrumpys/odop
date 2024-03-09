@@ -25,7 +25,7 @@ it('despak without merit', () => {
     invokeEquationSet(store);
     setSclDen(store);
     updateObjectiveValue(store);
-    
+
     store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
     store.dispatch(changeSymbolValue("RADIUS", 0.4));
     store.dispatch(changeSymbolValue("THICKNESS", 0.04));
@@ -99,7 +99,7 @@ it('despak with merit', () => {
     invokeEquationSet(store);
     setSclDen(store);
     updateObjectiveValue(store);
-    
+
     store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
     store.dispatch(changeSymbolValue("RADIUS", 0.4));
     store.dispatch(changeSymbolValue("THICKNESS", 0.04));
@@ -120,7 +120,7 @@ it('despak with merit', () => {
         M_DEN = 1.0;
     }
     var element;
-    
+
     function merit(p, x, design) {
         var m_funct;
         if (SOUGHT === 0) {

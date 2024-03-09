@@ -13,7 +13,7 @@ class ViewSymbolTable extends Component {
             modal: false,
         };
     }
-    
+
     toggle() {
 //        console.log('In ViewSymbolTable.toggle');
         this.setState({
@@ -132,7 +132,7 @@ class ViewSymbolTable extends Component {
             </>
         );
     }
-}  
+}
 
 const mapStateToProps = state => ({
     symbol_table: state.model.symbol_table,

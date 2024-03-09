@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip  } from 'react-bootstrap';
 
-export default function NameValueUnitsHeaderIndependentVariable() {
+export default NameValueUnitsHeaderIndependentVariable = () => {
 //  console.log("NameValueUnitsHeaderIndependentVariable - Mounting...");
   const system_controls = useSelector((state) => state.model.model.system_controls);
-    
+
   useEffect(() => {
 //    console.log("NameValueUnitsHeaderIndependentVariable - Mounted");
 //    return () => console.log("NameValueUnitsHeaderIndependentVariable - Unmounting ...");
@@ -34,7 +34,7 @@ export default function NameValueUnitsHeaderIndependentVariable() {
         </th>
         <th className="text-center">
           <OverlayTrigger placement="top" overlay={<Tooltip className="tooltip-lg">
-            <p>Check <i className="far fa-check-square"></i> to FIX the variable and hold it unchanged at this value.</p> 
+            <p>Check <i className="far fa-check-square"></i> to FIX the variable and hold it unchanged at this value.</p>
             <p>Uncheck <i className="far fa-square"></i> to FREE it and allow Search to find a value within its constraints.</p>
             <p>See Help Terminology FIX.</p>
             </Tooltip>}>

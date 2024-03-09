@@ -42,7 +42,7 @@ var ContextAwareAccordion = function({ children }) {
 }
 
 class AlertsAccordion extends Component {
-  
+
     constructor(props) {
 //        console.log('In AlertsAccordion.constructor props=',props);
         super(props);
@@ -88,14 +88,14 @@ class AlertsAccordion extends Component {
         event.preventDefault();
         window.open(event.target.href, '_blank');
     }
-    
+
     setLevel(level) {
 //        console.log('In AlertsAccordion.setLevel this=',this,'level=',level);
         this.setState({
             level: level
         });
     }
-    
+
     onAutoFixToggle(event) {
 //        console.log('In AlertsAccordion.onAutoFixToggle this=',this,'event=',event);
         var copy = Object.assign({}, this.props.system_controls);
@@ -110,7 +110,7 @@ class AlertsAccordion extends Component {
         this.props.changeSystemControlsValue(copy);
         logUsage('event', 'AlertsAccordion', { event_label: 'AutoFixToggle ' + label});
     }
-    
+
     render() {
 //        console.log('In AlertsAccordion.render this=',this);
         var line = 1;

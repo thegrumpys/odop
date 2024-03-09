@@ -1,26 +1,26 @@
-import { STARTUP, 
+import { STARTUP,
     LOAD,
     LOAD_INITIAL_STATE,
-    
-    CHANGE_SYMBOL_VALUE, 
-    FIX_SYMBOL_VALUE, 
-    FREE_SYMBOL_VALUE, 
-    CHANGE_SYMBOL_CONSTRAINT, 
-    SET_SYMBOL_FLAG, 
-    RESET_SYMBOL_FLAG, 
-    
-    CHANGE_INPUT_SYMBOL_VALUES, 
-    RESTORE_INPUT_SYMBOL_VALUES, 
-    
+
+    CHANGE_SYMBOL_VALUE,
+    FIX_SYMBOL_VALUE,
+    FREE_SYMBOL_VALUE,
+    CHANGE_SYMBOL_CONSTRAINT,
+    SET_SYMBOL_FLAG,
+    RESET_SYMBOL_FLAG,
+
+    CHANGE_INPUT_SYMBOL_VALUES,
+    RESTORE_INPUT_SYMBOL_VALUES,
+
     CHANGE_SYSTEM_CONTROLS_VALUE,
 
-    RESTORE_OUTPUT_SYMBOL_CONSTRAINTS, 
-    
-    SEARCH, 
+    RESTORE_OUTPUT_SYMBOL_CONSTRAINTS,
+
+    SEARCH,
     SEEK,
-    
+
     RESTORE_AUTO_SAVE,
-    
+
     MIN, MAX, FIXED, CONSTRAINED, FDCL
     } from '../actionTypes';
 import { setSclDen } from './setSclDen';
@@ -32,11 +32,11 @@ import { propagate } from './propagate';
 import { updateObjectiveValue } from './updateObjectiveValue';
 import { invokeCheck } from './invokeCheck';
 import { resetCatalogSelection } from './resetCatalogSelection';
-import { changeSymbolValue, setSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
+import { changeSymbolValue, setSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints,
          restoreOutputSymbolConstraints, changeResultTerminationCondition } from '../modelSlice';
 
 export const dispatcher = store => next => action => {
-    
+
     var design;
     var source;
     var sink;

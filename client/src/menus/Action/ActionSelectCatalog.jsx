@@ -28,14 +28,14 @@ class ActionSelectCatalog extends Component {
 //        console.log('In ActionSelectCatalog.componentDidMount this.state=',this.state);
         this.updateCatalogNames();
     }
-    
+
     componentDidUpdate(prevProps) {
         if (prevProps.type !== this.props.type) {
 //            console.log('In ActionSelectCatalog.componentDidUpdate prevPropsprev.type=',prevProps.type,'props.type=',this.props.type);
             this.updateCatalogNames();
         }
     }
-    
+
     updateCatalogNames() {
 //        console.log('In ActionSelectCatalog.updateCatalogNames');
         var { getCatalogNames, getCatalogEntries } = require('../../designtypes/'+this.props.type+'/catalog.js'); // Dynamically load getCatalogNames & getCatalogEntries
@@ -76,7 +76,7 @@ class ActionSelectCatalog extends Component {
             entry: entry
         });
     }
-    
+
     toggle() {
 //        console.log('In ActionSelectCatalog.toggle');
         this.updateCatalogNames();
@@ -121,7 +121,7 @@ class ActionSelectCatalog extends Component {
         logUsage('event', 'ActionSelectCatalog', { event_label: this.state.name + ' ' + this.state.entries[this.state.entry][0] });
         this.props.saveAutoSave();
 //        console.log('In ActionSelectCatalog.onSelect this.state.entries=',this.state.entries);
-        this.state.entries[this.state.entry][2].forEach((element) => { 
+        this.state.entries[this.state.entry][2].forEach((element) => {
 //            console.log('In ActionSelectCatalog.onSelect element=',element);
             this.props.changeSymbolValue(element[0],element[1]);
             logValue(element[0],element[1]);
@@ -162,7 +162,7 @@ class ActionSelectCatalog extends Component {
                             )}
                         </Form.Control>
                         <br />
-                        {this.state.entries.length === 0 ? 
+                        {this.state.entries.length === 0 ?
                             <Form.Label htmlFor="catalogEntrySelect">No acceptable entries were found in this catalog</Form.Label>
                         :
                             <>
@@ -194,7 +194,7 @@ class ActionSelectCatalog extends Component {
             </>
         );
     }
-}  
+}
 
 ActionSelectCatalog.contextTypes = {
     store: PropTypes.object

@@ -10,7 +10,7 @@ export function migrate(design) {
 //    console.log('In migrate design=',design);
 
     var previous_version = design.version;
-    var migrated_design = design; // Assume no-op as default 
+    var migrated_design = design; // Assume no-op as default
 
     /* eslint-disable no-fallthrough */
 //    console.log('In migrate design.version=',design.version);
@@ -33,18 +33,18 @@ export function migrate(design) {
     case '2':
         // Current model version
 //        console.log('Convert from 2 to 3');
-        // Mark all design_parameters and state_varaibles with equationset: true, 
+        // Mark all design_parameters and state_varaibles with equationset: true,
         design.design_parameters.forEach((design_parameter) => {
 //            console.log('design_parameter=',design_parameter);
-            design_parameter['input'] = true; 
-            design_parameter['equationset'] = true; 
-            design_parameter['hidden'] = false; 
+            design_parameter['input'] = true;
+            design_parameter['equationset'] = true;
+            design_parameter['hidden'] = false;
         });
         design.state_variables.forEach((state_variable) => {
 //            console.log('state_variable=',state_variable);
-            state_variable['input'] = false; 
+            state_variable['input'] = false;
             state_variable['equationset'] = true;
-            state_variable['hidden'] = false; 
+            state_variable['hidden'] = false;
         });
         // Mark all constants with equationset: false
         design.constants.forEach((constant) => {
@@ -57,7 +57,7 @@ export function migrate(design) {
             constant['ioclass'] = 0;
             constant['sdlim'] = 1.0;
             constant['equationset'] = false;
-            constant['hidden'] = false; 
+            constant['hidden'] = false;
         });
         // Create symbol table
         design['symbol_table'] = [];
@@ -138,7 +138,7 @@ export function migrate(design) {
         if (design.symbol_table[ 3].value > 7) { // Material table expansion
             ++design.symbol_table[ 3].value;
         };
-        design.symbol_table[3].table = 'Solid/mat_us';  // Incorporate revised material file naming 
+        design.symbol_table[3].table = 'Solid/mat_us';  // Incorporate revised material file naming
         migrated_design.version = '9'; // last thing... set the migrated model version
     case '9':
         // Current model version
@@ -157,7 +157,7 @@ export function migrate(design) {
     }
 //    console.log('In migrate migrated_design.version=',migrated_design.version);
     /* eslint-enable */
-    
+
 //    console.log('In migrate migrated_design=',migrated_design);
     return migrated_design;
 }

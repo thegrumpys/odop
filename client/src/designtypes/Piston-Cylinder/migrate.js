@@ -10,7 +10,7 @@ export function migrate(design) {
 //    console.log('In migrate design=',design);
 
     var previous_version = design.version;
-    var migrated_design = design; // Assume no-op as default 
+    var migrated_design = design; // Assume no-op as default
 
     /* eslint-disable no-fallthrough */
 //    console.log('In migrate design.version=',design.version);
@@ -22,18 +22,18 @@ export function migrate(design) {
     case '1':
         // Current model version
 //        console.log('Convert from 1 to 2');
-        // Mark all design_parameters and state_varaibles with equationset: true, 
+        // Mark all design_parameters and state_varaibles with equationset: true,
         design.design_parameters.forEach((design_parameter) => {
 //            console.log('design_parameter=',design_parameter);
-            design_parameter['input'] = true; 
-            design_parameter['equationset'] = true; 
-            design_parameter['hidden'] = false; 
+            design_parameter['input'] = true;
+            design_parameter['equationset'] = true;
+            design_parameter['hidden'] = false;
         });
         design.state_variables.forEach((state_variable) => {
 //            console.log('state_variable=',state_variable);
-            state_variable['input'] = false; 
+            state_variable['input'] = false;
             state_variable['equationset'] = true;
-            state_variable['hidden'] = false; 
+            state_variable['hidden'] = false;
         });
         // Mark all constants with equationset: false
         design.constants.forEach((constant) => {
@@ -46,7 +46,7 @@ export function migrate(design) {
             constant['ioclass'] = 0;
             constant['sdlim'] = 1.0;
             constant['equationset'] = false;
-            constant['hidden'] = false; 
+            constant['hidden'] = false;
         });
         // Create symbol table
         design['symbol_table'] = [];
@@ -132,7 +132,7 @@ export function migrate(design) {
     }
 //    console.log('In migrate migrated_design.version=',migrated_design.version);
     /* eslint-enable */
-    
+
 //    console.log('In migrate migrated_design=',migrated_design);
     return migrated_design;
 }

@@ -109,7 +109,7 @@ it('search with merit', () => {
         M_DEN = 1.0;
     }
     var element;
-    
+
     function merit(p, x, design) {
         var m_funct;
         if (SOUGHT === 0) {

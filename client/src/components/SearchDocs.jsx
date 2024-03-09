@@ -22,7 +22,7 @@ class SearchDocs extends Component {
             results: [],
         };
     }
-    
+
     onChange(event) {
 //        console.log("In SearchDocs.onChange event=",event);
         this.setState({
@@ -36,7 +36,7 @@ class SearchDocs extends Component {
             this.onButtonPress(event);
         }
     }
-    
+
     onButtonPress(event) {
 //        console.log("In SearchDocs.onButtonPress event=",event);
         var text = this.state.text;
@@ -104,7 +104,7 @@ class SearchDocs extends Component {
                     <Modal.Body>
                         <p>Found {this.state.results.length} matching documents</p>
                         <ul>
-                        {this.state.results !== undefined && this.state.results.map((element) => 
+                        {this.state.results !== undefined && this.state.results.map((element) =>
                             <li key={element.href}>
                                 <a href={'/docs/' + element.href + '?highlights=' + JSON.stringify(element.highlight_text)} target='_blank' rel="noopener noreferrer"><b>{element.title}</b></a>
                                 <div className="content" dangerouslySetInnerHTML={{__html: element.sentence_text}}></div>

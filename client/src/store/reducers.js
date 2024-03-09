@@ -28,7 +28,7 @@ import { STARTUP,
 
     CHANGE_SYSTEM_CONTROLS_VALUE,
     CHANGE_LABELS_VALUE,
-    
+
     SAVE_AUTO_SAVE,
     RESTORE_AUTO_SAVE,
     DELETE_AUTO_SAVE,
@@ -65,7 +65,7 @@ export function reducers(state, action) {
 //        console.log('In reducers.STARTUP state=',state);
         return state;
     case LOAD:
-        state = Object.assign({}, state, { 
+        state = Object.assign({}, state, {
             ...action.payload.design
         });
 //        console.log('In reducers.LOAD action.payload.design=',action.payload.design,'state=',state);
@@ -79,7 +79,7 @@ export function reducers(state, action) {
             module = require('../designtypes/'+action.payload.type+'/initialState_metric_units.js'); // Dynamically load initialState
         }
         module = JSON.parse(JSON.stringify(module)); // Make deep clone
-        state = Object.assign({}, state, { 
+        state = Object.assign({}, state, {
             name: action.payload.units === 'US' ? 'initialState' : 'initialState_metric_units',
             model: {
                 ...module.initialState,
@@ -523,7 +523,7 @@ export function reducers(state, action) {
                 name = autosave.name;
                 delete autosave.name;
                 state = Object.assign({}, state, {
-                    name: name, 
+                    name: name,
                     model: autosave
                 });
             } else {

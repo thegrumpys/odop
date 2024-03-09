@@ -267,13 +267,13 @@ class Report3 extends ReportBase {
                 |&lt;--------------------------- {this.props.symbol_table[o.L_Free].name} (w/ends) = {this.props.symbol_table[o.L_Free].value.toFixed(3)} ---------------------------&gt;|<br />
                 |&lt;--- {this.props.symbol_table[o.L_End].name} ---&gt;|&lt;--- {this.props.symbol_table[o.L_Body].name} ---&gt;|&lt;--- {this.props.symbol_table[o.End_Extension].name} ---&gt;|&lt;--- {this.props.symbol_table[o.L_Extended_End].name} ---&gt;|<br />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {this.props.symbol_table[o.L_End].value.toFixed(3)}      
+                {this.props.symbol_table[o.L_End].value.toFixed(3)}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {this.props.symbol_table[o.L_Body].value.toFixed(3)}      
+                {this.props.symbol_table[o.L_Body].value.toFixed(3)}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {this.props.symbol_table[o.End_Extension].value.toFixed(3)}     
+                {this.props.symbol_table[o.End_Extension].value.toFixed(3)}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {this.props.symbol_table[o.L_Extended_End].value.toFixed(3)} 
+                {this.props.symbol_table[o.L_Extended_End].value.toFixed(3)}
                 </pre>
                 <hr/>
                 <table id="view4" className="report-table">

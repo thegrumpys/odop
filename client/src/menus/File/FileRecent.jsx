@@ -18,7 +18,7 @@ class FileRecent extends Component {
             modal: !this.state.modal
         });
     }
-    
+
     render() {
 //        console.log('In FileRecent.render this=',this);
         return (
@@ -42,7 +42,7 @@ class FileRecent extends Component {
             </>
         );
     }
-}  
+}
 
 const mapStateToProps = state => ({
 });

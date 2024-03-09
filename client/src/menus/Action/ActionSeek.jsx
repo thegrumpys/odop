@@ -23,7 +23,7 @@ class ActionSeek extends Component {
             seek_minmax: MIN,
         };
     }
-    
+
     onSeekRequest() {
 //       console.log('In ActionSeek.onSeekRequest this=',this);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
@@ -82,10 +82,10 @@ class ActionSeek extends Component {
     onSeekNameSelect(event) {
 //        console.log('In ActionSeek.onSeekNameSelect this=',this,'event=',event);
         this.setState({
-            seek_name: event.target.value 
+            seek_name: event.target.value
         });
     }
-    
+
     onSeekButton(event) {
 //        console.log('In ActionSeek.onSeekButton this=',this,'event=',event);
         this.setState({

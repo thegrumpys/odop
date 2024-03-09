@@ -24,7 +24,7 @@ class FileSaveAs extends Component {
             name: undefined, // default to no name
         };
     }
-    
+
     componentDidMount() {
 //        console.log('In FileSaveAs.componentDidMount this=',this);
     }
@@ -63,7 +63,7 @@ class FileSaveAs extends Component {
             displaySpinner(false);
         });
     }
-    
+
     postDesign(user, type, name) {
 //        console.log('In FileSaveAs.postDesign user=',user,'type=',type,'name=',name);
         this.props.changeName(name);
@@ -81,7 +81,7 @@ class FileSaveAs extends Component {
             return res.json()
         })
         .then(names => {
-            // Second create or update the design 
+            // Second create or update the design
 //            console.log('In FileSaveAs.postDesign names=', names);
             this.setState({ names })
 //            console.log('In FileSaveAs.postDesign this.state.names=',this.state.names);
@@ -143,7 +143,7 @@ class FileSaveAs extends Component {
             name: event.target.value // Change name in component state
         });
     }
-    
+
     onSignIn() {
 //      console.log('In FileSaveAs.onSignIn this=',this);
       this.setState({
@@ -169,7 +169,7 @@ class FileSaveAs extends Component {
         this.postDesign(this.props.user, this.props.type, this.state.name); // Take name from component state
         this.props.deleteAutoSave();
     }
-    
+
     render() {
 //        console.log('In FileSaveAs.render this=',this);
         return (

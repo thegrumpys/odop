@@ -4,14 +4,14 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 class FeasibilityIndicator extends Component {
     static defaultProps = { width: 242, height: 24 };
-    
+
     render() {
 //        console.log('In FeasibilityIndicator.render this=',this);
         // Coordinate system is 4th quadrant ---x-->
-        //                                   | 
-        //                                   y 
-        //                                   | 
-        //                                   V 
+        //                                   |
+        //                                   y
+        //                                   |
+        //                                   V
         const triangleWidth = 16;
         const triangleHeight = 16;
         const blackWidth = 4;
@@ -67,7 +67,7 @@ class FeasibilityIndicator extends Component {
             </>
         );
     }
-    
+
 }
 const mapStateToProps = state => ({
     system_controls: state.model.system_controls,

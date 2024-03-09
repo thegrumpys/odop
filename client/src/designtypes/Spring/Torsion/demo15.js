@@ -9,19 +9,19 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    This demo session works through a handbook design example and confirms that the 
-                    results are in reasonable agreement with results published in the handbook. 
+                    This demo session works through a handbook design example and confirms that the
+                    results are in reasonable agreement with results published in the handbook.
                     </p>
-                    
+
                     <p>
-                    A detailed description of  
+                    A detailed description of
                     &nbsp;<a href="/docs/Help/DesignTypes/Spring/Torsion/description.html" target="_blank" rel="noopener noreferrer">torsion spring names</a>&nbsp;
-                    is provided in the On-line Help.  
+                    is provided in the On-line Help.
                     </p>
-                    
+
                     <p>
-                    As with the other tutorial and demo sessions, 
-                    this session needs to start from a known state.  
+                    As with the other tutorial and demo sessions,
+                    this session needs to start from a known state.
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     </p>
@@ -39,7 +39,7 @@ export const execute = {
                     <p>
                     The initial conditions expected by this demo session are now established.
                     </p>
-                    
+
                     <p>
                     This example appears in the
                     &nbsp; &nbsp; <b>SPRING DESIGNER'S HANDBOOK</b> &nbsp; &nbsp; by  Harold Carlson<br />
@@ -61,12 +61,12 @@ export const execute = {
                 <>
                 <p>
                 Problem 4 may be restated in a simplified form:<br/>
-                Determine a standard wire diameter, working stress, number of coils and 
-                other dimensions for a torsion spring 
-                with appropriate clearance for operation over a 21/32 (0.656) inch diameter rod. 
+                Determine a standard wire diameter, working stress, number of coils and
+                other dimensions for a torsion spring
+                with appropriate clearance for operation over a 21/32 (0.656) inch diameter rod.
                 A suggestion of a 0.75 inch inside diameter in the free condition is provided.
                 </p>
-                
+
                 <table>
                     <tbody>
                         <tr><th>material</th><td>&nbsp;=</td><td>&nbsp;</td><td>music wire</td><td> &nbsp; (E = 28,700,000 psi)</td></tr>
@@ -77,7 +77,7 @@ export const execute = {
                     </tbody>
                 </table>
                 <br />
-               
+
                 <p>
                 No information about ends or arm length is provided.
                 </p>
@@ -91,22 +91,22 @@ export const execute = {
                     <p>
                     Considering that the objective here is to illustrate how ODOP:Spring produces the same results as the handbook,
                     it will be necessary to use the same value of Modulus of Elasticity (E).
-                    The ODOP:Spring materials table provides a value for E of 30,000,000 psi. 
+                    The ODOP:Spring materials table provides a value for E of 30,000,000 psi.
                     </p>
-                    
+
                     For MUSIC_WIRE of 0.063 inch diameter:
                         <ul>
                             <li>The handbook's method 1 (page 212) uses a value for E of 29,000,000 psi from Fig. 134 (page 214).</li>
                             <li>The handbook's method 2 (page 213) uses a value for E of 28,700,000 psi from Fig. 112 (page 161).</li>
                         </ul>
-                   
+
                     <p>
-                    As described in the on-line Help section on  
+                    As described in the on-line Help section on
                     &nbsp;<a href="/docs/Help/SpringDesign/materials.html" target="_blank" rel="noopener noreferrer">Materials</a>&nbsp;
                     and also in the compression spring tutorial sessions tutor5 and tutor7,
                     changing Prop_Calc_Method will allow the use of different material property values.
                     </p>
-                    
+
                     <p>
                     The demo session has now entered:<br/>
                     CHANGE Prop_Calc_Method 3 <br/>
@@ -124,7 +124,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The demo session has now entered the remaining initial specifications for the problem. 
+                    The demo session has now entered the remaining initial specifications for the problem.
                     In summary, the changes were:<br />
                     <br />
                     FIX   M_1  0.0<br />
@@ -132,11 +132,11 @@ export const execute = {
                     FIX   ID_Free  0.75<br />
                     FIX   Deflect_2  200.0<br />
                     </p>
-                    
+
                     <p>
                     This is a good time to scroll down and confirm these changes are now in place.
                     </p>
-                    
+
                     <p>
                     A search will bring the remaining variables into alignment with these initial specifications.
                     Coil diameter is the primary element impacted here.
@@ -161,10 +161,10 @@ export const execute = {
                     </p>
 
                     <p>
-                    As expected, the design has achieved or come very close to the previously stated requirements for 
+                    As expected, the design has achieved or come very close to the previously stated requirements for
                     ID_Free, M_2 and Deflect_2.
                     The (uncorrected) value of stress is a good match to the handbook's value of 162,800 psi.
-                    In order to achieve the specified deflection, 
+                    In order to achieve the specified deflection,
                     the value of Coils_T is slightly higher than the handbook's value of 7.04 coils.
                     Thus, the value of L_Body is also a bit higher than the handbook's value of 0.504 inch.
                     <br />
@@ -186,12 +186,12 @@ export const execute = {
                     The <b>Action : Select Size</b> menu item can be used to select the nearest standard wire diameter.
                     You can experiment with that now.
                     </p>
-                   
+
                     <p>
                      The handbook recommended a Coil_Spacing of 0.015 inch per coil.
                     Also, the handbook determined a curvature correction factor of 1.06 by reading it from a graph.
                     </p>
-                    
+
                     <p>
                     In the process of transitioning to the next page, the demo session will
                     FIX a value of 0.063 inch on Wire_Dia,
@@ -208,10 +208,10 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The demo session has now imposed the values:<br /> 
-                    FIX Wire_Dia 0.063<br /> 
-                    CHANGE Coil_Spacing 0.015<br /> 
-                    CHANGE Heat_Treat "Stress Relieve"<br /> 
+                    The demo session has now imposed the values:<br />
+                    FIX Wire_Dia 0.063<br />
+                    CHANGE Coil_Spacing 0.015<br />
+                    CHANGE Heat_Treat "Stress Relieve"<br />
                     and executed another search.
                     </p>
 
@@ -223,10 +223,10 @@ export const execute = {
                          &nbsp; undeflected body length   = 0.594 in.<br />
                          &nbsp; curvature corrected stress (@ 4.0 lb-in) = 172,568 psi.
                     </p>
-                    
+
                     <p>
                     While the two solutions are in reasonable agreement,
-                    the demo session will take one more step and 
+                    the demo session will take one more step and
                     impose the handbook's values for OD_Free and Coils_T.
                     </p>
                 </>
@@ -252,7 +252,7 @@ export const execute = {
                          &nbsp; deflected inside diameter   = 0.6948 in.<br />
                          &nbsp; undeflected body length   = 0.594 in.<br />
                     </p>
-                    
+
                     <p>
                     The shift in OD_Free and Coils_T have resulted in a small change in deflection at point 2.
                     Even so, the two solutions are still in reasonable agreement.

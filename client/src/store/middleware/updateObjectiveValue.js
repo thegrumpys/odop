@@ -4,7 +4,7 @@ import { changeSymbolViolation,
 
 // Update Violations and Objective Value
 export function updateObjectiveValue(store, merit) {
-    
+
     // Update Constraint Violations
 
 //    console.log('<li>','Start updateObjectiveValue','</li><ul>');
@@ -82,7 +82,7 @@ export function updateObjectiveValue(store, merit) {
             /*
              * The fix_wt's are automatically incorporated in the scaling denominators
              * S(I+N) by the main routine.
-             * 
+             *
              * This version reduces penalty of large fix violations.
              */
             if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table

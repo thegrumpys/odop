@@ -3,7 +3,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class SymbolName extends Component {
-    
+
     render() {
 //        console.log('In SymbolName.render this=',this);
         return (

@@ -12,10 +12,10 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    This session creates two Piston-Cylinder Startup designs; 
-                    US and metric units. 
-                    While this session uses the Execute / Demo / Tutorial mechanism 
-                    associated with end-user training, it is not intended for end-users. 
+                    This session creates two Piston-Cylinder Startup designs;
+                    US and metric units.
+                    While this session uses the Execute / Demo / Tutorial mechanism
+                    associated with end-user training, it is not intended for end-users.
                     </p>
                     <p>Setting the following symbol table actions:</p>
                     <ol>
@@ -25,7 +25,7 @@ export const execute = {
                         <li>{'startup(),'}</li>
                     </ol>
                     <p>
-                    Confirm that you are logged in and then 
+                    Confirm that you are logged in and then
                     invoke the <b>File : Save </b> menu to save with the name <b>"Startup"</b> now.
                     </p>
                 </>

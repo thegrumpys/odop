@@ -11,7 +11,7 @@ export function migrate(design) {
 //    console.log('In migrate design=',design);
 
     var previous_version = design.version;
-    var migrated_design = design; // Assume no-op as default 
+    var migrated_design = design; // Assume no-op as default
 
     /* eslint-disable no-fallthrough */
 //    console.log('In migrate design.version=',design.version);
@@ -52,27 +52,27 @@ export function migrate(design) {
         migrated_design.version = '3'; // last thing... set the migrated model version
     case '3':
         // console.log('Convert from 3 to 4');
-        design.symbol_table[25].sdlim = 10000; 
+        design.symbol_table[25].sdlim = 10000;
         // Add Energy calculation
         design.symbol_table.splice(27,0,Object.assign({},design.symbol_table[25]));  //  Duplicate Cycle_Life in target position
         design.symbol_table[27].name = 'Energy'; // Rename it to Energy
-        design.symbol_table[27].value = 0.0; 
+        design.symbol_table[27].value = 0.0;
         if (design.symbol_table[0].units === 'mm') { // Check for metric units - is there a better approach?
-            design.symbol_table[27].value = 0.0; 
+            design.symbol_table[27].value = 0.0;
             design.symbol_table[27].units = 'N-mm';
-            design.symbol_table[27].lmin = 0; 
-            design.symbol_table[27].lmax = 0; 
-            design.symbol_table[27].cmin = 1.0; 
-            design.symbol_table[27].cmax = 1000000; 
+            design.symbol_table[27].lmin = 0;
+            design.symbol_table[27].lmax = 0;
+            design.symbol_table[27].cmin = 1.0;
+            design.symbol_table[27].cmax = 1000000;
         } else {
-            design.symbol_table[27].value = 0.0; 
+            design.symbol_table[27].value = 0.0;
             design.symbol_table[27].units = 'in-lb';
-            design.symbol_table[27].lmin = 0; 
-            design.symbol_table[27].lmax = 0; 
-            design.symbol_table[27].cmin = 1.0; 
-            design.symbol_table[27].cmax = 1000000; 
+            design.symbol_table[27].lmin = 0;
+            design.symbol_table[27].lmax = 0;
+            design.symbol_table[27].cmin = 1.0;
+            design.symbol_table[27].cmax = 1000000;
         }
-        design.symbol_table[27].sdlim = 0.0; 
+        design.symbol_table[27].sdlim = 0.0;
         design.symbol_table[27].tooltip = "Change in elastic potential energy between 1 and 2";
         migrated_design.version = '4'; // last thing... set the migrated model version
     case '4':
@@ -87,7 +87,7 @@ export function migrate(design) {
 //            console.log('In migrate.propgate element=',element);
             // ***************************************************************
             // Note no need to migrate FDCL because there has never been any
-            // FDCL definition in initialState for TORSION. The user cannot create 
+            // FDCL definition in initialState for TORSION. The user cannot create
             // FDCL if it is not already configured in initialState.
             // ***************************************************************
             if (element.lmin & FIXED || element.lmax & FIXED) { // If one is FIXED
@@ -135,25 +135,25 @@ export function migrate(design) {
         // Add %_Safe_Deflect calculation; make it constrained to a max of 95%
         design.symbol_table.splice(26,0,Object.assign({},design.symbol_table[26]));  //  Duplicate Force_Arm_2 in target position
         design.symbol_table[26].name = '%_Safe_Deflect'; // Rename it to %_Safe_Deflect
-        design.symbol_table[26].value = 0.0; 
+        design.symbol_table[26].value = 0.0;
         if (design.symbol_table[0].units === 'mm') { // Check for metric units - is there a better approach?
             design.symbol_table[26].units = '%';
-            design.symbol_table[26].lmin = 0; 
-            design.symbol_table[26].lmax = CONSTRAINED; 
-            design.symbol_table[26].cmin = 1.0; 
-            design.symbol_table[26].cmax = 95; 
+            design.symbol_table[26].lmin = 0;
+            design.symbol_table[26].lmax = CONSTRAINED;
+            design.symbol_table[26].cmin = 1.0;
+            design.symbol_table[26].cmax = 95;
         } else {
             design.symbol_table[26].units = '%';
-            design.symbol_table[26].lmin = 0; 
-            design.symbol_table[26].lmax = CONSTRAINED; 
-            design.symbol_table[26].cmin = 1.0; 
-            design.symbol_table[26].cmax = 95; 
+            design.symbol_table[26].lmin = 0;
+            design.symbol_table[26].lmax = CONSTRAINED;
+            design.symbol_table[26].cmin = 1.0;
+            design.symbol_table[26].cmax = 95;
         }
         delete design.symbol_table[26].oldlmin;
         delete design.symbol_table[26].oldlmax;
         delete design.symbol_table[26].oldcmin;
         delete design.symbol_table[26].oldcmax;
-        design.symbol_table[26].sdlim = 0.0; 
+        design.symbol_table[26].sdlim = 0.0;
         design.symbol_table[26].tooltip = "Deflection of load point 2 as a percent of total safe deflection";
         migrated_design.version = '5'; // last thing... set the migrated model version
     case '5':
@@ -203,7 +203,7 @@ export function migrate(design) {
         design.labels[20].value = '__________________________ ';
         design.labels[21].name = 'Vendor date';
         design.labels[21].value = ' _______ ';
-        
+
         migrated_design.version = '6'; // last thing... set the migrated model version
     case '6':
         // Current model version
@@ -328,7 +328,7 @@ export function migrate(design) {
     }
 //    console.log('In migrate migrated_design.version=',migrated_design.version);
     /* eslint-enable */
-    
+
 //    console.log('In migrate migrated_design=',migrated_design);
     return migrated_design;
 }

@@ -17,11 +17,11 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    This session creates a set of compression spring Startup designs 
-                    including US and metric units for both default spring designs 
-                    and optimized for designing large hot-wound compression springs. 
-                    While this session uses the Execute / Demo / Tutorial mechanism 
-                    associated with end-user training, it is not intended for end-users. 
+                    This session creates a set of compression spring Startup designs
+                    including US and metric units for both default spring designs
+                    and optimized for designing large hot-wound compression springs.
+                    While this session uses the Execute / Demo / Tutorial mechanism
+                    associated with end-user training, it is not intended for end-users.
                     </p>
                     <p>Setting the following symbol table actions:</p>
                     <ol>
@@ -31,7 +31,7 @@ export const execute = {
                         <li>{'startup(),'}</li>
                     </ol>
                     <p>
-                    Confirm that you are logged in and then 
+                    Confirm that you are logged in and then
                     invoke the <b>File : Save </b> menu to save with the name <b>"Startup"</b> now.
                     </p>
                 </>

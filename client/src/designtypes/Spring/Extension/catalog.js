@@ -52,7 +52,7 @@ function getObjectiveValue(st, viol_wt) {
             /*
              * The fix_wt's are automatically incorporated in the scaling denominators
              * S(I+N) by the main routine.
-             * 
+             *
              * This version reduces penalty of large fix violations.
              */
             if (element.lmin & FIXED) {
@@ -83,7 +83,7 @@ function getObjectiveValue(st, viol_wt) {
             }
         }
     }
-    
+
     // Return Objective Value
     result = viol_wt * viol_sum;
 //    console.log('In getObjectiveValue result=',result);
@@ -138,7 +138,7 @@ export function getCatalogEntries(name, store, st, viol_wt) {
             element.value = x[offset++];
         }
     }
-    
+
     // Create implied constraints between half and twice
     var cmin_OD_Free = st[o.OD_Free].value/2;
     var cmax_OD_Free = st[o.OD_Free].value*2;
@@ -152,7 +152,7 @@ export function getCatalogEntries(name, store, st, viol_wt) {
     // Load catalog table
     catalog = require('./'+name+'.json');
 //    console.log('In getCatalogEntries catalog=',catalog);
-    
+
     entry = Object.assign({},catalog[0]);
     var L_FreeStyle;
     var temp;
@@ -163,27 +163,27 @@ export function getCatalogEntries(name, store, st, viol_wt) {
     else {
         L_FreeStyle = false;
     }
-    
+
     // scan through catalog
     for (let i = 1; i < catalog.length; i++) { // Skip column headers at zeroth entry
         entry = Object.assign({},catalog[i]); // Make copy so we can modify it without affecting catalog
-        
+
         if (L_FreeStyle) {
             temp = entry[1] - 2.0 * entry[2];   //   inside diameter
             temp = END_DIAMETERS * temp;        //   total hook allowance
             entry[3] = (entry[3] - temp) / entry[2];  //  corrected value of Coils_T
 //            console.log("corrected Coils_T = ", entry[0], entry[3]);
         }
-        
+
         // Skip catalog entry if it's less than half the constraint value or greater than twice the constraint value
         if (entry[1] < cmin_OD_Free         || entry[1] > cmax_OD_Free        ) continue;
         if (entry[2] < cmin_Wire_Dia        || entry[2] > cmax_Wire_Dia       ) continue;
         if (entry[3] < cmin_Coils_T         || entry[3] > cmax_Coils_T        ) continue;
         if (entry[4] < cmin_Initial_Tension || entry[4] > cmax_Initial_Tension) continue;
-        
+
         entry[7] = m_tab.findIndex(findMaterialTypeIndex); // Set matching Material Type index
         entry[8] = et_tab.findIndex(findEndTypeIndex); // Set matching End Type index
-        
+
         // Update with catalog entries
         st[o.OD_Free].value = entry[1];
         st[o.Wire_Dia].value = entry[2];
@@ -202,7 +202,7 @@ export function getCatalogEntries(name, store, st, viol_wt) {
         offset = 0;
         st.forEach(xPull);
 //        console.log('In getCatalogEntries 1 st=',st);
-        
+
         // Invoke eqnset function
         p = [];
         st.forEach(pPush);
@@ -212,14 +212,14 @@ export function getCatalogEntries(name, store, st, viol_wt) {
         offset = 0;
         st.forEach(xPull);
 //        console.log('In getCatalogEntries 2 st=',st);
-        
+
         // Invoke violations & objective value function
         objective_value = getObjectiveValue(st, viol_wt);
 //        console.log('In getCatalogEntries 3 objective_value=',objective_value);
-        
+
         entry[9] = objective_value.toFixed(6); // Set Objective Value
 //        console.log("In getCatalogEntries 4: entry = ", entry);
-        
+
         // get four lowest objective values as candidate entries
         if (cat0 === undefined || entry[9] < cat0[9]) { cat3 = cat2; cat2 = cat1; cat1 = cat0; cat0 = entry; }
         else if (cat1 === undefined || entry[9] < cat1[9]) { cat3 = cat2; cat2 = cat1; cat1 = entry; }

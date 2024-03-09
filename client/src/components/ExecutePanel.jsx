@@ -87,7 +87,7 @@ class ExecutePanel extends Component {
             text: '', // Default: no text
         };
     }
-    
+
     componentDidMount() {
 //        console.log('In ExecutePanel.componentDidMount this=',this);
         if (this.state.execute_name !== undefined) {
@@ -200,7 +200,7 @@ class ExecutePanel extends Component {
             if (this.state.testGenerate) outputLine('    // No-op');
         }
     }
-    
+
     render() {
 //        console.log('In ExecutePanel.render this=',this);
         return this.state.modal && (
@@ -226,7 +226,7 @@ class ExecutePanel extends Component {
             </Alert>
         );
     }
-    
+
 }
 
 ExecutePanel.contextTypes = {

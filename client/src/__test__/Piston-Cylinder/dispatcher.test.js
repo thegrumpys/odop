@@ -7,7 +7,7 @@ import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../store/actionTypes';
 import {
     startup,
     changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag,
-    search, seek, 
+    search, seek,
     saveAutoSave, restoreAutoSave, deleteAutoSave } from '../../store/actionCreators';
 import { reducers } from '../../store/reducers';
 import { dispatcher } from '../../store/middleware/dispatcher';
@@ -792,13 +792,13 @@ it('middleware restore auto save', () => {
      reducers,
      {"user": "USERID0123456789", name: "initialState", model: state},
      applyMiddleware(dispatcher));
- 
+
  store.dispatch(saveAutoSave());
 
  store.dispatch(restoreAutoSave());
 
  var design = store.getState().model; // after
- 
+
 // console.log('In middleware restore auto save design.model.symbol_table[sto.PRESSURE]=',design.model.symbol_table[sto.PRESSURE]);
  expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
  expect(design.model.symbol_table[sto.PRESSURE].cmin).toEqual(0);
@@ -843,6 +843,6 @@ it('middleware restore auto save', () => {
 
  expect(typeof(Storage)).not.toEqual("undefined");
  expect(localStorage.getItem('autosave')).not.toBeNull();
- 
+
  store.dispatch(deleteAutoSave());
 });

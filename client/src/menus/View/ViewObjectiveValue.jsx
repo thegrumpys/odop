@@ -16,7 +16,7 @@ class ViewObjectiveValue extends Component {
             modal: false,
         };
     }
-    
+
     toggle() {
 //        console.log('In ViewObjectiveValue.toggle');
         this.setState({
@@ -24,7 +24,7 @@ class ViewObjectiveValue extends Component {
         });
         if (this.state.modal) logUsage('event', 'ViewObjectiveValue', { event_label: 'ViewObjectiveValue'});
     }
-    
+
     renderElementHeader() {
         return (
             <tr key="table-head-row">
@@ -54,7 +54,7 @@ class ViewObjectiveValue extends Component {
             </tr>
         );
     }
-    
+
     renderElement(viol_sum, element, i) {
         var flags = ['','CONSTRAINED','FIXED','CONSTRAINED|FIXED','FDCL','CONSTRAINED|FDCL','FIXED|FDCL','CONSTRAINED|FIXED|FDCL']
         var validity_vmin;
@@ -117,7 +117,7 @@ class ViewObjectiveValue extends Component {
             /*
              * The fix_wt's are automatically incorporated in the scaling denominators
              * S(I+N) by the main routine.
-             * 
+             *
              * This version reduces penalty of large fix violations.
              */
             if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
@@ -295,7 +295,7 @@ class ViewObjectiveValue extends Component {
             </>
         );
     }
-}  
+}
 
 const mapStateToProps = state => ({
     symbol_table: state.model.symbol_table,

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class SymbolUnits extends Component {
-    
+
     render() {
 //        console.log('In SymbolUnits.render this=',this);
         return (

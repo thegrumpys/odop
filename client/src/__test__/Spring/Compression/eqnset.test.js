@@ -12,9 +12,9 @@ it('eqnset initialState', () => {
     // p vector: OD_Free, Wire_Dia, L_Free, Coils_T, Force_1, Force_2
     var p =     [1.1,     0.1055,   3.25,   10.0,    10.0,    39.0];
     // x vector: Mean_Dia 0, Coils_A 1, Rate 2, Deflect_1 3, Deflect_2 4, L_1 5, L_2 6,  L_Stroke 7, L_Solid 8, Slenderness 9,
-    var x = [    0.0,        0.0,       0.0,    0.0,         0.0,         0.0,   0.0,    0.0,        0.0,       0.0, 
+    var x = [    0.0,        0.0,       0.0,    0.0,         0.0,         0.0,   0.0,    0.0,        0.0,       0.0,
     // ID_Free 10, Weight 11, Spring_Index 12, Force_Solid 13, Stress_1 14, Stress_2 15, Stress_Solid 16, FS_2 17, FS_Solid 18, FS_CycleLife 19,
-       0.0,        0.0,       0.0,             0.0,            0.0,         0.0,         0.0,             0.0,     0.0,         0.0, 
+       0.0,        0.0,       0.0,             0.0,            0.0,         0.0,         0.0,             0.0,     0.0,         0.0,
     // Cycle_Life 20, PC_Avail_Deflect 21, Energy 22, Spring_Type 23, Prop_Calc_Method 24, Material_Type 25, ASTM_Fed_Spec 26, Process 27, Material_File 28, Material_File 28, Life_Category 29
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
     // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type 38, Inactive_Coils 39
@@ -92,9 +92,9 @@ it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () 
     // p vector: OD_Free, Wire_Dia, L_Free, Coils_T, Force_1, Force_2
     var p =     [0.4,     0.2,      3.25,   10.0,    10.0,    39.0];
     // x vector: Mean_Dia 0, Coils_A 1, Rate 2, Deflect_1 3, Deflect_2 4, L_1 5, L_2 6,  L_Stroke 7, L_Solid 8, Slenderness 9,
-    var x = [    0.0,        0.0,       0.0,    0.0,         0.0,         0.0,   0.0,    0.0,        0.0,       0.0, 
+    var x = [    0.0,        0.0,       0.0,    0.0,         0.0,         0.0,   0.0,    0.0,        0.0,       0.0,
     // ID_Free 10, Weight 11, Spring_Index 12, Force_Solid 13, Stress_1 14, Stress_2 15, Stress_Solid 16, FS_2 17, FS_Solid 18, FS_CycleLife 19,
-       0.0,        0.0,       0.0,             0.0,            0.0,         0.0,         0.0,             0.0,     0.0,         0.0, 
+       0.0,        0.0,       0.0,             0.0,            0.0,         0.0,         0.0,             0.0,     0.0,         0.0,
     // Cycle_Life 20, PC_Avail_Deflect 21, Energy 22, Spring_Type 23, Prop_Calc_Method 24, Material_Type 25, ASTM_Fed_Spec 26, Process 27, Material_File 28, Material_File 28, Life_Category 29
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
     // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type 38, Inactive_Coils 39
@@ -172,9 +172,9 @@ it('eqnset pathological Coils_T === Inactive_Coils && Coils_A === 0.0', () => {
     // p vector: OD_Free, Wire_Dia, L_Free, Coils_T, Force_1, Force_2
     var p =     [1.1,     0.1055,   3.25,   2.0,    10.0,    39.0];
     // x vector: Mean_Dia 0, Coils_A 1, Rate 2, Deflect_1 3, Deflect_2 4, L_1 5, L_2 6,  L_Stroke 7, L_Solid 8, Slenderness 9,
-    var x = [    0.0,        0.0,       0.0,    0.0,         0.0,         0.0,   0.0,    0.0,        0.0,       0.0, 
+    var x = [    0.0,        0.0,       0.0,    0.0,         0.0,         0.0,   0.0,    0.0,        0.0,       0.0,
     // ID_Free 10, Weight 11, Spring_Index 12, Force_Solid 13, Stress_1 14, Stress_2 15, Stress_Solid 16, FS_2 17, FS_Solid 18, FS_CycleLife 19,
-       0.0,        0.0,       0.0,             0.0,            0.0,         0.0,         0.0,             0.0,     0.0,         0.0, 
+       0.0,        0.0,       0.0,             0.0,            0.0,         0.0,         0.0,             0.0,     0.0,         0.0,
     // Cycle_Life 20, PC_Avail_Deflect 21, Energy 22, Spring_Type 23, Prop_Calc_Method 24, Material_Type 25, ASTM_Fed_Spec 26, Process 27, Material_File 28, Material_File 28, Life_Category 29
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
     // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type 38, Inactive_Coils 39
@@ -253,9 +253,9 @@ it('eqnset pathological OD_Free === Wire_Dia && Mean_Dia === 0.0', () => {
     // p vector: OD_Free, Wire_Dia, L_Free, Coils_T, Force_1, Force_2
     var p =     [0.4,     0.4,      3.25,   10.0,    10.0,    39.0];
     // x vector: Mean_Dia 0, Coils_A 1, Rate 2, Deflect_1 3, Deflect_2 4, L_1 5, L_2 6,  L_Stroke 7, L_Solid 8, Slenderness 9,
-    var x = [    0.0,        0.0,       0.0,    0.0,         0.0,         0.0,   0.0,    0.0,        0.0,       0.0, 
+    var x = [    0.0,        0.0,       0.0,    0.0,         0.0,         0.0,   0.0,    0.0,        0.0,       0.0,
     // ID_Free 10, Weight 11, Spring_Index 12, Force_Solid 13, Stress_1 14, Stress_2 15, Stress_Solid 16, FS_2 17, FS_Solid 18, FS_CycleLife 19,
-       0.0,        0.0,       0.0,             0.0,            0.0,         0.0,         0.0,             0.0,     0.0,         0.0, 
+       0.0,        0.0,       0.0,             0.0,            0.0,         0.0,         0.0,             0.0,     0.0,         0.0,
     // Cycle_Life 20, PC_Avail_Deflect 21, Energy 22, Spring_Type 23, Prop_Calc_Method 24, Material_Type 25, ASTM_Fed_Spec 26, Process 27, Material_File 28, Material_File 28, Life_Category 29
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
     // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type 38, Inactive_Coils 39

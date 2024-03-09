@@ -33,7 +33,7 @@ it('demo14', () => {
     store.dispatch( changeLabelsValue([{"name":"COMMENT","value":"Torsion Spring Demo"}]) );
     design = store.getState().model;
     expect(design.model.result.objective_value).toEqual(0.0);
-    
+
     // Page 03 of 08
     // No-op
 
@@ -49,15 +49,15 @@ it('demo14', () => {
     store.dispatch( changeSymbolValue("Arm_2",9) );
     design = store.getState().model;
     expect(design.model.result.objective_value).toBeCloseTo(307.2401962,7);
-    
+
     // Page 05 of 08
     // No-op
-    
+
     // Page 06 of 08
     store.dispatch( search() );
     design = store.getState().model;
     expect(design.model.result.objective_value).toBeCloseTo(0.0000034,7);
-    
+
     // Page 07 of 08
         // No-op
 
@@ -66,6 +66,6 @@ it('demo14', () => {
     store.dispatch( search() );
     design = store.getState().model;
     expect(design.model.result.objective_value).toBeCloseTo(0.0000077,7);
-    
+
 });
 

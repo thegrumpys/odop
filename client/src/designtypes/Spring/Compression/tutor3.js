@@ -10,24 +10,24 @@ export const execute = {
                     <p>
                     In this tutorial session we will continue to develop the idea of
                     using "constraints" and "constraint levels" to express goals
-                    for a design. 
+                    for a design.
                     Once we have established a set of goals or objectives that
-                    a given design is to achieve, we can use the Search capability 
+                    a given design is to achieve, we can use the Search capability
                     to find a design that will (hopefully) achieve those objectives.
                     </p>
-                    
+
                     <p>
-                    As with the other tutorial and demo sessions, 
-                    this session needs to start from a known state.  
+                    As with the other tutorial and demo sessions,
+                    this session needs to start from a known state.
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     Moving to the next page will establish the necessary initialState.
                     for the ODOP <b>Compression Spring</b> design type.
                     </p>
-                    
+
                     <p>
                     To continue with this session, just click the "Next" button as you finish
-                    reading each page (step). 
+                    reading each page (step).
                     </p>
                     <br />
                 </>
@@ -40,18 +40,18 @@ export const execute = {
                     <p>
                     The initial conditions expected by this demo session are now established.
                     </p>
-                    
+
                     <p>
-                    It's time to take a look at the set of constraint levels. 
-                    Note that the default set of constraint levels imposed in the initialState 
+                    It's time to take a look at the set of constraint levels.
+                    Note that the default set of constraint levels imposed in the initialState
                     are set to allow a broad range of springs to be feasible.
                     More information about the constraints of spring design is provided in the
-                    on-line documentation sections (Help entries) titled 
+                    on-line documentation sections (Help entries) titled
                     &nbsp;<a href="/docs/Help/SpringDesign/spring_oview.html" target="_blank" rel="noopener noreferrer">Spring Design Overview</a>&nbsp;
-                    and  
+                    and
                     &nbsp;<a href="/docs/Help/designSituations.html" target="_blank" rel="noopener noreferrer">Design Situations</a>.&nbsp;
                     </p>
-                    
+
                     <p>
                     Each constraint has a corresponding constraint violation that represents
                     the difference between the current value of the quantity being
@@ -59,9 +59,9 @@ export const execute = {
                     column lists constraint violation as a percentage of the
                     corresponding constraint level.  A negative value implies that the
                     constraint is satisfied.  A positive value implies that the
-                    constraint is violated. 
+                    constraint is violated.
                     </p>
-                    
+
                 </>
             ),
             actions: [
@@ -98,21 +98,21 @@ export const execute = {
                     <br />
                     Take a look at the results.
                     </p>
-                    
+
                     <p>
                     It should be pretty hard to miss the violation of OD_FREE MAX.
-                    Also, the tool-tip on the "Status" label of the 
+                    Also, the tool-tip on the "Status" label of the
                     multi-colored Feasibility Status indicator shows that
-                    the Objective Value is greater than zero. 
+                    the Objective Value is greater than zero.
                     This is a good clue that there is work for the search procedure to do.<br />
                     <br />
                     Shall we see if Search can find a design with a smaller (less than
                     0.9 inch OD) spring that can still support the designated load ?
-                    Note that the tutorial has also put Force_2 in FIXed status so that 
+                    Note that the tutorial has also put Force_2 in FIXed status so that
                     designated load will not be changed by the search process.
                     </p>
-                    
-                    <p>You can scroll the page down to view the complete set of values. 
+
+                    <p>You can scroll the page down to view the complete set of values.
                     Scroll back up in order to use the Next button to continue.</p>
                 </>
             ),
@@ -128,7 +128,7 @@ export const execute = {
                 <>
                     <p>
                     Now that we have expressed what we want the design to accomplish,
-                    we will ask the Search algorithm (Search button or <b>Action : Search</b> menu) 
+                    we will ask the Search algorithm (Search button or <b>Action : Search</b> menu)
                     for a solution.
                     Specifically, Search will find values of the free Independent Variables
                     that cause the newly established Constraint to be satisfied.
@@ -147,17 +147,17 @@ export const execute = {
                 <>
                     <p>
                     OK, let's take a look at the results.
-                    Yes,  A feasible solution is available. 
+                    Yes,  A feasible solution is available.
                     Please take a moment to scroll through and view the values.
                     Look at the constraint violations to see how Search
                     really did its job and left no remaining constraint violations.
-                    Use the View menu to switch to Calculator View and Report 1 in order to 
-                    observe that the OD in the free condition is far enough below .9 inches 
+                    Use the View menu to switch to Calculator View and Report 1 in order to
+                    observe that the OD in the free condition is far enough below .9 inches
                     to guarantee that the OD in the solid condition is also below .9 inches.
                     </p>
                     <p>
-                    The alert and the Report 1 message: 
-                    "<b>Coil to coil contact may cause inaccuracy in point 2.</b>" 
+                    The alert and the Report 1 message:
+                    "<b>Coil to coil contact may cause inaccuracy in point 2.</b>"
                     are produced any time that the second load uses more
                     than 80 % of available deflection.
                     </p>
@@ -177,7 +177,7 @@ export const execute = {
                     don't forget to switch back to a view containing a main page
                     (Advanced or Calculator Views).
                     </p>
-                    
+
                     <p>
                     Now that we have covered the concept of constraints, we can describe
                     the use of FIX on a Dependent Variable in more specific terms.  The FIX
@@ -204,13 +204,13 @@ export const execute = {
                 <>
                     <p>
                     For our sample problem let's suppose that we want to design a spring
-                    to support a load of 280 pounds at a deflection of 5.5 inches. 
+                    to support a load of 280 pounds at a deflection of 5.5 inches.
                     The spring must operate in a 2.0 inch hole and must not set if compressed
                     to solid.  Considering that we haven't yet covered changing material
                     and end types, we'll use the currently established MUSIC_WIRE and
                     CLOSED&GROUND ends.
                     </p>
-                    
+
                     <p>
                     In tutorial "shorthand" notation, the tutorial has entered:<br />
                     <br />
@@ -238,19 +238,19 @@ export const execute = {
                     While it normally doesn't make much difference where we start a search,
                     applying a 280 pound load to a spring that was designed to support a
                     40 pound load will (mathematically) drive that spring far below its
-                    solid condition.  
+                    solid condition.
                     The search process will generally cope with such a poor starting point,
-                    but in some cases, 
-                    you can avoid a bit of difficulty by 
+                    but in some cases,
+                    you can avoid a bit of difficulty by
                     entering  values that produce a more realistic start point.
                     </p>
-                    
+
                     <p>
-                    OK, the tutorial will let Search do its thing. 
+                    OK, the tutorial will let Search do its thing.
                     Look for the results on the next page.
                     <br /><br />
                     </p>
-                    
+
                 </>
             )
         },
@@ -260,18 +260,18 @@ export const execute = {
                 <>
                     <p>
                     We have a solution. Please take a moment to scroll through and view the values.
-                    Note that results of additional calculations are given in Report&nbsp;1.&nbsp; 
+                    Note that results of additional calculations are given in Report&nbsp;1.&nbsp;
                     Use the View menu to select the report.
                     </p>
-                    
+
                     <p>
-                    So far so good, 
+                    So far so good,
                     OD is less than 2.0.
                     Yes, deflection is close to 5.5 inches.
                     By expanding the alert panel,
-                    you can see that this spring is prone to buckling. 
+                    you can see that this spring is prone to buckling.
                     </p>
-                    
+
                     <p>
                     It is time to move on.
                     </p>
@@ -289,11 +289,11 @@ export const execute = {
                     If you are still on a Report view,
                     use the View menu to switch back to a main page (Advanced or Calculator View).
                     </p>
-                    
+
                     <p>
                     Before we take a break, let's try just one more design.<br />
                     <br />
-                    To get started, the tutorial has already reset everything to the wide open 
+                    To get started, the tutorial has already reset everything to the wide open
                     conditions in the initialState starting point.
                     </p>
                     <br />
@@ -312,17 +312,17 @@ export const execute = {
                     This time, let's see if we can handle a design that has both force and
                     length specified at each of two points.
                     As long as L_Free (spring length in the free, no load condition) is in FREE status,
-                    this should not be a problem. 
-                    You may want to review 
-                    &nbsp;<a href="/docs/Help/designSituations.html" target="_blank" rel="noopener noreferrer">Design Situations</a>&nbsp; 
+                    this should not be a problem.
+                    You may want to review
+                    &nbsp;<a href="/docs/Help/designSituations.html" target="_blank" rel="noopener noreferrer">Design Situations</a>&nbsp;
                     to better understand the limitations of specifying force and deflection at two points.
                     </p>
-                    
+
                     <p>
                     Suppose we want a spring that delivers 15 pounds force at a length
                     of 2 inches, and 65 pounds force at a length of 1.25 inches.
                     </p>
-                    
+
                     <p>
                     Again, the tutorial has already imposed the changes ...<br />
                     FIX  Force_1  15<br />
@@ -330,7 +330,7 @@ export const execute = {
                     FIX  Force_2  65<br />
                     FIX  L_2    1.25<br />
                     </p>
-                    
+
                     <p>
                     Search will do its thing during the transition to the Next page.
                     </p>
@@ -351,7 +351,7 @@ export const execute = {
                     Now for a look at the results ...
                     One would expect a bit more wire diameter to support that extra load.
                     </p>
-                    
+
                     <p>
                     The lengths are essentially as requested.  This design is satisfactory.
                     </p>
@@ -369,19 +369,19 @@ export const execute = {
                     <p>
                     This section of the tutorial has covered a lot of important ground.
                     We have seen how constraints can express one sided goals for the
-                    design.  By manipulating the constraint levels 
+                    design.  By manipulating the constraint levels
                     and establishing target values for the Dependent Variables with FIX,
                     we set up a design problem to solve with Search.
                     By selecting different combinations of constraints and FIXes, we can express
                     a great variety of different spring design problems.  Take a few minutes
                     before starting the next section of the tutorial to try a few.
                     </p>
-                    
+
                     <p>
                     The next section of the tutorial will cover the techniques necessary
-                    to Save or print the information about a design. 
+                    to Save or print the information about a design.
                     Once saved, this information can be picked up for further work in a later session.
-                    
+
                     After that, another section of the tutorial will introduce the
                     techniques for selecting spring wire materials (with their associated
                     allowable stresses) and selecting spring end types.
@@ -394,15 +394,15 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    More tutorial sessions and demo problems are available. 
-                    They have names like tutor4, tutor5, demo1, demo2, ... etc. 
-                    Refer to the on-line documentation section (Help entry) covering the  
-                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    More tutorial sessions and demo problems are available.
+                    They have names like tutor4, tutor5, demo1, demo2, ... etc.
+                    Refer to the on-line documentation section (Help entry) covering the
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp;
                     for a list of topics.
                     </p>
-                    
-                    <p>If you do not wish to continue with more demonstration problems, 
-                    you can experiment with the various ODOP:Spring features, menus and reports. 
+
+                    <p>If you do not wish to continue with more demonstration problems,
+                    you can experiment with the various ODOP:Spring features, menus and reports.
                     The HELP menu is a good place to start. </p>
                     <br />
                 </>

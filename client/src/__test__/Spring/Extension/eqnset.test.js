@@ -11,18 +11,18 @@ it('eqnset initialState', () => {
 
     // p vector: OD_Free, Wire_Dia, Coils_T, Initial_Tension. End_Extension, Force_1, Force_2
     var p =     [1.1,     0.1055,   10.0,    6.0,             0.0,           10.0,    40.0];
-    // x vector: Mean_Dia 0, ID_Free 1, Coils_A 2, Rate 3, Deflect_1 4, Deflect_2 5, L_Body 6, L_Free 7, L_1 8, L_2 9, 
-    var x = [    0.0,        0.0,       0.0,       0.0,    0.0,         0.0,         0.0,      0.0,      0.0,   0.0, 
-    // L_Stroke 10, Weight 11, Spring_Index 12, Stress_Initial 13, Stress_1 14, Stress_2 15, Stress_Hook 16, FS_2 17, FS_CycleLife 18, FS_Hook 19, 
-       0.0,         0.0,       0.0,             0.0,               0.0,         0.0,         0.0,            0.0,     0.0,             0.0, 
-    // Cycle_Life 20, PC_Safe_Deflect 21, Stress_Init_Lo 22, Stress_Init_Hi 23, Energy 24, Spring_Type 25, Prop_Calc_Method 26, Material_Type 27, ASTM_Fed_Spec 28, Process 29, 
+    // x vector: Mean_Dia 0, ID_Free 1, Coils_A 2, Rate 3, Deflect_1 4, Deflect_2 5, L_Body 6, L_Free 7, L_1 8, L_2 9,
+    var x = [    0.0,        0.0,       0.0,       0.0,    0.0,         0.0,         0.0,      0.0,      0.0,   0.0,
+    // L_Stroke 10, Weight 11, Spring_Index 12, Stress_Initial 13, Stress_1 14, Stress_2 15, Stress_Hook 16, FS_2 17, FS_CycleLife 18, FS_Hook 19,
+       0.0,         0.0,       0.0,             0.0,               0.0,         0.0,         0.0,            0.0,     0.0,             0.0,
+    // Cycle_Life 20, PC_Safe_Deflect 21, Stress_Init_Lo 22, Stress_Init_Hi 23, Energy 24, Spring_Type 25, Prop_Calc_Method 26, Material_Type 27, ASTM_Fed_Spec 28, Process 29,
        0.0,           0.0,                0.0,               0.0,               0.0,      'Extension',     1,                   2,                'A228/QQW-470',   'Cold_Coiled',
-    // Material_File 30, Life_Category 31, Density 32, Torsion_Modulus 33, Hot_Factor_Kh 34, Tensile 35,        PC_Tensile_Endur 36, PC_Tensile_Stat 37, PC_Tensile_Bend 38, Stress_Lim_Endur 39, 
+    // Material_File 30, Life_Category 31, Density 32, Torsion_Modulus 33, Hot_Factor_Kh 34, Tensile 35,        PC_Tensile_Endur 36, PC_Tensile_Stat 37, PC_Tensile_Bend 38, Stress_Lim_Endur 39,
        'mat_us.json',    1,                0.284,      11500000,           1,                261419.2233253764, 50,                  50,                 75,                 130709.6116626882,
-    // Stress_Lim_Stat 40, Stress_Lim_Bend 41, SI_Range 42,          SI_Lo_Factor 43, SI_Hi_Factor 44, End_Type 45, End_ID 46, Extended_End_ID 47, L_End 48, L_Extended_End 49, 
+    // Stress_Lim_Stat 40, Stress_Lim_Bend 41, SI_Range 42,          SI_Lo_Factor 43, SI_Hi_Factor 44, End_Type 45, End_ID 46, Extended_End_ID 47, L_End 48, L_Extended_End 49,
        130709.6116626882,  196064,             'Readily Obtainable', 27400,           45000,           4,           0.8890,    0.8890,             0.8890,   0.8890,
     // Hook_Deflect_All 50, Catalog_Name 51, Catalog_Number 52, tbase010 53, tbase400 54, const_term 55, slope_term 56,       tensile_010 57,
-       0.4000,              '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000]; 
+       0.4000,              '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
 
@@ -107,18 +107,18 @@ it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () 
 
     // p vector: OD_Free, Wire_Dia, Coils_T, Initial_Tension. End_Extension, Force_1, Force_2
     var p =     [0.4,     0.2,      10.0,    6.0,             0.0,           10.0,    40.0];
-    // x vector: Mean_Dia 0, ID_Free 1, Coils_A 2, Rate 3, Deflect_1 4, Deflect_2 5, L_Body 6, L_Free 7, L_1 8, L_2 9, 
-    var x = [    0.0,        0.0,       0.0,       0.0,    0.0,         0.0,         0.0,      0.0,      0.0,   0.0, 
-    // L_Stroke 10, Weight 11, Spring_Index 12, Stress_Initial 13, Stress_1 14, Stress_2 15, Stress_Hook 16, FS_2 17, FS_CycleLife 18, FS_Hook 19, 
-       0.0,         0.0,       0.0,             0.0,               0.0,         0.0,         0.0,            0.0,     0.0,             0.0, 
-    // Cycle_Life 20, PC_Safe_Deflect 21, Stress_Init_Lo 22, Stress_Init_Hi 23, Energy 24, Spring_Type 25, Prop_Calc_Method 26, Material_Type 27, ASTM_Fed_Spec 28, Process 29, 
+    // x vector: Mean_Dia 0, ID_Free 1, Coils_A 2, Rate 3, Deflect_1 4, Deflect_2 5, L_Body 6, L_Free 7, L_1 8, L_2 9,
+    var x = [    0.0,        0.0,       0.0,       0.0,    0.0,         0.0,         0.0,      0.0,      0.0,   0.0,
+    // L_Stroke 10, Weight 11, Spring_Index 12, Stress_Initial 13, Stress_1 14, Stress_2 15, Stress_Hook 16, FS_2 17, FS_CycleLife 18, FS_Hook 19,
+       0.0,         0.0,       0.0,             0.0,               0.0,         0.0,         0.0,            0.0,     0.0,             0.0,
+    // Cycle_Life 20, PC_Safe_Deflect 21, Stress_Init_Lo 22, Stress_Init_Hi 23, Energy 24, Spring_Type 25, Prop_Calc_Method 26, Material_Type 27, ASTM_Fed_Spec 28, Process 29,
        0.0,           0.0,                0.0,               0.0,               0.0,      'Extension',     1,                   2,                'A228/QQW-470',   'Cold_Coiled',
-    // Material_File 30, Life_Category 31, Density 32, Torsion_Modulus 33, Hot_Factor_Kh 34, Tensile 35,        PC_Tensile_Endur 36, PC_Tensile_Stat 37, PC_Tensile_Bend 38, Stress_Lim_Endur 39, 
+    // Material_File 30, Life_Category 31, Density 32, Torsion_Modulus 33, Hot_Factor_Kh 34, Tensile 35,        PC_Tensile_Endur 36, PC_Tensile_Stat 37, PC_Tensile_Bend 38, Stress_Lim_Endur 39,
        'mat_us.json',    1,                0.284,      11500000,           1,                261419.2233253764, 50,                  50,                 75,                 130709.6116626882,
-    // Stress_Lim_Stat 40, Stress_Lim_Bend 41, SI_Range 42,          SI_Lo_Factor 43, SI_Hi_Factor 44, End_Type 45, End_ID 46, Extended_End_ID 47, L_End 48, L_Extended_End 49, 
+    // Stress_Lim_Stat 40, Stress_Lim_Bend 41, SI_Range 42,          SI_Lo_Factor 43, SI_Hi_Factor 44, End_Type 45, End_ID 46, Extended_End_ID 47, L_End 48, L_Extended_End 49,
        130709.6116626882,  196064,             'Readily Obtainable', 27400,           45000,           4,           0.8890,    0.8890,             0.8890,   0.8890,
     // Hook_Deflect_All 50, Catalog_Name 51, Catalog_Number 52, tbase010 53, tbase400 54, const_term 55, slope_term 56,       tensile_010 57,
-       0.4000,              '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000]; 
+       0.4000,              '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
 
@@ -203,18 +203,18 @@ it('eqnset pathological OD_Free === Wire_Dia && Mean_Dia === 0.0', () => {
 
     // p vector: OD_Free, Wire_Dia, Coils_T, Initial_Tension. End_Extension, Force_1, Force_2
     var p =     [0.4,     0.4,      10.0,    6.0,             0.0,           10.0,    40.0];
-    // x vector: Mean_Dia 0, ID_Free 1, Coils_A 2, Rate 3, Deflect_1 4, Deflect_2 5, L_Body 6, L_Free 7, L_1 8, L_2 9, 
-    var x = [    0.0,        0.0,       0.0,       0.0,    0.0,         0.0,         0.0,      0.0,      0.0,   0.0, 
-    // L_Stroke 10, Weight 11, Spring_Index 12, Stress_Initial 13, Stress_1 14, Stress_2 15, Stress_Hook 16, FS_2 17, FS_CycleLife 18, FS_Hook 19, 
-       0.0,         0.0,       0.0,             0.0,               0.0,         0.0,         0.0,            0.0,     0.0,             0.0, 
-    // Cycle_Life 20, PC_Safe_Deflect 21, Stress_Init_Lo 22, Stress_Init_Hi 23, Energy 24, Spring_Type 25, Prop_Calc_Method 26, Material_Type 27, ASTM_Fed_Spec 28, Process 29, 
+    // x vector: Mean_Dia 0, ID_Free 1, Coils_A 2, Rate 3, Deflect_1 4, Deflect_2 5, L_Body 6, L_Free 7, L_1 8, L_2 9,
+    var x = [    0.0,        0.0,       0.0,       0.0,    0.0,         0.0,         0.0,      0.0,      0.0,   0.0,
+    // L_Stroke 10, Weight 11, Spring_Index 12, Stress_Initial 13, Stress_1 14, Stress_2 15, Stress_Hook 16, FS_2 17, FS_CycleLife 18, FS_Hook 19,
+       0.0,         0.0,       0.0,             0.0,               0.0,         0.0,         0.0,            0.0,     0.0,             0.0,
+    // Cycle_Life 20, PC_Safe_Deflect 21, Stress_Init_Lo 22, Stress_Init_Hi 23, Energy 24, Spring_Type 25, Prop_Calc_Method 26, Material_Type 27, ASTM_Fed_Spec 28, Process 29,
        0.0,           0.0,                0.0,               0.0,               0.0,      'Extension',     1,                   2,                'A228/QQW-470',   'Cold_Coiled',
-    // Material_File 30, Life_Category 31, Density 32, Torsion_Modulus 33, Hot_Factor_Kh 34, Tensile 35,        PC_Tensile_Endur 36, PC_Tensile_Stat 37, PC_Tensile_Bend 38, Stress_Lim_Endur 39, 
+    // Material_File 30, Life_Category 31, Density 32, Torsion_Modulus 33, Hot_Factor_Kh 34, Tensile 35,        PC_Tensile_Endur 36, PC_Tensile_Stat 37, PC_Tensile_Bend 38, Stress_Lim_Endur 39,
        'mat_us.json',    1,                0.284,      11500000,           1,                261419.2233253764, 50,                  50,                 75,                 130709.6116626882,
-    // Stress_Lim_Stat 40, Stress_Lim_Bend 41, SI_Range 42,          SI_Lo_Factor 43, SI_Hi_Factor 44, End_Type 45, End_ID 46, Extended_End_ID 47, L_End 48, L_Extended_End 49, 
+    // Stress_Lim_Stat 40, Stress_Lim_Bend 41, SI_Range 42,          SI_Lo_Factor 43, SI_Hi_Factor 44, End_Type 45, End_ID 46, Extended_End_ID 47, L_End 48, L_Extended_End 49,
        130709.6116626882,  196064,             'Readily Obtainable', 27400,           45000,           4,           0.8890,    0.8890,             0.8890,   0.8890,
     // Hook_Deflect_All 50, Catalog_Name 51, Catalog_Number 52, tbase010 53, tbase400 54, const_term 55, slope_term 56,       tensile_010 57,
-       0.4000,              '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000]; 
+       0.4000,              '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
 

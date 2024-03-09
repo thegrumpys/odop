@@ -11,7 +11,7 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
     var Dend, K1, C1;
     var sq1, sq2;
     var j;
-    
+
     var et_tab = require('./endtypes.json');
 //  console.log("et_tab=", et_tab);
 
@@ -41,12 +41,12 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
 
     x[o.Deflect_1] = (p[o.Force_1] - p[o.Initial_Tension]) / x[o.Rate];
     if(x[o.Deflect_1] < zero) {x[o.Deflect_1] = zero};
-    
+
     x[o.Deflect_2] = (p[o.Force_2] - p[o.Initial_Tension]) / x[o.Rate];
     if(x[o.Deflect_2] < zero) {x[o.Deflect_2] = zero};
 
     x[o.L_Body] = p[o.Wire_Dia] * (p[o.Coils_T] + 1.0);
-    
+
     /*
      * End_ID, Extended_End_ID, L_End and L_Extended_End are also calculated in init.
      * They need to be calculated in eqnset because OD_Free will be changed during Search when init is not called.
@@ -63,18 +63,18 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
 //         console.log('    x[o.L_End] = ', x[o.L_End]);
 //         console.log('    x[o.L_Extended_End] = ', x[o.L_Extended_End]);
     }
-    
+
     x[o.L_Free] = x[o.L_End] + x[o.L_Body] + p[o.End_Extension] + x[o.L_Extended_End];
 
     wd3 = p[o.Wire_Dia] * p[o.Wire_Dia] * p[o.Wire_Dia];
     s_f = 8.0 * x[o.Mean_Dia] / (Math.PI * wd3);
-    
+
     /*  stress_initial does not contain the stress correction factor     */
     x[o.Stress_Initial] = s_f * p[o.Initial_Tension];
 
     /*  other stresses have ks included  */
     s_f *= ks;
-    
+
     x[o.L_1] = x[o.L_Free] + x[o.Deflect_1];
     x[o.L_2] = x[o.L_Free] + x[o.Deflect_2];
 
@@ -82,7 +82,7 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
 
     x[o.Stress_1] = s_f * p[o.Force_1];
     if (x[o.Stress_1] <  x[o.Stress_Initial]) {x[o.Stress_1] = x[o.Stress_Initial]};
-    
+
     x[o.Stress_2] = s_f * p[o.Force_2];
     if (x[o.Stress_2] <  x[o.Stress_Initial]) {x[o.Stress_2] = x[o.Stress_Initial]};
 
@@ -91,13 +91,13 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
 //          console.log("eqnset Tensile = ", x[o.Tensile]);
       }
       if (x[o.Prop_Calc_Method] <= 2) {
-          x[o.Stress_Lim_Endur] = x[o.Tensile] * x[o.PC_Tensile_Endur] / 100.0; 
-          x[o.Stress_Lim_Stat]  = x[o.Tensile] * x[o.PC_Tensile_Stat]  / 100.0; 
-          x[o.Stress_Lim_Bend]  = x[o.Tensile] * x[o.PC_Tensile_Bend]  / 100.0; 
+          x[o.Stress_Lim_Endur] = x[o.Tensile] * x[o.PC_Tensile_Endur] / 100.0;
+          x[o.Stress_Lim_Stat]  = x[o.Tensile] * x[o.PC_Tensile_Stat]  / 100.0;
+          x[o.Stress_Lim_Bend]  = x[o.Tensile] * x[o.PC_Tensile_Bend]  / 100.0;
       }
 
     if (x[o.Stress_2] > zero) {
-        x[o.FS_2] = x[o.Stress_Lim_Stat] / x[o.Stress_2]; 
+        x[o.FS_2] = x[o.Stress_Lim_Stat] / x[o.Stress_2];
 //        console.log("eqnset FS_2 = ", x[o.FS_2]);
     }
        else x[o.FS_2] = 1.0;
@@ -113,9 +113,9 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
         */
       stress_avg = (x[o.Stress_1] + x[o.Stress_2]) / 2.0;
       stress_rng = (x[o.Stress_2] - x[o.Stress_1]) / 2.0;
-      se2 = x[o.Stress_Lim_Endur] / 2.0; 
-    x[o.FS_CycleLife] =  x[o.Stress_Lim_Stat] / 
-         (kc * stress_rng * (x[o.Stress_Lim_Stat] - se2) / se2 + stress_avg); 
+      se2 = x[o.Stress_Lim_Endur] / 2.0;
+    x[o.FS_CycleLife] =  x[o.Stress_Lim_Stat] /
+         (kc * stress_rng * (x[o.Stress_Lim_Stat] - se2) / se2 + stress_avg);
 
     /*  ref. pg 51 Associated Spring Design Handbook  */
 //  if end_id > extended_end_id then
@@ -168,14 +168,14 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
         + Math.PI * (x[o.End_ID] +  p[o.Wire_Dia]
         + x[o.Extended_End_ID] +  p[o.Wire_Dia])
         + x[o.End_Extension];
-    
+
     x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * wire_len_t;
 
 //    safe_load=stress_lim_stat/s_f;
 //    safe_deflect=(safe_load-initial_tension)/rate;
 //    %_safe_deflect=deflect_2/safe_deflect*100.0;
     x[o.PC_Safe_Deflect] = 100.0 * x[o.Deflect_2] / (((x[o.Stress_Lim_Stat] / s_f)- p[o.Initial_Tension]) / x[o.Rate]);
-//    
+//
 //    temp=exp(0.105*spring_index);
 //    stress_init_lo=si_lo_factor/temp;
 //    stress_init_hi=si_hi_factor/temp;
@@ -185,10 +185,10 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
     x[o.Stress_Init_Hi] = x[o.SI_Hi_Factor] / temp;
 
      x[o.Energy] = 0.5 * x[o.Rate] * (x[o.Deflect_2] * x[o.Deflect_2] - x[o.Deflect_1] * x[o.Deflect_1]);
-    
+
 //    console.log('In eqnset p=',p,' x=',x);
     return x;
-    
+
 function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
 //    console.log("In cl_calc:");
 //    console.log("Material_Index = x[o.Material_Type] = mat_idx =", mat_idx);
@@ -196,7 +196,7 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
 //    console.log("st_code =", st_code, " x[o.Tensile] = tensile =", tensile);
 //    console.log("Stress1 = x[o.Stress_1] =", stress_1);
 //    console.log("Stress2 = x[o.Stress_2] =", stress_2);
-    
+
     var i;
     var j;
     var pntc;
@@ -233,7 +233,7 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
     }
     for (i = 0; i <= 3; i++) {
         idxoffset = 3 - i + j;
-        if (j > 0 && idxoffset === 3) { // If Shot Peened and 
+        if (j > 0 && idxoffset === 3) { // If Shot Peened and
             idxoffset = 0;
         }
         if (st_code === 3) { // Is it Torsion?
@@ -272,5 +272,5 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
 //    console.log('Before table sterm=',sterm,'temp=',temp,'result=',result);
     return(result);
 }
-    
+
 }

@@ -11,18 +11,18 @@ export const execute = {
                     The following example illustrates the use of ODOP:Spring in
                     the design of a compression spring from original specifications.
                     </p>
-                    
+
                     <p>
-                    As with the other tutorial and demo sessions, 
-                    this session needs to start from a known state.  
+                    As with the other tutorial and demo sessions,
+                    this session needs to start from a known state.
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     Moving to the next page will establish the necessary initialState.
                     </p>
-                    
+
                     <p>
                     To continue with this example, just click the "Next" button as you finish
-                    reading each page (step). 
+                    reading each page (step).
                     </p>
                     <br />
                 </>
@@ -35,13 +35,13 @@ export const execute = {
                     <p>
                     The initial conditions expected by this demo session are now established.
                     </p>
-                    
+
                     <p>
                     Before we make any changes, let's review a problem statement that
                     is similar to a sample compression spring problem
                     contained in the design handbook of a large spring manufacturer.
                     </p>
-                    
+
                     <p>
                     Determine wire size, number of coils and corrected stress at solid height, given:<br />
                           material     =  oil tempered wire,  ASTM A229<br />
@@ -63,12 +63,12 @@ export const execute = {
             text: (
                 <>
                     <p>Next, the demo session will enter everything we know about the problem. </p>
-                    
+
                     <p>This is a good time to take a good look at the existing values.
-                    Affected values will update immediately as the demo session enters 
+                    Affected values will update immediately as the demo session enters
                     changes when moving to the next page.</p>
-                    
-                    <p>You can scroll the page down to view the complete set of values. 
+
+                    <p>You can scroll the page down to view the complete set of values.
                     Scroll back up in order to use the Next button to continue.</p>
                     <br /><br />
                 </>
@@ -79,7 +79,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The demo has now entered what is known about the problem. 
+                    The demo has now entered what is known about the problem.
                     In summary, the changes were:<br />
                     </p>
                     CHANGE  Material_Type OIL_TEMPERED_MB<br />
@@ -91,7 +91,7 @@ export const execute = {
                     FIX  L_2        1.969<br />
                     <br />
                     <p>
-                    The remaining Independent Variable values remain as established by the initialState. 
+                    The remaining Independent Variable values remain as established by the initialState.
                     </p>
                 </>
             ),
@@ -117,9 +117,9 @@ export const execute = {
                 Note the warning message.  It says that when applying a 112
                 pound force, the current values of WIRE_DIA, COILS_T and L_FREE
                 (remaining as established by the initialState) create a starting
-                point where L_2, the length at point 2, is less than the solid length 
-                (less than zero, actually).  
-                This is an impossible condition and provides a difficult start point for the search. 
+                point where L_2, the length at point 2, is less than the solid length
+                (less than zero, actually).
+                This is an impossible condition and provides a difficult start point for the search.
                 However in this case, we'll ignore the message and proceed with the search.
                 </p>
                 <br /><br />
@@ -132,9 +132,9 @@ export const execute = {
                 <>
                     <p>We have a solution. Please take a moment to scroll through and view the values.</p>
                     <p>
-                    Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
-                    The message: 
-                    "<b>Coil to coil contact may cause inaccuracy in point 2.</b>" 
+                    Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini).
+                    The message:
+                    "<b>Coil to coil contact may cause inaccuracy in point 2.</b>"
                     is produced any time that the second load uses more
                     than 80 % of available deflection.
                     </p>
@@ -153,25 +153,25 @@ export const execute = {
                     If you are still viewing the Report,
                     don't forget to switch back to the main page.
                     </p>
-                    
+
                     <p>
-                    Clearly, there is more than one possible solution to this problem, as stated. 
-                    We established a constraint on outside diameter, 
-                    thus permitting any value less than this maximum value.  
+                    Clearly, there is more than one possible solution to this problem, as stated.
+                    We established a constraint on outside diameter,
+                    thus permitting any value less than this maximum value.
                     ODOP:Spring seems to
                     have discovered a solution with a significantly smaller outside diameter
                     than the one derived in the handbook (1.5 in.), yet it meets all the
                     other problem specifications.
                     </p>
-                    
+
                     <p>
-                    The handbook selected the design's outside diameter based on 95 % of the hole diameter. 
-                    This could be significant if buckling is an issue.  
-                    A larger outside diameter will be less prone to buckling. 
-                    Also, a correct fit within the hole will provide lateral support for the spring 
+                    The handbook selected the design's outside diameter based on 95 % of the hole diameter.
+                    This could be significant if buckling is an issue.
+                    A larger outside diameter will be less prone to buckling.
+                    Also, a correct fit within the hole will provide lateral support for the spring
                     and thus reduce any tendency to buckle.
                     </p>
-                    
+
                     <p>
                     Before going further, be sure to look at the wire size, number of coils,
                     stress at solid, factor of safety and weight of
@@ -185,17 +185,17 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The demo session has now entered the handbook solution. 
+                    The demo session has now entered the handbook solution.
                     We can look at the ODOP:Spring analysis of the handbook result.
                     </p>
-                    
+
                     <p>
                     CHANGE  Wire_Dia  0.189<br />
                     CHANGE  OD_Free   1.5<br />
                     CHANGE  L_Free    2.843<br />
                     CHANGE  Coils_T   8.4<br />
                     </p>
-                    
+
                     <p>
                     <br /><br />
                     </p>
@@ -214,11 +214,11 @@ export const execute = {
                 <>
                     <p>
                     Please take a moment to scroll through and view the values.
-                    Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
+                    Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini).
                     </p>
-                    
+
                     <p>
-                    While the ODOP:Spring solution and the handbook solution are quite different, 
+                    While the ODOP:Spring solution and the handbook solution are quite different,
                     the ODOP:Spring analysis of the handbook design
                     is very close to the results predicted by the handbook.
                     </p>
@@ -238,21 +238,21 @@ export const execute = {
                     <p>
                     If you are still viewing a Report, don't forget to switch back to the main page.
                     </p>
-                    
+
                     <p>
-                    As you can see by the violation of the upper constraint on the 
-                    factor of safety at Point 2 (FS_2), 
+                    As you can see by the violation of the upper constraint on the
+                    factor of safety at Point 2 (FS_2),
                     ODOP:Spring is not entirely happy with the handbook design because it is
-                    very conservative (low stress). 
+                    very conservative (low stress).
                     The ODOP compression spring initialState contains an upper
                     constraint on factor of safety at point 2 (FS_2 MAX = 1.5) that causes
                     the program to seek designs that are not excessively conservative.
                     Remember that this constraint is easily adjusted simply by changing the
                     value in that constraint field.
                     </p>
-                    
+
                     <p>
-                    As can be expected, there is a weight penalty for a more conservative design. 
+                    As can be expected, there is a weight penalty for a more conservative design.
                     The ODOP:Spring design had a smaller factor of safety and less weight.
                     </p>
                 </>
@@ -265,19 +265,19 @@ export const execute = {
                     <p>
                     This completes our analysis of this problem.
                     </p>
-                    
+
                     <p>
-                    Several more demo problems are available. 
-                    They are named demo1, demo2, ... etc. 
-                    Refer to the on-line documentation section (Help entry) covering the  
-                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    Several more demo problems are available.
+                    They are named demo1, demo2, ... etc.
+                    Refer to the on-line documentation section (Help entry) covering the
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp;
                     for a complete list of additional tutorial and demo topics.
                     </p>
-                    
+
                     <p>
-                    If you do not wish to continue with more demonstration problems, 
-                    you can experiment with the various ODOP:Spring features, menus and reports. 
-                    The HELP menu is a good place to start. 
+                    If you do not wish to continue with more demonstration problems,
+                    you can experiment with the various ODOP:Spring features, menus and reports.
+                    The HELP menu is a good place to start.
                     </p>
                 </>
             )

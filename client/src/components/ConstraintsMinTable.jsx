@@ -6,7 +6,7 @@ import ConstraintsMinRowIndependentVariable from './ConstraintsMinRowIndependent
 import ConstraintsMinHeaderDependentVariable from './ConstraintsMinHeaderDependentVariable';
 import ConstraintsMinRowDependentVariable from './ConstraintsMinRowDependentVariable';
 
-export default function ConstraintsMinTable() {
+export default ConstraintsMinTable = () => {
 //  console.log("ConstraintsMinTable - Mounting...");
   const symbol_table = useSelector((state) => state.model.model.symbol_table);
 

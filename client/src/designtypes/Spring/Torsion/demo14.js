@@ -11,25 +11,25 @@ export const execute = {
                 <>
                     <p>
                     The following example briefly illustrates the use of ODOP:Spring in
-                    the design of a torsion spring. 
+                    the design of a torsion spring.
                     </p>
-                    
+
                     <p>
-                    This demo session is written with the assumption that the reader is already familiar with 
+                    This demo session is written with the assumption that the reader is already familiar with
                     basic ODOP concepts and terminology.
-                    To get a more introductory experience, 
-                    the compression spring demo sessions named "demoDesignValidation" and "demoNewDesign" are a good place to get started. 
+                    To get a more introductory experience,
+                    the compression spring demo sessions named "demoDesignValidation" and "demoNewDesign" are a good place to get started.
                     </p>
-                    
+
                     <p>
-                    A detailed description of  
+                    A detailed description of
                     <a href="/docs/Help/DesignTypes/Spring/Torsion/description.html" target="_blank" rel="noopener noreferrer"> torsion spring names </a>
-                    is provided in the On-line Help.  
+                    is provided in the On-line Help.
                     </p>
-                    
+
                     <p>
-                    As with the other tutorial and demo sessions, 
-                    this session needs to start from a known state.  
+                    As with the other tutorial and demo sessions,
+                    this session needs to start from a known state.
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     </p>
@@ -47,7 +47,7 @@ export const execute = {
                     <p>
                     The initial conditions expected by this demo session are now established.
                     </p>
-                    
+
                     <p>This problem appears in the  HANDBOOK of SPRING DESIGN  published by:<br />
                     <br />
                     Spring Manufacturers Institute, Inc.<br />
@@ -76,16 +76,16 @@ export const execute = {
                 Design a torsion spring to counterbalance a trap door.
                 The spring should carry 18 pounds (90% of the door's 20 pound weight) in the door closed position.
                 The door's center of gravity is 9 inches from the hinge.
-                The torsion spring should exert 10 lb-in of torque to hold the door open at a deflection 
+                The torsion spring should exert 10 lb-in of torque to hold the door open at a deflection
                 of 110 degrees from the closed position.
                 </p>
-                
+
                 <p>
-                Determine a standard wire diameter and number of coils for a torsion spring 
+                Determine a standard wire diameter and number of coils for a torsion spring
                 with appropriate clearance for working over a 1.1 inch diameter shaft
                 (a suggestion of a 1.5 inch mean diameter is provided).
                 </p>
-                
+
                 <table>
                     <tbody>
                         <tr><th>material</th><td>&nbsp;=</td><td>&nbsp;</td><td>oil-tempered wire</td><td>&nbsp;</td></tr>
@@ -98,11 +98,11 @@ export const execute = {
                     </tbody>
                 </table>
                 <br />
-               
+
                 <p>
-                The handbook example uses allowable stresses appropriate for a static load and 
+                The handbook example uses allowable stresses appropriate for a static load and
                 does not state a requirement for cycle life.
-                There is no mention of spacing between coils or 
+                There is no mention of spacing between coils or
                 arm lengths necessary to compute wire length and weight.
                 </p>
                 </>
@@ -113,7 +113,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The demo has now entered what is known about the problem. 
+                    The demo has now entered what is known about the problem.
                     In summary, the changes were:<br />
                     <br />
                     CHANGE  Material_Type  OIL_TEMPERED_MB<br />
@@ -126,7 +126,7 @@ export const execute = {
                     FIX  Force_Arm_2  18.0<br />
                     CHANGE  Arm_2  9.0<br />
                     </p>
-                    
+
                     <p>
                     This is a good time to scroll down and confirm these changes are now in place.
                     </p>
@@ -153,7 +153,7 @@ export const execute = {
                     ODOP:Spring was able to accept the specifications for Force_Arm_2 and length of Arm_2 directly and
                     thus eliminated the need for that side calculation.
                     </p>
-                    
+
                     <p>
                     After the click on Next, the demo will run Search.
                     </p>
@@ -193,7 +193,7 @@ export const execute = {
                     The <b>Action : Select Size</b> menu item can be used to select the nearest standard wire diameter.
                     You can experiment with that now.
                     </p>
-                   
+
                     <p>
                     In the process of transitioning to the next page, the demo session will
                     FIX a value of 0.225 inch on Wire_Dia and then
@@ -221,7 +221,7 @@ export const execute = {
                     <p>
                     The two solutions are in reasonable agreement.
                     </p>
-                   
+
                     <p>
                     </p>
                 </>

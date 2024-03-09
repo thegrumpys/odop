@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip  } from 'react-bootstrap';
 
-export default function NameValueUnitsHeaderDependentVariable() {
+export default NameValueUnitsHeaderDependentVariable = () => {
 //  console.log("NameValueUnitsHeaderDependentVariable - Mounting...");
   const symbol_table = useSelector((state) => state.model.model.symbol_table);
   const system_controls = useSelector((state) => state.model.model.system_controls);
-    
+
   useEffect(() => {
 //    console.log("NameValueUnitsHeaderDependentVariable - Mounted");
 //    return () => console.log("NameValueUnitsHeaderDependentVariable - Unmounting ...");

@@ -26,7 +26,7 @@ class HelpIndex extends Component {
             </>
         );
     }
-}  
+}
 
 const mapStateToProps = state => ({
 });

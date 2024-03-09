@@ -36,7 +36,7 @@ class ActionSelectSize extends Component {
             this.updateSizeTypes();
         }
     }
-    
+
     updateSizeTypes() {
 //        console.log('In ActionSelectSize updateSizeTypes');
         var { getSizeTypes, getSizeEntries } = require('../../designtypes/'+this.props.type+'/size.js'); // Dynamically load getSizeTypes & getSizeEntries
@@ -100,7 +100,7 @@ class ActionSelectSize extends Component {
     onSelectSizeEntry(event) {
 //      console.log('In ActionSelectSizeEntry.onSelectSizeEntry event.target.value=',event.target.value);
       this.setState({
-          size: parseFloat(event.target.value) 
+          size: parseFloat(event.target.value)
       });
   }
 
@@ -173,7 +173,7 @@ class ActionSelectSize extends Component {
             </>
         );
     }
-}  
+}
 
 const mapStateToProps = state => ({
     type: state.model.type,

@@ -54,10 +54,10 @@ class HelpTutorial extends Component {
     onSelect(event) {
 //      console.log('In HelpTutorial.onSelect event.target.value=',event.target.value);
       this.setState({
-          execute_name: event.target.value 
+          execute_name: event.target.value
       });
   }
-  
+
     onExecute() {
 //        console.log('In HelpTutorial.onExecute');
         this.setState({
@@ -70,7 +70,7 @@ class HelpTutorial extends Component {
 //        console.log('In HelpTutorial.onExecute execute=',execute);
         startExecute('Help : Tutorial : ' + this.state.execute_name, this.state.execute_name, execute.steps);
     }
-    
+
     onCancel() {
 //        console.log('In HelpTutorial.onCancel');
         this.setState({
@@ -78,7 +78,7 @@ class HelpTutorial extends Component {
         });
         // Noop - all done
     }
-    
+
     render() {
 //        console.log('In HelpTutorial.render this=',this);
         return (
@@ -109,7 +109,7 @@ class HelpTutorial extends Component {
             </>
         );
     }
-}  
+}
 
 const mapStateToProps = state => ({
     type: state.model.type,

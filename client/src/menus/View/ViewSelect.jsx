@@ -11,7 +11,7 @@ class ViewSelect extends Component {
         super(props);
         this.onClick = this.onClick.bind(this);
     }
-    
+
     onClick(event) {
 //        console.log('In ViewSelect.onClick this=',this,'event=',event);
 //        console.log('In ViewSelect.onClick event.target.id=',event.target.id);
@@ -19,7 +19,7 @@ class ViewSelect extends Component {
         this.props.changeView(event.target.id);
         logUsage('event', 'ViewSelect', { event_label: event.target.id});
     }
-    
+
     render() {
 //        console.log('In ViewSelect.render this=',this);
         return (
@@ -32,7 +32,7 @@ class ViewSelect extends Component {
             </>
         );
     }
-}  
+}
 
 const mapStateToProps = state => ({
     type: state.model.type,

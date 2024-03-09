@@ -32,7 +32,7 @@ it('demo9', () => {
 
 // title: "Session Now In Progress",
     // No-op
-    
+
     // title: "Page 02 of 09"
     store.dispatch(loadInitialState("Spring/Extension","US"));
     store.dispatch(changeLabelsValue([{"name":"COMMENT","value":"Extension Spring Demo"}]));

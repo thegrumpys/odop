@@ -6,7 +6,7 @@ import NameValueUnitsRowIndependentVariable from './NameValueUnitsRowIndependent
 import NameValueUnitsHeaderDependentVariable from './NameValueUnitsHeaderDependentVariable';
 import NameValueUnitsRowDependentVariable from './NameValueUnitsRowDependentVariable';
 
-export default function NameValueUnitsTable() {
+export default NameValueUnitsTable = () => {
 //  console.log("NameValueUnitsTable - Mounting...");
   const symbol_table = useSelector((state) => state.model.model.symbol_table);
 

@@ -13,7 +13,7 @@ class ViewSymbolTableOffsets extends Component {
             modal: false
         };
     }
-    
+
     toggle() {
 //        console.log('In ViewSymbolTableOffsets.toggle');
         this.setState({
@@ -52,7 +52,7 @@ class ViewSymbolTableOffsets extends Component {
             </>
         );
     }
-}  
+}
 
 const mapStateToProps = state => ({
     symbol_table: state.model.symbol_table,

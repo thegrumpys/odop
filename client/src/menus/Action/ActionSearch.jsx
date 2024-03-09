@@ -60,7 +60,7 @@ class ActionSearch extends Component {
         });
         this.doSearch('NOT FINITE');
     }
-    
+
     onSearchCancel() {
 //        console.log('In ActionSearch.onSearchCancel');
         this.setState({
@@ -68,7 +68,7 @@ class ActionSearch extends Component {
         });
         // Noop - all done
     }
-    
+
     doSearch(type) {
 //        console.log('In ActionSearch.doSearch');
         var old_objective_value = this.props.objective_value;
@@ -108,7 +108,7 @@ class ActionSearch extends Component {
                             <p>Continuing Search may not result in an improvement.</p>
                             <p>Canceling Search will allow you to examine the Alerts panel for invalid values and associated help.
                             Freeing one or more Independent Variables may result in an improvement.</p>
-                        </Alert> 
+                        </Alert>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="outline-info" onClick={this.onSearchContextHelp}>Help</Button>{' '}

@@ -10,7 +10,7 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
     var stress_avg;
     var stress_rng;
     var se2;
-    
+
     /*  *******  DESIGN EQUATIONS  *******                  */
     x[o.Mean_Dia] = p[o.OD_Free] - p[o.Wire_Dia];
 
@@ -60,12 +60,12 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
 //          console.log("eqnset Tensile = ", x[o.Tensile]);
       }
       if (x[o.Prop_Calc_Method] <= 2) {
-          x[o.Stress_Lim_Endur] = x[o.Tensile] * x[o.PC_Tensile_Endur] / 100.0; 
-          x[o.Stress_Lim_Stat]  = x[o.Tensile] * x[o.PC_Tensile_Stat]  / 100.0; 
+          x[o.Stress_Lim_Endur] = x[o.Tensile] * x[o.PC_Tensile_Endur] / 100.0;
+          x[o.Stress_Lim_Stat]  = x[o.Tensile] * x[o.PC_Tensile_Stat]  / 100.0;
       }
 
     if (x[o.Stress_2] > zero) {
-        x[o.FS_2] = x[o.Stress_Lim_Stat] / x[o.Stress_2]; 
+        x[o.FS_2] = x[o.Stress_Lim_Stat] / x[o.Stress_2];
 //        console.log("eqnset FS_2 = ", x[o.FS_2]);
     }
        else x[o.FS_2] = 1.0;
@@ -86,9 +86,9 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
         */
       stress_avg = (x[o.Stress_1] + x[o.Stress_2]) / 2.0;
       stress_rng = (x[o.Stress_2] - x[o.Stress_1]) / 2.0;
-      se2 = x[o.Stress_Lim_Endur] / 2.0; 
-    x[o.FS_CycleLife] =  x[o.Stress_Lim_Stat] / 
-         (kc * stress_rng * (x[o.Stress_Lim_Stat] - se2) / se2 + stress_avg); 
+      se2 = x[o.Stress_Lim_Endur] / 2.0;
+    x[o.FS_CycleLife] =  x[o.Stress_Lim_Stat] /
+         (kc * stress_rng * (x[o.Stress_Lim_Stat] - se2) / se2 + stress_avg);
 
              /*  modified Goodman cycle life calculation  */
     if (x[o.Prop_Calc_Method] === 1 && x[o.Material_Type] !== 0) {
@@ -113,12 +113,12 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
         };
     }
     else x[o.PC_Avail_Deflect] = 100.0 * x[o.Deflect_2] / p[o.Wire_Dia] + 10000.0 * (x[o.L_Solid] + p[o.Wire_Dia] - p[o.L_Free]);
- 
+
      x[o.Energy] = 0.5 * x[o.Rate] * (x[o.Deflect_2] * x[o.Deflect_2] - x[o.Deflect_1] * x[o.Deflect_1]);
-    
+
 //    console.log('</ul><li>','@@@@@ End eqnset','</li>');
     return x;
-    
+
 function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
 //    console.log("In cl_calc:");
 //    console.log("Material_Index = x[o.Material_Type] = mat_idx =", mat_idx);
@@ -126,7 +126,7 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
 //    console.log("st_code =", st_code, " x[o.Tensile] = tensile =", tensile);
 //    console.log("Stress1 = x[o.Stress_1] =", stress_1);
 //    console.log("Stress2 = x[o.Stress_2] =", stress_2);
-    
+
     var i;
     var j;
     var pntc;
@@ -163,7 +163,7 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
     }
     for (i = 0; i <= 3; i++) {
         idxoffset = 3 - i + j;
-        if (j > 0 && idxoffset === 3) { // If Shot Peened and 
+        if (j > 0 && idxoffset === 3) { // If Shot Peened and
             idxoffset = 0;
         }
         if (st_code === 3) { // Is it Torsion?
@@ -202,5 +202,5 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
 //    console.log('Before table sterm=',sterm,'temp=',temp,'result=',result);
     return(result);
 }
-    
+
 }

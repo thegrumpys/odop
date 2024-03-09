@@ -1,44 +1,44 @@
 import {
-    STARTUP, 
-    LOAD, 
-    LOAD_INITIAL_STATE, 
-    CHANGE_NAME, 
-    CHANGE_USER, 
-    CHANGE_VIEW, 
-    
-    CHANGE_SYMBOL_VALUE, 
-    FIX_SYMBOL_VALUE, 
-    FREE_SYMBOL_VALUE, 
-    CHANGE_SYMBOL_VIOLATION, 
-    CHANGE_SYMBOL_CONSTRAINT, 
-    CHANGE_SYMBOL_CONSTRAINTS, 
-    SET_SYMBOL_FLAG, 
-    RESET_SYMBOL_FLAG, 
-    CHANGE_SYMBOL_INPUT, 
-    CHANGE_SYMBOL_HIDDEN, 
-    
-    CHANGE_INPUT_SYMBOL_VALUES, 
-    SAVE_INPUT_SYMBOL_VALUES, 
-    RESTORE_INPUT_SYMBOL_VALUES, 
+    STARTUP,
+    LOAD,
+    LOAD_INITIAL_STATE,
+    CHANGE_NAME,
+    CHANGE_USER,
+    CHANGE_VIEW,
 
-    CHANGE_OUTPUT_SYMBOL_VALUES, 
-    SAVE_OUTPUT_SYMBOL_CONSTRAINTS, 
-    RESTORE_OUTPUT_SYMBOL_CONSTRAINTS, 
-    
-    CHANGE_RESULT_OBJECTIVE_VALUE, 
-    CHANGE_RESULT_TERMINATION_CONDITION, 
-    CHANGE_RESULT_SEARCH_COMPLETED, 
-    
-    CHANGE_SYSTEM_CONTROLS_VALUE, 
-    CHANGE_LABELS_VALUE, 
+    CHANGE_SYMBOL_VALUE,
+    FIX_SYMBOL_VALUE,
+    FREE_SYMBOL_VALUE,
+    CHANGE_SYMBOL_VIOLATION,
+    CHANGE_SYMBOL_CONSTRAINT,
+    CHANGE_SYMBOL_CONSTRAINTS,
+    SET_SYMBOL_FLAG,
+    RESET_SYMBOL_FLAG,
+    CHANGE_SYMBOL_INPUT,
+    CHANGE_SYMBOL_HIDDEN,
 
-    SEARCH, 
+    CHANGE_INPUT_SYMBOL_VALUES,
+    SAVE_INPUT_SYMBOL_VALUES,
+    RESTORE_INPUT_SYMBOL_VALUES,
+
+    CHANGE_OUTPUT_SYMBOL_VALUES,
+    SAVE_OUTPUT_SYMBOL_CONSTRAINTS,
+    RESTORE_OUTPUT_SYMBOL_CONSTRAINTS,
+
+    CHANGE_RESULT_OBJECTIVE_VALUE,
+    CHANGE_RESULT_TERMINATION_CONDITION,
+    CHANGE_RESULT_SEARCH_COMPLETED,
+
+    CHANGE_SYSTEM_CONTROLS_VALUE,
+    CHANGE_LABELS_VALUE,
+
+    SEARCH,
     SEEK,
 
     SAVE_AUTO_SAVE,
     RESTORE_AUTO_SAVE,
     DELETE_AUTO_SAVE,
-    
+
     LOG_USAGE,
 } from './actionTypes';
 
@@ -53,7 +53,7 @@ export function load(design) {
         type: LOAD,
         payload: {
             design
-        } 
+        }
     }
 }
 
@@ -63,7 +63,7 @@ export function loadInitialState(type, units = 'US') {
         payload: {
             type,
             units
-        } 
+        }
     }
 }
 
@@ -72,7 +72,7 @@ export function changeName(name) {
         type: CHANGE_NAME,
         payload: {
             name
-        } 
+        }
     }
 }
 
@@ -81,7 +81,7 @@ export function changeUser(user) {
         type: CHANGE_USER,
         payload: {
             user
-        } 
+        }
     }
 }
 
@@ -90,7 +90,7 @@ export function changeView(view) {
         type: CHANGE_VIEW,
         payload: {
             view
-        } 
+        }
     }
 }
 

@@ -13,7 +13,7 @@ class FileProperties extends Component {
         this.onChange = this.onChange.bind(this);
         this.onRestoreDefaults = this.onRestoreDefaults.bind(this);
         this.onApplyandClose = this.onApplyandClose.bind(this);
-        // Initialze modal flag off 
+        // Initialze modal flag off
         // Initialize the state.labels to the props.labels
         this.state = {
             modal: false,
@@ -46,7 +46,7 @@ class FileProperties extends Component {
         });
         logValue(name,value,'Property');
     }
-    
+
     onRestoreDefaults() {
 //        console.log('In FileProperties.onRestoreDefaults');
         logUsage('event', 'FileProperties', { event_label: 'RestoreDefaults' });
@@ -57,7 +57,7 @@ class FileProperties extends Component {
         });
         this.props.saveAutoSave();
     }
-    
+
     onApplyandClose() {
 //        console.log('In FileProperties.onApplyandClose');
         // Close the modal
@@ -113,7 +113,7 @@ class FileProperties extends Component {
             </>
         );
     }
-}  
+}
 
 const mapStateToProps = state => ({
     type: state.model.type,

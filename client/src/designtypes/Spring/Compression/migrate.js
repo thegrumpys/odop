@@ -11,25 +11,25 @@ export function migrate(design) {
 //    console.log('In migrate design=',design);
 
     var previous_version = design.version;
-    var migrated_design = design; // Assume no-op as default 
+    var migrated_design = design; // Assume no-op as default
 
     /* eslint-disable no-fallthrough */
 //    console.log('In migrate design.version=',design.version);
     switch(design.version) {
     case '1':
 //        console.log('Convert from 1 to 2');
-        // Mark all design_parameters and state_varaibles with equationset: true, 
+        // Mark all design_parameters and state_varaibles with equationset: true,
         design.design_parameters.forEach((design_parameter) => {
 //            console.log('design_parameter=',design_parameter);
-            design_parameter['input'] = true; 
-            design_parameter['equationset'] = true; 
-            design_parameter['hidden'] = false; 
+            design_parameter['input'] = true;
+            design_parameter['equationset'] = true;
+            design_parameter['hidden'] = false;
         });
         design.state_variables.forEach((state_variable) => {
 //            console.log('state_variable=',state_variable);
-            state_variable['input'] = false; 
+            state_variable['input'] = false;
             state_variable['equationset'] = true;
-            state_variable['hidden'] = false; 
+            state_variable['hidden'] = false;
         });
         // Mark all constants with equationset: false
         design.constants.forEach((constant) => {
@@ -42,7 +42,7 @@ export function migrate(design) {
             constant['ioclass'] = 0;
             constant['sdlim'] = 1.0;
             constant['equationset'] = false;
-            constant['hidden'] = false; 
+            constant['hidden'] = false;
         });
         // Create symbol table
         design['symbol_table'] = [];
@@ -144,26 +144,26 @@ export function migrate(design) {
         migrated_design.version = '7';
     case '7':
         // console.log('Convert from 7 to 8');
-        design.symbol_table[26].sdlim = 10000; 
+        design.symbol_table[26].sdlim = 10000;
         // Add Energy calculation
         design.symbol_table.splice(28,0,Object.assign({},design.symbol_table[26]));  //  Duplicate Cycle_Life in target position
         design.symbol_table[28].name = 'Energy'; // Rename it to Energy
         if (design.symbol_table[0].units === 'mm') { // Check for metric units - is there a better approach?
-            design.symbol_table[28].value = 0.0; 
+            design.symbol_table[28].value = 0.0;
             design.symbol_table[28].units = 'N-mm';
-            design.symbol_table[28].lmin = 0; 
-            design.symbol_table[28].lmax = 0; 
-            design.symbol_table[28].cmin = 1.0; 
-            design.symbol_table[28].cmax = 1000000; 
+            design.symbol_table[28].lmin = 0;
+            design.symbol_table[28].lmax = 0;
+            design.symbol_table[28].cmin = 1.0;
+            design.symbol_table[28].cmax = 1000000;
         } else {
-            design.symbol_table[28].value = 0.0; 
+            design.symbol_table[28].value = 0.0;
             design.symbol_table[28].units = 'in-lb';
-            design.symbol_table[28].lmin = 0; 
-            design.symbol_table[28].lmax = 0; 
-            design.symbol_table[28].cmin = 1.0; 
-            design.symbol_table[28].cmax = 1000000; 
+            design.symbol_table[28].lmin = 0;
+            design.symbol_table[28].lmax = 0;
+            design.symbol_table[28].cmin = 1.0;
+            design.symbol_table[28].cmax = 1000000;
         }
-        design.symbol_table[28].sdlim = 0.0; 
+        design.symbol_table[28].sdlim = 0.0;
         design.symbol_table[28].tooltip = "Change in elastic potential energy between 1 and 2";
         // Make Catalog_Name and Catalog_Number not available for input
         design.symbol_table[47].input = false;
@@ -181,7 +181,7 @@ export function migrate(design) {
 //            console.log('In migrate.propgate element=',element);
             // ***************************************************************
             // Note no need to migrate FDCL because there has never been any
-            // FDCL definition in initialState for COMPRESSION. The user cannot create 
+            // FDCL definition in initialState for COMPRESSION. The user cannot create
             // FDCL if it is not already configured in initialState.
             // ***************************************************************
             if (element.lmin & FIXED || element.lmax & FIXED) { // If one is FIXED
@@ -237,7 +237,7 @@ export function migrate(design) {
     case '9':
         // console.log('Convert from 9 to 10');
         design.system_controls.enable_auto_fix = 1;
-        
+
         design.labels[4].name = 'City, State & Zip';
         if (design.labels[4].value !== '' && design.labels[5].value !== '') {
             design.labels[4].value = design.labels[4].value + ', ' + design.labels[5].value;
@@ -284,7 +284,7 @@ export function migrate(design) {
         design.labels[22].value = '__________________________ ';
         design.labels[23].name = 'Vendor date';
         design.labels[23].value = ' _______ ';
-       
+
         migrated_design.version = '10'; // last thing... set the migrated model version
     case '10':
         // Current model version
@@ -403,7 +403,7 @@ export function migrate(design) {
     }
 //    console.log('In migrate migrated_design.version=',migrated_design.version);
     /* eslint-enable */
-    
+
 //    console.log('In migrate migrated_design=',migrated_design);
     return migrated_design;
 }

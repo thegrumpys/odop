@@ -146,7 +146,7 @@ class SymbolValue extends Component {
         });
         this.doSearch('NOT FINITE');
     }
-    
+
     onSearchCancel() {
 //        console.log('In SymbolValue.onSearchCancel');
         this.setState({
@@ -155,7 +155,7 @@ class SymbolValue extends Component {
         });
         // Noop - all done
     }
-    
+
     doSearch(type) {
 //        console.log('In SymbolValue.doSearch');
         var old_objective_value = this.props.objective_value;
@@ -433,7 +433,7 @@ class SymbolValue extends Component {
                                             </OverlayTrigger>
                                             {feasibility_status === 'NOT FEASIBLE' && this.props.search_completed ?
                                                 <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
-                                                    <p>This design may be over-specified. 
+                                                    <p>This design may be over-specified.
                                                     See Help topics on Feasibility, Design Situations, Spring Design Technique and Hints, Tricks & Tips.</p>
                                                     </Tooltip>}>
                                                     <span>&nbsp;<i className="fas fa-info-circle text-primary"></i></span>
@@ -484,7 +484,7 @@ class SymbolValue extends Component {
                                 <tbody>
                                     <tr>
                                         <td>
-                                            To control the value of a Dependent Variable either FIX it or enable its MIN and/or MAX constraints and then set its constraint values. 
+                                            To control the value of a Dependent Variable either FIX it or enable its MIN and/or MAX constraints and then set its constraint values.
                                             This allows <img src="SearchButton.png" alt="SearchButton"/> to find the Dependent Variable's value that is within this constraint range.
                                         </td>
                                     </tr>
@@ -514,18 +514,18 @@ class SymbolValue extends Component {
                     <Modal.Footer>
                         <><Button variant="outline-info" onClick={this.onContextHelp}>Help</Button>{' '}&nbsp;</>
                         {this.state.modified ? <><Button variant="secondary" onClick={this.onResetButton}>Reset</Button>&nbsp;</> : ''}
-                        {display_search_button ? 
+                        {display_search_button ?
                             <>
-                                {this.props.element.type === "equationset" && this.props.element.input && this.props.element.lmin & FIXED && free_variables.length > 0 ? 
+                                {this.props.element.type === "equationset" && this.props.element.input && this.props.element.lmin & FIXED && free_variables.length > 0 ?
                                     (this.props.search_completed ?
                                         <Button variant="secondary" onClick={this.onSearchRequest} disabled><b>Search</b> (solve)</Button>
                                     :
                                         <>
                                             <Button variant="primary" onClick={this.onSearchRequest}><b>Search</b> (solve)</Button>
                                             <OverlayTrigger placement="top" overlay={<Tooltip className="tooltip-lg">
-                                                <p>The Independent Variable {this.props.element.name} is Fixed. 
-                                                Search manipulates only the values of Free Independent Variables. 
-                                                Press this <img src="SearchButton.png" alt="SearchButton"/> button to alter 
+                                                <p>The Independent Variable {this.props.element.name} is Fixed.
+                                                Search manipulates only the values of Free Independent Variables.
+                                                Press this <img src="SearchButton.png" alt="SearchButton"/> button to alter
                                                 the values, {free_variables} to locate a feasible solution (if available).</p>
                                                 </Tooltip>}>
                                                 <span><i className="fas fa-info-circle text-primary"></i></span>
@@ -537,7 +537,7 @@ class SymbolValue extends Component {
                                 <Button variant={this.props.search_completed ? "primary" : "secondary"} disabled={this.state.isInvalidValue || this.state.isInvalidMinConstraint || this.state.isInvalidMaxConstraint} onClick={this.onClose}>Close</Button>
                             </>
                         :
-                            (display_seek_button ? 
+                            (display_seek_button ?
                                 <>
                                     {this.props.element.lmin & FIXED ? '' : <Button variant="secondary" onClick={this.onSeekMinRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MIN {this.props.element.name}</Button>}
                                     {this.props.element.lmin & FIXED ? '' : <Button variant="secondary" onClick={this.onSeekMaxRequest} disabled={this.props.element.lmin & FIXED ? true : false} >Seek MAX {this.props.element.name}</Button>}
@@ -562,7 +562,7 @@ class SymbolValue extends Component {
                             <p>Continuing Search may not result in an improvement.</p>
                             <p>Canceling Search will allow you to examine the Alerts panel for invalid values and associated help.
                             Freeing one or more Independent Variables may result in an improvement.</p>
-                        </Alert> 
+                        </Alert>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="outline-info" onClick={this.onSearchContextHelp}>Help</Button>{' '}

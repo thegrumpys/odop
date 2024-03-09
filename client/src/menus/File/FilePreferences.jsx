@@ -16,7 +16,7 @@ class FilePreferences extends Component {
         this.onChangeInvalid = this.onChangeInvalid.bind(this);
         this.onRestoreDefaults = this.onRestoreDefaults.bind(this);
         this.onApplyandClose = this.onApplyandClose.bind(this);
-        // Initialze modal flag off 
+        // Initialze modal flag off
         // Initialize the state.system_controls to the props.system_controls
         this.state = {
             modal: false,
@@ -24,7 +24,7 @@ class FilePreferences extends Component {
             isInvalidValue: false,
         };
     }
-    
+
     toggle() {
         // Open the modal
         // Copy the props.system_controls into the state.system_controls
@@ -33,10 +33,10 @@ class FilePreferences extends Component {
             system_controls: this.props.system_controls
         });
     }
-    
+
     onChangeValid(name, value) {
         // Save the value into the state.system_controls
-        // You cannot convert to floating point here, 
+        // You cannot convert to floating point here,
         // because exponent without a following value causes a parse error, e.g., '1.2e'
         this.setState({
             system_controls: {
@@ -61,7 +61,7 @@ class FilePreferences extends Component {
         });
         logUsage('event', 'FilePreferences', { event_label: 'RestoreDefaults' });
     }
-    
+
     onApplyandClose() {
         // Close the modal
         this.setState({
@@ -121,8 +121,8 @@ class FilePreferences extends Component {
             </React.Fragment>
         );
     }
-    
-}  
+
+}
 
 const mapStateToProps = state => ({
     system_controls: state.model.system_controls

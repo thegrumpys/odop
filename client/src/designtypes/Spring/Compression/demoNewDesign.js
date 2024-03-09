@@ -12,19 +12,19 @@ export const execute = {
                     The following example illustrates the use of ODOP:Spring in
                     the design of a compression spring from original specifications.
                     </p>
-                    
+
                     <p>
-                    As with the other tutorial and demo sessions, 
-                    this session needs to start from a known state.  
+                    As with the other tutorial and demo sessions,
+                    this session needs to start from a known state.
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     Moving to the next page will establish the necessary initialState
                     for the ODOP <b>Compression Spring</b> design type.
                     </p>
-                    
+
                     <p>
                     To continue with this example, just click the "Next" button as you finish
-                    reading each page (step). 
+                    reading each page (step).
                     </p>
                     <br />
                 </>
@@ -38,7 +38,7 @@ export const execute = {
                     The initial conditions expected by this demo session are now established.
                     Before we make additional changes, let's review the problem statement:<br />
                     </p>
-                    
+
                     <p>
                     Design a compression spring such that the following conditions are met:<br />
                     <br />
@@ -69,15 +69,15 @@ export const execute = {
                 <>
                     <p>
                     In general, the easiest way to begin is to modify an existing design.
-                    This demo session will modify this design until it meets the requirements 
+                    This demo session will modify this design until it meets the requirements
                     of the current design problem.
                     The following sequence of pages will illustrate this process.
                     </p>
-                    
+
                     <p>
                     Two diagrams follow.
                     The first provides a high level overview of the ODOP design process or sequence.
-                    The second illustrates the names of ODOP:Spring variables 
+                    The second illustrates the names of ODOP:Spring variables
                     in the context of a force-deflection diagram.
                     </p>
                     <br />
@@ -105,11 +105,11 @@ export const execute = {
             text: (
                 <>
                     <p>Next, the demo session will enter everything we know about the problem. </p>
-                    
+
                     <p>This is a good time to take a good look at the existing values.
                     Affected values will update immediately as the demo session enters the changes.</p>
-                    
-                    <p>You can scroll the page down to view the complete set of values. 
+
+                    <p>You can scroll the page down to view the complete set of values.
                     Scroll back up in order to use the Next button to continue.</p>
                     <br /><br />
                 </>
@@ -120,7 +120,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The demo has now entered what is known about the problem. 
+                    The demo has now entered what is known about the problem.
                     In summary, the changes were:<br />
                     </p>
                     CHANGE  Material_Type OIL_TEMPERED_MB<br />
@@ -134,7 +134,7 @@ export const execute = {
                     FIX  Force_2  60.0<br />
                     <br />
                     <p>
-                    The remaining Independent Variable values remain as established by the initialState. 
+                    The remaining Independent Variable values remain as established by the initialState.
                     </p>
                 </>
             ),
@@ -169,13 +169,13 @@ export const execute = {
 
                     <p>
                     If the program can find a solution that fully satisfies all the constraints,
-                    it will display "<b>STRICTLY FEASIBLE</b>" in the Result section (immediately below these words).  
+                    it will display "<b>STRICTLY FEASIBLE</b>" in the Result section (immediately below these words).
                     If a satisfactory solution is found, but one or more constraints remain violated by a
                     trivial amount, the program will display "<b>FEASIBLE</b>" in the Result section.
                     If the search process is unable to find a solution, the red "<b>NOT FEASIBLE</b>" will persist.
-                    The on-line Help entry covering the multi-color 
+                    The on-line Help entry covering the multi-color
                     &nbsp;<a href="/docs/Help/feasibilityIndicator.html" target="_blank" rel="noopener noreferrer">Feasibility Indicator</a>&nbsp;
-                    provides additional details. 
+                    provides additional details.
                     </p>
 
                     <p>
@@ -190,10 +190,10 @@ export const execute = {
                 <>
                     <p>We have a solution. Please take a moment to scroll through and view the values.</p>
                     <p>
-                    Note that results of additional calculations are given in the Reports. 
+                    Note that results of additional calculations are given in the Reports.
                     Use the View menu to access Reports.
-                    The message: 
-                    "<b>Coil to coil contact may cause inaccuracy in point 2.</b>" 
+                    The message:
+                    "<b>Coil to coil contact may cause inaccuracy in point 2.</b>"
                     is produced any time that the second load uses more
                     than 80 % of available deflection.
                     </p>
@@ -211,26 +211,26 @@ export const execute = {
                 <>
                     <p>
                     If you are still on a Report view,
-                    don't forget to switch back to a main page (Advanced or Calculator View). 
+                    don't forget to switch back to a main page (Advanced or Calculator View).
                     </p>
-                    
+
                     <p>
-                    As a general rule, in the first approach to a new problem, 
-                    let the calculations use an arbitrary (non-standard) wire diameter. 
+                    As a general rule, in the first approach to a new problem,
+                    let the calculations use an arbitrary (non-standard) wire diameter.
                     As a last step, select a standard wire diameter.
-                    Then with Wire_Dia in FIXed status, execute a search to make any necessary 
+                    Then with Wire_Dia in FIXed status, execute a search to make any necessary
                     adjustments in the remaining free Independent Variables.
                     </p>
-                    
+
                     <p>
-                    This is an opportunity for you to 
+                    This is an opportunity for you to
                     go to the <b>Action : Select Size...</b> menu item
                     and see how to chose the nearest standard wire diameter.
                     <br /><br />
                     In Demo / Tutorial speak:<br />
                     Select  Size  Wire_Dia  0.135<br />
                     <br />
-                    Please confirm that Wire_Dia is FIXed at 0.135 and then click Next 
+                    Please confirm that Wire_Dia is FIXed at 0.135 and then click Next
                     to move to the next page.
                     </p>
                 </>
@@ -248,12 +248,12 @@ export const execute = {
                     will be required to make corresponding adjustments in the other
                     parameters such as number of coils, outside diameter and free length.
                     </p>
-                    
+
                     <p>
                     Look for the search results on the next page.
                     <br /><br />
                     </p>
-                    
+
                     <p>
                     <br /><br />
                     </p>
@@ -266,23 +266,23 @@ export const execute = {
                 <>
                     <p>
                     We have a solution. Please take a moment to scroll through and view the values.
-                    Note that results of additional calculations are given in the Reports. 
+                    Note that results of additional calculations are given in the Reports.
                     </p>
-                    
+
                     <p>
                     The design is complete.
                     </p>
-                    
+
                     <p>
                     This is a good time to think about saving the design for potential access in the future.
-                    Use the <b>File : Save As...</b> menu item to save the design into the Design Library. 
-                    The ODOP Design Library is "cloud", not local, storage. 
-                    Alternatively, the <b>File : Export</b> menu item saves to your local Downloads folder. 
+                    Use the <b>File : Save As...</b> menu item to save the design into the Design Library.
+                    The ODOP Design Library is "cloud", not local, storage.
+                    Alternatively, the <b>File : Export</b> menu item saves to your local Downloads folder.
                     Also, it should be possibile to use the print features of the browser to
                     send one or more of the Reports to a local printer or perhaps save to a .PDF file.
                     Your browser documentation should provide more details about printing.
                     </p>
-                    
+
                     <p>
                     The next page covers use of the catalog.
                     Selecting a catalog entry will replace the current design.
@@ -304,28 +304,28 @@ export const execute = {
                     If you are still on a Report view,
                     don't forget to switch back to a main page (Advanced or Calculator View).
                     </p>
-                    
+
                     <p>
-                    Finally, we'll use the Select Catalog feature 
-                    (<b>Action : Select Catalog...</b> menu item) 
-                    to determine if a similar design is available in the built-in catalog. 
-                    We'll choose the design that is closest to the current (custom) design, 
+                    Finally, we'll use the Select Catalog feature
+                    (<b>Action : Select Catalog...</b> menu item)
+                    to determine if a similar design is available in the built-in catalog.
+                    We'll choose the design that is closest to the current (custom) design,
                     then evaluate it.
-                    Again, the demo session needs your participation on 
+                    Again, the demo session needs your participation on
                     the Action menu ...
                     <br /><br />
                     In Demo / Tutorial speak:<br />
                     Select  Catalog
                     </p>
-                    
+
                     <p>
-                    You have the opportunity to specify a catalog. 
+                    You have the opportunity to specify a catalog.
                     Details on up to four entries from that catalog are displayed.
                     Pressing the "Select" button causes the
                     selected entry to become the current design providing an opportunity
                     to compare its performance to the previously established constraints.
                     </p>
-                    
+
                     <p>
                     Please take this opportunity to select a spring from the catalog.
                     </p>
@@ -337,19 +337,19 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Several more demo problems are available. 
-                    They are named demo1, demo2, ... etc. 
-                    Refer to the on-line documentation section (Help entry) covering the  
-                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    Several more demo problems are available.
+                    They are named demo1, demo2, ... etc.
+                    Refer to the on-line documentation section (Help entry) covering the
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp;
                     for a list of topics.
                     </p>
-                    
+
                     <p>
-                    If you do not wish to continue with more demonstration problems, 
-                    you can experiment with the various ODOP:Spring features, menus and reports. 
-                    The Help menu is a good place to start. 
+                    If you do not wish to continue with more demonstration problems,
+                    you can experiment with the various ODOP:Spring features, menus and reports.
+                    The Help menu is a good place to start.
                     </p>
-                    
+
                     <p>
                     Select (click on) the <b>Close</b> button to end this tutorial session.
                     </p>

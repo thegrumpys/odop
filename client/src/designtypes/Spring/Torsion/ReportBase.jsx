@@ -29,9 +29,9 @@ export class ReportBase extends Component {
         this.hits = getAlertsBySeverity().length;
         this.errmsg = "";
         this.startpntmsg = "Alert details are available via the Alert button on the main page of Advanced and Calculator Views.";
-        
+
         this.len_lbl = "Wire Length";
-        
+
         switch(this.props.symbol_table[o.End_Type].value) {
         case 1:        //  Tangent   this.pitch=(l_body-wire_dia)/coils_t
             this.pitch = (this.props.symbol_table[o.L_Body].value - this.props.symbol_table[o.Wire_Dia].value) / this.props.symbol_table[o.Coils_T].value;
@@ -42,7 +42,7 @@ export class ReportBase extends Component {
             break;
         default:        //  User Specified
             this.pitch = 0.0;
-        }     
+        }
 
         var sq1 = this.props.symbol_table[o.L_Body].value;
         var sq2 = this.props.symbol_table[o.Coils_T].value * Math.PI * this.props.symbol_table[o.Mean_Dia].value;
@@ -50,15 +50,15 @@ export class ReportBase extends Component {
 
         this.wgt1000 = 1000.0 * this.props.symbol_table[o.Weight].value;
 
-        /* 
-         *  calculates mean diameter of deflected torsion spring. 
+        /*
+         *  calculates mean diameter of deflected torsion spring.
          *  intermediate dia. calcs. assume no wire stretch
          */
-        
+
         this.dhat = this.def_dia_t(this.props.symbol_table[o.Deflect_1].value);
         this.od_1 = this.dhat + this.props.symbol_table[o.Wire_Dia].value;
         this.id_1 = this.dhat - this.props.symbol_table[o.Wire_Dia].value;
-        
+
         this.dhat = this.def_dia_t(this.props.symbol_table[o.Deflect_2].value);
         this.od_2 = this.dhat + this.props.symbol_table[o.Wire_Dia].value;
         this.id_2 = this.dhat - this.props.symbol_table[o.Wire_Dia].value;
@@ -88,7 +88,7 @@ export class ReportBase extends Component {
         }
         this.safe_load = this.props.symbol_table[o.Stress_Lim_Bnd_Stat].value / s_f;
         this.safe_load_u = this.props.symbol_table[o.M_2].units ;
-        
+
 
 //        this.def_max=this.safe_load/rate;
 //           ctp1=coils_t+1.0;
@@ -96,7 +96,7 @@ export class ReportBase extends Component {
 //           temp=def_dia_t(this.def_max);
 //        this.od_max=temp+wire_dia;
 //        id_max=temp-wire_dia;
-        
+
         this.cycle_life_u = this.props.symbol_table[o.Cycle_Life].units + " (est.)";
 
         this.def_max = this.safe_load / this.props.symbol_table[o.Rate].value;
@@ -104,7 +104,7 @@ export class ReportBase extends Component {
         this.l_max = Math.max(this.props.symbol_table[o.L_Body].value, this.props.symbol_table[o.Wire_Dia].value * (ctp1 + this.def_max / 360.0));
         var temp = this.def_dia_t(this.def_max);
         this.od_max = temp + this.props.symbol_table[o.Wire_Dia].value;
-        
+
         /*
          * Angle across coil cross section
          * this.hlx_ang=atan(0.5*this.pitch/mean_dia)*(180.0/pi);
@@ -115,7 +115,7 @@ export class ReportBase extends Component {
             this.hlx_ang = 0.0;
 
         this.safe_travel = this.def_max;
-        
+
 //        console.log("this.props.symbol_table[o.Prop_Calc_Method].value = ", this.props.symbol_table[o.Prop_Calc_Method].value);
         if (this.props.symbol_table[o.Prop_Calc_Method].value === 1){
             this.matTypeValue = this.m_tab[this.props.symbol_table[o.Material_Type].value][mo.matnam];

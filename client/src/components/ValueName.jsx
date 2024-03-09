@@ -3,7 +3,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class ValueName extends Component {
-    
+
     render() {
 //        console.log('In ValueName.render this=',this);
         return (

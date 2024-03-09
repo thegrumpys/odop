@@ -16,7 +16,7 @@ import HelpMotd from '../menus/Help/HelpMotd';
 import HelpAbout from '../menus/Help/HelpAbout';
 import config from '../config';
 
-export default function MainPage() {
+export default MainPage = () => {
 //  console.log("MainPage - Mounting...");
   const [show, setShow] = useState(false);
   const [activeTab, setActiveTab] = useState(config.url.view);
@@ -33,7 +33,7 @@ export default function MainPage() {
 
   const toggle = () => {
 //    console.log('In MainPage.toggle');
-    setShow(~show);
+    setShow(!show);
   }
 
   const setView = (view) => {
@@ -80,7 +80,7 @@ export default function MainPage() {
         <Tabs defaultActiveKey={config.url.view} activeKey={activeTab}>
           {viewNames.map((element) => {
             return (
-              <Tab title={null} key={element.title} eventKey={element.name}>
+              <Tab title="" key={element.title} eventKey={element.name}>
                 <div id={'main_' + element.name}>
                   {element.component}
                 </div>

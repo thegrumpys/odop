@@ -27,7 +27,7 @@ export class ReportBase extends Component {
         this.hits = getAlertsBySeverity().length;
         this.errmsg = "";
         this.startpntmsg = "Alert details are available via the Alert button on the main page of Advanced and Calculator Views.";
-        
+
         this.len_lbl = "Wire Length";
 
         var sq1 = this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Coils_T].value;
@@ -41,11 +41,11 @@ export class ReportBase extends Component {
 
 //        note that value of this.wire_len_a is actually square of body wire length
         this.wire_len_a = sq1 * sq1 + sq2 * sq2;
-        
+
         this.dhat = this.def_dia(sq1 + this.props.symbol_table[o.Deflect_1].value);
         this.od_1 = this.dhat + this.props.symbol_table[o.Wire_Dia].value;
         this.id_1 = this.dhat - this.props.symbol_table[o.Wire_Dia].value;
-        
+
         this.dhat = this.def_dia(sq1 + this.props.symbol_table[o.Deflect_2].value);
         this.od_2 = this.dhat + this.props.symbol_table[o.Wire_Dia].value;
         this.id_2 = this.dhat - this.props.symbol_table[o.Wire_Dia].value;
@@ -56,7 +56,7 @@ export class ReportBase extends Component {
         var s_f = ks * 8.0 * this.props.symbol_table[o.Mean_Dia].value / (Math.PI * wd3);
 
         this.kw1 = ks;
-        
+
         if (this.props.symbol_table[o.Stress_1].value !== 0.0)
             this.fs_1 = Math.abs(this.props.symbol_table[o.Stress_Lim_Stat].value / this.props.symbol_table[o.Stress_1].value);
         else
@@ -79,7 +79,7 @@ export class ReportBase extends Component {
 
         this.safe_travel = (this.safe_load - this.props.symbol_table[o.Initial_Tension].value) / this.props.symbol_table[o.Rate].value;
         this.pc_avail_deflect = 100.0 * this.props.symbol_table[o.Deflect_2].value / this.safe_travel;
-        
+
         this.dhat = this.def_dia(sq1 + this.safe_travel);
         this.od_maxsafe = this.dhat + this.props.symbol_table[o.Wire_Dia].value;
         this.id_maxsafe = this.dhat - this.props.symbol_table[o.Wire_Dia].value;
@@ -90,7 +90,7 @@ export class ReportBase extends Component {
         } else {
             this.warnmsg = "";
         }
-        
+
 //        console.log("this.props.symbol_table[o.Prop_Calc_Method].value = ", this.props.symbol_table[o.Prop_Calc_Method].value);
         if (this.props.symbol_table[o.Prop_Calc_Method].value === 1){
             this.matTypeValue = this.m_tab[this.props.symbol_table[o.Material_Type].value][mo.matnam];
@@ -118,8 +118,8 @@ export class ReportBase extends Component {
     }
 
     def_dia(def_len) {
-        /* 
-         * Calculates mean diameter of deflected spring. 
+        /*
+         * Calculates mean diameter of deflected spring.
          * intermediate dia. calcs. assume no wire stretch
          * note that value of this.wire_len_a is actually square of active wire length
          */

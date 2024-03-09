@@ -8,7 +8,7 @@ import config from '../../config';
 import { displayMessage } from '../../components/MessageModal';
 import { displaySpinner } from '../../components/Spinner';
 
-export default function HelpAbout() {
+export default HelpAbout = () => {
   console.log("HelpAbout - Mounting...");
   const [show, setShow] = useState(false);
   const [sizes, setSizes] = useState('');

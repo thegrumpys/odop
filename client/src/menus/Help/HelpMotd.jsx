@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
 
-export default function HelpMotd() {
+export default HelpMotd = () => {
   console.log("HelpMotd - Mounting...");
 
   useEffect(() => {
@@ -26,4 +26,4 @@ export default function HelpMotd() {
       </NavDropdown.Item>
     </>
   );
-}  
+}

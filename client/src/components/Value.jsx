@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { toODOPPrecision } from '../toODOPPrecision'
 
 class Value extends Component {
-    
+
     render() {
 //        console.log('In Value.render this=',this);
         return (

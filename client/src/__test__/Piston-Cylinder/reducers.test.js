@@ -731,7 +731,7 @@ it('reducers restore auto save', () => {
         "model": {
             "type": "Test-Design"
         }
-    })); 
+    }));
     var design = store.getState().model; // after
     expect(design.user).toEqual("USERID0123456789");
     expect(design.name).toEqual("test");

@@ -13,7 +13,7 @@ export function eqnset(p, x) {
      * of constraint violations ( =M) VMIN, VMAX C=vector of constraint levels (
      * =M) CMIN, CMAX S=vector of constraint scaling denominators (=M) SMIN,
      * SMAX D=vector of externally computed quantities
-     * 
+     *
      * m_flag = 0 if call is from search, no console I/O permitted. m_flag > 0
      * if "special" call requesting direct output.
      */

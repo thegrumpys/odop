@@ -14,7 +14,7 @@ export var check_message = (design, prefix, left, op, right, suffix = '') => {
     ' ' + design.model.symbol_table[right].name + ' (' + toODOPPrecision(design.model.symbol_table[right].value) + ')' + (suffix !== '' ? suffix : '');
 }
 
-// DCD is Default Constraint Disabled 
+// DCD is Default Constraint Disabled
 export var check_DCD_alert = (element, minmax, urlCode) => {
 //  console.log('In Alerts.check_DCD_alert', 'element=', element, 'minmax=', minmax, 'urlCod', urlCode);
   if (element.lmin & FIXED) {
@@ -51,7 +51,7 @@ export var checks = (store) => {
 //  console.log('In Alerts.checks','store=',store);
   var design = store.getState().model;
 
-  // OBJECTIVE VALUE CHECKS 
+  // OBJECTIVE VALUE CHECKS
   if (design.model.result.objective_value === Number.POSITIVE_INFINITY || design.model.result.objective_value === Number.NEGATIVE_INFINITY) { // Check for objective value of Infinity
     store.dispatch(addAlert({
       name: 'Objective Value',

@@ -173,30 +173,30 @@ export const execute = {
                 loadInitialState("Solid","US"),
                 changeName("USPS_MachinableParcels"),
                 changeLabelsValue([{name: "COMMENT", value: "USPS Machinable Parcel dimensions"}]),
-                
+
                 changeSymbolValue("Length",27),
                 setSymbolFlag("Length", MIN, CONSTRAINED),
                 changeSymbolConstraint("Length", MIN, 6),
                 setSymbolFlag("Length", MAX, CONSTRAINED),
                 changeSymbolConstraint("Length", MAX, 27),
-                
+
                 changeSymbolValue("Width",17),
                 setSymbolFlag("Width", MIN, CONSTRAINED),
                 changeSymbolConstraint("Width", MIN, 3),
                 setSymbolFlag("Width", MAX, CONSTRAINED),
                 changeSymbolConstraint("Width", MAX, 17),
-                
+
                 changeSymbolValue("Height",17),
                 setSymbolFlag("Height", MIN, CONSTRAINED),
                 changeSymbolConstraint("Height", MIN, 0.25),
                 setSymbolFlag("Height", MAX, CONSTRAINED),
                 changeSymbolConstraint("Height", MAX, 17),
-                
+
                 setSymbolFlag("Weight", MIN, CONSTRAINED),
                 changeSymbolConstraint("Weight", MIN, 0.375),
                 setSymbolFlag("Weight", MAX, CONSTRAINED),
                 changeSymbolConstraint("Weight", MAX, 25),
-                
+
                 changeSymbolValue("Material",4),
                 changeSymbolValue("Density",0.0001237),
                 startup(),

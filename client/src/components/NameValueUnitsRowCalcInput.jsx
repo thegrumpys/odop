@@ -6,7 +6,7 @@ import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
-export default function NameValueUnitsRowCalcInput({ element, index, onChange, onSelect }) {
+export default NameValueUnitsRowCalcInput = ({ element, index, onChange = () => {}, onSelect = () => {} }) => {
 //  console.log("NameValueUnitsRowCalcInput - Mounting...");
   const [table, setTable] = useState(null);
   const system_controls = useSelector((state) => state.model.model.system_controls);
@@ -29,19 +29,19 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChange, o
     var value = parseFloat(event.target.value);
     dispatch(changeSymbolValue(element.name, value)); // Update the model
     logValue(element.name, event.target.value);
-    if (typeof onChangeValid === "function") onChangeValid(event);
+    onChangeValid(event);
   }
 
   const onChangeInvalidLocal = (event) => {
 //    console.log("In NameValueUnitsRowCalcInput.onChangeInvalid','event.target.value=", event.target.value);
-    if (typeof onChangeInvalid === "function") onChangeInvalid(event);
+    onChangeInvalid(event);
   }
 
   const onChangeLocal = (event) => {
 //    console.log('In NameValueUnitsRowCalcInput.onChange', 'event.target.value=', event.target.value);
     dispatch(changeSymbolValue(element.name, event.target.value)); // Update the model
     logValue(element.name, event.target.value);
-    if (typeof onChange === "function") onChange(event);
+    onChange(event);
   }
 
   const onSelectLocal = (event) => {
@@ -49,7 +49,7 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChange, o
     var selectedIndex = parseFloat(event.target.value);
     dispatch(changeSymbolValue(element.name, selectedIndex));
     logValue(element.name, selectedIndex, 'TableIndex');
-    if (typeof onSelect === "function") onSelect(event);
+    onSelect(event);
   }
 
   var results = getAlertsByName(element.name);

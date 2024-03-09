@@ -17,16 +17,16 @@ class ActionTrade extends Component {
     constructor(props) {
 //        console.log('In ActionTrade.constructor props=',props);
         super(props);
-        
+
         this.strategyToggle = this.strategyToggle.bind(this);
         this.onNoop = this.onNoop.bind(this);
-        
+
         this.onStrategyDone = this.onStrategyDone.bind(this);
         this.onStrategyExisting = this.onStrategyExisting.bind(this);
         this.onStrategyArbitrary = this.onStrategyArbitrary.bind(this);
         this.onStrategyProportional = this.onStrategyProportional.bind(this);
         this.onStrategyContextHelp = this.onStrategyContextHelp.bind(this);
-        
+
         this.onArbitraryCancel = this.onArbitraryCancel.bind(this);
         this.onArbitraryContinue = this.onArbitraryContinue.bind(this);
         this.onArbitraryChangeValid = this.onArbitraryChangeValid.bind(this);
@@ -36,17 +36,17 @@ class ActionTrade extends Component {
         this.onSizeContinue = this.onSizeContinue.bind(this);
         this.onSizeChangeValid = this.onSizeChangeValid.bind(this);
         this.onSizeChangeInvalid = this.onSizeChangeInvalid.bind(this);
-        
+
         this.onFeasibleRestart = this.onFeasibleRestart.bind(this);
         this.onFeasibleDone = this.onFeasibleDone.bind(this);
-        
+
         this.onEstablishDone = this.onEstablishDone.bind(this);
         this.onEstablishAccept = this.onEstablishAccept.bind(this);
-        
+
         this.onNotFeasibleRepeat = this.onNotFeasibleRepeat.bind(this);
         this.onNotFeasibleRestart = this.onNotFeasibleRestart.bind(this);
         this.onNotFeasibleDone = this.onNotFeasibleDone.bind(this);
-        
+
         this.state = {
                 strategyModal: false,
                 arbitraryModal: false,
@@ -61,11 +61,11 @@ class ActionTrade extends Component {
                 dir: [],
             };
     }
-    
+
     //===========================================================
     // Trade Menu Item
     //===========================================================
-    
+
     strategyToggle() {
 //        console.log('In ActionTrade.strategyToggle this=',this);
 //        console.log('state=',this.state);
@@ -89,7 +89,7 @@ class ActionTrade extends Component {
             });
         }
     }
-    
+
     commonViolationSetup() {
 //        console.log('In ActionTrade.commonViolationSetup this=',this);
 //        console.log('state=',this.state);
@@ -124,7 +124,7 @@ class ActionTrade extends Component {
         });
         return nviol;
     }
-    
+
     onNoop() { // No-op for onHide
 //      console.log('In ActionTrade.onNoop this=',this);
 //      console.log('state=',this.state);
@@ -133,7 +133,7 @@ class ActionTrade extends Component {
     //===========================================================
     // Strategy Modal
     //===========================================================
-    
+
     onStrategyDone() { // Option 3
 //        console.log('In ActionTrade.onStrategyDone this=',this);
 //        console.log('state=',this.state);
@@ -226,7 +226,7 @@ class ActionTrade extends Component {
             sizeModal: !this.state.sizeModal,
         });
     }
-    
+
     onStrategyContextHelp() {
 //        console.log('In ActionTrade.onStrategyContextHelp this=',this);
 //        console.log('state=',this.state);
@@ -235,7 +235,7 @@ class ActionTrade extends Component {
         });
         window.open('/docs/Help/trade.html', '_blank');
     }
-    
+
     commonArbitraryOrProportional(dir) {
 //        console.log('In ActionTrade.commonArbitraryOrProportional dir=',dir);
 //        console.log('state=',this.state);
@@ -325,7 +325,7 @@ class ActionTrade extends Component {
     //===========================================================
     // Arbitrary Modal
     //===========================================================
-    
+
     onArbitraryCancel() {
 //        console.log('In ActionTrade.onArbitraryCancel this=',this);
 //        console.log('state=',this.state);
@@ -338,7 +338,7 @@ class ActionTrade extends Component {
         });
         return;
     }
-    
+
     onArbitraryContinue() {
 //        console.log('In ActionTrade.onArbitraryContinue this=',this);
 //        console.log('state=',this.state);
@@ -348,7 +348,7 @@ class ActionTrade extends Component {
             sizeModal: !this.state.sizeModal, // Show size modal
         });
     }
-    
+
     onArbitraryChangeValid(i, event) {
 //        console.log('In ActionTrade.onArbitraryChangeValid i=',i,' event.target.value=',event.target.value);
 //        console.log('state=',this.state);
@@ -387,7 +387,7 @@ class ActionTrade extends Component {
             arbitraryContinueDisabled: arbitraryContinueDisabled,
         });
     }
-    
+
     onArbitraryChangeInvalid(i, event) {
 //        console.log('In ActionTrade.onArbitraryChangeInvalid i=',i,' event.target.value=',event.target.value);
 //        console.log('state=',this.state);
@@ -413,11 +413,11 @@ class ActionTrade extends Component {
             arbitraryContinueDisabled: arbitraryContinueDisabled,
         });
     }
-    
+
     //===========================================================
     // Size Modal
     //===========================================================
-    
+
     onSizeCancel() {
 //        console.log('In ActionTrade.onSizeCancel this=',this);
 //        console.log('state=',this.state);
@@ -430,7 +430,7 @@ class ActionTrade extends Component {
         });
         return;
     }
-    
+
     onSizeContinue() {
 //        console.log('In ActionTrade.onSizeContinue this=',this);
 //        console.log('state=',this.state);
@@ -572,7 +572,7 @@ class ActionTrade extends Component {
             isSizeInvalid: false,
         });
     }
-    
+
     onSizeChangeInvalid(event) {
 //        console.log('In ActionTrade.onSizeChangeInvalid this=',this);
 //        console.log('state=',this.state);
@@ -584,7 +584,7 @@ class ActionTrade extends Component {
     //===========================================================
     // Feasible Modal
     //===========================================================
-    
+
     onFeasibleRestart() {
 //        console.log('In ActionTrade.onFeasibleRestart this=',this);
 //        console.log('state=',this.state);
@@ -622,7 +622,7 @@ class ActionTrade extends Component {
     //===========================================================
     // Establish Modal
     //===========================================================
-    
+
     onEstablishAccept() {
 //        console.log('In ActionTrade.onEstablishAccept this=',this);
 //        console.log('state=',this.state);
@@ -645,7 +645,7 @@ class ActionTrade extends Component {
             notFeasibleModal: !this.state.notFeasibleModal
         });
     }
-    
+
     onEstablishDone() {
 //      console.log('In ActionTrade.onEstablishDone this=',this);
 //      console.log('state=',this.state);
@@ -672,11 +672,11 @@ class ActionTrade extends Component {
       });
       return;
   }
-  
+
     //===========================================================
-    // Not Feasible Modal 
+    // Not Feasible Modal
     //===========================================================
-    
+
     onNotFeasibleRestart() {
 //        console.log('In ActionTrade.onNotFeasibleRestart this=',this);
 //        console.log('state=',this.state);
@@ -700,7 +700,7 @@ class ActionTrade extends Component {
             strategyModal: !this.state.strategyModal
         });
     }
-    
+
     onNotFeasibleRepeat() {
 //      console.log('In ActionTrade.onNotFeasibleRepeat this=',this);
 //      console.log('state=',this.state);
@@ -711,7 +711,7 @@ class ActionTrade extends Component {
           strategyModal: !this.state.strategyModal
       });
   }
-  
+
     onNotFeasibleDone() {
 //        console.log('In ActionTrade.onNotFeasibleDone this=',this);
 //        console.log('state=',this.state);
@@ -722,11 +722,11 @@ class ActionTrade extends Component {
             notFeasibleModal: !this.state.notFeasibleModal
         });
     }
-    
+
     //===========================================================
-    // Render 
+    // Render
     //===========================================================
-    
+
     render() {
 //        console.log('In ActionTrade.render this=',this);
         var design;
@@ -987,7 +987,7 @@ class ActionTrade extends Component {
         );
     }
 
-}  
+}
 
 ActionTrade.contextTypes = {
     store: PropTypes.object

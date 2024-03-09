@@ -22,7 +22,7 @@ export function init(store, p, x) {
 
      x[o.Spring_Type] = "Extension";
      j = x[o.End_Type];
- 
+
  switch(x[o.Prop_Calc_Method]){
  default:
  case 1:      // Prop_Calc_Method = 1 - Use values from material table
@@ -70,7 +70,7 @@ export function init(store, p, x) {
     x[o.tensile_010]   = ten3 * m_tab[i][mo.t010];
 //    tensile_400      = m_tab(i).t400;
     tensile_400        = ten3 * m_tab[i][mo.t400];
-    
+
     switch(x[o.Life_Category]){
         default:
         case 1:
@@ -102,7 +102,7 @@ export function init(store, p, x) {
             x[o.PC_Tensile_Endur] = m_tab[i][mo.pte8];
             x[o.PC_Tensile_Bend]  = m_tab[i][mo.ptb8];
     }
-    
+
 //    pc_tensile_stat  = m_tab(i).fy;
     x[o.PC_Tensile_Stat]  = m_tab[i][mo.pte1];
 //    pc_tensile_bend  = m_tab(i).ptb(life_catagory);
@@ -120,10 +120,10 @@ export function init(store, p, x) {
 //    stress_lim_stat =tensile*pc_tensile_stat /100.0;
     x[o.Stress_Lim_Stat]  = x[o.Tensile] * x[o.PC_Tensile_Stat]  / 100.0;
     x[o.Stress_Lim_Bend]  = x[o.Tensile] * x[o.PC_Tensile_Bend]  / 100.0;
-    
+
       /*
-       *  copy from end type table to Calculation Inputs  
-       *  check these values.     See AS Design Hdbk. p52  
+       *  copy from end type table to Calculation Inputs
+       *  check these values.     See AS Design Hdbk. p52
        */
 
     //if end_type_index > c_end_num then
@@ -133,7 +133,7 @@ export function init(store, p, x) {
     if (x[o.End_Type] <= e_end_num) {
         x[o.Hook_Deflect_All] = et_tab[j][eto.HookDefAll];
     }
-    
+
 // End_ID, Extended_End_ID, L_End and L_Extended_End are also calculated in eqnset
     if (x[o.End_Type] <= e_end_num) {
         x[o.End_ID] = x[o.ID_Free];
@@ -146,7 +146,7 @@ export function init(store, p, x) {
 //        console.log('    x[o.L_End] = ', x[o.L_End]);
 //        console.log('    x[o.L_Extended_End] = ', x[o.L_Extended_End]);
     }
-    
+
 //    console.log('init: x[o.SI_Range] = ', x[o.SI_Range]);
     if (x[o.SI_Range] <= 2 ) {
         x[o.SI_Lo_Factor] = m_tab[i][mo.silf];
@@ -158,7 +158,7 @@ export function init(store, p, x) {
             x[o.SI_Hi_Factor] = m_tab[i][mo.sihf];
         }
     }
-    
+
     store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", false));
     store.dispatch(changeSymbolHidden("Material_Type", false));
     store.dispatch(changeSymbolHidden("Process", false));

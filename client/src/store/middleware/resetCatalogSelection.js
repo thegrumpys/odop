@@ -16,4 +16,3 @@ export function resetCatalogSelection(store, action) {
     }
 //    console.log('</ul><li>','End resetCatalogSelection','</li>');
 }
- 

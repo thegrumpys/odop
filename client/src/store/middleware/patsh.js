@@ -6,7 +6,7 @@ import { despak } from './despak';
  * 1. The algorithm stops when the s_spi is less than an externally specified value, objmin.
  * 2. The algorithm stops when the iteration count exceeds an externally specified maximun iteration count.
  * 3. The algorithm demands a minimum improvement of s in each iteration compared to a externally specified tolerance value.
- * 4. The algorithm's explore function alternates the sign of delta for each psi[k] for each successive exploration 
+ * 4. The algorithm's explore function alternates the sign of delta for each psi[k] for each successive exploration
  */
 export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
 //    console.log('<li>','@@@@@ Start patsh psi=',psi,'del=',del,'delmin=',delmin,'objmin=',objmin,'maxit=',maxit,'tol=',tol,'store=',store,'merit=',merit,'</li><ul>');

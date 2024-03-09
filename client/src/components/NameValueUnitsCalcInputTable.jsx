@@ -4,10 +4,10 @@ import { Table  } from 'react-bootstrap';
 import NameValueUnitsHeaderCalcInput from './NameValueUnitsHeaderCalcInput';
 import NameValueUnitsRowCalcInput from './NameValueUnitsRowCalcInput';
 
-export default function NameValueUnitsCalcInputTable() {
+export default NameValueUnitsCalcInputTable = () => {
 //  console.log("NameValueUnitsCalcInputTable - Mounting...");
   const symbol_table = useSelector((state) => state.model.model.symbol_table);
-    
+
   useEffect(() => {
 //    console.log("NameValueUnitsCalcInputTable - Mounted");
 //    return () => console.log("NameValueUnitsCalcInputTable - Unmounting ...");

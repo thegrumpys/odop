@@ -17,7 +17,7 @@ class FileExport extends Component {
             modal: false,
         };
     }
-    
+
     export(model, name, type) {
 //        console.log('In FileExport.export model=',model);
         const url = window.URL.createObjectURL(new Blob([JSON.stringify(model, null, 2)]));
@@ -44,10 +44,10 @@ class FileExport extends Component {
             modal: false,
         });
     }
-    
-    // I created a special modified version of File Export which outputs a JSON file 
-    // with all properties sorted in alphabetical order. 
-    // It makes it easy to compare/diff two files and find the differences. 
+
+    // I created a special modified version of File Export which outputs a JSON file
+    // with all properties sorted in alphabetical order.
+    // It makes it easy to compare/diff two files and find the differences.
     onSortedExport() {
 //        console.log('In FileExport.onSortedExport');
 
@@ -80,10 +80,10 @@ class FileExport extends Component {
             modal: !this.state.modal,
         });
     }
-    
+
     exportCSV(symbol_table, name, type) {
 //        console.log('In FileExport.exportCSV','symbol_table=',symbol_table,'name=',name,'type=',type);
-        const url = window.URL.createObjectURL(new Blob(Object.keys(symbol_table).map(key => 
+        const url = window.URL.createObjectURL(new Blob(Object.keys(symbol_table).map(key =>
             symbol_table[key].name+","+
             symbol_table[key].value+","+
             symbol_table[key].units+
@@ -141,7 +141,7 @@ class FileExport extends Component {
             modal: !this.state.modal,
         });
     }
-    
+
     onCancel() {
 //        console.log('In FileExport.onCancel');
         this.setState({

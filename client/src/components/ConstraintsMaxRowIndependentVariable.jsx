@@ -187,9 +187,9 @@ class ConstraintsMaxRowIndependentVariable extends Component {
                     <td className={"text-right align-middle small " + className + (this.props.system_controls.show_violations === 0 ? "d-none" : "")} colSpan="1">
                         {this.props.system_controls.show_violations === 1 && this.props.element.vmax <= 0 ?
                             ''
-                            : (this.props.element.lmax & FIXED ? 
-                                '' 
-                                : (this.props.element.lmax & CONSTRAINED ? 
+                            : (this.props.element.lmax & FIXED ?
+                                ''
+                                : (this.props.element.lmax & CONSTRAINED ?
                                     toODOPPrecision(this.props.element.vmax*100.0)
                                     : ''))}
                     </td>

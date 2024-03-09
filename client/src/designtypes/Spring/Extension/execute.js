@@ -3,7 +3,7 @@ export function getExecuteNames() {
     var result;
     if (config.node.env !== "production") {
       result = [
-        'mkExtensionStartups',    // Script to make multiple Startup entries from Load Initial State 
+        'mkExtensionStartups',    // Script to make multiple Startup entries from Load Initial State
         'mkStartup',              // Script to make Startup file from Load Initial State
         'mkStartup_Metric',       // Script to make Startup Metric file from Load Initial State Metric
         'increasePrecision',      // Script to tweak Preference values for greater precision of search result

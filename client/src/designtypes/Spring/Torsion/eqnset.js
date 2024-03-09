@@ -1,9 +1,9 @@
 import * as o from './offsets';
 import * as mo from '../mat_offsets';
 export function eqnset(p, x) {        /*    Torsion  Spring  */
-    
+
 //    console.log('Entering eqnset p=',p);
-    
+
     const zero = 0.0;
     const Deg_Per_Turn = 360.0;
     const Deg2Rad = 2.0 * Math.PI / 360.0;
@@ -15,7 +15,7 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
     var stress_rng;
     var se2;
     var ctp1;
-    
+
     /*  *******  DESIGN EQUATIONS  *******                  */
     x[o.Mean_Dia] = p[o.OD_Free] - p[o.Wire_Dia];
 
@@ -47,7 +47,7 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
 //    console.log('x[o.Rate]=',x[o.Rate]);
 
     x[o.Rate] = x[o.Rate] / Deg_Per_Turn;
-    
+
     x[o.Deflect_1] = p[o.M_1] / x[o.Rate];
     x[o.Deflect_2] = p[o.M_2] / x[o.Rate];
 
@@ -74,7 +74,7 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
     else {
         x[o.Force_Arm_2] = zero;
     }
-    
+
 //    end_angle_free=deg_per_turn*(coils_t-trunc(coils_t));
     x[o.End_Angle_Free] = Deg_Per_Turn * (p[o.Coils_T] - Math.trunc(p[o.Coils_T]));
 
@@ -86,12 +86,12 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
 //          console.log("eqnset Tensile = ", x[o.Tensile]);
       }
       if (x[o.Prop_Calc_Method] <= 2) {
-          x[o.Stress_Lim_Bnd_Endur] = x[o.Tensile] * x[o.PC_Ten_Bnd_Endur] / 100.0; 
-          x[o.Stress_Lim_Bnd_Stat]  = x[o.Tensile] * x[o.PC_Ten_Bnd_Stat]  / 100.0; 
+          x[o.Stress_Lim_Bnd_Endur] = x[o.Tensile] * x[o.PC_Ten_Bnd_Endur] / 100.0;
+          x[o.Stress_Lim_Bnd_Stat]  = x[o.Tensile] * x[o.PC_Ten_Bnd_Stat]  / 100.0;
       }
 
     if (x[o.Stress_2] > zero) {
-        x[o.FS_2] = x[o.Stress_Lim_Bnd_Stat] / x[o.Stress_2]; 
+        x[o.FS_2] = x[o.Stress_Lim_Bnd_Stat] / x[o.Stress_2];
 //        console.log("eqnset FS_2 = ", x[o.FS_2]);
     }
        else x[o.FS_2] = 1.0;
@@ -107,20 +107,20 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
         */
       stress_avg = (x[o.Stress_1] + x[o.Stress_2]) / 2.0;
       stress_rng = (x[o.Stress_2] - x[o.Stress_1]) / 2.0;
-      se2 = x[o.Stress_Lim_Bnd_Endur] / 2.0; 
-    x[o.FS_CycleLife] =  x[o.Stress_Lim_Bnd_Stat] / 
-         (kb * stress_rng * (x[o.Stress_Lim_Bnd_Stat] - se2) / se2 + stress_avg); 
+      se2 = x[o.Stress_Lim_Bnd_Endur] / 2.0;
+    x[o.FS_CycleLife] =  x[o.Stress_Lim_Bnd_Stat] /
+         (kb * stress_rng * (x[o.Stress_Lim_Bnd_Stat] - se2) / se2 + stress_avg);
 
              /*  modified Goodman cycle life calculation  */
     if (x[o.Prop_Calc_Method] === 1 && x[o.Material_Type] !== 0) {
-//        for torsion springs: spring type (st_code) = 3 
+//        for torsion springs: spring type (st_code) = 3
 //        cycle_life = cl_calc(material_index,life_catagory,3,tensile,stress_1,stress_2);
         x[o.Cycle_Life] = cl_calc(x[o.Material_Type], x[o.Life_Category], 3, x[o.Tensile], x[o.Stress_1], x[o.Stress_2]);
     }
        else x[o.Cycle_Life] = zero;   // Setting to NaN causes problems with File : Open.  See issue #232
 
     x[o.PC_Safe_Deflect] = 100.0 * x[o.Deflect_2] / ((x[o.Stress_Lim_Bnd_Stat] / s_f) / x[o.Rate]);
- 
+
     var sq1 = x[o.L_Body];
     var sq2 = p[o.Coils_T] * Math.PI * x[o.Mean_Dia];
     var wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2);
@@ -131,10 +131,10 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
     Def1InRad = x[o.Deflect_1] * Deg2Rad;
     Def2InRad = x[o.Deflect_2] * Deg2Rad;
     x[o.Energy] = 0.5 * RateInRad * (Def2InRad * Def2InRad - Def1InRad * Def1InRad);
-    
+
 //    console.log('Exiting eqnset p=',p,' x=',x);
     return x;
-    
+
 function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
 //    console.log("In cl_calc:");
 //    console.log("Material_Index = x[o.Material_Type] = mat_idx =", mat_idx);
@@ -142,7 +142,7 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
 //    console.log("st_code =", st_code, " x[o.Tensile] = tensile =", tensile);
 //    console.log("Stress1 = x[o.Stress_1] =", stress_1);
 //    console.log("Stress2 = x[o.Stress_2] =", stress_2);
-    
+
     var i;
     var j;
     var pntc;
@@ -179,7 +179,7 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
     }
     for (i = 0; i <= 3; i++) {
         idxoffset = 3 - i + j;
-        if (j > 0 && idxoffset === 3) { // If Shot Peened and 
+        if (j > 0 && idxoffset === 3) { // If Shot Peened and
             idxoffset = 0;
         }
         if (st_code === 3) { // Is it Torsion?
@@ -218,5 +218,5 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
 //    console.log('Before table sterm=',sterm,'temp=',temp,'result=',result);
     return(result);
 }
-    
+
 }

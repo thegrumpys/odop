@@ -6,7 +6,7 @@ import { displayMessage } from "./MessageModal";
 import { changeName, changeUser, changeView, loadInitialState, changeSymbolValue, changeIndexValue } from "../store/modelSlice";
 import * as sto from '../designtypes/Piston-Cylinder/symbol_table_offsets';
 
-export default function Home() {
+export default Home = () => {
 //  console.log("HOME - Mounting..");
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -2,14 +2,14 @@ import { changeOutputSymbolValues } from '../modelSlice';
 
 // Invoke Equation Set
 export function invokeEquationSet(store) {
-    
+
 //    console.log('<li>','Start invokeEquationSet','</li><ul>');
-    
+
     var element;
 
     var design = store.getState().model;
 //    console.log('In invokeEquationSet design=',design);
-    
+
     // Loop to create p and x from symbol_table
     var p = [];
     var x = [];
@@ -29,6 +29,6 @@ export function invokeEquationSet(store) {
 
     // Compute and dispatch output changes
     store.dispatch(changeOutputSymbolValues(x));
-    
+
 //    console.log('</ul><li>','End invokeEquationSet','</li>');
 }

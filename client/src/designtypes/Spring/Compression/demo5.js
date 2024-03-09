@@ -8,21 +8,21 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The following example provides the ODOP:Spring solution to a reference book 
+                    The following example provides the ODOP:Spring solution to a reference book
                     problem illustrating the design of a compression spring .
                     </p>
-                    
+
                     <p>
-                    As with the other tutorial and demo sessions, 
-                    this session needs to start from a known state.  
+                    As with the other tutorial and demo sessions,
+                    this session needs to start from a known state.
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     Moving to the next page will establish the necessary initialState.
                     </p>
-                    
+
                     <p>
                     To continue with this example, just click the "Next" button as you finish
-                    reading each page (step). 
+                    reading each page (step).
                     </p>
                     <br />
                 </>
@@ -41,7 +41,7 @@ export const execute = {
                     <br />
                     Refer to  Problem 1  on page 179  of the 10th printing  (1978).
                     </p>
-                    
+
                 </>
             ),
             actions: [
@@ -75,11 +75,11 @@ export const execute = {
             text: (
                 <>
                     <p>Next, the demo session will enter everything we know about the problem. </p>
-                    
+
                     <p>This is a good time to take a good look at the existing values.
                     Affected values will update immediately as the demo session enters the changes.</p>
-                    
-                    <p>You can scroll the page down to view the complete set of values. 
+
+                    <p>You can scroll the page down to view the complete set of values.
                     Scroll back up in order to use the Next button to continue.</p>
                     <br /><br />
                 </>
@@ -90,7 +90,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The demo has now entered what is known about the problem. 
+                    The demo has now entered what is known about the problem.
                     In summary, the changes were:<br />
                     </p>
                     FIX  OD_Free  1.00<br />
@@ -103,7 +103,7 @@ export const execute = {
                     CHANGE  Material_Type OIL_TEMPERED_MB<br />
                     <br />
                     <p>
-                    The remaining Independent Variable values remain as established by the initialState. 
+                    The remaining Independent Variable values remain as established by the initialState.
                     </p>
                 </>
             ),
@@ -143,10 +143,10 @@ export const execute = {
                 <>
                     <p>Yes,  A feasible solution is available. Please take a moment to scroll through and view the values.</p>
                     <p>
-                    Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
+                    Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini).
                     Use the View menu to select that Report.
-                    The message: 
-                    "<b>Coil to coil contact may cause inaccuracy in point 2.</b>" 
+                    The message:
+                    "<b>Coil to coil contact may cause inaccuracy in point 2.</b>"
                     is produced any time that the second load uses more
                     than 80 % of available deflection.
                     </p>
@@ -164,15 +164,15 @@ export const execute = {
                     <p>
                     If you are still viewing a Report, don't forget to switch back to the main page.
                     </p>
-                    
+
                     <p>
-                    As a general rule, in the first approach to a new problem, 
+                    As a general rule, in the first approach to a new problem,
                     we let the calculations use an arbitrary (non-standard) wire diameter.
                     </p>
-                    
+
                     <p>
                     Now, in order to conclude this problem,
-                    we want to demonstrate the ODOP SELECT SIZE feature. 
+                    we want to demonstrate the ODOP SELECT SIZE feature.
                     Go to the <b>Action : Select Size...</b> menu item
                     and chose the nearest standard wire diameter.
                     In summary:
@@ -195,12 +195,12 @@ export const execute = {
                     will be required to make corresponding adjustments in the other parameters.
                     For this problem, only the number of coils remains to be determined.
                     </p>
-                    
+
                     <p>
                     Look for the results on the next page.
                     <br /><br />
                     </p>
-                    
+
                 </>
             ),
             actions: [
@@ -213,21 +213,21 @@ export const execute = {
                 <>
                     <p>
                     We have a solution. Please take a moment to scroll through and view the values.
-                    Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini). 
+                    Note that results of additional calculations are given in Report&nbsp;1&nbsp;(mini).
                     Use the View menu to select that Report.
                     </p>
-                    
+
                     <p>
                     Note that this design is very close to delivering 1.75 inches
                     compressed height at 60 pounds force.
                     <br /><br />
                     </p>
-                    
+
                     <p>
                     Next we'll make a detailed comparison with the handbook results.
                     Click Next to see the handbook inputs entered into the appropriate ODOP:Spring variables.
                     </p>
-                    
+
                     <p>
                     </p>
                 </>
@@ -243,7 +243,7 @@ export const execute = {
                     <p>
                     If you are still viewing a Report, don't forget to switch back to the main page.
                     </p>
-                    
+
                     <p>
                     The demo session has now imposed the values:<br />
                     <br />
@@ -270,7 +270,7 @@ export const execute = {
                     &nbsp; &nbsp;  stress at 60 lb load =  92900  psi  (corrected)<br />
                     &nbsp; &nbsp;  spring index = 7.3
                     </p>
-                    
+
                     <p>
                     The results are in very good agreement.
                     </p>
@@ -282,15 +282,15 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Several more demo problems are available. 
-                    They are named demo1, demo2, ... etc. 
-                    Refer to the on-line documentation section (Help entry) covering the  
-                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    Several more demo problems are available.
+                    They are named demo1, demo2, ... etc.
+                    Refer to the on-line documentation section (Help entry) covering the
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp;
                     for a complete list of additional tutorial and demo topics.
                     </p>
-                    
-                    <p>If you do not wish to continue with more demonstration problems, 
-                    you can experiment with the various ODOP:Spring features, menus and reports. 
+
+                    <p>If you do not wish to continue with more demonstration problems,
+                    you can experiment with the various ODOP:Spring features, menus and reports.
                     The HELP menu is a good place to start. </p>
                     <br />
                 </>

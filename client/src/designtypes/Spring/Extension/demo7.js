@@ -11,18 +11,18 @@ export const execute = {
                 <>
                     <p>
                     The following example illustrates the use of ODOP:Spring in
-                    the design of an extension spring. 
+                    the design of an extension spring.
                     </p>
-                    
+
                     <p>
-                    A detailed description of  
+                    A detailed description of
                     <a href="/docs/Help/DesignTypes/Spring/Extension/description.html" target="_blank" rel="noopener noreferrer"> extension spring names </a>
-                    is provided in the On-line Help.  
+                    is provided in the On-line Help.
                     </p>
-                    
+
                     <p>
-                    As with the other tutorial and demo sessions, 
-                    this session needs to start from a known state.  
+                    As with the other tutorial and demo sessions,
+                    this session needs to start from a known state.
                     So, if you have entered any work of value that is not yet saved,
                     use the <b>File : Save</b> menu item to save your work before continuing.
                     </p>
@@ -40,7 +40,7 @@ export const execute = {
                     <p>
                     The initial conditions expected by this demo session are now established.
                     </p>
-                    
+
                     <p>This problem appears in the  HANDBOOK of SPRING DESIGN  published by:<br />
                     <br />
                     Spring Manufacturers Institute, Inc.<br />
@@ -68,7 +68,7 @@ export const execute = {
                 <br />
                 Example 2: Design an extension spring to meet the following requirements:
                 </p>
-                
+
                 <table>
                     <tbody>
                     <tr><th>Material</th><td>&nbsp;=</td><td>&nbsp;</td><td>music wire</td><td>&nbsp;</td></tr>
@@ -82,9 +82,9 @@ export const execute = {
                     </tbody>
                 </table>
                 <br />
-               
+
                 <p>
-                The handbook example uses allowable stress appropriate for a static load (105,000 psi corrected) and 
+                The handbook example uses allowable stress appropriate for a static load (105,000 psi corrected) and
                 does not state a requirement for cycle life.
                 </p>
                 </>
@@ -97,8 +97,8 @@ export const execute = {
                     <p>
                     It is important to notice that the handbook has given us three points to
                     define the rate (slope of the linear force-deflection curve) of a coil
-                    spring.  Thus, there is a good chance that the problem is 
-                    <a href="/docs/Help/designSituations.html" target="_blank" rel="noopener noreferrer"> overspecified</a>. 
+                    spring.  Thus, there is a good chance that the problem is
+                    <a href="/docs/Help/designSituations.html" target="_blank" rel="noopener noreferrer"> overspecified</a>.
                     We are allowed a small tolerant region around load 1,  (+/-5 pounds).
                     Also, later in the problem the handbook indicates that load 2 may also
                     vary by 10%  (94.5 to 105 pounds).
@@ -115,7 +115,7 @@ export const execute = {
                     this case, the three points:  1, 2, and FREE are not on the same
                     straight line.
                     </p>
-                   
+
                     <p>
                     To avoid this problem, we'll specify forces as MAX and MIN values.
                     </p>
@@ -127,9 +127,9 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The demo session has now entered what is known about the problem. 
+                    The demo session has now entered what is known about the problem.
                     </p>
-                    
+
                     <p>
                     In summary, the changes were:<br />
                     &nbsp; CHANGE  Material_Type  MUSIC_WIRE<br />
@@ -169,7 +169,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Note that previously initialState had End_Extension FIXed at a value of 0.0 in. 
+                    Note that previously initialState had End_Extension FIXed at a value of 0.0 in.
                     &nbsp;For now, we'll let the solution process select any value of end extension that
                     assists the solution:<br />
                     &nbsp; FREE  End_Extension
@@ -177,7 +177,7 @@ export const execute = {
 
                     <p>
                     This is a good time to scroll down and confirm these changes are now in place.
-                    After the click on Next, the demo session will run Search. 
+                    After the click on Next, the demo session will run Search.
                     The calculations may take several seconds.
                     </p>
                 </>
@@ -196,9 +196,9 @@ export const execute = {
                     remainder of this session will look at the differences in detail.<br />
                     <br />
                     Recall that the handbook requested a spring which has a "minimum hook
-                    extension" of 0.725 inch.  
-                    The handbook definition of this quantity appears to be: 
-                    (free length - body length)/2  
+                    extension" of 0.725 inch.
+                    The handbook definition of this quantity appears to be:
+                    (free length - body length)/2
                     </p>
 
                     <p>
@@ -206,13 +206,13 @@ export const execute = {
                     ODOP:Spring calculates length between hooks as body length plus 75% or
                     100% (depending on End_Type) of a coil inside diameter for each end.
                     End_Extension is an offset in addition to this allowance for the ends.
-                    
-                    Specifically, the ODOP:Spring Calculation Inputs L_End and L_Extended_End 
+
+                    Specifically, the ODOP:Spring Calculation Inputs L_End and L_Extended_End
                     are determined by End_Type.
                     Typically, these quantities will represent the 75% or 100% of a coil
                     inside diameter that is added to L_Body in order to establish L_Free.
                     <br /><br />
-                    For a spring with "Full" hook or loop ends, ODOP:Spring's End_Extension 
+                    For a spring with "Full" hook or loop ends, ODOP:Spring's End_Extension
                     would be:
                     free length - (body length + 2 coil inside diameters)
                     </p>
@@ -250,11 +250,11 @@ export const execute = {
                     The <b>Action : Select Size</b> menu item can be used to select the nearest standard wire diameter.
                     You can experiment with that now.
                     </p>
-                   
+
                     <p>
-                    While it appears that a smaller standard wire diameter would be possible, 
+                    While it appears that a smaller standard wire diameter would be possible,
                     in order to be consistent with the handbook,
-                    the demo session will impose a Wire_Dia value of 0.120 
+                    the demo session will impose a Wire_Dia value of 0.120
                     in the process of transitioning to the next page.
                     Another search will re-establish corresponding values for all the other problem variables.
                     </p>
@@ -288,7 +288,7 @@ export const execute = {
                     &nbsp; Act. coils &nbsp; &nbsp;  29.   Coils &nbsp; &nbsp; &nbsp; &nbsp; Rate &nbsp;    71.2    lb/in<br />
                     &nbsp; Body length &nbsp;  3.60   inches &nbsp; &nbsp;  Stress &nbsp;    99000      psi
                     </p>
-                   
+
                     <p>
                     This is a good time to scroll through the ODOP:Spring design to compare results.
                     </p>
@@ -305,31 +305,31 @@ export const execute = {
                 <>
                     <p>
                     Now that we've seen how ODOP:Spring can derive a design that's close to
-                    the handbook design, 
-                    the demo session has entered the handbook solution 
+                    the handbook design,
+                    the demo session has entered the handbook solution
                     so that we can see what ODOP:Spring thinks of it.
                     </p>
 
                     <p>
                     ODOP:Spring normally makes an allowance for deflection in the hooks.
-                    The handbook calculation did not make any such allowance.  
+                    The handbook calculation did not make any such allowance.
                     Our comparison will be closer if set the ODOP:Spring allowance to zero.
                     Because the hook deflection allowance is determined from a table based
                     on end type, it will be necessary to "switch off" this table look up
-                    process first.  
+                    process first.
                     That is accomplished by selecting the "User_Specified" end type.
                     </p>
-                    
+
                     <p>
                     CHANGE  End_Type  User_Specified<br />
                     CHANGE  Hook_Deflect_All  0.0
                     </p>
-                    
+
                     <p>
                     Now we'll enter the values produced by the handbook solution and compare
                     the results.
                     </p>
-                    
+
                     <p>
                     CHANGE  OD_Free   0.645   (0.010 margin)<br />
                     CHANGE  Coils_T  29.0    (no allowance for hook deflection)<br />
@@ -338,7 +338,7 @@ export const execute = {
                     CHANGE  Force_1  50.0<br />
                     CHANGE  Force_2  94.5
                     </p>
-                   
+
                     <p>
                     </p>
                 </>
@@ -372,7 +372,7 @@ export const execute = {
 
                     <p>
                     ODOP:Spring thinks that this design has one small problem ...
-                    
+
                     The desired initial tension is in the region that the handbook describes
                     as "difficult to maintain with accurate and uniform results".
 
@@ -381,17 +381,17 @@ export const execute = {
                     the 28.4 pounds "attainable" with 22,000 psi initial stress (taken from
                     the chart), the situation is acceptable.
                     </p>
-                   
+
                     <p>
                     This completes our analysis of this problem.
                     If this example seemed a bit long and drawn out ...  it was.
                     </p>
-                    
+
                     <p>
                     Note that simply because the design specification and ODOP:Spring use the
                     same or similar names for a variable doesn't mean they are truly the same.  In
                     this case, End_Extension MIN and minimum hook extension had different meanings.
-                    
+
                     While once again we found that there can be several solutions to the
                     same spring problem, overall the ODOP:Spring calculations compare well to the
                     handbook results.

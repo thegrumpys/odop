@@ -10,7 +10,7 @@ import { displayMessage } from '../components/MessageModal';
 import AlertsAccordion from "./AlertsAccordion"
 
 class ResultTable extends Component {
-    
+
     constructor(props) {
 //        console.log('In ResultTable.constructor props=',props);
         super(props);
@@ -71,7 +71,7 @@ class ResultTable extends Component {
         });
         this.doSearch('NOT FINITE');
     }
-    
+
     onSearchCancel() {
 //        console.log('In ResultTable.onSearchCancel');
         this.setState({
@@ -79,7 +79,7 @@ class ResultTable extends Component {
         });
         // Noop - all done
     }
-    
+
     doSearch(type) {
 //        console.log('In ResultTable.doSearch');
         var old_objective_value = this.props.objective_value;
@@ -149,10 +149,10 @@ class ResultTable extends Component {
     onSeekNameSelect(event) {
 //        console.log('In ResultTable.onSeekNameSelect this=',this,'event=',event);
         this.setState({
-            seek_name: event.target.value 
+            seek_name: event.target.value
         });
     }
-    
+
     onSeekButton(event) {
 //        console.log('In ResultTable.onSeekButton this=',this,'event=',event);
         this.setState({
@@ -224,7 +224,7 @@ class ResultTable extends Component {
                                 </OverlayTrigger>
                                 {feasibility_status === 'NOT FEASIBLE' && this.props.search_completed ?
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
-                                        <p>This design may be over-specified. 
+                                        <p>This design may be over-specified.
                                         See Help topics on Feasibility, Design Situations, Spring Design Technique and Hints, Tricks & Tips.</p>
                                         </Tooltip>}>
                                         <span>&nbsp;<i className="fas fa-info-circle text-primary"></i></span>
@@ -260,19 +260,19 @@ class ResultTable extends Component {
                             </td>
                         </tr>
                         <tr>
-                            {display_search_button ? 
+                            {display_search_button ?
                                 <td align="text-left">
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip><b>Seek</b> (optimize) if feasible.<br /><b>Search</b> (solve) if not feasible.<br />Same functions as Action menu.</Tooltip>}>
                                         <b className="pr-5">Action</b>
                                     </OverlayTrigger>
                                     <Button variant="primary" size="sm" onClick={this.onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>&nbsp;
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
-                                        <p><b>Search</b> alters the values of any free independent variables to find a design that 
-                                        satisfies all constraints and each fixed dependent 
+                                        <p><b>Search</b> alters the values of any free independent variables to find a design that
+                                        satisfies all constraints and each fixed dependent
                                         variable. A feasible result is a solution to the designer’s
                                         goals as expressed by constraints and fixed values.</p>
                                         <p><b>Search</b> stops when the first feasible solution is found. This happens
-                                        when the Objective Value ({this.props.objective_value.toFixed(7)}) falls below 
+                                        when the Objective Value ({this.props.objective_value.toFixed(7)}) falls below
                                         OBJMIN ({this.props.system_controls.objmin.toFixed(7)}).</p>
                                         <p>If <b>Search</b> cannot achieve a feasible result it converges to a compromise.
                                         This compromise tries to minimize violations.</p
@@ -287,8 +287,8 @@ class ResultTable extends Component {
                                     </OverlayTrigger>
                                     <Button variant="primary" size="sm" onClick={this.onSeekRequest} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
-                                        <p>If one feasible design exists there are likely many more available, each with varying advantages / disadvantages. 
-                                        Seek provides a “goal seeking” capability to optimize your design on the parameter that you specify.</p> 
+                                        <p>If one feasible design exists there are likely many more available, each with varying advantages / disadvantages.
+                                        Seek provides a “goal seeking” capability to optimize your design on the parameter that you specify.</p>
                                         <p>If starting with a default design, additional constraints specific to your application are required to obtain meaningful results.</p>
                                         </Tooltip>}>
                                         <span><i className="fas fa-info-circle text-primary"></i></span>
@@ -344,7 +344,7 @@ class ResultTable extends Component {
                             <p>Continuing <b>Search</b> may not result in an improvement.</p>
                             <p>Canceling <b>Search</b> will allow you to examine the Alerts panel for invalid values and associated help.
                             Freeing one or more Independent Variables may result in an improvement.</p>
-                        </Alert> 
+                        </Alert>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="outline-info" onClick={this.onSearchContextHelp}>Help</Button>{' '}

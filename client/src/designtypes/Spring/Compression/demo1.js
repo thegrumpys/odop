@@ -11,19 +11,19 @@ export const execute = {
                     <>
                         <p>
                         The following example illustrates the use of ODOP:Spring in
-                        the design of a compression spring. 
+                        the design of a compression spring.
                         </p>
                         <p>
-                        As with the other tutorial and demo sessions, 
-                        this session needs to start from a known state.  
+                        As with the other tutorial and demo sessions,
+                        this session needs to start from a known state.
                         So, if you have entered any work of value that is not yet saved,
                         use the <b>File : Save</b> menu item to save your work before continuing.
                         Moving to the next page will establish the necessary initialState.
                         </p>
-                        
+
                         <p>
                         To continue with this example, just click the "Next" button as you finish
-                        reading each page (step). 
+                        reading each page (step).
                         </p>
                     </>
                 )
@@ -38,11 +38,11 @@ export const execute = {
 
                     <p>
                     In general, the easiest way to begin is to modify an existing design.
-                    This demo session will modify this design until it meets the requirements 
+                    This demo session will modify this design until it meets the requirements
                     of the current design problem.
                     The following sequence will illustrate this process.
                     </p>
-                    
+
                     <br /><br />
                 </>
             ),
@@ -74,7 +74,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Before making any additional changes, 
+                    Before making any additional changes,
                     Example 1 may be restated: &nbsp; Design a compression spring such that<br />
                     <br />
                     outside diameter =  0.925 in.<br />
@@ -84,11 +84,11 @@ export const execute = {
                     material         =  oil tempered wire<br />
                     ends             =  closed & ground<br />
                     </p>
-                    
+
                     <p>This is a good time to take a good look at the existing values.
                     Many values will update immediately as the demo process enters changes
                     to match the problem specifications.
-                    You can scroll the page down to view the complete set of values. 
+                    You can scroll the page down to view the complete set of values.
                     Scroll back up in order to use the Next button to continue.
                     The changes will happen immediately after this click of the Next button.
                     </p>
@@ -102,11 +102,11 @@ export const execute = {
                     <p>
                     Now, the demo session has entered everything we know about the problem
                     exactly as stated.
-                    All the numbers (Dependent Variable values, Constraint Violations, etc.) 
-                    updated immediately as the demo process entered changes to match the 
+                    All the numbers (Dependent Variable values, Constraint Violations, etc.)
+                    updated immediately as the demo process entered changes to match the
                     problem specifications.
                     </p>
-                    
+
                     In summary, the changes were:<br />
                     FIX OD_Free 0.925<br />
                     FIX L_Free 1.713<br />
@@ -116,7 +116,7 @@ export const execute = {
                     CHANGE Material_Type OIL_TEMPERED_MB<br />
                     <br />
                     <p>
-                    Again, you can scroll the page down to view the complete set of values. 
+                    Again, you can scroll the page down to view the complete set of values.
                     </p>
                 </>
             ),
@@ -165,9 +165,9 @@ export const execute = {
                     <p>
                     Again, this is a good time to take a good look at the existing values.
                     Even more details are provided in the Reports available on the View menu.
-                    After viewing Reports, be sure to return to the main page before continuing. 
+                    After viewing Reports, be sure to return to the main page before continuing.
                     </p>
-                    <p>You can scroll the page down to view the complete set of values. 
+                    <p>You can scroll the page down to view the complete set of values.
                     Scroll back up in order to use the Next button to continue.</p>
                     <br />
                 </>
@@ -185,20 +185,20 @@ export const execute = {
                     for wire diameter.
                     Let's see what ODOP:Spring says is a standard size for wire diameter ...
                     </p>
-                    
+
                     <p>
-                    This is an opportunity for you to go to 
+                    This is an opportunity for you to go to
                     the <b>Action : Select Size...</b> menu item
                     to chose the nearest standard wire diameter.
                     </p>
-                    
+
                     <p>
                     In Demo / Tutorial Speak:<br />
                     SELECT  Wire_Dia  0.125
                     </p>
-                    
+
                     <p>
-                    Please confirm that Wire_Dia is FIXed at 0.125 inch. 
+                    Please confirm that Wire_Dia is FIXed at 0.125 inch.
                     We will need to Search one more time to bring all the numbers into alignment.
                     That Search will happen when you click the Next button.
                     </p>
@@ -261,7 +261,7 @@ export const execute = {
                 <>
                     <p>
                     We can quickly confirm this notion by setting FORCE_2 to the handbook's value.
-                    Basically, 
+                    Basically,
                     <br /><br />
                     CHANGE  Force_2  75.1
                     <br /><br />
@@ -269,15 +269,15 @@ export const execute = {
                     the value of STRESS_2 is a reasonable match for the corresponding
                     stress value in the handbook example.
                     </p>
-                    
+
                     <p>
                     We can wrap up by saying that the ODOP:Spring values are a good match
                     for the handbook solution.
                     </p>
-                    
+
                     <p>
-                    Refer to the on-line documentation section (Help entry) covering the  
-                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    Refer to the on-line documentation section (Help entry) covering the
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp;
                     for a complete list of additional tutorial and demo topics.
                     </p>
                 </>

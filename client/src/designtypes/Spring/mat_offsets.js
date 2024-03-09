@@ -11,7 +11,7 @@ export const pte1 = 9;
 export const pte2 = 10;
 export const pte3 = 11;
 export const pte4 = 12;
-//pte5 
+//pte5
 export const pte6 = 13;
 export const pte7 = 14;
 export const pte8 = 15;

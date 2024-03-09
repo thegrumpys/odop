@@ -9,17 +9,17 @@ it('eqnset initialState', () => { // !!! Heat_Treat = 2 !!!
     var p = []; // p vector
     var x = []; // x vector
 
-    // p vector: OD_Free 0, Wire_Dia 1, Coils_T 2, M_1 3, M_2 4, Coil_Spacing 5, 
+    // p vector: OD_Free 0, Wire_Dia 1, Coils_T 2, M_1 3, M_2 4, Coil_Spacing 5,
     var p =     [0.9265,    0.063,      7.04,      0.05,  4,     0];
-    // x vector: Mean_Dia 0, ID_Free 1, Coils_A 2, Rate 3, Deflect_1 4, Deflect_2 5, L_Body 6, L_1 7, L_2 8, End_Angle_Free 9, 
-    var x = [    0.0,        0.0,       0.0,       0.0,    0.0,         0.0,         0.0,      0.0,   0.0,   0.0, 
-    // Stroke 10, Weight 11, Spring_Index 12, End_Deflect_All 13, Stress_1 14, Stress_2 15, Stress_End 16, FS_2 17, FS_CycleLife 18, Cycle_Life 19, 
-       0.0,        0.0,       0.0,            0.0,                0.0,         0.0,         0.0,           0.0,     0.0,             0.0, 
-    // PC_Safe_Deflect 20, Force_Arm_2 21, Energy 22, Spring_Type 23, Prop_Calc_Method 24, Material_Type 25, ASTM_Fed_Spec 26, Process 27,    Heat_Treat 28, Catalog_Number 29, 
+    // x vector: Mean_Dia 0, ID_Free 1, Coils_A 2, Rate 3, Deflect_1 4, Deflect_2 5, L_Body 6, L_1 7, L_2 8, End_Angle_Free 9,
+    var x = [    0.0,        0.0,       0.0,       0.0,    0.0,         0.0,         0.0,      0.0,   0.0,   0.0,
+    // Stroke 10, Weight 11, Spring_Index 12, End_Deflect_All 13, Stress_1 14, Stress_2 15, Stress_End 16, FS_2 17, FS_CycleLife 18, Cycle_Life 19,
+       0.0,        0.0,       0.0,            0.0,                0.0,         0.0,         0.0,           0.0,     0.0,             0.0,
+    // PC_Safe_Deflect 20, Force_Arm_2 21, Energy 22, Spring_Type 23, Prop_Calc_Method 24, Material_Type 25, ASTM_Fed_Spec 26, Process 27,    Heat_Treat 28, Catalog_Number 29,
        0.0,                0.0,            0.0,      'Torsion',       1,                   2,               'A228/QQW-470',    'Cold_Coiled', 2,             '',
-    // Material_File 30, Life_Category 31, Inactive_Coils 32, Density 33, Elastic_Modulus 34, Hot_Factor_Kh 35,   Tensile 36,         PC_Ten_Bnd_Endur 37, PC_Ten_Bnd_Stat 38, Stress_Lim_Bnd_Endur 39, 
+    // Material_File 30, Life_Category 31, Inactive_Coils 32, Density 33, Elastic_Modulus 34, Hot_Factor_Kh 35,   Tensile 36,         PC_Ten_Bnd_Endur 37, PC_Ten_Bnd_Stat 38, Stress_Lim_Bnd_Endur 39,
        'mat_us.json',    1,                0,                 0.284,      30000000,           1,                  285179.2728470361,  75,                  75,                 213884.45463527704,
-    // Stress_Lim_Bnd_Stat 40, End_Type 41, Arm_1 42, Arm_2 43, Xlen_1 44, Xlen_2 45, L_End_1 46, L_End_2 47, tbase010 48, tbase400 49,  
+    // Stress_Lim_Bnd_Stat 40, End_Type 41, Arm_1 42, Arm_2 43, Xlen_1 44, Xlen_2 45, L_End_1 46, L_End_2 47, tbase010 48, tbase400 49,
        213884.45463527704,     1,           0,        0,        0,         0,         0,          0,          0.01,        0.4,
     // const_term 50, slope_term 51,       tensile_010 52,
        -2,            -106113.37959890341, 370000];
@@ -36,7 +36,7 @@ it('eqnset initialState', () => { // !!! Heat_Treat = 2 !!!
     expect(p[o.M_1]).toEqual(0.05);
     expect(p[o.M_2]).toEqual(4);
     expect(p[o.Coil_Spacing]).toEqual(0.0);
-    
+
     // Dependent Variables
     expect(x[o.Mean_Dia]).toEqual(0.8634999999999999);
     expect(x[o.ID_Free]).toEqual(0.8005);
@@ -99,17 +99,17 @@ it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () 
     var p = []; // p vector
     var x = []; // x vector
 
-    // p vector: OD_Free 0, Wire_Dia 1, Coils_T 2, M_1 3, M_2 4, Coil_Spacing 5, 
+    // p vector: OD_Free 0, Wire_Dia 1, Coils_T 2, M_1 3, M_2 4, Coil_Spacing 5,
     var p =     [0.4,       0.2,        7.04,      0.05,  4,     0];
-    // x vector: Mean_Dia 0, ID_Free 1, Coils_A 2, Rate 3, Deflect_1 4, Deflect_2 5, L_Body 6, L_1 7, L_2 8, End_Angle_Free 9, 
-    var x = [    0.0,        0.0,       0.0,       0.0,    0.0,         0.0,         0.0,      0.0,   0.0,   0.0, 
-    // Stroke 10, Weight 11, Spring_Index 12, End_Deflect_All 13, Stress_1 14, Stress_2 15, Stress_End 16, FS_2 17, FS_CycleLife 18, Cycle_Life 19, 
-       0.0,        0.0,       0.0,            0.0,                0.0,         0.0,         0.0,           0.0,     0.0,             0.0, 
-    // PC_Safe_Deflect 20, Force_Arm_2 21, Energy 22, Spring_Type 23, Prop_Calc_Method 24, Material_Type 25, ASTM_Fed_Spec 26, Process 27,    Heat_Treat 28, Catalog_Number 29, 
+    // x vector: Mean_Dia 0, ID_Free 1, Coils_A 2, Rate 3, Deflect_1 4, Deflect_2 5, L_Body 6, L_1 7, L_2 8, End_Angle_Free 9,
+    var x = [    0.0,        0.0,       0.0,       0.0,    0.0,         0.0,         0.0,      0.0,   0.0,   0.0,
+    // Stroke 10, Weight 11, Spring_Index 12, End_Deflect_All 13, Stress_1 14, Stress_2 15, Stress_End 16, FS_2 17, FS_CycleLife 18, Cycle_Life 19,
+       0.0,        0.0,       0.0,            0.0,                0.0,         0.0,         0.0,           0.0,     0.0,             0.0,
+    // PC_Safe_Deflect 20, Force_Arm_2 21, Energy 22, Spring_Type 23, Prop_Calc_Method 24, Material_Type 25, ASTM_Fed_Spec 26, Process 27,    Heat_Treat 28, Catalog_Number 29,
        0.0,                0.0,            0.0,      'Torsion',       1,                   2,               'A228/QQW-470',    'Cold_Coiled', 2,             '',
-    // Material_File 30, Life_Category 31, Inactive_Coils 32, Density 33, Elastic_Modulus 34, Hot_Factor_Kh 35,   Tensile 36,         PC_Ten_Bnd_Endur 37, PC_Ten_Bnd_Stat 38, Stress_Lim_Bnd_Endur 39, 
+    // Material_File 30, Life_Category 31, Inactive_Coils 32, Density 33, Elastic_Modulus 34, Hot_Factor_Kh 35,   Tensile 36,         PC_Ten_Bnd_Endur 37, PC_Ten_Bnd_Stat 38, Stress_Lim_Bnd_Endur 39,
        'mat_us.json',    1,                0,                 0.284,      30000000,           1,                  285179.2728470361,  75,                  75,                 213884.45463527704,
-    // Stress_Lim_Bnd_Stat 40, End_Type 41, Arm_1 42, Arm_2 43, Xlen_1 44, Xlen_2 45, L_End_1 46, L_End_2 47, tbase010 48, tbase400 49,  
+    // Stress_Lim_Bnd_Stat 40, End_Type 41, Arm_1 42, Arm_2 43, Xlen_1 44, Xlen_2 45, L_End_1 46, L_End_2 47, tbase010 48, tbase400 49,
        213884.45463527704,     1,           0,        0,        0,         0,         0,          0,          0.01,        0.4,
     // const_term 50, slope_term 51,       tensile_010 52,
        -2,            -106113.37959890341, 370000];
@@ -126,7 +126,7 @@ it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () 
     expect(p[o.M_1]).toEqual(0.05);
     expect(p[o.M_2]).toEqual(4);
     expect(p[o.Coil_Spacing]).toEqual(0.0);
-    
+
     // Dependent Variables
     expect(x[o.Mean_Dia]).toEqual(0.2);
     expect(x[o.ID_Free]).toEqual(0.0);
@@ -190,17 +190,17 @@ it('eqnset pathological OD_Free === Wire_Dia && Mean_Dia === 0.0', () => { // !!
     var p = []; // p vector
     var x = []; // x vector
 
-    // p vector: OD_Free 0, Wire_Dia 1, Coils_T 2, M_1 3, M_2 4, Coil_Spacing 5, 
+    // p vector: OD_Free 0, Wire_Dia 1, Coils_T 2, M_1 3, M_2 4, Coil_Spacing 5,
     var p =     [0.4,       0.4,        7.04,      0.05,  4,     0];
-    // x vector: Mean_Dia 0, ID_Free 1, Coils_A 2, Rate 3, Deflect_1 4, Deflect_2 5, L_Body 6, L_1 7, L_2 8, End_Angle_Free 9, 
-    var x = [    0.0,        0.0,       0.0,       0.0,    0.0,         0.0,         0.0,      0.0,   0.0,   0.0, 
-    // Stroke 10, Weight 11, Spring_Index 12, End_Deflect_All 13, Stress_1 14, Stress_2 15, Stress_End 16, FS_2 17, FS_CycleLife 18, Cycle_Life 19, 
-       0.0,        0.0,       0.0,            0.0,                0.0,         0.0,         0.0,           0.0,     0.0,             0.0, 
-    // PC_Safe_Deflect 20, Force_Arm_2 21, Energy 22, Spring_Type 23, Prop_Calc_Method 24, Material_Type 25, ASTM_Fed_Spec 26, Process 27,    Heat_Treat 28, Catalog_Number 29, 
+    // x vector: Mean_Dia 0, ID_Free 1, Coils_A 2, Rate 3, Deflect_1 4, Deflect_2 5, L_Body 6, L_1 7, L_2 8, End_Angle_Free 9,
+    var x = [    0.0,        0.0,       0.0,       0.0,    0.0,         0.0,         0.0,      0.0,   0.0,   0.0,
+    // Stroke 10, Weight 11, Spring_Index 12, End_Deflect_All 13, Stress_1 14, Stress_2 15, Stress_End 16, FS_2 17, FS_CycleLife 18, Cycle_Life 19,
+       0.0,        0.0,       0.0,            0.0,                0.0,         0.0,         0.0,           0.0,     0.0,             0.0,
+    // PC_Safe_Deflect 20, Force_Arm_2 21, Energy 22, Spring_Type 23, Prop_Calc_Method 24, Material_Type 25, ASTM_Fed_Spec 26, Process 27,    Heat_Treat 28, Catalog_Number 29,
        0.0,                0.0,            0.0,      'Torsion',       1,                   2,               'A228/QQW-470',    'Cold_Coiled', 2,             '',
-    // Material_File 30, Life_Category 31, Inactive_Coils 32, Density 33, Elastic_Modulus 34, Hot_Factor_Kh 35,   Tensile 36,         PC_Ten_Bnd_Endur 37, PC_Ten_Bnd_Stat 38, Stress_Lim_Bnd_Endur 39, 
+    // Material_File 30, Life_Category 31, Inactive_Coils 32, Density 33, Elastic_Modulus 34, Hot_Factor_Kh 35,   Tensile 36,         PC_Ten_Bnd_Endur 37, PC_Ten_Bnd_Stat 38, Stress_Lim_Bnd_Endur 39,
        'mat_us.json',    1,                0,                 0.284,      30000000,           1,                  285179.2728470361,  75,                  75,                 213884.45463527704,
-    // Stress_Lim_Bnd_Stat 40, End_Type 41, Arm_1 42, Arm_2 43, Xlen_1 44, Xlen_2 45, L_End_1 46, L_End_2 47, tbase010 48, tbase400 49,  
+    // Stress_Lim_Bnd_Stat 40, End_Type 41, Arm_1 42, Arm_2 43, Xlen_1 44, Xlen_2 45, L_End_1 46, L_End_2 47, tbase010 48, tbase400 49,
        213884.45463527704,     1,           0,        0,        0,         0,         0,          0,          0.01,        0.4,
     // const_term 50, slope_term 51,       tensile_010 52,
        -2,            -106113.37959890341, 370000];
@@ -217,7 +217,7 @@ it('eqnset pathological OD_Free === Wire_Dia && Mean_Dia === 0.0', () => { // !!
     expect(p[o.M_1]).toEqual(0.05);
     expect(p[o.M_2]).toEqual(4);
     expect(p[o.Coil_Spacing]).toEqual(0.0);
-    
+
     // Dependent Variables
     expect(x[o.Mean_Dia]).toEqual(0.0);
     expect(x[o.ID_Free]).toEqual(-0.4);

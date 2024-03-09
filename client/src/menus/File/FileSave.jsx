@@ -21,7 +21,7 @@ class FileSave extends Component {
             names: [],
         };
     }
-    
+
     componentDidMount() {
 //        console.log('In FileSave.componentDidMount this=',this);
     }
@@ -60,7 +60,7 @@ class FileSave extends Component {
             displaySpinner(false);
         });
     }
-    
+
     postDesign(user, type, name) {
 //        console.log('In FileSave.postDesign user=',user,'type=',type,'name=',name);
         // First fetch the current list of names
@@ -77,7 +77,7 @@ class FileSave extends Component {
             return res.json()
         })
         .then(names => {
-            // Second create or update the design 
+            // Second create or update the design
 //            console.log('In FileSave.postDesign type=',type,'names=', names);
             this.setState({ names })
 //            console.log('In FileSave.postDesign this.state.names=',this.state.names);
@@ -154,7 +154,7 @@ class FileSave extends Component {
       });
       // Noop - all done
     }
- 
+
     render() {
 //        console.log('In FileSave.render this=',this);
         return (

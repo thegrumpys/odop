@@ -6,7 +6,7 @@ import ConstraintsMaxRowIndependentVariable from './ConstraintsMaxRowIndependent
 import ConstraintsMaxHeaderDependentVariable from './ConstraintsMaxHeaderDependentVariable';
 import ConstraintsMaxRowDependentVariable from './ConstraintsMaxRowDependentVariable';
 
-export default function ConstraintsMaxTable() {
+export default ConstraintsMaxTable = () => {
 //  console.log("ConstraintsMaxTable - Mounting...");
   const symbol_table = useSelector((state) => state.model.model.symbol_table);
 

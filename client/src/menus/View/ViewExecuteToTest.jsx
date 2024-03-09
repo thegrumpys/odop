@@ -58,7 +58,7 @@ class ViewExecuteToTest extends Component {
             lines: null,
         };
     }
-    
+
     toggle() {
 //        console.log('In ViewExecuteToTest.toggle');
         this.setState({
@@ -116,7 +116,7 @@ it('${this.state.execute_name}', () => {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {this.state.lines !== null ? 
+                        {this.state.lines !== null ?
                             <>
                                 <pre>
                                 {pre_lines}
@@ -139,7 +139,7 @@ it('${this.state.execute_name}', () => {
             </>
         );
     }
-}  
+}
 
 const mapStateToProps = state => ({
     symbol_table: state.model.symbol_table,
