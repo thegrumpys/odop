@@ -30,9 +30,9 @@ export const modelSlice = createSlice({
     load: {
       reducer: (state, action) => {
         console.log('model load','state=',current(state),',action=',action);
-        state = action.payload.design;
+        state.model = action.payload.model;
       },
-      prepare: (design) => { return { payload: { design } } }
+      prepare: (model) => { return { payload: { model } } }
     },
 
     loadInitialState: {

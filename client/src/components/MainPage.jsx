@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
     Navbar,
     Nav,
@@ -10,226 +11,58 @@ import {
     Tooltip,
     Row
 } from 'react-bootstrap';
-import { withRouter } from 'react-router-dom';
-import ExecutePanel from './ExecutePanel';
-import { connect } from 'react-redux';
-import SignIn from '../menus/Session/SignIn';
-import SignOut from '../menus/Session/SignOut';
-import FileOpen from '../menus/File/FileOpen';
-import FileSave from '../menus/File/FileSave';
-import FileSaveAs from '../menus/File/FileSaveAs';
-import FileDelete from '../menus/File/FileDelete';
-import FileRecent from '../menus/File/FileRecent';
-import FilePreferences from '../menus/File/FilePreferences';
-import FileProperties from '../menus/File/FileProperties';
-import FileImport from '../menus/File/FileImport';
-import FileExport from '../menus/File/FileExport';
-import ActionSearch from '../menus/Action/ActionSearch';
-import ActionSeek from '../menus/Action/ActionSeek';
-import ActionTrade from '../menus/Action/ActionTrade';
-import ActionSelectSize from '../menus/Action/ActionSelectSize';
-import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
-import ActionExecute from '../menus/Action/ActionExecute';
-import ViewCADModel from '../menus/View/ViewCADModel';
-import ViewSelect from '../menus/View/ViewSelect';
-import ViewOffsets from '../menus/View/ViewOffsets';
-import ViewSymbolTableOffsets from '../menus/View/ViewSymbolTableOffsets';
-import ViewSymbolTable from '../menus/View/ViewSymbolTable';
-import ViewObjectiveValue from '../menus/View/ViewObjectiveValue';
-import ViewExecuteToTest from '../menus/View/ViewExecuteToTest';
-import HelpMotd from '../menus/Help/HelpMotd';
-import HelpIndex from '../menus/Help/HelpIndex';
-import HelpDemo from '../menus/Help/HelpDemo';
-import HelpTutorial from '../menus/Help/HelpTutorial';
-import HelpAbout from '../menus/Help/HelpAbout';
-import SearchDocs from './SearchDocs';
-import { withOktaAuth } from '@okta/okta-react';
-import { changeUser, changeView, deleteAutoSave } from '../store/actionCreators';
+import { changeView } from '../store/modelSlice';
 import config from '../config';
-import ResultTable from './ResultTable';
 
-class MainPage extends Component {
-    
-    constructor(props) {
-//        console.log("In MainPage.constructor props=",props);
-        super(props);
-        this.toggle = this.toggle.bind(this);
-        this.setView = this.setView.bind(this);
-        this.props.changeView(config.url.view);
-        this.state = {
-            isOpen: false,
-            activeTab: config.url.view,
-        };
-    }
-    
-    componentDidUpdate(prevProps) {
-//        console.log('In MainPage.componentDidUpdate this=',this,'prevProps=',prevProps);
-        if (prevProps.authState.isAuthenticated !== this.props.authState.isAuthenticated) {
-//            console.log('In MainPage.componentDidUpdate prevProps.authState.isAuthenticated=',prevProps.authState.isAuthenticated,'props.authState.isAuthenticated=',this.props.authState.isAuthenticated);
-            if (this.props.authState.isAuthenticated) {
-//                console.log('In MainPage.componentDidUpdate isAuthenticated this.props.authState.idToken.claims.sub=',this.props.authState.idToken.claims.sub);
-                this.props.changeUser(this.props.authState.idToken.claims.sub);
-            } else {
-//                console.log('In MainPage.componentDidUpdate !isAuthenticated');
-                this.props.changeUser(null);
-            }
-        }
-        if (prevProps.type !== this.props.type) {
-//            console.log('In MainPage.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
-            var { getViewNames } = require('../designtypes/'+this.props.type+'/view.js'); // Dynamically load getViewNames
-            var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
-//            console.log('In MainPage.componentDidUpdate viewNames=', viewNames);
-            var view = viewNames.find(element => element.name === this.props.view);
-//            console.log('In MainPage.componentDidUpdate view=', view);
-            if (view === undefined)
-                this.props.changeView(config.env.view); // if not found then assume the configured default
-        }
-        if (prevProps.view !== this.props.view) {
-//            console.log('In MainPage.componentDidUpdate prevProps.view=',prevProps.view,'props.view=',this.props.view);
-            this.setState({
-                activeTab: this.props.view
-            });
-        }
-    }
+export default function MainPage() {
+  console.log("MainPage - Mounting...");
+  const [show, setShow] = useState(false);
+  const [activeTab, setActiveTab] = useState(config.url.view);
+  const name = useSelector((state) => state.model.name);
+  const view = useSelector((state) => state.model.view);
+  const type = useSelector((state) => state.model.model.type);
+  const dispatch = useDispatch();
 
-    toggle() {
-//        console.log('In MainPage.toggle');
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-    }
-    
-    setView(view) {
-//        console.log('In MainPage.setView view=',view);
-        this.props.changeView(view); // Update the model
-    }
-    
-    render() {
-//        console.log('In MainPage.render this=',this);
-        // If you're waiting to logged in then there is nothing to display OR
-        // If there is no name or type then there is no model therefore there is nothing to display
-        if (this.props.authState.isPending || this.props.name === null || this.props.type === null) return null;
+  useEffect(() => {
+    console.log("MainPage - Mounted");
+//    return () => console.log("MainPage - Unmounting ...");
+    return () => {};
+  }, []);
 
-        var { getViewNames } = require('../designtypes/'+this.props.type+'/view.js'); // Dynamically load getViewNames
-        var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
-//      console.log('In MainPage.constructor viewNames=', viewNames);
+  const toggle = () => {
+    console.log('In MainPage.toggle');
+    setShow(~show);
+  }
 
-        var src = 'designtypes/'+this.props.type+'/favicon.ico';
-        var alt = this.props.type+' icon';
-//        console.log('src=',src,' alt=',alt);
+  const setView = (view) => {
+//    console.log('In MainPage.setView view=',view);
+    dispatch(changeView(view)); // Update the model
+  }
 
-        const logOnOff = this.props.authState.isAuthenticated ? <SignOut /> : <SignIn />;
-        return (
-            <>
-                <Navbar variant="light" bg="light" expand="md" fixed="top">
-                  <OverlayTrigger placement="bottom" overlay={<Tooltip>Reset app.<br/>Save your work first!<br/>See Help AutoSave.</Tooltip>}>
-                    <Navbar.Brand href="/"><img className="d-none d-md-inline" src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/>ODOP</Navbar.Brand>
-                  </OverlayTrigger>
-                  <Navbar.Toggle onClick={this.toggle} />
-                    <Navbar.Collapse in={this.state.isOpen}>
-                        <Nav className="mr-auto">
-                            {logOnOff}
-                            <NavDropdown title="File" renderMenuOnMount={true}>
-                                <FileOpen />
-                                <FileRecent />
-                                <FileSave />
-                                <FileSaveAs />
-                                <FileDelete />
-                                <NavDropdown.Divider />
-                                <FileImport />
-                                <FileExport />
-                                <NavDropdown.Divider />
-                                <FilePreferences />
-                                <FileProperties />
-                            </NavDropdown>
-                            <NavDropdown title="Action">
-                                <ActionSearch />
-                                <ActionSeek />
-                                <ActionTrade />
-                                <NavDropdown.Divider />
-                                <ActionSelectSize />
-                                <ActionSelectCatalog />
-                                <NavDropdown.Divider />
-                                <ActionExecute />
-                            </NavDropdown>
-                            <NavDropdown title="View">
-                                {this.props.type === "Spring/Extension" && <ViewCADModel />}
-                                {this.props.type === "Spring/Extension" && <NavDropdown.Divider />}
-                                <NavDropdown.Item disabled>
-                                    Define  Sub-Problems&hellip;
-                                </NavDropdown.Item>
-                                <NavDropdown.Item disabled>
-                                    Display Sub-Problems&hellip;
-                                </NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <ViewSelect viewNames={viewNames}/>
-                                <NavDropdown.Divider />
-                                {config.node.env !== "production" && <ViewOffsets />}
-                                {config.node.env !== "production" && <ViewSymbolTableOffsets />}
-                                {config.node.env !== "production" && <ViewSymbolTable />}
-                                {config.node.env !== "production" && <ViewObjectiveValue />}
-                                {config.node.env !== "production" && <ViewExecuteToTest />}
-                            </NavDropdown>
-                            <NavDropdown title="Help">
-                                <HelpMotd />
-                                <HelpIndex />
-                                <HelpDemo />
-                                <HelpTutorial />
-                                <HelpAbout />
-                            </NavDropdown>
-                        </Nav>
-                        <Nav>
-                            <Nav.Item>
-                                <SearchDocs />
-                            </Nav.Item>
-                            <Nav.Item className="d-flex align-items-center">
-                                <a href={"/docs/Help/DesignTypes/"+this.props.type+"/description.html"} target="_blank" rel="noopener noreferrer">
-                                    <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {this.props.type}. Select icon for full description.</Tooltip>}>
-                                        <img className="d-none d-md-inline" src={src} alt={alt} height="30px"/>
-                                    </OverlayTrigger>
-                                </a>
-                                &nbsp;{this.props.name}
-                            </Nav.Item>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Navbar>
-                <Container style={{backgroundColor: '#eee', paddingTop: '60px'}}>
-                    <ExecutePanel />
-                    <Row>
-                        <ResultTable />
-                    </Row>
-                    <Tabs defaultActiveKey={config.url.view} activeKey={this.state.activeTab}>
-                        {viewNames.map((element) => {return (
-                            <Tab key={element.title} eventKey={element.name}>
-                                <div id={'main_'+element.name}>
-                                    {element.component}
-                                </div>
-                            </Tab>
-                            );
-                        })}
-                    </Tabs>
-                </Container>
-            </>
-        );
-    }
-    
+  console.log('In MainPage.render');
+  if (type === null) return null;
+  var { getViewNames } = require('../designtypes/'+type+'/view.js'); // Dynamically load getViewNames
+  var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
+  console.log('In MainPage.constructor viewNames=', viewNames);
+  var src = 'designtypes/'+type+'/favicon.ico';
+  var alt = type+' icon';
+  console.log('src=',src,' alt=',alt);
+
+  return (
+    <>
+      <Container style={{backgroundColor: '#eee', paddingTop: '60px'}}>
+        <Tabs defaultActiveKey={config.url.view} activeKey={activeTab}>
+          {viewNames.map((element) => {return (
+            <Tab title={element.title} key={element.title} eventKey={element.name}>
+              <div id={'main_'+element.name}>
+                {element.component}
+              </div>
+            </Tab>
+            );
+          })}
+        </Tabs>
+      </Container>
+    </>
+  );
 }
 
-const mapStateToProps = state => ({
-    name: state.name,
-    view: state.view,
-    type: state.model.type,
-});
-
-const mapDispatchToProps = {
-    changeUser: changeUser,
-    changeView: changeView,
-    deleteAutoSave: deleteAutoSave
-};
-
-export default withRouter(withOktaAuth(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(MainPage)
-));

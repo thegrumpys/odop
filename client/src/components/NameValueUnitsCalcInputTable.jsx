@@ -1,28 +1,25 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Table  } from 'react-bootstrap';
 import NameValueUnitsHeaderCalcInput from './NameValueUnitsHeaderCalcInput';
 import NameValueUnitsRowCalcInput from './NameValueUnitsRowCalcInput';
-import { connect } from 'react-redux';
 
-class NameValueUnitsCalcInputTable extends Component {
+export default function NameValueUnitsCalcInputTable() {
+  console.log("NameValueUnitsCalcInputTable - Mounting...");
+  const symbol_table = useSelector((state) => state.model.model.symbol_table);
     
-    render() {
-//        console.log('In NameValueUnitsTable.render this=',this);
-        return (
-            <>
-                <Table className="col-md-6 border border-secondary" size="sm">
-                    <NameValueUnitsHeaderCalcInput />
-                    {this.props.symbol_table.map((element,index) => element.type === "calcinput" && !element.hidden && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
-                </Table>
-            </>
-        );
-    }
-    
+  useEffect(() => {
+    console.log("NameValueUnitsCalcInputTable - Mounted");
+//    return () => console.log("NameValueUnitsCalcInputTable - Unmounting ...");
+    return () => {};
+  }, []);
+
+  return (
+    <>
+      <Table className="col-md-6 border border-secondary" size="sm">
+        <NameValueUnitsHeaderCalcInput />
+        {symbol_table.map((element,index) => element.type === "calcinput" && !element.hidden && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
+      </Table>
+    </>
+  );
 }
-
-const mapStateToProps = state => ({
-    symbol_table: state.model.symbol_table,
-    system_controls: state.model.system_controls
-});
-
-export default connect(mapStateToProps)(NameValueUnitsCalcInputTable);

@@ -1,29 +1,26 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Row } from 'react-bootstrap';
 import NameValueUnitsTable from './NameValueUnitsTable';
-import ConstraintsMinTable from './ConstraintsMinTable';
-import ConstraintsMaxTable from './ConstraintsMaxTable';
 import NameValueUnitsCalcInputTable from './NameValueUnitsCalcInputTable';
-import { connect } from 'react-redux';
 
-class DesignTable extends Component {
+export default function DesignTable() {
+  console.log("DesignTable - Mounting...");
 
-    render() {
-//        console.log('In DesignTable.render this=',this);
-        return (
-            <>
-                <Row>
-                    <NameValueUnitsTable />
-                    <ConstraintsMinTable />
-                    <ConstraintsMaxTable />
-                </Row>
-                <Row>
-                    <NameValueUnitsCalcInputTable />
-                </Row>
-            </>
-        );
-    }
+  useEffect(() => {
+    console.log("DesignTable - Mounted");
+//    return () => console.log("DesignTable - Unmounting ...");
+    return () => {};
+  }, []);
 
+  return (
+    <>
+      <Row>
+        <NameValueUnitsTable />
+      </Row>
+      <Row>
+        <NameValueUnitsCalcInputTable />
+      </Row>
+    </>
+  );
 }
-
-export default connect()(DesignTable);
