@@ -314,7 +314,7 @@ export var getAlertsByName = (name, includeViolations = false) => {
 //  console.log('In Alerts.getAlertsByName', 'name=', name, 'includeViolations=', includeViolations);
   var alerts = [];
   var maxSeverityNumber = 0;
-  var alertsSlice = store.getState().alerts;
+  var alertsSlice = store.getState().alertsSlice;
 //  console.log('### alertsSlice=',alertsSlice)
   alertsSlice.alerts.filter(entry => entry.severity === ERR).forEach((entry) => {
     var severityNumber;

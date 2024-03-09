@@ -117,7 +117,7 @@ export const modelSlice = createSlice({
       prepare: (value1, value2) => { return { payload: { value1, value2 } } }
     },
 
-    changeSymbolViolation: { // IMPLEMENT ME!
+    changeSymbolViolation: {
       reducer: (state, action) => {
         console.log('model changeSymbolViolation','state=',current(state),',action=',action);
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);

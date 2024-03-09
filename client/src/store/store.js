@@ -10,7 +10,7 @@ export default configureStore({
     spinner: spinnerReducer,
     messageModal: messageModalReducer,
     model: modelReducer,
-    alerts: alertsReducer,
+    alertsSlice: alertsReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(dispatcher)
 });
