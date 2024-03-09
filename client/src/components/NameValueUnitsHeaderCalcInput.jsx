@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip  } from 'react-bootstrap';
 
 export default function NameValueUnitsHeaderCalcInput() {
-  console.log("NameValueUnitsHeaderCalcInput - Mounting...");
+//  console.log("NameValueUnitsHeaderCalcInput - Mounting...");
   const symbol_table = useSelector((state) => state.model.model.symbol_table);
+  const system_controls = useSelector((state) => state.model.model.system_controls);
     
   useEffect(() => {
-    console.log("NameValueUnitsHeaderCalcInput - Mounted");
+//    console.log("NameValueUnitsHeaderCalcInput - Mounted");
 //    return () => console.log("NameValueUnitsHeaderCalcInput - Unmounting ...");
     return () => {};
   }, []);
@@ -34,7 +35,7 @@ export default function NameValueUnitsHeaderCalcInput() {
                 <span>Value</span>
               </OverlayTrigger>
             </th>
-            <th className={"text-left " + (this.props.system_controls.show_units ? "" : "d-none")} id="CIUnitsTitle">
+            <th className={"text-left " + (system_controls.show_units ? "" : "d-none")} id="CIUnitsTitle">
               <OverlayTrigger placement="top" overlay={<Tooltip>Units (information only)</Tooltip>}>
                 <span>Units</span>
               </OverlayTrigger>

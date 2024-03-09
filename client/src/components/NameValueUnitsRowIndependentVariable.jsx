@@ -1,141 +1,109 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED } from '../store/actionTypes';
-import { changeSymbolValue, fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../store/actionCreators';
+import { changeSymbolValue, fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../store/modelSlice';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
-class NameValueUnitsRowIndependentVariable extends Component {
+export default function NameValueUnitsRowIndependentVariable({ element, index, onChangeValid, onChangeInvalid, onSet, onReset }) {
+//  console.log("NameValueUnitsRowIndependentVariable - Mounting...");
+  const system_controls = useSelector((state) => state.model.model.system_controls);
+  const dispatch = useDispatch();
 
-    constructor(props) {
-//        console.log('In NameValueUnitsRowIndependentVariable.constructor props=',props);
-        super(props);
-        this.onChangeValid = this.onChangeValid.bind(this);
-        this.onChangeInvalid = this.onChangeInvalid.bind(this);
-        this.onSet = this.onSet.bind(this);
-        this.onReset = this.onReset.bind(this);
-//        console.log('In NameValueUnitsRowIndependentVariable.constructor this.props.element.name=',this.props.element.name,' this.props.element.format=',this.props.element.format,' this.props.element.table=',this.props.element.table);
-    }
+  useEffect(() => {
+//    console.log("NameValueUnitsRowIndependentVariable - Mounted");
+    //    return () => console.log("NameValueUnitsRowIndependentVariable - Unmounting ...");
+    return () => { };
+  }, []);
 
-    onChangeValid(event) {
-//        console.log('In NameValueUnitsRowIndependentVariable.onChangeValid event.target.value=',event.target.value);
-        var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
-        if (this.props.system_controls.enable_auto_fix) {
-            auto_fixed = true;
-            if (!(this.props.element.lmin & FIXED)) {
-                this.props.fixSymbolValue(this.props.element.name);
-                logValue(this.props.element.name,'AUTOFIXED','FixedFlag',false);
-            }
-        }
-        this.props.changeSymbolValue(this.props.element.name, parseFloat(event.target.value)); // Update the model
-        logValue(this.props.element.name,event.target.value);
-        if (auto_fixed) {
-            this.props.changeResultTerminationCondition('The value of ' + this.props.element.name + ' has been automatically fixed.');
-        }
-        this.props.onChangeValid(event);
+  const onChangeValidLocal = (event) => {
+//    console.log('In NameValueUnitsRowIndependentVariable.onChangeValid event.target.value=', event.target.value);
+    var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
+    if (system_controls.enable_auto_fix) {
+      auto_fixed = true;
+      if (!(element.lmin & FIXED)) {
+        dispatch(fixSymbolValue(element.name));
+        logValue(element.name, 'AUTOFIXED', 'FixedFlag', false);
+      }
     }
-    
-    onChangeInvalid(event) {
-//        console.log('In NameValueUnitsRowIndependentVariable.onChangeInvalid event.target.value=',event.target.value);
-        this.props.onChangeInvalid(event);
+    dispatch(changeSymbolValue(element.name, parseFloat(event.target.value))); // Update the model
+    logValue(element.name, event.target.value);
+    if (auto_fixed) {
+      dispatch(changeResultTerminationCondition('The value of ' + element.name + ' has been automatically fixed.'));
     }
+    if (typeof onChangeValid === "function") onChangeValid(event);
+  }
 
-    onSet(event) {
-//        console.log('In NameValueUnitsRowIndependentVariable.onSet');
-        this.props.fixSymbolValue(this.props.element.name);
-        logValue(this.props.element.name,'FIXED','FixedFlag',false);
-        this.props.onSet(event);
-    }
+  const onChangeInvalidLocal = (event) => {
+//    console.log('In NameValueUnitsRowIndependentVariable.onChangeInvalid event.target.value=', event.target.value);
+    if (typeof onChangeInvalid === "function") onChangeInvalid(event);
+  }
 
-    onReset(event) {
-//        console.log('In NameValueUnitsRowIndependentVariable.onReset');
-        this.props.freeSymbolValue(this.props.element.name);
-        logValue(this.props.element.name,'FREE','FixedFlag',false);
-        this.props.onReset(event);
-    }
+  const onSetLocal = (event) => {
+//    console.log('In NameValueUnitsRowIndependentVariable.onSet');
+    dispatch(fixSymbolValue(element.name));
+    logValue(element.name, 'FIXED', 'FixedFlag', false);
+    if (typeof onSet === "function") onSet(event);
+  }
 
-    render() {
-//        console.log('In NameValueUnitsRowIndependentVariable.render this=',this);
-        var results = getAlertsByName(this.props.element.name);
-        var className = results.className;
-        var icon_alerts = results.alerts;
-        var value_fix_free_text = '';
-        if (this.props.element.lmin & FIXED) {
-            className += "borders-fixed ";
-            if (this.props.element.type !== "calcinput") {
-                if (this.props.element.input) { // Independent Variable?
-                  value_fix_free_text = <div className="mb-3"><em>Fixed status prevents <img src="SearchButton.png" alt="SearchButton"/> from changing the value of this variable.</em></div>; // For Fixed
-                } else { // Dependent Variable?
-                  value_fix_free_text = <div className="mb-3"><em>Fixed status restrains the <img src="SearchButton.png" alt="SearchButton"/> result to be as close as possible to the constraint value.</em></div>; // For Fixed
-                }
-            }
-        } else {
-            if (this.props.element.lmin & CONSTRAINED) {
-                className += "borders-constrained-min ";
-            }
-            if (this.props.element.lmax & CONSTRAINED) {
-                className += "borders-constrained-max ";
-            }
-            if (this.props.element.type !== "calcinput") {
-                value_fix_free_text = <div className="mb-3"><em>Free status allows <img src="SearchButton.png" alt="SearchButton"/> to change the value of this variable.</em></div>; // For Free
-            }
-        }
-//        console.log('In NameValueUnitsRowIndependentVariable.render className=',className);
-        // =======================================
-        // Table Row
-        // =======================================
-        return (
-            <tbody>
-                <tr key={this.props.element.name}>
-                    <td className="align-middle" colSpan="2" id={'independent_variable_'+this.props.index}>
-                        <OverlayTrigger placement="top" overlay={this.props.element.tooltip !== undefined && <Tooltip>{this.props.element.tooltip}</Tooltip>}>
-                            <span>{this.props.element.name}</span>
-                        </OverlayTrigger>
-                    </td>
-                    <td className="align-middle">
-                        <InputGroup>
-                            <FormControlTypeNumber id={'nvuriv_'+this.props.element.name} icon_alerts={icon_alerts} className={className} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} />
-                        </InputGroup>
-                    </td>
-                    <td className="align-middle text-center">
-                        <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>
-                            <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
-                        </OverlayTrigger>
-                    </td>
-                    <td className={"text-nowrap align-middle small " + (this.props.system_controls.show_units ? "" : "d-none")} colSpan="1">{this.props.element.units}</td>
-                </tr>
-            </tbody>
-        );
+  const onResetLocal = (event) => {
+//    console.log('In NameValueUnitsRowIndependentVariable.onReset');
+    dispatch(freeSymbolValue(element.name));
+    logValue(element.name, 'FREE', 'FixedFlag', false);
+    if (typeof onReset === "function") onReset(event);
+  }
+
+  var results = getAlertsByName(element.name);
+  var className = results.className;
+  var icon_alerts = results.alerts;
+  var value_fix_free_text = '';
+  if (element.lmin & FIXED) {
+    className += "borders-fixed ";
+    if (element.type !== "calcinput") {
+      if (element.input) { // Independent Variable?
+        value_fix_free_text = <div className="mb-3"><em>Fixed status prevents <img src="SearchButton.png" alt="SearchButton" /> from changing the value of this variable.</em></div>; // For Fixed
+      } else { // Dependent Variable?
+        value_fix_free_text = <div className="mb-3"><em>Fixed status restrains the <img src="SearchButton.png" alt="SearchButton" /> result to be as close as possible to the constraint value.</em></div>; // For Fixed
+      }
     }
+  } else {
+    if (element.lmin & CONSTRAINED) {
+      className += "borders-constrained-min ";
+    }
+    if (element.lmax & CONSTRAINED) {
+      className += "borders-constrained-max ";
+    }
+    if (element.type !== "calcinput") {
+      value_fix_free_text = <div className="mb-3"><em>Free status allows <img src="SearchButton.png" alt="SearchButton" /> to change the value of this variable.</em></div>; // For Free
+    }
+  }
+//  console.log('In NameValueUnitsRowIndependentVariable','className=',className);
+
+  // =======================================
+  // Table Row
+  // =======================================
+  return (
+    <tbody>
+      <tr key={element.name}>
+        <td className="align-middle" colSpan="2" id={'independent_variable_' + index}>
+          <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip>{element.tooltip}</Tooltip>}>
+            <span>{element.name}</span>
+          </OverlayTrigger>
+        </td>
+        <td className="align-middle">
+          <InputGroup>
+            <FormControlTypeNumber id={'nvuriv_' + element.name} icon_alerts={icon_alerts} className={className} value={element.value} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidLocal} onChangeInvalid={onChangeInvalidLocal} />
+          </InputGroup>
+        </td>
+        <td className="align-middle text-center">
+          <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>
+            <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={element.lmin & FIXED} onChange={element.lmin & FIXED ? onResetLocal : onSetLocal} />
+          </OverlayTrigger>
+        </td>
+        <td className={"text-nowrap align-middle small " + (system_controls.show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
+      </tr>
+    </tbody>
+  );
 }
-
-NameValueUnitsRowIndependentVariable.propTypes = {
-    onChangeValid: PropTypes.func,
-    onChangeInvalid: PropTypes.func,
-    onSet: PropTypes.func,
-    onReset: PropTypes.func,
-}
-
-NameValueUnitsRowIndependentVariable.defaultProps = {
-    onChangeValid: (()=>{}),
-    onChangeInvalid: (()=>{}),
-    onSet: (()=>{}),
-    onReset: (()=>{}),
-}
-
-const mapStateToProps = state => ({
-    system_controls: state.model.system_controls,
-    objective_value: state.model.result.objective_value
-});
-
-const mapDispatchToProps = {
-    changeSymbolValue: changeSymbolValue,
-    fixSymbolValue: fixSymbolValue,
-    freeSymbolValue: freeSymbolValue,
-    changeResultTerminationCondition: changeResultTerminationCondition
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(NameValueUnitsRowIndependentVariable);

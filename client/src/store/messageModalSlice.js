@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 export const messageModalSlice = createSlice({
   name: "messageModalSlice",
@@ -10,7 +10,7 @@ export const messageModalSlice = createSlice({
   },
   reducers: {
     addMessage: (state, action) => {
-//      console.log('messageModal enabled','state=',state,'state.show=',state.show,'action=',action);
+//      console.log('messageModal add','state=',state,'action=',action);
       if (!state.show) { // If state not showing, then initialize else append
         state.show = true;
         state.header = action.payload.header;

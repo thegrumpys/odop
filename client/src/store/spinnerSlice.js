@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 export const spinnerSlice = createSlice({
   name: "spinnerSlice",
@@ -6,13 +6,17 @@ export const spinnerSlice = createSlice({
     show: false
   },
   reducers: {
-    enableSpinner: (state) => {
-//      console.log('spinner enabled');
-      state.show = true;
+    enableSpinner: {
+      reducer: (state, action) => {
+//        console.log('spinner enabled','state=',current(state),',action=',action);
+        state.show = true;
+      }
     },
-    disableSpinner: (state) => {
-//      console.log('spinner disabled');
-      state.show = false;
+    disableSpinner: {
+      reducer: (state, action) => {
+//        console.log('spinner disabled','state=',current(state),',action=',action);
+        state.show = false;
+      }
     }
   }
 });

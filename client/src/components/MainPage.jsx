@@ -15,7 +15,7 @@ import { changeView } from '../store/modelSlice';
 import config from '../config';
 
 export default function MainPage() {
-  console.log("MainPage - Mounting...");
+//  console.log("MainPage - Mounting...");
   const [show, setShow] = useState(false);
   const [activeTab, setActiveTab] = useState(config.url.view);
   const name = useSelector((state) => state.model.name);
@@ -24,13 +24,13 @@ export default function MainPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("MainPage - Mounted");
+//    console.log("MainPage - Mounted");
 //    return () => console.log("MainPage - Unmounting ...");
     return () => {};
   }, []);
 
   const toggle = () => {
-    console.log('In MainPage.toggle');
+//    console.log('In MainPage.toggle');
     setShow(~show);
   }
 
@@ -38,15 +38,15 @@ export default function MainPage() {
 //    console.log('In MainPage.setView view=',view);
     dispatch(changeView(view)); // Update the model
   }
-
-  console.log('In MainPage.render');
+//
+//  console.log('In MainPage.render');
   if (type === null) return null;
   var { getViewNames } = require('../designtypes/'+type+'/view.js'); // Dynamically load getViewNames
   var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
-  console.log('In MainPage.constructor viewNames=', viewNames);
+//  console.log('In MainPage.constructor viewNames=', viewNames);
   var src = 'designtypes/'+type+'/favicon.ico';
   var alt = type+' icon';
-  console.log('src=',src,' alt=',alt);
+//  console.log('src=',src,' alt=',alt);
 
   return (
     <>

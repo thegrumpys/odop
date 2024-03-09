@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 //import { useNavigate } from "react-router-dom";
 import { load, loadInitialState, changeName, restoreAutoSave, deleteAutoSave } from "../store/modelSlice";
 import MainPage from "./MainPage";
+//import Home from "./Home";
+//import Test from "./Test";
 import { Button, Modal, Alert } from 'react-bootstrap';
 import config from '../config';
 import { displaySpinner } from "./Spinner";
@@ -11,7 +13,7 @@ import { displayMessage } from "./MessageModal";
 import { logUsage } from '../logUsage';
 
 export default function App() {
-  console.log("APP - Mounting...");
+//  console.log("APP - Mounting...");
   const [show, setShow] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
   const user = useSelector((state) => state.model.user);
@@ -22,15 +24,15 @@ export default function App() {
 //  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("APP - Mounted");
+//    console.log("APP - Mounted");
     if (typeof(Storage) !== "undefined" && localStorage.getItem("redirect") !== null) {
-      console.log('In App restore "redirect" file')
+//      console.log('In App restore "redirect" file')
       loadRedirectDesign();
     } else if (typeof(Storage) !== "undefined" && localStorage.getItem("autosave") !== null) {
-      console.log('In App restore "autosave" file')
+//      console.log('In App restore "autosave" file')
       promptLoadAutoSave();
     } else {
-      console.log('In App restore default design')
+//      console.log('In App restore default design')
       loadDefaultDesign();
     }
 //    return () => console.log("APP - Unmounting ...");
@@ -38,7 +40,7 @@ export default function App() {
   }, []);
 
   const loadRedirectDesign = () => {
-    console.log('In App.loadRedirectDesign');
+//    console.log('APP - loadRedirectDesign');
     dispatch(restoreAutoSave("redirect"));
     dispatch(deleteAutoSave("redirect"));
     dispatch(deleteAutoSave()); // Get rid of any AutoSave data too
@@ -52,14 +54,14 @@ export default function App() {
   }
 
   const promptLoadAutoSave = () => {
-    console.log('In App.promptLoadAutoSave');
+//    console.log('APP - promptLoadAutoSave');
     setShow(true);
     setShowWelcome(false);
     logUsage('event', 'App', { event_label: 'type: ' + type + ' prompt autoSave' });
   }
 
   const loadAutoSaveDesign = () => {
-    console.log('In Routes.loadAutoSaveDesign');
+//    console.log('In Routes.loadAutoSaveDesign');
     setShow(false);
     dispatch(restoreAutoSave());
     dispatch(deleteAutoSave());
@@ -73,8 +75,8 @@ export default function App() {
   }
 
   const loadDefaultDesign = () => {
-    console.log('In App.loadDefaultDesign');
-    console.log('In App.loadDefaultDesign config.url.execute=',config.url.execute);
+//    console.log('APP - loadDefaultDesign');
+//    console.log('APP - loadDefaultDesign config.url.execute=',config.url.execute);
     setShow(false);
     if (!showWelcome) {
       config.url.execute = undefined; // Turn off execute
@@ -84,7 +86,7 @@ export default function App() {
   }
 
   const loadInitialStateDesign = (type, units) => {
-    console.log('In App.loadInitialStateDesign','type=',type,'units=',units);
+//    console.log('APP - loadInitialStateDesign','type=',type,'units=',units);
     dispatch(loadInitialState(type, units));
     dispatch(changeName('Startup'));
     dispatch(deleteAutoSave());
@@ -92,7 +94,7 @@ export default function App() {
   }
 
   const getDesign = (user, type, name) => {
-    console.log('In App.getDesign user=',user,'type=',type,'name=',name);
+//    console.log('APP - getDesign user=',user,'type=',type,'name=',name);
     displaySpinner(true);
     fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
       headers: {
@@ -107,21 +109,21 @@ export default function App() {
       return res.json();
     })
     .then((design) => {
-      console.log('In App.getDesign design=', design);
+//      console.log('APP - getDesign design=', design);
       var { migrate } = require('../designtypes/'+type+'/migrate.js'); // Dynamically load migrate
-      console.log('In App.getDesign','migrate=',migrate);
+//      console.log('APP - getDesign','migrate=',migrate);
       var migrated_design = migrate(design);
-      console.log('In App.getDesign','migrated_design=',migrated_design);
+//      console.log('APP - getDesign','migrated_design=',migrated_design);
       if (migrated_design.jsontype === "ODOP") {
-        console.log('In App.getDesign before load');
+//        console.log('APP - getDesign before load');
         dispatch(load(migrated_design));
         dispatch(changeName(name));
-        console.log('In App.getDesign after load');
+//        console.log('APP - getDesign after load');
         dispatch(deleteAutoSave());
         logUsage('event', 'App', { event_label: 'type: ' + type + ' name: ' + name });
 //        if (config.url.execute !== undefined) { // Once the design is loaded then you can run the query parameter execute script
 //          var { execute } = require('../designtypes/'+config.url.type+'/'+config.url.execute+'.js'); // Dynamically load execute
-//          console.log('In App.loadDefaultDesign execute=',execute);
+//          console.log('APP - loadDefaultDesign execute=',execute);
 //          startExecute('Execute : ' + config.url.execute, config.url.execute, execute.steps);
 //        }
       } else {
@@ -137,14 +139,17 @@ export default function App() {
   }
 
 //  const onAuthRequired = () => {
-//    console.log('In App.onAuthRequired');
+//    console.log('APP - onAuthRequired');
 //    navigate("/test");
 //  }
 
   const onContextHelp = () => {
-      console.log('In App.onContextHelp');
+//      console.log('APP - onContextHelp');
       window.open('/docs/Help/autoSave.html', '_blank');
   }
+
+//          <Route exact path="/" element={<Home />} />
+//          <Route path="/test" element={<Test />} />
 
   return (
     <>

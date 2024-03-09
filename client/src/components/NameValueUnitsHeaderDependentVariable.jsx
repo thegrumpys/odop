@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip  } from 'react-bootstrap';
 
 export default function NameValueUnitsHeaderDependentVariable() {
-  console.log("NameValueUnitsHeaderDependentVariable - Mounting...");
+//  console.log("NameValueUnitsHeaderDependentVariable - Mounting...");
   const symbol_table = useSelector((state) => state.model.model.symbol_table);
+  const system_controls = useSelector((state) => state.model.model.system_controls);
     
   useEffect(() => {
-    console.log("NameValueUnitsHeaderDependentVariable - Mounted");
+//    console.log("NameValueUnitsHeaderDependentVariable - Mounted");
 //    return () => console.log("NameValueUnitsHeaderDependentVariable - Unmounting ...");
     return () => {};
   }, []);
@@ -41,7 +42,7 @@ export default function NameValueUnitsHeaderDependentVariable() {
             <span>Fix</span>
           </OverlayTrigger>
         </th>
-        <th className={"text-left " + (this.props.system_controls.show_units ? "" : "d-none")} id="DVUnitsTitle">
+        <th className={"text-left " + (system_controls.show_units ? "" : "d-none")} id="DVUnitsTitle">
           <OverlayTrigger placement="top" overlay={<Tooltip>Units (information only)</Tooltip>}>
             <span>Units</span>
           </OverlayTrigger>

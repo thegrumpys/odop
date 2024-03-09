@@ -1,135 +1,90 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import { changeSymbolValue } from '../store/actionCreators';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
-class NameValueUnitsRowCalcInput extends Component {
-    
-    constructor(props) {
-//        console.log('In NameValueUnitsRowCalcInput.constructor props=',props);
-        super(props);
-        this.onChangeValid = this.onChangeValid.bind(this);
-        this.onChangeInvalid = this.onChangeInvalid.bind(this);
-        this.onSelect = this.onSelect.bind(this);
-//        console.log('In NameValueUnitsRowCalcInput.constructor this.props.element.name=',this.props.element.name,' this.props.element.format=',this.props.element.format,' this.props.element.table=',this.props.element.table);
-        if (this.props.element.format === 'table') {
-//            console.log('In NameValueUnitsRowCalcInput.constructor file= ../designtypes/'+this.props.element.table+'.json');
-            var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
-//            console.log('In NameValueUnitsRowCalcInput.constructor table=',table);
-            this.state = {
-                table: table,
-            };
-        }
+export default function NameValueUnitsRowCalcInput({ element, index, onChange, onSelect }) {
+//  console.log("NameValueUnitsRowCalcInput - Mounting...");
+  const [table, setTable] = useState(null);
+  const system_controls = useSelector((state) => state.model.model.system_controls);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+//    console.log("NameValueUnitsRowCalcInput - Mounted");
+    if (element.format === 'table') {
+      //      console.log('In NameValueUnitsRowCalcInput.constructor file= ../designtypes/'+element.table+'.json');
+      var table = require('../designtypes/' + element.table + '.json'); // Dynamically load table
+      //      console.log('In NameValueUnitsRowCalcInput.constructor table=',table);
+      setTable(table);
     }
-    
-    componentDidUpdate(prevProps) {
-//        console.log('In NameValueUnitsRowCalcInput.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
-        if (prevProps.type !== this.props.type) {
-//            console.log('In NameValueUnitsRowCalcInput.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
-            if (this.props.element.format === 'table') {
-//                console.log('In NameValueUnitsRowCalcInput.componentDidUpdate file= ../designtypes/'+this.props.element.table+'.json');
-                var table = require('../designtypes/'+this.props.element.table+'.json'); // Dynamically load table
-//                console.log('In NameValueUnitsRowCalcInput.componentDidUpdate table=',table);
-                this.setState({
-                    table: table,
-                });
+    //    return () => console.log("NameValueUnitsRowCalcInput - Unmounting ...");
+    return () => { };
+  }, []);
+
+  const onChangeValidLocal = (event) => {
+//    console.log('In NameValueUnitsRowCalcInput.onChangeValid', 'event.target.value=', event.target.value);
+    var value = parseFloat(event.target.value);
+    dispatch(changeSymbolValue(element.name, value)); // Update the model
+    logValue(element.name, event.target.value);
+    if (typeof onChangeValid === "function") onChangeValid(event);
+  }
+
+  const onChangeInvalidLocal = (event) => {
+//    console.log("In NameValueUnitsRowCalcInput.onChangeInvalid','event.target.value=", event.target.value);
+    if (typeof onChangeInvalid === "function") onChangeInvalid(event);
+  }
+
+  const onChangeLocal = (event) => {
+//    console.log('In NameValueUnitsRowCalcInput.onChange', 'event.target.value=', event.target.value);
+    dispatch(changeSymbolValue(element.name, event.target.value)); // Update the model
+    logValue(element.name, event.target.value);
+    if (typeof onChange === "function") onChange(event);
+  }
+
+  const onSelectLocal = (event) => {
+//    console.log('In NameValueUnitsRowCalcInput.onSelect', 'event.target.value=', event.target.value);
+    var selectedIndex = parseFloat(event.target.value);
+    dispatch(changeSymbolValue(element.name, selectedIndex));
+    logValue(element.name, selectedIndex, 'TableIndex');
+    if (typeof onSelect === "function") onSelect(event);
+  }
+
+  var results = getAlertsByName(element.name);
+  var className = results.className;
+  var icon_alerts = results.alerts;
+  // =======================================
+  // Table Row
+  // =======================================
+  return (
+    <tbody>
+      <tr key={element.name}>
+        <td className="align-middle" colSpan="2" id={'constant_' + index}>
+          <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip>{element.tooltip}</Tooltip>}>
+            <span>{element.name}</span>
+          </OverlayTrigger>
+        </td>
+        <td className="align-middle" colSpan="2">
+          <InputGroup>
+            {element.format === undefined && typeof element.value === 'number' ?
+              <FormControlTypeNumber id={'nvurci_' + element.name} disabled={!element.input} icon_alerts={icon_alerts} className={className} value={element.value} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidLocal} onChangeInvalid={onChangeInvalidLocal} /> : ''}
+            {element.format === undefined && typeof element.value === 'string' ?
+              <Form.Control id={'nvurci_' + element.name} type="text" disabled={!element.input} value={element.value} onChange={onChangeLocal} /> : ''}
+            {element.format === 'table' &&
+              (
+                <Form.Control id={'nvurci_' + element.name} as="select" disabled={!element.input} value={element.value} onChange={onSelectLocal}>
+                  {table.map((value, index) =>
+                    index > 0 ? <option key={index} value={index}>{value[0]}</option> : ''
+                  )}
+                </Form.Control>
+              )
             }
-        }
-    }
-
-    onChangeValid(event) {
-//        console.log('In NameValueUnitsRowCalcInput.onChangeValid event.target.value=',event.target.value);
-        var value = parseFloat(event.target.value);
-        this.props.changeSymbolValue(this.props.element.name, value); // Update the model
-        logValue(this.props.element.name,event.target.value);
-        this.props.onChangeValid(event);
-    }
-    
-    onChangeInvalid(event) {
-//        console.log("In NameValueUnitsRowCalcInput.onChangeInvalid event.target.value=", event.target.value);
-        this.props.onChangeInvalid(event);
-    }
-    
-    onChange(event) {
-//        console.log('In NameValueUnitsRowCalcInput.onChange event.target.value=',event.target.value);
-        this.props.changeSymbolValue(this.props.element.name, event.target.value); // Update the model
-        logValue(this.props.element.name,event.target.value);
-        this.props.onChange(event);
-    }
-    
-    onSelect(event) {
-//        console.log('In NameValueUnitsRowCalcInput.onSelect event.target.value=',event.target.value);
-        var selectedIndex = parseFloat(event.target.value);
-        this.props.changeSymbolValue(this.props.element.name,selectedIndex);
-        logValue(this.props.element.name,selectedIndex,'TableIndex');
-        this.props.onSelect(event);
-    }
-    
-    render() {
-//        console.log('In NameValueUnitsRowCalcInput.render this=',this);
-        var results = getAlertsByName(this.props.element.name);
-        var className = results.className;
-        var icon_alerts = results.alerts;
-        // =======================================
-        // Table Row
-        // =======================================
-        return (
-            <tbody>
-                <tr key={this.props.element.name}>
-                    <td className="align-middle" colSpan="2" id={'constant_'+this.props.index}>
-                        <OverlayTrigger placement="top" overlay={this.props.element.tooltip !== undefined && <Tooltip>{this.props.element.tooltip}</Tooltip>}>
-                            <span>{this.props.element.name}</span>
-                        </OverlayTrigger>
-                    </td>
-                    <td className="align-middle" colSpan="2">
-                        <InputGroup>
-                            { this.props.element.format === undefined && typeof this.props.element.value === 'number' ?
-                                <FormControlTypeNumber id={'nvurci_'+this.props.element.name} disabled={!this.props.element.input} icon_alerts={icon_alerts} className={className} value={this.props.element.value} validmin={this.props.element.validmin} validmax={this.props.element.validmax} onChangeValid={this.onChangeValid} onChangeInvalid={this.onChangeInvalid} /> : '' }
-                            { this.props.element.format === undefined && typeof this.props.element.value === 'string' ?
-                                <Form.Control id={'nvurci_'+this.props.element.name} type="text" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onChange} /> : '' }
-                            { this.props.element.format === 'table' &&
-                            (
-                                <Form.Control id={'nvurci_'+this.props.element.name} as="select" disabled={!this.props.element.input} value={this.props.element.value} onChange={this.onSelect}>
-                                    {this.state.table.map((value, index) =>
-                                        index > 0 ? <option key={index} value={index}>{value[0]}</option> : ''
-                                    )}
-                                </Form.Control>
-                            )
-                            }
-                        </InputGroup>
-                    </td>
-                    <td className={"text-nowrap align-middle small " + (this.props.system_controls.show_units ? "" : "d-none")} colSpan="1">{this.props.element.units}</td>
-                </tr>
-            </tbody>
-        );
-    }
+          </InputGroup>
+        </td>
+        <td className={"text-nowrap align-middle small " + (system_controls.show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
+      </tr>
+    </tbody>
+  );
 }
-
-NameValueUnitsRowCalcInput.propTypes = {
-    onChangeValid: PropTypes.func,
-    onChangeInvalid: PropTypes.func,
-    onChange: PropTypes.func,
-    onSelect: PropTypes.func,
-}
-
-NameValueUnitsRowCalcInput.defaultProps = {
-    onChangeValid: (()=>{}),
-    onChangeInvalid: (()=>{}),
-    onChange: (()=>{}),
-    onSelect: (()=>{}),
-}
-
-const mapStateToProps = state => ({
-    type: state.model.type,
-    system_controls: state.model.system_controls
-});
-
-const mapDispatchToProps = {
-    changeSymbolValue: changeSymbolValue
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(NameValueUnitsRowCalcInput);
