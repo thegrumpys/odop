@@ -1,34 +1,29 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
 
-class HelpMotd extends Component {
+export default function HelpMotd() {
+  console.log("HelpMotd - Mounting...");
 
-    constructor(props) {
-//        console.log("In HelpMotd.constructor props=",props);
-        super(props);
-        this.onHelp = this.onHelp.bind(this);
-    }
+  useEffect(() => {
+    console.log("HelpMotd - Mounted");
+//    return () => console.log("HelpMotd - Unmounting ...");
+    return () => { };
+  }, []);
 
-    onHelp() {
-        logUsage('event', 'HelpMotd', { event_label: 'https://thegrumpys.github.io/odop/About/messageOfTheDay.html' });
-        window.open('https://thegrumpys.github.io/odop/About/messageOfTheDay.html', '_blank');
-    }
 
-    render() {
-//        console.log('In HelpMotd.render this=',this);
-        return (
-            <>
-                <NavDropdown.Item onClick={this.onHelp}>
-                    Message of the Day
-                </NavDropdown.Item>
-            </>
-        );
-    }
+  const onHelp = () => {
+    logUsage('event', 'HelpMotd', { event_label: 'https://thegrumpys.github.io/odop/About/messageOfTheDay.html' });
+    window.open('https://thegrumpys.github.io/odop/About/messageOfTheDay.html', '_blank');
+  }
+
+  //        console.log('In HelpMotd.render this=',this);
+  return (
+    <>
+      <NavDropdown.Item onClick={onHelp}>
+        Message of the Day
+      </NavDropdown.Item>
+    </>
+  );
 }  
-
-const mapStateToProps = state => ({
-});
-
-export default connect(mapStateToProps)(HelpMotd);

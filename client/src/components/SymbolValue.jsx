@@ -462,7 +462,7 @@ class SymbolValue extends Component {
                             ''
                         }
                         {this.state.error !== '' ? <Alert variant="danger"> {this.state.error} </Alert> : ''}
-                        <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                        <Table className="<Table className=border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <NameValueUnitsHeaderIndependentVariable />
@@ -491,22 +491,22 @@ class SymbolValue extends Component {
                                 </tbody>
                             </Table>}
                         {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
-                            <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                            <Table className="<Table className=border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                 <ConstraintsMinHeaderIndependentVariable />
                                 <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                             </Table>}
                         {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
-                            <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                            <Table className="<Table className=border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                 <ConstraintsMinHeaderDependentVariable />
                                 <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                             </Table>}
                         {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
-                            <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                            <Table className="<Table className=border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                 <ConstraintsMaxHeaderIndependentVariable />
                                 <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                             </Table>}
                         {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
-                            <Table className="border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                            <Table className="<Table className=border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                 <ConstraintsMaxHeaderDependentVariable />
                                 <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                             </Table>}

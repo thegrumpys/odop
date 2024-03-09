@@ -12,6 +12,7 @@ import {
     Row
 } from 'react-bootstrap';
 import { changeView } from '../store/modelSlice';
+import HelpMotd from '../menus/Help/HelpMotd';
 import HelpAbout from '../menus/Help/HelpAbout';
 import config from '../config';
 
@@ -59,6 +60,7 @@ export default function MainPage() {
         <Navbar.Collapse in={show}>
           <Nav className="mr-auto">
             <NavDropdown title="Help">
+              <HelpMotd />
               <HelpAbout />
             </NavDropdown>
           </Nav>
@@ -78,7 +80,7 @@ export default function MainPage() {
         <Tabs defaultActiveKey={config.url.view} activeKey={activeTab}>
           {viewNames.map((element) => {
             return (
-              <Tab title={element.title} key={element.title} eventKey={element.name}>
+              <Tab title={null} key={element.title} eventKey={element.name}>
                 <div id={'main_' + element.name}>
                   {element.component}
                 </div>

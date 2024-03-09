@@ -18,7 +18,7 @@ export default function ConstraintsMaxTable() {
 
   return (
     <>
-      <Table className="col-md-3 border border-secondary" size="sm">
+      <Table className="<Table className=col-md-3 border border-secondary" size="sm">
         <ConstraintsMaxHeaderIndependentVariable />
         {symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden && <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={index} />)}
         <ConstraintsMaxHeaderDependentVariable />
