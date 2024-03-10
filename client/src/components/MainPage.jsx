@@ -80,7 +80,7 @@ export default function MainPage() {
         <Tabs defaultActiveKey={config.url.view} activeKey={activeTab}>
           {viewNames.map((element) => {
             return (
-              <Tab title="" key={element.title} eventKey={element.name}>
+              <Tab key={element.title} eventKey={element.name}>
                 <div id={'main_' + element.name}>
                   {element.component}
                 </div>

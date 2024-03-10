@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function ConstraintsMaxHeaderIndependentVariable() {
-  console.log("ConstraintsMaxHeaderIndependentVariable - Mounting...");
+//  console.log("ConstraintsMaxHeaderIndependentVariable - Mounting...");
   const system_controls = useSelector((state) => state.model.model.system_controls);
 
   useEffect(() => {
-    console.log("ConstraintsMaxHeaderIndependentVariable - Mounted");
+//    console.log("ConstraintsMaxHeaderIndependentVariable - Mounted");
 //    return () => console.log("ConstraintsMaxHeaderIndependentVariable - Unmounting ...");
     return () => { };
   }, []);
