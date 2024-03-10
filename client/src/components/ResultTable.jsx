@@ -5,7 +5,7 @@ import { CONSTRAINED, FIXED, MIN, MAX } from '../store/actionTypes';
 import FeasibilityIndicator from './FeasibilityIndicator';
 import { search, seek, saveAutoSave } from '../store/modelSlice';
 import { logUsage } from '../logUsage';
-import { displayMessage } from '../components/MessageModal';
+import { displayMessage } from '../components/Message';
 //import AlertsAccordion from "./AlertsAccordion"
 
 export default function ResultTable() {
@@ -14,12 +14,12 @@ export default function ResultTable() {
   const [seekShow, setSeekShow] = useState(false); // Default: do not display optimize modal
   const [seekName, setSeekName] = useState(null);
   const [seekMinMax, setSeekMinMax] = useState(MIN);
-  const type = useSelector((state) => state.model.model.type);
-  const symbol_table = useSelector((state) => state.model.model.symbol_table);
-  const system_controls = useSelector((state) => state.model.model.system_controls);
-  const objective_value = useSelector((state) => {console.log('state=',state);return state.model.model.result.objective_value});
-  const termination_condition = useSelector((state) => state.model.model.result.termination_condition);
-  const search_completed = useSelector((state) => state.model.model.result.search_completed);
+  const type = useSelector((state) => state.modelSlice.model.type);
+  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
+  const termination_condition = useSelector((state) => state.modelSlice.model.result.termination_condition);
+  const search_completed = useSelector((state) => state.modelSlice.model.result.search_completed);
   const dispatch = useDispatch();
 
   useEffect(() => {

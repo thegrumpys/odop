@@ -4,8 +4,8 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function FeasibilityIndicator({ width = 242, height = 24 }) {
   //  console.log("FeasibilityIndicator - Mounting...");
-  const system_controls = useSelector((state) => state.model.model.system_controls);
-  const objective_value = useSelector((state) => state.model.model.result.objective_value);
+  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
 
   useEffect(() => {
     //    console.log("FeasibilityIndicator - Mounted");

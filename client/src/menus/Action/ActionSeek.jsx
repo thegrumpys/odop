@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED, MIN, MAX } from '../../store/actionTypes';
 import { seek, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
-import { displayMessage } from '../../components/MessageModal';
+import { displayMessage } from '../../components/Message';
 
 class ActionSeek extends Component {
 

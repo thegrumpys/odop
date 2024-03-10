@@ -21,9 +21,9 @@ export default function MainPage() {
 //  console.log("MainPage - Mounting...");
   const [show, setShow] = useState(false);
   const [activeTab, setActiveTab] = useState(config.url.view);
-  const name = useSelector((state) => state.model.name);
-  const view = useSelector((state) => state.model.view);
-  const type = useSelector((state) => state.model.model.type);
+  const name = useSelector((state) => state.modelSlice.name);
+  const view = useSelector((state) => state.modelSlice.view);
+  const type = useSelector((state) => state.modelSlice.model.type);
   const dispatch = useDispatch();
 
   useEffect(() => {

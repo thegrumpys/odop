@@ -9,7 +9,7 @@ import { OktaAuth } from '@okta/okta-auth-js'
 import { connect } from 'react-redux';
 import { load, loadInitialState, restoreAutoSave, deleteAutoSave, changeName } from '../store/actionCreators';
 import { logUsage } from '../logUsage';
-import { displayMessage } from './MessageModal';
+import { displayMessage } from './Message';
 import { displaySpinner } from './Spinner';
 import { startExecute } from "./ExecutePanel";
 

@@ -44,11 +44,11 @@ export default function AlertsAccordion() {
   const [level, setLevel] = useState(ERR)
   const [caret, setCaret] = useState(<span className="pb-3 pr-1"><i className="fas fa-caret-right" /></span>)
   const alerts = useSelector((state) => state.alertsSlice.alerts);
-  const type = useSelector((state) => state.model.model.type);
-  const symbol_table = useSelector((state) => state.model.model.symbol_table);
-  const system_controls = useSelector((state) => state.model.model.system_controls);
-  const enable_auto_fix = useSelector((state) => state.model.model.system_controls.enable_auto_fix);
-  const objective_value = useSelector((state) => state.model.model.result.objective_value);
+  const type = useSelector((state) => state.modelSlice.model.type);
+  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const enable_auto_fix = useSelector((state) => state.modelSlice.model.system_controls.enable_auto_fix);
+  const objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
   const dispatch = useDispatch();
 
   useEffect(() => {

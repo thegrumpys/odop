@@ -15,7 +15,7 @@ export const displaySpinner = (display) => {
 
 const Spinner = () => {
 //  console.log("SPINNER - Mounting...");
-  const show = useSelector((state) => state.spinner.show);
+  const show = useSelector((state) => state.spinnerSlice.show);
 
   useEffect(() => {
 //    console.log("SPINNER - Mounted, show changed", show);

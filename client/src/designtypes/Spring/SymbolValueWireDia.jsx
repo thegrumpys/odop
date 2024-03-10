@@ -23,7 +23,7 @@ import { logValue } from '../../logUsage';
 import { logUsage } from '../../logUsage';
 import { getAlertsByName } from '../../components/Alerts';
 import { load, search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../../store/actionCreators';
-import { displayMessage } from '../../components/MessageModal';
+import { displayMessage } from '../../components/Message';
 import FeasibilityIndicator from '../../components/FeasibilityIndicator';
 import { toODOPPrecision } from '../../toODOPPrecision'
 

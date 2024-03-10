@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { displaySpinner } from "./Spinner";
-import { displayMessage } from "./MessageModal";
+import { displayMessage } from "./Message";
 import { changeName, changeUser, changeView, loadInitialState, changeSymbolValue, changeIndexValue } from "../store/modelSlice";
 import * as sto from '../designtypes/Piston-Cylinder/symbol_table_offsets';
 
@@ -50,14 +50,14 @@ export default function Home() {
     }, 2000);
   };
 
-  const name = useSelector((state) => state.model.name);
-  const user = useSelector((state) => state.model.user);
-  const view = useSelector((state) => state.model.view);
-  const symbol_table = useSelector((state) => state.model.model.symbol_table);
+  const name = useSelector((state) => state.modelSlice.name);
+  const user = useSelector((state) => state.modelSlice.user);
+  const view = useSelector((state) => state.modelSlice.view);
+  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
 
   return (
     <div className="App">
-      <h1>Spinner, MessageModal and Model implementation with Redux toolkit</h1>
+      <h1>Spinner, Message and Model implementation with Redux toolkit</h1>
       <ul style={{ textAlign: "left" }}>
         <li>Home is mounted only on startup page: Name: {name}, User: {user}, View: {view}</li>
         {symbol_table.map((element,index) => <li key={index}>{element.name} {element.value}</li>)}

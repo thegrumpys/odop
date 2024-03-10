@@ -25,10 +25,10 @@ export default function Test() {
     }, 1000);
   };
 
-  const name = useSelector((state) => state.model.name);
-  const user = useSelector((state) => state.model.user);
-  const view = useSelector((state) => state.model.view);
-  const symbol_table = useSelector((state) => state.model.model.symbol_table);
+  const name = useSelector((state) => state.modelSlice.name);
+  const user = useSelector((state) => state.modelSlice.user);
+  const view = useSelector((state) => state.modelSlice.view);
+  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
 
   return (
     <>

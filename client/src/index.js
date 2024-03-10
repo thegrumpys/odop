@@ -1,6 +1,6 @@
 import bootstrap from 'bootstrap';
 import Spinner from "./components/Spinner";
-import MessageModal from "./components/MessageModal";
+import Message from "./components/Message";
 import App from "./components/App";
 import store from "./store/store";
 import { Provider } from "react-redux";
@@ -12,7 +12,7 @@ root.render(
   <div id="root2">
     <Provider store={store}>
       <Spinner />
-      <MessageModal />
+      <Message />
       <App />
     </Provider>
   </div>

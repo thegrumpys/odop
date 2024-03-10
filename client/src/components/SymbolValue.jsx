@@ -21,7 +21,7 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 import { logUsage } from '../logUsage';
 import { getAlertsByName } from './Alerts';
 import { load, search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../store/actionCreators';
-import { displayMessage } from '../components/MessageModal';
+import { displayMessage } from '../components/Message';
 import FeasibilityIndicator from './FeasibilityIndicator';
 class SymbolValue extends Component {
 

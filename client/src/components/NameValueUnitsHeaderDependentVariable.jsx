@@ -4,8 +4,8 @@ import { OverlayTrigger, Tooltip  } from 'react-bootstrap';
 
 export default function NameValueUnitsHeaderDependentVariable() {
 //  console.log("NameValueUnitsHeaderDependentVariable - Mounting...");
-  const symbol_table = useSelector((state) => state.model.model.symbol_table);
-  const system_controls = useSelector((state) => state.model.model.system_controls);
+  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
 
   useEffect(() => {
 //    console.log("NameValueUnitsHeaderDependentVariable - Mounted");

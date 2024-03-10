@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavDropdown, Button, Modal, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { deleteAutoSave } from '../../store/actionCreators';
-import { displayMessage } from '../../components/MessageModal';
+import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import { withOktaAuth } from '@okta/okta-react';

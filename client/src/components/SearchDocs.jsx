@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { InputGroup, Form, Button, Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { logUsage } from '../logUsage';
-import { displayMessage } from './MessageModal';
+import { displayMessage } from './Message';
 import { displaySpinner } from './Spinner';
 
 class SearchDocs extends Component {

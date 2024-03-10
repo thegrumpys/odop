@@ -9,7 +9,7 @@ import { getAlertsByName } from './Alerts';
 export default function NameValueUnitsRowCalcInput({ element, index, onChangeValid, onChangeInvalid, onChange, onSelect }) {
   console.log("NameValueUnitsRowCalcInput - Mounting...",'element=',element,'index=',index);
   const [table, setTable] = useState(null);
-  const system_controls = useSelector((state) => state.model.model.system_controls);
+  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
   const dispatch = useDispatch();
 
   useEffect(() => {

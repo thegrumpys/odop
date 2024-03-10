@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED } from '../../store/actionTypes';
 import { search, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
-import { displayMessage } from '../../components/MessageModal';
+import { displayMessage } from '../../components/Message';
 
 class ActionSearch extends Component {
 

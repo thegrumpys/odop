@@ -16,7 +16,7 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
   const [show, setShow] = useState(false);
   const [isInvalidValue, setIsInvalidValue] = useState(false);
   const [valueString, setValueString] = useState(false);
-  const system_controls = useSelector((state) => state.model.model.system_controls);
+  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
   const dispatch = useDispatch();
 
   useEffect(() => {

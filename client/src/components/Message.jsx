@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Modal, Button, Alert } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
-import { addMessage, disableMessage } from "../store/messageModalSlice";
+import { addMessage, disableMessage } from "../store/messageSlice";
 import store from "../store/store";
 
 export const displayMessage = (message, variant = 'danger', header = '', help_url = '') => {
@@ -11,11 +11,11 @@ export const displayMessage = (message, variant = 'danger', header = '', help_ur
   store.dispatch(addMessage({message, variant, header, help_url}));
 }
 
-const MessageModal = () => {
-  const show = useSelector((state) => state.messageModal.show);
-  const header = useSelector((state) => state.messageModal.header);
-  const messages = useSelector((state) => state.messageModal.messages);
-  const help_url = useSelector((state) => state.messageModal.help_url);
+const Message = () => {
+  const show = useSelector((state) => state.messageSlice.show);
+  const header = useSelector((state) => state.messageSlice.header);
+  const messages = useSelector((state) => state.messageSlice.messages);
+  const help_url = useSelector((state) => state.messageSlice.help_url);
   const dispatch = useDispatch();
 
 //  console.log("MESSAGEMODAL - Mounting...",'show=',show,'header=',header,'messages=',messages,'help_url=',help_url);
@@ -33,7 +33,7 @@ const MessageModal = () => {
 
   const onContextHelp = () => {
 //    console.log('MESSAGEMODAL.onContextHelp this=',this);
-//    logUsage('event', 'MessageModal', { event_label: 'context Help button: ' + this.state.help_url });
+//    logUsage('event', 'Message', { event_label: 'context Help button: ' + this.state.help_url });
     dispatch(disableMessage());
     window.open(help_url, '_blank');
   }
@@ -61,4 +61,4 @@ const MessageModal = () => {
    );
 };
 
-export default MessageModal;
+export default Message;

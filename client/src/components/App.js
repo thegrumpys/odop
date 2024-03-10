@@ -9,17 +9,17 @@ import MainPage from "./MainPage";
 import { Button, Modal, Alert } from 'react-bootstrap';
 import config from '../config';
 import { displaySpinner } from "./Spinner";
-import { displayMessage } from "./MessageModal";
+import { displayMessage } from "./Message";
 import { logUsage } from '../logUsage';
 
 export default function App() {
 //  console.log("APP - Mounting...");
   const [show, setShow] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
-  const user = useSelector((state) => state.model.user);
-  const name = useSelector((state) => state.model.name);
-  const view = useSelector((state) => state.model.view);
-  const type = useSelector((state) => state.model.model.type);
+  const user = useSelector((state) => state.modelSlice.user);
+  const name = useSelector((state) => state.modelSlice.name);
+  const view = useSelector((state) => state.modelSlice.view);
+  const type = useSelector((state) => state.modelSlice.model.type);
   const dispatch = useDispatch();
 //  const navigate = useNavigate();
 

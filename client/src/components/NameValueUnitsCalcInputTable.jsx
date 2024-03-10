@@ -6,7 +6,7 @@ import NameValueUnitsRowCalcInput from './NameValueUnitsRowCalcInput';
 
 export default function NameValueUnitsCalcInputTable() {
 //  console.log("NameValueUnitsCalcInputTable - Mounting...");
-  const symbol_table = useSelector((state) => state.model.model.symbol_table);
+  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
 
   useEffect(() => {
 //    console.log("NameValueUnitsCalcInputTable - Mounted");

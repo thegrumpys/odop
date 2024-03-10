@@ -4,7 +4,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function ConstraintsMaxHeaderIndependentVariable() {
 //  console.log("ConstraintsMaxHeaderIndependentVariable - Mounting...");
-  const system_controls = useSelector((state) => state.model.model.system_controls);
+  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
 
   useEffect(() => {
 //    console.log("ConstraintsMaxHeaderIndependentVariable - Mounted");

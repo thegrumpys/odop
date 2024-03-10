@@ -1,4 +1,4 @@
-import { displayMessage } from '../../../components/MessageModal';
+import { displayMessage } from '../../../components/Message';
 import { initialState } from './initialState';
 import { initialSystemControls } from '../../../initialSystemControls';
 import { CONSTRAINED, FIXED } from '../../../store/actionTypes';

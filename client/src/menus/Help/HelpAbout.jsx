@@ -5,7 +5,7 @@ import { version as release_version } from '../../version';
 import { logUsage } from '../../logUsage';
 //import { withOktaAuth } from '@okta/okta-react';
 import config from '../../config';
-import { displayMessage } from '../../components/MessageModal';
+import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 
 export default function HelpAbout() {
@@ -13,11 +13,11 @@ export default function HelpAbout() {
   const [show, setShow] = useState(false);
   const [sizes, setSizes] = useState('');
   const [size, setSize] = useState('');
-  const user = useSelector((state) => state.model.user);
-  const type = useSelector((state) => state.model.model.type);
-  const version = useSelector((state) => state.model.model.version);
-  const jsontype = useSelector((state) => state.model.model.jsontype);
-  const units = useSelector((state) => state.model.model.units);
+  const user = useSelector((state) => state.modelSlice.user);
+  const type = useSelector((state) => state.modelSlice.model.type);
+  const version = useSelector((state) => state.modelSlice.model.version);
+  const jsontype = useSelector((state) => state.modelSlice.model.jsontype);
+  const units = useSelector((state) => state.modelSlice.model.units);
   const dispatch = useDispatch();
 
   useEffect(() => {

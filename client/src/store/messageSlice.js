@@ -1,7 +1,7 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 
-export const messageModalSlice = createSlice({
-  name: "messageModalSlice",
+export const messageSlice = createSlice({
+  name: "messageSlice",
   initialState: {
     show: false, // Default: do not display
     header: '', // Default: no header
@@ -10,7 +10,7 @@ export const messageModalSlice = createSlice({
   },
   reducers: {
     addMessage: (state, action) => {
-//      console.log('messageModal add','state=',state,'action=',action);
+//      console.log('message add','state=',state,'action=',action);
       if (!state.show) { // If state not showing, then initialize else append
         state.show = true;
         state.header = action.payload.header;
@@ -21,12 +21,12 @@ export const messageModalSlice = createSlice({
       }
     },
     disableMessage: (state, action) => {
-//      console.log('messageModal disabled','state=',state,'action=',action);
+//      console.log('message disabled','state=',state,'action=',action);
       state.show = false;
     }
   }
 });
 
-export const { addMessage, disableMessage } = messageModalSlice.actions;
+export const { addMessage, disableMessage } = messageSlice.actions;
 
-export default messageModalSlice.reducer;
+export default messageSlice.reducer;
