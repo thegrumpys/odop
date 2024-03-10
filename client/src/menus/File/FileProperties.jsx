@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Container, Row, Col, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { changeLabelsValue, saveAutoSave } from '../../store/actionCreators';
+import { changeLabelsValue, saveAutoSave } from '../../store/modelSlice';
 import { logUsage, logValue } from '../../logUsage';
 
 class FileProperties extends Component {

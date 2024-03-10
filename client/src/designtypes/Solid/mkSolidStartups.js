@@ -12,7 +12,7 @@ import {
     changeSymbolValue,
     setSymbolFlag,
     startup,
-} from '../../store/actionCreators';
+} from '../../store/modelSlice';
 export const execute = {
     steps: [
         {

@@ -8,7 +8,7 @@ import { changeSymbolConstraint,
     restoreInputSymbolValues,
     changeResultTerminationCondition,
     search,
-    saveAutoSave } from '../../store/actionCreators';
+    saveAutoSave } from '../../store/modelSlice';
 import { logUsage } from '../../logUsage';
 import FormControlTypeNumber from '../../components/FormControlTypeNumber';
 

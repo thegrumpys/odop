@@ -11,7 +11,7 @@ import {
     changeResultObjectiveValue, changeResultTerminationCondition,
     changeSystemControlsValue, changeLabelsValue, search, seek,
     saveAutoSave, restoreAutoSave, deleteAutoSave
-    } from '../../store/actionCreators';
+    } from '../../store/modelSlice';
 import { reducers } from '../../store/reducers';
 import { dispatcher } from '../../store/middleware/dispatcher';
 

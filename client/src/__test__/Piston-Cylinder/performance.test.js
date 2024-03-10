@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { initialState } from '../../designtypes/Piston-Cylinder/initialState';
 import * as sto from '../../designtypes/Piston-Cylinder/symbol_table_offsets';
 import { initialSystemControls } from '../../initialSystemControls';
-import { changeSymbolValue, changeResultObjectiveValue } from '../../store/actionCreators';
+import { changeSymbolValue, changeResultObjectiveValue } from '../../store/modelSlice';
 import { reducers } from '../../store/reducers';
 import { dispatcher } from '../../store/middleware/dispatcher';
 import { invokeInit } from '../../store/middleware/invokeInit';

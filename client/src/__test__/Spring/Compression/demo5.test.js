@@ -7,7 +7,7 @@ import { loadInitialState,
          setSymbolFlag,
          changeSymbolConstraint,
          fixSymbolValue,
-         search } from '../../../store/actionCreators';
+         search } from '../../../store/modelSlice';
 import { reducers } from '../../../store/reducers';
 import { dispatcher } from '../../../store/middleware/dispatcher';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';

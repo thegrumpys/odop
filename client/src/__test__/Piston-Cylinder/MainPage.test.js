@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 //import { initialState } from '../../designtypes/Piston-Cylinder/initialState';
 //import { initialSystemControls } from '../../initialSystemControls';
 //import MainPage from '../components/MainPage';
-//import { startup, changeSymbolValue } from '../../store/actionCreators';
+//import { startup, changeSymbolValue } from '../../store/modelSlice';
 //import { reducers } from '../../store/reducers';
 
 it('renders without crashing', () => {

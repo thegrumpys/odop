@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { initialSystemControls } from '../../initialSystemControls';
-import { changeSystemControlsValue, saveAutoSave } from '../../store/actionCreators';
+import { changeSystemControlsValue, saveAutoSave } from '../../store/modelSlice';
 import { logUsage, logValue } from '../../logUsage';
 import FormControlTypeNumber from '../../components/FormControlTypeNumber';
 

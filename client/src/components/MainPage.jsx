@@ -85,7 +85,7 @@ export default function MainPage() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Container fluid="md"className="table-secondary" style={{ paddingTop: '60px' }}>
+      <Container fluid="md"className="table-light" style={{ paddingTop: '60px' }}>
         <Row>
           <ResultTable />
         </Row>

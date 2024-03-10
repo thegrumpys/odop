@@ -184,7 +184,7 @@ export default function ResultTable() {
 
   return (
     <>
-      <Table className="table-secondary" size="sm">
+      <Table className="table-light" size="sm">
         <tbody>
           <tr>
             <th id="Feasibility">
@@ -218,7 +218,7 @@ export default function ResultTable() {
           </tr>
         </tbody>
       </Table>
-      <Table className="table-secondary" size="sm">
+      <Table className="table-light" size="sm">
         <tbody>
           <tr>
             <td className="text-left" id="ObjectiveValue">

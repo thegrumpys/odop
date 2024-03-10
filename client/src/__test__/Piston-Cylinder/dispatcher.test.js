@@ -8,7 +8,7 @@ import {
     startup,
     changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag,
     search, seek,
-    saveAutoSave, restoreAutoSave, deleteAutoSave } from '../../store/actionCreators';
+    saveAutoSave, restoreAutoSave, deleteAutoSave } from '../../store/modelSlice';
 import { reducers } from '../../store/reducers';
 import { dispatcher } from '../../store/middleware/dispatcher';
 

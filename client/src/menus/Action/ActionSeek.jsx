@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavDropdown, Modal, InputGroup, ButtonGroup, Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED, MIN, MAX } from '../../store/actionTypes';
-import { seek, saveAutoSave } from '../../store/actionCreators';
+import { seek, saveAutoSave } from '../../store/modelSlice';
 import { logUsage } from '../../logUsage';
 import { displayMessage } from '../../components/Message';
 

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actionCreators';
+import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/modelSlice';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';

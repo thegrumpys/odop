@@ -9,7 +9,7 @@ import { loadInitialState,
          fixSymbolValue,
          search,
          changeSystemControlsValue,
-         seek } from '../../../store/actionCreators';
+         seek } from '../../../store/modelSlice';
 import { reducers } from '../../../store/reducers';
 import { dispatcher } from '../../../store/middleware/dispatcher';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';

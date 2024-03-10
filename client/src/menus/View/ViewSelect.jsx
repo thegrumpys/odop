@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavDropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
-import { changeView } from '../../store/actionCreators';
+import { changeView } from '../../store/modelSlice';
 
 class ViewSelect extends Component {
 

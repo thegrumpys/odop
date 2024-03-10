@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Alert, Button, Container, Row } from 'react-bootstrap';
-import { load } from '../store/actionCreators';
 import { connect } from 'react-redux';
-import { changeResultTerminationCondition } from '../store/actionCreators';
+import { load, changeResultTerminationCondition } from '../store/modelSlice';
 import { actionDumper } from '../store/actionDumper';
 import { logUsage } from '../logUsage';
 import config from '../config';

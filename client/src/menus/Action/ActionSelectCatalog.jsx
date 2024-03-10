@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Table, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { changeSymbolValue, saveAutoSave } from '../../store/actionCreators';
+import { changeSymbolValue, saveAutoSave } from '../../store/modelSlice';
 import { logUsage, logValue } from '../../logUsage';
 
 class ActionSelectCatalog extends Component {
@@ -167,7 +167,7 @@ class ActionSelectCatalog extends Component {
                         :
                             <>
                                 <Form.Label htmlFor="catalogEntrySelect">Closest catalog entries:</Form.Label>
-                                <Table className="table-secondary border border-secondary" size="sm">
+                                <Table className="table-light border border-secondary" size="sm">
                                     <thead>
                                         <tr>
                                             <th>Name</th>

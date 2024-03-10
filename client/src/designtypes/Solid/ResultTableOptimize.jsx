@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
-import { seek, saveAutoSave } from '../../store/actionCreators';
+import { seek, saveAutoSave } from '../../store/modelSlice';
 import { logUsage } from '../../logUsage';
 import * as sto from './symbol_table_offsets';
 

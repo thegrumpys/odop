@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue, fixSymbolValue, loadInitialState, resetSymbolFlag, changeLabelsValue, changeSystemControlsValue, search } from '../../../store/actionCreators';
+import { changeSymbolValue, fixSymbolValue, loadInitialState, resetSymbolFlag, changeLabelsValue, changeSystemControlsValue, search } from '../../../store/modelSlice';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
     steps: [

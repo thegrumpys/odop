@@ -7,7 +7,7 @@ import MainPage from './MainPage';
 import SignInPage from './SignInPage';
 import { OktaAuth } from '@okta/okta-auth-js'
 import { connect } from 'react-redux';
-import { load, loadInitialState, restoreAutoSave, deleteAutoSave, changeName } from '../store/actionCreators';
+import { load, loadInitialState, restoreAutoSave, deleteAutoSave, changeName } from '../store/modelSlice';
 import { logUsage } from '../logUsage';
 import { displayMessage } from './Message';
 import { displaySpinner } from './Spinner';

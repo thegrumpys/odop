@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED } from '../../store/actionTypes';
-import { fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../../store/actionCreators';
+import { fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../../store/modelSlice';
 import * as mo from './mat_offsets';
 import NameValueUnitsHeaderIndependentVariable from '../../components/NameValueUnitsHeaderIndependentVariable';
 import NameValueUnitsHeaderDependentVariable from '../../components/NameValueUnitsHeaderDependentVariable';
@@ -22,7 +22,7 @@ import FormControlTypeNumber from '../../components/FormControlTypeNumber';
 import { logValue } from '../../logUsage';
 import { logUsage } from '../../logUsage';
 import { getAlertsByName } from '../../components/Alerts';
-import { load, search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../../store/actionCreators';
+import { load, search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../../store/modelSlice';
 import { displayMessage } from '../../components/Message';
 import FeasibilityIndicator from '../../components/FeasibilityIndicator';
 import { toODOPPrecision } from '../../toODOPPrecision'
@@ -566,7 +566,7 @@ class SymbolValueWireDia extends Component {
                             ''
                         }
                         {this.state.error !== '' ? <Alert variant="danger"> {this.state.error} </Alert> : ''}
-                        <Table className="table-secondary border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                        <Table className="table-light border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <NameValueUnitsHeaderIndependentVariable />
@@ -632,22 +632,22 @@ class SymbolValueWireDia extends Component {
                                 </tbody>
                             </Table>}
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
-                                <Table className="table-secondary border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                                <Table className="table-light border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                     <ConstraintsMinHeaderIndependentVariable />
                                     <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                                 </Table>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
-                                <Table className="table-secondary border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                                <Table className="table-light border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                     <ConstraintsMinHeaderDependentVariable />
                                     <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                                 </Table>}
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
-                                <Table className="table-secondary border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                                <Table className="table-light border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                     <ConstraintsMaxHeaderIndependentVariable />
                                     <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                                 </Table>}
                             {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
-                                <Table className="table-secondary border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                                <Table className="table-light border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                     <ConstraintsMaxHeaderDependentVariable />
                                     <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                                 </Table>}

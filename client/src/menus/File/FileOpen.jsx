@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { loadInitialState, load, restoreAutoSave, deleteAutoSave } from '../../store/actionCreators';
+import { loadInitialState, load, restoreAutoSave, deleteAutoSave } from '../../store/modelSlice';
 import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';

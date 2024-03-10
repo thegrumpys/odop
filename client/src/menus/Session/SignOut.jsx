@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
 import { connect } from 'react-redux';
 import { withOktaAuth } from '@okta/okta-react';
-import { changeUser, saveAutoSave } from '../../store/actionCreators';
+import { changeUser, saveAutoSave } from '../../store/modelSlice';
 
 class SignOut extends Component {
 

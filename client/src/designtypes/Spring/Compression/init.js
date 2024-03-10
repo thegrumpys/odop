@@ -1,7 +1,7 @@
 import * as o from './offsets';
 import * as mo from '../mat_offsets';
 import * as eto from './endtypes_offsets';
-import { changeSymbolInput, changeSymbolHidden } from '../../../store/actionCreators';
+import { changeSymbolInput, changeSymbolHidden } from '../../../store/modelSlice';
 
 export function init(store, p, x) {
 //    console.log('In init store=',store,'p=',p,'x=',x);
