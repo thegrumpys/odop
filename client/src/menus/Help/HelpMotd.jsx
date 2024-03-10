@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
 
-export default HelpMotd = () => {
+export default function HelpMotd() {
   console.log("HelpMotd - Mounting...");
 
   useEffect(() => {
@@ -12,13 +12,11 @@ export default HelpMotd = () => {
     return () => { };
   }, []);
 
-
   const onHelp = () => {
     logUsage('event', 'HelpMotd', { event_label: 'https://thegrumpys.github.io/odop/About/messageOfTheDay.html' });
     window.open('https://thegrumpys.github.io/odop/About/messageOfTheDay.html', '_blank');
   }
 
-  //        console.log('In HelpMotd.render this=',this);
   return (
     <>
       <NavDropdown.Item onClick={onHelp}>

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip  } from 'react-bootstrap';
 
-export default NameValueUnitsHeaderDependentVariable = () => {
+export default function NameValueUnitsHeaderDependentVariable() {
 //  console.log("NameValueUnitsHeaderDependentVariable - Mounting...");
   const symbol_table = useSelector((state) => state.model.model.symbol_table);
   const system_controls = useSelector((state) => state.model.model.system_controls);
@@ -14,7 +14,7 @@ export default NameValueUnitsHeaderDependentVariable = () => {
   }, []);
 
   return (
-    <thead>
+    <thead id="nvuhdv">
       <tr>
         <th className="text-center bg-secondary text-white" colSpan="6" id="DVTitle">
           <OverlayTrigger placement="top" overlay={<Tooltip>Outputs from design equations</Tooltip>}>

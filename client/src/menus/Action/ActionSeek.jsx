@@ -129,9 +129,7 @@ class ActionSeek extends Component {
                                 <Button variant="outline-secondary" onClick={() => this.onSeekMinMaxSelect(MAX)} active={this.state.seek_minmax === MAX}> Max </Button>
                             </ButtonGroup>
                             &nbsp;
-                            <InputGroup.Prepend>
-                                <InputGroup.Text>Name: </InputGroup.Text>
-                            </InputGroup.Prepend>
+                            <InputGroup.Text>Name: </InputGroup.Text>
                             <Form.Control as="select" className="align-middle" onChange={this.onSeekNameSelect} value={this.state.seek_name}>
                                 {this.props.symbol_table.map((element, index) =>
                                     (element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)) ? <option key={index} value={element.name}>{element.name}</option> : ''

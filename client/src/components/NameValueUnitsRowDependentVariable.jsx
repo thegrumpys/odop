@@ -7,8 +7,8 @@ import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
-export default NameValueUnitsRowIndependentVariable = ({ element, index, onSet = () => {}, onReset = () => {} }) => {
-//  console.log("NameValueUnitsRowIndependentVariable - Mounting...");
+export default function NameValueUnitsRowIndependentVariable({ element, index, onSet, onReset }) {
+//  console.log("NameValueUnitsRowIndependentVariable - Mounting...",'element=',element,'index=',index);
   const system_controls = useSelector((state) => state.model.model.system_controls);
   const dispatch = useDispatch();
 
@@ -22,14 +22,14 @@ export default NameValueUnitsRowIndependentVariable = ({ element, index, onSet =
 //    console.log('In NameValueUnitsRowDependentVariable.onSet');
     dispatch(fixSymbolValue(element.name));
     logValue(element.name, 'FIXED', 'FixedFlag', false);
-    onSet(event);
+    if (typeof onSet === "function") onSet(event);
   }
 
   const onResetLocal = (event) => {
 //    console.log('In NameValueUnitsRowDependentVariable.onReset');
     dispatch(freeSymbolValue(element.name));
     logValue(element.name, 'FREE', 'FixedFlag', false);
-    onReset(event);
+    if (typeof onReset === "function") onReset(event);
   }
 
   var results = getAlertsByName(element.name);
@@ -61,24 +61,24 @@ export default NameValueUnitsRowIndependentVariable = ({ element, index, onSet =
   // Table Row
   // =======================================
   return (
-    <tbody>
+    <tbody id={'nvurdv_' + element.name}>
       <tr key={element.name}>
-        <td className="align-middle" colSpan="2" id={'dependent_variable_' + index}>
+        <td className="align-middle" colSpan="2" id={'nvurdv_name_' + element.name}>
           <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip>{element.tooltip}</Tooltip>}>
             <span>{element.name}</span>
           </OverlayTrigger>
         </td>
         <td className="align-middle">
           <InputGroup>
-            <FormControlTypeNumber id={'nvurdv_' + element.name} disabled={true} icon_alerts={icon_alerts} className={className} value={element.value} validmin={element.validmin} validmax={element.validmax} />
+            <FormControlTypeNumber id={'nvurdv_value_' + element.name} disabled={true} icon_alerts={icon_alerts} className={className} value={element.value} validmin={element.validmin} validmax={element.validmax} />
           </InputGroup>
         </td>
         <td className="align-middle text-center">
           <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>
-            <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={element.lmin & FIXED} onChange={element.lmin & FIXED ? onResetLocal : onSetLocal} />
+            <Form.Check id={'nvurdv_checkbox_' + element.name} type="checkbox" aria-label="Checkbox for fixed value" checked={element.lmin & FIXED} onChange={element.lmin & FIXED ? onResetLocal : onSetLocal} />
           </OverlayTrigger>
         </td>
-        <td className={"text-nowrap align-middle small " + (system_controls.show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
+        <td id={'nvurdv_units_' + element.name} className={"text-nowrap align-middle small " + (system_controls.show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
       </tr>
     </tbody>
   );

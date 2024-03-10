@@ -6,7 +6,7 @@ import ConstraintsMaxRowIndependentVariable from './ConstraintsMaxRowIndependent
 import ConstraintsMaxHeaderDependentVariable from './ConstraintsMaxHeaderDependentVariable';
 import ConstraintsMaxRowDependentVariable from './ConstraintsMaxRowDependentVariable';
 
-export default ConstraintsMaxTable = () => {
+export default function ConstraintsMaxTable() {
 //  console.log("ConstraintsMaxTable - Mounting...");
   const symbol_table = useSelector((state) => state.model.model.symbol_table);
 
@@ -18,7 +18,7 @@ export default ConstraintsMaxTable = () => {
 
   return (
     <>
-      <Table className="<Table className=col-md-3 border border-secondary" size="sm">
+      <Table id="cmxt" className="table-secondary col-md-3 border border-secondary" size="sm">
         <ConstraintsMaxHeaderIndependentVariable />
         {symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden && <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={index} />)}
         <ConstraintsMaxHeaderDependentVariable />

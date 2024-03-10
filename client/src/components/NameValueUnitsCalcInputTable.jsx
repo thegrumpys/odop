@@ -4,7 +4,7 @@ import { Table  } from 'react-bootstrap';
 import NameValueUnitsHeaderCalcInput from './NameValueUnitsHeaderCalcInput';
 import NameValueUnitsRowCalcInput from './NameValueUnitsRowCalcInput';
 
-export default NameValueUnitsCalcInputTable = () => {
+export default function NameValueUnitsCalcInputTable() {
 //  console.log("NameValueUnitsCalcInputTable - Mounting...");
   const symbol_table = useSelector((state) => state.model.model.symbol_table);
 
@@ -15,11 +15,11 @@ export default NameValueUnitsCalcInputTable = () => {
   }, []);
 
   return (
-    <>
+    <div id="nvucit">
       <Table className="<Table className=col-md-6 border border-secondary" size="sm">
         <NameValueUnitsHeaderCalcInput />
         {symbol_table.map((element,index) => element.type === "calcinput" && !element.hidden && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
       </Table>
-    </>
+    </div>
   );
 }

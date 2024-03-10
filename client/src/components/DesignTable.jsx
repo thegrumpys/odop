@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Row } from 'react-bootstrap';
 import NameValueUnitsTable from './NameValueUnitsTable';
 import ConstraintsMinTable from './ConstraintsMinTable';
+import ConstraintsMaxTable from './ConstraintsMaxTable';
 import NameValueUnitsCalcInputTable from './NameValueUnitsCalcInputTable';
 
-export default DesignTable = () => {
+export default function DesignTable() {
 //  console.log("DesignTable - Mounting...");
 
   useEffect(() => {
@@ -15,14 +16,15 @@ export default DesignTable = () => {
   }, []);
 
   return (
-    <>
+    <div id="DesignTable">
       <Row>
         <NameValueUnitsTable />
         <ConstraintsMinTable />
+        <ConstraintsMaxTable />
       </Row>
       <Row>
         <NameValueUnitsCalcInputTable />
       </Row>
-    </>
+    </div>
   );
 }

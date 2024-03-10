@@ -6,10 +6,10 @@ import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
-import { toODOPPrecision } from '../toODOPPrecision'
+import { toODOPPrecision } from '../toODOPPrecision';
 
-export default ConstraintsMinRowDependentVariable = ({ element, index, onChangeValid = () => {}, onChangeInvalid = () => {}, onSet = () => {}, onReset = () => {} }) => {
-  console.log("ConstraintsMinRowDependentVariable - Mounting...");
+export default function ConstraintsMinRowDependentVariable({ element, index, onChangeValid, onChangeInvalid, onSet, onReset }) {
+//  console.log("ConstraintsMinRowDependentVariable - Mounting...",'element=',element,'index=',index);
   const [show, setShow] = useState(false);
   const [isInvalidValue, setIsInvalidValue] = useState(false);
   const [valueString, setValueString] = useState(false);
@@ -17,8 +17,8 @@ export default ConstraintsMinRowDependentVariable = ({ element, index, onChangeV
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("ConstraintsMinRowDependentVariable - Mounted");
-    //    return () => console.log("ConstraintsMinRowDependentVariable - Unmounting ...");
+//    console.log("ConstraintsMinRowDependentVariable - Mounted")
+//    return () => console.log("ConstraintsMinRowDependentVariable - Unmounting ...");
     return () => { };
   }, []);
 
@@ -26,14 +26,14 @@ export default ConstraintsMinRowDependentVariable = ({ element, index, onChangeV
     console.log("In ConstraintsMinRowDependentVariable.onSetFlagMinConstrained','event.target.value=", event.target.value);
     dispatch(setSymbolFlag(element.name, MIN, CONSTRAINED));
     logValue(element.name, 'Enabled', 'MinConstraintFlag', false);
-    onSet(event);
+    if (typeof onSet === "function") onSet(event);
   }
 
   const onResetFlagMinConstrained = (event) => {
     console.log("In ConstraintsMinRowDependentVariable.onResetFlagMinConstrained','event.target.value=", event.target.value);
     dispatch(resetSymbolFlag(element.name, MIN, CONSTRAINED));
     logValue(element.name, 'Disabled', 'MinConstraintFlag', false);
-    onReset(event);
+    if (typeof onReset === "function") onReset(event);
   }
 
   const onChangeValidMinConstraint = (event) => {
@@ -46,12 +46,12 @@ export default ConstraintsMinRowDependentVariable = ({ element, index, onChangeV
     } else {
       logValue(element.name, event.target.value, 'MinConstraint');
     }
-    onChangeValid(event);
+    if (typeof onChangeValid === "function") onChangeValid(event);
   }
 
   const onChangeInvalidMinConstraint = (event) => {
     console.log("In ConstraintsMinRowDependentVariable.onChangeInvalidMinConstraint','event.target.value=", event.target.value);
-    onChangeInvalid(event);
+    if (typeof onChangeInvalid === "function") onChangeInvalid(event);
   }
 
   const onClick = (event) => {
@@ -67,13 +67,13 @@ export default ConstraintsMinRowDependentVariable = ({ element, index, onChangeV
     console.log("In ConstraintsMinRowDependentVariable.onChangeValidValue','event.target.value=", event.target.value);
     setValueString(event.target.value);
     setIsInvalidValue(false);
-    onChangeValid(event);
+    if (typeof onChangeValid === "function") onChangeValid(event);
   }
 
   const onChangeInvalidValue = (event) => {
     console.log("In ConstraintsMinRowDependentVariable.onChangeInvalidValue','event.target.value=", event.target.value);
     setIsInvalidValue(true);
-    onChangeInvalid(event);
+    if (typeof onChangeInvalid === "function") onChangeInvalid(event);
   }
 
   const onEnterButton = (event) => {
@@ -109,21 +109,19 @@ export default ConstraintsMinRowDependentVariable = ({ element, index, onChangeV
   var className = results.className;
   var icon_alerts = results.alerts;
   return (
-    <tbody>
+    <tbody id={'cmnrdv_' + element.name}>
       <tr key={element.name}>
-        <td className="align-middle d-lg-none" id={'dependent_variable_min_constrain_' + index}>
+        <td className="align-middle d-lg-none" id={'cmnrdv_name_' + element.name}>
           <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip className="d-lg-none">{element.tooltip}</Tooltip>}>
             <span>{element.name}</span>
           </OverlayTrigger>
         </td>
         <td className="align-middle" colSpan="2">
           <InputGroup>
-            <InputGroup.Prepend>
-              <InputGroup.Text>
-                <Form.Check type="checkbox" aria-label="Checkbox for minimum value" checked={element.lmin & CONSTRAINED} onChange={element.lmin & CONSTRAINED ? onResetFlagMinConstrained : onSetFlagMinConstrained} disabled={element.lmin & FIXED ? true : false} />
-              </InputGroup.Text>
-            </InputGroup.Prepend>
-            <FormControlTypeNumber id={element.name + "_cmin"} icon_alerts={icon_alerts} className={className} value={element.cmin} validmin={element.validmin} validmax={element.validmax} disabled={element.lmin & FIXED || element.lmin & CONSTRAINED ? false : true} disabledText={element.lmin & CONSTRAINED ? false : true} onChangeValid={onChangeValidMinConstraint} onChangeInvalid={onChangeInvalidMinConstraint} onClick={onClick} />
+            <InputGroup.Text>
+              <Form.Check id={'cmnrdv_checkbox_' + element.name} type="checkbox" aria-label="Checkbox for minimum value" checked={element.lmin & CONSTRAINED} onChange={element.lmin & CONSTRAINED ? onResetFlagMinConstrained : onSetFlagMinConstrained} disabled={element.lmin & FIXED ? true : false} />
+            </InputGroup.Text>
+            <FormControlTypeNumber id={'cmnrdv_cmin_' + element.name} icon_alerts={icon_alerts} className={className} value={element.cmin} validmin={element.validmin} validmax={element.validmax} disabled={element.lmin & FIXED || element.lmin & CONSTRAINED ? false : true} disabledText={element.lmin & CONSTRAINED ? false : true} onChangeValid={onChangeValidMinConstraint} onChangeInvalid={onChangeInvalidMinConstraint} onClick={onClick} />
           </InputGroup>
           {element.cminchoices !== undefined && element.cminchoices.length > 0 ?
             <Modal show={show} size="lg" onHide={onCancel}>

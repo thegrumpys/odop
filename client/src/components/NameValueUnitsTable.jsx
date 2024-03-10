@@ -6,21 +6,26 @@ import NameValueUnitsRowIndependentVariable from './NameValueUnitsRowIndependent
 import NameValueUnitsHeaderDependentVariable from './NameValueUnitsHeaderDependentVariable';
 import NameValueUnitsRowDependentVariable from './NameValueUnitsRowDependentVariable';
 
-export default NameValueUnitsTable = () => {
+export default function NameValueUnitsTable() {
 //  console.log("NameValueUnitsTable - Mounting...");
   const symbol_table = useSelector((state) => state.model.model.symbol_table);
 
   useEffect(() => {
 //    console.log("NameValueUnitsTable - Mounted");
 //    return () => console.log("NameValueUnitsTable - Unmounting ...");
-    return () => { };
+    return () => {};
   }, []);
 
   return (
     <>
-      <Table className="table-secondary col-md-6 border border-secondary" size="sm">
+      <Table id="nvut" className="table-secondary col-md-6 border border-secondary" size="sm">
         <NameValueUnitsHeaderIndependentVariable />
-        {symbol_table.map((element, index) => element.type === "equationset" && element.input && !element.hidden && <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={index} />)}
+        {symbol_table.map((element, index) => 
+          element.type === "equationset" && 
+          element.input && 
+          !element.hidden && 
+          <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={index} />
+        )}
         <NameValueUnitsHeaderDependentVariable />
         {symbol_table.map((element, index) => element.type === "equationset" && !element.input && !element.hidden && <NameValueUnitsRowDependentVariable key={element.name} element={element} index={index} />)}
       </Table>

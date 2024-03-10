@@ -598,13 +598,11 @@ class SymbolValueWireDia extends Component {
                                                             {sorted_wire_dia_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}
                                                         </Form.Control>
                                                     )}
-                                                    <InputGroup.Append>
-                                                        <InputGroup.Text>
-                                                            <OverlayTrigger placement="top" overlay={<Tooltip>{nvu_value_fix_free_text}</Tooltip>}>
-                                                                <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
-                                                            </OverlayTrigger>
-                                                        </InputGroup.Text>
-                                                    </InputGroup.Append>
+                                                    <InputGroup.Text>
+                                                        <OverlayTrigger placement="top" overlay={<Tooltip>{nvu_value_fix_free_text}</Tooltip>}>
+                                                            <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={this.props.element.lmin & FIXED} onChange={this.props.element.lmin & FIXED ? this.onReset : this.onSet} />
+                                                        </OverlayTrigger>
+                                                    </InputGroup.Text>
                                                 </InputGroup>
                                             </td>
                                             <td className={"text-nowrap align-middle small " + (this.props.system_controls.show_units ? "" : "d-none")} colSpan="1">{this.props.element.units}</td>

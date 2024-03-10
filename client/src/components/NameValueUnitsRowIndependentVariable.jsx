@@ -7,8 +7,8 @@ import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
-export default NameValueUnitsRowIndependentVariable = ({ element, index, onChangeValid = () => {}, onChangeInvalid = () => {}, onSet = () => {}, onReset = () => {} }) => {
-//  console.log("NameValueUnitsRowIndependentVariable - Mounting...");
+export default function NameValueUnitsRowIndependentVariable({ element, index, onChangeValid, onChangeInvalid, onSet, onReset }) {
+//  console.log("NameValueUnitsRowIndependentVariable - Mounting...",'element=',element,'index=',index);
   const system_controls = useSelector((state) => state.model.model.system_controls);
   const dispatch = useDispatch();
 
@@ -33,26 +33,26 @@ export default NameValueUnitsRowIndependentVariable = ({ element, index, onChang
     if (auto_fixed) {
       dispatch(changeResultTerminationCondition('The value of ' + element.name + ' has been automatically fixed.'));
     }
-    onChangeValid(event);
+    if (typeof onChangeValid === "function") onChangeValid(event);
   }
 
   const onChangeInvalidLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onChangeInvalid event.target.value=', event.target.value);
-    onChangeInvalid(event);
+    if (typeof onChangeInvalid === "function") onChangeInvalid(event);
   }
 
   const onSetLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onSet');
     dispatch(fixSymbolValue(element.name));
     logValue(element.name, 'FIXED', 'FixedFlag', false);
-    onSet(event);
+    if (typeof onSet === "function") onSet(event);
   }
 
   const onResetLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onReset');
     dispatch(freeSymbolValue(element.name));
     logValue(element.name, 'FREE', 'FixedFlag', false);
-    onReset(event);
+    if (typeof onReset === "function") onReset(event);
   }
 
   var results = getAlertsByName(element.name);
@@ -85,24 +85,24 @@ export default NameValueUnitsRowIndependentVariable = ({ element, index, onChang
   // Table Row
   // =======================================
   return (
-    <tbody>
+    <tbody id={'nvuriv_' + element.name}>
       <tr key={element.name}>
-        <td className="align-middle" colSpan="2" id={'independent_variable_' + index}>
+        <td className="align-middle" colSpan="2" id={'nvuriv_name_' + element.name}>
           <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip>{element.tooltip}</Tooltip>}>
             <span>{element.name}</span>
           </OverlayTrigger>
         </td>
         <td className="align-middle">
           <InputGroup>
-            <FormControlTypeNumber id={'nvuriv_' + element.name} icon_alerts={icon_alerts} className={className} value={element.value} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidLocal} onChangeInvalid={onChangeInvalidLocal} />
+            <FormControlTypeNumber id={'nvuriv_value_' + element.name} icon_alerts={icon_alerts} className={className} value={element.value} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidLocal} onChangeInvalid={onChangeInvalidLocal} />
           </InputGroup>
         </td>
         <td className="align-middle text-center">
           <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>
-            <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={element.lmin & FIXED} onChange={element.lmin & FIXED ? onResetLocal : onSetLocal} />
+            <Form.Check id={'nvuriv_checkbox_' + element.name} type="checkbox" aria-label="Checkbox for fixed value" checked={element.lmin & FIXED} onChange={element.lmin & FIXED ? onResetLocal : onSetLocal} />
           </OverlayTrigger>
         </td>
-        <td className={"text-nowrap align-middle small " + (system_controls.show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
+        <td id={'nvuriv_units_' + element.name} className={"text-nowrap align-middle small " + (system_controls.show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
       </tr>
     </tbody>
   );

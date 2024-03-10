@@ -6,7 +6,7 @@ import ConstraintsMinRowIndependentVariable from './ConstraintsMinRowIndependent
 import ConstraintsMinHeaderDependentVariable from './ConstraintsMinHeaderDependentVariable';
 import ConstraintsMinRowDependentVariable from './ConstraintsMinRowDependentVariable';
 
-export default ConstraintsMinTable = () => {
+export default function ConstraintsMinTable() {
 //  console.log("ConstraintsMinTable - Mounting...");
   const symbol_table = useSelector((state) => state.model.model.symbol_table);
 
@@ -18,7 +18,7 @@ export default ConstraintsMinTable = () => {
 
   return (
     <>
-      <Table className="<Table className=col-md-3 border border-secondary" size="sm">
+      <Table id="cmnt" className="table-secondary col-md-3 border border-secondary" size="sm">
         <ConstraintsMinHeaderIndependentVariable />
         {symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden && <ConstraintsMinRowIndependentVariable key={element.name} element={element} index={index} />)}
         <ConstraintsMinHeaderDependentVariable />

@@ -2,18 +2,18 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
-export default ConstraintsMinHeaderIndependentVariable = () => {
-  console.log("ConstraintsMinHeaderIndependentVariable - Mounting...");
+export default function ConstraintsMinHeaderIndependentVariable() {
+//  console.log("ConstraintsMinHeaderIndependentVariable - Mounting...");
   const system_controls = useSelector((state) => state.model.model.system_controls);
 
   useEffect(() => {
-    console.log("ConstraintsMinHeaderIndependentVariable - Mounted");
-    return () => console.log("ConstraintsMinHeaderIndependentVariable - Unmounting ...");
+//    console.log("ConstraintsMinHeaderIndependentVariable - Mounted");
+//    return () => console.log("ConstraintsMinHeaderIndependentVariable - Unmounting ...");
     return () => { };
   }, []);
 
   return (
-    <thead>
+    <thead id="cmnhiv">
       <tr>
         <th className="text-center bg-secondary text-white" colSpan="4" id="IVMinConstraintTitle">
           <OverlayTrigger placement="top" overlay={<Tooltip>Lower limits on Independent Variables</Tooltip>}>

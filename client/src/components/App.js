@@ -12,7 +12,7 @@ import { displaySpinner } from "./Spinner";
 import { displayMessage } from "./MessageModal";
 import { logUsage } from '../logUsage';
 
-export default App = () => {
+export default function App() {
 //  console.log("APP - Mounting...");
   const [show, setShow] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);

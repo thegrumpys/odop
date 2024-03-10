@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip  } from 'react-bootstrap';
 
-export default NameValueUnitsHeaderCalcInput = () => {
+export default function NameValueUnitsHeaderCalcInput() {
 //  console.log("NameValueUnitsHeaderCalcInput - Mounting...");
   const symbol_table = useSelector((state) => state.model.model.symbol_table);
   const system_controls = useSelector((state) => state.model.model.system_controls);
@@ -16,7 +16,7 @@ export default NameValueUnitsHeaderCalcInput = () => {
   return (
     <>
       { (symbol_table.reduce((accum,element)=>{if (element.type === "calcinput" && !element.hidden) return accum+1; else return accum;}, 0) > 0) &&
-        (<thead>
+        (<thead id="nvuhci">
           <tr>
             <th className="text-center bg-secondary text-white" colSpan="6" id="CITitle">
               <OverlayTrigger placement="top" overlay={<Tooltip>Variables that are not subject to constraints, FIX or Search</Tooltip>}>

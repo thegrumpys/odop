@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip  } from 'react-bootstrap';
 
-export default NameValueUnitsHeaderIndependentVariable = () => {
+export default function NameValueUnitsHeaderIndependentVariable() {
 //  console.log("NameValueUnitsHeaderIndependentVariable - Mounting...");
   const system_controls = useSelector((state) => state.model.model.system_controls);
 
@@ -13,7 +13,7 @@ export default NameValueUnitsHeaderIndependentVariable = () => {
   }, []);
 
   return (
-    <thead>
+    <thead id="nvuhiv">
       <tr>
         <th className="text-center bg-secondary text-white" colSpan="6" id="IVTitle">
           <OverlayTrigger placement="top" overlay={<Tooltip>Inputs to design equations. Search adjusts FREE Independent Variables to obtain a feasible solution.</Tooltip>}>

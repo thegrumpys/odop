@@ -828,11 +828,9 @@ class ActionTrade extends Component {
                         Enter local exploration step size (%)<br/>
                         Possibilities range from {(90.0 * this.state.smallest).toFixed(2)} to {(100.0 * this.state.bigest).toFixed(2)}<br/>
                         <InputGroup>
-                            <InputGroup.Prepend>
-                                <InputGroup.Text>
-                                    Default
-                                </InputGroup.Text>
-                            </InputGroup.Prepend>
+                            <InputGroup.Text>
+                                Default
+                            </InputGroup.Text>
                             <FormControlTypeNumber value={this.state.default_est_percent} onChangeValid={this.onSizeChangeValid} onChangeInvalid={this.onSizeChangeInvalid}/>
                         </InputGroup>
                     </Modal.Body>

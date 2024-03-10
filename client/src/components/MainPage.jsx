@@ -16,7 +16,7 @@ import HelpMotd from '../menus/Help/HelpMotd';
 import HelpAbout from '../menus/Help/HelpAbout';
 import config from '../config';
 
-export default MainPage = () => {
+export default function MainPage() {
 //  console.log("MainPage - Mounting...");
   const [show, setShow] = useState(false);
   const [activeTab, setActiveTab] = useState(config.url.view);
