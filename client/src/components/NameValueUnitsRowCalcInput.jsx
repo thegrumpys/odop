@@ -7,17 +7,17 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
 export default function NameValueUnitsRowCalcInput({ element, index, onChangeValid, onChangeInvalid, onChange, onSelect }) {
-  console.log("NameValueUnitsRowCalcInput - Mounting...",'element=',element,'index=',index);
+//  console.log("NameValueUnitsRowCalcInput - Mounting...",'element=',element,'index=',index);
   const [table, setTable] = useState(null);
   const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("NameValueUnitsRowCalcInput - Mounted");
+//    console.log("NameValueUnitsRowCalcInput - Mounted");
     if (element.format === 'table') {
-      //      console.log('In NameValueUnitsRowCalcInput.constructor file= ../designtypes/'+element.table+'.json');
+//      console.log('In NameValueUnitsRowCalcInput.constructor file= ../designtypes/'+element.table+'.json');
       var table = require('../designtypes/' + element.table + '.json'); // Dynamically load table
-      //      console.log('In NameValueUnitsRowCalcInput.constructor table=',table);
+//      console.log('In NameValueUnitsRowCalcInput.constructor table=',table);
       setTable(table);
     }
     //    return () => console.log("NameValueUnitsRowCalcInput - Unmounting ...");

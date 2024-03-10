@@ -9,7 +9,7 @@ import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 
 export default function HelpAbout() {
-  console.log("HelpAbout - Mounting...");
+//  console.log("HelpAbout - Mounting...");
   const [show, setShow] = useState(false);
   const [sizes, setSizes] = useState('');
   const [size, setSize] = useState('');
@@ -21,20 +21,20 @@ export default function HelpAbout() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("HelpAbout - Mounted");
+//    console.log("HelpAbout - Mounted");
     getDBSize(user);
     return () => console.log("HelpAbout - Unmounting ...");
 //    return () => {};
   }, []);
 
   const toggle = () => {
-    console.log('In HelpAbout.toggle');
+//    console.log('In HelpAbout.toggle');
     setShow(!show);
     if (show) logUsage('event', 'HelpAbout', { event_label: 'HelpAbout' });
   }
 
   const getDBSize = (user) => {
-    console.log('In HelpAbout.getDBSize');
+//    console.log('In HelpAbout.getDBSize');
     displaySpinner(true);
     fetch('/api/v1/db_size', {
       headers: {
@@ -48,13 +48,13 @@ export default function HelpAbout() {
         return res.json()
       })
       .then(sizes => {
-        console.log('In HelpAbout.getSize sizes=', sizes);
+//        console.log('In HelpAbout.getSize sizes=', sizes);
         setSizes(sizes);
         var size = '';
         if (sizes.length > 0) {
           size = sizes[0]; // Default to first name
         }
-        console.log('In HelpAbout.getSize size=', size);
+//        console.log('In HelpAbout.getSize size=', size);
         setSize(size);
         logUsage('event', 'HelpAbout', { event_label: 'getDBSize: ' + size });
       })

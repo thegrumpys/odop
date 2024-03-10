@@ -72,7 +72,7 @@ export var checks = (store) => {
   var total = 0;
   for (let i = 0; i < design.model.symbol_table.length; i++) {
     var element = design.model.symbol_table[i];
-    //        console.log('name=',element.name,'element=',element);
+//    console.log('name=',element.name,'element=',element);
 
     // VALUE VALIDITY CHECKS
     var severity = ERR;
@@ -372,7 +372,7 @@ export var getAlertsByName = (name, includeViolations = false) => {
       alerts.push(entry);
     }
   });
-  //    console.log('In Alerts.getAlertsByName maxSeverityNumber=',maxSeverityNumber,'alerts=',alerts);
+//  console.log('In Alerts.getAlertsByName maxSeverityNumber=',maxSeverityNumber,'alerts=',alerts);
   return { className: getFeasibilityClassBySeverityNumber(maxSeverityNumber), alerts: alerts };
 }
 
@@ -383,14 +383,14 @@ export var getAlertsBySeverity = (severity = '*') => {
   var results;
   if (severity === '*') {
     results = alertsSlice.alerts.filter(entry => {
-      //            console.log('severity=',severity,'entry=',entry);
+//      console.log('severity=',severity,'entry=',entry);
       var severityNumber = getSeverityNumberBySeverity(entry.severity);
       entry.className = getFontClassBySeverityNumber(severityNumber);
       return entry.duplicate === undefined || entry.duplicate === false;
     });
   } else {
     results = alertsSlice.alerts.filter(entry => {
-      //            console.log('severity=',severity,'entry=',entry);
+//      console.log('severity=',severity,'entry=',entry);
       var severityNumber = getSeverityNumberBySeverity(entry.severity);
       entry.className = getFontClassBySeverityNumber(severityNumber);
       return entry.severity === severity && (entry.duplicate === undefined || entry.duplicate === false);

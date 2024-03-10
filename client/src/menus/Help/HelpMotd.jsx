@@ -4,10 +4,10 @@ import { NavDropdown } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
 
 export default function HelpMotd() {
-  console.log("HelpMotd - Mounting...");
+//  console.log("HelpMotd - Mounting...");
 
   useEffect(() => {
-    console.log("HelpMotd - Mounted");
+//    console.log("HelpMotd - Mounted");
 //    return () => console.log("HelpMotd - Unmounting ...");
     return () => { };
   }, []);
