@@ -1,6 +1,6 @@
 import * as o from './symbol_table_offsets';
-import { checks as commonChecks, WARN } from '../../components/Alerts';
 import { clearAlerts, addAlert } from '../../store/alertsSlice';
+import { checks as commonChecks, WARN } from '../../components/Alerts';
 import { toODOPPrecision } from '../../toODOPPrecision'
 
 export const checks = (store) => {

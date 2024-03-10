@@ -204,7 +204,7 @@ export function updateObjectiveValue(store, merit) {
     store.dispatch(changeResultSearchCompleted(false));
 
     if (debug) {
-	    if (!invalid && !infeasible) {
+      if (!invalid && !infeasible) {
             console.log('In updateObjectiveValue Valid & Feasible obj=',obj);
         } else if (!invalid && infeasible) {
             console.log('In updateObjectiveValue Valid & Infeasible obj=',obj);

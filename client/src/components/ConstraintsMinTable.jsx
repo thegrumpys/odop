@@ -18,7 +18,7 @@ export default function ConstraintsMinTable() {
 
   return (
     <>
-      <Table id="cmnt" className="table-secondary col-md-3 border border-secondary" size="sm">
+      <Table id="cmnt" className="table-light border border-secondary">
         <ConstraintsMinHeaderIndependentVariable />
         {symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden && <ConstraintsMinRowIndependentVariable key={element.name} element={element} index={index} />)}
         <ConstraintsMinHeaderDependentVariable />

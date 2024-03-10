@@ -378,7 +378,7 @@ export var getAlertsByName = (name, includeViolations = false) => {
 
 export var getAlertsBySeverity = (severity = '*') => {
 //  console.log('In Alerts.getAlertsBySeverity', 'severity=', severity);
-  var alertsSlice = store.getState().alerts;
+  var alertsSlice = store.getState().alertsSlice;
 //  console.log('### alertsSlice=',alertsSlice)
   var results;
   if (severity === '*') {

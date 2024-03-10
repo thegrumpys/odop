@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Row } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import NameValueUnitsTable from './NameValueUnitsTable';
 import ConstraintsMinTable from './ConstraintsMinTable';
 import ConstraintsMaxTable from './ConstraintsMaxTable';
@@ -16,15 +16,23 @@ export default function DesignTable() {
   }, []);
 
   return (
-    <div id="DesignTable">
+    <>
       <Row>
-        <NameValueUnitsTable />
-        <ConstraintsMinTable />
-        <ConstraintsMaxTable />
+        <Col className="p-0" lg="6">
+          <NameValueUnitsTable />
+        </Col>
+        <Col className="p-0" lg="3">
+          <ConstraintsMinTable />
+        </Col>
+        <Col className="p-0" lg="3">
+          <ConstraintsMaxTable />
+        </Col>
       </Row>
       <Row>
-        <NameValueUnitsCalcInputTable />
+        <Col className="p-0" lg="12">
+          <NameValueUnitsCalcInputTable />
+        </Col>
       </Row>
-    </div>
+    </>
   );
 }

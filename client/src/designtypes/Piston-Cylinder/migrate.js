@@ -18,7 +18,7 @@ export function migrate(design) {
     case '1.2':
 //        console.log('Convert from 1.2 to 1');
         design.constants.splice(0, design.constants.length); // Remove all constant entries
-    	migrated_design.version = '1'; // last thing... set the migrated model version
+      migrated_design.version = '1'; // last thing... set the migrated model version
     case '1':
         // Current model version
 //        console.log('Convert from 1 to 2');

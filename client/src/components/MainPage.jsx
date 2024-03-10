@@ -15,6 +15,7 @@ import { changeView } from '../store/modelSlice';
 import HelpMotd from '../menus/Help/HelpMotd';
 import HelpAbout from '../menus/Help/HelpAbout';
 import config from '../config';
+import ResultTable from './ResultTable';
 
 export default function MainPage() {
 //  console.log("MainPage - Mounting...");
@@ -46,6 +47,14 @@ export default function MainPage() {
   var { getViewNames } = require('../designtypes/'+type+'/view.js'); // Dynamically load getViewNames
   var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
 //  console.log('In MainPage.constructor viewNames=', viewNames);
+  var viewIndex = viewNames.find(element => element.name === config.url.view);
+//  console.log('In MainPage.constructor viewIndex=', viewIndex);
+  if (viewIndex >= 0) {
+    var viewComponent = viewNames[index].component;
+  } else { // Not found
+    var viewComponent = viewNames[0].component; // Default to the first one
+  }
+//  console.log('In MainPage.constructor viewComponent=', viewComponent);
   var src = 'designtypes/'+type+'/favicon.ico';
   var alt = type+' icon';
 //  console.log('src=',src,' alt=',alt);
@@ -76,18 +85,11 @@ export default function MainPage() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Container style={{ backgroundColor: '#eee', paddingTop: '60px' }}>
-        <Tabs defaultActiveKey={config.url.view} activeKey={activeTab}>
-          {viewNames.map((element) => {
-            return (
-              <Tab key={element.title} eventKey={element.name}>
-                <div id={'main_' + element.name}>
-                  {element.component}
-                </div>
-              </Tab>
-            );
-          })}
-        </Tabs>
+      <Container fluid="md"className="table-secondary" style={{ paddingTop: '60px' }}>
+        <Row>
+          <ResultTable />
+        </Row>
+        {viewComponent}
       </Container>
     </>
   );

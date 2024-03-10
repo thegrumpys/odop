@@ -18,14 +18,9 @@ export default function NameValueUnitsTable() {
 
   return (
     <>
-      <Table id="nvut" className="table-secondary col-md-6 border border-secondary" size="sm">
+      <Table id="nvut" className="table-light border border-secondary">
         <NameValueUnitsHeaderIndependentVariable />
-        {symbol_table.map((element, index) => 
-          element.type === "equationset" && 
-          element.input && 
-          !element.hidden && 
-          <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={index} />
-        )}
+        {symbol_table.map((element, index) => element.type === "equationset" && element.input && !element.hidden && <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={index} />)}
         <NameValueUnitsHeaderDependentVariable />
         {symbol_table.map((element, index) => element.type === "equationset" && !element.input && !element.hidden && <NameValueUnitsRowDependentVariable key={element.name} element={element} index={index} />)}
       </Table>

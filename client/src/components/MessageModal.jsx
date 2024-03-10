@@ -12,11 +12,11 @@ export const displayMessage = (message, variant = 'danger', header = '', help_ur
 }
 
 const MessageModal = () => {
-  const dispatch = useDispatch();
   const show = useSelector((state) => state.messageModal.show);
   const header = useSelector((state) => state.messageModal.header);
   const messages = useSelector((state) => state.messageModal.messages);
   const help_url = useSelector((state) => state.messageModal.help_url);
+  const dispatch = useDispatch();
 
 //  console.log("MESSAGEMODAL - Mounting...",'show=',show,'header=',header,'messages=',messages,'help_url=',help_url);
 

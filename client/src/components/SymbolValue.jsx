@@ -446,11 +446,11 @@ class SymbolValue extends Component {
                                     <tr>
                                         <td className="text-center" id="ObjectiveValue">
                                             <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
-				                                    <p>Visual summary of feasibility status.</p>
-				                                    <p>Objective Value = {this.props.objective_value.toFixed(7)}<br />
-				                                    OBJMIN = {this.props.system_controls.objmin.toFixed(7)}</p>
-				                                    <p>See on-line Help for details.  Try Help lookup <b>indicator</b></p>
-				                                    </Tooltip>}>
+                                            <p>Visual summary of feasibility status.</p>
+                                            <p>Objective Value = {this.props.objective_value.toFixed(7)}<br />
+                                            OBJMIN = {this.props.system_controls.objmin.toFixed(7)}</p>
+                                            <p>See on-line Help for details.  Try Help lookup <b>indicator</b></p>
+                                            </Tooltip>}>
                                                 <b>Status</b>
                                             </OverlayTrigger>
                                             <FeasibilityIndicator />
@@ -462,7 +462,7 @@ class SymbolValue extends Component {
                             ''
                         }
                         {this.state.error !== '' ? <Alert variant="danger"> {this.state.error} </Alert> : ''}
-                        <Table className="<Table className=border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                        <Table className="table-secondary border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                             {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
                                 <>
                                     <NameValueUnitsHeaderIndependentVariable />
@@ -491,22 +491,22 @@ class SymbolValue extends Component {
                                 </tbody>
                             </Table>}
                         {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
-                            <Table className="<Table className=border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                            <Table className="table-secondary border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                 <ConstraintsMinHeaderIndependentVariable />
                                 <ConstraintsMinRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                             </Table>}
                         {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
-                            <Table className="<Table className=border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                            <Table className="table-secondary border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                 <ConstraintsMinHeaderDependentVariable />
                                 <ConstraintsMinRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMinConstraint} onChangeInvalid={this.onChangeInvalidMinConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                             </Table>}
                         {this.props.element.type === "equationset" && this.props.element.input && !this.props.element.hidden &&
-                            <Table className="<Table className=border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                            <Table className="table-secondary border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                 <ConstraintsMaxHeaderIndependentVariable />
                                 <ConstraintsMaxRowIndependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                             </Table>}
                         {this.props.element.type === "equationset" && !this.props.element.input && !this.props.element.hidden &&
-                            <Table className="<Table className=border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
+                            <Table className="table-secondary border border-secondary" size="sm" style={{backgroundColor: '#eee'}}>
                                 <ConstraintsMaxHeaderDependentVariable />
                                 <ConstraintsMaxRowDependentVariable key={this.props.element.name} element={this.props.element} index={0} onChangeValid={this.onChangeValidMaxConstraint} onChangeInvalid={this.onChangeInvalidMaxConstraint} onSet={this.onModifiedFlag} onReset={this.onModifiedFlag} />
                             </Table>}
