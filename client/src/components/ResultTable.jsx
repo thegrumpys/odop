@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Table, OverlayTrigger, Tooltip, Modal, InputGroup, ButtonGroup, Button, Form, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Table, OverlayTrigger, Tooltip, Modal, InputGroup, ButtonGroup, Button, Form, Alert } from 'react-bootstrap';
 import { CONSTRAINED, FIXED, MIN, MAX } from '../store/actionTypes';
 import FeasibilityIndicator from './FeasibilityIndicator';
 import { search, seek, saveAutoSave } from '../store/modelSlice';
@@ -184,6 +184,9 @@ export default function ResultTable() {
 
   return (
     <>
+    <Container>
+    <Row>
+    <Col lg="8">
       <Table className="table-light" size="sm">
         <tbody>
           <tr>
@@ -218,6 +221,8 @@ export default function ResultTable() {
           </tr>
         </tbody>
       </Table>
+    </Col>
+    <Col lg="4">
       <Table className="table-light" size="sm">
         <tbody>
           <tr>
@@ -272,6 +277,9 @@ export default function ResultTable() {
           </tr>
         </tbody>
       </Table>
+    </Col>
+    </Row>
+    </Container>
       <Modal show={seekShow} onHide={onSeekCancelButton}>
         <Modal.Header closeButton>
           <Modal.Title>
