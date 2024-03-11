@@ -16,6 +16,7 @@ const dispatcher = store => next => action => {
   switch(action.type) {
 
     case loadInitialState().type: {
+      console.log('In dispatcher loadInitialState state=',store.getState());
       invokeInit(store);
       invokeEquationSet(store);
       propagate(store);
@@ -26,7 +27,7 @@ const dispatcher = store => next => action => {
     break;
 
     case changeSymbolValue().type: {
-        var design = store.getState().model;
+        var design = store.getState().modelSlice;
         var index = design.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index >= 0) {
           var element = design.model.symbol_table[index];

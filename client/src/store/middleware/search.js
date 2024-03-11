@@ -7,7 +7,7 @@ export function search(store, objmin, merit) {
 //    console.log('Entering search store=',store,'objmin=',objmin,'merit=',merit);
 //    console.trace();
 
-    var design = store.getState().model;
+    var design = store.getState().modelSlice;
 
     // Compress P into PC
     var element;
@@ -44,7 +44,7 @@ export function search(store, objmin, merit) {
     store.dispatch(changeResultSearchCompleted(true));
     store.dispatch(changeResultTerminationCondition(ncode));
 
-    design = store.getState().model;
+    design = store.getState().modelSlice;
     var obj = design.model.result.objective_value;
 //    console.log('Exiting search p=',p,'ncode=',ncode,'obj=',obj);
     return obj;

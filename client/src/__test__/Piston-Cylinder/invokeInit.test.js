@@ -24,7 +24,7 @@ it('invokeInit', () => {
 
     invokeInit(store);
 
-    var design = store.getState().model; // after
+    var design = store.getState().modelSlice; // after
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
     expect(design.model.version).toEqual("7");

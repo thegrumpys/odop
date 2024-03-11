@@ -21,8 +21,8 @@ it('demo3', () => {
         {"user": "USERID0123456789", name: "initialState", model: state},
         applyMiddleware(dispatcher));
 
-    var design = store.getState().model; // before
-    design = store.getState().model;
+    var design = store.getState().modelSlice; // before
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toEqual(0.0);
 
     // title: "Session Now In Progress",
@@ -30,7 +30,7 @@ it('demo3', () => {
 
     // title: "Page 02 of 11"
     store.dispatch(loadInitialState("Spring/Compression","US"));
-    design = store.getState().model;
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toBeCloseTo(0.0000000,7);
 
 // title: "Page 03 of 11"
@@ -46,7 +46,7 @@ it('demo3', () => {
     store.dispatch(fixSymbolValue("Force_2",112));
     store.dispatch(fixSymbolValue("L_2",1.969));
 
-    design = store.getState().model;
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toBeCloseTo(9.3335453,7);
 
 // title: "Page 05 of 11"
@@ -54,7 +54,7 @@ it('demo3', () => {
 
 // title: "Page 06 of 11"
     store.dispatch(search());
-    design = store.getState().model;
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toBeCloseTo(0.0000035,7);
 
 // title: "Page 07 of 11"
@@ -66,7 +66,7 @@ it('demo3', () => {
     store.dispatch(changeSymbolValue("L_Free",2.843));
     store.dispatch(changeSymbolValue("Coils_T",8.4));
 
-    design = store.getState().model;
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toBeCloseTo(0.0027744,7);
 
 // title: "Page 09 of 11"

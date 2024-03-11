@@ -25,8 +25,8 @@ it('demo10', () => {
         {"user": "USERID0123456789", name: "initialState", model: state},
         applyMiddleware(dispatcher));
 
-    var design = store.getState().model; // before
-    design = store.getState().model;
+    var design = store.getState().modelSlice; // before
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toEqual(0.0);
 
     // title: "Session Now In Progress",
@@ -36,7 +36,7 @@ it('demo10', () => {
     store.dispatch(loadInitialState("Spring/Compression","US"));
     store.dispatch(changeLabelsValue([{"name":"COMMENT","value":"Compression Spring demo10"}]));
 
-    design = store.getState().model;
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toBeCloseTo(0.0000000,7);
 
     // title: "Page 03 of 15"
@@ -50,7 +50,7 @@ it('demo10', () => {
     store.dispatch(changeSymbolValue("OD_Free",1.142));
     store.dispatch(changeSymbolValue("Wire_Dia",0.142));
 
-    design = store.getState().model;
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toBeCloseTo(0.2039332,7);
 
     // title: "Page 06 of 15"
@@ -59,7 +59,7 @@ it('demo10', () => {
     store.dispatch(changeSymbolValue("Wire_Dia",0.1055));
     store.dispatch(changeSymbolValue("Stress_Lim_Stat",96880));
 
-    design = store.getState().model;
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toBeCloseTo(0.0102917,7);
 
     // title: "Page 07 of 15"
@@ -71,7 +71,7 @@ it('demo10', () => {
     store.dispatch(fixSymbolValue("Mean_Dia",1));
     store.dispatch(fixSymbolValue("Stress_Solid",96880));
 
-    design = store.getState().model;
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toBeCloseTo(9.8438559,7);
 
     // title: "Page 08 of 15"
@@ -81,7 +81,7 @@ it('demo10', () => {
     store.dispatch(resetSymbolFlag("%_Avail_Deflect",MAX,CONSTRAINED));
     store.dispatch(changeSystemControlsValue({"maxit":1000,"objmin":0.000001,"delmin":0.00001,"tol":0.00001,"smallnum":1e-8}));
 
-    design = store.getState().model;
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toBeCloseTo(7.4588629,7);
 
     // title: "Page 09 of 15"
@@ -90,7 +90,7 @@ it('demo10', () => {
     // title: "Page 10 of 15"
     store.dispatch(search());
 
-    design = store.getState().model;
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toBeCloseTo(0.0000007,7);
 
     // title: "Page 11 of 15"
@@ -99,13 +99,13 @@ it('demo10', () => {
     // title: "Page 12 of 15"
     store.dispatch(fixSymbolValue("Wire_Dia",0.142));
 
-    design = store.getState().model;
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toBeCloseTo(0.0000545,7);
 
     // title: "Page 13 of 15"
     store.dispatch(search());
 
-    design = store.getState().model;
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toBeCloseTo(0.0000010,7);
 
     // title: "Page 14 of 15"

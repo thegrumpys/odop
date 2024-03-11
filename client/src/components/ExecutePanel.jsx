@@ -12,7 +12,7 @@ export var startExecute = function(prefix,execute_name,steps) {
 //    console.log('In startExecute prefix=',prefix,'execute_name=',execute_name,'steps=',steps);
     if (steps !== undefined && steps[0] !== undefined) {
         const { store } = this.context;
-        var design = store.getState().model;
+        var design = store.getState().modelSlice;
         steps = Object.assign([...steps], {0: Object.assign({}, steps[0], {state: JSON.stringify(design)})});
         var title = steps[0].title;
         var text = steps[0].text;
@@ -40,8 +40,8 @@ export var startExecute = function(prefix,execute_name,steps) {
                         outputLine('    store.dispatch('+dump+');');
                     }
                 }); // Generate test
-                design = store.getState().model;
-                outputLine('\n    design = store.getState().model;');
+                design = store.getState().modelSlice;
+                outputLine('\n    design = store.getState().modelSlice;');
                 outputLine('    expect(design.model.result.objective_value).toBeCloseTo('+design.model.result.objective_value.toFixed(7)+',7);');
             }
         } else {
@@ -122,7 +122,7 @@ class ExecutePanel extends Component {
         var next = this.state.step+1;
         if (this.state.steps[next] !== undefined) {
             const { store } = this.context;
-            var design = store.getState().model;
+            var design = store.getState().modelSlice;
             var steps = Object.assign([...this.state.steps], {[next]: Object.assign({}, this.state.steps[next], {state: JSON.stringify(design)})});
             var title = steps[next].title;
             var text = steps[next].text;
@@ -144,8 +144,8 @@ class ExecutePanel extends Component {
                             outputLine('    store.dispatch('+dump+');');
                         }
                     }); // Generate test
-                    design = store.getState().model;
-                    outputLine('\n    design = store.getState().model;');
+                    design = store.getState().modelSlice;
+                    outputLine('\n    design = store.getState().modelSlice;');
                     outputLine('    expect(design.model.result.objective_value).toBeCloseTo('+design.model.result.objective_value.toFixed(7)+',7);');
                 }
             } else {
@@ -169,7 +169,7 @@ class ExecutePanel extends Component {
         if (prev < 0) prev = 0; // Stop going backwards if it is on the first step
         // Put steps[prev].state into current store state - that is, time travel back
         const { store } = this.context;
-        var design = store.getState().model;
+        var design = store.getState().modelSlice;
         var steps = Object.assign([...this.state.steps]);
         var title = steps[prev].title;
         var text = steps[prev].text;
@@ -191,8 +191,8 @@ class ExecutePanel extends Component {
                         outputLine('    store.dispatch('+dump+');');
                     }
                 }); // Generate test
-                design = store.getState().model;
-                outputLine('\n    design = store.getState().model;');
+                design = store.getState().modelSlice;
+                outputLine('\n    design = store.getState().modelSlice;');
                 outputLine('    expect(design.model.result.objective_value).toBeCloseTo('+design.model.result.objective_value.toFixed(7)+',7);');
             }
         } else {

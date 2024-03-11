@@ -23,8 +23,8 @@ it('tutor6', () => {
         {"user": "USERID0123456789", name: "initialState", model: state},
         applyMiddleware(dispatcher));
 
-    var design = store.getState().model; // before
-    design = store.getState().model;
+    var design = store.getState().modelSlice; // before
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toEqual(0.0);
 
     // Execute File: tutor6
@@ -35,7 +35,7 @@ it('tutor6', () => {
     store.dispatch(loadInitialState("Spring/Compression","US"));
     store.dispatch(changeLabelsValue([{"name":"COMMENT","value":"Compression Spring Demo"}]));
 
-    design = store.getState().model;
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toBeCloseTo(0.0000000,7);
 
     // title: "Page 03 of 07"
@@ -49,13 +49,13 @@ it('tutor6', () => {
     store.dispatch(fixSymbolValue("Force_2",50));
     store.dispatch(fixSymbolValue("L_2",1.278));
 
-    design = store.getState().model;
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toBeCloseTo(11.1494326,7);
 
     // title: "Page 04 of 07"
     store.dispatch(search());
 
-    design = store.getState().model;
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toBeCloseTo(0.0000096,7);
 
     // title: "Page 05 of 07"
@@ -63,7 +63,7 @@ it('tutor6', () => {
     store.dispatch(changeSymbolConstraint("FS_2",MAX,1.6));
     store.dispatch(search());
 
-    design = store.getState().model;
+    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toBeCloseTo(0.0000031,7);
 
     // title: "Page 06 of 07"

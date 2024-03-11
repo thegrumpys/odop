@@ -23,8 +23,8 @@ export default function HelpAbout() {
   useEffect(() => {
 //    console.log("HelpAbout - Mounted");
     getDBSize(user);
-    return () => console.log("HelpAbout - Unmounting ...");
-//    return () => {};
+//    return () => console.log("HelpAbout - Unmounting ...");
+    return () => {};
   }, []);
 
   const toggle = () => {

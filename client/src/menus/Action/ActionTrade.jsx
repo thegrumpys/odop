@@ -76,7 +76,7 @@ class ActionTrade extends Component {
         const { store } = this.context;
 //        this.props.saveInputSymbolValues();
 //        this.props.search();
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         var nviol = this.commonViolationSetup();
         if (design.model.result.objective_value <= design.model.system_controls.objmin || nviol === 0) {
             this.props.restoreInputSymbolValues();
@@ -101,7 +101,7 @@ class ActionTrade extends Component {
         const { store } = this.context;
         this.props.saveInputSymbolValues();
         this.props.search();
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         for (let i = 0; i < design.model.symbol_table.length; i++) {
             element = design.model.symbol_table[i];
             if (element.lmin & CONSTRAINED && !(element.lmin & FDCL) && element.vmin > 0.0) {
@@ -155,7 +155,7 @@ class ActionTrade extends Component {
         var value;
         var ncode;
         const { store } = this.context;
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         for (let i = 0; i < this.state.nviol; i++) {
             let j = this.state.vflag[i];
             element = design.model.symbol_table[j];
@@ -183,7 +183,7 @@ class ActionTrade extends Component {
         var dir = [];
         var isArbitraryInvalid = [];
         const { store } = this.context;
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         for (let i = 0; i < this.state.nviol; i++) {
             let j = this.state.vflag[i];
             element = design.model.symbol_table[j];
@@ -210,7 +210,7 @@ class ActionTrade extends Component {
         var element;
         var dir = [];
         const { store } = this.context;
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         for (let i = 0; i < this.state.nviol; i++) {
             let j = this.state.vflag[i];
             element = design.model.symbol_table[j];
@@ -250,7 +250,7 @@ class ActionTrade extends Component {
         var itemp = 0;
         var temp;
         const { store } = this.context;
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         for (let i = 0; i < this.state.nviol; i++) {
             temp2 = Math.abs(dir[i]);
             if (temp2 > value) {
@@ -354,7 +354,7 @@ class ActionTrade extends Component {
 //        console.log('state=',this.state);
         var design;
         const { store } = this.context;
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         var dir = this.state.ldir.map((element,index)=>{
             var value;
             if (index === i) {
@@ -393,7 +393,7 @@ class ActionTrade extends Component {
 //        console.log('state=',this.state);
         var design;
         const { store } = this.context;
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         var greatestValue = this.state.dir.reduce((previousValue,currentValue) => {return Math.abs(currentValue) > previousValue ? Math.abs(currentValue) : previousValue}, 0.0);
 //        console.log('In ActionTrade.onArbitraryChangeInvalid greatestValue=',greatestValue);
         var isArbitraryInvalid = this.state.isArbitraryInvalid.map((element, index) => {
@@ -441,7 +441,7 @@ class ActionTrade extends Component {
         var rk3;
         var value;
         const { store } = this.context;
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         c3 = this.state.default_est_percent / 100.0; // Convert from percent to actual value
         // TAKE FIRST EXPLORATORY RELAXATION STEP
         for (let i = 0; i < this.state.nviol; i++) {
@@ -455,11 +455,11 @@ class ActionTrade extends Component {
                 this.props.changeSymbolConstraint(element.name, MAX, value);
             }
         }
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         if (design.model.result.objective_value > design.model.system_controls.objmin) {
             this.props.search();
         }
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         if (design.model.result.objective_value <= design.model.system_controls.objmin) {
             // Feasible was found, go show Feasible Modal
             this.setState({
@@ -488,7 +488,7 @@ class ActionTrade extends Component {
             }
             this.props.restoreInputSymbolValues();
             this.props.search();
-            design = store.getState().model;
+            design = store.getState().modelSlice;
             if (design.model.result.objective_value <= design.model.system_controls.objmin) {
                 // Feasible was found, go show Feasible Modal
                 this.setState({
@@ -555,7 +555,7 @@ class ActionTrade extends Component {
 //                        console.log(element.name + ' MAX ' + value + ' ' + element.units);
                 }
             }
-            design = store.getState().model;
+            design = store.getState().modelSlice;
             this.props.search();
         }
         this.setState({
@@ -591,7 +591,7 @@ class ActionTrade extends Component {
         var design;
         var element;
         const { store } = this.context;
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         for (let i = 0; i < this.state.nviol; i++) {
             let j = this.state.vflag[i];
             element = design.model.symbol_table[j];
@@ -629,9 +629,9 @@ class ActionTrade extends Component {
         var design;
         var ncode;
         const { store } = this.context;
-//        design = store.getState().model;
+//        design = store.getState().modelSlice;
 //        this.props.search();
-        design = store.getState().model; // Re-access store to get latest element values
+        design = store.getState().modelSlice; // Re-access store to get latest element values
         if (design.model.result.objective_value <= design.model.system_controls.objmin) {
             ncode = 'ACCEPTED TRADE RESULT';
             this.props.changeResultTerminationCondition(ncode);
@@ -654,7 +654,7 @@ class ActionTrade extends Component {
       var element;
       var ncode;
       const { store } = this.context;
-      design = store.getState().model;
+      design = store.getState().modelSlice;
       for (let i = 0; i < this.state.nviol; i++) {
           let j = this.state.vflag[i];
           element = design.model.symbol_table[j];
@@ -682,7 +682,7 @@ class ActionTrade extends Component {
 //        console.log('state=',this.state);
         var design;
         const { store } = this.context;
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         var element;
         for (let i = 0; i < this.state.nviol; i++) {
             let j = this.state.vflag[i];
@@ -731,7 +731,7 @@ class ActionTrade extends Component {
 //        console.log('In ActionTrade.render this=',this);
         var design;
         const { store } = this.context;
-        design = store.getState().model;
+        design = store.getState().modelSlice;
 
         var display_search_button;
         if (this.props.objective_value > this.props.system_controls.objmin) {
@@ -794,7 +794,7 @@ class ActionTrade extends Component {
                                     var element;
                                     var dname;
                                     const { store } = this.context;
-                                    design = store.getState().model;
+                                    design = store.getState().modelSlice;
                                     element = design.model.symbol_table[j];
                                     dname = element.name;
                                     return (
@@ -915,7 +915,7 @@ class ActionTrade extends Component {
 //        var design;
 //        var element;
 //        const { store } = this.context;
-//        design = store.getState().model;
+//        design = store.getState().modelSlice;
 //        console.log('CONSTRAINT                % VIOLATION           LEVEL');
 //        for (let i = 0; i < this.state.nviol; i++) {
 //            let j = this.state.vflag[i];
@@ -944,7 +944,7 @@ class ActionTrade extends Component {
                         var element;
                         var constraint_class;
                         const { store } = this.context;
-                        design = store.getState().model;
+                        design = store.getState().modelSlice;
                         element = design.model.symbol_table[j];
                         if (this.state.ldir[i] < 0) {
 //                                console.log(element.name + ' MIN ' + element.vmin * 100.0 + ' ' + element.cmin + ' ' + element.units);

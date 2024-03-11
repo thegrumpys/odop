@@ -3,7 +3,7 @@ export function invokeCheck(store) {
 
 //    console.log('<li>','Start invokeCheck','</li><ul>');
 
-    var design = store.getState().model;
+    var design = store.getState().modelSlice;
 //    console.log('In invokeCheck design=',design);
 
     // Check relationships among symbol tasble variables and create alerts

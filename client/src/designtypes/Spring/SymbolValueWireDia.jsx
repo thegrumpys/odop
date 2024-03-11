@@ -203,7 +203,7 @@ class SymbolValueWireDia extends Component {
         this.props.saveAutoSave();
         this.props.search();
         const { store } = this.context;
-        var design = store.getState().model;
+        var design = store.getState().modelSlice;
         var new_objective_value = design.model.result.objective_value;
         logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' Element ' + this.props.element.name + ' ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4)});
     }
@@ -265,7 +265,7 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.onContextMenu this=',this,'e=',e);
         e.preventDefault();
         const { store } = this.context;
-        var design = store.getState().model;
+        var design = store.getState().modelSlice;
         var reset = JSON.stringify(design);
         this.setState({
             edit_modal: true,

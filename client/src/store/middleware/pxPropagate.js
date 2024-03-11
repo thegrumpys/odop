@@ -2,7 +2,7 @@ import { changeSymbolConstraint } from '../modelSlice';
 
 export function pxPropagate(p, x, store) {
 //    console.log('<li>','Start pxPropagate store=',store,'</li><ul>');
-    var design = store.getState().model; // Re-access store to get latest source values
+    var design = store.getState().modelSlice; // Re-access store to get latest source values
 //    console.log('In pxPropagate design=',design);
     var ip = 0;
     var ix = 0;

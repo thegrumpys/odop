@@ -34,7 +34,7 @@ it('despak without merit', () => {
     store.dispatch(changeSymbolValue("STRESS", 789));
     store.dispatch(changeResultObjectiveValue(0.00005));
 
-    var design = store.getState().model; // before
+    var design = store.getState().modelSlice; // before
 
     // Compress P into PC
     var element;
@@ -49,7 +49,7 @@ it('despak without merit', () => {
     }
     var obj = despak(pc, store);
 
-    var design = store.getState().model; // after
+    var design = store.getState().modelSlice; // after
     expect(obj).toEqual(0.5605106434805028);
 
     expect(design.name).toEqual("initialState");
@@ -109,7 +109,7 @@ it('despak with merit', () => {
     store.dispatch(changeResultObjectiveValue(0.560511));
     store.dispatch(changeSymbolConstraint("STRESS", MAX, 10000)); // THIS MODIFIES THE DEPENDENT VARIABLES AND OBJECTIVE VALUE
 
-    var design = store.getState().model; // before
+    var design = store.getState().modelSlice; // before
 
     var SOUGHT = sto.STRESS + 1;
     var SDIR = -1; // MIN
@@ -170,7 +170,7 @@ it('despak with merit', () => {
     }
     var obj = despak(pc, store, merit);
 
-    var design = store.getState().model; // after
+    var design = store.getState().modelSlice; // after
     expect(obj).toEqual(0.5616217545916139);
 
     expect(design.name).toEqual("initialState");

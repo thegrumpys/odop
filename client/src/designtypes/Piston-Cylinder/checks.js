@@ -6,7 +6,7 @@ import { toODOPPrecision } from '../../toODOPPrecision'
 export const checks = (store) => {
 //    console.log('<li>','@@@@@ Start check store=',store,'</li><ul>');
     store.dispatch(clearAlerts());
-    var design = store.getState().model;
+    var design = store.getState().modelSlice;
     if (design.model.symbol_table[o.PRESSURE].value < 0.0) {
         store.dispatch(addAlert({
             element: design.model.symbol_table[o.PRESSURE],

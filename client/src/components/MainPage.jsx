@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    Navbar,
-    Nav,
-    Container,
-    Tabs,
-    Tab,
-    NavDropdown,
-    OverlayTrigger,
-    Tooltip,
-    Row
+  Navbar,
+  Nav,
+  Container,
+  Tabs,
+  Tab,
+  NavDropdown,
+  OverlayTrigger,
+  Tooltip,
+  Row
 } from 'react-bootstrap';
-import { changeView } from '../store/modelSlice';
+import { changeUser, changeView, deleteAutoSave } from '../store/modelSlice';
+import FileOpen from '../menus/File/FileOpen';
 import HelpMotd from '../menus/Help/HelpMotd';
 import HelpAbout from '../menus/Help/HelpAbout';
 import config from '../config';
@@ -29,7 +30,7 @@ export default function MainPage() {
   useEffect(() => {
 //    console.log("MainPage - Mounted");
 //    return () => console.log("MainPage - Unmounting ...");
-    return () => {};
+    return () => { };
   }, []);
 
   const toggle = () => {
@@ -42,21 +43,20 @@ export default function MainPage() {
     dispatch(changeView(view)); // Update the model
   }
 
-//  console.log('In MainPage.render');
   if (type === null) return null;
-  var { getViewNames } = require('../designtypes/'+type+'/view.js'); // Dynamically load getViewNames
+  var { getViewNames } = require('../designtypes/' + type + '/view.js'); // Dynamically load getViewNames
   var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
-//  console.log('In MainPage.constructor viewNames=', viewNames);
+  //  console.log('In MainPage.constructor viewNames=', viewNames);
   var viewIndex = viewNames.find(element => element.name === config.url.view);
-//  console.log('In MainPage.constructor viewIndex=', viewIndex);
+  //  console.log('In MainPage.constructor viewIndex=', viewIndex);
   if (viewIndex >= 0) {
     var viewComponent = viewNames[index].component;
   } else { // Not found
     var viewComponent = viewNames[0].component; // Default to the first one
   }
 //  console.log('In MainPage.constructor viewComponent=', viewComponent);
-  var src = 'designtypes/'+type+'/favicon.ico';
-  var alt = type+' icon';
+  var src = 'designtypes/' + type + '/favicon.ico';
+  var alt = type + ' icon';
 //  console.log('src=',src,' alt=',alt);
 
   return (
@@ -68,13 +68,16 @@ export default function MainPage() {
         <Navbar.Toggle onClick={toggle} />
         <Navbar.Collapse in={show}>
           <Nav className="mr-auto">
+            <NavDropdown title="File" renderMenuOnMount={true}>
+              <FileOpen />
+            </NavDropdown>
             <NavDropdown title="Help">
               <HelpMotd />
               <HelpAbout />
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Item className="d-flex align-items-center">
+            <Nav.Item className="d-flex align-items-center pr-3">
               <a href={"/docs/Help/DesignTypes/" + type + "/description.html"} target="_blank" rel="noopener noreferrer">
                 <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {type}. Select icon for full description.</Tooltip>}>
                   <img className="d-none d-md-inline" src={src} alt={alt} height="30px" />
@@ -85,7 +88,7 @@ export default function MainPage() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Container fluid="md"className="table-light" style={{ paddingTop: '60px' }}>
+      <Container fluid="md" className="table-light" style={{ paddingTop: '60px' }}>
         <Row>
           <ResultTable />
         </Row>

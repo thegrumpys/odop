@@ -37,7 +37,7 @@ export const modelSlice = createSlice({
 
     loadInitialState: {
       reducer: (state, action) => {
-//        console.log('model loadInitialState','state=',current(state),',action=',action);
+        console.log('model loadInitialState','state=',current(state),',action=',action);
         var module;
         if (action.payload.units === 'US') {
           module = require('../designtypes/'+action.payload.type+'/initialState.js'); // Dynamically load initialState

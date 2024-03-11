@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 //import { useNavigate } from "react-router-dom";
 import { load, loadInitialState, changeName, restoreAutoSave, deleteAutoSave } from "../store/modelSlice";
 import MainPage from "./MainPage";
-//import Home from "./Home";
-//import Test from "./Test";
 import { Button, Modal, Alert } from 'react-bootstrap';
 import config from '../config';
 import { displaySpinner } from "./Spinner";

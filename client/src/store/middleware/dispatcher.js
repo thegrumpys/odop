@@ -66,7 +66,7 @@ export const dispatcher = store => next => action => {
 
     case CHANGE_SYMBOL_VALUE:
 //        console.log('In dispatcher.CHANGE_SYMBOL_VALUE name=',action.payload.name,'value=',action.payload.value,'merit=',action.payload.merit);
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         design.model.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
                 if (element.type === "calcinput") {
@@ -102,7 +102,7 @@ export const dispatcher = store => next => action => {
         break;
     case FIX_SYMBOL_VALUE:
 //        console.log('In dispatcher.FIX_SYMBOL_VALUE action=',action);
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         design.model.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
                 if (element.lmin & FIXED) { // Is it already FIXED?
@@ -145,7 +145,7 @@ export const dispatcher = store => next => action => {
         break;
     case FREE_SYMBOL_VALUE:
 //        console.log('In dispatcher.FREE_SYMBOL_VALUE action=',action);
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         design.model.symbol_table.find((element) => {
             if (element.name === action.payload.name) {
                 if (element.lmin & FIXED) {
@@ -171,7 +171,7 @@ export const dispatcher = store => next => action => {
         break;
     case SET_SYMBOL_FLAG:
 //        console.log('In dispatcher.SET_SYMBOL_FLAG.propagate action=',action);
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         sink = design.model.symbol_table.find(element => element.name === action.payload.name);
 //        console.log('In dispatcher.SET_SYMBOL_FLAG.propagate sink=',sink);
         if (action.payload.mask & FDCL) {
@@ -195,7 +195,7 @@ export const dispatcher = store => next => action => {
         break;
     case RESET_SYMBOL_FLAG:
 //        console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate action=',action);
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         sink = design.model.symbol_table.find(element => element.name === action.payload.name);
 //        console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate sink=',sink);
         if (action.payload.mask & FDCL) {
@@ -241,12 +241,12 @@ export const dispatcher = store => next => action => {
         break;
 
     case SEARCH:
-        design = store.getState().model;
+        design = store.getState().modelSlice;
         search(store, design.model.system_controls.objmin);
         break;
     case SEEK:
         seek(store, action);
-        design = store.getState().model;
+        design = store.getState().modelSlice;
 //        console.log('@@@@@',design.model.result.termination_condition);
         var termination_condition = design.model.result.termination_condition;
         updateObjectiveValue(store);
