@@ -23,13 +23,13 @@ export const modelSlice = createSlice({
 
     startup: {
       reducer: (state, action) => {
-//        console.log('model startup','state=',current(state),',action=',action);
+        console.log('model startup','state=',current(state),',action=',action);
       }
     },
 
     load: {
       reducer: (state, action) => {
-//        console.log('model load','state=',current(state),',action=',action);
+        console.log('model load','state=',current(state),',action=',action);
         state.model = action.payload.model;
       },
       prepare: (model) => { return { payload: { model } } }
@@ -56,7 +56,7 @@ export const modelSlice = createSlice({
 
     changeName: {
       reducer: (state, action) => {
-//        console.log('model changeName','state=',current(state),',action=',action);
+        console.log('model changeName','state=',current(state),',action=',action);
         state.name = action.payload.name;
       },
       prepare: (name) => { return { payload: { name } } }
@@ -64,7 +64,7 @@ export const modelSlice = createSlice({
 
     changeUser: {
       reducer: (state, action) => {
-//        console.log('model changeUser','state=',current(state),',action=',action);
+        console.log('model changeUser','state=',current(state),',action=',action);
         state.user = action.payload.user;
       },
       prepare: (user) => { return { payload: { user } } }
@@ -72,7 +72,7 @@ export const modelSlice = createSlice({
 
     changeView: {
       reducer: (state, action) => {
-//        console.log('model changeView','state=',current(state),',action=',action);
+        console.log('model changeView','state=',current(state),',action=',action);
         state.view = action.payload.view;
       },
       prepare: (view) => { return { payload: { view } } }
@@ -80,7 +80,7 @@ export const modelSlice = createSlice({
 
     changeSymbolValue: {
       reducer: (state, action) => {
-//        console.log('model changeSymbolValue','state=',current(state),',action=',action);
+        console.log('model changeSymbolValue','state=',current(state),',action=',action);
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index >= 0) {
           state.model.symbol_table[index].value = action.payload.value;
@@ -93,7 +93,7 @@ export const modelSlice = createSlice({
 
     changeIndexValue: {
       reducer: (state, action) => {
-//        console.log('model changeIndexValue','state=',current(state),',action=',action);
+        console.log('model changeIndexValue','state=',current(state),',action=',action);
         if (action.payload.index >= 0 && action.payload.index < state.model.symbol_table.length) {
           state.model.symbol_table[action.payload.index].value = action.payload.value;
         } else {
@@ -105,21 +105,21 @@ export const modelSlice = createSlice({
 
     fixSymbolValue: { // IMPLEMENT ME!
       reducer: (state, action) => {
-//        console.log('model fixSymbolValue','state=',current(state),',action=',action);
+        console.log('model fixSymbolValue','state=',current(state),',action=',action);
       },
       prepare: (value1, value2) => { return { payload: { value1, value2 } } }
     },
 
     freeSymbolValue: { // IMPLEMENT ME!
       reducer: (state, action) => {
-//        console.log('model freeSymbolValue','state=',current(state),',action=',action);
+        console.log('model freeSymbolValue','state=',current(state),',action=',action);
       },
       prepare: (value1, value2) => { return { payload: { value1, value2 } } }
     },
 
     changeSymbolViolation: {
       reducer: (state, action) => {
-//        console.log('model changeSymbolViolation','state=',current(state),',action=',action);
+        console.log('model changeSymbolViolation','state=',current(state),',action=',action);
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index >= 0) {
           var element = state.model.symbol_table[index];
@@ -137,7 +137,7 @@ export const modelSlice = createSlice({
 
     changeSymbolConstraint: {
       reducer: (state, action) => {
-//        console.log('model changeSymbolConstraint','state=',current(state),',action=',action);
+        console.log('model changeSymbolConstraint','state=',current(state),',action=',action);
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index >= 0) {
           var element = state.model.symbol_table[index];
@@ -161,7 +161,7 @@ export const modelSlice = createSlice({
 
     changeSymbolConstraints: {
       reducer: (state, action) => {
-//        console.log('model changeSymbolConstraints','state=',current(state),',action=',action);
+        console.log('model changeSymbolConstraints','state=',current(state),',action=',action);
         let i=0;
         state.model.symbol_table.forEach((element) => {
           if (element.type === "equationset") {
@@ -183,35 +183,35 @@ export const modelSlice = createSlice({
 
     setSymbolFlag: { // IMPLEMENT ME!
       reducer: (state, action) => {
-//        console.log('model setSymbolFlag','state=',current(state),',action=',action);
+        console.log('model setSymbolFlag','state=',current(state),',action=',action);
       },
       prepare: (value1, value2) => { return { payload: { value1, value2 } } }
     },
 
     resetSymbolFlag: { // IMPLEMENT ME!
       reducer: (state, action) => {
-//        console.log('model resetSymbolFlag','state=',current(state),',action=',action);
+        console.log('model resetSymbolFlag','state=',current(state),',action=',action);
       },
       prepare: (value1, value2) => { return { payload: { value1, value2 } } }
     },
 
     changeSymbolInput: { // IMPLEMENT ME!
       reducer: (state, action) => {
-//        console.log('model changeSymbolInput','state=',current(state),',action=',action);
+        console.log('model changeSymbolInput','state=',current(state),',action=',action);
       },
       prepare: (value1, value2) => { return { payload: { value1, value2 } } }
     },
 
     changeSymbolHidden: { // IMPLEMENT ME!
       reducer: (state, action) => {
-//        console.log('model changeSymbolHidden','state=',current(state),',action=',action);
+        console.log('model changeSymbolHidden','state=',current(state),',action=',action);
       },
       prepare: (value1, value2) => { return { payload: { value1, value2 } } }
     },
 
     changeInputSymbolValues: {
       reducer: (state, action) => {
-//        console.log('model changeInputSymbolValues','state=',current(state),',action=',action);
+        console.log('model changeInputSymbolValues','state=',current(state),',action=',action);
         let i=0;
         state.model.symbol_table.forEach((element) => {
           if (element.type === "equationset" && element.input) {
@@ -227,21 +227,21 @@ export const modelSlice = createSlice({
 
     saveInputSymbolValues: { // IMPLEMENT ME!
       reducer: (state, action) => {
-//        console.log('model saveInputSymbolValues','state=',current(state),',action=',action);
+        console.log('model saveInputSymbolValues','state=',current(state),',action=',action);
       },
       prepare: (value1, value2) => { return { payload: { value1, value2 } } }
     },
 
     restoreInputSymbolValues: { // IMPLEMENT ME!
       reducer: (state, action) => {
-//        console.log('model restoreInputSymbolValues','state=',current(state),',action=',action);
+        console.log('model restoreInputSymbolValues','state=',current(state),',action=',action);
       },
       prepare: (value1, value2) => { return { payload: { value1, value2 } } }
     },
 
     changeOutputSymbolValues: {
       reducer: (state, action) => {
-//        console.log('model changeOutputSymbolValues','state=',current(state),',action=',action);
+        console.log('model changeOutputSymbolValues','state=',current(state),',action=',action);
         let i=0;
         state.model.symbol_table.forEach((element) => {
           if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
@@ -257,7 +257,7 @@ export const modelSlice = createSlice({
 
     saveOutputSymbolConstraints: {
       reducer: (state, action) => {
-//        console.log('model saveOutputSymbolConstraints','state=',current(state),',action=',action);
+        console.log('model saveOutputSymbolConstraints','state=',current(state),',action=',action);
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index >= 0) {
           var element = state.model.symbol_table[index];
@@ -276,7 +276,7 @@ export const modelSlice = createSlice({
 
     restoreOutputSymbolConstraints: {
       reducer: (state, action) => {
-//        console.log('model restoreOutputSymbolConstraints','state=',current(state),',action=',action);
+        console.log('model restoreOutputSymbolConstraints','state=',current(state),',action=',action);
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index >= 0) {
           var element = state.model.symbol_table[index];
@@ -305,7 +305,7 @@ export const modelSlice = createSlice({
 
     changeResultObjectiveValue: {
       reducer: (state, action) => {
-//        console.log('model changeResultObjectiveValue','state=',current(state),',action=',action);
+        console.log('model changeResultObjectiveValue','state=',current(state),',action=',action);
         state.model.result.search_completed = action.payload.objective_value;
       },
       prepare: (objective_value) => { return { payload: { objective_value } } }
@@ -313,7 +313,7 @@ export const modelSlice = createSlice({
 
     changeResultTerminationCondition: {
       reducer: (state, action) => {
-//        console.log('model changeResultTerminationCondition','state=',current(state),',action=',action);
+        console.log('model changeResultTerminationCondition','state=',current(state),',action=',action);
         state.model.result.search_completed = action.payload.termination_condition;
       },
       prepare: (termination_condition) => { return { payload: { termination_condition } } }
@@ -321,7 +321,7 @@ export const modelSlice = createSlice({
 
     changeResultSearchCompleted: {
       reducer: (state, action) => {
-//        console.log('model changeResultSearchCompleted','state=',current(state),',action=',action);
+        console.log('model changeResultSearchCompleted','state=',current(state),',action=',action);
         state.model.result.search_completed = action.payload.search_completed;
       },
       prepare: (search_completed) => { return { payload: { search_completed } } }
@@ -329,7 +329,7 @@ export const modelSlice = createSlice({
 
     changeSystemControlsValue: {
       reducer: (state, action) => {
-//        console.log('model changeSystemControlsValue','state=',current(state),',action=',action);
+        console.log('model changeSystemControlsValue','state=',current(state),',action=',action);
         state.model.system_controls = action.payload.system_controls;
       },
       prepare: (system_controls) => { return { payload: { system_controls } } }
@@ -337,7 +337,7 @@ export const modelSlice = createSlice({
 
     changeLabelsValue: {
       reducer: (state, action) => {
-//        console.log('model changeLabelsValue','state=',current(state),',action=',action);
+        console.log('model changeLabelsValue','state=',current(state),',action=',action);
         var index = state.model.labels.findIndex((element) => element.name === action.payload.name);
         if (index >= 0) {
           state.model.labels[index].value = action.payload.value;
@@ -350,42 +350,42 @@ export const modelSlice = createSlice({
 
     search: { // IMPLEMENT ME!
       reducer: (state, action) => {
-//        console.log('model search','state=',current(state),',action=',action);
+        console.log('model search','state=',current(state),',action=',action);
       },
       prepare: (value1, value2) => { return { payload: { value1, value2 } } }
     },
 
     seek: { // IMPLEMENT ME!
       reducer: (state, action) => {
-//        console.log('model seek','state=',current(state),',action=',action);
+        console.log('model seek','state=',current(state),',action=',action);
       },
       prepare: (value1, value2) => { return { payload: { value1, value2 } } }
     },
 
     saveAutoSave: { // IMPLEMENT ME!
       reducer: (state, action) => {
-//        console.log('model saveAutoSave','state=',current(state),',action=',action);
+        console.log('model saveAutoSave','state=',current(state),',action=',action);
       },
       prepare: (value1, value2) => { return { payload: { value1, value2 } } }
     },
 
     restoreAutoSave: { // IMPLEMENT ME!
       reducer: (state, action) => {
-//        console.log('model restoreAutoSave','state=',current(state),',action=',action);
+        console.log('model restoreAutoSave','state=',current(state),',action=',action);
       },
       prepare: (value1, value2) => { return { payload: { value1, value2 } } }
     },
 
     deleteAutoSave: { // IMPLEMENT ME!
       reducer: (state, action) => {
-//        console.log('model deleteAutoSave','state=',current(state),',action=',action);
+        console.log('model deleteAutoSave','state=',current(state),',action=',action);
       },
       prepare: (value1, value2) => { return { payload: { value1, value2 } } }
     },
 
     logUsage: {
       reducer: (state, action) => {
-//        console.log('model logUsage','state=',current(state),',action=',action);
+        console.log('model logUsage','state=',current(state),',action=',action);
         logUsage(action.payload.tag, action.payload.action, action.payload.note);
       },
       prepare: (tag, action, note) => { return { payload: { tag, action, note } } }
