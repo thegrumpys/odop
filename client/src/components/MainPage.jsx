@@ -11,53 +11,86 @@ import {
   Tooltip,
   Row
 } from 'react-bootstrap';
-import { changeUser, changeView, deleteAutoSave } from '../store/modelSlice';
+//import { changeUser, changeView, deleteAutoSave } from '../store/modelSlice';
 import FileOpen from '../menus/File/FileOpen';
 import HelpMotd from '../menus/Help/HelpMotd';
 import HelpAbout from '../menus/Help/HelpAbout';
 import config from '../config';
 import ResultTable from './ResultTable';
+import DesignTable from './DesignTable';
 
 export default function MainPage() {
 //  console.log("MainPage - Mounting...");
   const [show, setShow] = useState(false);
   const [activeTab, setActiveTab] = useState(config.url.view);
-  const name = useSelector((state) => state.modelSlice.name);
-  const view = useSelector((state) => state.modelSlice.view);
-  const type = useSelector((state) => state.modelSlice.model.type);
-  const dispatch = useDispatch();
+  const model_name = useSelector((state) => state.modelSlice.name);
+  const model_view = useSelector((state) => state.modelSlice.view);
+  const model_type = useSelector((state) => state.modelSlice.model.type);
+//  const dispatch = useDispatch();
+
+//  useEffect(() => {
+////    console.log("MainPage - Mounted");
+//  }, []);
 
   useEffect(() => {
-//    console.log("MainPage - Mounted");
-//    return () => console.log("MainPage - Unmounting ...");
-    return () => { };
-  }, []);
+    console.log("MainPage",'show=',show);
+  }, [show]);
+
+  useEffect(() => {
+    console.log("MainPage",'activeTab=',activeTab);
+  }, [activeTab]);
+
+  useEffect(() => {
+    console.log("MainPage",'model_name=',model_name);
+  }, [model_name]);
+
+  useEffect(() => {
+    console.log('MainPage','model_view=',model_view);
+    setActiveTab(model_view);
+  }, [model_view]);
+
+  useEffect(() => {
+    console.log('MainPage','model_type=',model_type);
+//    if (model_type === null) return;
+//    var { getViewNames } = require('../designtypes/'+ model_type + '/view.js'); // Dynamically load getViewNames
+//    console.log('MainPage - type changed','getViewNames=', getViewNames);
+//    var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
+//    console.log('MainPage - type changed','viewNames=', viewNames);
+//    var viewIndex = viewNames.find(element => element.name === config.url.view);
+//    console.log('MainPage','viewIndex=', viewIndex);
+//    if (viewIndex >= 0) {
+//      var viewComponent = viewNames[index].component;
+//    } else { // Not found
+//      var viewComponent = viewNames[0].component; // Default to the first one
+//    }
+//    console.log('MainPage - type changed','new_view=', new_view);
+//    if (new_view === undefined) {
+//      dispatch(changeView(config.env.view)); // if not found then assume the configured default
+//    } else {
+//      dispatch(changeView(view)); // if not found then assume the configured default
+//    }
+  }, [model_type]);
 
   const toggle = () => {
-//    console.log('In MainPage.toggle');
+    console.log('MainPage.toggle');
     setShow(!show);
   }
 
-  const setView = (view) => {
-//    console.log('In MainPage.setView view=',view);
-    dispatch(changeView(view)); // Update the model
-  }
-
-  if (type === null) return null;
-  var { getViewNames } = require('../designtypes/' + type + '/view.js'); // Dynamically load getViewNames
-  var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
-  //  console.log('In MainPage.constructor viewNames=', viewNames);
-  var viewIndex = viewNames.find(element => element.name === config.url.view);
-  //  console.log('In MainPage.constructor viewIndex=', viewIndex);
-  if (viewIndex >= 0) {
-    var viewComponent = viewNames[index].component;
-  } else { // Not found
-    var viewComponent = viewNames[0].component; // Default to the first one
-  }
-//  console.log('In MainPage.constructor viewComponent=', viewComponent);
-  var src = 'designtypes/' + type + '/favicon.ico';
-  var alt = type + ' icon';
-//  console.log('src=',src,' alt=',alt);
+  if (model_type === null) return null;
+//  var { getViewNames } = require('../designtypes/' + model_type + '/view.js'); // Dynamically load getViewNames
+//  var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
+//  console.log('MainPage','viewNames=', viewNames);
+//  var viewIndex = viewNames.find(element => element.name === config.url.view);
+//  console.log('MainPage','viewIndex=', viewIndex);
+//  if (viewIndex >= 0) {
+//    var viewComponent = viewNames[index].component;
+//  } else { // Not found
+//    var viewComponent = viewNames[0].component; // Default to the first one
+//  }
+//  console.log('MainPage','viewComponent=', viewComponent);
+  var src = 'designtypes/' + model_type + '/favicon.ico';
+  var alt = model_type + ' icon';
+//  console.log('MainPage','src=',src,' alt=',alt);
 
   return (
     <>
@@ -78,12 +111,12 @@ export default function MainPage() {
           </Nav>
           <Nav>
             <Nav.Item className="d-flex align-items-center pr-3">
-              <a href={"/docs/Help/DesignTypes/" + type + "/description.html"} target="_blank" rel="noopener noreferrer">
-                <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {type}. Select icon for full description.</Tooltip>}>
+              <a href={"/docs/Help/DesignTypes/" + model_type + "/description.html"} target="_blank" rel="noopener noreferrer">
+                <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {model_type}. Select icon for full description.</Tooltip>}>
                   <img className="d-none d-md-inline" src={src} alt={alt} height="30px" />
                 </OverlayTrigger>
               </a>
-              &nbsp;{name}
+              &nbsp;{model_name}
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>
@@ -92,9 +125,8 @@ export default function MainPage() {
         <Row>
           <ResultTable />
         </Row>
-        {viewComponent}
+        <DesignTable />
       </Container>
     </>
   );
 }
-

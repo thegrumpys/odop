@@ -83,14 +83,6 @@ export default function App() {
     logUsage('event', 'App', { event_label: 'type: ' + type + ' load defaultDesign' });
   }
 
-  const loadInitialStateDesign = (type, units) => {
-//    console.log('APP - loadInitialStateDesign','type=',type,'units=',units);
-    dispatch(loadInitialState(type, units));
-    dispatch(changeName('Startup'));
-    dispatch(deleteAutoSave());
-    logUsage('event', 'App', { event_label: 'type: ' + type + ' load initialState ' + units});
-  }
-
   const getDesign = (user, type, name) => {
 //    console.log('APP - getDesign user=',user,'type=',type,'name=',name);
     displaySpinner(true);

@@ -2,14 +2,14 @@ import { changeOutputSymbolValues } from '../modelSlice';
 
 // Invoke Init
 export function invokeInit(store) {
-    console.log('In invokeInit store=',store);
+//    console.log('In invokeInit store=',store);
 
 //    console.log('<li>','Start invokeInit','</li><ul>');
 
     var element;
 
     var design = store.getState().modelSlice;
-    console.log('In invokeInit design=',design);
+//    console.log('In invokeInit design=',design);
 
     // Loop to create p and x from symbol_table
     var p = [];
@@ -31,5 +31,5 @@ export function invokeInit(store) {
     // Compute and dispatch output changes
     store.dispatch(changeOutputSymbolValues(x));
 
-    console.log('</ul><li>','End invokeInit','</li>');
+//    console.log('</ul><li>','End invokeInit','</li>');
 }

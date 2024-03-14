@@ -3,7 +3,7 @@ import spinnerReducer from "./spinnerSlice";
 import messageReducer from "./messageSlice";
 import modelReducer from "./modelSlice";
 import alertsReducer from "./alertsSlice";
-import dispatcher from './middleware/logger';
+import dispatcher from './middleware/dispatcher';
 
 export default configureStore({
   reducer: {
