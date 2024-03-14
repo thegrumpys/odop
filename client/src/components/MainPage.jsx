@@ -13,6 +13,7 @@ import {
 } from 'react-bootstrap';
 //import { changeUser, changeView, deleteAutoSave } from '../store/modelSlice';
 import FileOpen from '../menus/File/FileOpen';
+import ActionSearch from '../menus/Action/ActionSearch';
 import HelpMotd from '../menus/Help/HelpMotd';
 import HelpAbout from '../menus/Help/HelpAbout';
 import config from '../config';
@@ -103,6 +104,9 @@ export default function MainPage() {
           <Nav className="mr-auto">
             <NavDropdown title="File" renderMenuOnMount={true}>
               <FileOpen />
+            </NavDropdown>
+            <NavDropdown title="Action">
+              <ActionSearch />
             </NavDropdown>
             <NavDropdown title="Help">
               <HelpMotd />

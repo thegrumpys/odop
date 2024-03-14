@@ -18,7 +18,6 @@ export default function HelpAbout() {
   const version = useSelector((state) => state.modelSlice.model.version);
   const jsontype = useSelector((state) => state.modelSlice.model.jsontype);
   const units = useSelector((state) => state.modelSlice.model.units);
-  const dispatch = useDispatch();
 
   useEffect(() => {
 //    console.log("HelpAbout - Mounted");

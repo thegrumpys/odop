@@ -4,7 +4,7 @@ import { patsh } from './patsh';
 
 // Search
 export function search(store, objmin, merit) {
-//    console.log('Entering search store=',store,'objmin=',objmin,'merit=',merit);
+    console.log('Entering search store=',store,'objmin=',objmin,'merit=',merit);
 //    console.trace();
 
     var design = store.getState().modelSlice;
@@ -46,6 +46,6 @@ export function search(store, objmin, merit) {
 
     design = store.getState().modelSlice;
     var obj = design.model.result.objective_value;
-//    console.log('Exiting search p=',p,'ncode=',ncode,'obj=',obj);
+    console.log('Exiting search p=',p,'ncode=',ncode,'obj=',obj);
     return obj;
 }

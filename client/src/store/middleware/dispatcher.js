@@ -212,6 +212,7 @@ const dispatcher = store => next => action => {
       break;
 
     case search().type: {
+      console.log('dispatcher saveAutoSave','store=',store,',action=',action);
       design = store.getState().modelSlice;
       search(store, design.model.system_controls.objmin);
     }
