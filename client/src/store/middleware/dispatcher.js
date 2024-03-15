@@ -10,6 +10,8 @@ import { propagate } from './propagate';
 import { setSclDen } from './setSclDen';
 import { updateObjectiveValue } from './updateObjectiveValue';
 import { invokeCheck } from './invokeCheck';
+import { search as invokeSearch} from './search'
+import { seek as invokeSeek} from './seek'
 
 const dispatcher = store => next => action => {
   //  console.log('In dispatcher','store=',store,'next=',next,'action=',action);
@@ -214,12 +216,12 @@ const dispatcher = store => next => action => {
     case search().type: {
       console.log('dispatcher saveAutoSave','store=',store,',action=',action);
       design = store.getState().modelSlice;
-      search(store, design.model.system_controls.objmin);
+      invokeSearch(store, design.model.system_controls.objmin);
     }
       break;
 
     case seek().type: {
-      seek(store, action);
+      invokeSeek(store, action);
       design = store.getState().modelSlice;
       //      console.log('@@@@@',design.model.result.termination_condition);
       var termination_condition = design.model.result.termination_condition;

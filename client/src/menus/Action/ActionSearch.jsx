@@ -11,7 +11,7 @@ export default function ActionSearch() {
   console.log("ActionSearch - Mounting...");
   const [searchInfiniteShow, setSearchInfiniteShow] = useState(false);
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const objmin = useSelector((state) => state.modelSlice.model.system_controls.objmin);
   const objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
   const dispatch = useDispatch();
 
@@ -72,7 +72,7 @@ export default function ActionSearch() {
   }
 
   var display_search_button;
-  if (objective_value > system_controls.objmin) {
+  if (objective_value > objmin) {
     display_search_button = true;
   } else {
     display_search_button = false;
