@@ -1,10 +1,7 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { InputGroup, ButtonGroup, OverlayTrigger, Tooltip, Modal, Button, Form, Table } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { InputGroup, ButtonGroup, OverlayTrigger, Tooltip, Modal, Button, Form, Table } from 'react-bootstrap';
+import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
 import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/modelSlice';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
@@ -16,7 +13,7 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
   const [show, setShow] = useState(false);
   const [isInvalidValue, setIsInvalidValue] = useState(false);
   const [valueString, setValueString] = useState(false);
-  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const show_violations = useSelector((state) => state.modelSlice.model.system_controls.show_violations);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -172,8 +169,8 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
               </Modal.Footer>
             </Modal> : ''}
         </td>
-        <td className={"text-right align-middle small " + className + (system_controls.show_violations === 0 ? "d-none" : "")} colSpan="1">
-          {system_controls.show_violations === 1 && element.vmax <= 0 ?
+        <td className={"text-right align-middle small " + className + (show_violations === 0 ? "d-none" : "")} colSpan="1">
+          {show_violations === 1 && element.vmax <= 0 ?
             ''
             : (element.lmax & FIXED ?
               toODOPPrecision(element.vmax * 100.0)
