@@ -8,6 +8,7 @@ import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 import { toODOPPrecision } from '../toODOPPrecision'
+import Emitter from './Emitter';
 
 class ConstraintsMaxRowIndependentVariable extends Component {
 
@@ -28,6 +29,24 @@ class ConstraintsMaxRowIndependentVariable extends Component {
             modal: false, // Default: do not display modal
             isInvalidValue: false,
         };
+    }
+
+    componentDidMount() {
+//        console.log('In componentDidMount');
+        Emitter.on('clearAlerts', () => {
+//            console.log('In componentDidMount clearAlerts handler');
+            this.forceUpdate();
+        });
+        Emitter.on('addAlert', (alert) => {
+//            console.log('In componentDidMount addAlert handler', alert);
+            this.forceUpdate();
+        });
+    }
+
+    componentWillUnmount() {
+//        console.log('In componentWillUnmount');
+        Emitter.off('clearAlerts');
+        Emitter.off('addAlerts');
     }
 
     onSetFlagMaxConstrained(event) {
