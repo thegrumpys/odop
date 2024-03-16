@@ -70,11 +70,11 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
               <Form.Control id={'nvurci_value_' + element.name} type="text" disabled={!element.input} value={element.value} onChange={onChangeLocal} /> : ''}
             {element.format === 'table' &&
               (
-                <Form.Control id={'nvurci_value_' + element.name} as="select" disabled={!element.input} value={element.value} onChange={onSelectLocal}>
+                <Form.Select id={'nvurci_value_' + element.name} disabled={!element.input} value={element.value} onChange={onSelectLocal}>
                   {table.map((value, index) =>
                     index > 0 ? <option key={index} value={index}>{value[0]}</option> : ''
                   )}
-                </Form.Control>
+                </Form.Select>
               )
             }
           </InputGroup>

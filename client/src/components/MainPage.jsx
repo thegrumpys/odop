@@ -104,13 +104,13 @@ export default function MainPage() {
 
   return (
     <>
-      <Navbar variant="light" bg="light" expand="md" fixed="top">
+      <Navbar className="ps-3 pe-3" variant="light" bg="light" expand="md" fixed="top">
         <OverlayTrigger placement="bottom" overlay={<Tooltip>Reset app.<br />Save your work first!<br />See Help AutoSave.</Tooltip>}>
           <Navbar.Brand href="/"><img className="d-none d-md-inline" src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" />ODOP</Navbar.Brand>
         </OverlayTrigger>
         <Navbar.Toggle onClick={toggle} />
         <Navbar.Collapse in={show}>
-          <Nav className="mr-auto">
+          <Nav className="me-auto">
             <NavDropdown title="File" renderMenuOnMount={true}>
               <FileOpen />
               <NavDropdown.Divider />
@@ -136,7 +136,7 @@ export default function MainPage() {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Item className="d-flex align-items-center pr-3">
+            <Nav.Item className="d-flex align-items-center">
               <a href={"/docs/Help/DesignTypes/" + model_type + "/description.html"} target="_blank" rel="noopener noreferrer">
                 <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {model_type}. Select icon for full description.</Tooltip>}>
                   <img className="d-none d-md-inline" src={src} alt={alt} height="30px" />
