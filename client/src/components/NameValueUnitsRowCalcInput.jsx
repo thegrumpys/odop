@@ -8,24 +8,19 @@ import { getAlertsByName } from './Alerts';
 
 export default function NameValueUnitsRowCalcInput({ element, index, onChangeValid, onChangeInvalid, onChange, onSelect }) {
 //  console.log("NameValueUnitsRowCalcInput - Mounting...",'element=',element,'index=',index);
-  const [table, setTable] = useState(null);
-  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const show_units = useSelector((state) => state.modelSlice.model.system_controls.show_units);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-//    console.log("NameValueUnitsRowCalcInput - Mounted");
-    if (element.format === 'table') {
-//      console.log('In NameValueUnitsRowCalcInput.constructor file= ../designtypes/'+element.table+'.json');
-      var table = require('../designtypes/' + element.table + '.json'); // Dynamically load table
-//      console.log('In NameValueUnitsRowCalcInput.constructor table=',table);
-      setTable(table);
-    }
-    //    return () => console.log("NameValueUnitsRowCalcInput - Unmounting ...");
-    return () => { };
-  }, []);
+  var tableContents = null;
+  if (element.format === 'table') {
+//    console.log('NameValueUnitsRowCalcInput file= ../designtypes/'+element.table+'.json');
+    var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
+//    console.log('NameValueUnitsRowCalcInput tableContents=',tableContents);
+  }
+  const [table, setTable] = useState(tableContents);
 
   const onChangeValidLocal = (event) => {
-//    console.log('In NameValueUnitsRowCalcInput.onChangeValid', 'event.target.value=', event.target.value);
+//    console.log('NameValueUnitsRowCalcInput.onChangeValid', 'event.target.value=', event.target.value);
     var value = parseFloat(event.target.value);
     dispatch(changeSymbolValue(element.name, value)); // Update the model
     logValue(element.name, event.target.value);
@@ -38,14 +33,14 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
   }
 
   const onChangeLocal = (event) => {
-//    console.log('In NameValueUnitsRowCalcInput.onChange', 'event.target.value=', event.target.value);
+//    console.log('NameValueUnitsRowCalcInput.onChange', 'event.target.value=', event.target.value);
     dispatch(changeSymbolValue(element.name, event.target.value)); // Update the model
     logValue(element.name, event.target.value);
     if (typeof onChange === "function") onChange(event);
   }
 
   const onSelectLocal = (event) => {
-//    console.log('In NameValueUnitsRowCalcInput.onSelect', 'event.target.value=', event.target.value);
+//    console.log('NameValueUnitsRowCalcInput.onSelect', 'event.target.value=', event.target.value);
     var selectedIndex = parseFloat(event.target.value);
     dispatch(changeSymbolValue(element.name, selectedIndex));
     logValue(element.name, selectedIndex, 'TableIndex');
@@ -55,6 +50,7 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
   var results = getAlertsByName(element.name);
   var className = results.className;
   var icon_alerts = results.alerts;
+//  console.log('name=',element.name,'table=',table);
   // =======================================
   // Table Row
   // =======================================
@@ -71,7 +67,7 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
             {element.format === undefined && typeof element.value === 'number' ?
               <FormControlTypeNumber id={'nvurci_value_' + element.name} disabled={!element.input} icon_alerts={icon_alerts} className={className} value={element.value} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidLocal} onChangeInvalid={onChangeInvalidLocal} /> : ''}
             {element.format === undefined && typeof element.value === 'string' ?
-              <Form.Contro id={'nvurci_value_' + element.name} type="text" disabled={!element.input} value={element.value} onChange={onChangeLocal} /> : ''}
+              <Form.Control id={'nvurci_value_' + element.name} type="text" disabled={!element.input} value={element.value} onChange={onChangeLocal} /> : ''}
             {element.format === 'table' &&
               (
                 <Form.Control id={'nvurci_value_' + element.name} as="select" disabled={!element.input} value={element.value} onChange={onSelectLocal}>
@@ -83,7 +79,7 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
             }
           </InputGroup>
         </td>
-        <td id={'nvurci_units_' + element.name} className={"text-nowrap align-middle small " + (system_controls.show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
+        <td id={'nvurci_units_' + element.name} className={"text-nowrap align-middle small " + (show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
       </tr>
     </tbody>
   );
