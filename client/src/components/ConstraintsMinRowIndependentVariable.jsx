@@ -102,6 +102,7 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
   // =======================================
   var results = getAlertsByName(element.name + ' MIN');
   var className = results.className;
+//  console.log('results=',results);
   var icon_alerts = results.alerts;
   return (
     <tbody id={'cmnriv_' + element.name}>

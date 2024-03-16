@@ -106,6 +106,7 @@ export default function ConstraintsMinRowDependentVariable({ element, index, onC
   // Constraint Minimum Column
   // =======================================
   var results = getAlertsByName(element.name + ' MIN');
+//  console.log('results=',results);
   var className = results.className;
   var icon_alerts = results.alerts;
   return (

@@ -280,11 +280,11 @@ export var getSeverityNumberByNameAndObjValue = (name, severity) => {
 //  console.log('### design=',design)
   var severityNumber = 0;
   if (name !== undefined && (name.endsWith(' MIN') || name.endsWith(' MAX')) && severity !== INFO) {
-    if (design.result.objective_value > 4 * design.result.system_controls.objmin) {
+    if (design.model.result.objective_value > 4 * design.model.system_controls.objmin) {
       severityNumber = 3;
-    } else if (design.result.objective_value > design.result.system_controls.objmin) {
+    } else if (design.model.result.objective_value > design.model.system_controls.objmin) {
       severityNumber = 2;
-    } else if (design.result.objective_value > 0.0) {
+    } else if (design.model.result.objective_value > 0.0) {
       severityNumber = 1;
     }
   }
@@ -319,13 +319,9 @@ export var getAlertsByName = (name, includeViolations = false) => {
   alertsSlice.alerts.filter(entry => entry.severity === ERR).forEach((entry) => {
     var severityNumber;
     if (entry.name === name) { // Matches exactly
-      severityNumber = getSeverityNumberBySeverity(entry.severity);
-      entry.className = getFontClassBySeverityNumber(severityNumber);
       maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name, entry.severity));
       alerts.push(entry);
     } else if (includeViolations && (entry.name === name + ' MIN' || entry.name === name + ' MAX')) { // Matches name prefix
-      severityNumber = getSeverityNumberBySeverity(entry.severity);
-      entry.className = getFontClassBySeverityNumber(severityNumber);
       maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name, entry.severity));
       alerts.push(entry);
     }
@@ -333,13 +329,9 @@ export var getAlertsByName = (name, includeViolations = false) => {
   alertsSlice.alerts.filter(entry => entry.severity === WARN).forEach((entry) => {
     var severityNumber;
     if (entry.name === name) { // Matches exactly
-      severityNumber = getSeverityNumberBySeverity(entry.severity);
-      entry.className = getFontClassBySeverityNumber(severityNumber);
       maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name, entry.severity));
       alerts.push(entry);
     } else if (includeViolations && (entry.name === name + ' MIN' || entry.name === name + ' MAX')) { // Matches name prefix
-      severityNumber = getSeverityNumberBySeverity(entry.severity);
-      entry.className = getFontClassBySeverityNumber(severityNumber);
       maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name, entry.severity));
       alerts.push(entry);
     }
@@ -347,13 +339,9 @@ export var getAlertsByName = (name, includeViolations = false) => {
   alertsSlice.alerts.filter(entry => entry.severity === NOTICE).forEach((entry) => {
     var severityNumber;
     if (entry.name === name) { // Matches exactly
-      severityNumber = getSeverityNumberBySeverity(entry.severity);
-      entry.className = getFontClassBySeverityNumber(severityNumber);
       maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name, entry.severity));
       alerts.push(entry);
     } else if (includeViolations && (entry.name === name + ' MIN' || entry.name === name + ' MAX')) { // Matches name prefix
-      severityNumber = getSeverityNumberBySeverity(entry.severity);
-      entry.className = getFontClassBySeverityNumber(severityNumber);
       maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name, entry.severity));
       alerts.push(entry);
     }
@@ -361,13 +349,9 @@ export var getAlertsByName = (name, includeViolations = false) => {
   alertsSlice.alerts.filter(entry => entry.severity === INFO).forEach((entry) => {
     var severityNumber;
     if (entry.name === name) { // Matches exactly
-      severityNumber = getSeverityNumberBySeverity(entry.severity);
-      entry.className = getFontClassBySeverityNumber(severityNumber);
       maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name, entry.severity));
       alerts.push(entry);
     } else if (includeViolations && (entry.name === name + ' MIN' || entry.name === name + ' MAX')) { // Matches name prefix
-      severityNumber = getSeverityNumberBySeverity(entry.severity);
-      entry.className = getFontClassBySeverityNumber(severityNumber);
       maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name, entry.severity));
       alerts.push(entry);
     }
