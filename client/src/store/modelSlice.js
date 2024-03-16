@@ -396,14 +396,16 @@ export const modelSlice = createSlice({
     changeLabelsValue: {
       reducer: (state, action) => {
 //        console.log('reducer changeLabelsValue','state=',current(state),',action=',action);
-        var index = state.model.labels.findIndex((element) => element.name === action.payload.name);
-        if (index >= 0) {
-          state.model.labels[index].value = action.payload.value;
-        } else {
-          console.error('changeLabelsValue: Failed to find name in labels.','name=',action.payload.name,'value=',action.payload.value);
-        }
+        state.model.labels = state.model.labels.map((element) => {
+          var index = action.payload.labels.findIndex(label => element.name === label.name);
+          if (index >= 0) {
+            return { ...element, value: action.payload.labels[index].value };
+          } else {
+            return element;
+          }
+        });
       },
-      prepare: (name, value) => { return { payload: { name, value } } }
+      prepare: (labels) => { return { payload: { labels } } }
     },
 
     search: {
