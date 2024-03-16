@@ -1,34 +1,27 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
 
-class HelpIndex extends Component {
+export default function HelpIndex() {
+//  console.log("HelpIndex - Mounting...");
 
-    constructor(props) {
-//        console.log("In HelpIndex.constructor props=",props);
-        super(props);
-        this.onHelp = this.onHelp.bind(this);
-    }
+  useEffect(() => {
+//    console.log("HelpIndex - Mounted");
+//    return () => console.log("HelpIndex - Unmounting ...");
+    return () => { };
+  }, []);
 
-    onHelp() {
-        logUsage('event', 'HelpIndex', { event_label: '/docs/Help' });
-        window.open('/docs/Help', '_blank');
-    }
+  const onHelp = () => {
+    logUsage('event', 'HelpIndex', { event_label: '/docs/Help' });
+    window.open('/docs/Help', '_blank');
+  }
 
-    render() {
-//        console.log('In HelpIndex.render this=',this);
-        return (
-            <>
-                <NavDropdown.Item onClick={this.onHelp}>
-                    Index
-                </NavDropdown.Item>
-            </>
-        );
-    }
+  return (
+    <>
+      <NavDropdown.Item onClick={onHelp}>
+        Index
+      </NavDropdown.Item>
+    </>
+  );
 }
-
-const mapStateToProps = state => ({
-});
-
-export default connect(mapStateToProps)(HelpIndex);

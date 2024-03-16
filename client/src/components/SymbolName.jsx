@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class SymbolName extends Component {
 
     render() {
-//        console.log('In SymbolName.render this=',this);
+//        console.log('In SymbolName.render');
         return (
             <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')} id={'sn_'+this.props.index}>
                 <OverlayTrigger placement="top" overlay={this.props.element.tooltip !== undefined && <Tooltip>{this.props.element.tooltip}</Tooltip>}>

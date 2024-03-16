@@ -80,7 +80,7 @@ class HelpDemo extends Component {
     }
 
     render() {
-//        console.log('In HelpDemo.render this=',this);
+//        console.log('In HelpDemo.render');
         return (
             <>
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.execute_names !== undefined && this.state.execute_names.length === 0}>

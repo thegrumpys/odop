@@ -71,7 +71,7 @@ class FileProperties extends Component {
     }
 
     render() {
-//        console.log('In FileProperties.render this=',this);
+//        console.log('In FileProperties.render');
         return (
             <>
                 <NavDropdown.Item onClick={this.toggle}>

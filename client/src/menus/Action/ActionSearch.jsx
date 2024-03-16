@@ -8,7 +8,7 @@ import { displayMessage } from '../../components/Message';
 import store from '../../store/store';
 
 export default function ActionSearch() {
-  console.log("ActionSearch - Mounting...");
+//  console.log("ActionSearch - Mounting...");
   const [searchInfiniteShow, setSearchInfiniteShow] = useState(false);
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const objmin = useSelector((state) => state.modelSlice.model.system_controls.objmin);
@@ -16,13 +16,13 @@ export default function ActionSearch() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("ActionSearch - Mounted");
-    return () => console.log("ActionSearch - Unmounting ...");
-//    return () => { };
+//    console.log("ActionSearch - Mounted");
+//    return () => console.log("ActionSearch - Unmounting ...");
+    return () => { };
   }, []);
 
   const onSearchRequest = (event) => {
-    console.log('ActionSearch.onSearchRequest this=',this,'event=',event);
+    console.log('ActionSearch.onSearchRequest','event=',event);
     if (symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Search cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
       return;
@@ -46,7 +46,7 @@ export default function ActionSearch() {
   }
 
   const onSearchContextHelp = () => {
-    console.log('ActionSearch.onSearchContinue this=',this);
+    console.log('ActionSearch.onSearchContinue');
     window.open('/docs/Help/errors.html#objNotFinite', '_blank');
   }
 

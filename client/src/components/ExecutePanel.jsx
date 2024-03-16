@@ -52,7 +52,7 @@ export var startExecute = function(prefix,execute_name,steps) {
 }
 
 export var stopExecute = function() {
-//    console.log('In stopExecute this=',this);
+//    console.log('In stopExecute');
     logUsage('event', 'ExecutePanel', { event_label: 'stop ' + this.state.execute_name});
     this.setState({
         execute_name: undefined, // Clear execute name
@@ -88,7 +88,7 @@ class ExecutePanel extends Component {
     }
 
     componentDidMount() {
-//        console.log('In ExecutePanel.componentDidMount this=',this);
+//        console.log('In ExecutePanel.componentDidMount');
         if (this.state.execute_name !== undefined) {
 //            console.log('In ExecutePanel.componentDidMount this.state.execute_name=',this.state.execute_name);
             var { execute } = require('../designtypes/'+this.props.type+'/'+this.state.execute_name+'.js'); // Dynamically load execute
@@ -101,7 +101,7 @@ class ExecutePanel extends Component {
     }
 
     componentDidUpdate(prevProps) {
-//        console.log('In ExecutePanel.componentDidUpdate this=',this,'prevProps=',prevProps);
+//        console.log('In ExecutePanel.componentDidUpdate','prevProps=',prevProps);
         if (prevProps.type !== this.props.type) {
 //            console.log('In ExecutePanel.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
 //            console.log('In ExecutePanel.componentDidUpdate this.state.execute_name=',this.state.execute_name,'prefix=',this.state.prefix);
@@ -112,13 +112,13 @@ class ExecutePanel extends Component {
     }
 
     onCancel() {
-//        console.log('In ExecutePanel.onCancel this=',this);
+//        console.log('In ExecutePanel.onCancel');
         stopExecute();
         this.props.changeResultTerminationCondition(''); // Reset any leftover messages
     }
 
     onNext() {
-//        console.log('In ExecutePanel.onNext this=',this);
+//        console.log('In ExecutePanel.onNext');
         var next = this.state.step+1;
         if (this.state.steps[next] !== undefined) {
             const { store } = this.context;
@@ -164,7 +164,7 @@ class ExecutePanel extends Component {
     }
 
     onBack() {
-//        console.log('In ExecutePanel.onBack this=',this);
+//        console.log('In ExecutePanel.onBack');
         var prev = this.state.step-1;
         if (prev < 0) prev = 0; // Stop going backwards if it is on the first step
         // Put steps[prev].state into current store state - that is, time travel back
@@ -201,7 +201,7 @@ class ExecutePanel extends Component {
     }
 
     render() {
-//        console.log('In ExecutePanel.render this=',this);
+//        console.log('In ExecutePanel.render');
         return this.state.modal && (
             <Alert variant="success" style={{marginTop: '10px'}}>
                 <Container>

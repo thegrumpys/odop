@@ -30,14 +30,14 @@ export default function FileOpen() {
 //  }, []);
 
   useEffect(() => {
-    console.log('FileOpen','model_user=',model_user,'model_type=',model_type);
+//    console.log('FileOpen','model_user=',model_user,'model_type=',model_type);
     setType(model_type);
     getDesignNames(model_user, model_type);
     return () => { };
   }, [model_user, model_type]);
 
   const getDesignNames = (user, type) => {
-    console.log('FileOpen.getDesignNames user=', user, 'type=', type);
+//    console.log('FileOpen.getDesignNames user=', user, 'type=', type);
     // Get the names and store them in state
     displaySpinner(true);
     fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
@@ -53,7 +53,7 @@ export default function FileOpen() {
         return res.json()
       })
       .then(names => {
-        console.log('FileOpen.getDesignNames user=', user, 'type=', type, 'names=', names);
+//        console.log('FileOpen.getDesignNames user=', user, 'type=', type, 'names=', names);
         var name;
         if (names.length > 0) {
           var i = names.findIndex(element => element.name === config.url.name)
@@ -77,7 +77,7 @@ export default function FileOpen() {
   }
 
   const getDesign = (user, type, name) => {
-    console.log('FileOpen.getDesign user=', user, 'type=', type, 'name=', name);
+//    console.log('FileOpen.getDesign user=', user, 'type=', type, 'name=', name);
     displaySpinner(true);
     fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
       headers: {
@@ -91,7 +91,7 @@ export default function FileOpen() {
         return res.json()
       })
       .then((design) => {
-        console.log('FileOpen.getDesign design=', design);
+//        console.log('FileOpen.getDesign design=', design);
         var { migrate } = require('../../designtypes/' + design.type + '/migrate.js'); // Dynamically load migrate
         var migrated_design = migrate(design);
         if (migrated_design.jsontype === "ODOP") {
@@ -112,7 +112,7 @@ export default function FileOpen() {
   }
 
   const toggle = () => {
-    console.log('FileOpen.toggle');
+//    console.log('FileOpen.toggle');
     var type = (types.includes(model_type) ? model_type : config.url.type);
     getDesignNames(model_user, type);
     var name = (names.includes(model_name) ? model_name : config.url.name);
@@ -122,34 +122,34 @@ export default function FileOpen() {
   }
 
   const onSelectType = (event) => {
-    console.log('FileOpen.onSelectType', 'event.target.value=', event.target.value)
+//    console.log('FileOpen.onSelectType', 'event.target.value=', event.target.value)
     setType(event.target.value);
     setNames([]);
     getDesignNames(model_user, event.target.value);
   }
 
   const onSelectName = (event) => {
-    console.log('FileOpen.onSelectName', 'event.target.value=', event.target.value)
+//    console.log('FileOpen.onSelectName', 'event.target.value=', event.target.value)
     setName(event.target.value);
   }
 
   const onSignIn = () => {
-    console.log('FileOpen.onSignIn');
+//    console.log('FileOpen.onSignIn');
     setShow(!show);
     navigate.push('/login');
   }
 
   const onLoadInitialState = () => {
-    console.log('FileOpen.onLoadInitialState');
+//    console.log('FileOpen.onLoadInitialState');
     setShow(!show);
     let rc = dispatch(loadInitialState(type, 'US'));
-    console.log('rc=',rc);
+//    console.log('rc=',rc);
     dispatch(deleteAutoSave());
     logUsage('event', 'FileOpen', { event_label: type + ' load initialState US' });
   }
 
   const onLoadMetricInitialState = () => {
-    console.log('FileOpen.onLoadMetricInitialState');
+//    console.log('FileOpen.onLoadMetricInitialState');
     setShow(!show);
     dispatch(loadInitialState(type, 'Metric'));
     dispatch(deleteAutoSave());
@@ -157,7 +157,7 @@ export default function FileOpen() {
   }
 
   const onLoadAutoSave = () => {
-    console.log('FileOpen.onLoadAutoSave');
+//    console.log('FileOpen.onLoadAutoSave');
     setShow(!show);
     dispatch(restoreAutoSave());
     dispatch(deleteAutoSave());
@@ -165,12 +165,12 @@ export default function FileOpen() {
   }
 
   const onCancel = () => {
-    console.log('FileOpen.onCancel');
+//    console.log('FileOpen.onCancel');
     setShow(!show); // Noop - all done    
   }
 
   const onOpen = () => {
-    console.log('FileOpen.onOpen');
+//    console.log('FileOpen.onOpen');
     setShow(!show);
     getDesign(model_user, type, name); // Load the model
   }

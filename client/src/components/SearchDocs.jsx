@@ -72,7 +72,7 @@ class SearchDocs extends Component {
     }
 
     onContextHelp() {
-//        console.log('In SearchDocs.onContextHelp this=',this);
+//        console.log('In SearchDocs.onContextHelp');
         this.setState({
             modal: !this.state.modal,
         });
@@ -88,7 +88,7 @@ class SearchDocs extends Component {
     }
 
     render() {
-//        console.log('In SearchDocs.render this=',this);
+//        console.log('In SearchDocs.render');
         return (
             <>
                 <InputGroup className='pr-3'>

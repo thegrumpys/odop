@@ -29,11 +29,11 @@ class FileDelete extends Component {
     }
 
     componentDidMount() {
-//        console.log('In FileDelete.componentDidMount this=',this);
+//        console.log('In FileDelete.componentDidMount');
     }
 
     componentDidUpdate(prevProps) {
-//      console.log('In FileDelete.componentDidUpdate this=',this,'prevProps=',prevProps);
+//      console.log('In FileDelete.componentDidUpdate','prevProps=',prevProps);
       if (prevProps.user !== this.props.user || prevProps.type !== this.props.type) {
 //          console.log('In FileDelete.componentDidUpdate prevProps=',prevProps,'this.props=',this.props);
           this.setState({
@@ -106,7 +106,7 @@ class FileDelete extends Component {
     }
 
     toggle() {
-//        console.log('In FileDelete.toggle this=',this);
+//        console.log('In FileDelete.toggle');
         if (this.props.authState.isAuthenticated) {
             this.getDesignNames(this.props.user,this.props.type);
         }
@@ -117,7 +117,7 @@ class FileDelete extends Component {
     }
 
     onSelectType(event) {
-//        console.log('In FileDelete.onSelectType this=',this,'event.target.value=',event.target.value)
+//        console.log('In FileDelete.onSelectType','event.target.value=',event.target.value)
         this.setState({
             type: event.target.value,
             names: [],
@@ -126,14 +126,14 @@ class FileDelete extends Component {
     }
 
     onSelectName(event) {
-//        console.log('In FileDelete.onSelectName this=',this,'event.target.value=',event.target.value);
+//        console.log('In FileDelete.onSelectName','event.target.value=',event.target.value);
         this.setState({
             name: event.target.value
         });
     }
 
     onSignIn() {
-//        console.log('In FileDelete.onSignIn this=',this);
+//        console.log('In FileDelete.onSignIn');
         this.setState({
             modal: !this.state.modal
         });
@@ -141,7 +141,7 @@ class FileDelete extends Component {
     }
 
     onCancel() {
-//        console.log('In FileDelete.onCancel this=',this);
+//        console.log('In FileDelete.onCancel');
         this.setState({
             modal: !this.state.modal
         });
@@ -149,7 +149,7 @@ class FileDelete extends Component {
     }
 
     onDelete() {
-//        console.log('In FileDelete.onDelete this=',this);
+//        console.log('In FileDelete.onDelete');
         // Validate name, and delete the database element
         if (this.state.name === '') {
             displayMessage("Select design to delete.");
@@ -162,7 +162,7 @@ class FileDelete extends Component {
     }
 
     render() {
-//        console.log('In FileDelete.render this=',this);
+//        console.log('In FileDelete.render');
         return (
             <>
                 <NavDropdown.Item onClick={this.toggle}>

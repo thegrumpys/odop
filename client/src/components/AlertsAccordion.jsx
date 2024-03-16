@@ -71,14 +71,14 @@ export default function AlertsAccordion() {
   }, [type]);
 
   const onHelpButton = (event) => {
-//        console.log('In AlertsAccordion.onHelpButton this=',this,'event=',event,'event.target=',event.target,'event.target.href=',event.target.href);
+//        console.log('In AlertsAccordion.onHelpButton','event=',event,'event.target=',event.target,'event.target.href=',event.target.href);
     logUsage('event', 'AlertsAccordion', { event_label: 'Help button: ' + event.target.href });
     event.preventDefault();
     window.open(event.target.href, '_blank');
   }
 
   const onAutoFixToggle = (event) => {
-//    console.log('In AlertsAccordion.onAutoFixToggle this=',this,'event=',event);
+//    console.log('In AlertsAccordion.onAutoFixToggle','event=',event);
     var copy = Object.assign({}, system_controls);
     var label;
     if (copy.enable_auto_fix === 0.0) {

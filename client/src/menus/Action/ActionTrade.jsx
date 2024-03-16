@@ -67,7 +67,7 @@ class ActionTrade extends Component {
     //===========================================================
 
     strategyToggle() {
-//        console.log('In ActionTrade.strategyToggle this=',this);
+//        console.log('In ActionTrade.strategyToggle');
 //        console.log('state=',this.state);
         logUsage('event', 'ActionTrade', { event_label: 'ActionTrade'});
         this.props.saveAutoSave();
@@ -91,7 +91,7 @@ class ActionTrade extends Component {
     }
 
     commonViolationSetup() {
-//        console.log('In ActionTrade.commonViolationSetup this=',this);
+//        console.log('In ActionTrade.commonViolationSetup');
 //        console.log('state=',this.state);
         var design;
         var element;
@@ -126,7 +126,7 @@ class ActionTrade extends Component {
     }
 
     onNoop() { // No-op for onHide
-//      console.log('In ActionTrade.onNoop this=',this);
+//      console.log('In ActionTrade.onNoop');
 //      console.log('state=',this.state);
     }
 
@@ -135,7 +135,7 @@ class ActionTrade extends Component {
     //===========================================================
 
     onStrategyDone() { // Option 3
-//        console.log('In ActionTrade.onStrategyDone this=',this);
+//        console.log('In ActionTrade.onStrategyDone');
 //        console.log('state=',this.state);
         this.props.restoreInputSymbolValues();
         var ncode;
@@ -148,7 +148,7 @@ class ActionTrade extends Component {
     }
 
     onStrategyExisting() { // Option 2
-//        console.log('In ActionTrade.onStrategyExisting this=',this);
+//        console.log('In ActionTrade.onStrategyExisting');
 //        console.log('state=',this.state);
         var design;
         var element;
@@ -176,7 +176,7 @@ class ActionTrade extends Component {
     }
 
     onStrategyArbitrary() { // Option 1
-//        console.log('In ActionTrade.onStrategyArbitrary this=',this);
+//        console.log('In ActionTrade.onStrategyArbitrary');
 //        console.log('state=',this.state);
         var design;
         var element;
@@ -204,7 +204,7 @@ class ActionTrade extends Component {
     }
 
     onStrategyProportional() { // Option 0
-//        console.log('In ActionTrade.onStrategyProportional this=',this);
+//        console.log('In ActionTrade.onStrategyProportional');
 //        console.log('state=',this.state);
         var design;
         var element;
@@ -228,7 +228,7 @@ class ActionTrade extends Component {
     }
 
     onStrategyContextHelp() {
-//        console.log('In ActionTrade.onStrategyContextHelp this=',this);
+//        console.log('In ActionTrade.onStrategyContextHelp');
 //        console.log('state=',this.state);
         this.setState({
             modal: !this.state.modal
@@ -327,7 +327,7 @@ class ActionTrade extends Component {
     //===========================================================
 
     onArbitraryCancel() {
-//        console.log('In ActionTrade.onArbitraryCancel this=',this);
+//        console.log('In ActionTrade.onArbitraryCancel');
 //        console.log('state=',this.state);
         this.props.restoreInputSymbolValues();
         var ncode;
@@ -340,7 +340,7 @@ class ActionTrade extends Component {
     }
 
     onArbitraryContinue() {
-//        console.log('In ActionTrade.onArbitraryContinue this=',this);
+//        console.log('In ActionTrade.onArbitraryContinue');
 //        console.log('state=',this.state);
         this.commonArbitraryOrProportional(this.state.dir);
         this.setState({
@@ -419,7 +419,7 @@ class ActionTrade extends Component {
     //===========================================================
 
     onSizeCancel() {
-//        console.log('In ActionTrade.onSizeCancel this=',this);
+//        console.log('In ActionTrade.onSizeCancel');
 //        console.log('state=',this.state);
         this.props.restoreInputSymbolValues();
         var ncode;
@@ -432,7 +432,7 @@ class ActionTrade extends Component {
     }
 
     onSizeContinue() {
-//        console.log('In ActionTrade.onSizeContinue this=',this);
+//        console.log('In ActionTrade.onSizeContinue');
 //        console.log('state=',this.state);
         var design;
         var element;
@@ -565,7 +565,7 @@ class ActionTrade extends Component {
     }
 
     onSizeChangeValid(event) {
-//        console.log('In ActionTrade.onSizeChangeValid this=',this);
+//        console.log('In ActionTrade.onSizeChangeValid');
 //        console.log('state=',this.state);
         this.setState({
             default_est: parseFloat(event.target.value),
@@ -574,7 +574,7 @@ class ActionTrade extends Component {
     }
 
     onSizeChangeInvalid(event) {
-//        console.log('In ActionTrade.onSizeChangeInvalid this=',this);
+//        console.log('In ActionTrade.onSizeChangeInvalid');
 //        console.log('state=',this.state);
         this.setState({
             isSizeInvalid: true,
@@ -586,7 +586,7 @@ class ActionTrade extends Component {
     //===========================================================
 
     onFeasibleRestart() {
-//        console.log('In ActionTrade.onFeasibleRestart this=',this);
+//        console.log('In ActionTrade.onFeasibleRestart');
 //        console.log('state=',this.state);
         var design;
         var element;
@@ -611,7 +611,7 @@ class ActionTrade extends Component {
     }
 
     onFeasibleDone() {
-//        console.log('In ActionTrade.onFeasibleDone this=',this);
+//        console.log('In ActionTrade.onFeasibleDone');
 //        console.log('state=',this.state);
         this.setState({
             feasibleModal: !this.state.feasibleModal
@@ -624,7 +624,7 @@ class ActionTrade extends Component {
     //===========================================================
 
     onEstablishAccept() {
-//        console.log('In ActionTrade.onEstablishAccept this=',this);
+//        console.log('In ActionTrade.onEstablishAccept');
 //        console.log('state=',this.state);
         var design;
         var ncode;
@@ -647,7 +647,7 @@ class ActionTrade extends Component {
     }
 
     onEstablishDone() {
-//      console.log('In ActionTrade.onEstablishDone this=',this);
+//      console.log('In ActionTrade.onEstablishDone');
 //      console.log('state=',this.state);
       this.props.restoreInputSymbolValues();
       var design;
@@ -678,7 +678,7 @@ class ActionTrade extends Component {
     //===========================================================
 
     onNotFeasibleRestart() {
-//        console.log('In ActionTrade.onNotFeasibleRestart this=',this);
+//        console.log('In ActionTrade.onNotFeasibleRestart');
 //        console.log('state=',this.state);
         var design;
         const { store } = this.context;
@@ -702,7 +702,7 @@ class ActionTrade extends Component {
     }
 
     onNotFeasibleRepeat() {
-//      console.log('In ActionTrade.onNotFeasibleRepeat this=',this);
+//      console.log('In ActionTrade.onNotFeasibleRepeat');
 //      console.log('state=',this.state);
 //      this.props.saveInputSymbolValues();
       this.commonViolationSetup()
@@ -713,7 +713,7 @@ class ActionTrade extends Component {
   }
 
     onNotFeasibleDone() {
-//        console.log('In ActionTrade.onNotFeasibleDone this=',this);
+//        console.log('In ActionTrade.onNotFeasibleDone');
 //        console.log('state=',this.state);
         var ncode;
         ncode = 'ACCEPTED TRADE RESULT';
@@ -728,7 +728,7 @@ class ActionTrade extends Component {
     //===========================================================
 
     render() {
-//        console.log('In ActionTrade.render this=',this);
+//        console.log('In ActionTrade.render');
         var design;
         const { store } = this.context;
         design = store.getState().modelSlice;

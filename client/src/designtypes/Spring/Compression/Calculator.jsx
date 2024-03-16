@@ -14,7 +14,7 @@ export class Calculator extends ReportBase {
 
     render() {
         super.render();
-//        console.log('In Calculator.render this=',this);
+//        console.log('In Calculator.render');
         return (
             <Container>
                 <Row>

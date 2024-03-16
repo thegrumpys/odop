@@ -80,7 +80,7 @@ class FilePreferences extends Component {
     }
 
     render() {
-//        console.log('In FilePreferences.render this=',this);
+//        console.log('In FilePreferences.render');
         return (
             <React.Fragment>
                 <NavDropdown.Item onClick={this.toggle}>

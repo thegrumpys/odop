@@ -13,7 +13,7 @@ export default withRouter(withOktaAuth(class SignIn extends Component {
     }
 
     async toggle() {
-//      console.log('In SignIn.toggle this=',this);
+//      console.log('In SignIn.toggle');
       this.props.oktaAuth.setOriginalUri();
 //      console.log('In SignIn.toggle this.props.oktaAuth.getOriginalUri=',this.props.oktaAuth.getOriginalUri());
       this.props.history.push('/login');
@@ -21,7 +21,7 @@ export default withRouter(withOktaAuth(class SignIn extends Component {
     }
 
     render() {
-//      console.log('In SignIn.render this=',this);
+//      console.log('In SignIn.render');
       return this.props.authState.isAuthenticated ? null : (
         <>
             <OverlayTrigger placement="bottom" overlay={<Tooltip>Sign in to save private designs.<br/>See About : User Accounts.</Tooltip>}>

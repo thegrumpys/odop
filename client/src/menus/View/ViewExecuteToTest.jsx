@@ -68,7 +68,7 @@ class ViewExecuteToTest extends Component {
     }
 
     render() {
-//        console.log('In ViewExecuteToTest.render this=',this);
+//        console.log('In ViewExecuteToTest.render');
         var pre_lines = `import { createStore, applyMiddleware } from 'redux';
 import { initialState } from '../../../designtypes/Spring/Compression/initialState';
 import { initialSystemControls } from '../../../initialSystemControls';

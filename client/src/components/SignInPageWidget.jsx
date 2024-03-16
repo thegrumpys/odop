@@ -11,7 +11,7 @@ import { logUsage } from '../logUsage';
 
 class SignInPageWidget extends Component {
   componentDidMount() {
-//    console.log('In SignInPageWidget.componentDidMount this=',this);
+//    console.log('In SignInPageWidget.componentDidMount');
     const el = ReactDOM.findDOMNode(this);
     const { pkce, issuer, clientId, redirectUri, scopes } = config.oidc;
 //  console.log("config=",config);
@@ -92,7 +92,7 @@ class SignInPageWidget extends Component {
         scopes,
       }).then((tokens) => {
         // Add tokens to storage
-//        console.log('In SignInPageWidget.showSignInToGetTokens this=',this,'tokens=',tokens);
+//        console.log('In SignInPageWidget.showSignInToGetTokens','tokens=',tokens);
         if (tokens !== undefined) {
             var user = tokens.idToken.claims.sub;
             this.props.changeUser(user);
@@ -107,12 +107,12 @@ class SignInPageWidget extends Component {
   }
 
   componentWillUnmount() {
-//      console.log('In SignInPageWidget.componentWillUnmount this=',this);
+//      console.log('In SignInPageWidget.componentWillUnmount');
     this.widget.remove();
   }
 
   render() {
-//    console.log('In SignInPageWidget.render this=',this);
+//    console.log('In SignInPageWidget.render');
     return <div />;
   }
 }

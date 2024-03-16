@@ -23,11 +23,11 @@ class FileSave extends Component {
     }
 
     componentDidMount() {
-//        console.log('In FileSave.componentDidMount this=',this);
+//        console.log('In FileSave.componentDidMount');
     }
 
     componentDidUpdate(prevProps) {
-//        console.log('In FileSave.componentDidUpdate this=',this,'prevProps=',prevProps);
+//        console.log('In FileSave.componentDidUpdate','prevProps=',prevProps);
         if (prevProps.user !== this.props.user || prevProps.type !== this.props.type) {
 //            console.log('In FileSave.componentDidUpdate prevProps=',prevProps,'this.props=',this.props);
             this.getDesignNames(this.props.user,this.props.type);
@@ -127,7 +127,7 @@ class FileSave extends Component {
     }
 
     toggle() {
-//        console.log('In FileSave.toggle this=',this);
+//        console.log('In FileSave.toggle');
         // Save the model
         if (this.props.authState.isAuthenticated) {
             this.postDesign(this.props.user, this.props.type, this.props.name);
@@ -140,7 +140,7 @@ class FileSave extends Component {
     }
 
     onSignIn() {
-//      console.log('In FileSave.onSignIn this=',this);
+//      console.log('In FileSave.onSignIn');
       this.setState({
           modal: !this.state.modal
       });
@@ -148,7 +148,7 @@ class FileSave extends Component {
     }
 
     onCancel() {
-//      console.log('In FileSave.onCancel this=',this);
+//      console.log('In FileSave.onCancel');
       this.setState({
           modal: !this.state.modal
       });
@@ -156,7 +156,7 @@ class FileSave extends Component {
     }
 
     render() {
-//        console.log('In FileSave.render this=',this);
+//        console.log('In FileSave.render');
         return (
             <>
                 <NavDropdown.Item onClick={this.toggle}>

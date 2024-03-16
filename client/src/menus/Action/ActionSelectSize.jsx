@@ -138,7 +138,7 @@ class ActionSelectSize extends Component {
     }
 
     render() {
-//        console.log('In ActionSelectSize.render this=',this);
+//        console.log('In ActionSelectSize.render');
         return (
             <>
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.types.length === 0}>

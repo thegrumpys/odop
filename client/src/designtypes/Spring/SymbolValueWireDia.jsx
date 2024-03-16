@@ -85,7 +85,7 @@ class SymbolValueWireDia extends Component {
     }
 
     onRadio() {
-//        console.log('In SymbolValueWireDia.onRadio this=',this);
+//        console.log('In SymbolValueWireDia.onRadio');
         this.setState({
             value_input: !this.state.value_input,
         });
@@ -148,7 +148,7 @@ class SymbolValueWireDia extends Component {
     }
 
     onSearchRequest(event) {
-//        console.log('In SymbolValueWireDia.onSearchRequest this=',this,'event=',event);
+//        console.log('In SymbolValueWireDia.onSearchRequest','event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             displayMessage('Search cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
             return;
@@ -175,7 +175,7 @@ class SymbolValueWireDia extends Component {
     }
 
     onSearchContextHelp() {
-//        console.log('In SymbolValueWireDia.onSearchContinue this=',this);
+//        console.log('In SymbolValueWireDia.onSearchContinue');
         window.open('/docs/Help/errors.html#objNotFinite', '_blank');
     }
 
@@ -210,7 +210,7 @@ class SymbolValueWireDia extends Component {
 
 
     onSeekMinRequest(event) {
-//        console.log('In SymbolValueWireDia.onSeekMinRequest this=',this,'event=',event);
+//        console.log('In SymbolValueWireDia.onSeekMinRequest','event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
             return;
@@ -236,7 +236,7 @@ class SymbolValueWireDia extends Component {
     }
 
     onSeekMaxRequest(event) {
-//        console.log('In SymbolValueWireDia.onSeekMaxRequest this=',this,'event=',event);
+//        console.log('In SymbolValueWireDia.onSeekMaxRequest','event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
             return;
@@ -262,7 +262,7 @@ class SymbolValueWireDia extends Component {
     }
 
     onContextMenu(e) {
-//        console.log('In SymbolValueWireDia.onContextMenu this=',this,'e=',e);
+//        console.log('In SymbolValueWireDia.onContextMenu','e=',e);
         e.preventDefault();
         const { store } = this.context;
         var design = store.getState().modelSlice;
@@ -276,7 +276,7 @@ class SymbolValueWireDia extends Component {
     }
 
     onContextHelp() {
-//        console.log('In SymbolValueWireDia.onContextHelp this=',this);
+//        console.log('In SymbolValueWireDia.onContextHelp');
         logUsage('event', 'SymbolValueWireDia', { event_label: 'Context Help button' });
         this.setState({
             edit_modal: !this.state.edit_modal,
@@ -286,7 +286,7 @@ class SymbolValueWireDia extends Component {
     }
 
     onClose() {
-//        console.log('In SymbolValueWireDia.onClose this=',this);
+//        console.log('In SymbolValueWireDia.onClose');
         this.setState({
             edit_modal: false,
             modified: false,
@@ -294,7 +294,7 @@ class SymbolValueWireDia extends Component {
     }
 
     onResetButton() {
-//        console.log('In SymbolValueWireDia.onResetButton this=',this);
+//        console.log('In SymbolValueWireDia.onResetButton');
         logUsage('event', 'SymbolValueWireDia', { event_label: 'Reset button' });
         const { store } = this.context;
         store.dispatch(load(JSON.parse(this.state.reset)));
@@ -304,7 +304,7 @@ class SymbolValueWireDia extends Component {
     }
 
     onChangeValidValue(event) {
-//        console.log('In SymbolValueWireDia.onChangeValidValue this=',this);
+//        console.log('In SymbolValueWireDia.onChangeValidValue');
         this.setState({
             isInvalidValue: false,
             modified: true,
@@ -312,7 +312,7 @@ class SymbolValueWireDia extends Component {
     }
 
     onChangeInvalidValue(event) {
-//        console.log('In SymbolValueWireDia.onChangeInvalidValue this=',this);
+//        console.log('In SymbolValueWireDia.onChangeInvalidValue');
         this.setState({
             isInvalidValue: true,
             modified: true,
@@ -320,7 +320,7 @@ class SymbolValueWireDia extends Component {
     }
 
     onChangeValidMinConstraint(event) {
-//        console.log('In SymbolValueWireDia.onChangeValidMinConstraint this=',this);
+//        console.log('In SymbolValueWireDia.onChangeValidMinConstraint');
         this.setState({
             isInvalidMinConstraint: false,
             modified: true,
@@ -328,7 +328,7 @@ class SymbolValueWireDia extends Component {
     }
 
     onChangeInvalidMinConstraint(event) {
-//        console.log('In SymbolValueWireDia.onChangeInvalidMinConstraint this=',this);
+//        console.log('In SymbolValueWireDia.onChangeInvalidMinConstraint');
         this.setState({
             isInvalidMinConstraint: true,
             modified: true,
@@ -336,7 +336,7 @@ class SymbolValueWireDia extends Component {
     }
 
     onChangeValidMaxConstraint(event) {
-//        console.log('In SymbolValueWireDia.onChangeValidMaxConstraint this=',this);
+//        console.log('In SymbolValueWireDia.onChangeValidMaxConstraint');
         this.setState({
             isInvalidMaxConstraint: false,
             modified: true,
@@ -344,7 +344,7 @@ class SymbolValueWireDia extends Component {
     }
 
     onChangeInvalidMaxConstraint(event) {
-//        console.log('In SymbolValueWireDia.onChangeInvalidMaxConstraint this=',this);
+//        console.log('In SymbolValueWireDia.onChangeInvalidMaxConstraint');
         this.setState({
             isInvalidMaxConstraint: true,
             modified: true,
@@ -352,14 +352,14 @@ class SymbolValueWireDia extends Component {
     }
 
     onModifiedFlag(event) {
-//        console.log('In SymbolValueWireDia.onModifiedFlag this=',this);
+//        console.log('In SymbolValueWireDia.onModifiedFlag');
         this.setState({
             modified: true,
         });
     }
 
     render() {
-//        console.log('In SymbolValueWireDia.render this=',this);
+//        console.log('In SymbolValueWireDia.render');
 
 //        console.log('In SymbolValueWireDia.render ../' + this.props.type + '/symbol_table_offsets.js');
         var o = require('../'+this.props.type+'/symbol_table_offsets.js'); // Dynamically load table

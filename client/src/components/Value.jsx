@@ -6,7 +6,7 @@ import { toODOPPrecision } from '../toODOPPrecision'
 class Value extends Component {
 
     render() {
-//        console.log('In Value.render this=',this);
+//        console.log('In Value.render');
         return (
             <>
                 <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>

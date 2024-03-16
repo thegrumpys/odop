@@ -14,7 +14,13 @@ import {
 //import { changeUser, changeView, deleteAutoSave } from '../store/modelSlice';
 import FileOpen from '../menus/File/FileOpen';
 import ActionSearch from '../menus/Action/ActionSearch';
+import ViewSelect from '../menus/View/ViewSelect';
+import ViewOffsets from '../menus/View/ViewOffsets';
+import ViewSymbolTableOffsets from '../menus/View/ViewSymbolTableOffsets';
+import ViewSymbolTable from '../menus/View/ViewSymbolTable';
+import ViewObjectiveValue from '../menus/View/ViewObjectiveValue';
 import HelpMotd from '../menus/Help/HelpMotd';
+import HelpIndex from '../menus/Help/HelpIndex';
 import HelpAbout from '../menus/Help/HelpAbout';
 import config from '../config';
 import ResultTable from './ResultTable';
@@ -27,67 +33,67 @@ export default function MainPage() {
   const model_name = useSelector((state) => state.modelSlice.name);
   const model_view = useSelector((state) => state.modelSlice.view);
   const model_type = useSelector((state) => state.modelSlice.model.type);
-//  const dispatch = useDispatch();
+  //  const dispatch = useDispatch();
 
-//  useEffect(() => {
-////    console.log("MainPage - Mounted");
-//  }, []);
+  //  useEffect(() => {
+  ////    console.log("MainPage - Mounted");
+  //  }, []);
 
   useEffect(() => {
-    console.log("MainPage",'show=',show);
+//    console.log("MainPage",'show=',show);
   }, [show]);
 
   useEffect(() => {
-    console.log("MainPage",'activeTab=',activeTab);
+//    console.log("MainPage",'activeTab=',activeTab);
   }, [activeTab]);
 
   useEffect(() => {
-    console.log("MainPage",'model_name=',model_name);
+//    console.log("MainPage",'model_name=',model_name);
   }, [model_name]);
 
   useEffect(() => {
-    console.log('MainPage','model_view=',model_view);
+//    console.log('MainPage','model_view=',model_view);
     setActiveTab(model_view);
   }, [model_view]);
 
   useEffect(() => {
-    console.log('MainPage','model_type=',model_type);
-//    if (model_type === null) return;
-//    var { getViewNames } = require('../designtypes/'+ model_type + '/view.js'); // Dynamically load getViewNames
+//    console.log('MainPage','model_type=',model_type);
+    //    if (model_type === null) return;
+    //    var { getViewNames } = require('../designtypes/'+ model_type + '/view.js'); // Dynamically load getViewNames
 //    console.log('MainPage - type changed','getViewNames=', getViewNames);
-//    var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
+    //    var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
 //    console.log('MainPage - type changed','viewNames=', viewNames);
-//    var viewIndex = viewNames.find(element => element.name === config.url.view);
+    //    var viewIndex = viewNames.find(element => element.name === config.url.view);
 //    console.log('MainPage','viewIndex=', viewIndex);
-//    if (viewIndex >= 0) {
-//      var viewComponent = viewNames[index].component;
-//    } else { // Not found
-//      var viewComponent = viewNames[0].component; // Default to the first one
-//    }
+    //    if (viewIndex >= 0) {
+    //      var viewComponent = viewNames[index].component;
+    //    } else { // Not found
+    //      var viewComponent = viewNames[0].component; // Default to the first one
+    //    }
 //    console.log('MainPage - type changed','new_view=', new_view);
-//    if (new_view === undefined) {
-//      dispatch(changeView(config.env.view)); // if not found then assume the configured default
-//    } else {
-//      dispatch(changeView(view)); // if not found then assume the configured default
-//    }
+    //    if (new_view === undefined) {
+    //      dispatch(changeView(config.env.view)); // if not found then assume the configured default
+    //    } else {
+    //      dispatch(changeView(view)); // if not found then assume the configured default
+    //    }
   }, [model_type]);
 
   const toggle = () => {
-    console.log('MainPage.toggle');
+//    console.log('MainPage.toggle');
     setShow(!show);
   }
 
   if (model_type === null) return null;
-//  var { getViewNames } = require('../designtypes/' + model_type + '/view.js'); // Dynamically load getViewNames
-//  var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
+  //  var { getViewNames } = require('../designtypes/' + model_type + '/view.js'); // Dynamically load getViewNames
+  //  var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
 //  console.log('MainPage','viewNames=', viewNames);
-//  var viewIndex = viewNames.find(element => element.name === config.url.view);
+  //  var viewIndex = viewNames.find(element => element.name === config.url.view);
 //  console.log('MainPage','viewIndex=', viewIndex);
-//  if (viewIndex >= 0) {
-//    var viewComponent = viewNames[index].component;
-//  } else { // Not found
-//    var viewComponent = viewNames[0].component; // Default to the first one
-//  }
+  //  if (viewIndex >= 0) {
+  //    var viewComponent = viewNames[index].component;
+  //  } else { // Not found
+  //    var viewComponent = viewNames[0].component; // Default to the first one
+  //  }
 //  console.log('MainPage','viewComponent=', viewComponent);
   var src = 'designtypes/' + model_type + '/favicon.ico';
   var alt = model_type + ' icon';
@@ -108,8 +114,17 @@ export default function MainPage() {
             <NavDropdown title="Action">
               <ActionSearch />
             </NavDropdown>
+            <NavDropdown title="View">
+              <ViewSelect />
+              <NavDropdown.Divider />
+              {config.node.env !== "production" && <ViewOffsets />}
+              {config.node.env !== "production" && <ViewSymbolTableOffsets />}
+              {config.node.env !== "production" && <ViewSymbolTable />}
+              {config.node.env !== "production" && <ViewObjectiveValue />}
+            </NavDropdown>
             <NavDropdown title="Help">
               <HelpMotd />
+              <HelpIndex />
               <HelpAbout />
             </NavDropdown>
           </Nav>

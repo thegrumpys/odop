@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 class SignInPage extends Component {
 
     render() {
-//        console.log('In SignInPage.render this=',this);
+//        console.log('In SignInPage.render');
         return this.props.authState.isAuthenticated ? <Redirect to={{ pathname: '/' }}/> : <SignInPageWidget />
     }
 }

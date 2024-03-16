@@ -6,7 +6,7 @@ import { addMessage, disableMessage } from "../store/messageSlice";
 import store from "../store/store";
 
 export const displayMessage = (message, variant = 'danger', header = '', help_url = '') => {
-//  console.log('In displayMessage this=',this);
+//  console.log('In displayMessage');
 //  logUsage('event', 'DisplayMessage', { event_label: 'message: ' + message + ', variant: ' + variant});
   store.dispatch(addMessage({message, variant, header, help_url}));
 }
@@ -27,12 +27,12 @@ const Message = () => {
   }, [show]);
 
   const toggle = () => {
-//    console.log('MESSAGEMODAL,onContextHelp this=',this);
+//    console.log('MESSAGEMODAL,onContextHelp');
     dispatch(disableMessage());
   }
 
   const onContextHelp = () => {
-//    console.log('MESSAGEMODAL.onContextHelp this=',this);
+//    console.log('MESSAGEMODAL.onContextHelp');
 //    logUsage('event', 'Message', { event_label: 'context Help button: ' + this.state.help_url });
     dispatch(disableMessage());
     window.open(help_url, '_blank');

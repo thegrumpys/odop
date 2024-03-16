@@ -9,7 +9,7 @@ import { displayMessage } from '../../components/Message';
 class ActionSeek extends Component {
 
     constructor(props) {
-//        console.log('In ActionSeek.constructor this=',this);
+//        console.log('In ActionSeek.constructor');
         super(props);
         this.onSeekRequest = this.onSeekRequest.bind(this);
         this.onSeekContextHelpButton = this.onSeekContextHelpButton.bind(this);
@@ -25,7 +25,7 @@ class ActionSeek extends Component {
     }
 
     onSeekRequest() {
-//       console.log('In ActionSeek.onSeekRequest this=',this);
+//       console.log('In ActionSeek.onSeekRequest');
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
             return;
@@ -58,7 +58,7 @@ class ActionSeek extends Component {
     }
 
     onSeekContextHelpButton(event) {
-//        console.log('In ActionSeek.onSeekContextHelpButton this=',this,'event=',event);
+//        console.log('In ActionSeek.onSeekContextHelpButton','event=',event);
         this.setState({
             seek_modal: !this.state.seek_modal,
         });
@@ -66,28 +66,28 @@ class ActionSeek extends Component {
     }
 
     onSeekCancelButton(event) {
-//        console.log('In ActionSeek.onSeekCancelButton this=',this,'event=',event);
+//        console.log('In ActionSeek.onSeekCancelButton','event=',event);
         this.setState({
             seek_modal: !this.state.seek_modal,
         });
     }
 
     onSeekMinMaxSelect(seek_minmax) {
-//        console.log('In ActionSeek.onSeekMinMaxSelect this=',this,'seek_minmax=',seek_minmax);
+//        console.log('In ActionSeek.onSeekMinMaxSelect','seek_minmax=',seek_minmax);
         this.setState({
             seek_minmax: seek_minmax
         });
     }
 
     onSeekNameSelect(event) {
-//        console.log('In ActionSeek.onSeekNameSelect this=',this,'event=',event);
+//        console.log('In ActionSeek.onSeekNameSelect','event=',event);
         this.setState({
             seek_name: event.target.value
         });
     }
 
     onSeekButton(event) {
-//        console.log('In ActionSeek.onSeekButton this=',this,'event=',event);
+//        console.log('In ActionSeek.onSeekButton','event=',event);
         this.setState({
             seek_modal: !this.state.seek_modal
         });
@@ -98,7 +98,7 @@ class ActionSeek extends Component {
     }
 
     render() {
-//        console.log('In ActionSeek.render this=',this);
+//        console.log('In ActionSeek.render');
 
         var ResultTableOptimize = require('../../designtypes/'+this.props.type+'/ResultTableOptimize.jsx'); // Dynamically load ResultTableOptimize
 

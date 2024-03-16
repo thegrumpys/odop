@@ -81,13 +81,13 @@ class SymbolValue extends Component {
     }
 
     componentDidMount() {
-//      console.log('In SymbolValue.componentDidMount this=',this);
+//      console.log('In SymbolValue.componentDidMount');
         document.addEventListener("click", this.handleClick);
         document.addEventListener("contextmenu", this.handleContextMenu);
     }
 
     componentWillUnmount() {
-//      console.log('In SymbolValue.componentWillUnmount this=',this);
+//      console.log('In SymbolValue.componentWillUnmount');
         document.removeEventListener("click", this.handleClick);
         document.removeEventListener("contextmenu", this.handleContextMenu);
     }
@@ -107,7 +107,7 @@ class SymbolValue extends Component {
     }
 
     onSearchRequest(event) {
-//        console.log('In SymbolValue.onSearchRequest this=',this,'event=',event);
+//        console.log('In SymbolValue.onSearchRequest','event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             displayMessage('Search cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
             return;
@@ -134,7 +134,7 @@ class SymbolValue extends Component {
     }
 
     onSearchContextHelp() {
-//        console.log('In SymbolValue.onSearchContinue this=',this);
+//        console.log('In SymbolValue.onSearchContinue');
         window.open('/docs/Help/errors.html#objNotFinite', '_blank');
     }
 
@@ -168,7 +168,7 @@ class SymbolValue extends Component {
     }
 
     onSeekMinRequest(event) {
-//        console.log('In SymbolValue.onSeekMinRequest this=',this,'event=',event);
+//        console.log('In SymbolValue.onSeekMinRequest','event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
             return;
@@ -194,7 +194,7 @@ class SymbolValue extends Component {
     }
 
     onSeekMaxRequest(event) {
-//        console.log('In SymbolValue.onSeekMaxRequest this=',this,'event=',event);
+//        console.log('In SymbolValue.onSeekMaxRequest','event=',event);
         if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
             return;
@@ -220,7 +220,7 @@ class SymbolValue extends Component {
     }
 
     onContextMenu(e) {
-//        console.log('In SymbolValue.onContextMenu this=',this,'e=',e);
+//        console.log('In SymbolValue.onContextMenu','e=',e);
         e.preventDefault();
         const { store } = this.context;
         var design = store.getState().modelSlice;
@@ -234,7 +234,7 @@ class SymbolValue extends Component {
     }
 
     onContextHelp() {
-//        console.log('In SymbolValue.onContextHelp this=',this);
+//        console.log('In SymbolValue.onContextHelp');
         logUsage('event', 'SymbolValue', { event_label: 'Context Help button' });
         this.setState({
             edit_modal: !this.state.edit_modal,
@@ -244,7 +244,7 @@ class SymbolValue extends Component {
     }
 
     onClose() {
-//        console.log('In SymbolValue.onClose this=',this);
+//        console.log('In SymbolValue.onClose');
         this.setState({
             edit_modal: false,
             modified: false,
@@ -252,7 +252,7 @@ class SymbolValue extends Component {
     }
 
     onResetButton() {
-//        console.log('In SymbolValue.onResetButton this=',this);
+//        console.log('In SymbolValue.onResetButton');
         logUsage('event', 'SymbolValue', { event_label: 'Reset button' });
         const { store } = this.context;
         store.dispatch(load(JSON.parse(this.state.reset)));
@@ -262,7 +262,7 @@ class SymbolValue extends Component {
     }
 
     onChangeValidValue(event) {
-//        console.log('In SymbolValue.onChangeValidValue this=',this);
+//        console.log('In SymbolValue.onChangeValidValue');
         this.setState({
             isInvalidValue: false,
             modified: true,
@@ -270,7 +270,7 @@ class SymbolValue extends Component {
     }
 
     onChangeInvalidValue(event) {
-//        console.log('In SymbolValue.onChangeInvalidValue this=',this);
+//        console.log('In SymbolValue.onChangeInvalidValue');
         this.setState({
             isInvalidValue: true,
             modified: true,
@@ -278,7 +278,7 @@ class SymbolValue extends Component {
     }
 
     onChangeValidMinConstraint(event) {
-//        console.log('In SymbolValue.onChangeValidMinConstraint this=',this);
+//        console.log('In SymbolValue.onChangeValidMinConstraint');
         this.setState({
             isInvalidMinConstraint: false,
             modified: true,
@@ -286,7 +286,7 @@ class SymbolValue extends Component {
     }
 
     onChangeInvalidMinConstraint(event) {
-//        console.log('In SymbolValue.onChangeInvalidMinConstraint this=',this);
+//        console.log('In SymbolValue.onChangeInvalidMinConstraint');
         this.setState({
             isInvalidMinConstraint: true,
             modified: true,
@@ -294,7 +294,7 @@ class SymbolValue extends Component {
     }
 
     onChangeValidMaxConstraint(event) {
-//        console.log('In SymbolValue.onChangeValidMaxConstraint this=',this);
+//        console.log('In SymbolValue.onChangeValidMaxConstraint');
         this.setState({
             isInvalidMaxConstraint: false,
             modified: true,
@@ -302,7 +302,7 @@ class SymbolValue extends Component {
     }
 
     onChangeInvalidMaxConstraint(event) {
-//        console.log('In SymbolValue.onChangeInvalidMaxConstraint this=',this);
+//        console.log('In SymbolValue.onChangeInvalidMaxConstraint');
         this.setState({
             isInvalidMaxConstraint: true,
             modified: true,
@@ -310,14 +310,14 @@ class SymbolValue extends Component {
     }
 
     onModifiedFlag(event) {
-//        console.log('In SymbolValue.onModifiedFlag this=',this);
+//        console.log('In SymbolValue.onModifiedFlag');
         this.setState({
             modified: true,
         });
     }
 
     render() {
-//        console.log('In SymbolValue.render this=',this);
+//        console.log('In SymbolValue.render');
         var sv_results = getAlertsByName(this.props.element.name, true);
         var sv_value_class = sv_results.className;
         var sv_icon_alerts = sv_results.alerts;

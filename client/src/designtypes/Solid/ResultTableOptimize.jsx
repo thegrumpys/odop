@@ -19,7 +19,7 @@ export class ResultTableOptimize extends Component {
     }
 
     onOptimizeSeekMAXVolume(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMAXVolume this=',this,'event=',event);
+//        console.log('In ResultTableOptimize.onOptimizeSeekMAXVolume','event=',event);
         logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX Volume button' });
         this.props.saveAutoSave();
         this.props.seek('Volume', MAX);
@@ -27,7 +27,7 @@ export class ResultTableOptimize extends Component {
     }
 
     onOptimizeSeekMAXWeight(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMAXWeight this=',this,'event=',event);
+//        console.log('In ResultTableOptimize.onOptimizeSeekMAXWeight','event=',event);
         logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX Weight button' });
         this.props.saveAutoSave();
         this.props.seek('Weight', MAX);
@@ -35,7 +35,7 @@ export class ResultTableOptimize extends Component {
     }
 
     onOptimizeSeekMINLength(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINLength this=',this,'event=',event);
+//        console.log('In ResultTableOptimize.onOptimizeSeekMINLength','event=',event);
         logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Length button' });
         this.props.saveAutoSave();
         this.props.seek('Length', MIN);
@@ -43,7 +43,7 @@ export class ResultTableOptimize extends Component {
     }
 
     onOptimizeSeekMINWidth(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINWidth this=',this,'event=',event);
+//        console.log('In ResultTableOptimize.onOptimizeSeekMINWidth','event=',event);
         logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Width button' });
         this.props.saveAutoSave();
         this.props.seek('Width', MIN);
@@ -51,7 +51,7 @@ export class ResultTableOptimize extends Component {
     }
 
     onOptimizeSeekMINHeight(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINWidth this=',this,'event=',event);
+//        console.log('In ResultTableOptimize.onOptimizeSeekMINWidth','event=',event);
         logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Height button' });
         this.props.saveAutoSave();
         this.props.seek('Height', MIN);
@@ -59,7 +59,7 @@ export class ResultTableOptimize extends Component {
     }
 
     render() {
-//        console.log('In ResultTableOptimize.render this=',this);
+//        console.log('In ResultTableOptimize.render');
         return (
             <>
                 <p>Select a pre-configured Seek optimization:</p>

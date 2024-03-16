@@ -1,45 +1,41 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
 import { changeView } from '../../store/modelSlice';
 
-class ViewSelect extends Component {
+export default function ViewSelect() {
+//  console.log("ViewSelect - Mounting...");
 
-    constructor(props) {
-//        console.log('In ViewSelect.constructor props=',props);
-        super(props);
-        this.onClick = this.onClick.bind(this);
-    }
+  const model_type = useSelector((state) => state.modelSlice.model.type);
+  const dispatch = useDispatch();
 
-    onClick(event) {
-//        console.log('In ViewSelect.onClick this=',this,'event=',event);
-//        console.log('In ViewSelect.onClick event.target.id=',event.target.id);
-//        this.props.parent.setKey(view);
-        this.props.changeView(event.target.id);
-        logUsage('event', 'ViewSelect', { event_label: event.target.id});
-    }
+  useEffect(() => {
+//    console.log("ViewSelect - Mounted");
+//    return () => console.log("ViewSelect - Unmounting ...");
+    return () => { };
+  }, []);
 
-    render() {
-//        console.log('In ViewSelect.render this=',this);
+  const onClick = (event) => {
+//    console.log('ViewSelect.onClick','event=',event);
+    dispatch(changeView(event.target.id));
+    logUsage('event', 'ViewSelect', { event_label: event.target.id });
+  }
+
+  var { getViewNames } = require('../../designtypes/' + model_type + '/view.js'); // Dynamically load getViewNames
+  console.log('ViewSelect - type changed', 'getViewNames=', getViewNames);
+  var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
+  console.log('ViewSelect - type changed', 'viewNames=', viewNames);
+
+  return (
+    <>
+      {viewNames.map((element) => {
         return (
-            <>
-                {this.props.viewNames.map((element) => {return (
-                    <NavDropdown.Item key={element.title} id={element.name} onClick={this.onClick}>
-                        {element.title}
-                    </NavDropdown.Item>
-                )})}
-            </>
-        );
-    }
+          <NavDropdown.Item key={element.title} id={element.name} onClick={onClick}>
+            {element.title}
+          </NavDropdown.Item>
+        )
+      })}
+    </>
+  );
 }
-
-const mapStateToProps = state => ({
-    type: state.model.type,
-});
-
-const mapDispatchToProps = {
-    changeView: changeView,
-};
-
-export default connect(mapStateToProps,mapDispatchToProps)(ViewSelect);

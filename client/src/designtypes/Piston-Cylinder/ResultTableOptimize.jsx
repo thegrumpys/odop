@@ -18,7 +18,7 @@ export class ResultTableOptimize extends Component {
     }
 
     onOptimizeSeekMAXFORCE(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMAXFORCE this=',this,'event=',event);
+//        console.log('In ResultTableOptimize.onOptimizeSeekMAXFORCE','event=',event);
         logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX FORCE button' });
         this.props.saveAutoSave();
         this.props.seek('FORCE', MAX);
@@ -26,7 +26,7 @@ export class ResultTableOptimize extends Component {
     }
 
     onOptimizeSeekMINRADIUS(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINRADIUS this=',this,'event=',event);
+//        console.log('In ResultTableOptimize.onOptimizeSeekMINRADIUS','event=',event);
         logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN RADIUS button' });
         this.props.saveAutoSave();
         this.props.seek('RADIUS', MIN);
@@ -34,7 +34,7 @@ export class ResultTableOptimize extends Component {
     }
 
     onOptimizeSeekMINPRESSURE(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINPRESSURE this=',this,'event=',event);
+//        console.log('In ResultTableOptimize.onOptimizeSeekMINPRESSURE','event=',event);
         logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN PRESSURE button' });
         this.props.saveAutoSave();
         this.props.seek('PRESSURE', MIN);
@@ -42,7 +42,7 @@ export class ResultTableOptimize extends Component {
     }
 
     onOptimizeSeekMINSTRESS(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINSTRESS this=',this,'event=',event);
+//        console.log('In ResultTableOptimize.onOptimizeSeekMINSTRESS','event=',event);
         logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN STRESS button' });
         this.props.saveAutoSave();
         this.props.seek('STRESS', MIN);
@@ -50,7 +50,7 @@ export class ResultTableOptimize extends Component {
     }
 
     render() {
-//        console.log('In ResultTableOptimize.render this=',this);
+//        console.log('In ResultTableOptimize.render');
         return (
             <>
                 <p>Select a pre-configured Seek optimization:</p>

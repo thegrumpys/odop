@@ -15,7 +15,7 @@ class ViewCADModel extends Component {
     }
 
     toggle() {
-//        console.log('In ViewCADModel.toggle this=',this);
+//        console.log('In ViewCADModel.toggle');
         this.setState({
             modal: !this.state.modal
         });
@@ -23,7 +23,7 @@ class ViewCADModel extends Component {
     }
 
     render() {
-//        console.log('In ViewCADModel.render this=',this);
+//        console.log('In ViewCADModel.render');
 
         var od_free = this.props.symbol_table[0];
 //        console.log('In ViewCADModel.render OD_Free=',od_free);

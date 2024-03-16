@@ -21,7 +21,7 @@ class Report1 extends ReportBase {
 
     render() {
         super.render();
-//        console.log('In Report1.render this=',this);
+//        console.log('In Report1.render');
         var line = 1;
         return (
             <>

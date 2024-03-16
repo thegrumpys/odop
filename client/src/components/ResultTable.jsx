@@ -29,7 +29,7 @@ export default function ResultTable() {
   }, []);
 
   const onSearchRequest = (event) => {
-//    console.log('In ResultTable.onSearchRequest this=',this,'event=',event);
+//    console.log('In ResultTable.onSearchRequest','event=',event);
     if (symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Search cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
       return;
@@ -53,7 +53,7 @@ export default function ResultTable() {
   }
 
   const onSearchContextHelp = () => {
-//    console.log('In ResultTable.onSearchContinue this=',this);
+//    console.log('In ResultTable.onSearchContinue');
     window.open('/docs/Help/errors.html#objNotFinite', '_blank');
   }
 
@@ -79,7 +79,7 @@ export default function ResultTable() {
   }
 
   const onSeekRequest = (event) => {
-//    console.log('In ResultTable.onSeekRequest this=',this,'event=',event);
+//    console.log('In ResultTable.onSeekRequest','event=',event);
     if (symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
       return;
@@ -110,28 +110,28 @@ export default function ResultTable() {
   }
 
   const onSeekContextHelpButton = (event) => {
-//    console.log('In ResultTable.onSeekContextHelpButton this=',this,'event=',event);
+//    console.log('In ResultTable.onSeekContextHelpButton','event=',event);
     setSeekShow(!seekShow);
     window.open('/docs/Help/seek.html', '_blank');
   }
 
   const onSeekCancelButton = (event) => {
-//    console.log('In ResultTable.onSeekCancelButton this=',this,'event=',event);
+//    console.log('In ResultTable.onSeekCancelButton','event=',event);
     setSeekShow(!seekShow);
   }
 
   const onSeekMinMaxSelect = (seekMinMax) => {
-//    console.log('In ResultTable.onSeekMinMaxSelect this=',this,'seekMinMax=',seekMinMax);
+//    console.log('In ResultTable.onSeekMinMaxSelect','seekMinMax=',seekMinMax);
     setSeekMinMax(seekMinMax);
   }
 
   const onSeekNameSelect = (event) => {
-//    console.log('In ResultTable.onSeekNameSelect this=',this,'event=',event);
+//    console.log('In ResultTable.onSeekNameSelect','event=',event);
     setSeekName(event.target.value);
   }
 
   const onSeekButton = (event) => {
-//    console.log('In ResultTable.onSeekButton this=',this,'event=',event);
+//    console.log('In ResultTable.onSeekButton','event=',event);
     setSeekShow(!seekShow);
     // Do seek
     dispatch(saveAutoSave());

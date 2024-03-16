@@ -142,7 +142,7 @@ class ActionSelectCatalog extends Component {
     }
 
     render() {
-//        console.log('In ActionSelectCatalog.render this=',this);
+//        console.log('In ActionSelectCatalog.render');
         return (
             <>
                 <NavDropdown.Item onClick={this.toggle} disabled={this.state.names.length === 0}>

@@ -6,13 +6,13 @@ import { getAlertsBySeverity } from '../../../components/Alerts';
 export class ReportBase extends Component {
 
     constructor(props) {
-//        console.log('In ReportBase.constructor this=',this,'props=',props);
+//        console.log('In ReportBase.constructor','props=',props);
         super(props);
         this.def_dia = this.def_dia.bind(this);
     }
 
     render() {
-//        console.log('In ReportBase.render this=',this);
+//        console.log('In ReportBase.render');
         const Close_Wound_Coil = 5;
         /*  Bring in material properties table  */
         if (this.props.symbol_table[o.Material_File].value === "mat_metric.json")

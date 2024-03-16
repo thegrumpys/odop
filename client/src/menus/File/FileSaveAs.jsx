@@ -26,11 +26,11 @@ class FileSaveAs extends Component {
     }
 
     componentDidMount() {
-//        console.log('In FileSaveAs.componentDidMount this=',this);
+//        console.log('In FileSaveAs.componentDidMount');
     }
 
     componentDidUpdate(prevProps) {
-//        console.log('In FileSaveAs.componentDidUpdate this=',this,'prevProps=',prevProps);
+//        console.log('In FileSaveAs.componentDidUpdate','prevProps=',prevProps);
         if (prevProps.user !== this.props.user || prevProps.type !== this.props.type) {
 //            console.log('In FileSaveAs.componentDidUpdate prevProps=',prevProps,'this.props=',this.props);
             this.getDesignNames(this.props.user,this.props.type);
@@ -131,21 +131,21 @@ class FileSaveAs extends Component {
     }
 
     toggle() {
-//        console.log('In FileSaveAs.toggle this=',this);
+//        console.log('In FileSaveAs.toggle');
         this.setState({
             modal: !this.state.modal,
         });
     }
 
     onTextInput(event) {
-//        console.log('In FileSaveAs.onTextInput this=',this,'event.target.value=',event.target.value);
+//        console.log('In FileSaveAs.onTextInput','event.target.value=',event.target.value);
         this.setState({
             name: event.target.value // Change name in component state
         });
     }
 
     onSignIn() {
-//      console.log('In FileSaveAs.onSignIn this=',this);
+//      console.log('In FileSaveAs.onSignIn');
       this.setState({
           modal: !this.state.modal
       });
@@ -153,7 +153,7 @@ class FileSaveAs extends Component {
     }
 
     onCancel() {
-//      console.log('In FileSaveAs.onCancel this=',this);
+//      console.log('In FileSaveAs.onCancel');
       this.setState({
           modal: !this.state.modal
       });
@@ -161,7 +161,7 @@ class FileSaveAs extends Component {
   }
 
     onSaveAs() {
-//        console.log('In FileSaveAs.onSaveAs this=',this);
+//        console.log('In FileSaveAs.onSaveAs');
         this.setState({
             modal: !this.state.modal
         });
@@ -171,7 +171,7 @@ class FileSaveAs extends Component {
     }
 
     render() {
-//        console.log('In FileSaveAs.render this=',this);
+//        console.log('In FileSaveAs.render');
         return (
             <>
                 <NavDropdown.Item onClick={this.toggle}>
