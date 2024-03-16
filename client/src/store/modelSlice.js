@@ -408,7 +408,7 @@ export const modelSlice = createSlice({
 
     search: {
       reducer: (state, action) => {
-        console.log('reducer search','state=',current(state),',action=',action);
+//        console.log('reducer search','state=',current(state),',action=',action);
         return; // No-op
       }
     },
@@ -422,7 +422,7 @@ export const modelSlice = createSlice({
 
     saveAutoSave: {
       reducer: (state, action) => {
-        console.log('reducer saveAutoSave','state=',current(state),',action=',action);
+//        console.log('reducer saveAutoSave','state=',current(state),',action=',action);
         if (typeof(Storage) !== "undefined") {
           localStorage.setItem(action.payload.name, JSON.stringify(state), null, 2); // create or replace auto save file with current state contents
         }

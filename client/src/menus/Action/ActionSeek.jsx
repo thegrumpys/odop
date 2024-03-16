@@ -1,37 +1,36 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown, Modal, InputGroup, ButtonGroup, Button, Form } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import { CONSTRAINED, FIXED, MIN, MAX } from '../../store/actionTypes';
 import { seek, saveAutoSave } from '../../store/modelSlice';
 import { logUsage } from '../../logUsage';
 import { displayMessage } from '../../components/Message';
 
-class ActionSeek extends Component {
+export default function ActionSeek() {
+//  console.log("ActionSeek - Mounting...");
+  const [seekShow, setSeekShow] = useState(false);
+  const [seekName, setSeekName] = useState(null);
+  const [seekMinMax, setSeekMinMax] = useState(MIN);
+  const type = useSelector((state) => state.modelSlice.model.type);
+  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const objmin = useSelector((state) => state.modelSlice.model.system_controls.objmin);
+  const objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
+  const dispatch = useDispatch();
 
-    constructor(props) {
-//        console.log('In ActionSeek.constructor');
-        super(props);
-        this.onSeekRequest = this.onSeekRequest.bind(this);
-        this.onSeekContextHelpButton = this.onSeekContextHelpButton.bind(this);
-        this.onSeekCancelButton = this.onSeekCancelButton.bind(this);
-        this.onSeekMinMaxSelect = this.onSeekMinMaxSelect.bind(this);
-        this.onSeekNameSelect = this.onSeekNameSelect.bind(this);
-        this.onSeekButton = this.onSeekButton.bind(this);
-        this.state = {
-            seek_modal: false, // Default: do not display optimize modal
-            seek_name: null,
-            seek_minmax: MIN,
-        };
-    }
+  useEffect(() => {
+//    console.log("ActionSeek - Mounted");
+//    return () => console.log("ActionSeek - Unmounting ...");
+    return () => { };
+  }, []);
 
-    onSeekRequest() {
+  const  onSeekRequest = () => {
 //       console.log('In ActionSeek.onSeekRequest');
-        if (this.props.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+        if (symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
             return;
         }
         var inverted_constraint = false;
-        this.props.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
+        symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
             if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
                 inverted_constraint = true;
                 displayMessage((element.name + ' constraints are inconsistent. Help button provides more information.'), 'danger', 'Errors', '/docs/Help/alerts.html#Constraint_Inconsistency');
@@ -41,69 +40,54 @@ class ActionSeek extends Component {
         if (inverted_constraint) {
             return;
         }
-        var result = this.props.symbol_table.find( // Find free variable matching the current variable name
-            (element) => this.state.seek_name === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
+        var result = symbol_table.find( // Find free variable matching the current variable name
+            (element) => seekName === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
         );
         if (result === undefined) { // Was matching free variable not found
             // Set default name to the First free variable. There must be at least one
             // This duplicates the UI render code algorithm - be careful and make them match!
-            result = this.props.symbol_table.find( // Find first free variable
+            result = symbol_table.find( // Find first free variable
                 (element) => element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
             );
         }
-        this.setState({
-            seek_modal: !this.state.seek_modal,
-            seek_name: result.name,
-        });
+        setSeekShow(!seekShow);
+        setSeekName(result.name);
     }
 
-    onSeekContextHelpButton(event) {
+  const  onSeekContextHelpButton = (event) => {
 //        console.log('In ActionSeek.onSeekContextHelpButton','event=',event);
-        this.setState({
-            seek_modal: !this.state.seek_modal,
-        });
+        setSeekShow(!seekShow);
         window.open('/docs/Help/seek.html', '_blank');
     }
 
-    onSeekCancelButton(event) {
+  const  onSeekCancelButton = (event) => {
 //        console.log('In ActionSeek.onSeekCancelButton','event=',event);
-        this.setState({
-            seek_modal: !this.state.seek_modal,
-        });
+        setSeekShow(!seekShow);
     }
 
-    onSeekMinMaxSelect(seek_minmax) {
-//        console.log('In ActionSeek.onSeekMinMaxSelect','seek_minmax=',seek_minmax);
-        this.setState({
-            seek_minmax: seek_minmax
-        });
+  const  onSeekMinMaxSelect = (seekMinMax) => {
+//        console.log('In ActionSeek.onSeekMinMaxSelect','seekMinMax=',seekMinMax);
+        setSeekMinMax(seekMinMax);
     }
 
-    onSeekNameSelect(event) {
+  const   onSeekNameSelect = (event) => {
 //        console.log('In ActionSeek.onSeekNameSelect','event=',event);
-        this.setState({
-            seek_name: event.target.value
-        });
+        setSeekName(event.target.value);
     }
 
-    onSeekButton(event) {
+  const  onSeekButton = (event) => {
 //        console.log('In ActionSeek.onSeekButton','event=',event);
-        this.setState({
-            seek_modal: !this.state.seek_modal
-        });
+        setSeekShow(!seekShow);
         // Do seek
-        this.props.saveAutoSave();
-        this.props.seek(this.state.seek_name, this.state.seek_minmax);
-        logUsage('event', 'ActionSeek', { event_label: this.state.seek_minmax + ' ' + this.state.seek_name });
+        dispatch(saveAutoSave());
+        dispatch(seek(seekName, seekMinMax));
+        logUsage('event', 'ActionSeek', { event_label: seekMinMax + ' ' + seekName });
     }
 
-    render() {
-//        console.log('In ActionSeek.render');
-
-        var ResultTableOptimize = require('../../designtypes/'+this.props.type+'/ResultTableOptimize.jsx'); // Dynamically load ResultTableOptimize
+        var ResultTableOptimize = require('../../designtypes/'+type+'/ResultTableOptimize.jsx'); // Dynamically load ResultTableOptimize
 
         var display_search_button;
-        if (this.props.objective_value > this.props.system_controls.objmin) {
+        if (objective_value > objmin) {
             display_search_button = true;
         } else {
             display_search_button = false;
@@ -111,10 +95,10 @@ class ActionSeek extends Component {
 
         return (
             <>
-                <NavDropdown.Item onClick={this.onSeekRequest} disabled={display_search_button}>
+                <NavDropdown.Item onClick={onSeekRequest} disabled={display_search_button}>
                     Seek (optimize)&hellip;
                 </NavDropdown.Item>
-                <Modal show={this.state.seek_modal} onHide={this.onSeekCancelButton}>
+                <Modal show={seekShow} onHide={onSeekCancelButton}>
                     <Modal.Header closeButton>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Seek (optimize)
@@ -122,42 +106,27 @@ class ActionSeek extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <p>This may be a long running operation. Please be patient.</p>
-                        <ResultTableOptimize.default onClick={this.onSeekCancelButton}/>
+                        <ResultTableOptimize.default onClick={onSeekCancelButton}/>
                         <InputGroup>
                             <ButtonGroup>
-                                <Button variant="outline-secondary" onClick={() => this.onSeekMinMaxSelect(MIN)} active={this.state.seek_minmax === MIN}> Min </Button>
-                                <Button variant="outline-secondary" onClick={() => this.onSeekMinMaxSelect(MAX)} active={this.state.seek_minmax === MAX}> Max </Button>
+                                <Button variant="outline-secondary" onClick={() => onSeekMinMaxSelect(MIN)} active={seekMinMax === MIN}> Min </Button>
+                                <Button variant="outline-secondary" onClick={() => onSeekMinMaxSelect(MAX)} active={seekMinMax === MAX}> Max </Button>
                             </ButtonGroup>
                             &nbsp;
                             <InputGroup.Text>Name: </InputGroup.Text>
-                            <Form.Control as="select" className="align-middle" onChange={this.onSeekNameSelect} value={this.state.seek_name}>
-                                {this.props.symbol_table.map((element, index) =>
+                            <Form.Control as="select" className="align-middle" onChange={onSeekNameSelect} value={seekName}>
+                                {symbol_table.map((element, index) =>
                                     (element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)) ? <option key={index} value={element.name}>{element.name}</option> : ''
                                 )}
                             </Form.Control>
                         </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="outline-info" onClick={this.onSeekContextHelpButton}>Help</Button>{' '}
-                        <Button variant="secondary" onClick={this.onSeekCancelButton}>Cancel</Button>{' '}
-                        <Button variant="primary" onClick={this.onSeekButton}>Seek</Button>
+                        <Button variant="outline-info" onClick={onSeekContextHelpButton}>Help</Button>{' '}
+                        <Button variant="secondary" onClick={onSeekCancelButton}>Cancel</Button>{' '}
+                        <Button variant="primary" onClick={onSeekButton}>Seek</Button>
                     </Modal.Footer>
                 </Modal>
             </>
         );
-    }
 }
-
-const mapStateToProps = state => ({
-    type: state.model.type,
-    symbol_table: state.model.symbol_table,
-    system_controls: state.model.system_controls,
-    objective_value: state.model.result.objective_value,
-});
-
-const mapDispatchToProps = {
-    seek: seek,
-    saveAutoSave: saveAutoSave
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ActionSeek);

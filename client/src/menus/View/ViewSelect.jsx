@@ -23,9 +23,9 @@ export default function ViewSelect() {
   }
 
   var { getViewNames } = require('../../designtypes/' + model_type + '/view.js'); // Dynamically load getViewNames
-  console.log('ViewSelect - type changed', 'getViewNames=', getViewNames);
+//  console.log('ViewSelect - type changed', 'getViewNames=', getViewNames);
   var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
-  console.log('ViewSelect - type changed', 'viewNames=', viewNames);
+//  console.log('ViewSelect - type changed', 'viewNames=', viewNames);
 
   return (
     <>

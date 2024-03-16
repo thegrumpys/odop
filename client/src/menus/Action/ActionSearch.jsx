@@ -22,7 +22,7 @@ export default function ActionSearch() {
   }, []);
 
   const onSearchRequest = (event) => {
-    console.log('ActionSearch.onSearchRequest','event=',event);
+//    console.log('ActionSearch.onSearchRequest','event=',event);
     if (symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Search cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
       return;
@@ -46,23 +46,23 @@ export default function ActionSearch() {
   }
 
   const onSearchContextHelp = () => {
-    console.log('ActionSearch.onSearchContinue');
+//    console.log('ActionSearch.onSearchContinue');
     window.open('/docs/Help/errors.html#objNotFinite', '_blank');
   }
 
   const onSearchContinue = () => {
-    console.log('ActionSearch.onSearchContinue');
+//    console.log('ActionSearch.onSearchContinue');
     setSearchInfiniteShow(!searchInfiniteShow);
     this.doSearch('NOT FINITE');
   }
 
   const onSearchCancel = () => {
-    console.log('ActionSearch.onSearchCancel');
+//    console.log('ActionSearch.onSearchCancel');
     setSearchInfiniteShow(!searchInfiniteShow);
   }
 
   const doSearch = (type) => {
-    console.log('ActionSearch.doSearch');
+//    console.log('ActionSearch.doSearch');
     var old_objective_value = objective_value;
     dispatch(saveAutoSave());
     dispatch(search());

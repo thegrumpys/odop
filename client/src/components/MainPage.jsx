@@ -14,6 +14,7 @@ import {
 //import { changeUser, changeView, deleteAutoSave } from '../store/modelSlice';
 import FileOpen from '../menus/File/FileOpen';
 import ActionSearch from '../menus/Action/ActionSearch';
+import ActionSeek from '../menus/Action/ActionSeek';
 import ViewSelect from '../menus/View/ViewSelect';
 import ViewOffsets from '../menus/View/ViewOffsets';
 import ViewSymbolTableOffsets from '../menus/View/ViewSymbolTableOffsets';
@@ -113,6 +114,7 @@ export default function MainPage() {
             </NavDropdown>
             <NavDropdown title="Action">
               <ActionSearch />
+              <ActionSeek />
             </NavDropdown>
             <NavDropdown title="View">
               <ViewSelect />
