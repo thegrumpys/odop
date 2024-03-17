@@ -39,14 +39,14 @@ export const alertsSlice = createSlice({
     },
     setCaret: {
       reducer: (state, action) => {
-        console.log('reducer setCaret','state=',current(state),',action=',action);
+//        console.log('reducer setCaret','state=',current(state),',action=',action);
         state.caret = action.payload.caret;
       },
       prepare: (caret) => { return { payload: { caret } } }
     },
     setLevel: {
       reducer: (state, action) => {
-        console.log('reducer setLevel','state=',current(state),',action=',action);
+//        console.log('reducer setLevel','state=',current(state),',action=',action);
         state.level = action.payload.level;
       },
       prepare: (level) => { return { payload: { level } } }

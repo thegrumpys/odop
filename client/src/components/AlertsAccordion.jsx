@@ -19,20 +19,20 @@ const ContextAwareAccordion = ({ children }) => {
 //  console.log("In ContextAwareAccordion activeKey=",activeKey);
   return (
     <Accordion className="mb-3" activeKey={activeKey} onSelect={eventKey => {
-      console.log('ContextAwareAccordion activekey=',activeKey,'level=',level,'eventKey=',eventKey,'activeEventKey=',activeEventKey);
+//      console.log('ContextAwareAccordion activekey=',activeKey,'level=',level,'eventKey=',eventKey,'activeEventKey=',activeEventKey);
       if (activeKey === null) { // Is it now Collapsed?
-        console.log('ContextAwareAccordion EXPAND');
+//        console.log('ContextAwareAccordion EXPAND');
         dispatch(setActiveKey('0'));
         dispatch(setCaret("fas fa-caret-down"));
         logUsage('event', 'AlertsAccordion', { event_label: 'Level ' + level + '->' + eventKey + ' expand' });
       } else { // Otherwise it is already Expanded
         if (level !== eventKey) {
-          console.log('ContextAwareAccordion EXPAND');
+//          console.log('ContextAwareAccordion EXPAND');
           dispatch(setActiveKey('0'));
           dispatch(setCaret("fas fa-caret-down"));
           logUsage('event', 'AlertsAccordion', { event_label: 'Level ' + level + '->' + eventKey + ' expand' });
         } else {
-          console.log('ContextAwareAccordion COLLAPSE');
+//          console.log('ContextAwareAccordion COLLAPSE');
           dispatch(setActiveKey(null));
           dispatch(setCaret("fas fa-caret-right" ));
           logUsage('event', 'AlertsAccordion', { event_label: 'Level ' + level + '->' + eventKey + ' collapse' });
