@@ -1,22 +1,15 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { connect } from 'react-redux';
 
-class SymbolName extends Component {
+export default function SymbolName({ className, element, index }) {
+//  console.log("SymbolName - Mounting...",'element=',element,'index=',index);
 
-    render() {
-//        console.log('In SymbolName.render');
-        return (
-            <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')} id={'sn_'+this.props.index}>
-                <OverlayTrigger placement="top" overlay={this.props.element.tooltip !== undefined && <Tooltip>{this.props.element.tooltip}</Tooltip>}>
-                    <span>{this.props.element.name}</span>
-                </OverlayTrigger>
-            </td>
-        );
-    }
+  return (
+    <td className={"align-middle " + (className !== undefined ? className : '')} id={'sn_' + element.name}>
+      <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip>{element.tooltip}</Tooltip>}>
+        <span>{element.name}</span>
+      </OverlayTrigger>
+    </td>
+  );
 }
-
-const mapStateToProps = state => ({
-});
-
-export default connect(mapStateToProps)(SymbolName);

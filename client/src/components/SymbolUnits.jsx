@@ -1,20 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-class SymbolUnits extends Component {
+export default function SymbolUnits({ className, element, index }) {
+//  console.log("SymbolUnits - Mounting...",'element=',element,'index=',index);
+  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
 
-    render() {
-//        console.log('In SymbolUnits.render');
-        return (
-            <>
-                <td className={"text-nowrap align-middle " + (this.props.system_controls.show_units ? "" : "d-none") + (this.props.className !== undefined ? this.props.className : '')}>{this.props.element.units}</td>
-            </>
-        );
-    }
+  return (
+    <>
+      <td className={"text-nowrap align-middle " + (system_controls.show_units ? "" : "d-none") + (className !== undefined ? className : '')} id={'su_' + element.name}>
+        {element.units}
+      </td>
+    </>
+  );
 }
-
-const mapStateToProps = state => ({
-    system_controls: state.model.system_controls,
-});
-
-export default connect(mapStateToProps)(SymbolUnits);

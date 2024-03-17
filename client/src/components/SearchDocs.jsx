@@ -91,7 +91,7 @@ class SearchDocs extends Component {
 //        console.log('In SearchDocs.render');
         return (
             <>
-                <InputGroup className='pr-3'>
+                <InputGroup className='pe-3'>
                     <Form.Control type="text" value={this.state.text} placeholder="Help lookup" onChange={this.onChange} onKeyPress={this.onKeyPress} />
                     <Button onClick={this.onButtonPress} style={{padding: '0px 24px 16px 8px'}} disabled={this.state.text.length === 0}><i className="fas fa-search"></i></Button>
                 </InputGroup>

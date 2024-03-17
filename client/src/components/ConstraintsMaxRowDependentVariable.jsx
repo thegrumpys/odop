@@ -79,7 +79,7 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
   const onEnterButton = (event) => {
 //    console.log("In ConstraintsMaxRowDependentVariable.onEnterButton", "event.target.value=", event.target.value);
     setShow(!show);
-    var value = parseFloat(state.valueString);
+    var value = parseFloat(valueString);
     if (element.lmax & FIXED) {
       dispatch(resetSymbolFlag(element.name, MIN, FDCL));
       dispatch(changeSymbolConstraint(element.name, MIN, value));
@@ -109,9 +109,9 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
   var className = results.className;
   var icon_alerts = results.alerts;
   return (
-    <tbody>
+    <tbody id={'cmxrdv_' + element.name}>
       <tr key={element.name}>
-        <td className="align-middle d-lg-none" id={'dependent_variable_max_constrain_' + index}>
+        <td className="align-middle d-lg-none" id={'cmxrdv_name_' + element.name}>
           <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip className="d-lg-none">{element.tooltip}</Tooltip>}>
             <span>{element.name}</span>
           </OverlayTrigger>
@@ -119,12 +119,12 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
         <td className="align-middle" colSpan="2">
           <InputGroup>
             <InputGroup.Text>
-              <Form.Check type="checkbox" aria-label="Checkbox for maximum value" checked={element.lmax & CONSTRAINED} onChange={element.lmax & CONSTRAINED ? onResetFlagMaxConstrained : onSetFlagMaxConstrained} disabled={element.lmax & FIXED ? true : false} />
+              <Form.Check id={'cmxrdv_checkbox_' + element.name} type="checkbox" aria-label="Checkbox for maximum value" checked={element.lmax & CONSTRAINED} onChange={element.lmax & CONSTRAINED ? onResetFlagMaxConstrained : onSetFlagMaxConstrained} disabled={element.lmax & FIXED ? true : false} />
             </InputGroup.Text>
-            <FormControlTypeNumber id={element.name + "_cmax"} icon_alerts={icon_alerts} className={className} value={element.cmax} validmin={element.validmin} validmax={element.validmax} disabled={element.lmax & FIXED || element.lmax & CONSTRAINED ? false : true} disabledText={element.lmax & CONSTRAINED ? false : true} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onClick={onClick} />
+            <FormControlTypeNumber id={'cmxrdv_cmax_' + element.name} icon_alerts={icon_alerts} className={className} value={element.cmax} validmin={element.validmin} validmax={element.validmax} disabled={element.lmax & FIXED || element.lmax & CONSTRAINED ? false : true} disabledText={element.lmax & CONSTRAINED ? false : true} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onClick={onClick} />
           </InputGroup>
           {element.cmaxchoices !== undefined && element.cmaxchoices.length > 0 ?
-            <Modal show={state.modal} size="lg" onHide={onCancel}>
+            <Modal show={show} size="lg" onHide={onCancel}>
               <Modal.Header closeButton>
                 <Modal.Title>
                   Functionally Determined Constraint Level (FDCL) - Set {element.name} Max Constraint
@@ -156,8 +156,8 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
                       <td>Value:&nbsp;</td>
                       <td>
                         <InputGroup>
-                          <FormControlTypeNumber id={element.name + "_cmax"} className={className} value={element.cmax} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidValue} onChangeInvalid={onChangeInvalidValue} />
-                          <Button variant="primary" disabled={state.isInvalidValue} onClick={onEnterButton}>Enter</Button>
+                          <FormControlTypeNumber id={'cmxrdv_cmaxfdcl_' + element.name} className={className} value={element.cmax} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidValue} onChangeInvalid={onChangeInvalidValue} />
+                          <Button variant="primary" disabled={isInvalidValue} onClick={onEnterButton}>Enter</Button>
                         </InputGroup>
                       </td>
                     </tr>

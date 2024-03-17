@@ -6,7 +6,7 @@ import FeasibilityIndicator from './FeasibilityIndicator';
 import { search, seek, saveAutoSave } from '../store/modelSlice';
 import { logUsage } from '../logUsage';
 import { displayMessage } from '../components/Message';
-//import AlertsAccordion from "./AlertsAccordion"
+import AlertsAccordion from "./AlertsAccordion"
 
 export default function ResultTable() {
 //  console.log("ResultTable - Mounting...");
@@ -242,7 +242,7 @@ export default function ResultTable() {
             {display_search_button ?
               <td align="text-left">
                 <OverlayTrigger placement="bottom" overlay={<Tooltip><b>Seek</b> (optimize) if feasible.<br /><b>Search</b> (solve) if not feasible.<br />Same functions as Action menu.</Tooltip>}>
-                  <b className="pr-5">Action</b>
+                  <b className="pe-5">Action</b>
                 </OverlayTrigger>
                 <Button variant="primary" size="sm" onClick={onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>&nbsp;
                 <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
@@ -262,7 +262,7 @@ export default function ResultTable() {
               :
               <td align="text-left">
                 <OverlayTrigger placement="bottom" overlay={<Tooltip><b>Seek</b> (optimize) if feasible.<br /><b>Search</b> (solve) if not feasible.<br />Same functions as Action menu.</Tooltip>}>
-                  <b className="pr-5">Action</b>
+                  <b className="pe-5">Action</b>
                 </OverlayTrigger>
                 <Button variant="primary" size="sm" onClick={onSeekRequest} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
                 <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
@@ -280,6 +280,7 @@ export default function ResultTable() {
     </Col>
     </Row>
     </Container>
+      <AlertsAccordion />
       <Modal show={seekShow} onHide={onSeekCancelButton}>
         <Modal.Header closeButton>
           <Modal.Title>

@@ -1,33 +1,20 @@
-import React, { Component } from 'react';
 import { InputGroup, Form } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import { toODOPPrecision } from '../toODOPPrecision'
 
-class Value extends Component {
+export default function Value({ id, className, value }) {
+//  console.log("Value - Mounting...",'id=',id,'value=',value);
 
-    render() {
-//        console.log('In Value.render');
-        return (
-            <>
-                <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')}>
-                    <InputGroup>
-                        {typeof this.props.value === 'number' ?
-                            <Form.Control id={'v_'+this.props.id} type="text" disabled={true} className="text-right" value={toODOPPrecision(this.props.value)} />
-                            :
-                            <Form.Control id={'v_'+this.props.id} type="text" disabled={true} className="text-right" value={this.props.value} />
-                        }
-                    </InputGroup>
-                </td>
-            </>
-        );
-    }
+  return (
+    <>
+      <td className={"align-middle " + (className !== undefined ? className : '')}>
+        <InputGroup>
+          {typeof value === 'number' ?
+            <Form.Control id={'v_' + id} type="text" disabled={true} className="text-right" value={toODOPPrecision(value)} />
+            :
+            <Form.Control id={'v_' + id} type="text" disabled={true} className="text-right" value={value} />
+          }
+        </InputGroup>
+      </td>
+    </>
+  );
 }
-
-const mapStateToProps = state => ({
-});
-
-const mapDispatchToProps = {
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Value);
-

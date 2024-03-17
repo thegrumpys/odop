@@ -368,15 +368,11 @@ export var getAlertsBySeverity = (severity = '*') => {
   if (severity === '*') {
     results = alertsSlice.alerts.filter(entry => {
 //      console.log('severity=',severity,'entry=',entry);
-      var severityNumber = getSeverityNumberBySeverity(entry.severity);
-      entry.className = getFontClassBySeverityNumber(severityNumber);
       return entry.duplicate === undefined || entry.duplicate === false;
     });
   } else {
     results = alertsSlice.alerts.filter(entry => {
 //      console.log('severity=',severity,'entry=',entry);
-      var severityNumber = getSeverityNumberBySeverity(entry.severity);
-      entry.className = getFontClassBySeverityNumber(severityNumber);
       return entry.severity === severity && (entry.duplicate === undefined || entry.duplicate === false);
     });
   }

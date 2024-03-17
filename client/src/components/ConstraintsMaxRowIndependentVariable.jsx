@@ -151,7 +151,7 @@ export default function ConstraintsMaxRowIndependentVariable({ element, index, o
                       <td>Value:&nbsp;</td>
                       <td>
                         <InputGroup>
-                          <FormControlTypeNumber id={element.name + "_cmax"} className={className} value={element.cmax} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidValue} onChangeInvalid={onChangeInvalidValue} />
+                          <FormControlTypeNumber id={'cmxriv_cmaxfdcl_' + element.name} className={className} value={element.cmax} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidValue} onChangeInvalid={onChangeInvalidValue} />
                           <Button variant="primary" disabled={isInvalidValue} onClick={onEnterButton}>Enter</Button>
                         </InputGroup>
                       </td>

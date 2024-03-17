@@ -26,7 +26,7 @@ class Report1 extends ReportBase {
         return (
             <>
                 <h4 className="d-flex mt-3">
-                    <span className="mr-auto">ODOP:Spring &nbsp; Compression Spring Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></span>
+                    <span className="ms-auto">ODOP:Spring &nbsp; Compression Spring Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></span>
                     <Button onClick={this.onClick}>Print</Button>
                 </h4>
                 <br />

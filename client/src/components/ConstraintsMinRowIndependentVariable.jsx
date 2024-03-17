@@ -102,7 +102,6 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
   // =======================================
   var results = getAlertsByName(element.name + ' MIN');
   var className = results.className;
-//  console.log('results=',results);
   var icon_alerts = results.alerts;
   return (
     <tbody id={'cmnriv_' + element.name}>
@@ -152,7 +151,7 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
                       <td>Value:&nbsp;</td>
                       <td>
                         <InputGroup>
-                          <FormControlTypeNumber id={element.name + "_cmin"} className={className} value={element.cmin} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidValue} onChangeInvalid={onChangeInvalidValue} />
+                          <FormControlTypeNumber id={'cmnriv_cminfdcl_' + element.name} className={className} value={element.cmin} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidValue} onChangeInvalid={onChangeInvalidValue} />
                           <Button variant="primary" disabled={isInvalidValue} onClick={onEnterButton}>Enter</Button>
                         </InputGroup>
                       </td>

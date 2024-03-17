@@ -1,22 +1,13 @@
-import React, { Component } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { connect } from 'react-redux';
 
-class ValueName extends Component {
+export default function Value({ className, name, tooltip }) {
+//  console.log("Value - Mounting...",'id=',id,'value=',value);
 
-    render() {
-//        console.log('In ValueName.render');
-        return (
-            <td className={"align-middle " + (this.props.className !== undefined ? this.props.className : '')} id={'vn_'+this.props.name}>
-                <OverlayTrigger placement="top" overlay={this.props.tooltip !== undefined && <Tooltip>{this.props.tooltip}</Tooltip>}>
-                    <span>{this.props.name}</span>
-                </OverlayTrigger>
-            </td>
-        );
-    }
+  return (
+    <td className={"align-middle " + (className !== undefined ? className : '')} id={'vn_' + name}>
+      <OverlayTrigger placement="top" overlay={tooltip !== undefined && <Tooltip>{tooltip}</Tooltip>}>
+        <span>{name}</span>
+      </OverlayTrigger>
+    </td>
+  );
 }
-
-const mapStateToProps = state => ({
-});
-
-export default connect(mapStateToProps)(ValueName);

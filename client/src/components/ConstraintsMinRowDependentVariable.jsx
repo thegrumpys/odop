@@ -106,7 +106,6 @@ export default function ConstraintsMinRowDependentVariable({ element, index, onC
   // Constraint Minimum Column
   // =======================================
   var results = getAlertsByName(element.name + ' MIN');
-//  console.log('results=',results);
   var className = results.className;
   var icon_alerts = results.alerts;
   return (
@@ -157,7 +156,7 @@ export default function ConstraintsMinRowDependentVariable({ element, index, onC
                       <td>Value:&nbsp;</td>
                       <td>
                         <InputGroup>
-                          <FormControlTypeNumber id={element.name + "_cmin"} className={className} value={element.cmin} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidValue} onChangeInvalid={onChangeInvalidValue} />
+                          <FormControlTypeNumber id={'cmnrdv_cminfdcl_' + element.name} className={className} value={element.cmin} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidValue} onChangeInvalid={onChangeInvalidValue} />
                           <Button variant="primary" disabled={isInvalidValue} onClick={onEnterButton}>Enter</Button>
                         </InputGroup>
                       </td>
