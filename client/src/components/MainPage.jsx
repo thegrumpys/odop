@@ -15,6 +15,8 @@ import {
 import FileOpen from '../menus/File/FileOpen';
 import FilePreferences from '../menus/File/FilePreferences';
 import FileProperties from '../menus/File/FileProperties';
+import FileImport from '../menus/File/FileImport';
+import FileExport from '../menus/File/FileExport';
 import ActionSearch from '../menus/Action/ActionSearch';
 import ActionSeek from '../menus/Action/ActionSeek';
 import ViewSelect from '../menus/View/ViewSelect';
@@ -26,6 +28,7 @@ import HelpMotd from '../menus/Help/HelpMotd';
 import HelpIndex from '../menus/Help/HelpIndex';
 import HelpAbout from '../menus/Help/HelpAbout';
 import config from '../config';
+import SearchDocs from './SearchDocs';
 import ResultTable from './ResultTable';
 import DesignTable from './DesignTable';
 
@@ -41,46 +44,46 @@ export default function MainPage() {
 //  useEffect(() => {
 ////    console.log("MainPage - Mounted");
 //  }, []);
-
-  useEffect(() => {
-//    console.log("MainPage",'show=',show);
-  }, [show]);
-
-  useEffect(() => {
-//    console.log("MainPage",'activeTab=',activeTab);
-  }, [activeTab]);
-
-  useEffect(() => {
-//    console.log("MainPage",'model_name=',model_name);
-  }, [model_name]);
-
-  useEffect(() => {
-//    console.log('MainPage','model_view=',model_view);
-    setActiveTab(model_view);
-  }, [model_view]);
-
-  useEffect(() => {
-//    console.log('MainPage','model_type=',model_type);
-//    if (model_type === null) return;
-//    var { getViewNames } = require('../designtypes/'+ model_type + '/view.js'); // Dynamically load getViewNames
-//    console.log('MainPage - type changed','getViewNames=', getViewNames);
-//    var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
-//    console.log('MainPage - type changed','viewNames=', viewNames);
-//    var viewIndex = viewNames.find(element => element.name === config.url.view);
-//    console.log('MainPage','viewIndex=', viewIndex);
-//    if (viewIndex >= 0) {
-//      var viewComponent = viewNames[index].component;
-//    } else { // Not found
-//      var viewComponent = viewNames[0].component; // Default to the first one
-//    }
-//    console.log('MainPage - type changed','new_view=', new_view);
-//    if (new_view === undefined) {
-//      dispatch(changeView(config.env.view)); // if not found then assume the configured default
-//    } else {
-//      dispatch(changeView(view)); // if not found then assume the configured default
-//    }
-  }, [model_type]);
-
+//
+//  useEffect(() => {
+////    console.log("MainPage",'show=',show);
+//  }, [show]);
+//
+//  useEffect(() => {
+////    console.log("MainPage",'activeTab=',activeTab);
+//  }, [activeTab]);
+//
+//  useEffect(() => {
+////    console.log("MainPage",'model_name=',model_name);
+//  }, [model_name]);
+//
+//  useEffect(() => {
+////    console.log('MainPage','model_view=',model_view);
+//    setActiveTab(model_view);
+//  }, [model_view]);
+//
+//  useEffect(() => {
+////    console.log('MainPage','model_type=',model_type);
+////    if (model_type === null) return;
+////    var { getViewNames } = require('../designtypes/'+ model_type + '/view.js'); // Dynamically load getViewNames
+////    console.log('MainPage - type changed','getViewNames=', getViewNames);
+////    var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
+////    console.log('MainPage - type changed','viewNames=', viewNames);
+////    var viewIndex = viewNames.find(element => element.name === config.url.view);
+////    console.log('MainPage','viewIndex=', viewIndex);
+////    if (viewIndex >= 0) {
+////      var viewComponent = viewNames[index].component;
+////    } else { // Not found
+////      var viewComponent = viewNames[0].component; // Default to the first one
+////    }
+////    console.log('MainPage - type changed','new_view=', new_view);
+////    if (new_view === undefined) {
+////      dispatch(changeView(config.env.view)); // if not found then assume the configured default
+////    } else {
+////      dispatch(changeView(view)); // if not found then assume the configured default
+////    }
+//  }, [model_type]);
+//
   const toggle = () => {
 //    console.log('MainPage.toggle');
     setShow(!show);
@@ -114,6 +117,9 @@ export default function MainPage() {
             <NavDropdown title="File" renderMenuOnMount={true}>
               <FileOpen />
               <NavDropdown.Divider />
+              <FileImport />
+              <FileExport />
+              <NavDropdown.Divider />
               <FilePreferences />
               <FileProperties />
             </NavDropdown>
@@ -136,6 +142,9 @@ export default function MainPage() {
             </NavDropdown>
           </Nav>
           <Nav>
+            <Nav.Item>
+              <SearchDocs />
+            </Nav.Item>
             <Nav.Item className="d-flex align-items-center">
               <a href={"/docs/Help/DesignTypes/" + model_type + "/description.html"} target="_blank" rel="noopener noreferrer">
                 <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {model_type}. Select icon for full description.</Tooltip>}>
