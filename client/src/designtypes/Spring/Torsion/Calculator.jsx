@@ -27,11 +27,11 @@ export class Calculator extends ReportBase {
                                     :
                                     <Value id="Material_Type" value={this.matTypeValue} />
                                 }
-                                <SymbolUnits element={this.props.symbol_table[o.Material_Type]} index={o.Material_Type} className="text-left" />
+                                <SymbolUnits element={this.props.symbol_table[o.Material_Type]} index={o.Material_Type} className="text-start" />
                                 <td> &nbsp; &nbsp; </td>
                                 <SymbolName element={this.props.symbol_table[o.End_Type]} index={o.End_Type} />
                                 <SymbolValue element={this.props.symbol_table[o.End_Type]} index={o.End_Type} />
-                                <SymbolUnits element={this.props.symbol_table[o.End_Type]} index={o.End_Type} className="text-left" />
+                                <SymbolUnits element={this.props.symbol_table[o.End_Type]} index={o.End_Type} className="text-start" />
                             </tr>
                         </tbody>
                     </table>
@@ -62,7 +62,7 @@ export class Calculator extends ReportBase {
                                 <Value id="Stress_Free" value={0.0} />
                                 <td className="align-middle">
                                     <InputGroup>
-                                        <Form.Control type="text" disabled={true} className="text-right text-muted" value={"Infinity"} />
+                                        <Form.Control type="text" disabled={true} className="text-end text-muted" value={"Infinity"} />
                                     </InputGroup>
                                 </td>
                             </tr>
@@ -106,65 +106,65 @@ export class Calculator extends ReportBase {
                             <tr>
                                 <SymbolName element={this.props.symbol_table[o.Stroke]} index={o.Stroke} />
                                 <SymbolValue element={this.props.symbol_table[o.Stroke]} index={o.Stroke} />
-                                <SymbolUnits element={this.props.symbol_table[o.Stroke]} index={o.Stroke} className="text-left" />
+                                <SymbolUnits element={this.props.symbol_table[o.Stroke]} index={o.Stroke} className="text-start" />
                                 <td> &nbsp; &nbsp; </td>
                                 <SymbolName element={this.props.symbol_table[o.Wire_Dia]} index={o.Wire_Dia} />
                                 <SymbolValueWireDia element={this.props.symbol_table[o.Wire_Dia]} index={o.Wire_Dia} />
-                                <SymbolUnits element={this.props.symbol_table[o.Wire_Dia]} index={o.Wire_Dia} className="text-left" />
+                                <SymbolUnits element={this.props.symbol_table[o.Wire_Dia]} index={o.Wire_Dia} className="text-start" />
                             </tr>
                             <tr>
                                 <SymbolName element={this.props.symbol_table[o.Coils_T]} index={o.Coils_T} />
                                 <SymbolValue element={this.props.symbol_table[o.Coils_T]} index={o.Coils_T} />
-                                <SymbolUnits element={this.props.symbol_table[o.Coils_T]} index={o.Coils_T} className="text-left" />
+                                <SymbolUnits element={this.props.symbol_table[o.Coils_T]} index={o.Coils_T} className="text-start" />
                                 <td> &nbsp; &nbsp; </td>
                                 <SymbolName element={this.props.symbol_table[o.Spring_Index]} index={o.Spring_Index} />
                                 <SymbolValue element={this.props.symbol_table[o.Spring_Index]} index={o.Spring_Index} />
-                                <SymbolUnits element={this.props.symbol_table[o.Spring_Index]} index={o.Spring_Index} className="text-left" />
+                                <SymbolUnits element={this.props.symbol_table[o.Spring_Index]} index={o.Spring_Index} className="text-start" />
                             </tr>
                             <tr>
                                 <SymbolName element={this.props.symbol_table[o.Coils_A]} index={o.Coils_A} />
                                 <SymbolValue element={this.props.symbol_table[o.Coils_A]} index={o.Coils_A} />
-                                <SymbolUnits element={this.props.symbol_table[o.Coils_A]} index={o.Coils_A} className="text-left" />
+                                <SymbolUnits element={this.props.symbol_table[o.Coils_A]} index={o.Coils_A} className="text-start" />
                                 <td> &nbsp; &nbsp; </td>
                                 <SymbolName element={this.props.symbol_table[o.Rate]} index={o.Rate} />
                                 <SymbolValue element={this.props.symbol_table[o.Rate]} index={o.Rate} />
-                                <SymbolUnits element={this.props.symbol_table[o.Rate]} index={o.Rate} className="text-left" />
+                                <SymbolUnits element={this.props.symbol_table[o.Rate]} index={o.Rate} className="text-start" />
                             </tr>
                             <tr>
                                 <SymbolName element={this.props.symbol_table[o.Coil_Spacing]} index={o.Coil_Spacing} />
                                 <SymbolValue element={this.props.symbol_table[o.Coil_Spacing]} index={o.Coil_Spacing} />
-                                <SymbolUnits element={this.props.symbol_table[o.Coil_Spacing]} index={o.Coil_Spacing} className="text-left" />
+                                <SymbolUnits element={this.props.symbol_table[o.Coil_Spacing]} index={o.Coil_Spacing} className="text-start" />
                                 <td> &nbsp; &nbsp; </td>
                                 <SymbolName element={this.props.symbol_table[o.Weight]} index={o.Weight} />
                                 <SymbolValue element={this.props.symbol_table[o.Weight]} index={o.Weight} />
-                                <SymbolUnits element={this.props.symbol_table[o.Weight]} index={o.Weight} className="text-left" />
+                                <SymbolUnits element={this.props.symbol_table[o.Weight]} index={o.Weight} className="text-start" />
                             </tr>
                             <tr>
                                 <SymbolName element={this.props.symbol_table[o.End_Angle_Free]} index={o.End_Angle_Free} />
                                 <SymbolValue element={this.props.symbol_table[o.End_Angle_Free]} index={o.End_Angle_Free} />
-                                <SymbolUnits element={this.props.symbol_table[o.End_Angle_Free]} index={o.End_Angle_Free} className="text-left" />
+                                <SymbolUnits element={this.props.symbol_table[o.End_Angle_Free]} index={o.End_Angle_Free} className="text-start" />
                                 <td> &nbsp; &nbsp; </td>
                                 <ValueName name="Pitch" tooltip="Pitch is the distance between two adjacent coils"/>
                                 <Value id="Pitch" value={this.pitch} />
-                                <SymbolUnits element={this.props.symbol_table[o.L_Body]} index={o.L_Body} className="text-left" />
+                                <SymbolUnits element={this.props.symbol_table[o.L_Body]} index={o.L_Body} className="text-start" />
                             </tr>
                             <tr>
                                 <SymbolName element={this.props.symbol_table[o.Arm_2]} index={o.Arm_2} />
                                 <SymbolValue element={this.props.symbol_table[o.Arm_2]} index={o.Arm_2} />
-                                <SymbolUnits element={this.props.symbol_table[o.Arm_2]} index={o.Arm_2} className="text-left" />
+                                <SymbolUnits element={this.props.symbol_table[o.Arm_2]} index={o.Arm_2} className="text-start" />
                                 <td> &nbsp; &nbsp; </td>
                                 <SymbolName element={this.props.symbol_table[o.Force_Arm_2]} index={o.Force_Arm_2} />
                                 <SymbolValue element={this.props.symbol_table[o.Force_Arm_2]} index={o.Force_Arm_2} />
-                                <SymbolUnits element={this.props.symbol_table[o.Force_Arm_2]} index={o.Force_Arm_2} className="text-left" />
+                                <SymbolUnits element={this.props.symbol_table[o.Force_Arm_2]} index={o.Force_Arm_2} className="text-start" />
                             </tr>
                             <tr>
                                 <SymbolName element={this.props.symbol_table[o.Cycle_Life]} index={o.Cycle_Life} />
                                 <SymbolValue element={this.props.symbol_table[o.Cycle_Life]} index={o.Cycle_Life} />
-                                <td className="text-left">{this.cycle_life_u}</td>
+                                <td className="text-start">{this.cycle_life_u}</td>
                             </tr>
                             <tr>
                                 <td />
-                                <td className="text-left" colSpan="2">({this.props.symbol_table[o.Cycle_Life].name} applies to body coils only.)</td>
+                                <td className="text-start" colSpan="2">({this.props.symbol_table[o.Cycle_Life].name} applies to body coils only.)</td>
                             </tr>
                         </tbody>
                     </table>

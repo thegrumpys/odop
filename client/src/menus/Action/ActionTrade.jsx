@@ -784,9 +784,9 @@ class ActionTrade extends Component {
                     <Modal.Body>
                         <Container>
                             <Row>
-                                <Col className="text-left font-weight-bold align-middle" xs="4">Name</Col>
-                                <Col className="text-left font-weight-bold align-middle" xs="2"></Col>
-                                <Col className="text-right font-weight-bold align-middle" xs="6">Weight</Col>
+                                <Col className="text-start font-weight-bold align-middle" xs="4">Name</Col>
+                                <Col className="text-start font-weight-bold align-middle" xs="2"></Col>
+                                <Col className="text-end font-weight-bold align-middle" xs="6">Weight</Col>
                             </Row>
                             {
                                 this.state.vflag.map((j,i) => {
@@ -799,9 +799,9 @@ class ActionTrade extends Component {
                                     dname = element.name;
                                     return (
                                         <Row key={dname}>
-                                            <Col className="align-middle text-left" xs="4">{dname}</Col>
-                                            <Col className="align-middle text-left" xs="2">{this.state.ldir[i] < 0 ? 'MIN' : 'MAX'}</Col>
-                                            <Col className="align-middle text-right" xs="6">
+                                            <Col className="align-middle text-start" xs="4">{dname}</Col>
+                                            <Col className="align-middle text-start" xs="2">{this.state.ldir[i] < 0 ? 'MIN' : 'MAX'}</Col>
+                                            <Col className="align-middle text-end" xs="6">
                                                 <FormControlTypeNumber value={Math.abs(this.state.dir[i])} onChangeValid={(event) => {this.onArbitraryChangeValid(i, event)}} onChangeInvalid={(event) => {this.onArbitraryChangeInvalid(i, event)}}/>
                                             </Col>
                                         </Row>
@@ -932,11 +932,11 @@ class ActionTrade extends Component {
         return (
             <Container>
                 <Row>
-                    <Col className="text-left font-weight-bold align-middle" xs="3">Name</Col>
-                    <Col className="text-left font-weight-bold align-middle" xs="1"></Col>
-                    <Col className="text-right font-weight-bold align-middle" xs="3">Violation</Col>
-                    <Col className="text-right font-weight-bold align-middle" xs="3">Constraint</Col>
-                    <Col className="text-right font-weight-bold align-middle" xs="2">Units</Col>
+                    <Col className="text-start font-weight-bold align-middle" xs="3">Name</Col>
+                    <Col className="text-start font-weight-bold align-middle" xs="1"></Col>
+                    <Col className="text-end font-weight-bold align-middle" xs="3">Violation</Col>
+                    <Col className="text-end font-weight-bold align-middle" xs="3">Constraint</Col>
+                    <Col className="text-end font-weight-bold align-middle" xs="2">Units</Col>
                 </Row>
                 {
                     this.state.vflag.map((j,i) => {
@@ -949,33 +949,33 @@ class ActionTrade extends Component {
                         if (this.state.ldir[i] < 0) {
 //                                console.log(element.name + ' MIN ' + element.vmin * 100.0 + ' ' + element.cmin + ' ' + element.units);
                             if (design.model.result.objective_value < design.model.system_controls.objmin) {
-                                constraint_class = (element.lmin & CONSTRAINED && element.vmin > 0.0) ? 'text-low-danger align-middle text-right' : 'text-right';
+                                constraint_class = (element.lmin & CONSTRAINED && element.vmin > 0.0) ? 'text-low-danger align-middle text-end' : 'text-end';
                             } else {
-                                constraint_class = (element.lmin & CONSTRAINED && element.vmin > 0.0) ? 'text-danger align-middle text-right font-weight-bold' : 'text-right';
+                                constraint_class = (element.lmin & CONSTRAINED && element.vmin > 0.0) ? 'text-danger align-middle text-end font-weight-bold' : 'text-end';
                             }
                             return (
                                     <Row key={element.name}>
-                                        <Col className="align-middle text-left" xs="3">{element.name}</Col>
-                                        <Col className="align-middle text-left" xs="1">MIN</Col>
-                                        <Col className="align-middle text-right" xs="3">{(element.vmin * 100.0).toFixed(1)}%</Col>
+                                        <Col className="align-middle text-start" xs="3">{element.name}</Col>
+                                        <Col className="align-middle text-start" xs="1">MIN</Col>
+                                        <Col className="align-middle text-end" xs="3">{(element.vmin * 100.0).toFixed(1)}%</Col>
                                         <Col className={constraint_class} xs="3">{element.cmin.toFixed(4)}</Col>
-                                        <Col className="align-middle text-right" xs="2">{element.units}</Col>
+                                        <Col className="align-middle text-end" xs="2">{element.units}</Col>
                                     </Row>
                                 );
                         } else {
 //                                console.log(element.name + ' MAX ' + element.vmax * 100.0 + ' ' + element.cmax + ' ' + element.units);
                             if (design.model.result.objective_value < design.model.system_controls.objmin) {
-                                constraint_class = (element.lmax & CONSTRAINED && element.vmax > 0.0) ? 'text-low-danger align-middle text-right' : 'text-right';
+                                constraint_class = (element.lmax & CONSTRAINED && element.vmax > 0.0) ? 'text-low-danger align-middle text-end' : 'text-end';
                             } else {
-                                constraint_class = (element.lmax & CONSTRAINED && element.vmax > 0.0) ? 'text-danger align-middle text-right font-weight-bold' : 'text-right';
+                                constraint_class = (element.lmax & CONSTRAINED && element.vmax > 0.0) ? 'text-danger align-middle text-end font-weight-bold' : 'text-end';
                             }
                             return (
                                     <Row key={element.name}>
-                                        <Col className="align-middle text-left" xs="3">{element.name}</Col>
-                                        <Col className="align-middle text-left" xs="1">MAX</Col>
-                                        <Col className="align-middle text-right" xs="3">{(element.vmax * 100.0).toFixed(1)}%</Col>
+                                        <Col className="align-middle text-start" xs="3">{element.name}</Col>
+                                        <Col className="align-middle text-start" xs="1">MAX</Col>
+                                        <Col className="align-middle text-end" xs="3">{(element.vmax * 100.0).toFixed(1)}%</Col>
                                         <Col className={constraint_class} xs="3">{element.cmax.toFixed(4)}</Col>
-                                        <Col className="align-middle text-right" xs="2">{element.units}</Col>
+                                        <Col className="align-middle text-end" xs="2">{element.units}</Col>
                                     </Row>
                                 );
                         }

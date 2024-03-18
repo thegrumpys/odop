@@ -68,16 +68,16 @@ export default function FileProperties() {
         <Modal.Body>
           <Container>
             <Row>
-              <Col className="text-left font-weight-bold">Name</Col>
-              <Col className="text-right font-weight-bold">Value</Col>
+              <Col className="text-start font-weight-bold">Name</Col>
+              <Col className="text-end font-weight-bold">Value</Col>
             </Row>
             {
               labels.map(
                 (label) => {
                   return (
                     <Row key={label.name}>
-                      <Col className="align-middle text-left">{label.name}</Col>
-                      <Col className="align-middle text-left">
+                      <Col className="align-middle text-start">{label.name}</Col>
+                      <Col className="align-middle text-start">
                         <Form.Control as="textarea" className="input-group-lg" value={label.value} onChange={(event) => { onChange(label.name, event.target.value) }} />
                       </Col>
                     </Row>

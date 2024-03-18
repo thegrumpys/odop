@@ -9,9 +9,9 @@ export default function Value({ id, className, value }) {
       <td className={"align-middle " + (className !== undefined ? className : '')}>
         <InputGroup>
           {typeof value === 'number' ?
-            <Form.Control id={'v_' + id} type="text" disabled={true} className="text-right" value={toODOPPrecision(value)} />
+            <Form.Control id={'v_' + id} type="text" disabled={true} className="text-end" value={toODOPPrecision(value)} />
             :
-            <Form.Control id={'v_' + id} type="text" disabled={true} className="text-right" value={value} />
+            <Form.Control id={'v_' + id} type="text" disabled={true} className="text-end" value={value} />
           }
         </InputGroup>
       </td>

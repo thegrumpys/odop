@@ -169,7 +169,7 @@ export default function ConstraintsMinRowDependentVariable({ element, index, onC
               </Modal.Footer>
             </Modal> : ''}
         </td>
-        <td className={"text-right align-middle small " + className + (show_violations === 0 ? "d-none" : "")} colSpan="1">
+        <td className={"text-end align-middle small " + className + (show_violations === 0 ? "d-none" : "")} colSpan="1">
           {show_violations === 1 && element.vmin <= 0 ?
             ''
             : (element.lmin & FIXED ?

@@ -206,13 +206,13 @@ class ExecutePanel extends Component {
             <Alert variant="success" style={{marginTop: '10px'}}>
                 <Container>
                     <Row>
-                        <div className="col-5 text-left align-middle ps-0">
+                        <div className="col-5 text-start align-middle ps-0">
                             <b>{this.state.prefix}{this.state.title !== undefined && this.state.title.length > 0 ? ' - ' + this.state.title : ''}</b>
                         </div>
-                        <div className="col-7 text-left align-middle">
-                            <Button className="float-right ms-1" variant="primary" onClick={this.onNext} disabled={this.state.steps[this.state.step+1] === undefined}>Next</Button>
-                            <Button className="float-right ms-1" variant="secondary" onClick={this.onBack} disabled={this.state.step === 0}>Back</Button>
-                            <Button className="float-right ms-1" variant="secondary" onClick={this.onCancel}>Close</Button>
+                        <div className="col-7 text-start align-middle">
+                            <Button className="float-end ms-1" variant="primary" onClick={this.onNext} disabled={this.state.steps[this.state.step+1] === undefined}>Next</Button>
+                            <Button className="float-end ms-1" variant="secondary" onClick={this.onBack} disabled={this.state.step === 0}>Back</Button>
+                            <Button className="float-end ms-1" variant="secondary" onClick={this.onCancel}>Close</Button>
                         </div>
                         <hr/>
                     </Row>

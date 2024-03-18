@@ -141,7 +141,7 @@ class FormControlTypeNumber extends Component {
     render() {
 //        console.log('In FormControlTypeNumber.render value=',this.state.value,'valueString=',this.state.valueString);
 //        console.log('In FormControlTypeNumber.render className=',this.props.className);
-        var className = (this.props.className !== undefined ? this.props.className : '') + ' text-right';
+        var className = (this.props.className !== undefined ? this.props.className : '') + ' text-end';
         if (!Number.isFinite(parseFloat(this.state.valueString))) {
             className += ' text-not-feasible';
             if (this.state.focused) {

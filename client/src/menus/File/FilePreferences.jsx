@@ -67,15 +67,15 @@ export default function FilePreferences() {
         <Modal.Body>
           <Container>
             <Row>
-              <Col className="text-left font-weight-bold">Name</Col>
-              <Col className="text-right font-weight-bold">Value</Col>
+              <Col className="text-start font-weight-bold">Name</Col>
+              <Col className="text-end font-weight-bold">Value</Col>
             </Row>
             {
               Object.keys(systemControls).map((property_name) => {
                 return (
                   <Row key={property_name}>
-                    <Col className="align-middle text-left">{property_name}</Col>
-                    <Col className="align-middle text-right">
+                    <Col className="align-middle text-start">{property_name}</Col>
+                    <Col className="align-middle text-end">
                       <FormControlTypeNumber id={property_name} value={systemControls[property_name]} onChangeValid={(event) => { onChangeValid(property_name, event.target.value) }} onChangeInvalid={onChangeInvalid} />
                     </Col>
                   </Row>

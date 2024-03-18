@@ -195,7 +195,7 @@ export default function ResultTable() {
                 <span>Feasibility</span>
               </OverlayTrigger>
             </th>
-            <td className={feasibility_class + " text-left"}>
+            <td className={feasibility_class + " text-start"}>
               <OverlayTrigger placement="bottom" overlay={<Tooltip>{feasibility_tooltip}</Tooltip>}>
                 <span>{feasibility_status}</span>
               </OverlayTrigger>
@@ -217,7 +217,7 @@ export default function ResultTable() {
                 <span>Message</span>
               </OverlayTrigger>
             </th>
-            <td className="text-left">{termination_condition}</td>
+            <td className="text-start">{termination_condition}</td>
           </tr>
         </tbody>
       </Table>
@@ -226,7 +226,7 @@ export default function ResultTable() {
       <Table className="table-light" size="sm">
         <tbody>
           <tr>
-            <td className="text-left" id="ObjectiveValue">
+            <td className="text-start" id="ObjectiveValue">
               <OverlayTrigger placement="bottom" overlay={<Tooltip>
                 <p>Visual summary of feasibility status.</p>
                 <p>Objective Value = {objective_value.toFixed(7)}<br />
@@ -240,7 +240,7 @@ export default function ResultTable() {
           </tr>
           <tr>
             {display_search_button ?
-              <td align="text-left">
+              <td align="text-start">
                 <OverlayTrigger placement="bottom" overlay={<Tooltip><b>Seek</b> (optimize) if feasible.<br /><b>Search</b> (solve) if not feasible.<br />Same functions as Action menu.</Tooltip>}>
                   <b className="pe-5">Action</b>
                 </OverlayTrigger>
@@ -260,7 +260,7 @@ export default function ResultTable() {
                 </OverlayTrigger>
               </td>
               :
-              <td align="text-left">
+              <td align="text-start">
                 <OverlayTrigger placement="bottom" overlay={<Tooltip><b>Seek</b> (optimize) if feasible.<br /><b>Search</b> (solve) if not feasible.<br />Same functions as Action menu.</Tooltip>}>
                   <b className="pe-5">Action</b>
                 </OverlayTrigger>

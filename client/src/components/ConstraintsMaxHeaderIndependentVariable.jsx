@@ -22,12 +22,12 @@ export default function ConstraintsMaxHeaderIndependentVariable() {
         </th>
       </tr>
       <tr>
-        <th className="text-left d-lg-none" id="IVMaxConstraintNameTitle">
+        <th className="text-start d-lg-none" id="IVMaxConstraintNameTitle">
           <OverlayTrigger placement="top" overlay={<Tooltip className="d-lg-none">Variable names</Tooltip>}>
             <span>Name</span>
           </OverlayTrigger>
         </th>
-        <th className="text-left" id="IVMaxConstraintConstrainTitle">
+        <th className="text-start" id="IVMaxConstraintConstrainTitle">
           <OverlayTrigger placement="top" overlay={<Tooltip>Check box to establish upper limit</Tooltip>}>
             <span>Constrain</span>
           </OverlayTrigger>
@@ -37,7 +37,7 @@ export default function ConstraintsMaxHeaderIndependentVariable() {
             <span>Value</span>
           </OverlayTrigger>
         </th>
-        <th className={"text-right " + (system_controls.show_violations > 0 ? "" : "d-none")} id="IVMaxConstraintViolationTitle">
+        <th className={"text-end " + (system_controls.show_violations > 0 ? "" : "d-none")} id="IVMaxConstraintViolationTitle">
           <OverlayTrigger placement="top" overlay={<Tooltip>Measure of constraint violation.<br />Set File : Preferences show_violations=2 to show both violation (+) and satisfaction (-).</Tooltip>}>
             <span>Violation</span>
           </OverlayTrigger>

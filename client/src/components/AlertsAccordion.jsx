@@ -168,7 +168,7 @@ export default function AlertsAccordion() {
                       </th>
                       <th>
                         <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
-                          <p className="text-left">Severity:</p>
+                          <p className="text-start">Severity:</p>
                           <ul>
                             <li><b>Err</b> - Error alerts indicate a value outside its validity range.</li>
                             <li><b>Warn</b> - Warning alerts are produced if the relationship between two values is incorrect.</li>

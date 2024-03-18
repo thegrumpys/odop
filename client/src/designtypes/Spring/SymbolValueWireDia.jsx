@@ -406,7 +406,7 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.render sorted_wire_dia_table=',sorted_wire_dia_table);
 
         var sv_results = getAlertsByName(this.props.element.name, true);
-        var sv_value_class = sv_results.className + ' text-right ';
+        var sv_value_class = sv_results.className + ' text-end ';
         var sv_icon_alerts = sv_results.alerts;
         if (this.props.element.lmin & FIXED) {
             sv_value_class += "borders-fixed ";
@@ -436,7 +436,7 @@ class SymbolValueWireDia extends Component {
         var nvu_results = getAlertsByName(this.props.element.name);
 //        console.log('In SymbolValueWireDia.render nvu_results=',nvu_results);
         var nvu_icon_alerts = nvu_results.alerts;
-        var nvu_value_class = nvu_results.className + ' text-right ';
+        var nvu_value_class = nvu_results.className + ' text-end ';
 //        console.log('In SymbolValueWireDia.render nvu_value_tooltip=',nvu_value_tooltip);
         var nvu_value_fix_free_text = '';
         if (this.props.element.lmin & FIXED) {

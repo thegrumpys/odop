@@ -22,12 +22,12 @@ export default function ConstraintsMaxHeaderDependentVariable() {
         </th>
       </tr>
       <tr>
-        <th className="text-left d-lg-none" id="DVMaxConstraintNameTitle">
+        <th className="text-start d-lg-none" id="DVMaxConstraintNameTitle">
           <OverlayTrigger placement="top" overlay={<Tooltip className="d-lg-none">Variable names</Tooltip>}>
             <span>Name</span>
           </OverlayTrigger>
         </th>
-        <th className="text-left" id="DVMaxConstraintConstrainTitle">
+        <th className="text-start" id="DVMaxConstraintConstrainTitle">
           <OverlayTrigger placement="top" overlay={<Tooltip>Check box to establish upper limit</Tooltip>}>
             <span>Constrain</span>
           </OverlayTrigger>
@@ -37,7 +37,7 @@ export default function ConstraintsMaxHeaderDependentVariable() {
             <span>Value</span>
           </OverlayTrigger>
         </th>
-        <th className={"text-right " + (system_controls.show_violations > 0 ? "" : "d-none")} id="DVMaxConstraintViolationTitle">
+        <th className={"text-end " + (system_controls.show_violations > 0 ? "" : "d-none")} id="DVMaxConstraintViolationTitle">
           <OverlayTrigger placement="top" overlay={<Tooltip>Measure of constraint violation.<br />Set File : Preferences show_violations=2 to show both violation (+) and satisfaction (-).</Tooltip>}>
             <span>Violation</span>
           </OverlayTrigger>

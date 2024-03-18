@@ -4,6 +4,7 @@ import Message from "./components/Message";
 import App from "./components/App";
 import store from "./store/store";
 import { Provider } from "react-redux";
+import './odop.css';
 import * as ReactDOMClient from "react-dom/client";
 
 const container = document.getElementById('root');

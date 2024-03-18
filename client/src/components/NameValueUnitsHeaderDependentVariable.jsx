@@ -23,7 +23,7 @@ export default function NameValueUnitsHeaderDependentVariable() {
         </th>
       </tr>
       <tr>
-        <th className="text-left" colSpan="2" id="DVNameTitle">
+        <th className="text-start" colSpan="2" id="DVNameTitle">
           <OverlayTrigger placement="top" overlay={<Tooltip>Variable names</Tooltip>}>
             <span>Name</span>
           </OverlayTrigger>
@@ -42,7 +42,7 @@ export default function NameValueUnitsHeaderDependentVariable() {
             <span>Fix</span>
           </OverlayTrigger>
         </th>
-        <th className={"text-left " + (system_controls.show_units ? "" : "d-none")} id="DVUnitsTitle">
+        <th className={"text-start " + (system_controls.show_units ? "" : "d-none")} id="DVUnitsTitle">
           <OverlayTrigger placement="top" overlay={<Tooltip>Units (information only)</Tooltip>}>
             <span>Units</span>
           </OverlayTrigger>
