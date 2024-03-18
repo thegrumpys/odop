@@ -5,21 +5,17 @@ import { getAlertsBySeverity, ERR, WARN, NOTICE, INFO } from './Alerts';
 import { logUsage } from '../logUsage';
 import SymbolValue from './SymbolValue';
 import Value from './Value';
-import { useContext } from 'react';
 import config from '../config';
 import { changeSystemControlsValue } from '../store/modelSlice';
 import { setActiveKey, setCaret, setLevel } from '../store/alertsSlice';
-import { AccordionContext } from 'react-bootstrap';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 
 const ContextAwareAccordion = ({ children }) => {
   const activeKey = useSelector((state) => state.alertsSlice.activeKey);
   const level = useSelector((state) => state.alertsSlice.level);
-//  const { activeEventKey } = useContext(AccordionContext);
   const dispatch = useDispatch();
   return (
     <Accordion flush className="mb-3" activeKey={activeKey} onSelect={eventKey => {
-//      console.log('ContextAwareAccordion activekey=',activeKey,'level=',level,'eventKey=',eventKey,'activeEventKey=',activeEventKey);
       if (activeKey === null) { // Is it now Collapsed?
 //        console.log('ContextAwareAccordion EXPAND');
         dispatch(setActiveKey('0'));
@@ -44,17 +40,8 @@ const ContextAwareAccordion = ({ children }) => {
   );
 }
 
-// <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={ERR}
-//   onClick={() => setLevel(ERR)} active={level === ERR || level === WARN || level === NOTICE || level === INFO}>
-//   {ERR}&nbsp;{err_alerts.length > 0 ? <Badge variant="danger">{err_alerts.length}</Badge> : ''}
-// </Accordion.Toggle>
-
-
 function ContextAwareToggle({ children, variant, size, disabled, eventKey, onClick, active }) {
-//  console.log('variant=',variant,'size=',size,'disabled=',disabled,'eventKey=',eventKey,'onClick=',onClick,'active=',active);
-//  const { activeEventKey } = useContext(AccordionContext);
-//  console.log('activeEventKey=',activeEventKey);
- 
+//  console.log("AlertsAccordion - Mounting...",'variant=',variant,'size=',size,'disabled=',disabled,'eventKey=',eventKey,'onClick=',onClick,'active=',active);
   const decoratedOnClick = useAccordionButton(eventKey, onClick);
 
   return (
@@ -72,25 +59,6 @@ export default function AlertsAccordion() {
   const enable_auto_fix = useSelector((state) => state.modelSlice.model.system_controls.enable_auto_fix);
   const dispatch = useDispatch();
 
-//  useEffect(() => {
-//    console.log("AlertsAccordion - Mounted");
-//    //    return () => console.log("AlertsAccordion - Unmounting ...");
-//    return () => { };
-//  }, []);
-//
-//  useEffect(() => {
-//    console.log("AlertsAccordion - alerts changed");
-//    //    return () => console.log("AlertsAccordion - Unmounting ...");
-//    return () => { };
-//  }, [alerts]);
-//
-//  useEffect(() => {
-//    console.log("AlertsAccordion - type changed");
-//    dispatch(clearAlerts());
-//    //    return () => console.log("AlertsAccordion - Unmounting ...");
-//    return () => { };
-//  }, [model_type]);
-//
   const onHelpButton = (event) => {
 //    console.log('AlertsAccordion.onHelpButton', 'event=', event, 'event.target=', event.target, 'event.target.href=', event.target.href);
     logUsage('event', 'AlertsAccordion', { event_label: 'Help button: ' + event.target.href });
