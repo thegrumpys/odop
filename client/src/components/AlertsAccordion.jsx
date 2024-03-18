@@ -138,19 +138,19 @@ export default function AlertsAccordion() {
                   <span className="pb-3 pe-1"><i className={caret} /></span>
                 </ContextAwareToggle>
                 <ContextAwareToggle variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={ERR}
-                  onClick={() => {console.log('setLevel(ERR)');return dispatch(setLevel(ERR))}} active={level === ERR || level === WARN || level === NOTICE || level === INFO}>
+                  onClick={() => dispatch(setLevel(ERR))} active={level === ERR || level === WARN || level === NOTICE || level === INFO}>
                   {ERR}&nbsp;{err_alerts.length > 0 ? <Badge variant="danger">{err_alerts.length}</Badge> : ''}
                 </ContextAwareToggle>
                 <ContextAwareToggle variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={WARN}
-                  onClick={() => {console.log('setLevel(WARN)');return dispatch(setLevel(WARN))}} active={level === WARN || level === NOTICE || level === INFO}>
+                  onClick={() => dispatch(setLevel(WARN))} active={level === WARN || level === NOTICE || level === INFO}>
                   {WARN}&nbsp;{warn_alerts.length > 0 ? <Badge variant="danger">{warn_alerts.length}</Badge> : ''}
                 </ContextAwareToggle>
                 <ContextAwareToggle variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={NOTICE}
-                  onClick={() => {console.log('setLevel(NOTICE)');return dispatch(setLevel(NOTICE))}} active={level === NOTICE || level === INFO}>
+                  onClick={() => dispatch(setLevel(NOTICE))} active={level === NOTICE || level === INFO}>
                   {NOTICE}&nbsp;{notice_alerts.length > 0 ? <Badge variant="danger">{notice_alerts.length}</Badge> : ''}
                 </ContextAwareToggle>
                 <ContextAwareToggle variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={INFO}
-                  onClick={() => {console.log('setLevel(INFO)');return dispatch(setLevel(INFO))}} active={level === INFO}>
+                  onClick={() => dispatch(setLevel(INFO))} active={level === INFO}>
                   {INFO}&nbsp;{info_alerts.length > 0 ? <Badge variant="danger">{info_alerts.length}</Badge> : ''}
                 </ContextAwareToggle>
               </ButtonGroup>
