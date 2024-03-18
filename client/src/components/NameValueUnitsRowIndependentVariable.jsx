@@ -7,7 +7,8 @@ import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
-export default function NameValueUnitsRowIndependentVariable({ element, index, onChangeValid, onChangeInvalid, onSet, onReset }) {
+export default function NameValueUnitsRowIndependentVariable({ index, onChangeValid, onChangeInvalid, onSet, onReset }) {
+  const element = useSelector((state) => state.modelSlice.model.symbol_table[index]);
 //  console.log("NameValueUnitsRowIndependentVariable - Mounting...",'element=',element,'index=',index);
   const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
   const dispatch = useDispatch();
@@ -42,14 +43,14 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   }
 
   const onSetLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onSet');
+//    console.log('In NameValueUnitsRowIndependentVariable.onSetLocal');
     dispatch(fixSymbolValue(element.name));
     logValue(element.name, 'FIXED', 'FixedFlag', false);
     if (typeof onSet === "function") onSet(event);
   }
 
   const onResetLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onReset');
+//    console.log('In NameValueUnitsRowIndependentVariable.onResetLocal');
     dispatch(freeSymbolValue(element.name));
     logValue(element.name, 'FREE', 'FixedFlag', false);
     if (typeof onReset === "function") onReset(event);

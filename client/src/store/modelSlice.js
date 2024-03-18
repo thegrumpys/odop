@@ -85,7 +85,7 @@ export const modelSlice = createSlice({
         if (index >= 0) {
           state.model.symbol_table[index].value = action.payload.value;
         } else {
-          console.error('changeSymbolValue: Failed to find name in symbol_table.','name=',action.payload.name,'value=',action.payload.value);
+          console.error('changeSymbolValue: Failed to find name in symbol_table.','name=',action.payload.name);
         }
       },
       prepare: (name, value) => { return { payload: { name, value } } }
@@ -97,7 +97,7 @@ export const modelSlice = createSlice({
         if (action.payload.index >= 0 && action.payload.index < state.model.symbol_table.length) {
           state.model.symbol_table[action.payload.index].value = action.payload.value;
         } else {
-          console.error('changeIndexValue: Invalid index into symbol_table.','index=',action.payload.index,'value=',action.payload.value);
+          console.error('changeIndexValue: Invalid index into symbol_table.','index=',action.payload.index);
         }
       },
       prepare: (index, value) => { return { payload: { index, value } } }
@@ -106,17 +106,25 @@ export const modelSlice = createSlice({
     fixSymbolValue: {
       reducer: (state, action) => {
 //        console.log('reducer fixSymbolValue','state=',current(state),',action=',action);
+        var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
+        if (index < 0) {
+          console.error('changeSymbolValue: Failed to find name in symbol_table.','name=',action.payload.name);
+        }
         return; // No-op
       },
-      prepare: (value1, value2) => { return { payload: { value1, value2 } } }
+      prepare: (name, value) => { return { payload: { name, value } } }
     },
 
     freeSymbolValue: {
       reducer: (state, action) => {
 //        console.log('reducer freeSymbolValue','state=',current(state),',action=',action);
+        var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
+        if (index < 0) {
+          console.error('changeSymbolValue: Failed to find name in symbol_table.','name=',action.payload.name);
+        }
         return; // No-op
       },
-      prepare: (value1, value2) => { return { payload: { value1, value2 } } }
+      prepare: (name, value) => { return { payload: { name, value } } }
     },
 
     changeSymbolViolation: {
@@ -131,7 +139,7 @@ export const modelSlice = createSlice({
             element.vmax = action.payload.value;
           }
         } else {
-          console.error('changeSymbolViolation: Failed to find name in symbol_table.','name=',action.payload.name,'value=',action.payload.value);
+          console.error('changeSymbolViolation: Failed to find name in symbol_table.','name=',action.payload.name);
         }
       },
       prepare: (name, minmax, value) => { return { payload: { name, minmax, value } } }
@@ -155,7 +163,7 @@ export const modelSlice = createSlice({
             element.validmax = action.payload.value;
           }
         } else {
-          console.error('changeSymbolConstraint: Failed to find name in symbol_table.','name=',action.payload.name,'value=',action.payload.value);
+          console.error('changeSymbolConstraint: Failed to find name in symbol_table.','name=',action.payload.name);
         }
       },
       prepare: (name, minmax, value) => { return { payload: { name, minmax, value } } }
@@ -198,7 +206,7 @@ export const modelSlice = createSlice({
           console.error('setSymbolFlag: Failed to find name in symbol_table.','name=',action.payload.name);
         }
       },
-      prepare: (name, mask) => { return { payload: { name, mask } } }
+      prepare: (name, minmax, mask) => { return { payload: { name, minmax, mask } } }
     },
 
     resetSymbolFlag: {
@@ -216,7 +224,7 @@ export const modelSlice = createSlice({
           console.error('resetSymbolFlag: Failed to find name in symbol_table.','name=',action.payload.name);
         }
       },
-      prepare: (name, mask) => { return { payload: { name, mask } } }
+      prepare: (name, minmax, mask) => { return { payload: { name, minmax, mask } } }
     },
 
     changeSymbolInput: {

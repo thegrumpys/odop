@@ -1,5 +1,5 @@
 import { startup, load, loadInitialState, changeSymbolValue, restoreAutoSave,
-         fixSymbolValue, freeSymbolValue, changeSymbolConstraint, restoreOutputSymbolConstraints,
+         fixSymbolValue, freeSymbolValue, changeSymbolConstraint, saveOutputSymbolConstraints, restoreOutputSymbolConstraints,
          setSymbolFlag, resetSymbolFlag, 
          changeInputSymbolValues, restoreInputSymbolValues, changeSystemControlsValue,
          search, seek } from '../modelSlice';
@@ -15,7 +15,7 @@ import { invokeCheck } from './invokeCheck';
 import { resetCatalogSelection } from './resetCatalogSelection';
 
 const dispatcher = store => next => action => {
-  //  console.log('In dispatcher','store=',store,'next=',next,'action=',action);
+//  console.log('In dispatcher','store=',store,'next=',next,'action=',action);
 
   var design;
   var source;
@@ -49,18 +49,18 @@ const dispatcher = store => next => action => {
       if (index >= 0) {
         element = design.model.symbol_table[index];
         if (element.type === "calcinput") {
-          //            console.log("In dispatcher.CHANGE_SYMBOL_VALUE element=",element);
+//            console.log("In dispatcher.CHANGE_SYMBOL_VALUE element=",element);
           if (element.format === 'table') {
-            //              console.log('In dispatcher.CHANGE_SYMBOL_VALUE file = ../../designtypes/'+element.table+'.json');
+//              console.log('In dispatcher.CHANGE_SYMBOL_VALUE file = ../../designtypes/'+element.table+'.json');
             var table = require('../../designtypes/' + element.table + '.json'); // Dynamically load table
             var selectedIndex = element.value;
-            //              console.log('In dispatcher.CHANGE_SYMBOL_VALUE table=',table,'selectedIndex=',selectedIndex);
+//              console.log('In dispatcher.CHANGE_SYMBOL_VALUE table=',table,'selectedIndex=',selectedIndex);
             table[selectedIndex].forEach((value, index) => {
               if (index > 0) { // Skip the first column
                 var name = table[0][index];
-                //                  console.log('In dispatcher.CHANGE_SYMBOL_VALUE value=',value,'index=',index,' name=',name);
+//                  console.log('In dispatcher.CHANGE_SYMBOL_VALUE value=',value,'index=',index,' name=',name);
                 if (design.model.symbol_table.find(element2 => element2.name === name) !== undefined) {
-                  //                    console.log('In dispatcher.CHANGE_SYMBOL_VALUE name=',name,'value=',value);
+//                    console.log('In dispatcher.CHANGE_SYMBOL_VALUE name=',name,'value=',value);
                   store.dispatch(changeSymbolValue(name, value));
                 }
               }
@@ -69,7 +69,7 @@ const dispatcher = store => next => action => {
           invokeInit(store);
         }
       } else {
-        console.error('changeSymbolValue: Failed to find name in symbol_table.', 'name=', action.payload.name, 'value=', action.payload.value);
+        console.error('changeSymbolValue: Failed to find name in symbol_table.', 'name=', action.payload.name);
       }
       resetCatalogSelection(store, action);
       invokeEquationSet(store);
@@ -156,10 +156,10 @@ const dispatcher = store => next => action => {
 //      console.log('In dispatcher',action.type,'state=',store.getState());
       design = store.getState().modelSlice;
       sink = design.model.symbol_table.find(element => element.name === action.payload.name);
-      //        console.log('In dispatcher.SET_SYMBOL_FLAG.propagate sink=',sink);
+//        console.log('In dispatcher.SET_SYMBOL_FLAG.propagate sink=',sink);
       if (action.payload.mask & FDCL) {
         source = design.model.symbol_table.find(element => element.name === action.payload.source);
-        //            console.log('In dispatcher.SET_SYMBOL_FLAG.propagate source=',source);
+//            console.log('In dispatcher.SET_SYMBOL_FLAG.propagate source=',source);
         if (source.propagate === undefined) source.propagate = [];
         index = source.propagate.findIndex(i => i.name === action.payload.name && i.minmax === action.payload.minmax);
         if (index === -1) { // If not found in propagate array then add it
@@ -171,7 +171,7 @@ const dispatcher = store => next => action => {
           }
         }
         store.dispatch(changeSymbolConstraint(sink.name, action.payload.minmax, source.value)); // Propagate now
-        //            console.log('In dispatcher.SET_SYMBOL_FLAG.propagate action=',action,'source=',source,'sink=',sink);
+//            console.log('In dispatcher.SET_SYMBOL_FLAG.propagate action=',action,'source=',source,'sink=',sink);
       }
       updateObjectiveValue(store);
       invokeCheck(store);
@@ -182,17 +182,17 @@ const dispatcher = store => next => action => {
 //      console.log('In dispatcher',action.type,'state=',store.getState());
       design = store.getState().modelSlice;
       sink = design.model.symbol_table.find(element => element.name === action.payload.name);
-      //        console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate sink=',sink);
+//        console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate sink=',sink);
       if (action.payload.mask & FDCL) {
         if (action.payload.minmax === MIN) {
           source = design.model.symbol_table.find(element => element.name === sink.cminchoices[sink.cminchoice]);
         } else {
           source = design.model.symbol_table.find(element => element.name === sink.cmaxchoices[sink.cmaxchoice]);
         }
-        //            console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate source=',source);
+//            console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate source=',source);
         if (source !== undefined && source.propagate !== undefined) {
           index = source.propagate.findIndex(i => i.name === action.payload.name && i.minmax === action.payload.minmax);
-          //                console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate index=',index);
+//                console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate index=',index);
           if (index !== -1) { // If found in propagate array then remove it
             source.propagate.splice(index, 1); // Delete 1 entry at offset index
             if (source.propagate.length === 0) {
@@ -206,7 +206,7 @@ const dispatcher = store => next => action => {
         } else {
           delete sink.cmaxchoice;
         }
-        //            console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate source=',source,'sink=',sink);
+//            console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate source=',source,'sink=',sink);
       }
       updateObjectiveValue(store);
       invokeCheck(store);
