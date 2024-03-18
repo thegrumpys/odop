@@ -102,7 +102,7 @@ export default function AlertsAccordion() {
               <InputGroup.Text>Alerts</InputGroup.Text>
               <ButtonGroup>
                 <ContextAwareToggle variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={level}
-                  onClick={() => setLevel(level)}>
+                  onClick={() => dispatch(setLevel(level))}>
                   <span className="pb-3 pe-1"><i className={caret} /></span>
                 </ContextAwareToggle>
                 <ContextAwareToggle variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={ERR}

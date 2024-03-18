@@ -3,21 +3,28 @@ import { startup, load, loadInitialState, changeSymbolValue, restoreAutoSave,
          setSymbolFlag, resetSymbolFlag, 
          changeInputSymbolValues, restoreInputSymbolValues, changeSystemControlsValue,
          search, seek } from '../modelSlice';
-import { resetCatalogSelection } from './resetCatalogSelection';
+import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../actionTypes';
+import { setSclDen } from './setSclDen';
+import { search as invokeSearch} from './search'
+import { seek as invokeSeek} from './seek'
 import { invokeInit } from './invokeInit';
 import { invokeEquationSet } from './invokeEquationSet';
 import { propagate } from './propagate';
-import { setSclDen } from './setSclDen';
 import { updateObjectiveValue } from './updateObjectiveValue';
 import { invokeCheck } from './invokeCheck';
-import { search as invokeSearch} from './search'
-import { seek as invokeSeek} from './seek'
+import { resetCatalogSelection } from './resetCatalogSelection';
 
 const dispatcher = store => next => action => {
   //  console.log('In dispatcher','store=',store,'next=',next,'action=',action);
 
+  var design;
+  var source;
+  var sink;
+  var index;
+  var element;
+
   const returnValue = next(action);
-  //  console.log('In dispatcher returnValue=',returnValue);
+//  console.log('In dispatcher returnValue=',returnValue);
 
   switch (action.type) {
 
@@ -37,10 +44,10 @@ const dispatcher = store => next => action => {
 
     case changeSymbolValue().type: {
 //      console.log('In dispatcher',action.type,'state=',store.getState());
-      var design = store.getState().modelSlice;
-      var index = design.model.symbol_table.findIndex((element) => element.name === action.payload.name);
+      design = store.getState().modelSlice;
+      index = design.model.symbol_table.findIndex((element) => element.name === action.payload.name);
       if (index >= 0) {
-        var element = design.model.symbol_table[index];
+        element = design.model.symbol_table[index];
         if (element.type === "calcinput") {
           //            console.log("In dispatcher.CHANGE_SYMBOL_VALUE element=",element);
           if (element.format === 'table') {
@@ -231,7 +238,6 @@ const dispatcher = store => next => action => {
 //      console.log('In dispatcher',action.type,'state=',store.getState());
       invokeSeek(store, action);
       design = store.getState().modelSlice;
-//      console.log('@@@@@',design.model.result.termination_condition);
       var termination_condition = design.model.result.termination_condition;
       updateObjectiveValue(store);
       store.dispatch(changeResultTerminationCondition(termination_condition));
