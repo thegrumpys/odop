@@ -10,15 +10,15 @@ import config from '../config';
 import { changeSystemControlsValue } from '../store/modelSlice';
 import { setActiveKey, setCaret, setLevel } from '../store/alertsSlice';
 import { AccordionContext } from 'react-bootstrap';
+import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 
 const ContextAwareAccordion = ({ children }) => {
   const activeKey = useSelector((state) => state.alertsSlice.activeKey);
   const level = useSelector((state) => state.alertsSlice.level);
+//  const { activeEventKey } = useContext(AccordionContext);
   const dispatch = useDispatch();
-  const activeEventKey = useContext(AccordionContext);
-//  console.log("In ContextAwareAccordion activeKey=",activeKey);
   return (
-    <Accordion className="mb-3" activeKey={activeKey} onSelect={eventKey => {
+    <Accordion flush className="mb-3" activeKey={activeKey} onSelect={eventKey => {
 //      console.log('ContextAwareAccordion activekey=',activeKey,'level=',level,'eventKey=',eventKey,'activeEventKey=',activeEventKey);
       if (activeKey === null) { // Is it now Collapsed?
 //        console.log('ContextAwareAccordion EXPAND');
@@ -41,6 +41,26 @@ const ContextAwareAccordion = ({ children }) => {
     }}>
       {children}
     </Accordion>
+  );
+}
+
+// <Accordion.Toggle as={Button} variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={ERR}
+//   onClick={() => setLevel(ERR)} active={level === ERR || level === WARN || level === NOTICE || level === INFO}>
+//   {ERR}&nbsp;{err_alerts.length > 0 ? <Badge variant="danger">{err_alerts.length}</Badge> : ''}
+// </Accordion.Toggle>
+
+
+function ContextAwareToggle({ children, variant, size, disabled, eventKey, onClick, active }) {
+//  console.log('variant=',variant,'size=',size,'disabled=',disabled,'eventKey=',eventKey,'onClick=',onClick,'active=',active);
+//  const { activeEventKey } = useContext(AccordionContext);
+//  console.log('activeEventKey=',activeEventKey);
+ 
+  const decoratedOnClick = useAccordionButton(eventKey, onClick);
+
+  return (
+    <Button variant={variant} size={size} disabled={disabled} onClick={decoratedOnClick} active={active}>
+      {children}
+    </Button>
   );
 }
 
@@ -113,21 +133,26 @@ export default function AlertsAccordion() {
             <InputGroup as="span">
               <InputGroup.Text>Alerts</InputGroup.Text>
               <ButtonGroup>
-                <Accordion.Button variant="outline-primary" size="sm" disabled={all_alerts.length === 0} onClick={() => dispatch(setLevel(level))}>
+                <ContextAwareToggle variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={level}
+                  onClick={() => setLevel(level)}>
                   <span className="pb-3 pe-1"><i className={caret} /></span>
-                </Accordion.Button>
-                <Accordion.Button variant="outline-primary" size="sm" disabled={all_alerts.length === 0} onClick={() => dispatch(setLevel(ERR))}>
+                </ContextAwareToggle>
+                <ContextAwareToggle variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={ERR}
+                  onClick={() => {console.log('setLevel(ERR)');return dispatch(setLevel(ERR))}} active={level === ERR || level === WARN || level === NOTICE || level === INFO}>
                   {ERR}&nbsp;{err_alerts.length > 0 ? <Badge variant="danger">{err_alerts.length}</Badge> : ''}
-                </Accordion.Button>
-                <Accordion.Button variant="outline-primary" size="sm" disabled={all_alerts.length === 0} onClick={() => dispatch(setLevel(WARN))}>
+                </ContextAwareToggle>
+                <ContextAwareToggle variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={WARN}
+                  onClick={() => {console.log('setLevel(WARN)');return dispatch(setLevel(WARN))}} active={level === WARN || level === NOTICE || level === INFO}>
                   {WARN}&nbsp;{warn_alerts.length > 0 ? <Badge variant="danger">{warn_alerts.length}</Badge> : ''}
-                </Accordion.Button>
-                <Accordion.Button variant="outline-primary" size="sm" disabled={all_alerts.length === 0} onClick={() => dispatch(setLevel(NOTICE))}>
+                </ContextAwareToggle>
+                <ContextAwareToggle variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={NOTICE}
+                  onClick={() => {console.log('setLevel(NOTICE)');return dispatch(setLevel(NOTICE))}} active={level === NOTICE || level === INFO}>
                   {NOTICE}&nbsp;{notice_alerts.length > 0 ? <Badge variant="danger">{notice_alerts.length}</Badge> : ''}
-                </Accordion.Button>
-                <Accordion.Button variant="outline-primary" size="sm" disabled={all_alerts.length === 0} onClick={() => dispatch(setLevel(INFO))}>
+                </ContextAwareToggle>
+                <ContextAwareToggle variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={INFO}
+                  onClick={() => {console.log('setLevel(INFO)');return dispatch(setLevel(INFO))}} active={level === INFO}>
                   {INFO}&nbsp;{info_alerts.length > 0 ? <Badge variant="danger">{info_alerts.length}</Badge> : ''}
-                </Accordion.Button>
+                </ContextAwareToggle>
               </ButtonGroup>
               <OverlayTrigger placement="bottom" overlay={
                 <Tooltip className="tooltip-lg">
@@ -142,7 +167,7 @@ export default function AlertsAccordion() {
                   <p>A red "badge" on each Alert button indicates the total number of alerts of this type.
                     Close the Alerts panel by a second click on the same Alerts button.</p>
                 </Tooltip>}>
-                <span className="text-primary px-2 pt-3"><i className="fas fa-info-circle"></i></span>
+                <span className="text-primary px-2 pt-2"><i className="fas fa-info-circle"></i></span>
               </OverlayTrigger>
               <InputGroup.Text className="ms-auto">Auto Fix</InputGroup.Text>
               <InputGroup.Checkbox id="auto_fix" aria-label="Checkbox for enabling Auto Fix" onChange={onAutoFixToggle} checked={enable_auto_fix} />
@@ -152,7 +177,7 @@ export default function AlertsAccordion() {
                   <p>Applies only to future value changes. Does not affect any existing variables already in "Fixed" status.</p>
                   <p>The behavior is the same as the File : Preferences enable_auto_fix value.</p>
                 </Tooltip>}>
-                <span className="text-primary px-2 pt-3"><i className="fas fa-info-circle"></i></span>
+                <span className="text-primary px-2 pt-2"><i className="fas fa-info-circle"></i></span>
               </OverlayTrigger>
             </InputGroup>
           </Card.Header>
