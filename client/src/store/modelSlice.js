@@ -88,7 +88,7 @@ export const modelSlice = createSlice({
           console.error('changeSymbolValue: Failed to find name in symbol_table.','name=',action.payload.name);
         }
       },
-      prepare: (name, value) => { return { payload: { name, value } } }
+      prepare: (name, value, merit) => { return { payload: { name, value, merit } } }
     },
 
     changeIndexValue: {
@@ -206,7 +206,7 @@ export const modelSlice = createSlice({
           console.error('setSymbolFlag: Failed to find name in symbol_table.','name=',action.payload.name);
         }
       },
-      prepare: (name, minmax, mask) => { return { payload: { name, minmax, mask } } }
+      prepare: (name, minmax, mask, source=undefined) => { return { payload: { name, minmax, mask, source } } }
     },
 
     resetSymbolFlag: {
@@ -266,7 +266,7 @@ export const modelSlice = createSlice({
           }
         });
       },
-      prepare: (values) => { return { payload: { values } } }
+      prepare: (values, merit) => { return { payload: { values, merit } } }
     },
 
     saveInputSymbolValues: {
@@ -281,8 +281,7 @@ export const modelSlice = createSlice({
         } else {
           console.error('saveInputSymbolValues: Failed to find name in symbol_table.','name=',action.payload.name);
         }
-      },
-      prepare: (name) => { return { payload: { name } } }
+      }
     },
 
     restoreInputSymbolValues: {
