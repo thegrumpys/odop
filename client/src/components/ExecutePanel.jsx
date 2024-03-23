@@ -55,7 +55,7 @@ export var stopExecute = () => {
   store.dispatch(setShow(false)); // Default: do not display
   store.dispatch(setPrefix(''));
   store.dispatch(setSteps(null));
-  store.dispatch(setSteps(0));
+  store.dispatch(setStep(0));
   store.dispatch(setTitle(''));
   store.dispatch(setText('')); // Default: no text
 //  var testGenerate = store.getSTate().executePanelSlice.testGenerate;
