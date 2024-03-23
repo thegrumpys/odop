@@ -10,22 +10,16 @@ export default function ViewSelect() {
   const model_type = useSelector((state) => state.modelSlice.model.type);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-//    console.log("ViewSelect - Mounted");
-//    return () => console.log("ViewSelect - Unmounting ...");
-    return () => { };
-  }, []);
+  var { getViewNames } = require('../../designtypes/' + model_type + '/view.js'); // Dynamically load getViewNames
+//  console.log('ViewSelect - type changed', 'getViewNames=', getViewNames);
+  var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
+//  console.log('ViewSelect - type changed', 'viewNames=', viewNames);
 
   const onClick = (event) => {
 //    console.log('ViewSelect.onClick','event=',event);
     dispatch(changeView(event.target.id));
     logUsage('event', 'ViewSelect', { event_label: event.target.id });
   }
-
-  var { getViewNames } = require('../../designtypes/' + model_type + '/view.js'); // Dynamically load getViewNames
-//  console.log('ViewSelect - type changed', 'getViewNames=', getViewNames);
-  var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
-//  console.log('ViewSelect - type changed', 'viewNames=', viewNames);
 
   return (
     <>

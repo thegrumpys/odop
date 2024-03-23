@@ -12,6 +12,7 @@ import {
   Row
 } from 'react-bootstrap';
 //import { changeUser, changeView, deleteAutoSave } from '../store/modelSlice';
+import ExecutePanel from './ExecutePanel';
 import FileOpen from '../menus/File/FileOpen';
 import FilePreferences from '../menus/File/FilePreferences';
 import FileProperties from '../menus/File/FileProperties';
@@ -19,16 +20,20 @@ import FileImport from '../menus/File/FileImport';
 import FileExport from '../menus/File/FileExport';
 import ActionSearch from '../menus/Action/ActionSearch';
 import ActionSeek from '../menus/Action/ActionSeek';
+import ActionExecute from '../menus/Action/ActionExecute';
 import ViewSelect from '../menus/View/ViewSelect';
 import ViewOffsets from '../menus/View/ViewOffsets';
 import ViewSymbolTableOffsets from '../menus/View/ViewSymbolTableOffsets';
 import ViewSymbolTable from '../menus/View/ViewSymbolTable';
 import ViewObjectiveValue from '../menus/View/ViewObjectiveValue';
+//import ViewExecuteToTest from '../menus/View/ViewExecuteToTest';
 import HelpMotd from '../menus/Help/HelpMotd';
 import HelpIndex from '../menus/Help/HelpIndex';
+import HelpDemo from '../menus/Help/HelpDemo';
+import HelpTutorial from '../menus/Help/HelpTutorial';
 import HelpAbout from '../menus/Help/HelpAbout';
-import config from '../config';
 import SearchDocs from './SearchDocs';
+import config from '../config';
 import ResultTable from './ResultTable';
 import DesignTable from './DesignTable';
 
@@ -90,17 +95,11 @@ export default function MainPage() {
   }
 
   if (model_type === null) return null;
-//  var { getViewNames } = require('../designtypes/' + model_type + '/view.js'); // Dynamically load getViewNames
-//  var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
-//  console.log('MainPage','viewNames=', viewNames);
-//  var viewIndex = viewNames.find(element => element.name === config.url.view);
-//  console.log('MainPage','viewIndex=', viewIndex);
-//  if (viewIndex >= 0) {
-//    var viewComponent = viewNames[index].component;
-//  } else { // Not found
-//    var viewComponent = viewNames[0].component; // Default to the first one
-//  }
-//  console.log('MainPage','viewComponent=', viewComponent);
+
+  var { getViewNames } = require('../designtypes/'+model_type+'/view.js'); // Dynamically load getViewNames
+  var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
+//  console.log('MainPage.constructor viewNames=', viewNames);
+
   var src = 'designtypes/' + model_type + '/favicon.ico';
   var alt = model_type + ' icon';
 //  console.log('MainPage','src=',src,' alt=',alt);
@@ -126,9 +125,18 @@ export default function MainPage() {
             <NavDropdown title="Action">
               <ActionSearch />
               <ActionSeek />
+              <NavDropdown.Divider />
+              <ActionExecute />
             </NavDropdown>
             <NavDropdown title="View">
-              <ViewSelect />
+              <NavDropdown.Item disabled>
+                Define  Sub-Problems&hellip;
+              </NavDropdown.Item>
+              <NavDropdown.Item disabled>
+                Display Sub-Problems&hellip;
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <ViewSelect viewNames={viewNames}/>
               <NavDropdown.Divider />
               {config.node.env !== "production" && <ViewOffsets />}
               {config.node.env !== "production" && <ViewSymbolTableOffsets />}
@@ -138,6 +146,8 @@ export default function MainPage() {
             <NavDropdown title="Help">
               <HelpMotd />
               <HelpIndex />
+              <HelpDemo />
+              <HelpTutorial />
               <HelpAbout />
             </NavDropdown>
           </Nav>
@@ -157,6 +167,7 @@ export default function MainPage() {
         </Navbar.Collapse>
       </Navbar>
       <Container fluid="md" className="table-light" style={{ paddingTop: '60px' }}>
+        <ExecutePanel />
         <Row>
           <ResultTable />
         </Row>

@@ -1,118 +1,77 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
 import { startExecute } from "../../components/ExecutePanel";
 
-class HelpTutorial extends Component {
+export default function HelpTutorial() {
+  console.log("HelpTutorial - Mounting...");
 
-    constructor(props) {
-//        console.log('In HelpTutorial.constructor props=',props)
-        super(props);
-        this.toggle = this.toggle.bind(this);
-        this.onSelect = this.onSelect.bind(this);
-        this.onExecute = this.onExecute.bind(this);
-        this.onCancel = this.onCancel.bind(this);
-        this.state = {
-            modal: false,
-        };
-    }
+  const [show, setShow] = useState(false);
+  const model_type = useSelector((state) => state.modelSlice.model.type);
 
-    componentDidMount() {
-//        console.log('In HelpTutorial.componentDidMount);
-        this.updateExecuteNames();
-    }
-
-    componentDidUpdate(prevProps) {
-//        console.log('In HelpTutorial.componentDidUpdate prevProps=',prevProps.type,'props=',this.props.type);
-        if (prevProps.type !== this.props.type) {
-//            console.log('In HelpTutorial.componentDidUpdate prevProps.type=',prevProps.type,'props.type=',this.props.type);
-            this.updateExecuteNames();
-        }
-    }
-
-    updateExecuteNames() {
-        var { getTutorialNames } = require('../../designtypes/'+this.props.type+'/execute.js'); // Dynamically load getTutorialNames
-        var execute_names = getTutorialNames();
-//        console.log('In HelpTutorial.updateExecuteNames execute_names=', execute_names);
-        var execute_name;
-        if (execute_names.length > 0)
-            execute_name = execute_names[0]; // Default to first name
-        this.setState({
-            execute_names: execute_names,
-            execute_name: execute_name
-        });
-    }
-
-    toggle() {
-//        console.log('In HelpTutorial.toggle');
-        this.setState({
-            modal: !this.state.modal
-        });
-    }
-
-    onSelect(event) {
-//      console.log('In HelpTutorial.onSelect event.target.value=',event.target.value);
-      this.setState({
-          execute_name: event.target.value
-      });
+  var { getTutorialNames } = require('../../designtypes/' + model_type + '/execute.js'); // Dynamically load getTutorialNames
+  var localExecuteNames = getTutorialNames();
+  console.log('HelpTutorial.updateExecuteNames localExecuteNames=', localExecuteNames);
+  var localExecuteName;
+  if (localExecuteNames.length > 0) {
+    localExecuteName = localExecuteNames[0]; // Default to first name
   }
 
-    onExecute() {
-//        console.log('In HelpTutorial.onExecute');
-        this.setState({
-            modal: !this.state.modal
-        });
-        logUsage('event', 'HelpTutorial', { event_label: this.state.execute_name });
-        // Do execute
-//        console.log('In HelpTutorial.onExecute this.state.execute_name=',this.state.execute_name);
-        var { execute } = require('../../designtypes/'+this.props.type+'/'+this.state.execute_name+'.js'); // Dynamically load execute
-//        console.log('In HelpTutorial.onExecute execute=',execute);
-        startExecute('Help : Tutorial : ' + this.state.execute_name, this.state.execute_name, execute.steps);
-    }
+  const [executeNames, setExecuteNames] = useState(localExecuteNames);
+  const [executeName, setExecuteName] = useState(localExecuteName);
 
-    onCancel() {
-//        console.log('In HelpTutorial.onCancel');
-        this.setState({
-            modal: !this.state.modal
-        });
-        // Noop - all done
-    }
+  const toggle = () => {
+    console.log('HelpTutorial.toggle');
+    setShow(!show);
+  }
 
-    render() {
-//        console.log('In HelpTutorial.render');
-        return (
-            <>
-                <NavDropdown.Item onClick={this.toggle} disabled={this.state.execute_names !== undefined && this.state.execute_names.length === 0}>
-                    Tutorial&hellip;
-                </NavDropdown.Item>
-                <Modal show={this.state.modal} onHide={this.onCancel}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>
-                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Help : Tutorial
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <br />
-                        <Form.Label htmlFor="tutorialSelect">Select demo/tutorial to execute:</Form.Label>
-                        <Form.Control as="select" id="tutorialSelect" onChange={this.onSelect} value={this.state.execute_name}>
-                            {this.state.execute_names !== undefined && this.state.execute_names.map((element, index) => (
-                                <option key={index} value={element}>{element}</option>
-                            ))}
-                        </Form.Control>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>
-                        <Button variant="primary" onClick={this.onExecute}>Execute</Button>
-                    </Modal.Footer>
-                </Modal>
-            </>
-        );
-    }
+  const onSelect = (event) => {
+    console.log('HelpTutorial.onSelect event.target.value=',event.target.value);
+    setExecuteName(event.target.value);
+  }
+
+  const onExecute = () => {
+    console.log('HelpTutorial.onExecute');
+    setShow(!show);
+    logUsage('event', 'HelpTutorial', { event_label: executeName });
+    // Do execute
+        console.log('HelpTutorial.onExecute executeName=',executeName);
+    var { execute } = require('../../designtypes/' + model_type + '/' + executeName + '.js'); // Dynamically load execute
+    console.log('HelpTutorial.onExecute execute=',execute);
+    startExecute('Help : Tutorial : ' + executeName, executeName, execute.steps);
+  }
+
+  const onCancel = () => {
+    console.log('HelpTutorial.onCancel');
+    setShow(!show);
+  }
+
+  return (
+    <>
+      <NavDropdown.Item onClick={toggle} disabled={executeNames !== undefined && executeNames.length === 0}>
+        Tutorial&hellip;
+      </NavDropdown.Item>
+      <Modal show={show} onHide={onCancel}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; Help : Tutorial
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <br />
+          <Form.Label htmlFor="tutorialSelect">Select demo/tutorial to execute:</Form.Label>
+          <Form.Control as="select" id="tutorialSelect" onChange={onSelect} value={executeName}>
+            {executeNames !== undefined && executeNames.map((element, index) => (
+              <option key={index} value={element}>{element}</option>
+            ))}
+          </Form.Control>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={onCancel}>Cancel</Button>
+          <Button variant="primary" onClick={onExecute}>Execute</Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
 }
-
-const mapStateToProps = state => ({
-    type: state.model.type,
-});
-
-export default connect(mapStateToProps)(HelpTutorial);

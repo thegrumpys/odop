@@ -1,75 +1,65 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown, Modal, Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
 
 export var outputStart = function(execute_name) {
-//    console.log('In outputStart','execute_name=',execute_name);
-    if (this === undefined) return;
-    this.setState( // Special form of setState using updater function
-        (prevState, props) => {
-            var line = '    // Execute File: ' + execute_name;
-            var l = <>{line}<br /></>;
-            return {
-                execute_name: execute_name, // Clear lines
-                lines: l, // Clear lines
-            };
-        }
-    );
+//  console.log('In outputStart','execute_name=',execute_name);
+  if (this === undefined) return;
+  this.setState( // Special form of setState using updater function
+    (prevState, props) => {
+      var line = '    // Execute File: ' + execute_name;
+      var l = <>{line}<br /></>;
+      return {
+        execute_name: execute_name, // Clear lines
+        lines: l, // Clear lines
+      };
+    }
+  );
 }
 
 export var outputLine = function(line) {
-//    console.log('In outputLine','line=',line);
-    if (this === undefined) return;
-    this.setState( // Special form of setState using updater function
-        (prevState, props) => {
-            var l = <>{prevState.lines}{line}<br /></>;
-            return {
-                lines: l // Concatenate lines
-            };
-        }
-    );
+//  console.log('In outputLine','line=',line);
+  if (this === undefined) return;
+  this.setState( // Special form of setState using updater function
+    (prevState, props) => {
+      var l = <>{prevState.lines}{line}<br /></>;
+      return {
+        lines: l // Concatenate lines
+      };
+    }
+  );
 }
 
 export var outputStop = function() {
-//    console.log('In outputStop','this=',this);
-    if (this === undefined) return;
-    this.setState( // Special form of setState using updater function
-        (prevState, props) => {
-            var l = <>{prevState.lines}</>;
-            return {
-                lines: l, // Clear lines
-            };
-        }
-    );
+//  console.log('In outputStop','this=',this);
+  if (this === undefined) return;
+  this.setState( // Special form of setState using updater function
+    (prevState, props) => {
+      var l = <>{prevState.lines}</>;
+      return {
+        lines: l, // Clear lines
+      };
+    }
+  );
 }
 
-class ViewExecuteToTest extends Component {
+export default function ViewExecuteToTest() {
+//  console.log("ViewExecuteToTest - Mounting...");
 
-    constructor(props) {
-//        console.log('In ViewExecuteToTest.constructor props=',props)
-        super(props);
-        this.toggle = this.toggle.bind(this);
-        outputStart = outputStart.bind(this); // Bind external function - no 'this'
-        outputLine = outputLine.bind(this); // Bind external function - no 'this'
-        outputStop = outputStop.bind(this); // Bind external function - no 'this'
-        this.state = {
-            modal: false,
-            lines: null,
-        };
-    }
+  const [show, setShow] = useState(false);
+  const [lines, setLines] = useState(false);
+  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const labels = useSelector((state) => state.modelSlice.model.labels);
 
-    toggle() {
-//        console.log('In ViewExecuteToTest.toggle');
-        this.setState({
-            modal: !this.state.modal
-        });
-        if (this.state.modal) logUsage('event', 'ViewExecuteToTest', { event_label: 'ViewExecuteToTest'});
-    }
+  const toggle = () => {
+//    console.log('In ViewExecuteToTest.toggle');
+    setShow(!show)
+    if (show) logUsage('event', 'ViewExecuteToTest', { event_label: 'ViewExecuteToTest' });
+  }
 
-    render() {
-//        console.log('In ViewExecuteToTest.render');
-        var pre_lines = `import { createStore, applyMiddleware } from 'redux';
+  var pre_lines = `import { createStore, applyMiddleware } from 'redux';
 import { initialState } from '../../../designtypes/Spring/Compression/initialState';
 import { initialSystemControls } from '../../../initialSystemControls';
 import { loadInitialState,
@@ -97,54 +87,44 @@ it('${this.state.execute_name}', () => {
         applyMiddleware(dispatcher));
 
     var design = store.getState().modelSlice; // before
-    design = store.getState().modelSlice;
     expect(design.model.result.objective_value).toEqual(0.0);
 
 `;
-        var post_lines = `});
+  var post_lines = `});
 
 `;
-        return (
+  return (
+    <>
+      <NavDropdown.Item onClick={toggle}>
+        ExecuteToTest
+      </NavDropdown.Item>
+      <Modal show={show} onHide={toggle} size="xl">
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; View : ExecuteToTest
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {lines !== null ?
             <>
-                <NavDropdown.Item onClick={this.toggle}>
-                    ExecuteToTest
-                </NavDropdown.Item>
-                <Modal show={this.state.modal} onHide={this.toggle} size="xl">
-                    <Modal.Header closeButton>
-                        <Modal.Title>
-                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : ExecuteToTest
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        {this.state.lines !== null ?
-                            <>
-                                <pre>
-                                {pre_lines}
-                                </pre>
-                                <pre>
-                                {this.state.lines}
-                                </pre>
-                                <pre>
-                                {post_lines}
-                                </pre>
-                            </>
-                        :
-                            'No lines. Select the View menu before running the execute file'
-                        }
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="primary" onClick={this.toggle}>Close</Button>
-                    </Modal.Footer>
-                </Modal>
+              <pre>
+                {pre_lines}
+              </pre>
+              <pre>
+                {lines}
+              </pre>
+              <pre>
+                {post_lines}
+              </pre>
             </>
-        );
-    }
+            :
+            'No lines. Select the View menu before running the execute file'
+          }
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={toggle}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
 }
-
-const mapStateToProps = state => ({
-    symbol_table: state.model.symbol_table,
-    system_controls: state.model.system_controls,
-    labels: state.model.labels
-});
-
-export default connect(mapStateToProps)(ViewExecuteToTest);
