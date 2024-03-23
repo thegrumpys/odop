@@ -4,29 +4,27 @@ import config from '../config';
 export const executePanelSlice = createSlice({
   name: "executePanelSlice",
   initialState: {
-    executeName: undefined,
     show: false,
+    executeName: undefined,
     prefix: '',
-    steps: [],
+    states: [],
     step: 0,
-    title: '',
-    text: '',
 //    testGenerate: config.node.env !== "production" ? true : false,
   },
   reducers: {
-    setExecuteName: {
-      reducer: (state, action) => {
-        console.log('executePanelSlice setExecuteName','state=',current(state),',action=',action);
-        state.executePanel = action.payload.executeName;
-      },
-      prepare: (executeName) => { return { payload: { executeName } } }
-    },
     setShow: {
       reducer: (state, action) => {
         console.log('executePanelSlice setShow','state=',current(state),',action=',action);
         state.show = action.payload.show;
       },
       prepare: (show) => { return { payload: { show } } }
+    },
+    setExecuteName: {
+      reducer: (state, action) => {
+        console.log('executePanelSlice setExecuteName','state=',current(state),',action=',action);
+        state.executeName = action.payload.executeName;
+      },
+      prepare: (executeName) => { return { payload: { executeName } } }
     },
     setPrefix: {
       reducer: (state, action) => {
@@ -35,12 +33,12 @@ export const executePanelSlice = createSlice({
       },
       prepare: (prefix) => { return { payload: { prefix } } }
     },
-    setSteps: {
+    setStates: {
       reducer: (state, action) => {
-        console.log('executePanelSlice setSteps','state=',current(state),',action=',action);
-        state.steps = action.payload.setSteps;
+        console.log('executePanelSlice setStates','state=',current(state),',action=',action);
+        state.states = action.payload.setStates;
       },
-      prepare: (setSteps) => { return { payload: { setSteps } } }
+      prepare: (setStates) => { return { payload: { setStates } } }
     },
     setStep: {
       reducer: (state, action) => {
@@ -48,20 +46,6 @@ export const executePanelSlice = createSlice({
         state.step = action.payload.step;
       },
       prepare: (step) => { return { payload: { step } } }
-    },
-    setTitle: {
-      reducer: (state, action) => {
-        console.log('executePanelSlice setTitle','state=',current(state),',action=',action);
-        state.title = action.payload.title;
-      },
-      prepare: (title) => { return { payload: { title } } }
-    },
-    setText: {
-      reducer: (state, action) => {
-        console.log('executePanelSlice setText','state=',current(state),',action=',action);
-        state.text = action.payload.text;
-      },
-      prepare: (text) => { return { payload: { text } } }
     },
 //    setTestGenerate: {
 //      reducer: (state, action) => {
@@ -73,6 +57,6 @@ export const executePanelSlice = createSlice({
   }
 });
 
-export const { setExecuteName, setShow, setPrefix, setSteps, setStep, setTitle, setText /*, setTestGenerate */ } = executePanelSlice.actions; // FIXME
+export const { setShow, setExecuteName, setPrefix, setStates, setStep, /*, setTestGenerate */ } = executePanelSlice.actions; // FIXME
 
 export default executePanelSlice.reducer;

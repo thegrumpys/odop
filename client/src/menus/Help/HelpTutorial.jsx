@@ -35,11 +35,8 @@ export default function HelpTutorial() {
     console.log('HelpTutorial.onExecute');
     setShow(!show);
     logUsage('event', 'HelpTutorial', { event_label: executeName });
-    // Do execute
-        console.log('HelpTutorial.onExecute executeName=',executeName);
-    var { execute } = require('../../designtypes/' + model_type + '/' + executeName + '.js'); // Dynamically load execute
-    console.log('HelpTutorial.onExecute execute=',execute);
-    startExecute('Help : Tutorial : ' + executeName, executeName, execute.steps);
+    console.log('HelpTutorial.onExecute executeName=',executeName);
+    startExecute('Help : Tutorial : ' + executeName, executeName);
   }
 
   const onCancel = () => {

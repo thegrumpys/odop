@@ -36,10 +36,8 @@ export default function HelpDemo() {
     setShow(!show);
     logUsage('event', 'HelpDemo', { event_label: executeName });
     // Do execute
-        console.log('HelpDemo.onExecute executeName=',executeName);
-    var { execute } = require('../../designtypes/' + model_type + '/' + executeName + '.js'); // Dynamically load execute
-    console.log('HelpDemo.onExecute execute=',execute);
-    startExecute('Help : Demo : ' + executeName, executeName, execute.steps);
+    console.log('HelpDemo.onExecute executeName=',executeName);
+    startExecute('Help : Demo : ' + executeName, executeName);
   }
 
   const onCancel = () => {

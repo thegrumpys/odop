@@ -9,10 +9,11 @@ export default function ActionExecute() {
 
   const [show, setShow] = useState(false);
   const model_type = useSelector((state) => state.modelSlice.model.type);
+  console.log('ActionExecute','show=', show,'model_type=', model_type);
 
   var { getExecuteNames } = require('../../designtypes/' + model_type + '/execute.js'); // Dynamically load getExecuteNames
   var localExecuteNames = getExecuteNames();
-  console.log('ActionExecute.updateExecuteNames localExecuteNames=', localExecuteNames);
+  console.log('ActionExecute','localExecuteNames=', localExecuteNames);
   var localExecuteName;
   if (localExecuteNames.length > 0) {
     localExecuteName = localExecuteNames[0]; // Default to first name
@@ -35,11 +36,8 @@ export default function ActionExecute() {
     console.log('ActionExecute.onExecute');
     setShow(!show);
     logUsage('event', 'ActionExecute', { event_label: executeName });
-    // Do execute
     console.log('ActionExecute.onExecute executeName=',executeName);
-    var { execute } = require('../../designtypes/' + model_type + '/' + executeName + '.js'); // Dynamically load execute
-    console.log('ActionExecute.onExecute execute=',execute);
-    startExecute('Action : Execute : ' + executeName, executeName, execute.steps);
+    startExecute('Action : Execute : ' + executeName, executeName);
   }
 
   const onCancel = () => {
