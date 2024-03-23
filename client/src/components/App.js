@@ -111,11 +111,11 @@ export default function App() {
 //        console.log('APP - getDesign after load');
         dispatch(deleteAutoSave());
         logUsage('event', 'App', { event_label: 'type: ' + type + ' name: ' + name });
-//        if (config.url.execute !== undefined) { // Once the design is loaded then you can run the query parameter execute script
-//          var { execute } = require('../designtypes/'+config.url.type+'/'+config.url.execute+'.js'); // Dynamically load execute
+        if (config.url.execute !== undefined) { // Once the design is loaded then you can run the query parameter execute script
+          var { execute } = require('../designtypes/'+config.url.type+'/'+config.url.execute+'.js'); // Dynamically load execute
 //          console.log('APP - loadDefaultDesign execute=',execute);
-//          startExecute('Execute : ' + config.url.execute, config.url.execute, execute.steps);
-//        }
+          startExecute('Execute : ' + config.url.execute, config.url.execute, execute.steps);
+        }
       } else {
         displayMessage('Invalid JSON type, function ignored');
       }

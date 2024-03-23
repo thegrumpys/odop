@@ -36,7 +36,7 @@ export default function ActionExecute() {
     setShow(!show);
     logUsage('event', 'ActionExecute', { event_label: executeName });
     // Do execute
-        console.log('ActionExecute.onExecute executeName=',executeName);
+    console.log('ActionExecute.onExecute executeName=',executeName);
     var { execute } = require('../../designtypes/' + model_type + '/' + executeName + '.js'); // Dynamically load execute
     console.log('ActionExecute.onExecute execute=',execute);
     startExecute('Action : Execute : ' + executeName, executeName, execute.steps);
