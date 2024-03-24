@@ -5,14 +5,14 @@ import { logUsage } from '../../logUsage';
 import { startExecute } from "../../components/ExecutePanel";
 
 export default function HelpDemo() {
-  console.log("HelpDemo - Mounting...");
+//  console.log("HelpDemo - Mounting...");
 
   const [show, setShow] = useState(false);
   const model_type = useSelector((state) => state.modelSlice.model.type);
 
   var { getDemoNames } = require('../../designtypes/' + model_type + '/execute.js'); // Dynamically load getDemoNames
   var localExecuteNames = getDemoNames();
-  console.log('HelpDemo.updateExecuteNames localExecuteNames=', localExecuteNames);
+//  console.log('HelpDemo.updateExecuteNames localExecuteNames=', localExecuteNames);
   var localExecuteName;
   if (localExecuteNames.length > 0) {
     localExecuteName = localExecuteNames[0]; // Default to first name
@@ -22,26 +22,26 @@ export default function HelpDemo() {
   const [executeName, setExecuteName] = useState(localExecuteName);
 
   const toggle = () => {
-    console.log('HelpDemo.toggle');
+//    console.log('HelpDemo.toggle');
     setShow(!show);
   }
 
   const onSelect = (event) => {
-    console.log('HelpDemo.onSelect event.target.value=',event.target.value);
+//    console.log('HelpDemo.onSelect event.target.value=',event.target.value);
     setExecuteName(event.target.value);
   }
 
   const onExecute = () => {
-    console.log('HelpDemo.onExecute');
+//    console.log('HelpDemo.onExecute');
     setShow(!show);
     logUsage('event', 'HelpDemo', { event_label: executeName });
     // Do execute
-    console.log('HelpDemo.onExecute executeName=',executeName);
+//    console.log('HelpDemo.onExecute executeName=',executeName);
     startExecute('Help : Demo : ' + executeName, executeName);
   }
 
   const onCancel = () => {
-    console.log('HelpDemo.onCancel');
+//    console.log('HelpDemo.onCancel');
     setShow(!show);
   }
 
@@ -50,7 +50,7 @@ export default function HelpDemo() {
       <NavDropdown.Item onClick={toggle} disabled={executeNames !== undefined && executeNames.length === 0}>
         Demo&hellip;
       </NavDropdown.Item>
-      <Modal show={show} onHide={onCancel}>
+      {show && <Modal show={show} onHide={onCancel}>
         <Modal.Header closeButton>
           <Modal.Title>
             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; Help : Demo
@@ -69,7 +69,7 @@ export default function HelpDemo() {
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>
           <Button variant="primary" onClick={onExecute}>Execute</Button>
         </Modal.Footer>
-      </Modal>
+      </Modal>}
     </>
   );
 }

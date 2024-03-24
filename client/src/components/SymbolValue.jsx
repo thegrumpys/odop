@@ -337,7 +337,7 @@ export default function SymbolValue({ className, element, index }) {
               : ''}
           </InputGroup>
         </td>
-        <Modal show={editShow} onHide={onClose}>
+        {editShow && <Modal show={editShow} onHide={onClose}>
           <Modal.Header closeButton>
             <Modal.Title>
               Edit {element.type === "equationset" ? (element.input ? 'Independent Variable' : 'Dependent Variable') : "Calculation Input"} {element.name}
@@ -469,8 +469,8 @@ export default function SymbolValue({ className, element, index }) {
               )
             }
           </Modal.Footer>
-        </Modal>
-        <Modal show={searchInfiniteShow} onHide={onSearchCancel}>
+        </Modal>}
+        {searchInfiniteShow && <Modal show={searchInfiniteShow} onHide={onSearchCancel}>
           <Modal.Header closeButton>
             <Modal.Title>
               Search (solve)
@@ -490,7 +490,7 @@ export default function SymbolValue({ className, element, index }) {
             <Button variant="secondary" onClick={onSearchContinue}>Continue</Button>
             <Button variant="primary" onClick={onSearchCancel}>Cancel</Button>
           </Modal.Footer>
-        </Modal>
+        </Modal>}
       </>
     );
 }

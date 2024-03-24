@@ -29,7 +29,7 @@ export default function ViewSymbolTableOffsets() {
       <NavDropdown.Item onClick={toggle}>
         SymbolTableOffsets
       </NavDropdown.Item>
-      <Modal show={show} onHide={toggle}>
+      {show && <Modal show={show} onHide={toggle}>
         <Modal.Header closeButton>
           <Modal.Title>
             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; View : SymbolTableOffsets
@@ -46,7 +46,7 @@ export default function ViewSymbolTableOffsets() {
         <Modal.Footer>
           <Button variant="primary" onClick={toggle}>Close</Button>
         </Modal.Footer>
-      </Modal>
+      </Modal>}
     </>
   );
 }

@@ -118,7 +118,7 @@ export default function ConstraintsMaxRowIndependentVariable({ element, index, o
             </InputGroup.Text>
             <FormControlTypeNumber id={'cmxriv_cmin_' + element.name} icon_alerts={icon_alerts} className={className} value={element.cmax} validmin={element.validmin} validmax={element.validmax} disabled={element.lmax & FIXED ? true : (element.lmax & CONSTRAINED ? false : true)} disabledText={element.lmax & CONSTRAINED ? false : true} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onClick={onClick} />
           </InputGroup>
-          {element.cmaxchoices !== undefined && element.cmaxchoices.length > 0 ?
+          {element.cmaxchoices !== undefined && element.cmaxchoices.length > 0 && show &&
             <Modal show={show} size="lg" onHide={onCancel}>
               <Modal.Header closeButton>
                 <Modal.Title>
@@ -162,7 +162,7 @@ export default function ConstraintsMaxRowIndependentVariable({ element, index, o
               <Modal.Footer>
                 <Button variant="secondary" onClick={onCancel}>Cancel</Button>
               </Modal.Footer>
-            </Modal> : ''}
+            </Modal>}
         </td>
         <td className={"text-end align-middle small " + className + (show_violations === 0 ? "d-none" : "")} colSpan="1">
           {show_violations === 1 && element.vmax <= 0 ?

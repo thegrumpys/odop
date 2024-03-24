@@ -28,7 +28,7 @@ export default function ViewOffsets() {
       <NavDropdown.Item onClick={toggle}>
         Offsets
       </NavDropdown.Item>
-      <Modal show={show} onHide={toggle}>
+      {show && <Modal show={show} onHide={toggle}>
         <Modal.Header closeButton>
           <Modal.Title>
             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; View : Offsets
@@ -45,7 +45,7 @@ export default function ViewOffsets() {
         <Modal.Footer>
           <Button variant="primary" onClick={toggle}>Close</Button>
         </Modal.Footer>
-      </Modal>
+      </Modal>}
     </>
   );
 }

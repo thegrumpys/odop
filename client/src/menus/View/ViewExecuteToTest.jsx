@@ -98,7 +98,7 @@ it('${this.state.execute_name}', () => {
       <NavDropdown.Item onClick={toggle}>
         ExecuteToTest
       </NavDropdown.Item>
-      <Modal show={show} onHide={toggle} size="xl">
+      {show && <Modal show={show} onHide={toggle} size="xl">
         <Modal.Header closeButton>
           <Modal.Title>
             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; View : ExecuteToTest
@@ -124,7 +124,7 @@ it('${this.state.execute_name}', () => {
         <Modal.Footer>
           <Button variant="primary" onClick={toggle}>Close</Button>
         </Modal.Footer>
-      </Modal>
+      </Modal>}
     </>
   );
 }

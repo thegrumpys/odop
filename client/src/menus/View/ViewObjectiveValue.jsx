@@ -266,7 +266,7 @@ export default function ViewObjectiveValue() {
       <NavDropdown.Item onClick={toggle}>
         ObjectiveValue
       </NavDropdown.Item>
-      <Modal show={show} onHide={toggle} size="xl">
+      {show && <Modal show={show} onHide={toggle} size="xl">
         <Modal.Header closeButton>
           <Modal.Title>
             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; View : ObjectiveValue = {objective_value}
@@ -287,7 +287,7 @@ export default function ViewObjectiveValue() {
         <Modal.Footer>
           <Button variant="primary" onClick={toggle}>Close</Button>
         </Modal.Footer>
-      </Modal>
+      </Modal>}
     </>
   );
 }

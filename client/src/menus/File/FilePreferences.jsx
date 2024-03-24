@@ -58,7 +58,7 @@ export default function FilePreferences() {
       <NavDropdown.Item onClick={toggle}>
         Preferences&hellip;
       </NavDropdown.Item>
-      <Modal show={show} size="lg" onHide={toggle}>
+      {show && <Modal show={show} size="lg" onHide={toggle}>
         <Modal.Header closeButton>
           <Modal.Title>
             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; File : Preferences
@@ -89,7 +89,7 @@ export default function FilePreferences() {
           <Button variant="primary" onClick={onRestoreDefaults}>Restore Defaults</Button>
           <Button variant="primary" disabled={isInvalidValue} onClick={onApplyandClose}>Apply and Close</Button>
         </Modal.Footer>
-      </Modal>
+      </Modal>}
     </>
   );
 }

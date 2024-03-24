@@ -138,7 +138,7 @@ export default function FileExport() {
       <NavDropdown.Item onClick={onExport}>
         Export
       </NavDropdown.Item>
-      <Modal show={show} onHide={onCancel}>
+      {show && <Modal show={show} onHide={onCancel}>
         <Modal.Header closeButton>
           <Modal.Title>
             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; File : Export
@@ -150,7 +150,7 @@ export default function FileExport() {
           <Button variant="outline-info" onClick={onSortedExport}>Sorted Export</Button>{' '}
           <Button variant="primary" onClick={onExport}>Export</Button>
         </Modal.Footer>
-      </Modal>
+      </Modal>}
     </>
   );
 }

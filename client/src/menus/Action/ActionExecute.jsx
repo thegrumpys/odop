@@ -5,15 +5,15 @@ import { logUsage } from '../../logUsage';
 import { startExecute } from "../../components/ExecutePanel";
 
 export default function ActionExecute() {
-  console.log("ActionExecute - Mounting...");
+//  console.log("ActionExecute - Mounting...");
 
   const [show, setShow] = useState(false);
   const model_type = useSelector((state) => state.modelSlice.model.type);
-  console.log('ActionExecute','show=', show,'model_type=', model_type);
+//  console.log('ActionExecute','show=', show,'model_type=', model_type);
 
   var { getExecuteNames } = require('../../designtypes/' + model_type + '/execute.js'); // Dynamically load getExecuteNames
   var localExecuteNames = getExecuteNames();
-  console.log('ActionExecute','localExecuteNames=', localExecuteNames);
+//  console.log('ActionExecute','localExecuteNames=', localExecuteNames);
   var localExecuteName;
   if (localExecuteNames.length > 0) {
     localExecuteName = localExecuteNames[0]; // Default to first name
@@ -23,25 +23,25 @@ export default function ActionExecute() {
   const [executeName, setExecuteName] = useState(localExecuteName);
 
   const toggle = () => {
-    console.log('ActionExecute.toggle');
+//    console.log('ActionExecute.toggle');
     setShow(!show);
   }
 
   const onSelect = (event) => {
-    console.log('ActionExecute.onSelect event.target.value=',event.target.value);
+//    console.log('ActionExecute.onSelect event.target.value=',event.target.value);
     setExecuteName(event.target.value);
   }
 
   const onExecute = () => {
-    console.log('ActionExecute.onExecute');
+//    console.log('ActionExecute.onExecute');
     setShow(!show);
     logUsage('event', 'ActionExecute', { event_label: executeName });
-    console.log('ActionExecute.onExecute executeName=',executeName);
+//    console.log('ActionExecute.onExecute executeName=',executeName);
     startExecute('Action : Execute : ' + executeName, executeName);
   }
 
   const onCancel = () => {
-    console.log('ActionExecute.onCancel');
+//    console.log('ActionExecute.onCancel');
     setShow(!show);
   }
 
@@ -50,7 +50,7 @@ export default function ActionExecute() {
       <NavDropdown.Item onClick={toggle} disabled={executeNames !== undefined && executeNames.length === 0}>
         Execute&hellip;
       </NavDropdown.Item>
-      <Modal show={show} onHide={onCancel}>
+      {show && <Modal show={show} onHide={onCancel}>
         <Modal.Header closeButton>
           <Modal.Title>
             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; Action : Execute
@@ -69,7 +69,7 @@ export default function ActionExecute() {
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>
           <Button variant="primary" onClick={onExecute}>Execute</Button>
         </Modal.Footer>
-      </Modal>
+      </Modal>}
     </>
   );
 }

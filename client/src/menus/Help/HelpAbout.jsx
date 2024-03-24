@@ -73,7 +73,7 @@ export default function HelpAbout() {
       <NavDropdown.Item onClick={toggle}>
         About
       </NavDropdown.Item>
-      <Modal show={show} onHide={toggle}>
+      {show && <Modal show={show} onHide={toggle}>
         <Modal.Header closeButton>
           <Modal.Title>
             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" />  &nbsp; About ODOP
@@ -106,7 +106,7 @@ export default function HelpAbout() {
         <Modal.Footer>
           <Button variant="primary" onClick={toggle}>Close</Button>
         </Modal.Footer>
-      </Modal>
+      </Modal>}
     </>
   );
 }

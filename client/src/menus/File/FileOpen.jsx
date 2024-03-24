@@ -180,7 +180,7 @@ export default function FileOpen() {
       <NavDropdown.Item onClick={toggle}>
         Open&hellip;
       </NavDropdown.Item>
-      <Modal show={show} onHide={onCancel}>
+      {show && <Modal show={show} onHide={onCancel}>
         <Modal.Header closeButton>
           <Modal.Title>
             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; File : Open
@@ -211,7 +211,7 @@ export default function FileOpen() {
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>{' '}
           <Button variant="primary" onClick={onOpen} disabled={names.length === 0 ? true : false}>Open</Button>
         </Modal.Footer>
-      </Modal>
+      </Modal>}
     </>
   );
 }

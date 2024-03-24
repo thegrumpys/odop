@@ -98,7 +98,7 @@ export default function ActionSeek() {
                 <NavDropdown.Item onClick={onSeekRequest} disabled={display_search_button}>
                     Seek (optimize)&hellip;
                 </NavDropdown.Item>
-                <Modal show={seekShow} onHide={onSeekCancelButton}>
+                {seekShow && <Modal show={seekShow} onHide={onSeekCancelButton}>
                     <Modal.Header closeButton>
                         <Modal.Title>
                             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Seek (optimize)
@@ -126,7 +126,7 @@ export default function ActionSeek() {
                         <Button variant="secondary" onClick={onSeekCancelButton}>Cancel</Button>{' '}
                         <Button variant="primary" onClick={onSeekButton}>Seek</Button>
                     </Modal.Footer>
-                </Modal>
+                </Modal>}
             </>
         );
 }

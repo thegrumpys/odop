@@ -10,7 +10,7 @@ import { setExecuteName, setShow, setPrefix, setStates, setStep, setTitle, setTe
 import store from '../store/store';
 
 export var startExecute = (prefix, executeName) => {
-  console.log('startExecute','prefix=',prefix,'executeName=',executeName);
+//  console.log('startExecute','prefix=',prefix,'executeName=',executeName);
   if (executeName === undefined) return;
 
   var design = store.getState().modelSlice;
@@ -19,11 +19,11 @@ export var startExecute = (prefix, executeName) => {
 
   var states = store.getState().executePanelSlice.states;
 
-  var localStates = Object.assign([...states], { 0: Object.assign({}, states[0], { state: JSON.stringify(design) }) });
+  var localStates = Object.assign([...states], { 0: Object.assign({}, states[0], { state: JSON.stringify(design.model) }) });
   var localTitle = execute.steps[0].title;
   var localText = execute.steps[0].text;
 //    var localTestGenerate = config.node.env !== "production" ? true : false; // FIXME
-  console.log('startExecute','localStates=',localStates,'localTitle=',localTitle,'localText=',localText);
+//  console.log('startExecute','localStates=',localStates,'localTitle=',localTitle,'localText=',localText);
   store.dispatch(setShow(true)); // Default: do display
   store.dispatch(setPrefix(prefix));
   store.dispatch(setExecuteName(executeName));
@@ -50,7 +50,7 @@ export var startExecute = (prefix, executeName) => {
 }
 
 export var stopExecute = () => {
-  console.log('stopExecute');
+//  console.log('stopExecute');
   var executeName = store.getState().executePanelSlice.executeName;
   logUsage('event', 'ExecutePanel', { event_label: 'stop ' + executeName });
   store.dispatch(setExecuteName(undefined)); // Clear execute name
@@ -71,17 +71,17 @@ export default function ExecutePanel() {
 //  const testGenerate = useSelector((state) => state.executePanelSlice.testGenerate);
   const design = useSelector((state) => state.modelSlice.model);
   const model_type = useSelector((state) => state.modelSlice.model.type);
-  console.log('ExecutePanel - Mounting...','show=',show,'executeName=',executeName,'prefix=',prefix,'states=',states,'step=',step);
+//  console.log('ExecutePanel - Mounting...','show=',show,'executeName=',executeName,'prefix=',prefix,'states=',states,'step=',step);
   const dispatch = useDispatch();
 
   const onCancel = () => {
-    console.log('ExecutePanel.onCancel');
+//    console.log('ExecutePanel.onCancel');
     stopExecute();
     dispatch(changeResultTerminationCondition('')); // Reset any leftover messages
   }
 
   const onNext = () => {
-    console.log('ExecutePanel.onNext');
+//    console.log('ExecutePanel.onNext');
     var next = step + 1;
     var localStates = Object.assign([...states], { [next]: Object.assign({}, states[next], { state: JSON.stringify(design) }) });
     // Put current store state into steps[next].state - remember this for "back" time travel
@@ -106,11 +106,11 @@ export default function ExecutePanel() {
   }
 
   const onBack = () => {
-    console.log('ExecutePanel.onBack');
+//    console.log('ExecutePanel.onBack');
     var prev = step - 1;
     if (prev < 0) prev = 0; // Stop going backwards if it is on the first step
     // Put steps[prev].state into current store state - that is, time travel back
-    var localStates = states.slice(0, prev); // Remove last state
+    var localStates = states.slice(0, step); // Remove last state, excludes [step]
 //    console.log('ExecutePanel.onBack JSON.parse(steps[prev].state)=',JSON.parse(steps[prev].state));
     dispatch(load(JSON.parse(localStates[prev].state)));
     dispatch(setStep(prev));
@@ -136,7 +136,7 @@ export default function ExecutePanel() {
     return null;
   } else {
     var { execute } = require('../designtypes/' + model_type + '/' + executeName + '.js'); // Dynamically load execute
-    console.log('ExecutePanel','execute=',execute);
+//    console.log('ExecutePanel','execute=',execute);
     return show && (
       <Alert variant="success" style={{ marginTop: '10px' }}>
         <Container>

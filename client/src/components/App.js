@@ -146,7 +146,7 @@ export default function App() {
           <Route exact path="/" element={<MainPage />} />
         </Routes>
       </BrowserRouter>
-      <Modal show={show} onHide={loadDefaultDesign}>
+      {show && <Modal show={show} onHide={loadDefaultDesign}>
           <Modal.Header closeButton><Modal.Title>ODOP Design Recovery</Modal.Title></Modal.Header>
           <Modal.Body>
               <Alert variant="info">AutoSave design available. Recover the design?</Alert>
@@ -156,7 +156,7 @@ export default function App() {
               <Button variant="secondary" onClick={loadDefaultDesign}>No</Button>{' '}
               <Button variant="primary" onClick={loadAutoSaveDesign}>Yes</Button>
           </Modal.Footer>
-      </Modal>
+      </Modal>}
     </>
   );
 }

@@ -40,7 +40,7 @@ const Message = () => {
 
   const body = messages.reduce((accumulator,element) => <> {accumulator} <Alert variant={element.variant==='' ? 'primary' : element.variant }>{element.message}</Alert> </>, <> </>);
   return (
-    <Modal show={show} onHide={toggle}>
+    show && <Modal show={show} onHide={toggle}>
       { header !== '' ?
         <Modal.Header closeButton>
           <Modal.Title>

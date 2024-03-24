@@ -28,7 +28,7 @@ export default function ViewSymbolTable() {
       <NavDropdown.Item onClick={toggle}>
         SymbolTable
       </NavDropdown.Item>
-      <Modal show={show} onHide={toggle} size="xl">
+      {show && <Modal show={show} onHide={toggle} size="xl">
         <Modal.Header closeButton>
           <Modal.Title>
             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; View : SymbolTable
@@ -125,7 +125,7 @@ export default function ViewSymbolTable() {
         <Modal.Footer>
           <Button variant="primary" onClick={toggle}>Close</Button>
         </Modal.Footer>
-      </Modal>
+      </Modal>}
     </>
   );
 }

@@ -281,7 +281,7 @@ export default function ResultTable() {
     </Row>
     </Container>
       <AlertsAccordion />
-      <Modal show={seekShow} onHide={onSeekCancelButton}>
+      {seekShow && <Modal show={seekShow} onHide={onSeekCancelButton}>
         <Modal.Header closeButton>
           <Modal.Title>
             Seek (optimize)
@@ -310,8 +310,8 @@ export default function ResultTable() {
           <Button variant="secondary" onClick={onSeekCancelButton}>Cancel</Button>{' '}
           <Button variant="primary" onClick={onSeekButton}>Seek</Button>
         </Modal.Footer>
-      </Modal>
-      <Modal show={searchInfiniteShow} onHide={onSearchCancel}>
+      </Modal>}
+      {searchInfiniteShow && <Modal show={searchInfiniteShow} onHide={onSearchCancel}>
         <Modal.Header closeButton>
           <Modal.Title>
             Search (solve)
@@ -331,7 +331,7 @@ export default function ResultTable() {
           <Button variant="secondary" onClick={onSearchContinue}>Continue</Button>
           <Button variant="primary" onClick={onSearchCancel}>Cancel</Button>
         </Modal.Footer>
-      </Modal>
+      </Modal>}
     </>
   );
 }

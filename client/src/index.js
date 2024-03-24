@@ -1,4 +1,4 @@
-import bootstrap from 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Spinner from "./components/Spinner";
 import Message from "./components/Message";
 import App from "./components/App";

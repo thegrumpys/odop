@@ -59,7 +59,7 @@ export default function FileProperties() {
       <NavDropdown.Item onClick={toggle}>
         Properties&hellip;
       </NavDropdown.Item>
-      <Modal show={show} onHide={toggle}>
+      {show && <Modal show={show} onHide={toggle}>
         <Modal.Header closeButton>
           <Modal.Title>
             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; File : Properties
@@ -91,7 +91,7 @@ export default function FileProperties() {
           <Button variant="primary" onClick={onRestoreDefaults}>Restore Defaults</Button>
           <Button variant="primary" onClick={onApplyandClose}>Apply and Close</Button>
         </Modal.Footer>
-      </Modal>
+      </Modal>}
     </>
   );
 }

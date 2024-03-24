@@ -83,7 +83,7 @@ export default function ActionSearch() {
       <NavDropdown.Item onClick={onSearchRequest} disabled={!display_search_button}>
         Search (solve)
       </NavDropdown.Item>
-      <Modal show={searchInfiniteShow} onHide={onSearchCancel}>
+      {searchInfiniteShow && <Modal show={searchInfiniteShow} onHide={onSearchCancel}>
         <Modal.Header closeButton>
           <Modal.Title>
             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; Action : Search
@@ -103,7 +103,7 @@ export default function ActionSearch() {
           <Button variant="secondary" onClick={onSearchContinue}>Continue</Button>
           <Button variant="primary" onClick={onSearchCancel}>Cancel</Button>
         </Modal.Footer>
-      </Modal>
+      </Modal>}
     </>
   );
 }

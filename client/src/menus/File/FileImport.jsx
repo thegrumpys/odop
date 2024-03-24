@@ -70,7 +70,7 @@ export default function FileImport() {
       <NavDropdown.Item onClick={toggle}>
         Import&hellip;
       </NavDropdown.Item>
-      <Modal show={show} onHide={onCancel}>
+      {show && <Modal show={show} onHide={onCancel}>
         <Modal.Header closeButton>
           <Modal.Title>
             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; File : Import
@@ -85,7 +85,7 @@ export default function FileImport() {
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>{' '}
           <Button variant="primary" onClick={onFileImport} disabled={selectedFile == null}>Import</Button>
         </Modal.Footer>
-      </Modal>
+      </Modal>}
     </>
   );
 }
