@@ -1,107 +1,86 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Table, Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek, saveAutoSave } from '../../store/modelSlice';
 import { logUsage } from '../../logUsage';
 import * as sto from './symbol_table_offsets';
 
-export class ResultTableOptimize extends Component {
+export default function ResultTableOptimize({ onClick }) {
+  //  console.log('ResultTableOptimize - Mounting...','onClick=',onClick);
+  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const dispatch = useDispatch();
 
-    constructor(props) {
-//        console.log('In ResultTableOptimize.constructor props=',props);
-        super(props);
-        this.onOptimizeSeekMAXVolume = this.onOptimizeSeekMAXVolume.bind(this);
-        this.onOptimizeSeekMAXWeight = this.onOptimizeSeekMAXWeight.bind(this);
-        this.onOptimizeSeekMINLength = this.onOptimizeSeekMINLength.bind(this);
-        this.onOptimizeSeekMINWidth = this.onOptimizeSeekMINWidth.bind(this);
-        this.onOptimizeSeekMINHeight = this.onOptimizeSeekMINHeight.bind(this);
-    }
+  const onOptimizeSeekMAXVolume = (event) => {
+    //        console.log('In ResultTableOptimize.onOptimizeSeekMAXVolume','event=',event);
+    logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX Volume button' });
+    dispatch(saveAutoSave());
+    dispatch(seek('Volume', MAX));
+    onClick(event);
+  }
 
-    onOptimizeSeekMAXVolume(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMAXVolume','event=',event);
-        logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX Volume button' });
-        this.props.saveAutoSave();
-        this.props.seek('Volume', MAX);
-        this.props.onClick(event);
-    }
+  const onOptimizeSeekMAXWeight = (event) => {
+    //        console.log('In ResultTableOptimize.onOptimizeSeekMAXWeight','event=',event);
+    logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX Weight button' });
+    dispatch(saveAutoSave());
+    dispatch(seek('Weight', MAX));
+    onClick(event);
+  }
 
-    onOptimizeSeekMAXWeight(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMAXWeight','event=',event);
-        logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX Weight button' });
-        this.props.saveAutoSave();
-        this.props.seek('Weight', MAX);
-        this.props.onClick(event);
-    }
+  const onOptimizeSeekMINLength = (event) => {
+    //        console.log('In ResultTableOptimize.onOptimizeSeekMINLength','event=',event);
+    logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Length button' });
+    dispatch(saveAutoSave());
+    dispatch(seek('Length', MIN));
+    onClick(event);
+  }
 
-    onOptimizeSeekMINLength(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINLength','event=',event);
-        logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Length button' });
-        this.props.saveAutoSave();
-        this.props.seek('Length', MIN);
-        this.props.onClick(event);
-    }
+  const onOptimizeSeekMINWidth = (event) => {
+    //        console.log('In ResultTableOptimize.onOptimizeSeekMINWidth','event=',event);
+    logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Width button' });
+    dispatch(saveAutoSave());
+    dispatch(seek('Width', MIN));
+    onClick(event);
+  }
 
-    onOptimizeSeekMINWidth(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINWidth','event=',event);
-        logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Width button' });
-        this.props.saveAutoSave();
-        this.props.seek('Width', MIN);
-        this.props.onClick(event);
-    }
+  const onOptimizeSeekMINHeight = (event) => {
+    //        console.log('In ResultTableOptimize.onOptimizeSeekMINWidth','event=',event);
+    logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Height button' });
+    dispatch(saveAutoSave());
+    dispatch(seek('Height', MIN));
+    onClick(event);
+  }
 
-    onOptimizeSeekMINHeight(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINWidth','event=',event);
-        logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Height button' });
-        this.props.saveAutoSave();
-        this.props.seek('Height', MIN);
-        this.props.onClick(event);
-    }
-
-    render() {
-//        console.log('In ResultTableOptimize.render');
-        return (
-            <>
-                <p>Select a pre-configured Seek optimization:</p>
-                <Table borderless="true" size="sm">
-                    <tbody>
-                        <tr>
-                            <td width="50%">
-                                <Button variant="primary" disabled={this.props.symbol_table[sto.Volume].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMAXVolume}>Seek MAX Volume</Button>
-                            </td>
-                            <td width="50%">
-                                <Button variant="primary" disabled={this.props.symbol_table[sto.Weight].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMAXWeight}>Seek MAX Weight</Button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="50%">
-                                <Button variant="primary" disabled={this.props.symbol_table[sto.Length].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMINLength}>Seek MIN Length</Button>
-                            </td>
-                            <td width="50%">
-                                <Button variant="primary" disabled={this.props.symbol_table[sto.Width].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMINWidth}>Seek MIN Width</Button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="50%">
-                                <Button variant="primary" disabled={this.props.symbol_table[sto.Height].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMINHeight}>Seek MIN Height</Button>
-                            </td>
-                            <td width="50%">
-                            </td>
-                        </tr>
-                    </tbody>
-                </Table>
-            </>
-        );
-    }
+  return (
+    <>
+      <p>Select a pre-configured Seek optimization:</p>
+      <Table borderless="true" size="sm">
+        <tbody>
+          <tr>
+            <td width="50%">
+              <Button variant="primary" disabled={symbol_table[sto.Volume].lmin & FIXED ? true : false} onClick={onOptimizeSeekMAXVolume}>Seek MAX Volume</Button>
+            </td>
+            <td width="50%">
+              <Button variant="primary" disabled={symbol_table[sto.Weight].lmin & FIXED ? true : false} onClick={onOptimizeSeekMAXWeight}>Seek MAX Weight</Button>
+            </td>
+          </tr>
+          <tr>
+            <td width="50%">
+              <Button variant="primary" disabled={symbol_table[sto.Length].lmin & FIXED ? true : false} onClick={onOptimizeSeekMINLength}>Seek MIN Length</Button>
+            </td>
+            <td width="50%">
+              <Button variant="primary" disabled={symbol_table[sto.Width].lmin & FIXED ? true : false} onClick={onOptimizeSeekMINWidth}>Seek MIN Width</Button>
+            </td>
+          </tr>
+          <tr>
+            <td width="50%">
+              <Button variant="primary" disabled={symbol_table[sto.Height].lmin & FIXED ? true : false} onClick={onOptimizeSeekMINHeight}>Seek MIN Height</Button>
+            </td>
+            <td width="50%">
+            </td>
+          </tr>
+        </tbody>
+      </Table>
+    </>
+  );
 }
-
-const mapStateToProps = state => ({
-    symbol_table: state.model.symbol_table,
-});
-
-const mapDispatchToProps = {
-    seek: seek,
-    saveAutoSave: saveAutoSave
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ResultTableOptimize);
