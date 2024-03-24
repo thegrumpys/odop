@@ -29,7 +29,7 @@ export default function DesignTable() {
         </Col>
       </Row>
       <Row>
-        <Col className="p-0" lg="12">
+        <Col className="p-0" lg="6">
           <NameValueUnitsCalcInputTable />
         </Col>
       </Row>

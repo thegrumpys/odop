@@ -1,4 +1,4 @@
-import { MIN, MAX } from './actionTypes';
+import { MIN, MAX, VALID_MIN, VALID_MAX } from './actionTypes';
 import { createSlice, current } from "@reduxjs/toolkit";
 import { initialSystemControls } from '../initialSystemControls';
 import config from '../config';
