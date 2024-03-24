@@ -32,7 +32,7 @@ const dispatcher = store => next => action => {
     case load().type:
     case loadInitialState().type:
     case restoreAutoSave().type: {
-//      console.log('In dispatcher',action.type,'state=',store.getState());
+//      console.log('In dispatcher','state=',store.getState(),'action=',action);
       invokeInit(store);
       invokeEquationSet(store);
       propagate(store);
@@ -43,7 +43,7 @@ const dispatcher = store => next => action => {
       break;
 
     case changeSymbolValue().type: {
-//      console.log('In dispatcher',action.type,'state=',store.getState());
+//      console.log('In dispatcher','state=',store.getState(),'action=',action);
       design = store.getState().modelSlice;
       index = design.model.symbol_table.findIndex((element) => element.name === action.payload.name);
       if (index >= 0) {
@@ -80,7 +80,7 @@ const dispatcher = store => next => action => {
       break;
 
     case fixSymbolValue().type: {
-//      console.log('In dispatcher',action.type,'state=',store.getState());
+//      console.log('In dispatcher','state=',store.getState(),'action=',action);
       design = store.getState().modelSlice;
       design.model.symbol_table.find((element) => {
         if (element.name === action.payload.name) {
@@ -125,7 +125,7 @@ const dispatcher = store => next => action => {
       break;
 
     case freeSymbolValue().type: {
-//      console.log('In dispatcher',action.type,'state=',store.getState());
+//      console.log('In dispatcher','state=',store.getState(),'action=',action);
       design = store.getState().modelSlice;
       design.model.symbol_table.find((element) => {
         if (element.name === action.payload.name) {
@@ -146,14 +146,14 @@ const dispatcher = store => next => action => {
 
     case changeSymbolConstraint().type:
     case restoreOutputSymbolConstraints().type: {
-//      console.log('In dispatcher',action.type,'state=',store.getState());
+//      console.log('In dispatcher','state=',store.getState(),'action=',action);
       updateObjectiveValue(store);
       invokeCheck(store);
     }
       break;
 
     case setSymbolFlag().type: {
-//      console.log('In dispatcher',action.type,'state=',store.getState());
+//      console.log('In dispatcher','state=',store.getState(),'action=',action);
       design = store.getState().modelSlice;
       sink = design.model.symbol_table.find(element => element.name === action.payload.name);
 //        console.log('In dispatcher.SET_SYMBOL_FLAG.propagate sink=',sink);
@@ -179,7 +179,7 @@ const dispatcher = store => next => action => {
       break;
 
     case resetSymbolFlag().type: {
-//      console.log('In dispatcher',action.type,'state=',store.getState());
+//      console.log('In dispatcher','state=',store.getState(),'action=',action);
       design = store.getState().modelSlice;
       sink = design.model.symbol_table.find(element => element.name === action.payload.name);
 //        console.log('In dispatcher.RESET_SYMBOL_FLAG.propagate sink=',sink);
@@ -216,7 +216,7 @@ const dispatcher = store => next => action => {
     case changeInputSymbolValues().type:
     case restoreInputSymbolValues().type:
     case changeSystemControlsValue().type: {
-//      console.log('In dispatcher',action.type,'state=',store.getState());
+//      console.log('In dispatcher','state=',store.getState(),'action=',action);
       // DO NOT INVOKE invokeInit(store) BECAUSE OF RECURSION
       store.dispatch(changeSymbolValue('Catalog_Name', '', action.payload.merit))
       store.dispatch(changeSymbolValue('Catalog_Number', '', action.payload.merit))
@@ -228,14 +228,14 @@ const dispatcher = store => next => action => {
       break;
 
     case search().type: {
-//      console.log('In dispatcher',action.type,'state=',store.getState());
+//      console.log('In dispatcher','state=',store.getState(),'action=',action);
       design = store.getState().modelSlice;
       invokeSearch(store, design.model.system_controls.objmin);
     }
       break;
 
     case seek().type: {
-//      console.log('In dispatcher',action.type,'state=',store.getState());
+//      console.log('In dispatcher','state=',store.getState(),'action=',action);
       invokeSeek(store, action);
       design = store.getState().modelSlice;
       var termination_condition = design.model.result.termination_condition;
@@ -246,7 +246,7 @@ const dispatcher = store => next => action => {
       break;
 
     default: {
-//      console.log('In dispatcher',action.type,'state=',store.getState());
+//      console.log('In dispatcher','state=',store.getState(),'action=',action);
     }
       break;
   }

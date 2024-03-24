@@ -1,7 +1,7 @@
 // Invoke Check
 export function invokeCheck(store) {
 
-//    console.log('<li>','Start invokeCheck','</li><ul>');
+//    console.log('Start invokeCheck');
 
     var design = store.getState().modelSlice;
 //    console.log('In invokeCheck design=',design);

@@ -4,7 +4,7 @@ import { checks as commonChecks, WARN } from '../../components/Alerts';
 import { toODOPPrecision } from '../../toODOPPrecision'
 
 export function checks(store) {
-//    console.log('<li>','@@@@@ Start check store=',store,'</li><ul>');
+//    console.log('@@@@@ Start check store=',store);
     store.dispatch(clearAlerts());
     var design = store.getState().modelSlice;
     if (design.model.symbol_table[o.Density].value <= 0.0) {

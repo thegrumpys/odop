@@ -11,7 +11,7 @@ import {
   Tooltip,
   Row
 } from 'react-bootstrap';
-//import { changeUser, changeView, deleteAutoSave } from '../store/modelSlice';
+import { changeUser, changeView, deleteAutoSave } from '../store/modelSlice';
 import ExecutePanel from './ExecutePanel';
 import FileOpen from '../menus/File/FileOpen';
 import FilePreferences from '../menus/File/FilePreferences';
@@ -38,12 +38,13 @@ import ResultTable from './ResultTable';
 import DesignTable from './DesignTable';
 
 export default function MainPage() {
-  //  console.log("MainPage - Mounting...");
+//  console.log('MainPage - Mounting...');
   const [show, setShow] = useState(false);
   const [activeTab, setActiveTab] = useState(config.url.view);
+  const model_type = useSelector((state) => state.modelSlice.model.type);
   const model_name = useSelector((state) => state.modelSlice.name);
   const model_view = useSelector((state) => state.modelSlice.view);
-  const model_type = useSelector((state) => state.modelSlice.model.type);
+//  console.log('MainPage - Mounting...','model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
   //  const dispatch = useDispatch();
 
 //  useEffect(() => {
@@ -69,11 +70,11 @@ export default function MainPage() {
 //
 //  useEffect(() => {
 ////    console.log('MainPage','model_type=',model_type);
-////    if (model_type === null) return;
-////    var { getViewNames } = require('../designtypes/'+ model_type + '/view.js'); // Dynamically load getViewNames
-////    console.log('MainPage - type changed','getViewNames=', getViewNames);
-////    var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
-////    console.log('MainPage - type changed','viewNames=', viewNames);
+    if (model_type === null) return;
+    var { getViewNames } = require('../designtypes/'+ model_type + '/view.js'); // Dynamically load getViewNames
+//    console.log('MainPage - type changed','getViewNames=', getViewNames);
+    var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
+//    console.log('MainPage - type changed','viewNames=', viewNames);
 ////    var viewIndex = viewNames.find(element => element.name === config.url.view);
 ////    console.log('MainPage','viewIndex=', viewIndex);
 ////    if (viewIndex >= 0) {
@@ -167,11 +168,15 @@ export default function MainPage() {
         </Navbar.Collapse>
       </Navbar>
       <Container fluid="md" className="table-light" style={{ paddingTop: '60px' }}>
-        <ExecutePanel />
+        <Row>
+          <ExecutePanel />
+        </Row>
         <Row>
           <ResultTable />
         </Row>
-        <DesignTable />
+        <Row>
+          {viewNames[viewNames.findIndex(element => element.name === activeTab)].component}
+        </Row>
       </Container>
     </>
   );

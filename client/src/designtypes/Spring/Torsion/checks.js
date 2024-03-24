@@ -5,7 +5,7 @@ import { CONSTRAINED, FIXED, MIN, MAX } from '../../../store/actionTypes';
 import { toODOPPrecision } from '../../../toODOPPrecision'
 
 export function checks(store) {        /*    Compression  Spring  */
-//    console.log('<li>','@@@@@ Start check store=',store,'</li><ul>');
+//    console.log('@@@@@ Start check store=',store);
     store.dispatch(clearAlerts());
     var design = store.getState().modelSlice;
 

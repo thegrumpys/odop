@@ -5,7 +5,7 @@ import { pxPropagate } from './pxPropagate';
  * despak - Expand any compressed design parameters and call the equation set.
  */
 export function despak(pc, store, merit) {
-//    console.log('<li>!!!!! Start despak pc=',pc,'</li><ul>');
+//    console.log('<li>!!!!! Start despak pc=',pc);
     var design = store.getState().modelSlice;
     var kd = 0;
     var p = [];

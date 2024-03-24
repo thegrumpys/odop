@@ -9,7 +9,7 @@ import { despak } from './despak';
  * 4. The algorithm's explore function alternates the sign of delta for each psi[k] for each successive exploration
  */
 export function patsh(psi, del, delmin, objmin, maxit, tol, store, merit) {
-//    console.log('<li>','@@@@@ Start patsh psi=',psi,'del=',del,'delmin=',delmin,'objmin=',objmin,'maxit=',maxit,'tol=',tol,'store=',store,'merit=',merit,'</li><ul>');
+//    console.log('@@@@@ Start patsh psi=',psi,'del=',del,'delmin=',delmin,'objmin=',objmin,'maxit=',maxit,'tol=',tol,'store=',store,'merit=',merit);
     var s_psi;
     var NCODE;
     var itno = 0;

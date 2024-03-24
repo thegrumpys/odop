@@ -7,7 +7,7 @@ export function updateObjectiveValue(store, merit) {
 
     // Update Constraint Violations
 
-//    console.log('<li>','Start updateObjectiveValue','</li><ul>');
+//    console.log('Start updateObjectiveValue');
 
     /*
      * The following section of code constructs the objective function from the

@@ -414,14 +414,14 @@ export const modelSlice = createSlice({
     search: {
       reducer: (state, action) => {
 //        console.log('reducer search','state=',current(state),',action=',action);
-        return; // No-op
+        return;
       }
     },
 
     seek: {
       reducer: (state, action) => {
 //        console.log('reducer seek','state=',current(state),',action=',action);
-        return; // No-op
+        return;
       },
       prepare: (name, minmax) => { return { payload: { name, minmax } } }
     },

@@ -1,7 +1,7 @@
 import * as o from './offsets';
 import * as mo from '../mat_offsets';
 export function eqnset(p, x) {        /*    Compression  Spring  */
-//    console.log('<li>','@@@@@ Start eqnset p=',p,'x=',x,'</li><ul>');
+//    console.log('@@@@@ Start eqnset p=',p,'x=',x);
     const zero = 0.0;
     var ks;
     var kc;

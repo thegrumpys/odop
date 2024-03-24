@@ -3,7 +3,7 @@ import { changeOutputSymbolValues } from '../modelSlice';
 // Invoke Equation Set
 export function invokeEquationSet(store) {
 
-//    console.log('<li>','Start invokeEquationSet','</li><ul>');
+//    console.log('Start invokeEquationSet');
 
     var element;
 

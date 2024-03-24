@@ -5,7 +5,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
 
     // Update Constraint Violations
 
-//    console.log('<li>','Start pxUpdateObjectiveValue','p=',p,'x=',x,'</li><ul>');
+//    console.log('Start pxUpdateObjectiveValue','p=',p,'x=',x);
 
     /*
      * The following section of code constructs the objective function from the

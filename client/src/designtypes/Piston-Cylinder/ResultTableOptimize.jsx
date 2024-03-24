@@ -6,8 +6,8 @@ import { seek, saveAutoSave } from '../../store/modelSlice';
 import { logUsage } from '../../logUsage';
 import * as sto from './symbol_table_offsets';
 
-export default function ResultTableOptimize(onClick) {
-//  console.log('ResultTableOptimize - Mounting...');
+export default function ResultTableOptimize({onClick}) {
+//  console.log('ResultTableOptimize - Mounting...','onClick=',onClick);
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const dispatch = useDispatch();
 
@@ -15,7 +15,7 @@ export default function ResultTableOptimize(onClick) {
 //    console.log('In ResultTableOptimize.onOptimizeSeekMAXFORCE','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX FORCE button' });
     dispatch(saveAutoSave());
-    dispatch(seek(('FORCE', MAX)));
+    dispatch(seek('FORCE', MAX));
     onClick(event);
   }
 
@@ -23,7 +23,7 @@ export default function ResultTableOptimize(onClick) {
 //    console.log('In ResultTableOptimize.onOptimizeSeekMINRADIUS','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN RADIUS button' });
     dispatch(saveAutoSave());
-    dispatch(seek(('RADIUS', MIN)));
+    dispatch(seek('RADIUS', MIN));
     onClick(event);
   }
 
@@ -31,7 +31,7 @@ export default function ResultTableOptimize(onClick) {
 //    console.log('In ResultTableOptimize.onOptimizeSeekMINPRESSURE','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN PRESSURE button' });
     dispatch(saveAutoSave());
-    dispatch(seek(('PRESSURE', MIN)));
+    dispatch(seek('PRESSURE', MIN));
     onClick(event);
   }
 
@@ -39,7 +39,7 @@ export default function ResultTableOptimize(onClick) {
 //    console.log('In ResultTableOptimize.onOptimizeSeekMINSTRESS','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN STRESS button' });
     dispatch(saveAutoSave());
-    dispatch(seek(('STRESS', MIN)));
+    dispatch(seek('STRESS', MIN));
     onClick(event);
   }
 

@@ -4,7 +4,7 @@ import { changeOutputSymbolValues } from '../modelSlice';
 export function invokeInit(store) {
 //    console.log('In invokeInit store=',store);
 
-//    console.log('<li>','Start invokeInit','</li><ul>');
+//    console.log('Start invokeInit');
 
     var element;
 
