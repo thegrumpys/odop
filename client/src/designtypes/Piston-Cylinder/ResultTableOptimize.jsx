@@ -9,6 +9,7 @@ import * as sto from './symbol_table_offsets';
 export default function ResultTableOptimize(onClick) {
 //  console.log('ResultTableOptimize - Mounting...');
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const dispatch = useDispatch();
 
   const onOptimizeSeekMAXFORCE = (event) => {
 //    console.log('In ResultTableOptimize.onOptimizeSeekMAXFORCE','event=',event);
