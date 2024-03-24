@@ -7,11 +7,11 @@ import { logUsage } from '../../logUsage';
 import * as sto from './symbol_table_offsets';
 
 function ResultTableOptimize(onClick) {
-  console.log('ResultTableOptimize - Mounting...');
+//  console.log('ResultTableOptimize - Mounting...');
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
 
   const onOptimizeSeekMAXFORCE = (event) => {
-    console.log('In ResultTableOptimize.onOptimizeSeekMAXFORCE','event=',event);
+//    console.log('In ResultTableOptimize.onOptimizeSeekMAXFORCE','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX FORCE button' });
     dispatch(saveAutoSave());
     dispatch(seek(('FORCE', MAX)));
@@ -19,7 +19,7 @@ function ResultTableOptimize(onClick) {
   }
 
   const onOptimizeSeekMINRADIUS = (event) => {
-    console.log('In ResultTableOptimize.onOptimizeSeekMINRADIUS','event=',event);
+//    console.log('In ResultTableOptimize.onOptimizeSeekMINRADIUS','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN RADIUS button' });
     dispatch(saveAutoSave());
     dispatch(seek(('RADIUS', MIN)));
@@ -27,7 +27,7 @@ function ResultTableOptimize(onClick) {
   }
 
   const onOptimizeSeekMINPRESSURE = (event) => {
-    console.log('In ResultTableOptimize.onOptimizeSeekMINPRESSURE','event=',event);
+//    console.log('In ResultTableOptimize.onOptimizeSeekMINPRESSURE','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN PRESSURE button' });
     dispatch(saveAutoSave());
     dispatch(seek(('PRESSURE', MIN)));
@@ -35,7 +35,7 @@ function ResultTableOptimize(onClick) {
   }
 
   const onOptimizeSeekMINSTRESS = (event) => {
-    console.log('In ResultTableOptimize.onOptimizeSeekMINSTRESS','event=',event);
+//    console.log('In ResultTableOptimize.onOptimizeSeekMINSTRESS','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN STRESS button' });
     dispatch(saveAutoSave());
     dispatch(seek(('STRESS', MIN)));
