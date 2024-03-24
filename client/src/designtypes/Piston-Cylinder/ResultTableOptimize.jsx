@@ -6,7 +6,7 @@ import { seek, saveAutoSave } from '../../store/modelSlice';
 import { logUsage } from '../../logUsage';
 import * as sto from './symbol_table_offsets';
 
-function ResultTableOptimize(onClick) {
+export default function ResultTableOptimize(onClick) {
 //  console.log('ResultTableOptimize - Mounting...');
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
 
