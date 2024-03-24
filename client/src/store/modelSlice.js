@@ -262,6 +262,8 @@ export const modelSlice = createSlice({
             let value = action.payload.values[i++];
             if (value !== undefined) {
               element.value = value;
+            } else {
+              console.error('changeInputSymbolValues: Action payload value is undefined','i=',i-1,'name=',element.name);
             }
           }
         });
@@ -272,34 +274,28 @@ export const modelSlice = createSlice({
     saveInputSymbolValues: {
       reducer: (state, action) => {
 //        console.log('reducer saveInputSymbolValues','state=',current(state),',action=',action);
-        var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
-        if (index >= 0) {
-          var element = state.model.symbol_table[index];
+        state.model.symbol_table.forEach((element) => {
           if (element.type === "equationset" && element.input) {
             element.oldvalue = element.value;
           }
-        } else {
-          console.error('saveInputSymbolValues: Failed to find name in symbol_table.','name=',action.payload.name);
-        }
+        });
       }
     },
 
     restoreInputSymbolValues: {
       reducer: (state, action) => {
 //        console.log('reducer restoreInputSymbolValues','state=',current(state),',action=',action);
-        var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
-        if (index >= 0) {
-          var element = state.model.symbol_table[index];
+        state.model.symbol_table.forEach((element) => {
           if (element.type === "equationset" && element.input) {
             if (element.oldvalue !== undefined) {
               var value = element.oldvalue; // Get the value as local
               delete element.oldvalue; // Delete the value
               element.value = value; // Assign the local
+            } else {
+              console.error('restoreInputSymbolValues: Element oldvalue is undefined','name=',element.name);
             }
           }
-        } else {
-          console.error('restoreInputSymbolValues: Failed to find name in symbol_table.','name=',action.payload.name);
-        }
+        });
       },
       prepare: (name) => { return { payload: { name } } }
     },
@@ -426,7 +422,8 @@ export const modelSlice = createSlice({
       reducer: (state, action) => {
 //        console.log('reducer seek','state=',current(state),',action=',action);
         return; // No-op
-      }
+      },
+      prepare: (name, minmax) => { return { payload: { name, minmax } } }
     },
 
     saveAutoSave: {

@@ -7,30 +7,25 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
 export default function NameValueUnitsRowCalcInput({ element, index, onChangeValid, onChangeInvalid, onChange, onSelect }) {
-// console.log("NameValueUnitsRowCalcInput - Mounting...",'element=',element,'index=',index);
-  const type = useSelector((state) => state.modelSlice.model.system_controls);
+//  console.log("NameValueUnitsRowCalcInput - Mounting...",'element=',element,'index=',index);
+  const type = useSelector((state) => state.modelSlice.model.type);
   const show_units = useSelector((state) => state.modelSlice.model.system_controls.show_units);
-  const [table, setTable] = useState(null);
+  const [table, setTable] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
-//   console.log("SymbolValue - Mounted");
+//    console.log("SymbolValue - Mounted");
     if (element.format === 'table') {
+//      console.log('NameValueUnitsRowCalcInput useEffect file= ../designtypes/'+element.table+'.json');
       var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
+//      console.log('NameValueUnitsRowCalcInput','tableContents=',tableContents);
       setTable(tableContents);
     }
     return () => { };
   }, [element, type]);
 
-  if (element.format === 'table') {
-//   console.log('NameValueUnitsRowCalcInput file= ../designtypes/'+element.table+'.json');
-    var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
-//   console.log('NameValueUnitsRowCalcInput tableContents=',tableContents);
-    setTable(tableContents);
-  }
-
   const onChangeValidLocal = (event) => {
-//   console.log('NameValueUnitsRowCalcInput.onChangeValid', 'event.target.value=', event.target.value);
+//    console.log('NameValueUnitsRowCalcInput.onChangeValid', 'event.target.value=', event.target.value);
     var value = parseFloat(event.target.value);
     dispatch(changeSymbolValue(element.name, value)); // Update the model
     logValue(element.name, event.target.value);
@@ -38,19 +33,19 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
   }
 
   const onChangeInvalidLocal = (event) => {
-//   console.log("In NameValueUnitsRowCalcInput.onChangeInvalid','event.target.value=", event.target.value);
+//    console.log("In NameValueUnitsRowCalcInput.onChangeInvalid','event.target.value=", event.target.value);
     if (typeof onChangeInvalid === "function") onChangeInvalid(event);
   }
 
   const onChangeLocal = (event) => {
-//   console.log('NameValueUnitsRowCalcInput.onChange', 'event.target.value=', event.target.value);
+//    console.log('NameValueUnitsRowCalcInput.onChange', 'event.target.value=', event.target.value);
     dispatch(changeSymbolValue(element.name, event.target.value)); // Update the model
     logValue(element.name, event.target.value);
     if (typeof onChange === "function") onChange(event);
   }
 
   const onSelectLocal = (event) => {
-//   console.log('NameValueUnitsRowCalcInput.onSelect', 'event.target.value=', event.target.value);
+//    console.log('NameValueUnitsRowCalcInput.onSelect', 'event.target.value=', event.target.value);
     var selectedIndex = parseFloat(event.target.value);
     dispatch(changeSymbolValue(element.name, selectedIndex));
     logValue(element.name, selectedIndex, 'TableIndex');
@@ -60,7 +55,7 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
   var results = getAlertsByName(element.name);
   var className = results.className;
   var icon_alerts = results.alerts;
-// console.log('name=',element.name,'table=',table);
+//  console.log('name=',element.name,'table=',table);
   // =======================================
   // Table Row
   // =======================================

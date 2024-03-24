@@ -1,91 +1,70 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Table, Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek, saveAutoSave } from '../../store/modelSlice';
 import { logUsage } from '../../logUsage';
 import * as sto from './symbol_table_offsets';
 
-export class ResultTableOptimize extends Component {
+function ResultTableOptimize(onClick) {
+  console.log('ResultTableOptimize - Mounting...');
+  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
 
-    constructor(props) {
-//        console.log('In ResultTableOptimize.constructor props=',props);
-        super(props);
-        this.onOptimizeSeekMAXFORCE = this.onOptimizeSeekMAXFORCE.bind(this);
-        this.onOptimizeSeekMINRADIUS = this.onOptimizeSeekMINRADIUS.bind(this);
-        this.onOptimizeSeekMINPRESSURE = this.onOptimizeSeekMINPRESSURE.bind(this);
-        this.onOptimizeSeekMINSTRESS = this.onOptimizeSeekMINSTRESS.bind(this);
-    }
+  const onOptimizeSeekMAXFORCE = (event) => {
+    console.log('In ResultTableOptimize.onOptimizeSeekMAXFORCE','event=',event);
+    logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX FORCE button' });
+    dispatch(saveAutoSave());
+    dispatch(seek(('FORCE', MAX)));
+    onClick(event);
+  }
 
-    onOptimizeSeekMAXFORCE(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMAXFORCE','event=',event);
-        logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX FORCE button' });
-        this.props.saveAutoSave();
-        this.props.seek('FORCE', MAX);
-        this.props.onClick(event);
-    }
+  const onOptimizeSeekMINRADIUS = (event) => {
+    console.log('In ResultTableOptimize.onOptimizeSeekMINRADIUS','event=',event);
+    logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN RADIUS button' });
+    dispatch(saveAutoSave());
+    dispatch(seek(('RADIUS', MIN)));
+    onClick(event);
+  }
 
-    onOptimizeSeekMINRADIUS(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINRADIUS','event=',event);
-        logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN RADIUS button' });
-        this.props.saveAutoSave();
-        this.props.seek('RADIUS', MIN);
-        this.props.onClick(event);
-    }
+  const onOptimizeSeekMINPRESSURE = (event) => {
+    console.log('In ResultTableOptimize.onOptimizeSeekMINPRESSURE','event=',event);
+    logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN PRESSURE button' });
+    dispatch(saveAutoSave());
+    dispatch(seek(('PRESSURE', MIN)));
+    onClick(event);
+  }
 
-    onOptimizeSeekMINPRESSURE(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINPRESSURE','event=',event);
-        logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN PRESSURE button' });
-        this.props.saveAutoSave();
-        this.props.seek('PRESSURE', MIN);
-        this.props.onClick(event);
-    }
+  const onOptimizeSeekMINSTRESS = (event) => {
+    console.log('In ResultTableOptimize.onOptimizeSeekMINSTRESS','event=',event);
+    logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN STRESS button' });
+    dispatch(saveAutoSave());
+    dispatch(seek(('STRESS', MIN)));
+    onClick(event);
+  }
 
-    onOptimizeSeekMINSTRESS(event) {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINSTRESS','event=',event);
-        logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN STRESS button' });
-        this.props.saveAutoSave();
-        this.props.seek('STRESS', MIN);
-        this.props.onClick(event);
-    }
-
-    render() {
-//        console.log('In ResultTableOptimize.render');
-        return (
-            <>
-                <p>Select a pre-configured Seek optimization:</p>
-                <Table borderless="true" size="sm">
-                    <tbody>
-                        <tr>
-                            <td width="50%">
-                                <Button variant="primary" disabled={this.props.symbol_table[sto.FORCE].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMAXFORCE}>Seek MAX FORCE</Button>
-                            </td>
-                            <td width="50%">
-                                <Button variant="primary" disabled={this.props.symbol_table[sto.RADIUS].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMINRADIUS}>Seek MIN RADIUS</Button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="50%">
-                                <Button variant="primary" disabled={this.props.symbol_table[sto.PRESSURE].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMINPRESSURE}>Seek MIN PRESSURE</Button>
-                            </td>
-                            <td width="50%">
-                                <Button variant="primary" disabled={this.props.symbol_table[sto.STRESS].lmin & FIXED ? true : false} onClick={this.onOptimizeSeekMINSTRESS}>Seek MIN STRESS</Button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </Table>
-            </>
-        );
-    }
+  return (
+    <>
+      <p>Select a pre-configured Seek optimization:</p>
+      <Table borderless="true" size="sm">
+        <tbody>
+          <tr>
+            <td width="50%">
+              <Button variant="primary" disabled={symbol_table[sto.FORCE].lmin & FIXED ? true : false} onClick={onOptimizeSeekMAXFORCE}>Seek MAX FORCE</Button>
+            </td>
+            <td width="50%">
+              <Button variant="primary" disabled={symbol_table[sto.RADIUS].lmin & FIXED ? true : false} onClick={onOptimizeSeekMINRADIUS}>Seek MIN RADIUS</Button>
+            </td>
+          </tr>
+          <tr>
+            <td width="50%">
+              <Button variant="primary" disabled={symbol_table[sto.PRESSURE].lmin & FIXED ? true : false} onClick={onOptimizeSeekMINPRESSURE}>Seek MIN PRESSURE</Button>
+            </td>
+            <td width="50%">
+              <Button variant="primary" disabled={symbol_table[sto.STRESS].lmin & FIXED ? true : false} onClick={onOptimizeSeekMINSTRESS}>Seek MIN STRESS</Button>
+            </td>
+          </tr>
+        </tbody>
+      </Table>
+    </>
+  );
 }
-
-const mapStateToProps = state => ({
-    symbol_table: state.model.symbol_table,
-});
-
-const mapDispatchToProps = {
-    seek: seek,
-    saveAutoSave: saveAutoSave
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ResultTableOptimize);

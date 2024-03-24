@@ -179,6 +179,7 @@ export default function ResultTable() {
   }
 
   var ResultTableOptimize = require('../designtypes/' + type + '/ResultTableOptimize.jsx'); // Dynamically load ResultTableOptimize
+//  console.log('ResultTable','ResultTableOptimize=',ResultTableOptimize);
 
 //      <AlertsAccordion />
 
