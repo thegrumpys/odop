@@ -20,6 +20,7 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 import { logUsage } from '../logUsage';
 import { getAlertsByName } from './Alerts';
 import { load, search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../store/modelSlice';
+import { enableSpinner, disableSpinner }  from '../store/spinnerSlice';
 import { displayMessage } from '../components/Message';
 import FeasibilityIndicator from './FeasibilityIndicator';
 import store from '../store/store';
@@ -114,7 +115,9 @@ export default function SymbolValue({ className, element, index }) {
 //       console.log('In SymbolValue.doSearch');
     var old_objective_value = objective_value;
     dispatch(saveAutoSave());
+    dispatch(enableSpinner);
     dispatch(search());
+    dispatch(disableSpinner);
     var design = store.getState().modelSlice;
     var new_objective_value = design.model.result.objective_value;
     logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' Element ' + element.name + ' ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });

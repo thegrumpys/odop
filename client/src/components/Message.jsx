@@ -18,21 +18,21 @@ const Message = () => {
   const help_url = useSelector((state) => state.messageSlice.help_url);
   const dispatch = useDispatch();
 
-//  console.log("MESSAGEMODAL - Mounting...",'show=',show,'header=',header,'messages=',messages,'help_url=',help_url);
+//  console.log("MESSAGE - Mounting...",'show=',show,'header=',header,'messages=',messages,'help_url=',help_url);
 
   useEffect(() => {
-//    console.log("MESSAGEMODAL - Mounted, show changed", show);
-//    return () => console.log("MESSAGEMODAL - Unmounting...");
+//    console.log("MESSAGE - Mounted, show changed", show);
+//    return () => console.log("MESSAGE - Unmounting...");
     return () => {};
   }, [show]);
 
   const toggle = () => {
-//    console.log('MESSAGEMODAL,onContextHelp');
+//    console.log('MESSAGE,onContextHelp');
     dispatch(disableMessage());
   }
 
   const onContextHelp = () => {
-//    console.log('MESSAGEMODAL.onContextHelp');
+//    console.log('MESSAGE.onContextHelp');
 //    logUsage('event', 'Message', { event_label: 'context Help button: ' + this.state.help_url });
     dispatch(disableMessage());
     window.open(help_url, '_blank');

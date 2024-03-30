@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown, Modal, Alert, Button } from 'react-bootstrap';
 import { CONSTRAINED, FIXED } from '../../store/actionTypes';
 import { search, saveAutoSave } from '../../store/modelSlice';
+import { enableSpinner, disableSpinner }  from '../../store/spinnerSlice';
 import { logUsage } from '../../logUsage';
 import { displayMessage } from '../../components/Message';
 import store from '../../store/store';
@@ -65,7 +66,9 @@ export default function ActionSearch() {
 //    console.log('ActionSearch.doSearch');
     var old_objective_value = objective_value;
     dispatch(saveAutoSave());
+    dispatch(enableSpinner);
     dispatch(search());
+    dispatch(disableSpinner);
     var design = store.getState().modelSlice;
     var new_objective_value = design.model.result.objective_value;
     logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });

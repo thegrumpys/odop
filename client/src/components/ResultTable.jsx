@@ -4,6 +4,7 @@ import { Container, Row, Col, Table, OverlayTrigger, Tooltip, Modal, InputGroup,
 import { CONSTRAINED, FIXED, MIN, MAX } from '../store/actionTypes';
 import FeasibilityIndicator from './FeasibilityIndicator';
 import { search, seek, saveAutoSave } from '../store/modelSlice';
+import { enableSpinner, disableSpinner }  from '../store/spinnerSlice';
 import { logUsage } from '../logUsage';
 import { displayMessage } from '../components/Message';
 import AlertsAccordion from "./AlertsAccordion"
@@ -73,7 +74,9 @@ export default function ResultTable() {
 //    console.log('In ResultTable.doSearch');
     var old_objective_value = objective_value;
     dispatch(saveAutoSave());
+    dispatch(enableSpinner());
     dispatch(search());
+    dispatch(disableSpinner());
     var new_objective_value = objective_value;
     logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' Button ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });
   }

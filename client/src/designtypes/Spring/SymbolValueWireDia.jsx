@@ -4,6 +4,7 @@ import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table, Alert 
 import { connect } from 'react-redux';
 import { MIN, MAX, FIXED, CONSTRAINED } from '../../store/actionTypes';
 import { fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../../store/modelSlice';
+import { enableSpinner, disableSpinner }  from '../../store/spinnerSlice';
 import * as mo from './mat_offsets';
 import NameValueUnitsHeaderIndependentVariable from '../../components/NameValueUnitsHeaderIndependentVariable';
 import NameValueUnitsHeaderDependentVariable from '../../components/NameValueUnitsHeaderDependentVariable';
@@ -201,7 +202,9 @@ class SymbolValueWireDia extends Component {
 //        console.log('In SymbolValueWireDia.doSearch');
         var old_objective_value = this.props.objective_value;
         this.props.saveAutoSave();
+        dispatch(enableSpinner);
         this.props.search();
+        dispatch(disableSpinner);
         const { store } = this.context;
         var design = store.getState().modelSlice;
         var new_objective_value = design.model.result.objective_value;
