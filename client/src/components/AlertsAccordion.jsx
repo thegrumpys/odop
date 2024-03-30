@@ -107,19 +107,19 @@ export default function AlertsAccordion() {
                 </ContextAwareToggle>
                 <ContextAwareToggle variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={ERR}
                   onClick={() => dispatch(setLevel(ERR))} active={level === ERR || level === WARN || level === NOTICE || level === INFO}>
-                  {ERR}&nbsp;{err_alerts.length > 0 ? <Badge variant="danger">{err_alerts.length}</Badge> : ''}
+                  {ERR}&nbsp;{err_alerts.length > 0 ? <Badge bg="danger">{err_alerts.length}</Badge> : ''}
                 </ContextAwareToggle>
                 <ContextAwareToggle variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={WARN}
                   onClick={() => dispatch(setLevel(WARN))} active={level === WARN || level === NOTICE || level === INFO}>
-                  {WARN}&nbsp;{warn_alerts.length > 0 ? <Badge variant="danger">{warn_alerts.length}</Badge> : ''}
+                  {WARN}&nbsp;{warn_alerts.length > 0 ? <Badge bg="danger">{warn_alerts.length}</Badge> : ''}
                 </ContextAwareToggle>
                 <ContextAwareToggle variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={NOTICE}
                   onClick={() => dispatch(setLevel(NOTICE))} active={level === NOTICE || level === INFO}>
-                  {NOTICE}&nbsp;{notice_alerts.length > 0 ? <Badge variant="danger">{notice_alerts.length}</Badge> : ''}
+                  {NOTICE}&nbsp;{notice_alerts.length > 0 ? <Badge bg="danger">{notice_alerts.length}</Badge> : ''}
                 </ContextAwareToggle>
                 <ContextAwareToggle variant="outline-primary" size="sm" disabled={all_alerts.length === 0} eventKey={INFO}
                   onClick={() => dispatch(setLevel(INFO))} active={level === INFO}>
-                  {INFO}&nbsp;{info_alerts.length > 0 ? <Badge variant="danger">{info_alerts.length}</Badge> : ''}
+                  {INFO}&nbsp;{info_alerts.length > 0 ? <Badge bg="danger">{info_alerts.length}</Badge> : ''}
                 </ContextAwareToggle>
               </ButtonGroup>
               <OverlayTrigger placement="bottom" overlay={
