@@ -50,6 +50,7 @@ export const modelSlice = createSlice({
           ...module.initialState,
           system_controls: initialSystemControls
         };
+        state.model.result.termination_condition = '';
       },
       prepare: (type, units = 'US') => { return { payload: { type, units } } }
     },
@@ -390,8 +391,8 @@ export const modelSlice = createSlice({
 
     changeSystemControlsValue: {
       reducer: (state, action) => {
-//        console.log('reducer changeSystemControlsValue','state=',current(state),',action=',action);
-        state.model.system_controls = action.payload.system_controls;
+        console.log('reducer changeSystemControlsValue','state=',current(state),',action=',action);
+        state.model.system_controls = {...state.model.system_controls,...action.payload.system_controls};
       },
       prepare: (system_controls) => { return { payload: { system_controls } } }
     },
