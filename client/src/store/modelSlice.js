@@ -24,12 +24,14 @@ export const modelSlice = createSlice({
     startup: {
       reducer: (state, action) => {
 //        console.log('reducer startup','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
       }
     },
 
     load: {
       reducer: (state, action) => {
 //        console.log('reducer load','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         state.model = action.payload.model;
       },
       prepare: (model) => { return { payload: { model } } }
@@ -38,6 +40,7 @@ export const modelSlice = createSlice({
     loadInitialState: {
       reducer: (state, action) => {
 //        console.log('reducer loadInitialState','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         var module;
         if (action.payload.units === 'US') {
           module = require('../designtypes/'+action.payload.type+'/initialState.js'); // Dynamically load initialState
@@ -50,7 +53,6 @@ export const modelSlice = createSlice({
           ...module.initialState,
           system_controls: initialSystemControls
         };
-        state.model.result.termination_condition = '';
       },
       prepare: (type, units = 'US') => { return { payload: { type, units } } }
     },
@@ -58,6 +60,7 @@ export const modelSlice = createSlice({
     changeName: {
       reducer: (state, action) => {
 //        console.log('reducer changeName','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         state.name = action.payload.name;
       },
       prepare: (name) => { return { payload: { name } } }
@@ -66,6 +69,7 @@ export const modelSlice = createSlice({
     changeUser: {
       reducer: (state, action) => {
 //        console.log('reducer changeUser','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         state.user = action.payload.user;
       },
       prepare: (user) => { return { payload: { user } } }
@@ -74,6 +78,7 @@ export const modelSlice = createSlice({
     changeView: {
       reducer: (state, action) => {
 //        console.log('reducer changeView','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         state.view = action.payload.view;
       },
       prepare: (view) => { return { payload: { view } } }
@@ -82,6 +87,7 @@ export const modelSlice = createSlice({
     changeSymbolValue: {
       reducer: (state, action) => {
 //        console.log('reducer changeSymbolValue','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index >= 0) {
           state.model.symbol_table[index].value = action.payload.value;
@@ -95,6 +101,7 @@ export const modelSlice = createSlice({
     changeIndexValue: {
       reducer: (state, action) => {
 //        console.log('reducer changeIndexValue','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         if (action.payload.index >= 0 && action.payload.index < state.model.symbol_table.length) {
           state.model.symbol_table[action.payload.index].value = action.payload.value;
         } else {
@@ -107,6 +114,7 @@ export const modelSlice = createSlice({
     fixSymbolValue: {
       reducer: (state, action) => {
 //        console.log('reducer fixSymbolValue','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index < 0) {
           console.error('changeSymbolValue: Failed to find name in symbol_table.','name=',action.payload.name);
@@ -119,6 +127,7 @@ export const modelSlice = createSlice({
     freeSymbolValue: {
       reducer: (state, action) => {
 //        console.log('reducer freeSymbolValue','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index < 0) {
           console.error('changeSymbolValue: Failed to find name in symbol_table.','name=',action.payload.name);
@@ -131,6 +140,7 @@ export const modelSlice = createSlice({
     changeSymbolViolation: {
       reducer: (state, action) => {
 //        console.log('reducer changeSymbolViolation','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index >= 0) {
           var element = state.model.symbol_table[index];
@@ -149,6 +159,7 @@ export const modelSlice = createSlice({
     changeSymbolConstraint: {
       reducer: (state, action) => {
 //        console.log('reducer changeSymbolConstraint','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index >= 0) {
           var element = state.model.symbol_table[index];
@@ -173,6 +184,7 @@ export const modelSlice = createSlice({
     changeSymbolConstraints: {
       reducer: (state, action) => {
 //        console.log('reducer changeSymbolConstraints','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         let i=0;
         state.model.symbol_table.forEach((element) => {
           if (element.type === "equationset") {
@@ -195,6 +207,7 @@ export const modelSlice = createSlice({
     setSymbolFlag: {
       reducer: (state, action) => {
 //        console.log('reducer setSymbolFlag','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index >= 0) {
           var element = state.model.symbol_table[index];
@@ -213,6 +226,7 @@ export const modelSlice = createSlice({
     resetSymbolFlag: {
       reducer: (state, action) => {
 //        console.log('reducer resetSymbolFlag','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index >= 0) {
           var element = state.model.symbol_table[index];
@@ -231,6 +245,7 @@ export const modelSlice = createSlice({
     changeSymbolInput: {
       reducer: (state, action) => {
 //        console.log('reducer changeSymbolInput','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index >= 0) {
           state.model.symbol_table[index].input = action.payload.value;
@@ -244,6 +259,7 @@ export const modelSlice = createSlice({
     changeSymbolHidden: {
       reducer: (state, action) => {
 //        console.log('reducer changeSymbolHidden','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index >= 0) {
           state.model.symbol_table[index].hidden = action.payload.value;
@@ -257,6 +273,7 @@ export const modelSlice = createSlice({
     changeInputSymbolValues: {
       reducer: (state, action) => {
 //        console.log('reducer changeInputSymbolValues','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         let i=0;
         state.model.symbol_table.forEach((element) => {
           if (element.type === "equationset" && element.input) {
@@ -275,6 +292,7 @@ export const modelSlice = createSlice({
     saveInputSymbolValues: {
       reducer: (state, action) => {
 //        console.log('reducer saveInputSymbolValues','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         state.model.symbol_table.forEach((element) => {
           if (element.type === "equationset" && element.input) {
             element.oldvalue = element.value;
@@ -286,6 +304,7 @@ export const modelSlice = createSlice({
     restoreInputSymbolValues: {
       reducer: (state, action) => {
 //        console.log('reducer restoreInputSymbolValues','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         state.model.symbol_table.forEach((element) => {
           if (element.type === "equationset" && element.input) {
             if (element.oldvalue !== undefined) {
@@ -304,6 +323,7 @@ export const modelSlice = createSlice({
     changeOutputSymbolValues: {
       reducer: (state, action) => {
 //        console.log('reducer changeOutputSymbolValues','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         let i=0;
         state.model.symbol_table.forEach((element) => {
           if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
@@ -320,6 +340,7 @@ export const modelSlice = createSlice({
     saveOutputSymbolConstraints: {
       reducer: (state, action) => {
 //        console.log('reducer saveOutputSymbolConstraints','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index >= 0) {
           var element = state.model.symbol_table[index];
@@ -339,6 +360,7 @@ export const modelSlice = createSlice({
     restoreOutputSymbolConstraints: {
       reducer: (state, action) => {
 //        console.log('reducer restoreOutputSymbolConstraints','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index >= 0) {
           var element = state.model.symbol_table[index];
@@ -368,6 +390,7 @@ export const modelSlice = createSlice({
     changeResultObjectiveValue: {
       reducer: (state, action) => {
 //        console.log('reducer changeResultObjectiveValue','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         state.model.result.objective_value = action.payload.objective_value;
       },
       prepare: (objective_value) => { return { payload: { objective_value } } }
@@ -376,6 +399,7 @@ export const modelSlice = createSlice({
     changeResultTerminationCondition: {
       reducer: (state, action) => {
 //        console.log('reducer changeResultTerminationCondition','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         state.model.result.termination_condition = action.payload.termination_condition;
       },
       prepare: (termination_condition) => { return { payload: { termination_condition } } }
@@ -384,6 +408,7 @@ export const modelSlice = createSlice({
     changeResultSearchCompleted: {
       reducer: (state, action) => {
 //        console.log('reducer changeResultSearchCompleted','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         state.model.result.search_completed = action.payload.search_completed;
       },
       prepare: (search_completed) => { return { payload: { search_completed } } }
@@ -392,6 +417,7 @@ export const modelSlice = createSlice({
     changeSystemControlsValue: {
       reducer: (state, action) => {
         console.log('reducer changeSystemControlsValue','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         state.model.system_controls = {...state.model.system_controls,...action.payload.system_controls};
       },
       prepare: (system_controls) => { return { payload: { system_controls } } }
@@ -400,6 +426,7 @@ export const modelSlice = createSlice({
     changeLabelsValue: {
       reducer: (state, action) => {
 //        console.log('reducer changeLabelsValue','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         state.model.labels = state.model.labels.map((element) => {
           var index = action.payload.labels.findIndex(label => element.name === label.name);
           if (index >= 0) {
@@ -414,7 +441,8 @@ export const modelSlice = createSlice({
 
     search: {
       reducer: (state, action) => {
-//        console.log('reducer search','state=',current(state),',action=',action);
+        console.log('reducer search','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         return;
       }
     },
@@ -422,6 +450,7 @@ export const modelSlice = createSlice({
     seek: {
       reducer: (state, action) => {
 //        console.log('reducer seek','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         return;
       },
       prepare: (name, minmax) => { return { payload: { name, minmax } } }
@@ -430,6 +459,7 @@ export const modelSlice = createSlice({
     saveAutoSave: {
       reducer: (state, action) => {
 //        console.log('reducer saveAutoSave','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         if (typeof(Storage) !== "undefined") {
           localStorage.setItem(action.payload.name, JSON.stringify(state), null, 2); // create or replace auto save file with current state contents
         }
@@ -440,6 +470,7 @@ export const modelSlice = createSlice({
     restoreAutoSave: {
       reducer: (state, action) => {
 //        console.log('reducer restoreAutoSave','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         if (typeof(Storage) !== "undefined") {
             var autosave = JSON.parse(localStorage.getItem(action.payload.name)); // get auto save file contents
             // Migrate autosave file from old (no model property) to new (with model property)
@@ -461,6 +492,7 @@ export const modelSlice = createSlice({
     deleteAutoSave: {
       reducer: (state, action) => {
 //        console.log('reducer deleteAutoSave','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         localStorage.removeItem(action.payload.name); // remove auto save file
       },
       prepare: (name) => { return { payload: { name } } }
@@ -469,6 +501,7 @@ export const modelSlice = createSlice({
     logUsage: {
       reducer: (state, action) => {
 //        console.log('reducer logUsage','state=',current(state),',action=',action);
+        state.model.result.termination_condition = '';
         logUsage(action.payload.tag, action.payload.action, action.payload.note);
       },
       prepare: (tag, action, note) => { return { payload: { tag, action, note } } }
