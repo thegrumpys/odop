@@ -9,17 +9,27 @@ export default function HelpDemo() {
 
   const [show, setShow] = useState(false);
   const model_type = useSelector((state) => state.modelSlice.model.type);
+  const [executeNames, setExecuteNames] = useState([]);
+  const [executeName, setExecuteName] = useState('');
 
-  var { getDemoNames } = require('../../designtypes/' + model_type + '/execute.js'); // Dynamically load getDemoNames
-  var localExecuteNames = getDemoNames();
-//  console.log('HelpDemo.updateExecuteNames localExecuteNames=', localExecuteNames);
-  var localExecuteName;
-  if (localExecuteNames.length > 0) {
-    localExecuteName = localExecuteNames[0]; // Default to first name
+  useEffect(() => {
+//    console.log("HelpDemo - Mounted",'model_type=',model_type);
+    updateExecuteNames();
+    return () => { };
+  }, [model_type]);
+
+  const updateExecuteNames = () => {
+    var { getDemoNames } = require('../../designtypes/' + model_type + '/execute.js'); // Dynamically load getDemoNames
+    var localExecuteNames = getDemoNames();
+//    console.log('HelpDemo.updateExecuteNames localExecuteNames=', localExecuteNames);
+    var localExecuteName;
+    if (localExecuteNames.length > 0) {
+      localExecuteName = localExecuteNames[0]; // Default to first name
+    }
+//    console.log('HelpDemo.updateExecuteNames localExecuteName=', localExecuteName);
+    setExecuteNames(localExecuteNames);
+    setExecuteName(localExecuteName);
   }
-
-  const [executeNames, setExecuteNames] = useState(localExecuteNames);
-  const [executeName, setExecuteName] = useState(localExecuteName);
 
   const toggle = () => {
 //    console.log('HelpDemo.toggle');

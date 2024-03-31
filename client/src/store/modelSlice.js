@@ -416,7 +416,7 @@ export const modelSlice = createSlice({
 
     changeSystemControlsValue: {
       reducer: (state, action) => {
-        console.log('reducer changeSystemControlsValue','state=',current(state),',action=',action);
+//        console.log('reducer changeSystemControlsValue','state=',current(state),',action=',action);
         state.model.result.termination_condition = '';
         state.model.system_controls = {...state.model.system_controls,...action.payload.system_controls};
       },
@@ -441,7 +441,7 @@ export const modelSlice = createSlice({
 
     search: {
       reducer: (state, action) => {
-        console.log('reducer search','state=',current(state),',action=',action);
+//        console.log('reducer search','state=',current(state),',action=',action);
         state.model.result.termination_condition = '';
         return;
       }
