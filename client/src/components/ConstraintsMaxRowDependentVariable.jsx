@@ -58,14 +58,14 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
 //    console.log("In ConstraintsMaxRowDependentVariable.onClick", "event.target.value=", event.target.value);
     // Show modal only if there are cmaxchoices
     if (element.cmaxchoices !== undefined && element.cmaxchoices.length > 0) {
-      setVakueString(element.cmax.toString());
+      setValueString(element.cmax.toString());
       setShow(!show);
     }
   }
 
   const onChangeValidValue = (event) => {
 //    console.log("In ConstraintsMaxRowDependentVariable.onChangeValidValue", "event.target.value=", event.target.value);
-    setVakueString(event.target.value);
+    setValueString(event.target.value);
     setIsInvalidValue(false);
     if (typeof onChangeValid === "function") onChangeValid(event);
   }
