@@ -9,18 +9,27 @@ export default function ActionExecute() {
 
   const [show, setShow] = useState(false);
   const model_type = useSelector((state) => state.modelSlice.model.type);
-//  console.log('ActionExecute','show=', show,'model_type=', model_type);
+  const [executeNames, setExecuteNames] = useState([]);
+  const [executeName, setExecuteName] = useState('');
 
-  var { getExecuteNames } = require('../../designtypes/' + model_type + '/execute.js'); // Dynamically load getExecuteNames
-  var localExecuteNames = getExecuteNames();
-//  console.log('ActionExecute','localExecuteNames=', localExecuteNames);
-  var localExecuteName;
-  if (localExecuteNames.length > 0) {
-    localExecuteName = localExecuteNames[0]; // Default to first name
+  useEffect(() => {
+//    console.log("ActionExecute - Mounted",'model_type=',model_type);
+    updateExecuteNames();
+    return () => { };
+  }, [model_type]);
+
+  const updateExecuteNames = () => {
+    var { getExecuteNames } = require('../../designtypes/' + model_type + '/execute.js'); // Dynamically load getExecuteNames
+    var localExecuteNames = getExecuteNames();
+//    console.log('ActionExecute.updateExecuteNames','localExecuteNames=', localExecuteNames);
+    var localExecuteName;
+    if (localExecuteNames.length > 0) {
+      localExecuteName = localExecuteNames[0]; // Default to first name
+    }
+//    console.log('ActionExecute.updateExecuteNames','localExecuteName=', localExecuteName);
+    setExecuteNames(localExecuteNames);
+    setExecuteName(localExecuteName);
   }
-
-  const [executeNames, setExecuteNames] = useState(localExecuteNames);
-  const [executeName, setExecuteName] = useState(localExecuteName);
 
   const toggle = () => {
 //    console.log('ActionExecute.toggle');

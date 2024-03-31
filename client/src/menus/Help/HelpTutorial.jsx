@@ -9,17 +9,27 @@ export default function HelpTutorial() {
 
   const [show, setShow] = useState(false);
   const model_type = useSelector((state) => state.modelSlice.model.type);
+  const [executeNames, setExecuteNames] = useState([]);
+  const [executeName, setExecuteName] = useState('');
 
-  var { getTutorialNames } = require('../../designtypes/' + model_type + '/execute.js'); // Dynamically load getTutorialNames
-  var localExecuteNames = getTutorialNames();
-//  console.log('HelpTutorial.updateExecuteNames localExecuteNames=', localExecuteNames);
-  var localExecuteName;
-  if (localExecuteNames.length > 0) {
-    localExecuteName = localExecuteNames[0]; // Default to first name
+  useEffect(() => {
+//    console.log("HelpDemo - Mounted",'model_type=',model_type);
+    updateExecuteNames();
+    return () => { };
+  }, [model_type]);
+
+  const updateExecuteNames = () => {
+    var { getTutorialNames } = require('../../designtypes/' + model_type + '/execute.js'); // Dynamically load getTutorialNames
+    var localExecuteNames = getTutorialNames();
+//    console.log('HelpTutorial.updateExecuteNames localExecuteNames=', localExecuteNames);
+    var localExecuteName;
+    if (localExecuteNames.length > 0) {
+      localExecuteName = localExecuteNames[0]; // Default to first name
+    }
+//    console.log('HelpTutorial.updateExecuteNames localExecuteName=', localExecuteName);
+    setExecuteNames(localExecuteNames);
+    setExecuteName(localExecuteName);
   }
-
-  const [executeNames, setExecuteNames] = useState(localExecuteNames);
-  const [executeName, setExecuteName] = useState(localExecuteName);
 
   const toggle = () => {
 //    console.log('HelpTutorial.toggle');

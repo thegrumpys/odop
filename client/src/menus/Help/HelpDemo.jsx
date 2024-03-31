@@ -45,7 +45,6 @@ export default function HelpDemo() {
 //    console.log('HelpDemo.onExecute');
     setShow(!show);
     logUsage('event', 'HelpDemo', { event_label: executeName });
-    // Do execute
 //    console.log('HelpDemo.onExecute executeName=',executeName);
     startExecute('Help : Demo : ' + executeName, executeName);
   }
