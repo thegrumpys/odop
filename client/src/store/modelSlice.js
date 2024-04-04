@@ -1,4 +1,4 @@
-import { MIN, MAX, VALID_MIN, VALID_MAX } from './actionTypes';
+import { MIN, MAX, VALID_MIN, VALID_MAX, FDCL } from './actionTypes';
 import { createSlice, current } from "@reduxjs/toolkit";
 import { initialSystemControls } from '../initialSystemControls';
 import config from '../config';
@@ -216,6 +216,23 @@ export const modelSlice = createSlice({
           } else {
             element.lmax = element.lmax | action.payload.mask;
           }
+          if (action.payload.mask & FDCL) {
+            var sink = element;
+//            console.log('setSymbolFlag: sink=',sink);
+            var source = state.model.symbol_table.find(element => element.name === action.payload.source);
+//            console.log('setSymbolFlag: source=',source);
+            if (source.propagate === undefined) source.propagate = [];
+            index = source.propagate.findIndex(i => i !== undefined && i.name === action.payload.name && i.minmax === action.payload.minmax);
+//            console.log('setSymbolFlag: index=',index);
+            if (index === -1) { // If not found in propagate array then add it
+              source.propagate.push({ name: sink.name, minmax: action.payload.minmax });
+              if (action.payload.minmax === MIN) {
+                sink.cminchoice = sink.cminchoices.indexOf(source.name);
+              } else {
+                sink.cmaxchoice = sink.cmaxchoices.indexOf(source.name);
+              }
+            }
+          }
         } else {
           console.error('setSymbolFlag: Failed to find name in symbol_table.','name=',action.payload.name);
         }
@@ -234,6 +251,33 @@ export const modelSlice = createSlice({
             element.lmin = element.lmin & (~action.payload.mask);
           } else {
             element.lmax = element.lmax & (~action.payload.mask);
+          }
+          if (action.payload.mask & FDCL) {
+            var sink = element;
+//            console.log('resetSymbolFlag: sink=',sink);
+            if (action.payload.minmax === MIN) {
+              var source = state.model.symbol_table.find(element => element.name === sink.cminchoices[sink.cminchoice]);
+            } else {
+              var source = state.model.symbol_table.find(element => element.name === sink.cmaxchoices[sink.cmaxchoice]);
+            }
+//            console.log('resetSymbolFlag: source=',source);
+            if (source !== undefined && source.propagate !== undefined) {
+              index = source.propagate.findIndex(i => i !== undefined && i.name === action.payload.name && i.minmax === action.payload.minmax);
+//              console.log('resetSymbolFlag: index=',index);
+              if (index !== -1) { // If found in propagate array then remove it
+                delete source.propagate[index]; // Delete entry at offset index
+                if (source.propagate.length === 0) {
+                  source.propagate = undefined; // De-reference the array
+                  delete source.propagate; // Delete the property
+                }
+              }
+            }
+            if (action.payload.minmax === MIN) {
+              delete sink.cminchoice;
+            } else {
+              delete sink.cmaxchoice;
+            }
+//            console.log('resetSymbolFlag: source=',source,'sink=',sink);
           }
         } else {
           console.error('resetSymbolFlag: Failed to find name in symbol_table.','name=',action.payload.name);

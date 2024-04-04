@@ -73,6 +73,7 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
 
   const onEnterButton = (event) => {
 //    console.log("In ConstraintsMinRowIndependentVariable.onEnterButton","event.target.value=", event.target.value);
+//    console.log("In ConstraintsMinRowIndependentVariable.onEnterButton","valueString=", valueString);
     setShow(!show);
     var value = parseFloat(valueString);
     dispatch(resetSymbolFlag(element.name, MIN, FDCL));
