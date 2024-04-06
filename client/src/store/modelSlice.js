@@ -265,7 +265,7 @@ export const modelSlice = createSlice({
               index = source.propagate.findIndex(i => i !== undefined && i.name === action.payload.name && i.minmax === action.payload.minmax);
 //              console.log('resetSymbolFlag: index=',index);
               if (index !== -1) { // If found in propagate array then remove it
-                delete source.propagate[index]; // Delete entry at offset index
+                source.propagate.splice(index,1); // Delete entry at offset index
                 if (source.propagate.length === 0) {
                   source.propagate = undefined; // De-reference the array
                   delete source.propagate; // Delete the property
@@ -308,7 +308,7 @@ export const modelSlice = createSlice({
         if (index >= 0) {
           state.model.symbol_table[index].hidden = action.payload.value;
         } else {
-          console.error('resetSymbolFlag: Failed to find name in symbol_table.','name=',action.payload.name);
+          console.error('changeSymbolHidden: Failed to find name in symbol_table.','name=',action.payload.name);
         }
       },
       prepare: (name, value) => { return { payload: { name, value } } }
