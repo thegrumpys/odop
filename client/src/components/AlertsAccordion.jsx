@@ -15,7 +15,7 @@ const ContextAwareAccordion = ({ children }) => {
   const level = useSelector((state) => state.alertsSlice.level);
   const dispatch = useDispatch();
   return (
-    <Accordion className="mb-3" activeKey={activeKey} onSelect={eventKey => {
+    <Accordion flush className="mb-3" activeKey={activeKey} onSelect={eventKey => {
       if (activeKey === null) { // Is it now Collapsed?
 //        console.log('ContextAwareAccordion EXPAND');
         dispatch(setActiveKey('0'));

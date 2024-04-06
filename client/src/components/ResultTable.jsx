@@ -188,7 +188,6 @@ export default function ResultTable() {
 
   return (
     <>
-    <Container className="pt-2" fluid>
     <Row>
     <Col lg="8">
       <Table className="table-light" size="sm">
@@ -283,7 +282,6 @@ export default function ResultTable() {
       </Table>
     </Col>
     </Row>
-    </Container>
       <AlertsAccordion />
       {seekShow && <Modal show={seekShow} onHide={onSeekCancelButton}>
         <Modal.Header closeButton>

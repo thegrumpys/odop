@@ -171,12 +171,8 @@ export default function MainPage() {
         <Row>
           <ExecutePanel />
         </Row>
-        <Row>
-          <ResultTable />
-        </Row>
-        <Row>
-          {viewNames[viewNames.findIndex(element => element.name === activeTab)].component}
-        </Row>
+        <ResultTable />
+        {viewNames[viewNames.findIndex(element => element.name === activeTab)].component}
       </Container>
     </>
   );
