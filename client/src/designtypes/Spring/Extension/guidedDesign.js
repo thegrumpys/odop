@@ -89,7 +89,7 @@ export const execute = {
             title: "Page 03 of 13",
             text: (
                 <>
-                    <Table bordered size="sm">
+                    <Table borderless variant="success" size="sm">
                     <tbody>
                         <tr>
                             <td width="60%" valign="top">
@@ -186,7 +186,7 @@ export const execute = {
                     For example, you should see established constraints on quantities like:
                     </p>
 
-                    <Table bordered size="sm">
+                    <Table borderless variant="success" size="sm">
                     <tbody>
                         <tr>
                             <td> &nbsp; &nbsp; &nbsp; &nbsp; </td><td>active coils</td><td>Coils_A</td><td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; </td><td> &nbsp; </td>
@@ -488,7 +488,7 @@ export const execute = {
                     ODOP:Spring comes equipped with multiple spring catalogs, including:
                     </p>
 
-                    <Table bordered size="sm">
+                    <Table borderless variant="success" size="sm">
                     <tbody>
                         <tr>
                             <td> &nbsp; </td><td>generic_compression_catalog</td><td>a generic catalog of commonly available compression springs</td>
