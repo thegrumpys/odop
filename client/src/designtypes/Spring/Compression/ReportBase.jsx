@@ -1,194 +1,195 @@
-import { Component } from 'react';
+import { useState, useEffect, createContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import * as o from './symbol_table_offsets';
 import * as mo from '../mat_offsets';
 import { getAlertsBySeverity } from '../../../components/Alerts';
+import ReportBaseContext from './ReportBaseContext';
 
-export class ReportBase extends Component {
+export default function ReportBase(props) {
+//  console.log("ReportBase - Mounting...");
+  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
 
-    constructor(props) {
-//        console.log('In ReportBase.constructor','props=',props);
-        super(props);
-        this.def_dia = this.def_dia.bind(this);
+  const def_dia = (def_len) => {
+    /*  calculates mean diameter of deflected spring.  */
+//    console.log("In ReportBase.def_dia this=",this);
+    return Math.sqrt(base.wire_len_a - def_len * def_len) / (symbol_table[o.Coils_A].value * Math.PI);
+  }
+
+  var base = {}; // empty object
+  
+  /*  Bring in material properties table  */
+  if (symbol_table[o.Material_File].value === "mat_metric.json")
+    base.m_tab = require('../mat_metric.json');
+  else
+    base.m_tab = require('../mat_us.json');
+  base.et_tab = require('./endtypes.json');
+
+  /*  Bring in life target table  */
+  base.lifetarg = require('./lifetarget.json');
+
+  base.hits = getAlertsBySeverity().length;
+  base.errmsg = "";
+  base.startpntmsg = "Alert details are available via the Alert button on the main page of Advanced and Calculator Views.";
+
+  base.len_lbl = "Wire Length";
+
+  switch (symbol_table[o.End_Type].value) {
+    case 4:        //  Closed & Ground
+      base.pitch = (symbol_table[o.L_Free].value - 2.0 * symbol_table[o.Wire_Dia].value) / symbol_table[o.Coils_A].value;
+      break;
+    case 3:        //  Closed
+      base.pitch = (symbol_table[o.L_Free].value - 3.0 * symbol_table[o.Wire_Dia].value) / symbol_table[o.Coils_A].value;
+      break;
+    case 2:        //  Open & Ground
+      base.pitch = symbol_table[o.L_Free].value / symbol_table[o.Coils_T].value;
+      break;
+    case 1:        //  Open
+      base.pitch = (symbol_table[o.L_Free].value - symbol_table[o.Wire_Dia].value) / symbol_table[o.Coils_A].value;
+      break;
+    case 5:        //  Tapered Closed & Ground
+      base.pitch = (symbol_table[o.L_Free].value - 1.5 * symbol_table[o.Wire_Dia].value) / symbol_table[o.Coils_A].value;
+      base.len_lbl = "Bar cut len.";
+      break;
+    case 6:        //  Pig-tail
+      base.pitch = (symbol_table[o.L_Free].value - 2.0 * symbol_table[o.Wire_Dia].value) / symbol_table[o.Coils_A].value;
+      break;
+    default:        //  User Specified
+      base.pitch = (symbol_table[o.L_Free].value - (symbol_table[o.Inactive_Coils].value + 1.0) * symbol_table[o.Wire_Dia].value) / symbol_table[o.Coils_A].value;
+  }
+
+  var sq1 = symbol_table[o.L_Free].value;
+  var sq2 = symbol_table[o.Coils_T].value * Math.PI * symbol_table[o.Mean_Dia].value;
+  base.wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2);
+  if (symbol_table[o.End_Type].value === 5)  /*  calculate developed length of tapered ends based on 2 ends * pi * wire diameter * 0.625 */
+    base.wire_len_t = base.wire_len_t - 3.926 * symbol_table[o.Wire_Dia].value;
+
+  base.wgt1000 = 1000.0 * symbol_table[o.Weight].value;
+
+  /*
+   * intermediate dia. calcs. assume no wire stretch
+   * note that value of base.wire_len_a is actually square of active wire length
+   */
+  sq1 = symbol_table[o.L_Free].value;
+  sq2 = symbol_table[o.Coils_A].value * Math.PI * symbol_table[o.Mean_Dia].value;
+  base.wire_len_a = sq1 * sq1 + sq2 * sq2;
+
+  base.dhat = def_dia(symbol_table[o.L_1].value);
+  base.od_1 = base.dhat + symbol_table[o.Wire_Dia].value;
+  base.id_1 = base.dhat - symbol_table[o.Wire_Dia].value;
+
+  base.dhat = def_dia(symbol_table[o.L_2].value);
+  base.od_2 = base.dhat + symbol_table[o.Wire_Dia].value;
+  base.id_2 = base.dhat - symbol_table[o.Wire_Dia].value;
+
+  base.dhat = def_dia(symbol_table[o.L_Solid].value)
+  base.od_solid = base.dhat + symbol_table[o.Wire_Dia].value;
+
+  /*
+   * Alternative deflected diameter calculation formula:
+   * From: https://www.acxesspring.com/spring-diameter-change.html
+   * From: http://springipedia.com/compression-general-design.asp
+   */
+
+  base.dhat = symbol_table[o.Tensile].value / 100.0;
+  var kc = (4.0 * symbol_table[o.Spring_Index].value - 1.0) / (4.0 * symbol_table[o.Spring_Index].value - 4.0);
+  var ks = kc + 0.615 / symbol_table[o.Spring_Index].value;
+  var s_f = ks * 8.0 * symbol_table[o.Mean_Dia].value / (Math.PI * symbol_table[o.Wire_Dia].value * symbol_table[o.Wire_Dia].value * symbol_table[o.Wire_Dia].value);
+
+  base.kw1 = ks;
+  base.kw2 = 1.0 + 0.5 / symbol_table[o.Spring_Index].value;
+  var temp = base.kw2 * s_f / ks;
+  base.kw2str1 = temp * symbol_table[o.Force_1].value;
+  base.kw2str2 = temp * symbol_table[o.Force_2].value;
+  base.kw2strs = temp * symbol_table[o.Force_Solid].value;
+
+  if (symbol_table[o.Stress_1].value !== 0.0)
+    base.fs_1 = Math.abs(symbol_table[o.Stress_Lim_Stat].value / symbol_table[o.Stress_1].value);
+  else
+    base.fs_1 = Number.POSITIVE_INFINITY;
+
+  /*  unused
+   *  temp = 0.7 * symbol_table[o.Tensile].value;  // allowable stress for preset
+   *  if (base.kw2str1 !== 0.0) kw2fs_1 = Math.abs(temp / base.kw2str1);
+   *  else kw2fs_1 = 0.0;
+   *  if (base.kw2str2 !== 0.0) kw2fs_2 = temp / base.kw2str2;
+   *  else base.kw2str2 = 0.0;
+   *  if (base.kw2strs !== 0.0) kw2fs_s = temp / base.kw2strs;
+   *  else kw2fs_s = 0.0;
+   *  unused
+   */
+
+  base.safe_load = symbol_table[o.Stress_Lim_Stat].value / s_f;
+  if (base.safe_load > symbol_table[o.Force_Solid].value)
+    base.safe_load_u = "(Solid)";
+  else
+    base.safe_load_u = symbol_table[o.Force_2].units;
+  base.safe_load = Math.min(base.safe_load, symbol_table[o.Force_Solid].value);
+  /*
+   * Angle across coil cross section
+   * base.hlx_ang=atan(0.5*base.pitch/mean_dia)*(180.0/pi);
+   */
+  if (base.pitch > 0.0)
+    base.hlx_ang = Math.atan(base.pitch / (Math.PI * symbol_table[o.Mean_Dia].value)) * (180.0 / Math.PI);
+  else
+    base.hlx_ang = 0.0;
+
+  base.cycle_life_u = symbol_table[o.Cycle_Life].units + " (est.)";
+
+  base.pcadmsg = undefined;
+  if (symbol_table[o.PC_Avail_Deflect].value > 80.0) {
+    base.pcadmsg = "Coil to coil contact may cause inaccuracy in point 2.";
+  }
+
+  temp = symbol_table[o.Deflect_2].value / symbol_table[o.L_Free].value;
+  sq1 = 1.4 * symbol_table[o.Slenderness].value - 4.0;
+  base.errmsg1 = undefined;
+  base.errmsg0 = undefined;
+  if (sq1 > system_controls.smallnum) {
+    /* structured to avoid div by 0 */
+    if (temp > 0.76 / sq1) {
+      base.errmsg1 = "Given a deflection ratio of " + temp.toFixed(3) +
+        "  and a Slenderness ratio of " + symbol_table[o.Slenderness].value.toFixed(1) + ", " +
+        "the spring will tend to buckle with fixed/free  ends.";
+      sq1 = 2.0 * symbol_table[o.Slenderness].value - 8.0;
+      if (sq1 <= 0.0 || temp < 1.6 / sq1)
+        base.errmsg0 = " not";
+      else
+        base.errmsg0 = "";
+      base.errmsg0 = "The spring will" + base.errmsg0 + " tend to buckle with fixed/fixed ends.";
     }
+  }
 
-    render() {
-//        console.log('In ReportBase.render');
-        /*  Bring in material properties table  */
-        if (this.props.symbol_table[o.Material_File].value === "mat_metric.json")
-            this.m_tab = require('../mat_metric.json');
-        else
-            this.m_tab = require('../mat_us.json');
-        this.et_tab = require('./endtypes.json');
+  var def_max = symbol_table[o.L_Free].value - symbol_table[o.L_Solid].value;
+  base.safe_travel = Math.min(base.safe_load / symbol_table[o.Rate].value, def_max);
 
-        /*  Bring in life target table  */
-            this.lifetarg = require('./lifetarget.json');
+  //        console.log("symbol_table[o.Prop_Calc_Method].value = ", symbol_table[o.Prop_Calc_Method].value);
+  if (symbol_table[o.Prop_Calc_Method].value === 1 && symbol_table[o.Material_Type].value !== 0) {
+    base.matTypeValue = base.m_tab[symbol_table[o.Material_Type].value][mo.matnam];
+    base.astmFedSpecValue = symbol_table[o.ASTM_Fed_Spec].value;
+    base.clWarnString = "";
+  } else {
+    base.matTypeValue = "User_Specified";
+    base.astmFedSpecValue = "N/A";
+    base.clWarnString = "Cycle_Life is not computed for User_Specified materials.";
+  }
+  //        console.log("base.matTypeValue, base.astmFedSpecValue = ", base.matTypeValue, base.astmFedSpecValue);
 
-        this.hits = getAlertsBySeverity().length;
-        this.errmsg = "";
-        this.startpntmsg = "Alert details are available via the Alert button on the main page of Advanced and Calculator Views.";
+  base.lifeTargValue = base.lifetarg[symbol_table[o.Life_Category].value];
+  if (symbol_table[o.Life_Category].value <= 4) {
+    base.peenValue = "Not peened";
+  } else {
+    base.peenValue = "Shot peened";
+  }
 
-        this.len_lbl = "Wire Length";
+  base.energy_1 = 0.5 * symbol_table[o.Rate].value * symbol_table[o.Deflect_1].value * symbol_table[o.Deflect_1].value;
+  base.energy_2 = 0.5 * symbol_table[o.Rate].value * symbol_table[o.Deflect_2].value * symbol_table[o.Deflect_2].value;
+  var DefSolid = (symbol_table[o.L_Free].value - symbol_table[o.L_Solid].value);
+  base.energy_S = 0.5 * symbol_table[o.Rate].value * DefSolid * DefSolid;
 
-        switch(this.props.symbol_table[o.End_Type].value) {
-        case 4:        //  Closed & Ground
-            this.pitch = (this.props.symbol_table[o.L_Free].value - 2.0 * this.props.symbol_table[o.Wire_Dia].value) / this.props.symbol_table[o.Coils_A].value;
-            break;
-        case 3:        //  Closed
-            this.pitch = (this.props.symbol_table[o.L_Free].value - 3.0 * this.props.symbol_table[o.Wire_Dia].value) / this.props.symbol_table[o.Coils_A].value;
-            break;
-        case 2:        //  Open & Ground
-            this.pitch = this.props.symbol_table[o.L_Free].value / this.props.symbol_table[o.Coils_T].value;
-            break;
-        case 1:        //  Open
-            this.pitch = (this.props.symbol_table[o.L_Free].value -       this.props.symbol_table[o.Wire_Dia].value) / this.props.symbol_table[o.Coils_A].value;
-            break;
-        case 5:        //  Tapered Closed & Ground
-            this.pitch = (this.props.symbol_table[o.L_Free].value - 1.5 * this.props.symbol_table[o.Wire_Dia].value) / this.props.symbol_table[o.Coils_A].value;
-            this.len_lbl = "Bar cut len.";
-            break;
-        case 6:        //  Pig-tail
-            this.pitch = (this.props.symbol_table[o.L_Free].value - 2.0 * this.props.symbol_table[o.Wire_Dia].value) / this.props.symbol_table[o.Coils_A].value;
-            break;
-        default:        //  User Specified
-            this.pitch = (this.props.symbol_table[o.L_Free].value - (this.props.symbol_table[o.Inactive_Coils].value + 1.0) * this.props.symbol_table[o.Wire_Dia].value) / this.props.symbol_table[o.Coils_A].value;
-        }
+  console.log('ReportBase','base=',base);
 
-        var sq1 = this.props.symbol_table[o.L_Free].value;
-        var sq2 = this.props.symbol_table[o.Coils_T].value * Math.PI * this.props.symbol_table[o.Mean_Dia].value;
-        this.wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2);
-        if (this.props.symbol_table[o.End_Type].value === 5 )  /*  calculate developed length of tapered ends based on 2 ends * pi * wire diameter * 0.625 */
-            this.wire_len_t = this.wire_len_t - 3.926 * this.props.symbol_table[o.Wire_Dia].value;
-
-        this.wgt1000 = 1000.0 * this.props.symbol_table[o.Weight].value;
-
-        /*
-         * intermediate dia. calcs. assume no wire stretch
-         * note that value of this.wire_len_a is actually square of active wire length
-         */
-        sq1 = this.props.symbol_table[o.L_Free].value;
-        sq2 = this.props.symbol_table[o.Coils_A].value * Math.PI * this.props.symbol_table[o.Mean_Dia].value;
-        this.wire_len_a = sq1 * sq1 + sq2 * sq2;
-
-        this.dhat = this.def_dia(this.props.symbol_table[o.L_1].value);
-        this.od_1 = this.dhat + this.props.symbol_table[o.Wire_Dia].value;
-        this.id_1 = this.dhat - this.props.symbol_table[o.Wire_Dia].value;
-
-        this.dhat = this.def_dia(this.props.symbol_table[o.L_2].value);
-        this.od_2 = this.dhat + this.props.symbol_table[o.Wire_Dia].value;
-        this.id_2 = this.dhat - this.props.symbol_table[o.Wire_Dia].value;
-
-        this.dhat = this.def_dia(this.props.symbol_table[o.L_Solid].value)
-        this.od_solid = this.dhat + this.props.symbol_table[o.Wire_Dia].value;
-
-        /*
-         * Alternative deflected diameter calculation formula:
-         * From: https://www.acxesspring.com/spring-diameter-change.html
-         * From: http://springipedia.com/compression-general-design.asp
-         */
-
-        this.dhat = this.props.symbol_table[o.Tensile].value / 100.0;
-        var kc = (4.0 * this.props.symbol_table[o.Spring_Index].value - 1.0) / (4.0 * this.props.symbol_table[o.Spring_Index].value - 4.0);
-        var ks = kc + 0.615 / this.props.symbol_table[o.Spring_Index].value;
-        var s_f = ks * 8.0 * this.props.symbol_table[o.Mean_Dia].value / (Math.PI * this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value);
-
-        this.kw1 = ks;
-        this.kw2 = 1.0 + 0.5 / this.props.symbol_table[o.Spring_Index].value;
-        var temp = this.kw2 * s_f / ks;
-        this.kw2str1 = temp * this.props.symbol_table[o.Force_1].value;
-        this.kw2str2 = temp * this.props.symbol_table[o.Force_2].value;
-        this.kw2strs = temp * this.props.symbol_table[o.Force_Solid].value;
-
-        if (this.props.symbol_table[o.Stress_1].value !== 0.0)
-            this.fs_1 = Math.abs(this.props.symbol_table[o.Stress_Lim_Stat].value / this.props.symbol_table[o.Stress_1].value);
-        else
-            this.fs_1 = Number.POSITIVE_INFINITY;
-
-        /*  unused
-         *  temp = 0.7 * this.props.symbol_table[o.Tensile].value;  // allowable stress for preset
-         *  if (this.kw2str1 !== 0.0) kw2fs_1 = Math.abs(temp / this.kw2str1);
-         *  else kw2fs_1 = 0.0;
-         *  if (this.kw2str2 !== 0.0) kw2fs_2 = temp / this.kw2str2;
-         *  else this.kw2str2 = 0.0;
-         *  if (this.kw2strs !== 0.0) kw2fs_s = temp / this.kw2strs;
-         *  else kw2fs_s = 0.0;
-         *  unused
-         */
-
-        this.safe_load = this.props.symbol_table[o.Stress_Lim_Stat].value / s_f;
-        if (this.safe_load > this.props.symbol_table[o.Force_Solid].value)
-            this.safe_load_u = "(Solid)";
-        else
-            this.safe_load_u = this.props.symbol_table[o.Force_2].units ;
-        this.safe_load = Math.min(this.safe_load, this.props.symbol_table[o.Force_Solid].value);
-        /*
-         * Angle across coil cross section
-         * this.hlx_ang=atan(0.5*this.pitch/mean_dia)*(180.0/pi);
-         */
-        if (this.pitch > 0.0)
-            this.hlx_ang = Math.atan(this.pitch / (Math.PI * this.props.symbol_table[o.Mean_Dia].value)) * (180.0 / Math.PI);
-        else
-            this.hlx_ang = 0.0;
-
-        this.cycle_life_u = this.props.symbol_table[o.Cycle_Life].units + " (est.)";
-
-        this.pcadmsg = undefined;
-        if (this.props.symbol_table[o.PC_Avail_Deflect].value > 80.0) {
-            this.pcadmsg = "Coil to coil contact may cause inaccuracy in point 2.";
-        }
-
-        temp = this.props.symbol_table[o.Deflect_2].value / this.props.symbol_table[o.L_Free].value;
-        sq1 = 1.4 * this.props.symbol_table[o.Slenderness].value - 4.0;
-        this.errmsg1 = undefined;
-        this.errmsg0 = undefined;
-        if (sq1 > this.props.system_controls.smallnum) {
-            /* structured to avoid div by 0 */
-            if (temp > 0.76 / sq1) {
-                this.errmsg1 = "Given a deflection ratio of " + temp.toFixed(3) +
-                               "  and a Slenderness ratio of " + this.props.symbol_table[o.Slenderness].value.toFixed(1) + ", " +
-                               "the spring will tend to buckle with fixed/free  ends.";
-                sq1 = 2.0 * this.props.symbol_table[o.Slenderness].value - 8.0;
-                if (sq1 <= 0.0 || temp < 1.6 / sq1)
-                    this.errmsg0 = " not";
-                else
-                    this.errmsg0 = "";
-                this.errmsg0 = "The spring will" + this.errmsg0 + " tend to buckle with fixed/fixed ends.";
-            }
-        }
-
-        var def_max = this.props.symbol_table[o.L_Free].value - this.props.symbol_table[o.L_Solid].value;
-        this.safe_travel = Math.min(this.safe_load / this.props.symbol_table[o.Rate].value, def_max);
-
-//        console.log("this.props.symbol_table[o.Prop_Calc_Method].value = ", this.props.symbol_table[o.Prop_Calc_Method].value);
-        if (this.props.symbol_table[o.Prop_Calc_Method].value === 1 && this.props.symbol_table[o.Material_Type].value !== 0){
-            this.matTypeValue = this.m_tab[this.props.symbol_table[o.Material_Type].value][mo.matnam];
-            this.astmFedSpecValue = this.props.symbol_table[o.ASTM_Fed_Spec].value;
-            this.clWarnString = "";
-        } else {
-            this.matTypeValue = "User_Specified";
-            this.astmFedSpecValue = "N/A";
-            this.clWarnString = "Cycle_Life is not computed for User_Specified materials.";
-        }
-//        console.log("this.matTypeValue, this.astmFedSpecValue = ", this.matTypeValue, this.astmFedSpecValue);
-
-        this.lifeTargValue = this.lifetarg[this.props.symbol_table[o.Life_Category].value];
-        if (this.props.symbol_table[o.Life_Category].value <= 4){
-            this.peenValue = "Not peened";
-        } else {
-            this.peenValue = "Shot peened";
-        }
-
-        this.energy_1 = 0.5 * this.props.symbol_table[o.Rate].value * this.props.symbol_table[o.Deflect_1].value * this.props.symbol_table[o.Deflect_1].value;
-        this.energy_2 = 0.5 * this.props.symbol_table[o.Rate].value * this.props.symbol_table[o.Deflect_2].value * this.props.symbol_table[o.Deflect_2].value;
-        var DefSolid = (this.props.symbol_table[o.L_Free].value - this.props.symbol_table[o.L_Solid].value);
-        this.energy_S = 0.5 * this.props.symbol_table[o.Rate].value * DefSolid * DefSolid;
-
-        return null;
-    }
-
-    def_dia(def_len) {
-        /*  calculates mean diameter of deflected spring.  */
-//        console.log("In ReportBase.def_dia this=",this);
-        return Math.sqrt(this.wire_len_a - def_len * def_len) / (this.props.symbol_table[o.Coils_A].value * Math.PI);
-    }
-
+  return <ReportBaseContext.Provider value={base}>
+    { props.children }
+  </ReportBaseContext.Provider>;
 }

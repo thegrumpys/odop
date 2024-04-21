@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown, Modal, Button } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
 
-export var outputStart = function(execute_name) {
+export const outputStart = function(execute_name) {
 //  console.log('In outputStart','execute_name=',execute_name);
   if (this === undefined) return;
   this.setState( // Special form of setState using updater function
@@ -18,7 +18,7 @@ export var outputStart = function(execute_name) {
   );
 }
 
-export var outputLine = function(line) {
+export const outputLine = function(line) {
 //  console.log('In outputLine','line=',line);
   if (this === undefined) return;
   this.setState( // Special form of setState using updater function
@@ -31,7 +31,7 @@ export var outputLine = function(line) {
   );
 }
 
-export var outputStop = function() {
+export const outputStop = function() {
 //  console.log('In outputStop','this=',this);
   if (this === undefined) return;
   this.setState( // Special form of setState using updater function

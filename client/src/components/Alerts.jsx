@@ -8,14 +8,14 @@ export const WARN = 'Warn';
 export const NOTICE = 'Notice';
 export const INFO = 'Info';
 
-export var check_message = (design, prefix, left, op, right, suffix = '') => {
+export const check_message = (design, prefix, left, op, right, suffix = '') => {
 //  console.log('In Alerts.check_message', 'design=', design, 'prefix=', prefix, 'left=', left, 'op=', op, 'right=', right, 'suffix=', suffix);
   return prefix + ': ' + design.model.symbol_table[left].name + ' (' + toODOPPrecision(design.model.symbol_table[left].value) + ') ' + op +
     ' ' + design.model.symbol_table[right].name + ' (' + toODOPPrecision(design.model.symbol_table[right].value) + ')' + (suffix !== '' ? suffix : '');
 }
 
 // DCD is Default Constraint Disabled
-export var check_DCD_alert = (element, minmax, urlCode) => {
+export const check_DCD_alert = (element, minmax, urlCode) => {
 //  console.log('In Alerts.check_DCD_alert', 'element=', element, 'minmax=', minmax, 'urlCod', urlCode);
   if (element.lmin & FIXED) {
     return;
@@ -47,7 +47,7 @@ export var check_DCD_alert = (element, minmax, urlCode) => {
   }));
 }
 
-export var checks = (store) => {
+export const checks = (store) => {
 //  console.log('In Alerts.checks','store=',store);
   var design = store.getState().modelSlice;
 
@@ -274,7 +274,7 @@ export var checks = (store) => {
   }
 }
 
-export var getSeverityNumberByNameAndObjValue = (name, severity) => {
+export const getSeverityNumberByNameAndObjValue = (name, severity) => {
 //  console.log('In Alerts.getSeverityNumberByNameAndObjValue', 'name=', name, 'severity=', severity);
   var design = store.getState().modelSlice;
 //  console.log('### design=',design)
@@ -292,25 +292,25 @@ export var getSeverityNumberByNameAndObjValue = (name, severity) => {
   return severityNumber;
 }
 
-export var getFeasibilityClassBySeverityNumber = (severityNumber) => {
+export const getFeasibilityClassBySeverityNumber = (severityNumber) => {
 //  console.log('In Alerts.getFeasibilityClassBySeverityNumber', 'severityNumber=', severityNumber);
   var feasibilityClasses = ["", "text-feasible ", "text-close-to-feasible ", "text-not-feasible "];
   return feasibilityClasses[severityNumber];
 }
 
-export var getFontClassBySeverityNumber = (severityNumber) => {
+export const getFontClassBySeverityNumber = (severityNumber) => {
 //  console.log('In Alerts.getFeasibilityClassBySeverityNumber', 'severityNumber=', severityNumber);
   var fontClasses = ["text-alert-info ", "text-alert-notice ", "text-alert-warn ", "text-alert-err "];
   return fontClasses[severityNumber];
 }
 
-export var getSeverityNumberBySeverity = (severity) => {
+export const getSeverityNumberBySeverity = (severity) => {
 //  console.log('In Alerts.getSeverityNumberBySeverity', 'severity=', severity);
   var severityNumber = { Err: 3, Warn: 2, Notice: 1, Info: 0 };
   return severityNumber[severity];
 }
 
-export var getAlertsByName = (name, includeViolations = false) => {
+export const getAlertsByName = (name, includeViolations = false) => {
 //  console.log('In Alerts.getAlertsByName', 'name=', name, 'includeViolations=', includeViolations);
   var alerts = [];
   var maxSeverityNumber = 0;
@@ -360,7 +360,7 @@ export var getAlertsByName = (name, includeViolations = false) => {
   return { className: getFeasibilityClassBySeverityNumber(maxSeverityNumber), alerts: alerts };
 }
 
-export var getAlertsBySeverity = (severity = '*') => {
+export const getAlertsBySeverity = (severity = '*') => {
 //  console.log('In Alerts.getAlertsBySeverity', 'severity=', severity);
   var alertsSlice = store.getState().alertsSlice;
 //  console.log('### alertsSlice=',alertsSlice)

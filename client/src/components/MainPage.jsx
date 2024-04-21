@@ -35,61 +35,42 @@ import HelpAbout from '../menus/Help/HelpAbout';
 import SearchDocs from './SearchDocs';
 import config from '../config';
 import ResultTable from './ResultTable';
-import DesignTable from './DesignTable';
 
 export default function MainPage() {
 //  console.log('MainPage - Mounting...');
-  const [show, setShow] = useState(false);
-  const [activeTab, setActiveTab] = useState(config.url.view);
   const model_type = useSelector((state) => state.modelSlice.model.type);
   const model_name = useSelector((state) => state.modelSlice.name);
   const model_view = useSelector((state) => state.modelSlice.view);
-//  console.log('MainPage - Mounting...','model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
-  //  const dispatch = useDispatch();
+  console.log('MainPage - Mounting...','model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
+  const [show, setShow] = useState(false);
+  const [viewName, setViewName] = useState(config.url.view);
+  const dispatch = useDispatch();
 
-//  useEffect(() => {
-////    console.log("MainPage - Mounted");
-//  }, []);
-//
-//  useEffect(() => {
-////    console.log("MainPage",'show=',show);
-//  }, [show]);
-//
-//  useEffect(() => {
-////    console.log("MainPage",'activeTab=',activeTab);
-//  }, [activeTab]);
-//
-//  useEffect(() => {
-////    console.log("MainPage",'model_name=',model_name);
-//  }, [model_name]);
-//
-//  useEffect(() => {
-////    console.log('MainPage','model_view=',model_view);
-//    setActiveTab(model_view);
-//  }, [model_view]);
-//
-//  useEffect(() => {
-////    console.log('MainPage','model_type=',model_type);
-    if (model_type === null) return;
+  useEffect(() => {
+    console.log('MainPage','model_view useEffect','model_view=',model_view);
+    setViewName(model_view);
+  }, [model_view]);
+
+  useEffect(() => {
+    console.log('MainPage','model_type useEffect','model_type=',model_type);
+    if (model_type === null) return () => {};
     var { getViewNames } = require('../designtypes/'+ model_type + '/view.js'); // Dynamically load getViewNames
-//    console.log('MainPage - type changed','getViewNames=', getViewNames);
-    var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
-//    console.log('MainPage - type changed','viewNames=', viewNames);
-////    var viewIndex = viewNames.find(element => element.name === config.url.view);
-////    console.log('MainPage','viewIndex=', viewIndex);
-////    if (viewIndex >= 0) {
-////      var viewComponent = viewNames[index].component;
-////    } else { // Not found
-////      var viewComponent = viewNames[0].component; // Default to the first one
-////    }
-////    console.log('MainPage - type changed','new_view=', new_view);
-////    if (new_view === undefined) {
-////      dispatch(changeView(config.env.view)); // if not found then assume the configured default
-////    } else {
-////      dispatch(changeView(view)); // if not found then assume the configured default
-////    }
-//  }, [model_type]);
-//
+    console.log('MainPage','model_type useEffect','getViewNames=', getViewNames);
+    var viewNames = getViewNames();
+    console.log('MainPage','model_type useEffect','viewNames=', viewNames);
+    if (model_type === config.url.type) {
+      var viewIndex = viewNames.findIndex(element => element.name === config.url.view);
+      console.log('MainPage','model_type useEffect','viewIndex=', viewIndex);
+      if (viewIndex >= 0) {
+        dispatch(changeView(viewNames[viewIndex].name)); // if not found then assume the configured default
+      } else { // Not found
+        dispatch(changeView(viewNames[0].name)); // Default to the first one
+      }
+    } else {
+      dispatch(changeView(config.env.view)); // if not found then assume the configured default
+    }
+  }, [model_type]);
+
   const toggle = () => {
 //    console.log('MainPage.toggle');
     setShow(!show);
@@ -98,8 +79,8 @@ export default function MainPage() {
   if (model_type === null) return null;
 
   var { getViewNames } = require('../designtypes/'+model_type+'/view.js'); // Dynamically load getViewNames
-  var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
-//  console.log('MainPage.constructor viewNames=', viewNames);
+  var viewNames = getViewNames(); // Get them in MainPage render because they contain React Components
+  console.log('MainPage','show=', show,'viewNames=', viewNames,'viewName=', viewName);
 
   var src = 'designtypes/' + model_type + '/favicon.ico';
   var alt = model_type + ' icon';
@@ -172,7 +153,7 @@ export default function MainPage() {
           <ExecutePanel />
         </Row>
         <ResultTable />
-        {viewNames[viewNames.findIndex(element => element.name === activeTab)].component}
+        {viewNames[viewNames.findIndex(element => element.name === viewName)].component}
       </Container>
     </>
   );

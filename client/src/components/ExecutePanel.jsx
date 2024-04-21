@@ -9,7 +9,7 @@ import { outputStart, outputLine, outputStop } from '../menus/View/ViewExecuteTo
 import { setExecuteName, setShow, setPrefix, setStates, setStep, setTitle, setText /*, setTestGenerate */ } from '../store/executePanelSlice'; // FIXME
 import store from '../store/store';
 
-export var startExecute = (prefix, executeName) => {
+export const startExecute = (prefix, executeName) => {
 //  console.log('startExecute','prefix=',prefix,'executeName=',executeName);
   if (executeName === undefined) return;
 
@@ -49,7 +49,7 @@ export var startExecute = (prefix, executeName) => {
   window.scrollTo(0, 0);
 }
 
-export var stopExecute = () => {
+export const stopExecute = () => {
 //  console.log('stopExecute');
   var executeName = store.getState().executePanelSlice.executeName;
   logUsage('event', 'ExecutePanel', { event_label: 'stop ' + executeName });
