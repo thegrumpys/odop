@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ReportBase from './ReportBase';
 import ReportBaseContext from './ReportBaseContext';
 import { Button } from 'react-bootstrap';
 import * as o from './symbol_table_offsets';
@@ -20,7 +19,7 @@ export default function Report1() {
 
   var line = 1;
   return (
-    <ReportBase>
+    <>
       <h4 className="d-flex mt-3">
         <span className="ms-auto">ODOP:Spring &nbsp; Compression Spring Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></span>
         <Button onClick={onClick}>Print</Button>
@@ -191,6 +190,6 @@ export default function Report1() {
       Deflection at load point 2 is {symbol_table[o.PC_Avail_Deflect].value.toFixed(0)}% of total available deflection.<br />
       {base.pcadmsg}{base.pcadmsg !== undefined && <br />}
       <br />
-    </ReportBase>
+    </>
   );
 }
