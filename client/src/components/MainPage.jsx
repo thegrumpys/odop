@@ -88,7 +88,7 @@ export default function MainPage() {
 
   return (
     <>
-      <Navbar className="ps-3 pe-3" variant="light" bg="light" expand="md" fixed="top">
+      <Navbar className="ps-3 pe-3" style={{ backgroundColor: '#eeeeee' }} expand="md" fixed="top">
         <OverlayTrigger placement="bottom" overlay={<Tooltip>Reset app.<br />Save your work first!<br />See Help AutoSave.</Tooltip>}>
           <Navbar.Brand href="/"><img className="d-none d-md-inline" src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" />ODOP</Navbar.Brand>
         </OverlayTrigger>
@@ -148,7 +148,7 @@ export default function MainPage() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Container fluid="md" className="table-light" style={{ paddingTop: '60px' }}>
+      <Container fluid="md" style={{ backgroundColor: '#eeeeee', paddingTop: '60px' }}>
         <Row>
           <ExecutePanel />
         </Row>

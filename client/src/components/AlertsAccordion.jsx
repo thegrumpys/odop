@@ -96,7 +96,7 @@ export default function AlertsAccordion() {
   return (
     <>
       <ContextAwareAccordion>
-        <Card bg="light">
+        <Card style={{ backgroundColor: '#eeeeee' }}>
           <Card.Header>
             <InputGroup as="span">
               <InputGroup.Text>Alerts</InputGroup.Text>

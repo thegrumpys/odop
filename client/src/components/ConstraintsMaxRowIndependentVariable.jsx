@@ -126,7 +126,7 @@ export default function ConstraintsMaxRowIndependentVariable({ element, index, o
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <Table borderless="true">
+                <Table borderless="true" className="table-secondary">
                   <tbody>
                     <tr>
                       <td colSpan="2">

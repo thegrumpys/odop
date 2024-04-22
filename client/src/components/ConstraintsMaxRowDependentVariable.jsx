@@ -131,7 +131,7 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <Table borderless="true">
+                <Table borderless="true" className="table-secondary">
                   <tbody>
                     <tr>
                       <td colSpan="2">

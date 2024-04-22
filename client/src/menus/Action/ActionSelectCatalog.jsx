@@ -167,7 +167,7 @@ class ActionSelectCatalog extends Component {
                         :
                             <>
                                 <Form.Label htmlFor="catalogEntrySelect">Closest catalog entries:</Form.Label>
-                                <Table className="table-light border border-secondary" size="sm">
+                                <Table className="table-secondary border border-secondary" size="sm">
                                     <thead>
                                         <tr>
                                             <th>Name</th>

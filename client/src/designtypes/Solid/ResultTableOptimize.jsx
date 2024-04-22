@@ -54,7 +54,7 @@ export default function ResultTableOptimize({ onClick }) {
   return (
     <>
       <p>Select a pre-configured Seek optimization:</p>
-      <Table borderless="true" size="sm">
+      <Table borderless="true" size="sm" className="table-secondary">
         <tbody>
           <tr>
             <td width="50%">

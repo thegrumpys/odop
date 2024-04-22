@@ -18,7 +18,7 @@ export default function NameValueUnitsTable() {
 
   return (
     <>
-      <Table id="nvut" className="table-light border border-secondary">
+      <Table id="nvut" className="table-secondary border border-secondary">
         <NameValueUnitsHeaderIndependentVariable />
         {symbol_table.map((element, index) => element.type === "equationset" && element.input && !element.hidden && <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={index} />)}
         <NameValueUnitsHeaderDependentVariable />

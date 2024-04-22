@@ -510,7 +510,7 @@ export default function SymbolValueWireDia({ className, element }) {
             ''
           }
           {error !== '' ? <Alert variant="danger"> {error} </Alert> : ''}
-          <Table className="table-light border border-secondary" size="sm" style={{ backgroundColor: '#eee' }}>
+          <Table className="table-secondary border border-secondary" size="sm">
             {element.type === "equationset" && element.input && !element.hidden &&
               <>
                 <NameValueUnitsHeaderIndependentVariable />
@@ -576,22 +576,22 @@ export default function SymbolValueWireDia({ className, element }) {
               </tbody>
             </Table>}
           {element.type === "equationset" && element.input && !element.hidden &&
-            <Table className="table-light border border-secondary" size="sm" style={{ backgroundColor: '#eee' }}>
+            <Table className="table-secondary border border-secondary" size="sm">
               <ConstraintsMinHeaderIndependentVariable />
               <ConstraintsMinRowIndependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMinConstraint} onChangeInvalid={onChangeInvalidMinConstraint} onSet={onModifiedFlag} onReset={onModifiedFlag} />
             </Table>}
           {element.type === "equationset" && !element.input && !element.hidden &&
-            <Table className="table-light border border-secondary" size="sm" style={{ backgroundColor: '#eee' }}>
+            <Table className="table-secondary border border-secondary" size="sm">
               <ConstraintsMinHeaderDependentVariable />
               <ConstraintsMinRowDependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMinConstraint} onChangeInvalid={onChangeInvalidMinConstraint} onSet={onModifiedFlag} onReset={onModifiedFlag} />
             </Table>}
           {element.type === "equationset" && element.input && !element.hidden &&
-            <Table className="table-light border border-secondary" size="sm" style={{ backgroundColor: '#eee' }}>
+            <Table className="table-secondary border border-secondary" size="sm">
               <ConstraintsMaxHeaderIndependentVariable />
               <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onSet={onModifiedFlag} onReset={onModifiedFlag} />
             </Table>}
           {element.type === "equationset" && !element.input && !element.hidden &&
-            <Table className="table-light border border-secondary" size="sm" style={{ backgroundColor: '#eee' }}>
+            <Table className="table-secondary border border-secondary" size="sm">
               <ConstraintsMaxHeaderDependentVariable />
               <ConstraintsMaxRowDependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onSet={onModifiedFlag} onReset={onModifiedFlag} />
             </Table>}

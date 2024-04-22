@@ -16,7 +16,7 @@ export default function NameValueUnitsCalcInputTable() {
 
   return (
     <div id="nvucit">
-      <Table className="table-light border border-secondary" size="sm">
+      <Table className="table-secondary border border-secondary" size="sm">
         <NameValueUnitsHeaderCalcInput />
         {symbol_table.map((element,index) => element.type === "calcinput" && !element.hidden && <NameValueUnitsRowCalcInput key={element.name} element={element} index={index} />)}
       </Table>

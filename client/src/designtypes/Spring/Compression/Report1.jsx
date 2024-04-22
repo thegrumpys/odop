@@ -21,7 +21,7 @@ export default function Report1() {
   return (
     <>
       <h4 className="d-flex mt-3">
-        <span className="ms-auto">ODOP:Spring &nbsp; Compression Spring Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></span>
+        <span className="me-auto">ODOP:Spring &nbsp; Compression Spring Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></span>
         <Button onClick={onClick}>Print</Button>
       </h4>
       <br />
