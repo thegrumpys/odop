@@ -556,7 +556,7 @@ export default function SymbolValueWireDia({ className, element }) {
             {element.type === "equationset" && !element.input && !element.hidden &&
               <>
                 <NameValueUnitsHeaderDependentVariable />
-                <NameValueUnitsRowDependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidValue} onChangeInvalid={onChangeInvalidValue} onSet={onModifiedFlag} onReset={onModifiedFlag} />
+                <NameValueUnitsRowDependentVariable key={element.name} element={element} index={0} onSet={onModifiedFlag} onReset={onModifiedFlag} />
               </>}
             {element.type === "calcinput" && !element.hidden &&
               <>

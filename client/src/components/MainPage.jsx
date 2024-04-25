@@ -41,26 +41,26 @@ export default function MainPage() {
   const model_type = useSelector((state) => state.modelSlice.model.type);
   const model_name = useSelector((state) => state.modelSlice.name);
   const model_view = useSelector((state) => state.modelSlice.view);
-  console.log('MainPage - Mounting...','model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
+//  console.log('MainPage - Mounting...','model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
   const [show, setShow] = useState(false);
   const [viewName, setViewName] = useState(config.url.view);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('MainPage','model_view useEffect','model_view=',model_view);
+//    console.log('MainPage','model_view useEffect','model_view=',model_view);
     setViewName(model_view);
   }, [model_view]);
 
   useEffect(() => {
-    console.log('MainPage','model_type useEffect','model_type=',model_type);
+//    console.log('MainPage','Mounted','useEffect','model_type=',model_type);
     if (model_type === null) return () => {};
     var { getViewNames } = require('../designtypes/'+ model_type + '/view.js'); // Dynamically load getViewNames
-    console.log('MainPage','model_type useEffect','getViewNames=', getViewNames);
+//    console.log('MainPage','model_type useEffect','getViewNames=', getViewNames);
     var viewNames = getViewNames();
-    console.log('MainPage','model_type useEffect','viewNames=', viewNames);
+//    console.log('MainPage','model_type useEffect','viewNames=', viewNames);
     if (model_type === config.url.type) {
       var viewIndex = viewNames.findIndex(element => element.name === config.url.view);
-      console.log('MainPage','model_type useEffect','viewIndex=', viewIndex);
+//      console.log('MainPage','model_type useEffect','viewIndex=', viewIndex);
       if (viewIndex >= 0) {
         dispatch(changeView(viewNames[viewIndex].name)); // if not found then assume the configured default
       } else { // Not found
@@ -80,7 +80,7 @@ export default function MainPage() {
 
   var { getViewNames } = require('../designtypes/'+model_type+'/view.js'); // Dynamically load getViewNames
   var viewNames = getViewNames(); // Get them in MainPage render because they contain React Components
-  console.log('MainPage','show=', show,'viewNames=', viewNames,'viewName=', viewName);
+//  console.log('MainPage','show=', show,'viewNames=', viewNames,'viewName=', viewName);
 
   var src = 'designtypes/' + model_type + '/favicon.ico';
   var alt = model_type + ' icon';

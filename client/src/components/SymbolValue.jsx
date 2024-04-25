@@ -25,9 +25,8 @@ import { displayMessage } from '../components/Message';
 import FeasibilityIndicator from './FeasibilityIndicator';
 import store from '../store/store';
 
-export default function SymbolValue({ className, element }) {
-// console.log("SymbolValue - Mounting...",'element=',element,'index=',index);
-  const type = useSelector((state) => state.modelSlice.model.type);
+export default function SymbolValue({ className, element, index }) {
+  console.log('SymbolValue','Mounting...','element=',element,'index=',index);
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
   const objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
@@ -44,31 +43,34 @@ export default function SymbolValue({ className, element }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-//    console.log("SymbolValue - Mounted");
+    console.log('SymbolValue','Mounted');
 //    document.addEventListener("click", handleClick);
 //    document.addEventListener("contextmenu", handleContextMenu);
     return () => {
-//      console.log("SymbolValue - Unmounting ...");
+      console.log('SymbolValue','Unmounting...');
 //      document.removeEventListener("click", handleClick);
 //      document.removeEventListener("contextmenu", handleContextMenu);
     };
   }, []);
 
   useEffect(() => {
-//    console.log("SymbolValue - Mounted");
+//    console.log('SymbolValue','Mounted','useEffect','element=',element);
     if (element.format === 'table') {
+      console.log('SymbolValue','Mounted','useEffect','element=',element);
+      console.log('SymbolValue','Mounted','useEffect','file= ../designtypes/'+element.table+'.json');
       var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
+      console.log('SymbolValue','Mounted','useEffect','tableContents=',tableContents);
       setTable(tableContents);
     }
     return () => { };
-  }, [element, type]);
+  }, [element]);
 
-  if (element.format === 'table') {
-//   console.log('SymbolValue file= ../designtypes/'+element.table+'.json');
-    var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
-//   console.log('SymbolValue tableContents=',tableContents);
-    setTable(tableContents);
-  }
+//  if (element.format === 'table') {
+//    console.log('SymbolValue','Mounting','file= ../designtypes/'+element.table+'.json');
+//    var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
+//    console.log('SymbolValue','Mounting','tableContents=',tableContents);
+//    setTable(tableContents);
+//  }
 
   const onSearchRequest = (event) => {
 //    console.log('In SymbolValue.onSearchRequest','event=',event);
@@ -315,6 +317,7 @@ export default function SymbolValue({ className, element }) {
     }
   });
 //  console.log('feasibility_status=',feasibility_status,'feasibility_class=',feasibility_class,'display_search_button=',display_search_button,'display_seek_button=',display_seek_button);
+  console.log('SymbolValue','Mounting...','table=',table);
 
   return (
     <>
@@ -395,7 +398,7 @@ export default function SymbolValue({ className, element }) {
             {element.type === "equationset" && !element.input && !element.hidden &&
               <>
                 <NameValueUnitsHeaderDependentVariable />
-                <NameValueUnitsRowDependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidValue} onChangeInvalid={onChangeInvalidValue} onSet={onModifiedFlag} onReset={onModifiedFlag} />
+                <NameValueUnitsRowDependentVariable key={element.name} element={element} index={0} onSet={onModifiedFlag} onReset={onModifiedFlag} />
               </>}
             {element.type === "calcinput" && !element.hidden &&
               <>

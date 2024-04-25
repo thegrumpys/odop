@@ -187,7 +187,7 @@ export default function ReportBase(props) {
   var DefSolid = (symbol_table[o.L_Free].value - symbol_table[o.L_Solid].value);
   base.energy_S = 0.5 * symbol_table[o.Rate].value * DefSolid * DefSolid;
 
-  console.log('ReportBase','base=',base);
+//  console.log('ReportBase','base=',base);
 
   return <ReportBaseContext.Provider value={base}>
     { props.children }

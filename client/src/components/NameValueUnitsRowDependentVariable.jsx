@@ -7,14 +7,14 @@ import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
-export default function NameValueUnitsRowIndependentVariable({ element, index, onSet, onReset }) {
-//  console.log("NameValueUnitsRowIndependentVariable - Mounting...",'element=',element,'index=',index);
+export default function NameValueUnitsRowDependentVariable({ element, index, onSet, onReset }) {
+//  console.log("NameValueUnitsRowDependentVariable - Mounting...",'element=',element,'index=',index);
   const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
   const dispatch = useDispatch();
 
   useEffect(() => {
-//    console.log("NameValueUnitsRowIndependentVariable - Mounted");
-//    return () => console.log("NameValueUnitsRowIndependentVariable - Unmounting ...");
+//    console.log("NameValueUnitsRowDependentVariable - Mounted");
+//    return () => console.log("NameValueUnitsRowDependentVariable - Unmounting ...");
     return () => { };
   }, []);
 

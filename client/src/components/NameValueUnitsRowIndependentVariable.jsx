@@ -7,8 +7,8 @@ import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
-export default function NameValueUnitsRowIndependentVariable({ index, onChangeValid, onChangeInvalid, onSet, onReset }) {
-  const element = useSelector((state) => state.modelSlice.model.symbol_table[index]);
+export default function NameValueUnitsRowIndependentVariable({ element, index, onChangeValid, onChangeInvalid, onSet, onReset }) {
+//  const element = useSelector((state) => state.modelSlice.model.symbol_table[index]);
 //  console.log("NameValueUnitsRowIndependentVariable - Mounting...",'element=',element,'index=',index);
   const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
   const dispatch = useDispatch();

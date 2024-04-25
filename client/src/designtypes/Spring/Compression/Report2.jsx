@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ReportBase from './ReportBase';
 import ReportBaseContext from './ReportBaseContext';
 import { Button } from 'react-bootstrap';
 import * as o from './symbol_table_offsets';
@@ -9,7 +8,7 @@ export default function Report2() {
 //  console.log('Report2 - Mounting...');
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const base = useContext(ReportBaseContext);
-  console.log('Report2','base=',base);
+//  console.log('Report2','base=',base);
 
   const onClick = (event) => {
 //    console.log("In Report2.onClick event=",event);
@@ -18,7 +17,7 @@ export default function Report2() {
   }
 
   return (
-    <ReportBase>
+    <>
       <h4 className="d-flex mt-3">
         <span className="me-auto">ODOP:Spring &nbsp; Compression Spring Report &nbsp; &nbsp; <a href="https://www.springdesignsoftware.org"><small>https://www.springdesignsoftware.org</small></a></span>
         <Button onClick={onClick}>Print</Button>
@@ -303,6 +302,6 @@ export default function Report2() {
       <sup>*</sup>Source data for %_Tensile_Endur (Stress_Lim_Endur) based on Stress Ratio = 0.
       <br />
       <br />
-    </ReportBase>
+    </>
   );
 }
