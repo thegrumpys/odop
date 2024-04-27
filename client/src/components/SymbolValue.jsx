@@ -26,7 +26,7 @@ import FeasibilityIndicator from './FeasibilityIndicator';
 import store from '../store/store';
 
 export default function SymbolValue({ className, element, index }) {
-  console.log('SymbolValue','Mounting...','element=',element,'index=',index);
+//  console.log('SymbolValue','Mounting...','element=',element,'index=',index);
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
   const objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
@@ -37,40 +37,40 @@ export default function SymbolValue({ className, element, index }) {
   const [isInvalidMinConstraint, setIsInvalidMinConstraint] = useState(false);
   const [isInvalidMaxConstraint, setIsInvalidMaxConstraint] = useState(false);
   const [error, setError] = useState('');
-  const [table, setTable] = useState(null);
+//  const [table, setTable] = useState(null);
   const [modified, setModified] = useState(false);
   const [reset, setReset] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('SymbolValue','Mounted');
+//    console.log('SymbolValue','Mounted');
 //    document.addEventListener("click", handleClick);
 //    document.addEventListener("contextmenu", handleContextMenu);
     return () => {
-      console.log('SymbolValue','Unmounting...');
+//      console.log('SymbolValue','Unmounting...');
 //      document.removeEventListener("click", handleClick);
 //      document.removeEventListener("contextmenu", handleContextMenu);
     };
   }, []);
 
-  useEffect(() => {
-//    console.log('SymbolValue','Mounted','useEffect','element=',element);
-    if (element.format === 'table') {
-      console.log('SymbolValue','Mounted','useEffect','element=',element);
-      console.log('SymbolValue','Mounted','useEffect','file= ../designtypes/'+element.table+'.json');
-      var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
-      console.log('SymbolValue','Mounted','useEffect','tableContents=',tableContents);
-      setTable(tableContents);
-    }
-    return () => { };
-  }, [element]);
+//  useEffect(() => {
+////    console.log('SymbolValue','Mounted','useEffect','element=',element);
+//    if (element.format === 'table') {
+//      console.log('SymbolValue','Mounted','useEffect','element=',element);
+//      console.log('SymbolValue','Mounted','useEffect','file= ../designtypes/'+element.table+'.json');
+//      var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
+//      console.log('SymbolValue','Mounted','useEffect','tableContents=',tableContents);
+//      setTable(tableContents);
+//    }
+//    return () => { };
+//  }, [element]);
 
-//  if (element.format === 'table') {
+  if (element.format === 'table') {
 //    console.log('SymbolValue','Mounting','file= ../designtypes/'+element.table+'.json');
-//    var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
+    var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
 //    console.log('SymbolValue','Mounting','tableContents=',tableContents);
 //    setTable(tableContents);
-//  }
+  }
 
   const onSearchRequest = (event) => {
 //    console.log('In SymbolValue.onSearchRequest','event=',event);
@@ -317,7 +317,7 @@ export default function SymbolValue({ className, element, index }) {
     }
   });
 //  console.log('feasibility_status=',feasibility_status,'feasibility_class=',feasibility_class,'display_search_button=',display_search_button,'display_seek_button=',display_seek_button);
-  console.log('SymbolValue','Mounting...','table=',table);
+//  console.log('SymbolValue','Mounting...','table=',table);
 
   return (
     <>
@@ -338,7 +338,7 @@ export default function SymbolValue({ className, element, index }) {
           {element.format === 'table' ?
             <>
               {icon_dependent_tag}
-              <Form.Control id={'sv_' + element.name} type="text" disabled={disabled} readOnly className={sv_value_class} value={table[element.value][0]} onClick={onContextMenu} />
+              <Form.Control id={'sv_' + element.name} type="text" disabled={disabled} readOnly className={sv_value_class} value={tableContents[element.value][0]} onClick={onContextMenu} />
             </>
             : ''}
         </InputGroup>

@@ -15,7 +15,7 @@ export default function Calculator() {
 //  console.log("Calculator - Mounting...");
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const base = useContext(ReportBaseContext);
-  console.log('Calculator','base=',base);
+//  console.log('Calculator','base=',base);
 
   return (
     <ReportBase>
