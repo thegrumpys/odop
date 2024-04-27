@@ -12,7 +12,7 @@ export default function ReportBase(props) {
 
   const def_dia = (def_len) => {
     /*  calculates mean diameter of deflected spring.  */
-//    console.log("In ReportBase.def_dia this=",this);
+//    console.log("In Reportdef_dia this=",this);
     return Math.sqrt(base.wire_len_a - def_len * def_len) / (symbol_table[o.Coils_A].value * Math.PI);
   }
 

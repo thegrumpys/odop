@@ -1,129 +1,128 @@
-import { Component } from 'react';
+import { useState, useEffect, createContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import * as o from './symbol_table_offsets';
 import * as mo from '../mat_offsets';
 import { getAlertsBySeverity } from '../../../components/Alerts';
+import ReportBaseContext from './ReportBaseContext';
 
-export class ReportBase extends Component {
+export default function ReportBase(props) {
+  //  console.log("ReportBase - Mounting...");
+  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
 
-    constructor(props) {
-//        console.log('In ReportBase.constructor','props=',props);
-        super(props);
-        this.def_dia = this.def_dia.bind(this);
-    }
+  const def_dia = (def_len) => {
+    /*
+     * Calculates mean diameter of deflected spring.
+     * intermediate dia. calcs. assume no wire stretch
+     * note that value of base.wire_len_a is actually square of active wire length
+     */
+    return Math.sqrt(base.wire_len_a - def_len * def_len) / (symbol_table[o.Coils_T].value * Math.PI);
+  }
 
-    render() {
-//        console.log('In ReportBase.render');
-        const Close_Wound_Coil = 5;
-        /*  Bring in material properties table  */
-        if (this.props.symbol_table[o.Material_File].value === "mat_metric.json")
-            this.m_tab = require('../mat_metric.json');
-        else
-            this.m_tab = require('../mat_us.json');
-        this.et_tab = require('./endtypes.json');
+  var base = {}; // empty object
 
-        /*  Bring in life target table  */
-            this.lifetarg = require('./lifetarget.json');
+  /*  Bring in material properties table  */
+  if (symbol_table[o.Material_File].value === "mat_metric.json")
+    base.m_tab = require('../mat_metric.json');
+  else
+    base.m_tab = require('../mat_us.json');
+  base.et_tab = require('./endtypes.json');
 
-        this.hits = getAlertsBySeverity().length;
-        this.errmsg = "";
-        this.startpntmsg = "Alert details are available via the Alert button on the main page of Advanced and Calculator Views.";
+  /*  Bring in life target table  */
+  base.lifetarg = require('./lifetarget.json');
 
-        this.len_lbl = "Wire Length";
+  base.hits = getAlertsBySeverity().length;
+  base.errmsg = "";
+  base.startpntmsg = "Alert details are available via the Alert button on the main page of Advanced and Calculator Views.";
 
-        var sq1 = this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Coils_T].value;
-        var sq2 = this.props.symbol_table[o.Coils_T].value * Math.PI * this.props.symbol_table[o.Mean_Dia].value;
-        this.wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2)
-            + Math.PI * (this.props.symbol_table[o.End_ID].value + this.props.symbol_table[o.Wire_Dia].value
-            + this.props.symbol_table[o.Extended_End_ID].value + this.props.symbol_table[o.Wire_Dia].value)
-            + this.props.symbol_table[o.End_Extension].value;
+  base.len_lbl = "Wire Length";
 
-        this.wgt1000 = 1000.0 * this.props.symbol_table[o.Weight].value;
+  var sq1 = symbol_table[o.Wire_Dia].value * symbol_table[o.Coils_T].value;
+  var sq2 = symbol_table[o.Coils_T].value * Math.PI * symbol_table[o.Mean_Dia].value;
+  base.wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2)
+    + Math.PI * (symbol_table[o.End_ID].value + symbol_table[o.Wire_Dia].value
+      + symbol_table[o.Extended_End_ID].value + symbol_table[o.Wire_Dia].value)
+    + symbol_table[o.End_Extension].value;
 
-//        note that value of this.wire_len_a is actually square of body wire length
-        this.wire_len_a = sq1 * sq1 + sq2 * sq2;
+  base.wgt1000 = 1000.0 * symbol_table[o.Weight].value;
 
-        this.dhat = this.def_dia(sq1 + this.props.symbol_table[o.Deflect_1].value);
-        this.od_1 = this.dhat + this.props.symbol_table[o.Wire_Dia].value;
-        this.id_1 = this.dhat - this.props.symbol_table[o.Wire_Dia].value;
+  //        note that value of base.wire_len_a is actually square of body wire length
+  base.wire_len_a = sq1 * sq1 + sq2 * sq2;
 
-        this.dhat = this.def_dia(sq1 + this.props.symbol_table[o.Deflect_2].value);
-        this.od_2 = this.dhat + this.props.symbol_table[o.Wire_Dia].value;
-        this.id_2 = this.dhat - this.props.symbol_table[o.Wire_Dia].value;
+  base.dhat = def_dia(sq1 + symbol_table[o.Deflect_1].value);
+  base.od_1 = base.dhat + symbol_table[o.Wire_Dia].value;
+  base.id_1 = base.dhat - symbol_table[o.Wire_Dia].value;
 
-        var kc = (4.0 * this.props.symbol_table[o.Spring_Index].value - 1.0) / (4.0 * this.props.symbol_table[o.Spring_Index].value - 4.0);
-        var ks = kc + 0.615 / this.props.symbol_table[o.Spring_Index].value;
-        var wd3 = this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value * this.props.symbol_table[o.Wire_Dia].value;
-        var s_f = ks * 8.0 * this.props.symbol_table[o.Mean_Dia].value / (Math.PI * wd3);
+  base.dhat = def_dia(sq1 + symbol_table[o.Deflect_2].value);
+  base.od_2 = base.dhat + symbol_table[o.Wire_Dia].value;
+  base.id_2 = base.dhat - symbol_table[o.Wire_Dia].value;
 
-        this.kw1 = ks;
+  var kc = (4.0 * symbol_table[o.Spring_Index].value - 1.0) / (4.0 * symbol_table[o.Spring_Index].value - 4.0);
+  var ks = kc + 0.615 / symbol_table[o.Spring_Index].value;
+  var wd3 = symbol_table[o.Wire_Dia].value * symbol_table[o.Wire_Dia].value * symbol_table[o.Wire_Dia].value;
+  var s_f = ks * 8.0 * symbol_table[o.Mean_Dia].value / (Math.PI * wd3);
 
-        if (this.props.symbol_table[o.Stress_1].value !== 0.0)
-            this.fs_1 = Math.abs(this.props.symbol_table[o.Stress_Lim_Stat].value / this.props.symbol_table[o.Stress_1].value);
-        else
-            this.fs_1 = Number.POSITIVE_INFINITY;
+  base.kw1 = ks;
 
-        this.safe_load = this.props.symbol_table[o.Stress_Lim_Stat].value / s_f;
-        this.safe_load_u = this.props.symbol_table[o.Force_2].units;
+  if (symbol_table[o.Stress_1].value !== 0.0)
+    base.fs_1 = Math.abs(symbol_table[o.Stress_Lim_Stat].value / symbol_table[o.Stress_1].value);
+  else
+    base.fs_1 = Number.POSITIVE_INFINITY;
 
-        /*
-         * pitch and helix angle are not used for extension spring
-         * Angle across coil cross section
-         * hlx_ang=atan(0.5*pitch/mean_dia)*(180.0/pi);
-         */
+  base.safe_load = symbol_table[o.Stress_Lim_Stat].value / s_f;
+  base.safe_load_u = symbol_table[o.Force_2].units;
 
-        this.cycle_life_u = this.props.symbol_table[o.Cycle_Life].units + " (est.)";
+  /*
+   * pitch and helix angle are not used for extension spring
+   * Angle across coil cross section
+   * hlx_ang=atan(0.5*pitch/mean_dia)*(180.0/pi);
+   */
 
-        /*  ref. pg 51 Associated Spring Design Handbook  */
-        /*  assume C2=4; i.e. R2=twice wire dia       */
-        this.sb = 1.25 * (8.0 * this.props.symbol_table[o.Mean_Dia].value * this.props.symbol_table[o.Force_2].value) / (Math.PI * wd3);
+  base.cycle_life_u = symbol_table[o.Cycle_Life].units + " (est.)";
 
-        this.safe_travel = (this.safe_load - this.props.symbol_table[o.Initial_Tension].value) / this.props.symbol_table[o.Rate].value;
-        this.pc_avail_deflect = 100.0 * this.props.symbol_table[o.Deflect_2].value / this.safe_travel;
+  /*  ref. pg 51 Associated Spring Design Handbook  */
+  /*  assume C2=4; i.e. R2=twice wire dia       */
+  base.sb = 1.25 * (8.0 * symbol_table[o.Mean_Dia].value * symbol_table[o.Force_2].value) / (Math.PI * wd3);
 
-        this.dhat = this.def_dia(sq1 + this.safe_travel);
-        this.od_maxsafe = this.dhat + this.props.symbol_table[o.Wire_Dia].value;
-        this.id_maxsafe = this.dhat - this.props.symbol_table[o.Wire_Dia].value;
-        this.dhat = this.props.symbol_table[o.Tensile].value / 100.0;
+  base.safe_travel = (base.safe_load - symbol_table[o.Initial_Tension].value) / symbol_table[o.Rate].value;
+  base.pc_avail_deflect = 100.0 * symbol_table[o.Deflect_2].value / base.safe_travel;
 
-        if (this.props.symbol_table[o.End_Type].value !== Close_Wound_Coil && (this.sb > this.props.symbol_table[o.Stress_Lim_Endur].value || this.props.symbol_table[o.Stress_Hook].value > this.props.symbol_table[o.Stress_Lim_Bend].value)) {
-            this.warnmsg = "Fatigue failure at end is possible. See the Hook Stress topic in on-line Help for the Extension Spring design type.";
-        } else {
-            this.warnmsg = "";
-        }
+  base.dhat = def_dia(sq1 + base.safe_travel);
+  base.od_maxsafe = base.dhat + symbol_table[o.Wire_Dia].value;
+  base.id_maxsafe = base.dhat - symbol_table[o.Wire_Dia].value;
+  base.dhat = symbol_table[o.Tensile].value / 100.0;
 
-//        console.log("this.props.symbol_table[o.Prop_Calc_Method].value = ", this.props.symbol_table[o.Prop_Calc_Method].value);
-        if (this.props.symbol_table[o.Prop_Calc_Method].value === 1){
-            this.matTypeValue = this.m_tab[this.props.symbol_table[o.Material_Type].value][mo.matnam];
-            this.astmFedSpecValue = this.props.symbol_table[o.ASTM_Fed_Spec].value;
-            this.clWarnString = "";
-        } else {
-            this.matTypeValue = "User_Specified";
-            this.astmFedSpecValue = "N/A";
-            this.clWarnString = "Cycle_Life is not computed for User_Specified materials.";
-        }
-//        console.log("this.matTypeValue, this.astmFedSpecValue = ", this.matTypeValue, this.astmFedSpecValue);
+  if (symbol_table[o.End_Type].value !== "Close_Wound_Coil" && (base.sb > symbol_table[o.Stress_Lim_Endur].value || symbol_table[o.Stress_Hook].value > symbol_table[o.Stress_Lim_Bend].value)) {
+    base.warnmsg = "Fatigue failure at end is possible. See the Hook Stress topic in on-line Help for the Extension Spring design type.";
+  } else {
+    base.warnmsg = "";
+  }
 
-        this.lifeTargValue = this.lifetarg[this.props.symbol_table[o.Life_Category].value];
-        if (this.props.symbol_table[o.Life_Category].value <= 4){
-            this.peenValue = "Not peened";
-        } else {
-            this.peenValue = "Shot peened";
-        }
+  //        console.log("symbol_table[o.Prop_Calc_Method].value = ", symbol_table[o.Prop_Calc_Method].value);
+  if (symbol_table[o.Prop_Calc_Method].value === 1) {
+    base.matTypeValue = base.m_tab[symbol_table[o.Material_Type].value][mo.matnam];
+    base.astmFedSpecValue = symbol_table[o.ASTM_Fed_Spec].value;
+    base.clWarnString = "";
+  } else {
+    base.matTypeValue = "User_Specified";
+    base.astmFedSpecValue = "N/A";
+    base.clWarnString = "Cycle_Life is not computed for User_Specified materials.";
+  }
+  //        console.log("base.matTypeValue, base.astmFedSpecValue = ", base.matTypeValue, base.astmFedSpecValue);
 
-        this.energy_1 = 0.5 * this.props.symbol_table[o.Rate].value * this.props.symbol_table[o.Deflect_1].value * this.props.symbol_table[o.Deflect_1].value;
-        this.energy_2 = 0.5 * this.props.symbol_table[o.Rate].value * this.props.symbol_table[o.Deflect_2].value * this.props.symbol_table[o.Deflect_2].value;
-        this.energy_MS = 0.5 * this.props.symbol_table[o.Rate].value * this.safe_travel * this.safe_travel;
+  base.lifeTargValue = base.lifetarg[symbol_table[o.Life_Category].value];
+  if (symbol_table[o.Life_Category].value <= 4) {
+    base.peenValue = "Not peened";
+  } else {
+    base.peenValue = "Shot peened";
+  }
 
-        return null;
-    }
+  base.energy_1 = 0.5 * symbol_table[o.Rate].value * symbol_table[o.Deflect_1].value * symbol_table[o.Deflect_1].value;
+  base.energy_2 = 0.5 * symbol_table[o.Rate].value * symbol_table[o.Deflect_2].value * symbol_table[o.Deflect_2].value;
+  base.energy_MS = 0.5 * symbol_table[o.Rate].value * base.safe_travel * base.safe_travel;
 
-    def_dia(def_len) {
-        /*
-         * Calculates mean diameter of deflected spring.
-         * intermediate dia. calcs. assume no wire stretch
-         * note that value of this.wire_len_a is actually square of active wire length
-         */
-        return Math.sqrt(this.wire_len_a - def_len * def_len) / (this.props.symbol_table[o.Coils_T].value * Math.PI);
-    }
+  //  console.log('ReportBase','base=',base);
 
+  return <ReportBaseContext.Provider value={base}>
+    {props.children}
+  </ReportBaseContext.Provider>;
 }
