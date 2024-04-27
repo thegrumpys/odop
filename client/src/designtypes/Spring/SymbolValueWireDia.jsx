@@ -28,7 +28,7 @@ import FeasibilityIndicator from '../../components/FeasibilityIndicator';
 import { toODOPPrecision } from '../../toODOPPrecision'
 import store from '../../store/store';
 
-export default function SymbolValueWireDia({ className, element }) {
+export default function SymbolValueWireDia({ className, element, index }) {
 // console.log("SymbolValueWireDia - Mounting...",'element=',element,'index=',index);
   const type = useSelector((state) => state.modelSlice.model.type);
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
@@ -41,7 +41,7 @@ export default function SymbolValueWireDia({ className, element }) {
   const [isInvalidMinConstraint, setIsInvalidMinConstraint] = useState(false);
   const [isInvalidMaxConstraint, setIsInvalidMaxConstraint] = useState(false);
   const [error, setError] = useState('');
-  const [table, setTable] = useState(null);
+//  const [table, setTable] = useState(null);
   const [modified, setModified] = useState(false);
   const [reset, setReset] = useState('');
   const [valueInput, setValueInput] = useState(true);
@@ -58,20 +58,20 @@ export default function SymbolValueWireDia({ className, element }) {
     };
   }, []);
 
-  useEffect(() => {
-//    console.log("SymbolValueWireDia - Mounted");
-    if (element.format === 'table') {
-      var tableContents = require('./' + element.table + '.json'); // Dynamically load table
-      setTable(tableContents);
-    }
-    return () => { };
-  }, [element, type]);
+//  useEffect(() => {
+////    console.log("SymbolValueWireDia - Mounted");
+//    if (element.format === 'table') {
+//      var tableContents = require('./' + element.table + '.json'); // Dynamically load table
+//      setTable(tableContents);
+//    }
+//    return () => { };
+//  }, [element, type]);
 
   if (element.format === 'table') {
-//   console.log('SymbolValueWireDia file= ../designtypes/'+element.table+'.json');
+//    console.log('SymbolValueWireDia file= ../designtypes/'+element.table+'.json');
     var tableContents = require('./' + element.table + '.json'); // Dynamically load table
-//   console.log('SymbolValueWireDia tableContents=',tableContents);
-    setTable(tableContents);
+//    console.log('SymbolValueWireDia tableContents=',tableContents);
+//    setTable(tableContents);
   }
 
   const onRadio = () => {
@@ -565,7 +565,7 @@ export default function SymbolValueWireDia({ className, element }) {
               </>}
           </Table>
           {element.type === "equationset" && !element.input && !element.hidden &&
-            <Table size="sm" borderless>
+            <Table size="sm" borderless className="table-secondary">
               <tbody>
                 <tr>
                   <td>
