@@ -14,5 +14,10 @@ export default configureStore({
     alertsSlice: alertsReducer,
     executePanelSlice: executePanelReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(dispatcher)
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore these field paths in all actions
+        ignoredActionPaths: ['payload.merit'],
+      },
+  }).concat(dispatcher)
 });

@@ -117,7 +117,7 @@ export const modelSlice = createSlice({
         state.model.result.termination_condition = '';
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index < 0) {
-          console.error('changeSymbolValue: Failed to find name in symbol_table.','name=',action.payload.name);
+          console.error('fixSymbolValue: Failed to find name in symbol_table.','name=',action.payload.name);
         }
         return; // No-op
       },
@@ -130,7 +130,7 @@ export const modelSlice = createSlice({
         state.model.result.termination_condition = '';
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index < 0) {
-          console.error('changeSymbolValue: Failed to find name in symbol_table.','name=',action.payload.name);
+          console.error('freeSymbolValue: Failed to find name in symbol_table.','name=',action.payload.name);
         }
         return; // No-op
       },
