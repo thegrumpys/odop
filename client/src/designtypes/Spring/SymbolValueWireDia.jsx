@@ -43,7 +43,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
   const [error, setError] = useState('');
 //  const [table, setTable] = useState(null);
   const [modified, setModified] = useState(false);
-  const [reset, setReset] = useState(null);
+  const [reset, setReset] = useState('');
   const [valueInput, setValueInput] = useState(true);
   const dispatch = useDispatch();
 
@@ -237,8 +237,10 @@ export default function SymbolValueWireDia({ className, element, index }) {
   const onContextMenu = (e) => {
 //    console.log('In SymbolValueWireDia.onContextMenu','e=',e);
     e.preventDefault();
+    var design = store.getState().modelSlice;
+    var reset = JSON.stringify(design.model);
     setEditShow(true);
-    setReset(element.value); // Remember original value
+    setReset(reset);
     setError('');
     setModified(false);
   }
@@ -260,7 +262,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
   const onResetButton = () => {
 //    console.log('In SymbolValueWireDia.onResetButton');
     logUsage('event', 'SymbolValueWireDia', { event_label: 'Reset button' });
-    dispatch(changeSymbolValue(element.name, reset)); // Restore original value
+    dispatch(load(JSON.parse(reset)));
     setModified(false);
   }
 

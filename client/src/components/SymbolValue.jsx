@@ -39,7 +39,7 @@ export default function SymbolValue({ className, element, index }) {
   const [error, setError] = useState('');
 //  const [table, setTable] = useState(null);
   const [modified, setModified] = useState(false);
-  const [reset, setReset] = useState(null);
+  const [reset, setReset] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -174,8 +174,10 @@ export default function SymbolValue({ className, element, index }) {
   const onContextMenu = (e) => {
 //    console.log('In SymbolValue.onContextMenu','e=',e);
     e.preventDefault();
+    var design = store.getState().modelSlice;
+    var reset = JSON.stringify(design.model);
     setEditShow(true);
-    setReset(element.value); // Remember original value
+    setReset(reset);
     setError('');
     setModified(false);
   }
@@ -197,7 +199,7 @@ export default function SymbolValue({ className, element, index }) {
   const onResetButton = () => {
 //    console.log('In SymbolValue.onResetButton');
     logUsage('event', 'SymbolValue', { event_label: 'Reset button' });
-    dispatch(changeSymbolValue(element.name, reset)); // Restore original value
+    dispatch(load(JSON.parse(reset)));
     setModified(false);
   }
 
