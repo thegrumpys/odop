@@ -245,7 +245,7 @@ export default function SymbolValue({ className, element, index }) {
   }
 
   var sv_results = getAlertsByName(element.name, true);
-  var sv_value_class = sv_results.className + ' text-end ';
+  var sv_value_class = sv_results.className;
   var sv_icon_alerts = sv_results.alerts;
   if (element.lmin & FIXED) {
     sv_value_class += "borders-fixed ";

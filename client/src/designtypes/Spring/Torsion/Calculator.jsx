@@ -19,7 +19,7 @@ export default function Calculator() {
   return (
     <Container>
       <Row>
-        <table className="report-table">
+        <table className="w-50 report-table">
           <tbody>
             <tr>
               <SymbolName element={symbol_table[o.Material_Type]} index={o.Material_Type} />
@@ -39,7 +39,7 @@ export default function Calculator() {
       </Row>
       <br />
       <Row>
-        <table className="report-table">
+        <table className="w-100 report-table">
           <thead>
             <tr>
               <th></th>
@@ -102,7 +102,7 @@ export default function Calculator() {
       </Row>
       <br />
       <Row>
-        <table className="report-table">
+        <table className="w-75 report-table">
           <tbody>
             <tr>
               <SymbolName element={symbol_table[o.Stroke]} index={o.Stroke} />
@@ -172,7 +172,7 @@ export default function Calculator() {
       </Row>
       <br />
       <Row>
-        <table className="report-table">
+        <table className="w-75 report-table">
           <tbody>
             <tr>
               <td>
@@ -186,6 +186,7 @@ export default function Calculator() {
           </tbody>
         </table>
       </Row>
+      <br />
     </Container>
   );
 }
