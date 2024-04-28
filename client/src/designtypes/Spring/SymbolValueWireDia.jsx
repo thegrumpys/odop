@@ -240,7 +240,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
     var design = store.getState().modelSlice;
     var reset = JSON.stringify(design.model);
     setEditShow(true);
-    setReset(reset);
+    setReset(reset); // Yes, we are saving the ENTIRE model so we can restore ONLY ONE symbol table entry - overkill, but it works!
     setError('');
     setModified(false);
   }
@@ -262,7 +262,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
   const onResetButton = () => {
 //    console.log('In SymbolValueWireDia.onResetButton');
     logUsage('event', 'SymbolValueWireDia', { event_label: 'Reset button' });
-    dispatch(load(JSON.parse(reset)));
+    dispatch(load(JSON.parse(reset))); // Yes, we are restoring the ENTIRE model so we can reset ONLY ONE symbol table entry - overkill, but it works!
     setModified(false);
   }
 
