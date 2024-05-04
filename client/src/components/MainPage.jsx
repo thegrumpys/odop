@@ -13,6 +13,8 @@ import {
 } from 'react-bootstrap';
 import { changeUser, changeView, deleteAutoSave } from '../store/modelSlice';
 import ExecutePanel from './ExecutePanel';
+import SignIn from '../menus/Session/SignIn';
+import SignOut from '../menus/Session/SignOut';
 import FileOpen from '../menus/File/FileOpen';
 import FilePreferences from '../menus/File/FilePreferences';
 import FileProperties from '../menus/File/FileProperties';
@@ -35,6 +37,7 @@ import HelpAbout from '../menus/Help/HelpAbout';
 import SearchDocs from './SearchDocs';
 import config from '../config';
 import ResultTable from './ResultTable';
+import { useOktaAuth } from '@okta/okta-react';
 
 export default function MainPage() {
 //  console.log('MainPage - Mounting...');
@@ -45,6 +48,8 @@ export default function MainPage() {
   const [show, setShow] = useState(false);
   const [viewName, setViewName] = useState(config.url.view);
   const dispatch = useDispatch();
+  const { oktaAuth, authState } = useOktaAuth();
+  console.log('MainPage','oktaAuth=',oktaAuth,'authState=',authState);
 
   useEffect(() => {
 //    console.log('MainPage','model_view useEffect','model_view=',model_view);
@@ -86,6 +91,7 @@ export default function MainPage() {
   var alt = model_type + ' icon';
 //  console.log('MainPage','src=',src,' alt=',alt);
 
+  const logOnOff = authState.isAuthenticated ? <SignOut /> : <SignIn />;
   return (
     <>
       <Navbar className="ps-3 pe-3" style={{ backgroundColor: '#eeeeee' }} expand="md" fixed="top">
@@ -95,6 +101,7 @@ export default function MainPage() {
         <Navbar.Toggle onClick={toggle} />
         <Navbar.Collapse in={show}>
           <Nav className="me-auto">
+            {logOnOff}
             <NavDropdown title="File" renderMenuOnMount={true}>
               <FileOpen />
               <NavDropdown.Divider />

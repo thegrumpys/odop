@@ -30,6 +30,8 @@
   ],
   "dependencies": {
     "@mars/heroku-js-runtime-env": "^3.0.2",
+    "@okta/okta-react": "^6.8.0",
+    "@okta/okta-signin-widget": "^7.18.0",
     "@reduxjs/toolkit": "^2.2.1",
     "bootstrap": "^5.3.3",
     "popper.js": "^1.16.1",

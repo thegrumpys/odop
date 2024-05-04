@@ -1,54 +1,28 @@
-import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
-import { connect } from 'react-redux';
-import { withOktaAuth } from '@okta/okta-react';
+import { useOktaAuth } from '@okta/okta-react';
 import { changeUser, saveAutoSave } from '../../store/modelSlice';
 
-class SignOut extends Component {
+export default function SignOut() {
+  const { oktaAuth, authState } = useOktaAuth();
+  console.log('SignOut','oktaAuth=',oktaAuth,'authState=',authState);
 
-    constructor(props) {
-//      console.log("In SignOut.constructor props=",props);
-      super(props);
-      this.toggle = this.toggle.bind(this);
-    }
+  const toggle = () => {
+    console.log('In SignOut.toggle');
+    dispatch(changeUser(null));
+    dispoatch(saveAutoSave("redirect"));
+    // Before changing the postSignOutRedirectUri you must go into the Okta Admin UI
+    // And add the new one into the "SignOut redirect URIs" to whitelist it.
+//    oktaAuth.signOut({ postSignOutRedirectUri: window.location.origin + '/' });
+    oktaAuth.signOut();
+    logUsage('event', 'SignOut', { event_label: '' });
+  }
 
-    async toggle() {
-//      console.log('In SignOut.toggle');
-      this.props.changeUser(null);
-      this.props.saveAutoSave("redirect");
-      // Before changing the postSignOutRedirectUri you must go into the Okta Admin UI
-      // And add the new one into the "SignOut redirect URIs" to whitelist it.
-//      this.props.oktaAuth.signOut({postSignOutRedirectUri: window.location.origin + '/'});
-      this.props.oktaAuth.signOut();
-      logUsage('event', 'SignOut', { event_label: '' });
-    }
-
-    render() {
-//      console.log('In SignOut.render');
-      return this.props.authState.isAuthenticated ? (
-        <>
-            <Button variant="light" onClick={this.toggle}>
-                 Sign Out
-            </Button>
-        </>
-      ) : null;
-    }
-
+  return authState.isAuthenticated ? (
+    <>
+      <Button variant="light" onClick={toggle}>
+        Sign Out
+      </Button>
+    </>
+  ) : null;
 }
-
-
-const mapStateToProps = state => ({
-});
-
-const mapDispatchToProps = {
-    changeUser: changeUser,
-    saveAutoSave: saveAutoSave,
-};
-
-export default withOktaAuth(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(SignOut)
-);

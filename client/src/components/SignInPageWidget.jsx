@@ -1,18 +1,23 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import OktaSignIn from '@okta/okta-signin-widget';
-import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
+//import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 import config from '../config';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { withOktaAuth } from '@okta/okta-react';
+import { useOktaAuth } from '@okta/okta-react';
 import { changeUser, saveAutoSave } from '../store/modelSlice';
 import { logUsage } from '../logUsage';
 
-class SignInPageWidget extends Component {
-  componentDidMount() {
-//    console.log('In SignInPageWidget.componentDidMount');
-    const el = ReactDOM.findDOMNode(this);
+export default function SignInPageWidget() {
+  const inputRef = useRef(null);
+  console.log('SignInPageWidget','inputRef=',inputRef);
+  const dispatch = useDispatch();
+  const { oktaAuth, authState } = useOktaAuth();
+  console.log('SignInPageWidget','oktaAuth=',oktaAuth,'authState=',authState);
+
+  useEffect(() => {
+    console.log("SignInPageWidget - Mounted");
+    const el = inputRef.current;
+    console.log("el=",el);
     const { pkce, issuer, clientId, redirectUri, scopes } = config.oidc;
 //  console.log("config=",config);
 //  console.log("config.oidc=",config.oidc);
@@ -42,7 +47,7 @@ class SignInPageWidget extends Component {
 //  }
 //  // End Diagnostic
 
-  this.widget = new OktaSignIn({
+     let widget = new OktaSignIn({
       /**
        * Note: when using the Sign-In Widget for an OIDC flow, it still
        * needs to be configured with the base URL for your Okta Org. Here
@@ -63,9 +68,7 @@ class SignInPageWidget extends Component {
         display: 'page',
         scopes,
       },
-
       features: { registration:true },
-
       helpLinks: {
         custom: [
           {
@@ -85,51 +88,30 @@ class SignInPageWidget extends Component {
           }
         ]
       }
-
     });
-    this.widget.showSignInToGetTokens({
-        el: el,
-        scopes,
-      }).then((tokens) => {
-        // Add tokens to storage
-//        console.log('In SignInPageWidget.showSignInToGetTokens','tokens=',tokens);
-        if (tokens !== undefined) {
-            var user = tokens.idToken.claims.sub;
-            this.props.changeUser(user);
-            logUsage('event', 'SignedIn', { event_label: user });
-            this.props.saveAutoSave("redirect");
-            this.props.oktaAuth.handleLoginRedirect(tokens);
-        }
-      }).catch((err) => {
-        throw err;
-      });
+    console.log('widget=',widget);
+    widget.showSignInToGetTokens({
+      el: el,
+      scopes,
+    }).then((tokens) => {
+      // Add tokens to storage
+//      console.log('In SignInPageWidget.showSignInToGetTokens','tokens=',tokens);
+      if (tokens !== undefined) {
+          var user = tokens.idToken.claims.sub;
+          dispatch(changeUser(user));
+          logUsage('event', 'SignedIn', { event_label: user });
+          dispatch(saveAutoSave("redirect"));
+          oktaAuth.handleLoginRedirect(tokens);
+      }
+    }).catch((err) => {
+      throw err;
+    });
 
-  }
+    return () => {
+      console.log("SignInPageWidget - Unmounting ...")
+      widget.remove();
+    }
+  }, []);
 
-  componentWillUnmount() {
-//      console.log('In SignInPageWidget.componentWillUnmount');
-    this.widget.remove();
-  }
-
-  render() {
-//    console.log('In SignInPageWidget.render');
-    return <div />;
-  }
+  return <div ref={inputRef} />;
 }
-
-const mapStateToProps = state => ({
-    user: state.user,
-});
-
-const mapDispatchToProps = {
-    changeUser: changeUser,
-    saveAutoSave: saveAutoSave,
-};
-
-export default withRouter(withOktaAuth(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(SignInPageWidget)
-));
-

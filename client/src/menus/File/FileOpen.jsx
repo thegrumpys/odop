@@ -7,8 +7,7 @@ import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
-//import { withOktaAuth } from '@okta/okta-react';
-//import { withRouter } from 'react-router-dom';
+import { useOktaAuth } from '@okta/okta-react';
 
 export default function FileOpen() {
 //  console.log("FileOpen - Mounting...");
@@ -22,6 +21,8 @@ export default function FileOpen() {
   const [name, setName] = useState(model_name);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { oktaAuth, authState } = useOktaAuth();
+  console.log('FileOpen','oktaAuth=',oktaAuth,'authState=',authState);
 
 //  useEffect(() => {
 ////    console.log("FileOpen - Mounted");
@@ -136,7 +137,8 @@ export default function FileOpen() {
   const onSignIn = () => {
 //    console.log('FileOpen.onSignIn');
     setShow(!show);
-    navigate.push('/login');
+    console.log('navigate("/login")');
+    navigate('/login');
   }
 
   const onLoadInitialState = () => {
@@ -204,7 +206,7 @@ export default function FileOpen() {
           </Form.Control>
         </Modal.Body>
         <Modal.Footer>
-          {/* {!this.props.authState.isAuthenticated && <Button variant="info" onClick={onSignIn}>Sign In...</Button>}{' '} */}
+          {!authState.isAuthenticated && <Button variant="info" onClick={onSignIn}>Sign In...</Button>}{' '}
           {config.node.env !== "production" && <Button variant="secondary" onClick={onLoadInitialState}>Load Initial State</Button>}{' '}
           {config.node.env !== "production" && <Button variant="secondary" onClick={onLoadMetricInitialState}>Load Metric Initial State</Button>}{' '}
           {typeof (Storage) !== "undefined" && localStorage.getItem('autosave') !== null && <Button variant="secondary" onClick={onLoadAutoSave}>Load Auto Save</Button>}{' '}

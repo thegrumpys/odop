@@ -6,7 +6,6 @@ import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
 import { withOktaAuth } from '@okta/okta-react';
-import { withRouter } from 'react-router-dom';
 
 class FileDelete extends Component {
 

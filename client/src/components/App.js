@@ -1,14 +1,17 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { load, loadInitialState, changeName, restoreAutoSave, deleteAutoSave } from "../store/modelSlice";
 import MainPage from "./MainPage";
+import SignInPage from './SignInPage';
 import { Button, Modal, Alert } from 'react-bootstrap';
 import config from '../config';
 import { displaySpinner } from "./Spinner";
 import { displayMessage } from "./Message";
 import { logUsage } from '../logUsage';
+import { OktaAuth } from '@okta/okta-auth-js'
+import { LoginCallback, SecureRoute, Security } from '@okta/okta-react';
 
 export default function App() {
 //  console.log("APP - Mounting...");
@@ -19,7 +22,7 @@ export default function App() {
   const view = useSelector((state) => state.modelSlice.view);
   const type = useSelector((state) => state.modelSlice.model.type);
   const dispatch = useDispatch();
-//  const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
 //    console.log("APP - Mounted");
@@ -47,7 +50,8 @@ export default function App() {
     config.url.view = view; // Use model view
     config.url.type = type; // Use model type
     config.url.execute = undefined; // Turn off execute
-//    navigate("/test");
+    console.log('navigate("/login")');
+    navigate("/login");
     logUsage('event', 'App', { event_label: 'type: ' + type + ' load redirect' });
   }
 
@@ -68,7 +72,8 @@ export default function App() {
     config.url.view = view; // Use model view
     config.url.type = type; // Use model type
     config.url.execute = undefined; // Turn off execute
-//    navigate("/test");
+    console.log('navigate("/login")');
+    navigate("/login");
     logUsage('event', 'Routes', { event_label: 'type: ' + type + ' load autoSave' });
   }
 
@@ -126,10 +131,11 @@ export default function App() {
     });
   }
 
-//  const onAuthRequired = () => {
-//    console.log('APP - onAuthRequired');
-//    navigate("/test");
-//  }
+  const onAuthRequired = () => {
+    console.log('APP - onAuthRequired');
+    console.log('navigate("/login")');
+    navigate("/login");
+  }
 
   const onContextHelp = () => {
 //      console.log('APP - onContextHelp');
@@ -139,13 +145,22 @@ export default function App() {
 //          <Route exact path="/" element={<Home />} />
 //          <Route path="/test" element={<Test />} />
 
+  const restoreOriginalUri = async (oktaAuth, originalUri) => {
+    navigate.replace(toRelativeUrl(originalUri || '/', window.location.origin));
+  };
+
+  const oktaAuth = new OktaAuth({...config.oidc});
   return (
     <>
-      <BrowserRouter>
+      <Security oktaAuth={oktaAuth}
+                onAuthRequired={onAuthRequired}
+                restoreOriginalUri={restoreOriginalUri} >
         <Routes>
           <Route exact path="/" element={<MainPage />} />
+          <Route path='/login' element={<SignInPage />} />
+          <Route path='/implicit/callback' element={LoginCallback} />
         </Routes>
-      </BrowserRouter>
+      </Security>
       {show && <Modal show={show} onHide={loadDefaultDesign}>
           <Modal.Header closeButton><Modal.Title>ODOP Design Recovery</Modal.Title></Modal.Header>
           <Modal.Body>

@@ -6,6 +6,7 @@ import store from "./store/store";
 import { Provider } from "react-redux";
 import './odop.css';
 import * as ReactDOMClient from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 
 const container = document.getElementById('root');
 const root = ReactDOMClient.createRoot(container);
@@ -14,7 +15,9 @@ root.render(
     <Provider store={store}>
       <Spinner />
       <Message />
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   </div>
 );

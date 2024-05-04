@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, NavDropdown } from 'react-bootstrap';
 import { version as release_version } from '../../version';
 import { logUsage } from '../../logUsage';
-//import { withOktaAuth } from '@okta/okta-react';
+import { useOktaAuth } from '@okta/okta-react';
 import config from '../../config';
 import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
@@ -18,6 +18,8 @@ export default function HelpAbout() {
   const version = useSelector((state) => state.modelSlice.model.version);
   const jsontype = useSelector((state) => state.modelSlice.model.jsontype);
   const units = useSelector((state) => state.modelSlice.model.units);
+  const { oktaAuth, authState } = useOktaAuth();
+  console.log('HelpAbout','oktaAuth=',oktaAuth,'authState=',authState);
 
   useEffect(() => {
 //    console.log("HelpAbout - Mounted");
@@ -65,9 +67,6 @@ export default function HelpAbout() {
       });
   }
 
-                                /* User Authenticated: {this.props.authState.isAuthenticated ? 'true' : 'false'}<br /> */
-                                /* User Email: {this.props.authState.isAuthenticated ? this.props.authState.idToken.claims.email : 'Unknown'}<br /> */
-
   return (
     <>
       <NavDropdown.Item onClick={toggle}>
@@ -95,6 +94,8 @@ export default function HelpAbout() {
           ODOP Software Version: {release_version()}<br />
           {config.node.env !== "production" &&
             <>
+              User Authenticated: {authState.isAuthenticated ? 'true' : 'false'}<br />
+              User Email: {authState.isAuthenticated ? authState.idToken.claims.email : 'Unknown'}<br />
               User ClientId: {user === null ? 'Unknown' : user}<br />
             </>
           }

@@ -1,36 +1,30 @@
-import React, { Component } from 'react';
+import { useNavigate } from "react-router-dom";
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { withRouter } from 'react-router-dom';
 import { logUsage } from '../../logUsage';
-import { withOktaAuth } from '@okta/okta-react';
+import { useOktaAuth } from '@okta/okta-react';
 
-export default withRouter(withOktaAuth(class SignIn extends Component {
+export default function SignIn() {
+  const navigate = useNavigate();
+  const { oktaAuth, authState } = useOktaAuth();
+  console.log('SignIn','oktaAuth=',oktaAuth,'authState=',authState);
 
-    constructor(props) {
-//      console.log("In SignIn.constructor props=",props);
-      super(props);
-      this.toggle = this.toggle.bind(this);
-    }
+  const toggle = () => {
+    console.log('In SignIn.toggle');
+    oktaAuth.setOriginalUri();
+    console.log('In SignIn.toggle oktaAuth.getOriginalUri=', oktaAuth.getOriginalUri());
+    console.log('navigate("/login")');
+    navigate('/login');
+    logUsage('event', 'SignIn', { event_label: '' });
+  }
 
-    async toggle() {
-//      console.log('In SignIn.toggle');
-      this.props.oktaAuth.setOriginalUri();
-//      console.log('In SignIn.toggle this.props.oktaAuth.getOriginalUri=',this.props.oktaAuth.getOriginalUri());
-      this.props.history.push('/login');
-      logUsage('event', 'SignIn', { event_label: '' });
-    }
+  return authState.isAuthenticated ? null : (
+    <>
+      <OverlayTrigger placement="bottom" overlay={<Tooltip>Sign in to save private designs.<br />See About : User Accounts.</Tooltip>}>
+        <Button variant="light" onClick={toggle}>
+          Sign&nbsp;In&hellip;
+        </Button>
+      </OverlayTrigger>
+    </>
+  );
 
-    render() {
-//      console.log('In SignIn.render');
-      return this.props.authState.isAuthenticated ? null : (
-        <>
-            <OverlayTrigger placement="bottom" overlay={<Tooltip>Sign in to save private designs.<br/>See About : User Accounts.</Tooltip>}>
-                <Button variant="light" onClick={this.toggle}>
-                    Sign&nbsp;In&hellip;
-                </Button>
-            </OverlayTrigger>
-        </>
-      );
-    }
-
-}));
+};
