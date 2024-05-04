@@ -21,7 +21,6 @@ export default function SignInPageWidget() {
     const { pkce, issuer, clientId, redirectUri, scopes } = config.oidc;
 //  console.log("config=",config);
 //  console.log("config.oidc=",config.oidc);
-
 //  console.log("pkce=",pkce);
 //  console.log("issuer=",issuer);
 //  console.log("clientId=",clientId);
