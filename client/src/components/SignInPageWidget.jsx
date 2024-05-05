@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import OktaSignIn from '@okta/okta-signin-widget';
-//import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
+import '@okta/okta-signin-widget/css/okta-sign-in.min.css';
 import config from '../config';
 import { useOktaAuth } from '@okta/okta-react';
 import { changeUser, saveAutoSave } from '../store/modelSlice';
