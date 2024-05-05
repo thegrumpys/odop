@@ -5,13 +5,13 @@ import { Button } from 'react-bootstrap';
 import * as o from './symbol_table_offsets';
 
 export default function Report2() {
-  //  console.log('Report2 - Mounting...');
+//  console.log('Report2 - Mounting...');
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const base = useContext(ReportBaseContext);
-  //  console.log('Report2','base=',base);
+//  console.log('Report2','base=',base);
 
   const onClick = (event) => {
-    //    console.log("In Report2.onClick event=",event);
+//    console.log("In Report2.onClick event=",event);
     window.print();
     return false;
   }

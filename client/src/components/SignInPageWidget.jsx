@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import OktaSignIn from '@okta/okta-signin-widget';
 //import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
@@ -8,16 +8,12 @@ import { changeUser, saveAutoSave } from '../store/modelSlice';
 import { logUsage } from '../logUsage';
 
 export default function SignInPageWidget() {
-  const inputRef = useRef(null);
-  console.log('SignInPageWidget','inputRef=',inputRef);
   const dispatch = useDispatch();
   const { oktaAuth, authState } = useOktaAuth();
-  console.log('SignInPageWidget','oktaAuth=',oktaAuth,'authState=',authState);
+//  console.log('SignInPageWidget','oktaAuth=',oktaAuth,'authState=',authState);
 
   useEffect(() => {
-    console.log("SignInPageWidget - Mounted");
-    const el = inputRef.current;
-    console.log("el=",el);
+//    console.log("SignInPageWidget - Mounted");
     const { pkce, issuer, clientId, redirectUri, scopes } = config.oidc;
 //  console.log("config=",config);
 //  console.log("config.oidc=",config.oidc);
@@ -47,6 +43,8 @@ export default function SignInPageWidget() {
 //  // End Diagnostic
 
      let widget = new OktaSignIn({
+       useInteractionCodeFlow: false,
+       useClassicEngine: true,
       /**
        * Note: when using the Sign-In Widget for an OIDC flow, it still
        * needs to be configured with the base URL for your Okta Org. Here
@@ -88,9 +86,9 @@ export default function SignInPageWidget() {
         ]
       }
     });
-    console.log('widget=',widget);
+//    console.log('widget=',widget);
     widget.showSignInToGetTokens({
-      el: el,
+      el: '#widget-container',
       scopes,
     }).then((tokens) => {
       // Add tokens to storage
@@ -107,10 +105,10 @@ export default function SignInPageWidget() {
     });
 
     return () => {
-      console.log("SignInPageWidget - Unmounting ...")
+//      console.log("SignInPageWidget - Unmounting ...")
       widget.remove();
     }
   }, []);
 
-  return <div ref={inputRef} />;
+  return <div id="widget-container" />;
 }

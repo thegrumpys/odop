@@ -3,7 +3,6 @@ import { changeOutputSymbolValues } from '../modelSlice';
 // Invoke Init
 export function invokeInit(store) {
 //    console.log('In invokeInit store=',store);
-
 //    console.log('Start invokeInit');
 
     var element;
@@ -30,6 +29,5 @@ export function invokeInit(store) {
 
     // Compute and dispatch output changes
     store.dispatch(changeOutputSymbolValues(x));
-
 //    console.log('</ul><li>','End invokeInit','</li>');
 }

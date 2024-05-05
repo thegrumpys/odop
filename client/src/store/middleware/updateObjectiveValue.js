@@ -6,7 +6,6 @@ import { changeSymbolViolation,
 export function updateObjectiveValue(store, merit) {
 
     // Update Constraint Violations
-
 //    console.log('Start updateObjectiveValue');
 
     /*
@@ -214,6 +213,5 @@ export function updateObjectiveValue(store, merit) {
             console.error('@@@ In updateObjectiveValue Invalid & Feasible obj=',obj);
         }
     }
-
 //    console.log('</ul><li>','End updateObjectiveValue obj=',obj,'</li>');
 }

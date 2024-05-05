@@ -3,7 +3,6 @@ import { changeSymbolConstraints } from '../modelSlice';
 
 // Startup
 export function setSclDen(store) {
-
 //    console.log('Entering setSclDen');
 
     var design = store.getState().modelSlice;
@@ -24,7 +23,6 @@ export function setSclDen(store) {
     // And update violations and objective value
     store.dispatch(changeSymbolConstraints(cmin, MIN));
     store.dispatch(changeSymbolConstraints(cmax, MAX));
-
 //    console.log('Exiting setSclDen');
 
 }

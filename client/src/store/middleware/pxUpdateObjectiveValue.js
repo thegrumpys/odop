@@ -4,7 +4,6 @@ import { CONSTRAINED, FIXED } from '../actionTypes';
 export function pxUpdateObjectiveValue(p, x, store, merit) {
 
     // Update Constraint Violations
-
 //    console.log('Start pxUpdateObjectiveValue','p=',p,'x=',x);
 
     /*
@@ -197,7 +196,6 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
             console.error('@@@ In pxUpdateObjectiveValue Invalid & Feasible obj=',obj);
         }
     }
-
 //    console.log('</ul><li>','End pxUpdateObjectiveValue obj=',obj,'</li>');
     return obj;
 }

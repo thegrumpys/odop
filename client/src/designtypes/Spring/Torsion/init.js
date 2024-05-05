@@ -193,7 +193,6 @@ export function init(store, p, x) {
  }
 
  store.dispatch(changeSymbolHidden("Inactive_Coils", true)); // Always hide Inactive_Coils (pseudo-migration)
-
 //    console.log('Exiting init p=',p,' x=',x);
     return x;
 

@@ -17,7 +17,6 @@ const Message = () => {
   const messages = useSelector((state) => state.messageSlice.messages);
   const help_url = useSelector((state) => state.messageSlice.help_url);
   const dispatch = useDispatch();
-
 //  console.log("MESSAGE - Mounting...",'show=',show,'header=',header,'messages=',messages,'help_url=',help_url);
 
   useEffect(() => {

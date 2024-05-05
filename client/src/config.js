@@ -11,7 +11,6 @@ var env_name;
 var env_units;
 var env_view;
 var session_refresh;
-
 //console.log('In config process.env.NODE_ENV=',process.env.NODE_ENV);
 if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "development" or "test"?
 //  console.log('In config process.env.REACT_APP_NODE_ENV=', process.env.REACT_APP_NODE_ENV);
@@ -62,7 +61,6 @@ var url_type = type !== undefined ? type : env_type;
 var url_name = name !== undefined ? name : env_name;
 var url_view = view !== undefined ? view : env_view;
 var url_execute = execute !== undefined ? execute : undefined;
-
 //console.log('In config node_env=',node_env);
 //console.log('In config issuer=',issuer);
 //console.log('In config clientId=',clientId);

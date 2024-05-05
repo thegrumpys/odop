@@ -6,7 +6,7 @@ import { getAlertsBySeverity } from '../../../components/Alerts';
 import ReportBaseContext from './ReportBaseContext';
 
 export default function ReportBase(props) {
-  //  console.log("ReportBase - Mounting...");
+//  console.log("ReportBase - Mounting...");
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
 
   const def_dia = (def_len) => {
@@ -96,8 +96,7 @@ export default function ReportBase(props) {
   } else {
     base.warnmsg = "";
   }
-
-  //        console.log("symbol_table[o.Prop_Calc_Method].value = ", symbol_table[o.Prop_Calc_Method].value);
+//        console.log("symbol_table[o.Prop_Calc_Method].value = ", symbol_table[o.Prop_Calc_Method].value);
   if (symbol_table[o.Prop_Calc_Method].value === 1) {
     base.matTypeValue = base.m_tab[symbol_table[o.Material_Type].value][mo.matnam];
     base.astmFedSpecValue = symbol_table[o.ASTM_Fed_Spec].value;
@@ -107,7 +106,7 @@ export default function ReportBase(props) {
     base.astmFedSpecValue = "N/A";
     base.clWarnString = "Cycle_Life is not computed for User_Specified materials.";
   }
-  //        console.log("base.matTypeValue, base.astmFedSpecValue = ", base.matTypeValue, base.astmFedSpecValue);
+//        console.log("base.matTypeValue, base.astmFedSpecValue = ", base.matTypeValue, base.astmFedSpecValue);
 
   base.lifeTargValue = base.lifetarg[symbol_table[o.Life_Category].value];
   if (symbol_table[o.Life_Category].value <= 4) {
@@ -119,8 +118,7 @@ export default function ReportBase(props) {
   base.energy_1 = 0.5 * symbol_table[o.Rate].value * symbol_table[o.Deflect_1].value * symbol_table[o.Deflect_1].value;
   base.energy_2 = 0.5 * symbol_table[o.Rate].value * symbol_table[o.Deflect_2].value * symbol_table[o.Deflect_2].value;
   base.energy_MS = 0.5 * symbol_table[o.Rate].value * base.safe_travel * base.safe_travel;
-
-  //  console.log('ReportBase','base=',base);
+//  console.log('ReportBase','base=',base);
 
   return <ReportBaseContext.Provider value={base}>
     {props.children}

@@ -1,7 +1,6 @@
 import * as o from './offsets';
 import * as mo from '../mat_offsets';
 export function eqnset(p, x) {        /*    Torsion  Spring  */
-
 //    console.log('Entering eqnset p=',p);
 
     const zero = 0.0;
@@ -131,7 +130,6 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
     Def1InRad = x[o.Deflect_1] * Deg2Rad;
     Def2InRad = x[o.Deflect_2] * Deg2Rad;
     x[o.Energy] = 0.5 * RateInRad * (Def2InRad * Def2InRad - Def1InRad * Def1InRad);
-
 //    console.log('Exiting eqnset p=',p,' x=',x);
     return x;
 

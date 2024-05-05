@@ -162,8 +162,7 @@ export default function ReportBase(props) {
 
   var def_max = symbol_table[o.L_Free].value - symbol_table[o.L_Solid].value;
   base.safe_travel = Math.min(base.safe_load / symbol_table[o.Rate].value, def_max);
-
-  //        console.log("symbol_table[o.Prop_Calc_Method].value = ", symbol_table[o.Prop_Calc_Method].value);
+//        console.log("symbol_table[o.Prop_Calc_Method].value = ", symbol_table[o.Prop_Calc_Method].value);
   if (symbol_table[o.Prop_Calc_Method].value === 1 && symbol_table[o.Material_Type].value !== 0) {
     base.matTypeValue = base.m_tab[symbol_table[o.Material_Type].value][mo.matnam];
     base.astmFedSpecValue = symbol_table[o.ASTM_Fed_Spec].value;
@@ -173,7 +172,7 @@ export default function ReportBase(props) {
     base.astmFedSpecValue = "N/A";
     base.clWarnString = "Cycle_Life is not computed for User_Specified materials.";
   }
-  //        console.log("base.matTypeValue, base.astmFedSpecValue = ", base.matTypeValue, base.astmFedSpecValue);
+//        console.log("base.matTypeValue, base.astmFedSpecValue = ", base.matTypeValue, base.astmFedSpecValue);
 
   base.lifeTargValue = base.lifetarg[symbol_table[o.Life_Category].value];
   if (symbol_table[o.Life_Category].value <= 4) {
@@ -186,7 +185,6 @@ export default function ReportBase(props) {
   base.energy_2 = 0.5 * symbol_table[o.Rate].value * symbol_table[o.Deflect_2].value * symbol_table[o.Deflect_2].value;
   var DefSolid = (symbol_table[o.L_Free].value - symbol_table[o.L_Solid].value);
   base.energy_S = 0.5 * symbol_table[o.Rate].value * DefSolid * DefSolid;
-
 //  console.log('ReportBase','base=',base);
 
   return <ReportBaseContext.Provider value={base}>

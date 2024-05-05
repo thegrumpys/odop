@@ -185,7 +185,6 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
     x[o.Stress_Init_Hi] = x[o.SI_Hi_Factor] / temp;
 
      x[o.Energy] = 0.5 * x[o.Rate] * (x[o.Deflect_2] * x[o.Deflect_2] - x[o.Deflect_1] * x[o.Deflect_1]);
-
 //    console.log('In eqnset p=',p,' x=',x);
     return x;
 

@@ -68,11 +68,11 @@ function getObjectiveValue(st, viol_wt) {
             } else {
                 if (element.lmin & CONSTRAINED ) {
                     vmin = (-element.value + element.cmin) / element.smin;
-    //                console.log('name=',element.name,' vmin=',vmin,' value=',element.value,' cmin=',element.cmin,' smin=',element.smin);
+//                console.log('name=',element.name,' vmin=',vmin,' value=',element.value,' cmin=',element.cmin,' smin=',element.smin);
                 }
                 if (element.lmax & CONSTRAINED ) {
                     vmax = ( element.value - element.cmax) / element.smax;
-    //                console.log('name=',element.name,' vmax=',vmax,' value=',element.value,' cmax=',element.cmax,' smax=',element.smax);
+//                console.log('name=',element.name,' vmax=',vmax,' value=',element.value,' cmax=',element.cmax,' smax=',element.smax);
                 }
                 if (vmin > 0.0) {
                     viol_sum = viol_sum + vmin * vmin;

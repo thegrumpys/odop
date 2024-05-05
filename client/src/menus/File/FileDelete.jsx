@@ -1,218 +1,169 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Button, Modal, NavDropdown, Form, Alert } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
-import { withOktaAuth } from '@okta/okta-react';
+import { useOktaAuth } from '@okta/okta-react';
 
-class FileDelete extends Component {
+export default function FileDelete() {
+//  console.log("FileDelete - Mounting...");
+  const model_user = useSelector((state) => state.modelSlice.user);
+  const model_type = useSelector((state) => state.modelSlice.model.type);
+  const model_name = useSelector((state) => state.modelSlice.name);
+  const [show, setShow] = useState(false);
+  const [types, setTypes] = useState(config.env.types);
+  const [names, setNames] = useState([]);
+  const [type, setType] = useState(model_type);
+  const [name, setName] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { oktaAuth, authState } = useOktaAuth();
 
-    constructor(props) {
-//        console.log("In FileDelete.constructor props=",props);
-        super(props);
-        this.toggle = this.toggle.bind(this);
-        this.onSelectType = this.onSelectType.bind(this);
-        this.onSelectName = this.onSelectName.bind(this);
-        this.onSignIn = this.onSignIn.bind(this);
-        this.onCancel = this.onCancel.bind(this);
-        this.onDelete = this.onDelete.bind(this);
-        this.state = {
-            modal: false,
-            types: config.env.types,
-            names: [],
-            type: this.props.type,
-            name: '',
-        };
-    }
+  useEffect(() => {
+//    console.log('FileDelete','model_user=',model_user,'model_type=',model_type);
+    setType(model_type);
+    getDesignNames(model_user, model_type);
+    return () => { };
+  }, [model_user, model_type]);
 
-    componentDidMount() {
-//        console.log('In FileDelete.componentDidMount');
-    }
-
-    componentDidUpdate(prevProps) {
-//      console.log('In FileDelete.componentDidUpdate','prevProps=',prevProps);
-      if (prevProps.user !== this.props.user || prevProps.type !== this.props.type) {
-//          console.log('In FileDelete.componentDidUpdate prevProps=',prevProps,'this.props=',this.props);
-          this.setState({
-              type: this.props.type
-          });
-          this.getDesignNames(this.props.user,this.props.type);
+  const getDesignNames = (user, type) => {
+//    console.log('In FileDelete.getDesignNames user=',user,'type=',type);
+    // Get the names and store them in state
+    displaySpinner(true);
+    fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
+      headers: {
+        Authorization: 'Bearer ' + user
       }
+    })
+      .then(res => {
+        if (!res.ok) {
+          //                console.warn('In FileDelete.getDesignNames res=',res);
+          throw Error(res.statusText);
+        }
+        return res.json()
+      })
+      .then(names => {
+//        console.log('In FileDelete.getDesignNames user=',user,'type=',type,'names=', names);
+        setNames(names.filter(design => { return design.user !== null }));
+        var name = '';
+        if (names.length > 0)
+          name = names[0].name; // Default to first name
+        setName(name);
+      })
+      .catch(error => {
+        displayMessage('GET of design names failed with message: \'' + error.message + '\'');
+      })
+      .finally(() => {
+        displaySpinner(false);
+      });
   }
 
-    getDesignNames(user, type) {
-//        console.log('In FileDelete.getDesignNames user=',user,'type=',type);
-        // Get the names and store them in state
-        displaySpinner(true);
-        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs', {
-            headers: {
-                Authorization: 'Bearer ' + user
-            }
-        })
-        .then(res => {
-            if (!res.ok) {
-//                console.warn('In FileDelete.getDesignNames res=',res);
-                throw Error(res.statusText);
-            }
-            return res.json()
-        })
-        .then(names => {
-//            console.log('In FileDelete.getDesignNames user=',user,'type=',type,'names=', names);
-            this.setState({
-                names: names.filter((design) => {return design.user !== null})
-            });
-            var name = '';
-            if (this.state.names.length > 0)
-                name = this.state.names[0].name; // Default to first name
-            this.setState({
-                name: name
-            });
-        })
-        .catch(error => {
-            displayMessage('GET of design names failed with message: \''+error.message+'\'');
-        })
-        .finally(() => {
-            displaySpinner(false);
-        });
-    }
-
-    deleteDesign(user, type, name) {
-//        console.log('In FileDelete.deleteDesign user=',user,'type=',type,'name=',name);
-        displaySpinner(true);
-        fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/'+encodeURIComponent(name), {
-            method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + user
-            },
-        })
-        .then(res => {
-            if (!res.ok) {
-                throw Error(res.statusText);
-            }
-            logUsage('event', 'FileDelete', { event_label: type + ' ' + name });
-            return res.json()
-        })
-        .catch(error => {
-            displayMessage('DELETE of \''+name+'\' design  \''+type+'\' design type failed with message: \''+error.message+'\'');
-        })
-        .finally(() => {
-            displaySpinner(false);
-        });
-    }
-
-    toggle() {
-//        console.log('In FileDelete.toggle');
-        if (this.props.authState.isAuthenticated) {
-            this.getDesignNames(this.props.user,this.props.type);
+  const deleteDesign = (user, type, name) => {
+//    console.log('In FileDelete.deleteDesign user=',user,'type=',type,'name=',name);
+    displaySpinner(true);
+    fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + user
+      },
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw Error(res.statusText);
         }
-        this.setState({
-            modal: !this.state.modal,
-            type: this.props.type,
-        });
-    }
+        logUsage('event', 'FileDelete', { event_label: type + ' ' + name });
+        return res.json()
+      })
+      .catch(error => {
+        displayMessage('DELETE of \'' + name + '\' design  \'' + type + '\' design type failed with message: \'' + error.message + '\'');
+      })
+      .finally(() => {
+        displaySpinner(false);
+      });
+  }
 
-    onSelectType(event) {
-//        console.log('In FileDelete.onSelectType','event.target.value=',event.target.value)
-        this.setState({
-            type: event.target.value,
-            names: [],
-        });
-        this.getDesignNames(this.props.user,event.target.value);
+  const toggle = () => {
+//    console.log('In FileDelete.toggle');
+    if (authState.isAuthenticated) {
+      getDesignNames(model_user, model_type);
     }
+    setShow(!show);
+    setType(model_type);
+  }
 
-    onSelectName(event) {
-//        console.log('In FileDelete.onSelectName','event.target.value=',event.target.value);
-        this.setState({
-            name: event.target.value
-        });
-    }
+  const onSelectType = (event) => {
+//    console.log('In FileDelete.onSelectType','event.target.value=',event.target.value)
+    setType(event.target.value);
+    setNames([]);
+    getDesignNames(model_user, event.target.value);
+  }
 
-    onSignIn() {
-//        console.log('In FileDelete.onSignIn');
-        this.setState({
-            modal: !this.state.modal
-        });
-        this.props.history.push('/login');
-    }
+  const onSelectName = (event) => {
+//    console.log('In FileDelete.onSelectName','event.target.value=',event.target.value);
+    setName(event.target.value);
+  }
 
-    onCancel() {
-//        console.log('In FileDelete.onCancel');
-        this.setState({
-            modal: !this.state.modal
-        });
-        // Noop - all done
-    }
+  const onSignIn = () => {
+//    console.log('In FileDelete.onSignIn');
+    setShow(!show);
+    navigate('/login');
+  }
 
-    onDelete() {
-//        console.log('In FileDelete.onDelete');
-        // Validate name, and delete the database element
-        if (this.state.name === '') {
-            displayMessage("Select design to delete.");
-            return;
-        }
-        this.setState({
-            modal: !this.state.modal
-        });
-        this.deleteDesign(this.props.user, this.state.type, this.state.name);
-    }
+  const onCancel = () => {
+//    console.log('In FileDelete.onCancel');
+    setShow(!show);
+  }
 
-    render() {
-//        console.log('In FileDelete.render');
-        return (
-            <>
-                <NavDropdown.Item onClick={this.toggle}>
-                    Delete&hellip;
-                </NavDropdown.Item>
-                <Modal show={this.state.modal} onHide={this.onCancel}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>
-                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; File : Delete
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <br />
-                        {!this.props.authState.isAuthenticated && <Alert variant="info">You are not signed in. Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>}
-                        <Form.Label htmlFor="fileDeleteSelectType">Select design type for delete:</Form.Label>
-                        <Form.Control as="select" id="fileDeleteSelectType" onChange={this.onSelectType} value={this.state.type} disabled={!this.props.authState.isAuthenticated}>
-                            {this.state.types.map((designtype, index) =>
-                                <option key={index} value={designtype}>{designtype}</option>
-                            )}
-                        </Form.Control>
-                        <br />
-                        <Form.Label htmlFor="fileDeleteSelectName">Select design to delete:</Form.Label>
-                        <Form.Control as="select" id="fileDeleteSelectName" onChange={this.onSelectName} disabled={!this.props.authState.isAuthenticated}>
-                            {this.state.names.map((design, index) => {
-                                return <option key={index} value={design.name}>{design.name}</option>
-                            })}
-                        </Form.Control>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        {!this.props.authState.isAuthenticated && <Button variant="info" onClick={this.onSignIn}>Sign In...</Button>}{' '}
-                        <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>{' '}
-                        <Button variant="primary" onClick={this.onDelete} disabled={!this.props.authState.isAuthenticated && this.state.names.length === 0 ? true : false}>Delete</Button>
-                    </Modal.Footer>
-                </Modal>
-            </>
-        );
+  const onDelete = () => {
+//    console.log('In FileDelete.onDelete');
+    // Validate name, and delete the database element
+    if (name === '') {
+      displayMessage("Select design to delete.");
+      return;
     }
+    setShow(!show);
+    deleteDesign(model_user, type, name);
+  }
+
+  return (
+    <>
+      <NavDropdown.Item onClick={toggle}>
+        Delete&hellip;
+      </NavDropdown.Item>
+      {show && <Modal show={show} onHide={onCancel}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; File : Delete
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <br />
+          {!authState.isAuthenticated && <Alert variant="info">You are not signed in. Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>}
+          <Form.Label htmlFor="fileDeleteSelectType">Select design type for delete:</Form.Label>
+          <Form.Control as="select" id="fileDeleteSelectType" onChange={onSelectType} value={type} disabled={!authState.isAuthenticated}>
+            {types.map((designtype, index) =>
+              <option key={index} value={designtype}>{designtype}</option>
+            )}
+          </Form.Control>
+          <br />
+          <Form.Label htmlFor="fileDeleteSelectName">Select design to delete:</Form.Label>
+          <Form.Control as="select" id="fileDeleteSelectName" onChange={onSelectName} disabled={!authState.isAuthenticated}>
+            {names.map((design, index) => {
+              return <option key={index} value={design.name}>{design.name}</option>
+            })}
+          </Form.Control>
+        </Modal.Body>
+        <Modal.Footer>
+          {!authState.isAuthenticated && <Button variant="info" onClick={onSignIn}>Sign In...</Button>}{' '}
+          <Button variant="secondary" onClick={onCancel}>Cancel</Button>{' '}
+          <Button variant="primary" onClick={onDelete} disabled={!authState.isAuthenticated && names.length === 0 ? true : false}>Delete</Button>
+        </Modal.Footer>
+      </Modal>}
+    </>
+  );
 }
-
-const mapStateToProps = state => ({
-    user: state.user,
-    name: state.name,
-    type: state.model.type,
-});
-
-const mapDispatchToProps = {
-};
-
-export default withRouter(withOktaAuth(
-    connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(FileDelete)
-));

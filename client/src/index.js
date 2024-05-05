@@ -11,13 +11,11 @@ import { BrowserRouter } from "react-router-dom";
 const container = document.getElementById('root');
 const root = ReactDOMClient.createRoot(container);
 root.render(
-  <div id="root2">
-    <Provider store={store}>
-      <Spinner />
-      <Message />
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  </div>
+  <Provider store={store}>
+    <Spinner />
+    <Message />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
 );

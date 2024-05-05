@@ -295,7 +295,6 @@ export function checks(store) {        /*    Compression  Spring  */
 //    }
 
     commonChecks(store); // Now run the generic checks after the more specific checks
-
 //    console.log('</ul><li>','End check','</li>');
 
 }

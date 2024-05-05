@@ -16,6 +16,10 @@ import ExecutePanel from './ExecutePanel';
 import SignIn from '../menus/Session/SignIn';
 import SignOut from '../menus/Session/SignOut';
 import FileOpen from '../menus/File/FileOpen';
+import FileSave from '../menus/File/FileSave';
+import FileSaveAs from '../menus/File/FileSaveAs';
+import FileDelete from '../menus/File/FileDelete';
+import FileRecent from '../menus/File/FileRecent';
 import FilePreferences from '../menus/File/FilePreferences';
 import FileProperties from '../menus/File/FileProperties';
 import FileImport from '../menus/File/FileImport';
@@ -49,7 +53,7 @@ export default function MainPage() {
   const [viewName, setViewName] = useState(config.url.view);
   const dispatch = useDispatch();
   const { oktaAuth, authState } = useOktaAuth();
-  console.log('MainPage','oktaAuth=',oktaAuth,'authState=',authState);
+//  console.log('MainPage','oktaAuth=',oktaAuth,'authState=',authState);
 
   useEffect(() => {
 //    console.log('MainPage','model_view useEffect','model_view=',model_view);
@@ -104,6 +108,10 @@ export default function MainPage() {
             {logOnOff}
             <NavDropdown title="File" renderMenuOnMount={true}>
               <FileOpen />
+              <FileRecent />
+              <FileSave />
+              <FileSaveAs />
+              <FileDelete />
               <NavDropdown.Divider />
               <FileImport />
               <FileExport />

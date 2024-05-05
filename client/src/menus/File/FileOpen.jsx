@@ -22,7 +22,7 @@ export default function FileOpen() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { oktaAuth, authState } = useOktaAuth();
-  console.log('FileOpen','oktaAuth=',oktaAuth,'authState=',authState);
+//  console.log('FileOpen','oktaAuth=',oktaAuth,'authState=',authState);
 
 //  useEffect(() => {
 ////    console.log("FileOpen - Mounted");
@@ -137,7 +137,7 @@ export default function FileOpen() {
   const onSignIn = () => {
 //    console.log('FileOpen.onSignIn');
     setShow(!show);
-    console.log('navigate("/login")');
+//    console.log('navigate("/login")');
     navigate('/login');
   }
 

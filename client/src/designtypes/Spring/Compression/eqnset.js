@@ -115,7 +115,6 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
     else x[o.PC_Avail_Deflect] = 100.0 * x[o.Deflect_2] / p[o.Wire_Dia] + 10000.0 * (x[o.L_Solid] + p[o.Wire_Dia] - p[o.L_Free]);
 
      x[o.Energy] = 0.5 * x[o.Rate] * (x[o.Deflect_2] * x[o.Deflect_2] - x[o.Deflect_1] * x[o.Deflect_1]);
-
 //    console.log('</ul><li>','@@@@@ End eqnset','</li>');
     return x;
 

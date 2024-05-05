@@ -19,7 +19,7 @@ export default function HelpAbout() {
   const jsontype = useSelector((state) => state.modelSlice.model.jsontype);
   const units = useSelector((state) => state.modelSlice.model.units);
   const { oktaAuth, authState } = useOktaAuth();
-  console.log('HelpAbout','oktaAuth=',oktaAuth,'authState=',authState);
+//  console.log('HelpAbout','oktaAuth=',oktaAuth,'authState=',authState);
 
   useEffect(() => {
 //    console.log("HelpAbout - Mounted");

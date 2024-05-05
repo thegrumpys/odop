@@ -29,7 +29,6 @@ export function despak(pc, store, merit) {
     pxPropagate(p, x, store);
 
     var obj = pxUpdateObjectiveValue(p, x, store, merit); // Update Objective Value
-
 //    console.log('</ul><li>','!!!!! End despak obj=',obj,'</li>');
     return obj;
 }

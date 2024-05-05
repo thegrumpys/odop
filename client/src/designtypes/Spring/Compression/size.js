@@ -92,7 +92,6 @@ export function getSizeEntries(type, st) {
     default:
         break;
     }
-
 //    console.log('In getSizeEntries result=',result);
     return result;
 }

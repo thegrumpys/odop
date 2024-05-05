@@ -1,6 +1,5 @@
 // Invoke Check
 export function invokeCheck(store) {
-
 //    console.log('Start invokeCheck');
 
     var design = store.getState().modelSlice;
@@ -10,6 +9,5 @@ export function invokeCheck(store) {
     var { checks } = require('../../designtypes/'+design.model.type+'/checks.js'); // Dynamically load checks
 //    console.log('In invokeCheck','checks=',checks);
     checks(store);
-
 //    console.log('</ul><li>','End invokeCheck','</li>');
 }

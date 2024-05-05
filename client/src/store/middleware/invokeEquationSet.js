@@ -2,7 +2,6 @@ import { changeOutputSymbolValues } from '../modelSlice';
 
 // Invoke Equation Set
 export function invokeEquationSet(store) {
-
 //    console.log('Start invokeEquationSet');
 
     var element;
@@ -29,6 +28,5 @@ export function invokeEquationSet(store) {
 
     // Compute and dispatch output changes
     store.dispatch(changeOutputSymbolValues(x));
-
 //    console.log('</ul><li>','End invokeEquationSet','</li>');
 }

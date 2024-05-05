@@ -146,7 +146,6 @@ export function init(store, p, x) {
 //        console.log('    x[o.L_End] = ', x[o.L_End]);
 //        console.log('    x[o.L_Extended_End] = ', x[o.L_Extended_End]);
     }
-
 //    console.log('init: x[o.SI_Range] = ', x[o.SI_Range]);
     if (x[o.SI_Range] <= 2 ) {
         x[o.SI_Lo_Factor] = m_tab[i][mo.silf];
@@ -250,7 +249,7 @@ export function init(store, p, x) {
      store.dispatch(changeSymbolInput("SI_Lo_Factor", false));
      store.dispatch(changeSymbolInput("SI_Hi_Factor", false));
  }
- //    console.log('In init p=',p,' x=',x);
+//    console.log('In init p=',p,' x=',x);
     return x;
 
 }

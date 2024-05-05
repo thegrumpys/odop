@@ -16,7 +16,6 @@ var lunr_pages = require("./lunr_pages.json");
 function authenticationRequired(req, res, next) {
   const authHeader = req.headers.authorization || '';
   const match = authHeader.match(/Bearer (.+)/);
-
 //  console.log('SERVER: In authenticationRequired authHeader=',authHeader);
 //  console.log('SERVER: In authenticationRequired match=',match);
 
@@ -479,7 +478,6 @@ function createSentenceSearchResult(pageMatch) {
     let ellipsis = ' ... ';
     searchResultText += sentence + ellipsis;
   });
-
 //  console.log('In createSentenceSearchResult searchResultText=',searchResultText);
   return searchResultText;
 }

@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { load, loadInitialState, changeName, restoreAutoSave, deleteAutoSave } from "../store/modelSlice";
 import MainPage from "./MainPage";
 import SignInPage from './SignInPage';
@@ -10,7 +10,7 @@ import config from '../config';
 import { displaySpinner } from "./Spinner";
 import { displayMessage } from "./Message";
 import { logUsage } from '../logUsage';
-import { OktaAuth } from '@okta/okta-auth-js'
+import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js'
 import { LoginCallback, SecureRoute, Security } from '@okta/okta-react';
 
 export default function App() {
@@ -23,9 +23,11 @@ export default function App() {
   const type = useSelector((state) => state.modelSlice.model.type);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+//  console.log('APP','location=',location);
 
   useEffect(() => {
-//    console.log("APP - Mounted");
+//    console.log("APP - useEffect Mounted");
     if (typeof(Storage) !== "undefined" && localStorage.getItem("redirect") !== null) {
 //      console.log('In App restore "redirect" file')
       loadRedirectDesign();
@@ -36,13 +38,13 @@ export default function App() {
 //      console.log('In App restore default design')
       loadDefaultDesign();
     }
-//    return () => console.log("APP - Unmounting ...");
-    return () => {};
+    return () => console.log("APP - useEffect Unmounting ...");
+//    return () => {};
   }, []);
 
   const loadRedirectDesign = () => {
 //    console.log('APP - loadRedirectDesign');
-    dispatch(restoreAutoSave("redirect"));
+//    dispatch(restoreAutoSave("redirect"));
     dispatch(deleteAutoSave("redirect"));
     dispatch(deleteAutoSave()); // Get rid of any AutoSave data too
     config.url.prompt = false; // Turn off prompt
@@ -50,7 +52,7 @@ export default function App() {
     config.url.view = view; // Use model view
     config.url.type = type; // Use model type
     config.url.execute = undefined; // Turn off execute
-    console.log('navigate("/login")');
+//    console.log('navigate("/login")');
     navigate("/login");
     logUsage('event', 'App', { event_label: 'type: ' + type + ' load redirect' });
   }
@@ -63,7 +65,7 @@ export default function App() {
   }
 
   const loadAutoSaveDesign = () => {
-//    console.log('In Routes.loadAutoSaveDesign');
+//    console.log('APP - loadAutoSaveDesign');
     setShow(false);
     dispatch(restoreAutoSave());
     dispatch(deleteAutoSave());
@@ -72,14 +74,13 @@ export default function App() {
     config.url.view = view; // Use model view
     config.url.type = type; // Use model type
     config.url.execute = undefined; // Turn off execute
-    console.log('navigate("/login")');
+//    console.log('navigate("/login")');
     navigate("/login");
     logUsage('event', 'Routes', { event_label: 'type: ' + type + ' load autoSave' });
   }
 
   const loadDefaultDesign = () => {
-//    console.log('APP - loadDefaultDesign');
-//    console.log('APP - loadDefaultDesign config.url.execute=',config.url.execute);
+//    console.log('APP - loadDefaultDesign','config.url.execute=',config.url.execute,'user=',user,'config.url.type=',config.url.type,'config.url.name=',config.url.name);
     setShow(false);
     if (!showWelcome) {
       config.url.execute = undefined; // Turn off execute
@@ -89,7 +90,7 @@ export default function App() {
   }
 
   const getDesign = (user, type, name) => {
-//    console.log('APP - getDesign user=',user,'type=',type,'name=',name);
+//    console.log('APP - getDesign','user=',user,'type=',type,'name=',name);
     displaySpinner(true);
     fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
       headers: {
@@ -132,24 +133,22 @@ export default function App() {
   }
 
   const onAuthRequired = () => {
-    console.log('APP - onAuthRequired');
-    console.log('navigate("/login")');
+//    console.log('APP - onAuthRequired');
     navigate("/login");
   }
 
   const onContextHelp = () => {
-//      console.log('APP - onContextHelp');
-      window.open('/docs/Help/autoSave.html', '_blank');
+//    console.log('APP - onContextHelp');
+    window.open('/docs/Help/autoSave.html', '_blank');
   }
 
-//          <Route exact path="/" element={<Home />} />
-//          <Route path="/test" element={<Test />} />
-
   const restoreOriginalUri = async (oktaAuth, originalUri) => {
+//    console.log('APP - restoreOriginalUri','oktaAuth=',oktaAuth,'originalUri=',originalUri);
     navigate.replace(toRelativeUrl(originalUri || '/', window.location.origin));
   };
 
   const oktaAuth = new OktaAuth({...config.oidc});
+//  console.log('APP','oktaAuth=',oktaAuth);
   return (
     <>
       <Security oktaAuth={oktaAuth}

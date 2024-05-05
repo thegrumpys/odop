@@ -6,13 +6,13 @@ import * as o from './symbol_table_offsets';
 import { getAlertsBySeverity, ERR, WARN, NOTICE, INFO } from '../../../components/Alerts';
 
 export default function Report1() {
-  //  console.log('Report1 - Mounting...');
+//  console.log('Report1 - Mounting...');
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const base = useContext(ReportBaseContext);
-  //  console.log('Report1','base=',base);
+//  console.log('Report1','base=',base);
 
   const onClick = (event) => {
-    //    console.log("In Report1.onClick event=",event);
+//    console.log("In Report1.onClick event=",event);
     window.print();
     return false;
   }
