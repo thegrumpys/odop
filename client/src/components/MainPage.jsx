@@ -49,7 +49,7 @@ export default function MainPage() {
   const model_name = useSelector((state) => state.modelSlice.name);
   const model_view = useSelector((state) => state.modelSlice.view);
   const model_user = useSelector((state) => state.modelSlice.user);
-  console.log('MainPage - Mounting...','model_type=',model_type,'model_name=',model_name,'model_view=',model_view,'model_user=',model_user);
+//  console.log('MainPage - Mounting...','model_type=',model_type,'model_name=',model_name,'model_view=',model_view,'model_user=',model_user);
   const [show, setShow] = useState(false);
   const [viewName, setViewName] = useState(config.url.view);
   const dispatch = useDispatch();

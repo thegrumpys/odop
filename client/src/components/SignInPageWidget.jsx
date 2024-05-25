@@ -92,10 +92,10 @@ export default function SignInPageWidget() {
       scopes,
     }).then((tokens) => {
       // Add tokens to storage
-      console.log('In SignInPageWidget.showSignInToGetTokens','tokens=',tokens);
+//      console.log('In SignInPageWidget.showSignInToGetTokens','tokens=',tokens);
       if (tokens !== undefined) {
           var user = tokens.idToken.claims.sub;
-          console.log('In SignInPageWidget.showSignInToGetTokens','user=',user);
+//          console.log('In SignInPageWidget.showSignInToGetTokens','user=',user);
           dispatch(changeUser(user));
           logUsage('event', 'SignedIn', { event_label: user });
           dispatch(saveAutoSave("redirect"));
