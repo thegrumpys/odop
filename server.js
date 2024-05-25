@@ -269,7 +269,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
     var type = req.body.type;
     var name = req.params['name'];
     console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name);
-//    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name+' user=',user,' req.body=',req.body);
+    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name+' user=',user,' req.body=',req.body);
     if (req.uid === "null" || req.body === undefined || req.body.length === 0 || req.body.type === undefined || req.body.type !== req.params['type']) {
         res.status(400).end();
         console.log('SERVER: 400 - BAD REQUEST');

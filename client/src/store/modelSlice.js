@@ -68,7 +68,7 @@ export const modelSlice = createSlice({
 
     changeUser: {
       reducer: (state, action) => {
-//        console.log('reducer changeUser','state=',current(state),',action=',action);
+        console.log('reducer changeUser','state=',current(state),',action=',action);
         state.model.result.termination_condition = '';
         state.user = action.payload.user;
       },

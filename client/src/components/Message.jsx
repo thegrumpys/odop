@@ -11,7 +11,7 @@ export const displayMessage = (message, variant = 'danger', header = '', help_ur
   store.dispatch(addMessage({message, variant, header, help_url}));
 }
 
-const Message = () => {
+export default function Message() {
   const show = useSelector((state) => state.messageSlice.show);
   const header = useSelector((state) => state.messageSlice.header);
   const messages = useSelector((state) => state.messageSlice.messages);
@@ -59,5 +59,3 @@ const Message = () => {
     </Modal>
    );
 };
-
-export default Message;
