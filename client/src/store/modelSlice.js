@@ -538,23 +538,6 @@ export const modelSlice = createSlice({
 //            console.log("In reducers.RESTORE_AUTO_SAVE action.payload.name=",action.payload.name,"state=",state);
         }
         return state; // state changed
-//        state.model.result.termination_condition = '';
-//        if (typeof(Storage) !== "undefined") {
-//            var autosave = JSON.parse(localStorage.getItem(action.payload.name)); // get auto save file contents
-//            // Migrate autosave file from old (no model property) to new (with model property)
-//            if (autosave.model === undefined) { // Is it the old format
-//                var name = autosave.name;
-//                delete autosave.name;
-//                state.name = name;
-//                state.model = autosave;
-//            } else {
-//                state = autosave; // New format
-//                console.log('in reducer restoreAutoSave','state.user=',state.user,'state.name=',state.name,'state.view=',state.view,'state.model.type=',state.model.type);
-//            }
-//            var { migrate } = require('../designtypes/'+state.model.type+'/migrate.js'); // Dynamically load migrate
-//            state.model = migrate(state.model);
-//        }
-//        console.log('end reducer restoreAutoSave');
       },
       prepare: (name = 'autosave') => { return { payload: { name } } }
     },
