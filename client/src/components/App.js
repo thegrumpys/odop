@@ -155,20 +155,6 @@ export default function App() {
   const oktaAuth = new OktaAuth({...config.oidc});
 //  console.log('APP - render','oktaAuth=',oktaAuth);
 
-//  function MyLoginCallback() {
-//    console.log('APP - MyLoginCallback');
-//    return LoginCallback();
-//  }
-
-  const UndefinedCallback = () => {
-//    console.log('APP - UndefinedCallback');
-  }
-  
-  const MyLoginCallback = (x) => {
-//    console.log('APP - MyLoginCallback');
-    LoginCallback(x);
-  }
-
   return (
     <>
       <Security oktaAuth={oktaAuth}
@@ -177,8 +163,7 @@ export default function App() {
         <Routes>
           <Route exact path="/" element={<MainPage />} />
           <Route path='/login' element={<SignInPageWidget />} />
-          <Route path='/implicit/callback' component={MyLoginCallback} />
-          <Route path='/undefined' element={<UndefinedCallback />} />
+          <Route path='/implicit/callback' component={LoginCallback} />
         </Routes>
       </Security>
       {show && <Modal show={show} onHide={loadDefaultDesign}>
