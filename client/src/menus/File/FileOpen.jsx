@@ -137,8 +137,8 @@ export default function FileOpen() {
   const onSignIn = () => {
 //    console.log('FileOpen.onSignIn');
     setShow(!show);
-//    console.log('navigate("/login")');
-    navigate('/login');
+//    console.log('In FileOpen.onSignIn - navigate("/login")');
+    navigate("/login"); // Must be last
   }
 
   const onLoadInitialState = () => {

@@ -11,7 +11,7 @@ import {
   Tooltip,
   Row
 } from 'react-bootstrap';
-import { changeUser, changeView, deleteAutoSave } from '../store/modelSlice';
+import { changeView, deleteAutoSave } from '../store/modelSlice';
 import ExecutePanel from './ExecutePanel';
 import SignIn from '../menus/Session/SignIn';
 import SignOut from '../menus/Session/SignOut';
@@ -57,6 +57,12 @@ export default function MainPage() {
 //  console.log('MainPage','oktaAuth=',oktaAuth,'authState=',authState);
 
   useEffect(() => {
+//    console.log("MainPage - Mounted");
+//    return () => console.log("MainPage - Unmounting ...");
+    return () => {};
+  }, []);
+
+  useEffect(() => {
 //    console.log('MainPage','model_view useEffect','model_view=',model_view);
     setViewName(model_view);
   }, [model_view]);
@@ -96,7 +102,8 @@ export default function MainPage() {
   var alt = model_type + ' icon';
 //  console.log('MainPage','src=',src,' alt=',alt);
 
-  const logOnOff = authState.isAuthenticated ? <SignOut /> : <SignIn />;
+  const logOnOff = authState && authState.isAuthenticated ? <SignOut /> : <SignIn />;
+//  console.log('MainPage - Mounting return');
   return (
     <>
       <Navbar className="ps-3 pe-3" style={{ backgroundColor: '#eeeeee' }} expand="md" fixed="top">

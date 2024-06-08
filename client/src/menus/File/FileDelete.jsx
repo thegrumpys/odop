@@ -89,7 +89,7 @@ export default function FileDelete() {
 
   const toggle = () => {
 //    console.log('In FileDelete.toggle');
-    if (authState.isAuthenticated) {
+    if (authState && authState.isAuthenticated) {
       getDesignNames(model_user, model_type);
     }
     setShow(!show);
@@ -111,7 +111,8 @@ export default function FileDelete() {
   const onSignIn = () => {
 //    console.log('In FileDelete.onSignIn');
     setShow(!show);
-    navigate('/login');
+//    console.log('In FileDelete.onSignIn - navigate("/login")');
+    navigate("/login"); // Must be last
   }
 
   const onCancel = () => {

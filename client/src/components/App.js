@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { load, loadInitialState, changeName, restoreAutoSave, deleteAutoSave } from "../store/modelSlice";
 import MainPage from "./MainPage";
-import SignInPage from './SignInPage';
+import SignInPageWidget from './SignInPageWidget';
 import { Button, Modal, Alert } from 'react-bootstrap';
 import config from '../config';
 import { displaySpinner } from "./Spinner";
@@ -44,17 +44,18 @@ export default function App() {
 
   const loadRedirectDesign = () => {
 //    console.log('APP - loadRedirectDesign');
-//    dispatch(restoreAutoSave("redirect"));
+    dispatch(restoreAutoSave("redirect"));
     dispatch(deleteAutoSave("redirect"));
     dispatch(deleteAutoSave()); // Get rid of any AutoSave data too
+//    console.log('APP - loadAutoSaveDesign','user=',user,'name=',name,'view=',view,'type=',type);
     config.url.prompt = false; // Turn off prompt
     config.url.name = name; // Use model name
     config.url.view = view; // Use model view
     config.url.type = type; // Use model type
     config.url.execute = undefined; // Turn off execute
-//    console.log('navigate("/login")');
-    navigate("/login");
     logUsage('event', 'App', { event_label: 'type: ' + type + ' load redirect' });
+//    console.log('APP - loadRedirectDesign navigate("/")');
+    navigate("/"); // Must be last after logUsage
   }
 
   const promptLoadAutoSave = () => {
@@ -69,14 +70,15 @@ export default function App() {
     setShow(false);
     dispatch(restoreAutoSave());
     dispatch(deleteAutoSave());
+//    console.log('APP - loadAutoSaveDesign','user=',user,'name=',name,'view=',view,'type=',type);
     config.url.prompt = false; // Turn off prompt
     config.url.name = name; // Use model name
     config.url.view = view; // Use model view
     config.url.type = type; // Use model type
     config.url.execute = undefined; // Turn off execute
-//    console.log('navigate("/login")');
-    navigate("/login");
     logUsage('event', 'Routes', { event_label: 'type: ' + type + ' load autoSave' });
+//    console.log('APP - loadAutoSaveDesign navigate("/")');
+    navigate("/"); // Must be last after logUsage
   }
 
   const loadDefaultDesign = () => {
@@ -87,6 +89,7 @@ export default function App() {
     }
     getDesign(user, config.url.type, config.url.name);
     logUsage('event', 'App', { event_label: 'type: ' + type + ' load defaultDesign' });
+    navigate("/"); // Must be last after logUsage
   }
 
   const getDesign = (user, type, name) => {
@@ -134,7 +137,8 @@ export default function App() {
 
   const onAuthRequired = () => {
 //    console.log('APP - onAuthRequired');
-    navigate("/login");
+//    console.log('APP - navigate("/login")');
+    navigate("/login"); // Must be last
   }
 
   const onContextHelp = () => {
@@ -143,12 +147,28 @@ export default function App() {
   }
 
   const restoreOriginalUri = async (oktaAuth, originalUri) => {
-//    console.log('APP - restoreOriginalUri','oktaAuth=',oktaAuth,'originalUri=',originalUri);
-    navigate.replace(toRelativeUrl(originalUri || '/', window.location.origin));
+//    console.log('APP - restoreOriginalUri','oktaAuth=',oktaAuth,'originalUri=',originalUri,'window.location.origin=',window.location.origin);
+//    console.log('APP - navigate(toRelativeUrl(originalUri || \'/\', window.location.origin), { replace: true })');
+    navigate(toRelativeUrl(originalUri || '/', window.location.origin), { replace: true }); // Must be last
   };
 
   const oktaAuth = new OktaAuth({...config.oidc});
-//  console.log('APP','oktaAuth=',oktaAuth);
+//  console.log('APP - render','oktaAuth=',oktaAuth);
+
+//  function MyLoginCallback() {
+//    console.log('APP - MyLoginCallback');
+//    return LoginCallback();
+//  }
+
+  const UndefinedCallback = () => {
+//    console.log('APP - UndefinedCallback');
+  }
+  
+  const MyLoginCallback = (x) => {
+//    console.log('APP - MyLoginCallback');
+    LoginCallback(x);
+  }
+
   return (
     <>
       <Security oktaAuth={oktaAuth}
@@ -156,8 +176,9 @@ export default function App() {
                 restoreOriginalUri={restoreOriginalUri} >
         <Routes>
           <Route exact path="/" element={<MainPage />} />
-          <Route path='/login' element={<SignInPage />} />
-          <Route path='/implicit/callback' element={LoginCallback} />
+          <Route path='/login' element={<SignInPageWidget />} />
+          <Route path='/implicit/callback' component={MyLoginCallback} />
+          <Route path='/undefined' element={<UndefinedCallback />} />
         </Routes>
       </Security>
       {show && <Modal show={show} onHide={loadDefaultDesign}>

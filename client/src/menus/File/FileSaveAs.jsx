@@ -131,7 +131,8 @@ export default function FileSaveAs() {
   const onSignIn = () => {
 //  console.log('In FileSaveAs.onSignIn');
     setShow(!show);
-    navigate('/login');
+//    console.log('In FileSaveAs.onSignIn - navigate("/login")');
+    navigate("/login"); // Must be last
   }
 
   const onCancel = () => {

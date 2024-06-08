@@ -14,12 +14,12 @@ export default function SignIn() {
 //    console.log('In SignIn.toggle');
     oktaAuth.setOriginalUri();
 //    console.log('In SignIn.toggle oktaAuth.getOriginalUri=', oktaAuth.getOriginalUri());
-//    console.log('navigate("/login")');
-    navigate('/login');
     logUsage('event', 'SignIn', { event_label: '' });
+//    console.log('In SignIn.toggle navigate("/login")');
+    navigate("/login"); // Must be last after logUsage
   }
 
-  return authState.isAuthenticated ? null : (
+  return authState && authState.isAuthenticated ? null : (
     <>
       <OverlayTrigger placement="bottom" overlay={<Tooltip>Sign in to save private designs.<br />See About : User Accounts.</Tooltip>}>
         <Button variant="light" onClick={toggle}>

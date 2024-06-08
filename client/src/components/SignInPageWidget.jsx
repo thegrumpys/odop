@@ -99,15 +99,17 @@ export default function SignInPageWidget() {
           dispatch(changeUser(user));
           logUsage('event', 'SignedIn', { event_label: user });
           dispatch(saveAutoSave("redirect"));
+          widget.remove();
           oktaAuth.handleLoginRedirect(tokens);
       }
+//      console.log('In SignInPageWidget.showSignInToGetTokens','end');
     }).catch((err) => {
+//      console.log('In SignInPageWidget.showSignInToGetTokens','err=',err);
       throw err;
     });
 
     return () => {
 //      console.log("SignInPageWidget - Unmounting ...")
-      widget.remove();
     }
   }, []);
 
