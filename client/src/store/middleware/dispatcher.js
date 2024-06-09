@@ -16,16 +16,22 @@ import { resetCatalogSelection } from './resetCatalogSelection';
 import { current } from "@reduxjs/toolkit";
 
 const dispatcher = store => next => action => {
-//  console.log('start dispatcher','store=',store,'next=',next,'action=',action);
+//  console.log('start dispatcher before reducer','store=',store,'next=',next,'action=',action);
+
+  // Reset termination message before invoking the reducer
+  if (store.getState().modelSlice.model.result.termination_condition !== undefined &&
+      store.getState().modelSlice.model.result.termination_condition !== '') {
+    store.dispatch(changeResultTerminationCondition(''));
+  }
+  
+  const returnValue = next(action); // Invoke reducer
+//  console.log('start dispatcher after reducer','returnValue=',returnValue);
 
   var design;
   var source;
   var sink;
   var index;
   var element;
-
-  const returnValue = next(action);
-//  console.log('start dispatcher returnValue=',returnValue);
 
   switch (action.type) {
 
