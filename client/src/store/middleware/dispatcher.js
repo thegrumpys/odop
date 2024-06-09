@@ -13,14 +13,13 @@ import { propagate } from './propagate';
 import { updateObjectiveValue } from './updateObjectiveValue';
 import { invokeCheck } from './invokeCheck';
 import { resetCatalogSelection } from './resetCatalogSelection';
-import { current } from "@reduxjs/toolkit";
 
 const dispatcher = store => next => action => {
 //  console.log('start dispatcher before reducer','store=',store,'next=',next,'action=',action);
 
   // Reset termination message before invoking the reducer
-  if (store.getState().modelSlice.model.result.termination_condition !== undefined &&
-      store.getState().modelSlice.model.result.termination_condition !== '') {
+  const termination_condition = store.getState().modelSlice.model.result.termination_condition;
+  if (termination_condition !== undefined && termination_condition !== '') {
     store.dispatch(changeResultTerminationCondition(''));
   }
   
@@ -207,7 +206,7 @@ const dispatcher = store => next => action => {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
       invokeSeek(store, action);
       design = store.getState().modelSlice;
-      var termination_condition = design.model.result.termination_condition;
+      termination_condition = design.model.result.termination_condition;
       updateObjectiveValue(store);
       store.dispatch(changeResultTerminationCondition(termination_condition));
       invokeCheck(store);
