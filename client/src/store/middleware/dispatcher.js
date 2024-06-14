@@ -16,13 +16,6 @@ import { resetCatalogSelection } from './resetCatalogSelection';
 
 const dispatcher = store => next => action => {
 //  console.log('start dispatcher before reducer','store=',store,'next=',next,'action=',action);
-
-  // Reset termination message before invoking the reducer
-  const termination_condition = store.getState().modelSlice.model.result.termination_condition;
-  if (termination_condition !== undefined && termination_condition !== '') {
-    store.dispatch(changeResultTerminationCondition(''));
-  }
-  
   const returnValue = next(action); // Invoke reducer
 //  console.log('start dispatcher after reducer','returnValue=',returnValue);
 

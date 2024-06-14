@@ -44,12 +44,12 @@ import ResultTable from './ResultTable';
 import { useOktaAuth } from '@okta/okta-react';
 
 export default function MainPage() {
-//  console.log('MainPage - Mounting...');
+//  console.log('MainPage','Mounting...');
   const model_type = useSelector((state) => state.modelSlice.model.type);
   const model_name = useSelector((state) => state.modelSlice.name);
   const model_view = useSelector((state) => state.modelSlice.view);
   const model_user = useSelector((state) => state.modelSlice.user);
-//  console.log('MainPage - Mounting...','model_type=',model_type,'model_name=',model_name,'model_view=',model_view,'model_user=',model_user);
+//  console.log('MainPage','Mounting...','model_type=',model_type,'model_name=',model_name,'model_view=',model_view,'model_user=',model_user);
   const [show, setShow] = useState(false);
   const [viewName, setViewName] = useState(config.url.view);
   const dispatch = useDispatch();
@@ -57,18 +57,21 @@ export default function MainPage() {
 //  console.log('MainPage','oktaAuth=',oktaAuth,'authState=',authState);
 
   useEffect(() => {
-//    console.log("MainPage - Mounted");
-//    return () => console.log("MainPage - Unmounting ...");
+//    console.log('MainPage','Mounted','All useEffect');
+//    return () => console.log('MainPage','Unmounting ...','All useEffect');
     return () => {};
   }, []);
 
   useEffect(() => {
-//    console.log('MainPage','model_view useEffect','model_view=',model_view);
+//    console.log('MainPage','Mounted','model_view useEffect','model_view=',model_view);
     setViewName(model_view);
+//    return () => console.log('MainPage','Unmounting ...','model_view useEffect');
+    return () => {};
   }, [model_view]);
 
   useEffect(() => {
-//    console.log('MainPage','Mounted','useEffect','model_type=',model_type);
+//    console.log('MainPage','Mounted','model_type useEffect','model_type=',model_type);
+//    if (model_type === null) return () => console.log('MainPage','Unmounting ...','model_type useEffect');
     if (model_type === null) return () => {};
     var { getViewNames } = require('../designtypes/'+ model_type + '/view.js'); // Dynamically load getViewNames
 //    console.log('MainPage','model_type useEffect','getViewNames=', getViewNames);
@@ -85,6 +88,8 @@ export default function MainPage() {
     } else {
       dispatch(changeView(config.env.view)); // if not found then assume the configured default
     }
+//    return () => console.log('MainPage','Unmounting ...','model_type useEffect');
+    return () => {};
   }, [model_type]);
 
   const toggle = () => {
@@ -103,7 +108,7 @@ export default function MainPage() {
 //  console.log('MainPage','src=',src,' alt=',alt);
 
   const logOnOff = authState && authState.isAuthenticated ? <SignOut /> : <SignIn />;
-//  console.log('MainPage - Mounting return');
+//  console.log('MainPage','Mounting return');
   return (
     <>
       <Navbar className="ps-3 pe-3" style={{ backgroundColor: '#eeeeee' }} expand="md" fixed="top">
