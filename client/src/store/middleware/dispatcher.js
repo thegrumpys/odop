@@ -199,7 +199,7 @@ const dispatcher = store => next => action => {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
       invokeSeek(store, action);
       design = store.getState().modelSlice;
-      termination_condition = design.model.result.termination_condition;
+      var termination_condition = design.model.result.termination_condition;
       updateObjectiveValue(store);
       store.dispatch(changeResultTerminationCondition(termination_condition));
       invokeCheck(store);
