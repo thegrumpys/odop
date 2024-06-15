@@ -47,7 +47,7 @@ export default function FileDelete() {
     })
     .then(names => {
       console.log('In FileDelete.getDesignNames user=',user,'type=',type,'names=', names);
-      setNames(names.filter(design => { return design.user !== null }));
+      setNames(names.filter(design => { return design.user !== null && design.user !== 'null'}));
       var name = '';
       if (names.length > 0)
         name = names[0].name; // Default to first name
