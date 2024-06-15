@@ -10,19 +10,18 @@ import { useOktaAuth } from '@okta/okta-react';
 
 export default function FileSaveAs() {
 //  console.log('FileSaveAs - Mounting...');
-  const model = useSelector((state) => state.modelSlice);
+  const model = useSelector((state) => state.modelSlice.model);
   const model_user = useSelector((state) => state.modelSlice.user);
   const model_type = useSelector((state) => state.modelSlice.model.type);
-  const model_name = useSelector((state) => state.modelSlice.name);
   const [show, setShow] = useState(false);
   const [names, setNames] = useState([]);
-  const [name, setName] = useState(undefined);
+  const [name, setName] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { oktaAuth, authState } = useOktaAuth();
 
   useEffect(() => {
-//    console.log('FileSaveAs','model_user=',model_user,'model_type=',model_type);
+//    console.log('FileSaveAs','useEffect','model_user=',model_user,'model_type=',model_type);
     getDesignNames(model_user, model_type);
     return () => { };
   }, [model_user, model_type]);
@@ -43,7 +42,7 @@ export default function FileSaveAs() {
       return res.json()
     })
     .then(names => {
-//        console.log('In FileSaveAs.getDesignNames  user=',user,'type=',type,'names=',names);
+//      console.log('In FileSaveAs.getDesignNames','names=',names);
       setNames(names);
     })
     .catch(error => {
@@ -72,21 +71,21 @@ export default function FileSaveAs() {
     })
     .then(names => {
         // Second create or update the design
-//        console.log('In FileSaveAs.postDesign type=',type,'names=', names);
+//      console.log('In FileSaveAs.postDesign type=',type,'names=', names);
       setNames(names);
-//        console.log('In FileSaveAs.postDesign names=',names);
+//      console.log('In FileSaveAs.postDesign names=',names);
       var method = 'POST'; // Create it
       if (names.filter(e => e.name === name && e.user === user).length > 0) { // Does it already exist?
         method = 'PUT'; // Update it
       }
-//        console.log('In FileSaveAs.postDesign method=', method);
+//      console.log('In FileSaveAs.postDesign method=', method);
       displaySpinner(true);
-      fetch('/api/v1/designtypes/' + encodeURIComponent(model_type) + '/designs/' + encodeURIComponent(name), {
+      fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
         method: method,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + model_user
+          Authorization: 'Bearer ' + user
         },
         body: JSON.stringify(model)
       })
@@ -94,14 +93,17 @@ export default function FileSaveAs() {
         if (!res.ok) {
           throw Error(res.statusText);
         }
+        return res.json()
+      })
+      .then(names => {
+//        console.log('In FileSave.getDesignNames','names=',names);
         if (method === 'POST') {
           var names = Array.from(names); // clone it
-          names.push({ user: user, name: name }); // If create and successful then add name to the array of names
-//                console.log('In FileSaveAs.postDesign type=',type,'name=',name,'names=', names);
+          names.push({ user: user, name: name }); // If create was successful then add name to the array of names
+//          console.log('In FileSaveAs.postDesign type=',type,'name=',name,'names=', names);
           setNames(names);
         }
         logUsage('event', 'FileSaveAs', { event_label: type + ' ' + name });
-        return res.json()
       })
       .catch(error => {
         displayMessage(method+' of \'' + name + '\' design failed for type \'' + type + '\' with message: \'' + error.message + '\'');
@@ -129,9 +131,9 @@ export default function FileSaveAs() {
   }
 
   const onSignIn = () => {
-//  console.log('In FileSaveAs.onSignIn');
+//    console.log('In FileSaveAs.onSignIn');
     setShow(!show);
-//    console.log('In FileSaveAs.onSignIn - navigate('/login')');
+//    console.log('In FileSaveAs.onSignIn - navigate(\'/login\')');
     navigate('/login'); // Must be last
   }
 
@@ -168,7 +170,7 @@ export default function FileSaveAs() {
         <Modal.Footer>
           {!authState.isAuthenticated && <Button variant="info" onClick={onSignIn}>Sign In...</Button>}{' '}
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>{' '}
-          <Button variant="primary" onClick={onSaveAs} disabled={!authState.isAuthenticated || name === undefined}>Save As</Button>
+          <Button variant="primary" onClick={onSaveAs} disabled={!authState.isAuthenticated || name === ''}>Save As</Button>
         </Modal.Footer>
       </Modal>}
     </>

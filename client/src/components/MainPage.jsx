@@ -11,7 +11,7 @@ import {
   Tooltip,
   Row
 } from 'react-bootstrap';
-import { changeView, deleteAutoSave } from '../store/modelSlice';
+import { changeView, changeUser, deleteAutoSave } from '../store/modelSlice';
 import ExecutePanel from './ExecutePanel';
 import SignIn from '../menus/Session/SignIn';
 import SignOut from '../menus/Session/SignOut';
@@ -48,7 +48,7 @@ export default function MainPage() {
   const model_type = useSelector((state) => state.modelSlice.model.type);
   const model_name = useSelector((state) => state.modelSlice.name);
   const model_view = useSelector((state) => state.modelSlice.view);
-  const model_user = useSelector((state) => state.modelSlice.user);
+//  const model_user = useSelector((state) => state.modelSlice.user);
 //  console.log('MainPage','Mounting...','model_type=',model_type,'model_name=',model_name,'model_view=',model_view,'model_user=',model_user);
   const [show, setShow] = useState(false);
   const [viewName, setViewName] = useState(config.url.view);
@@ -58,9 +58,14 @@ export default function MainPage() {
 
   useEffect(() => {
 //    console.log('MainPage','Mounted','All useEffect');
-//    return () => console.log('MainPage','Unmounting ...','All useEffect');
-    return () => {};
-  }, []);
+    if (authState && authState.isAuthenticated) {
+//      console.log('MainPage','Mounted','changeUser=',authState.idToken.clientId);
+      dispatch(changeUser(authState.idToken.clientId));
+    }
+    return () => {
+//      console.log('MainPage','Unmounting ...','All useEffect');
+    }
+  }, [authState]);
 
   useEffect(() => {
 //    console.log('MainPage','Mounted','model_view useEffect','model_view=',model_view);

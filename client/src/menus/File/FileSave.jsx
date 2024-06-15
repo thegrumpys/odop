@@ -9,8 +9,7 @@ import { logUsage } from '../../logUsage';
 import { useOktaAuth } from '@okta/okta-react';
 
 export default function FileSave() {
-  console.log('FileSave - Mounting...');
-  const model = useSelector((state) => state.modelSlice);
+  const model = useSelector((state) => state.modelSlice.model);
   const model_user = useSelector((state) => state.modelSlice.user);
   const model_type = useSelector((state) => state.modelSlice.model.type);
   const model_name = useSelector((state) => state.modelSlice.name);
@@ -19,9 +18,10 @@ export default function FileSave() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { oktaAuth, authState } = useOktaAuth();
+//  console.log('FileSave','Mounting...','model_user=',model_user,'model_type=',model_type,'model_name=',model_name);
 
   useEffect(() => {
-    console.log('FileSave','useEffect','model_user=',model_user,'model_type=',model_type);
+//    console.log('FileSave','useEffect','model_user=',model_user,'model_type=',model_type,'model_name=',model_name);
     getDesignNames(model_user, model_type);
     return () => { };
   }, [model_user, model_type]);
@@ -54,7 +54,7 @@ export default function FileSave() {
   }
 
   const postDesign = (user, type, name) => {
-    console.log('In FileSave.postDesign user=',user,'type=',type,'name=',name);
+//    console.log('In FileSave.postDesign user=',user,'type=',type,'name=',name);
     // First fetch the current list of names
     displaySpinner(true);
     fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
@@ -70,14 +70,14 @@ export default function FileSave() {
     })
     .then(names => {
         // Second create or update the design
-//        console.log('In FileSave.postDesign type=',type,'names=', names);
+//      console.log('In FileSave.postDesign type=',type,'names=', names);
       setNames(names);
-//        console.log('In FileSave.postDesign names=',names);
+//      console.log('In FileSave.postDesign names=',names);
       var method = 'POST'; // Create it
       if (names.filter(e => e.name === name && e.user === user).length > 0) { // Does it already exist?
         method = 'PUT'; // Update it
       }
-//        console.log('In FileSave.postDesign method=', method);
+//      console.log('In FileSave.postDesign','method=', method,'type=', type,'name=', name);
       displaySpinner(true);
       fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
         method: method,
@@ -92,14 +92,17 @@ export default function FileSave() {
         if (!res.ok) {
           throw Error(res.statusText);
         }
+        return res.json()
+      })
+      .then(names => {
+//        console.log('In FileSave.getDesignNames','names=',names);
         if (method === 'POST') {
           var names = Array.from(names); // clone it
-          names.push({ user: user, name: name }); // If create and successful then add name to the array of names
-//                console.log('In FileSave.postDesign type=',type,'name=',name,'names=', names);
+          names.push({ user: user, name: name }); // If create was successful then add name to the array of names
+//          console.log('In FileSave.postDesign type=',type,'name=',name,'names=', names);
           setNames(names);
         }
         logUsage('event', 'FileSave', { event_label: type + ' ' + name });
-        return res.json()
       })
       .catch(error => {
         displayMessage(method+' of \'' + name + '\' design failed for type \'' + type + '\' with message: \'' + error.message + '\'');
@@ -128,7 +131,7 @@ export default function FileSave() {
   }
 
   const onSignIn = () => {
-//  console.log('In FileSave.onSignIn');
+//    console.log('In FileSave.onSignIn');
     setShow(!show);
 //    console.log('In FileSave.onSignIn - navigate('/login')');
     navigate('/login'); // Must be last

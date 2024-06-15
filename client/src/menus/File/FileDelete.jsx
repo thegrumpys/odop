@@ -23,14 +23,14 @@ export default function FileDelete() {
   const { oktaAuth, authState } = useOktaAuth();
 
   useEffect(() => {
-//    console.log('FileDelete','model_user=',model_user,'model_type=',model_type);
+//    console.log('FileDelete','model_user=',model_user,'model_type=',model_type,'model_name=',model_name);
     setType(model_type);
     getDesignNames(model_user, model_type);
     return () => { };
   }, [model_user, model_type]);
 
   const getDesignNames = (user, type) => {
-//    console.log('In FileDelete.getDesignNames user=',user,'type=',type);
+//    console.log('In FileDelete.getDesignNames','user=',user,'type=',type);
     // Get the names and store them in state
     displaySpinner(true);
     fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
@@ -45,12 +45,15 @@ export default function FileDelete() {
       }
       return res.json()
     })
-    .then(names => {
-//      console.log('In FileDelete.getDesignNames user=',user,'type=',type,'names=', names);
-      setNames(names.filter(design => { return design.user !== null && design.user !== 'null'}));
+    .then(all_names => {
+//      console.log('In FileDelete.getDesignNames','all_names=', all_names);
+      var rw_names = all_names.filter(design => { return design.user !== null && design.user !== 'null'});
+      setNames(rw_names);
       var name = '';
-      if (names.length > 0)
-        name = names[0].name; // Default to first name
+      if (rw_names.length > 0) {
+        name = rw_names[0].name; // Default to first name
+      }
+//      console.log('In FileDelete.getDesignNames','name=', name);
       setName(name);
     })
     .catch(error => {
@@ -62,7 +65,7 @@ export default function FileDelete() {
   }
 
   const deleteDesign = (user, type, name) => {
-//    console.log('In FileDelete.deleteDesign user=',user,'type=',type,'name=',name);
+//    console.log('In FileDelete.deleteDesign','user=',user,'type=',type,'name=',name);
     displaySpinner(true);
     fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
       method: 'DELETE',
@@ -162,7 +165,7 @@ export default function FileDelete() {
         <Modal.Footer>
           {!authState.isAuthenticated && <Button variant="info" onClick={onSignIn}>Sign In...</Button>}{' '}
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>{' '}
-          <Button variant="primary" onClick={onDelete} disabled={!authState.isAuthenticated && names.length === 0 ? true : false}>Delete</Button>
+          <Button variant="primary" onClick={onDelete} disabled={!authState.isAuthenticated || names.length === 0 ? true : false}>Delete</Button>
         </Modal.Footer>
       </Modal>}
     </>
