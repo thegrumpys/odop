@@ -10,20 +10,20 @@ import { logUsage } from '../logUsage';
 export default function SignInPageWidget() {
   const dispatch = useDispatch();
   const { oktaAuth, authState } = useOktaAuth();
-//  console.log('SignInPageWidget','oktaAuth=',oktaAuth,'authState=',authState);
+  console.log('SignInPageWidget','oktaAuth=',oktaAuth,'authState=',authState);
 
   useEffect(() => {
-//    console.log("SignInPageWidget - Mounted");
+    console.log('SignInPageWidget - Mounted');
     const { pkce, issuer, clientId, redirectUri, scopes } = config.oidc;
-//  console.log("config=",config);
-//  console.log("config.oidc=",config.oidc);
-//  console.log("pkce=",pkce);
-//  console.log("issuer=",issuer);
-//  console.log("clientId=",clientId);
-//  console.log("redirectUri=",redirectUri);
-//  console.log("scopes=",scopes);
+//  console.log('config=',config);
+//  console.log('config.oidc=',config.oidc);
+//  console.log('pkce=',pkce);
+//  console.log('issuer=',issuer);
+//  console.log('clientId=',clientId);
+//  console.log('redirectUri=',redirectUri);
+//  console.log('scopes=',scopes);
 //  var baseUrl = issuer.split('/oauth2')[0];
-//  console.log("baseUrl=",baseUrl);
+//  console.log('baseUrl=',baseUrl);
 
 //  // Begin Diagnostic
 //  var xhr = new XMLHttpRequest();
@@ -38,7 +38,7 @@ export default function SignInPageWidget() {
 //      xhr.withCredentials = true;
 //      xhr.send();
 //  } else {
-//      console.log("CORS is not supported for this browser!");
+//      console.log('CORS is not supported for this browser!');
 //  }
 //  // End Diagnostic
 
@@ -86,30 +86,30 @@ export default function SignInPageWidget() {
         ]
       }
     });
-//    console.log('widget=',widget);
+    console.log('widget=',widget);
     widget.showSignInToGetTokens({
       el: '#widget-container',
       scopes,
     }).then((tokens) => {
       // Add tokens to storage
-//      console.log('In SignInPageWidget.showSignInToGetTokens','tokens=',tokens);
+      console.log('In SignInPageWidget.showSignInToGetTokens','tokens=',tokens);
       if (tokens !== undefined) {
           var user = tokens.idToken.claims.sub;
-//          console.log('In SignInPageWidget.showSignInToGetTokens','user=',user);
+          console.log('In SignInPageWidget.showSignInToGetTokens','user=',user);
           dispatch(changeUser(user));
           logUsage('event', 'SignedIn', { event_label: user });
-          dispatch(saveAutoSave("redirect"));
+          dispatch(saveAutoSave('redirect'));
           widget.remove();
           oktaAuth.handleLoginRedirect(tokens);
       }
-//      console.log('In SignInPageWidget.showSignInToGetTokens','end');
+      console.log('In SignInPageWidget.showSignInToGetTokens','end');
     }).catch((err) => {
-//      console.log('In SignInPageWidget.showSignInToGetTokens','err=',err);
+      console.log('In SignInPageWidget.showSignInToGetTokens','err=',err);
       throw err;
     });
 
     return () => {
-//      console.log("SignInPageWidget - Unmounting ...")
+      console.log('SignInPageWidget - Unmounting ...')
     }
   }, []);
 

@@ -6,13 +6,13 @@ import { getAlertsBySeverity } from '../../../components/Alerts';
 import ReportBaseContext from './ReportBaseContext';
 
 export default function ReportBase(props) {
-//  console.log("ReportBase - Mounting...");
+//  console.log('ReportBase - Mounting...');
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
 
   const def_dia = (def_len) => {
     /*  calculates mean diameter of deflected spring.  */
-//    console.log("In Reportdef_dia this=",this);
+//    console.log('In Reportdef_dia this=',this);
     return Math.sqrt(base.wire_len_a - def_len * def_len) / (symbol_table[o.Coils_A].value * Math.PI);
   }
 
@@ -162,7 +162,7 @@ export default function ReportBase(props) {
 
   var def_max = symbol_table[o.L_Free].value - symbol_table[o.L_Solid].value;
   base.safe_travel = Math.min(base.safe_load / symbol_table[o.Rate].value, def_max);
-//        console.log("symbol_table[o.Prop_Calc_Method].value = ", symbol_table[o.Prop_Calc_Method].value);
+//        console.log('symbol_table[o.Prop_Calc_Method].value = ', symbol_table[o.Prop_Calc_Method].value);
   if (symbol_table[o.Prop_Calc_Method].value === 1 && symbol_table[o.Material_Type].value !== 0) {
     base.matTypeValue = base.m_tab[symbol_table[o.Material_Type].value][mo.matnam];
     base.astmFedSpecValue = symbol_table[o.ASTM_Fed_Spec].value;
@@ -172,7 +172,7 @@ export default function ReportBase(props) {
     base.astmFedSpecValue = "N/A";
     base.clWarnString = "Cycle_Life is not computed for User_Specified materials.";
   }
-//        console.log("base.matTypeValue, base.astmFedSpecValue = ", base.matTypeValue, base.astmFedSpecValue);
+//        console.log('base.matTypeValue, base.astmFedSpecValue = ', base.matTypeValue, base.astmFedSpecValue);
 
   base.lifeTargValue = base.lifetarg[symbol_table[o.Life_Category].value];
   if (symbol_table[o.Life_Category].value <= 4) {

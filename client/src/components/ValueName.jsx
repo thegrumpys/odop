@@ -1,7 +1,7 @@
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function Value({ className, name, tooltip }) {
-//  console.log("Value - Mounting...",'id=',id,'value=',value);
+//  console.log('Value - Mounting...','id=',id,'value=',value);
 
   return (
     <td className={"align-middle " + (className !== undefined ? className : '')} id={'vn_' + name}>

@@ -5,7 +5,7 @@ import { logUsage } from '../../logUsage';
 import { startExecute } from "../../components/ExecutePanel";
 
 export default function HelpTutorial() {
-//  console.log("HelpTutorial - Mounting...");
+//  console.log('HelpTutorial - Mounting...');
 
   const [show, setShow] = useState(false);
   const model_type = useSelector((state) => state.modelSlice.model.type);
@@ -13,7 +13,7 @@ export default function HelpTutorial() {
   const [executeName, setExecuteName] = useState('');
 
   useEffect(() => {
-//    console.log("HelpDemo - Mounted",'model_type=',model_type);
+//    console.log('HelpDemo - Mounted','model_type=',model_type);
     updateExecuteNames();
     return () => { };
   }, [model_type]);

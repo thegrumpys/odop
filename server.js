@@ -522,10 +522,10 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')
     // If it’s not https already, redirect the same url on https.
     app.use((req, res, next) => {
       if (req.header('x-forwarded-proto') !== 'https') {
-        console.log("SERVER: In USE Redirect PATH=",path.join(__dirname, 'client/build', 'index.html'));
+        console.log('SERVER: In USE Redirect PATH=',path.join(__dirname, 'client/build', 'index.html'));
         res.redirect(`https://${req.header('host')}${req.url}`);
       } else {
-//        console.log("SERVER: In USE next");
+//        console.log('SERVER: In USE next');
         next();
       }
     })
@@ -535,7 +535,7 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')
     );
     // Handle React routing, return all requests to React app
     app.get('*', function (req, res, next) {
-        console.log("SERVER: In GET * PATH=",path.join(__dirname, 'client/build', 'index.html'));
+        console.log('SERVER: In GET * PATH=',path.join(__dirname, 'client/build', 'index.html'));
         res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
     });
 } else {

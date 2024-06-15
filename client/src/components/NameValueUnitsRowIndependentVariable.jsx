@@ -9,13 +9,13 @@ import { getAlertsByName } from './Alerts';
 
 export default function NameValueUnitsRowIndependentVariable({ element, index, onChangeValid, onChangeInvalid, onSet, onReset }) {
 //  const element = useSelector((state) => state.modelSlice.model.symbol_table[index]);
-//  console.log("NameValueUnitsRowIndependentVariable - Mounting...",'element=',element,'index=',index);
+//  console.log('NameValueUnitsRowIndependentVariable - Mounting...','element=',element,'index=',index);
   const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
   const dispatch = useDispatch();
 
   useEffect(() => {
-//    console.log("NameValueUnitsRowIndependentVariable - Mounted");
-//    return () => console.log("NameValueUnitsRowIndependentVariable - Unmounting ...");
+//    console.log('NameValueUnitsRowIndependentVariable - Mounted');
+//    return () => console.log('NameValueUnitsRowIndependentVariable - Unmounting ...');
     return () => { };
   }, []);
 

@@ -5,7 +5,7 @@ import { logUsage } from '../../logUsage';
 import { startExecute } from "../../components/ExecutePanel";
 
 export default function ActionExecute() {
-//  console.log("ActionExecute - Mounting...");
+//  console.log('ActionExecute - Mounting...');
 
   const [show, setShow] = useState(false);
   const model_type = useSelector((state) => state.modelSlice.model.type);
@@ -13,7 +13,7 @@ export default function ActionExecute() {
   const [executeName, setExecuteName] = useState('');
 
   useEffect(() => {
-//    console.log("ActionExecute - Mounted",'model_type=',model_type);
+//    console.log('ActionExecute - Mounted','model_type=',model_type);
     updateExecuteNames();
     return () => { };
   }, [model_type]);

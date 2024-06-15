@@ -29,7 +29,7 @@ import { toODOPPrecision } from '../../toODOPPrecision'
 import store from '../../store/store';
 
 export default function SymbolValueWireDia({ className, element, index }) {
-// console.log("SymbolValueWireDia - Mounting...",'element=',element,'index=',index);
+// console.log('SymbolValueWireDia - Mounting...','element=',element,'index=',index);
   const type = useSelector((state) => state.modelSlice.model.type);
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
@@ -48,18 +48,18 @@ export default function SymbolValueWireDia({ className, element, index }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-//    console.log("SymbolValueWireDia - Mounted");
+//    console.log('SymbolValueWireDia - Mounted');
 //    document.addEventListener("click", handleClick);
 //    document.addEventListener("contextmenu", handleContextMenu);
     return () => {
-//      console.log("SymbolValueWireDia - Unmounting ...");
+//      console.log('SymbolValueWireDia - Unmounting ...');
 //      document.removeEventListener("click", handleClick);
 //      document.removeEventListener("contextmenu", handleContextMenu);
     };
   }, []);
 
 //  useEffect(() => {
-////    console.log("SymbolValueWireDia - Mounted");
+////    console.log('SymbolValueWireDia - Mounted');
 //    if (element.format === 'table') {
 //      var tableContents = require('./' + element.table + '.json'); // Dynamically load table
 //      setTable(tableContents);

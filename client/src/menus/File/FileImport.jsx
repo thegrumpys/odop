@@ -8,7 +8,7 @@ import { logUsage } from '../../logUsage';
 import { basename } from 'path-browserify';
 
 export default function FileImport() {
-//  console.log("FileImport - Mounting...");
+//  console.log('FileImport - Mounting...');
   const [show, setShow] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const dispatch = useDispatch();

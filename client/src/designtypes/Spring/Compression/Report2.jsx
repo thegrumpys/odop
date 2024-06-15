@@ -11,7 +11,7 @@ export default function Report2() {
 //  console.log('Report2','base=',base);
 
   const onClick = (event) => {
-//    console.log("In Report2.onClick event=",event);
+//    console.log('In Report2.onClick event=',event);
     window.print();
     return false;
   }

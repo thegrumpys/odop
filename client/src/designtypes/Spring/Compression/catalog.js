@@ -17,7 +17,7 @@ export function getCatalogNames() {
 }
 
 function getObjectiveValue(st, viol_wt) {
-//    console.log('In getObjectiveValue st=',st,"viol_wt=",viol_wt);
+//    console.log('In getObjectiveValue st=',st,'viol_wt=',viol_wt);
     var element;
     var vmin;
     var vmax;
@@ -199,7 +199,7 @@ export function getCatalogEntries(name, store, st, viol_wt) {
 //        console.log('In getCatalogEntries 3 objective_value=',objective_value);
 
         entry[9] = objective_value.toFixed(6); // Set Objective Value
-//        console.log("In getCatalogEntries 4: entry = ", entry);
+//        console.log('In getCatalogEntries 4: entry = ', entry);
 
         // get four lowest objective values as candidate entries
         if (cat0 === undefined || entry[9] < cat0[9]) { cat3 = cat2; cat2 = cat1; cat1 = cat0; cat0 = entry; }

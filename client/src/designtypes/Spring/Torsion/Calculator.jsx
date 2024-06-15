@@ -11,7 +11,7 @@ import Value from '../../../components/Value';
 import * as o from './symbol_table_offsets';
 
 export default function Calculator() {
-//  console.log("Calculator - Mounting...");
+//  console.log('Calculator - Mounting...');
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const base = useContext(ReportBaseContext);
 //  console.log('Calculator','base=',base);

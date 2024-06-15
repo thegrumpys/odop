@@ -9,7 +9,7 @@ import { logUsage } from '../../logUsage';
 import { useOktaAuth } from '@okta/okta-react';
 
 export default function FileSaveAs() {
-//  console.log("FileSaveAs - Mounting...");
+//  console.log('FileSaveAs - Mounting...');
   const model = useSelector((state) => state.modelSlice);
   const model_user = useSelector((state) => state.modelSlice.user);
   const model_type = useSelector((state) => state.modelSlice.model.type);
@@ -131,8 +131,8 @@ export default function FileSaveAs() {
   const onSignIn = () => {
 //  console.log('In FileSaveAs.onSignIn');
     setShow(!show);
-//    console.log('In FileSaveAs.onSignIn - navigate("/login")');
-    navigate("/login"); // Must be last
+//    console.log('In FileSaveAs.onSignIn - navigate('/login')');
+    navigate('/login'); // Must be last
   }
 
   const onCancel = () => {

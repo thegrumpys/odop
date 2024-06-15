@@ -6,29 +6,29 @@ import { displayMessage } from './Message';
 import { displaySpinner } from './Spinner';
 
 export default function SearchDocs() {
-//  console.log("SearchDocs - Mounting...");
+//  console.log('SearchDocs - Mounting...');
   const [show, setShow] = useState(false);
   const [text, setText] = useState('');
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
 
   const onChange = (event) => {
-//        console.log("In SearchDocs.onChange event=",event);
+//        console.log('In SearchDocs.onChange event=',event);
     setText(event.target.value);
   }
 
   const onKeyPress = (event) => {
-//        console.log("In SearchDocs.onKeyPress event=",event);
+//        console.log('In SearchDocs.onKeyPress event=',event);
     if (event.charCode === 13) {
       onButtonPress(event);
     }
   }
 
   const onButtonPress = (event) => {
-//        console.log("In SearchDocs.onButtonPress event=",event);
+//        console.log('In SearchDocs.onButtonPress event=',event);
     var local_text = text;
     var encoded_text = encodeURIComponent(text);
-//        console.log("In SearchDocs.onButtonPress encoded_text=",encoded_text);
+//        console.log('In SearchDocs.onButtonPress encoded_text=',encoded_text);
     logUsage('event', 'SearchDocs', { event_label: text });
     setText('');
     setQuery(local_text);
@@ -61,7 +61,7 @@ export default function SearchDocs() {
   }
 
   const onCancel = (event) => {
-//        console.log("In SearchDocs.onCancel event=",event);
+//        console.log('In SearchDocs.onCancel event=',event);
     setShow(!show);
     // Noop - all done
   }

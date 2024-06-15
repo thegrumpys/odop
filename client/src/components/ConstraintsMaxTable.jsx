@@ -7,12 +7,12 @@ import ConstraintsMaxHeaderDependentVariable from './ConstraintsMaxHeaderDepende
 import ConstraintsMaxRowDependentVariable from './ConstraintsMaxRowDependentVariable';
 
 export default function ConstraintsMaxTable() {
-//  console.log("ConstraintsMaxTable - Mounting...");
+//  console.log('ConstraintsMaxTable - Mounting...');
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
 
   useEffect(() => {
-//    console.log("ConstraintsMaxTable - Mounted");
-//    return () => console.log("ConstraintsMaxTable - Unmounting ...");
+//    console.log('ConstraintsMaxTable - Mounted');
+//    return () => console.log('ConstraintsMaxTable - Unmounting ...');
     return () => {};
   }, []);
 

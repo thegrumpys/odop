@@ -7,14 +7,14 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
 export default function NameValueUnitsRowCalcInput({ element, index, onChangeValid, onChangeInvalid, onChange, onSelect }) {
-//  console.log("NameValueUnitsRowCalcInput - Mounting...",'element=',element,'index=',index);
+//  console.log('NameValueUnitsRowCalcInput - Mounting...','element=',element,'index=',index);
   const type = useSelector((state) => state.modelSlice.model.type);
   const show_units = useSelector((state) => state.modelSlice.model.system_controls.show_units);
   const [table, setTable] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
-//    console.log("SymbolValue - Mounted");
+//    console.log('SymbolValue - Mounted');
     if (element.format === 'table') {
 //      console.log('NameValueUnitsRowCalcInput useEffect file= ../designtypes/'+element.table+'.json');
       var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
@@ -33,7 +33,7 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
   }
 
   const onChangeInvalidLocal = (event) => {
-//    console.log("In NameValueUnitsRowCalcInput.onChangeInvalid','event.target.value=", event.target.value);
+//    console.log('In NameValueUnitsRowCalcInput.onChangeInvalid','event.target.value=', event.target.value);
     if (typeof onChangeInvalid === "function") onChangeInvalid(event);
   }
 

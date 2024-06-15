@@ -41,7 +41,7 @@ const ContextAwareAccordion = ({ children }) => {
 }
 
 function ContextAwareToggle({ children, variant, size, disabled, eventKey, onClick, active }) {
-//  console.log("AlertsAccordion - Mounting...",'variant=',variant,'size=',size,'disabled=',disabled,'eventKey=',eventKey,'onClick=',onClick,'active=',active);
+//  console.log('AlertsAccordion - Mounting...','variant=',variant,'size=',size,'disabled=',disabled,'eventKey=',eventKey,'onClick=',onClick,'active=',active);
   const decoratedOnClick = useAccordionButton(eventKey, onClick);
 
   return (
@@ -52,7 +52,7 @@ function ContextAwareToggle({ children, variant, size, disabled, eventKey, onCli
 }
 
 export default function AlertsAccordion() {
-//  console.log("AlertsAccordion - Mounting...");
+//  console.log('AlertsAccordion - Mounting...');
   const caret = useSelector((state) => state.alertsSlice.caret);
   const level = useSelector((state) => state.alertsSlice.level);
   const system_controls = useSelector((state) => state.modelSlice.model.system_controls);

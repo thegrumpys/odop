@@ -4,14 +4,14 @@ import { NavDropdown, Modal, Button } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
 
 export default function ViewSymbolTable() {
-//  console.log("ViewSymbolTable - Mounting...");
+//  console.log('ViewSymbolTable - Mounting...');
 
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-//    console.log("ViewSymbolTable - Mounted");
-//    return () => console.log("ViewSymbolTable - Unmounting ...");
+//    console.log('ViewSymbolTable - Mounted');
+//    return () => console.log('ViewSymbolTable - Unmounting ...');
     return () => { };
   }, []);
 

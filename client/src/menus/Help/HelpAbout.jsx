@@ -9,7 +9,7 @@ import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 
 export default function HelpAbout() {
-//  console.log("HelpAbout - Mounting...");
+//  console.log('HelpAbout - Mounting...');
   const [show, setShow] = useState(false);
   const [sizes, setSizes] = useState('');
   const [size, setSize] = useState('');
@@ -22,9 +22,9 @@ export default function HelpAbout() {
 //  console.log('HelpAbout','oktaAuth=',oktaAuth,'authState=',authState);
 
   useEffect(() => {
-//    console.log("HelpAbout - Mounted");
+//    console.log('HelpAbout - Mounted');
     getDBSize(user);
-//    return () => console.log("HelpAbout - Unmounting ...");
+//    return () => console.log('HelpAbout - Unmounting ...');
     return () => {};
   }, []);
 

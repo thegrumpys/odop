@@ -7,12 +7,12 @@ import NameValueUnitsHeaderDependentVariable from './NameValueUnitsHeaderDepende
 import NameValueUnitsRowDependentVariable from './NameValueUnitsRowDependentVariable';
 
 export default function NameValueUnitsTable() {
-//  console.log("NameValueUnitsTable - Mounting...");
+//  console.log('NameValueUnitsTable - Mounting...');
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
 
   useEffect(() => {
-//    console.log("NameValueUnitsTable - Mounted");
-//    return () => console.log("NameValueUnitsTable - Unmounting ...");
+//    console.log('NameValueUnitsTable - Mounted');
+//    return () => console.log('NameValueUnitsTable - Unmounting ...');
     return () => {};
   }, []);
 

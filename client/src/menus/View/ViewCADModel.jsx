@@ -63,11 +63,11 @@ class ViewCADModel extends Component {
 //        var l_free_fudged = l_free_table[l_free_table.length-1];
 ////        console.log('In ViewCADModel.render l_free_fudged=',l_free_fudged);
 //        for (let i = 0; i < l_free_table.length; i++) {
-////            console.log("i=",i,"l_free_value=",l_free_value,"l_free_table=",l_free_table[i]);
+////            console.log('i=',i,'l_free_value=',l_free_value,'l_free_table=',l_free_table[i]);
 //            if (l_free_value < l_free_table[i]) {
 //                var prev_diff = l_free_value-l_free_table[i-1];
 //                var next_diff = l_free_table[i]-l_free_value;
-////                console.log("i=",i,"prev_diff=",prev_diff,"next_diff=",next_diff);
+////                console.log('i=',i,'prev_diff=',prev_diff,'next_diff=',next_diff);
 //                if (prev_diff < next_diff) {
 //                    l_free_fudged = l_free_table[i-1];
 //                } else {

@@ -5,15 +5,15 @@ import { logUsage } from '../../logUsage';
 import { CONSTRAINED, FIXED } from '../../store/actionTypes';
 
 export default function ViewObjectiveValue() {
-//  console.log("ViewObjectiveValue - Mounting...");
+//  console.log('ViewObjectiveValue - Mounting...');
 
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-//    console.log("ViewObjectiveValue - Mounted");
-//    return () => console.log("ViewObjectiveValue - Unmounting ...");
+//    console.log('ViewObjectiveValue - Mounted');
+//    return () => console.log('ViewObjectiveValue - Unmounting ...');
     return () => { };
   }, []);
 

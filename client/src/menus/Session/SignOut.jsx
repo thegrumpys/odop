@@ -15,15 +15,15 @@ export default function SignOut() {
   const toggle = () => {
 //    console.log('In SignOut.toggle');
     dispatch(changeUser(null));
-    dispatch(saveAutoSave("redirect"));
+    dispatch(saveAutoSave('redirect'));
     // Before changing the postSignOutRedirectUri you must go into the Okta Admin UI
     // And add the new one into the "SignOut redirect URIs" to whitelist it.
 //    oktaAuth.signOut({ postSignOutRedirectUri: window.location.origin + '/' });
 //    console.log('In SignOut.toggle window.location.origin=',window.location.origin);
     oktaAuth.signOut();
     logUsage('event', 'SignOut', { event_label: '' });
-//    console.log('In SignOut.toggle navigate("/")');
-    navigate("/"); // Must be last after logUsage
+//    console.log('In SignOut.toggle navigate('/')');
+    navigate('/'); // Must be last after logUsage
   }
 
   return authState && authState.isAuthenticated ? (

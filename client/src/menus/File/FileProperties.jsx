@@ -5,7 +5,7 @@ import { changeLabelsValue, saveAutoSave } from '../../store/modelSlice';
 import { logUsage, logValue } from '../../logUsage';
 
 export default function FileProperties() {
-//  console.log("FileProperties - Mounting...");
+//  console.log('FileProperties - Mounting...');
   const model_labels = useSelector((state) => state.modelSlice.model.labels);
   const model_type = useSelector((state) => state.modelSlice.model.type);
   const [show, setShow] = useState(false);
@@ -13,8 +13,8 @@ export default function FileProperties() {
   const dispatch = useDispatch();
 
 //  useEffect(() => {
-////    console.log("FileProperties - Mounted");
-////    return () => console.log("FileProperties - Unmounting...");
+////    console.log('FileProperties - Mounted');
+////    return () => console.log('FileProperties - Unmounting...');
 //    return () => { };
 //  }, []);
 

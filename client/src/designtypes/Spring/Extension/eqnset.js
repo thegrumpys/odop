@@ -13,7 +13,7 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
     var j;
 
     var et_tab = require('./endtypes.json');
-//  console.log("et_tab=", et_tab);
+//  console.log('et_tab=', et_tab);
 
     /*  *******  DESIGN EQUATIONS  *******                  */
     x[o.Mean_Dia] = p[o.OD_Free] - p[o.Wire_Dia];
@@ -88,7 +88,7 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
 
       if (x[o.Prop_Calc_Method] === 1) {
           x[o.Tensile] = x[o.slope_term] * (Math.log10(p[o.Wire_Dia]) - x[o.const_term]) + x[o.tensile_010];
-//          console.log("eqnset Tensile = ", x[o.Tensile]);
+//          console.log('eqnset Tensile = ', x[o.Tensile]);
       }
       if (x[o.Prop_Calc_Method] <= 2) {
           x[o.Stress_Lim_Endur] = x[o.Tensile] * x[o.PC_Tensile_Endur] / 100.0;
@@ -98,7 +98,7 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
 
     if (x[o.Stress_2] > zero) {
         x[o.FS_2] = x[o.Stress_Lim_Stat] / x[o.Stress_2];
-//        console.log("eqnset FS_2 = ", x[o.FS_2]);
+//        console.log('eqnset FS_2 = ', x[o.FS_2]);
     }
        else x[o.FS_2] = 1.0;
 
@@ -189,12 +189,12 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
     return x;
 
 function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
-//    console.log("In cl_calc:");
-//    console.log("Material_Index = x[o.Material_Type] = mat_idx =", mat_idx);
-//    console.log("Life_Category =  x[o.Life_Category] = cl_idx  =", cl_idx);
-//    console.log("st_code =", st_code, " x[o.Tensile] = tensile =", tensile);
-//    console.log("Stress1 = x[o.Stress_1] =", stress_1);
-//    console.log("Stress2 = x[o.Stress_2] =", stress_2);
+//    console.log('In cl_calc:');
+//    console.log('Material_Index = x[o.Material_Type] = mat_idx =', mat_idx);
+//    console.log('Life_Category =  x[o.Life_Category] = cl_idx  =', cl_idx);
+//    console.log('st_code =', st_code, " x[o.Tensile] = tensile =", tensile);
+//    console.log('Stress1 = x[o.Stress_1] =', stress_1);
+//    console.log('Stress2 = x[o.Stress_2] =', stress_2);
 
     var i;
     var j;
@@ -237,10 +237,10 @@ function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
         }
         if (st_code === 3) { // Is it Torsion?
             snx[i] = 0.01 * m_tab[mat_idx][mo.ptb1+idxoffset] * tensile;
-//            console.log("i =", i, " j =", j, "idxoffset =", idxoffset, "m_tab[mat_idx][mo.ptb1+idxoffset]", m_tab[mat_idx][mo.ptb1+idxoffset],'snx[i]=',snx[i]);
+//            console.log('i =', i, " j =", j, "idxoffset =", idxoffset, "m_tab[mat_idx][mo.ptb1+idxoffset]", m_tab[mat_idx][mo.ptb1+idxoffset],'snx[i]=',snx[i]);
         } else {
             snx[i] = 0.01 * m_tab[mat_idx][mo.pte1+idxoffset] * tensile;
-//            console.log("i =", i, " j =", j, "idxoffset =", idxoffset, "m_tab[mat_idx][mo.pte1+idxoffset]", m_tab[mat_idx][mo.pte1+idxoffset],'snx[i]=',snx[i]);
+//            console.log('i =', i, " j =", j, "idxoffset =", idxoffset, "m_tab[mat_idx][mo.pte1+idxoffset]", m_tab[mat_idx][mo.pte1+idxoffset],'snx[i]=',snx[i]);
         }
     }
 

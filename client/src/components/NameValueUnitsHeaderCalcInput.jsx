@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip  } from 'react-bootstrap';
 
 export default function NameValueUnitsHeaderCalcInput() {
-//  console.log("NameValueUnitsHeaderCalcInput - Mounting...");
+//  console.log('NameValueUnitsHeaderCalcInput - Mounting...');
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
 
   useEffect(() => {
-//    console.log("NameValueUnitsHeaderCalcInput - Mounted");
-//    return () => console.log("NameValueUnitsHeaderCalcInput - Unmounting ...");
+//    console.log('NameValueUnitsHeaderCalcInput - Mounted');
+//    return () => console.log('NameValueUnitsHeaderCalcInput - Unmounting ...');
     return () => {};
   }, []);
 

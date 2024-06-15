@@ -4,14 +4,14 @@ import { NavDropdown, Modal, Button } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
 
 export default function ViewOffsets() {
-//  console.log("ViewOffsets - Mounting...");
+//  console.log('ViewOffsets - Mounting...');
 
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-//    console.log("ViewOffsets - Mounted");
-//    return () => console.log("ViewOffsets - Unmounting ...");
+//    console.log('ViewOffsets - Mounted');
+//    return () => console.log('ViewOffsets - Unmounting ...');
     return () => { };
   }, []);
 

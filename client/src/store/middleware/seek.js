@@ -15,7 +15,7 @@ export function seek(store, action) {
     var M_NUM;
     var design = store.getState().modelSlice; // Re-access store to get latest element values
     if (design.model.system_controls.ioopt > 5) {
-        console.log("00 In seek", action);
+        console.log('00 In seek', action);
     }
     if (design.model.system_controls.ioopt > 5) {
         console.log('01 SEEK:    OBJ =', design.model.result.objective_value);
@@ -25,8 +25,8 @@ export function seek(store, action) {
     }
 
     if (design.model.system_controls.ioopt > 5) {
-        console.log("02A THE NUMBER OF FIXED INDEPENDENT VARIABLES IS:", design.model.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && element.lmin & FIXED ? total+1 : total+0}, 0));
-        console.log("02B THE NUMBER OF FREE INDEPENDENT VARIABLES IS:", design.model.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0));
+        console.log('02A THE NUMBER OF FIXED INDEPENDENT VARIABLES IS:', design.model.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && element.lmin & FIXED ? total+1 : total+0}, 0));
+        console.log('02B THE NUMBER OF FREE INDEPENDENT VARIABLES IS:', design.model.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0));
     }
     var ncode;
     if(design.model.symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {

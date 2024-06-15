@@ -9,7 +9,7 @@ import { logUsage } from '../../logUsage';
 import { useOktaAuth } from '@okta/okta-react';
 
 export default function FileSave() {
-//  console.log("FileSave - Mounting...");
+  console.log('FileSave - Mounting...');
   const model = useSelector((state) => state.modelSlice);
   const model_user = useSelector((state) => state.modelSlice.user);
   const model_type = useSelector((state) => state.modelSlice.model.type);
@@ -21,7 +21,7 @@ export default function FileSave() {
   const { oktaAuth, authState } = useOktaAuth();
 
   useEffect(() => {
-//    console.log('FileSave','model_user=',model_user,'model_type=',model_type);
+    console.log('FileSave','useEffect','model_user=',model_user,'model_type=',model_type);
     getDesignNames(model_user, model_type);
     return () => { };
   }, [model_user, model_type]);
@@ -54,7 +54,7 @@ export default function FileSave() {
   }
 
   const postDesign = (user, type, name) => {
-//    console.log('In FileSave.postDesign user=',user,'type=',type,'name=',name);
+    console.log('In FileSave.postDesign user=',user,'type=',type,'name=',name);
     // First fetch the current list of names
     displaySpinner(true);
     fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
@@ -130,8 +130,8 @@ export default function FileSave() {
   const onSignIn = () => {
 //  console.log('In FileSave.onSignIn');
     setShow(!show);
-//    console.log('In FileSave.onSignIn - navigate("/login")');
-    navigate("/login"); // Must be last
+//    console.log('In FileSave.onSignIn - navigate('/login')');
+    navigate('/login'); // Must be last
   }
 
   const onCancel = () => {

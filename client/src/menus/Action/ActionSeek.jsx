@@ -7,7 +7,7 @@ import { logUsage } from '../../logUsage';
 import { displayMessage } from '../../components/Message';
 
 export default function ActionSeek() {
-//  console.log("ActionSeek - Mounting...");
+//  console.log('ActionSeek - Mounting...');
   const [seekShow, setSeekShow] = useState(false);
   const [seekName, setSeekName] = useState(null);
   const [seekMinMax, setSeekMinMax] = useState(MIN);
@@ -18,8 +18,8 @@ export default function ActionSeek() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-//    console.log("ActionSeek - Mounted");
-//    return () => console.log("ActionSeek - Unmounting ...");
+//    console.log('ActionSeek - Mounted');
+//    return () => console.log('ActionSeek - Unmounting ...');
     return () => { };
   }, []);
 

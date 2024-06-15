@@ -9,7 +9,7 @@ import { getAlertsByName } from './Alerts';
 import { toODOPPrecision } from '../toODOPPrecision';
 
 export default function ConstraintsMinRowIndependentVariable({ element, index, onChangeValid, onChangeInvalid, onSet, onReset }) {
-//  console.log("ConstraintsMinRowIndependentVariable - Mounting...",'element=',element,'index=',index);
+//  console.log('ConstraintsMinRowIndependentVariable - Mounting...','element=',element,'index=',index);
   const [show, setShow] = useState(false);
   const [isInvalidValue, setIsInvalidValue] = useState(false);
   const [valueString, setValueString] = useState(false);
@@ -17,27 +17,27 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
   const dispatch = useDispatch();
 
   useEffect(() => {
-//    console.log("ConstraintsMinRowIndependentVariable - Mounted");
-//    return () => console.log("ConstraintsMinRowIndependentVariable - Unmounting ...");
+//    console.log('ConstraintsMinRowIndependentVariable - Mounted');
+//    return () => console.log('ConstraintsMinRowIndependentVariable - Unmounting ...');
     return () => { };
   }, []);
 
   const onSetFlagMinConstrained = (event) => {
-//    console.log("In ConstraintsMinRowIndependentVariable.onSetFlagMinConstrained","event.target.value=", event.target.value);
+//    console.log('In ConstraintsMinRowIndependentVariable.onSetFlagMinConstrained','event.target.value=', event.target.value);
     dispatch(setSymbolFlag(element.name, MIN, CONSTRAINED));
     logValue(element.name, 'Enabled', 'MinConstraintFlag', false);
     if (typeof onSet === "function") onSet(event);
   }
 
   const onResetFlagMinConstrained = (event) => {
-//    console.log("In ConstraintsMinRowIndependentVariable.onResetFlagMinConstrained","event.target.value=", event.target.value);
+//    console.log('In ConstraintsMinRowIndependentVariable.onResetFlagMinConstrained','event.target.value=', event.target.value);
     dispatch(resetSymbolFlag(element.name, MIN, CONSTRAINED));
     logValue(element.name, 'Disabled', 'MinConstraintFlag', false);
     if (typeof onReset === "function") onReset(event);
   }
 
   const onChangeValidMinConstraint = (event) => {
-//    console.log("In ConstraintsMinRowIndependentVariable.onChangeValidMinConstraint","event.target.value=", event.target.value);
+//    console.log('In ConstraintsMinRowIndependentVariable.onChangeValidMinConstraint','event.target.value=', event.target.value);
     var value = parseFloat(event.target.value);
     dispatch(changeSymbolConstraint(element.name, MIN, value)); // Update the model
     logValue(element.name, event.target.value, 'MinConstraint');
@@ -45,12 +45,12 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
   }
 
   const onChangeInvalidMinConstraint = (event) => {
-//    console.log("In ConstraintsMinRowIndependentVariable.onChangeInvalidMinConstraint","event.target.value=", event.target.value);
+//    console.log('In ConstraintsMinRowIndependentVariable.onChangeInvalidMinConstraint','event.target.value=', event.target.value);
     if (typeof onChangeInvalid === "function") onChangeInvalid(event);
   }
 
   const onClick = (event) => {
-//    console.log("In ConstraintsMinRowIndependentVariable.onClick','event.target.value=",event.target.value);
+//    console.log('In ConstraintsMinRowIndependentVariable.onClick','event.target.value=',event.target.value);
     // Show modal only if there are cminchoices
     if (element.cminchoices !== undefined && element.cminchoices.length > 0) {
       setValueString(element.cmin.toString());
@@ -59,21 +59,21 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
   }
 
   const onChangeValidValue = (event) => {
-//    console.log("In ConstraintsMinRowIndependentVariable.onChangeValidValue","event.target.value=", event.target.value);
+//    console.log('In ConstraintsMinRowIndependentVariable.onChangeValidValue','event.target.value=', event.target.value);
     setValueString(event.target.value);
     setIsInvalidValue(false);
     if (typeof onChangeValid === "function") onChangeValid(event);
   }
 
   const onChangeInvalidValue = (event) => {
-//    console.log("In ConstraintsMinRowIndependentVariable.onChangeInvalidValue","event.target.value=", event.target.value);
+//    console.log('In ConstraintsMinRowIndependentVariable.onChangeInvalidValue','event.target.value=', event.target.value);
     setIsInvalidValue(true);
     if (typeof onChangeInvalid === "function") onChangeInvalid(event);
   }
 
   const onEnterButton = (event) => {
-//    console.log("In ConstraintsMinRowIndependentVariable.onEnterButton","event.target.value=", event.target.value);
-//    console.log("In ConstraintsMinRowIndependentVariable.onEnterButton","valueString=", valueString);
+//    console.log('In ConstraintsMinRowIndependentVariable.onEnterButton','event.target.value=', event.target.value);
+//    console.log('In ConstraintsMinRowIndependentVariable.onEnterButton','valueString=', valueString);
     setShow(!show);
     var value = parseFloat(valueString);
     dispatch(resetSymbolFlag(element.name, MIN, FDCL));
@@ -85,7 +85,7 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
   }
 
   const onVariableButton = (event, source_name) => {
-//    console.log("In ConstraintsMinRowIndependentVariable.onVariableButton","event.target.value=", event.target.value, 'source_name=', source_name);
+//    console.log('In ConstraintsMinRowIndependentVariable.onVariableButton','event.target.value=', event.target.value, 'source_name=', source_name);
     setShow(!show);
     dispatch(setSymbolFlag(element.name, MIN, FDCL, source_name));
     if (element.lmin & FIXED) {
@@ -94,7 +94,7 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
   }
 
   const onCancel = (event) => {
-//    console.log("In ConstraintsMinRowIndependentVariable.onCancel", "event.target.value=", event.target.value);
+//    console.log('In ConstraintsMinRowIndependentVariable.onCancel', "event.target.value=", event.target.value);
     setShow(!show);
   }
 

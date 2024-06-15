@@ -23,7 +23,7 @@ function isHtml(filename) {
 
 function findHtml(folder) {
     if (!fs.existsSync(folder)) {
-        console.log("Could not find folder: ", folder);
+        console.log('Could not find folder: ', folder);
         return;
     }
 
@@ -157,9 +157,9 @@ function main() {
     console.log('HTML_FOLDER=',HTML_FOLDER);
     files = findHtml(HTML_FOLDER);
     var docs = [];
-    console.log("Building index for these files:");
+    console.log('Building index for these files:');
     for (var i = 0; i < files.length; i++) {
-        console.log("    " + files[i]);
+        console.log('    ' + files[i]);
         docs.push(readHtml(HTML_FOLDER, files[i]));
     }
     var idx = buildIndex(docs);
@@ -169,14 +169,14 @@ function main() {
         if(err) {
             return console.log(err);
         }
-        console.log("Index saved as " + LUNR_INDEX);
+        console.log('Index saved as ' + LUNR_INDEX);
     });
     var pages_json = JSON.stringify(previews, null, 2);
     fs.writeFile(LUNR_PAGES, pages_json, function(err) {
         if(err) {
             return console.log(err);
         }
-        console.log("Pages saved as " + LUNR_PAGES);
+        console.log('Pages saved as ' + LUNR_PAGES);
     });
 }
 

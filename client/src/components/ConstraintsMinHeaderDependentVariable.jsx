@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function ConstraintsMinHeaderDependentVariable() {
-//  console.log("ConstraintsMinHeaderDependentVariable - Mounting...");
+//  console.log('ConstraintsMinHeaderDependentVariable - Mounting...');
   const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
 
   useEffect(() => {
-//    console.log("ConstraintsMinHeaderDependentVariable - Mounted");
-//    return () => console.log("ConstraintsMinHeaderDependentVariable - Unmounting ...");
+//    console.log('ConstraintsMinHeaderDependentVariable - Mounted');
+//    return () => console.log('ConstraintsMinHeaderDependentVariable - Unmounting ...');
     return () => { };
   }, []);
 

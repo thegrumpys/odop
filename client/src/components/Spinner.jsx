@@ -14,12 +14,12 @@ export const displaySpinner = (display) => {
 }
 
 const Spinner = () => {
-//  console.log("SPINNER - Mounting...");
+//  console.log('SPINNER - Mounting...');
   const show = useSelector((state) => state.spinnerSlice.show);
 
   useEffect(() => {
-//    console.log("SPINNER - Mounted, show changed", show);
-//    return () => console.log("SPINNER - Unmounting...");
+//    console.log('SPINNER - Mounted, show changed', show);
+//    return () => console.log('SPINNER - Unmounting...');
     return () => {};
   }, [show]);
 

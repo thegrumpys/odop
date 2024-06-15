@@ -5,7 +5,7 @@ import { logUsage } from '../../logUsage';
 import { changeView } from '../../store/modelSlice';
 
 export default function ViewSelect() {
-//  console.log("ViewSelect - Mounting...");
+//  console.log('ViewSelect - Mounting...');
 
   const model_type = useSelector((state) => state.modelSlice.model.type);
   const dispatch = useDispatch();

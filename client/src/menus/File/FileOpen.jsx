@@ -10,7 +10,7 @@ import config from '../../config';
 import { useOktaAuth } from '@okta/okta-react';
 
 export default function FileOpen() {
-//  console.log("FileOpen - Mounting...");
+//  console.log('FileOpen - Mounting...');
   const model_user = useSelector((state) => state.modelSlice.user);
   const model_type = useSelector((state) => state.modelSlice.model.type);
   const model_name = useSelector((state) => state.modelSlice.name);
@@ -25,7 +25,7 @@ export default function FileOpen() {
 //  console.log('FileOpen','oktaAuth=',oktaAuth,'authState=',authState);
 
 //  useEffect(() => {
-////    console.log("FileOpen - Mounted");
+////    console.log('FileOpen - Mounted');
 //    getDesignNames(model_user, model_type);
 //    return () => { };
 //  }, []);
@@ -137,8 +137,8 @@ export default function FileOpen() {
   const onSignIn = () => {
 //    console.log('FileOpen.onSignIn');
     setShow(!show);
-//    console.log('In FileOpen.onSignIn - navigate("/login")');
-    navigate("/login"); // Must be last
+//    console.log('In FileOpen.onSignIn - navigate('/login')');
+    navigate('/login'); // Must be last
   }
 
   const onLoadInitialState = () => {

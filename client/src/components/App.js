@@ -14,7 +14,7 @@ import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js'
 import { LoginCallback, SecureRoute, Security } from '@okta/okta-react';
 
 export default function App() {
-//  console.log("APP - Mounting...");
+//  console.log('APP - Mounting...');
   const [show, setShow] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
   const user = useSelector((state) => state.modelSlice.user);
@@ -27,7 +27,7 @@ export default function App() {
 //  console.log('APP','location=',location);
 
   useEffect(() => {
-//    console.log("APP - useEffect Mounted");
+//    console.log('APP - useEffect Mounted');
     if (typeof(Storage) !== "undefined" && localStorage.getItem("redirect") !== null) {
 //      console.log('In App restore "redirect" file')
       loadRedirectDesign();
@@ -38,14 +38,14 @@ export default function App() {
 //      console.log('In App restore default design')
       loadDefaultDesign();
     }
-    return () => console.log("APP - useEffect Unmounting ...");
+    return () => console.log('APP - useEffect Unmounting ...');
 //    return () => {};
   }, []);
 
   const loadRedirectDesign = () => {
 //    console.log('APP - loadRedirectDesign');
-    dispatch(restoreAutoSave("redirect"));
-    dispatch(deleteAutoSave("redirect"));
+    dispatch(restoreAutoSave('redirect'));
+    dispatch(deleteAutoSave('redirect'));
     dispatch(deleteAutoSave()); // Get rid of any AutoSave data too
 //    console.log('APP - loadAutoSaveDesign','user=',user,'name=',name,'view=',view,'type=',type);
     config.url.prompt = false; // Turn off prompt
@@ -54,8 +54,8 @@ export default function App() {
     config.url.type = type; // Use model type
     config.url.execute = undefined; // Turn off execute
     logUsage('event', 'App', { event_label: 'type: ' + type + ' load redirect' });
-//    console.log('APP - loadRedirectDesign navigate("/")');
-    navigate("/"); // Must be last after logUsage
+//    console.log('APP - loadRedirectDesign navigate('/')');
+    navigate('/'); // Must be last after logUsage
   }
 
   const promptLoadAutoSave = () => {
@@ -77,8 +77,8 @@ export default function App() {
     config.url.type = type; // Use model type
     config.url.execute = undefined; // Turn off execute
     logUsage('event', 'Routes', { event_label: 'type: ' + type + ' load autoSave' });
-//    console.log('APP - loadAutoSaveDesign navigate("/")');
-    navigate("/"); // Must be last after logUsage
+//    console.log('APP - loadAutoSaveDesign navigate('/')');
+    navigate('/'); // Must be last after logUsage
   }
 
   const loadDefaultDesign = () => {
@@ -89,7 +89,7 @@ export default function App() {
     }
     getDesign(user, config.url.type, config.url.name);
     logUsage('event', 'App', { event_label: 'type: ' + type + ' load defaultDesign' });
-    navigate("/"); // Must be last after logUsage
+    navigate('/'); // Must be last after logUsage
   }
 
   const getDesign = (user, type, name) => {
@@ -137,8 +137,8 @@ export default function App() {
 
   const onAuthRequired = () => {
 //    console.log('APP - onAuthRequired');
-//    console.log('APP - navigate("/login")');
-    navigate("/login"); // Must be last
+//    console.log('APP - navigate('/login')');
+    navigate('/login'); // Must be last
   }
 
   const onContextHelp = () => {

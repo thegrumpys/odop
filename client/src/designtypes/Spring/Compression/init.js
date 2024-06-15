@@ -13,9 +13,9 @@ export function init(store, p, x) {
    /*  Bring in material properties table  */
  if (x[o.Material_File] === "mat_metric.json") m_tab = require('../mat_metric.json');
     else m_tab = require('../mat_us.json');
-//    console.log("m_tab=", m_tab);
+//    console.log('m_tab=', m_tab);
  var et_tab = require('./endtypes.json');
-//    console.log("et_tab=", et_tab);
+//    console.log('et_tab=', et_tab);
 
 
      x[o.Spring_Type] = "Compression";
@@ -24,13 +24,13 @@ export function init(store, p, x) {
  switch(x[o.Prop_Calc_Method]){
  default:
  case 1:      // Prop_Calc_Method = 1 - Use values from material table
-//     console.log("case 1 - Use values from material table");
+//     console.log('case 1 - Use values from material table');
  /*   Refer to SETIDX.PLI, READMAT.PLI and TAB2D.PLI    */
  //
     i = x[o.Material_Type];
 //    x[o.Material_Index] = i;
-//    console.log("Material_Index = x[o.Material_Type] =", x[o.Material_Type]);
-//    console.log("Material_Index = x[o.Material_Index] =", x[o.Material_Index]);
+//    console.log('Material_Index = x[o.Material_Type] =', x[o.Material_Type]);
+//    console.log('Material_Index = x[o.Material_Index] =', x[o.Material_Index]);
 
      /*  taken from READMAT.PLI
       *  Initial manipulations of material array
@@ -155,7 +155,7 @@ export function init(store, p, x) {
     break;
 
  case 2:     // Prop_Calc_Method = 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
-//     console.log("case 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur");
+//     console.log('case 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur');
      store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", true));
      store.dispatch(changeSymbolHidden("Material_Type", true));
      store.dispatch(changeSymbolHidden("Process", true));
@@ -176,7 +176,7 @@ export function init(store, p, x) {
      break;
 
  case 3:     // Prop_Calc_Method = 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur
-//     console.log("case 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur");
+//     console.log('case 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur');
      store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", true));
      store.dispatch(changeSymbolHidden("Material_Type", true));
      store.dispatch(changeSymbolHidden("Process", true));

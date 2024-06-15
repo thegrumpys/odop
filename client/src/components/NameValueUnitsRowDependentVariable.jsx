@@ -8,13 +8,13 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
 export default function NameValueUnitsRowDependentVariable({ element, index, onSet, onReset }) {
-//  console.log("NameValueUnitsRowDependentVariable - Mounting...",'element=',element,'index=',index);
+//  console.log('NameValueUnitsRowDependentVariable - Mounting...','element=',element,'index=',index);
   const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
   const dispatch = useDispatch();
 
   useEffect(() => {
-//    console.log("NameValueUnitsRowDependentVariable - Mounted");
-//    return () => console.log("NameValueUnitsRowDependentVariable - Unmounting ...");
+//    console.log('NameValueUnitsRowDependentVariable - Mounted');
+//    return () => console.log('NameValueUnitsRowDependentVariable - Unmounting ...');
     return () => { };
   }, []);
 

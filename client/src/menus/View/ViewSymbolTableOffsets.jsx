@@ -4,15 +4,15 @@ import { NavDropdown, Modal, Button } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
 
 export default function ViewSymbolTableOffsets() {
-//  console.log("ViewSymbolTableOffsets - Mounting...");
+//  console.log('ViewSymbolTableOffsets - Mounting...');
 
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const labels = useSelector((state) => state.modelSlice.model.labels);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-//    console.log("ViewSymbolTableOffsets - Mounted");
-    //    return () => console.log("ViewSymbolTableOffsets - Unmounting ...");
+//    console.log('ViewSymbolTableOffsets - Mounted');
+    //    return () => console.log('ViewSymbolTableOffsets - Unmounting ...');
     return () => { };
   }, []);
 

@@ -7,11 +7,11 @@ import ConstraintsMaxTable from './ConstraintsMaxTable';
 import NameValueUnitsCalcInputTable from './NameValueUnitsCalcInputTable';
 
 export default function DesignTable() {
-//  console.log("DesignTable - Mounting...");
+//  console.log('DesignTable - Mounting...');
 
   useEffect(() => {
-//    console.log("DesignTable - Mounted");
-//    return () => console.log("DesignTable - Unmounting ...");
+//    console.log('DesignTable - Mounted');
+//    return () => console.log('DesignTable - Unmounting ...');
     return () => { };
   }, []);
 

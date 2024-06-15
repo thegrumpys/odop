@@ -6,7 +6,7 @@ import { getAlertsBySeverity } from '../../../components/Alerts';
 import ReportBaseContext from './ReportBaseContext';
 
 export default function ReportBase(props) {
-//  console.log("ReportBase - Mounting...");
+//  console.log('ReportBase - Mounting...');
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
 
   const def_dia_t = (def) => {
@@ -74,8 +74,8 @@ export default function ReportBase(props) {
   else {                          //  No Stress Relieve
     base.kb = 1.0;
   }
-//  console.log("symbol_table[o.Heat_Treat].value =", symbol_table[o.Heat_Treat].value);
-//  console.log("base.kb = ", base.kb);
+//  console.log('symbol_table[o.Heat_Treat].value =', symbol_table[o.Heat_Treat].value);
+//  console.log('base.kb = ', base.kb);
 
   var s_f = 32.0 * base.kb / (Math.PI * symbol_table[o.Wire_Dia].value * symbol_table[o.Wire_Dia].value * symbol_table[o.Wire_Dia].value);
 
@@ -118,7 +118,7 @@ export default function ReportBase(props) {
     base.hlx_ang = 0.0;
 
   base.safe_travel = base.def_max;
-//        console.log("symbol_table[o.Prop_Calc_Method].value = ", symbol_table[o.Prop_Calc_Method].value);
+//        console.log('symbol_table[o.Prop_Calc_Method].value = ', symbol_table[o.Prop_Calc_Method].value);
   if (symbol_table[o.Prop_Calc_Method].value === 1) {
     base.matTypeValue = base.m_tab[symbol_table[o.Material_Type].value][mo.matnam];
     base.astmFedSpecValue = symbol_table[o.ASTM_Fed_Spec].value;
@@ -128,7 +128,7 @@ export default function ReportBase(props) {
     base.astmFedSpecValue = "N/A";
     base.clWarnString = "Cycle_Life is not computed for User_Specified materials.";
   }
-//        console.log("base.matTypeValue, base.astmFedSpecValue = ", base.matTypeValue, base.astmFedSpecValue);
+//        console.log('base.matTypeValue, base.astmFedSpecValue = ', base.matTypeValue, base.astmFedSpecValue);
 
   base.lifeTargValue = base.lifetarg[symbol_table[o.Life_Category].value];
   if (symbol_table[o.Life_Category].value <= 4) {

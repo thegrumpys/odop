@@ -9,7 +9,7 @@ import { displayMessage } from '../../components/Message';
 import store from '../../store/store';
 
 export default function ActionSearch() {
-//  console.log("ActionSearch - Mounting...");
+//  console.log('ActionSearch - Mounting...');
   const [searchInfiniteShow, setSearchInfiniteShow] = useState(false);
   const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const objmin = useSelector((state) => state.modelSlice.model.system_controls.objmin);
@@ -17,8 +17,8 @@ export default function ActionSearch() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-//    console.log("ActionSearch - Mounted");
-//    return () => console.log("ActionSearch - Unmounting ...");
+//    console.log('ActionSearch - Mounted');
+//    return () => console.log('ActionSearch - Unmounting ...');
     return () => { };
   }, []);
 

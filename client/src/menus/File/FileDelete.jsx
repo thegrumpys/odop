@@ -9,7 +9,7 @@ import config from '../../config';
 import { useOktaAuth } from '@okta/okta-react';
 
 export default function FileDelete() {
-//  console.log("FileDelete - Mounting...");
+//  console.log('FileDelete - Mounting...');
   const model_user = useSelector((state) => state.modelSlice.user);
   const model_type = useSelector((state) => state.modelSlice.model.type);
   const model_name = useSelector((state) => state.modelSlice.name);
@@ -23,14 +23,14 @@ export default function FileDelete() {
   const { oktaAuth, authState } = useOktaAuth();
 
   useEffect(() => {
-    console.log('FileDelete','model_user=',model_user,'model_type=',model_type);
+//    console.log('FileDelete','model_user=',model_user,'model_type=',model_type);
     setType(model_type);
     getDesignNames(model_user, model_type);
     return () => { };
   }, [model_user, model_type]);
 
   const getDesignNames = (user, type) => {
-    console.log('In FileDelete.getDesignNames user=',user,'type=',type);
+//    console.log('In FileDelete.getDesignNames user=',user,'type=',type);
     // Get the names and store them in state
     displaySpinner(true);
     fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
@@ -46,7 +46,7 @@ export default function FileDelete() {
       return res.json()
     })
     .then(names => {
-      console.log('In FileDelete.getDesignNames user=',user,'type=',type,'names=', names);
+//      console.log('In FileDelete.getDesignNames user=',user,'type=',type,'names=', names);
       setNames(names.filter(design => { return design.user !== null && design.user !== 'null'}));
       var name = '';
       if (names.length > 0)
@@ -62,7 +62,7 @@ export default function FileDelete() {
   }
 
   const deleteDesign = (user, type, name) => {
-    console.log('In FileDelete.deleteDesign user=',user,'type=',type,'name=',name);
+//    console.log('In FileDelete.deleteDesign user=',user,'type=',type,'name=',name);
     displaySpinner(true);
     fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
       method: 'DELETE',
@@ -111,8 +111,8 @@ export default function FileDelete() {
   const onSignIn = () => {
 //    console.log('In FileDelete.onSignIn');
     setShow(!show);
-//    console.log('In FileDelete.onSignIn - navigate("/login")');
-    navigate("/login"); // Must be last
+//    console.log('In FileDelete.onSignIn - navigate('/login')');
+    navigate('/login'); // Must be last
   }
 
   const onCancel = () => {

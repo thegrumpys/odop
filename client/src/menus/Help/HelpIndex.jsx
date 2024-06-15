@@ -4,11 +4,11 @@ import { NavDropdown } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
 
 export default function HelpIndex() {
-//  console.log("HelpIndex - Mounting...");
+//  console.log('HelpIndex - Mounting...');
 
   useEffect(() => {
-//    console.log("HelpIndex - Mounted");
-//    return () => console.log("HelpIndex - Unmounting ...");
+//    console.log('HelpIndex - Mounted');
+//    return () => console.log('HelpIndex - Unmounting ...');
     return () => { };
   }, []);
 

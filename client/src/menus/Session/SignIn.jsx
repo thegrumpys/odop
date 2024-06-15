@@ -15,8 +15,8 @@ export default function SignIn() {
     oktaAuth.setOriginalUri();
 //    console.log('In SignIn.toggle oktaAuth.getOriginalUri=', oktaAuth.getOriginalUri());
     logUsage('event', 'SignIn', { event_label: '' });
-//    console.log('In SignIn.toggle navigate("/login")');
-    navigate("/login"); // Must be last after logUsage
+//    console.log('In SignIn.toggle navigate('/login')');
+    navigate('/login'); // Must be last after logUsage
   }
 
   return authState && authState.isAuthenticated ? null : (

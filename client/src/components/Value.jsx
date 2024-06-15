@@ -2,7 +2,7 @@ import { InputGroup, Form } from 'react-bootstrap';
 import { toODOPPrecision } from '../toODOPPrecision'
 
 export default function Value({ id, className, value }) {
-//  console.log("Value - Mounting...",'id=',id,'value=',value);
+//  console.log('Value - Mounting...','id=',id,'value=',value);
 
   return (
     <>

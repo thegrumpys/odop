@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function SymbolName({ className, element, index }) {
-//  console.log("SymbolName - Mounting...",'element=',element,'index=',index);
+//  console.log('SymbolName - Mounting...','element=',element,'index=',index);
 
   return (
     <td className={"align-middle " + (className !== undefined ? className : '')} id={'sn_' + element.name}>

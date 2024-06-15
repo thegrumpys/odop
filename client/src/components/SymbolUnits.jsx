@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function SymbolUnits({ className, element, index }) {
-//  console.log("SymbolUnits - Mounting...",'element=',element,'index=',index);
+//  console.log('SymbolUnits - Mounting...','element=',element,'index=',index);
   const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
 
   return (

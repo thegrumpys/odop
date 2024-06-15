@@ -10,7 +10,7 @@ import { displayMessage } from '../components/Message';
 import AlertsAccordion from "./AlertsAccordion"
 
 export default function ResultTable() {
-//  console.log("ResultTable - Mounting...");
+//  console.log('ResultTable - Mounting...');
   const [searchInfiniteShow, setSearchInfiniteShow] = useState(false);
   const [seekShow, setSeekShow] = useState(false); // Default: do not display optimize modal
   const [seekName, setSeekName] = useState(null);
@@ -24,8 +24,8 @@ export default function ResultTable() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-//    console.log("ResultTable - Mounted");
-//    return () => console.log("ResultTable - Unmounting ...");
+//    console.log('ResultTable - Mounted');
+//    return () => console.log('ResultTable - Unmounting ...');
     return () => { };
   }, []);
 
