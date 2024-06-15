@@ -42,29 +42,29 @@ export default function HelpAbout() {
         Authorization: 'Bearer ' + user
       }
     })
-      .then(res => {
-        if (!res.ok) {
-          throw Error(res.statusText);
-        }
-        return res.json()
-      })
-      .then(sizes => {
+    .then(res => {
+      if (!res.ok) {
+        throw Error(res.statusText);
+      }
+      return res.json()
+    })
+    .then(sizes => {
 //        console.log('In HelpAbout.getSize sizes=', sizes);
-        setSizes(sizes);
-        var size = '';
-        if (sizes.length > 0) {
-          size = sizes[0]; // Default to first name
-        }
+      setSizes(sizes);
+      var size = '';
+      if (sizes.length > 0) {
+        size = sizes[0]; // Default to first name
+      }
 //        console.log('In HelpAbout.getSize size=', size);
-        setSize(size);
-        logUsage('event', 'HelpAbout', { event_label: 'getDBSize: ' + size });
-      })
-      .catch(error => {
-        displayMessage('GET of DB Size failed with message: \'' + error.message + '\'');
-      })
-      .finally(() => {
-        displaySpinner(false);
-      });
+      setSize(size);
+      logUsage('event', 'HelpAbout', { event_label: 'getDBSize: ' + size });
+    })
+    .catch(error => {
+      displayMessage('GET of DB Size failed with message: \'' + error.message + '\'');
+    })
+    .finally(() => {
+      displaySpinner(false);
+    });
   }
 
   return (

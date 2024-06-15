@@ -23,14 +23,14 @@ export default function FileDelete() {
   const { oktaAuth, authState } = useOktaAuth();
 
   useEffect(() => {
-//    console.log('FileDelete','model_user=',model_user,'model_type=',model_type);
+    console.log('FileDelete','model_user=',model_user,'model_type=',model_type);
     setType(model_type);
     getDesignNames(model_user, model_type);
     return () => { };
   }, [model_user, model_type]);
 
   const getDesignNames = (user, type) => {
-//    console.log('In FileDelete.getDesignNames user=',user,'type=',type);
+    console.log('In FileDelete.getDesignNames user=',user,'type=',type);
     // Get the names and store them in state
     displaySpinner(true);
     fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
@@ -38,31 +38,31 @@ export default function FileDelete() {
         Authorization: 'Bearer ' + user
       }
     })
-      .then(res => {
-        if (!res.ok) {
-          //                console.warn('In FileDelete.getDesignNames res=',res);
-          throw Error(res.statusText);
-        }
-        return res.json()
-      })
-      .then(names => {
-//        console.log('In FileDelete.getDesignNames user=',user,'type=',type,'names=', names);
-        setNames(names.filter(design => { return design.user !== null }));
-        var name = '';
-        if (names.length > 0)
-          name = names[0].name; // Default to first name
-        setName(name);
-      })
-      .catch(error => {
-        displayMessage('GET of design names failed with message: \'' + error.message + '\'');
-      })
-      .finally(() => {
-        displaySpinner(false);
-      });
+    .then(res => {
+      if (!res.ok) {
+        console.warn('In FileDelete.getDesignNames res=',res);
+        throw Error(res.statusText);
+      }
+      return res.json()
+    })
+    .then(names => {
+      console.log('In FileDelete.getDesignNames user=',user,'type=',type,'names=', names);
+      setNames(names.filter(design => { return design.user !== null }));
+      var name = '';
+      if (names.length > 0)
+        name = names[0].name; // Default to first name
+      setName(name);
+    })
+    .catch(error => {
+      displayMessage('GET of design names failed with message: \'' + error.message + '\'');
+    })
+    .finally(() => {
+      displaySpinner(false);
+    });
   }
 
   const deleteDesign = (user, type, name) => {
-//    console.log('In FileDelete.deleteDesign user=',user,'type=',type,'name=',name);
+    console.log('In FileDelete.deleteDesign user=',user,'type=',type,'name=',name);
     displaySpinner(true);
     fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
       method: 'DELETE',
@@ -72,19 +72,19 @@ export default function FileDelete() {
         Authorization: 'Bearer ' + user
       },
     })
-      .then(res => {
-        if (!res.ok) {
-          throw Error(res.statusText);
-        }
-        logUsage('event', 'FileDelete', { event_label: type + ' ' + name });
-        return res.json()
-      })
-      .catch(error => {
-        displayMessage('DELETE of \'' + name + '\' design  \'' + type + '\' design type failed with message: \'' + error.message + '\'');
-      })
-      .finally(() => {
-        displaySpinner(false);
-      });
+    .then(res => {
+      if (!res.ok) {
+        throw Error(res.statusText);
+      }
+      logUsage('event', 'FileDelete', { event_label: type + ' ' + name });
+      return res.json()
+    })
+    .catch(error => {
+      displayMessage('DELETE of \'' + name + '\' design  \'' + type + '\' design type failed with message: \'' + error.message + '\'');
+    })
+    .finally(() => {
+      displaySpinner(false);
+    });
   }
 
   const toggle = () => {

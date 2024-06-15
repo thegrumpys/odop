@@ -46,35 +46,35 @@ export default function FileOpen() {
         Authorization: 'Bearer ' + user
       }
     })
-      .then(res => {
-        if (!res.ok) {
-          //                console.warn('FileOpen.getDesignNames res=',res);
-          throw Error(res.statusText);
-        }
-        return res.json()
-      })
-      .then(names => {
+    .then(res => {
+      if (!res.ok) {
+        //                console.warn('FileOpen.getDesignNames res=',res);
+        throw Error(res.statusText);
+      }
+      return res.json()
+    })
+    .then(names => {
 //        console.log('FileOpen.getDesignNames user=', user, 'type=', type, 'names=', names);
-        var name;
-        if (names.length > 0) {
-          var i = names.findIndex(element => element.name === config.url.name)
-          if (i > 0) {
-            name = names[i].name;
-          } else {
-            name = names[0].name;
-          }
+      var name;
+      if (names.length > 0) {
+        var i = names.findIndex(element => element.name === config.url.name)
+        if (i > 0) {
+          name = names[i].name;
         } else {
-          name = '';
+          name = names[0].name;
         }
-        setNames(names);
-        setName(name);
-      })
-      .catch(error => {
-        displayMessage('GET of design names failed with message: \'' + error.message + '\'');
-      })
-      .finally(() => {
-        displaySpinner(false);
-      });
+      } else {
+        name = '';
+      }
+      setNames(names);
+      setName(name);
+    })
+    .catch(error => {
+      displayMessage('GET of design names failed with message: \'' + error.message + '\'');
+    })
+    .finally(() => {
+      displaySpinner(false);
+    });
   }
 
   const getDesign = (user, type, name) => {
@@ -85,31 +85,31 @@ export default function FileOpen() {
         Authorization: 'Bearer ' + user
       }
     })
-      .then(res => {
-        if (!res.ok) {
-          throw Error(res.statusText);
-        }
-        return res.json()
-      })
-      .then((design) => {
+    .then(res => {
+      if (!res.ok) {
+        throw Error(res.statusText);
+      }
+      return res.json()
+    })
+    .then((design) => {
 //        console.log('FileOpen.getDesign design=', design);
-        var { migrate } = require('../../designtypes/' + design.type + '/migrate.js'); // Dynamically load migrate
-        var migrated_design = migrate(design);
-        if (migrated_design.jsontype === "ODOP") {
-          dispatch(changeName(name));
-          dispatch(load(migrated_design));
-          dispatch(deleteAutoSave());
-          logUsage('event', 'FileOpen', { event_label: type + ' ' + name });
-        } else {
-          displayMessage('Invalid JSON type, function ignored');
-        }
-      })
-      .catch(error => {
-        displayMessage('GET of \'' + name + '\' design failed for type \'' + type + '\' with message: \'' + error.message + '\'');
-      })
-      .finally(() => {
-        displaySpinner(false);
-      });
+      var { migrate } = require('../../designtypes/' + design.type + '/migrate.js'); // Dynamically load migrate
+      var migrated_design = migrate(design);
+      if (migrated_design.jsontype === "ODOP") {
+        dispatch(changeName(name));
+        dispatch(load(migrated_design));
+        dispatch(deleteAutoSave());
+        logUsage('event', 'FileOpen', { event_label: type + ' ' + name });
+      } else {
+        displayMessage('Invalid JSON type, function ignored');
+      }
+    })
+    .catch(error => {
+      displayMessage('GET of \'' + name + '\' design failed for type \'' + type + '\' with message: \'' + error.message + '\'');
+    })
+    .finally(() => {
+      displaySpinner(false);
+    });
   }
 
   const toggle = () => {

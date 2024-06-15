@@ -34,24 +34,24 @@ export default function SearchDocs() {
     setQuery(local_text);
     displaySpinner(true);
     fetch('/api/v1/search?terms=' + encoded_text)
-      .then(res => {
-        if (!res.ok) {
-          throw Error(res.statusText);
-        }
-        return res.json()
-      })
-      .then((results) => {
+    .then(res => {
+      if (!res.ok) {
+        throw Error(res.statusText);
+      }
+      return res.json()
+    })
+    .then((results) => {
 //            console.log('In SearchDocs.onButtonPress results=', results);
 //            results.forEach((element) => console.log('element.href=',element.href));
-        setShow(!show);
-        setResults(results);
-      })
-      .catch(error => {
-        displayMessage('GET of search \'' + text + '\' failed with message: \'' + error.message + '\'');
-      })
-      .finally(() => {
-        displaySpinner(false);
-      });
+      setShow(!show);
+      setResults(results);
+    })
+    .catch(error => {
+      displayMessage('GET of search \'' + text + '\' failed with message: \'' + error.message + '\'');
+    })
+    .finally(() => {
+      displaySpinner(false);
+    });
   }
 
   const onContextHelp = () => {

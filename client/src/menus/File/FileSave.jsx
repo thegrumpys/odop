@@ -35,22 +35,22 @@ export default function FileSave() {
         Authorization: 'Bearer ' + user
       }
     })
-      .then(res => {
-        if (!res.ok) {
-          throw Error(res.statusText);
-        }
-        return res.json()
-      })
-      .then(names => {
-//        console.log('In FileSave.getDesignNames user=',user,'type=',type,'names=',names);
-        setNames(names);
-      })
-      .catch(error => {
-        displayMessage('GET of design names failed with message: \'' + error.message + '\'');
-      })
-      .finally(() => {
-        displaySpinner(false);
-      });
+    .then(res => {
+      if (!res.ok) {
+        throw Error(res.statusText);
+      }
+      return res.json()
+    })
+    .then(names => {
+//      console.log('In FileSave.getDesignNames user=',user,'type=',type,'names=',names);
+      setNames(names);
+    })
+    .catch(error => {
+      displayMessage('GET of design names failed with message: \'' + error.message + '\'');
+    })
+    .finally(() => {
+      displaySpinner(false);
+    });
   }
 
   const postDesign = (user, type, name) => {
@@ -62,58 +62,58 @@ export default function FileSave() {
         Authorization: 'Bearer ' + user
       }
     })
+    .then(res => {
+      if (!res.ok) {
+        throw Error(res.statusText);
+      }
+      return res.json()
+    })
+    .then(names => {
+        // Second create or update the design
+//        console.log('In FileSave.postDesign type=',type,'names=', names);
+      setNames(names);
+//        console.log('In FileSave.postDesign names=',names);
+      var method = 'POST'; // Create it
+      if (names.filter(e => e.name === name && e.user === user).length > 0) { // Does it already exist?
+        method = 'PUT'; // Update it
+      }
+//        console.log('In FileSave.postDesign method=', method);
+      displaySpinner(true);
+      fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
+        method: method,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + user
+        },
+        body: JSON.stringify(model)
+      })
       .then(res => {
         if (!res.ok) {
           throw Error(res.statusText);
         }
+        if (method === 'POST') {
+          var names = Array.from(names); // clone it
+          names.push({ user: user, name: name }); // If create and successful then add name to the array of names
+//                console.log('In FileSave.postDesign type=',type,'name=',name,'names=', names);
+          setNames(names);
+        }
+        logUsage('event', 'FileSave', { event_label: type + ' ' + name });
         return res.json()
       })
-      .then(names => {
-        // Second create or update the design
-//        console.log('In FileSave.postDesign type=',type,'names=', names);
-        setNames(names);
-//        console.log('In FileSave.postDesign names=',names);
-        var method = 'POST'; // Create it
-        if (names.filter(e => e.name === name && e.user === user).length > 0) { // Does it already exist?
-          method = 'PUT'; // Update it
-        }
-//        console.log('In FileSave.postDesign method=', method);
-        displaySpinner(true);
-        fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
-          method: method,
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + user
-          },
-          body: JSON.stringify(model)
-        })
-          .then(res => {
-            if (!res.ok) {
-              throw Error(res.statusText);
-            }
-            if (method === 'POST') {
-              var names = Array.from(names); // clone it
-              names.push({ user: user, name: name }); // If create and successful then add name to the array of names
-//                console.log('In FileSave.postDesign type=',type,'name=',name,'names=', names);
-              setNames(names);
-            }
-            logUsage('event', 'FileSave', { event_label: type + ' ' + name });
-            return res.json()
-          })
-          .catch(error => {
-            displayMessage(method+' of \'' + name + '\' design failed for type \'' + type + '\' with message: \'' + error.message + '\'');
-          })
-          .finally(() => {
-            displaySpinner(false);
-          });
-      })
       .catch(error => {
-        displayMessage('GET of design names failed with message: \'' + error.message + '\'');
+        displayMessage(method+' of \'' + name + '\' design failed for type \'' + type + '\' with message: \'' + error.message + '\'');
       })
       .finally(() => {
         displaySpinner(false);
       });
+    })
+    .catch(error => {
+      displayMessage('GET of design names failed with message: \'' + error.message + '\'');
+    })
+    .finally(() => {
+      displaySpinner(false);
+    });
   }
 
   const toggle = () => {
