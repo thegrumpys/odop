@@ -94,7 +94,7 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
   }
 
   const onCancel = (event) => {
-//    console.log('In ConstraintsMinRowIndependentVariable.onCancel', "event.target.value=", event.target.value);
+//    console.log('In ConstraintsMinRowIndependentVariable.onCancel', 'event.target.value=', event.target.value);
     setShow(!show);
   }
 
