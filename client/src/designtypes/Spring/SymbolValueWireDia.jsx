@@ -182,9 +182,9 @@ export default function SymbolValueWireDia({ className, element, index }) {
 //    console.log('In SymbolValueWireDia.doSearch');
     var old_objective_value = objective_value;
     dispatch(saveAutoSave());
-    dispatch(enableSpinner);
+    dispatch(enableSpinner());
     dispatch(search());
-    dispatch(disableSpinner);
+    dispatch(disableSpinner());
     var design = store.getState().modelSlice;
     var new_objective_value = design.model.result.objective_value;
     logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' Element ' + element.name + ' ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });
