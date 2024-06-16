@@ -483,7 +483,7 @@ export const modelSlice = createSlice({
                 }
                 inner_result = Object.assign({}, element, inner_result);
                 console.log('In reducers.RESET_SYMBOL_FLAG ','action=', action,'element=',element,'update=',inner_result,'result=',inner_result);
-                return result;
+                return inner_result;
               }
               return element;
             }),
