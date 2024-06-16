@@ -1,214 +1,169 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, NavDropdown, Table, Form } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import { changeSymbolValue, saveAutoSave } from '../../store/modelSlice';
 import { logUsage, logValue } from '../../logUsage';
+import store from "../../store/store";
 
-class ActionSelectCatalog extends Component {
+export default function ActionSelectCatalog() {
+  //  console.log('ActionSelectCatalog - Mounting...');
 
-    constructor(props) {
-//        console.log('In ActionSelectCatalog.constructor props=',props);
-        super(props);
-        this.toggle = this.toggle.bind(this);
-        this.onSelectCatalogName = this.onSelectCatalogName.bind(this);
-        this.onSelectCatalogEntry = this.onSelectCatalogEntry.bind(this);
-        this.onSelect = this.onSelect.bind(this);
-        this.onCancel = this.onCancel.bind(this);
-        this.state = {
-            modal: false,
-            names: [],
-            name: undefined,
-            entries: [],
-            entry: 0
-        };
-    }
+  const model_type = useSelector((state) => state.modelSlice.model.type);
+  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const [show, setShow] = useState(false);
+  const [names, setNames] = useState([]);
+  const [name, setName] = useState(undefined);
+  const [entries, setEntries] = useState([]);
+  const [entry, setEntry] = useState(undefined);
+  const dispatch = useDispatch();
 
-    componentDidMount() {
-//        console.log('In ActionSelectCatalog.componentDidMount this.state=',this.state);
-        this.updateCatalogNames();
-    }
+  useEffect(() => {
+    //    console.log('ActionSelectCatalog - Mounted','model_type=',model_type);
+    updateCatalogNames();
+    return () => { };
+  }, [model_type]);
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.type !== this.props.type) {
-//            console.log('In ActionSelectCatalog.componentDidUpdate prevPropsprev.type=',prevProps.type,'props.type=',this.props.type);
-            this.updateCatalogNames();
+  const updateCatalogNames = () => {
+    //        console.log('In ActionSelectCatalog.updateCatalogNames');
+    var { getCatalogNames, getCatalogEntries } = require('../../designtypes/' + model_type + '/catalog.js'); // Dynamically load getCatalogNames & getCatalogEntries
+    var localNames = getCatalogNames();
+    //        console.log('In ActionSelectCatalog.toggle names=',names);
+    var localName;
+    var entry_string;
+    // Loop to create st from symbol_table, and initialize names/name and entries/entry
+    var st = [];
+    symbol_table.forEach((element) => {
+      st.push(Object.assign({}, element));
+      if (element.name === "Catalog_Name") {
+        localName = localNames[0]; // Default to first name
+        if (element.value !== "") {
+          localName = element.value;
         }
-    }
+      }
+      if (element.name === "Catalog_Number") {
+        entry_string = ""; // Default to blank entry string
+        if (element.value !== "") {
+          entry_string = element.value;
+        }
+      }
+    });
+    var localEntries = getCatalogEntries(localName, store, st, system_controls.viol_wt);
+    var localEntry = 0; // Default to first entry
+    localEntries.forEach((element, index) => {
+      if (element[0] === entry_string) {
+        localEntry = index;
+      }
+    });
+    //        console.log('names=',names,'name=',name,'entries=',entries,'entry=',entry);
+    setNames(localNames);
+    setName(localName);
+    setEntries(localEntries);
+    setEntry(localEntry);
+  }
 
-    updateCatalogNames() {
-//        console.log('In ActionSelectCatalog.updateCatalogNames');
-        var { getCatalogNames, getCatalogEntries } = require('../../designtypes/'+this.props.type+'/catalog.js'); // Dynamically load getCatalogNames & getCatalogEntries
-        var names = getCatalogNames();
-//        console.log('In ActionSelectCatalog.toggle names=',names);
-        var name;
-        var entry_string;
-        const { store } = this.context;
-        // Loop to create st from symbol_table, and initialize names/name and entries/entry
-        var st = [];
-        this.props.symbol_table.forEach((element) => {
-            st.push(Object.assign({},element));
-            if (element.name === "Catalog_Name") {
-                name = names[0]; // Default to first name
-                if (element.value !== "") {
-                    name = element.value;
-                }
-            }
-            if (element.name === "Catalog_Number") {
-                entry_string = ""; // Default to blank entry string
-                if (element.value !== "") {
-                    entry_string = element.value;
-                }
-            }
-        });
-        var entries = getCatalogEntries(name, store, st, this.props.system_controls.viol_wt);
-        var entry = 0; // Default to first entry
-        entries.forEach((element, index) => {
-            if (element[0] === entry_string) {
-                entry = index;
-            }
-        });
-//        console.log('names=',names,'name=',name,'entries=',entries,'entry=',entry);
-        this.setState({
-            names: names,
-            name: name,
-            entries: entries,
-            entry: entry
-        });
-    }
+  const toggle = () => {
+    //        console.log('In ActionSelectCatalog.toggle');
+    updateCatalogNames();
+    setShow(!show);
+  }
 
-    toggle() {
-//        console.log('In ActionSelectCatalog.toggle');
-        this.updateCatalogNames();
-        this.setState({
-            modal: !this.state.modal,
-        });
-    }
+  const onSelectCatalogName = (event) => {
+    //        console.log('In ActionSelectCatalog.onSelectCatalogName event.target.value=',event.target.value);
+    var localName = event.target.value;
+    var { getCatalogEntries } = require('../../designtypes/' + model_type + '/catalog.js'); // Dynamically load getCatalogEntries
+    // Loop to create p and x from symbol_table
+    var st = [];
+    symbol_table.forEach((element) => {
+      st.push(Object.assign({}, element));
+    });
+    var localEntries = getCatalogEntries(localName, store, st, system_controls.viol_wt);
+    var localEntry = 0; // Default to first entry
+    setName(localName);
+    setEntries(localEntries);
+    setEntry(localEntry);
+  }
 
-    onSelectCatalogName(event) {
-//        console.log('In ActionSelectCatalog.onSelectCatalogName event.target.value=',event.target.value);
-        var name = event.target.value;
-        var { getCatalogEntries } = require('../../designtypes/'+this.props.type+'/catalog.js'); // Dynamically load getCatalogEntries
-        const { store } = this.context;
-        // Loop to create p and x from symbol_table
-        var st = [];
-        this.props.symbol_table.forEach((element) => {
-            st.push(Object.assign({},element));
-        });
-        var entries = getCatalogEntries(name, store, st, this.props.system_controls.viol_wt);
-        var entry = 0; // Default to first entry
-        this.setState({
-            name: name,
-            entries: entries,
-            entry: entry
-        });
-    }
+  const onSelectCatalogEntry = (event) => {
+    //        console.log('In ActionSelectCatalog.onSelectCatalogEntry event.target.value=',event.target.value);
+    var entry = parseFloat(event.target.value);
+    setEntry(entry);
+  }
 
-    onSelectCatalogEntry(event) {
-//        console.log('In ActionSelectCatalog.onSelectCatalogEntry event.target.value=',event.target.value);
-        var entry = parseFloat(event.target.value);
-        this.setState({
-            entry: entry
-        });
-    }
+  const onSelect = () => {
+    //        console.log('In ActionSelectCatalog.onSelect');
+    setShow(!show);
+    // Do select catalog entry
+    logUsage('event', 'ActionSelectCatalog', { event_label: name + ' ' + entries[entry][0] });
+    dispatch(saveAutoSave());
+    //        console.log('In ActionSelectCatalog.onSelect entries=',entries);
+    entries[entry][2].forEach((element) => {
+      //            console.log('In ActionSelectCatalog.onSelect element=',element);
+      dispatch(changeSymbolValue(element[0], element[1]));
+      logValue(element[0], element[1]);
+    });
+    // The catalog name and number must be set after setting the affected symbols table entries
+    dispatch(changeSymbolValue('Catalog_Name', name));
+    logValue('Catalog_Name', name);
+    dispatch(changeSymbolValue('Catalog_Number', entries[entry][0]));
+    logValue('Catalog_Number', entries[entry][0]);
+  }
 
-    onSelect() {
-//        console.log('In ActionSelectCatalog.onSelect this.state=',this.state);
-        this.setState({
-            modal: !this.state.modal
-        });
-        // Do select catalog entry
-        logUsage('event', 'ActionSelectCatalog', { event_label: this.state.name + ' ' + this.state.entries[this.state.entry][0] });
-        this.props.saveAutoSave();
-//        console.log('In ActionSelectCatalog.onSelect this.state.entries=',this.state.entries);
-        this.state.entries[this.state.entry][2].forEach((element) => {
-//            console.log('In ActionSelectCatalog.onSelect element=',element);
-            this.props.changeSymbolValue(element[0],element[1]);
-            logValue(element[0],element[1]);
-        });
-        // The catalog name and number must be set after setting the affected symbols table entries
-        this.props.changeSymbolValue('Catalog_Name',this.state.name);
-        logValue('Catalog_Name',this.state.name);
-        this.props.changeSymbolValue('Catalog_Number',this.state.entries[this.state.entry][0]);
-        logValue('Catalog_Number',this.state.entries[this.state.entry][0]);
-    }
+  const onCancel = () => {
+    //        console.log('In ActionSelectCatalog.onCancel');
+    setShow(!show);
+  }
 
-    onCancel() {
-//        console.log('In ActionSelectCatalog.onCancel');
-        this.setState({
-            modal: !this.state.modal
-        });
-        // Noop - all done
-    }
+//  updateCatalogNames();
 
-    render() {
-//        console.log('In ActionSelectCatalog.render');
-        return (
+  return (
+    <>
+      <NavDropdown.Item onClick={toggle} disabled={names.length === 0}>
+        Select Catalog&hellip;
+      </NavDropdown.Item>
+      {show && <Modal show={show} size="lg" onHide={onCancel}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; Action : Select Catalog
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Label htmlFor="catalogNameSelect">Select catalog name:</Form.Label>
+          <Form.Control as="select" id="catalogNameSelect" onChange={onSelectCatalogName} value={name}>
+            {names.map((element, index) =>
+              <option key={index} value={element}>{element}</option>
+            )}
+          </Form.Control>
+          <br />
+          {entries.length === 0 ?
+            <Form.Label htmlFor="catalogEntrySelect">No acceptable entries were found in this catalog</Form.Label>
+            :
             <>
-                <NavDropdown.Item onClick={this.toggle} disabled={this.state.names.length === 0}>
-                    Select Catalog&hellip;
-                </NavDropdown.Item>
-                <Modal show={this.state.modal} size="lg" onHide={this.onCancel}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>
-                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; Action : Select Catalog
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Form.Label htmlFor="catalogNameSelect">Select catalog name:</Form.Label>
-                        <Form.Control as="select" id="catalogNameSelect" onChange={this.onSelectCatalogName} value={this.state.name}>
-                            {this.state.names.map((element, index) =>
-                                <option key={index} value={element}>{element}</option>
-                            )}
-                        </Form.Control>
-                        <br />
-                        {this.state.entries.length === 0 ?
-                            <Form.Label htmlFor="catalogEntrySelect">No acceptable entries were found in this catalog</Form.Label>
-                        :
-                            <>
-                                <Form.Label htmlFor="catalogEntrySelect">Closest catalog entries:</Form.Label>
-                                <Table className="table-secondary border border-secondary" size="sm">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Values</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {this.state.entries.map((element, index) => (
-                                            <tr key={index}>
-                                                <td><Form.Check type='radio' name="catalogEntrySelect" id="catalogEntrySelect" checked={index === this.state.entry} label={element[0]} onChange={this.onSelectCatalogEntry} value={index}></Form.Check></td>
-                                                <td>{element[1]}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </Table>
-                            </>
-                        }
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>
-                        <Button variant="primary" onClick={this.onSelect} disabled={this.state.entries.length === 0}>Select</Button>
-                    </Modal.Footer>
-                </Modal>
+              <Form.Label htmlFor="catalogEntrySelect">Closest catalog entries:</Form.Label>
+              <Table className="table-secondary border border-secondary" size="sm">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Values</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {entries.map((element, index) => (
+                    <tr key={index}>
+                      <td><Form.Check type='radio' name="catalogEntrySelect" id="catalogEntrySelect" checked={index === entry} label={element[0]} onChange={onSelectCatalogEntry} value={index}></Form.Check></td>
+                      <td>{element[1]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
             </>
-        );
-    }
+          }
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={onCancel}>Cancel</Button>
+          <Button variant="primary" onClick={onSelect} disabled={entries.length === 0}>Select</Button>
+        </Modal.Footer>
+      </Modal>}
+    </>
+  );
 }
-
-ActionSelectCatalog.contextTypes = {
-    store: PropTypes.object
-};
-
-const mapStateToProps = state => ({
-    type: state.model.type,
-    symbol_table: state.model.symbol_table,
-    system_controls: state.model.system_controls
-});
-
-const mapDispatchToProps = {
-    changeSymbolValue: changeSymbolValue,
-    saveAutoSave: saveAutoSave
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ActionSelectCatalog);

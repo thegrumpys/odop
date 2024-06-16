@@ -7,8 +7,8 @@ import { startExecute } from "../../components/ExecutePanel";
 export default function ActionExecute() {
 //  console.log('ActionExecute - Mounting...');
 
-  const [show, setShow] = useState(false);
   const model_type = useSelector((state) => state.modelSlice.model.type);
+  const [show, setShow] = useState(false);
   const [executeNames, setExecuteNames] = useState([]);
   const [executeName, setExecuteName] = useState('');
 
