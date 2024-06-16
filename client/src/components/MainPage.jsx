@@ -60,7 +60,7 @@ export default function MainPage() {
 //    console.log('MainPage','Mounted','All useEffect');
     if (authState && authState.isAuthenticated) {
 //      console.log('MainPage','Mounted','changeUser=',authState.idToken.clientId);
-      dispatch(changeUser(authState.idToken.clientId));
+      dispatch(changeUser(authState.idToken.claims.sub));
     }
     return () => {
 //      console.log('MainPage','Unmounting ...','All useEffect');
