@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table, Alert } from 'react-bootstrap';
 import { MIN, MAX, FIXED, CONSTRAINED } from '../../store/actionTypes';
 import { fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../../store/modelSlice';
-import { load, search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../../store/modelSlice';
-import { enableSpinner, disableSpinner }  from '../../store/spinnerSlice';
+import { load, search, seek, saveAutoSave, changeSymbolValue } from '../../store/modelSlice';
+import { enableSpinner, disableSpinner } from '../../store/spinnerSlice';
 import * as mo from './mat_offsets';
 import NameValueUnitsHeaderIndependentVariable from '../../components/NameValueUnitsHeaderIndependentVariable';
 import NameValueUnitsHeaderDependentVariable from '../../components/NameValueUnitsHeaderDependentVariable';
@@ -85,16 +85,16 @@ export default function SymbolValueWireDia({ className, element, index }) {
     if (system_controls.enable_auto_fix && !(element.lmin & FIXED)) {
       auto_fixed = true;
       if (!(element.lmin & FIXED)) {
-        fixSymbolValue(element.name);
+        dispatch(fixSymbolValue(element.name));
         logValue(element.name, 'AUTOFIXED', 'FixedFlag', false);
       }
     }
     var wire_dia = parseFloat(event.target.value);
 //    console.log('In SymbolValueWireDia.onSelect wire_dia=',wire_dia);
-    changeSymbolValue(element.name, wire_dia);
+    dispatch(changeSymbolValue(element.name, wire_dia));
     logValue(element.name, wire_dia, 'TableValue');
     if (auto_fixed) {
-      changeResultTerminationCondition('The value of ' + element.name + ' has been automatically fixed.');
+      dispatch(changeResultTerminationCondition('The value of ' + element.name + ' has been automatically fixed.'));
     }
   }
 
@@ -104,14 +104,14 @@ export default function SymbolValueWireDia({ className, element, index }) {
     if (system_controls.enable_auto_fix) {
       auto_fixed = true;
       if (!(element.lmin & FIXED)) {
-        fixSymbolValue(element.name);
+        dispatch(fixSymbolValue(element.name));
         logValue(element.name, 'AUTOFIXED', 'FixedFlag', false);
       }
     }
-    changeSymbolValue(element.name, parseFloat(event.target.value)); // Update the model
+    dispatch(changeSymbolValue(element.name, parseFloat(event.target.value))); // Update the model
     logValue(element.name, event.target.value, 'NumericValue');
     if (auto_fixed) {
-      changeResultTerminationCondition('The value of ' + element.name + ' has been automatically fixed.');
+      dispatch(changeResultTerminationCondition('The value of ' + element.name + ' has been automatically fixed.'));
     }
     onChangeValidValue(event);
   }
@@ -123,14 +123,14 @@ export default function SymbolValueWireDia({ className, element, index }) {
 
   const onSet = (event) => {
 //    console.log('In SymbolValueWireDia.onSet');
-    fixSymbolValue(element.name);
+    dispatch(fixSymbolValue(element.name));
     logValue(element.name, 'FIXED', 'FixedFlag', false);
     onModifiedFlag(event);
   }
 
   const onReset = (event) => {
 //    console.log('In SymbolValueWireDia.onReset');
-    freeSymbolValue(element.name);
+    dispatch(freeSymbolValue(element.name));
     logValue(element.name, 'FREE', 'FixedFlag', false);
     onModifiedFlag(event);
   }
@@ -350,7 +350,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
 //        console.log('In SymbolValueWireDia.render sorted_wire_dia_table=',sorted_wire_dia_table);
 
   var sv_results = getAlertsByName(element.name, true);
-  var sv_value_class = sv_results.className;
+  var sv_value_class = sv_results.className + ' text-end ';
   var sv_icon_alerts = sv_results.alerts;
   if (element.lmin & FIXED) {
     sv_value_class += "borders-fixed ";
