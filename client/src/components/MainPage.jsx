@@ -19,7 +19,6 @@ import FileOpen from '../menus/File/FileOpen';
 import FileSave from '../menus/File/FileSave';
 import FileSaveAs from '../menus/File/FileSaveAs';
 import FileDelete from '../menus/File/FileDelete';
-import FileRecent from '../menus/File/FileRecent';
 import FilePreferences from '../menus/File/FilePreferences';
 import FileProperties from '../menus/File/FileProperties';
 import FileImport from '../menus/File/FileImport';
@@ -126,7 +125,6 @@ export default function MainPage() {
             {logOnOff}
             <NavDropdown title="File" renderMenuOnMount={true}>
               <FileOpen />
-              <FileRecent />
               <FileSave />
               <FileSaveAs />
               <FileDelete />
@@ -144,13 +142,6 @@ export default function MainPage() {
               <ActionExecute />
             </NavDropdown>
             <NavDropdown title="View">
-              <NavDropdown.Item disabled>
-                Define  Sub-Problems&hellip;
-              </NavDropdown.Item>
-              <NavDropdown.Item disabled>
-                Display Sub-Problems&hellip;
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
               <ViewSelect viewNames={viewNames}/>
               <NavDropdown.Divider />
               {config.node.env !== "production" && <ViewOffsets />}
