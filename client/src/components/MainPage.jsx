@@ -59,7 +59,7 @@ export default function MainPage() {
   useEffect(() => {
 //    console.log('MainPage','Mounted','All useEffect');
     if (authState && authState.isAuthenticated) {
-//      console.log('MainPage','Mounted','changeUser=',authState.idToken.clientId);
+//      console.log('MainPage','Mounted','changeUser=',authState.idToken.claims.sub);
       dispatch(changeUser(authState.idToken.claims.sub));
     }
     return () => {
