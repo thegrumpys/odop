@@ -25,6 +25,7 @@ import FileImport from '../menus/File/FileImport';
 import FileExport from '../menus/File/FileExport';
 import ActionSearch from '../menus/Action/ActionSearch';
 import ActionSeek from '../menus/Action/ActionSeek';
+import ActionTrade from '../menus/Action/ActionTrade';
 import ActionSelectSize from '../menus/Action/ActionSelectSize';
 import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
 import ActionExecute from '../menus/Action/ActionExecute';
@@ -141,6 +142,7 @@ export default function MainPage() {
             <NavDropdown title="Action">
               <ActionSearch />
               <ActionSeek />
+              <ActionTrade />
               <NavDropdown.Divider />
               <ActionSelectSize />
               <ActionSelectCatalog />
