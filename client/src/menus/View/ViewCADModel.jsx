@@ -1,39 +1,35 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown, Modal, Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
+import * as sto from '../../designtypes/Spring/Extension/symbol_table_offsets';
 
-class ViewCADModel extends Component {
+export default function ViewCADModel() {
+//  console.log('ViewCADModel - Mounting...');
 
-    constructor(props) {
-//        console.log('In ViewCADModel.constructor props=',props);
-        super(props);
-        this.toggle = this.toggle.bind(this);
-        this.state = {
-            modal: false
-        };
-    }
+  const model_type = useSelector((state) => state.modelSlice.model.type);
+  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const [show, setShow] = useState(false);
 
-    toggle() {
-//        console.log('In ViewCADModel.toggle');
-        this.setState({
-            modal: !this.state.modal
-        });
-        logUsage('event', 'ViewCADModel', { event_label: 'ViewCADModel'});
-    }
+  useEffect(() => {
+//    console.log('ViewCADModel - Mounted','model_type=',model_type);
+    return () => {};
+  }, [model_type]);
 
-    render() {
-//        console.log('In ViewCADModel.render');
+  const toggle = () => {
+//    console.log('In ViewCADModel.toggle');
+    setShow(!show);
+    logUsage('event', 'ViewCADModel', { event_label: 'ViewCADModel' });
+  }
 
-        var od_free = this.props.symbol_table[0];
-//        console.log('In ViewCADModel.render OD_Free=',od_free);
-        var wire_dia = this.props.symbol_table[1];
-//        console.log('In ViewCADModel.render Wire_Dia=',wire_dia);
-        var coils_t = this.props.symbol_table[2];
-//        console.log('In ViewCADModel.render Coils_T=',coils_t);
-
-//        var l_free = this.props.symbol_table[14];
-////        console.log('In ViewCADModel.render L_Free=',l_free);
+  var od_free = symbol_table[sto.OD_Free];
+//  console.log('In ViewCADModel OD_Free=',od_free);
+  var wire_dia = symbol_table[sto.Wire_Dia];
+//  console.log('In ViewCADModel Wire_Dia=',wire_dia);
+  var coils_t = symbol_table[sto.Coils_T];
+//  console.log('In ViewCADModel Coils_T=',coils_t);
+//        var l_free = symbol_table[14];
+////        console.log('In ViewCADModel L_Free=',l_free);
 //
 //        var l_free_value = l_free.value;
 //        var l_free_table = [
@@ -59,9 +55,9 @@ class ViewCADModel extends Component {
 //            4.750,
 //            5.000,
 //        ];
-////        console.log('In ViewCADModel.render l_free_table=',l_free_table);
+////        console.log('In ViewCADModel l_free_table=',l_free_table);
 //        var l_free_fudged = l_free_table[l_free_table.length-1];
-////        console.log('In ViewCADModel.render l_free_fudged=',l_free_fudged);
+////        console.log('In ViewCADModel l_free_fudged=',l_free_fudged);
 //        for (let i = 0; i < l_free_table.length; i++) {
 ////            console.log('i=',i,'l_free_value=',l_free_value,'l_free_table=',l_free_table[i]);
 //            if (l_free_value < l_free_table[i]) {
@@ -76,49 +72,40 @@ class ViewCADModel extends Component {
 //                break;
 //            }
 //        }
-////        console.log('In ViewCADModel.render l_free_fudged=',l_free_fudged);
-
-          // Original URL to SAE Extension Spring
+////        console.log('In ViewCADModel l_free_fudged=',l_free_fudged);
+// Original URL to SAE Extension Spring
 //        var prefix = "https://sae-embedded.qa.partcommunity.com/3d-cad-models/?info=sae%2Fmodeling%2Fsprings%2Fas24586a.prj";
 //        var varset = "varset={MAT=" + (material_type.value === 2 ? 'MW' : 'CRES') + '},{OD=' + (od_free.value) + '},{DD=' + (wire_dia.value) + '},{L=' + (l_free_fudged) + '}';
-
 //        https://psdev-embedded.qa.partcommunity.com/3d-cad-models/?info=usa_demo%2Fs%2Fspring_analysis_software%2Fspring_220mm_ss.prj
 //          &varset=%7bOD=12%7d,%7bWD=3%7d,%7bNOC=24%7d&hidePortlets=navigation
 //          varset={OD=12},{WD=3},{NOC=24}&hidePortlets=navigation
-        var prefix = "https://psdev-embedded.qa.partcommunity.com/3d-cad-models/?info=usa_demo%2Fs%2Fspring_analysis_software%2Fspring_220mm_ss.prj";
-//        console.log('In ViewCADModel.render prefix=',prefix);
+  var prefix = "https://psdev-embedded.qa.partcommunity.com/3d-cad-models/?info=usa_demo%2Fs%2Fspring_analysis_software%2Fspring_220mm_ss.prj";
+//  console.log('In ViewCADModel prefix=',prefix);
 
-        var varset = 'varset={OD=' + (od_free.value.toFixed(2)) + '},{WD=' + (wire_dia.value.toFixed(3)) + '},{NOC=' + (coils_t.value.toFixed(0)) + '}';
-//        console.log('In ViewCADModel.render varset=',varset);
+  var varset = 'varset={OD=' + (od_free.value.toFixed(2)) + '},{WD=' + (wire_dia.value.toFixed(3)) + '},{NOC=' + (coils_t.value.toFixed(0)) + '}';
+//  console.log('In ViewCADModel varset=',varset);
 
-        var src = prefix + '&' + encodeURI(varset) + '&hidePortlets=navigation';
-//        console.log('In ViewCADModel.render src=',src);
+  var src = prefix + '&' + encodeURI(varset) + '&hidePortlets=navigation';
+//  console.log('In ViewCADModel src=',src);
 
-        return (
-            <>
-                <NavDropdown.Item onClick={this.toggle}>
-                    CAD Model (Pre-alpha)
-                </NavDropdown.Item>
-                <Modal show={this.state.modal} onHide={this.toggle} size="xl">
-                    <Modal.Header closeButton>
-                        <Modal.Title>
-                            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon"/> &nbsp; View : CAD Model (Pre-alpha)
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <iframe title="CADModel" id="pcomiframe" src={src} width="100%" height="750px" sandbox="allow-forms allow-scripts allow-same-origin allow-popups" referrerPolicy="origin-when-cross-origin"></iframe>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="primary" onClick={this.toggle}>Close</Button>
-                    </Modal.Footer>
-                </Modal>
-            </>
-        );
-    }
+  return (
+    <>
+      <NavDropdown.Item onClick={toggle}>
+        CAD Model (Pre-alpha)
+      </NavDropdown.Item>
+      {show && <Modal show={show} onHide={toggle} size="xl">
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; View : CAD Model (Pre-alpha)
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <iframe title="CADModel" id="pcomiframe" src={src} width="100%" height="750px" sandbox="allow-forms allow-scripts allow-same-origin allow-popups" referrerPolicy="origin-when-cross-origin"></iframe>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={toggle}>Close</Button>
+        </Modal.Footer>
+      </Modal>}
+    </>
+  );
 }
-
-const mapStateToProps = state => ({
-    symbol_table: state.model.symbol_table,
-});
-
-export default connect(mapStateToProps)(ViewCADModel);

@@ -28,6 +28,7 @@ import ActionSeek from '../menus/Action/ActionSeek';
 import ActionSelectSize from '../menus/Action/ActionSelectSize';
 import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
 import ActionExecute from '../menus/Action/ActionExecute';
+import ViewCADModel from '../menus/View/ViewCADModel';
 import ViewSelect from '../menus/View/ViewSelect';
 import ViewOffsets from '../menus/View/ViewOffsets';
 import ViewSymbolTableOffsets from '../menus/View/ViewSymbolTableOffsets';
@@ -147,6 +148,8 @@ export default function MainPage() {
               <ActionExecute />
             </NavDropdown>
             <NavDropdown title="View">
+              {model_type === "Spring/Extension" && <ViewCADModel />}
+              {model_type === "Spring/Extension" && <NavDropdown.Divider />}
               <ViewSelect viewNames={viewNames}/>
               <NavDropdown.Divider />
               {config.node.env !== "production" && <ViewOffsets />}
