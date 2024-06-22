@@ -53,8 +53,8 @@ export default function ActionTrade() {
     var ncode;
 //        dispatch(saveInputSymbolValues());
 //        dispatch(search());
-    var nviol = commonViolationSetup();
-    if (objective_value <= objmin || nviol === 0) {
+    var localNviol = commonViolationSetup();
+    if (objective_value <= objmin || localNviol === 0) {
       dispatch(restoreInputSymbolValues());
       ncode = 'OBJ < OBJMIN - USE OF TRADE IS NOT APPROPRIATE';
       dispatch(changeResultTerminationCondition(ncode));
@@ -202,12 +202,12 @@ export default function ActionTrade() {
         tc[i] = element.cmax;
       }
     }
-    var rk1;
+    var localRk1;
     var localSmallEst;
     var localBigEst;
     var localDefaultEstPercent;
 //          c1 = 0.0
-    rk1 = objective_value;
+    localRk1 = objective_value;
     /* estimate best step size */
     localSmallEst = Number.MAX_VALUE;
     localBigEst = Number.MIN_VALUE;
@@ -247,11 +247,12 @@ export default function ActionTrade() {
     }
     setDir(dir);
     setTc(tc);
-    setRk1(rk1);
+    setRk1(localRk1);
     setSmallEst(localSmallEst);
     setBigEst(localBigEst);
     setDefaultEstPercent(localDefaultEstPercent);
   }
+
 //===========================================================
 // Arbitrary Modal
 //===========================================================
@@ -274,7 +275,7 @@ export default function ActionTrade() {
 
   const onArbitraryChangeValid = (i, event) => {
     console.log('In ActionTrade.onArbitraryChangeValid i=',i,' event.target.value=',event.target.value);
-    var dir = ldir.map((element, index) => {
+    var localDir = ldir.map((element, index) => {
       var value;
       if (index === i) {
         value = element * parseFloat(event.target.value);
@@ -286,44 +287,45 @@ export default function ActionTrade() {
       return value;
     });
 //        console.log('In ActionTrade.onArbitraryChangeValid dir=',dir);
-    var greatestValue = dir.reduce((previousValue, currentValue) => { return Math.abs(currentValue) > previousValue ? Math.abs(currentValue) : previousValue }, 0.0);
+    var greatestValue = localDir.reduce((previousValue, currentValue) => { return Math.abs(currentValue) > previousValue ? Math.abs(currentValue) : previousValue }, 0.0);
 //        console.log('In ActionTrade.onArbitraryChangeValid greatestValue=',greatestValue);
-    var isArbitraryInvalid = isArbitraryInvalid.map((element, index) => {
+    var localIsArbitraryInvalid = isArbitraryInvalid.map((element, index) => {
       if (index === i) {
         return false;
       } else {
         return element;
       }
     });
-//        console.log('In ActionTrade.onArbitraryChangeValid isArbitraryInvalid=',isArbitraryInvalid);
-    var notAllArbitraryValid = isArbitraryInvalid.reduce((previousValue, currentValue) => { return previousValue || currentValue }, false);
+//        console.log('In ActionTrade.onArbitraryChangeValid localIsArbitraryInvalid=',localIsArbitraryInvalid);
+    var notAllArbitraryValid = localIsArbitraryInvalid.reduce((previousValue, currentValue) => { return previousValue || currentValue }, false);
 //        console.log('In ActionTrade.onArbitraryChangeValid notAllNumbers=',notAllArbitraryValid);
-    var arbitraryContinueDisabled = greatestValue < smallnum || notAllArbitraryValid;
-//        console.log('In ActionTrade.onArbitraryChangeValid arbitraryContinueDisabled=',arbitraryContinueDisabled);
-    setDir(dir);
-    setIsArbitraryInvalid(isArbitraryInvalid);
-    setArbitraryContinueDisabled(arbitraryContinueDisabled);
+    var localArbitraryContinueDisabled = greatestValue < smallnum || notAllArbitraryValid;
+//        console.log('In ActionTrade.onArbitraryChangeValid localArbitraryContinueDisabled=',localArbitraryContinueDisabled);
+    setDir(localDir);
+    setIsArbitraryInvalid(localIsArbitraryInvalid);
+    setArbitraryContinueDisabled(localArbitraryContinueDisabled);
   }
 
   const onArbitraryChangeInvalid = (i, event) => {
     console.log('In ActionTrade.onArbitraryChangeInvalid i=',i,' event.target.value=',event.target.value);
     var greatestValue = dir.reduce((previousValue, currentValue) => { return Math.abs(currentValue) > previousValue ? Math.abs(currentValue) : previousValue }, 0.0);
 //        console.log('In ActionTrade.onArbitraryChangeInvalid greatestValue=',greatestValue);
-    var isArbitraryInvalid = isArbitraryInvalid.map((element, index) => {
+    var localIsArbitraryInvalid = isArbitraryInvalid.map((element, index) => {
       if (index === i) {
         return true;
       } else {
         return element;
       }
     });
-//        console.log('In ActionTrade.onArbitraryChangeInvalid isArbitraryInvalid=',isArbitraryInvalid);
-    var notAllArbitraryValid = isArbitraryInvalid.reduce((previousValue, currentValue) => { return previousValue || currentValue }, false);
+//        console.log('In ActionTrade.onArbitraryChangeInvalid localIsArbitraryInvalid=',localIsArbitraryInvalid);
+    var notAllArbitraryValid = localIsArbitraryInvalid.reduce((previousValue, currentValue) => { return previousValue || currentValue }, false);
 //        console.log('In ActionTrade.onArbitraryChangeInvalid notAllNumbers=',notAllArbitraryValid);
-    var arbitraryContinueDisabled = greatestValue < smallnum || notAllArbitraryValid;
-//        console.log('In ActionTrade.onArbitraryChangeInvalid arbitraryContinueDisabled=',arbitraryContinueDisabled);
-    setIsArbitraryInvalid(isArbitraryInvalid);
-    setArbitraryContinueDisabled(arbitraryContinueDisabled);
+    var localArbitraryContinueDisabled = greatestValue < smallnum || notAllArbitraryValid;
+//        console.log('In ActionTrade.onArbitraryChangeInvalid localArbitraryContinueDisabled=',localArbitraryContinueDisabled);
+    setIsArbitraryInvalid(localIsArbitraryInvalid);
+    setArbitraryContinueDisabled(localArbitraryContinueDisabled);
   }
+
 //===========================================================
 // Size Modal
 //===========================================================
@@ -466,6 +468,7 @@ export default function ActionTrade() {
     console.log('In ActionTrade.onSizeChangeInvalid');
     setIsSizeInvalid(true);
   }
+
 //===========================================================
 // Feasible Modal
 //===========================================================
@@ -493,6 +496,7 @@ export default function ActionTrade() {
     console.log('In ActionTrade.onFeasibleDone');
     setFeasibleShow(!feasibleShow);
   }
+
 //===========================================================
 // Establish Modal
 //===========================================================
@@ -529,6 +533,7 @@ export default function ActionTrade() {
     dispatch(changeResultTerminationCondition(ncode));
     setEstablishShow(!establishShow);
   }
+
 //===========================================================
 // Not Feasible Modal
 //===========================================================
@@ -566,6 +571,7 @@ export default function ActionTrade() {
     dispatch(changeResultTerminationCondition(ncode));
     setNotFeasibleShow(!notFeasibleShow);
   }
+
 //    clister() {
 //        var element;
 //        console.log('CONSTRAINT                % VIOLATION           LEVEL');
