@@ -17,14 +17,17 @@ import store from "../../store/store";
 export default function ActionTrade() {
   console.log('ActionTrade - Mounting...');
 
+  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const objmin = useSelector((state) => state.modelSlice.model.system_controls.objmin);
+  const smallnum = useSelector((state) => state.modelSlice.model.system_controls.smallnum);
+//  const ioopt = useSelector((state) => state.modelSlice.model.system_controls.ioopt);
   const objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
   const [strategyShow, setStrategyShow] = useState(false);
-  const [arbitraryShow, setArbitraryModal] = useState(false);
-  const [sizeShow, setSizeModal] = useState(false);
-  const [feasibleShow, setFeasibleModal] = useState(false);
-  const [establishShow, setEstablishModal] = useState(false);
-  const [notFeasibleShow, setNotFeasibleModal] = useState(false);
+  const [arbitraryShow, setArbitraryShow] = useState(false);
+  const [sizeShow, setSizeShow] = useState(false);
+  const [feasibleShow, setFeasibleShow] = useState(false);
+  const [establishShow, setEstablishShow] = useState(false);
+  const [notFeasibleShow, setNotFeasibleShow] = useState(false);
   const [arbitraryContinueDisabled, setArbitraryContinueDisabled] = useState(false);
   const [isArbitraryInvalid, setIsArbitraryInvalid] = useState([]);
   const [isSizeInvalid, setIsSizeInvalid] = useState(false);
@@ -33,7 +36,7 @@ export default function ActionTrade() {
   const [ldir, setLdir] = useState([]);
   const [dir, setDir] = useState([]);
   const [tc, setTc] = useState(undefined);
-  const [rk1, SetRk1] = useState(undefined);
+  const [rk1, setRk1] = useState(undefined);
   const [smallEst, setSmallEst] = useState(undefined);
   const [bigEst, setBigEst] = useState(undefined);
   const [defaultEstPercent, setDefaultEstPercent] = useState(undefined);
@@ -47,13 +50,11 @@ export default function ActionTrade() {
     console.log('In ActionTrade.strategyToggle');
     logUsage('event', 'ActionTrade', { event_label: 'ActionTrade' });
     dispatch(saveAutoSave());
-    var design;
     var ncode;
 //        dispatch(saveInputSymbolValues());
 //        dispatch(search());
-    design = store.getState().modelSlice;
     var nviol = commonViolationSetup();
-    if (design.model.result.objective_value <= design.model.system_controls.objmin || nviol === 0) {
+    if (objective_value <= objmin || nviol === 0) {
       dispatch(restoreInputSymbolValues());
       ncode = 'OBJ < OBJMIN - USE OF TRADE IS NOT APPROPRIATE';
       dispatch(changeResultTerminationCondition(ncode));
@@ -65,16 +66,14 @@ export default function ActionTrade() {
 
   const commonViolationSetup = () => {
     console.log('In ActionTrade.commonViolationSetup');
-    var design;
     var element;
     var localNviol = 0;
     var localVflag = [];
     var localLdir = [];
     dispatch(saveInputSymbolValues());
     dispatch(search());
-    design = store.getState().modelSlice;
-    for (let i = 0; i < design.model.symbol_table.length; i++) {
-      element = design.model.symbol_table[i];
+    for (let i = 0; i < symbol_table.length; i++) {
+      element = symbol_table[i];
       if (element.lmin & CONSTRAINED && !(element.lmin & FDCL) && element.vmin > 0.0) {
         localNviol++
         localVflag[localNviol - 1] = i;
@@ -112,14 +111,12 @@ export default function ActionTrade() {
 
   const onStrategyExisting = () => { // Option 2
     console.log('In ActionTrade.onStrategyExisting');
-    var design;
     var element;
     var value;
     var ncode;
-    design = store.getState().modelSlice;
     for (let i = 0; i < nviol; i++) {
       let j = vflag[i];
-      element = design.model.symbol_table[j];
+      element = symbol_table[j];
       if (ldir[i] < 0) {
         value = element.cmin + element.vmin * element.smin * ldir[i];
         dispatch(changeSymbolConstraint(element.name, MIN, value));
@@ -136,14 +133,12 @@ export default function ActionTrade() {
 
   const onStrategyArbitrary = () => { // Option 1
     console.log('In ActionTrade.onStrategyArbitrary');
-    var design;
     var element;
     var localDir = [];
     var localIsArbitraryInvalid = [];
-    design = store.getState().modelSlice;
     for (let i = 0; i < nviol; i++) {
       let j = vflag[i];
-      element = design.model.symbol_table[j];
+      element = symbol_table[j];
       if (ldir[i] < 0) {
         localDir[i] = ldir[i] * element.vmin;
       } else {
@@ -160,13 +155,11 @@ export default function ActionTrade() {
 
   const onStrategyProportional = () => { // Option 0
     console.log('In ActionTrade.onStrategyProportional');
-    var design;
     var element;
     var localDir = [];
-    design = store.getState().modelSlice;
     for (let i = 0; i < nviol; i++) {
       let j = vflag[i];
-      element = design.model.symbol_table[j];
+      element = symbol_table[j];
       if (ldir[i] < 0) {
         localDir[i] = ldir[i] * element.vmin;
       } else {
@@ -189,13 +182,11 @@ export default function ActionTrade() {
      * **** CREATE normalized VECTOR IN VIOLATED CONSTRAINT SPACE
      * *****
      */
-    var design;
     var element;
     var temp2;
     var value = 0.0;
     var itemp = 0;
     var temp;
-    design = store.getState().modelSlice;
     for (let i = 0; i < nviol; i++) {
       temp2 = Math.abs(dir[i]);
       if (temp2 > value) {
@@ -207,7 +198,7 @@ export default function ActionTrade() {
     for (let i = 0; i < nviol; i++) {
       dir[i] = dir[i] / value;
       let j = vflag[i];
-      element = design.model.symbol_table[j];
+      element = symbol_table[j];
       if (ldir[i] < 0) {
         tc[i] = element.cmin;
       } else {
@@ -219,28 +210,28 @@ export default function ActionTrade() {
     var localBigEst;
     var localDefaultEstPercent;
 //          c1 = 0.0
-    rk1 = design.model.result.objective_value;
+    rk1 = objective_value;
     /* estimate best step size */
     localSmallEst = Number.MAX_VALUE;
     localBigEst = Number.MIN_VALUE;
     for (let i = 0; i < nviol; i++) {
       temp2 = Math.abs(dir[i]);
       let j = vflag[i];
-      element = design.model.symbol_table[j];
+      element = symbol_table[j];
       if (ldir[i] < 0) {
-        if (temp2 > design.model.system_controls.smallnum) {
+        if (temp2 > smallnum) {
           temp = element.vmin / temp2;
         } else {
           temp = element.vmin;
         }
       } else {
-        if (temp2 > design.model.system_controls.smallnum) {
+        if (temp2 > smallnum) {
           temp = element.vmax / temp2;
         } else {
           temp = element.vmax;
         }
       }
-      if (temp > design.model.system_controls.smallnum && temp < localSmallEst) {
+      if (temp > smallnum && temp < localSmallEst) {
         localSmallEst = temp;
       }
       if (temp > localBigEst) {
@@ -248,14 +239,14 @@ export default function ActionTrade() {
       }
     }
     let j = vflag[itemp];
-    element = design.model.symbol_table[j];
+    element = symbol_table[j];
     if (ldir[itemp] < 0) {
       localDefaultEstPercent = 90 * element.vmin; // 90% of vmin
     } else {
       localDefaultEstPercent = 90 * element.vmax; // 90% of vmax
     }
-    if (localDefaultEstPercent / 100.0 < design.model.system_controls.smallnum) {
-      localDefaultEstPercent = design.model.system_controls.smallnum * 100.0;
+    if (localDefaultEstPercent / 100.0 < smallnum) {
+      localDefaultEstPercent = smallnum * 100.0;
     }
     setDir(dir);
     setTc(tc);
@@ -287,8 +278,6 @@ export default function ActionTrade() {
 
   const onArbitraryChangeValid = (i, event) => {
     console.log('In ActionTrade.onArbitraryChangeValid i=',i,' event.target.value=',event.target.value);
-    var design;
-    design = store.getState().modelSlice;
     var dir = ldir.map((element, index) => {
       var value;
       if (index === i) {
@@ -313,7 +302,7 @@ export default function ActionTrade() {
 //        console.log('In ActionTrade.onArbitraryChangeValid isArbitraryInvalid=',isArbitraryInvalid);
     var notAllArbitraryValid = isArbitraryInvalid.reduce((previousValue, currentValue) => { return previousValue || currentValue }, false);
 //        console.log('In ActionTrade.onArbitraryChangeValid notAllNumbers=',notAllArbitraryValid);
-    var arbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum || notAllArbitraryValid;
+    var arbitraryContinueDisabled = greatestValue < smallnum || notAllArbitraryValid;
 //        console.log('In ActionTrade.onArbitraryChangeValid arbitraryContinueDisabled=',arbitraryContinueDisabled);
     setDir(dir);
     setIsArbitraryInvalid(isArbitraryInvalid);
@@ -322,8 +311,6 @@ export default function ActionTrade() {
 
   const onArbitraryChangeInvalid = (i, event) => {
     console.log('In ActionTrade.onArbitraryChangeInvalid i=',i,' event.target.value=',event.target.value);
-    var design;
-    design = store.getState().modelSlice;
     var greatestValue = dir.reduce((previousValue, currentValue) => { return Math.abs(currentValue) > previousValue ? Math.abs(currentValue) : previousValue }, 0.0);
 //        console.log('In ActionTrade.onArbitraryChangeInvalid greatestValue=',greatestValue);
     var isArbitraryInvalid = isArbitraryInvalid.map((element, index) => {
@@ -336,7 +323,7 @@ export default function ActionTrade() {
 //        console.log('In ActionTrade.onArbitraryChangeInvalid isArbitraryInvalid=',isArbitraryInvalid);
     var notAllArbitraryValid = isArbitraryInvalid.reduce((previousValue, currentValue) => { return previousValue || currentValue }, false);
 //        console.log('In ActionTrade.onArbitraryChangeInvalid notAllNumbers=',notAllArbitraryValid);
-    var arbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum || notAllArbitraryValid;
+    var arbitraryContinueDisabled = greatestValue < smallnum || notAllArbitraryValid;
 //        console.log('In ActionTrade.onArbitraryChangeInvalid arbitraryContinueDisabled=',arbitraryContinueDisabled);
     setIsArbitraryInvalid(isArbitraryInvalid);
     setArbitraryContinueDisabled(arbitraryContinueDisabled);
@@ -357,18 +344,16 @@ export default function ActionTrade() {
 
   const onSizeContinue = () => {
     console.log('In ActionTrade.onSizeContinue');
-    var design;
     var element;
     var c2;
     var c3;
     var rk3;
     var value;
-    design = store.getState().modelSlice;
     c3 = defaultEstPercent / 100.0; // Convert from percent to actual value
 // TAKE FIRST EXPLORATORY RELAXATION STEP
     for (let i = 0; i < nviol; i++) {
       let j = vflag[i];
-      element = design.model.symbol_table[j];
+      element = symbol_table[j];
       if (ldir[i] < 0) {
         value = element.cmin + dir[i] * element.cmin * c3;
         dispatch(changeSymbolConstraint(element.name, MIN, value));
@@ -377,27 +362,25 @@ export default function ActionTrade() {
         dispatch(changeSymbolConstraint(element.name, MAX, value));
       }
     }
-    design = store.getState().modelSlice;
-    if (design.model.result.objective_value > design.model.system_controls.objmin) {
+    if (objective_value > objmin) {
       dispatch(search());
     }
-    design = store.getState().modelSlice;
-    if (design.model.result.objective_value <= design.model.system_controls.objmin) {
+    if (objective_value <= objmin) {
 // Feasible was found, go show Feasible Modal
       setSizeShow(!sizeShow);
       setFeasibleShow(!feasibleShow);
       return;
     } else {
-//            if (design.model.system_controls.ioopt > 1) {
+//            if (ioopt > 1) {
 //                console.log('TRIAL (FULL STEP) CONSTRAINTS:');
 //                clister();
 //            }
-      rk3 = design.model.result.objective_value;
+      rk3 = objective_value;
 // MAKE SECOND EXPLORATORY STEP 1/2 WAY TO THE FIRST ONE
       c2 = c3 / 2.0;
       for (let i = 0; i < nviol; i++) {
         let j = vflag[i];
-        element = design.model.symbol_table[j];
+        element = symbol_table[j];
         if (ldir[i] < 0) {
           value = tc[i] + dir[i] * tc[i] * c2;
           dispatch(changeSymbolConstraint(element.name, MIN, value));
@@ -408,8 +391,7 @@ export default function ActionTrade() {
       }
       dispatch(restoreInputSymbolValues());
       dispatch(search());
-      design = store.getState().modelSlice;
-      if (design.model.result.objective_value <= design.model.system_controls.objmin) {
+      if (objective_value <= objmin) {
 // Feasible was found, go show Feasible Modal
         setSizeShow(!sizeShow);
         setFeasibleShow(!feasibleShow);
@@ -427,11 +409,11 @@ export default function ActionTrade() {
       var capb;
       var capc;
       var arg;
-//            if (design.model.system_controls.ioopt > 1) {
+//            if (ioopt > 1) {
 //                console.log('TRIAL (HALF STEP) CONSTRAINTS:');
 //                clister();
 //            }
-      rk2 = design.model.result.objective_value;
+      rk2 = objective_value;
       /** ******** QUADRATIC EXTRAPOLATION ****************************** */
       /* REFER TO THESIS FIGURE 4-2 */
       /* FOR THE CASE THAT C1 ^= 0 : */
@@ -462,7 +444,7 @@ export default function ActionTrade() {
       }
       for (let i = 0; i < nviol; i++) {
         let j = vflag[i];
-        element = design.model.symbol_table[j];
+        element = symbol_table[j];
         if (ldir[i] < 0) {
           value = tc[i] + dir[i] * tc[i] * c0;
           dispatch(changeSymbolConstraint(element.name, MIN, value));
@@ -473,7 +455,6 @@ export default function ActionTrade() {
 //                        console.log(element.name + ' MAX ' + value + ' ' + element.units);
         }
       }
-      design = store.getState().modelSlice;
       dispatch(search());
     }
     setSizeShow(!sizeShow);
@@ -496,12 +477,10 @@ export default function ActionTrade() {
 
   const onFeasibleRestart = () => {
     console.log('In ActionTrade.onFeasibleRestart');
-    var design;
     var element;
-    design = store.getState().modelSlice;
     for (let i = 0; i < nviol; i++) {
       let j = vflag[i];
-      element = design.model.symbol_table[j];
+      element = symbol_table[j];
       if (ldir[i] < 0) {
         dispatch(changeSymbolConstraint(element.name, MIN, tc[i]));
       } else {
@@ -526,12 +505,8 @@ export default function ActionTrade() {
 
   const onEstablishAccept = () => {
     console.log('In ActionTrade.onEstablishAccept');
-    var design;
     var ncode;
-//        design = store.getState().modelSlice;
-//        dispatch(search());
-    design = store.getState().modelSlice; // Re-access store to get latest element values
-    if (design.model.result.objective_value <= design.model.system_controls.objmin) {
+    if (objective_value <= objmin) {
       ncode = 'ACCEPTED TRADE RESULT';
       dispatch(changeResultTerminationCondition(ncode));
       setEstablishShow(!establishShow);
@@ -544,13 +519,11 @@ export default function ActionTrade() {
   const onEstablishDone = () => {
     console.log('In ActionTrade.onEstablishDone');
     dispatch(restoreInputSymbolValues());
-    var design;
     var element;
     var ncode;
-    design = store.getState().modelSlice;
     for (let i = 0; i < nviol; i++) {
       let j = vflag[i];
-      element = design.model.symbol_table[j];
+      element = symbol_table[j];
       if (ldir[i] < 0) {
         dispatch(changeSymbolConstraint(element.name, MIN, tc[i]));
       } else {
@@ -569,12 +542,10 @@ export default function ActionTrade() {
 
   const onNotFeasibleRestart = () => {
     console.log('In ActionTrade.onNotFeasibleRestart');
-    var design;
-    design = store.getState().modelSlice;
     var element;
     for (let i = 0; i < nviol; i++) {
       let j = vflag[i];
-      element = design.model.symbol_table[j];
+      element = symbol_table[j];
       if (ldir[i] < 0) {
         dispatch(changeSymbolConstraint(element.name, MIN, tc[i]));
       } else {
@@ -603,13 +574,11 @@ export default function ActionTrade() {
     setNotFeasibleShow(!notFeasibleShow);
   }
 //    clister() {
-//        var design;
 //        var element;
-//        design = store.getState().modelSlice;
 //        console.log('CONSTRAINT                % VIOLATION           LEVEL');
 //        for (let i = 0; i < nviol; i++) {
 //            let j = vflag[i];
-//            element = design.model.symbol_table[j];
+//            element = symbol_table[j];
 //            if (ldir[i] < 0) {
 //                console.log(element.name + ' MIN ' + element.vmin * 100.0 + ' ' + element.cmin + ' ' + element.units);
 //            } else {
@@ -630,14 +599,12 @@ export default function ActionTrade() {
         </Row>
         {
           vflag.map((j, i) => {
-            var design;
             var element;
             var constraint_class;
-            design = store.getState().modelSlice;
-            element = design.model.symbol_table[j];
+            element = symbol_table[j];
             if (ldir[i] < 0) {
 //                                console.log(element.name + ' MIN ' + element.vmin * 100.0 + ' ' + element.cmin + ' ' + element.units);
-              if (design.model.result.objective_value < design.model.system_controls.objmin) {
+              if (objective_value < objmin) {
                 constraint_class = (element.lmin & CONSTRAINED && element.vmin > 0.0) ? 'text-low-danger align-middle text-end' : 'text-end';
               } else {
                 constraint_class = (element.lmin & CONSTRAINED && element.vmin > 0.0) ? 'text-danger align-middle text-end font-weight-bold' : 'text-end';
@@ -653,7 +620,7 @@ export default function ActionTrade() {
               );
             } else {
 //                                console.log(element.name + ' MAX ' + element.vmax * 100.0 + ' ' + element.cmax + ' ' + element.units);
-              if (design.model.result.objective_value < design.model.system_controls.objmin) {
+              if (objective_value < objmin) {
                 constraint_class = (element.lmax & CONSTRAINED && element.vmax > 0.0) ? 'text-low-danger align-middle text-end' : 'text-end';
               } else {
                 constraint_class = (element.lmax & CONSTRAINED && element.vmax > 0.0) ? 'text-danger align-middle text-end font-weight-bold' : 'text-end';
@@ -673,9 +640,6 @@ export default function ActionTrade() {
       </Container>
     );
   }
-
-  var design;
-  design = store.getState().modelSlice;
 
   var display_search_button;
   if (objective_value > objmin) {
@@ -734,11 +698,9 @@ export default function ActionTrade() {
             </Row>
             {
               vflag.map((j, i) => {
-                var design;
                 var element;
                 var dname;
-                design = store.getState().modelSlice;
-                element = design.model.symbol_table[j];
+                element = symbol_table[j];
                 dname = element.name;
                 return (
                   <Row key={dname}>
@@ -779,7 +741,7 @@ export default function ActionTrade() {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onSizeCancel}>Cancel</Button>{' '}
-          <Button variant="primary" disabled={isSizeInvalid || defaultEstPercent / 100.0 < design.model.system_controls.smallnum} onClick={onSizeContinue}>Continue</Button>
+          <Button variant="primary" disabled={isSizeInvalid || defaultEstPercent / 100.0 < smallnum} onClick={onSizeContinue}>Continue</Button>
         </Modal.Footer>
       </Modal>}
       {/*==================================================*/}
@@ -836,7 +798,7 @@ export default function ActionTrade() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          The result is not feasible: obj = {parseFloat(design.model.result.objective_value).toFixed(6)}<br />
+          The result is not feasible: obj = {parseFloat(objective_value).toFixed(6)}<br />
           <ul>
             <li>Done &nbsp; - To return to the main page with these constraints</li>
             <li>Repeat - To repeat Trade with these constraints</li>
