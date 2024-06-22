@@ -34,8 +34,8 @@ export default function ActionTrade() {
   const [dir, setDir] = useState([]);
   const [tc, setTc] = useState(undefined);
   const [rk1, SetRk1] = useState(undefined);
-  const [smallest, setSmallest] = useState(undefined);
-  const [biggest, setBiggest] = useState(undefined);
+  const [smallEst, setSmallEst] = useState(undefined);
+  const [bigEst, setBigEst] = useState(undefined);
   const [defaultEstPercent, setDefaultEstPercent] = useState(undefined);
   const dispatch = useDispatch();
 
@@ -67,29 +67,29 @@ export default function ActionTrade() {
     console.log('In ActionTrade.commonViolationSetup');
     var design;
     var element;
-    var nviol = 0;
-    var ldir = [];
-    var vflag = [];
+    var localNviol = 0;
+    var localVflag = [];
+    var localLdir = [];
     dispatch(saveInputSymbolValues());
     dispatch(search());
     design = store.getState().modelSlice;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
       element = design.model.symbol_table[i];
       if (element.lmin & CONSTRAINED && !(element.lmin & FDCL) && element.vmin > 0.0) {
-        nviol++
-        vflag[nviol - 1] = i;
-        ldir[nviol - 1] = -1;
+        localNviol++
+        localVflag[localNviol - 1] = i;
+        localLdir[localNviol - 1] = -1;
       } else if (element.lmax & CONSTRAINED && !(element.lmax & FDCL) && element.vmax > 0.0) {
-        nviol++
-        vflag[nviol - 1] = i;
-        ldir[nviol - 1] = +1;
+        localNviol++
+        localVflag[localNviol - 1] = i;
+        localLdir[localNviol - 1] = +1;
       }
     }
-    console.log('nviol=',nviol,'vflag=',vflag,'ldir=',ldir);
-    setNviol(nviol);
-    setVflag(vflag);
-    setLdir(ldir);
-    return nviol;
+    console.log('localNviol=',localNviol,'localVflag=',localVflag,'localLdir=',localLdir);
+    setNviol(localNviol);
+    setVflag(localVflag);
+    setLdir(localLdir);
+    return localNviol;
   }
 
   const onNoop = () => { // No-op for onHide
@@ -138,21 +138,21 @@ export default function ActionTrade() {
     console.log('In ActionTrade.onStrategyArbitrary');
     var design;
     var element;
-    var dir = [];
-    var isArbitraryInvalid = [];
+    var localDir = [];
+    var localIsArbitraryInvalid = [];
     design = store.getState().modelSlice;
     for (let i = 0; i < nviol; i++) {
       let j = vflag[i];
       element = design.model.symbol_table[j];
       if (ldir[i] < 0) {
-        dir[i] = ldir[i] * element.vmin;
+        localDir[i] = ldir[i] * element.vmin;
       } else {
-        dir[i] = ldir[i] * element.vmax;
+        localDir[i] = ldir[i] * element.vmax;
       }
-      isArbitraryInvalid[i] = false;
+      localIsArbitraryInvalid[i] = false;
     }
-    setDir(dir);
-    setIsArbitraryInvalid(isArbitraryInvalid);
+    setDir(localDir);
+    setIsArbitraryInvalid(localIsArbitraryInvalid);
     setArbitraryContinueDisabled(arbitraryContinueDisabled);
     setStrategyShow(!strategyShow); // Hide strategy
     setArbitraryShow(!arbitraryShow); // Show arbitrary
@@ -162,18 +162,18 @@ export default function ActionTrade() {
     console.log('In ActionTrade.onStrategyProportional');
     var design;
     var element;
-    var dir = [];
+    var localDir = [];
     design = store.getState().modelSlice;
     for (let i = 0; i < nviol; i++) {
       let j = vflag[i];
       element = design.model.symbol_table[j];
       if (ldir[i] < 0) {
-        dir[i] = ldir[i] * element.vmin;
+        localDir[i] = ldir[i] * element.vmin;
       } else {
-        dir[i] = ldir[i] * element.vmax;
+        localDir[i] = ldir[i] * element.vmax;
       }
     }
-    commonArbitraryOrProportional(dir);
+    commonArbitraryOrProportional(localDir);
     setStrategyShow(!strategyShow);
     setSizeShow(!sizeShow);
   }
@@ -215,14 +215,14 @@ export default function ActionTrade() {
       }
     }
     var rk1;
-    var smallest;
-    var biggest;
-    var defaultEstPercent;
+    var localSmallEst;
+    var localBigEst;
+    var localDefaultEstPercent;
 //          c1 = 0.0
     rk1 = design.model.result.objective_value;
     /* estimate best step size */
-    smallest = Number.MAX_VALUE;
-    biggest = Number.MIN_VALUE;
+    localSmallEst = Number.MAX_VALUE;
+    localBigEst = Number.MIN_VALUE;
     for (let i = 0; i < nviol; i++) {
       temp2 = Math.abs(dir[i]);
       let j = vflag[i];
@@ -240,29 +240,29 @@ export default function ActionTrade() {
           temp = element.vmax;
         }
       }
-      if (temp > design.model.system_controls.smallnum && temp < smallest) {
-        smallest = temp;
+      if (temp > design.model.system_controls.smallnum && temp < localSmallEst) {
+        localSmallEst = temp;
       }
-      if (temp > biggest) {
-        biggest = temp;
+      if (temp > localBigEst) {
+        localBigEst = temp;
       }
     }
     let j = vflag[itemp];
     element = design.model.symbol_table[j];
     if (ldir[itemp] < 0) {
-      defaultEstPercent = 90 * element.vmin; // 90% of vmin
+      localDefaultEstPercent = 90 * element.vmin; // 90% of vmin
     } else {
-      defaultEstPercent = 90 * element.vmax; // 90% of vmax
+      localDefaultEstPercent = 90 * element.vmax; // 90% of vmax
     }
-    if (defaultEstPercent / 100.0 < design.model.system_controls.smallnum) {
-      defaultEstPercent = design.model.system_controls.smallnum * 100.0;
+    if (localDefaultEstPercent / 100.0 < design.model.system_controls.smallnum) {
+      localDefaultEstPercent = design.model.system_controls.smallnum * 100.0;
     }
     setDir(dir);
     setTc(tc);
     setRk1(rk1);
-    setSmallest(smallest);
-    setBiggest(biggest);
-    setDefaultEstPercent(defaultEstPercent);
+    setSmallEst(localSmallEst);
+    setBigEst(localBigEst);
+    setDefaultEstPercent(localDefaultEstPercent);
   }
 //===========================================================
 // Arbitrary Modal
@@ -482,7 +482,7 @@ export default function ActionTrade() {
 
   const onSizeChangeValid = (event) => {
     console.log('In ActionTrade.onSizeChangeValid');
-    setDefaultEst(parseFloat(event.target.value));
+    setDefaultEstPercent(parseFloat(event.target.value));
     setIsSizeInvalid(false);
   }
 
@@ -769,7 +769,7 @@ export default function ActionTrade() {
         </Modal.Header>
         <Modal.Body>
           Enter local exploration step size (%)<br />
-          Possibilities range from {(90.0 * smallest).toFixed(2)} to {(100.0 * biggest).toFixed(2)}<br />
+          Possibilities range from {(90.0 * smallEst).toFixed(2)} to {(100.0 * bigEst).toFixed(2)}<br />
           <InputGroup>
             <InputGroup.Text>
               Default
