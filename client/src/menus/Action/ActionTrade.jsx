@@ -26,6 +26,8 @@ export default function ActionTrade() {
   const [establishShow, setEstablishModal] = useState(false);
   const [notFeasibleShow, setNotFeasibleModal] = useState(false);
   const [arbitraryContinueDisabled, setArbitraryContinueDisabled] = useState(false);
+  const [isArbitraryInvalid, setIsArbitraryInvalid] = useState([]);
+  const [isSizeInvalid, setIsSizeInvalid] = useState(false);
   const [nviol, setNviol] = useState(0);
   const [vflag, setVflag] = useState([]);
   const [ldir, setLdir] = useState([]);
