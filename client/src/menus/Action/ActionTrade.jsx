@@ -58,7 +58,6 @@ export default function ActionTrade() {
       dispatch(restoreInputSymbolValues());
       ncode = 'OBJ < OBJMIN - USE OF TRADE IS NOT APPROPRIATE';
       dispatch(changeResultTerminationCondition(ncode));
-      return;
     } else {
       setStrategyShow(!strategyShow);
     }
@@ -106,7 +105,6 @@ export default function ActionTrade() {
     ncode = 'TRADE CANCELLED';
     dispatch(changeResultTerminationCondition(ncode));
     setStrategyShow(!strategyShow);
-    return;
   }
 
   const onStrategyExisting = () => { // Option 2
@@ -128,7 +126,6 @@ export default function ActionTrade() {
     ncode = 'CONSTRAINT LEVELS RELAXED TO EXISTING VIOLATIONS';
     dispatch(changeResultTerminationCondition(ncode));
     setStrategyShow(!strategyShow);
-    return;
   }
 
   const onStrategyArbitrary = () => { // Option 1
@@ -266,7 +263,6 @@ export default function ActionTrade() {
     ncode = 'TRADE CANCELLED';
     dispatch(changeResultTerminationCondition(ncode));
     setArbitraryShow(!arbitraryShow); // Hide arbitrary show
-    return;
   }
 
   const onArbitraryContinue = () => {
@@ -339,7 +335,6 @@ export default function ActionTrade() {
     ncode = 'TRADE CANCELLED';
     dispatch(changeResultTerminationCondition(ncode));
     setSizeShow(!sizeShow);
-    return;
   }
 
   const onSizeContinue = () => {
@@ -497,7 +492,6 @@ export default function ActionTrade() {
   const onFeasibleDone = () => {
     console.log('In ActionTrade.onFeasibleDone');
     setFeasibleShow(!feasibleShow);
-    return;
   }
 //===========================================================
 // Establish Modal
@@ -510,10 +504,10 @@ export default function ActionTrade() {
       ncode = 'ACCEPTED TRADE RESULT';
       dispatch(changeResultTerminationCondition(ncode));
       setEstablishShow(!establishShow);
-      return;
+    } else {
+      setEstablishShow(!establishShow);
+      setNotFeasibleShow(!notFeasibleShow);
     }
-    setEstablishShow(!establishShow);
-    setNotFeasibleShow(!notFeasibleShow);
   }
 
   const onEstablishDone = () => {
@@ -534,7 +528,6 @@ export default function ActionTrade() {
     ncode = 'DECLINED TRADE RESULT';
     dispatch(changeResultTerminationCondition(ncode));
     setEstablishShow(!establishShow);
-    return;
   }
 //===========================================================
 // Not Feasible Modal
