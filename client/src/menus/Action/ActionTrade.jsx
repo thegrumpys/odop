@@ -17,11 +17,6 @@ import store from "../../store/store";
 export default function ActionTrade() {
   console.log('ActionTrade - Mounting...');
 
-//  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-//  const objmin = useSelector((state) => state.modelSlice.model.system_controls.objmin);
-//  const smallnum = useSelector((state) => state.modelSlice.model.system_controls.smallnum);
-//  const ioopt = useSelector((state) => state.modelSlice.model.system_controls.ioopt);
-//  const objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
   const [strategyShow, setStrategyShow] = useState(false);
   const [arbitraryShow, setArbitraryShow] = useState(false);
   const [sizeShow, setSizeShow] = useState(false);
@@ -51,8 +46,6 @@ export default function ActionTrade() {
     logUsage('event', 'ActionTrade', { event_label: 'ActionTrade' });
     dispatch(saveAutoSave());
     var ncode;
-//        dispatch(saveInputSymbolValues());
-//        dispatch(search());
     var design = store.getState().modelSlice;
     var localNviol = commonViolationSetup();
     if (design.model.result.objective_value <= design.model.system_controls.objmin || localNviol === 0) {
