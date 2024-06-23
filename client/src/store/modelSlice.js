@@ -475,7 +475,7 @@ export const modelSlice = createSlice({
             },
             symbol_table: state.model.symbol_table.map((element) => {
               if (element.name === action.payload.name) {
-                console.log('In reducers.RESET_SYMBOL_FLAG state=',state,'action=', action);
+//                console.log('In reducers.RESET_SYMBOL_FLAG state=',state,'action=', action);
                 var inner_result;
                 if (action.payload.minmax === MIN) {
                   inner_result = { lmin: element.lmin & (~action.payload.mask) };
@@ -483,7 +483,7 @@ export const modelSlice = createSlice({
                   inner_result = { lmax: element.lmax & (~action.payload.mask) };
                 }
                 inner_result = Object.assign({}, element, inner_result);
-                console.log('In reducers.RESET_SYMBOL_FLAG ','action=', action,'element=',element,'update=',inner_result,'result=',inner_result);
+//                console.log('In reducers.RESET_SYMBOL_FLAG ','action=', action,'element=',element,'update=',inner_result,'result=',inner_result);
                 return inner_result;
               }
               return element;

@@ -52,7 +52,11 @@ function flushBuffer() {
   if (buffer !== '') {
     var tag = 'event';
     var action = 'Values';
-    var sequenced_note = { event_value: sequence++, event_label: buffer };
+    var sequenced_note = {
+      event_value: sequence++, 
+      event_datetime: new Date().toLocaleString([], {year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', fractionalSecondDigits: '3', hour12: false}), 
+      event_label: buffer
+    };
     if (process.env.NODE_ENV === 'production') { // Limit G.A. tracking to production
       window.gtag(tag, action, sequenced_note); // Output to Google Analytics
     }
@@ -76,7 +80,13 @@ export function logValue(name, value, suffix = '', merge = true) {
 export function logUsage(tag, action, note) {
 //    console.log('In logUsage tag=',tag,'action=',action,'note=',note);
   flushBuffer();
-  var sequenced_note = Object.assign({ event_value: sequence++ }, note);
+  var sequenced_note = Object.assign(
+    {
+      event_value: sequence++,
+      event_datetime: new Date().toLocaleString([], {year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', fractionalSecondDigits: '3', hour12: false}), 
+    }, 
+    note
+  );
   if (process.env.NODE_ENV === 'production') { // Limit G.A. tracking to production
     window.gtag(tag, action, sequenced_note); // Output to Google Analytics
   }
