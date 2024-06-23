@@ -3,6 +3,7 @@ import { createSlice, current } from "@reduxjs/toolkit";
 import { initialSystemControls } from '../initialSystemControls';
 import config from '../config';
 import { sclden } from './middleware/sclden';
+import { logUsage as log} from '../logUsage';
 
 export const modelSlice = createSlice({
   name: "modelSlice",
@@ -916,7 +917,7 @@ export const modelSlice = createSlice({
     logUsage: {
       reducer: (state, action) => {
 //        console.log('start reducer logUsage', 'state=', current(state), ',action=', action);
-        logUsage(action.payload.tag, action.payload.action, action.payload.note)
+        log(action.payload.tag, action.payload.action, action.payload.note); // log is alias of logUsage
         var result = Object.assign({}, state, {
           model: {
             ...state.model,
