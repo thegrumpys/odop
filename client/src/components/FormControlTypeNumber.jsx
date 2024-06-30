@@ -7,7 +7,7 @@ import { toODOPPrecision } from '../toODOPPrecision'
 class FormControlTypeNumber extends Component {
 
     constructor(props, context) {
-//        console.log('In FormControlTypeNumber.constructor props=',props,'context=',context);
+        console.log('In FormControlTypeNumber.constructor props=',props,'context=',context);
         super(props, context);
         this.onClick = this.onClick.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -194,6 +194,7 @@ class FormControlTypeNumber extends Component {
 }
 
 FormControlTypeNumber.propTypes = {
+    id: PropTypes.string,
     className: PropTypes.string,
     disabled: PropTypes.bool,
     disabledText: PropTypes.bool,
@@ -202,6 +203,7 @@ FormControlTypeNumber.propTypes = {
     validmin: PropTypes.number,
     validmax: PropTypes.number,
     step: PropTypes.string,
+    type: PropTypes.string,
     onClick: PropTypes.func,
     onChange: PropTypes.func,
     onChangeValid: PropTypes.func,
@@ -211,14 +213,16 @@ FormControlTypeNumber.propTypes = {
 }
 
 FormControlTypeNumber.defaultProps = {
+    id: '',
     className: '',
     disabled: false,
     disabledText: false,
     readOnly: false,
-    value: '',
+    value: 0,
     validmin: -Number.MAX_VALUE,
     validmax: Number.MAX_VALUE,
     step: 'any',
+    type: 'number',
     onClick: (()=>{}),
     onChange: (()=>{}),
     onChangeValid: (()=>{}),
