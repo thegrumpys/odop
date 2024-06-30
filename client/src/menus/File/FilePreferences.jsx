@@ -25,7 +25,7 @@ export default function FilePreferences() {
     setSystemControls(model_system_controls);
   }
 
-  const onChangeValid = (name, value) => {
+  const onChangePropertyValid = (name, value) => {
     var newSystemControls = {
       ...systemControls,
       [name]: parseFloat(value)
@@ -35,7 +35,7 @@ export default function FilePreferences() {
     logValue(name, value, 'Preference');
   }
 
-  const onChangeInvalid = () => {
+  const onChangePropertyInvalid = () => {
     setIsInvalidValue(true);
   }
 
@@ -76,7 +76,7 @@ export default function FilePreferences() {
                   <Row key={property_name}>
                     <Col className="align-middle text-start">{property_name}</Col>
                     <Col className="align-middle text-end">
-                      <FormControlTypeNumber id={property_name} value={systemControls[property_name]} onChangeValid={(event) => { onChangeValid(property_name, event.target.value) }} onChangeInvalid={onChangeInvalid} />
+                      <FormControlTypeNumber id={property_name} value={systemControls[property_name]} onChangeValid={(event) => { onChangePropertyValid(property_name, event.target.value) }} onChangeInvalid={onChangePropertyInvalid} />
                     </Col>
                   </Row>
                 );
