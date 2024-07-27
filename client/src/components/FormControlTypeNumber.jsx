@@ -1,41 +1,40 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { toODOPPrecision } from '../toODOPPrecision'
 
 export default function FormControlTypeNumber(props) {
 //  console.log('In FormControlTypeNumber - Mounting...','props=',props,'props.value=',props.value,'Number.isFinite(props.value)=',Number.isFinite(props.value));
-  const [stateValue, setStateValue] = useState(props.value);
-  const [stateValueString, setStateValueString] = useState(props.value.toString());
-  const [stateIsInvalid, setStateIsInvalid] = useState(false);
-  const [stateFocused, setStateFocused] = useState(false);
+  const [value, setValue] = useState(props.value);
+  const [valueString, setValueString] = useState(props.value.toString());
+  const [isInvalid, setIsInvalid] = useState(false);
+  const [focused, setFocused] = useState(false);
 
   useEffect(() => {
-//    console.log('FormControlTypeNumber mounted, changed props.value=', props.value,'value=',stateValue,'valueString=',stateValueString);
+//    console.log('FormControlTypeNumber mounted, changed props.value=', props.value,'value=',value,'valueString=',valueString);
     if (Number.isFinite(props.value)) {
-      if (props.value !== stateValue) { // Only update our internal state value if they differ leaving the valueString unchanged.
-//        console.log('In FormControlTypeNumber.useEffect 0','props.value=',props.value,'value=',stateValue,'valueString=',stateValueString);
+      if (props.value !== value) { // Only update our internal state value if they differ leaving the valueString unchanged.
+//        console.log('In FormControlTypeNumber.useEffect 0','props.value=',props.value,'value=',value,'valueString=',valueString);
         var value = parseFloat(props.value);
-        setStateValue(value);
-        setStateValueString(value.toString());
-        setStateIsInvalid(false);
+        setValue(value);
+        setValueString(value.toString());
+        setIsInvalid(false);
       }
     } else {
-      if (Number.isNaN(props.value) && stateValueString !== 'NaN') {
-//        console.log('In FormControlTypeNumber.useEffect 1','props.value=',props.value,'value=',stateValue,'valueString=',stateValueString);
-        setStateValue(props.value);
-        setStateValueString(props.value.toString());
-        setStateIsInvalid(true);
-      } else if (props.value === Number.POSITIVE_INFINITY && stateValueString !== 'Infinity') {
-//        console.log('In FormControlTypeNumber.useEffect 2','props.value=',props.value,'value=',stateValue,'valueString=',stateValueString);
-        setStateValue(props.value);
-        setStateValueString(props.value.toString());
-        setStateIsInvalid(true);
-      } else if (props.value === Number.NEGATIVE_INFINITY && stateValueString !== '-Infinity') {
-//        console.log('In FormControlTypeNumber.useEffect 3','props.value=',props.value,'value=',stateValue,'valueString=',stateValueString);
-        setStateValue(props.value);
-        setStateValueString(props.value.toString());
-        setStateIsInvalid(true);
+      if (Number.isNaN(props.value) && valueString !== 'NaN') {
+//        console.log('In FormControlTypeNumber.useEffect 1','props.value=',props.value,'value=',value,'valueString=',valueString);
+        setValue(props.value);
+        setValueString(props.value.toString());
+        setIsInvalid(true);
+      } else if (props.value === Number.POSITIVE_INFINITY && valueString !== 'Infinity') {
+//        console.log('In FormControlTypeNumber.useEffect 2','props.value=',props.value,'value=',value,'valueString=',valueString);
+        setValue(props.value);
+        setValueString(props.value.toString());
+        setIsInvalid(true);
+      } else if (props.value === Number.NEGATIVE_INFINITY && valueString !== '-Infinity') {
+//        console.log('In FormControlTypeNumber.useEffect 3','props.value=',props.value,'value=',value,'valueString=',valueString);
+        setValue(props.value);
+        setValueString(props.value.toString());
+        setIsInvalid(true);
       }
     }
 //    return () => console.log('FormControlTypeNumber Unmounting...');
@@ -52,15 +51,15 @@ export default function FormControlTypeNumber(props) {
     var eventValue = parseFloat(event.target.value);
     if (Number.isFinite(eventValue)) {
 //      console.log('In FormControlTypeNumber.onChange Valid event.target.value=',event.target.value);
-      setStateValue(eventValue);
-      setStateValueString(event.target.value);
-      setStateIsInvalid(false);
+      setValue(eventValue);
+      setValueString(event.target.value);
+      setIsInvalid(false);
       if (typeof props.onChangeValid === "function") props.onChangeValid(event); // Pass valid number onward
       if (typeof props.onChange === "function") props.onChange(event); // Pass valid number onward
     } else {
 //      console.log('In FormControlTypeNumber.onChange Invalid event.target.value=',event.target.value);
-      setStateValueString(event.target.value);
-      setStateIsInvalid(true);
+      setValueString(event.target.value);
+      setIsInvalid(true);
       if (typeof props.onChangeInvalid === "function") props.onChangeInvalid(event); // Pass valid number onward
     }
   }
@@ -68,16 +67,16 @@ export default function FormControlTypeNumber(props) {
   const localOnFocus = (event) => {
 //    console.log('In FormControlTypeNumber.localOnFocus event.target.value=',event.target.value);
     if (!props.readOnly) {
-      if (Number.isFinite(stateValue)) {
+      if (Number.isFinite(value)) {
 //        console.log('In FormControlTypeNumber.onFocus Valid event.target.value=',event.target.value);
-        setStateValueString(stateValue.toString());
-        setStateIsInvalid(false);
-        setStateFocused(true);
+        setValueString(value.toString());
+        setIsInvalid(false);
+        setFocused(true);
       } else {
 //        console.log('In FormControlTypeNumber.onFocus Invalid event.target.value=',event.target.value);
-        setStateValueString('');
-        setStateIsInvalid(true);
-        setStateFocused(true);
+        setValueString('');
+        setIsInvalid(true);
+        setFocused(true);
       }
     }
     if (typeof props.onFocus === "function") props.onFocus(event); // Pass valid number onward
@@ -85,28 +84,23 @@ export default function FormControlTypeNumber(props) {
 
   const localOnBlur = (event) => {
 //    console.log('In FormControlTypeNumber.localOnBlur event.target.value=',event.target.value);
-    if (stateIsInvalid) {
-      event.target.value = stateValue;
+    if (isInvalid) {
+      event.target.value = value;
       if (typeof props.onChangeValid === "function") props.onChangeValid(event); // Pass valid number onward
       if (typeof props.onChange === "function") props.onChange(event); // Pass valid number onward
     }
-    setStateValueString(toODOPPrecision(stateValue)); // Update the display with formatted value
-    setStateIsInvalid(false);
-    setStateFocused(false);
+    setValueString(toODOPPrecision(value)); // Update the display with formatted value
+    setIsInvalid(false);
+    setFocused(false);
     if (typeof props.onBlur === "function") props.onBlur(event); // Pass valid number onward
   }
 
-  const onContextMenu = (event) => {
-//    console.log('In FormControlTypeNumber.onContextMenu event.target.value=',event.target.value);
-    if (typeof props.onContextMenu === "function") props.onContextMenu(event); // Pass valid number onward
-  }
-
-//  console.log('In FormControlTypeNumber.render','stateValue=',stateValue,'stateValueString=',stateValueString,'stateIsInvalid=',stateIsInvalid,'stateFocused=',stateFocused);
+//  console.log('In FormControlTypeNumber.render','value=',value,'valueString=',valueString,'isInvalid=',isInvalid,'focused=',focused);
 
   var localClassName = (props.className !== undefined ? props.className : '') + ' text-end';
-  if (!Number.isFinite(parseFloat(stateValueString))) {
+  if (!Number.isFinite(parseFloat(valueString))) {
     localClassName += ' text-not-feasible';
-    if (stateFocused) {
+    if (focused) {
       localClassName += ' borders-invalid';
     }
   }
@@ -146,14 +140,14 @@ export default function FormControlTypeNumber(props) {
       </OverlayTrigger>
       :
       ''}
-    <Form.Control type={Number.isFinite(stateValue) ? 'number' : ''}
+    <Form.Control type={Number.isFinite(value) ? 'number' : ''}
       {...p} // Allow OverlayTrigger to pass-in other props
       onClick={localOnClick}
       onChange={localOnChange}
       onFocus={localOnFocus}
       onBlur={localOnBlur}
       className={localClassName}
-      value={props.disabledText ? '' : (stateFocused ? stateValueString : (Number.isFinite(stateValue) ? toODOPPrecision(stateValue) : stateValueString))}/>
+      value={props.disabledText ? '' : (focused ? valueString : (Number.isFinite(value) ? toODOPPrecision(value) : valueString))}/>
   </>)
-//      value={props.disabledText ? '' : (stateFocused ? stateValueString : ((Number.isFinite(stateValue) ? toODOPPrecision(stateValue) : stateValueString)))} />
+//      value={props.disabledText ? '' : (focused ? valueString : ((Number.isFinite(value) ? toODOPPrecision(value) : valueString)))} />
 }
