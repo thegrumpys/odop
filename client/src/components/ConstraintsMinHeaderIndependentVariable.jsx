@@ -4,7 +4,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function ConstraintsMinHeaderIndependentVariable() {
 //  console.log('ConstraintsMinHeaderIndependentVariable - Mounting...');
-  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_show_violations = useSelector((state) => state.modelSlice.model.system_controls.show_violations);
 
   useEffect(() => {
 //    console.log('ConstraintsMinHeaderIndependentVariable - Mounted');
@@ -37,7 +37,7 @@ export default function ConstraintsMinHeaderIndependentVariable() {
             <span>Value</span>
           </OverlayTrigger>
         </th>
-        <th className={"text-end " + (model_system_controls.show_violations > 0 ? "" : "d-none")} id="IVMinConstraintViolationTitle">
+        <th className={"text-end " + (model_show_violations > 0 ? "" : "d-none")} id="IVMinConstraintViolationTitle">
           <OverlayTrigger placement="top" overlay={<Tooltip>Measure of constraint violation.<br />Set File : Preferences show_violations=2 to show both violation (+) and satisfaction (-).</Tooltip>}>
             <span>Violation</span>
           </OverlayTrigger>

@@ -8,7 +8,7 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
 export default function NameValueUnitsRowIndependentVariable({ element, index, onChangeValid, onChangeInvalid, onSet, onReset }) {
-  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_show_units = useSelector((state) => state.modelSlice.model.system_controls.show_units);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -101,7 +101,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
             <Form.Check id={'nvuriv_checkbox_' + element.name} type="checkbox" aria-label="Checkbox for fixed value" checked={element.lmin & FIXED} onChange={element.lmin & FIXED ? onResetLocal : onSetLocal} />
           </OverlayTrigger>
         </td>
-        <td id={'nvuriv_units_' + element.name} className={"text-nowrap align-middle small " + (model_system_controls.show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
+        <td id={'nvuriv_units_' + element.name} className={"text-nowrap align-middle small " + (model_show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
       </tr>
     </tbody>
   );

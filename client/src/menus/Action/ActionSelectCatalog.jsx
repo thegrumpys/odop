@@ -10,7 +10,7 @@ export default function ActionSelectCatalog() {
 
   const model_type = useSelector((state) => state.modelSlice.model.type);
   const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_viol_wt = useSelector((state) => state.modelSlice.model.system_controls.viol_wt);
   const [show, setShow] = useState(false);
   const [names, setNames] = useState([]);
   const [name, setName] = useState(undefined);
@@ -48,7 +48,7 @@ export default function ActionSelectCatalog() {
         }
       }
     });
-    var localEntries = getCatalogEntries(localName, store, st, model_system_controls.viol_wt);
+    var localEntries = getCatalogEntries(localName, store, st, model_viol_wt);
     var localEntry = 0; // Default to first entry
     localEntries.forEach((element, index) => {
       if (element[0] === entry_string) {

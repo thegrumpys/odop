@@ -28,7 +28,7 @@ import store from '../store/store';
 export default function SymbolValue({ className, element, index }) {
 //  console.log('SymbolValue','Mounting...','element=',element,'index=',index);
   const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_objmin = useSelector((state) => state.modelSlice.model.system_controls.objmin);
   const model_objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
   const model_search_completed = useSelector((state) => state.modelSlice.model.result.search_completed);
   const [searchInfiniteShow, setSearchInfiniteShow] = useState(false);
@@ -284,13 +284,13 @@ export default function SymbolValue({ className, element, index }) {
       feasibility_class = "text-feasibility-undefined";
       display_search_button = true;
       display_seek_button = false;
-    } else if (model_objective_value > 4 * model_system_controls.objmin) {
+    } else if (model_objective_value > 4 * model_objmin) {
       feasibility_status = "NOT FEASIBLE";
       feasibility_tooltip = 'NOT FEASIBLE: constraints significantly violated';
       feasibility_class = "text-not-feasible ";
       display_search_button = true;
       display_seek_button = false;
-    } else if (model_objective_value > model_system_controls.objmin) {
+    } else if (model_objective_value > model_objmin) {
       feasibility_status = "CLOSE TO FEASIBLE";
       feasibility_tooltip = 'CLOSE TO FEASIBLE: constraints slightly violated';
       feasibility_class = "text-close-to-feasible ";
@@ -375,7 +375,7 @@ export default function SymbolValue({ className, element, index }) {
                     <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
                       <p>Visual summary of feasibility status.</p>
                       <p>Objective Value = {model_objective_value.toFixed(7)}<br />
-                        OBJMIN = {model_system_controls.objmin.toFixed(7)}</p>
+                        OBJMIN = {model_objmin.toFixed(7)}</p>
                       <p>See on-line Help for details.  Try Help lookup <b>indicator</b></p>
                     </Tooltip>}>
                       <b>Status</b>

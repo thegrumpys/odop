@@ -5,7 +5,7 @@ import { OverlayTrigger, Tooltip  } from 'react-bootstrap';
 export default function NameValueUnitsHeaderCalcInput() {
 //  console.log('NameValueUnitsHeaderCalcInput - Mounting...');
   const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_show_units = useSelector((state) => state.modelSlice.model.system_controls.show_units);
 
   useEffect(() => {
 //    console.log('NameValueUnitsHeaderCalcInput - Mounted');
@@ -35,7 +35,7 @@ export default function NameValueUnitsHeaderCalcInput() {
                 <span>Value</span>
               </OverlayTrigger>
             </th>
-            <th className={"text-start " + (model_system_controls.show_units ? "" : "d-none")} id="CIUnitsTitle">
+            <th className={"text-start " + (model_show_units ? "" : "d-none")} id="CIUnitsTitle">
               <OverlayTrigger placement="top" overlay={<Tooltip>Units (information only)</Tooltip>}>
                 <span>Units</span>
               </OverlayTrigger>

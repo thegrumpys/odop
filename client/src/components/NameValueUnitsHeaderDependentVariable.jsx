@@ -4,7 +4,7 @@ import { OverlayTrigger, Tooltip  } from 'react-bootstrap';
 
 export default function NameValueUnitsHeaderDependentVariable() {
 //  console.log('NameValueUnitsHeaderDependentVariable - Mounting...');
-  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_show_units = useSelector((state) => state.modelSlice.model.system_controls.show_units);
 
   useEffect(() => {
 //    console.log('NameValueUnitsHeaderDependentVariable - Mounted');
@@ -41,7 +41,7 @@ export default function NameValueUnitsHeaderDependentVariable() {
             <span>Fix</span>
           </OverlayTrigger>
         </th>
-        <th className={"text-start " + (model_system_controls.show_units ? "" : "d-none")} id="DVUnitsTitle">
+        <th className={"text-start " + (model_show_units ? "" : "d-none")} id="DVUnitsTitle">
           <OverlayTrigger placement="top" overlay={<Tooltip>Units (information only)</Tooltip>}>
             <span>Units</span>
           </OverlayTrigger>

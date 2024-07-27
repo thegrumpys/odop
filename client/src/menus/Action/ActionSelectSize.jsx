@@ -12,7 +12,7 @@ export default function ActionSelectSize() {
 
   const model_type = useSelector((state) => state.modelSlice.model.type);
   const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_enable_auto_fix = useSelector((state) => state.modelSlice.model.system_controls);
   const [show, setShow] = useState(false);
   const [types, setTypes] = useState([]);
   const [type, setType] = useState(undefined);
@@ -92,7 +92,7 @@ export default function ActionSelectSize() {
     // Do select size entry
     dispatch(saveAutoSave());
     var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
-    if (model_system_controls.enable_auto_fix) {
+    if (model_enable_auto_fix.enable_auto_fix) {
       auto_fixed = true;
       var found = model_symbol_table.find((element) => element.name === type);
       //            console.log('In ActionSelectSize.onSelect found=',found);

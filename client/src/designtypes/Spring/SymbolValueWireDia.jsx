@@ -32,7 +32,9 @@ export default function SymbolValueWireDia({ className, element, index }) {
 // console.log('SymbolValueWireDia - Mounting...','element=',element,'index=',index);
   const model_type = useSelector((state) => state.modelSlice.model.type);
   const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_enable_auto_fix = useSelector((state) => state.modelSlice.model.system_controls.enable_auto_fix);
+  const model_objmin = useSelector((state) => state.modelSlice.model.system_controls.objmin);
+  const model_show_units = useSelector((state) => state.modelSlice.model.system_controls.show_units);
   const model_objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
   const model_search_completed = useSelector((state) => state.modelSlice.model.result.search_completed);
   const [searchInfiniteShow, setSearchInfiniteShow] = useState(false);
@@ -82,7 +84,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
   const onSelect = (event) => {
 //    console.log('In SymbolValueWireDia.onSelect event.target.value=',event.target.value);
     var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
-    if (model_system_controls.enable_auto_fix && !(element.lmin & FIXED)) {
+    if (model_enable_auto_fix && !(element.lmin & FIXED)) {
       auto_fixed = true;
       if (!(element.lmin & FIXED)) {
         dispatch(fixSymbolValue(element.name));
@@ -101,7 +103,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
   const onChangeValid = (event) => {
 //    console.log('In SymbolValueWireDia.onChangeValid event.target.value=',event.target.value);
     var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
-    if (model_system_controls.enable_auto_fix) {
+    if (model_enable_auto_fix) {
       auto_fixed = true;
       if (!(element.lmin & FIXED)) {
         dispatch(fixSymbolValue(element.name));
@@ -417,13 +419,13 @@ export default function SymbolValueWireDia({ className, element, index }) {
       feasibility_class = "text-feasibility-undefined";
       display_search_button = true;
       display_seek_button = false;
-    } else if (model_objective_value > 4 * model_system_controls.objmin) {
+    } else if (model_objective_value > 4 * model_objmin) {
       feasibility_status = "NOT FEASIBLE";
       feasibility_tooltip = 'NOT FEASIBLE: constraints significantly violated';
       feasibility_class = "text-not-feasible ";
       display_search_button = true;
       display_seek_button = false;
-    } else if (model_objective_value > model_system_controls.objmin) {
+    } else if (model_objective_value > model_objmin) {
       feasibility_status = "CLOSE TO FEASIBLE";
       feasibility_tooltip = 'CLOSE TO FEASIBLE: constraints slightly violated';
       feasibility_class = "text-close-to-feasible ";
@@ -496,7 +498,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
                     <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
                       <p>Visual summary of feasibility status.</p>
                       <p>Objective Value = {model_objective_value.toFixed(7)}<br />
-                        OBJMIN = {model_system_controls.objmin.toFixed(7)}</p>
+                        OBJMIN = {model_objmin.toFixed(7)}</p>
                       <p>See on-line Help for details.  Try Help lookup <b>indicator</b></p>
                     </Tooltip>}>
                       <b>Status</b>
@@ -549,7 +551,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
                         </InputGroup.Text>
                       </InputGroup>
                     </td>
-                    <td className={"text-nowrap align-middle small " + (model_system_controls.show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
+                    <td className={"text-nowrap align-middle small " + (model_show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
                   </tr>
                 </tbody>
               </>}

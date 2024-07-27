@@ -4,7 +4,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function FeasibilityIndicator({ width = 242, height = 24 }) {
 //  console.log('FeasibilityIndicator - Mounting...');
-  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_objmin = useSelector((state) => state.modelSlice.model.system_controls.objmin);
   const model_objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
 
   useEffect(() => {
@@ -34,18 +34,18 @@ export default function FeasibilityIndicator({ width = 242, height = 24 }) {
     x = -blackWidth / 2; // Center of black
   } else if (!Number.isFinite(model_objective_value)) { // Purple
     x = greenWidth + orangeWidth + redWidth + purpleWidth / 2; // Scale and shift it
-  } else if (model_objective_value > 4 * model_system_controls.objmin) { // Red
-    x = model_objective_value - 4 * model_system_controls.objmin; // Shift to Zero
+  } else if (model_objective_value > 4 * model_objmin) { // Red
+    x = model_objective_value - 4 * model_objmin; // Shift to Zero
     x = Math.log10(x); // log10
-    var lowBound = Math.log10(4 * model_system_controls.objmin); // 0.000200 is approx. 10**(-3.7)
+    var lowBound = Math.log10(4 * model_objmin); // 0.000200 is approx. 10**(-3.7)
     var highBound = 8 // 10**8
     if (x < lowBound) x = lowBound;
     else if (x > highBound) x = highBound;
     x = ((x - lowBound) / (highBound - lowBound)) * redWidth + greenWidth + orangeWidth; // Scale and shift it
-  } else if (model_objective_value > model_system_controls.objmin) { // Orange
-    x = ((model_objective_value - model_system_controls.objmin) / (4 * model_system_controls.objmin - model_system_controls.objmin)) * orangeWidth + greenWidth;
+  } else if (model_objective_value > model_objmin) { // Orange
+    x = ((model_objective_value - model_objmin) / (4 * model_objmin - model_objmin)) * orangeWidth + greenWidth;
   } else { // Green
-    x = (model_objective_value / model_system_controls.objmin) * greenWidth;
+    x = (model_objective_value / model_objmin) * greenWidth;
   }
 //  console.log('In FeasibilityIndicator.render model_objective_value=', model_objective_value,'x=',x);
   return (

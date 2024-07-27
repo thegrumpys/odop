@@ -8,7 +8,7 @@ import ReportBaseContext from './ReportBaseContext';
 export default function ReportBase(props) {
 //  console.log('ReportBase - Mounting...');
   const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_smallnum = useSelector((state) => state.modelSlice.model.system_controls.smallnum);
 
   const def_dia = (def_len) => {
     /*  calculates mean diameter of deflected spring.  */
@@ -145,7 +145,7 @@ export default function ReportBase(props) {
   sq1 = 1.4 * model_symbol_table[o.Slenderness].value - 4.0;
   base.errmsg1 = undefined;
   base.errmsg0 = undefined;
-  if (sq1 > model_system_controls.smallnum) {
+  if (sq1 > model_smallnum) {
     /* structured to avoid div by 0 */
     if (temp > 0.76 / sq1) {
       base.errmsg1 = "Given a deflection ratio of " + temp.toFixed(3) +
