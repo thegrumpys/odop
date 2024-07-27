@@ -7,8 +7,8 @@ import { CONSTRAINED, FIXED } from '../../store/actionTypes';
 export default function ViewObjectiveValue() {
 //  console.log('ViewObjectiveValue - Mounting...');
 
-  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
+  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -238,8 +238,8 @@ export default function ViewObjectiveValue() {
         <td>{viol_sum.value}</td>
         <td>{invalid ? 'true' : ''}</td>
         <td>{infeasible ? 'true' : ''}</td>
-        <td>{(objective_value === 0.0 || (feasibility_vmin <= 0.0 && validity_vmin <= 0.0)) ? '' : String((feasibility_vmin + validity_vmin) * (feasibility_vmin + validity_vmin) * 100 / objective_value)}</td>
-        <td>{(objective_value === 0.0 || (feasibility_vmax <= 0.0 && validity_vmax <= 0.0)) ? '' : String((feasibility_vmax + validity_vmax) * (feasibility_vmax + validity_vmax) * 100 / objective_value)}</td>
+        <td>{(model_objective_value === 0.0 || (feasibility_vmin <= 0.0 && validity_vmin <= 0.0)) ? '' : String((feasibility_vmin + validity_vmin) * (feasibility_vmin + validity_vmin) * 100 / model_objective_value)}</td>
+        <td>{(model_objective_value === 0.0 || (feasibility_vmax <= 0.0 && validity_vmax <= 0.0)) ? '' : String((feasibility_vmax + validity_vmax) * (feasibility_vmax + validity_vmax) * 100 / model_objective_value)}</td>
         <td>{validity_vmin <= 0.0 ? '' : String(validity_vmin)}</td>
         <td>{validity_vmax <= 0.0 ? '' : String(validity_vmax)}</td>
         <td>{feasibility_vmin <= 0.0 ? '' : String(feasibility_vmin)}</td>
@@ -269,7 +269,7 @@ export default function ViewObjectiveValue() {
       {show && <Modal show={show} onHide={toggle} size="xl">
         <Modal.Header closeButton>
           <Modal.Title>
-            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; View : ObjectiveValue = {objective_value}
+            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; View : ObjectiveValue = {model_objective_value}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -279,7 +279,7 @@ export default function ViewObjectiveValue() {
                 {renderElementHeader()}
               </thead>
               <tbody>
-                {symbol_table.map((element, i) => renderElement(viol_sum, element, i))}
+                {model_symbol_table.map((element, i) => renderElement(viol_sum, element, i))}
               </tbody>
             </table>
           </pre>

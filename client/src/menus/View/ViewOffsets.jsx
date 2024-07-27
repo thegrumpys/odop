@@ -6,7 +6,7 @@ import { logUsage } from '../../logUsage';
 export default function ViewOffsets() {
 //  console.log('ViewOffsets - Mounting...');
 
-  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -37,9 +37,9 @@ export default function ViewOffsets() {
         <Modal.Body>
           <pre>
             {'// Independent Variables (input-only)\n'}
-            {symbol_table.map((element) => { return (element.type === "equationset" && element.input) ? 'export const ' + element.name.replace('%', 'PC').replace(/[^a-zA-Z0-9]/g, '_') + ' = ' + (ip++) + ';\n' : '' })}
+            {model_symbol_table.map((element) => { return (element.type === "equationset" && element.input) ? 'export const ' + element.name.replace('%', 'PC').replace(/[^a-zA-Z0-9]/g, '_') + ' = ' + (ip++) + ';\n' : '' })}
             {'\n// Dependent Variables (input-output)\n'}
-            {symbol_table.map((element) => { return ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) ? 'export const ' + element.name.replace('%', 'PC').replace(/[^a-zA-Z0-9]/g, '_') + ' = ' + (ix++) + ';\n' : '' })}
+            {model_symbol_table.map((element) => { return ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) ? 'export const ' + element.name.replace('%', 'PC').replace(/[^a-zA-Z0-9]/g, '_') + ' = ' + (ix++) + ';\n' : '' })}
           </pre>
         </Modal.Body>
         <Modal.Footer>

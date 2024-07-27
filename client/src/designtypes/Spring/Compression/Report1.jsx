@@ -7,7 +7,7 @@ import { getAlertsBySeverity, ERR, WARN, NOTICE, INFO } from '../../../component
 
 export default function Report1() {
 //  console.log('Report1 - Mounting...');
-  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const base = useContext(ReportBaseContext);
 //  console.log('Report1','base=',base);
   
@@ -38,45 +38,45 @@ export default function Report1() {
       <table id="view1" className="report-table">
         <tbody>
           <tr>
-            <td>{symbol_table[o.Spring_Type].name}</td>
+            <td>{model_symbol_table[o.Spring_Type].name}</td>
             <td>=</td>
-            <td className="text-start" colSpan="2">{symbol_table[o.Spring_Type].value}</td>
+            <td className="text-start" colSpan="2">{model_symbol_table[o.Spring_Type].value}</td>
             <td />
-            <td>{symbol_table[o.Material_Type].name}</td>
+            <td>{model_symbol_table[o.Material_Type].name}</td>
             <td>=</td>
             <td className="text-start" colSpan="2">{base.matTypeValue}</td>
           </tr>
           <tr>
-            <td>{symbol_table[o.Wire_Dia].name}</td>
+            <td>{model_symbol_table[o.Wire_Dia].name}</td>
             <td>=</td>
-            <td>{symbol_table[o.Wire_Dia].value.toFixed(4)}</td>
-            <td className="text-start">{symbol_table[o.Wire_Dia].units}</td>
+            <td>{model_symbol_table[o.Wire_Dia].value.toFixed(4)}</td>
+            <td className="text-start">{model_symbol_table[o.Wire_Dia].units}</td>
             <td />
-            <td>{symbol_table[o.End_Type].name}</td>
+            <td>{model_symbol_table[o.End_Type].name}</td>
             <td>=</td>
-            <td className="text-start" colSpan="2">{base.et_tab[symbol_table[o.End_Type].value][0]}</td>
+            <td className="text-start" colSpan="2">{base.et_tab[model_symbol_table[o.End_Type].value][0]}</td>
           </tr>
           <tr>
-            <td>{symbol_table[o.Spring_Index].name}</td>
+            <td>{model_symbol_table[o.Spring_Index].name}</td>
             <td>=</td>
-            <td>{symbol_table[o.Spring_Index].value.toFixed(3)}</td>
-            <td className="text-start">{symbol_table[o.Spring_Index].units}</td>
+            <td>{model_symbol_table[o.Spring_Index].value.toFixed(3)}</td>
+            <td className="text-start">{model_symbol_table[o.Spring_Index].units}</td>
             <td />
-            <td>{symbol_table[o.Coils_T].name}</td>
+            <td>{model_symbol_table[o.Coils_T].name}</td>
             <td>=</td>
-            <td>{symbol_table[o.Coils_T].value.toFixed(3)}</td>
-            <td className="text-start">{"total " + symbol_table[o.Coils_T].units}</td>
+            <td>{model_symbol_table[o.Coils_T].value.toFixed(3)}</td>
+            <td className="text-start">{"total " + model_symbol_table[o.Coils_T].units}</td>
           </tr>
           <tr>
-            <td>{symbol_table[o.Rate].name}</td>
+            <td>{model_symbol_table[o.Rate].name}</td>
             <td>=</td>
-            <td>{symbol_table[o.Rate].value.toFixed(3)}</td>
-            <td className="text-start">{symbol_table[o.Rate].units}</td>
+            <td>{model_symbol_table[o.Rate].value.toFixed(3)}</td>
+            <td className="text-start">{model_symbol_table[o.Rate].units}</td>
             <td />
-            <td>{symbol_table[o.Coils_A].name}</td>
+            <td>{model_symbol_table[o.Coils_A].name}</td>
             <td>=</td>
-            <td>{symbol_table[o.Coils_A].value.toFixed(3)}</td>
-            <td className="text-start">{"active " + symbol_table[o.Coils_A].units}</td>
+            <td>{model_symbol_table[o.Coils_A].value.toFixed(3)}</td>
+            <td className="text-start">{"active " + model_symbol_table[o.Coils_A].units}</td>
           </tr>
         </tbody>
       </table>
@@ -85,15 +85,15 @@ export default function Report1() {
         <thead>
           <tr>
             <td></td>
-            <td className="text-center"><b>Force</b><br />{symbol_table[o.Force_1].units}</td>
-            <td className="text-center"><b>Deflect</b><br />{symbol_table[o.L_Free].units}</td>
-            <td className="text-center"><b>Length</b><br />{symbol_table[o.L_Free].units}</td>
+            <td className="text-center"><b>Force</b><br />{model_symbol_table[o.Force_1].units}</td>
+            <td className="text-center"><b>Deflect</b><br />{model_symbol_table[o.L_Free].units}</td>
+            <td className="text-center"><b>Length</b><br />{model_symbol_table[o.L_Free].units}</td>
             <td />
-            <td className="text-center"><b>OD</b><br />{symbol_table[o.OD_Free].units}</td>
-            <td className="text-center"><b>ID</b><br />{symbol_table[o.ID_Free].units}</td>
+            <td className="text-center"><b>OD</b><br />{model_symbol_table[o.OD_Free].units}</td>
+            <td className="text-center"><b>ID</b><br />{model_symbol_table[o.ID_Free].units}</td>
             <td />
-            <td className="text-center"><b>Stress</b><br />{symbol_table[o.Stress_1].units}</td>
-            <td className="text-center"><b>Static&nbsp;FS</b><br />{symbol_table[o.FS_2].units}</td>
+            <td className="text-center"><b>Stress</b><br />{model_symbol_table[o.Stress_1].units}</td>
+            <td className="text-center"><b>Static&nbsp;FS</b><br />{model_symbol_table[o.FS_2].units}</td>
           </tr>
         </thead>
         <tbody>
@@ -101,49 +101,49 @@ export default function Report1() {
             <td><b>Free</b></td>
             <td>{(0.0).toFixed(2)}</td>
             <td>{(0.0).toFixed(4)}</td>
-            <td>{symbol_table[o.L_Free].value.toFixed(3)}</td>
+            <td>{model_symbol_table[o.L_Free].value.toFixed(3)}</td>
             <td />
-            <td>{symbol_table[o.OD_Free].value.toFixed(4)}</td>
-            <td>{symbol_table[o.ID_Free].value.toFixed(4)}</td>
+            <td>{model_symbol_table[o.OD_Free].value.toFixed(4)}</td>
+            <td>{model_symbol_table[o.ID_Free].value.toFixed(4)}</td>
             <td />
             <td>{(0.0).toFixed(0)}</td>
             <td>Infinity</td>
           </tr>
           <tr>
             <td><b>1</b></td>
-            <td>{symbol_table[o.Force_1].value.toFixed(2)}</td>
-            <td>{symbol_table[o.Deflect_1].value.toFixed(4)}</td>
-            <td>{symbol_table[o.L_1].value.toFixed(3)}</td>
+            <td>{model_symbol_table[o.Force_1].value.toFixed(2)}</td>
+            <td>{model_symbol_table[o.Deflect_1].value.toFixed(4)}</td>
+            <td>{model_symbol_table[o.L_1].value.toFixed(3)}</td>
             <td />
             <td>{base.od_1.toFixed(4)}</td>
             <td>{base.id_1.toFixed(4)}</td>
             <td />
-            <td>{symbol_table[o.Stress_1].value.toFixed(0)}</td>
+            <td>{model_symbol_table[o.Stress_1].value.toFixed(0)}</td>
             <td>{base.fs_1.toFixed(2)}</td>
           </tr>
           <tr>
             <td><b>2</b></td>
-            <td>{symbol_table[o.Force_2].value.toFixed(2)}</td>
-            <td>{symbol_table[o.Deflect_2].value.toFixed(4)}</td>
-            <td>{symbol_table[o.L_2].value.toFixed(3)}</td>
+            <td>{model_symbol_table[o.Force_2].value.toFixed(2)}</td>
+            <td>{model_symbol_table[o.Deflect_2].value.toFixed(4)}</td>
+            <td>{model_symbol_table[o.L_2].value.toFixed(3)}</td>
             <td />
             <td>{base.od_2.toFixed(4)}</td>
             <td>{base.id_2.toFixed(4)}</td>
             <td />
-            <td>{symbol_table[o.Stress_2].value.toFixed(0)}</td>
-            <td>{symbol_table[o.FS_2].value.toFixed(2)}</td>
+            <td>{model_symbol_table[o.Stress_2].value.toFixed(0)}</td>
+            <td>{model_symbol_table[o.FS_2].value.toFixed(2)}</td>
           </tr>
           <tr>
             <td><b>Solid</b></td>
-            <td>{symbol_table[o.Force_Solid].value.toFixed(2)}</td>
-            <td>{(symbol_table[o.L_Free].value - symbol_table[o.L_Solid].value).toFixed(4)}</td>
-            <td>{symbol_table[o.L_Solid].value.toFixed(3)}</td>
+            <td>{model_symbol_table[o.Force_Solid].value.toFixed(2)}</td>
+            <td>{(model_symbol_table[o.L_Free].value - model_symbol_table[o.L_Solid].value).toFixed(4)}</td>
+            <td>{model_symbol_table[o.L_Solid].value.toFixed(3)}</td>
             <td />
             <td>{base.od_solid.toFixed(4)}</td>
-            <td>{(base.od_solid - 2.0 * symbol_table[o.Wire_Dia].value).toFixed(4)}</td>
+            <td>{(base.od_solid - 2.0 * model_symbol_table[o.Wire_Dia].value).toFixed(4)}</td>
             <td />
-            <td>{symbol_table[o.Stress_Solid].value.toFixed(0)}</td>
-            <td>{symbol_table[o.FS_Solid].value.toFixed(2)}</td>
+            <td>{model_symbol_table[o.Stress_Solid].value.toFixed(0)}</td>
+            <td>{model_symbol_table[o.FS_Solid].value.toFixed(2)}</td>
           </tr>
         </tbody>
       </table>
@@ -159,35 +159,35 @@ export default function Report1() {
             <td>{base.len_lbl}</td>
             <td>=</td>
             <td>{base.wire_len_t.toFixed(3)}</td>
-            <td className="text-start">{symbol_table[o.L_Free].units}</td>
+            <td className="text-start">{model_symbol_table[o.L_Free].units}</td>
           </tr>
           <tr>
-            <td>{symbol_table[o.L_Stroke].name}</td>
+            <td>{model_symbol_table[o.L_Stroke].name}</td>
             <td>=</td>
-            <td>{symbol_table[o.L_Stroke].value.toFixed(3)}</td>
-            <td className="text-start">{symbol_table[o.L_Stroke].units}</td>
+            <td>{model_symbol_table[o.L_Stroke].value.toFixed(3)}</td>
+            <td className="text-start">{model_symbol_table[o.L_Stroke].units}</td>
             <td />
-            <td>{symbol_table[o.Weight].name}</td>
+            <td>{model_symbol_table[o.Weight].name}</td>
             <td>=</td>
             <td>{base.wgt1000.toFixed(3)}</td>
-            <td className="text-start">{symbol_table[o.Weight].units + "/1000"}</td>
+            <td className="text-start">{model_symbol_table[o.Weight].units + "/1000"}</td>
           </tr>
           <tr>
             <td>Pitch</td>
             <td>=</td>
             <td>{base.pitch.toFixed(3)}</td>
-            <td className="text-start">{symbol_table[o.L_Free].units}</td>
+            <td className="text-start">{model_symbol_table[o.L_Free].units}</td>
             <td />
-            <td>{symbol_table[o.Cycle_Life].name}</td>
+            <td>{model_symbol_table[o.Cycle_Life].name}</td>
             <td>=</td>
-            <td>{symbol_table[o.Cycle_Life].value.toFixed(0)}</td>
-            <td className="text-start">{symbol_table[o.Cycle_Life].units + " (estimate)"}</td>
+            <td>{model_symbol_table[o.Cycle_Life].value.toFixed(0)}</td>
+            <td className="text-start">{model_symbol_table[o.Cycle_Life].units + " (estimate)"}</td>
             <td />
           </tr>
         </tbody>
       </table>
       <br />
-      Deflection at load point 2 is {symbol_table[o.PC_Avail_Deflect].value.toFixed(0)}% of total available deflection.<br />
+      Deflection at load point 2 is {model_symbol_table[o.PC_Avail_Deflect].value.toFixed(0)}% of total available deflection.<br />
       {base.pcadmsg}{base.pcadmsg !== undefined && <br />}
       <br />
     </>

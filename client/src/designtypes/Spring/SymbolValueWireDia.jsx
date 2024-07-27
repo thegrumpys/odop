@@ -30,11 +30,11 @@ import store from '../../store/store';
 
 export default function SymbolValueWireDia({ className, element, index }) {
 // console.log('SymbolValueWireDia - Mounting...','element=',element,'index=',index);
-  const type = useSelector((state) => state.modelSlice.model.type);
-  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
-  const objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
-  const search_completed = useSelector((state) => state.modelSlice.model.result.search_completed);
+  const model_type = useSelector((state) => state.modelSlice.model.type);
+  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
+  const model_search_completed = useSelector((state) => state.modelSlice.model.result.search_completed);
   const [searchInfiniteShow, setSearchInfiniteShow] = useState(false);
   const [editShow, setEditShow] = useState(false);
   const [isInvalidValue, setIsInvalidValue] = useState(false);
@@ -65,7 +65,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
 //      setTable(tableContents);
 //    }
 //    return () => { };
-//  }, [element, type]);
+//  }, [element, model_type]);
 
   if (element.format === 'table') {
 //    console.log('SymbolValueWireDia file= ../designtypes/'+element.table+'.json');
@@ -82,7 +82,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
   const onSelect = (event) => {
 //    console.log('In SymbolValueWireDia.onSelect event.target.value=',event.target.value);
     var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
-    if (system_controls.enable_auto_fix && !(element.lmin & FIXED)) {
+    if (model_system_controls.enable_auto_fix && !(element.lmin & FIXED)) {
       auto_fixed = true;
       if (!(element.lmin & FIXED)) {
         dispatch(fixSymbolValue(element.name));
@@ -101,7 +101,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
   const onChangeValid = (event) => {
 //    console.log('In SymbolValueWireDia.onChangeValid event.target.value=',event.target.value);
     var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
-    if (system_controls.enable_auto_fix) {
+    if (model_system_controls.enable_auto_fix) {
       auto_fixed = true;
       if (!(element.lmin & FIXED)) {
         dispatch(fixSymbolValue(element.name));
@@ -137,12 +137,12 @@ export default function SymbolValueWireDia({ className, element, index }) {
 
   const onSearchRequest = (event) => {
 //    console.log('In SymbolValueWireDia.onSearchRequest','event=',event);
-    if (symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
+    if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Search cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
       return;
     }
     var inverted_constraint = false;
-    symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
+    model_symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
       if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
         inverted_constraint = true;
         displayMessage((element.name + ' constraints are inconsistent. Help button provides more information.'), 'danger', 'Errors', '/docs/Help/alerts.html#Constraint_Inconsistency');
@@ -152,7 +152,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
     if (inverted_constraint) {
       return;
     }
-    if (!Number.isFinite(objective_value)) {
+    if (!Number.isFinite(model_objective_value)) {
       setSearchInfiniteShow(!searchInfiniteShow);
       setEditShow(!editShow);
       return;
@@ -180,24 +180,24 @@ export default function SymbolValueWireDia({ className, element, index }) {
 
   const doSearch = (type) => {
 //    console.log('In SymbolValueWireDia.doSearch');
-    var old_objective_value = objective_value;
+    var old_objective_value = model_objective_value;
     dispatch(saveAutoSave());
     dispatch(enableSpinner());
     dispatch(search());
     dispatch(disableSpinner());
     var design = store.getState().modelSlice;
-    var new_objective_value = design.model.result.objective_value;
+    var new_objective_value = design.model.result.model_objective_value;
     logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' Element ' + element.name + ' ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });
   }
 
   const onSeekMinRequest = (event) => {
 //    console.log('In SymbolValueWireDia.onSeekMinRequest','event=',event);
-    if (symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
+    if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
       return;
     }
     var inverted_constraint = false;
-    symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
+    model_symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
       if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
         inverted_constraint = true;
         displayMessage((element.name + ' constraints are inconsistent. Help button provides more information.'), 'danger', 'Errors', '/docs/Help/alerts.html#Constraint_Inconsistency');
@@ -214,12 +214,12 @@ export default function SymbolValueWireDia({ className, element, index }) {
 
   const onSeekMaxRequest = (event) => {
 //    console.log('In SymbolValueWireDia.onSeekMaxRequest','event=',event);
-    if (symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
+    if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
       return;
     }
     var inverted_constraint = false;
-    symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
+    model_symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
       if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
         inverted_constraint = true;
         displayMessage((element.name + ' constraints are inconsistent. Help button provides more information.'), 'danger', 'Errors', '/docs/Help/alerts.html#Constraint_Inconsistency');
@@ -306,18 +306,18 @@ export default function SymbolValueWireDia({ className, element, index }) {
 //    console.log('In SymbolValueWireDia.onModifiedFlag');
     setModified(true);
   }
-//        console.log('In SymbolValueWireDia.render ../' + type + '/symbol_table_offsets.js');
-  var o = require('../' + type + '/symbol_table_offsets.js'); // Dynamically load table
+//        console.log('In SymbolValueWireDia.render ../' + model_type + '/symbol_table_offsets.js');
+  var o = require('../' + model_type + '/symbol_table_offsets.js'); // Dynamically load table
 //        console.log('In SymbolValueWireDia.render o =', o);
 // Find size name, load size table, and get wire diameter value
-//        console.log('In SymbolValueWireDia.render symbol_table[o.Material_File].value =', symbol_table[o.Material_File].value);
+//        console.log('In SymbolValueWireDia.render model_symbol_table[o.Material_File].value =', model_symbol_table[o.Material_File].value);
   var m_tab;
-  if (symbol_table[o.Material_File].value === "mat_metric.json")
+  if (model_symbol_table[o.Material_File].value === "mat_metric.json")
     m_tab = require('./mat_metric.json');
   else
     m_tab = require('./mat_us.json');
 //        console.log('In SymbolValueWireDia.render m_tab =', m_tab);
-  var i = symbol_table[o.Material_Type].value;
+  var i = model_symbol_table[o.Material_Type].value;
 //        console.log('In SymbolValueWireDia.render i=',i);
   var wire_dia_filename = m_tab[i][mo.wire_dia_filename];
 //        console.log('In SymbolValueWireDia.render wire_dia_filename=',wire_dia_filename);
@@ -411,25 +411,25 @@ export default function SymbolValueWireDia({ className, element, index }) {
   var display_search_button = false;
   var display_seek_button = false;
   if (element.type === 'equationset') {
-    if (!Number.isFinite(objective_value)) {
+    if (!Number.isFinite(model_objective_value)) {
       feasibility_status = "FEASIBILITY UNDEFINED";
       feasibility_tooltip = 'FEASIBILITY UNDEFINED: computing constraints failed';
       feasibility_class = "text-feasibility-undefined";
       display_search_button = true;
       display_seek_button = false;
-    } else if (objective_value > 4 * system_controls.objmin) {
+    } else if (model_objective_value > 4 * model_system_controls.objmin) {
       feasibility_status = "NOT FEASIBLE";
       feasibility_tooltip = 'NOT FEASIBLE: constraints significantly violated';
       feasibility_class = "text-not-feasible ";
       display_search_button = true;
       display_seek_button = false;
-    } else if (objective_value > system_controls.objmin) {
+    } else if (model_objective_value > model_system_controls.objmin) {
       feasibility_status = "CLOSE TO FEASIBLE";
       feasibility_tooltip = 'CLOSE TO FEASIBLE: constraints slightly violated';
       feasibility_class = "text-close-to-feasible ";
       display_search_button = true;
       display_seek_button = false;
-    } else if (objective_value > 0.0) {
+    } else if (model_objective_value > 0.0) {
       feasibility_status = "FEASIBLE";
       feasibility_tooltip = 'FEASIBLE: constraints not significantly violated';
       feasibility_class = "text-feasible ";
@@ -444,7 +444,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
     }
   }
   var free_variables = '';
-  symbol_table.forEach((element) => {
+  model_symbol_table.forEach((element) => {
     if (element.type === 'equationset' && element.input && !(element.lmin & FIXED)) {
       free_variables += element.name + ', ';
     }
@@ -479,7 +479,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
                     <OverlayTrigger placement="bottom" overlay={<Tooltip>{feasibility_tooltip}</Tooltip>}>
                       <span>{feasibility_status}</span>
                     </OverlayTrigger>
-                    {feasibility_status === 'NOT FEASIBLE' && search_completed ?
+                    {feasibility_status === 'NOT FEASIBLE' && model_search_completed ?
                       <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
                         <p>This design may be over-specified.
                           See Help topics on Feasibility, Design Situations, Spring Design Technique and Hints, Tricks & Tips.</p>
@@ -495,8 +495,8 @@ export default function SymbolValueWireDia({ className, element, index }) {
                   <td className="text-center" id="ObjectiveValue">
                     <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
                       <p>Visual summary of feasibility status.</p>
-                      <p>Objective Value = {objective_value.toFixed(7)}<br />
-                        OBJMIN = {system_controls.objmin.toFixed(7)}</p>
+                      <p>Objective Value = {model_objective_value.toFixed(7)}<br />
+                        OBJMIN = {model_system_controls.objmin.toFixed(7)}</p>
                       <p>See on-line Help for details.  Try Help lookup <b>indicator</b></p>
                     </Tooltip>}>
                       <b>Status</b>
@@ -549,7 +549,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
                         </InputGroup.Text>
                       </InputGroup>
                     </td>
-                    <td className={"text-nowrap align-middle small " + (system_controls.show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
+                    <td className={"text-nowrap align-middle small " + (model_system_controls.show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
                   </tr>
                 </tbody>
               </>}
@@ -602,7 +602,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
           {display_search_button ?
             <>
               {(element.lmin & FIXED && free_variables.length > 0) ?
-                (search_completed ?
+                (model_search_completed ?
                   <Button variant="secondary" onClick={onSearchRequest} disabled><b>Search</b> (solve)</Button>
                   :
                   <>
@@ -618,8 +618,8 @@ export default function SymbolValueWireDia({ className, element, index }) {
                   </>
                 )
                 :
-                <Button variant={search_completed ? "secondary" : "primary"} onClick={onSearchRequest} disabled={search_completed}><b>Search</b> (solve)</Button>}
-              <Button variant={search_completed ? "primary" : "secondary"} disabled={isInvalidValue || isInvalidMinConstraint || isInvalidMaxConstraint} onClick={onClose}>Close</Button>
+                <Button variant={model_search_completed ? "secondary" : "primary"} onClick={onSearchRequest} disabled={model_search_completed}><b>Search</b> (solve)</Button>}
+              <Button variant={model_search_completed ? "primary" : "secondary"} disabled={isInvalidValue || isInvalidMinConstraint || isInvalidMaxConstraint} onClick={onClose}>Close</Button>
             </>
             :
             (display_seek_button ?

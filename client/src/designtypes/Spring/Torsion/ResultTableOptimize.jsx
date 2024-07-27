@@ -8,7 +8,7 @@ import * as sto from './symbol_table_offsets';
 
 export default function ResultTableOptimize({ onClick }) {
 //  console.log('ResultTableOptimize - Mounting...','onClick=',onClick);
-  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const dispatch = useDispatch();
 
   const onOptimizeSeekMINWeight = (event) => {
@@ -50,18 +50,18 @@ export default function ResultTableOptimize({ onClick }) {
         <tbody>
           <tr>
             <td width="50%">
-              <Button variant="primary" disabled={symbol_table[sto.Weight].lmin & FIXED ? true : false} onClick={onOptimizeSeekMINWeight}>Seek MIN Weight</Button>
+              <Button variant="primary" disabled={model_symbol_table[sto.Weight].lmin & FIXED ? true : false} onClick={onOptimizeSeekMINWeight}>Seek MIN Weight</Button>
             </td>
             <td width="50%">
-              <Button variant="primary" disabled={symbol_table[sto.Cycle_Life].lmin & FIXED ? true : false} onClick={onOptimizeSeekMAXCycle_Life}>Seek MAX Cycle_Life</Button>
+              <Button variant="primary" disabled={model_symbol_table[sto.Cycle_Life].lmin & FIXED ? true : false} onClick={onOptimizeSeekMAXCycle_Life}>Seek MAX Cycle_Life</Button>
             </td>
           </tr>
           <tr>
             <td width="50%">
-              <Button variant="primary" disabled={symbol_table[sto.Rate].lmin & FIXED ? true : false} onClick={onOptimizeSeekMINRate}>Seek MIN Rate</Button>
+              <Button variant="primary" disabled={model_symbol_table[sto.Rate].lmin & FIXED ? true : false} onClick={onOptimizeSeekMINRate}>Seek MIN Rate</Button>
             </td>
             <td width="50%">
-              <Button variant="primary" disabled={symbol_table[sto.Stroke].lmin & FIXED ? true : false} onClick={onOptimizeSeekMAXStroke}>Seek MAX Stroke</Button>
+              <Button variant="primary" disabled={model_symbol_table[sto.Stroke].lmin & FIXED ? true : false} onClick={onOptimizeSeekMAXStroke}>Seek MAX Stroke</Button>
             </td>
           </tr>
         </tbody>

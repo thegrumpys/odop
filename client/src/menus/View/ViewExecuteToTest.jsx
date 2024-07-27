@@ -49,9 +49,9 @@ export default function ViewExecuteToTest() {
 
   const [show, setShow] = useState(false);
   const [lines, setLines] = useState(false);
-  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
-  const labels = useSelector((state) => state.modelSlice.model.labels);
+  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_labels = useSelector((state) => state.modelSlice.model.labels);
 
   const toggle = () => {
 //    console.log('In ViewExecuteToTest.toggle');
@@ -80,7 +80,7 @@ import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 // This is a mapping of the ${this.state.execute_name} execute file to an equivalent test case file
 
 it('${this.state.execute_name}', () => {
-    var state = Object.assign({}, initialState, { system_controls: initialSystemControls });
+    var state = Object.assign({}, initialState, { model_system_controls: initialSystemControls });
     const store = createStore(
         reducers,
         {"user": "USERID0123456789", name: "initialState", model: state},

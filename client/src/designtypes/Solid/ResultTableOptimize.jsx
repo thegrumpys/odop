@@ -8,7 +8,7 @@ import * as sto from './symbol_table_offsets';
 
 export default function ResultTableOptimize({ onClick }) {
 //  console.log('ResultTableOptimize - Mounting...','onClick=',onClick);
-  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const dispatch = useDispatch();
 
   const onOptimizeSeekMAXVolume = (event) => {
@@ -58,23 +58,23 @@ export default function ResultTableOptimize({ onClick }) {
         <tbody>
           <tr>
             <td width="50%">
-              <Button variant="primary" disabled={symbol_table[sto.Volume].lmin & FIXED ? true : false} onClick={onOptimizeSeekMAXVolume}>Seek MAX Volume</Button>
+              <Button variant="primary" disabled={model_symbol_table[sto.Volume].lmin & FIXED ? true : false} onClick={onOptimizeSeekMAXVolume}>Seek MAX Volume</Button>
             </td>
             <td width="50%">
-              <Button variant="primary" disabled={symbol_table[sto.Weight].lmin & FIXED ? true : false} onClick={onOptimizeSeekMAXWeight}>Seek MAX Weight</Button>
-            </td>
-          </tr>
-          <tr>
-            <td width="50%">
-              <Button variant="primary" disabled={symbol_table[sto.Length].lmin & FIXED ? true : false} onClick={onOptimizeSeekMINLength}>Seek MIN Length</Button>
-            </td>
-            <td width="50%">
-              <Button variant="primary" disabled={symbol_table[sto.Width].lmin & FIXED ? true : false} onClick={onOptimizeSeekMINWidth}>Seek MIN Width</Button>
+              <Button variant="primary" disabled={model_symbol_table[sto.Weight].lmin & FIXED ? true : false} onClick={onOptimizeSeekMAXWeight}>Seek MAX Weight</Button>
             </td>
           </tr>
           <tr>
             <td width="50%">
-              <Button variant="primary" disabled={symbol_table[sto.Height].lmin & FIXED ? true : false} onClick={onOptimizeSeekMINHeight}>Seek MIN Height</Button>
+              <Button variant="primary" disabled={model_symbol_table[sto.Length].lmin & FIXED ? true : false} onClick={onOptimizeSeekMINLength}>Seek MIN Length</Button>
+            </td>
+            <td width="50%">
+              <Button variant="primary" disabled={model_symbol_table[sto.Width].lmin & FIXED ? true : false} onClick={onOptimizeSeekMINWidth}>Seek MIN Width</Button>
+            </td>
+          </tr>
+          <tr>
+            <td width="50%">
+              <Button variant="primary" disabled={model_symbol_table[sto.Height].lmin & FIXED ? true : false} onClick={onOptimizeSeekMINHeight}>Seek MIN Height</Button>
             </td>
             <td width="50%">
             </td>

@@ -8,7 +8,7 @@ import ConstraintsMaxRowDependentVariable from './ConstraintsMaxRowDependentVari
 
 export default function ConstraintsMaxTable() {
 //  console.log('ConstraintsMaxTable - Mounting...');
-  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
 
   useEffect(() => {
 //    console.log('ConstraintsMaxTable - Mounted');
@@ -20,9 +20,9 @@ export default function ConstraintsMaxTable() {
     <>
       <Table id="cmxt" className="table-secondary border border-secondary">
         <ConstraintsMaxHeaderIndependentVariable />
-        {symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden && <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={index} />)}
+        {model_symbol_table.map((element,index) => element.type === "equationset" && element.input && !element.hidden && <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={index} />)}
         <ConstraintsMaxHeaderDependentVariable />
-        {symbol_table.map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <ConstraintsMaxRowDependentVariable key={element.name} element={element} index={index} />)}
+        {model_symbol_table.map((element,index) => element.type === "equationset" && !element.input && !element.hidden && <ConstraintsMaxRowDependentVariable key={element.name} element={element} index={index} />)}
       </Table>
     </>
   );

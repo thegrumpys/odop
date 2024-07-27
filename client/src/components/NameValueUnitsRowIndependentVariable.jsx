@@ -8,9 +8,7 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
 export default function NameValueUnitsRowIndependentVariable({ element, index, onChangeValid, onChangeInvalid, onSet, onReset }) {
-//  const element = useSelector((state) => state.modelSlice.model.symbol_table[index]);
-//  console.log('NameValueUnitsRowIndependentVariable - Mounting...','element=',element,'index=',index);
-  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,7 +20,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   const onChangeValidLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onChangeValid event.target.value=', event.target.value);
     var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
-    if (system_controls.enable_auto_fix) {
+    if (model_system_controls.enable_auto_fix) {
       auto_fixed = true;
       if (!(element.lmin & FIXED)) {
         dispatch(fixSymbolValue(element.name));
@@ -103,7 +101,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
             <Form.Check id={'nvuriv_checkbox_' + element.name} type="checkbox" aria-label="Checkbox for fixed value" checked={element.lmin & FIXED} onChange={element.lmin & FIXED ? onResetLocal : onSetLocal} />
           </OverlayTrigger>
         </td>
-        <td id={'nvuriv_units_' + element.name} className={"text-nowrap align-middle small " + (system_controls.show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
+        <td id={'nvuriv_units_' + element.name} className={"text-nowrap align-middle small " + (model_system_controls.show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
       </tr>
     </tbody>
   );

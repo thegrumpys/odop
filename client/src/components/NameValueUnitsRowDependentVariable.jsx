@@ -9,7 +9,7 @@ import { getAlertsByName } from './Alerts';
 
 export default function NameValueUnitsRowDependentVariable({ element, index, onSet, onReset }) {
 //  console.log('NameValueUnitsRowDependentVariable - Mounting...','element=',element,'index=',index);
-  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export default function NameValueUnitsRowDependentVariable({ element, index, onS
             <Form.Check id={'nvurdv_checkbox_' + element.name} type="checkbox" aria-label="Checkbox for fixed value" checked={element.lmin & FIXED} onChange={element.lmin & FIXED ? onResetLocal : onSetLocal} />
           </OverlayTrigger>
         </td>
-        <td id={'nvurdv_units_' + element.name} className={"text-nowrap align-middle small " + (system_controls.show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
+        <td id={'nvurdv_units_' + element.name} className={"text-nowrap align-middle small " + (model_system_controls.show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
       </tr>
     </tbody>
   );

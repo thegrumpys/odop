@@ -8,8 +8,8 @@ import { getAlertsByName } from './Alerts';
 
 export default function NameValueUnitsRowCalcInput({ element, index, onChangeValid, onChangeInvalid, onChange, onSelect }) {
 //  console.log('NameValueUnitsRowCalcInput - Mounting...','element=',element,'index=',index);
-  const type = useSelector((state) => state.modelSlice.model.type);
-  const show_units = useSelector((state) => state.modelSlice.model.system_controls.show_units);
+  const model_type = useSelector((state) => state.modelSlice.model.type);
+  const model_show_units = useSelector((state) => state.modelSlice.model.system_controls.show_units);
   const [table, setTable] = useState([]);
   const dispatch = useDispatch();
 
@@ -22,7 +22,7 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
       setTable(tableContents);
     }
     return () => { };
-  }, [element, type]);
+  }, [element, model_type]);
 
   const onChangeValidLocal = (event) => {
 //    console.log('NameValueUnitsRowCalcInput.onChangeValid', 'event.target.value=', event.target.value);
@@ -84,7 +84,7 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
             }
           </InputGroup>
         </td>
-        <td id={'nvurci_units_' + element.name} className={"text-nowrap align-middle small " + (show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
+        <td id={'nvurci_units_' + element.name} className={"text-nowrap align-middle small " + (model_show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
       </tr>
     </tbody>
   );

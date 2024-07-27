@@ -11,8 +11,8 @@ export default function ActionSelectSize() {
   //  console.log('ActionSelectSize - Mounting...');
 
   const model_type = useSelector((state) => state.modelSlice.model.type);
-  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
   const [show, setShow] = useState(false);
   const [types, setTypes] = useState([]);
   const [type, setType] = useState(undefined);
@@ -33,9 +33,9 @@ export default function ActionSelectSize() {
     var localType;
     if (localTypes.length > 0)
       localType = localTypes[0]; // Default to first type
-    // Loop to create st from symbol_table
+    // Loop to create st from model_symbol_table
     var st = [];
-    symbol_table.forEach((element) => {
+    model_symbol_table.forEach((element) => {
       st.push(element);
     });
     var localSizes = getSizeEntries(type, st);
@@ -62,9 +62,9 @@ export default function ActionSelectSize() {
     //        console.log('In ActionSelectSize.onSelectSizeType event.target.value=',event.target.value);
     var localType = event.target.value;
     var { getSizeEntries } = require('../../designtypes/' + type + '/size.js'); // Dynamically load getSizeEntries
-    // Loop to create p and x from symbol_table
+    // Loop to create p and x from model_symbol_table
     var st = [];
-    symbol_table.forEach((element) => {
+    model_symbol_table.forEach((element) => {
       st.push(element);
     });
     var localSizes = getSizeEntries(type, st);
@@ -92,9 +92,9 @@ export default function ActionSelectSize() {
     // Do select size entry
     dispatch(saveAutoSave());
     var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
-    if (system_controls.enable_auto_fix) {
+    if (model_system_controls.enable_auto_fix) {
       auto_fixed = true;
-      var found = symbol_table.find((element) => element.name === type);
+      var found = model_symbol_table.find((element) => element.name === type);
       //            console.log('In ActionSelectSize.onSelect found=',found);
       if (!(found.lmin & FIXED)) {
         dispatch(fixSymbolValue(type));

@@ -6,8 +6,8 @@ import { logUsage } from '../../logUsage';
 export default function ViewSymbolTableOffsets() {
 //  console.log('ViewSymbolTableOffsets - Mounting...');
 
-  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const labels = useSelector((state) => state.modelSlice.model.labels);
+  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_labels = useSelector((state) => state.modelSlice.model.labels);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -38,9 +38,9 @@ export default function ViewSymbolTableOffsets() {
         <Modal.Body>
           <pre>
             {'// Variables\n'}
-            {symbol_table.map((element) => { return 'export const ' + element.name.replace('%', 'PC').replace(/[^a-zA-Z0-9]/g, '_') + ' = ' + (ip++) + ';\n' })}
+            {model_symbol_table.map((element) => { return 'export const ' + element.name.replace('%', 'PC').replace(/[^a-zA-Z0-9]/g, '_') + ' = ' + (ip++) + ';\n' })}
             {'\n// Labels (Properties)\n'}
-            {labels.map((element) => { return 'export const ' + element.name.replace('%', 'PC').replace(/[^a-zA-Z0-9]/g, '_') + ' = ' + (il++) + ';\n' })}
+            {model_labels.map((element) => { return 'export const ' + element.name.replace('%', 'PC').replace(/[^a-zA-Z0-9]/g, '_') + ' = ' + (il++) + ';\n' })}
           </pre>
         </Modal.Body>
         <Modal.Footer>

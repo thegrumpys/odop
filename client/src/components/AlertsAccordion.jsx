@@ -55,8 +55,8 @@ export default function AlertsAccordion() {
 //  console.log('AlertsAccordion - Mounting...');
   const caret = useSelector((state) => state.alertsSlice.caret);
   const level = useSelector((state) => state.alertsSlice.level);
-  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
-  const enable_auto_fix = useSelector((state) => state.modelSlice.model.system_controls.enable_auto_fix);
+  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_enable_auto_fix = useSelector((state) => state.modelSlice.model.system_controls.enable_auto_fix);
   const dispatch = useDispatch();
 
   const onHelpButton = (event) => {
@@ -68,7 +68,7 @@ export default function AlertsAccordion() {
 
   const onAutoFixToggle = (event) => {
 //    console.log('AlertsAccordion.onAutoFixToggle', 'event=', event);
-    var copy = Object.assign({}, system_controls);
+    var copy = Object.assign({}, model_system_controls);
     var label;
     if (copy.enable_auto_fix === 0.0) {
       copy.enable_auto_fix = 1.0;
@@ -138,7 +138,7 @@ export default function AlertsAccordion() {
                 <span className="text-primary px-2 pt-2"><i className="fas fa-info-circle"></i></span>
               </OverlayTrigger>
               <InputGroup.Text className="ms-auto">Auto Fix</InputGroup.Text>
-              <InputGroup.Checkbox id="auto_fix" aria-label="Checkbox for enabling Auto Fix" onChange={onAutoFixToggle} checked={enable_auto_fix} />
+              <InputGroup.Checkbox id="auto_fix" aria-label="Checkbox for enabling Auto Fix" onChange={onAutoFixToggle} checked={model_enable_auto_fix} />
               <OverlayTrigger placement="bottom" overlay={
                 <Tooltip className="tooltip-lg">
                   <p>When checked, sets "Fixed" status of Independent Variables whose values are changed by user input.</p>

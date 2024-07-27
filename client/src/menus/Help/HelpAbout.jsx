@@ -13,17 +13,17 @@ export default function HelpAbout() {
   const [show, setShow] = useState(false);
   const [sizes, setSizes] = useState('');
   const [size, setSize] = useState('');
-  const user = useSelector((state) => state.modelSlice.user);
-  const type = useSelector((state) => state.modelSlice.model.type);
-  const version = useSelector((state) => state.modelSlice.model.version);
-  const jsontype = useSelector((state) => state.modelSlice.model.jsontype);
-  const units = useSelector((state) => state.modelSlice.model.units);
+  const model_user = useSelector((state) => state.modelSlice.user);
+  const model_type = useSelector((state) => state.modelSlice.model.type);
+  const model_version = useSelector((state) => state.modelSlice.model.version);
+  const model_jsontype = useSelector((state) => state.modelSlice.model.jsontype);
+  const model_units = useSelector((state) => state.modelSlice.model.units);
   const { oktaAuth, authState } = useOktaAuth();
 //  console.log('HelpAbout','oktaAuth=',oktaAuth,'authState=',authState);
 
   useEffect(() => {
 //    console.log('HelpAbout - Mounted');
-    getDBSize(user);
+    getDBSize(model_user);
 //    return () => console.log('HelpAbout - Unmounting ...');
     return () => {};
   }, []);
@@ -81,7 +81,7 @@ export default function HelpAbout() {
         <Modal.Body>
           Link to <a href="/docs/About/" target="_blank" rel="noopener noreferrer">About</a> topics
           <br />
-          Link to <a href={'/docs/Help/DesignTypes/' + type + '/description.html'} target="_blank" rel="noopener noreferrer">{type} Design Type</a> description
+          Link to <a href={'/docs/Help/DesignTypes/' + model_type + '/description.html'} target="_blank" rel="noopener noreferrer">{model_type} Design Type</a> description
           <br />
           Link to <a href="https://www.springdesignsoftware.org/" target="_blank" rel="noopener noreferrer">Spring Design Software Website</a> home page
           <hr />
@@ -96,12 +96,12 @@ export default function HelpAbout() {
             <>
               User Authenticated: {authState.isAuthenticated ? 'true' : 'false'}<br />
               User Email: {authState.isAuthenticated ? authState.idToken.claims.email : 'Unknown'}<br />
-              User ClientId: {user === null ? 'Unknown' : user}<br />
+              User ClientId: {model_user === null ? 'Unknown' : model_user}<br />
             </>
           }
-          Model: {jsontype} {type}<br />
-          Model Units: {units}<br />
-          Model Version: {version}<br />
+          Model: {model_jsontype} {model_type}<br />
+          Model Units: {model_units}<br />
+          Model Version: {model_version}<br />
           {config.node.env !== "production" && <span>DB Size: {size} MB</span>}
         </Modal.Body>
         <Modal.Footer>

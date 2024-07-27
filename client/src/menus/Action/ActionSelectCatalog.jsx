@@ -9,8 +9,8 @@ export default function ActionSelectCatalog() {
   //  console.log('ActionSelectCatalog - Mounting...');
 
   const model_type = useSelector((state) => state.modelSlice.model.type);
-  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
   const [show, setShow] = useState(false);
   const [names, setNames] = useState([]);
   const [name, setName] = useState(undefined);
@@ -31,9 +31,9 @@ export default function ActionSelectCatalog() {
     //        console.log('In ActionSelectCatalog.toggle names=',names);
     var localName;
     var entry_string;
-    // Loop to create st from symbol_table, and initialize names/name and entries/entry
+    // Loop to create st from model_symbol_table, and initialize names/name and entries/entry
     var st = [];
-    symbol_table.forEach((element) => {
+    model_symbol_table.forEach((element) => {
       st.push(Object.assign({}, element));
       if (element.name === "Catalog_Name") {
         localName = localNames[0]; // Default to first name
@@ -48,7 +48,7 @@ export default function ActionSelectCatalog() {
         }
       }
     });
-    var localEntries = getCatalogEntries(localName, store, st, system_controls.viol_wt);
+    var localEntries = getCatalogEntries(localName, store, st, model_system_controls.viol_wt);
     var localEntry = 0; // Default to first entry
     localEntries.forEach((element, index) => {
       if (element[0] === entry_string) {
@@ -72,12 +72,12 @@ export default function ActionSelectCatalog() {
     //        console.log('In ActionSelectCatalog.onSelectCatalogName event.target.value=',event.target.value);
     var localName = event.target.value;
     var { getCatalogEntries } = require('../../designtypes/' + model_type + '/catalog.js'); // Dynamically load getCatalogEntries
-    // Loop to create p and x from symbol_table
+    // Loop to create p and x from model_symbol_table
     var st = [];
-    symbol_table.forEach((element) => {
+    model_symbol_table.forEach((element) => {
       st.push(Object.assign({}, element));
     });
-    var localEntries = getCatalogEntries(localName, store, st, system_controls.viol_wt);
+    var localEntries = getCatalogEntries(localName, store, st, model_system_controls.viol_wt);
     var localEntry = 0; // Default to first entry
     setName(localName);
     setEntries(localEntries);

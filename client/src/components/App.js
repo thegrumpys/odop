@@ -17,10 +17,10 @@ export default function App() {
 //  console.log('APP - Mounting...');
   const [show, setShow] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
-  const user = useSelector((state) => state.modelSlice.user);
-  const name = useSelector((state) => state.modelSlice.name);
-  const view = useSelector((state) => state.modelSlice.view);
-  const type = useSelector((state) => state.modelSlice.model.type);
+  const model_user = useSelector((state) => state.modelSlice.user);
+  const model_name = useSelector((state) => state.modelSlice.name);
+  const model_view = useSelector((state) => state.modelSlice.view);
+  const model_type = useSelector((state) => state.modelSlice.model.type);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -47,13 +47,13 @@ export default function App() {
     dispatch(restoreAutoSave('redirect'));
     dispatch(deleteAutoSave('redirect'));
     dispatch(deleteAutoSave()); // Get rid of any AutoSave data too
-//    console.log('APP - loadAutoSaveDesign','user=',user,'name=',name,'view=',view,'type=',type);
+//    console.log('APP - loadAutoSaveDesign','model_user=',model_user,'model_name=',model_name,'model_view=',model_view,'model_type=',model_type);
     config.url.prompt = false; // Turn off prompt
-    config.url.name = name; // Use model name
-    config.url.view = view; // Use model view
-    config.url.type = type; // Use model type
+    config.url.name = model_name; // Use model name
+    config.url.view = model_view; // Use model view
+    config.url.type = model_type; // Use model type
     config.url.execute = undefined; // Turn off execute
-    logUsage('event', 'App', { event_label: 'type: ' + type + ' load redirect' });
+    logUsage('event', 'App', { event_label: 'type: ' + model_type + ' load redirect ' + model_name});
 //    console.log('APP - loadRedirectDesign navigate('/')');
     navigate('/'); // Must be last after logUsage
   }
@@ -62,7 +62,7 @@ export default function App() {
 //    console.log('APP - promptLoadAutoSave');
     setShow(true);
     setShowWelcome(false);
-    logUsage('event', 'App', { event_label: 'type: ' + type + ' prompt autoSave' });
+    logUsage('event', 'App', { event_label: 'type: ' + model_type + ' prompt autoSave' });
   }
 
   const loadAutoSaveDesign = () => {
@@ -70,25 +70,25 @@ export default function App() {
     setShow(false);
     dispatch(restoreAutoSave());
     dispatch(deleteAutoSave());
-//    console.log('APP - loadAutoSaveDesign','user=',user,'name=',name,'view=',view,'type=',type);
+//    console.log('APP - loadAutoSaveDesign','model_user=',model_user,'model_name=',model_name,'model_view=',model_view,'model_type=',model_type);
     config.url.prompt = false; // Turn off prompt
-    config.url.name = name; // Use model name
-    config.url.view = view; // Use model view
-    config.url.type = type; // Use model type
+    config.url.name = model_name; // Use model name
+    config.url.view = model_view; // Use model view
+    config.url.type = model_type; // Use model type
     config.url.execute = undefined; // Turn off execute
-    logUsage('event', 'Routes', { event_label: 'type: ' + type + ' load autoSave' });
+    logUsage('event', 'Routes', { event_label: 'type: ' + model_type + ' load autoSave ' + model_name});
 //    console.log('APP - loadAutoSaveDesign navigate('/')');
     navigate('/'); // Must be last after logUsage
   }
 
   const loadDefaultDesign = () => {
-//    console.log('APP - loadDefaultDesign','config.url.execute=',config.url.execute,'user=',user,'config.url.type=',config.url.type,'config.url.name=',config.url.name);
+//    console.log('APP - loadDefaultDesign','config.url.execute=',config.url.execute,'model_user=',model_user,'config.url.type=',config.url.type,'config.url.name=',config.url.name);
     setShow(false);
     if (!showWelcome) {
       config.url.execute = undefined; // Turn off execute
     }
-    getDesign(user, config.url.type, config.url.name);
-    logUsage('event', 'App', { event_label: 'type: ' + type + ' load defaultDesign' });
+    getDesign(model_user, config.url.type, config.url.name);
+    logUsage('event', 'App', { event_label: 'type: ' + config.url.type + ' load defaultDesign ' + config.url.name});
     navigate('/'); // Must be last after logUsage
   }
 
@@ -109,7 +109,7 @@ export default function App() {
     })
     .then((design) => {
 //      console.log('APP - getDesign design=', design);
-      var { migrate } = require('../designtypes/'+type+'/migrate.js'); // Dynamically load migrate
+      var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
 //      console.log('APP - getDesign','migrate=',migrate);
       var migrated_design = migrate(design);
 //      console.log('APP - getDesign','migrated_design=',migrated_design);

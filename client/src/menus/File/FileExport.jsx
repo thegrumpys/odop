@@ -9,7 +9,7 @@ export default function FileExport() {
   const model_model = useSelector((state) => state.modelSlice.model);
   const model_name = useSelector((state) => state.modelSlice.name);
   const model_type = useSelector((state) => state.modelSlice.model.type);
-  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const [show, setShow] = useState(false);
 
   const exportFile = (model, name, type) => {
@@ -69,12 +69,12 @@ export default function FileExport() {
     setShow(!show);
   }
 
-  const exportCSV = (symbol_table, name, type) => {
-//        console.log('In FileExport.exportCSV','symbol_table=',symbol_table,'name=',name,'type=',type);
-    const url = window.URL.createObjectURL(new Blob(Object.keys(symbol_table).map(key =>
-      symbol_table[key].name + "," +
-      symbol_table[key].value + "," +
-      symbol_table[key].units +
+  const exportCSV = (model_symbol_table, name, type) => {
+//        console.log('In FileExport.exportCSV','model_symbol_table=',model_symbol_table,'name=',name,'type=',type);
+    const url = window.URL.createObjectURL(new Blob(Object.keys(model_symbol_table).map(key =>
+      model_symbol_table[key].name + "," +
+      model_symbol_table[key].value + "," +
+      model_symbol_table[key].units +
       "\n")));
 //        console.log('In FileExport.exportCSV','url=', url);
     const link = document.createElement('a');
@@ -114,8 +114,8 @@ export default function FileExport() {
     // Convert % to PC and convert all non-alphanumeric characters to _.
     // Ignore hidden objects
     var newObject = {};
-    for (var j = 0; j < symbol_table.length; j++) {
-      var entry = {...symbol_table[j]}; // clone
+    for (var j = 0; j < model_symbol_table.length; j++) {
+      var entry = {...model_symbol_table[j]}; // clone
       entry.name = entry.name.replace('%', 'PC').replace(/[^a-zA-Z0-9]/g, '_');
       if (entry.hidden === false) {
         newObject[entry.name] = entry;

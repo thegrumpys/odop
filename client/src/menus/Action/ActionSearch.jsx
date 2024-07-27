@@ -11,9 +11,9 @@ import store from '../../store/store';
 export default function ActionSearch() {
 //  console.log('ActionSearch - Mounting...');
   const [searchInfiniteShow, setSearchInfiniteShow] = useState(false);
-  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const objmin = useSelector((state) => state.modelSlice.model.system_controls.objmin);
-  const objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
+  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_objmin = useSelector((state) => state.modelSlice.model.system_controls.objmin);
+  const model_objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,12 +24,12 @@ export default function ActionSearch() {
 
   const onSearchRequest = (event) => {
 //    console.log('ActionSearch.onSearchRequest','event=',event);
-    if (symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
+    if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Search cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
       return;
     }
     var inverted_constraint = false;
-    symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
+    model_symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
       if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
         inverted_constraint = true;
         displayMessage((element.name + ' constraints are inconsistent. Help button provides more information.'), 'danger', 'Errors', '/docs/Help/alerts.html#Constraint_Inconsistency');
@@ -39,7 +39,7 @@ export default function ActionSearch() {
     if (inverted_constraint) {
       return;
     }
-    if (!Number.isFinite(objective_value)) {
+    if (!Number.isFinite(model_objective_value)) {
       setSearchInfiniteShow(!searchInfiniteShow);
       return;
     }
@@ -64,18 +64,18 @@ export default function ActionSearch() {
 
   const doSearch = (type) => {
 //    console.log('ActionSearch.doSearch');
-    var old_objective_value = objective_value;
+    var old_objective_value = model_objective_value;
     dispatch(saveAutoSave());
     dispatch(enableSpinner());
     dispatch(search());
     dispatch(disableSpinner());
     var design = store.getState().modelSlice;
-    var new_objective_value = design.model.result.objective_value;
+    var new_objective_value = design.model.result.model_objective_value;
     logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });
   }
 
   var display_search_button;
-  if (objective_value > objmin) {
+  if (model_objective_value > model_objmin) {
     display_search_button = true;
   } else {
     display_search_button = false;

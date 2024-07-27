@@ -15,12 +15,12 @@ export default function ResultTable() {
   const [seekShow, setSeekShow] = useState(false); // Default: do not display optimize modal
   const [seekName, setSeekName] = useState(null);
   const [seekMinMax, setSeekMinMax] = useState(MIN);
-  const type = useSelector((state) => state.modelSlice.model.type);
-  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
-  const objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
-  const termination_condition = useSelector((state) => state.modelSlice.model.result.termination_condition);
-  const search_completed = useSelector((state) => state.modelSlice.model.result.search_completed);
+  const model_type = useSelector((state) => state.modelSlice.model.type);
+  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
+  const model_termination_condition = useSelector((state) => state.modelSlice.model.result.termination_condition);
+  const model_search_completed = useSelector((state) => state.modelSlice.model.result.search_completed);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,12 +31,12 @@ export default function ResultTable() {
 
   const onSearchRequest = (event) => {
 //    console.log('In ResultTable.onSearchRequest','event=',event);
-    if (symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
+    if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Search cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
       return;
     }
     var inverted_constraint = false;
-    symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
+    model_symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
       if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
         inverted_constraint = true;
         displayMessage((element.name + ' constraints are inconsistent. Help button provides more information.'), 'danger', 'Errors', '/docs/Help/alerts.html#Constraint_Inconsistency');
@@ -46,7 +46,7 @@ export default function ResultTable() {
     if (inverted_constraint) {
       return;
     }
-    if (!Number.isFinite(objective_value)) {
+    if (!Number.isFinite(model_objective_value)) {
       setSearchInfiniteShow(!searchInfiniteShow);
       return;
     }
@@ -72,23 +72,23 @@ export default function ResultTable() {
 
   const doSearch = (type) => {
 //    console.log('In ResultTable.doSearch');
-    var old_objective_value = objective_value;
+    var old_objective_value = model_objective_value;
     dispatch(saveAutoSave());
     dispatch(enableSpinner());
     dispatch(search());
     dispatch(disableSpinner());
-    var new_objective_value = objective_value;
+    var new_objective_value = model_objective_value;
     logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' Button ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });
   }
 
   const onSeekRequest = (event) => {
 //    console.log('In ResultTable.onSeekRequest','event=',event);
-    if (symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
+    if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
       return;
     }
     var inverted_constraint = false;
-    symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
+    model_symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
       if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
         inverted_constraint = true;
         displayMessage((element.name + ' constraints are inconsistent. Help button provides more information.'), 'danger', 'Errors', '/docs/Help/alerts.html#Constraint_Inconsistency');
@@ -98,13 +98,13 @@ export default function ResultTable() {
     if (inverted_constraint) {
       return;
     }
-    var result = symbol_table.find( // Find free variable matching the current variable name
+    var result = model_symbol_table.find( // Find free variable matching the current variable name
       (element) => seekName === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
     );
     if (result === undefined) { // Was matching free variable not found
       // Set default name to the First free variable. There must be at least one
       // This duplicates the UI render code algorithm - be careful and make them match!
-      result = symbol_table.find( // Find first free variable
+      result = model_symbol_table.find( // Find first free variable
         (element) => element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
       );
     }
@@ -154,22 +154,22 @@ export default function ResultTable() {
   var feasibility_tooltip;
   var feasibility_class;
   var display_search_button;
-  if (!Number.isFinite(objective_value)) {
+  if (!Number.isFinite(model_objective_value)) {
     feasibility_status = "FEASIBILITY UNDEFINED";
     feasibility_tooltip = 'FEASIBILITY UNDEFINED: computing constraints failed';
     feasibility_class = "text-feasibility-undefined";
     display_search_button = true;
-  } else if (objective_value > 4 * system_controls.objmin) {
+  } else if (model_objective_value > 4 * model_system_controls.objmin) {
     feasibility_status = "NOT FEASIBLE";
     feasibility_tooltip = 'NOT FEASIBLE: constraints significantly violated';
     feasibility_class = "text-not-feasible ";
     display_search_button = true;
-  } else if (objective_value > system_controls.objmin) {
+  } else if (model_objective_value > model_system_controls.objmin) {
     feasibility_status = "CLOSE TO FEASIBLE";
     feasibility_tooltip = 'CLOSE TO FEASIBLE: constraints slightly violated';
     feasibility_class = "text-close-to-feasible ";
     display_search_button = true;
-  } else if (objective_value > 0.0) {
+  } else if (model_objective_value > 0.0) {
     feasibility_status = "FEASIBLE";
     feasibility_tooltip = 'FEASIBLE: constraints not significantly violated';
     feasibility_class = "text-feasible ";
@@ -181,7 +181,7 @@ export default function ResultTable() {
     display_search_button = false;
   }
 
-  var ResultTableOptimize = require('../designtypes/' + type + '/ResultTableOptimize.jsx'); // Dynamically load ResultTableOptimize
+  var ResultTableOptimize = require('../designtypes/' + model_type + '/ResultTableOptimize.jsx'); // Dynamically load ResultTableOptimize
 //  console.log('ResultTable','ResultTableOptimize=',ResultTableOptimize);
 
 //      <AlertsAccordion />
@@ -202,7 +202,7 @@ export default function ResultTable() {
               <OverlayTrigger placement="bottom" overlay={<Tooltip>{feasibility_tooltip}</Tooltip>}>
                 <span>{feasibility_status}</span>
               </OverlayTrigger>
-              {feasibility_status === 'NOT FEASIBLE' && search_completed ?
+              {feasibility_status === 'NOT FEASIBLE' && model_search_completed ?
                 <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
                   <p>This design may be over-specified.
                     See Help topics on Feasibility, Design Situations, Spring Design Technique and Hints, Tricks & Tips.</p>
@@ -220,7 +220,7 @@ export default function ResultTable() {
                 <span>Message</span>
               </OverlayTrigger>
             </th>
-            <td className="text-start">{termination_condition}</td>
+            <td className="text-start">{model_termination_condition}</td>
           </tr>
         </tbody>
       </Table>
@@ -232,8 +232,8 @@ export default function ResultTable() {
             <td className="text-start" id="ObjectiveValue">
               <OverlayTrigger placement="bottom" overlay={<Tooltip>
                 <p>Visual summary of feasibility status.</p>
-                <p>Objective Value = {objective_value.toFixed(7)}<br />
-                  OBJMIN = {system_controls.objmin.toFixed(7)}</p>
+                <p>Objective Value = {model_objective_value.toFixed(7)}<br />
+                  OBJMIN = {model_system_controls.objmin.toFixed(7)}</p>
                 <p>See on-line Help for details.  Try Help lookup <b>indicator</b></p>
               </Tooltip>}>
                 <b>Status</b>
@@ -254,8 +254,8 @@ export default function ResultTable() {
                     variable. A feasible result is a solution to the designer’s
                     goals as expressed by constraints and fixed values.</p>
                   <p><b>Search</b> stops when the first feasible solution is found. This happens
-                    when the Objective Value ({objective_value.toFixed(7)}) falls below
-                    OBJMIN ({system_controls.objmin.toFixed(7)}).</p>
+                    when the Objective Value ({model_objective_value.toFixed(7)}) falls below
+                    OBJMIN ({model_system_controls.objmin.toFixed(7)}).</p>
                   <p>If <b>Search</b> cannot achieve a feasible result it converges to a compromise.
                     This compromise tries to minimize violations.</p
                   ></Tooltip>}>
@@ -301,7 +301,7 @@ export default function ResultTable() {
             &nbsp;
             <InputGroup.Text>Name: </InputGroup.Text>
             <Form.Control as="select" className="align-middle" onChange={onSeekNameSelect} value={seekName}>
-              {symbol_table.map((element, index) =>
+              {model_symbol_table.map((element, index) =>
                 (element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)) ? <option key={index} value={element.name}>{element.name}</option> : ''
               )}
             </Form.Control>

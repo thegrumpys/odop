@@ -12,9 +12,9 @@ export default function ActionSeek() {
   const [seekName, setSeekName] = useState(null);
   const [seekMinMax, setSeekMinMax] = useState(MIN);
   const type = useSelector((state) => state.modelSlice.model.type);
-  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const objmin = useSelector((state) => state.modelSlice.model.system_controls.objmin);
-  const objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
+  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_objmin = useSelector((state) => state.modelSlice.model.system_controls.objmin);
+  const model_objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,12 +25,12 @@ export default function ActionSeek() {
 
   const  onSeekRequest = () => {
 //       console.log('In ActionSeek.onSeekRequest');
-        if (symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
+        if (model_symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
             return;
         }
         var inverted_constraint = false;
-        symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
+        model_symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
             if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
                 inverted_constraint = true;
                 displayMessage((element.name + ' constraints are inconsistent. Help button provides more information.'), 'danger', 'Errors', '/docs/Help/alerts.html#Constraint_Inconsistency');
@@ -40,13 +40,13 @@ export default function ActionSeek() {
         if (inverted_constraint) {
             return;
         }
-        var result = symbol_table.find( // Find free variable matching the current variable name
+        var result = model_symbol_table.find( // Find free variable matching the current variable name
             (element) => seekName === element.name && element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
         );
         if (result === undefined) { // Was matching free variable not found
             // Set default name to the First free variable. There must be at least one
             // This duplicates the UI render code algorithm - be careful and make them match!
-            result = symbol_table.find( // Find first free variable
+            result = model_symbol_table.find( // Find first free variable
                 (element) => element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)
             );
         }
@@ -87,7 +87,7 @@ export default function ActionSeek() {
         var ResultTableOptimize = require('../../designtypes/'+type+'/ResultTableOptimize.jsx'); // Dynamically load ResultTableOptimize
 
         var display_search_button;
-        if (objective_value > objmin) {
+        if (model_objective_value > model_objmin) {
             display_search_button = true;
         } else {
             display_search_button = false;
@@ -115,7 +115,7 @@ export default function ActionSeek() {
                             &nbsp;
                             <InputGroup.Text>Name: </InputGroup.Text>
                             <Form.Control as="select" className="align-middle" onChange={onSeekNameSelect} value={seekName}>
-                                {symbol_table.map((element, index) =>
+                                {model_symbol_table.map((element, index) =>
                                     (element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)) ? <option key={index} value={element.name}>{element.name}</option> : ''
                                 )}
                             </Form.Control>

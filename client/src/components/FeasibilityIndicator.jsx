@@ -4,8 +4,8 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function FeasibilityIndicator({ width = 242, height = 24 }) {
 //  console.log('FeasibilityIndicator - Mounting...');
-  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
-  const objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
+  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
 
   useEffect(() => {
 //    console.log('FeasibilityIndicator - Mounted');
@@ -30,24 +30,24 @@ export default function FeasibilityIndicator({ width = 242, height = 24 }) {
   const xOrigin = triangleWidth + blackWidth;
   const yOrigin = 0;
   var x;
-  if (objective_value <= 0) { // Black
+  if (model_objective_value <= 0) { // Black
     x = -blackWidth / 2; // Center of black
-  } else if (!Number.isFinite(objective_value)) { // Purple
+  } else if (!Number.isFinite(model_objective_value)) { // Purple
     x = greenWidth + orangeWidth + redWidth + purpleWidth / 2; // Scale and shift it
-  } else if (objective_value > 4 * system_controls.objmin) { // Red
-    x = objective_value - 4 * system_controls.objmin; // Shift to Zero
+  } else if (model_objective_value > 4 * model_system_controls.objmin) { // Red
+    x = model_objective_value - 4 * model_system_controls.objmin; // Shift to Zero
     x = Math.log10(x); // log10
-    var lowBound = Math.log10(4 * system_controls.objmin); // 0.000200 is approx. 10**(-3.7)
+    var lowBound = Math.log10(4 * model_system_controls.objmin); // 0.000200 is approx. 10**(-3.7)
     var highBound = 8 // 10**8
     if (x < lowBound) x = lowBound;
     else if (x > highBound) x = highBound;
     x = ((x - lowBound) / (highBound - lowBound)) * redWidth + greenWidth + orangeWidth; // Scale and shift it
-  } else if (objective_value > system_controls.objmin) { // Orange
-    x = ((objective_value - system_controls.objmin) / (4 * system_controls.objmin - system_controls.objmin)) * orangeWidth + greenWidth;
+  } else if (model_objective_value > model_system_controls.objmin) { // Orange
+    x = ((model_objective_value - model_system_controls.objmin) / (4 * model_system_controls.objmin - model_system_controls.objmin)) * orangeWidth + greenWidth;
   } else { // Green
-    x = (objective_value / system_controls.objmin) * greenWidth;
+    x = (model_objective_value / model_system_controls.objmin) * greenWidth;
   }
-//  console.log('In FeasibilityIndicator.render objective_value=', objective_value,'x=',x);
+//  console.log('In FeasibilityIndicator.render model_objective_value=', model_objective_value,'x=',x);
   return (
     <>
       <svg width={width} height={height}>
@@ -66,7 +66,7 @@ export default function FeasibilityIndicator({ width = 242, height = 24 }) {
         <OverlayTrigger placement="bottom" overlay={<Tooltip>FEASIBILITY UNDEFINED: computing constraints failed</Tooltip>}>
           <rect x={xOrigin + greenWidth + orangeWidth + redWidth} y={yOrigin + boxY} width={purpleWidth} height={boxHeight} fill="#8b299e" />
         </OverlayTrigger>)
-        <OverlayTrigger placement="top" overlay={<Tooltip>Objective Value = {objective_value.toFixed(7)}</Tooltip>}>
+        <OverlayTrigger placement="top" overlay={<Tooltip>Objective Value = {model_objective_value.toFixed(7)}</Tooltip>}>
           <polygon points={[[xOrigin + x, yOrigin + triangleHeight], [xOrigin + triangleWidth / 2 + x, yOrigin], [xOrigin - triangleWidth / 2 + x, yOrigin]]} fill="#05a4e8" stroke="white" strokeWidth={1} />
         </OverlayTrigger>)
       </svg>

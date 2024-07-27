@@ -13,7 +13,7 @@ export default function ConstraintsMinRowDependentVariable({ element, index, onC
   const [show, setShow] = useState(false);
   const [isInvalidValue, setIsInvalidValue] = useState(false);
   const [valueString, setValueString] = useState(false);
-  const show_violations = useSelector((state) => state.modelSlice.model.system_controls.show_violations);
+  const model_show_violations = useSelector((state) => state.modelSlice.model.system_controls.show_violations);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -169,8 +169,8 @@ export default function ConstraintsMinRowDependentVariable({ element, index, onC
               </Modal.Footer>
             </Modal>}
         </td>
-        <td className={"text-end align-middle small " + className + (show_violations === 0 ? "d-none" : "")} colSpan="1">
-          {show_violations === 1 && element.vmin <= 0 ?
+        <td className={"text-end align-middle small " + className + (model_show_violations === 0 ? "d-none" : "")} colSpan="1">
+          {model_show_violations === 1 && element.vmin <= 0 ?
             ''
             : (element.lmin & FIXED ?
               toODOPPrecision(element.vmin * 100.0)

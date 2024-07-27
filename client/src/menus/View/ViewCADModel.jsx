@@ -8,7 +8,7 @@ export default function ViewCADModel() {
 //  console.log('ViewCADModel - Mounting...');
 
   const model_type = useSelector((state) => state.modelSlice.model.type);
-  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -22,13 +22,13 @@ export default function ViewCADModel() {
     logUsage('event', 'ViewCADModel', { event_label: 'ViewCADModel' });
   }
 
-  var od_free = symbol_table[sto.OD_Free];
+  var od_free = model_symbol_table[sto.OD_Free];
 //  console.log('In ViewCADModel OD_Free=',od_free);
-  var wire_dia = symbol_table[sto.Wire_Dia];
+  var wire_dia = model_symbol_table[sto.Wire_Dia];
 //  console.log('In ViewCADModel Wire_Dia=',wire_dia);
-  var coils_t = symbol_table[sto.Coils_T];
+  var coils_t = model_symbol_table[sto.Coils_T];
 //  console.log('In ViewCADModel Coils_T=',coils_t);
-//        var l_free = symbol_table[14];
+//        var l_free = model_symbol_table[14];
 ////        console.log('In ViewCADModel L_Free=',l_free);
 //
 //        var l_free_value = l_free.value;

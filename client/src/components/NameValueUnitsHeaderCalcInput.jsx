@@ -4,8 +4,8 @@ import { OverlayTrigger, Tooltip  } from 'react-bootstrap';
 
 export default function NameValueUnitsHeaderCalcInput() {
 //  console.log('NameValueUnitsHeaderCalcInput - Mounting...');
-  const symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
 
   useEffect(() => {
 //    console.log('NameValueUnitsHeaderCalcInput - Mounted');
@@ -15,7 +15,7 @@ export default function NameValueUnitsHeaderCalcInput() {
 
   return (
     <>
-      { (symbol_table.reduce((accum,element)=>{if (element.type === "calcinput" && !element.hidden) return accum+1; else return accum;}, 0) > 0) &&
+      { (model_symbol_table.reduce((accum,element)=>{if (element.type === "calcinput" && !element.hidden) return accum+1; else return accum;}, 0) > 0) &&
         (<thead id="nvuhci">
           <tr>
             <th className="text-center bg-secondary text-white" colSpan="6" id="CITitle">
@@ -35,7 +35,7 @@ export default function NameValueUnitsHeaderCalcInput() {
                 <span>Value</span>
               </OverlayTrigger>
             </th>
-            <th className={"text-start " + (system_controls.show_units ? "" : "d-none")} id="CIUnitsTitle">
+            <th className={"text-start " + (model_system_controls.show_units ? "" : "d-none")} id="CIUnitsTitle">
               <OverlayTrigger placement="top" overlay={<Tooltip>Units (information only)</Tooltip>}>
                 <span>Units</span>
               </OverlayTrigger>

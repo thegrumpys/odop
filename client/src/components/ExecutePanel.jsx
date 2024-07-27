@@ -69,7 +69,7 @@ export default function ExecutePanel() {
   const states = useSelector((state) => state.executePanelSlice.states);
   const step = useSelector((state) => state.executePanelSlice.step);
 //  const testGenerate = useSelector((state) => state.executePanelSlice.testGenerate);
-  const design = useSelector((state) => state.modelSlice.model);
+  const model = useSelector((state) => state.modelSlice.model);
   const model_type = useSelector((state) => state.modelSlice.model.type);
 //  console.log('ExecutePanel - Mounting...','show=',show,'executeName=',executeName,'prefix=',prefix,'states=',states,'step=',step);
   const dispatch = useDispatch();
@@ -83,7 +83,7 @@ export default function ExecutePanel() {
   const onNext = () => {
 //    console.log('ExecutePanel.onNext');
     var next = step + 1;
-    var localStates = Object.assign([...states], { [next]: Object.assign({}, states[next], { state: JSON.stringify(design) }) });
+    var localStates = Object.assign([...states], { [next]: Object.assign({}, states[next], { state: JSON.stringify(model) }) });
     // Put current store state into steps[next].state - remember this for "back" time travel
     dispatch(setStates(localStates));
     dispatch(setStep(next));
