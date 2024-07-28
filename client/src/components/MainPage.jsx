@@ -80,10 +80,10 @@ export default function MainPage() {
     var viewNames = getViewNames();
 //    console.log('MainPage','model_type useEffect','viewNames=', viewNames);
 //    console.log('MainPage','Mounted','model_type useEffect','model_view=',model_view,'config.url.view=',config.url.view,'viewNames[0]=',viewNames[0].name);
-    if (viewNames.findIndex(element => element.name === config.url.view) >= 0) { // Config URL view found
+    if (viewNames.findIndex(element => element.name === model_view) >= 0) { // Model view found
 //      console.log('MainPage','Mounted','model_type useEffect','Use model_view=',model_view);
       ; // No-op, leave model view name unchanged
-    } else if (viewNames.findIndex(element => element.name === model_view) >= 0) { // Model view found
+    } else if (viewNames.findIndex(element => element.name === config.url.view) >= 0) { // Config URL view found
 //      console.log('MainPage','Mounted','model_type useEffect','Use config.url.view=',config.url.view);
       dispatch(changeView(config.url.view)); // Change to Config URL view name
     } else { // Else viewNames[0] can always be found
@@ -105,13 +105,13 @@ export default function MainPage() {
   var { getViewNames } = require('../designtypes/'+model_type+'/view.js'); // Dynamically load getViewNames
   var viewNames = getViewNames(); // Get them in MainPage render because they contain React Components
 //  console.log('MainPage','model_type=',model_type,'model_view=',model_view,'config.url.view=',config.url.view,'viewNames[0]=',viewNames[0].name);
-  var viewIndex = viewNames.findIndex(element => element.name === config.url.view)
+  var viewIndex = viewNames.findIndex(element => element.name === model_view)
   if (viewIndex >= 0) { // Found
-//    console.log('MainPage','Use config.url.view=',config.url.view);
+//    console.log('MainPage','Use model_view=',model_view);
   } else {
-    viewIndex = viewNames.findIndex(element => element.name === model_view);
+    viewIndex = viewNames.findIndex(element => element.name === config.url.view);
     if (viewIndex >= 0) { // Found
-//      console.log('MainPage','Use model_view=',model_view);
+//      console.log('MainPage','Use config.url.view=',config.url.view);
     } else {
       viewIndex = 0;
 //      console.log('MainPage','Use viewNames[0].name=',viewNames[0].name);
