@@ -12,8 +12,8 @@ import { useOktaAuth } from '@okta/okta-react';
 export default function FileOpen() {
 //  console.log('FileOpen - Mounting...');
   const model_user = useSelector((state) => state.modelSlice.user);
-  const model_type = useSelector((state) => state.modelSlice.model.type);
   const model_name = useSelector((state) => state.modelSlice.name);
+  const model_type = useSelector((state) => state.modelSlice.model.type);
   const [show, setShow] = useState(config.url.prompt);
   const [types, setTypes] = useState(config.env.types);
   const [names, setNames] = useState([{ user: model_user, name: model_name }]);
@@ -92,7 +92,7 @@ export default function FileOpen() {
       return res.json()
     })
     .then((design) => {
-//        console.log('FileOpen.getDesign design=', design);
+//      console.log('FileOpen.getDesign design=', design);
       var { migrate } = require('../../designtypes/' + design.type + '/migrate.js'); // Dynamically load migrate
       var migrated_design = migrate(design);
       if (migrated_design.jsontype === "ODOP") {
@@ -137,16 +137,16 @@ export default function FileOpen() {
   const onSignIn = () => {
 //    console.log('FileOpen.onSignIn');
     setShow(!show);
-//    console.log('In FileOpen.onSignIn - navigate('/login')');
+//    console.log('FileOpen.onSignIn - navigate('/login')');
     navigate('/login'); // Must be last
   }
 
   const onLoadInitialState = () => {
 //    console.log('FileOpen.onLoadInitialState');
     setShow(!show);
-    let rc = dispatch(loadInitialState(type, 'US'));
-//    console.log('rc=',rc);
+    dispatch(loadInitialState(type, 'US'));
     dispatch(deleteAutoSave());
+//    console.log('FileOpen.onLoadInitialState','model_user=',model_user,'model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
     logUsage('event', 'FileOpen', { event_label: type + ' load initialState US' });
   }
 
@@ -155,6 +155,7 @@ export default function FileOpen() {
     setShow(!show);
     dispatch(loadInitialState(type, 'Metric'));
     dispatch(deleteAutoSave());
+//    console.log('FileOpen.onLoadMetricInitialState','model_user=',model_user,'model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
     logUsage('event', 'FileOpen', { event_label: type + ' load initialState Metric' });
   }
 
@@ -163,6 +164,7 @@ export default function FileOpen() {
     setShow(!show);
     dispatch(restoreAutoSave());
     dispatch(deleteAutoSave());
+//    console.log('FileOpen.onLoadAutoSave','model_user=',model_user,'model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
     logUsage('event', 'FileOpen', { event_label: type + ' load autoSave' });
   }
 
@@ -174,6 +176,7 @@ export default function FileOpen() {
   const onOpen = () => {
 //    console.log('FileOpen.onOpen');
     setShow(!show);
+//    console.log('FileOpen.onOpen','model_user=',model_user,'type=',type,'name=',name,'model_view=',model_view);
     getDesign(model_user, type, name); // Load the model
   }
 

@@ -54,7 +54,6 @@ export default function MainPage() {
 //  const model_user = useSelector((state) => state.modelSlice.user);
 //  console.log('MainPage','Mounting...','model_type=',model_type,'model_name=',model_name,'model_view=',model_view,'model_user=',model_user);
   const [show, setShow] = useState(false);
-  const [viewName, setViewName] = useState(config.url.view);
   const dispatch = useDispatch();
   const { oktaAuth, authState } = useOktaAuth();
 //  console.log('MainPage','oktaAuth=',oktaAuth,'authState=',authState);
@@ -71,33 +70,29 @@ export default function MainPage() {
   }, [authState]);
 
   useEffect(() => {
-//    console.log('MainPage','Mounted','model_view useEffect','model_view=',model_view);
-    setViewName(model_view);
-//    return () => console.log('MainPage','Unmounting ...','model_view useEffect');
-    return () => {};
-  }, [model_view]);
-
-  useEffect(() => {
-//    console.log('MainPage','Mounted','model_type useEffect','model_type=',model_type);
+//    console.log('MainPage','Mounted','model_type useEffect','model_type=',model_type,'model_view=',model_view);
 //    if (model_type === null) return () => console.log('MainPage','Unmounting ...','model_type useEffect');
-    if (model_type === null) return () => {};
+    if (model_type === null) return () => {
+//      console.log('MainPage','Unmounting ...','model_type useEffect');
+    }
     var { getViewNames } = require('../designtypes/'+ model_type + '/view.js'); // Dynamically load getViewNames
 //    console.log('MainPage','model_type useEffect','getViewNames=', getViewNames);
     var viewNames = getViewNames();
 //    console.log('MainPage','model_type useEffect','viewNames=', viewNames);
-    if (model_type === config.url.type) {
-      var viewIndex = viewNames.findIndex(element => element.name === config.url.view);
-//      console.log('MainPage','model_type useEffect','viewIndex=', viewIndex);
-      if (viewIndex >= 0) {
-        dispatch(changeView(viewNames[viewIndex].name)); // if not found then assume the configured default
-      } else { // Not found
-        dispatch(changeView(viewNames[0].name)); // Default to the first one
-      }
-    } else {
-      dispatch(changeView(config.env.view)); // if not found then assume the configured default
+//    console.log('MainPage','Mounted','model_type useEffect','model_view=',model_view,'config.url.view=',config.url.view,'viewNames[0]=',viewNames[0].name);
+    if (viewNames.findIndex(element => element.name === config.url.view) >= 0) { // Config URL view found
+//      console.log('MainPage','Mounted','model_type useEffect','Use model_view=',model_view);
+      ; // No-op, leave model view name unchanged
+    } else if (viewNames.findIndex(element => element.name === model_view) >= 0) { // Model view found
+//      console.log('MainPage','Mounted','model_type useEffect','Use config.url.view=',config.url.view);
+      dispatch(changeView(config.url.view)); // Change to Config URL view name
+    } else { // Else viewNames[0] can always be found
+//      console.log('MainPage','Mounted','model_type useEffect','Use viewNames[0].name=',viewNames[0].name);
+      dispatch(changeView(viewNames[0].name)); // Change to viewNames[0] view name
     }
-//    return () => console.log('MainPage','Unmounting ...','model_type useEffect');
-    return () => {};
+    return () => {
+//      console.log('MainPage','Unmounting ...','model_type useEffect');
+    }
   }, [model_type]);
 
   const toggle = () => {
@@ -109,7 +104,21 @@ export default function MainPage() {
 
   var { getViewNames } = require('../designtypes/'+model_type+'/view.js'); // Dynamically load getViewNames
   var viewNames = getViewNames(); // Get them in MainPage render because they contain React Components
-//  console.log('MainPage','show=', show,'viewNames=', viewNames,'viewName=', viewName);
+//  console.log('MainPage','model_type=',model_type,'model_view=',model_view,'config.url.view=',config.url.view,'viewNames[0]=',viewNames[0].name);
+  var viewIndex = viewNames.findIndex(element => element.name === config.url.view)
+  if (viewIndex >= 0) { // Found
+//    console.log('MainPage','Use config.url.view=',config.url.view);
+  } else {
+    viewIndex = viewNames.findIndex(element => element.name === model_view);
+    if (viewIndex >= 0) { // Found
+//      console.log('MainPage','Use model_view=',model_view);
+    } else {
+      viewIndex = 0;
+//      console.log('MainPage','Use viewNames[0].name=',viewNames[0].name);
+    }
+  }
+  var viewComponent = viewNames[viewIndex].component;
+//  console.log('MainPage','show=', show,'model_type=',model_type,'model_view=',model_view,'viewNames=', viewNames,'viewIndex=', viewIndex,'viewComponent=', viewComponent);
 
   var src = 'designtypes/' + model_type + '/favicon.ico';
   var alt = model_type + ' icon';
@@ -187,7 +196,7 @@ export default function MainPage() {
           <ExecutePanel />
         </Row>
         <ResultTable />
-        {viewNames[viewNames.findIndex(element => element.name === viewName)].component}
+        {viewComponent}
       </Container>
     </>
   );

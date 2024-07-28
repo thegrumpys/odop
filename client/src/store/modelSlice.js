@@ -139,6 +139,7 @@ export const modelSlice = createSlice({
           },
           view: action.payload.view,
         });
+//        console.log('end reducer changeView', 'result=', result);
         return result;
       },
       prepare: (view) => { return { payload: { view } } }

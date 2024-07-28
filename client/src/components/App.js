@@ -14,7 +14,7 @@ import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js'
 import { LoginCallback, SecureRoute, Security } from '@okta/okta-react';
 
 export default function App() {
-//  console.log('APP - Mounting...');
+//  console.log('App','Mounting...');
   const [show, setShow] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
   const model_user = useSelector((state) => state.modelSlice.user);
@@ -24,65 +24,66 @@ export default function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-//  console.log('APP','location=',location);
+//  console.log('App','location=',location);
 
   useEffect(() => {
-//    console.log('APP - useEffect Mounted');
+//    console.log('App.useEffect','Mounted');
     if (typeof(Storage) !== "undefined" && localStorage.getItem("redirect") !== null) {
-//      console.log('In App restore "redirect" file')
+//      console.log('App.useEffect','restore "redirect" file')
       loadRedirectDesign();
     } else if (typeof(Storage) !== "undefined" && localStorage.getItem("autosave") !== null) {
-//      console.log('In App restore "autosave" file')
+//      console.log('App.useEffect','restore "autosave" file')
       promptLoadAutoSave();
     } else {
-//      console.log('In App restore default design')
+//      console.log('App.useEffect','restore default design')
       loadDefaultDesign();
     }
-    return () => console.log('APP - useEffect Unmounting ...');
-//    return () => {};
+    return () => {
+//      console.log('App.useEffect','Unmounting ...');
+    }
   }, []);
 
   const loadRedirectDesign = () => {
-//    console.log('APP - loadRedirectDesign');
+//    console.log('App.loadRedirectDesign');
     dispatch(restoreAutoSave('redirect'));
     dispatch(deleteAutoSave('redirect'));
     dispatch(deleteAutoSave()); // Get rid of any AutoSave data too
-//    console.log('APP - loadAutoSaveDesign','model_user=',model_user,'model_name=',model_name,'model_view=',model_view,'model_type=',model_type);
+//    console.log('App.loadAutoSaveDesign','model_user=',model_user,'model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
     config.url.prompt = false; // Turn off prompt
     config.url.name = model_name; // Use model name
     config.url.view = model_view; // Use model view
     config.url.type = model_type; // Use model type
     config.url.execute = undefined; // Turn off execute
     logUsage('event', 'App', { event_label: 'type: ' + model_type + ' load redirect ' + model_name});
-//    console.log('APP - loadRedirectDesign navigate('/')');
+//    console.log('App.loadRedirectDesign'.'navigate('/')');
     navigate('/'); // Must be last after logUsage
   }
 
   const promptLoadAutoSave = () => {
-//    console.log('APP - promptLoadAutoSave');
+//    console.log('App.promptLoadAutoSave');
     setShow(true);
     setShowWelcome(false);
     logUsage('event', 'App', { event_label: 'type: ' + model_type + ' prompt autoSave' });
   }
 
   const loadAutoSaveDesign = () => {
-//    console.log('APP - loadAutoSaveDesign');
+//    console.log('App.loadAutoSaveDesign');
     setShow(false);
     dispatch(restoreAutoSave());
     dispatch(deleteAutoSave());
-//    console.log('APP - loadAutoSaveDesign','model_user=',model_user,'model_name=',model_name,'model_view=',model_view,'model_type=',model_type);
+//    console.log('App.loadAutoSaveDesign','model_user=',model_user,'model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
     config.url.prompt = false; // Turn off prompt
     config.url.name = model_name; // Use model name
     config.url.view = model_view; // Use model view
     config.url.type = model_type; // Use model type
     config.url.execute = undefined; // Turn off execute
     logUsage('event', 'Routes', { event_label: 'type: ' + model_type + ' load autoSave ' + model_name});
-//    console.log('APP - loadAutoSaveDesign navigate('/')');
+//    console.log('App.loadAutoSaveDesign'.'navigate('/')');
     navigate('/'); // Must be last after logUsage
   }
 
   const loadDefaultDesign = () => {
-//    console.log('APP - loadDefaultDesign','config.url.execute=',config.url.execute,'model_user=',model_user,'config.url.type=',config.url.type,'config.url.name=',config.url.name);
+//    console.log('App.loadDefaultDesign','config.url.execute=',config.url.execute,'model_user=',model_user,'config.url.type=',config.url.type,'config.url.name=',config.url.name,'model_view=',model_view);
     setShow(false);
     if (!showWelcome) {
       config.url.execute = undefined; // Turn off execute
@@ -93,7 +94,7 @@ export default function App() {
   }
 
   const getDesign = (user, type, name) => {
-//    console.log('APP - getDesign','user=',user,'type=',type,'name=',name);
+//    console.log('App.getDesign','user=',user,'type=',type,'name=',name);
     displaySpinner(true);
     fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
       headers: {
@@ -108,16 +109,16 @@ export default function App() {
       return res.json();
     })
     .then((design) => {
-//      console.log('APP - getDesign design=', design);
+//      console.log('App.getDesign','design=', design);
       var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
-//      console.log('APP - getDesign','migrate=',migrate);
+//      console.log('App.getDesign','migrate=',migrate);
       var migrated_design = migrate(design);
-//      console.log('APP - getDesign','migrated_design=',migrated_design);
+//      console.log('App.getDesign','migrated_design=',migrated_design);
       if (migrated_design.jsontype === "ODOP") {
-//        console.log('APP - getDesign before load');
+//        console.log('App.getDesign'.'before load');
         dispatch(load(migrated_design));
         dispatch(changeName(name));
-//        console.log('APP - getDesign after load');
+//        console.log('App.getDesign'.'after load');
         dispatch(deleteAutoSave());
         logUsage('event', 'App', { event_label: 'type: ' + type + ' name: ' + name });
         if (config.url.execute !== undefined) { // Once the design is loaded then you can run the query parameter execute script
@@ -136,24 +137,24 @@ export default function App() {
   }
 
   const onAuthRequired = () => {
-//    console.log('APP - onAuthRequired');
-//    console.log('APP - navigate('/login')');
+//    console.log('App.onAuthRequired');
+//    console.log('App.navigate('/login')');
     navigate('/login'); // Must be last
   }
 
   const onContextHelp = () => {
-//    console.log('APP - onContextHelp');
+//    console.log('App.onContextHelp');
     window.open('/docs/Help/autoSave.html', '_blank');
   }
 
   const restoreOriginalUri = async (oktaAuth, originalUri) => {
-//    console.log('APP - restoreOriginalUri','oktaAuth=',oktaAuth,'originalUri=',originalUri,'window.location.origin=',window.location.origin);
-//    console.log('APP - navigate(toRelativeUrl(originalUri || \'/\', window.location.origin), { replace: true })');
+//    console.log('App.restoreOriginalUri','oktaAuth=',oktaAuth,'originalUri=',originalUri,'window.location.origin=',window.location.origin);
+//    console.log('App.navigate(toRelativeUrl(originalUri || \'/\', window.location.origin), { replace: true })');
     navigate(toRelativeUrl(originalUri || '/', window.location.origin), { replace: true }); // Must be last
   };
 
   const oktaAuth = new OktaAuth({...config.oidc});
-//  console.log('APP - render','oktaAuth=',oktaAuth);
+//  console.log('App.render','oktaAuth=',oktaAuth);
 
   return (
     <>
