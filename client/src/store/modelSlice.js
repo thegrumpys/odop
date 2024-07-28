@@ -872,7 +872,7 @@ export const modelSlice = createSlice({
           } else {
             result = Object.assign({}, state, autosave); // New format
           }
-          var { migrate } = require('../designtypes/' + state.model.type + '/migrate.js'); // Dynamically load migrate
+          var { migrate } = require('../designtypes/' + result.model.type + '/migrate.js'); // Dynamically load migrate
           result = Object.assign({}, result, {
             ...result,
             model: migrate(result.model),
