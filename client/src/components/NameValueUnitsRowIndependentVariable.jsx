@@ -8,6 +8,7 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
 export default function NameValueUnitsRowIndependentVariable({ element, index, onChangeValid, onChangeInvalid, onSet, onReset }) {
+  const model_enable_auto_fix = useSelector((state) => state.modelSlice.model.system_controls.enable_auto_fix);
   const model_show_units = useSelector((state) => state.modelSlice.model.system_controls.show_units);
   const dispatch = useDispatch();
 
@@ -20,7 +21,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   const onChangeValidLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onChangeValid event.target.value=', event.target.value);
     var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
-    if (model_system_controls.enable_auto_fix) {
+    if (model_enable_auto_fix) {
       auto_fixed = true;
       if (!(element.lmin & FIXED)) {
         dispatch(fixSymbolValue(element.name));

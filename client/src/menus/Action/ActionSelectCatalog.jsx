@@ -77,7 +77,7 @@ export default function ActionSelectCatalog() {
     model_symbol_table.forEach((element) => {
       st.push(Object.assign({}, element));
     });
-    var localEntries = getCatalogEntries(localName, store, st, model_system_controls.viol_wt);
+    var localEntries = getCatalogEntries(localName, store, st, model_viol_wt);
     var localEntry = 0; // Default to first entry
     setName(localName);
     setEntries(localEntries);

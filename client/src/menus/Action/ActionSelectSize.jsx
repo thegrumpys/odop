@@ -92,7 +92,7 @@ export default function ActionSelectSize() {
     // Do select size entry
     dispatch(saveAutoSave());
     var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
-    if (model_enable_auto_fix.enable_auto_fix) {
+    if (model_enable_auto_fix) {
       auto_fixed = true;
       var found = model_symbol_table.find((element) => element.name === type);
       //            console.log('In ActionSelectSize.onSelect found=',found);
