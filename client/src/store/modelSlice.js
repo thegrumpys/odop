@@ -25,7 +25,7 @@ export const modelSlice = createSlice({
 
     startup: {
       reducer: (state, action) => {
-//        console.log('start reducer startup', 'state=', current(state), ',action=', action);
+//        console.log('start reducer startup', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -42,7 +42,7 @@ export const modelSlice = createSlice({
 
     load: {
       reducer: (state, action) => {
-//        console.log('start reducer load', 'state=', current(state), ',action=', action);
+//        console.log('start reducer load', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -61,7 +61,7 @@ export const modelSlice = createSlice({
 
     loadInitialState: {
       reducer: (state, action) => {
-//        console.log('start reducer loadInitialState', 'state=', current(state), ',action=', action);
+//        console.log('start reducer loadInitialState', 'state=', current(state), 'action=', action);
         var module;
         if (action.payload.units === 'US') {
           module = require('../designtypes/' + action.payload.type + '/initialState.js'); // Dynamically load initialState
@@ -89,7 +89,7 @@ export const modelSlice = createSlice({
 
     changeName: {
       reducer: (state, action) => {
-//        console.log('start reducer changeName', 'state=', current(state), ',action=', action);
+//        console.log('start reducer changeName', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, {
           ...state,
           model: {
@@ -127,7 +127,7 @@ export const modelSlice = createSlice({
 
     changeView: {
       reducer: (state, action) => {
-//        console.log('start reducer changeView', 'state=', current(state), ',action=', action);
+//        console.log('start reducer changeView', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, {
           ...state,
           model: {
@@ -147,7 +147,7 @@ export const modelSlice = createSlice({
 
     changeSymbolValue: {
       reducer: (state, action) => {
-//        console.log('start reducer changeSymbolValue', 'state=', current(state), ',action=', action);
+//        console.log('start reducer changeSymbolValue', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -177,7 +177,7 @@ export const modelSlice = createSlice({
 
     fixSymbolValue: {
       reducer: (state, action) => {
-//        console.log('start reducer fixSymbolValue', 'state=', current(state), ',action=', action);
+//        console.log('start reducer fixSymbolValue', 'state=', current(state), 'action=', action);
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index < 0) {
           console.error('fixSymbolValue: Failed to find name in symbol_table.', 'name=', action.payload.name);
@@ -199,7 +199,7 @@ export const modelSlice = createSlice({
 
     freeSymbolValue: {
       reducer: (state, action) => {
-//        console.log('start reducer freeSymbolValue', 'state=', current(state), ',action=', action);
+//        console.log('start reducer freeSymbolValue', 'state=', current(state), 'action=', action);
         var index = state.model.symbol_table.findIndex((element) => element.name === action.payload.name);
         if (index < 0) {
           console.error('freeSymbolValue: Failed to find name in symbol_table.', 'name=', action.payload.name);
@@ -221,7 +221,7 @@ export const modelSlice = createSlice({
 
     changeSymbolViolation: {
       reducer: (state, action) => {
-//        console.log('start reducer changeSymbolViolation', 'state=', current(state), ',action=', action);
+//        console.log('start reducer changeSymbolViolation', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -256,7 +256,7 @@ export const modelSlice = createSlice({
 
     changeSymbolConstraint: {
       reducer: (state, action) => {
-//        console.log('start reducer changeSymbolConstraint', 'state=', current(state), ',action=', action);
+        console.log('start reducer changeSymbolConstraint', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -301,7 +301,7 @@ export const modelSlice = createSlice({
 
     changeSymbolConstraints: {
       reducer: (state, action) => {
-//        console.log('start reducer changeSymbolConstraints', 'state=', current(state), ',action=', action);
+//        console.log('start reducer changeSymbolConstraints', 'state=', current(state), 'action=', action);
         var i = 0;
         var result = Object.assign({}, state, {
           ...state,
@@ -345,7 +345,7 @@ export const modelSlice = createSlice({
 
     saveOutputSymbolConstraints: {
       reducer: (state, action) => {
-//        console.log('start reducer saveOutputSymbolConstraints', 'state=', current(state), ',action=', action);
+//        console.log('start reducer saveOutputSymbolConstraints', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -384,7 +384,7 @@ export const modelSlice = createSlice({
 
     restoreOutputSymbolConstraints: {
       reducer: (state, action) => {
-//        console.log('start reducer restoreOutputSymbolConstraints', 'state=', current(state), ',action=', action);
+//        console.log('start reducer restoreOutputSymbolConstraints', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -431,7 +431,7 @@ export const modelSlice = createSlice({
 
     setSymbolFlag: {
       reducer: (state, action) => {
-//        console.log('start reducer setSymbolFlag', 'state=', current(state), ',action=', action);
+//        console.log('start reducer setSymbolFlag', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -465,7 +465,7 @@ export const modelSlice = createSlice({
 
     resetSymbolFlag: {
       reducer: (state, action) => {
-//        console.log('start reducer resetSymbolFlag', 'state=', current(state), ',action=', action);
+//        console.log('start reducer resetSymbolFlag', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -498,7 +498,7 @@ export const modelSlice = createSlice({
 
     changeSymbolInput: {
       reducer: (state, action) => {
-//        console.log('start reducer changeSymbolInput', 'state=', current(state), ',action=', action);
+//        console.log('start reducer changeSymbolInput', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -526,7 +526,7 @@ export const modelSlice = createSlice({
 
     changeSymbolHidden: {
       reducer: (state, action) => {
-//        console.log('start reducer changeSymbolHidden', 'state=', current(state), ',action=', action);
+//        console.log('start reducer changeSymbolHidden', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -554,7 +554,7 @@ export const modelSlice = createSlice({
 
     changeInputSymbolValues: {
       reducer: (state, action) => {
-//        console.log('start reducer changeInputSymbolValues', 'state=', current(state), ',action=', action);
+//        console.log('start reducer changeInputSymbolValues', 'state=', current(state), 'action=', action);
         var i = 0;
         var result = Object.assign({}, state, {
           ...state,
@@ -588,7 +588,7 @@ export const modelSlice = createSlice({
 
     saveInputSymbolValues: {
       reducer: (state, action) => {
-//        console.log('start reducer saveInputSymbolValues', 'state=', current(state), ',action=', action);
+//        console.log('start reducer saveInputSymbolValues', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -617,7 +617,7 @@ export const modelSlice = createSlice({
 
     restoreInputSymbolValues: {
       reducer: (state, action) => {
-//        console.log('start reducer restoreInputSymbolValues', 'state=', current(state), ',action=', action);
+//        console.log('start reducer restoreInputSymbolValues', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -654,7 +654,7 @@ export const modelSlice = createSlice({
 
     changeOutputSymbolValues: {
       reducer: (state, action) => {
-//        console.log('start reducer changeOutputSymbolValues', 'state=', current(state), ',action=', action);
+//        console.log('start reducer changeOutputSymbolValues', 'state=', current(state), 'action=', action);
         var i = 0;
         var result = Object.assign({}, state, {
           ...state,
@@ -690,7 +690,7 @@ export const modelSlice = createSlice({
 
     changeResultObjectiveValue: {
       reducer: (state, action) => {
-//        console.log('start reducer changeResultObjectiveValue', 'state=', current(state), ',action=', action);
+//        console.log('start reducer changeResultObjectiveValue', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -709,7 +709,7 @@ export const modelSlice = createSlice({
 
     changeResultTerminationCondition: {
       reducer: (state, action) => {
-//        console.log('start reducer changeResultTerminationCondition', 'state=', current(state), ',action=', action);
+//        console.log('start reducer changeResultTerminationCondition', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -727,7 +727,7 @@ export const modelSlice = createSlice({
 
     changeResultSearchCompleted: {
       reducer: (state, action) => {
-//        console.log('start reducer changeResultSearchCompleted', 'state=', current(state), ',action=', action);
+//        console.log('start reducer changeResultSearchCompleted', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -746,7 +746,7 @@ export const modelSlice = createSlice({
 
     changeSystemControlsValue: {
       reducer: (state, action) => {
-//        console.log('start reducer changeSystemControlsValue', 'state=', current(state), ',action=', action);
+//        console.log('start reducer changeSystemControlsValue', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -768,7 +768,7 @@ export const modelSlice = createSlice({
 
     changeLabelsValue: {
       reducer: (state, action) => {
-//        console.log('start reducer changeLabelsValue', 'state=', current(state), ',action=', action);
+//        console.log('start reducer changeLabelsValue', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -797,7 +797,7 @@ export const modelSlice = createSlice({
 
     search: {
       reducer: (state, action) => {
-//        console.log('start reducer search', 'state=', current(state), ',action=', action);
+//        console.log('start reducer search', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -814,7 +814,7 @@ export const modelSlice = createSlice({
 
     seek: {
       reducer: (state, action) => {
-//        console.log('start reducer seek', 'state=', current(state), ',action=', action);
+//        console.log('start reducer seek', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -832,11 +832,11 @@ export const modelSlice = createSlice({
 
     saveAutoSave: {
       reducer: (state, action) => {
-//        console.log('start reducer saveAutoSave', 'state=', current(state), ',action=', action);
+//        console.log('start reducer saveAutoSave', 'state=', current(state), 'action=', action);
 //        console.log('in reducer saveAutoSave', 'state.user=', current(state).user, 'state.name=', current(state).name, 'state.view=', current(state).view, 'state.model.type=', current(state).model.type);
         if (typeof (Storage) !== "undefined") {
           localStorage.setItem(action.payload.name, JSON.stringify(state), null, 2); // create or replace auto save file with current state contents
-//          console.log('In reducers.SAVE_AUTO_SAVE action.payload.name=',action.payload.name,'state=',state);
+//          console.log('In reducers.SAVE_AUTO_SAVE action.payload.name=',action.payload.name,'state=',current(state));
         }
         var result = Object.assign({}, state, {
           ...state,
@@ -848,6 +848,7 @@ export const modelSlice = createSlice({
             }
           }
         });
+//        console.log('end reducer saveAutoSave', 'state=', current(state), 'action=', action, 'result=', result);
         return result;
       },
       prepare: (name = 'autosave') => { return { payload: { name } } }
@@ -855,7 +856,7 @@ export const modelSlice = createSlice({
 
     restoreAutoSave: {
       reducer: (state, action) => {
-//        console.log('start reducer restoreAutoSave', 'state=', current(state), ',action=', action);
+//        console.log('start reducer restoreAutoSave', 'state=', current(state), 'action=', action);
         var result;
         if (typeof (Storage) !== "undefined") {
           var autosave = JSON.parse(localStorage.getItem(action.payload.name)); // get auto save file contents
@@ -889,6 +890,7 @@ export const modelSlice = createSlice({
             }
           }
         });
+//        console.log('end reducer restoreAutoSave', 'state=', current(state), 'action=', action, 'result=', result);
         return result;
       },
       prepare: (name = 'autosave') => { return { payload: { name } } }
@@ -896,7 +898,7 @@ export const modelSlice = createSlice({
 
     deleteAutoSave: {
       reducer: (state, action) => {
-//        console.log('start reducer deleteAutoSave', 'state=', current(state), ',action=', action);
+//        console.log('start reducer deleteAutoSave', 'state=', current(state), 'action=', action);
         if (typeof (Storage) !== "undefined") {
           localStorage.removeItem(action.payload.name); // remove auto save file
 //          console.log('In reducers.DELETE_AUTO_SAVE action.payload.name=',action.payload.name,'state=',state);
@@ -910,6 +912,7 @@ export const modelSlice = createSlice({
             }
           }
         });
+//        console.log('end reducer deleteAutoSave', 'state=', current(state), 'action=', action, 'result=', result);
         return result;
       },
       prepare: (name = 'autosave') => { return { payload: { name } } }
@@ -917,7 +920,7 @@ export const modelSlice = createSlice({
 
     logUsage: {
       reducer: (state, action) => {
-//        console.log('start reducer logUsage', 'state=', current(state), ',action=', action);
+//        console.log('start reducer logUsage', 'state=', current(state), 'action=', action);
         log(action.payload.tag, action.payload.action, action.payload.note); // log is alias of logUsage
         var result = Object.assign({}, state, {
           model: {
