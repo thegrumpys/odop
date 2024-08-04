@@ -256,7 +256,7 @@ export const modelSlice = createSlice({
 
     changeSymbolConstraint: {
       reducer: (state, action) => {
-        console.log('start reducer changeSymbolConstraint', 'state=', current(state), 'action=', action);
+//        console.log('start reducer changeSymbolConstraint', 'state=', current(state), 'action=', action);
         var result = Object.assign({}, state, {
           ...state,
           model: {
@@ -442,19 +442,37 @@ export const modelSlice = createSlice({
             },
             symbol_table: state.model.symbol_table.map((element) => {
               if (element.name === action.payload.name) {
-//                console.log('In reducers.SET_SYMBOL_FLAG state=',state,'action=', action);
-                var inner_result;
+                var inner_result = Object.assign({}, element);
                 if (action.payload.minmax === MIN) {
-                  inner_result = { lmin: element.lmin | action.payload.mask };
+                  inner_result.lmin = inner_result.lmin | action.payload.mask;
+                  if (action.payload.mask & FDCL && action.payload.source !== undefined) {
+                    inner_result.cminchoice = inner_result.cminchoices.indexOf(action.payload.source);
+                  }
                 } else {
-                  inner_result = { lmax: element.lmax | action.payload.mask };
+                  inner_result.lmax = inner_result.lmax | action.payload.mask;
+                  if (action.payload.mask & FDCL && action.payload.source !== undefined) {
+                    inner_result.cmaxchoice = inner_result.cmaxchoices.indexOf(action.payload.source);
+                  }
                 }
-                inner_result = Object.assign({}, element, inner_result);
-//                console.log('In reducers.SET_SYMBOL_FLAG ','action=', action,'element=',element,'update=',update,'result=',result);
+//                console.log('In reducers.SET_SYMBOL_FLAG','element=',element,'inner_result=',inner_result);
+                return inner_result;
+              } else if (action.payload.source !== undefined && element.name === action.payload.source) {
+                var inner_result = Object.assign({}, element);
+                if (action.payload.mask & FDCL) {
+                  if (inner_result.propagate === undefined || inner_result.propagate.length === 0) {
+                    inner_result.propagate = [{ name: action.payload.name, minmax: action.payload.minmax }];
+                  } else {
+                    var index = inner_result.propagate.findIndex(i => i.name === action.payload.name && i.minmax === action.payload.minmax);
+                    if (index === -1) { // If not found in propagate array then add it
+                      inner_result.propagate.push({ name: action.payload.name, minmax: action.payload.minmax });
+                    }
+                  }
+                }                
+//                console.log('In reducers.SET_SYMBOL_FLAG','element=',element,'inner_result=',inner_result);
                 return inner_result;
               } else {
                 return element;
-	              }
+              }
             }),
           }
         });
@@ -475,19 +493,35 @@ export const modelSlice = createSlice({
               termination_condition: ''
             },
             symbol_table: state.model.symbol_table.map((element) => {
+              var index;
               if (element.name === action.payload.name) {
-//                console.log('In reducers.RESET_SYMBOL_FLAG state=',state,'action=', action);
-                var inner_result;
+                var inner_result = Object.assign({}, element);
                 if (action.payload.minmax === MIN) {
-                  inner_result = { lmin: element.lmin & (~action.payload.mask) };
+                  inner_result.lmin = inner_result.lmin & (~action.payload.mask);
+                  if (action.payload.mask & FDCL) {
+                    delete inner_result.cminchoice;
+                  }
                 } else {
-                  inner_result = { lmax: element.lmax & (~action.payload.mask) };
+                  inner_result.lmax = inner_result.lmax & (~action.payload.mask);
+                  if (action.payload.mask & FDCL) {
+                    delete inner_result.cmaxchoice;
+                  }
                 }
-                inner_result = Object.assign({}, element, inner_result);
-//                console.log('In reducers.RESET_SYMBOL_FLAG ','action=', action,'element=',element,'update=',inner_result,'result=',inner_result);
+//                console.log('In reducers.RESET_SYMBOL_FLAG ','element=',element,'inner_result=',inner_result);
                 return inner_result;
+              } else if ((action.payload.mask & FDCL) && (element.propagate !== undefined) && (index = element.propagate.findIndex(i => i.name === action.payload.name && i.minmax === action.payload.minmax)) !== -1) {
+                var inner_result = Object.assign({}, element);
+                inner_result.propagate = Object.assign([], element.propagate);
+                inner_result.propagate.splice(index,1); // Delete 1 entry at offset index
+                if (inner_result.propagate.length === 0) {
+                  inner_result.propagate = undefined; // De-reference the array
+                  delete inner_result.propagate; // Delete the property
+                }
+//                console.log('In reducers.RESET_SYMBOL_FLAG ','element=',element,'index=',index,'inner_result=',inner_result);
+                return inner_result;
+              } else {
+                return element;
               }
-              return element;
             }),
           }
         });
