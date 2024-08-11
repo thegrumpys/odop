@@ -29,14 +29,14 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `design` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `user` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `type` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `value` mediumtext COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `user` varchar(64) DEFAULT NULL,
+  `type` varchar(64) NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `value` mediumtext
+);
 
 -- --------------------------------------------------------
 
@@ -45,12 +45,12 @@ CREATE TABLE `design` (
 --
 
 CREATE TABLE `usage_log` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `ip_address` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `note` longtext COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `ip_address` varchar(64) NOT NULL,
+  `note` longtext DEFAULT NULL
+);
 
 --
 -- Indexes for dumped tables
@@ -76,13 +76,13 @@ ALTER TABLE `usage_log`
 -- AUTO_INCREMENT for table `design`
 --
 ALTER TABLE `design`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `usage_log`
 --
 ALTER TABLE `usage_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

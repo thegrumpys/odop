@@ -33,9 +33,9 @@ export default function FileImport() {
     setShow(!show);
     dispatch(executeStop());
     displaySpinner(true);
-    fileReader.readAsText(selectedFile); // Begin Reading Text File
     fileReader.onloadend = onLoadEnd; // On Load End callback
     fileReader.onError = onError; // On Error callback
+    fileReader.readAsText(selectedFile); // Begin Reading Text File
 
   };
 
@@ -49,7 +49,7 @@ export default function FileImport() {
       dispatch(load(migrated_design));
       dispatch(changeName(filename));
       dispatch(deleteAutoSave());
-      logUsage('event', 'FileImport', { event_label: migrated_design.type + ' ' + migrated_design.name });
+      logUsage('event', 'FileImport', { event_label: migrated_design.type + ' ' + filename });
     } else {
       displayMessage('Invalid JSON type, function ignored');
     }
@@ -58,7 +58,7 @@ export default function FileImport() {
 
   const onError = (e) => {
 //    console.log('In FileImport.onError e=',e);
-    displayMessage('GET of design names failed with message: \'' + fileReader.error.message + '\'');
+    displayMessage('Read of Import File failed with message: \'' + fileReader.error.message + '\'');
     displaySpinner(false);
   }
 
