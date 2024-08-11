@@ -12,6 +12,28 @@ export const executePanelSlice = createSlice({
 //    testGenerate: config.node.env !== "production" ? true : false,
   },
   reducers: {
+    executeStart: {
+      reducer: (state, action) => {
+//        console.log('executePanelSlice executeStart','state=',current(state),',action=',action);
+        state.show = action.payload.show;
+        state.executeName = action.payload.executeName;
+        state.prefix = action.payload.prefix;
+        state.states = action.payload.states;
+        state.step = action.payload.step;
+      },
+      prepare: (show, executeName, prefix, states, step) => { return { payload: {show, executeName, prefix, states, step} } }
+    },
+    executeStop: {
+      reducer: (state, action) => {
+//        console.log('executePanelSlice executeStop','state=',current(state),',action=',action);
+        state.show = false;
+        state.executeName = undefined;
+        state.prefix = '';
+        state.states = [];
+        state.step = 0;
+      },
+      prepare: () => { return { payload: {} } }
+    },
     setShow: {
       reducer: (state, action) => {
 //        console.log('executePanelSlice setShow','state=',current(state),',action=',action);
@@ -57,6 +79,6 @@ export const executePanelSlice = createSlice({
   }
 });
 
-export const { setShow, setExecuteName, setPrefix, setStates, setStep, /*, setTestGenerate */ } = executePanelSlice.actions; // FIXME
+export const { executeStart, executeStop, setShow, setExecuteName, setPrefix, setStates, setStep, /*, setTestGenerate */ } = executePanelSlice.actions; // FIXME
 
 export default executePanelSlice.reducer;

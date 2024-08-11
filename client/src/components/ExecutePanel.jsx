@@ -6,7 +6,7 @@ import { actionDumper } from '../store/actionDumper';
 import { logUsage } from '../logUsage';
 import config from '../config';
 import { outputStart, outputLine, outputStop } from '../menus/View/ViewExecuteToTest';
-import { setExecuteName, setShow, setPrefix, setStates, setStep, setTitle, setText /*, setTestGenerate */ } from '../store/executePanelSlice'; // FIXME
+import { executeStart, executeStop, setExecuteName, setShow, setPrefix, setStates, setStep, setTitle, setText /*, setTestGenerate */ } from '../store/executePanelSlice'; // FIXME
 import store from '../store/store';
 
 export const startExecute = (prefix, executeName) => {
@@ -24,10 +24,7 @@ export const startExecute = (prefix, executeName) => {
   var localText = execute.steps[0].text;
 //    var localTestGenerate = config.node.env !== "production" ? true : false; // FIXME
 //  console.log('startExecute','localStates=',localStates,'localTitle=',localTitle,'localText=',localText);
-  store.dispatch(setShow(true)); // Default: do display
-  store.dispatch(setPrefix(prefix));
-  store.dispatch(setExecuteName(executeName));
-  store.dispatch(setStates(localStates)); // Put current store state into steps[0].state - remember this for "back" time travel
+  store.dispatch(executeStart(true, executeName, prefix, localStates, 0)); // Put current store state into steps[0].state - remember this for "back" time travel
 //  store.dispatch(setTestGenerate(localTestGenerate)); // FIXME
 //  if (localTestGenerate) outputStart(executeName);
 //  if (localTestGenerate) outputLine('    // title: "' + localTitle + '"');
@@ -53,11 +50,7 @@ export const stopExecute = () => {
 //  console.log('stopExecute');
   var executeName = store.getState().executePanelSlice.executeName;
   logUsage('event', 'ExecutePanel', { event_label: 'stop ' + executeName });
-  store.dispatch(setExecuteName(undefined)); // Clear execute name
-  store.dispatch(setShow(false)); // Default: do not display
-  store.dispatch(setPrefix(''));
-  store.dispatch(setStates([]));
-  store.dispatch(setStep(0));
+  store.dispatch(executeStop());
 //  var testGenerate = store.getSTate().executePanelSlice.testGenerate; // FIXME
 //  if (testGenerate) outputStop();
 }

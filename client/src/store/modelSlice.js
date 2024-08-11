@@ -37,7 +37,8 @@ export const modelSlice = createSlice({
           }
         });
         return result;
-      }
+      },
+      prepare: () => { return { payload: {} } }
     },
 
     load: {
