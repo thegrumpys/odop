@@ -9,7 +9,9 @@
     "test": "react-app-rewired test --env=jsdom",
     "coverage": "react-app-rewired test --env=jsdom --coverage",
     "eject": "react-scripts eject",
-    "analyze": "source-map-explorer 'build/static/js/*.js'"
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "postinstall": "patch-package",
+    "heroku-cleanup": "npx patch-package"
   },
   "repository": {
     "type": "git",
@@ -53,6 +55,7 @@
     "fs": "^0.0.1-security",
     "https-browserify": "^1.0.0",
     "os-browserify": "^0.3.0",
+    "patch-package": "^8.0.0",
     "path-browserify": "^1.0.1",
     "process": "^0.11.10",
     "react-app-rewired": "^2.2.1",
