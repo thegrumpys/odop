@@ -112,7 +112,7 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
     <tbody id={'cmxrdv_' + element.name}>
       <tr key={element.name}>
         <td className="align-middle d-lg-none" id={'cmxrdv_name_' + element.name}>
-          <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip className="d-lg-none"><div dangerouslySetInnerHTML={{__html: this.props.element.tooltip}}></div></Tooltip>}>
+          <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip className="d-lg-none"><div dangerouslySetInnerHTML={{__html: element.tooltip}}></div></Tooltip>}>
             <span>{element.name}</span>
           </OverlayTrigger>
         </td>

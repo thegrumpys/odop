@@ -13,7 +13,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1,
-            "tooltip": "<Table><tr><td>Longest dimension</td></tr><tr><td><Image fluid src=\"http://localhost:3000/designtypes/Solid/FileName.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Longest dimension</td></tr><tr><td><Image fluid src=\"/designtypes/Solid/tooltips/FileName.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -29,7 +29,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1,
-            "tooltip": "<Table><tr><td>Width dimension</td></tr><tr><td><Image fluid src=\"http://localhost:3000/designtypes/Solid/FileName.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Width dimension</td></tr><tr><td><Image fluid src=\"/designtypes/Solid/tooltips/FileName.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -45,7 +45,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1,
-            "tooltip": "<Table><tr><td>Shortest dimension</td></tr><tr><td><Image fluid src=\"http://localhost:3000/designtypes/Solid/FileName.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Shortest dimension</td></tr><tr><td><Image fluid src=\"/designtypes/Solid/tooltips/FileName.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -61,7 +61,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0,
-            "tooltip": "<Table><tr><td>Select from list</td></tr><tr><td><Image fluid src=\"http://localhost:3000/designtypes/Solid/FileName.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Select from list</td></tr><tr><td><Image fluid src=\"/designtypes/Solid/tooltips/FileName.png\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },
@@ -77,7 +77,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0,
-            "tooltip": "<Table><tr><td>Weight per unit volume of the selected material</td></tr><tr><td><Image fluid src=\"http://localhost:3000/designtypes/Solid/FileName.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Weight per unit volume of the selected material</td></tr><tr><td><Image fluid src=\"/designtypes/Solid/tooltips/FileName.png\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },
@@ -93,7 +93,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1,
-            "tooltip": "<Table><tr><td>Three-dimensional space enclosed</td></tr><tr><td><Image fluid src=\"http://localhost:3000/designtypes/Solid/FileName.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Three-dimensional space enclosed</td></tr><tr><td><Image fluid src=\"/designtypes/Solid/tooltips/FileName.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -109,7 +109,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1,
-            "tooltip": "<Table><tr><td>Sum of the area of the surfaces</td></tr><tr><td><Image fluid src=\"http://localhost:3000/designtypes/Solid/FileName.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Sum of the area of the surfaces</td></tr><tr><td><Image fluid src=\"/designtypes/Solid/tooltips/FileName.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -125,7 +125,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.01,
-            "tooltip": "<Table><tr><td>Computed ratio of volume to surface area</td></tr><tr><td><Image fluid src=\"http://localhost:3000/designtypes/Solid/FileName.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Computed ratio of volume to surface area</td></tr><tr><td><Image fluid src=\"/designtypes/Solid/tooltips/FileName.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -141,7 +141,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1,
-            "tooltip": "<Table><tr><td>Perimeter around width and height dimensions</td></tr><tr><td><Image fluid src=\"http://localhost:3000/designtypes/Solid/FileName.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Perimeter around width and height dimensions</td></tr><tr><td><Image fluid src=\"/designtypes/Solid/tooltips/FileName.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -157,7 +157,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1,
-            "tooltip": "<Table><tr><td>Sum of length and girth dimensions. Shippers may limit to ~275 cm.</td></tr><tr><td><Image fluid src=\"http://localhost:3000/designtypes/Solid/FileName.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Sum of length and girth dimensions. Shippers may limit to ~275 cm.</td></tr><tr><td><Image fluid src=\"/designtypes/Solid/tooltips/FileName.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -173,7 +173,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1,
-            "tooltip": "<Table><tr><td>3D distance from corner to furthest corner</td></tr><tr><td><Image fluid src=\"http://localhost:3000/designtypes/Solid/FileName.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>3D distance from corner to furthest corner</td></tr><tr><td><Image fluid src=\"/designtypes/Solid/tooltips/FileName.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -189,7 +189,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "<Table><tr><td>Volume times Density of the selected material. Shippers may limit to 30 kg.</td></tr><tr><td><Image fluid src=\"http://localhost:3000/designtypes/Solid/FileName.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Volume times Density of the selected material. Shippers may limit to 30 kg.</td></tr><tr><td><Image fluid src=\"/designtypes/Solid/tooltips/FileName.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         }
