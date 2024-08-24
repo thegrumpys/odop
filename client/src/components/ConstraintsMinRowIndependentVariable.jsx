@@ -108,7 +108,7 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
     <tbody id={'cmnriv_' + element.name}>
       <tr key={element.name}>
         <td className="align-middle d-lg-none" id={'cmnriv_name_' + element.name}>
-          <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip className="d-lg-none">{element.tooltip}</Tooltip>}>
+          <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip className="d-lg-none"><div dangerouslySetInnerHTML={{__html: this.props.element.tooltip}}></div></Tooltip>}>
             <span>{element.name}</span>
           </OverlayTrigger>
         </td>

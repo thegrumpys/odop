@@ -88,7 +88,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
     <tbody id={'nvuriv_' + element.name}>
       <tr key={element.name}>
         <td className="align-middle" colSpan="2" id={'nvuriv_name_' + element.name}>
-          <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip>{element.tooltip}</Tooltip>}>
+          <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip><div dangerouslySetInnerHTML={{__html: this.props.element.tooltip}}></div></Tooltip>}>
             <span>{element.name}</span>
           </OverlayTrigger>
         </td>
