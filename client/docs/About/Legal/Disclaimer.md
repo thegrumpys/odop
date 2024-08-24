@@ -5,4 +5,4 @@ Validity, accuracy or applicability of results of this program are NOT guarantee
 The user must verify all results by independent means and assume all responsibilities for their use and consequences.
 No warranty is provided.  No liability is assumed.   
    
-[About](/docs/About)
+[About](/docs/About/index.html)

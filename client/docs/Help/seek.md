@@ -71,4 +71,4 @@ with the [File : Preferences](menus.html#FilePreferences) menu item.
 
 &nbsp;  
 
-[Help](/docs/Help) 
+[Help](/docs/Help/index.html) 

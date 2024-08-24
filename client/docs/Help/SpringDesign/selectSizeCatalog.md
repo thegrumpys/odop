@@ -92,10 +92,10 @@ MS24586\_(SAE-AS24586)\_e\_ss  | &nbsp; | Military Standard, Extension, Stainles
  
  See also: 
  
- * [Spring Design Topics](/docs/Help/SpringDesign)   
+ * [Spring Design Topics](/docs/Help/SpringDesign/index.html)   
  * [Menu Action : Select Size...](/docs/Help/menus.html#ActionSelectSize)   
  * [Menu Action : Select Catalog...](/docs/Help/menus.html#ActionSelectCatalog)   
  * [Extension spring catalog lookup](/docs/Help/htt.html#e_springCatLookup)   
- * [Help](/docs/Help)   
+ * [Help](/docs/Help/index.html)   
 
  

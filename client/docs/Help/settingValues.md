@@ -147,7 +147,7 @@ Related topics:
 
 &nbsp;   
 
-[Help](/docs/Help) 
+[Help](/docs/Help/index.html) 
 
 &nbsp;   
 

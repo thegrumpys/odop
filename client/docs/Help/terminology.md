@@ -567,5 +567,5 @@ ___
 &nbsp; 
 
 [Top](terminology.html#top)  
-[Help](/docs/Help)  
+[Help](/docs/Help/index.html)  
 

@@ -666,6 +666,6 @@ ___
 
 &nbsp;
 
-[Spring Design Topics](/docs/Help/SpringDesign)   
-[Help](/docs/Help)   
+[Spring Design Topics](/docs/Help/SpringDesign/index.html)   
+[Help](/docs/Help/index.html)   
 

@@ -50,11 +50,11 @@ export const execute = {
                     </p>
 
                     <p>
-                    The on-line documentation sections (Help entries) titled
-                    &nbsp;<a href="/docs/Help/SpringDesign" target="_blank" rel="noopener noreferrer">Spring Design</a>&nbsp;
-                    and
-                    &nbsp;<a href="/docs/Help/DesignTypes/Spring/Compression/description.html" target="_blank" rel="noopener noreferrer">Compression Spring</a>&nbsp;
-                    provide a more detailed definition for each of the Calculation Inputs.
+                    The on-line documentation sections (Help entries) titled 
+                    &nbsp;<a href="/docs/Help/SpringDesign/index.html" target="_blank" rel="noopener noreferrer">Spring Design</a>&nbsp; 
+                    and 
+                    &nbsp;<a href="/docs/Help/DesignTypes/Spring/Compression/description.html" target="_blank" rel="noopener noreferrer">Compression Spring</a>&nbsp; 
+                    provide a more detailed definition for each of the Calculation Inputs.  
                     It would make the tutorial too long (and boring !) to review each quantity here.
                     However, it is important to make sure that you understand that
                     Stress_Lim_Stat and Stress_Lim_Endur are the allowable

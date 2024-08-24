@@ -83,4 +83,4 @@ Switch tabs in order to return to that Sign-In page or simply close this tab.
 
 &nbsp; 
 
-[About](/docs/About) 
+[About](/docs/About/index.html) 

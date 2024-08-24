@@ -79,7 +79,7 @@ export default function HelpAbout() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Link to <a href="/docs/About/" target="_blank" rel="noopener noreferrer">About</a> topics
+          Link to <a href="/docs/About/index.html" target="_blank" rel="noopener noreferrer">About</a> topics
           <br />
           Link to <a href={'/docs/Help/DesignTypes/' + model_type + '/description.html'} target="_blank" rel="noopener noreferrer">{model_type} Design Type</a> description
           <br />

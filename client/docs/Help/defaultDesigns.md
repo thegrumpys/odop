@@ -40,4 +40,4 @@ and in other on-line Help topics such as
 
 &nbsp;
 
-[Help](/docs/Help)
+[Help](/docs/Help/index.html)

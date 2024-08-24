@@ -87,4 +87,4 @@ It is possible to save designs into the public account but keep in mind that all
 **If you feel that we are not abiding by this privacy policy, please [Contact Us](/docs/About/ContactUs.html) immediately.** 
    
 &nbsp;   
-[About](/docs/About)   
+[About](/docs/About/index.html)   

@@ -16,5 +16,5 @@ See: [Default Designs](/docs/Help/defaultDesigns.html) for more information.
 
 &nbsp;
   
-[Spring Design Topics](/docs/Help/SpringDesign)   
-[Help](/docs/Help)   
+[Spring Design Topics](/docs/Help/SpringDesign/index.html)   
+[Help](/docs/Help/index.html)   

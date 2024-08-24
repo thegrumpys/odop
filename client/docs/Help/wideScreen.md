@@ -45,5 +45,5 @@ See also:
 
 &nbsp; 
 
-[About](/docs/About)   
-[Help](/docs/Help)   
+[About](/docs/About/index.html)   
+[Help](/docs/Help/index.html)   

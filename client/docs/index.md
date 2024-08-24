@@ -15,7 +15,7 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 * [Privacy Statement](About/Legal/PrivacyStatement.html)
 * [User Accounts](About/userAccounts.html)
 * [Contact Us](About/ContactUs.html)
-* [Help topics](Help)   
+* [Help topics](Help/index.html)   
 
 
 ## Help
@@ -40,9 +40,9 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 * [Help Lookup](Help/helpLookup.html)
 * [Hints, Tips and Tricks](Help/htt.html)
 * [AutoSave](Help/autoSave.html)
-* [Design Types](Help/DesignTypes)
-* [Spring Design](Help/SpringDesign)
-* [About topics](About)   
+* [Design Types](Help/DesignTypes/index.html)
+* [Spring Design](Help/SpringDesign/index.html)
+* [About topics](About/index.html)   
 
 
 ## Design

@@ -30,7 +30,7 @@ This topic covers the ODOP menu structure.
  * [Help : Index](menus.html#HelpIndex) 
  * [Help : Demo...](menus.html#HelpDemo) 
  * [Help : Tutorial...](menus.html#HelpTutorial) 
- * [Help : About](menus.html#HelpAbout) 
+ * [Help : About](menus.html#HelpAbout/index.html) 
 
 ___
 
@@ -511,7 +511,7 @@ Most of these articles are common to all design types.
 An entry describing [Available Design Types](DesignTypes) is near the bottom of the list. 
 
 A link to a list of [Spring Design Topics](SpringDesign) is near the bottom of the list.
-The last link on the list is an alternate way to reach the [About](/docs/About) articles.
+The last link on the list is an alternate way to reach the [About](/docs/About/index.html) articles.
 
 ___
 
@@ -554,15 +554,16 @@ The Help : About menu item displays information about the ODOP software.
 
 This information includes: 
  - a link to the "About: articles in the on-line Help 
+ - a link to the description page for the current design type
  - a link to the SpringDesignSoftware.org website home page 
  - a link to the Wikipedia article describing open-source software 
  - a description of the ODOP license 
  - the current ODOP software version 
- - the current design type (Model) version and associated units 
+ - the current design type (Model), version and associated units 
 
 ___
 
 &nbsp; 
  
-[Help](/docs/Help) 
+[Help](/docs/Help/index.html) 
 

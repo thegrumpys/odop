@@ -5,7 +5,7 @@ The Torsion Spring design type is a full-featured mathematical model enabling
 the engineering design of round wire helical coil torsion springs. 
 
 This section presents material unique to the Torsion Spring design type. 
-The more general material available at [Spring Design Topics](/docs/Help/SpringDesign) 
+The more general material available at [Spring Design Topics](/docs/Help/SpringDesign/index.html) 
 provides important supplemental information. 
 
 ___
@@ -252,10 +252,10 @@ ___
 
 ## Related topics 
 
- - [Design Types](/docs/Help/DesignTypes)   
- - [Spring Design Topics](/docs/Help/SpringDesign)   
+ - [Design Types](/docs/Help/DesignTypes/index.html)   
+ - [Spring Design Topics](/docs/Help/SpringDesign/index.html)   
  - [Restrictions](/docs/About/Legal/Restrictions.html)   
- - [Help](/docs/Help)   
+ - [Help](/docs/Help/index.html)   
 
 &nbsp;  
 

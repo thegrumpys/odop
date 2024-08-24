@@ -18,7 +18,7 @@ For details, see: [Requirements](http://odop.springdesignsoftware.org/docs/About
 
 To establish a free account, see: [User Accounts](http://odop.springdesignsoftware.org/docs/About/userAccounts.html). 
 
-Evaluators and new users should be sure to see the [About](http://odop.springdesignsoftware.org/docs/About) section 
+Evaluators and new users should be sure to see the [About](http://odop.springdesignsoftware.org/docs/About/index.html) section 
 of the on-line documentation early in the learning process. 
 Also, a short [Getting Started with ODOP](https://www.youtube.com/watch?v=JS-8Z1Ct0aI) video is available.
 

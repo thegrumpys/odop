@@ -80,14 +80,14 @@ export const execute = {
                     <p>
                     Expanded descriptions are available as tooltips for many elements of the Calculator View.
                     Hover the cursor (tap on a touch screen) over headings, labels, and variable names to learn more.
-                    This compression spring
-                    &nbsp;<a href="/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png" target="_blank" rel="noopener noreferrer">Force-Deflection diagram</a>&nbsp;
-                    illustrates selected variable names.
-                    Additional insights are available in the
-                    &nbsp;<a href="/docs/Help" target="_blank" rel="noopener noreferrer">on-line Help</a>&nbsp;
-                    plus
-                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp;
-                    sessions.
+                    This compression spring 
+                    &nbsp;<a href="/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png" target="_blank" rel="noopener noreferrer">Force-Deflection diagram</a>&nbsp; 
+                    illustrates selected variable names.  
+                    Additional insights are available in the  
+                    &nbsp;<a href="/docs/Help/index.html" target="_blank" rel="noopener noreferrer">on-line Help</a>&nbsp; 
+                    plus 
+                    &nbsp;<a href="/docs/Help/tutordemo.html" target="_blank" rel="noopener noreferrer">Tutorial and Demo</a>&nbsp; 
+                    sessions. 
                     </p>
                     <br />
                 </>
@@ -137,9 +137,9 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The <b>File : Open</b> menu above provides the ability to open existing designs of
-                    supported spring
-                    &nbsp;<a href="/docs/Help/DesignTypes" target="_blank" rel="noopener noreferrer">types</a>&nbsp;
+                    The <b>File : Open</b> menu above provides the ability to open existing designs of 
+                    supported spring 
+                    &nbsp;<a href="/docs/Help/DesignTypes/index.html" target="_blank" rel="noopener noreferrer">types</a>&nbsp; 
                     (
                     <a href="/docs/Help/DesignTypes/Spring/Compression/description.html" target="_blank" rel="noopener noreferrer">compression,</a>&nbsp;
                     <a href="/docs/Help/DesignTypes/Spring/Extension/description.html" target="_blank" rel="noopener noreferrer">extension</a>&nbsp;
