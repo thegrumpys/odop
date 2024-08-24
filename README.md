@@ -42,3 +42,7 @@ More detail is available in the [On-line Help](https://odop.springdesignsoftware
 &nbsp; [Rectangular Solid with constraints of USPS "Machinable Parcels"](https://odop.springdesignsoftware.org?type=Solid&name=USPS_MachinableParcels)  
 
 &nbsp;
+If you are developing software that utilizes any of this material, please contact us. We would like to work with you.
+Specifically, we may be able to integrate pull requests such that your work can more easily take advantage of our future enhancements.
+
+&nbsp;
