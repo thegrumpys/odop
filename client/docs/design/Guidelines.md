@@ -60,9 +60,16 @@ odop/client/public/designtypes/xxx/imagename
 
 Any images in documentation should be located in a "docs": subdirectory:   
 
-* odop/client/docs/About/img/imagename   
-* odop/client/docs/design/img/imagename   
-* odop/client/docs/Help/img/imagename   
+* odop/client/docs/design/img 
+* odop/client/docs/About/img 
+* odop/client/docs/Help/img 
+* odop/client/docs/Help/DesignTypes/Piston-Cylinder/img 
+* odop/client/docs/Help/DesignTypes/Solid/img 
+* odop/client/docs/Help/DesignTypes/Spring/img 
+* odop/client/docs/Help/DesignTypes/Spring/Compression/img - to be defined 
+* odop/client/docs/Help/DesignTypes/Spring/Extension/img - to be defined 
+* odop/client/docs/Help/DesignTypes/Spring/Torsion/img 
+
 
 See issues #243 & #244.
 
