@@ -83,7 +83,7 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 ## Procedures
 
 * [Release Process](procedures/release.html) 
-* [Version Number Guidelines](design/VersionNumbers.html) 
+* [Guidelines](design/Guidelines.html) 
 * [New Design Type](procedures/NewDesignType.html) 
 * [initialState, Startup and load.sql](procedures/initialState_startup_loadSQL.html) 
 * [Install development environment on a new computer](procedures/developmentEnvironment.html) 
