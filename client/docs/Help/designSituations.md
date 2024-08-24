@@ -10,15 +10,15 @@ Under-specified situations have too few constraints.
 There is nothing that prevents Seek from producing a trivial result.
 A Seek operation on an under-specified situation will likely result in an extremely poor ("degenerate") design.
 For example, **Seek Min Weight** could produce a design with close to zero dimensions.
-Well, probably not what you wanted but at least it has very low weight !
+This is probably not what you wanted but at least it has very low weight !
 
 Over-specified situations have fixes and constraints that are mutually exclusive, allowing no solution.
 See below for examples.
 A Search operation on an over-specified situation will almost certainly produce a result 
 that is "NOT FEASIBLE".
-Unfortunately, it is also possible for a properly-specified situation with overly ambitious goals to produce a 
+It is also possible for a properly-specified situation with overly ambitious goals to produce a 
 "NOT FEASIBLE" search result. 
-Without a careful analysis plus good understanding of the equations and values involved,
+Unfortunately, without a careful analysis plus good understanding of the equations and values involved,
 it can be difficult to distinguish the difference between these two cases.
 
 Properly-specified situations without overly ambitious goals may provide a "feasible region" 
@@ -28,7 +28,7 @@ A Seek is necessary to find a design that is "best" ...
 specifically, the min or max of one of the design variables.
 
 Note that the ODOP default designs, also known as Startup and initialState, are under-specified.
-These designs generally require the user to add additional constraints 
+These designs require the user to add additional constraints 
 in order to produce a useful result with Seek.
 
 &nbsp;
@@ -46,25 +46,24 @@ finding a feasible solution may be impossible.
 Coil spring design offers many such opportunities to over-specify a design situation.
 Some of these are a consequence of 
 [Hooke's Law](https://en.wikipedia.org/wiki/Hooke%27s_law) 
-which says that the force-deflection relationship of coil springs is linear. 
+which says that the force-deflection relationship is linear<sup>*</sup>. 
 
- - This discussion applies to helical coil compression, extension and torsion springs 
+<sup>*</sup> This discussion applies to helical coil compression, extension and torsion springs 
 that have the properties of uniform pitch and cylindrical shape with loading along the coil axis 
 and ignores deviation from linearity caused by real-world issues such as 
-tolerances and small geometric imperfections. 
+tolerances, asymmetry of applied load and geometric imperfections in forming the spring. 
 
 For compression and torsion springs, 
 by definition of the term "deflection", there is a requirement of zero force at zero deflection. 
-For compression and torsion springs, 
-the zero force at zero deflection point has to fall on the line 
-describing the 
+The zero force at zero deflection point has to fall on the line describing the 
 [relationship between force and deflection](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png).
 
-ODOP:Spring allows the user to specify force and deflection at two load points. 
+ODOP:Spring allows the user to specify force and deflection at two points. 
 For compression and torsion springs, 
-If the line defined by those two points does not pass through zero force at zero deflection, 
-the Search process (<b>Action : Search</b> menu item) will likely determine the result is "NOT FEASIBLE".
-In summary, this is the same situation as attempting to specify a straight line with more than two points. 
+if the line defined by those two points does not pass through zero force at zero deflection, 
+the Search process (Search button or <b>Action : Search</b> menu item) will likely determine the result is "NOT FEASIBLE".
+In summary, this situation is over-specified. 
+It is the same situation as attempting to specify a straight line with more than two points. 
 The Search feature can produce a feasible design only if all the points are on the same straight line.
 
 For extension springs, the potential to vary initial tension (within limits) may allow the user

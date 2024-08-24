@@ -98,7 +98,7 @@ ___
 
 Alert entry #ODOP01
 ##  Objective Value is Infinity
-The Objective Value can become Infinity when numerical difficulties such as division be zero are encountered 
+The Objective Value can become Infinity when numerical difficulties such as division by zero are encountered 
 while solving the design equations.  
 
 Other entries in the Alerts panel may provide more specific details about which variables are causing the problem 
@@ -230,10 +230,10 @@ Alert entry #ODOP07
 Constraints on the associated variable are inconsistent. 
 Specifically, the MAX constraint value is less than the MIN constraint value. 
 
-This inconsistency may block the Search, Seek and Trade features from starting.
-
 To resolve the situation, change one or both of the associated variable's constraint values. 
 Increase the MAX value and / or decrease the MIN value until there is no overlap. 
+
+This inconsistency may block the Search, Seek and Trade features from starting.
 
 See also: 
  - [Constraints](/docs/Help/terminology.html#constraints)  
@@ -395,15 +395,16 @@ Alert entry #ODOP12
 If all [Independent Variables](/docs/Help/terminology.html#independentVar) (inputs) are in 
 [Fixed](/docs/Help/terminology.html#fix) status, 
 there is nothing left for Search to manipulate in order to achieve a feasible design. 
-This condition may block use of the Search, Seek and Trade features. 
-
-It is possible that operation of the [AutoFix](/docs/Help/terminology.html#autoFix) feature 
-has contributed to the situation. 
 
 In order to resolve this situation, put one or more Independent Variables in Free status. 
 Specifically, uncheck the checkbox that is positioned between the associated variable's 
 value and its units label. 
 When in Calculator View, first click the variable in order to open its value change dialog box. 
+
+This condition may block use of the Search, Seek and Trade features. 
+
+It is possible that operation of the [AutoFix](/docs/Help/terminology.html#autoFix) feature 
+has contributed to the situation. 
 
 Rather than having a quantity set to a specific value with Fixed status,
 it may be appropriate to use [Constraints](/docs/Help/terminology.html#constraints) to 

@@ -83,15 +83,20 @@ There may be some inaccuracy in moments and deflections for this point.
 available deflection, the inspection (acceptance) criteria should be specified within this range.** 
 
 Helical coil compression, extension and torsion springs that have the properties of uniform pitch and cylindrical shape 
-follow Hooke's Law in that they provide a nominally linear relationship between force (moment) and deflection. 
+follow Hooke's Law which provides a nominally linear relationship between force (moment) and deflection. 
 However, in the real world there are limitations. 
 
-When torsion springs are deflected beyond roughly 80% of safe deflection 
-geometric imperfections such as 
+When torsion springs are deflected beyond roughly 80% of safe deflection, 
+geometric asymmetry and imperfections such as 
 a lack uniformity in coil pitch, 
-minor deviation from cylindrical shape 
-and deflection in the ends 
+minor deviation from cylindrical shape, 
+deflection in the ends and
+friction between coils and with the mandrel 
 become factors in the real (as opposed to theoretical) moment-deflection relationship. 
+Significantly, wound coil springs (as opposed to double-start machined springs) are not symmetric at the ends. 
+Because the load is is transmitted at an offset (Mean_Dia/2) from the centerline of the spring,
+a moment is generated potentially contributing to coil to coil contact and the real force-deflection relationship.
+
 Depending on Coil_Spacing, coil to coil contact may produce an increase in spring rate that continues to increase 
 with additional deflection until the maximum safe operating condition is reached. 
 Thus, when operating beyond 80% of the safe deflection, expect moments to be somewhat higher 
@@ -120,12 +125,16 @@ There may be some some inaccuracy in moment and deflection for this point.
 available deflection, the inspection (acceptance) criteria should be specified within this range.** 
 
 Helical coil compression, extension and torsion springs that have the properties of uniform pitch and cylindrical shape 
-follow Hooke's Law in that they provide a nominally linear relationship between force and deflection. 
+follow Hooke's Law which provides a nominally linear relationship between force and deflection. 
 However, in the real world there are limitations. 
 
 When torsion springs are deflected less than roughly 20% of maximum safe deflection, 
-various factors such as deviation from perfect coil straightness (cylindrical form) and deflection in the ends 
-will become a factor in the real (as opposed to theoretical) force-deflection relationship. 
+various factors such as 
+geometric asymmetry, 
+deviation from perfect coil straightness (cylindrical form), 
+deflection in the ends and 
+friction between coils and with the mandrel 
+become a factor in the real (as opposed to theoretical) force-deflection relationship. 
 Thus when operating within the first 20% of the available deflection expect moments to be somewhat lower 
 (or deflections to be somewhat greater) than the linear behavior predicted by the equations.  
 

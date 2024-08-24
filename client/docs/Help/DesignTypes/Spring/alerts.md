@@ -87,7 +87,7 @@ Alert entry #S53
 ## Wire_Dia > ID_Free 
 The wire diameter (Wire_Dia) is greater than the coil inside diameter (ID_Free).
 
-Most spring wire is not sufficiently ductile to be wound this tightly. 
+Most spring wire is not ductile enough to be wound this tightly. 
 
 Resolve this alert by increasing the value of the variable controlling coil diameter
 (OD_Free, Mean_Dia or ID_Free) or decreasing the value of Wire_Dia. 
@@ -137,12 +137,12 @@ Alert entry #S55
 A more restrictive Life_Category has been selected but 
 the corresponding constraint on FS_CycleLife is not enabled. 
 
+Enable the FS_CycleLife MIN constraint to utilize the selected Life_Category. 
+
 Selecting a Life_Category gets a corresponding value of %_Tensile_Endur from the internal material table. 
 This value is then used to calculate Stress_Lim_Endur. 
 The MIN constraint on FS_CycleLife must be enabled in order to have Search achieve designs 
 that do not exceed the designated Stress_Lim_Endur. 
-
-Suggest enabling the FS_CycleLife MIN constraint. 
 
 See also: 
  - [Cycle Life section of Spring Design Overview](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
@@ -156,7 +156,7 @@ ___
 Alert entry #S56
 ## Over-design concern 
 The term "over-design" implies that this design may be too conservative. 
-Its Factor of Safety at operating point 2 exceeds the maximum constraint (FS_2 MAX). 
+The Factor of Safety at operating point 2 exceeds the maximum constraint (FS_2 MAX). 
 
 Try investigating a smaller wire diameter. 
 One approach is to run Search (menu **Action : Search** or Search button) with Wire_Dia in Free status. 
@@ -265,11 +265,6 @@ This means that the current set of inputs have resulted in a stress at point 2
 For this design, the wire is at or perhaps even beyond its yield point. 
 In this situation, the direct cycle life calculation (Cycle_Life variable - Modified Goodman calculation) is not meaningful. 
 
-**Note:**   
-In this case of unrealistically high stress at point 2, 
-if Cycle_Life is Fixed or has either MIN or MAX constraints enabled, 
-Search is not likely to find a solution that is judged to be FEASIBLE. 
-
 **Recommendations:**   
 Change inputs such that stress at working point 2 (maximum operating load) is reduced. 
 
@@ -280,6 +275,11 @@ Wire_Dia | &nbsp; | Force_2 or M_2
 
 Perhaps the best approach is to to confirm that one or more of these variables is in Free status 
 and then run Search. 
+
+**Note:**   
+In this case of unrealistically high stress at point 2, 
+if Cycle_Life is Fixed or has either MIN or MAX constraints enabled, 
+Search is not likely to find a solution that is judged to be FEASIBLE. 
 
 See also: 
  - [Cycle Life section of Spring Design Overview](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
@@ -335,26 +335,33 @@ Disabling default constraints is not recommended.
 Adjust the constraint value instead. 
 
 This alert is produced when constraints enabled by default are disabled. 
+The default constraints guide Search to "good" spring designs. 
+The Seek and Trade features utilize Search internally and thus those results are also
+guided by the default constraints. 
+
 This alert can be also be produced for designs created and saved with older versions of the software. 
 Specifically, constraints on Spring_Index were not enabled by default in older designs. 
 If this alert is associated with Spring_Index on an older design, it may be ignored. 
 Better yet, clear the alert by enabling MIN and MAX constraints on Spring_Index. 
 
-The default constraints guide Search to "good" spring designs. 
-The Seek and Trade features utilize Search internally and thus those results are also
-guided by the default constraints. 
-
-For example: 
+**Examples:** 
  - A lower constraint on deflection at the first operating point (Deflect_1) 
 prevents Search from generating negative values for force and deflection at point 1. 
  - Constraints on Spring_Index insure that designs produced by the software are within the range of manufacturability. 
- For custom springs, consult your manufacturer regarding capabilities and costs. 
+For custom springs, consult your manufacturer regarding capabilities and costs. 
  - Constraints on factor of safety at the second operating point (FS_2) insure that stresses are in an appropriate range. 
  
     + Disabling FS_2 MIN allows Search to return a highly over-stressed design and declare it as "feasible". 
 
     + Disabling FS_2 MAX allows Search to return a under-stressed design and declare it as "feasible". 
     If a relatively heavy, low-stress design is desired (an "over-design" situation), increase the value of the FS_2 MAX constraint. 
+
+ - For compression springs, disabling the lower (MIN) constraint on factor of safety at solid (FS_Solid MIN) allows 
+Search to return a design that would “set” (not return to the original free length if fully deflected) and declare it as “feasible”. 
+ - For compression springs, disabling the upper (MAX) constraint on percent available deflection at operating load point 2 (%_Avail_Deflect) 
+allows Search to return a design that would deflect all the way to solid under the second operating load (Force_2) and declare it as “feasible”. 
+If a design that achieves its second operating load (Force_2) near or at the solid condition is desired, 
+change the value of the FS_2 MIN constraint to be 1.0 and the value of the %_Avail_Deflect MAX constraint to be 100.
 
 In summary, while it may be reasonable to adjust the constraint values of a default constraint, 
 disabling a default constraint entirely is not recommended. 
