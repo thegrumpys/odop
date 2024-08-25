@@ -945,11 +945,11 @@ export const initialState = {
             "name": "Vendor approval",
             "value": "__________________________ "
         },
-            {
+        {
             "name": "Vendor date",
             "value": " _______ "
         }
-],
+    ],
     "type": "Spring/Compression",
     "version": "12",
     "result": {
