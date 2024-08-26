@@ -616,7 +616,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Reduction factor applied to modulus of hot-wound materials>",
+            "tooltip": "Reduction factor applied to modulus of hot-wound materials",
             "type": "calcinput",
             "hidden": false
         },
@@ -696,7 +696,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Allowable stress for static applications<",
+            "tooltip": "Allowable stress for static applications",
             "type": "calcinput",
             "hidden": false
         },

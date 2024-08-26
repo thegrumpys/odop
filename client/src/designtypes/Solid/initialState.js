@@ -109,7 +109,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1,
-            "tooltip": "Sum of the area of the surfaces<",
+            "tooltip": "Sum of the area of the surfaces",
             "type": "equationset",
             "hidden": false
         },
