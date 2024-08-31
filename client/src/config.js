@@ -60,11 +60,11 @@ var type = searchParams.get('type');
 var name = searchParams.get('name');
 var view = searchParams.get('view');
 var execute = searchParams.get('execute');
-console.log('In config prompt=',prompt);
-console.log('In config type=',type);
-console.log('In config name=',name);
-console.log('In config view=',view);
-console.log('In config execute=',execute);
+//console.log('In config prompt=',prompt);
+//console.log('In config type=',type);
+//console.log('In config name=',name);
+//console.log('In config view=',view);
+//console.log('In config execute=',execute);
 var url_prompt = prompt !== null ? true : false;
 var url_type = type !== null ? type : env_type;
 var url_name = name !== null ? name : env_name;
@@ -79,11 +79,11 @@ var url_execute = execute !== null ? execute : undefined;
 //console.log('In config env_units=',env_units);
 //console.log('In config env_view=',env_view);
 //console.log('In config session_refresh=',session_refresh);
-console.log('In config url_prompt=',url_prompt);
-console.log('In config url_type=',url_type);
-console.log('In config url_name=',url_name);
-console.log('In config url_view=',url_view);
-console.log('In config url_execute=',url_execute);
+//console.log('In config url_prompt=',url_prompt);
+//console.log('In config url_type=',url_type);
+//console.log('In config url_name=',url_name);
+//console.log('In config url_view=',url_view);
+//console.log('In config url_execute=',url_execute);
 
 export default {
   node: {
