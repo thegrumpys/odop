@@ -19,9 +19,22 @@ export const modelSlice = createSlice({
         termination_condition: ''
       },
       system_controls: initialSystemControls
-    }
+    },
+    enableDispatcher: true,
   },
   reducers: {
+
+    inject: {
+      reducer: (state, action) => {
+//        console.log('start reducer inject', 'state=', current(state), 'action=', action);
+        var result = Object.assign({}, state, {
+          ...action.payload.store,
+          enableDispatcher: false, // inject always sets enableDispatcher false
+        });
+        return result;
+      },
+      prepare: (store) => { return { payload: { store } } }
+    },
 
     startup: {
       reducer: (state, action) => {
@@ -969,11 +982,27 @@ export const modelSlice = createSlice({
         return result;
       },
       prepare: (tag, action, note) => { return { payload: { tag, action, note } } }
-    }
+    },
+
+    enableDispatcher: {
+      reducer: (state, action) => {
+//        console.log('start reducer enableDispatcher', 'state=', current(state), 'action=', action);
+        var result = Object.assign({}, state, {
+          ...state,
+          enableDispatcher: action.payload.value
+        });
+//        console.log('start reducer enableDispatcher', 'state=', current(state), 'action=', action, 'result=', result);
+        return result;
+      },
+      prepare: (value = true) => { return { payload: { value } } }
+    },
+
   }
+
 });
 
 export const {
+  inject,
   startup,
   load,
   loadInitialState,
@@ -1007,7 +1036,8 @@ export const {
   saveAutoSave,
   restoreAutoSave,
   deleteAutoSave,
-  logUsage
+  logUsage,
+  enableDispatcher,
 } = modelSlice.actions;
 
 export default modelSlice.reducer;

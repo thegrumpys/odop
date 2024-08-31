@@ -1,11 +1,9 @@
-import { createStore, applyMiddleware } from 'redux';
 import { initialState } from '../../designtypes/Piston-Cylinder/initialState';
 import * as sto from '../../designtypes/Piston-Cylinder/symbol_table_offsets';
 import { initialSystemControls } from '../../initialSystemControls';
-import { changeSymbolValue } from '../../store/modelSlice';
-import { reducers } from '../../store/reducers';
-import { dispatcher } from '../../store/middleware/dispatcher';
+import { inject, changeSymbolValue } from '../../store/modelSlice';
 import { invokeInit } from '../../store/middleware/invokeInit';
+import store from "../../store/store";
 
 //=====================================================================
 // invokeInit
@@ -13,7 +11,7 @@ import { invokeInit } from '../../store/middleware/invokeInit';
 
 it('invokeInit', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-    const store = createStore(reducers, {"user": "USERID0123456789", name: "initialState", model: state});
+    store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
 
     store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
     store.dispatch(changeSymbolValue("RADIUS", 0.4));

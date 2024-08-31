@@ -25,6 +25,8 @@ const dispatcher = store => next => action => {
   var index;
   var element;
 
+  if (!store.getState().modelSlice.enableDispatcher) return returnValue;
+
   switch (action.type) {
 
     case startup().type:

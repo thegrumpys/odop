@@ -1,16 +1,14 @@
-import { createStore, applyMiddleware } from 'redux';
 import { initialState } from '../../designtypes/Piston-Cylinder/initialState';
 import * as sto from '../../designtypes/Piston-Cylinder/symbol_table_offsets';
 import { initialSystemControls } from '../../initialSystemControls';
 import { MAX } from '../../store/actionTypes';
-import { changeSymbolValue, changeResultObjectiveValue, changeSymbolConstraint } from '../../store/modelSlice';
-import { reducers } from '../../store/reducers';
-import { dispatcher } from '../../store/middleware/dispatcher';
+import { inject, enableDispatcher, changeSymbolValue, changeResultObjectiveValue, changeSymbolConstraint } from '../../store/modelSlice';
 import { invokeInit } from '../../store/middleware/invokeInit';
 import { invokeEquationSet } from '../../store/middleware/invokeEquationSet';
 import { setSclDen } from '../../store/middleware/setSclDen';
 import { updateObjectiveValue } from '../../store/middleware/updateObjectiveValue';
 import { search } from '../../store/middleware/search';
+import store from "../../store/store";
 
 //=====================================================================
 // search
@@ -18,7 +16,8 @@ import { search } from '../../store/middleware/search';
 
 it('search without merit', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-    const store = createStore(reducers, {"user": "USERID0123456789", name: "initialState", model: state}, applyMiddleware(dispatcher));
+    store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
+    store.dispatch(enableDispatcher(true));
 
     // These next statements replace store.dispatch(startup());
     invokeInit(store);
@@ -81,7 +80,8 @@ it('search without merit', () => {
 
 it('search with merit', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-    const store = createStore(reducers, {"user": "USERID0123456789", name: "initialState", model: state}, applyMiddleware(dispatcher));
+    store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
+    store.dispatch(enableDispatcher(true));
 
     // These next statements replace store.dispatch(startup());
     invokeInit(store);

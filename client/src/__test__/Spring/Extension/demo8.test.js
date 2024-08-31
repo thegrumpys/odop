@@ -1,7 +1,6 @@
-import { createStore, applyMiddleware } from 'redux';
 import { initialState } from '../../../designtypes/Spring/Extension/initialState';
 import { initialSystemControls } from '../../../initialSystemControls';
-import { loadInitialState,
+import { inject, enableDispatcher, loadInitialState,
          changeLabelsValue,
          changeSymbolValue,
          freeSymbolValue,
@@ -10,18 +9,15 @@ import { loadInitialState,
          changeSymbolConstraint,
          fixSymbolValue,
          search } from '../../../store/modelSlice';
-import { reducers } from '../../../store/reducers';
-import { dispatcher } from '../../../store/middleware/dispatcher';
 import { MIN, MAX, CONSTRAINED, FDCL } from '../../../store/actionTypes';
+import store from "../../../store/store";
 
 // This is a mapping of the demo8 execute file to an equivalent test case file
 
 it('demo8', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-    const store = createStore(
-        reducers,
-        {"user": "USERID0123456789", name: "initialState", model: state},
-        applyMiddleware(dispatcher));
+    store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
+    store.dispatch(enableDispatcher(true));
 
     var design = store.getState().modelSlice; // before
     design = store.getState().modelSlice;

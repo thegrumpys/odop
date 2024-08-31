@@ -6,8 +6,8 @@ import ReactDOM from 'react-dom';
 //import { initialSystemControls } from '../../initialSystemControls';
 //import MainPage from '../components/MainPage';
 //import { startup, changeSymbolValue } from '../../store/modelSlice';
-//import { reducers } from '../../store/reducers';
-
+//import store from "../../store/store";
+//
 it('renders without crashing', () => {
 //    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
 //    const store = createStore(
