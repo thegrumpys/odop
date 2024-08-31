@@ -1,5 +1,4 @@
 import runtimeEnv from '@mars/heroku-js-runtime-env';
-import queryString from 'query-string';
 require('dotenv').config();
 
 var node_env;
@@ -55,12 +54,22 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "
   session_refresh = env.REACT_APP_SESSION_REFRESH || 3600;
 }
 
-var { prompt, type, name, view, execute } = queryString.parse(window.location.search);
-var url_prompt = prompt !== undefined ? true : false;
-var url_type = type !== undefined ? type : env_type;
-var url_name = name !== undefined ? name : env_name;
-var url_view = view !== undefined ? view : env_view;
-var url_execute = execute !== undefined ? execute : undefined;
+const searchParams = new URLSearchParams(window.location.search);
+var prompt = searchParams.get('prompt');
+var type = searchParams.get('type');
+var name = searchParams.get('name');
+var view = searchParams.get('view');
+var execute = searchParams.get('execute');
+console.log('In config prompt=',prompt);
+console.log('In config type=',type);
+console.log('In config name=',name);
+console.log('In config view=',view);
+console.log('In config execute=',execute);
+var url_prompt = prompt !== null ? true : false;
+var url_type = type !== null ? type : env_type;
+var url_name = name !== null ? name : env_name;
+var url_view = view !== null ? view : env_view;
+var url_execute = execute !== null ? execute : undefined;
 //console.log('In config node_env=',node_env);
 //console.log('In config issuer=',issuer);
 //console.log('In config clientId=',clientId);
@@ -70,11 +79,11 @@ var url_execute = execute !== undefined ? execute : undefined;
 //console.log('In config env_units=',env_units);
 //console.log('In config env_view=',env_view);
 //console.log('In config session_refresh=',session_refresh);
-//console.log('In config url_prompt=',url_prompt);
-//console.log('In config url_type=',url_type);
-//console.log('In config url_name=',url_name);
-//console.log('In config url_view=',url_view);
-//console.log('In config url_execute=',url_execute);
+console.log('In config url_prompt=',url_prompt);
+console.log('In config url_type=',url_type);
+console.log('In config url_name=',url_name);
+console.log('In config url_view=',url_view);
+console.log('In config url_execute=',url_execute);
 
 export default {
   node: {

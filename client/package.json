@@ -6,7 +6,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "test": "react-app-rewired test --env=jsdom",
+    "test": "react-app-rewired test --env=jsdom --detectOpenHandles",
     "coverage": "react-app-rewired test --env=jsdom --coverage",
     "eject": "react-scripts eject",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
@@ -37,7 +37,6 @@
     "@reduxjs/toolkit": "^2.2.1",
     "bootstrap": "^5.3.3",
     "popper.js": "^1.16.1",
-    "query-string": "^9.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
     "react-dom": "^18.2.0",
@@ -48,6 +47,7 @@
     "util": "^0.12.5"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "assert": "^2.1.0",
     "browserify-fs": "^1.0.0",
     "buffer": "^6.0.3",
