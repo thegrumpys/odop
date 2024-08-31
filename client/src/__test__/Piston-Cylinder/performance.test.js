@@ -14,22 +14,22 @@ import store from "../../store/store";
 //=====================================================================
 
 it('reducers change symbol value 1000000x', () => {
-//    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-//    store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
-//
-//    var design = store.getState().modelSlice; // before
-//    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
-//    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.4);
-//    expect(design.model.symbol_table[sto.AREA].name).toEqual("AREA");
-//    expect(design.model.symbol_table[sto.AREA].value).toEqual(0);
-//
-////    store.dispatch(changeSymbolValue("RADIUS", 0.5));
-//    const start = Date.now();
-//    for (let i = 0; i < 1000000; i++) {
-//        store.dispatch(changeSymbolValue("RADIUS", 0.5));
-//    }
-//    const duration = Date.now()-start;
-//    console.log('reducers change symbol value 1000000x duration=',duration);
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
+
+    var design = store.getState().modelSlice; // before
+    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.4);
+    expect(design.model.symbol_table[sto.AREA].name).toEqual("AREA");
+    expect(design.model.symbol_table[sto.AREA].value).toEqual(0);
+
+//    store.dispatch(changeSymbolValue("RADIUS", 0.5));
+    const start = Date.now();
+    for (let i = 0; i < 1000000; i++) {
+        store.dispatch(changeSymbolValue("RADIUS", 0.5));
+    }
+    const duration = Date.now()-start;
+    console.log('reducers change symbol value 1000000x duration=',duration);
 });
 
 //=====================================================================
@@ -37,61 +37,61 @@ it('reducers change symbol value 1000000x', () => {
 //=====================================================================
 
 it('invokeEquationSet 100000x', () => {
-//    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-//    store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
-//
-//    store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
-//    store.dispatch(changeSymbolValue("RADIUS", 0.4));
-//    store.dispatch(changeSymbolValue("THICKNESS", 0.04));
-//    store.dispatch(changeSymbolValue("FORCE", 123)); // x vector
-//    store.dispatch(changeSymbolValue("AREA", 456));
-//    store.dispatch(changeSymbolValue("STRESS", 789));
-//
-////    invokeEquationSet(store);
-//    const start = Date.now();
-//    for (let i = 0; i < 100000; i++) {
-//        invokeEquationSet(store);
-//    }
-//    const duration = Date.now()-start;
-//    console.log('invokeEquationSet 100000x duration=',duration);
-//
-//    var design = store.getState().modelSlice; // after
-//    expect(design.name).toEqual("initialState");
-//    expect(design.model.type).toEqual("Piston-Cylinder");
-//    expect(design.model.version).toEqual("7");
-//
-//    expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
-//    expect(design.model.symbol_table[sto.PRESSURE].value).toEqual(500);
-//    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
-//    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.4);
-//    expect(design.model.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
-//    expect(design.model.symbol_table[sto.THICKNESS].value).toEqual(0.04);
-//    expect(design.model.symbol_table[sto.FORCE].name).toEqual("FORCE"); // x vector
-//    expect(design.model.symbol_table[sto.FORCE].value).toEqual(251.32741228718348);
-//    expect(design.model.symbol_table[sto.AREA].name).toEqual("AREA");
-//    expect(design.model.symbol_table[sto.AREA].value).toEqual(0.5026548245743669);
-//    expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
-//    expect(design.model.symbol_table[sto.STRESS].value).toEqual(2500);
-//
-//    expect(design.model.system_controls.ioopt).toEqual(3);
-//    expect(design.model.system_controls.maxit).toEqual(600);
-//    expect(design.model.system_controls.weapon).toEqual(1);
-//    expect(design.model.system_controls.nmerit).toEqual(1);
-//    expect(design.model.system_controls.fix_wt).toEqual(1.5);
-//    expect(design.model.system_controls.con_wt).toEqual(1.0);
-//    expect(design.model.system_controls.zero_wt).toEqual(10.0);
-//    expect(design.model.system_controls.viol_wt).toEqual(1.0);
-//    expect(design.model.system_controls.mfn_wt).toEqual(0.01);
-//    expect(design.model.system_controls.objmin).toEqual(0.00001);
-//    expect(design.model.system_controls.del).toEqual(1.0);
-//    expect(design.model.system_controls.delmin).toEqual(0.0001);
-//    expect(design.model.system_controls.tol).toEqual(0.0001);
-//    expect(design.model.system_controls.smallnum).toEqual(1.0e-07);
-//    expect(design.model.system_controls.show_units).toEqual(1);
-//    expect(design.model.system_controls.show_violations).toEqual(1);
-//
-//    expect(design.model.result.objective_value).toEqual(0);
-//    expect(design.model.result.termination_condition).toEqual("");
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
+
+    store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
+    store.dispatch(changeSymbolValue("RADIUS", 0.4));
+    store.dispatch(changeSymbolValue("THICKNESS", 0.04));
+    store.dispatch(changeSymbolValue("FORCE", 123)); // x vector
+    store.dispatch(changeSymbolValue("AREA", 456));
+    store.dispatch(changeSymbolValue("STRESS", 789));
+
+//    invokeEquationSet(store);
+    const start = Date.now();
+    for (let i = 0; i < 100000; i++) {
+        invokeEquationSet(store);
+    }
+    const duration = Date.now()-start;
+    console.log('invokeEquationSet 100000x duration=',duration);
+
+    var design = store.getState().modelSlice; // after
+    expect(design.name).toEqual("initialState");
+    expect(design.model.type).toEqual("Piston-Cylinder");
+    expect(design.model.version).toEqual("7");
+
+    expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
+    expect(design.model.symbol_table[sto.PRESSURE].value).toEqual(500);
+    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.4);
+    expect(design.model.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
+    expect(design.model.symbol_table[sto.THICKNESS].value).toEqual(0.04);
+    expect(design.model.symbol_table[sto.FORCE].name).toEqual("FORCE"); // x vector
+    expect(design.model.symbol_table[sto.FORCE].value).toEqual(251.32741228718348);
+    expect(design.model.symbol_table[sto.AREA].name).toEqual("AREA");
+    expect(design.model.symbol_table[sto.AREA].value).toEqual(0.5026548245743669);
+    expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
+    expect(design.model.symbol_table[sto.STRESS].value).toEqual(2500);
+
+    expect(design.model.system_controls.ioopt).toEqual(3);
+    expect(design.model.system_controls.maxit).toEqual(600);
+    expect(design.model.system_controls.weapon).toEqual(1);
+    expect(design.model.system_controls.nmerit).toEqual(1);
+    expect(design.model.system_controls.fix_wt).toEqual(1.5);
+    expect(design.model.system_controls.con_wt).toEqual(1.0);
+    expect(design.model.system_controls.zero_wt).toEqual(10.0);
+    expect(design.model.system_controls.viol_wt).toEqual(1.0);
+    expect(design.model.system_controls.mfn_wt).toEqual(0.01);
+    expect(design.model.system_controls.objmin).toEqual(0.00001);
+    expect(design.model.system_controls.del).toEqual(1.0);
+    expect(design.model.system_controls.delmin).toEqual(0.0001);
+    expect(design.model.system_controls.tol).toEqual(0.0001);
+    expect(design.model.system_controls.smallnum).toEqual(1.0e-07);
+    expect(design.model.system_controls.show_units).toEqual(1);
+    expect(design.model.system_controls.show_violations).toEqual(1);
+
+    expect(design.model.result.objective_value).toEqual(0);
+    expect(design.model.result.termination_condition).toEqual("");
 });
 
 //=====================================================================
@@ -99,72 +99,72 @@ it('invokeEquationSet 100000x', () => {
 //=====================================================================
 
 it('search without merit 1000x', () => {
-//    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-//    store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
-//    store.dispatch(enableDispatcher(true));
-//
-//    // These next statements replace store.dispatch(startup());
-//    invokeInit(store);
-//    invokeEquationSet(store);
-//    setSclDen(store);
-//    updateObjectiveValue(store);
-//
-//    store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
-//    store.dispatch(changeSymbolValue("RADIUS", 0.4));
-//    store.dispatch(changeSymbolValue("THICKNESS", 0.04));
-//    store.dispatch(changeSymbolValue("FORCE", 123)); // x vector
-//    store.dispatch(changeSymbolValue("AREA", 456));
-//    store.dispatch(changeSymbolValue("STRESS", 789));
-//    store.dispatch(changeResultObjectiveValue(0.560511));
-//
-//    var design = store.getState().modelSlice; // before
-//
-////    var obj = search(store, design.model.system_controls.objmin);
-//    var obj;
-//    const start = Date.now();
-//    for (let i = 0; i < 1000; i++) {
-//        obj = search(store, design.model.system_controls.objmin);
-//    }
-//    const duration = Date.now()-start;
-//    console.log('search without merit 1000x duration=',duration);
-//
-//    var design = store.getState().modelSlice; // after
-//    expect(obj).toEqual(0.14664205223346785);
-//
-//    expect(design.name).toEqual("initialState");
-//    expect(design.model.type).toEqual("Piston-Cylinder");
-//    expect(design.model.version).toEqual("7");
-//
-//    expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
-//    expect(design.model.symbol_table[sto.PRESSURE].value).toEqual(697.7189007950918);
-//    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
-//    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.5826768884094977);
-//    expect(design.model.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
-//    expect(design.model.symbol_table[sto.THICKNESS].value).toEqual(0.05821622609935947);
-//    expect(design.model.symbol_table[sto.FORCE].name).toEqual("FORCE"); // x vector
-//    expect(design.model.symbol_table[sto.FORCE].value).toEqual(744.193624881146);
-//    expect(design.model.symbol_table[sto.AREA].name).toEqual("AREA");
-//    expect(design.model.symbol_table[sto.AREA].value).toEqual(1.0666095243128622);
-//    expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
-//    expect(design.model.symbol_table[sto.STRESS].value).toEqual(3491.6783974103414);
-//
-//    expect(design.model.system_controls.ioopt).toEqual(3);
-//    expect(design.model.system_controls.maxit).toEqual(600);
-//    expect(design.model.system_controls.weapon).toEqual(1);
-//    expect(design.model.system_controls.nmerit).toEqual(1);
-//    expect(design.model.system_controls.fix_wt).toEqual(1.5);
-//    expect(design.model.system_controls.con_wt).toEqual(1.0);
-//    expect(design.model.system_controls.zero_wt).toEqual(10.0);
-//    expect(design.model.system_controls.viol_wt).toEqual(1.0);
-//    expect(design.model.system_controls.mfn_wt).toEqual(0.01);
-//    expect(design.model.system_controls.objmin).toEqual(0.00001);
-//    expect(design.model.system_controls.del).toEqual(1.0);
-//    expect(design.model.system_controls.delmin).toEqual(0.0001);
-//    expect(design.model.system_controls.tol).toEqual(0.0001);
-//    expect(design.model.system_controls.smallnum).toEqual(1.0e-07);
-//    expect(design.model.system_controls.show_units).toEqual(1);
-//    expect(design.model.system_controls.show_violations).toEqual(1);
-//
-//    expect(design.model.result.objective_value).toEqual(0.14664205223346785);
-//    expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN). Low iteration count may produce low precision results.");
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
+    store.dispatch(enableDispatcher(true));
+
+    // These next statements replace store.dispatch(startup());
+    invokeInit(store);
+    invokeEquationSet(store);
+    setSclDen(store);
+    updateObjectiveValue(store);
+
+    store.dispatch(changeSymbolValue("PRESSURE", 500)); // p vector
+    store.dispatch(changeSymbolValue("RADIUS", 0.4));
+    store.dispatch(changeSymbolValue("THICKNESS", 0.04));
+    store.dispatch(changeSymbolValue("FORCE", 123)); // x vector
+    store.dispatch(changeSymbolValue("AREA", 456));
+    store.dispatch(changeSymbolValue("STRESS", 789));
+    store.dispatch(changeResultObjectiveValue(0.560511));
+
+    var design = store.getState().modelSlice; // before
+
+//    var obj = search(store, design.model.system_controls.objmin);
+    var obj;
+    const start = Date.now();
+    for (let i = 0; i < 1000; i++) {
+        obj = search(store, design.model.system_controls.objmin);
+    }
+    const duration = Date.now()-start;
+    console.log('search without merit 1000x duration=',duration);
+
+    var design = store.getState().modelSlice; // after
+    expect(obj).toEqual(0.14664205223346785);
+
+    expect(design.name).toEqual("initialState");
+    expect(design.model.type).toEqual("Piston-Cylinder");
+    expect(design.model.version).toEqual("7");
+
+    expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
+    expect(design.model.symbol_table[sto.PRESSURE].value).toEqual(697.7189007950918);
+    expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
+    expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.5826768884094977);
+    expect(design.model.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
+    expect(design.model.symbol_table[sto.THICKNESS].value).toEqual(0.05821622609935947);
+    expect(design.model.symbol_table[sto.FORCE].name).toEqual("FORCE"); // x vector
+    expect(design.model.symbol_table[sto.FORCE].value).toEqual(744.193624881146);
+    expect(design.model.symbol_table[sto.AREA].name).toEqual("AREA");
+    expect(design.model.symbol_table[sto.AREA].value).toEqual(1.0666095243128622);
+    expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
+    expect(design.model.symbol_table[sto.STRESS].value).toEqual(3491.6783974103414);
+
+    expect(design.model.system_controls.ioopt).toEqual(3);
+    expect(design.model.system_controls.maxit).toEqual(600);
+    expect(design.model.system_controls.weapon).toEqual(1);
+    expect(design.model.system_controls.nmerit).toEqual(1);
+    expect(design.model.system_controls.fix_wt).toEqual(1.5);
+    expect(design.model.system_controls.con_wt).toEqual(1.0);
+    expect(design.model.system_controls.zero_wt).toEqual(10.0);
+    expect(design.model.system_controls.viol_wt).toEqual(1.0);
+    expect(design.model.system_controls.mfn_wt).toEqual(0.01);
+    expect(design.model.system_controls.objmin).toEqual(0.00001);
+    expect(design.model.system_controls.del).toEqual(1.0);
+    expect(design.model.system_controls.delmin).toEqual(0.0001);
+    expect(design.model.system_controls.tol).toEqual(0.0001);
+    expect(design.model.system_controls.smallnum).toEqual(1.0e-07);
+    expect(design.model.system_controls.show_units).toEqual(1);
+    expect(design.model.system_controls.show_violations).toEqual(1);
+
+    expect(design.model.result.objective_value).toEqual(0.14664205223346785);
+    expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN). Low iteration count may produce low precision results.");
 });

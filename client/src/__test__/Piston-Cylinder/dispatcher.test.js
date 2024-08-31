@@ -4,7 +4,7 @@ import * as sto from '../../designtypes/Piston-Cylinder/symbol_table_offsets';
 import { initialSystemControls } from '../../initialSystemControls';
 import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../store/actionTypes';
 import {
-    startup, enableDispatcher,
+    inject, enableDispatcher, startup,
     changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag,
     search, seek,
     saveAutoSave, restoreAutoSave, deleteAutoSave } from '../../store/modelSlice';
@@ -315,7 +315,7 @@ it('middleware set/reset symbol flag max FDCL', () => {
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.model.symbol_table[sto.RADIUS].lmax).toEqual(CONSTRAINED);
     expect(design.model.symbol_table[sto.RADIUS].cmaxchoices).toEqual(["THICKNESS"]);
-    expect(design.model.symbol_table[sto.THICKNESS].propagate).toEqual([]); // Fudge to make work, looks like value cascades from the last test, but it should be undefined
+    expect(design.model.symbol_table[sto.THICKNESS].propagate).toEqual(undefined);
     expect(design.model.symbol_table[sto.RADIUS].cmaxchoice).toEqual(undefined);
 
     store.dispatch(setSymbolFlag("RADIUS", MAX, FDCL, "THICKNESS"));

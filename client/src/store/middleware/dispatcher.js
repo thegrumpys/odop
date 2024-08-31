@@ -70,7 +70,9 @@ const dispatcher = store => next => action => {
           invokeInit(store);
         }
       } else {
-        console.error('changeSymbolValue: Failed to find name in symbol_table.', 'name=', action.payload.name);
+        if (action.payload.name !== "Catalog_Name" && action.payload.name !== "Catalog_Number") {
+          console.error('changeSymbolValue: Failed to find name in symbol_table.', 'name=', action.payload.name);
+        }
       }
       resetCatalogSelection(store, action);
       invokeEquationSet(store);
