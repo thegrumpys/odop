@@ -1,4 +1,7 @@
 import { initialState } from '../../designtypes/Piston-Cylinder/initialState';
+import { initialState as initialStateWithFDCL } from './initialStateWithFDCL';
+import { initialState as initialStateOld } from './initialStateOld';
+import { initialState as initialStateSpringCompression } from '../../designtypes/Spring/Compression/initialState';
 import * as sto from '../../designtypes/Piston-Cylinder/symbol_table_offsets';
 import { initialSystemControls } from '../../initialSystemControls';
 import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../store/actionTypes';
@@ -61,14 +64,11 @@ it('reducers load', () => {
     expect(design.model.type).toEqual("Piston-Cylinder");
 
     store.dispatch(load({
-        "name": "test",
-        "model": {
-            "type": "Test-Design"
-        }
+        "type": "Test-Design"
     }));
 
     var design = store.getState().modelSlice; // after
-//    expect(design.name).toEqual("test");
+    expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Test-Design");
 });
 
@@ -224,11 +224,11 @@ it('reducers reset symbol flag min CONSTRAINED', () => {
 });
 
 it('reducers set symbol flag min FDCL', () => {
-    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    
+    var state = Object.assign({}, initialStateWithFDCL, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     store.dispatch(inject({name: "initialState", model: state}));
 
     var design = store.getState().modelSlice; // before
-    design.model.symbol_table[sto.RADIUS].cminchoices = ["THICKNESS"]; // Prepare for FDCL
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.model.symbol_table[sto.RADIUS].lmin).toEqual(CONSTRAINED);
     expect(design.model.symbol_table[sto.RADIUS].cminchoices).toEqual(["THICKNESS"]);
@@ -273,11 +273,10 @@ it('reducers reset symbol flag max CONSTRAINED', () => {
 });
 
 it('reducers set symbol flag max FDCL', () => {
-    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    var state = Object.assign({}, initialStateWithFDCL, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     store.dispatch(inject({name: "initialState", model: state}));
 
     var design = store.getState().modelSlice; // before
-    design.model.symbol_table[sto.RADIUS].cmaxchoices = ["THICKNESS"]; // Prepare for FDCL
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.model.symbol_table[sto.RADIUS].lmax).toEqual(CONSTRAINED);
     expect(design.model.symbol_table[sto.RADIUS].cmaxchoices).toEqual(["THICKNESS"]);
@@ -658,15 +657,11 @@ it('reducers restore auto save', () => {
 
     // Load with an entirely different state before restore and verify it
     store.dispatch(load({
-        "user": "USERID0123456789",
-        "name": "test",
-        "model": {
-            "type": "Test-Design"
-        }
+        "type": "Test-Design"
     }));
     var design = store.getState().modelSlice; // after
     expect(design.user).toEqual("USERID0123456789");
-    expect(design.name).toEqual("test");
+    expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Test-Design");
 
     store.dispatch(restoreAutoSave());
@@ -681,31 +676,23 @@ it('reducers restore auto save', () => {
 });
 
 it('reducers restore old auto save', () => {
-    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    // initialStateOld has no state.jsontype, has no state.units, and has state.name
+    var state = Object.assign({}, initialStateOld, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
     store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
 
     // Create an old format autosave file and verify it was created
-    delete state.jsontype; // Mark it as old by deleting jsontype
-    delete state.units; // Mark it as old by deleting units
     var design = store.getState().modelSlice; // before
-    state.name = design.name; // move name into model to save it ***FUDGE*** for compatibility with existing autosave files
     expect(typeof(Storage)).not.toEqual("undefined");
     localStorage.setItem('autosave', JSON.stringify(state), null, 2); // create or replace auto save file with current state contents
     expect(localStorage.getItem('autosave')).not.toBeNull();
-    delete state.name; // after saving it delete name from model ***FUDGE*** for compatibility with existing autosave files
 
     // Load with an entirely different state before restore and verify it
-    store.dispatch(load({
-        "user": "USERID0123456789",
-        "name": "test",
-        "model": {
-            "type": "Test-Design"
-        }
-    })); // load with an entirely different state before restore
+    var state = Object.assign({}, initialStateSpringCompression, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    store.dispatch(inject({"user": "USERIDABCDEFGHIK", name: "test", model: state})); // load with an entirely different state before restore
     var design = store.getState().modelSlice; // before
-    expect(design.user).toEqual("USERID0123456789");
+    expect(design.user).toEqual("USERIDABCDEFGHIK");
     expect(design.name).toEqual("test");
-    expect(design.model.type).toEqual("Test-Design");
+    expect(design.model.type).toEqual("Spring/Compression");
 
     store.dispatch(restoreAutoSave());
 

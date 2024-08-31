@@ -1,5 +1,6 @@
 import { CONSTRAINED } from '../../store/actionTypes';
 export const initialState = {
+    "name": "initialState",
     "symbol_table": [
         {
             "input": true,
@@ -31,9 +32,7 @@ export const initialState = {
             "sdlim": 0.01,
             "tooltip": "Piston dimension; creates AREA where PRESSURE is applied",
             "type": "equationset",
-            "hidden": false,
-            "cminchoices": ["THICKNESS"],
-            "cmaxchoices": ["THICKNESS"]
+            "hidden": false
         },
         {
             "input": true,
@@ -111,7 +110,5 @@ export const initialState = {
     "result": {
         "objective_value": 0,
         "termination_condition": ""
-    },
-    "jsontype": "ODOP",
-    "units": "US"
+    }
 };
