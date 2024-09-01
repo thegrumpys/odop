@@ -13,7 +13,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.2,
-            "tooltip": "Outside diameter in free (no load) condition",
+            "tooltip": "<Table><tr><td>Outside diameter in free (no load) condition</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Compression/tooltips/OD_Free.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -29,7 +29,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.01,
-            "tooltip": "Wire diameter",
+            "tooltip": "<Table><tr><td>Wire diameter</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Compression/tooltips/Wire_Dia.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -45,7 +45,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "Length in free (no load) condition",
+            "tooltip": "<Table><tr><td>Length in free (no load) condition</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Compression/tooltips/L_Free.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -61,7 +61,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "Total number of coils",
+            "tooltip": "<Table><tr><td>Total number of coils</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Compression/tooltips/Coils_T.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -77,7 +77,7 @@ export const initialState = {
             "validmin": -Number.MAX_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.01,
-            "tooltip": "Minimum operating load (Length L_1)",
+            "tooltip": "<Table><tr><td>Minimum operating load (Length L_1)</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Compression/tooltips/Force_1.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -93,7 +93,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Maximum operating load (Length L_2)",
+            "tooltip": "<Table><tr><td>Maximum operating load (Length L_2)</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Compression/tooltips/Force_2.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -141,7 +141,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.01,
-            "tooltip": "Spring rate (spring constant); slope of force-deflection curve",
+            "tooltip": "<Table><tr><td>Spring rate (spring constant); slope of force-deflection curve</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Compression/tooltips/Rate.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -157,7 +157,7 @@ export const initialState = {
             "validmin": -Number.MAX_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Deflection from free to load point 1",
+            "tooltip": "<Table><tr><td>Deflection from free to load point 1</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Compression/tooltips/Deflect_1.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -173,7 +173,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "Deflection from free to load point 2",
+            "tooltip": "<Table><tr><td>Deflection from free to load point 2</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Compression/tooltips/Deflect_2.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -189,7 +189,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "Spring length at load point 1",
+            "tooltip": "<Table><tr><td>Spring length at load point 1</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Compression/tooltips/L_1.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -205,7 +205,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "Spring length at load point 2",
+            "tooltip": "<Table><tr><td>Spring length at load point 2</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Compression/tooltips/L_2.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false,
             "validminchoices": ["L_Solid"],
@@ -223,7 +223,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Length of stroke from point 1 to point 2",
+            "tooltip": "<Table><tr><td>Length of stroke from point 1 to point 2</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Compression/tooltips/L_Stroke.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -239,7 +239,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "Spring length when fully compressed",
+            "tooltip": "<Table><tr><td>Spring length when fully compressed</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Compression/tooltips/L_Solid.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false,
             "propagate": [{ name: "L_2", minmax: VALID_MIN }]
@@ -272,7 +272,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Inside diameter in free (no load) condition",
+            "tooltip": "<Table><tr><td>Inside diameter in free (no load) condition</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Compression/tooltips/ID_Free.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -288,7 +288,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.001,
-            "tooltip": "Weight of one spring",
+            "tooltip": "<Table><tr><td>Weight of one spring</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Compression/tooltips/Weight.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -320,7 +320,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Load required to fully compress the spring",
+            "tooltip": "<Table><tr><td>Load required to fully compress the spring</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Compression/tooltips/Force_Solid.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -850,7 +850,8 @@ export const initialState = {
             "sdlim": 0.0,
             "type": "calcinput",
             "hidden": true
-        }],
+        }
+    ],
     "labels": [
         {
             "name": "COMMENT",

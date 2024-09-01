@@ -195,6 +195,15 @@ table[id^=view] td {
   border-color: #767676;
 }
 /**************************************************/
+/* After much work when adding tooltip images we found
+   out that Bootstrap tooltips do not have opacity equals
+   1.0 which was causing the background to bleed through
+   the image and be visible. This change is requires us
+   to force all tooltip opacities to 1.0 */
+.tooltip.show {
+  opacity: 1.0 !important;
+}
+/**************************************************/
     </style>
   </head>
   <body>

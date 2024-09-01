@@ -63,7 +63,7 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
     <tbody id={'nvurci_' + element.name}>
       <tr key={element.name}>
         <td className="align-middle" colSpan="2" id={'nvurci_name_' + element.name}>
-          <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip>{element.tooltip}</Tooltip>}>
+          <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip><div dangerouslySetInnerHTML={{__html: element.tooltip}}></div></Tooltip>}>
             <span>{element.name}</span>
           </OverlayTrigger>
         </td>

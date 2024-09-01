@@ -7,7 +7,7 @@ export default function SymbolName({ className, element, index }) {
 
   return (
     <td className={"align-middle " + (className !== undefined ? className : '')} id={'sn_' + element.name}>
-      <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip>{element.tooltip}</Tooltip>}>
+      <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip><div dangerouslySetInnerHTML={{__html: element.tooltip}}></div></Tooltip>}>
         <span>{element.name}</span>
       </OverlayTrigger>
     </td>

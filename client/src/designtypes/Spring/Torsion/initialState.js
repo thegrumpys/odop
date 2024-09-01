@@ -13,7 +13,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Outside diameter in free (no load) condition",
+            "tooltip": "<Table><tr><td>Outside diameter in free (no load) condition</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/OD_Free.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -29,7 +29,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.01,
-            "tooltip": "Wire diameter",
+            "tooltip": "<Table><tr><td>Wire diameter</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Wire_Dia.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -45,7 +45,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "Total number of coils",
+            "tooltip": "<Table><tr><td>Total number of coils</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Coils_T.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -61,7 +61,7 @@ export const initialState = {
             "validmin": -Number.MAX_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.001,
-            "tooltip": "Minimum operating load (Length L_1)",
+            "tooltip": "<Table><tr><td>Minimum operating load (Length L_1)</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/M_1.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -77,7 +77,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.01,
-            "tooltip": "Maximum operating load",
+            "tooltip": "<Table><tr><td>Maximum operating load</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/M_2.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -97,7 +97,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.001,
-            "tooltip": "Empty space between each turn (not the same as pitch)",
+            "tooltip": "<Table><tr><td>Empty space between each turn (not the same as pitch)</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Coil_Spacing.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -129,7 +129,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.01,
-            "tooltip": "Inside diameter in free (no load) condition",
+            "tooltip": "<Table><tr><td>Inside diameter in free (no load) condition</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/ID_Free.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -161,7 +161,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.00001,
-            "tooltip": "Spring rate (spring constant); slope of force-deflection curve",
+            "tooltip": "<Table><tr><td>Spring rate (spring constant); slope of force-deflection curve</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Rate.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -177,7 +177,7 @@ export const initialState = {
             "validmin": -Number.MAX_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Deflection from free to load point 1",
+            "tooltip": "<Table><tr><td>Deflection from free to load point 1</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Deflect_1.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -193,7 +193,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "Deflection from free to load point 2",
+            "tooltip": "<Table><tr><td>Deflection from free to load point 2</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Deflect_2.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -209,7 +209,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Length of spring body in free condition",
+            "tooltip": "<Table><tr><td>Length of spring body in free condition</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/L_Body.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -273,7 +273,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Angular displacement from point 1 to point 2",
+            "tooltip": "<Table><tr><td>Angular displacement from point 1 to point 2</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Stroke.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -289,7 +289,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.00001,
-            "tooltip": "Weight of one spring",
+            "tooltip": "<Table><tr><td>Weight of one spring</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Weight.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -449,7 +449,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.01,
-            "tooltip": "Force produced at distance of Arm_2",
+            "tooltip": "<Table><tr><td>Force produced at distance of Arm_2</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Force_Arm_2.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -773,7 +773,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Moment arm at end 1",
+            "tooltip": "<Table><tr><td>Moment arm at end 1</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Arm_1.png\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },
@@ -789,7 +789,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Moment arm at end 2",
+            "tooltip": "<Table><tr><td>Moment arm at end 2</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Arm_2.png\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },
@@ -805,7 +805,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Extra length at end 1 added to wire length calculation",
+            "tooltip": "<Table><tr><td>Extra length at end 1 added to wire length calculation</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Xlen_1.png\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },
@@ -821,7 +821,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Extra length at end 2 added to wire length calculation",
+            "tooltip": "<Table><tr><td>Extra length at end 2 added to wire length calculation</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Xlen_2.png\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },
@@ -837,7 +837,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Length at end 1 used to calculate end deflection allowance",
+            "tooltip": "<Table><tr><td>Length at end 1 used to calculate end deflection allowance</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/L_End_1.png\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },
@@ -853,7 +853,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Length at end 2 used to calculate end deflection allowance",
+            "tooltip": "<Table><tr><td>Length at end 2 used to calculate end deflection allowance</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/L_End_2.png\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },

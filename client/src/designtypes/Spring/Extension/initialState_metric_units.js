@@ -13,7 +13,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "Outside diameter in free (no load) condition",
+            "tooltip": "<Table><tr><td>Outside diameter in free (no load) condition</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/OD_Free.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -29,7 +29,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.01,
-            "tooltip": "Wire diameter",
+            "tooltip": "<Table><tr><td>Wire diameter</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/Wire_Dia.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -45,7 +45,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "Total number of coils",
+            "tooltip": "<Table><tr><td>Total number of coils</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/Coils_T.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -82,7 +82,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "End Extension (see diagram in on-line Help)",
+            "tooltip": "<Table><tr><td>End Extension</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/End_Extension.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -98,7 +98,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.01,
-            "tooltip": "Minimum operating load (Length L_1) (FDCL)",
+            "tooltip": "<Table><tr><td>Minimum operating load (Length L_1) (FDCL)</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/Force_1.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false,
             "cminchoices": [ "Initial_Tension" ],
@@ -116,7 +116,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Maximum operating load (Length L_2)",
+            "tooltip": "<Table><tr><td>Maximum operating load (Length L_2)</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/Force_2.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -148,7 +148,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "Coil inside diameter in free (no load) condition",
+            "tooltip": "<Table><tr><td>Coil inside diameter in free (no load) condition</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/ID_Free.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -180,7 +180,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.01,
-            "tooltip": "Spring rate (spring constant); slope of force-deflection curve",
+            "tooltip": "<Table><tr><td>Spring rate (spring constant); slope of force-deflection curve</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/Rate.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -196,7 +196,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Deflection from free to load point 1",
+            "tooltip": "<Table><tr><td>Deflection from free to load point 1</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/Deflect_1.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -212,7 +212,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "Deflection from free to load point 2",
+            "tooltip": "<Table><tr><td>Deflection from free to load point 2</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/Deflect_2.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -228,7 +228,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "Length of body in free condition (see diagram in on-line Help)",
+            "tooltip": "<Table><tr><td>Length of body in free condition</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/L_Body.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -244,7 +244,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 2.0,
-            "tooltip": "Free length including ends (see diagram in on-line Help)",
+            "tooltip": "<Table><tr><td>Free length including ends</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/L_Free.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -292,7 +292,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Length of stroke from point 1 to point 2",
+            "tooltip": "<Table><tr><td>Length of stroke from point 1 to point 2</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/L_Stroke.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -308,7 +308,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.001,
-            "tooltip": "Weight of one spring",
+            "tooltip": "<Table><tr><td>Weight of one spring</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/Weight.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -868,7 +868,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "End Inside Diameter. Used in calculation of stress at end.",
+            "tooltip": "<Table><tr><td>End Inside Diameter. Used in calculation of stress at end.</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/End_ID.png\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },
@@ -900,7 +900,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Length of End (see diagram in on-line Help). Used in calculation of L_Free.",
+            "tooltip": "<Table><tr><td>Length of End. Used in calculation of L_Free.</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/L_End.png\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },
@@ -916,7 +916,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Length of Extended End (see diagram in on-line Help). Used in calculation of L_Free.",
+            "tooltip": "<Table><tr><td>Length of Extended End. Used in calculation of L_Free.</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/L_Extended_End.png\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },
