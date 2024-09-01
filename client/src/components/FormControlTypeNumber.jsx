@@ -148,6 +148,7 @@ export default function FormControlTypeNumber(props) {
       onFocus={localOnFocus}
       onBlur={localOnBlur}
       className={localClassName}
+      step={props.step !== undefined ? props.step : 'any'}
       value={props.disabledText ? '' : (focused ? valueString : (Number.isFinite(value) ? toODOPPrecision(value) : valueString))}/>
   </>)
 }
