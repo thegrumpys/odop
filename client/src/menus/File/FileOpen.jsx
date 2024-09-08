@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal, NavDropdown, Form, Alert } from 'react-bootstrap';
 import { changeName, loadInitialState, load, restoreAutoSave, deleteAutoSave } from '../../store/modelSlice';
-import { executeStop } from '../../store/executePanelSlice';
+import { executeStopOnLoad } from '../../store/executePanelSlice';
 import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
@@ -145,7 +145,7 @@ export default function FileOpen() {
   const onLoadInitialState = () => {
 //    console.log('FileOpen.onLoadInitialState');
     setShow(!show);
-    dispatch(executeStop()); // Stop execute file
+    dispatch(executeStopOnLoad()); // Stop execute file
     dispatch(loadInitialState(type, 'US'));
     dispatch(deleteAutoSave());
 //    console.log('FileOpen.onLoadInitialState','model_user=',model_user,'model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
@@ -155,7 +155,7 @@ export default function FileOpen() {
   const onLoadMetricInitialState = () => {
 //    console.log('FileOpen.onLoadMetricInitialState');
     setShow(!show);
-    dispatch(executeStop()); // Stop execute file
+    dispatch(executeStopOnLoad()); // Stop execute file
     dispatch(loadInitialState(type, 'Metric'));
     dispatch(deleteAutoSave());
 //    console.log('FileOpen.onLoadMetricInitialState','model_user=',model_user,'model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
@@ -165,7 +165,7 @@ export default function FileOpen() {
   const onLoadAutoSave = () => {
 //    console.log('FileOpen.onLoadAutoSave');
     setShow(!show);
-    dispatch(executeStop()); // Stop execute file
+    dispatch(executeStopOnLoad()); // Stop execute file
     dispatch(restoreAutoSave());
     dispatch(deleteAutoSave());
 //    console.log('FileOpen.onLoadAutoSave','model_user=',model_user,'model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
@@ -180,7 +180,7 @@ export default function FileOpen() {
   const onOpen = () => {
 //    console.log('FileOpen.onOpen');
     setShow(!show);
-    dispatch(executeStop()); // Stop execute file
+    dispatch(executeStopOnLoad()); // Stop execute file
 //    console.log('FileOpen.onOpen','model_user=',model_user,'type=',type,'name=',name,'model_view=',model_view);
     getDesign(model_user, type, name); // Load the model
   }

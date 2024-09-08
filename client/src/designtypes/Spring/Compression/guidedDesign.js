@@ -1,4 +1,5 @@
 import React from 'react';
+import { setStopOnFileLoad } from '../../../store/executePanelSlice';
 import { Table, Image } from 'react-bootstrap';
 export const execute = {
     steps: [
@@ -55,7 +56,10 @@ export const execute = {
                     reading each page.
                     </p>
                 </>
-            )
+            ),
+            actions: [
+                setStopOnFileLoad(false)
+            ]
         },
         {
             title: "Page 02 of 13",

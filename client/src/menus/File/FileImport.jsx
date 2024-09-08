@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { load, changeName, deleteAutoSave } from '../../store/modelSlice';
-import { executeStop } from '../../store/executePanelSlice';
+import { executeStopOnLoad } from '../../store/executePanelSlice';
 import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
@@ -31,7 +31,7 @@ export default function FileImport() {
   const onFileImport = () => {
 //    console.log('In FileImport.onFileImport');
     setShow(!show);
-    dispatch(executeStop());
+    dispatch(executeStopOnLoad());
     displaySpinner(true);
     fileReader.onloadend = onLoadEnd; // On Load End callback
     fileReader.onError = onError; // On Error callback

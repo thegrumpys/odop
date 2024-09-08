@@ -9,6 +9,7 @@ export const executePanelSlice = createSlice({
     prefix: '',
     states: [],
     step: 0,
+    stop_on_file_load: true, // flag for guidedDesign execute macro
 //    testGenerate: config.node.env !== "production" ? true : false,
   },
   reducers: {
@@ -23,6 +24,18 @@ export const executePanelSlice = createSlice({
       },
       prepare: (show, executeName, prefix, states, step) => { return { payload: {show, executeName, prefix, states, step} } }
     },
+    executeStopOnLoad: {
+      reducer: (state, action) => {
+//        console.log('executePanelSlice executeStopOnLoad','state=',current(state),',action=',action);
+        if (state.stop_on_file_load) {
+          state.show = false;
+          state.executeName = undefined;
+          state.prefix = '';
+          state.states = [];
+          state.step = 0;
+        }
+      },
+    },
     executeStop: {
       reducer: (state, action) => {
 //        console.log('executePanelSlice executeStop','state=',current(state),',action=',action);
@@ -31,6 +44,7 @@ export const executePanelSlice = createSlice({
         state.prefix = '';
         state.states = [];
         state.step = 0;
+        state.stop_on_file_load = true;
       },
       prepare: () => { return { payload: {} } }
     },
@@ -69,6 +83,13 @@ export const executePanelSlice = createSlice({
       },
       prepare: (step) => { return { payload: { step } } }
     },
+    setStopOnFileLoad: {
+      reducer: (state, action) => {
+//        console.log('executePanelSlice setStopOnFileLoad','state=',current(state),',action=',action);
+        state.stop_on_file_load = action.payload.stop_on_file_load;
+      },
+      prepare: (stop_on_file_load) => { return { payload: { stop_on_file_load } } }
+    },
 //    setTestGenerate: {
 //      reducer: (state, action) => {
 //        console.log('executePanelSlice setTestGenerate','state=',current(state),',action=',action);
@@ -79,6 +100,6 @@ export const executePanelSlice = createSlice({
   }
 });
 
-export const { executeStart, executeStop, setShow, setExecuteName, setPrefix, setStates, setStep, /*, setTestGenerate */ } = executePanelSlice.actions; // FIXME
+export const { executeStart, executeStopOnLoad, executeStop, setShow, setExecuteName, setPrefix, setStates, setStep, setStopOnFileLoad/*, setTestGenerate */ } = executePanelSlice.actions; // FIXME
 
 export default executePanelSlice.reducer;
