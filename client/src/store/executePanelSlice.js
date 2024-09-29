@@ -4,7 +4,6 @@ import config from '../config';
 export const executePanelSlice = createSlice({
   name: "executePanelSlice",
   initialState: {
-    startTime: Date.now(),
     show: false,
     executeName: undefined,
     prefix: '',
@@ -17,7 +16,6 @@ export const executePanelSlice = createSlice({
     executeStart: {
       reducer: (state, action) => {
 //        console.log('executePanelSlice executeStart','state=',current(state),',action=',action);
-        state.startTime = Date.now();
         state.show = action.payload.show;
         state.executeName = action.payload.executeName;
         state.prefix = action.payload.prefix;
@@ -84,13 +82,6 @@ export const executePanelSlice = createSlice({
         state.step = action.payload.step;
       },
       prepare: (step) => { return { payload: { step } } }
-    },
-    setStartTime: {
-      reducer: (state, action) => {
-//        console.log('executePanelSlice setStartTime','state=',current(state),',action=',action);
-        state.startTime = action.payload.startTime;
-      },
-      prepare: (startTime) => { return { payload: { startTime } } }
     },
     setStopOnFileLoad: {
       reducer: (state, action) => {

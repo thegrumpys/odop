@@ -27,14 +27,16 @@ export const startExecute = (prefix, executeName, run=false) => {
   store.dispatch(executeStart(true, executeName, prefix, localStates, 0)); // Put current store state into steps[0].state - remember this for "back" time travel
 //  store.dispatch(setTestGenerate(localTestGenerate)); // FIXME
 //  if (localTestGenerate) outputStart(executeName);
+  var startTime = Date.now();
   for (var next = 0; next < execute.steps.length; next++) {
+    console.log('execute_name=',executeName,'step=',next)
     var localStates = Object.assign([...states], { [next]: Object.assign({}, states[next], { state: JSON.stringify(model) }) });
     // Put current store state into steps[next].state - remember this for "back" time travel
     store.dispatch(setStates(localStates));
     store.dispatch(setStep(next));
 //    if (localTestGenerate) outputLine('    // title: "' + localTitle + '"');
     if (execute.steps[next].actions !== undefined) {
-      execute.steps[next].actions.forEach((action) => { store.dispatch(action); })
+      execute.steps[next].actions.forEach((action) => { store.dispatch(action); console.log('\taction.type=',action.type);})
 //      if (localTestGenerate) { // FIXME
 //        execute.steps[0].actions.forEach((action) => {
 //          var dump = actionDumper(action);
@@ -50,9 +52,9 @@ export const startExecute = (prefix, executeName, run=false) => {
     }
     if (config.node.env !== "production") {
       var endTime = Date.now();
-      var duration = endTime - store.getState().executePanelSlice.startTime;
-      console.log('execute_name=',store.getState().executePanelSlice.executeName,'step=',store.getState().executePanelSlice.step,'duration=',duration)
-      store.dispatch(setStartTime(endTime));
+      var duration = endTime - startTime;
+      console.log('\tduration=',duration);
+      startTime = endTime;
     }
     if (!run) break;
   }
