@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
-import { startExecute } from "../../components/ExecutePanel";
+import { startExecute, stopExecute } from "../../components/ExecutePanel";
+import config from '../../config';
 
 export default function HelpTutorial() {
 //  console.log('HelpTutorial - Mounting...');
@@ -49,6 +50,16 @@ export default function HelpTutorial() {
     startExecute('Help : Tutorial : ' + executeName, executeName);
   }
 
+  const onExecuteAndRun = () => {
+//    console.log('HelpTutorial.onExecuteAndRun');
+    setShow(!show);
+    logUsage('event', 'HelpTutorial', { event_label: executeName + ' RUN' });
+//    console.log('HelpTutorial.onExecute executeName=',executeName);
+    startExecute('Help : Tutorial : ' + executeName, executeName, true);
+    stopExecute();
+    setShow(!show);
+  }
+
   const onCancel = () => {
 //    console.log('HelpTutorial.onCancel');
     setShow(!show);
@@ -75,7 +86,8 @@ export default function HelpTutorial() {
           </Form.Control>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={onCancel}>Cancel</Button>
+          <Button variant="secondary" onClick={onCancel}>Cancel</Button>{' '}
+          {config.node.env !== "production" && <Button variant="danger" onClick={onExecuteAndRun}>Execute All</Button>}{' '}
           <Button variant="primary" onClick={onExecute}>Execute</Button>
         </Modal.Footer>
       </Modal>}

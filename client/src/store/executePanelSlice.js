@@ -4,7 +4,7 @@ import config from '../config';
 export const executePanelSlice = createSlice({
   name: "executePanelSlice",
   initialState: {
-    start: Date.now(),
+    startTime: Date.now(),
     show: false,
     executeName: undefined,
     prefix: '',
@@ -17,7 +17,7 @@ export const executePanelSlice = createSlice({
     executeStart: {
       reducer: (state, action) => {
 //        console.log('executePanelSlice executeStart','state=',current(state),',action=',action);
-        state.start = Date.now();
+        state.startTime = Date.now();
         state.show = action.payload.show;
         state.executeName = action.payload.executeName;
         state.prefix = action.payload.prefix;
@@ -74,22 +74,23 @@ export const executePanelSlice = createSlice({
     setStates: {
       reducer: (state, action) => {
 //        console.log('executePanelSlice setStates','state=',current(state),',action=',action);
-        state.states = action.payload.setStates;
+        state.states = action.payload.states;
       },
-      prepare: (setStates) => { return { payload: { setStates } } }
+      prepare: (states) => { return { payload: { states } } }
     },
     setStep: {
       reducer: (state, action) => {
 //        console.log('executePanelSlice setStep','state=',current(state),',action=',action);
         state.step = action.payload.step;
-        if (config.node.env !== "production") {
-          const end = Date.now();
-          const duration = end-state.start;
-          console.log('executeName=',state.executeName,'step=',state.step,'duration=',duration);
-          state.start = end;
-        }
       },
       prepare: (step) => { return { payload: { step } } }
+    },
+    setStartTime: {
+      reducer: (state, action) => {
+//        console.log('executePanelSlice setStartTime','state=',current(state),',action=',action);
+        state.startTime = action.payload.startTime;
+      },
+      prepare: (startTime) => { return { payload: { startTime } } }
     },
     setStopOnFileLoad: {
       reducer: (state, action) => {
@@ -108,6 +109,6 @@ export const executePanelSlice = createSlice({
   }
 });
 
-export const { executeStart, executeStopOnLoad, executeStop, setShow, setExecuteName, setPrefix, setStates, setStep, setStopOnFileLoad/*, setTestGenerate */ } = executePanelSlice.actions; // FIXME
+export const { executeStart, executeStopOnLoad, executeStop, setShow, setExecuteName, setPrefix, setStates, setStep, setStartTime, setStopOnFileLoad/*, setTestGenerate */ } = executePanelSlice.actions; // FIXME
 
 export default executePanelSlice.reducer;

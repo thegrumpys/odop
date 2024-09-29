@@ -6,7 +6,7 @@ import { actionDumper } from '../store/actionDumper';
 import { logUsage } from '../logUsage';
 import config from '../config';
 import { outputStart, outputLine, outputStop } from '../menus/View/ViewExecuteToTest';
-import { executeStart, executeStop, setExecuteName, setShow, setPrefix, setStates, setStep, setTitle, setText /*, setTestGenerate */ } from '../store/executePanelSlice'; // FIXME
+import { executeStart, executeStop, setExecuteName, setShow, setPrefix, setStates, setStep, setTitle, setText, setStartTime /*, setTestGenerate */ } from '../store/executePanelSlice'; // FIXME
 import store from '../store/store';
 
 export const startExecute = (prefix, executeName, run=false) => {
@@ -48,6 +48,12 @@ export const startExecute = (prefix, executeName, run=false) => {
     } else {
 //    if (localTestGenerate) outputLine('    // No-op'); // FIXME
     }
+    if (config.node.env !== "production") {
+      var endTime = Date.now();
+      var duration = endTime - store.getState().executePanelSlice.startTime;
+      console.log('execute_name=',store.getState().executePanelSlice.executeName,'step=',store.getState().executePanelSlice.step,'duration=',duration)
+      store.dispatch(setStartTime(endTime));
+    }
     if (!run) break;
   }
   window.scrollTo(0, 0);
@@ -78,32 +84,6 @@ export default function ExecutePanel() {
 //    console.log('ExecutePanel.onCancel');
     stopExecute();
     dispatch(changeResultTerminationCondition('')); // Reset any leftover messages
-  }
-
-  const onRun = () => {
-//    console.log('ExecutePanel.onNext');
-    for (var next = step+1; next < execute.steps.length; next++) {
-      var localStates = Object.assign([...states], { [next]: Object.assign({}, states[next], { state: JSON.stringify(model) }) });
-      // Put current store state into steps[next].state - remember this for "back" time travel
-      dispatch(setStates(localStates));
-      dispatch(setStep(next));
-//      if (testGenerate) outputLine('\n    // title: "' + title + '"'); // FIXME
-      if (execute.steps[next].actions !== undefined) {
-        execute.steps[next].actions.forEach((action) => { dispatch(action); });
-//        if (testGenerate) { // FIXME
-//          steps[next].actions.forEach((action) => {
-//            var dump = actionDumper(action);
-//            if (dump !== undefined) {
-//              outputLine('    store.dispatch(' + dump + ');');
-//            }
-//          }); // Generate test
-//          outputLine('\n    design = store.getState().modelSlice;');
-//          outputLine('    expect(design.model.result.objective_value).toBeCloseTo(' + objective_value.toFixed(7) + ',7);');
-//        }
-      } else {
-//        if (testGenerate) outputLine('    // No-op'); // FIXME
-      }
-    }
   }
 
   const onNext = () => {
@@ -171,7 +151,6 @@ export default function ExecutePanel() {
               <b>{prefix}{execute.steps[step].title !== undefined && execute.steps[step].title.length > 0 ? ' - ' + execute.steps[step].title : ''}</b>
             </div>
             <div className="col-3 text-start align-middle">
-              {config.node.env !== "production" && <Button className="float-end ms-1" variant="danger" onClick={onRun} disabled={step >= execute.steps.length-1}>Run</Button>}
               <Button className="float-end ms-1" variant="primary" onClick={onNext} disabled={step >= execute.steps.length-1}>Next</Button>
               <Button className="float-end ms-1" variant="secondary" onClick={onBack} disabled={step <= 0}>Back</Button>
               <Button className="float-end ms-1" variant="secondary" onClick={onCancel}>Close</Button>
