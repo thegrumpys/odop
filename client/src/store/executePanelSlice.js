@@ -4,6 +4,7 @@ import config from '../config';
 export const executePanelSlice = createSlice({
   name: "executePanelSlice",
   initialState: {
+    start: Date.now(),
     show: false,
     executeName: undefined,
     prefix: '',
@@ -16,6 +17,7 @@ export const executePanelSlice = createSlice({
     executeStart: {
       reducer: (state, action) => {
 //        console.log('executePanelSlice executeStart','state=',current(state),',action=',action);
+        state.start = Date.now();
         state.show = action.payload.show;
         state.executeName = action.payload.executeName;
         state.prefix = action.payload.prefix;
@@ -80,6 +82,12 @@ export const executePanelSlice = createSlice({
       reducer: (state, action) => {
 //        console.log('executePanelSlice setStep','state=',current(state),',action=',action);
         state.step = action.payload.step;
+        if (config.node.env !== "production") {
+          const end = Date.now();
+          const duration = end-state.start;
+          console.log('executeName=',state.executeName,'step=',state.step,'duration=',duration);
+          state.start = end;
+        }
       },
       prepare: (step) => { return { payload: { step } } }
     },

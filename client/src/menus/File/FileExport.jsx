@@ -146,8 +146,8 @@ export default function FileExport() {
         </Modal.Header>
         <Modal.Footer>
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>{' '}
-          <Button variant="outline-info" onClick={onCSVExport}>CSV Export</Button>{' '}
-          <Button variant="outline-info" onClick={onSortedExport}>Sorted Export</Button>{' '}
+          <Button variant="danger" onClick={onCSVExport}>CSV Export</Button>{' '}
+          <Button variant="danger" onClick={onSortedExport}>Sorted Export</Button>{' '}
           <Button variant="primary" onClick={onExport}>Export</Button>
         </Modal.Footer>
       </Modal>}

@@ -9,39 +9,46 @@ import { outputStart, outputLine, outputStop } from '../menus/View/ViewExecuteTo
 import { executeStart, executeStop, setExecuteName, setShow, setPrefix, setStates, setStep, setTitle, setText /*, setTestGenerate */ } from '../store/executePanelSlice'; // FIXME
 import store from '../store/store';
 
-export const startExecute = (prefix, executeName) => {
+export const startExecute = (prefix, executeName, run=false) => {
 //  console.log('startExecute','prefix=',prefix,'executeName=',executeName);
   if (executeName === undefined) return;
 
-  var design = store.getState().modelSlice;
-  var model_type = design.model.type;
+  var model = store.getState().modelSlice.model;
+  var model_type = model.type;
   var { execute } = require('../designtypes/' + model_type + '/' + executeName + '.js'); // Dynamically load execute
 
   var states = store.getState().executePanelSlice.states;
 
-  var localStates = Object.assign([...states], { 0: Object.assign({}, states[0], { state: JSON.stringify(design.model) }) });
-  var localTitle = execute.steps[0].title;
-  var localText = execute.steps[0].text;
+  var localStates = Object.assign([...states], { 0: Object.assign({}, states[0], { state: JSON.stringify(model) }) });
+//  var localTitle = execute.steps[0].title;
+//  var localText = execute.steps[0].text;
 //    var localTestGenerate = config.node.env !== "production" ? true : false; // FIXME
 //  console.log('startExecute','localStates=',localStates,'localTitle=',localTitle,'localText=',localText);
   store.dispatch(executeStart(true, executeName, prefix, localStates, 0)); // Put current store state into steps[0].state - remember this for "back" time travel
 //  store.dispatch(setTestGenerate(localTestGenerate)); // FIXME
 //  if (localTestGenerate) outputStart(executeName);
-//  if (localTestGenerate) outputLine('    // title: "' + localTitle + '"');
-  if (execute.steps[0].actions !== undefined) {
-    execute.steps[0].actions.forEach((action) => { store.dispatch(action); })
-//    if (localTestGenerate) { // FIXME
-//      execute.steps[0].actions.forEach((action) => {
-//      var dump = actionDumper(action);
-//      if (dump !== undefined) {
-//          outputLine('    store.dispatch(' + dump + ');');
-//        }
-//      }); // Generate test
-//      outputLine('\n    design = store.getState().modelSlice;');
-//      outputLine('    expect(design.model.result.objective_value).toBeCloseTo(' + design.model.result.objective_value.toFixed(7) + ',7);');
-//    }
-  } else {
+  for (var next = 0; next < execute.steps.length; next++) {
+    var localStates = Object.assign([...states], { [next]: Object.assign({}, states[next], { state: JSON.stringify(model) }) });
+    // Put current store state into steps[next].state - remember this for "back" time travel
+    store.dispatch(setStates(localStates));
+    store.dispatch(setStep(next));
+//    if (localTestGenerate) outputLine('    // title: "' + localTitle + '"');
+    if (execute.steps[next].actions !== undefined) {
+      execute.steps[next].actions.forEach((action) => { store.dispatch(action); })
+//      if (localTestGenerate) { // FIXME
+//        execute.steps[0].actions.forEach((action) => {
+//          var dump = actionDumper(action);
+//          if (dump !== undefined) {
+//            outputLine('    store.dispatch(' + dump + ');');
+//          }
+//        }); // Generate test
+//        outputLine('\n    design = store.getState().modelSlice;');
+//        outputLine('    expect(design.model.result.objective_value).toBeCloseTo(' + design.model.result.objective_value.toFixed(7) + ',7);');
+//      }
+    } else {
 //    if (localTestGenerate) outputLine('    // No-op'); // FIXME
+    }
+    if (!run) break;
   }
   window.scrollTo(0, 0);
 }
@@ -71,6 +78,32 @@ export default function ExecutePanel() {
 //    console.log('ExecutePanel.onCancel');
     stopExecute();
     dispatch(changeResultTerminationCondition('')); // Reset any leftover messages
+  }
+
+  const onRun = () => {
+//    console.log('ExecutePanel.onNext');
+    for (var next = step+1; next < execute.steps.length; next++) {
+      var localStates = Object.assign([...states], { [next]: Object.assign({}, states[next], { state: JSON.stringify(model) }) });
+      // Put current store state into steps[next].state - remember this for "back" time travel
+      dispatch(setStates(localStates));
+      dispatch(setStep(next));
+//      if (testGenerate) outputLine('\n    // title: "' + title + '"'); // FIXME
+      if (execute.steps[next].actions !== undefined) {
+        execute.steps[next].actions.forEach((action) => { dispatch(action); });
+//        if (testGenerate) { // FIXME
+//          steps[next].actions.forEach((action) => {
+//            var dump = actionDumper(action);
+//            if (dump !== undefined) {
+//              outputLine('    store.dispatch(' + dump + ');');
+//            }
+//          }); // Generate test
+//          outputLine('\n    design = store.getState().modelSlice;');
+//          outputLine('    expect(design.model.result.objective_value).toBeCloseTo(' + objective_value.toFixed(7) + ',7);');
+//        }
+      } else {
+//        if (testGenerate) outputLine('    // No-op'); // FIXME
+      }
+    }
   }
 
   const onNext = () => {
@@ -138,6 +171,7 @@ export default function ExecutePanel() {
               <b>{prefix}{execute.steps[step].title !== undefined && execute.steps[step].title.length > 0 ? ' - ' + execute.steps[step].title : ''}</b>
             </div>
             <div className="col-3 text-start align-middle">
+              {config.node.env !== "production" && <Button className="float-end ms-1" variant="danger" onClick={onRun} disabled={step >= execute.steps.length-1}>Run</Button>}
               <Button className="float-end ms-1" variant="primary" onClick={onNext} disabled={step >= execute.steps.length-1}>Next</Button>
               <Button className="float-end ms-1" variant="secondary" onClick={onBack} disabled={step <= 0}>Back</Button>
               <Button className="float-end ms-1" variant="secondary" onClick={onCancel}>Close</Button>
