@@ -188,100 +188,100 @@ export default function ResultTable() {
 
   return (
     <>
-    <Row className="pt-3">
-    <Col lg="8">
-      <Table size="sm" className="table-secondary " >
-        <tbody>
-          <tr>
-            <th id="Feasibility">
-              <OverlayTrigger placement="bottom" overlay={<Tooltip>Viability of the current design relative to constraints and fixed values</Tooltip>}>
-                <span>Feasibility</span>
-              </OverlayTrigger>
-            </th>
-            <td className={feasibility_class + " text-start"}>
-              <OverlayTrigger placement="bottom" overlay={<Tooltip>{feasibility_tooltip}</Tooltip>}>
-                <span>{feasibility_status}</span>
-              </OverlayTrigger>
-              {feasibility_status === 'NOT FEASIBLE' && model_search_completed ?
-                <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
-                  <p>This design may be over-specified.
-                    See Help topics on Feasibility, Design Situations, Spring Design Technique and Hints, Tricks & Tips.</p>
-                </Tooltip>}>
-                  <span>&nbsp;<i className="fas fa-info-circle text-primary"></i></span>
-                </OverlayTrigger>
-                :
-                ''
-              }
-            </td>
-          </tr>
-          <tr>
-            <th width="10%" id="Message" className="pb-3">
-              <OverlayTrigger placement="bottom" overlay={<Tooltip>Status feedback message from solution process</Tooltip>}>
-                <span>Message</span>
-              </OverlayTrigger>
-            </th>
-            <td className="text-start">{model_termination_condition}</td>
-          </tr>
-        </tbody>
-      </Table>
-    </Col>
-    <Col lg="4">
-      <Table size="sm" className="table-secondary">
-        <tbody>
-          <tr>
-            <td className="text-start" id="ObjectiveValue">
-              <OverlayTrigger placement="bottom" overlay={<Tooltip>
-                <p>Visual summary of feasibility status.</p>
-                <p>Objective Value = {model_objective_value.toFixed(7)}<br />
-                  OBJMIN = {model_objmin.toFixed(7)}</p>
-                <p>See on-line Help for details.  Try Help lookup <b>indicator</b></p>
-              </Tooltip>}>
-                <b>Status</b>
-              </OverlayTrigger>
-              <FeasibilityIndicator />
-            </td>
-          </tr>
-          <tr>
-            {display_search_button ?
-              <td align="text-start">
-                <OverlayTrigger placement="bottom" overlay={<Tooltip><b>Seek</b> (optimize) if feasible.<br /><b>Search</b> (solve) if not feasible.<br />Same functions as Action menu.</Tooltip>}>
-                  <b className="pe-5">Action</b>
-                </OverlayTrigger>
-                <Button variant="primary" onClick={onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>&nbsp;
-                <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
-                  <p><b>Search</b> alters the values of any free independent variables to find a design that
-                    satisfies all constraints and each fixed dependent
-                    variable. A feasible result is a solution to the designer’s
-                    goals as expressed by constraints and fixed values.</p>
-                  <p><b>Search</b> stops when the first feasible solution is found. This happens
-                    when the Objective Value ({model_objective_value.toFixed(7)}) falls below
-                    OBJMIN ({model_objmin.toFixed(7)}).</p>
-                  <p>If <b>Search</b> cannot achieve a feasible result it converges to a compromise.
-                    This compromise tries to minimize violations.</p
-                  ></Tooltip>}>
-                  <span><i className="fas fa-info-circle text-primary"></i></span>
-                </OverlayTrigger>
-              </td>
-              :
-              <td align="text-start">
-                <OverlayTrigger placement="bottom" overlay={<Tooltip><b>Seek</b> (optimize) if feasible.<br /><b>Search</b> (solve) if not feasible.<br />Same functions as Action menu.</Tooltip>}>
-                  <b className="pe-5">Action</b>
-                </OverlayTrigger>
-                <Button variant="primary" onClick={onSeekRequest} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
-                <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
-                  <p>If one feasible design exists there are likely many more available, each with varying advantages / disadvantages.
-                    Seek provides a “goal seeking” capability to optimize your design on the parameter that you specify.</p>
-                  <p>If starting with a default design, additional constraints specific to your application are required to obtain meaningful results.</p>
-                </Tooltip>}>
-                  <span><i className="fas fa-info-circle text-primary"></i></span>
-                </OverlayTrigger>
-              </td>
-            }
-          </tr>
-        </tbody>
-      </Table>
-    </Col>
-    </Row>
+      <Row className="pt-3">
+        <Col lg="8">
+          <Table size="sm" className="table-secondary " >
+            <tbody>
+              <tr>
+                <th id="Feasibility">
+                  <OverlayTrigger placement="bottom" overlay={<Tooltip>Viability of the current design relative to constraints and fixed values</Tooltip>}>
+                    <span>Feasibility</span>
+                  </OverlayTrigger>
+                </th>
+                <td className={feasibility_class + " text-start"}>
+                  <OverlayTrigger placement="bottom" overlay={<Tooltip>{feasibility_tooltip}</Tooltip>}>
+                    <span>{feasibility_status}</span>
+                  </OverlayTrigger>
+                  {feasibility_status === 'NOT FEASIBLE' && model_search_completed ?
+                    <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
+                      <p>This design may be over-specified.
+                        See Help topics on Feasibility, Design Situations, Spring Design Technique and Hints, Tricks & Tips.</p>
+                    </Tooltip>}>
+                      <span>&nbsp;<i className="fas fa-info-circle text-primary"></i></span>
+                    </OverlayTrigger>
+                    :
+                    ''
+                  }
+                </td>
+              </tr>
+              <tr>
+                <th width="10%" id="Message" className="pb-3">
+                  <OverlayTrigger placement="bottom" overlay={<Tooltip>Status feedback message from solution process</Tooltip>}>
+                    <span>Message</span>
+                  </OverlayTrigger>
+                </th>
+                <td className="text-start">{model_termination_condition}</td>
+              </tr>
+            </tbody>
+          </Table>
+        </Col>
+        <Col lg="4">
+          <Table size="sm" className="table-secondary">
+            <tbody>
+              <tr>
+                <td className="text-start" id="ObjectiveValue">
+                  <OverlayTrigger placement="bottom" overlay={<Tooltip>
+                    <p>Visual summary of feasibility status.</p>
+                    <p>Objective Value = {model_objective_value.toFixed(7)}<br />
+                      OBJMIN = {model_objmin.toFixed(7)}</p>
+                    <p>See on-line Help for details.  Try Help lookup <b>indicator</b></p>
+                  </Tooltip>}>
+                    <b>Status</b>
+                  </OverlayTrigger>
+                  <FeasibilityIndicator />
+                </td>
+              </tr>
+              <tr>
+                {display_search_button ?
+                  <td align="text-start">
+                    <OverlayTrigger placement="bottom" overlay={<Tooltip><b>Seek</b> (optimize) if feasible.<br /><b>Search</b> (solve) if not feasible.<br />Same functions as Action menu.</Tooltip>}>
+                      <b className="pe-5">Action</b>
+                    </OverlayTrigger>
+                    <Button variant="primary" onClick={onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>&nbsp;
+                    <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
+                      <p><b>Search</b> alters the values of any free independent variables to find a design that
+                        satisfies all constraints and each fixed dependent
+                        variable. A feasible result is a solution to the designer’s
+                        goals as expressed by constraints and fixed values.</p>
+                      <p><b>Search</b> stops when the first feasible solution is found. This happens
+                        when the Objective Value ({model_objective_value.toFixed(7)}) falls below
+                        OBJMIN ({model_objmin.toFixed(7)}).</p>
+                      <p>If <b>Search</b> cannot achieve a feasible result it converges to a compromise.
+                        This compromise tries to minimize violations.</p
+                      ></Tooltip>}>
+                      <span><i className="fas fa-info-circle text-primary"></i></span>
+                    </OverlayTrigger>
+                  </td>
+                  :
+                  <td align="text-start">
+                    <OverlayTrigger placement="bottom" overlay={<Tooltip><b>Seek</b> (optimize) if feasible.<br /><b>Search</b> (solve) if not feasible.<br />Same functions as Action menu.</Tooltip>}>
+                      <b className="pe-5">Action</b>
+                    </OverlayTrigger>
+                    <Button variant="primary" onClick={onSeekRequest} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
+                    <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
+                      <p>If one feasible design exists there are likely many more available, each with varying advantages / disadvantages.
+                        Seek provides a “goal seeking” capability to optimize your design on the parameter that you specify.</p>
+                      <p>If starting with a default design, additional constraints specific to your application are required to obtain meaningful results.</p>
+                    </Tooltip>}>
+                      <span><i className="fas fa-info-circle text-primary"></i></span>
+                    </OverlayTrigger>
+                  </td>
+                }
+              </tr>
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
       <AlertsAccordion />
       {seekShow && <Modal show={seekShow} onHide={onSeekCancelButton}>
         <Modal.Header closeButton>

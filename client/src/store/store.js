@@ -14,6 +14,7 @@ export default configureStore({
     alertsSlice: alertsReducer,
     executePanelSlice: executePanelReducer,
   },
+  devTools: false,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
       serializableCheck: {
         // Ignore these field paths in all actions

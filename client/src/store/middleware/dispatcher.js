@@ -14,7 +14,7 @@ import { updateObjectiveValue } from './updateObjectiveValue';
 import { invokeCheck } from './invokeCheck';
 import { resetCatalogSelection } from './resetCatalogSelection';
 
-const dispatcher = store => next => action => {
+export const dispatcher = store => next => action => {
 //  console.log('start dispatcher before reducer','store=',store,'next=',next,'action=',action);
   const returnValue = next(action); // Invoke reducer
 //  console.log('start dispatcher after reducer','returnValue=',returnValue);
