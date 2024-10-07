@@ -6,7 +6,7 @@ import { logUsage } from '../logUsage';
 import SymbolValue from './SymbolValue';
 import Value from './Value';
 import config from '../config';
-import { changeSystemControlsValue } from '../store/modelSlice';
+import { changeSystemControlsValue } from '../store/actionCreators';
 import { setActiveKey, setCaret, setLevel } from '../store/alertsSlice';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 

@@ -7,7 +7,7 @@ import {
     inject, enableDispatcher, startup,
     changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag,
     search, seek,
-    saveAutoSave, restoreAutoSave, deleteAutoSave } from '../../store/modelSlice';
+    saveAutoSave, restoreAutoSave, deleteAutoSave } from '../../store/actionCreators';
 import store from "../../store/store";
 
 //=====================================================================

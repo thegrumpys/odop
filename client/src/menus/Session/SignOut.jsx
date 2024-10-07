@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
 import { useOktaAuth } from '@okta/okta-react';
-import { changeUser, saveAutoSave } from '../../store/modelSlice';
+import { changeUser, saveAutoSave } from '../../store/actionCreators';
 
 export default function SignOut() {
   const dispatch = useDispatch();

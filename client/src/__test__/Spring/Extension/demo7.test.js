@@ -10,7 +10,7 @@ import { inject, enableDispatcher, loadInitialState,
          freeSymbolValue,
          search,
          changeSystemControlsValue,
-         seek } from '../../../store/modelSlice';
+         seek } from '../../../store/actionCreators';
 import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 import store from "../../../store/store";
 

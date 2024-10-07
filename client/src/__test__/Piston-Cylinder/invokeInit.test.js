@@ -1,7 +1,7 @@
 import { initialState } from '../../designtypes/Piston-Cylinder/initialState';
 import * as sto from '../../designtypes/Piston-Cylinder/symbol_table_offsets';
 import { initialSystemControls } from '../../initialSystemControls';
-import { inject, changeSymbolValue } from '../../store/modelSlice';
+import { inject, changeSymbolValue } from '../../store/actionCreators';
 import { invokeInit } from '../../store/middleware/invokeInit';
 import store from "../../store/store";
 

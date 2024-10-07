@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown, Modal, InputGroup, ButtonGroup, Button, Form } from 'react-bootstrap';
 import { CONSTRAINED, FIXED, MIN, MAX } from '../../store/actionTypes';
-import { seek, saveAutoSave } from '../../store/modelSlice';
+import { seek, saveAutoSave } from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
 import { displayMessage } from '../../components/Message';
 

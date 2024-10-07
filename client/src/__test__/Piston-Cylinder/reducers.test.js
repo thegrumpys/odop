@@ -13,7 +13,7 @@ import {
     changeResultObjectiveValue, changeResultTerminationCondition,
     changeSystemControlsValue, changeLabelsValue, search, seek,
     saveAutoSave, restoreAutoSave, deleteAutoSave
-    } from '../../store/modelSlice';
+    } from '../../store/actionCreators';
 import store from "../../store/store";
 
 //=====================================================================

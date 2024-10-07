@@ -4,7 +4,7 @@ import {
     changeName,
     changeLabelsValue,
     startup,
-} from '../../store/modelSlice';
+} from '../../store/actionCreators';
 export const execute = {
     steps: [
         {

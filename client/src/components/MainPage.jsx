@@ -11,37 +11,8 @@ import {
   Tooltip,
   Row
 } from 'react-bootstrap';
-import { changeView, changeUser, deleteAutoSave } from '../store/modelSlice';
+import { changeView, changeUser, deleteAutoSave } from '../store/actionCreators';
 import ExecutePanel from './ExecutePanel';
-import SignIn from '../menus/Session/SignIn';
-import SignOut from '../menus/Session/SignOut';
-import FileOpen from '../menus/File/FileOpen';
-import FileSave from '../menus/File/FileSave';
-import FileSaveAs from '../menus/File/FileSaveAs';
-import FileDelete from '../menus/File/FileDelete';
-import FilePreferences from '../menus/File/FilePreferences';
-import FileProperties from '../menus/File/FileProperties';
-import FileImport from '../menus/File/FileImport';
-import FileExport from '../menus/File/FileExport';
-import ActionSearch from '../menus/Action/ActionSearch';
-import ActionSeek from '../menus/Action/ActionSeek';
-import ActionTrade from '../menus/Action/ActionTrade';
-import ActionSelectSize from '../menus/Action/ActionSelectSize';
-import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
-import ActionExecute from '../menus/Action/ActionExecute';
-import ViewCADModel from '../menus/View/ViewCADModel';
-import ViewSelect from '../menus/View/ViewSelect';
-import ViewOffsets from '../menus/View/ViewOffsets';
-import ViewSymbolTableOffsets from '../menus/View/ViewSymbolTableOffsets';
-import ViewSymbolTable from '../menus/View/ViewSymbolTable';
-import ViewObjectiveValue from '../menus/View/ViewObjectiveValue';
-//import ViewExecuteToTest from '../menus/View/ViewExecuteToTest';
-import HelpMotd from '../menus/Help/HelpMotd';
-import HelpIndex from '../menus/Help/HelpIndex';
-import HelpDemo from '../menus/Help/HelpDemo';
-import HelpTutorial from '../menus/Help/HelpTutorial';
-import HelpAbout from '../menus/Help/HelpAbout';
-import SearchDocs from './SearchDocs';
 import config from '../config';
 import ResultTable from './ResultTable';
 import { useOktaAuth } from '@okta/okta-react';
@@ -136,50 +107,11 @@ export default function MainPage() {
         <Navbar.Collapse in={show}>
           <Nav className="me-auto">
             {logOnOff}
-            <NavDropdown title="File" renderMenuOnMount={true}>
-              <FileOpen />
-              <FileSave />
-              <FileSaveAs />
-              <FileDelete />
-              <NavDropdown.Divider />
-              <FileImport />
-              <FileExport />
-              <NavDropdown.Divider />
-              <FilePreferences />
-              <FileProperties />
-            </NavDropdown>
             <NavDropdown title="Action">
-              <ActionSearch />
-              <ActionSeek />
-              <ActionTrade />
-              <NavDropdown.Divider />
-              <ActionSelectSize />
-              <ActionSelectCatalog />
-              <NavDropdown.Divider />
               <ActionExecute />
-            </NavDropdown>
-            <NavDropdown title="View">
-              {model_type === "Spring/Extension" && <ViewCADModel />}
-              {model_type === "Spring/Extension" && <NavDropdown.Divider />}
-              <ViewSelect viewNames={viewNames}/>
-              <NavDropdown.Divider />
-              {config.node.env !== "production" && <ViewOffsets />}
-              {config.node.env !== "production" && <ViewSymbolTableOffsets />}
-              {config.node.env !== "production" && <ViewSymbolTable />}
-              {config.node.env !== "production" && <ViewObjectiveValue />}
-            </NavDropdown>
-            <NavDropdown title="Help">
-              <HelpMotd />
-              <HelpIndex />
-              <HelpDemo />
-              <HelpTutorial />
-              <HelpAbout />
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Item>
-              <SearchDocs />
-            </Nav.Item>
             <Nav.Item className="d-flex align-items-center">
               <a href={"/docs/Help/DesignTypes/" + model_type + "/description.html"} target="_blank" rel="noopener noreferrer">
                 <OverlayTrigger placement="bottom" overlay={<Tooltip>Design type is {model_type}. Select icon for full description.</Tooltip>}>
@@ -196,7 +128,6 @@ export default function MainPage() {
           <ExecutePanel />
         </Row>
         <ResultTable />
-        {viewComponent}
       </Container>
     </>
   );

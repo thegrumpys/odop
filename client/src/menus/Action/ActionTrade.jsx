@@ -9,7 +9,7 @@ import {
   changeResultTerminationCondition,
   search,
   saveAutoSave
-} from '../../store/modelSlice';
+} from '../../store/actionCreators';
 import { logUsage } from '../../logUsage';
 import FormControlTypeNumber from '../../components/FormControlTypeNumber';
 import store from "../../store/store";

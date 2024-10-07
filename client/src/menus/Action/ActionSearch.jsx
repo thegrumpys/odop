@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown, Modal, Alert, Button } from 'react-bootstrap';
 import { CONSTRAINED, FIXED } from '../../store/actionTypes';
-import { search, saveAutoSave } from '../../store/modelSlice';
+import { search, saveAutoSave } from '../../store/actionCreators';
 import { enableSpinner, disableSpinner }  from '../../store/spinnerSlice';
 import { logUsage } from '../../logUsage';
 import { displayMessage } from '../../components/Message';

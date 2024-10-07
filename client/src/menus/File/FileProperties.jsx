@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, NavDropdown, Container, Row, Col, Form } from 'react-bootstrap';
-import { changeLabelsValue, saveAutoSave } from '../../store/modelSlice';
+import { changeLabelsValue, saveAutoSave } from '../../store/actionCreators';
 import { logUsage, logValue } from '../../logUsage';
 
 export default function FileProperties() {

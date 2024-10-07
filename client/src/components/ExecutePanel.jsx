@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, Button, Container, Row } from 'react-bootstrap';
-import { load, changeResultTerminationCondition } from '../store/modelSlice';
+import { load, changeResultTerminationCondition } from '../store/actionCreators';
 import { actionDumper } from '../store/actionDumper';
 import { logUsage } from '../logUsage';
 import config from '../config';

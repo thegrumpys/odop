@@ -8,7 +8,7 @@ import { inject, enableDispatcher, loadInitialState,
          fixSymbolValue,
          search,
          changeSystemControlsValue,
-         seek } from '../../../store/modelSlice';
+         seek } from '../../../store/actionCreators';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 import store from "../../../store/store";
 

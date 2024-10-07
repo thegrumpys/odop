@@ -1,6 +1,6 @@
 import React from 'react';
-import { changeSymbolValue, fixSymbolValue, loadInitialState, changeLabelsValue, search } from '../../../store/modelSlice';
-import { changeSystemControlsValue } from '../../../store/modelSlice';
+import { changeSymbolValue, fixSymbolValue, loadInitialState, changeLabelsValue, search } from '../../../store/actionCreators';
+import { changeSystemControlsValue } from '../../../store/actionCreators';
 export const execute = {
     "name": "demo9",
     "steps": [
