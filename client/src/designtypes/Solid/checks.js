@@ -1,5 +1,5 @@
 import * as o from './symbol_table_offsets';
-import { clearAlerts, addAlert } from '../../store/alertsSlice';
+import { clearAlerts, addAlert } from '../../store/alertsActions';
 import { checks as commonChecks, WARN } from '../../components/Alerts';
 import { toODOPPrecision } from '../../toODOPPrecision'
 

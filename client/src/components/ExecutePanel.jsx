@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, Button, Container, Row } from 'react-bootstrap';
-import { load, changeResultTerminationCondition } from '../store/actionCreators';
-import { actionDumper } from '../store/actionDumper';
+import { load, changeResultTerminationCondition } from '../store/modelActions';
+import { modelDumper } from '../store/modelDumper';
 import { logUsage } from '../logUsage';
 import config from '../config';
 import { outputStart, outputLine, outputStop } from '../menus/View/ViewExecuteToTest';
-import { executeStart, executeStop, setExecuteName, setShow, setPrefix, setStates, setStep, setTitle, setText, setStartTime /*, setTestGenerate */ } from '../store/executePanelSlice'; // FIXME
+import { executeStart, executeStop, setExecuteName, setShow, setPrefix, setStates, setStep, setTitle, setText, setStartTime /*, setTestGenerate */ } from '../store/executePanelActions'; // FIXME
 import store from '../store/store';
 
 export const startExecute = (prefix, executeName, run=false) => {
@@ -39,7 +39,7 @@ export const startExecute = (prefix, executeName, run=false) => {
       execute.steps[next].actions.forEach((action) => { store.dispatch(action); console.log('\taction.type=',action.type);})
 //      if (localTestGenerate) { // FIXME
 //        execute.steps[0].actions.forEach((action) => {
-//          var dump = actionDumper(action);
+//          var dump = modelDumper(action);
 //          if (dump !== undefined) {
 //            outputLine('    store.dispatch(' + dump + ');');
 //          }
@@ -100,7 +100,7 @@ export default function ExecutePanel() {
       execute.steps[next].actions.forEach((action) => { dispatch(action); });
 //      if (testGenerate) { // FIXME
 //        steps[next].actions.forEach((action) => {
-//          var dump = actionDumper(action);
+//          var dump = modelDumper(action);
 //          if (dump !== undefined) {
 //            outputLine('    store.dispatch(' + dump + ');');
 //          }
@@ -127,7 +127,7 @@ export default function ExecutePanel() {
       execute.steps[prev].actions.forEach((action) => { dispatch(action); });
 //      if (testGenerate) { // FIXME
 //        steps[prev].actions.forEach((action) => {
-//          var dump = actionDumper(action);
+//          var dump = modelDumper(action);
 //          if (dump !== undefined) {
 //            outputLine('    store.dispatch(' + dump + ');');
 //          }

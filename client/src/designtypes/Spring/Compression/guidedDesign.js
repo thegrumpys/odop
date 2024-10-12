@@ -1,5 +1,5 @@
 import React from 'react';
-import { setStopOnFileLoad } from '../../../store/executePanelSlice';
+import { setStopOnFileLoad } from '../../../store/executePanelActions';
 import { Table, Image } from 'react-bootstrap';
 export const execute = {
     steps: [

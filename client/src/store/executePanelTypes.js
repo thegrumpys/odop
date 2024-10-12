@@ -1,0 +1,9 @@
+export const EXECUTE_START = 'executePanelSlice/executeStart';
+export const EXECUTE_STOP_ON_LOAD = 'executePanelSlice/setStopOnFileLoad';
+export const EXECUTE_STOP = 'executePanelSlice/executeStop';
+export const SET_SHOW = 'executePanelSlice/setShow';
+export const SET_EXECUTE_NAME = 'executePanelSlice/setExecuteName';
+export const SET_PREFIX = 'executePanelSlice/setPrefix';
+export const SET_STATES = 'executePanelSlice/setStates';
+export const SET_STEP = 'executePanelSlice/setStep';
+export const SET_STOP_ON_FILE_LOAD = 'executePanelSlice/setStopOnFileLoad';

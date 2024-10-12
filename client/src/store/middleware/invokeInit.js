@@ -1,4 +1,4 @@
-import { changeOutputSymbolValues } from '../modelSlice';
+import { changeOutputSymbolValues } from '../modelActions';
 
 // Invoke Init
 export function invokeInit(store) {

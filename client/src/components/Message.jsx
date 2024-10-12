@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Modal, Button, Alert } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
-import { addMessage, disableMessage } from "../store/messageSlice";
+import { addMessage, disableMessage } from "../store/messageActions";
 import store from "../store/store";
 
 export const displayMessage = (message, variant = 'danger', header = '', help_url = '') => {

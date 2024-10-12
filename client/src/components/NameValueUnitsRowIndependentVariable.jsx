@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { CONSTRAINED, FIXED } from '../store/actionTypes';
-import { changeSymbolValue, fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../store/actionCreators';
+import { changeSymbolValue, fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../store/modelActions';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';

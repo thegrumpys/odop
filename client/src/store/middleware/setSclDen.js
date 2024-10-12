@@ -1,5 +1,5 @@
 import { MIN, MAX } from '../actionTypes';
-import { changeSymbolConstraints } from '../modelSlice';
+import { changeSymbolConstraints } from '../modelActions';
 
 // Startup
 export function setSclDen(store) {

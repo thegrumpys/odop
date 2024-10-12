@@ -1,4 +1,4 @@
-import { changeSymbolConstraint } from '../modelSlice';
+import { changeSymbolConstraint } from '../modelActions';
 
 export function pxPropagate(p, x, store) {
 //    console.log('Start pxPropagate store=',store);

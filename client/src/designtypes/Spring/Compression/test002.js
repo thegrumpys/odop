@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSymbolValue } from '../../../store/actionCreators';
+import { changeSymbolValue } from '../../../store/modelActions';
 export const execute = {
     "name": "test001",
     "steps": [

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, NavDropdown, Table, Form } from 'react-bootstrap';
-import { changeSymbolValue, saveAutoSave } from '../../store/actionCreators';
+import { changeSymbolValue, saveAutoSave } from '../../store/modelActions';
 import { logUsage, logValue } from '../../logUsage';
 import store from "../../store/store";
 

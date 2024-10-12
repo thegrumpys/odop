@@ -2,7 +2,7 @@ import { startup, load, loadInitialState, changeSymbolValue, restoreAutoSave,
          fixSymbolValue, freeSymbolValue, changeSymbolConstraint, saveOutputSymbolConstraints, restoreOutputSymbolConstraints,
          setSymbolFlag, resetSymbolFlag, 
          changeInputSymbolValues, restoreInputSymbolValues, changeSystemControlsValue,
-         search, seek, changeResultTerminationCondition } from '../modelSlice';
+         search, seek, changeResultTerminationCondition } from '../modelActions';
 import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../actionTypes';
 import { setSclDen } from './setSclDen';
 import { search as invokeSearch} from './search'

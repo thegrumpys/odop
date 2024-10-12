@@ -9,7 +9,7 @@ import { inject, enableDispatcher, loadInitialState,
          changeSymbolConstraint,
          fixSymbolValue,
          changeSystemControlsValue,
-         search } from '../../../store/actionCreators';
+         search } from '../../../store/modelActions';
 import { MIN, MAX, CONSTRAINED, FDCL } from '../../../store/actionTypes';
 import store from "../../../store/store";
 

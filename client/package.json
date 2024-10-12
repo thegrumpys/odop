@@ -34,7 +34,6 @@
     "@mars/heroku-js-runtime-env": "^3.0.2",
     "@okta/okta-react": "^6.8.0",
     "@okta/okta-signin-widget": "^7.18.0",
-    "@reduxjs/toolkit": "^2.2.1",
     "bootstrap": "^5.3.3",
     "popper.js": "^1.16.1",
     "react": "^18.2.0",
@@ -43,7 +42,7 @@
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.22.1",
     "react-scripts": "^5.0.1",
-    "redux-logger": "^3.0.6",
+    "redux": "^5.0.1",
     "util": "^0.12.5"
   },
   "devDependencies": {

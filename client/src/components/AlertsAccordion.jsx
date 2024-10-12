@@ -6,8 +6,8 @@ import { logUsage } from '../logUsage';
 import SymbolValue from './SymbolValue';
 import Value from './Value';
 import config from '../config';
-import { changeSystemControlsValue } from '../store/actionCreators';
-import { setActiveKey, setCaret, setLevel } from '../store/alertsSlice';
+import { changeSystemControlsValue } from '../store/modelActions';
+import { setActiveKey, setCaret, setLevel } from '../store/alertsActions';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 
 const ContextAwareAccordion = ({ children }) => {

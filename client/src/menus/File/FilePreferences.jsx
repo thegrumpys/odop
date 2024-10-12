@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, NavDropdown, Container, Row, Col } from 'react-bootstrap';
 import { initialSystemControls } from '../../initialSystemControls';
-import { changeSystemControlsValue, saveAutoSave } from '../../store/actionCreators';
+import { changeSystemControlsValue, saveAutoSave } from '../../store/modelActions';
 import { logUsage, logValue } from '../../logUsage';
 import FormControlTypeNumber from '../../components/FormControlTypeNumber';
 

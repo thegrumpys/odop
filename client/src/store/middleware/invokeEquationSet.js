@@ -1,4 +1,4 @@
-import { changeOutputSymbolValues } from '../modelSlice';
+import { changeOutputSymbolValues } from '../modelActions';
 
 // Invoke Equation Set
 export function invokeEquationSet(store) {

@@ -2,11 +2,12 @@ import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-import { load, loadInitialState, changeName, restoreAutoSave, deleteAutoSave } from "../store/actionCreators";
+import { load, loadInitialState, changeName, restoreAutoSave, deleteAutoSave } from "../store/modelActions";
 import MainPage from "./MainPage";
+import SignInPageWidget from './SignInPageWidget';
 import { Button, Modal, Alert } from 'react-bootstrap';
 import config from '../config';
-import { displaySpinner } from "./Spinner";
+//import { displaySpinner } from "./Spinner";
 import { displayMessage } from "./Message";
 import { logUsage } from '../logUsage';
 import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js'
@@ -95,7 +96,7 @@ export default function App2() {
 
   const getDesign = (user, type, name) => {
 //    console.log('App.getDesign','user=',user,'type=',type,'name=',name);
-    displaySpinner(true);
+//    displaySpinner(true);
     fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
       headers: {
         Authorization: 'Bearer ' + user
@@ -132,7 +133,7 @@ export default function App2() {
       displayMessage('GET of \''+name+'\' design failed for type \''+type+'\' with message: \''+error.message+'\'');
     })
     .finally(() => {
-      displaySpinner(false);
+//      displaySpinner(false);
     });
   }
 
@@ -163,6 +164,8 @@ export default function App2() {
                 restoreOriginalUri={restoreOriginalUri} >
         <Routes>
           <Route exact path="/" element={<MainPage />} />
+          <Route path='/login' element={<SignInPageWidget />} />
+          <Route path='/implicit/callback' component={LoginCallback} />
         </Routes>
       </Security>
       {show && <Modal show={show} onHide={loadDefaultDesign}>

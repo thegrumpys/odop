@@ -1,6 +1,6 @@
 import { MIN, MAX, CONSTRAINED, FIXED } from '../actionTypes';
 import { changeSymbolViolation,
-    changeResultObjectiveValue, changeResultSearchCompleted } from '../modelSlice';
+    changeResultObjectiveValue, changeResultSearchCompleted } from '../modelActions';
 
 // Update Violations and Objective Value
 export function updateObjectiveValue(store, merit) {
