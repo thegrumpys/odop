@@ -36,9 +36,9 @@ import { changeSymbolValue, setSymbolFlag, changeSymbolConstraint, saveOutputSym
          restoreOutputSymbolConstraints, changeResultTerminationCondition } from '../modelActions';
 
 export const dispatcher = store => next => action => {
-  console.log('start dispatcher before reducer','store=',store,'next=',next,'action=',action);
+//  console.log('start dispatcher before reducer','store=',store,'next=',next,'action=',action);
   const returnValue = next(action); // Invoke reducer
-  console.log('start dispatcher after reducer','returnValue=',returnValue);
+//  console.log('start dispatcher after reducer','returnValue=',returnValue);
 
   var design;
   var source;

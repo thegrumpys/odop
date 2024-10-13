@@ -52,7 +52,7 @@ export default function modelReducers(state = {}, action) {
   var value;
   var name;
 
-  console.warn('In reducers state=',state,'action=', action);
+//  console.warn('In reducers state=',state,'action=', action);
 //  if (action.payload === undefined || action.payload.name === undefined) {
 //      console.log('<li>','In reducers action=', action.type,'</li>');
 //  } else {
