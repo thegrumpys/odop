@@ -41,6 +41,7 @@ import {
   DELETE_AUTO_SAVE,
 
   LOG_USAGE,
+  ENABLE_DISPATCHER
 } from './modelTypes';
 import { VALID_MIN, VALID_MAX, MIN, MAX, FDCL } from './actionTypes';
 import { sclden } from './middleware/sclden';
@@ -62,6 +63,7 @@ export default function modelReducers(state = {}, action) {
     case INJECT:
       //        console.log('start reducer inject', 'state=', current(state), 'action=', action);
       var result = Object.assign({}, state, {
+        ...state,
         ...action.payload.store,
         enableDispatcher: false, // inject always sets enableDispatcher false
       });
@@ -874,6 +876,13 @@ export default function modelReducers(state = {}, action) {
           }
         }
       });
+      return result;
+
+    case ENABLE_DISPATCHER:
+      var result = Object.assign({}, state, {
+         ...state,
+         enableDispatcher: action.payload.flag
+      })
       return result;
 
     default:

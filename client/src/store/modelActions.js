@@ -41,11 +41,15 @@ import {
   DELETE_AUTO_SAVE,
 
   LOG_USAGE,
+  ENABLE_DISPATCHER
 } from './modelTypes';
 
-export function inject() {
+export function inject(store) {
   return {
-    type: INJECT
+    type: INJECT,
+    payload: {
+      store
+    }
   }
 }
 
@@ -362,6 +366,15 @@ export function logUsage(tag, action, note) {
       tag,
       action,
       note,
+    }
+  }
+}
+
+export function enableDispatcher(flag = true) {
+  return {
+    type: ENABLE_DISPATCHER,
+    payload: {
+      flag
     }
   }
 }

@@ -39,4 +39,5 @@ export const SAVE_AUTO_SAVE = 'modelSlice/saveAutoSave';
 export const RESTORE_AUTO_SAVE = 'modelSlice/restoreAutoSave';
 export const DELETE_AUTO_SAVE = 'modelSlice/deleteAutoSave';
 
-export const LOG_USAGE = 'modelSlice/LogUsage';
+export const LOG_USAGE = 'modelSlice/logUsage';
+export const ENABLE_DISPATCHER = 'modelSlice/enableDispatcher';
