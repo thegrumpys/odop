@@ -1,8 +1,27 @@
-import { startup, load, loadInitialState, changeSymbolValue, restoreAutoSave,
-         fixSymbolValue, freeSymbolValue, changeSymbolConstraint, saveOutputSymbolConstraints, restoreOutputSymbolConstraints,
-         setSymbolFlag, resetSymbolFlag, 
-         changeInputSymbolValues, restoreInputSymbolValues, changeSystemControlsValue,
-         search, seek, changeResultTerminationCondition } from '../modelActions';
+import { STARTUP,
+
+    LOAD,
+    LOAD_INITIAL_STATE,
+
+    CHANGE_SYMBOL_VALUE,
+    FIX_SYMBOL_VALUE,
+    FREE_SYMBOL_VALUE,
+    CHANGE_SYMBOL_CONSTRAINT,
+    SET_SYMBOL_FLAG,
+    RESET_SYMBOL_FLAG,
+
+    CHANGE_INPUT_SYMBOL_VALUES,
+    RESTORE_INPUT_SYMBOL_VALUES,
+
+    CHANGE_SYSTEM_CONTROLS_VALUE,
+
+    RESTORE_OUTPUT_SYMBOL_CONSTRAINTS,
+
+    SEARCH,
+    SEEK,
+
+    RESTORE_AUTO_SAVE,
+    } from '../modelTypes';
 import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../actionTypes';
 import { setSclDen } from './setSclDen';
 import { search as invokeSearch} from './search'
@@ -13,11 +32,13 @@ import { propagate } from './propagate';
 import { updateObjectiveValue } from './updateObjectiveValue';
 import { invokeCheck } from './invokeCheck';
 import { resetCatalogSelection } from './resetCatalogSelection';
+import { changeSymbolValue, setSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
+         restoreOutputSymbolConstraints, changeResultTerminationCondition } from '../modelActions';
 
 export const dispatcher = store => next => action => {
-//  console.log('start dispatcher before reducer','store=',store,'next=',next,'action=',action);
+  console.log('start dispatcher before reducer','store=',store,'next=',next,'action=',action);
   const returnValue = next(action); // Invoke reducer
-//  console.log('start dispatcher after reducer','returnValue=',returnValue);
+  console.log('start dispatcher after reducer','returnValue=',returnValue);
 
   var design;
   var source;
@@ -29,10 +50,10 @@ export const dispatcher = store => next => action => {
 
   switch (action.type) {
 
-    case startup().type:
-    case load().type:
-    case loadInitialState().type:
-    case restoreAutoSave().type: {
+    case STARTUP:
+    case LOAD:
+    case LOAD_INITIAL_STATE:
+    case RESTORE_AUTO_SAVE: {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
       invokeInit(store);
       invokeEquationSet(store);
@@ -43,7 +64,7 @@ export const dispatcher = store => next => action => {
     }
       break;
 
-    case changeSymbolValue().type: {
+    case CHANGE_SYMBOL_VALUE: {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
       design = store.getState().modelSlice;
       index = design.model.symbol_table.findIndex((element) => element.name === action.payload.name);
@@ -82,7 +103,7 @@ export const dispatcher = store => next => action => {
     }
       break;
 
-    case fixSymbolValue().type: {
+    case FIX_SYMBOL_VALUE: {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
       design = store.getState().modelSlice;
       design.model.symbol_table.find((element) => {
@@ -127,7 +148,7 @@ export const dispatcher = store => next => action => {
     }
       break;
 
-    case freeSymbolValue().type: {
+    case FREE_SYMBOL_VALUE: {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
       design = store.getState().modelSlice;
       design.model.symbol_table.find((element) => {
@@ -147,15 +168,15 @@ export const dispatcher = store => next => action => {
     }
       break;
 
-    case changeSymbolConstraint().type:
-    case restoreOutputSymbolConstraints().type: {
+    case CHANGE_SYMBOL_CONSTRAINT:
+    case RESTORE_OUTPUT_SYMBOL_CONSTRAINTS: {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
       updateObjectiveValue(store);
       invokeCheck(store);
     }
       break;
 
-    case setSymbolFlag().type: {
+    case SET_SYMBOL_FLAG: {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
       if (action.payload.mask & FDCL) {
         design = store.getState().modelSlice;
@@ -171,16 +192,16 @@ export const dispatcher = store => next => action => {
     }
       break;
 
-    case resetSymbolFlag().type: {
+    case RESET_SYMBOL_FLAG: {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
       updateObjectiveValue(store);
       invokeCheck(store);
     }
       break;
 
-    case changeInputSymbolValues().type:
-    case restoreInputSymbolValues().type:
-    case changeSystemControlsValue().type: {
+    case CHANGE_INPUT_SYMBOL_VALUES:
+    case RESTORE_INPUT_SYMBOL_VALUES:
+    case CHANGE_SYSTEM_CONTROLS_VALUE: {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
       // DO NOT INVOKE invokeInit(store) BECAUSE OF RECURSION
       store.dispatch(changeSymbolValue('Catalog_Name', '', action.payload.merit))
@@ -192,14 +213,14 @@ export const dispatcher = store => next => action => {
     }
       break;
 
-    case search().type: {
+    case SEARCH: {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
       design = store.getState().modelSlice;
       invokeSearch(store, design.model.system_controls.objmin);
     }
       break;
 
-    case seek().type: {
+    case SEEK: {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
       invokeSeek(store, action);
       design = store.getState().modelSlice;
