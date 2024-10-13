@@ -42,11 +42,11 @@ import {
 
   LOG_USAGE,
 } from './modelTypes';
-import { VALID_MIN, VALID_MAX, MIN, MAX } from './actionTypes';
+import { VALID_MIN, VALID_MAX, MIN, MAX, FDCL } from './actionTypes';
 import { sclden } from './middleware/sclden';
 import { initialSystemControls } from '../initialSystemControls';
 
-export default function modelReducers(state, action) {
+export default function modelReducers(state = {}, action) {
   var i;
   var value;
   var name;

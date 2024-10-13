@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App2 from "./components/App2";
+import store from "./store/store";
 import { Provider } from "react-redux";
 import './odop.css';
 import * as ReactDOMClient from "react-dom/client";

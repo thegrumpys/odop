@@ -55,11 +55,11 @@ export function startup() {
   }
 }
 
-export function load(design) {
+export function load(model) {
   return {
     type: LOAD,
     payload: {
-      design
+      model
     }
   }
 }

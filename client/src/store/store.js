@@ -15,9 +15,9 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
 
 const reducers = combineReducers({
+  modelSlice: modelReducers,
   alertsSlice: alertsReducers,
   executePanelSlice: executePanelReducers,
-  modelSlice: modelReducers,
   messageSlice: messageReducers,
   spinnerSlice: spinnerReducers,
 });
