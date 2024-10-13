@@ -15,10 +15,10 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
 
 const reducers = combineReducers({
-  modelSlice: modelReducers,
   alertsSlice: alertsReducers,
   executePanelSlice: executePanelReducers,
   messageSlice: messageReducers,
+  modelSlice: modelReducers,
   spinnerSlice: spinnerReducers,
 });
 
@@ -39,6 +39,12 @@ export default createStore(reducers, {
     stop_on_file_load: true, // flag for guidedDesign execute macro
 //    testGenerate: config.node.env !== "production" ? true : false,
   },
+  messageSlice: {
+    show: false, // Default: do not display
+    header: '', // Default: no header
+    messages: [], // Default: no messages
+    help_url: '', // Default: no Help URL
+  },
   modelSlice: {
     user: null,
     name: config.url.name,
@@ -49,13 +55,8 @@ export default createStore(reducers, {
         objective_value: 0
       },
       system_controls: initialSystemControls
-    }
-  },
-  messageSlice: {
-    show: false, // Default: do not display
-    header: '', // Default: no header
-    messages: [], // Default: no messages
-    help_url: '', // Default: no Help URL
+    },
+    enableDispatcher: true,
   },
   spinnerSlice: {
     show: false

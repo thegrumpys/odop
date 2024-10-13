@@ -881,7 +881,7 @@ export default function modelReducers(state = {}, action) {
     case ENABLE_DISPATCHER:
       var result = Object.assign({}, state, {
          ...state,
-         enableDispatcher: action.payload.flag
+         enableDispatcher: action.payload.value
       })
       return result;
 

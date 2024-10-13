@@ -370,11 +370,11 @@ export function logUsage(tag, action, note) {
   }
 }
 
-export function enableDispatcher(flag = true) {
+export function enableDispatcher(value = true) {
   return {
     type: ENABLE_DISPATCHER,
     payload: {
-      flag
+      value
     }
   }
 }
