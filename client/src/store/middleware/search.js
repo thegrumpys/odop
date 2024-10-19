@@ -1,5 +1,5 @@
 import { FIXED } from '../actionTypes';
-import { changeInputSymbolValues, changeResultTerminationCondition, changeResultSearchCompleted } from '../modelActions';
+import { changeInputSymbolValues, changeResultTerminationCondition, changeResultSearchCompleted } from '../actions';
 import { patsh } from './patsh';
 
 // Search

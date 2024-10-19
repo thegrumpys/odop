@@ -1,4 +1,4 @@
-import { changeSymbolConstraint } from '../modelActions';
+import { changeSymbolConstraint } from '../actions';
 
 export function propagate(store) {
 //    console.log('Start propagate store=',store);

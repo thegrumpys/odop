@@ -3,52 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown, Modal, Button } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
 
-export const outputStart = function(execute_name) {
-//  console.log('In outputStart','execute_name=',execute_name);
-  if (this === undefined) return;
-  this.setState( // Special form of setState using updater function
-    (prevState, props) => {
-      var line = '    // Execute File: ' + execute_name;
-      var l = <>{line}<br /></>;
-      return {
-        execute_name: execute_name, // Clear lines
-        lines: l, // Clear lines
-      };
-    }
-  );
-}
-
-export const outputLine = function(line) {
-//  console.log('In outputLine','line=',line);
-  if (this === undefined) return;
-  this.setState( // Special form of setState using updater function
-    (prevState, props) => {
-      var l = <>{prevState.lines}{line}<br /></>;
-      return {
-        lines: l // Concatenate lines
-      };
-    }
-  );
-}
-
-export const outputStop = function() {
-//  console.log('In outputStop','this=',this);
-  if (this === undefined) return;
-  this.setState( // Special form of setState using updater function
-    (prevState, props) => {
-      var l = <>{prevState.lines}</>;
-      return {
-        lines: l, // Clear lines
-      };
-    }
-  );
-}
-
 export default function ViewExecuteToTest() {
 //  console.log('ViewExecuteToTest - Mounting...');
 
+  const executeName = useSelector((state) => state.executePanelSlice.executeName);
+  const lines = useSelector((state) => state.executePanelSlice.lines);
   const [show, setShow] = useState(false);
-  const [lines, setLines] = useState(false);
 
   const toggle = () => {
 //    console.log('In ViewExecuteToTest.toggle');
@@ -74,9 +34,9 @@ import { inject,
 import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 import store from "../../../store/store";
 
-// This is a mapping of the ${this.state.execute_name} execute file to an equivalent test case file
+// This is a mapping of the ${executeName} execute file to an equivalent test case file
 
-it('${this.state.execute_name}', () => {
+it('${executeName}', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls });
     store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
     store.dispatch(enableDispatcher(true));

@@ -1,5 +1,5 @@
 import { MAX, FIXED, CONSTRAINED } from '../actionTypes';
-import { saveInputSymbolValues, restoreInputSymbolValues, changeResultTerminationCondition } from '../modelActions';
+import { saveInputSymbolValues, restoreInputSymbolValues, changeResultTerminationCondition } from '../actions';
 import { search } from './search';
 import { despak } from './despak';
 import { toODOPPrecision } from '../../toODOPPrecision'

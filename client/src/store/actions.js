@@ -15,6 +15,10 @@ import {
   SET_PREFIX,
   SET_STATES,
   SET_STEP,
+  SET_TEST_GENERATE,
+  OUTPUT_START,
+  OUTPUT_LINE,
+  OUTPUT_STOP,
 } from './types';
 
 import {
@@ -76,6 +80,7 @@ import {
 //=============================================================================
 // Alerts Actions
 //=============================================================================
+
 export function clearAlerts() {
   return {
     type: CLEAR_ALERTS,
@@ -121,6 +126,7 @@ export function setLevel(level) {
 //=============================================================================
 // ExecutePanel Actions
 //=============================================================================
+
 export function executeStart(show, executeName, prefix, states, step) {
   return {
     type: EXECUTE_START,
@@ -191,18 +197,49 @@ export function setStep(step) {
   }
 }
 
-export function setStopOnFileLoad(stop_on_file_load) {
+export function setStopOnFileLoad(stopOnFileLoad) {
   return {
     type: SET_STOP_ON_FILE_LOAD,
     payload: {
-      stop_on_file_load: stop_on_file_load
+      stopOnFileLoad: stopOnFileLoad
     }
+  }
+}
+
+export function setTestGenerate(testGenerate) {
+  return {
+    type: SET_TEST_GENERATE,
+    payload: {
+      testGenerate: testGenerate
+    }
+  }
+}
+
+export function outputStart() {
+  return {
+    type: OUTPUT_START,
+  }
+}
+
+export function outputLine(line) {
+  return {
+    type: OUTPUT_LINE,
+    payload: {
+      line: line
+    }
+  }
+}
+
+export function outputStop() {
+  return {
+    type: OUTPUT_STOP,
   }
 }
 
 //=============================================================================
 // Message Actions
 //=============================================================================
+
 export function addMessage(message, variant, header, help_url) {
   return {
     type: ADD_MESSAGE,
@@ -224,6 +261,7 @@ export function disableMessage() {
 //=============================================================================
 // Model Actions
 //=============================================================================
+
 export function inject(store) {
   return {
     type: INJECT,
@@ -562,6 +600,7 @@ export function enableDispatcher(value = true) {
 //=============================================================================
 // Spinner Actions
 //=============================================================================
+
 export function enableSpinner() {
   return {
     type: ENABLE_SPINNER

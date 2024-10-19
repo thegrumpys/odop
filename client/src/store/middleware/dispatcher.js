@@ -21,7 +21,7 @@ import { STARTUP,
     SEEK,
 
     RESTORE_AUTO_SAVE,
-    } from '../modelTypes';
+    } from '../types';
 import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../actionTypes';
 import { setSclDen } from './setSclDen';
 import { search as invokeSearch} from './search'
@@ -33,7 +33,7 @@ import { updateObjectiveValue } from './updateObjectiveValue';
 import { invokeCheck } from './invokeCheck';
 import { resetCatalogSelection } from './resetCatalogSelection';
 import { changeSymbolValue, setSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
-         restoreOutputSymbolConstraints, changeResultTerminationCondition } from '../modelActions';
+         restoreOutputSymbolConstraints, changeResultTerminationCondition } from '../actions';
 
 export const dispatcher = store => next => action => {
 //  console.log('start dispatcher before reducer','store=',store,'next=',next,'action=',action);

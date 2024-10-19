@@ -24,8 +24,9 @@ export default createStore(reducers, {
     prefix: '',
     states: [],
     step: 0,
-    stop_on_file_load: true, // flag for guidedDesign execute macro
-//    testGenerate: config.node.env !== "production" ? true : false,
+    stopOnFileLoad: true, // flag for guidedDesign execute macro
+    testGenerate: config.node.env !== "production" ? true : false,
+    lines: '',
   },
   messageSlice: {
     show: false, // Default: do not display

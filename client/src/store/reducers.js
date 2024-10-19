@@ -17,12 +17,16 @@ import {
   SET_STATES,
   SET_STEP,
   SET_STOP_ON_FILE_LOAD,
+  SET_TEST_GENERATE,
+  OUTPUT_START,
+  OUTPUT_LINE,
+  OUTPUT_STOP,
 } from './types';
 
 import {
   ADD_MESSAGE,
   DISABLE_MESSAGE
-} from './messageTypes';
+} from './types';
 
 import {
   INJECT,
@@ -160,14 +164,15 @@ export default function reducers(state = {}, action) {
           prefix: action.payload.prefix,
           states: action.payload.states,
           step: action.payload.step,
-          stop_on_file_load: false
+          stopOnFileLoad: false,
+          testGenerate: false,
         }
       });
       return result;
 
     case EXECUTE_STOP_ON_LOAD:
       var result;
-      if (state.stop_on_file_load) {
+      if (state.stopOnFileLoad) {
         result = Object.assign({}, state, {
           ...state,
           executePanelSlice: {
@@ -177,7 +182,8 @@ export default function reducers(state = {}, action) {
             prefix: '',
             states: [],
             step: 0,
-            stop_on_file_load: true
+            stopOnFileLoad: true,
+            testGenerate: false,
           }
         });
       } else {
@@ -195,7 +201,8 @@ export default function reducers(state = {}, action) {
           prefix: '',
           states: [],
           step: 0,
-          stop_on_file_load: true
+          stopOnFileLoad: true,
+          testGenerate: false,
         }
       });
       return result;
@@ -255,7 +262,47 @@ export default function reducers(state = {}, action) {
         ...state,
         executePanelSlice: {
           ...state.executePanelSlice,
-          stop_on_file_load: action.payload.stop_on_file_load
+          stopOnFileLoad: action.payload.stopOnFileLoad
+        }
+      });
+      return result;
+
+    case SET_TEST_GENERATE:
+      var result = Object.assign({}, state, {
+        ...state,
+        executePanelSlice: {
+          ...state.executePanelSlice,
+          testGenerate: action.payload.testGenerate
+        }
+      });
+      return result;
+
+    case OUTPUT_START:
+      var result = Object.assign({}, state, {
+        ...state,
+        executePanelSlice: {
+          ...state.executePanelSlice,
+          lines: '',
+        }
+      });
+      return result;
+
+    case OUTPUT_LINE:
+      var result = Object.assign({}, state, {
+        ...state,
+        executePanelSlice: {
+          ...state.executePanelSlice,
+          lines: state.executePanelSlice.lines + '\n' + action.payload.line
+        }
+      });
+      return result;
+
+    case OUTPUT_STOP:
+      var result = Object.assign({}, state, {
+        ...state,
+        executePanelSlice: {
+          ...state.executePanelSlice,
+          lines: state.executePanelSlice.lines + '\n'
         }
       });
       return result;

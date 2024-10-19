@@ -19,6 +19,10 @@ export const SET_PREFIX = 'executePanelSlice/setPrefix';
 export const SET_STATES = 'executePanelSlice/setStates';
 export const SET_STEP = 'executePanelSlice/setStep';
 export const SET_STOP_ON_FILE_LOAD = 'executePanelSlice/setStopOnFileLoad';
+export const SET_TEST_GENERATE = 'executePanelSlice/setTestGenerate';
+export const OUTPUT_START = 'executePanelSlice/outputStart';
+export const OUTPUT_LINE = 'executePanelSlice/outputLine';
+export const OUTPUT_STOP = 'executePanelSlice/outputStop';
 
 //=============================================================================
 // Message Types

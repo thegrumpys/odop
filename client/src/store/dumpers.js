@@ -40,10 +40,10 @@ import {
   DELETE_AUTO_SAVE,
 
   LOG_USAGE,
-} from './modelTypes';
+} from './types';
 import { MIN } from './actionTypes';
 
-export function modelDumper(action) {
+export function dumpers(action) {
   var flags = ['', 'CONSTRAINED', 'FIXED', 'CONSTRAINED|FIXED', 'FDCL', 'CONSTRAINED|FDCL', 'FIXED|FDCL', 'CONSTRAINED|FIXED|FDCL']
   var result = '@@@ NOT SUPPORTED @@@';
   switch (action.type) {
