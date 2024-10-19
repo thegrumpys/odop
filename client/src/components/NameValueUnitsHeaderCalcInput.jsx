@@ -4,8 +4,8 @@ import { OverlayTrigger, Tooltip  } from 'react-bootstrap';
 
 export default function NameValueUnitsHeaderCalcInput() {
 //  console.log('NameValueUnitsHeaderCalcInput - Mounting...');
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const model_show_units = useSelector((state) => state.modelSlice.model.system_controls.show_units);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
+  const model_show_units = useSelector((state) => state.model.system_controls.show_units);
 
   useEffect(() => {
 //    console.log('NameValueUnitsHeaderCalcInput - Mounted');

@@ -6,8 +6,8 @@ import * as o from './symbol_table_offsets';
 
 export default function Report3() {
 //  console.log('Report3 - Mounting...');
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const model_labels = useSelector((state) => state.modelSlice.model.labels);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
+  const model_labels = useSelector((state) => state.model.labels);
   const base = useContext(ReportBaseContext);
 //  console.log('Report3','base=',base);
 

@@ -7,7 +7,7 @@ import { getAlertsBySeverity, ERR, WARN, NOTICE, INFO } from '../../../component
 
 export default function Report1() {
 //  console.log('Report1 - Mounting...');
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const base = useContext(ReportBaseContext);
 //  console.log('Report1','base=',base);
   

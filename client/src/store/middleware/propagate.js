@@ -2,7 +2,7 @@ import { changeSymbolConstraint } from '../actions';
 
 export function propagate(store) {
 //    console.log('Start propagate store=',store);
-    var design = store.getState().modelSlice; // Re-access store to get latest source values
+    var design = store.getState(); // Re-access store to get latest source values
 //    console.log('In propagate design=',design);
     var value;
     function nameMatch(entry) {

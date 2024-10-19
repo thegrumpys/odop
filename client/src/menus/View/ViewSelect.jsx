@@ -7,7 +7,7 @@ import { changeView } from '../../store/actions';
 export default function ViewSelect() {
 //  console.log('ViewSelect - Mounting...');
 
-  const model_type = useSelector((state) => state.modelSlice.model.type);
+  const model_type = useSelector((state) => state.model.type);
   const dispatch = useDispatch();
 
   var { getViewNames } = require('../../designtypes/' + model_type + '/view.js'); // Dynamically load getViewNames

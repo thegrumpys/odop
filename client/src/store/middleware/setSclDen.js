@@ -5,7 +5,7 @@ import { changeSymbolConstraints } from '../actions';
 export function setSclDen(store) {
 //    console.log('Entering setSclDen');
 
-    var design = store.getState().modelSlice;
+    var design = store.getState();
 //    console.log('In setSclDen design=',design);
 
     // Loop to create cmin and cmax arrays from symbol_table

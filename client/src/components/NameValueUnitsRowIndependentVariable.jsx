@@ -8,8 +8,8 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
 export default function NameValueUnitsRowIndependentVariable({ element, index, onChangeValid, onChangeInvalid, onSet, onReset }) {
-  const model_enable_auto_fix = useSelector((state) => state.modelSlice.model.system_controls.enable_auto_fix);
-  const model_show_units = useSelector((state) => state.modelSlice.model.system_controls.show_units);
+  const model_enable_auto_fix = useSelector((state) => state.model.system_controls.enable_auto_fix);
+  const model_show_units = useSelector((state) => state.model.system_controls.show_units);
   const dispatch = useDispatch();
 
   useEffect(() => {

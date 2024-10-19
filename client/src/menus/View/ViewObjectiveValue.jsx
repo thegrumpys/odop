@@ -7,8 +7,8 @@ import { CONSTRAINED, FIXED } from '../../store/actionTypes';
 export default function ViewObjectiveValue() {
 //  console.log('ViewObjectiveValue - Mounting...');
 
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const model_objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
+  const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const [show, setShow] = useState(false);
 
   useEffect(() => {

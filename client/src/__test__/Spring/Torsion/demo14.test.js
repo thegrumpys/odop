@@ -17,8 +17,8 @@ it('demo14', () => {
     store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
     store.dispatch(enableDispatcher(true));
 
-    var design = store.getState().modelSlice; // before
-    design = store.getState().modelSlice;
+    var design = store.getState(); // before
+    design = store.getState();
     expect(design.model.result.objective_value).toEqual(0.0);
 
     // title: "Session Now In Progress",
@@ -27,7 +27,7 @@ it('demo14', () => {
     // Page 02 of 08
     store.dispatch( loadInitialState("Spring/Torsion","US") );
     store.dispatch( changeLabelsValue([{"name":"COMMENT","value":"Torsion Spring Demo"}]) );
-    design = store.getState().modelSlice;
+    design = store.getState();
     expect(design.model.result.objective_value).toEqual(0.0);
 
     // Page 03 of 08
@@ -43,7 +43,7 @@ it('demo14', () => {
     store.dispatch( fixSymbolValue("Stroke",110) );
     store.dispatch( fixSymbolValue("Force_Arm_2",18) );
     store.dispatch( changeSymbolValue("Arm_2",9) );
-    design = store.getState().modelSlice;
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(307.2401962,7);
 
     // Page 05 of 08
@@ -51,7 +51,7 @@ it('demo14', () => {
 
     // Page 06 of 08
     store.dispatch( search() );
-    design = store.getState().modelSlice;
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0000034,7);
 
     // Page 07 of 08
@@ -60,7 +60,7 @@ it('demo14', () => {
     // Page 08 of 08
     store.dispatch( fixSymbolValue("Wire_Dia",0.225) );
     store.dispatch( search() );
-    design = store.getState().modelSlice;
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0000077,7);
 
 });

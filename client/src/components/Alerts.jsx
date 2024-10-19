@@ -49,7 +49,7 @@ export const check_DCD_alert = (element, minmax, urlCode) => {
 
 export const checks = (store) => {
 //  console.log('In Alerts.checks','store=',store);
-  var design = store.getState().modelSlice;
+  var design = store.getState();
 
   // OBJECTIVE VALUE CHECKS
   if (design.model.result.objective_value === Number.POSITIVE_INFINITY || design.model.result.objective_value === Number.NEGATIVE_INFINITY) { // Check for objective value of Infinity
@@ -276,7 +276,7 @@ export const checks = (store) => {
 
 export const getSeverityNumberByNameAndObjValue = (name, severity) => {
 //  console.log('In Alerts.getSeverityNumberByNameAndObjValue', 'name=', name, 'severity=', severity);
-  var design = store.getState().modelSlice;
+  var design = store.getState();
 //  console.log('### design=',design)
   var severityNumber = 0;
   if (name !== undefined && (name.endsWith(' MIN') || name.endsWith(' MAX')) && severity !== INFO) {

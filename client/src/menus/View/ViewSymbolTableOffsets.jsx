@@ -6,8 +6,8 @@ import { logUsage } from '../../logUsage';
 export default function ViewSymbolTableOffsets() {
 //  console.log('ViewSymbolTableOffsets - Mounting...');
 
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const model_labels = useSelector((state) => state.modelSlice.model.labels);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
+  const model_labels = useSelector((state) => state.model.labels);
   const [show, setShow] = useState(false);
 
   useEffect(() => {

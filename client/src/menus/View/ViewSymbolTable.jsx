@@ -6,7 +6,7 @@ import { logUsage } from '../../logUsage';
 export default function ViewSymbolTable() {
 //  console.log('ViewSymbolTable - Mounting...');
 
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const [show, setShow] = useState(false);
 
   useEffect(() => {

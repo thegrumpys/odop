@@ -34,19 +34,17 @@ export default createStore(reducers, {
     messages: [], // Default: no messages
     help_url: '', // Default: no Help URL
   },
-  modelSlice: {
-    user: null,
-    name: config.url.name,
-    view: config.url.view,
-    model: {
-      type: null,
-      result: {
-        objective_value: 0
-      },
-      system_controls: initialSystemControls
+  user: null,
+  name: config.url.name,
+  view: config.url.view,
+  model: {
+    type: null,
+    result: {
+      objective_value: 0
     },
-    enableDispatcher: true,
+    system_controls: initialSystemControls
   },
+  enableDispatcher: true,
   spinnerSlice: {
     show: false
   },

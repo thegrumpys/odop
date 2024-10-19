@@ -21,8 +21,8 @@ it('demo1', () => {
     store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
     store.dispatch(enableDispatcher(true));
 
-    var design = store.getState().modelSlice; // before
-    design = store.getState().modelSlice;
+    var design = store.getState(); // before
+    design = store.getState();
     expect(design.model.result.objective_value).toEqual(0.0);
 
     // Execute File: demo1
@@ -33,7 +33,7 @@ it('demo1', () => {
     store.dispatch(loadInitialState("Spring/Compression","US"));
     store.dispatch(changeLabelsValue([{"name":"COMMENT","value":"Compression Spring demo1"}]));
 
-    design = store.getState().modelSlice;
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0000000,7);
 
     // title: "Page 03 of 11"
@@ -51,31 +51,31 @@ it('demo1', () => {
     store.dispatch(changeSymbolConstraint("L_Solid",MAX,1.06));
     store.dispatch(changeSymbolValue("Material_Type",3));
 
-    design = store.getState().modelSlice;
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(2.7011747,7);
 
     // title: "Page 06 of 11"
     store.dispatch(changeSymbolConstraint("FS_2",MAX,2));
 
-    design = store.getState().modelSlice;
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(2.7011747,7);
 
     // title: "Page 07 of 11"
     store.dispatch(search());
 
-    design = store.getState().modelSlice;
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0000032,7);
 
     // title: "Page 08 of 11"
     store.dispatch(fixSymbolValue("Wire_Dia",0.125));
 
-    design = store.getState().modelSlice;
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0000408,7);
 
     // title: "Page 09 of 11"
     store.dispatch(search());
 
-    design = store.getState().modelSlice;
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0000099,7);
 
     // title: "Page 10 of 11"
@@ -84,6 +84,6 @@ it('demo1', () => {
     // title: "Page 11 of 11 (last page)"
     store.dispatch(fixSymbolValue("Force_2",75.1));
 
-    design = store.getState().modelSlice;
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0632930,7);
 });

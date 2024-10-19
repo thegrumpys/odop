@@ -8,9 +8,9 @@ import store from "../../store/store";
 export default function ActionSelectCatalog() {
   //  console.log('ActionSelectCatalog - Mounting...');
 
-  const model_type = useSelector((state) => state.modelSlice.model.type);
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const model_viol_wt = useSelector((state) => state.modelSlice.model.system_controls.viol_wt);
+  const model_type = useSelector((state) => state.model.type);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
+  const model_viol_wt = useSelector((state) => state.model.system_controls.viol_wt);
   const [show, setShow] = useState(false);
   const [names, setNames] = useState([]);
   const [name, setName] = useState(undefined);

@@ -33,11 +33,11 @@ it('search without merit', () => {
     store.dispatch(changeSymbolValue("STRESS", 789));
     store.dispatch(changeResultObjectiveValue(0.560511));
 
-    var design = store.getState().modelSlice; // before
+    var design = store.getState(); // before
 
     var obj = search(store, design.model.system_controls.objmin);
 
-    var design = store.getState().modelSlice; // after
+    var design = store.getState(); // after
     expect(obj).toEqual(0.14664205223346785);
 
     expect(design.name).toEqual("initialState");
@@ -98,7 +98,7 @@ it('search with merit', () => {
     store.dispatch(changeResultObjectiveValue(0.560511));
     store.dispatch(changeSymbolConstraint("STRESS", MAX, 10000));
 
-    var design = store.getState().modelSlice; // before
+    var design = store.getState(); // before
 
     var SOUGHT = sto.STRESS + 1;
     var SDIR = -1; // MIN
@@ -148,7 +148,7 @@ it('search with merit', () => {
 
     var obj = search(store, -1.0, merit);
 
-    var design = store.getState().modelSlice; // after
+    var design = store.getState(); // after
     expect(obj).toEqual(0.017724894644824022);
 
     expect(design.name).toEqual("initialState");

@@ -41,7 +41,7 @@ it('${executeName}', () => {
     store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
     store.dispatch(enableDispatcher(true));
 
-    var design = store.getState().modelSlice; // before
+    var design = store.getState(); // before
     expect(design.model.result.objective_value).toEqual(0.0);
 
 `;

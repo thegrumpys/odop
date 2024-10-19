@@ -17,8 +17,8 @@ it('demo6', () => {
     store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
     store.dispatch(enableDispatcher(true));
 
-    var design = store.getState().modelSlice; // before
-    design = store.getState().modelSlice;
+    var design = store.getState(); // before
+    design = store.getState();
     expect(design.model.result.objective_value).toEqual(0.0);
 
 // title: "Session Now In Progress",
@@ -28,7 +28,7 @@ it('demo6', () => {
     store.dispatch(loadInitialState("Spring/Extension","US"));
     store.dispatch(changeLabelsValue([{"name":"COMMENT","value":"Extension Spring Demo"}]));
 
-design = store.getState().modelSlice;
+design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0000000,7);
 
 // title: "Page 03 of 09"
@@ -46,18 +46,18 @@ design = store.getState().modelSlice;
     store.dispatch(fixSymbolValue("Force_2",35));
     store.dispatch(fixSymbolValue("L_2",6.6));
 
-design = store.getState().modelSlice;
+design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.3825930,7);
 
 // title: "Page 05 of 09"
 
-design = store.getState().modelSlice;
+design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.3825930,7);
 
 // title: "Page 06 of 09"
     store.dispatch(search());
 
-design = store.getState().modelSlice;
+design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0000092,7);
 
 // title: "Page 07 of 09"
@@ -67,7 +67,7 @@ design = store.getState().modelSlice;
     store.dispatch(fixSymbolValue("Wire_Dia",0.105));
     store.dispatch(search());
 
-design = store.getState().modelSlice;
+design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0000042,7);
 
 // title: "Page 09 of 09 (last page)"
@@ -77,7 +77,7 @@ design = store.getState().modelSlice;
     store.dispatch(changeSymbolValue("End_Type",6));
     store.dispatch(changeSymbolValue("Hook_Deflect_All",0));
 
-design = store.getState().modelSlice;
+design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0000002,7);
 
 });

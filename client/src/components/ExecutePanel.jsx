@@ -12,7 +12,7 @@ export const startExecute = (prefix, executeName, run=false) => {
 //  console.log('startExecute','prefix=',prefix,'executeName=',executeName);
   if (executeName === undefined) return;
 
-  var model = store.getState().modelSlice.model;
+  var model = store.getState().model;
   var model_type = model.type;
   var { execute } = require('../designtypes/' + model_type + '/' + executeName + '.js'); // Dynamically load execute
 
@@ -43,7 +43,7 @@ export const startExecute = (prefix, executeName, run=false) => {
             store.dispatch(outputLine('    store.dispatch(' + dump + ');'));
           }
         }); // Generate test
-        store.dispatch(outputLine('\n    design = store.getState().modelSlice;'));
+        store.dispatch(outputLine('\n    design = store.getState();'));
         store.dispatch(outputLine('    expect(design.model.result.objective_value).toBeCloseTo(' + model.result.objective_value.toFixed(7) + ',7);'));
       }
     } else {
@@ -76,9 +76,9 @@ export default function ExecutePanel() {
   const states = useSelector((state) => state.executePanelSlice.states);
   const step = useSelector((state) => state.executePanelSlice.step);
   const testGenerate = useSelector((state) => state.executePanelSlice.testGenerate);
-  const model = useSelector((state) => state.modelSlice.model);
-  const model_type = useSelector((state) => state.modelSlice.model.type);
-  const model_objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
+  const model = useSelector((state) => state.model);
+  const model_type = useSelector((state) => state.model.type);
+  const model_objective_value = useSelector((state) => state.model.result.objective_value);
 //  console.log('ExecutePanel - Mounting...','show=',show,'executeName=',executeName,'prefix=',prefix,'states=',states,'step=',step);
   const dispatch = useDispatch();
 
@@ -106,7 +106,7 @@ export default function ExecutePanel() {
             store.dispatch(outputLine('    store.dispatch(' + dump + ');'));
           }
         }); // Generate test
-        store.dispatch(outputLine('\n    design = store.getState().modelSlice;'));
+        store.dispatch(outputLine('\n    design = store.getState();'));
         store.dispatch(outputLine('    expect(design.model.result.objective_value).toBeCloseTo(' + model_objective_value.toFixed(7) + ',7);'));
       }
     } else {
@@ -134,7 +134,7 @@ export default function ExecutePanel() {
             store.dispatch(outputLine('    store.dispatch(' + dump + ');'));
           }
         }); // Generate test
-        store.dispatch(outputLine('\n    design = store.getState().modelSlice;'));
+        store.dispatch(outputLine('\n    design = store.getState();'));
         store.dispatch(outputLine('    expect(design.model.result.objective_value).toBeCloseTo(' + model_objective_value.toFixed(7) + ',7);'));
       }
     } else {

@@ -8,7 +8,7 @@ import config from '../../config';
 export default function ActionExecute() {
 //  console.log('ActionExecute - Mounting...');
 
-  const model_type = useSelector((state) => state.modelSlice.model.type);
+  const model_type = useSelector((state) => state.model.type);
   const [show, setShow] = useState(false);
   const [executeNames, setExecuteNames] = useState([]);
   const [executeName, setExecuteName] = useState('');

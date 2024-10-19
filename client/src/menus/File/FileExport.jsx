@@ -6,10 +6,10 @@ import config from '../../config';
 
 export default function FileExport() {
 //  console.log('FileExport - Mounting...');
-  const model_model = useSelector((state) => state.modelSlice.model);
-  const model_name = useSelector((state) => state.modelSlice.name);
-  const model_type = useSelector((state) => state.modelSlice.model.type);
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_model = useSelector((state) => state.model);
+  const model_name = useSelector((state) => state.name);
+  const model_type = useSelector((state) => state.model.type);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const [show, setShow] = useState(false);
 
   const exportFile = (model, name, type) => {

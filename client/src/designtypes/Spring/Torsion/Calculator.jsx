@@ -12,7 +12,7 @@ import * as o from './symbol_table_offsets';
 
 export default function Calculator() {
 //  console.log('Calculator - Mounting...');
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const base = useContext(ReportBaseContext);
 //  console.log('Calculator','base=',base);
 

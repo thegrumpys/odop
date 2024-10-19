@@ -9,7 +9,7 @@ import { getAlertsByName } from './Alerts';
 
 export default function NameValueUnitsRowDependentVariable({ element, index, onSet, onReset }) {
 //  console.log('NameValueUnitsRowDependentVariable - Mounting...','element=',element,'index=',index);
-  const model_show_units = useSelector((state) => state.modelSlice.model.system_controls.show_units);
+  const model_show_units = useSelector((state) => state.model.system_controls.show_units);
   const dispatch = useDispatch();
 
   useEffect(() => {

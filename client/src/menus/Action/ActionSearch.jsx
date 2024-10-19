@@ -11,9 +11,9 @@ import store from '../../store/store';
 export default function ActionSearch() {
 //  console.log('ActionSearch - Mounting...');
   const [searchInfiniteShow, setSearchInfiniteShow] = useState(false);
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const model_objmin = useSelector((state) => state.modelSlice.model.system_controls.objmin);
-  const model_objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
+  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
+  const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -69,7 +69,7 @@ export default function ActionSearch() {
     dispatch(enableSpinner());
     dispatch(search());
     dispatch(disableSpinner());
-    var design = store.getState().modelSlice;
+    var design = store.getState();
     var new_objective_value = design.model.result.model_objective_value;
     logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });
   }

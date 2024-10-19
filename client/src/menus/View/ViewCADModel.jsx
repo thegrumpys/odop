@@ -7,8 +7,8 @@ import * as sto from '../../designtypes/Spring/Extension/symbol_table_offsets';
 export default function ViewCADModel() {
 //  console.log('ViewCADModel - Mounting...');
 
-  const model_type = useSelector((state) => state.modelSlice.model.type);
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_type = useSelector((state) => state.model.type);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const [show, setShow] = useState(false);
 
   useEffect(() => {

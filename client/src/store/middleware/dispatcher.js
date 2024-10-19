@@ -46,7 +46,7 @@ export const dispatcher = store => next => action => {
   var index;
   var element;
 
-  if (!store.getState().modelSlice.enableDispatcher) return returnValue;
+  if (!store.getState().enableDispatcher) return returnValue;
 
   switch (action.type) {
 
@@ -66,7 +66,7 @@ export const dispatcher = store => next => action => {
 
     case CHANGE_SYMBOL_VALUE: {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
-      design = store.getState().modelSlice;
+      design = store.getState();
       index = design.model.symbol_table.findIndex((element) => element.name === action.payload.name);
       if (index >= 0) {
         element = design.model.symbol_table[index];
@@ -105,7 +105,7 @@ export const dispatcher = store => next => action => {
 
     case FIX_SYMBOL_VALUE: {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
-      design = store.getState().modelSlice;
+      design = store.getState();
       design.model.symbol_table.find((element) => {
         if (element.name === action.payload.name) {
           if (element.lmin & FIXED) { // Is it already FIXED?
@@ -150,7 +150,7 @@ export const dispatcher = store => next => action => {
 
     case FREE_SYMBOL_VALUE: {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
-      design = store.getState().modelSlice;
+      design = store.getState();
       design.model.symbol_table.find((element) => {
         if (element.name === action.payload.name) {
           if (element.lmin & FIXED) {
@@ -179,7 +179,7 @@ export const dispatcher = store => next => action => {
     case SET_SYMBOL_FLAG: {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
       if (action.payload.mask & FDCL) {
-        design = store.getState().modelSlice;
+        design = store.getState();
         sink = design.model.symbol_table.find(element => element.name === action.payload.name);
 //        console.log('setSymbolFlag: sink=',sink);
         source = design.model.symbol_table.find(element => element.name === action.payload.source);
@@ -215,7 +215,7 @@ export const dispatcher = store => next => action => {
 
     case SEARCH: {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
-      design = store.getState().modelSlice;
+      design = store.getState();
       invokeSearch(store, design.model.system_controls.objmin);
     }
       break;
@@ -223,7 +223,7 @@ export const dispatcher = store => next => action => {
     case SEEK: {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
       invokeSeek(store, action);
-      design = store.getState().modelSlice;
+      design = store.getState();
       var termination_condition = design.model.result.termination_condition;
       updateObjectiveValue(store);
       store.dispatch(changeResultTerminationCondition(termination_condition));

@@ -46,7 +46,7 @@ export default function ActionTrade() {
     logUsage('event', 'ActionTrade', { event_label: 'ActionTrade' });
     dispatch(saveAutoSave());
     var ncode;
-    var design = store.getState().modelSlice;
+    var design = store.getState();
     var localNviol = commonViolationSetup();
     if (design.model.result.objective_value <= design.model.system_controls.objmin || localNviol === 0) {
       dispatch(restoreInputSymbolValues());
@@ -65,7 +65,7 @@ export default function ActionTrade() {
     var localLdir = [];
     dispatch(saveInputSymbolValues());
     dispatch(search());
-    var design = store.getState().modelSlice;
+    var design = store.getState();
     for (let i = 0; i < design.model.symbol_table.length; i++) {
       element = design.model.symbol_table[i];
       if (element.lmin & CONSTRAINED && !(element.lmin & FDCL) && element.vmin > 0.0) {
@@ -107,7 +107,7 @@ export default function ActionTrade() {
     var element;
     var value;
     var ncode;
-    var design = store.getState().modelSlice;
+    var design = store.getState();
     for (let i = 0; i < nviol; i++) {
       let j = vflag[i];
       element = design.model.symbol_table[j];
@@ -129,7 +129,7 @@ export default function ActionTrade() {
     var element;
     var localDir = [];
     var localIsArbitraryInvalid = [];
-    var design = store.getState().modelSlice;
+    var design = store.getState();
     for (let i = 0; i < nviol; i++) {
       let j = vflag[i];
       element = design.model.symbol_table[j];
@@ -151,7 +151,7 @@ export default function ActionTrade() {
 //    console.log('In ActionTrade.onStrategyProportional');
     var element;
     var localDir = [];
-    var design = store.getState().modelSlice;
+    var design = store.getState();
     for (let i = 0; i < nviol; i++) {
       let j = vflag[i];
       element = design.model.symbol_table[j];
@@ -182,7 +182,7 @@ export default function ActionTrade() {
     var value = 0.0;
     var itemp = 0;
     var temp;
-    var design = store.getState().modelSlice;
+    var design = store.getState();
     for (let i = 0; i < nviol; i++) {
       temp2 = Math.abs(dir[i]);
       if (temp2 > value) {
@@ -274,7 +274,7 @@ export default function ActionTrade() {
 
   const onArbitraryChangeValid = (i, event) => {
 //    console.log('In ActionTrade.onArbitraryChangeValid i=',i,' event.target.value=',event.target.value);
-    var design = store.getState().modelSlice;
+    var design = store.getState();
     var localDir = ldir.map((element, index) => {
       var value;
       if (index === i) {
@@ -308,7 +308,7 @@ export default function ActionTrade() {
 
   const onArbitraryChangeInvalid = (i, event) => {
 //    console.log('In ActionTrade.onArbitraryChangeInvalid i=',i,' event.target.value=',event.target.value);
-    var design = store.getState().modelSlice;
+    var design = store.getState();
     var greatestValue = dir.reduce((previousValue, currentValue) => { return Math.abs(currentValue) > previousValue ? Math.abs(currentValue) : previousValue }, 0.0);
 //        console.log('In ActionTrade.onArbitraryChangeInvalid greatestValue=',greatestValue);
     var localIsArbitraryInvalid = isArbitraryInvalid.map((element, index) => {
@@ -347,7 +347,7 @@ export default function ActionTrade() {
     var c3;
     var rk3;
     var value;
-    var design = store.getState().modelSlice;
+    var design = store.getState();
     c3 = defaultEstPercent / 100.0; // Convert from percent to actual value
 // TAKE FIRST EXPLORATORY RELAXATION STEP
     for (let i = 0; i < nviol; i++) {
@@ -361,11 +361,11 @@ export default function ActionTrade() {
         dispatch(changeSymbolConstraint(element.name, MAX, value));
       }
     }
-    design = store.getState().modelSlice;
+    design = store.getState();
     if (design.model.result.objective_value > design.model.system_controls.objmin) {
       dispatch(search());
     }
-    design = store.getState().modelSlice;
+    design = store.getState();
     if (design.model.result.objective_value <= design.model.system_controls.objmin) {
 // Feasible was found, go show Feasible Modal
       setSizeShow(!sizeShow);
@@ -392,7 +392,7 @@ export default function ActionTrade() {
       }
       dispatch(restoreInputSymbolValues());
       dispatch(search());
-      design = store.getState().modelSlice;
+      design = store.getState();
       if (design.model.result.objective_value <= design.model.system_controls.objmin) {
 // Feasible was found, go show Feasible Modal
         setSizeShow(!sizeShow);
@@ -481,7 +481,7 @@ export default function ActionTrade() {
   const onFeasibleRestart = () => {
 //    console.log('In ActionTrade.onFeasibleRestart');
     var element;
-    var design = store.getState().modelSlice;
+    var design = store.getState();
     for (let i = 0; i < nviol; i++) {
       let j = vflag[i];
       element = design.model.symbol_table[j];
@@ -510,7 +510,7 @@ export default function ActionTrade() {
   const onEstablishAccept = () => {
 //    console.log('In ActionTrade.onEstablishAccept');
     var ncode;
-    var design = store.getState().modelSlice; // Re-access store to get latest element values
+    var design = store.getState(); // Re-access store to get latest element values
     if (design.model.result.objective_value <= design.model.system_controls.objmin) {
       ncode = 'ACCEPTED TRADE RESULT';
       dispatch(changeResultTerminationCondition(ncode));
@@ -526,7 +526,7 @@ export default function ActionTrade() {
     dispatch(restoreInputSymbolValues());
     var element;
     var ncode;
-    var design = store.getState().modelSlice;
+    var design = store.getState();
     for (let i = 0; i < nviol; i++) {
       let j = vflag[i];
       element = design.model.symbol_table[j];
@@ -548,7 +548,7 @@ export default function ActionTrade() {
 
   const onNotFeasibleRestart = () => {
 //    console.log('In ActionTrade.onNotFeasibleRestart');
-    var design = store.getState().modelSlice;
+    var design = store.getState();
     var element;
     for (let i = 0; i < nviol; i++) {
       let j = vflag[i];
@@ -583,7 +583,7 @@ export default function ActionTrade() {
 
 //    clister() {
 //        var element;
-//        var design = store.getState().modelSlice;
+//        var design = store.getState();
 //        console.log('CONSTRAINT                % VIOLATION           LEVEL');
 //        for (let i = 0; i < nviol; i++) {
 //            let j = vflag[i];
@@ -610,7 +610,7 @@ export default function ActionTrade() {
           vflag.map((j, i) => {
             var element;
             var constraint_class;
-            var design = store.getState().modelSlice;
+            var design = store.getState();
             element = design.model.symbol_table[j];
             if (ldir[i] < 0) {
 //                                console.log(element.name + ' MIN ' + element.vmin * 100.0 + ' ' + element.cmin + ' ' + element.units);
@@ -651,7 +651,7 @@ export default function ActionTrade() {
     );
   }
 
-  var design = store.getState().modelSlice;
+  var design = store.getState();
   var display_search_button;
   if (design.model.result.objective_value > design.model.system_controls.objmin) {
     display_search_button = true;
@@ -711,7 +711,7 @@ export default function ActionTrade() {
               vflag.map((j, i) => {
                 var element;
                 var dname;
-                var design = store.getState().modelSlice;
+                var design = store.getState();
                 element = design.model.symbol_table[j];
                 dname = element.name;
                 return (

@@ -8,8 +8,8 @@ import { getAlertsByName } from './Alerts';
 
 export default function NameValueUnitsRowCalcInput({ element, index, onChangeValid, onChangeInvalid, onChange, onSelect }) {
 //  console.log('NameValueUnitsRowCalcInput - Mounting...','element=',element,'index=',index);
-  const model_type = useSelector((state) => state.modelSlice.model.type);
-  const model_show_units = useSelector((state) => state.modelSlice.model.system_controls.show_units);
+  const model_type = useSelector((state) => state.model.type);
+  const model_show_units = useSelector((state) => state.model.system_controls.show_units);
   const [table, setTable] = useState([]);
   const dispatch = useDispatch();
 

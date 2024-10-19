@@ -8,7 +8,7 @@ import ConstraintsMinRowDependentVariable from './ConstraintsMinRowDependentVari
 
 export default function ConstraintsMinTable() {
 //  console.log('ConstraintsMinTable - Mounting...');
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
 
   useEffect(() => {
 //    console.log('ConstraintsMinTable - Mounted');

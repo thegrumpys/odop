@@ -7,7 +7,7 @@ import ReportBaseContext from './ReportBaseContext';
 
 export default function ReportBase(props) {
 //  console.log('ReportBase - Mounting...');
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
 
   const def_dia_t = (def) => {
     //      return((mean_dia*coils_a)/(coils_a+def/deg_per_turn));

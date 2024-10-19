@@ -7,8 +7,8 @@ import ReportBaseContext from './ReportBaseContext';
 
 export default function ReportBase(props) {
 //  console.log('ReportBase - Mounting...');
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const model_smallnum = useSelector((state) => state.modelSlice.model.system_controls.smallnum);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
+  const model_smallnum = useSelector((state) => state.model.system_controls.smallnum);
 
   const def_dia = (def_len) => {
     /*  calculates mean diameter of deflected spring.  */

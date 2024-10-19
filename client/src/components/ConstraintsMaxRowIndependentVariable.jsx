@@ -13,7 +13,7 @@ export default function ConstraintsMaxRowIndependentVariable({ element, index, o
   const [show, setShow] = useState(false);
   const [isInvalidValue, setIsInvalidValue] = useState(false);
   const [valueString, setValueString] = useState(false);
-  const model_show_violations = useSelector((state) => state.modelSlice.model.system_controls.show_violations);
+  const model_show_violations = useSelector((state) => state.model.system_controls.show_violations);
   const dispatch = useDispatch();
 
   useEffect(() => {

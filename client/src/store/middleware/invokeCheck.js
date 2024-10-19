@@ -2,7 +2,7 @@
 export function invokeCheck(store) {
 //    console.log('Start invokeCheck');
 
-    var design = store.getState().modelSlice;
+    var design = store.getState();
 //    console.log('In invokeCheck design=',design);
 
     // Check relationships among symbol tasble variables and create alerts

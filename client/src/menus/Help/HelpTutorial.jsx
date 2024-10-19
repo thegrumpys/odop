@@ -9,7 +9,7 @@ export default function HelpTutorial() {
 //  console.log('HelpTutorial - Mounting...');
 
   const [show, setShow] = useState(false);
-  const model_type = useSelector((state) => state.modelSlice.model.type);
+  const model_type = useSelector((state) => state.model.type);
   const [executeNames, setExecuteNames] = useState([]);
   const [executeName, setExecuteName] = useState('');
 

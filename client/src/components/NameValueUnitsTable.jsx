@@ -8,7 +8,7 @@ import NameValueUnitsRowDependentVariable from './NameValueUnitsRowDependentVari
 
 export default function NameValueUnitsTable() {
 //  console.log('NameValueUnitsTable - Mounting...');
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
 
   useEffect(() => {
 //    console.log('NameValueUnitsTable - Mounted');

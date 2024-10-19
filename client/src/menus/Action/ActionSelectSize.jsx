@@ -10,9 +10,9 @@ import store from "../../store/store";
 export default function ActionSelectSize() {
   //  console.log('ActionSelectSize - Mounting...');
 
-  const model_type = useSelector((state) => state.modelSlice.model.type);
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const model_enable_auto_fix = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_type = useSelector((state) => state.model.type);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
+  const model_enable_auto_fix = useSelector((state) => state.model.system_controls);
   const [show, setShow] = useState(false);
   const [types, setTypes] = useState([]);
   const [type, setType] = useState(undefined);

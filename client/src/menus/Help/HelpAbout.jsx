@@ -13,11 +13,11 @@ export default function HelpAbout() {
   const [show, setShow] = useState(false);
   const [sizes, setSizes] = useState('');
   const [size, setSize] = useState('');
-  const model_user = useSelector((state) => state.modelSlice.user);
-  const model_type = useSelector((state) => state.modelSlice.model.type);
-  const model_version = useSelector((state) => state.modelSlice.model.version);
-  const model_jsontype = useSelector((state) => state.modelSlice.model.jsontype);
-  const model_units = useSelector((state) => state.modelSlice.model.units);
+  const model_user = useSelector((state) => state.user);
+  const model_type = useSelector((state) => state.model.type);
+  const model_version = useSelector((state) => state.model.version);
+  const model_jsontype = useSelector((state) => state.model.jsontype);
+  const model_units = useSelector((state) => state.model.units);
   const { oktaAuth, authState } = useOktaAuth();
 //  console.log('HelpAbout','oktaAuth=',oktaAuth,'authState=',authState);
 

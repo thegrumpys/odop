@@ -48,10 +48,10 @@ import { useOktaAuth } from '@okta/okta-react';
 
 export default function MainPage() {
 //  console.log('MainPage','Mounting...');
-  const model_type = useSelector((state) => state.modelSlice.model.type);
-  const model_name = useSelector((state) => state.modelSlice.name);
-  const model_view = useSelector((state) => state.modelSlice.view);
-//  const model_user = useSelector((state) => state.modelSlice.user);
+  const model_type = useSelector((state) => state.model.type);
+  const model_name = useSelector((state) => state.name);
+  const model_view = useSelector((state) => state.view);
+//  const model_user = useSelector((state) => state.user);
 //  console.log('MainPage','Mounting...','model_type=',model_type,'model_name=',model_name,'model_view=',model_view,'model_user=',model_user);
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();

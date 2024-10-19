@@ -7,7 +7,7 @@ import { toODOPPrecision } from '../../../toODOPPrecision'
 export function checks(store) {        /*    Compression  Spring  */
 //    console.log('@@@@@ Start check store=',store);
     store.dispatch(clearAlerts());
-    var design = store.getState().modelSlice;
+    var design = store.getState();
 
 // Alerts common to all round-wire coil springs
 

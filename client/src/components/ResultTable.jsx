@@ -15,12 +15,12 @@ export default function ResultTable() {
   const [seekShow, setSeekShow] = useState(false); // Default: do not display optimize modal
   const [seekName, setSeekName] = useState(null);
   const [seekMinMax, setSeekMinMax] = useState(MIN);
-  const model_type = useSelector((state) => state.modelSlice.model.type);
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const model_objmin = useSelector((state) => state.modelSlice.model.system_controls.objmin);
-  const model_objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
-  const model_termination_condition = useSelector((state) => state.modelSlice.model.result.termination_condition);
-  const model_search_completed = useSelector((state) => state.modelSlice.model.result.search_completed);
+  const model_type = useSelector((state) => state.model.type);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
+  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
+  const model_objective_value = useSelector((state) => state.model.result.objective_value);
+  const model_termination_condition = useSelector((state) => state.model.result.termination_condition);
+  const model_search_completed = useSelector((state) => state.model.result.search_completed);
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -27,10 +27,10 @@ import store from '../store/store';
 
 export default function SymbolValue({ className, element, index }) {
 //  console.log('SymbolValue','Mounting...','element=',element,'index=',index);
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
-  const model_objmin = useSelector((state) => state.modelSlice.model.system_controls.objmin);
-  const model_objective_value = useSelector((state) => state.modelSlice.model.result.objective_value);
-  const model_search_completed = useSelector((state) => state.modelSlice.model.result.search_completed);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
+  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
+  const model_objective_value = useSelector((state) => state.model.result.objective_value);
+  const model_search_completed = useSelector((state) => state.model.result.search_completed);
   const [searchInfiniteShow, setSearchInfiniteShow] = useState(false);
   const [editShow, setEditShow] = useState(false);
   const [isInvalidValue, setIsInvalidValue] = useState(false);
@@ -122,7 +122,7 @@ export default function SymbolValue({ className, element, index }) {
     dispatch(enableSpinner());
     dispatch(search());
     dispatch(disableSpinner());
-    var design = store.getState().modelSlice;
+    var design = store.getState();
     var new_objective_value = design.model.result.model_objective_value;
     logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' Element ' + element.name + ' ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });
   }
@@ -174,7 +174,7 @@ export default function SymbolValue({ className, element, index }) {
   const onContextMenu = (e) => {
 //    console.log('In SymbolValue.onContextMenu','e=',e);
     e.preventDefault();
-    var design = store.getState().modelSlice;
+    var design = store.getState();
     var reset = JSON.stringify(design.model);
     setEditShow(true);
     setReset(reset); // Yes, we are saving the ENTIRE model so we can restore ONLY ONE symbol table entry - overkill, but it works!

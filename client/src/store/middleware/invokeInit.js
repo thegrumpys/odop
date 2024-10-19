@@ -7,7 +7,7 @@ export function invokeInit(store) {
 
     var element;
 
-    var design = store.getState().modelSlice;
+    var design = store.getState();
 //    console.log('In invokeInit design=',design);
 
     // Loop to create p and x from symbol_table

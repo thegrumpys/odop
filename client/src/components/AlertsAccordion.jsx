@@ -55,8 +55,8 @@ export default function AlertsAccordion() {
 //  console.log('AlertsAccordion - Mounting...');
   const caret = useSelector((state) => state.alertsSlice.caret);
   const level = useSelector((state) => state.alertsSlice.level);
-  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
-  const model_enable_auto_fix = useSelector((state) => state.modelSlice.model.system_controls.enable_auto_fix);
+  const model_system_controls = useSelector((state) => state.model.system_controls);
+  const model_enable_auto_fix = useSelector((state) => state.model.system_controls.enable_auto_fix);
   const dispatch = useDispatch();
 
   const onHelpButton = (event) => {

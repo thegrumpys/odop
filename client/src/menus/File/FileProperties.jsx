@@ -6,8 +6,8 @@ import { logUsage, logValue } from '../../logUsage';
 
 export default function FileProperties() {
 //  console.log('FileProperties - Mounting...');
-  const model_labels = useSelector((state) => state.modelSlice.model.labels);
-  const model_type = useSelector((state) => state.modelSlice.model.type);
+  const model_labels = useSelector((state) => state.model.labels);
+  const model_type = useSelector((state) => state.model.type);
   const [show, setShow] = useState(false);
   const [labels, setLabels] = useState(model_labels);
   const dispatch = useDispatch();

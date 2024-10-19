@@ -22,7 +22,7 @@ it('invokeEquationSet', () => {
 
     invokeEquationSet(store);
 
-    var design = store.getState().modelSlice; // after
+    var design = store.getState(); // after
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
     expect(design.model.version).toEqual("7");

@@ -8,7 +8,7 @@ import * as sto from './symbol_table_offsets';
 
 export default function ResultTableOptimize({ onClick }) {
 //  console.log('ResultTableOptimize - Mounting...','onClick=',onClick);
-  const model_symbol_table = useSelector((state) => state.modelSlice.model.symbol_table);
+  const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const dispatch = useDispatch();
 
   const onOptimizeSeekMAXVolume = (event) => {

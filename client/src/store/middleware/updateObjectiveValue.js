@@ -23,7 +23,7 @@ export function updateObjectiveValue(store, merit) {
     var viol_sum;
     var debug = false;
 
-    var design = store.getState().modelSlice; // Re-access store to get latest element values
+    var design = store.getState(); // Re-access store to get latest element values
 //    console.log('In updateObjectiveValue design=',design);
 
     // Determine all constraint violations

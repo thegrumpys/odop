@@ -8,7 +8,7 @@ import FormControlTypeNumber from '../../components/FormControlTypeNumber';
 
 export default function FilePreferences() {
 //  console.log('FilePreferences - Mounting...');
-  const model_system_controls = useSelector((state) => state.modelSlice.model.system_controls);
+  const model_system_controls = useSelector((state) => state.model.system_controls);
   const [show, setShow] = useState(false);
   const [systemControls, setSystemControls] = useState(model_system_controls);
   const [isInvalidValue, setIsInvalidValue] = useState(false);

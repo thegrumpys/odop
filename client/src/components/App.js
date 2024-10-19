@@ -18,10 +18,10 @@ export default function App() {
 //  console.log('App','Mounting...');
   const [show, setShow] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
-  const model_user = useSelector((state) => state.modelSlice.user);
-  const model_name = useSelector((state) => state.modelSlice.name);
-  const model_view = useSelector((state) => state.modelSlice.view);
-  const model_type = useSelector((state) => state.modelSlice.model.type);
+  const model_user = useSelector((state) => state.user);
+  const model_name = useSelector((state) => state.name);
+  const model_view = useSelector((state) => state.view);
+  const model_type = useSelector((state) => state.model.type);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();

@@ -6,7 +6,7 @@ import { toODOPPrecision } from '../../toODOPPrecision'
 export function checks(store) {
 //    console.log('@@@@@ Start check store=',store);
     store.dispatch(clearAlerts());
-    var design = store.getState().modelSlice;
+    var design = store.getState();
     if (design.model.symbol_table[o.Density].value <= 0.0) {
         store.dispatch(addAlert({
             element: design.model.symbol_table[o.Density],

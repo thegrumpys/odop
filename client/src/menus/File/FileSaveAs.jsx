@@ -10,9 +10,9 @@ import { useOktaAuth } from '@okta/okta-react';
 
 export default function FileSaveAs() {
 //  console.log('FileSaveAs - Mounting...');
-  const model = useSelector((state) => state.modelSlice.model);
-  const model_user = useSelector((state) => state.modelSlice.user);
-  const model_type = useSelector((state) => state.modelSlice.model.type);
+  const model = useSelector((state) => state.model);
+  const model_user = useSelector((state) => state.user);
+  const model_type = useSelector((state) => state.model.type);
   const [show, setShow] = useState(false);
   const [names, setNames] = useState([]);
   const [name, setName] = useState('');

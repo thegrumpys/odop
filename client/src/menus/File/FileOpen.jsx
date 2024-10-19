@@ -12,9 +12,9 @@ import { useOktaAuth } from '@okta/okta-react';
 
 export default function FileOpen() {
 //  console.log('FileOpen - Mounting...');
-  const model_user = useSelector((state) => state.modelSlice.user);
-  const model_name = useSelector((state) => state.modelSlice.name);
-  const model_type = useSelector((state) => state.modelSlice.model.type);
+  const model_user = useSelector((state) => state.user);
+  const model_name = useSelector((state) => state.name);
+  const model_type = useSelector((state) => state.model.type);
   const [show, setShow] = useState(config.url.prompt);
   const [types, setTypes] = useState(config.env.types);
   const [names, setNames] = useState([{ user: model_user, name: model_name }]);
