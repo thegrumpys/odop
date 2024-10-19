@@ -192,7 +192,6 @@ export default function reducers(state = {}, action) {
           executePanelSlice: {
             ...state.executePanelSlice,
             show: false,
-            executeName: undefined,
             prefix: '',
             states: [],
             step: 0,
@@ -211,7 +210,6 @@ export default function reducers(state = {}, action) {
         executePanelSlice: {
           ...state.executePanelSlice,
           show: false,
-          executeName: undefined,
           prefix: '',
           states: [],
           step: 0,

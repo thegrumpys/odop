@@ -7,6 +7,7 @@ export default function ViewExecuteToTest() {
 //  console.log('ViewExecuteToTest - Mounting...');
 
   const executeName = useSelector((state) => state.executePanelSlice.executeName);
+  console.log('executeName=',executeName);
   const lines = useSelector((state) => state.executePanelSlice.lines);
   const [show, setShow] = useState(false);
 
@@ -43,7 +44,6 @@ it('${executeName}', () => {
 
     var design = store.getState(); // before
     expect(design.model.result.objective_value).toEqual(0.0);
-
 `;
   var post_lines = `});
 

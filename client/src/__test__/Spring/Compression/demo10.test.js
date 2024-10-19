@@ -1,31 +1,33 @@
 import { initialState } from '../../../designtypes/Spring/Compression/initialState';
 import { initialSystemControls } from '../../../initialSystemControls';
-import { inject, enableDispatcher, loadInitialState,
+import { inject,
+         enableDispatcher,
+         loadInitialState,
          changeLabelsValue,
          changeSymbolValue,
          setSymbolFlag,
          resetSymbolFlag,
          changeSymbolConstraint,
          fixSymbolValue,
+         freeSymbolValue,
+         search,
          changeSystemControlsValue,
-         search } from '../../../store/actions';
-import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
+         seek } from '../../../store/actions';
+import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 import store from "../../../store/store";
 
 // This is a mapping of the demo10 execute file to an equivalent test case file
-// RegEx: Find: ExecutePanel\.jsx:\d+\s Replace with: <nothing>
-// RegEx: Find: ^.*\[Violation\].*\s$ Replace with: <nothing>
 
 it('demo10', () => {
-    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls });
     store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
     store.dispatch(enableDispatcher(true));
 
     var design = store.getState(); // before
-    design = store.getState();
     expect(design.model.result.objective_value).toEqual(0.0);
 
-    // title: "Session Now In Progress",
+
+    // title: "Session Now In Progress"
     // No-op
 
     // title: "Page 02 of 15"
@@ -108,7 +110,5 @@ it('demo10', () => {
     // No-op
 
     // title: "Page 15 of 15 (last page)"
-    // No-op});
-
+    // No-op
 });
-

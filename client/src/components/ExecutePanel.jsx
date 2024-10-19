@@ -19,9 +19,7 @@ export const startExecute = (prefix, executeName, run=false) => {
   var states = store.getState().executePanelSlice.states;
 
   var localStates = Object.assign([...states], { 0: Object.assign({}, states[0], { state: JSON.stringify(model) }) });
-  var localTitle = execute.steps[0].title;
-//  var localText = execute.steps[0].text;
-//  console.log('startExecute','localStates=',localStates,'localTitle=',localTitle,'localText=',localText);
+//  console.log('startExecute','localStates=',localStates);
   var localTestGenerate = config.node.env !== "production" ? true : false;
   store.dispatch(executeStart(true, executeName, prefix, localStates, 0)); // Put current store state into steps[0].state - remember this for "back" time travel
   store.dispatch(setTestGenerate(localTestGenerate));
@@ -33,18 +31,18 @@ export const startExecute = (prefix, executeName, run=false) => {
     // Put current store state into steps[next].state - remember this for "back" time travel
     store.dispatch(setStates(localStates));
     store.dispatch(setStep(next));
-    if (localTestGenerate) store.dispatch(outputLine('    // title: "' + localTitle + '"'));
+    if (localTestGenerate) store.dispatch(outputLine('\n    // title: "' + execute.steps[next].title + '"'));
     if (execute.steps[next].actions !== undefined) {
       execute.steps[next].actions.forEach((action) => { store.dispatch(action); console.log('\taction.type=',action.type);})
       if (localTestGenerate) {
-        execute.steps[0].actions.forEach((action) => {
+        execute.steps[next].actions.forEach((action) => {
           var dump = dumpers(action);
           if (dump !== undefined) {
             store.dispatch(outputLine('    store.dispatch(' + dump + ');'));
           }
         }); // Generate test
         store.dispatch(outputLine('\n    design = store.getState();'));
-        store.dispatch(outputLine('    expect(design.model.result.objective_value).toBeCloseTo(' + model.result.objective_value.toFixed(7) + ',7);'));
+        store.dispatch(outputLine('    expect(design.model.result.objective_value).toBeCloseTo(' + store.getState().model.result.objective_value.toFixed(7) + ',7);'));
       }
     } else {
       if (localTestGenerate) store.dispatch(outputLine('    // No-op'));
@@ -78,7 +76,6 @@ export default function ExecutePanel() {
   const testGenerate = useSelector((state) => state.executePanelSlice.testGenerate);
   const model = useSelector((state) => state.model);
   const model_type = useSelector((state) => state.model.type);
-  const model_objective_value = useSelector((state) => state.model.result.objective_value);
 //  console.log('ExecutePanel - Mounting...','show=',show,'executeName=',executeName,'prefix=',prefix,'states=',states,'step=',step);
   const dispatch = useDispatch();
 
@@ -107,7 +104,7 @@ export default function ExecutePanel() {
           }
         }); // Generate test
         store.dispatch(outputLine('\n    design = store.getState();'));
-        store.dispatch(outputLine('    expect(design.model.result.objective_value).toBeCloseTo(' + model_objective_value.toFixed(7) + ',7);'));
+        store.dispatch(outputLine('    expect(design.model.result.objective_value).toBeCloseTo(' + store.getState().model.result.objective_value.toFixed(7) + ',7);'));
       }
     } else {
       if (testGenerate) store.dispatch(outputLine('    // No-op'));
@@ -135,7 +132,7 @@ export default function ExecutePanel() {
           }
         }); // Generate test
         store.dispatch(outputLine('\n    design = store.getState();'));
-        store.dispatch(outputLine('    expect(design.model.result.objective_value).toBeCloseTo(' + model_objective_value.toFixed(7) + ',7);'));
+        store.dispatch(outputLine('    expect(design.model.result.objective_value).toBeCloseTo(' + store.getState().model.result.objective_value.toFixed(7) + ',7);'));
       }
     } else {
       if (testGenerate) store.dispatch(outputLine('    // No-op'));
