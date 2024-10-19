@@ -1,9 +1,5 @@
-import { legacy_createStore as createStore, applyMiddleware, compose, combineReducers } from 'redux';
-import spinnerReducers from "./spinnerReducers";
-import messageReducers from "./messageReducers";
-import modelReducers from "./modelReducers";
-import alertsReducers from "./alertsReducers";
-import executePanelReducers from "./executePanelReducers";
+import { legacy_createStore as createStore, applyMiddleware, compose } from 'redux';
+import reducers from "./reducers";
 import dispatcher from './middleware/dispatcher';
 import { ERR } from '../components/Alerts';
 import { initialSystemControls } from '../initialSystemControls';
@@ -13,14 +9,6 @@ import config from '../config';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
 const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
-
-const reducers = combineReducers({
-  alertsSlice: alertsReducers,
-  executePanelSlice: executePanelReducers,
-  messageSlice: messageReducers,
-  modelSlice: modelReducers,
-  spinnerSlice: spinnerReducers,
-});
 
 // Create a store with an empty model where type is null
 export default createStore(reducers, {

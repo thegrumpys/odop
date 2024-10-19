@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeSystemControlsValue } from '../../../store/modelActions';
+import { changeSystemControlsValue } from '../../../store/actions';
 export const execute = {
     steps: [
         {

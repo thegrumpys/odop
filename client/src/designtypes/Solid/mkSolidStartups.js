@@ -12,7 +12,7 @@ import {
     changeSymbolValue,
     setSymbolFlag,
     startup,
-} from '../../store/modelActions';
+} from '../../store/actions';
 export const execute = {
     steps: [
         {

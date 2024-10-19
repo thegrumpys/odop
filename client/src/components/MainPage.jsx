@@ -11,7 +11,7 @@ import {
   Tooltip,
   Row
 } from 'react-bootstrap';
-import { changeView, changeUser, deleteAutoSave } from '../store/modelActions';
+import { changeView, changeUser, deleteAutoSave } from '../store/actions';
 import ExecutePanel from './ExecutePanel';
 import SignIn from '../menus/Session/SignIn';
 import SignOut from '../menus/Session/SignOut';

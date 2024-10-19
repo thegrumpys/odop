@@ -6,7 +6,7 @@ import {
     changeSymbolConstraint,
     changeSymbolValue,
     startup,
-} from '../../../store/modelActions';
+} from '../../../store/actions';
 import {
     MAX,
 } from '../../../store/actionTypes';

@@ -13,7 +13,7 @@ import {
     changeResultObjectiveValue, changeResultTerminationCondition,
     changeSystemControlsValue, changeLabelsValue, search, seek,
     saveAutoSave, restoreAutoSave, deleteAutoSave
-    } from '../../store/modelActions';
+    } from '../../store/actions';
 import store from "../../store/store";
 
 //=====================================================================
@@ -697,6 +697,7 @@ it('reducers restore old auto save', () => {
     store.dispatch(restoreAutoSave());
 
     var design = store.getState().modelSlice; // after
+//    console.log('In reducers.test.reducers."restore old auto save design"=',design);
     expect(design.model.type).toEqual("Piston-Cylinder");
     expect(design.name).toEqual("initialState");
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");

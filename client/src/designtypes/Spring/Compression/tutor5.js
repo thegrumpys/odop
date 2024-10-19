@@ -1,5 +1,5 @@
 import React from 'react';
-import { loadInitialState, changeLabelsValue } from '../../../store/modelActions';
+import { loadInitialState, changeLabelsValue } from '../../../store/actions';
 export const execute = {
     steps: [
         {

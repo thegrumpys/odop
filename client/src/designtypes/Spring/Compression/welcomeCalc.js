@@ -1,5 +1,5 @@
 import React from 'react';
-import { logUsage, changeResultTerminationCondition } from '../../../store/modelActions';
+import { logUsage, changeResultTerminationCondition } from '../../../store/actions';
 export const execute = {
     steps: [
         {

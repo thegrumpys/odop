@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Container, Row, Col, Table, OverlayTrigger, Tooltip, Modal, InputGroup, ButtonGroup, Button, Form, Alert } from 'react-bootstrap';
 import { CONSTRAINED, FIXED, MIN, MAX } from '../store/actionTypes';
 import FeasibilityIndicator from './FeasibilityIndicator';
-import { search, seek, saveAutoSave } from '../store/modelActions';
-import { enableSpinner, disableSpinner }  from '../store/spinnerActions';
+import { search, seek, saveAutoSave } from '../store/actions';
+import { enableSpinner, disableSpinner }  from '../store/actions';
 import { logUsage } from '../logUsage';
 import { displayMessage } from '../components/Message';
 import AlertsAccordion from "./AlertsAccordion"

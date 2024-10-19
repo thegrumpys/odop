@@ -1,7 +1,7 @@
 import { initialState } from '../../designtypes/Piston-Cylinder/initialState';
 import * as sto from '../../designtypes/Piston-Cylinder/symbol_table_offsets';
 import { initialSystemControls } from '../../initialSystemControls';
-import { inject, enableDispatcher, changeSymbolValue, changeResultObjectiveValue } from '../../store/modelActions';
+import { inject, enableDispatcher, changeSymbolValue, changeResultObjectiveValue } from '../../store/actions';
 import { invokeInit } from '../../store/middleware/invokeInit';
 import { invokeEquationSet } from '../../store/middleware/invokeEquationSet';
 import { setSclDen } from '../../store/middleware/setSclDen';

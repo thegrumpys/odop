@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
-import { changeView } from '../../store/modelActions';
+import { changeView } from '../../store/actions';
 
 export default function ViewSelect() {
 //  console.log('ViewSelect - Mounting...');

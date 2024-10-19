@@ -4,7 +4,7 @@ import {
     changeName,
     changeLabelsValue,
     startup,
-} from '../../../store/modelActions';
+} from '../../../store/actions';
 export const execute = {
     steps: [
         {

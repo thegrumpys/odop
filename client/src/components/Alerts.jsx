@@ -1,6 +1,6 @@
 import { CONSTRAINED, MIN, MAX, FIXED, FDCL } from '../store/actionTypes';
 import { toODOPPrecision } from '../toODOPPrecision';
-import { addAlert } from '../store/alertsActions';
+import { addAlert } from '../store/actions';
 import store from "../store/store";
 
 export const ERR = 'Err';

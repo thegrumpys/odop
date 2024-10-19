@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, Button, Container, Row } from 'react-bootstrap';
-import { load, changeResultTerminationCondition } from '../store/modelActions';
+import { load, changeResultTerminationCondition } from '../store/actions';
 import { modelDumper } from '../store/modelDumper';
 import { logUsage } from '../logUsage';
 import config from '../config';
 import { outputStart, outputLine, outputStop } from '../menus/View/ViewExecuteToTest';
-import { executeStart, executeStop, setExecuteName, setShow, setPrefix, setStates, setStep, setTitle, setText, setStartTime /*, setTestGenerate */ } from '../store/executePanelActions'; // FIXME
+import { executeStart, executeStop, setExecuteName, setShow, setPrefix, setStates, setStep, setTitle, setText, setStartTime /*, setTestGenerate */ } from '../store/actions'; // FIXME
 import store from '../store/store';
 
 export const startExecute = (prefix, executeName, run=false) => {

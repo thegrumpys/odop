@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
-import { changeSymbolValue, fixSymbolValue, loadInitialState, search } from '../../store/modelActions';
+import { changeSymbolValue, fixSymbolValue, loadInitialState, search } from '../../store/actions';
 export const execute = {
     steps: [
         {

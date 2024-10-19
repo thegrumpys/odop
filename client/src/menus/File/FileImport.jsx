@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
-import { load, changeName, deleteAutoSave } from '../../store/modelActions';
-import { executeStopOnLoad } from '../../store/executePanelActions';
+import { load, changeName, deleteAutoSave } from '../../store/actions';
+import { executeStopOnLoad } from '../../store/actions';
 import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
