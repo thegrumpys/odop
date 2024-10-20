@@ -7,7 +7,7 @@ export default function ViewExecuteToTest() {
 //  console.log('ViewExecuteToTest - Mounting...');
 
   const executeName = useSelector((state) => state.executePanelSlice.executeName);
-  console.log('executeName=',executeName);
+//  console.log('executeName=',executeName);
   const lines = useSelector((state) => state.executePanelSlice.lines);
   const [show, setShow] = useState(false);
 
