@@ -13,7 +13,7 @@ export const displaySpinner = (display) => {
   }
 }
 
-const Spinner = () => {
+export default function Spinner() {
 //  console.log('SPINNER - Mounting...');
   const show = useSelector((state) => state.spinnerSlice.show);
 
@@ -29,5 +29,3 @@ const Spinner = () => {
     </Modal>
   );
 };
-
-export default Spinner;

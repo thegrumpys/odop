@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-import { load, loadInitialState, changeName, restoreAutoSave, deleteAutoSave } from "../store/actions";
+import { load, changeName, restoreAutoSave, deleteAutoSave } from "../store/actions";
 import MainPage from "./MainPage";
 import SignInPageWidget from './SignInPageWidget';
 import { Button, Modal, Alert } from 'react-bootstrap';
@@ -11,7 +11,7 @@ import { displaySpinner } from "./Spinner";
 import { displayMessage } from "./Message";
 import { logUsage } from '../logUsage';
 import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js'
-import { LoginCallback, SecureRoute, Security } from '@okta/okta-react';
+import { LoginCallback, Security } from '@okta/okta-react';
 import { startExecute } from "./ExecutePanel";
 
 export default function App() {
@@ -163,9 +163,9 @@ export default function App() {
                 onAuthRequired={onAuthRequired}
                 restoreOriginalUri={restoreOriginalUri} >
         <Routes>
-          <Route exact path="/" element={<MainPage />} />
+          <Route path="/" exact="true" element={<MainPage />} />
           <Route path='/login' element={<SignInPageWidget />} />
-          <Route path='/implicit/callback' component={LoginCallback} />
+          <Route path='/implicit/callback' element={<LoginCallback />} />
         </Routes>
       </Security>
       {show && <Modal show={show} onHide={loadDefaultDesign}>

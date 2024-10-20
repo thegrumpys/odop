@@ -325,8 +325,9 @@ export default function reducers(state = {}, action) {
 
     case ADD_MESSAGE:
       var result;
+      console.log('action=',action);
       if (!state.show) {
-        result = Object.assign({}, state, {
+        result = Object.assign({}, state, { // Initialize messages
           ...state,
           messageSlice: {
             ...state.messageSlice,
@@ -336,15 +337,17 @@ export default function reducers(state = {}, action) {
             help_url: action.payload.help_url,
           }
         });
+        console.log('result1=',result);
       } else {
-        result = Object.assign({}, state, {
+        result = Object.assign({}, state, { // Concatenate messages
           ...state,
           messageSlice: {
             ...state.messageSlice,
             messages: [...state.messageSlice.messages, { message: action.payload.message, variant: action.payload.variant }]
           }
         });
-      }
+        console.log('result2=',result);
+     }
       return result;
 
     case DISABLE_MESSAGE:
@@ -355,6 +358,7 @@ export default function reducers(state = {}, action) {
           show: false
         }
       });
+      console.log('result3=',result);
       return result;
 
 //=============================================================================
