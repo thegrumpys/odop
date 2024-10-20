@@ -3,24 +3,27 @@ import { useSelector } from "react-redux";
 import { Modal } from 'react-bootstrap';
 import { disableSpinner, enableSpinner } from "../store/actions";
 import store from "../store/store";
+import { logUsage } from '../logUsage';
 
 export const displaySpinner = (display) => {
 //  console.log('In displaySpinner display=', display);
   if (display) {
     store.dispatch(enableSpinner());
+    logUsage('event', 'Spinner', { event_label: 'enable' });
   } else {
     store.dispatch(disableSpinner());
+    logUsage('event', 'Spinner', { event_label: 'disable' });
   }
 }
 
 export default function Spinner() {
-//  console.log('SPINNER - Mounting...');
   const show = useSelector((state) => state.spinnerSlice.show);
+//  console.log('SPINNER - Mounting...','show=',show);
 
   useEffect(() => {
 //    console.log('SPINNER - Mounted, show changed', show);
-//    return () => console.log('SPINNER - Unmounting...');
-    return () => {};
+    return () => console.log('SPINNER - Unmounting...');
+//    return () => {};
   }, [show]);
 
   return (

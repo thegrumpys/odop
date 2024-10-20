@@ -1081,7 +1081,7 @@ export default function reducers(state = {}, action) {
       return result;
 
     case SEARCH:
-//        console.log('start reducer search', 'state=', state, 'action=', action);
+//      console.log('start reducer SEARCH', 'state=', state, 'action=', action);
       var result = Object.assign({}, state, {
         ...state,
         model: {
@@ -1218,6 +1218,7 @@ export default function reducers(state = {}, action) {
 //=============================================================================
 
     case ENABLE_SPINNER:
+//      console.log('start reducer ENABLE_SPINNER', 'state=', state, 'action=', action);
       var result = Object.assign({}, state, {
         ...state,
         spinnerSlice: {
@@ -1228,6 +1229,7 @@ export default function reducers(state = {}, action) {
       return result;
 
     case DISABLE_SPINNER:
+//      console.log('start reducer DISABLE_SPINNER', 'state=', state, 'action=', action);
       var result = Object.assign({}, state, {
         ...state,
         spinnerSlice: {

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table, Alert } from 'react-bootstrap';
 import { MIN, MAX, FIXED, CONSTRAINED } from '../store/actionTypes';
 import { load, search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../store/actions';
-import { enableSpinner, disableSpinner }  from '../store/actions';
 import NameValueUnitsHeaderIndependentVariable from './NameValueUnitsHeaderIndependentVariable';
 import NameValueUnitsRowIndependentVariable from './NameValueUnitsRowIndependentVariable';
 import NameValueUnitsHeaderDependentVariable from './NameValueUnitsHeaderDependentVariable';
@@ -22,6 +21,7 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 import { logUsage } from '../logUsage';
 import { getAlertsByName } from './Alerts';
 import { displayMessage } from '../components/Message';
+import { displaySpinner } from '../components/Spinner';
 import FeasibilityIndicator from './FeasibilityIndicator';
 import store from '../store/store';
 
@@ -116,15 +116,15 @@ export default function SymbolValue({ className, element, index }) {
   }
 
   const doSearch = (type) => {
+    displaySpinner(true);
 //    console.log('In SymbolValue.doSearch');
     var old_objective_value = model_objective_value;
     dispatch(saveAutoSave());
-    dispatch(enableSpinner());
     dispatch(search());
-    dispatch(disableSpinner());
     var design = store.getState();
     var new_objective_value = design.model.result.model_objective_value;
     logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' Element ' + element.name + ' ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });
+    displaySpinner(false);
   }
 
   const onSeekMinRequest = (event) => {

@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown, Modal, Alert, Button } from 'react-bootstrap';
 import { CONSTRAINED, FIXED } from '../../store/actionTypes';
 import { search, saveAutoSave } from '../../store/actions';
-import { enableSpinner, disableSpinner }  from '../../store/actions';
 import { logUsage } from '../../logUsage';
 import { displayMessage } from '../../components/Message';
+import { displaySpinner } from '../../components/Spinner';
 import store from '../../store/store';
 
 export default function ActionSearch() {
@@ -63,15 +63,16 @@ export default function ActionSearch() {
   }
 
   const doSearch = (type) => {
+    displaySpinner(true);
 //    console.log('ActionSearch.doSearch');
     var old_objective_value = model_objective_value;
     dispatch(saveAutoSave());
-    dispatch(enableSpinner());
     dispatch(search());
-    dispatch(disableSpinner());
     var design = store.getState();
-    var new_objective_value = design.model.result.model_objective_value;
+    var new_objective_value = design.model.result.objective_value;
+//    console.log('old_objective_value=',old_objective_value,'new_objective_value=',new_objective_value);
     logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });
+    displaySpinner(false);
   }
 
   var display_search_button;

@@ -376,6 +376,7 @@ app.post('/api/v1/usage_log', (req, res) => {
     ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 //    console.log('SERVER: In POST /api/v1/usage_log ip_address='+ip_address+' req.body=',req.body);
     note = JSON.stringify(req.body); // Convert blob to string
+    console.log('SERVER: In POST /api/v1/usage_log ip_address='+ip_address+' note=',note);
     var connection = startConnection();
     note = note.replace(/[']/ig,"''"); // replace one single quote with an two single quotes throughout
     var stmt = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address+'\',\''+note+'\')';

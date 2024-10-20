@@ -214,7 +214,7 @@ export const dispatcher = store => next => action => {
       break;
 
     case SEARCH: {
-//      console.log('in dispatcher','state=',store.getState(),'action=',action);
+//      console.log('in dispatcher SEARCH','state=',store.getState(),'action=',action);
       design = store.getState();
       invokeSearch(store, design.model.system_controls.objmin);
     }

@@ -4,9 +4,9 @@ import { Container, Row, Col, Table, OverlayTrigger, Tooltip, Modal, InputGroup,
 import { CONSTRAINED, FIXED, MIN, MAX } from '../store/actionTypes';
 import FeasibilityIndicator from './FeasibilityIndicator';
 import { search, seek, saveAutoSave } from '../store/actions';
-import { enableSpinner, disableSpinner }  from '../store/actions';
 import { logUsage } from '../logUsage';
 import { displayMessage } from '../components/Message';
+import { displaySpinner } from '../components/Spinner';
 import AlertsAccordion from "./AlertsAccordion"
 
 export default function ResultTable() {
@@ -71,14 +71,14 @@ export default function ResultTable() {
   }
 
   const doSearch = (type) => {
+    displaySpinner(true);
 //    console.log('In ResultTable.doSearch');
     var old_objective_value = model_objective_value;
     dispatch(saveAutoSave());
-    dispatch(enableSpinner());
     dispatch(search());
-    dispatch(disableSpinner());
     var new_objective_value = model_objective_value;
     logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' Button ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });
+    displaySpinner(false);
   }
 
   const onSeekRequest = (event) => {
