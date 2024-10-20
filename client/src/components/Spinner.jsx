@@ -22,8 +22,8 @@ export default function Spinner() {
 
   useEffect(() => {
 //    console.log('SPINNER - Mounted, show changed', show);
-    return () => console.log('SPINNER - Unmounting...');
-//    return () => {};
+//    return () => console.log('SPINNER - Unmounting...');
+    return () => {};
   }, [show]);
 
   return (
