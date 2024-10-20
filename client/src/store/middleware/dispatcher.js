@@ -171,6 +171,7 @@ export const dispatcher = store => next => action => {
     case CHANGE_SYMBOL_CONSTRAINT:
     case RESTORE_OUTPUT_SYMBOL_CONSTRAINTS: {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
+      if (action.payload.skipDispatch !== undefined && action.payload.skipDispatch) return;
       updateObjectiveValue(store);
       invokeCheck(store);
     }

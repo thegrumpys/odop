@@ -21,8 +21,8 @@ export default function Message() {
 
   useEffect(() => {
 //    console.log('MESSAGE - Mounted, show changed', show);
-    return () => console.log('MESSAGE - Unmounting...');
-//    return () => {};
+//    return () => console.log('MESSAGE - Unmounting...');
+    return () => {};
   }, [show]);
 
   const toggle = () => {

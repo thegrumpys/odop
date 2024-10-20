@@ -25,7 +25,7 @@ export function pxPropagate(p, x, store) {
                 var sink = nameMatch(entry);
 //                console.log('In pxPropagate source=',source,'sink=',sink);
 //                console.log('In pxPropagate sink.name=',sink.name,'entry.minmax=',entry.minmax,'value=',value);
-                store.dispatch(changeSymbolConstraint(sink.name, entry.minmax, value));
+                store.dispatch(changeSymbolConstraint(sink.name, entry.minmax, value, true)); // no dispatch
             }
         }
     }

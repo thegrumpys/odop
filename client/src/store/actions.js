@@ -377,13 +377,14 @@ export function changeSymbolViolation(name, minmax, value) {
   }
 }
 
-export function changeSymbolConstraint(name, minmax, value) {
+export function changeSymbolConstraint(name, minmax, value, skipDispatch = false) {
   return {
     type: CHANGE_SYMBOL_CONSTRAINT,
     payload: {
       name,
       minmax,
-      value
+      value,
+      skipDispatch,
     }
   }
 }

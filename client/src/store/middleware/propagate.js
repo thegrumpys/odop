@@ -19,7 +19,7 @@ export function propagate(store) {
                 var sink = nameMatch(entry);
 //                console.log('In propagate source=',source,'sink=',sink);
 //                console.log('In propagate sink.name=',sink.name,'entry.minmax=',entry.minmax,'value=',value);
-                store.dispatch(changeSymbolConstraint(sink.name, entry.minmax, value));
+                store.dispatch(changeSymbolConstraint(sink.name, entry.minmax, value, true)); // no dispatch
             }
         }
     }
