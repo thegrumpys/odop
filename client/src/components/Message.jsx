@@ -17,21 +17,21 @@ export default function Message() {
   const messages = useSelector((state) => state.messageSlice.messages);
   const help_url = useSelector((state) => state.messageSlice.help_url);
   const dispatch = useDispatch();
-  console.log('MESSAGE - Mounting...','show=',show,'header=',header,'messages=',messages,'help_url=',help_url);
+//  console.log('MESSAGE - Mounting...','show=',show,'header=',header,'messages=',messages,'help_url=',help_url);
 
   useEffect(() => {
-    console.log('MESSAGE - Mounted, show changed', show);
+//    console.log('MESSAGE - Mounted, show changed', show);
     return () => console.log('MESSAGE - Unmounting...');
 //    return () => {};
   }, [show]);
 
   const toggle = () => {
-    console.log('MESSAGE.toggle');
+//    console.log('MESSAGE.toggle');
     dispatch(disableMessage());
   }
 
   const onContextHelp = () => {
-    console.log('MESSAGE.onContextHelp');
+//    console.log('MESSAGE.onContextHelp');
 //    logUsage('event', 'Message', { event_label: 'context Help button: ' + this.state.help_url });
     dispatch(disableMessage());
     window.open(help_url, '_blank');
