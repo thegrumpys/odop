@@ -91,7 +91,7 @@ export function seek(store, action) {
             }
         }
     }
-    obj = despak(pc, store);
+    obj = despak(store, pc);
     design = store.getState(); // Re-access store to get latest element values
     if (obj < design.model.system_controls.objmin) {
         store.dispatch(restoreInputSymbolValues());

@@ -33,7 +33,7 @@ export const startExecute = (prefix, executeName, run=false) => {
     store.dispatch(setStep(next));
     if (localTestGenerate) store.dispatch(outputLine('\n    // title: "' + execute.steps[next].title + '"'));
     if (execute.steps[next].actions !== undefined) {
-      execute.steps[next].actions.forEach((action) => { store.dispatch(action); console.log('\taction.type=',action.type);})
+      execute.steps[next].actions.forEach((action) => { console.log('\taction.type=',action.type); store.dispatch(action); })
       if (localTestGenerate) {
         execute.steps[next].actions.forEach((action) => {
           var dump = dumpers(action);

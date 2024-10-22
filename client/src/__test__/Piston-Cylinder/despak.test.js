@@ -45,7 +45,7 @@ it('despak without merit', () => {
             }
         }
     }
-    var obj = despak(pc, store);
+    var obj = despak(store, pc);
 
     var design = store.getState(); // after
     expect(obj).toEqual(0.5605106434805028);
@@ -167,7 +167,7 @@ it('despak with merit', () => {
             }
         }
     }
-    var obj = despak(pc, store, merit);
+    var obj = despak(store, pc, merit);
 
     var design = store.getState(); // after
     expect(obj).toEqual(0.5616217545916139);

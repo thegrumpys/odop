@@ -95,10 +95,11 @@ import { getSeverityNumberBySeverity, getFontClassBySeverityNumber } from '../co
 import { VALID_MIN, VALID_MAX, MIN, MAX, FDCL } from './actionTypes';
 import { sclden } from './middleware/sclden';
 import { initialSystemControls } from '../initialSystemControls';
+import { logUsage as log } from '../logUsage';
 
 export default function reducers(state = {}, action) {
 
-//  console.warn('In reducers state=',state,'action=', action);
+//  console.log('In reducers','state=',state,'action=', action);
 //  if (action.payload === undefined || action.payload.name === undefined) {
 //      console.log('<li>','In reducers action=', action.type,'</li>');
 //  } else {

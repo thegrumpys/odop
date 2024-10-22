@@ -170,8 +170,8 @@ export const dispatcher = store => next => action => {
 
     case CHANGE_SYMBOL_CONSTRAINT:
     case RESTORE_OUTPUT_SYMBOL_CONSTRAINTS: {
-//      console.log('in dispatcher','state=',store.getState(),'action=',action);
       if (action.payload.skipDispatch !== undefined && action.payload.skipDispatch) return;
+//      console.log('in dispatcher','state=',store.getState(),'action=',action);
       updateObjectiveValue(store);
       invokeCheck(store);
     }
@@ -225,9 +225,9 @@ export const dispatcher = store => next => action => {
 //      console.log('in dispatcher','state=',store.getState(),'action=',action);
       invokeSeek(store, action);
       design = store.getState();
-      var termination_condition = design.model.result.termination_condition;
-      updateObjectiveValue(store);
-      store.dispatch(changeResultTerminationCondition(termination_condition));
+      var termination_condition = design.model.result.termination_condition; // Save the termination message
+      updateObjectiveValue(store) // Do this before setting the Seek's termination message because this will reset
+      store.dispatch(changeResultTerminationCondition(termination_condition)); // Now output the Seek's termination message
       invokeCheck(store);
     }
       break;
