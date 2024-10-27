@@ -1,32 +1,34 @@
-import { initialState } from '../../../designtypes/Spring/Extension/initialState';
+import { initialState } from '../../../designtypes/Spring/Compression/initialState';
 import { initialSystemControls } from '../../../initialSystemControls';
-import { inject, enableDispatcher, loadInitialState,
+import { inject,
+         enableDispatcher,
+         loadInitialState,
          changeLabelsValue,
          changeSymbolValue,
-         freeSymbolValue,
          setSymbolFlag,
          resetSymbolFlag,
          changeSymbolConstraint,
          fixSymbolValue,
+         freeSymbolValue,
+         search,
          changeSystemControlsValue,
-         search } from '../../../store/actions';
-import { MIN, MAX, CONSTRAINED, FDCL } from '../../../store/actionTypes';
+         seek } from '../../../store/actions';
+import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 import store from "../../../store/store";
 
 // This is a mapping of the demo9 execute file to an equivalent test case file
-// RegEx: Find: ExecutePanel\.jsx:\d+\s Replace with: <nothing>
-// RegEx: Find: ^.*\[Violation\].*\s$ Replace with: <nothing>
 
 it('demo9', () => {
-    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    var startTime = Date.now();
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls });
     store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
     store.dispatch(enableDispatcher(true));
 
     var design = store.getState(); // before
-    design = store.getState();
     expect(design.model.result.objective_value).toEqual(0.0);
 
-// title: "Session Now In Progress",
+
+    // title: "Session Now In Progress"
     // No-op
 
     // title: "Page 02 of 09"
@@ -86,5 +88,7 @@ it('demo9', () => {
     design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0000520,7);
 
+    var endTime = Date.now();
+    var duration = endTime - startTime;
+    console.log('Duration=',duration);
 });
-

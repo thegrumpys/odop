@@ -1,29 +1,33 @@
 import { initialState } from '../../../designtypes/Spring/Compression/initialState';
 import { initialSystemControls } from '../../../initialSystemControls';
-import { inject, enableDispatcher, loadInitialState,
+import { inject,
+         enableDispatcher,
+         loadInitialState,
          changeLabelsValue,
          changeSymbolValue,
          setSymbolFlag,
+         resetSymbolFlag,
          changeSymbolConstraint,
          fixSymbolValue,
+         freeSymbolValue,
          search,
          changeSystemControlsValue,
          seek } from '../../../store/actions';
-import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
+import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 import store from "../../../store/store";
 
 // This is a mapping of the tutor6 execute file to an equivalent test case file
 
 it('tutor6', () => {
+    var startTime = Date.now();
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls });
     store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
     store.dispatch(enableDispatcher(true));
 
     var design = store.getState(); // before
-    design = store.getState();
     expect(design.model.result.objective_value).toEqual(0.0);
 
-    // Execute File: tutor6
+
     // title: "Session Now In Progress"
     // No-op
 
@@ -67,4 +71,8 @@ it('tutor6', () => {
 
     // title: "Page 07 of 07 (last page)"
     // No-op
+
+    var endTime = Date.now();
+    var duration = endTime - startTime;
+    console.log('Duration=',duration);
 });

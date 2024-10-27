@@ -1,28 +1,34 @@
 import { initialState } from '../../../designtypes/Spring/Compression/initialState';
 import { initialSystemControls } from '../../../initialSystemControls';
-import { inject, enableDispatcher, loadInitialState,
+import { inject,
+         enableDispatcher,
+         loadInitialState,
          changeLabelsValue,
          changeSymbolValue,
          setSymbolFlag,
+         resetSymbolFlag,
          changeSymbolConstraint,
          fixSymbolValue,
+         freeSymbolValue,
          search,
+         changeSystemControlsValue,
          seek } from '../../../store/actions';
-import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
+import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 import store from "../../../store/store";
 
 // This is a mapping of the tutor7 execute file to an equivalent test case file
 
 it('tutor7', () => {
-    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    var startTime = Date.now();
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls });
     store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
     store.dispatch(enableDispatcher(true));
 
     var design = store.getState(); // before
-        design = store.getState();
     expect(design.model.result.objective_value).toEqual(0.0);
 
-    // title: "Session Now In Progress",
+
+    // title: "Session Now In Progress"
     // No-op
 
     // title: "Page 02 of 17"
@@ -128,6 +134,9 @@ it('tutor7', () => {
     expect(design.model.result.objective_value).toBeCloseTo(0.0001687,7);
 
     // title: "Page 17 of 17 (last page)"
-    // No-op});
-});
+    // No-op
 
+    var endTime = Date.now();
+    var duration = endTime - startTime;
+    console.log('Duration=',duration);
+});

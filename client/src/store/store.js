@@ -10,8 +10,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
 const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
 
-// Create a store with an empty model where type is null
-export default createStore(reducers, {
+const default_state = {
   alertsSlice: {
     alerts: [],
     activeKey: null,
@@ -47,5 +46,10 @@ export default createStore(reducers, {
   enableDispatcher: true,
   spinnerSlice: {
     show: false
-  },
-}, middleware);
+  }
+};
+
+// Create a store with an empty model where type is null
+export default createStore(reducers, default_state, middleware);
+
+export const shadow_store = createStore(reducers, JSON.parse(JSON.stringify(default_state)), middleware);

@@ -24,16 +24,16 @@ export const startExecute = (prefix, executeName, run=false) => {
   store.dispatch(executeStart(true, executeName, prefix, localStates, 0)); // Put current store state into steps[0].state - remember this for "back" time travel
   store.dispatch(setTestGenerate(localTestGenerate));
   if (localTestGenerate) store.dispatch(outputStart(executeName));
-  var startTime = Date.now();
+//  var startTime = Date.now();
   for (var next = 0; next < execute.steps.length; next++) {
-    console.log('execute_name=',executeName,'step=',next)
+//    console.log('execute_name=',executeName,'step=',next)
     var localStates = Object.assign([...states], { [next]: Object.assign({}, states[next], { state: JSON.stringify(model) }) });
     // Put current store state into steps[next].state - remember this for "back" time travel
     store.dispatch(setStates(localStates));
     store.dispatch(setStep(next));
     if (localTestGenerate) store.dispatch(outputLine('\n    // title: "' + execute.steps[next].title + '"'));
     if (execute.steps[next].actions !== undefined) {
-      execute.steps[next].actions.forEach((action) => { console.log('\taction.type=',action.type); store.dispatch(action); })
+      execute.steps[next].actions.forEach((action) => { /* console.log('\taction.type=',action.type); */ store.dispatch(action); })
       if (localTestGenerate) {
         execute.steps[next].actions.forEach((action) => {
           var dump = dumpers(action);
@@ -47,12 +47,12 @@ export const startExecute = (prefix, executeName, run=false) => {
     } else {
       if (localTestGenerate) store.dispatch(outputLine('    // No-op'));
     }
-    if (config.node.env !== "production") {
-      var endTime = Date.now();
-      var duration = endTime - startTime;
-      console.log('\tduration=',duration);
-      startTime = endTime;
-    }
+//    if (config.node.env !== "production") {
+//      var endTime = Date.now();
+//      var duration = endTime - startTime;
+//      console.log('\tduration=',duration);
+//      startTime = endTime;
+//    }
     if (!run) break;
   }
   window.scrollTo(0, 0);

@@ -38,6 +38,7 @@ import store from "../../../store/store";
 // This is a mapping of the ${executeName} execute file to an equivalent test case file
 
 it('${executeName}', () => {
+    var startTime = Date.now();
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls });
     store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
     store.dispatch(enableDispatcher(true));
@@ -45,8 +46,11 @@ it('${executeName}', () => {
     var design = store.getState(); // before
     expect(design.model.result.objective_value).toEqual(0.0);
 `;
-  var post_lines = `});
-
+  var post_lines = `
+    var endTime = Date.now();
+    var duration = endTime - startTime;
+    console.log('Duration=',duration);
+});
 `;
   return (
     <>

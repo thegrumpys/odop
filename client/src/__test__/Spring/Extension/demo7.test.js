@@ -1,6 +1,8 @@
 import { initialState } from '../../../designtypes/Spring/Compression/initialState';
 import { initialSystemControls } from '../../../initialSystemControls';
-import { inject, enableDispatcher, loadInitialState,
+import { inject,
+         enableDispatcher,
+         loadInitialState,
          changeLabelsValue,
          changeSymbolValue,
          setSymbolFlag,
@@ -17,15 +19,15 @@ import store from "../../../store/store";
 // This is a mapping of the demo7 execute file to an equivalent test case file
 
 it('demo7', () => {
+    var startTime = Date.now();
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls });
     store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
     store.dispatch(enableDispatcher(true));
 
     var design = store.getState(); // before
-    design = store.getState();
     expect(design.model.result.objective_value).toEqual(0.0);
 
-    // Execute File: demo7
+
     // title: "Session Now In Progress"
     // No-op
 
@@ -104,4 +106,8 @@ it('demo7', () => {
 
     // title: "Page 11 of 11 (last page)"
     // No-op
+
+    var endTime = Date.now();
+    var duration = endTime - startTime;
+    console.log('Duration=',duration);
 });
