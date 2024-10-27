@@ -4,7 +4,7 @@
   "description": "Open Design Optimization Platform (ODOP) Client",
   "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "coverage": "react-scripts test --env=jsdom --coverage",
@@ -43,7 +43,7 @@
     "source-map-explorer": "^2.5.1",
     "typescript": "^3.9.7"
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:5001",
   "browserslist": [
     ">0.2%",
     "not dead",

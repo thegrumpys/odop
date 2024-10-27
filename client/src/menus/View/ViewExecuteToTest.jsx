@@ -90,6 +90,7 @@ import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 // This is a mapping of the ${this.state.execute_name} execute file to an equivalent test case file
 
 it('${this.state.execute_name}', () => {
+    var startTime = Date.now();
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls });
     const store = createStore(
         reducers,
@@ -101,8 +102,11 @@ it('${this.state.execute_name}', () => {
     expect(design.model.result.objective_value).toEqual(0.0);
 
 `;
-        var post_lines = `});
-
+        var post_lines = `
+    var endTime = Date.now();
+    var duration = endTime - startTime;
+    console.log('Duration=',duration);
+});
 `;
         return (
             <>

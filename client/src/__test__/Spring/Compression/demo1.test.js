@@ -19,6 +19,7 @@ import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 // This is a mapping of the demo1 execute file to an equivalent test case file
 
 it('demo1', () => {
+    var startTime = Date.now();
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls });
     const store = createStore(
         reducers,
@@ -90,4 +91,8 @@ it('demo1', () => {
 
     design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0632930,7);
+
+    var endTime = Date.now();
+    var duration = endTime - startTime;
+    console.log('Duration=',duration);
 });

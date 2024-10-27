@@ -19,6 +19,7 @@ import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 // This is a mapping of the demo7 execute file to an equivalent test case file
 
 it('demo7', () => {
+    var startTime = Date.now();
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls });
     const store = createStore(
         reducers,
@@ -108,4 +109,8 @@ it('demo7', () => {
 
     // title: "Page 11 of 11 (last page)"
     // No-op
+
+    var endTime = Date.now();
+    var duration = endTime - startTime;
+    console.log('Duration=',duration);
 });

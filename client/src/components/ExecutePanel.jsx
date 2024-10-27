@@ -9,7 +9,7 @@ import { logUsage } from '../logUsage';
 import config from '../config';
 import { outputStart, outputLine, outputStop } from '../menus/View/ViewExecuteToTest';
 
-export var startExecute = function(prefix,execute_name,steps) {
+export var startExecute = function(prefix,execute_name,steps,run=false) {
 //    console.log('In startExecute prefix=',prefix,'execute_name=',execute_name,'steps=',steps);
     if (steps !== undefined && steps[0] !== undefined) {
         const { store } = this.context;
@@ -30,23 +30,34 @@ export var startExecute = function(prefix,execute_name,steps) {
             text: text, // Default: first text
             testGenerate: testGenerate,
         });
-        if (testGenerate) outputStart(execute_name);
-        if (testGenerate) outputLine('    // title: "' + title + '"');
-        if (steps[0].actions !== undefined) {
-            steps[0].actions.forEach((action) => { store.dispatch(action); })
-            if (testGenerate) {
-                steps[0].actions.forEach((action) => {
-                    var dump = actionDumper(action);
-                    if (dump !== undefined) {
-                        outputLine('    store.dispatch('+dump+');');
-                    }
-                }); // Generate test
-                design = store.getState();
-                outputLine('\n    design = store.getState();');
-                outputLine('    expect(design.model.result.objective_value).toBeCloseTo('+design.model.result.objective_value.toFixed(7)+',7);');
+//        var startTime = Date.now();
+        for (var next=0; next < steps.length; next++) {
+//            console.log('execute_name=',execute_name,'step=',next)
+            steps = Object.assign([...steps], {[next]: Object.assign({}, steps[next], {state: JSON.stringify(design)})});
+//            console.log('In ExecutePanel.onNext steps=',steps);
+            if (testGenerate) outputStart(execute_name);
+            if (testGenerate) outputLine('    // title: "' + title + '"');
+            if (steps[next].actions !== undefined) {
+                steps[next].actions.forEach((action) => { /* console.log('\taction.type=',action.type); */ store.dispatch(action); })
+                if (testGenerate) {
+                    steps[next].actions.forEach((action) => {
+                        var dump = actionDumper(action);
+                        if (dump !== undefined) {
+                            outputLine('    store.dispatch('+dump+');');
+                        }
+                    }); // Generate test
+                    design = store.getState();
+                    outputLine('\n    design = store.getState();');
+                    outputLine('    expect(design.model.result.objective_value).toBeCloseTo('+design.model.result.objective_value.toFixed(7)+',7);');
+                }
+            } else {
+	              if (testGenerate) outputLine('    // No-op');
             }
-        } else {
-            if (testGenerate) outputLine('    // No-op');
+//            var endTime = Date.now();
+//            var duration = endTime-startTime;
+//            console.log('\tduration=',duration)
+//            startTime = endTime;
+            if (!run) break;
         }
         window.scrollTo(0, 0);
     }

@@ -5,17 +5,22 @@ import { loadInitialState,
          changeLabelsValue,
          changeSymbolValue,
          setSymbolFlag,
+         resetSymbolFlag,
          changeSymbolConstraint,
          fixSymbolValue,
-         search } from '../../../store/actionCreators';
+         freeSymbolValue,
+         search,
+         changeSystemControlsValue,
+         seek } from '../../../store/actionCreators';
 import { reducers } from '../../../store/reducers';
 import { dispatcher } from '../../../store/middleware/dispatcher';
-import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
+import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 
 // This is a mapping of the demo2 execute file to an equivalent test case file
 
 it('demo2', () => {
-    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    var startTime = Date.now();
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls });
     const store = createStore(
         reducers,
         {"user": "USERID0123456789", name: "initialState", model: state},
@@ -25,23 +30,24 @@ it('demo2', () => {
     design = store.getState();
     expect(design.model.result.objective_value).toEqual(0.0);
 
-// title: "Session Now In Progress",
+    // Execute File: demo2
+    // title: "Session Now In Progress"
     // No-op
-    
-// title: "Page 02 of 07"
+
+    // title: "Page 02 of 07"
     store.dispatch(loadInitialState("Spring/Compression","US"));
     store.dispatch(changeLabelsValue([{"name":"COMMENT","value":"Compression Spring demo2"}]));
-    
-design = store.getState();
+
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0000000,7);
-    
-// title: "Page 03 of 07"
+
+    // title: "Page 03 of 07"
     // No-op
-    
-// title: "Page 04 of 07"
+
+    // title: "Page 04 of 07"
     // No-op
-    
-// title: "Page 05 of 07"
+
+    // title: "Page 05 of 07"
     store.dispatch(changeSymbolValue("Material_Type",7));
     store.dispatch(changeSymbolValue("End_Type",3));
     store.dispatch(fixSymbolValue("OD_Free",0.188));
@@ -51,21 +57,23 @@ design = store.getState();
     store.dispatch(fixSymbolValue("Force_2",7.2));
     store.dispatch(fixSymbolValue("L_Free",0.475));
     store.dispatch(changeSymbolValue("Wire_Dia",0.035));
-    
-design = store.getState();
+
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.1569232,7);
-    
-// title: "Page 06 of 07"
+
+    // title: "Page 06 of 07"
     store.dispatch(changeSymbolConstraint("FS_Solid",MIN,0.7));
-    
-design = store.getState();
+
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.1569232,7);
-    
-// title: "Page 07 of 07 (last page)"
+
+    // title: "Page 07 of 07 (last page)"
     store.dispatch(search());
-    
-design = store.getState();
+
+    design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0000062,7);
 
+    var endTime = Date.now();
+    var duration = endTime - startTime;
+    console.log('Duration=',duration);
 });
-

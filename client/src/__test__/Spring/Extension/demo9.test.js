@@ -1,26 +1,26 @@
 import { createStore, applyMiddleware } from 'redux';
-import { initialState } from '../../../designtypes/Spring/Extension/initialState';
+import { initialState } from '../../../designtypes/Spring/Compression/initialState';
 import { initialSystemControls } from '../../../initialSystemControls';
 import { loadInitialState,
          changeLabelsValue,
          changeSymbolValue,
-         freeSymbolValue,
          setSymbolFlag,
          resetSymbolFlag,
          changeSymbolConstraint,
          fixSymbolValue,
+         freeSymbolValue,
+         search,
          changeSystemControlsValue,
-         search } from '../../../store/actionCreators';
+         seek } from '../../../store/actionCreators';
 import { reducers } from '../../../store/reducers';
 import { dispatcher } from '../../../store/middleware/dispatcher';
-import { MIN, MAX, CONSTRAINED, FDCL } from '../../../store/actionTypes';
+import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../../store/actionTypes';
 
 // This is a mapping of the demo9 execute file to an equivalent test case file
-// RegEx: Find: ExecutePanel\.jsx:\d+\s Replace with: <nothing>
-// RegEx: Find: ^.*\[Violation\].*\s$ Replace with: <nothing>
 
 it('demo9', () => {
-    var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
+    var startTime = Date.now();
+    var state = Object.assign({}, initialState, { system_controls: initialSystemControls });
     const store = createStore(
         reducers,
         {"user": "USERID0123456789", name: "initialState", model: state},
@@ -30,9 +30,10 @@ it('demo9', () => {
     design = store.getState();
     expect(design.model.result.objective_value).toEqual(0.0);
 
-// title: "Session Now In Progress",
+    // Execute File: demo9
+    // title: "Session Now In Progress"
     // No-op
-    
+
     // title: "Page 02 of 09"
     store.dispatch(loadInitialState("Spring/Extension","US"));
     store.dispatch(changeLabelsValue([{"name":"COMMENT","value":"Extension Spring Demo"}]));
@@ -90,5 +91,7 @@ it('demo9', () => {
     design = store.getState();
     expect(design.model.result.objective_value).toBeCloseTo(0.0000520,7);
 
+    var endTime = Date.now();
+    var duration = endTime - startTime;
+    console.log('Duration=',duration);
 });
-

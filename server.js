@@ -544,7 +544,7 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')
 //    console.log('process.env.NODE_ENV != production or staging');
 }
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 if (!module.parent) { // If not in a testcase then start listening
     console.log('SERVER: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'starting on port =', port, 'node version =', process.version);
     app.listen(port);

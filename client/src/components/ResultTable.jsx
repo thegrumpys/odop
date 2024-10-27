@@ -241,7 +241,7 @@ class ResultTable extends Component {
                                 </OverlayTrigger>
                             </th>
                             <td className="text-left">{this.props.termination_condition}</td>
-                       </tr>
+                        </tr>
                     </tbody>
                 </Table>
                 <Table className="col-md-4" size="sm">
@@ -373,7 +373,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
     search: search,
     seek: seek,
-    saveAutoSave: saveAutoSave
+    saveAutoSave: saveAutoSave,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ResultTable);

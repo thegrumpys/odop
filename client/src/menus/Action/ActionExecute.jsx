@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { logUsage } from '../../logUsage';
-import { startExecute } from "../../components/ExecutePanel";
+import { startExecute, stopExecute } from "../../components/ExecutePanel";
+import config from '../../config';
 
 class ActionExecute extends Component {
 
@@ -12,6 +13,7 @@ class ActionExecute extends Component {
         this.toggle = this.toggle.bind(this);
         this.onSelect = this.onSelect.bind(this);
         this.onExecute = this.onExecute.bind(this);
+        this.onExecuteAndRun = this.onExecuteAndRun.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.state = {
             modal: false,
@@ -71,6 +73,23 @@ class ActionExecute extends Component {
         startExecute('Action : Execute : ' + this.state.execute_name, this.state.execute_name, execute.steps);
     }
     
+    onExecuteAndRun() {
+//        console.log('In ActionExecute.onExecuteAndRun');
+        this.setState({
+            modal: !this.state.modal
+        });
+        logUsage('event', 'ActionExecute', { event_label: this.state.execute_name + ' RUN'});
+        // Do execute
+//        console.log('In ActionExecute.onExecute this.state.execute_name=',this.state.execute_name);
+        var { execute } = require('../../designtypes/'+this.props.type+'/'+this.state.execute_name+'.js'); // Dynamically load execute
+//        console.log('In ActionExecute.onExecute execute=',execute);
+        startExecute('Action : Execute : ' + this.state.execute_name, this.state.execute_name, execute.steps, true);
+        this.setState({
+            modal: !this.state.modal
+        });
+        stopExecute();
+    }
+    
     onCancel() {
 //        console.log('In ActionExecute.onCancel');
         this.setState({
@@ -103,6 +122,7 @@ class ActionExecute extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.onCancel}>Cancel</Button>
+                        {config.node.env !== "production" && <Button variant="danger" onClick={this.onExecuteAndRun}>Execute All</Button>}
                         <Button variant="primary" onClick={this.onExecute}>Execute</Button>
                     </Modal.Footer>
                 </Modal>
