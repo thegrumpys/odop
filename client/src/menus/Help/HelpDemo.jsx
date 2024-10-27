@@ -16,7 +16,8 @@ export default function HelpDemo() {
   useEffect(() => {
 //    console.log('HelpDemo - Mounted','model_type=',model_type);
     updateExecuteNames();
-    return () => { };
+//    return () => console.log('HelpDemo - Unmounting ...');
+    return () => {};
   }, [model_type]);
 
   const updateExecuteNames = () => {

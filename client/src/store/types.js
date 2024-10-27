@@ -11,7 +11,7 @@ export const SET_LEVEL = 'alertsSlice/setLevel';
 // ExecutePanel Types
 //=============================================================================
 export const EXECUTE_START = 'executePanelSlice/executeStart';
-export const EXECUTE_STOP_ON_LOAD = 'executePanelSlice/setStopOnFileLoad';
+export const EXECUTE_STOP_ON_LOAD = 'executePanelSlice/executeStopOnLoad';
 export const EXECUTE_STOP = 'executePanelSlice/executeStop';
 export const SET_SHOW = 'executePanelSlice/setShow';
 export const SET_EXECUTE_NAME = 'executePanelSlice/setExecuteName';

@@ -14,9 +14,10 @@ export default function HelpTutorial() {
   const [executeName, setExecuteName] = useState('');
 
   useEffect(() => {
-//    console.log('HelpDemo - Mounted','model_type=',model_type);
+//    console.log('HelpTutorial - Mounted','model_type=',model_type);
     updateExecuteNames();
-    return () => { };
+//    return () => console.log('HelpTutorial - Unmounting ...');
+    return () => {};
   }, [model_type]);
 
   const updateExecuteNames = () => {

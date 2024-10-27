@@ -179,7 +179,7 @@ export default function reducers(state = {}, action) {
           prefix: action.payload.prefix,
           states: action.payload.states,
           step: action.payload.step,
-          stopOnFileLoad: false,
+          stopOnFileLoad: true,
           testGenerate: false,
         }
       });
@@ -187,12 +187,13 @@ export default function reducers(state = {}, action) {
 
     case EXECUTE_STOP_ON_LOAD:
       var result;
-      if (state.stopOnFileLoad) {
+      if (state.executePanelSlice.stopOnFileLoad) {
         result = Object.assign({}, state, {
           ...state,
           executePanelSlice: {
             ...state.executePanelSlice,
             show: false,
+            executeName: undefined, // Clear execute name
             prefix: '',
             states: [],
             step: 0,
@@ -211,6 +212,7 @@ export default function reducers(state = {}, action) {
         executePanelSlice: {
           ...state.executePanelSlice,
           show: false,
+          executeName: undefined, // Clear execute name
           prefix: '',
           states: [],
           step: 0,
@@ -327,7 +329,7 @@ export default function reducers(state = {}, action) {
     case ADD_MESSAGE:
       var result;
 //      console.log('action=',action);
-      if (!state.show) {
+      if (!state.messageSlice.show) {
         result = Object.assign({}, state, { // Initialize messages
           ...state,
           messageSlice: {

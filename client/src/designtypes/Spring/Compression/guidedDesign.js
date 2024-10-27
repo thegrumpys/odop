@@ -193,22 +193,13 @@ export const execute = {
                     <Table borderless variant="success" size="sm">
                     <tbody>
                         <tr>
-                            <td> &nbsp; &nbsp; &nbsp; &nbsp; </td>
-                            <td>active coils</td>
-                            <td>Coils_A</td>
-                            <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; </td>
+                            <td> &nbsp; &nbsp; &nbsp; &nbsp; </td><td>active coils</td><td>Coils_A</td><td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; </td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td>deflection at first load point</td>
-                            <td>Deflect_1</td>
-                            <td></td>
+                            <td></td><td>deflection at first load point</td><td>Deflect_1</td><td></td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td>spring index</td>
-                            <td>Spring_Index</td>
-                            <td></td>
+                            <td></td><td>spring index</td><td>Spring_Index</td><td></td>
                         </tr>
                         <tr>
                             <td></td><td>factor of safety at second load point</td><td>FS_2</td><td></td>
