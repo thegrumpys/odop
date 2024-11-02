@@ -19,7 +19,7 @@ export default function Calculator() {
   return (
     <Container>
       <Row>
-        <table className="w-50 report-table">
+        <table className="w-auto report-table">
           <tbody>
             <tr>
               <SymbolName element={model_symbol_table[o.Material_Type]} index={o.Material_Type} />
@@ -39,7 +39,7 @@ export default function Calculator() {
       </Row>
       <br />
       <Row>
-        <table className="w-100 report-table">
+        <table className="w-auto report-table">
           <thead>
             <tr>
               <th></th>
@@ -102,7 +102,7 @@ export default function Calculator() {
       </Row>
       <br />
       <Row>
-        <table className="w-75 report-table">
+        <table className="w-auto report-table">
           <tbody>
             <tr>
               <SymbolName element={model_symbol_table[o.Stroke]} index={o.Stroke} />
@@ -172,7 +172,7 @@ export default function Calculator() {
       </Row>
       <br />
       <Row>
-        <table className="w-75 report-table">
+        <table className="w-auto report-table">
           <tbody>
             <tr>
               <td>
