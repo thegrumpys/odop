@@ -1,5 +1,4 @@
-import { useState, useEffect, createContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import * as o from './symbol_table_offsets';
 import * as mo from '../mat_offsets';
 import { getAlertsBySeverity } from '../../../components/Alerts';

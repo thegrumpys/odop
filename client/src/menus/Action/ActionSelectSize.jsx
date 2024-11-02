@@ -5,7 +5,6 @@ import { changeSymbolValue, fixSymbolValue, saveAutoSave, changeResultTerminatio
 import { logUsage } from '../../logUsage';
 import { FIXED } from '../../store/actionTypes';
 import { logValue } from '../../logUsage';
-import store from "../../store/store";
 
 export default function ActionSelectSize() {
   //  console.log('ActionSelectSize - Mounting...');

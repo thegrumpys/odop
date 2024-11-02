@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Table } from 'react-bootstrap';
 import ConstraintsMaxHeaderIndependentVariable from './ConstraintsMaxHeaderIndependentVariable';
 import ConstraintsMaxRowIndependentVariable from './ConstraintsMaxRowIndependentVariable';

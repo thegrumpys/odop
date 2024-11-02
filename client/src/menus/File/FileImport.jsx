@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { load, changeName, deleteAutoSave } from '../../store/actions';
 import { executeStopOnLoad } from '../../store/actions';

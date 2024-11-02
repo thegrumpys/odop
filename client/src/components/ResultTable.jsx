@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Row, Col, Table, OverlayTrigger, Tooltip, Modal, InputGroup, ButtonGroup, Button, Form, Alert } from 'react-bootstrap';
+import { Row, Col, Table, OverlayTrigger, Tooltip, Modal, InputGroup, ButtonGroup, Button, Form, Alert } from 'react-bootstrap';
 import { CONSTRAINED, FIXED, MIN, MAX } from '../store/actionTypes';
 import FeasibilityIndicator from './FeasibilityIndicator';
 import { search, seek, saveAutoSave } from '../store/actions';
 import { logUsage } from '../logUsage';
 import { displayMessage } from '../components/Message';
-import { displaySpinner } from '../components/Spinner';
 import AlertsAccordion from "./AlertsAccordion"
 
 export default function ResultTable() {

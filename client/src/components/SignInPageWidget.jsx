@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import OktaSignIn from '@okta/okta-signin-widget';
 import '@okta/okta-signin-widget/css/okta-sign-in.min.css';

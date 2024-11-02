@@ -4,14 +4,12 @@ import {
   Navbar,
   Nav,
   Container,
-  Tabs,
-  Tab,
   NavDropdown,
   OverlayTrigger,
   Tooltip,
   Row
 } from 'react-bootstrap';
-import { changeView, changeUser, deleteAutoSave } from '../store/actions';
+import { changeView, changeUser } from '../store/actions';
 import ExecutePanel from './ExecutePanel';
 import SignIn from '../menus/Session/SignIn';
 import SignOut from '../menus/Session/SignOut';
@@ -55,7 +53,7 @@ export default function MainPage() {
 //  console.log('MainPage','Mounting...','model_type=',model_type,'model_name=',model_name,'model_view=',model_view,'model_user=',model_user);
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
-  const { oktaAuth, authState } = useOktaAuth();
+  const { authState } = useOktaAuth();
 //  console.log('MainPage','oktaAuth=',oktaAuth,'authState=',authState);
 
   useEffect(() => {

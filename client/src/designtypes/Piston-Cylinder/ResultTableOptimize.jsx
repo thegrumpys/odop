@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Table, Button } from 'react-bootstrap';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';

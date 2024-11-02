@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table, Alert } from 'react-bootstrap';
 import { MIN, MAX, FIXED, CONSTRAINED } from '../store/actionTypes';
-import { load, search, seek, saveAutoSave, changeSymbolValue, setSymbolFlag, resetSymbolFlag, changeSymbolConstraint } from '../store/actions';
+import { load, search, seek, saveAutoSave } from '../store/actions';
 import NameValueUnitsHeaderIndependentVariable from './NameValueUnitsHeaderIndependentVariable';
 import NameValueUnitsRowIndependentVariable from './NameValueUnitsRowIndependentVariable';
 import NameValueUnitsHeaderDependentVariable from './NameValueUnitsHeaderDependentVariable';
@@ -21,7 +21,6 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 import { logUsage } from '../logUsage';
 import { getAlertsByName } from './Alerts';
 import { displayMessage } from '../components/Message';
-import { displaySpinner } from '../components/Spinner';
 import FeasibilityIndicator from './FeasibilityIndicator';
 import store from '../store/store';
 

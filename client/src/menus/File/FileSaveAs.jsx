@@ -18,7 +18,7 @@ export default function FileSaveAs() {
   const [name, setName] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { oktaAuth, authState } = useOktaAuth();
+  const { authState } = useOktaAuth();
 
   useEffect(() => {
 //    console.log('FileSaveAs','useEffect','model_user=',model_user,'model_type=',model_type);

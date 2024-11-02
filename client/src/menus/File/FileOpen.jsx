@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Button, Modal, NavDropdown, Form, Alert } from 'react-bootstrap';
+import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { changeName, loadInitialState, load, restoreAutoSave, deleteAutoSave } from '../../store/actions';
 import { executeStopOnLoad } from '../../store/actions';
 import { displayMessage } from '../../components/Message';
@@ -22,7 +22,7 @@ export default function FileOpen() {
   const [name, setName] = useState(model_name);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { oktaAuth, authState } = useOktaAuth();
+  const { authState } = useOktaAuth();
 //  console.log('FileOpen','oktaAuth=',oktaAuth,'authState=',authState);
 
   useEffect(() => {

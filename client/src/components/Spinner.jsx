@@ -3,16 +3,13 @@ import { useSelector } from "react-redux";
 import { Modal } from 'react-bootstrap';
 import { disableSpinner, enableSpinner } from "../store/actions";
 import store from "../store/store";
-import { logUsage } from '../logUsage';
 
 export const displaySpinner = (display) => {
 //  console.log('In displaySpinner display=', display);
   if (display) {
     store.dispatch(enableSpinner());
-//    logUsage('event', 'Spinner', { event_label: 'enable' });
   } else {
     store.dispatch(disableSpinner());
-//    logUsage('event', 'Spinner', { event_label: 'disable' });
   }
 }
 

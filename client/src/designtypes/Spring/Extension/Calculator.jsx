@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useContext } from "react";
+import { useSelector } from "react-redux";
 import { Container, Row, InputGroup, Form } from 'react-bootstrap';
 import ReportBaseContext from './ReportBaseContext';
 import SymbolName from '../../../components/SymbolName';

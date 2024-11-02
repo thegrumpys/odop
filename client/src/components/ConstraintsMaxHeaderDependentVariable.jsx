@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 

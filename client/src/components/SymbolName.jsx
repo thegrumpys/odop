@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function SymbolName({ className, element, index }) {

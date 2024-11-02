@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function SymbolUnits({ className, element, index }) {
 //  console.log('SymbolUnits - Mounting...','element=',element,'index=',index);

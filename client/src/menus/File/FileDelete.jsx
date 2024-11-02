@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal, NavDropdown, Form, Alert } from 'react-bootstrap';
 import { displayMessage } from '../../components/Message';
@@ -12,15 +12,13 @@ export default function FileDelete() {
 //  console.log('FileDelete - Mounting...');
   const model_user = useSelector((state) => state.user);
   const model_type = useSelector((state) => state.model.type);
-  const model_name = useSelector((state) => state.name);
   const [show, setShow] = useState(false);
   const [types, setTypes] = useState(config.env.types);
   const [names, setNames] = useState([]);
   const [type, setType] = useState(model_type);
   const [name, setName] = useState('');
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { oktaAuth, authState } = useOktaAuth();
+  const { authState } = useOktaAuth();
 
   useEffect(() => {
 //    console.log('FileDelete','model_user=',model_user,'model_type=',model_type,'model_name=',model_name);

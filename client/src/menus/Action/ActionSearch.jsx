@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown, Modal, Alert, Button } from 'react-bootstrap';
 import { CONSTRAINED, FIXED } from '../../store/actionTypes';
 import { search, saveAutoSave } from '../../store/actions';
 import { logUsage } from '../../logUsage';
 import { displayMessage } from '../../components/Message';
-import { displaySpinner } from '../../components/Spinner';
 import store from '../../store/store';
 
 export default function ActionSearch() {

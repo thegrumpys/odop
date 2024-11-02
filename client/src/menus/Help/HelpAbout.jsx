@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Button, Modal, NavDropdown } from 'react-bootstrap';
 import { version as release_version } from '../../version';
 import { logUsage } from '../../logUsage';
@@ -18,7 +18,7 @@ export default function HelpAbout() {
   const model_version = useSelector((state) => state.model.version);
   const model_jsontype = useSelector((state) => state.model.jsontype);
   const model_units = useSelector((state) => state.model.units);
-  const { oktaAuth, authState } = useOktaAuth();
+  const { authState } = useOktaAuth();
 //  console.log('HelpAbout','oktaAuth=',oktaAuth,'authState=',authState);
 
   useEffect(() => {

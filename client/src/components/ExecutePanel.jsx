@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, Button, Container, Row } from 'react-bootstrap';
 import { load, changeResultTerminationCondition } from '../store/actions';
