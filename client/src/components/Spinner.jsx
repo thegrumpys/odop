@@ -9,10 +9,10 @@ export const displaySpinner = (display) => {
 //  console.log('In displaySpinner display=', display);
   if (display) {
     store.dispatch(enableSpinner());
-    logUsage('event', 'Spinner', { event_label: 'enable' });
+//    logUsage('event', 'Spinner', { event_label: 'enable' });
   } else {
     store.dispatch(disableSpinner());
-    logUsage('event', 'Spinner', { event_label: 'disable' });
+//    logUsage('event', 'Spinner', { event_label: 'disable' });
   }
 }
 
