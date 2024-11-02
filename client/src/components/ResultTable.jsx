@@ -71,14 +71,13 @@ export default function ResultTable() {
   }
 
   const doSearch = (type) => {
-    displaySpinner(true);
 //    console.log('In ResultTable.doSearch');
     var old_objective_value = model_objective_value;
     dispatch(saveAutoSave());
     dispatch(search());
-    var new_objective_value = model_objective_value;
+    var design = store.getState();
+    var new_objective_value = design.model.result.objective_value;
     logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' Button ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });
-    displaySpinner(false);
   }
 
   const onSeekRequest = (event) => {

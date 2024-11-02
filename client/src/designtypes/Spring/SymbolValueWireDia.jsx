@@ -188,7 +188,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
     dispatch(search());
     dispatch(disableSpinner());
     var design = store.getState();
-    var new_objective_value = design.model.result.model_objective_value;
+    var new_objective_value = design.model.result.objective_value;
     logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' Element ' + element.name + ' ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });
   }
 

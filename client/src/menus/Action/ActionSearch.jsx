@@ -63,7 +63,6 @@ export default function ActionSearch() {
   }
 
   const doSearch = (type) => {
-    displaySpinner(true);
 //    console.log('ActionSearch.doSearch');
     var old_objective_value = model_objective_value;
     dispatch(saveAutoSave());
@@ -72,7 +71,6 @@ export default function ActionSearch() {
     var new_objective_value = design.model.result.objective_value;
 //    console.log('old_objective_value=',old_objective_value,'new_objective_value=',new_objective_value);
     logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });
-    displaySpinner(false);
   }
 
   var display_search_button;
