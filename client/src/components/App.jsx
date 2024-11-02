@@ -24,7 +24,6 @@ export default function App() {
   const model_type = useSelector((state) => state.model.type);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
 //  console.log('App','location=',location);
 
   useEffect(() => {

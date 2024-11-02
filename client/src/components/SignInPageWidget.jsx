@@ -11,7 +11,7 @@ import { logUsage } from '../logUsage';
 export default function SignInPageWidget() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { oktaAuth, authState } = useOktaAuth();
+  const { oktaAuth } = useOktaAuth();
 //  console.log('SignInPageWidget','oktaAuth=',oktaAuth,'authState=',authState);
 
   useEffect(() => {

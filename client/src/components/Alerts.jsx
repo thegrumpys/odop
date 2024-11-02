@@ -317,7 +317,6 @@ export const getAlertsByName = (name, includeViolations = false) => {
   var alertsSlice = store.getState().alertsSlice;
 //  console.log('### alertsSlice=',alertsSlice)
   alertsSlice.alerts.filter(entry => entry.severity === ERR).forEach((entry) => {
-    var severityNumber;
     if (entry.name === name) { // Matches exactly
       maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name, entry.severity));
       alerts.push(entry);
@@ -327,7 +326,6 @@ export const getAlertsByName = (name, includeViolations = false) => {
     }
   });
   alertsSlice.alerts.filter(entry => entry.severity === WARN).forEach((entry) => {
-    var severityNumber;
     if (entry.name === name) { // Matches exactly
       maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name, entry.severity));
       alerts.push(entry);
@@ -337,7 +335,6 @@ export const getAlertsByName = (name, includeViolations = false) => {
     }
   });
   alertsSlice.alerts.filter(entry => entry.severity === NOTICE).forEach((entry) => {
-    var severityNumber;
     if (entry.name === name) { // Matches exactly
       maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name, entry.severity));
       alerts.push(entry);
@@ -347,7 +344,6 @@ export const getAlertsByName = (name, includeViolations = false) => {
     }
   });
   alertsSlice.alerts.filter(entry => entry.severity === INFO).forEach((entry) => {
-    var severityNumber;
     if (entry.name === name) { // Matches exactly
       maxSeverityNumber = Math.max(maxSeverityNumber, getSeverityNumberByNameAndObjValue(entry.name, entry.severity));
       alerts.push(entry);
