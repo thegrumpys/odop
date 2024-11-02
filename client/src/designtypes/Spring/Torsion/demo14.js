@@ -2,7 +2,6 @@ import React from 'react';
 import { changeSymbolValue, changeSymbolConstraint, fixSymbolValue, loadInitialState, setSymbolFlag, changeLabelsValue, search } from '../../../store/actions';
 import { MIN, MAX, CONSTRAINED } from '../../../store/actionTypes';
 export const execute = {
-    "name": "demo14",
     "steps": [
         {
             title: "Session Now In Progress",
