@@ -192,7 +192,7 @@ export default function MainPage() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Container fluid="md" style={{ backgroundColor: '#eeeeee', paddingTop: '60px' }}>
+      <Container style={{ backgroundColor: '#eeeeee', paddingTop: '60px' }}>
         <Row>
           <ExecutePanel />
         </Row>
