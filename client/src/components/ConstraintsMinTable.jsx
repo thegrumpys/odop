@@ -10,12 +10,6 @@ export default function ConstraintsMinTable() {
 //  console.log('ConstraintsMinTable - Mounting...');
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
 
-  useEffect(() => {
-//    console.log('ConstraintsMinTable - Mounted');
-//    return () => console.log('ConstraintsMinTable - Unmounting ...');
-    return () => {};
-  }, []);
-
   return (
     <>
       <Table id="cmnt" className="table-secondary border border-secondary">

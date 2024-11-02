@@ -12,12 +12,6 @@ export default function NameValueUnitsRowDependentVariable({ element, index, onS
   const model_show_units = useSelector((state) => state.model.system_controls.show_units);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-//    console.log('NameValueUnitsRowDependentVariable - Mounted');
-//    return () => console.log('NameValueUnitsRowDependentVariable - Unmounting ...');
-    return () => { };
-  }, []);
-
   const onSetLocal = (event) => {
 //    console.log('In NameValueUnitsRowDependentVariable.onSet');
     dispatch(fixSymbolValue(element.name));

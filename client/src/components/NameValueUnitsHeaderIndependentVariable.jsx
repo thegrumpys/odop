@@ -6,12 +6,6 @@ export default function NameValueUnitsHeaderIndependentVariable() {
 //  console.log('NameValueUnitsHeaderIndependentVariable - Mounting...');
   const model_show_units = useSelector((state) => state.model.system_controls.show_units);
 
-  useEffect(() => {
-//    console.log('NameValueUnitsHeaderIndependentVariable - Mounted');
-//    return () => console.log('NameValueUnitsHeaderIndependentVariable - Unmounting ...');
-    return () => {};
-  }, []);
-
   return (
     <thead id="nvuhiv">
       <tr>

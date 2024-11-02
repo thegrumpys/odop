@@ -23,12 +23,6 @@ export default function ResultTable() {
   const model_search_completed = useSelector((state) => state.model.result.search_completed);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-//    console.log('ResultTable - Mounted');
-//    return () => console.log('ResultTable - Unmounting ...');
-    return () => { };
-  }, []);
-
   const onSearchRequest = (event) => {
 //    console.log('In ResultTable.onSearchRequest','event=',event);
     if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {

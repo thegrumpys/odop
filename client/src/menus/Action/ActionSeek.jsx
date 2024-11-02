@@ -17,12 +17,6 @@ export default function ActionSeek() {
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-//    console.log('ActionSeek - Mounted');
-//    return () => console.log('ActionSeek - Unmounting ...');
-    return () => { };
-  }, []);
-
   const  onSeekRequest = () => {
 //       console.log('In ActionSeek.onSeekRequest');
         if (model_symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {

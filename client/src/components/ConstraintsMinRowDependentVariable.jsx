@@ -16,12 +16,6 @@ export default function ConstraintsMinRowDependentVariable({ element, index, onC
   const model_show_violations = useSelector((state) => state.model.system_controls.show_violations);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-//    console.log('ConstraintsMinRowDependentVariable - Mounted')
-//    return () => console.log('ConstraintsMinRowDependentVariable - Unmounting ...');
-    return () => { };
-  }, []);
-
   const onSetFlagMinConstrained = (event) => {
 //    console.log('In ConstraintsMinRowDependentVariable.onSetFlagMinConstrained','event.target.value=', event.target.value);
     dispatch(setSymbolFlag(element.name, MIN, CONSTRAINED));

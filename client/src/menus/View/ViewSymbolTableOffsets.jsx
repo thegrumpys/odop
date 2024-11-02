@@ -10,12 +10,6 @@ export default function ViewSymbolTableOffsets() {
   const model_labels = useSelector((state) => state.model.labels);
   const [show, setShow] = useState(false);
 
-  useEffect(() => {
-//    console.log('ViewSymbolTableOffsets - Mounted');
-    //    return () => console.log('ViewSymbolTableOffsets - Unmounting ...');
-    return () => { };
-  }, []);
-
   const toggle = () => {
 //        console.log('In ViewSymbolTableOffsets.toggle');
     setShow(!show);

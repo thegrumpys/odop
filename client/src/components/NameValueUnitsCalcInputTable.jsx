@@ -8,12 +8,6 @@ export default function NameValueUnitsCalcInputTable() {
 //  console.log('NameValueUnitsCalcInputTable - Mounting...');
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
 
-  useEffect(() => {
-//    console.log('NameValueUnitsCalcInputTable - Mounted');
-//    return () => console.log('NameValueUnitsCalcInputTable - Unmounting ...');
-    return () => {};
-  }, []);
-
   return (
     <div id="nvucit">
       <Table className="table-secondary border border-secondary" size="sm">

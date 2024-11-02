@@ -49,26 +49,6 @@ export default function SymbolValueWireDia({ className, element, index }) {
   const [valueInput, setValueInput] = useState(true);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-//    console.log('SymbolValueWireDia - Mounted');
-//    document.addEventListener("click", handleClick);
-//    document.addEventListener("contextmenu", handleContextMenu);
-    return () => {
-//      console.log('SymbolValueWireDia - Unmounting ...');
-//      document.removeEventListener("click", handleClick);
-//      document.removeEventListener("contextmenu", handleContextMenu);
-    };
-  }, []);
-
-//  useEffect(() => {
-////    console.log('SymbolValueWireDia - Mounted');
-//    if (element.format === 'table') {
-//      var tableContents = require('./' + element.table + '.json'); // Dynamically load table
-//      setTable(tableContents);
-//    }
-//    return () => { };
-//  }, [element, model_type]);
-
   if (element.format === 'table') {
 //    console.log('SymbolValueWireDia file= ../designtypes/'+element.table+'.json');
     var tableContents = require('./' + element.table + '.json'); // Dynamically load table

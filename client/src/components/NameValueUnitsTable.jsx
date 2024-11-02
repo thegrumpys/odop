@@ -10,12 +10,6 @@ export default function NameValueUnitsTable() {
 //  console.log('NameValueUnitsTable - Mounting...');
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
 
-  useEffect(() => {
-//    console.log('NameValueUnitsTable - Mounted');
-//    return () => console.log('NameValueUnitsTable - Unmounting ...');
-    return () => {};
-  }, []);
-
   return (
     <>
       <Table id="nvut" className="table-secondary border border-secondary">

@@ -7,12 +7,6 @@ export default function FeasibilityIndicator({ width = 242, height = 24 }) {
   const model_objmin = useSelector((state) => state.model.system_controls.objmin);
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
 
-  useEffect(() => {
-//    console.log('FeasibilityIndicator - Mounted');
-//    return () => console.log('FeasibilityIndicator - Unmounting ...');
-    return () => { };
-  }, []);
-
   // Coordinate system is 4th quadrant ---x-->
   //                                   |
   //                                   y

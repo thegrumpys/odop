@@ -12,12 +12,6 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   const model_show_units = useSelector((state) => state.model.system_controls.show_units);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-//    console.log('NameValueUnitsRowIndependentVariable - Mounted');
-//    return () => console.log('NameValueUnitsRowIndependentVariable - Unmounting ...');
-    return () => { };
-  }, []);
-
   const onChangeValidLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onChangeValid event.target.value=', event.target.value);
     var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message

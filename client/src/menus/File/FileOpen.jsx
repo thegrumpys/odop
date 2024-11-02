@@ -25,12 +25,6 @@ export default function FileOpen() {
   const { oktaAuth, authState } = useOktaAuth();
 //  console.log('FileOpen','oktaAuth=',oktaAuth,'authState=',authState);
 
-//  useEffect(() => {
-////    console.log('FileOpen - Mounted');
-//    getDesignNames(model_user, model_type);
-//    return () => { };
-//  }, []);
-
   useEffect(() => {
 //    console.log('FileOpen','model_user=',model_user,'model_type=',model_type);
     setType(model_type);

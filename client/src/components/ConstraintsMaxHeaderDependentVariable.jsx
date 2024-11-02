@@ -1,16 +1,10 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function ConstraintsMaxHeaderDependentVariable() {
 //  console.log('ConstraintsMaxHeaderDependentVariable - Mounting...');
   const model_show_violations = useSelector((state) => state.model.system_controls.show_violations);
-
-  useEffect(() => {
-//    console.log('ConstraintsMaxHeaderDependentVariable - Mounted');
-//    return () => console.log('ConstraintsMaxHeaderDependentVariable - Unmounting ...');
-    return () => { };
-  }, []);
 
   return (
     <thead>

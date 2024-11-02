@@ -14,12 +14,6 @@ export default function FilePreferences() {
   const [isInvalidValue, setIsInvalidValue] = useState(false);
   const dispatch = useDispatch();
 
-//  useEffect(() => {
-////    console.log('FilePreferences - Mounted');
-////    return () => console.log('FilePreferences - Unmounting...');
-//    return () => { };
-//  }, []);
-
   const toggle = () => {
     setShow(!show); // Open the show
     setSystemControls(model_system_controls);

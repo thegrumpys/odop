@@ -16,12 +16,6 @@ export default function ConstraintsMaxRowIndependentVariable({ element, index, o
   const model_show_violations = useSelector((state) => state.model.system_controls.show_violations);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-//    console.log('ConstraintsMaxRowIndependentVariable - Mounted');
-//    return () => console.log('ConstraintsMaxRowIndependentVariable - Unmounting ...');
-    return () => { };
-  }, []);
-
   const onSetFlagMaxConstrained = (event) => {
 //    console.log('In ConstraintsMaxRowIndependentVariable.onSetFlagMaxConstrained', 'event.target.value=', event.target.value);
     dispatch(setSymbolFlag(element.name, MAX, CONSTRAINED));

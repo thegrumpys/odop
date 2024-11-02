@@ -6,12 +6,6 @@ import { logUsage } from '../../logUsage';
 export default function HelpMotd() {
 //  console.log('HelpMotd - Mounting...');
 
-  useEffect(() => {
-//    console.log('HelpMotd - Mounted');
-//    return () => console.log('HelpMotd - Unmounting ...');
-    return () => { };
-  }, []);
-
   const onHelp = () => {
     logUsage('event', 'HelpMotd', { event_label: 'https://thegrumpys.github.io/odop/About/messageOfTheDay.html' });
     window.open('https://thegrumpys.github.io/odop/About/messageOfTheDay.html', '_blank');

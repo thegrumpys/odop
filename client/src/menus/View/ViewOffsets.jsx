@@ -9,12 +9,6 @@ export default function ViewOffsets() {
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const [show, setShow] = useState(false);
 
-  useEffect(() => {
-//    console.log('ViewOffsets - Mounted');
-//    return () => console.log('ViewOffsets - Unmounting ...');
-    return () => { };
-  }, []);
-
   const toggle = () => {
 //    console.log('ViewOffsets.toggle');
     setShow(!show);

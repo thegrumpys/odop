@@ -16,12 +16,6 @@ export default function ActionSearch() {
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-//    console.log('ActionSearch - Mounted');
-//    return () => console.log('ActionSearch - Unmounting ...');
-    return () => { };
-  }, []);
-
   const onSearchRequest = (event) => {
 //    console.log('ActionSearch.onSearchRequest','event=',event);
     if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {

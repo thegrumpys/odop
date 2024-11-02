@@ -6,12 +6,6 @@ import { logUsage } from '../../logUsage';
 export default function HelpIndex() {
 //  console.log('HelpIndex - Mounting...');
 
-  useEffect(() => {
-//    console.log('HelpIndex - Mounted');
-//    return () => console.log('HelpIndex - Unmounting ...');
-    return () => { };
-  }, []);
-
   const onHelp = () => {
     logUsage('event', 'HelpIndex', { event_label: '/docs/Help' });
     window.open('/docs/Help', '_blank');

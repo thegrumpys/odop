@@ -10,12 +10,6 @@ export default function ConstraintsMaxTable() {
 //  console.log('ConstraintsMaxTable - Mounting...');
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
 
-  useEffect(() => {
-//    console.log('ConstraintsMaxTable - Mounted');
-//    return () => console.log('ConstraintsMaxTable - Unmounting ...');
-    return () => {};
-  }, []);
-
   return (
     <>
       <Table id="cmxt" className="table-secondary border border-secondary">

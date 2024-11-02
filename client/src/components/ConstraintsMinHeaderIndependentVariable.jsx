@@ -6,12 +6,6 @@ export default function ConstraintsMinHeaderIndependentVariable() {
 //  console.log('ConstraintsMinHeaderIndependentVariable - Mounting...');
   const model_show_violations = useSelector((state) => state.model.system_controls.show_violations);
 
-  useEffect(() => {
-//    console.log('ConstraintsMinHeaderIndependentVariable - Mounted');
-//    return () => console.log('ConstraintsMinHeaderIndependentVariable - Unmounting ...');
-    return () => { };
-  }, []);
-
   return (
     <thead id="cmnhiv">
       <tr>

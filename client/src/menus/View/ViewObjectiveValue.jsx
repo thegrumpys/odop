@@ -11,12 +11,6 @@ export default function ViewObjectiveValue() {
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const [show, setShow] = useState(false);
 
-  useEffect(() => {
-//    console.log('ViewObjectiveValue - Mounted');
-//    return () => console.log('ViewObjectiveValue - Unmounting ...');
-    return () => { };
-  }, []);
-
   const toggle = () => {
 //        console.log('ViewObjectiveValue.toggle');
     setShow(!show);

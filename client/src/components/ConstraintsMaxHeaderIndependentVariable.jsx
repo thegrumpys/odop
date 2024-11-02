@@ -6,12 +6,6 @@ export default function ConstraintsMaxHeaderIndependentVariable() {
 //  console.log('ConstraintsMaxHeaderIndependentVariable - Mounting...');
   const model_show_violations = useSelector((state) => state.model.system_controls.show_violations);
 
-  useEffect(() => {
-//    console.log('ConstraintsMaxHeaderIndependentVariable - Mounted');
-//    return () => console.log('ConstraintsMaxHeaderIndependentVariable - Unmounting ...');
-    return () => { };
-  }, []);
-
   return (
     <thead>
       <tr>

@@ -7,12 +7,6 @@ export default function NameValueUnitsHeaderCalcInput() {
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const model_show_units = useSelector((state) => state.model.system_controls.show_units);
 
-  useEffect(() => {
-//    console.log('NameValueUnitsHeaderCalcInput - Mounted');
-//    return () => console.log('NameValueUnitsHeaderCalcInput - Unmounting ...');
-    return () => {};
-  }, []);
-
   return (
     <>
       { (model_symbol_table.reduce((accum,element)=>{if (element.type === "calcinput" && !element.hidden) return accum+1; else return accum;}, 0) > 0) &&

@@ -42,29 +42,6 @@ export default function SymbolValue({ className, element, index }) {
   const [reset, setReset] = useState('');
   const dispatch = useDispatch();
 
-  useEffect(() => {
-//    console.log('SymbolValue','Mounted');
-//    document.addEventListener("click", handleClick);
-//    document.addEventListener("contextmenu", handleContextMenu);
-    return () => {
-//      console.log('SymbolValue','Unmounting...');
-//      document.removeEventListener("click", handleClick);
-//      document.removeEventListener("contextmenu", handleContextMenu);
-    };
-  }, []);
-
-//  useEffect(() => {
-////    console.log('SymbolValue','Mounted','useEffect','element=',element);
-//    if (element.format === 'table') {
-//      console.log('SymbolValue','Mounted','useEffect','element=',element);
-//      console.log('SymbolValue','Mounted','useEffect','file= ../designtypes/'+element.table+'.json');
-//      var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
-//      console.log('SymbolValue','Mounted','useEffect','tableContents=',tableContents);
-//      setTable(tableContents);
-//    }
-//    return () => { };
-//  }, [element]);
-
   if (element.format === 'table') {
 //    console.log('SymbolValue','Mounting','file= ../designtypes/'+element.table+'.json');
     var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table

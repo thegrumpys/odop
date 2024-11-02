@@ -9,12 +9,6 @@ export default function ViewSymbolTable() {
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const [show, setShow] = useState(false);
 
-  useEffect(() => {
-//    console.log('ViewSymbolTable - Mounted');
-//    return () => console.log('ViewSymbolTable - Unmounting ...');
-    return () => { };
-  }, []);
-
   const toggle = () => {
 //        console.log('ViewSymbolTable.toggle');
     setShow(!show);

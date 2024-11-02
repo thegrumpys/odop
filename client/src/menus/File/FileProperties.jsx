@@ -12,12 +12,6 @@ export default function FileProperties() {
   const [labels, setLabels] = useState(model_labels);
   const dispatch = useDispatch();
 
-//  useEffect(() => {
-////    console.log('FileProperties - Mounted');
-////    return () => console.log('FileProperties - Unmounting...');
-//    return () => { };
-//  }, []);
-
   const toggle = () => {
 //    console.log('FileProperties.toggle');
     setShow(!show); // Open the show
