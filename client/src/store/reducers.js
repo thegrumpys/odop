@@ -22,6 +22,7 @@ import {
   SET_PREFIX,
   SET_STATES,
   SET_STEP,
+  SET_STEPS,
   SET_STOP_ON_FILE_LOAD,
   SET_TEST_GENERATE,
   OUTPUT_START,
@@ -179,6 +180,7 @@ export default function reducers(state = {}, action) {
           prefix: action.payload.prefix,
           states: action.payload.states,
           step: action.payload.step,
+          steps: action.payload.steps,
           stopOnFileLoad: true,
           testGenerate: false,
         }
@@ -197,6 +199,7 @@ export default function reducers(state = {}, action) {
             prefix: '',
             states: [],
             step: 0,
+            steps: [],
             stopOnFileLoad: true,
             testGenerate: false,
           }
@@ -216,6 +219,7 @@ export default function reducers(state = {}, action) {
           prefix: '',
           states: [],
           step: 0,
+          steps: [],
           stopOnFileLoad: true,
           testGenerate: false,
         }
@@ -268,6 +272,16 @@ export default function reducers(state = {}, action) {
         executePanelSlice: {
           ...state.executePanelSlice,
           step: action.payload.step
+        }
+      });
+      return result;
+
+    case SET_STEPS:
+      var result = Object.assign({}, state, {
+        ...state,
+        executePanelSlice: {
+          ...state.executePanelSlice,
+          steps: action.payload.steps
         }
       });
       return result;
