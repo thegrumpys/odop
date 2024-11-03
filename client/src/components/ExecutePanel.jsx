@@ -8,7 +8,7 @@ import { executeStart, executeStop, setExecuteName, setShow, setPrefix, setState
 import store from '../store/store';
 
 export const startExecute = (prefix, executeName, run=false) => {
-  console.log('In startExecute','prefix=',prefix,'executeName=',executeName,'run=',run);
+//  console.log('In startExecute','prefix=',prefix,'executeName=',executeName,'run=',run);
   if (executeName === undefined) return;
 
   var model = store.getState().model;
@@ -23,7 +23,7 @@ export const startExecute = (prefix, executeName, run=false) => {
   if (localTestGenerate) store.dispatch(outputStart(executeName));
 //  var startTime = Date.now();
   for (var next = 0; next < steps.length; next++) {
-    console.log('In startExecute','execute_name=',executeName,'step=',next)
+//    console.log('In startExecute','execute_name=',executeName,'step=',next)
     var localStates = Object.assign([...states], { [next]: Object.assign({}, states[next], { state: JSON.stringify(model) }) });
     // Put current store state into steps[next].state - remember this for "back" time travel
     store.dispatch(setStates(localStates));
@@ -56,7 +56,7 @@ export const startExecute = (prefix, executeName, run=false) => {
 }
 
 export const stopExecute = () => {
-  console.log('In stopExecute');
+//  console.log('In stopExecute');
   var executeName = store.getState().executePanelSlice.executeName;
   logUsage('event', 'ExecutePanel', { event_label: 'stop ' + executeName });
   store.dispatch(executeStop());
@@ -73,17 +73,17 @@ export default function ExecutePanel() {
   const steps = useSelector((state) => state.executePanelSlice.steps);
   const testGenerate = useSelector((state) => state.executePanelSlice.testGenerate);
   const model = useSelector((state) => state.model);
-  console.log('ExecutePanel - Mounting...','show=',show,'executeName=',executeName,'prefix=',prefix,'states=',states,'step=',step,'steps=',steps);
+//  console.log('ExecutePanel - Mounting...','show=',show,'executeName=',executeName,'prefix=',prefix,'states=',states,'step=',step,'steps=',steps);
   const dispatch = useDispatch();
 
   const onCancel = () => {
-    console.log('ExecutePanel.onCancel');
+//    console.log('ExecutePanel.onCancel');
     stopExecute();
     dispatch(changeResultTerminationCondition('')); // Reset any leftover messages
   }
 
   const onNext = () => {
-    console.log('ExecutePanel.onNext');
+//    console.log('ExecutePanel.onNext');
     var next = step + 1;
     var localStates = Object.assign([...states], { [next]: Object.assign({}, states[next], { state: JSON.stringify(model) }) });
     // Put current store state into steps[next].state - remember this for "back" time travel
@@ -108,7 +108,7 @@ export default function ExecutePanel() {
   }
 
   const onBack = () => {
-    console.log('ExecutePanel.onBack');
+//    console.log('ExecutePanel.onBack');
     var prev = step - 1;
     if (prev < 0) prev = 0; // Stop going backwards if it is on the first step
     // Put steps[prev].state into current store state - that is, time travel back
