@@ -18,6 +18,7 @@ export const SET_EXECUTE_NAME = 'executePanelSlice/setExecuteName';
 export const SET_PREFIX = 'executePanelSlice/setPrefix';
 export const SET_STATES = 'executePanelSlice/setStates';
 export const SET_STEP = 'executePanelSlice/setStep';
+export const SET_STEPS = 'executePanelSlice/setSteps';
 export const SET_STOP_ON_FILE_LOAD = 'executePanelSlice/setStopOnFileLoad';
 export const SET_TEST_GENERATE = 'executePanelSlice/setTestGenerate';
 export const OUTPUT_START = 'executePanelSlice/outputStart';

@@ -8,33 +8,31 @@ import { executeStart, executeStop, setExecuteName, setShow, setPrefix, setState
 import store from '../store/store';
 
 export const startExecute = (prefix, executeName, run=false) => {
-//  console.log('startExecute','prefix=',prefix,'executeName=',executeName);
+//  console.log('In startExecute','prefix=',prefix,'executeName=',executeName,'run=',run);
   if (executeName === undefined) return;
 
   var model = store.getState().model;
   var model_type = model.type;
   var { execute } = require('../designtypes/' + model_type + '/' + executeName + '.js'); // Dynamically load execute
-
+  var steps = execute.steps;
   var states = store.getState().executePanelSlice.states;
-
   var localStates = Object.assign([...states], { 0: Object.assign({}, states[0], { state: JSON.stringify(model) }) });
-//  console.log('startExecute','localStates=',localStates);
   var localTestGenerate = config.node.env !== "production" ? true : false;
-  store.dispatch(executeStart(true, executeName, prefix, localStates, 0)); // Put current store state into steps[0].state - remember this for "back" time travel
+  store.dispatch(executeStart(true, executeName, prefix, localStates, 0, steps)); // Put current store state into steps[0].state - remember this for "back" time travel
   store.dispatch(setTestGenerate(localTestGenerate));
   if (localTestGenerate) store.dispatch(outputStart(executeName));
 //  var startTime = Date.now();
-  for (var next = 0; next < execute.steps.length; next++) {
-//    console.log('execute_name=',executeName,'step=',next)
+  for (var next = 0; next < steps.length; next++) {
+//    console.log('In startExecute','execute_name=',executeName,'step=',next)
     var localStates = Object.assign([...states], { [next]: Object.assign({}, states[next], { state: JSON.stringify(model) }) });
     // Put current store state into steps[next].state - remember this for "back" time travel
     store.dispatch(setStates(localStates));
     store.dispatch(setStep(next));
-    if (localTestGenerate) store.dispatch(outputLine('\n    // title: "' + execute.steps[next].title + '"'));
-    if (execute.steps[next].actions !== undefined) {
-      execute.steps[next].actions.forEach((action) => { /* console.log('\taction.type=',action.type); */ store.dispatch(action); })
+    if (localTestGenerate) store.dispatch(outputLine('\n    // title: "' + steps[next].title + '"'));
+    if (steps[next].actions !== undefined) {
+      steps[next].actions.forEach((action) => { /* console.log('\taction.type=',action.type); */ store.dispatch(action); })
       if (localTestGenerate) {
-        execute.steps[next].actions.forEach((action) => {
+        steps[next].actions.forEach((action) => {
           var dump = dumpers(action);
           if (dump !== undefined) {
             store.dispatch(outputLine('    store.dispatch(' + dump + ');'));
@@ -58,7 +56,7 @@ export const startExecute = (prefix, executeName, run=false) => {
 }
 
 export const stopExecute = () => {
-//  console.log('stopExecute');
+//  console.log('In stopExecute');
   var executeName = store.getState().executePanelSlice.executeName;
   logUsage('event', 'ExecutePanel', { event_label: 'stop ' + executeName });
   store.dispatch(executeStop());
@@ -72,10 +70,10 @@ export default function ExecutePanel() {
   const prefix = useSelector((state) => state.executePanelSlice.prefix);
   const states = useSelector((state) => state.executePanelSlice.states);
   const step = useSelector((state) => state.executePanelSlice.step);
+  const steps = useSelector((state) => state.executePanelSlice.steps);
   const testGenerate = useSelector((state) => state.executePanelSlice.testGenerate);
   const model = useSelector((state) => state.model);
-  const model_type = useSelector((state) => state.model.type);
-//  console.log('ExecutePanel - Mounting...','show=',show,'executeName=',executeName,'prefix=',prefix,'states=',states,'step=',step);
+//  console.log('ExecutePanel - Mounting...','show=',show,'executeName=',executeName,'prefix=',prefix,'states=',states,'step=',step,'steps=',steps);
   const dispatch = useDispatch();
 
   const onCancel = () => {
@@ -86,17 +84,16 @@ export default function ExecutePanel() {
 
   const onNext = () => {
 //    console.log('ExecutePanel.onNext');
-    var { execute } = require('../designtypes/' + model_type + '/' + executeName + '.js'); // Dynamically load execute
     var next = step + 1;
     var localStates = Object.assign([...states], { [next]: Object.assign({}, states[next], { state: JSON.stringify(model) }) });
     // Put current store state into steps[next].state - remember this for "back" time travel
     dispatch(setStates(localStates));
     dispatch(setStep(next));
-    if (testGenerate) store.dispatch(outputLine('\n    // title: "' + execute.steps[next].title + '"'));
-    if (execute.steps[next].actions !== undefined) {
-      execute.steps[next].actions.forEach((action) => { dispatch(action); });
+    if (testGenerate) store.dispatch(outputLine('\n    // title: "' + steps[next].title + '"'));
+    if (steps[next].actions !== undefined) {
+      steps[next].actions.forEach((action) => { dispatch(action); });
       if (testGenerate) {
-        execute.steps[next].actions.forEach((action) => {
+        steps[next].actions.forEach((action) => {
           var dump = dumpers(action);
           if (dump !== undefined) {
             store.dispatch(outputLine('    store.dispatch(' + dump + ');'));
@@ -112,7 +109,6 @@ export default function ExecutePanel() {
 
   const onBack = () => {
 //    console.log('ExecutePanel.onBack');
-    var { execute } = require('../designtypes/' + model_type + '/' + executeName + '.js'); // Dynamically load execute
     var prev = step - 1;
     if (prev < 0) prev = 0; // Stop going backwards if it is on the first step
     // Put steps[prev].state into current store state - that is, time travel back
@@ -120,11 +116,11 @@ export default function ExecutePanel() {
 //    console.log('ExecutePanel.onBack JSON.parse(steps[prev].state)=',JSON.parse(steps[prev].state));
     dispatch(load(JSON.parse(localStates[prev].state)));
     dispatch(setStep(prev));
-    if (testGenerate) store.dispatch(outputLine('\n    // title: "' + execute.steps[next].title + '"'));
-    if (execute.steps[prev].actions !== undefined) {
-      execute.steps[prev].actions.forEach((action) => { dispatch(action); });
+    if (testGenerate) store.dispatch(outputLine('\n    // title: "' + steps[next].title + '"'));
+    if (steps[prev].actions !== undefined) {
+      steps[prev].actions.forEach((action) => { dispatch(action); });
       if (testGenerate) {
-        execute.steps[prev].actions.forEach((action) => {
+        steps[prev].actions.forEach((action) => {
           var dump = dumpers(action);
           if (dump !== undefined) {
             store.dispatch(outputLine('    store.dispatch(' + dump + ');'));
@@ -138,32 +134,26 @@ export default function ExecutePanel() {
     }
   }
 
-  if (executeName === undefined) {
-    return null;
-  } else {
-    var { execute } = require('../designtypes/' + model_type + '/' + executeName + '.js'); // Dynamically load execute
-//    console.log('ExecutePanel','execute=',execute);
-    return show && (
-      <Alert variant="success" style={{ marginTop: '10px' }}>
-        <Container>
-          <Row>
-            <div className="col-9 text-start align-middle ps-0">
-              <b>{prefix}{execute.steps[step].title !== undefined && execute.steps[step].title.length > 0 ? ' - ' + execute.steps[step].title : ''}</b>
-            </div>
-            <div className="col-3 text-start align-middle">
-              <Button className="float-end ms-1" variant="primary" onClick={onNext} disabled={step >= execute.steps.length-1}>Next</Button>
-              <Button className="float-end ms-1" variant="secondary" onClick={onBack} disabled={step <= 0}>Back</Button>
-              <Button className="float-end ms-1" variant="secondary" onClick={onCancel}>Close</Button>
-            </div>
-            <hr />
-          </Row>
-          <Row>
-            <div style={{ marginTop: '10px' }}>
-              {execute.steps[step].text}
-            </div>
-          </Row>
-        </Container>
-      </Alert>
-    );
-  }
+  return show && (
+    <Alert variant="success" style={{ marginTop: '10px' }}>
+      <Container>
+        <Row>
+          <div className="col-9 text-start align-middle ps-0">
+            <b>{prefix}{steps[step].title !== undefined && steps[step].title.length > 0 ? ' - ' + steps[step].title : ''}</b>
+          </div>
+          <div className="col-3 text-start align-middle">
+            <Button className="float-end ms-1" variant="primary" onClick={onNext} disabled={step >= steps.length-1}>Next</Button>
+            <Button className="float-end ms-1" variant="secondary" onClick={onBack} disabled={step <= 0}>Back</Button>
+            <Button className="float-end ms-1" variant="secondary" onClick={onCancel}>Close</Button>
+          </div>
+          <hr />
+        </Row>
+        <Row>
+          <div style={{ marginTop: '10px' }}>
+            {steps[step].text}
+          </div>
+        </Row>
+      </Container>
+    </Alert>
+  );
 }

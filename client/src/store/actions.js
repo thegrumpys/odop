@@ -22,6 +22,7 @@ import {
   SET_PREFIX,
   SET_STATES,
   SET_STEP,
+  SET_STEPS,
   SET_STOP_ON_FILE_LOAD,
   SET_TEST_GENERATE,
   OUTPUT_START,
@@ -141,7 +142,7 @@ export function setLevel(level) {
 // ExecutePanel Actions
 //=============================================================================
 
-export function executeStart(show, executeName, prefix, states, step) {
+export function executeStart(show, executeName, prefix, states, step, steps) {
   return {
     type: EXECUTE_START,
     payload: {
@@ -150,6 +151,7 @@ export function executeStart(show, executeName, prefix, states, step) {
       prefix: prefix,
       states: states,
       step: step,
+      steps: steps,
     }
   }
 }
@@ -207,6 +209,15 @@ export function setStep(step) {
     type: SET_STEP,
     payload: {
       step: step
+    }
+  }
+}
+
+export function setSteps(steps) {
+  return {
+    type: SET_STEPS,
+    payload: {
+      steps: steps
     }
   }
 }

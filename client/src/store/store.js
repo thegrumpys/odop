@@ -23,6 +23,7 @@ const default_state = {
     prefix: '',
     states: [],
     step: 0,
+    steps: [],
     stopOnFileLoad: true, // flag for guidedDesign execute macro
     testGenerate: config.node.env !== "production" ? true : false,
     lines: '',
