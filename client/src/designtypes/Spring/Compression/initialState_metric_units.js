@@ -109,7 +109,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "Average of inside and outside diameters",
+            "tooltip": "<Table><tr><td>Average of inside and outside diameters</td></tr><tr><td>Also: OD_Free-Wire_Dia</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Compression/tooltips/Mean_Dia.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
