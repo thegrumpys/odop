@@ -7,6 +7,7 @@ import { search, seek, saveAutoSave } from '../store/actions';
 import { logUsage } from '../logUsage';
 import { displayMessage } from '../components/Message';
 import AlertsAccordion from "./AlertsAccordion"
+import store from "../store/store";
 
 export default function ResultTable() {
 //  console.log('ResultTable - Mounting...');
