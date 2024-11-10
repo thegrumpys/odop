@@ -884,7 +884,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Extended End Inside Diameter. Used in calculation of stress at end.",
+            "tooltip": "<Table><tr><td>Extended End Inside Diameter. Used in calculation of stress at end.</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/Extended_End_ID.png\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },
