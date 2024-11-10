@@ -61,7 +61,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.01,
-            "tooltip": "Minimum force required to separate coils",
+            "tooltip": "<Table><tr><td>Minimum force required to separate coils</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/Initial_Tension.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false,
             "propagate": [{ name: "Force_1", minmax: MIN }]
