@@ -61,7 +61,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.01,
-            "tooltip": "Minimum force required to separate coils",
+            "tooltip": "<Table><tr><td>Minimum force required to separate coils</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/Initial_Tension.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false,
             "propagate": [{ name: "Force_1", minmax: MIN }]
@@ -132,7 +132,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Average of inside and outside coil diameters",
+            "tooltip": "<Table><tr><td>Average of inside and outside diameters</td></tr><tr><td>Also: OD_Free-Wire_Dia</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/Mean_Dia.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -260,7 +260,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Spring length at load point 1",
+            "tooltip": "<Table><tr><td>Spring length at load point 1</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/L_1.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -276,7 +276,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.2,
-            "tooltip": "Spring length at load point 2",
+            "tooltip": "<Table><tr><td>Spring length at load point 2</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Extension/tooltips/L_2.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
