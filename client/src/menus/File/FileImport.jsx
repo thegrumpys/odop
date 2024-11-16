@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
+import { Button, Modal, NavDropdown, Form, Table } from 'react-bootstrap';
 import { load, changeName, deleteAutoSave } from '../../store/actions';
 import { executeStopOnLoad } from '../../store/actions';
 import { displayMessage } from '../../components/Message';
@@ -79,9 +79,20 @@ export default function FileImport() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form.Group>
-            <Form.Control type="file" accept=".json" onChange={onFileChange}/>
-          </Form.Group>
+          <Table>
+            <tr>
+              <td>
+                <Form.Group>
+                  <Form.Control type="file" accept=".json" onChange={onFileChange}/>
+                </Form.Group>
+              </td>
+            </tr>
+            <tr>
+              <td class='pt-2 text-center'>
+                {selectedFile === null ?'' : "Click or select Import button to import: " + selectedFile.name}
+              </td>
+            </tr>
+          </Table>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>{' '}
