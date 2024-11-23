@@ -21,4 +21,3 @@ REM Development
 ) > load_all.txt
 mysql --user=%user% --password=%password% --host=%host% < load_all.txt
 DEL load_all.txt
-  
