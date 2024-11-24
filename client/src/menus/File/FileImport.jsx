@@ -80,18 +80,20 @@ export default function FileImport() {
         </Modal.Header>
         <Modal.Body>
           <Table>
-            <tr>
-              <td>
-                <Form.Group>
-                  <Form.Control type="file" accept=".json" onChange={onFileChange}/>
-                </Form.Group>
-              </td>
-            </tr>
-            <tr>
-              <td class='pt-2 text-center'>
-                {selectedFile === null ?'' : "Click or select Import button to import: " + selectedFile.name}
-              </td>
-            </tr>
+            <tbody>
+              <tr>
+                <td>
+                  <Form.Group>
+                    <Form.Control type="file" accept=".json" onChange={onFileChange}/>
+                  </Form.Group>
+                </td>
+              </tr>
+             <tr>
+                <td class='pt-2 text-center'>
+                  {selectedFile === null ?'' : "Click or select Import button to import: " + selectedFile.name}
+                </td>
+              </tr>
+            </tbody>
           </Table>
         </Modal.Body>
         <Modal.Footer>
