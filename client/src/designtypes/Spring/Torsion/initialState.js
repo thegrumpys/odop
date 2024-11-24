@@ -1024,7 +1024,7 @@ export const initialState = {
         }
     ],
     "type": "Spring/Torsion",
-    "version": "8",
+    "version": "9",
     "result": {
         "objective_value": 0,
         "termination_condition": ""

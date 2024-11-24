@@ -336,7 +336,14 @@ export function migrate(design) {
         if (design.result.objective_value === null) {
             design.result.objective_value = 0.0;
         }
-        // To be defined - presently do nothing
+        migrated_design.version = '9'; // last thing... set the migrated model version
+
+    case '9':
+        // Current model version
+// console.log('Convert from 9 to 10');
+        if (design.symbol_table[38] >= 5) { // Is Life_Category shot-peened then make it not shot-peened
+          design.symbol_table[38] -= 4;
+        }
         // migrated_design.version = '9'; // last thing... set the migrated model version
 
         break; // Do not copy this break
