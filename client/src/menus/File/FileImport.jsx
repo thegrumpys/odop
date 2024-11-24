@@ -89,7 +89,7 @@ export default function FileImport() {
                 </td>
               </tr>
              <tr>
-                <td class='pt-2 text-center'>
+                <td className='pt-2 text-center'>
                   {selectedFile === null ?'' : "Click or select Import button to import: " + selectedFile.name}
                 </td>
               </tr>
