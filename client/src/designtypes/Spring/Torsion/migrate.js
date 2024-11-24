@@ -320,8 +320,8 @@ export function migrate(design) {
     case '9':
         // Current model version
 // console.log('Convert from 9 to 10');
-        if (design.symbol_table[37] >= 5) { // Is Life_Category shot-peened then make it not shot-peened
-          design.symbol_table[37] -= 4;
+        if (design.symbol_table[37].value >= 5) { // Is Life_Category shot-peened then make it not shot-peened
+          design.symbol_table[37].value -= 4;
         }
         // migrated_design.version = '9'; // last thing... set the migrated model version
 
