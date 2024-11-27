@@ -1,0 +1,46 @@
+REM Create ODOP database access variables to be used in other batch files
+REM Include this file name in .gitignore
+
+IF "%1"=="development" GOTO DEVELOPMENT
+IF "%1"=="test" GOTO TEST
+IF "%1"=="staging" GOTO STAGING
+IF "%1"=="production" GOTO PRODUCTION
+GOTO ERROUT
+
+:DEVELOPMENT
+SET ODOPtype=development
+SET ODOPuser=@@@ PUT Development DATABASE USER HERE @@@
+SET ODOPpassword=@@@ PUT Development DATABASE PASSWORD HERE @@@
+SET ODOPhost=@@@ PUT Development DATABASE HOST HERE @@@
+SET ODOPdatabase=@@@ PUT Development DATABASE NAME HERE @@@
+GOTO RETURN
+
+:TEST
+SET ODOPtype=test
+SET ODOPuser=@@@ PUT Test DATABASE USER HERE @@@
+SET ODOPpassword=@@@ PUT Test DATABASE PASSWORD HERE @@@
+SET ODOPhost=@@@ PUT Test DATABASE HOST HERE @@@
+SET ODOPdatabase=@@@ PUT Test DATABASE NAME HERE @@@
+GOTO RETURN
+
+:STAGING
+SET ODOPtype=staging
+SET ODOPuser=@@@ PUT Staging DATABASE USER HERE @@@
+SET ODOPpassword=@@@ PUT Staging DATABASE PASSWORD HERE @@@
+SET ODOPhost=@@@ PUT Staging DATABASE HOST HERE @@@
+SET ODOPdatabase=@@@ PUT Staging DATABASE NAME HERE @@@
+GOTO RETURN
+
+:PRODUCTION
+SET ODOPtype=production
+SET ODOPuser=@@@ PUT Production DATABASE USER HERE @@@
+SET ODOPpassword=@@@ PUT Production DATABASE PASSWORD HERE @@@
+SET ODOPhost=@@@ PUT Production DATABASE HOST HERE @@@
+SET ODOPdatabase=@@@ PUT Production DATABASE NAME HERE @@@
+GOTO RETURN
+
+:ERROUT
+ECHO Bad input to setDBaccessVar: %1
+
+:RETURN
+
