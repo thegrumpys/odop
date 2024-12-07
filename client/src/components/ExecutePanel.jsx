@@ -116,7 +116,7 @@ export default function ExecutePanel() {
 //    console.log('ExecutePanel.onBack JSON.parse(steps[prev].state)=',JSON.parse(steps[prev].state));
     dispatch(load(JSON.parse(localStates[prev].state)));
     dispatch(setStep(prev));
-    if (testGenerate) store.dispatch(outputLine('\n    // title: "' + steps[next].title + '"'));
+    if (testGenerate) store.dispatch(outputLine('\n    // title: "' + steps[prev].title + '"'));
     if (steps[prev].actions !== undefined) {
       steps[prev].actions.forEach((action) => { dispatch(action); });
       if (testGenerate) {
