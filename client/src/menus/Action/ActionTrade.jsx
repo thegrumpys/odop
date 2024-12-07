@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { NavDropdown, Modal, Button, Container, Row, Col, InputGroup } from 'react-bootstrap';
 import { MIN, MAX, CONSTRAINED, FDCL } from '../../store/actionTypes';
 import {
@@ -35,6 +35,8 @@ export default function ActionTrade() {
   const [smallEst, setSmallEst] = useState(undefined);
   const [bigEst, setBigEst] = useState(undefined);
   const [defaultEstPercent, setDefaultEstPercent] = useState(undefined);
+  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
+  const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const dispatch = useDispatch();
 
 //===========================================================
@@ -652,16 +654,9 @@ export default function ActionTrade() {
   }
 
   var design = store.getState();
-  var display_search_button;
-  if (design.model.result.objective_value > design.model.system_controls.objmin) {
-    display_search_button = true;
-  } else {
-    display_search_button = false;
-  }
-
   return (
     <>
-      <NavDropdown.Item onClick={strategyToggle} disabled={!display_search_button}>
+      <NavDropdown.Item onClick={strategyToggle} disabled={model_objective_value <= model_objmin}>
         Trade&hellip;
       </NavDropdown.Item>
       {/*==================================================*/}
