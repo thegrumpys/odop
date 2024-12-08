@@ -38,7 +38,7 @@ export default function FileDelete() {
     })
     .then(res => {
       if (!res.ok) {
-        console.warn('In FileDelete.getDesignNames res=',res);
+//        console.warn('In FileDelete.getDesignNames res=',res);
         throw Error(res.statusText);
       }
       return res.json()
