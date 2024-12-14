@@ -22,12 +22,8 @@ A. **DEVELOPMENT environment**
    "Have we done everything on our milestone list?"   
    "Is there anything else we need to do?"   
    "Are we ready for release?"   
+   "Have the steps in [Prepare for Release](https://odop.springdesignsoftware.org/docs/procedures/prep4Release.html) been executed recently?"   
 1. Make sure your development environment is on branch master.   
-1. Check for and deal with security vulnerabilities.
-See GitHub Dependabot alerts.   
-Issue the command:   
-npm audit fix   
-when positioned in the server directory and again when positioned in the client directory.
 1. If this release has no migrate requirement, initialState impact or environment variable changes,
 skip forward to [Test For Console Output](release.html#test4consoleoutput).   
 To confirm,
@@ -103,9 +99,6 @@ If they are already started, log off of Okta and re-log into Okta to ensure the 
 
 B. **DO first for STAGING and then do again for PRODUCTION environments**
 1. If not logged into Heroku, go to the Heroku Website and log in.
-1. Use the Heroku console settings tab to check the currently configured version of the Heroku stack. 
-   Upgrade the Heroku stack for the staging or production system as appropriate. 
-   The change will not be final until after the next deployment.  
 1. If operating on the production system (ignore for staging), check for active users on the production system; put the production system in maintenance mode.
    Maintenance mode may be enabled in the Heroku console settings tab or from the command line with:  
    heroku maintenance:on -a odop
