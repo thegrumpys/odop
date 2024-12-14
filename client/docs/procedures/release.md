@@ -71,18 +71,20 @@ If they are already started, log off of Okta and re-log into Okta to ensure the 
 &nbsp;
 1. **Test For Console Output** &nbsp; Bring up Google Chrome and enable View Console / Debugger.
    Test various input and menu functions and verify no unexpected console.log output.
-   Use regular expression search: "^\s*console\." to find non-commented out console.log lines.
-   Most console.log output is acceptable in 
-     * client/public/dynoLoading.js.
-     * client/src/__test__/performance.test.js
-     * client/src/store/middleware/pxUpdateObjectiveValue.js
-     * client/src/store/middleware/seek.js 
-     * client/src/store/middleware/updateObjectiveValue.js 
-     * client/src/logUsage.js 
-     * client/src/registerServiceWorker.js 
-     * scripts/build_index.js 
-     * scanner.js 
-     * server.js 
+   Use regular expression search: "`^\s*console\.`" to find non-commented out console.log lines.
+   Most console.log output is acceptable in: 
+     * `client/public/dynoLoading.js` 
+     * `client/src/__test__/*.*` 
+     * `client/src/menus/View/ViewExecuteToTest.jsx` 
+     * `client/src/store/middleware/dispatcher.js` 
+     * `client/src/store/middleware/pxUpdateObjectiveValue.js` 
+     * `client/src/store/reducers.js` 
+     * `client/src/store/middleware/updateObjectiveValue.js` 
+     * `client/src/logUsage.js` 
+     * `client/src/registerServiceWorker.js` 
+     * `scripts/build_index.js` 
+     * `scanner.js` 
+     * `server.js` 
 1. Shutdown server and client under your development environment.  
 &nbsp;
 1. In server, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully. 
