@@ -70,7 +70,8 @@ If they are already started, log off of Okta and re-log into Okta to ensure the 
 <a id="test4consoleoutput"></a>  
 &nbsp;
 1. **Test For Console Output** &nbsp; Bring up Google Chrome and enable View Console / Debugger.
-   Test various input and menu functions and verify no unexpected console.log output.
+   Test various input and menu functions and verify no unexpected console.log output.   
+   
    Use regular expression search: "`^\s*console\.`" to find non-commented out console.log lines.
    Most console.log output is acceptable in: 
      * `client/public/dynoLoading.js` 
@@ -78,8 +79,9 @@ If they are already started, log off of Okta and re-log into Okta to ensure the 
      * `client/src/menus/View/ViewExecuteToTest.jsx` 
      * `client/src/store/middleware/dispatcher.js` 
      * `client/src/store/middleware/pxUpdateObjectiveValue.js` 
-     * `client/src/store/reducers.js` 
+     * `client/src/store/middleware/seek.js` 
      * `client/src/store/middleware/updateObjectiveValue.js` 
+     * `client/src/store/reducers.js` 
      * `client/src/logUsage.js` 
      * `client/src/registerServiceWorker.js` 
      * `scripts/build_index.js` 
@@ -90,7 +92,7 @@ If they are already started, log off of Okta and re-log into Okta to ensure the 
 1. In server, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully. 
 1. In client, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully.  
 &nbsp;
-1. Update client/src/version.js file to Major.Minor.Patch (for example: 2.3.1). Remove 'dev' suffix. Optionally use 'rc1' or 'rc2'.
+1. Update client/src/version.js file to Major.Minor.Patch (for example: 2.3.1). Remove 'dev' suffix. Optionally use 'rc1', 'rc2', etc.
 1. Commit with message "Update version.js to Major.Minor.Patch" and push to origin.
 1. Pull to get latest version on all systems.
 1. Restart server then client under your development environment.
