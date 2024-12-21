@@ -22,12 +22,7 @@ From issue 897:
 * Use open arrows to illustrate forces, curved open arrows for moments; size of arrows to reflect relative size of force
 
 ### Example image
-The next line is not working.  Need help.  
-![Coils_T](/public/designtypes/Spring/Compression/tooltips/Coils_T.png "Coils_T")  
-The next line works.  Needs to be deleted.  
-![Free independent variable value input dialog box](/docs/Help/img/ValInpDlgIndepFreeNoted.png "Free independent variable value input dialog box")   
-The next line needs to be deleted.  
-![FavIcon](/public/favicon.ico)  
+![Coils_T](/designtypes/Spring/Compression/tooltips/Coils_T.png "Coils_T")  
 
 ### Procedure
 
