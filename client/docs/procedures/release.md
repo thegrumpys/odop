@@ -5,7 +5,7 @@ Specifically, this is the process to publish the current development version and
 
 Ideally, any system downtime affecting the production system should be announced in advance via messageOfTheDay.md
 
-For background regarding "Major.Minor.Patch" see: [ODOP version numbering](/docs/design/VersionNumbers.html)
+For background regarding "Major.Minor.Patch" see: [ODOP version numbering](/docs/design/Guidelines.html#verNum)
    
 Effective with v4.2, documentation (Help, About, design, procedures, etc. but not messageOfTheDay) is hosted on Heroku.
 The build process includes a Harp compile to create html files for end-user viewing. 
@@ -18,11 +18,11 @@ Still maintained on GitHub Pages, messageOfTheDay can be updated independently o
 
 A. **DEVELOPMENT environment**
 
+1. Confirm that the steps in [Prepare for Release](prep4Release.html) been executed recently.
 1. Verify GitHub Milestone issues are completed.  Ask:   
    "Have we done everything on our milestone list?"   
    "Is there anything else we need to do?"   
    "Are we ready for release?"   
-   "Have the steps in [Prepare for Release](https://odop.springdesignsoftware.org/docs/procedures/prep4Release.html) been executed recently?"   
 1. Make sure your development environment is on branch master.   
 1. If this release has no migrate requirement, initialState impact or environment variable changes,
 skip forward to [Test For Console Output](release.html#test4consoleoutput).   

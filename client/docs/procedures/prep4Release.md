@@ -4,7 +4,7 @@ This entry describes steps that should be executed prior to release of a new ver
 These steps are somewhat independent of the actual release procedure and 
 can be optionally executed in advance to make the actual release activity shorter and less prone to distraction or failure.  
 
- **Question:  Should this work be done in a branch as opposed to master?**
+1. Create an issue providing a branch in which to make these changes.
 
 1. Check for and deal with security vulnerabilities.
 See GitHub Dependabot alerts. 
@@ -16,15 +16,14 @@ when positioned in the server directory and again when positioned in the client 
    Upgrade the Heroku stack for the staging or production system as appropriate. 
    The change will not be final until after the next deployment.  
 
-1. Shutdown server and client under your development environment.  
-
-1. In server, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully. 
-1. In client, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully.  
-
-1. Save results of performance / duration in: `/ODOP/client/src/__test__/test-results/test_results_Major_Minor_Patch.txt`.   
+1. Run test automation
+    1. In server, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully. 
+    1. In client, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully.  
+    1. Save results of performance (duration) in:  
+`/ODOP/client/src/__test__/test-results/test_results_Major_Minor_Patch.txt`.   
 For example: `test_results_5_1_0.txt`
-    1. Update summary .csv file
+        1. Update summary .csv file
     
-1. Run the production build in the development environment to confirm that things are synchronized 
-with the Heroku build environment and assure that the build process goes smoothly during the actual release.
-
+1. Run the production build in a test environment to confirm that things are synchronized 
+with the Heroku build environment and assure that the build process goes smoothly during the actual release. 
+One possibility is to build into the staging system with the Heroku environment variables set to "production".  
