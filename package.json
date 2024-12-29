@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
-    "heroku-postbuild": "echo 'client 0' && cd client && echo 'client 1' && npm install && echo 'client 2' && npm run build && echo 'client 3' && harp compile docs build/docs && echo 'client 4' && cd .. && echo 'client 5' && node ./scripts/build_index.js client/build/docs && echo 'client 6'",
+    "heroku-postbuild": "cd client && npm install && npm run build && harp docs build/docs && cd .. && node ./scripts/build_index.js client/build/docs",
     "test": "mocha --timeout 10000",
     "coverage": "nyc --reporter=html node_modules/mocha/bin/_mocha --timeout 10000",
     "showcoverage": "open coverage/index.html",
