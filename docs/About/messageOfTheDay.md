@@ -1,4 +1,4 @@
-**Message-of-the-day** &nbsp; updated December 8, 2024  
+**Message-of-the-day** &nbsp; updated December 29, 2024  
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
@@ -7,7 +7,7 @@ including recent and impending releases, planned outages, newly discovered issue
 
 Version  | &nbsp; | Date released  
 ---      | ---    | ---  
-[ODOP version 5.1](https://github.com/thegrumpys/odop/milestone/75?closed=1)   | &nbsp; |December 8, 2024.  
+[ODOP version 5.1](https://github.com/thegrumpys/odop/milestone/75?closed=1)   | &nbsp; |December 29, 2024.  
 [ODOP version 5.0](https://github.com/thegrumpys/odop/milestone/58?closed=1)   | &nbsp; | was never released.  
 
 Follow the link(s) above to see change details in GitHub.  
@@ -58,7 +58,7 @@ Follow the links below to see change details in GitHub.
 
 Version  | &nbsp; | Date released  
 ---      | ---    | ---  
-[ODOP version 5.1](https://github.com/thegrumpys/odop/milestone/75?closed=1)   | &nbsp; | December 8, 2024.  
+[ODOP version 5.1](https://github.com/thegrumpys/odop/milestone/75?closed=1)   | &nbsp; | December 29, 2024.  
 [ODOP version 5.0](https://github.com/thegrumpys/odop/milestone/58?closed=1)   | &nbsp; | was never released.  
 [ODOP version 4.5.1](https://github.com/thegrumpys/odop/milestone/69?closed=1) | &nbsp; | December 10, 2023.  
 [ODOP version 4.5](https://github.com/thegrumpys/odop/milestone/67?closed=1)   | &nbsp; | November 25, 2023.  
