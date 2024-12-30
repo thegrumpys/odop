@@ -69,29 +69,9 @@ If they are already started, log off of Okta and re-log into Okta to ensure the 
 1. Do a pull or push to get latest version on all systems.
 <a id="test4consoleoutput"></a>  
 &nbsp;
-1. **Test For Console Output** &nbsp; Bring up Google Chrome and enable View Console / Debugger.
-   Test various input and menu functions and verify no unexpected console.log output.   
-   
-   Use regular expression search: "`^\s*console\.`" to find non-commented out console.log lines.
-   Most console.log output is acceptable in: 
-     * `client/public/dynoLoading.js` 
-     * `client/src/__test__/*.*` 
-     * `client/src/menus/View/ViewExecuteToTest.jsx` 
-     * `client/src/store/middleware/dispatcher.js` 
-     * `client/src/store/middleware/pxUpdateObjectiveValue.js` 
-     * `client/src/store/middleware/seek.js` 
-     * `client/src/store/middleware/updateObjectiveValue.js` 
-     * `client/src/store/reducers.js` 
-     * `client/src/logUsage.js` 
-     * `client/src/registerServiceWorker.js` 
-     * `scripts/build_index.js` 
-     * `scanner.js` 
-     * `server.js` 
-1. Shutdown server and client under your development environment.  
-&nbsp;
-1. In server, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully. 
-1. In client, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully.  
-&nbsp;
+1. Confirm that **Test For Console Output** in [Prepare for Release](prep4Release.html) was recently executed.
+1. Confirm that test automation in [Prepare for Release](prep4Release.html) was recently executed.  
+    1. If necessary, shutdown server and client under your development environment before running tests.  
 1. Update client/src/version.js file to Major.Minor.Patch (for example: 2.3.1). Remove 'dev' suffix. Optionally use 'rc1', 'rc2', etc.
 1. Commit with message "Update version.js to Major.Minor.Patch" and push to origin.
 1. Pull to get latest version on all systems.
@@ -135,7 +115,8 @@ Do this for staging and/or production databases as appropriate.
 See the above link for the easier-to-read table of database names.  
 1. Optionally back up staging database. Back up the production database.
    For background on backup provided by JAWSDB see: [Heroku docs](https://devcenter.heroku.com/articles/jawsdb#database-backups)
-1. Check the size of the production database as compared to capacity limits (5Mb for JAWSDB free plan). 
+1. Check the size of the production database as compared to capacity limits 
+(50MB for production paid kitefin-manifold-mysql; 5MB for JAWSDB free plan). 
 Use the ./scripts/db_size.sh script.  
 For details, see the first FAQ question at: https://devcenter.heroku.com/articles/jawsdb#faq   
 If appropriate, dump to off-line storage and re-initialize the log_Usage table.

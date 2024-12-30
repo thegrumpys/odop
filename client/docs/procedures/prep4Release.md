@@ -24,6 +24,26 @@ when positioned in the server directory and again when positioned in the client 
 For example: `test_results_5_1_0.txt`
         1. Update summary .csv file
     
+1. Test For Console Output  
+Bring up Google Chrome and enable View Console / Debugger.  
+Test various input and menu functions and verify no unexpected console.log output.   
+   
+   Use regular expression search: "`^\s*console\.`" to find non-commented out console.log lines.
+   Most console.log output is acceptable in: 
+     * `client/public/dynoLoading.js` 
+     * `client/src/__test__/*.*` 
+     * `client/src/menus/View/ViewExecuteToTest.jsx` 
+     * `client/src/store/middleware/dispatcher.js` 
+     * `client/src/store/middleware/pxUpdateObjectiveValue.js` 
+     * `client/src/store/middleware/seek.js` 
+     * `client/src/store/middleware/updateObjectiveValue.js` 
+     * `client/src/store/reducers.js` 
+     * `client/src/logUsage.js` 
+     * `client/src/registerServiceWorker.js` 
+     * `scripts/build_index.js` 
+     * `scanner.js` 
+     * `server.js` 
+
 1. Run the production build in a test environment to confirm that things are synchronized 
 with the Heroku build environment and assure that the build process goes smoothly during the actual release. 
 One possibility is to build into the staging system with the Heroku environment variables set to "production".  
