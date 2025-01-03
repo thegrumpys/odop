@@ -51,15 +51,15 @@ ECHO.
   ECHO     s.schema_name
   ECHO     ,sp.grantee
   ECHO     ,sp.has_insert;
-) > db_size.txt
-mysql --user=%ODOPuser% --password=%ODOPpassword% --host=%ODOPhost% < db_size.txt
-IF %ERRORLEVEL% NEQ 0 ECHO odopDB_sizeList: mysql returned ERRORLEVEL %ERRORLEVEL%
-DEL db_size.txt
+) > list_db_size.txt
+mysql --user=%ODOPuser% --password=%ODOPpassword% --host=%ODOPhost% < list_db_size.txt
+IF %ERRORLEVEL% NEQ 0 ECHO list_db_size.txt: mysql returned ERRORLEVEL %ERRORLEVEL%
+DEL list_db_size.txt
 ENDLOCAL
 GOTO BYEBYE
 
 :NOPARM
-ECHO USAGE:  odopDB_sizeList type 
+ECHO USAGE:  list_db_size.txt type 
 ECHO         where "type" is the system type: "development", "test", "staging" or "production" 
 ECHO.
 ECHO Creates a simple console listing providing the size of the selected ODOP database. 
@@ -67,7 +67,7 @@ ECHO.
 GOTO BYEBYE
 
 :ERROUT
-ECHO Bad input to odopDB_sizeList: %1 %2
+ECHO Bad input to list_db_size.txt: %1 %2
 ECHO.
 
 :BYEBYE
