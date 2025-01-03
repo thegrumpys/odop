@@ -1,5 +1,5 @@
 @echo off
-REM Perform ODOP database dump then immediate restore.
+REM Perform database dump then immediate restore.
 
 IF "%1"=="" GOTO NOPARM
 IF "%1"=="development" GOTO GETACCESSVAR
@@ -12,24 +12,24 @@ GOTO ERROUT
 SETLOCAL
 call setDBaccessVar %1
 
-REM echo ODOPtype=%ODOPtype%
-REM echo %ODOPuser%
-REM echo %ODOPpassword%
-REM echo %ODOPhost%
-REM echo %ODOPdatabase%
+REM echo type=%type%
+REM echo %user%
+REM echo %password%
+REM echo %host%
+REM echo %database%
 ECHO.
 
-SET ODOPfilename=%ODOPtype%_%date:~10,4%-%date:~4,2%-%date:~7,2%.sql
-mysqldump --user=%ODOPuser% --password=%ODOPpassword% --host=%ODOPhost% %ODOPdatabase% --no-tablespaces --set-gtid-purged=OFF --single-transaction > %ODOPfilename%
+SET filename=%type%_%date:~10,4%-%date:~4,2%-%date:~7,2%.sql
+mysqldump --user=%user% --password=%password% --host=%host% %database% --no-tablespaces --set-gtid-purged=OFF --single-transaction > %filename%
 IF %ERRORLEVEL% NEQ 0 (
   ECHO dump_restore_db: mysqldump returned ERRORLEVEL %ERRORLEVEL%. Terminating with no attempt to restore.
   GOTO BYEBYE
 )
 (
-  ECHO use %ODOPdatabase%; 
-  ECHO source %ODOPfilename%;
+  ECHO use %database%; 
+  ECHO source %filename%;
 ) > dump_restore_db.txt
-mysql --user=%ODOPuser% --password=%ODOPpassword% --host=%ODOPhost% < dump_restore_db.txt
+mysql --user=%user% --password=%password% --host=%host% < dump_restore_db.txt
 IF %ERRORLEVEL% NEQ 0 ECHO dump_restore_db: mysql returned ERRORLEVEL %ERRORLEVEL%
 DEL dump_restore_db.txt
 ENDLOCAL

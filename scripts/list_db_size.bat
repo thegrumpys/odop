@@ -1,5 +1,5 @@
 @echo off
-REM Create size listing of specified ODOP database
+REM Create size listing of specified database
 
 IF "%1"=="" GOTO NOPARM
 IF "%1"=="development" GOTO GETACCESSVAR
@@ -10,17 +10,17 @@ GOTO ERROUT
 
 :GETACCESSVAR
 SETLOCAL
-call setDBaccessVar %1
+call set_db_access_var %1
 
-REM echo ODOPtype=%ODOPtype%
-REM echo %ODOPuser%
-REM echo %ODOPpassword%
-REM echo %ODOPhost%
-REM echo %ODOPdatabase%
+REM echo type=%type%
+REM echo %user%
+REM echo %password%
+REM echo %host%
+REM echo %database%
 ECHO.
 
 (
-  ECHO use %ODOPdatabase%; 
+  ECHO use %database%; 
   ECHO select
   ECHO     NOW^(^),
   ECHO     s.schema_name
@@ -52,22 +52,22 @@ ECHO.
   ECHO     ,sp.grantee
   ECHO     ,sp.has_insert;
 ) > list_db_size.txt
-mysql --user=%ODOPuser% --password=%ODOPpassword% --host=%ODOPhost% < list_db_size.txt
-IF %ERRORLEVEL% NEQ 0 ECHO list_db_size.txt: mysql returned ERRORLEVEL %ERRORLEVEL%
+mysql --user=%user% --password=%password% --host=%host% < list_db_size.txt
+IF %ERRORLEVEL% NEQ 0 ECHO list_db_size: mysql returned ERRORLEVEL %ERRORLEVEL%
 DEL list_db_size.txt
 ENDLOCAL
 GOTO BYEBYE
 
 :NOPARM
-ECHO USAGE:  list_db_size.txt type 
+ECHO USAGE:  list_db_size type 
 ECHO         where "type" is the system type: "development", "test", "staging" or "production" 
 ECHO.
-ECHO Creates a simple console listing providing the size of the selected ODOP database. 
+ECHO Creates a simple console listing providing the size of the selected database. 
 ECHO.
 GOTO BYEBYE
 
 :ERROUT
-ECHO Bad input to list_db_size.txt: %1 %2
+ECHO Bad input to list_db_size: %1 %2
 ECHO.
 
 :BYEBYE

@@ -1,5 +1,5 @@
 @echo off
-REM perform dump (backup) operation on ODOP database 
+REM perform dump (backup) operation on  database 
 
 IF "%1"=="" GOTO NOPARM
 IF "%1"=="development" GOTO GETACCESSVAR
@@ -10,17 +10,17 @@ GOTO ERROUT
 
 :GETACCESSVAR
 SETLOCAL
-call setDBaccessVar %1
+call set_db_access_var %1
 
-REM echo ODOPtype=%ODOPtype%
-REM echo %ODOPuser%
-REM echo %ODOPpassword%
-REM echo %ODOPhost%
-REM echo %ODOPdatabase%
+REM echo type=%type%
+REM echo %user%
+REM echo %password%
+REM echo %host%
+REM echo %database%
 ECHO.
 
-SET ODOPfilename=%ODOPtype%_%date:~10,4%-%date:~4,2%-%date:~7,2%.sql
-mysqldump --user=%ODOPuser% --password=%ODOPpassword% --host=%ODOPhost% %ODOPdatabase% --no-tablespaces --set-gtid-purged=OFF --single-transaction > %ODOPfilename%
+SET filename=%type%_%date:~10,4%-%date:~4,2%-%date:~7,2%.sql
+mysqldump --user=%user% --password=%password% --host=%host% %database% --no-tablespaces --set-gtid-purged=OFF --single-transaction > %filename%
 IF %ERRORLEVEL% NEQ 0 ECHO dump_db: mysqldump returned ERRORLEVEL %ERRORLEVEL%
 ENDLOCAL
 GOTO BYEBYE
