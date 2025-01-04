@@ -1,5 +1,5 @@
 @echo off
-REM perform dump (backup) operation on  database 
+REM perform dump (backup) operation on database 
 
 IF "%1"=="" GOTO NOPARM
 IF "%1"=="development" GOTO GETACCESSVAR
