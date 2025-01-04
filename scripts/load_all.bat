@@ -3,6 +3,7 @@ REM Load default Startup designs for all design types.
 REM BEWARE! This empties the design table of all designs with a NULL user.
 
 IF "%1"=="" GOTO NOPARM
+IF "%1"=="local" GOTO GETACCESSVAR
 IF "%1"=="development" GOTO GETACCESSVAR
 IF "%1"=="test" GOTO GETACCESSVAR
 IF "%1"=="staging" GOTO GETACCESSVAR
@@ -11,7 +12,7 @@ GOTO ERROUT
 
 :GETACCESSVAR
 SETLOCAL
-call set_db_access_var %1
+call .\scripts\set_db_access_var %1
 
 REM echo type=%type%
 REM echo %user%
@@ -37,7 +38,7 @@ GOTO BYEBYE
 
 :NOPARM
 ECHO USAGE:  load_all type 
-ECHO         where "type" is the system type: "development", "test", "staging" or "production" 
+ECHO         where "type" is the system type: "local", "development", "test", "staging" or "production" 
 ECHO.
 ECHO This script loads default Startup designs for all design types. 
 ECHO BEWARE! It empties the design table of all designs with a NULL user.
