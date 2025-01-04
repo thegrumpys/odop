@@ -75,7 +75,6 @@ $ package dotenv file
 
 # configured scripts
 scripts/load_all.sh
-scripts/create_db.bat
 scripts/create_db.sh
 scripts/db_size.sh
 scripts/dump_db_startup_files.sh
