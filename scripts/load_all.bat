@@ -31,7 +31,7 @@ ECHO.
   ECHO source ./designtypes/Spring/Torsion/load.sql;
 ) > load_all.txt
 mysql --user=%user% --password=%password% --host=%host% < load_all.txt
-IF %ERRORLEVEL% NEQ 0 ECHO dump_db: mysql returned ERRORLEVEL %ERRORLEVEL%
+IF %ERRORLEVEL% NEQ 0 ECHO load_all: mysql returned ERRORLEVEL %ERRORLEVEL%
 DEL load_all.txt
 ENDLOCAL
 GOTO BYEBYE

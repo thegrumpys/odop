@@ -2,6 +2,7 @@
 REM perform dump (backup) operation on database 
 
 IF "%1"=="" GOTO NOPARM
+IF "%1"=="local" GOTO GETACCESSVAR
 IF "%1"=="development" GOTO GETACCESSVAR
 IF "%1"=="test" GOTO GETACCESSVAR
 IF "%1"=="staging" GOTO GETACCESSVAR
@@ -27,7 +28,7 @@ GOTO BYEBYE
 
 :NOPARM
 ECHO USAGE:  dump_db type 
-ECHO         where "type" is the system type: "development", "test", "staging" or "production" 
+ECHO         where "type" is the system type: "local", "development", "test", "staging" or "production" 
 ECHO.
 ECHO The operation is a simple mysqldump that leaves a .sql file in the current directory. 
 ECHO.

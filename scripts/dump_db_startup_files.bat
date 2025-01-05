@@ -3,6 +3,7 @@ REM Perform dump (backup) operation on Startup designs to create load.sql files.
 REM Hard coded for Info@SpringDesignSoftware Okta User '%oktauserid%'  <--- check this
 
 IF "%1"=="" GOTO NOPARM
+IF "%1"=="local" GOTO GETACCESSVAR
 IF "%1"=="development" GOTO GETACCESSVAR
 IF "%1"=="test" GOTO GETACCESSVAR
 IF "%1"=="staging" GOTO GETACCESSVAR
@@ -38,7 +39,7 @@ GOTO BYEBYE
 
 :NOPARM
 ECHO USAGE:  dump_db_startup_files type 
-ECHO         where "type" is the system type: "development", "test", "staging" or "production" 
+ECHO         where "type" is the system type: "local", "development", "test", "staging" or "production" 
 ECHO.
 ECHO Perform dump (backup) operation on Startup designs to create load.sql files. 
 ECHO Hard coded for Info@SpringDesignSoftware Okta User '%oktauserid%'  <--- check this

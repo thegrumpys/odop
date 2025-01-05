@@ -2,6 +2,7 @@
 REM Perform database dump then immediate restore.
 
 IF "%1"=="" GOTO NOPARM
+IF "%1"=="local" GOTO GETACCESSVAR
 IF "%1"=="development" GOTO GETACCESSVAR
 IF "%1"=="test" GOTO GETACCESSVAR
 IF "%1"=="staging" GOTO GETACCESSVAR
@@ -37,7 +38,7 @@ GOTO BYEBYE
 
 :NOPARM
 ECHO USAGE:  dump_restore_db type 
-ECHO         where "type" is the system type: "development", "test", "staging" or "production" 
+ECHO         where "type" is the system type: "local", "development", "test", "staging" or "production" 
 ECHO.
 ECHO The operation is a mysqldump combined with an immediate restore of that dump file. 
 ECHO A .sql file is left in the current directory. 
