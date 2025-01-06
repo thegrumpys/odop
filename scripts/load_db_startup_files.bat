@@ -29,15 +29,15 @@ ECHO.
   ECHO source ./designtypes/Spring/Compression/load.sql;
   ECHO source ./designtypes/Spring/Extension/load.sql;
   ECHO source ./designtypes/Spring/Torsion/load.sql;
-) > load_all.txt
-mysql --user=%user% --password=%password% --host=%host% < load_all.txt
-IF %ERRORLEVEL% NEQ 0 ECHO load_all: mysql returned ERRORLEVEL %ERRORLEVEL%
-DEL load_all.txt
+) > load_db_startup_files.txt
+mysql --user=%user% --password=%password% --host=%host% < load_db_startup_files.txt
+IF %ERRORLEVEL% NEQ 0 ECHO load_db_startup_files: mysql returned ERRORLEVEL %ERRORLEVEL%
+DEL load_db_startup_files.txt
 ENDLOCAL
 GOTO BYEBYE
 
 :NOPARM
-ECHO USAGE:  load_all type 
+ECHO USAGE:  load_db_startup_files type 
 ECHO         where "type" is the system type: "local", "development", "test", "staging" or "production" 
 ECHO.
 ECHO This script loads default Startup designs for all design types. 
@@ -46,7 +46,7 @@ ECHO.
 GOTO BYEBYE
 
 :ERROUT
-ECHO Bad input to load_all: %1 %2
+ECHO Bad input to load_db_startup_files: %1 %2
 ECHO.
 
 :BYEBYE

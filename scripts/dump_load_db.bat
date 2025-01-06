@@ -1,5 +1,5 @@
 @echo off
-REM Perform database dump then immediate restore.
+REM Perform database dump then immediatly load (restore) it.
 
 IF "%1"=="" GOTO NOPARM
 IF "%1"=="local" GOTO GETACCESSVAR
@@ -23,30 +23,30 @@ ECHO.
 SET filename=%type%_%date:~10,4%-%date:~4,2%-%date:~7,2%.sql
 mysqldump --user=%user% --password=%password% --host=%host% %database% --no-tablespaces --set-gtid-purged=OFF --single-transaction > %filename%
 IF %ERRORLEVEL% NEQ 0 (
-  ECHO dump_restore_db: mysqldump returned ERRORLEVEL %ERRORLEVEL%. Terminating with no attempt to restore.
+  ECHO dump_load_db: mysqldump returned ERRORLEVEL %ERRORLEVEL%. Terminating with no attempt to load (restore).
   GOTO BYEBYE
 )
 (
   ECHO use %database%; 
   ECHO source %filename%;
-) > dump_restore_db.txt
-mysql --user=%user% --password=%password% --host=%host% < dump_restore_db.txt
-IF %ERRORLEVEL% NEQ 0 ECHO dump_restore_db: mysql returned ERRORLEVEL %ERRORLEVEL%
-DEL dump_restore_db.txt
+) > dump_load_db.txt
+mysql --user=%user% --password=%password% --host=%host% < dump_load_db.txt
+IF %ERRORLEVEL% NEQ 0 ECHO dump_load_db: mysql returned ERRORLEVEL %ERRORLEVEL%
+DEL dump_load_db.txt
 ENDLOCAL
 GOTO BYEBYE
 
 :NOPARM
-ECHO USAGE:  dump_restore_db type 
+ECHO USAGE:  dump_load_db type 
 ECHO         where "type" is the system type: "local", "development", "test", "staging" or "production" 
 ECHO.
-ECHO The operation is a mysqldump combined with an immediate restore of that dump file. 
+ECHO The operation is a mysqldump combined with an immediate load (restore) of that dump file. 
 ECHO A .sql file is left in the current directory. 
 ECHO.
 GOTO BYEBYE
 
 :ERROUT
-ECHO Bad input to dump_restore_db: %1 %2
+ECHO Bad input to dump_load_db: %1 %2
 ECHO.
 
 :BYEBYE
