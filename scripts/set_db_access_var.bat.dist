@@ -1,11 +1,21 @@
 REM Create database access variables to be used in other batch files
 REM Include the .BAT file of this name in .gitignore
 
+IF "%1"=="local" GOTO LOCAL
 IF "%1"=="development" GOTO DEVELOPMENT
 IF "%1"=="test" GOTO TEST
 IF "%1"=="staging" GOTO STAGING
 IF "%1"=="production" GOTO PRODUCTION
-GOTO ERROUT
+ECHO Bad input to set_db_access_var: %1
+GOTO RETURN
+
+:LOCAL
+SET type=local
+SET user==@@@ PUT Development DATABASE USER HERE @@@
+SET password=@@@ PUT Development DATABASE PASSWORD HERE @@@
+SET host=localhost
+SET database=@@@ PUT Development DATABASE NAME HERE @@@
+GOTO RETURN
 
 :DEVELOPMENT
 SET type=development
@@ -39,8 +49,4 @@ SET host=@@@ PUT Production DATABASE HOST HERE @@@
 SET database=@@@ PUT Production DATABASE NAME HERE @@@
 GOTO RETURN
 
-:ERROUT
-ECHO Bad input to set_db_access_var: %1
-
 :RETURN
-
