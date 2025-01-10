@@ -1,24 +1,31 @@
 @echo off
 REM Create size listing of specified database
 
-IF "%1"=="" GOTO NOPARM
+IF "%1"=="" (
+  ECHO USAGE:  list_db_size type 
+  ECHO         where "type" is the system type: "local", "development", "test", "staging" or "production" 
+  ECHO.
+  ECHO Creates a simple console listing providing the size of the selected database. 
+  GOTO BYEBYE
+  )
+
+if not exist ".\scripts\set_db_access_var.bat" ( 
+  echo This batch file must be run from the ~ git\odop directory ... a.k.a. "server level". 
+  GOTO BYEBYE
+  ) 
+
+
 IF "%1"=="local" GOTO GETACCESSVAR
 IF "%1"=="development" GOTO GETACCESSVAR
 IF "%1"=="test" GOTO GETACCESSVAR
 IF "%1"=="staging" GOTO GETACCESSVAR
 IF "%1"=="production" GOTO GETACCESSVAR
-GOTO ERROUT
+ECHO Bad target system type parameter: "%1"
+GOTO BYEBYE
 
 :GETACCESSVAR
 SETLOCAL
-call set_db_access_var %1
-
-REM echo type=%type%
-REM echo %user%
-REM echo %password%
-REM echo %host%
-REM echo %database%
-ECHO.
+call .\scripts\set_db_access_var %1
 
 (
   ECHO use %database%; 
@@ -57,18 +64,6 @@ mysql --user=%user% --password=%password% --host=%host% < list_db_size.txt
 IF %ERRORLEVEL% NEQ 0 ECHO list_db_size: mysql returned ERRORLEVEL %ERRORLEVEL%
 DEL list_db_size.txt
 ENDLOCAL
-GOTO BYEBYE
-
-:NOPARM
-ECHO USAGE:  list_db_size type 
-ECHO         where "type" is the system type: "local", "development", "test", "staging" or "production" 
-ECHO.
-ECHO Creates a simple console listing providing the size of the selected database. 
-ECHO.
-GOTO BYEBYE
-
-:ERROUT
-ECHO Bad input to list_db_size: %1 %2
-ECHO.
 
 :BYEBYE
+ECHO.
