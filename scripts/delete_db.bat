@@ -1,11 +1,13 @@
 @echo off
-REM Create empty default database and tables
+REM Delete entire database and tables
+REM BEWARE! This destroys any existing odop database and all its tables
 
 IF "%1"=="" (
-  ECHO USAGE:  create_db type 
+  ECHO USAGE:  delete_db type 
   ECHO         where "type" is the system type: "local", "development", "test", "staging" or "production" 
   ECHO.
-  ECHO Create empty default database and tables 
+  ECHO Delete entire database and tables
+  ECHO BEWARE! This destroys any existing odop database and all its tables
   GOTO BYEBYE
   )
 
@@ -25,16 +27,13 @@ GOTO BYEBYE
 :GETACCESSVAR
 SETLOCAL
 call .\scripts\set_db_access_var %1
-set filename=./data/create.sql
 
 (
-  ECHO create database %database% character set utf8;
-  ECHO use %database%;
-  ECHO source %filename%;
-) > create_db.txt
-mysql --user=%user% --password=%password% --host=%host% < create_db.txt
-IF %ERRORLEVEL% NEQ 0 ECHO create_db: mysql returned ERRORLEVEL %ERRORLEVEL%
-DEL create_db.txt
+  ECHO drop database %database%;
+) > delete_db.txt
+mysql --user=%user% --password=%password% --host=%host% < delete_db.txt
+IF %ERRORLEVEL% NEQ 0 ECHO delete_db: mysql returned ERRORLEVEL %ERRORLEVEL%
+DEL delete_db.txt
 ENDLOCAL
 
 :BYEBYE

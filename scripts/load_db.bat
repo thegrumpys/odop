@@ -38,12 +38,6 @@ SETLOCAL
 SET filename=%1
 call .\scripts\set_db_access_var %2
 
-REM Remove this comment and the following four lines
-echo type=%type%, user=%user%, password=%password%, 
-echo host=%host%, database=%database%
-echo filename=%filename%
-GOTO BYEBYE
-
 (
   ECHO use %database%; 
   ECHO source %filename%;
