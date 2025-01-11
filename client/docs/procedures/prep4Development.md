@@ -10,12 +10,15 @@ For background regarding "Major.Minor.Patch" see: [ODOP version numbering](/docs
 
 1. Create an issue providing a branch in which to make the following changes.
 
-1. Check for and deal with security vulnerabilities.
-See GitHub Dependabot alerts. 
-Issue the command:   
-`npm audit fix`   
-when positioned in the server directory and again when positioned in the client directory.
-
-1. Use the Heroku console settings tab to check the currently configured version of the Heroku stack. 
-   Upgrade the Heroku stack for the staging or production system as appropriate. 
-   The change will not be final until after the next deployment.  
+    1. Check for and deal with security vulnerabilities.
+    See GitHub Dependabot alerts. 
+    Issue the command:   
+    `npm audit fix`   
+    when positioned in the server directory and again when positioned in the client directory.
+    
+    1. Go to Github's Pull Requests and review and repair any dependabot entries to Bump/Update dependency versions.
+    When complete we are to close these pull requests.
+    
+    1. Use the Heroku console settings tab to check the currently configured version of the Heroku stack. 
+    Upgrade the Heroku stack for the staging or production system as appropriate. 
+    The change will not occur until after the next deployment.  
