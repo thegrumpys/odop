@@ -34,7 +34,9 @@ echo host=%host%, database=%database%
 echo filename=%filename%
 GOTO BYEBYE
 
+REM Info@SpringDesignSoftware.org
 SET oktauserid=00u1g7vr21d7yajY4357
+REM bwatt@1fifoto.com
 SET oktauserid=00u1itcx44XGp65ln357
 
 mysqldump --user=%user% --password=%password% --host=%host% %database% design --complete-insert --no-create-info --compact --no-tablespaces --set-gtid-purged=OFF --where="(user='%oktauserid%' AND type='Piston-Cylinder' AND name='Startup') OR (user='%oktauserid%' AND type='Piston-Cylinder' AND name='Startup_Metric')" > designtypes\Piston-Cylinder\load.sql
