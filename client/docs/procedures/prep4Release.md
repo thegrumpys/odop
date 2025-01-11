@@ -6,16 +6,6 @@ can be optionally executed in advance to make the actual release activity shorte
 
 1. Create an issue providing a branch in which to make these changes.
 
-1. Check for and deal with security vulnerabilities.
-See GitHub Dependabot alerts. 
-Issue the command:   
-`npm audit fix`   
-when positioned in the server directory and again when positioned in the client directory.
-
-1. Use the Heroku console settings tab to check the currently configured version of the Heroku stack. 
-   Upgrade the Heroku stack for the staging or production system as appropriate. 
-   The change will not be final until after the next deployment.  
-
 1. Run test automation
     1. In server, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully. 
     1. In client, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully.  
@@ -44,6 +34,9 @@ Test various input and menu functions and verify no unexpected console.log outpu
      * `scanner.js` 
      * `server.js` 
 
+<!---
+Commented out pending review - Did I get it right?
 1. Run the production build in a test environment to confirm that things are synchronized 
 with the Heroku build environment and assure that the build process goes smoothly during the actual release. 
 One possibility is to build into the staging system with the Heroku environment variables set to "production".  
+ -->

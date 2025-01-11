@@ -4,8 +4,6 @@ This entry describes the steps necessary to make a new ODOP "release".
 Specifically, this is the process to publish the current development version and its documentation to Heroku. 
 
 Ideally, any system downtime affecting the production system should be announced in advance via messageOfTheDay.md
-
-For background regarding "Major.Minor.Patch" see: [ODOP version numbering](/docs/design/Guidelines.html#verNum)
    
 Effective with v4.2, documentation (Help, About, design, procedures, etc. but not messageOfTheDay) is hosted on Heroku.
 The build process includes a Harp compile to create html files for end-user viewing. 
@@ -14,10 +12,9 @@ The html files should be referenced via the CNAME: odop.springdesignsoftware.org
 [Document structure](https://odop.springdesignsoftware.org/docs/design/Docs.html). 
 Still maintained on GitHub Pages, messageOfTheDay can be updated independently of the release process.  
 
-&nbsp;
+**A. Initial steps preparing for release**
 
-A. **DEVELOPMENT environment**
-
+1. Confirm that the steps in [Prepare for Development](prep4Development.html) been executed previously.
 1. Confirm that the steps in [Prepare for Release](prep4Release.html) been executed recently.
 1. Verify GitHub Milestone issues are completed.  Ask:   
    "Have we done everything on our milestone list?"   
@@ -25,7 +22,7 @@ A. **DEVELOPMENT environment**
    "Are we ready for release?"   
 1. Make sure your development environment is on branch master.   
 1. If this release has no migrate requirement, initialState impact or environment variable changes,
-skip forward to [Test For Console Output](release.html#test4consoleoutput).   
+skip forward to [Run Test Automation](release.html#runTestAutomation).   
 To confirm,
 compare the current master branch against the previous released commit tag branch 
 and check if any of the client/src/designtypes/.../initialState.js files have changed.  
@@ -66,22 +63,21 @@ If they are already started, log off of Okta and re-log into Okta to ensure the 
     * REACT\_APP\_DESIGN\_UNITS
     * REACT\_APP\_DESIGN\_VIEW
     * REACT\_APP\_SESSION\_REFRESH
-1. Do a pull or push to get latest version on all systems.
-<a id="test4consoleoutput"></a>  
-&nbsp;
-1. Confirm that **Test For Console Output** in [Prepare for Release](prep4Release.html) was recently executed.
-1. Confirm that test automation in [Prepare for Release](prep4Release.html) was recently executed.  
+1. Do a pull or push to get latest version on all systems.  
+<a id="runTestAutomation"></a>  
+1. Confirm that **test automation** in [Prepare for Release](prep4Release.html) was recently executed.  
     1. If necessary, shutdown server and client under your development environment before running tests.  
 1. Update client/src/version.js file to Major.Minor.Patch (for example: 2.3.1). Remove 'dev' suffix. Optionally use 'rc1', 'rc2', etc.
 1. Commit with message "Update version.js to Major.Minor.Patch" and push to origin.
 1. Pull to get latest version on all systems.
-1. Restart server then client under your development environment.
+1. If necessary, restart server then client under your development environment.
 1. Bring up on Windows under Microsoft Chromium Edge and verify Help : About Software Version is as expected (Major.Minor.Patch).
    Bring up on Windows and Mac OS X under Google Chrome and verify Help : About Software Version is as expected.
 
 &nbsp;
 
-B. **DO first for STAGING and then do again for PRODUCTION environments**
+**B. DO first for STAGING and then do again for PRODUCTION environments**  
+
 1. If not logged into Heroku, go to the Heroku Website and log in.
 1. If operating on the production system (ignore for staging), check for active users on the production system; put the production system in maintenance mode.
    Maintenance mode may be enabled in the Heroku console settings tab or from the command line with:  
@@ -114,26 +110,25 @@ to create and format the database tables using the create.sql file.
 Do this for staging and/or production databases as appropriate.   
 See the above link for the easier-to-read table of database names.  
 1. Optionally back up staging database. Back up the production database.
+   Use the ./scripts/dump_db.* script or batch file. 
    For background on backup provided by JAWSDB see: [Heroku docs](https://devcenter.heroku.com/articles/jawsdb#database-backups)
 1. Check the size of the production database as compared to capacity limits 
 (50MB for production paid kitefin-manifold-mysql; 5MB for JAWSDB free plan). 
-Use the ./scripts/db_size.sh script.  
+Use the ./scripts/list_db_size.* script or batch file.  
 For details, see the first FAQ question at: https://devcenter.heroku.com/articles/jawsdb#faq   
-If appropriate, dump to off-line storage and re-initialize the log_Usage table.
+If appropriate, dump and archive to off-line storage and re-initialize the usage_log table.
 <a id="runloadscript"></a>
 &nbsp;
 1. If the database already exists but no entries exist or must be recreated, then either
-   modify the script for the particular database and
-   run the configured ./scripts/load_all.sh script
+   run the ./scripts/load_db_startup_files.* script or batch file
    or
    manually run all affected load.sql files to create startup files for each design type in the affected database (for example, do this for Staging and Production).
 1. Delete any old, invalid or development-only designs if necessary.
-1. Optionally, dump and archive, then empty the usage_log table. 
 <a id="publish2Heroku"></a>
 &nbsp;
 1. **Publish to Heroku** &nbsp; If production, update messageOfTheDay.md to announce availability of the new version.
 To do this do the following: Create issue branch, update MOTD file, check-in change to branch and iterate if necessary, then when all is ready merge branch into master.
-Note: Merging will publish the MOTD externally/publically.
+Note: Merging will publish the MOTD externally/publicly.
 1. Do a pull as required to get latest version on all systems.
 1. If not logged into Heroku, login in using the command line "heroku login" which in turn brings up the Heroku website login page in your browser.
 1. Shutdown server and client under your development environment.
@@ -158,7 +153,8 @@ heroku maintenance:off -a odop
 
 &nbsp;
 
-C. **DEVELOPMENT ENVIRONMENT**
+**C. Post Release Steps**  
+
 1. Do a pull as required to get latest version on all systems.
 1. Create Major.Minor.Patch tag (for example, 3.2.1).
    Commit "Release Major.Minor.Patch" and push to origin.
@@ -170,7 +166,6 @@ C. **DEVELOPMENT ENVIRONMENT**
 
 &nbsp;
 
-D. **FUTURES**
-1. Discuss the next release, what work needs to be done and who does it.
-   In other words, set the direction for the upcoming milestone.
+**D. FUTURES**
+1. Looking to the next release, review the steps in [Prepare for Development](prep4Development.html).
 
