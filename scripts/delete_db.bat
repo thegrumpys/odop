@@ -16,6 +16,9 @@ if not exist ".\scripts\set_db_access_var.bat" (
   GOTO BYEBYE
   ) 
 
+if "%1"=="production" echo You are about to delete the ODOP production database. Use Control-C to abort.  Otherwise ...
+pause
+
 IF "%1"=="local" GOTO GETACCESSVAR
 IF "%1"=="development" GOTO GETACCESSVAR
 IF "%1"=="test" GOTO GETACCESSVAR
@@ -32,7 +35,7 @@ call .\scripts\set_db_access_var %1
   ECHO drop database %database%;
 ) > delete_db.txt
 mysql --user=%user% --password=%password% --host=%host% < delete_db.txt
-IF %ERRORLEVEL% NEQ 0 ECHO delete_db: mysql returned ERRORLEVEL %ERRORLEVEL%
+IF %ERRORLEVEL% NEQ 0 (ECHO delete_db: mysql returned ERRORLEVEL %ERRORLEVEL%) ELSE (ECHO mysql returned SUCCESS)
 DEL delete_db.txt
 ENDLOCAL
 

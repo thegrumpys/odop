@@ -43,7 +43,7 @@ call .\scripts\set_db_access_var %2
   ECHO source %filename%;
 ) > load_db.txt
 mysql --user=%user% --password=%password% --host=%host% < load_db.txt
-IF %ERRORLEVEL% NEQ 0 ECHO load_db: mysql returned ERRORLEVEL %ERRORLEVEL%
+IF %ERRORLEVEL% NEQ 0 (ECHO load_db: mysql returned ERRORLEVEL %ERRORLEVEL%) ELSE (ECHO mysql returned SUCCESS)
 DEL load_db.txt
 ENDLOCAL
 
