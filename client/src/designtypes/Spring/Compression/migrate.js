@@ -389,8 +389,12 @@ export function migrate(design) {
         if (design.result.objective_value === null) {
             design.result.objective_value = 0.0;
         }
-        // To be defined - presently do nothing
-        // migrated_design.version = '13'; // last thing... set the migrated model version
+        migrated_design.version = '13'; // last thing... set the migrated model version
+    case '13':
+        // Current model version
+        // console.log('Convert from 13 to 14');
+        design.system_controls.enable_auto_search = 1;
+        // migrated_design.version = '14'; // last thing... set the migrated model version
 
         break; // Do not copy this break
     default: // Unknown
@@ -406,3 +410,6 @@ export function migrate(design) {
 //    console.log('In migrate migrated_design=',migrated_design);
     return migrated_design;
 }
+
+
+

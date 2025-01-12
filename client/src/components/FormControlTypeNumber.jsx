@@ -48,7 +48,7 @@ export default function FormControlTypeNumber(props) {
   }
 
   const localOnChange = (event) => {
-//    console.log('In FormControlTypeNumber.localOnChange','event.target.value=',event.target.value,'value=',value,'valueString=',valueString,'isInvalid=',isInvalid,'focused=',focused);
+    console.log('In FormControlTypeNumber.localOnChange','event.target.value=',event.target.value,'value=',value,'valueString=',valueString,'isInvalid=',isInvalid,'focused=',focused);
     var eventValue = parseFloat(event.target.value);
     if (Number.isFinite(eventValue)) {
 //      console.log('In FormControlTypeNumber.localOnChange Valid','event.target.value=',event.target.value,'value=',value,'valueString=',valueString,'isInvalid=',isInvalid,'focused=',focused);
@@ -84,7 +84,7 @@ export default function FormControlTypeNumber(props) {
   }
 
   const localOnBlur = (event) => {
-//    console.log('In FormControlTypeNumber.localOnBlur','event.target.value=',event.target.value,'value=',value,'valueString=',valueString,'isInvalid=',isInvalid,'focused=',focused);
+    console.log('In FormControlTypeNumber.localOnBlur','event.target.value=',event.target.value,'value=',value,'valueString=',valueString,'isInvalid=',isInvalid,'focused=',focused);
     if (isInvalid) {
       event.target.value = value;
       if (typeof props.onChangeValid === "function") props.onChangeValid(event); // Pass valid number onward
