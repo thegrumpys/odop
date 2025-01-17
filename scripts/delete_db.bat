@@ -1,4 +1,4 @@
-@echo off
+@ECHO off
 REM Delete entire database and tables
 REM BEWARE! This destroys any existing odop database and all its tables
 
@@ -11,19 +11,20 @@ IF "%1"=="" (
   GOTO BYEBYE
   )
 
-if not exist ".\scripts\set_db_access_var.bat" ( 
-  echo This batch file must be run from the ~ git\odop directory ... a.k.a. "server level". 
+IF not exist ".\scripts\set_db_access_var.bat" ( 
+  ECHO This batch file must be run from the ~ git\odop directory ... a.k.a. "server level". 
   GOTO BYEBYE
   ) 
-
-if "%1"=="production" echo You are about to delete the ODOP production database. Use Control-C to abort.  Otherwise ...
-pause
 
 IF "%1"=="local" GOTO GETACCESSVAR
 IF "%1"=="development" GOTO GETACCESSVAR
 IF "%1"=="test" GOTO GETACCESSVAR
 IF "%1"=="staging" GOTO GETACCESSVAR
-IF "%1"=="production" GOTO GETACCESSVAR
+IF "%1"=="production" (
+  ECHO You are about to delete the ODOP production database. Use Control-C to abort.  Otherwise ...
+  PAUSE
+  GOTO GETACCESSVAR
+  )
 ECHO Bad target system type parameter: "%1"
 GOTO BYEBYE
 
