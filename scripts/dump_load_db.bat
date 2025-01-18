@@ -1,4 +1,4 @@
-@echo off
+@ECHO off
 REM Perform database dump then immediatly load [restore] it.
 
 IF "%1"=="" (
@@ -10,8 +10,8 @@ IF "%1"=="" (
   GOTO BYEBYE
   )
 
-if not exist ".\scripts\set_db_access_var.bat" ( 
-  echo This batch file must be run from the ~ git\odop directory ... a.k.a. "server level". 
+IF not exist ".\scripts\set_db_access_var.bat" ( 
+  ECHO This batch file must be run from the ~ git\odop directory ... a.k.a. "server level". 
   GOTO BYEBYE
   ) 
 
@@ -25,20 +25,14 @@ GOTO BYEBYE
 
 :GETACCESSVAR
 SETLOCAL
-call .\scripts\set_db_access_var %1
-
-REM Remove this comment and the following four lines
-echo type=%type%, user=%user%, password=%password%, 
-echo host=%host%, database=%database%
-echo filename=%filename%
-GOTO BYEBYE
+CALL .\scripts\set_db_access_var %1
 
 SET filename=%type%_%date:~10,4%-%date:~4,2%-%date:~7,2%.sql
 mysqldump --user=%user% --password=%password% --host=%host% %database% --no-tablespaces --set-gtid-purged=OFF --single-transaction > %filename%
 IF %ERRORLEVEL% NEQ 0 (
   ECHO dump_load_db: mysqldump returned ERRORLEVEL %ERRORLEVEL%. Terminating with no attempt to load [restore].
   GOTO BYEBYE
-)
+) ELSE (ECHO mysqldump returned SUCCESS)
 (
   ECHO use %database%; 
   ECHO source %filename%;

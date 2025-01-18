@@ -1,4 +1,4 @@
-@echo off
+@ECHO off
 REM Create size listing of specified database
 
 IF "%1"=="" (
@@ -9,13 +9,16 @@ IF "%1"=="" (
   GOTO BYEBYE
   )
 
-if not exist ".\scripts\set_db_access_var.bat" ( 
-  echo This batch file must be run from the ~ git\odop directory ... a.k.a. "server level". 
+IF not exist ".\scripts\set_db_access_var.bat" ( 
+  ECHO This batch file must be run from the ~ git\odop directory ... a.k.a. "server level". 
   GOTO BYEBYE
   ) 
 
 
-IF "%1"=="local" GOTO GETACCESSVAR
+IF "%1"=="local" (
+  ECHO WARNING:  Results for the local database are known to be incorrect.
+  GOTO GETACCESSVAR
+  )
 IF "%1"=="development" GOTO GETACCESSVAR
 IF "%1"=="test" GOTO GETACCESSVAR
 IF "%1"=="staging" GOTO GETACCESSVAR
@@ -25,7 +28,7 @@ GOTO BYEBYE
 
 :GETACCESSVAR
 SETLOCAL
-call .\scripts\set_db_access_var %1
+CALL .\scripts\set_db_access_var %1
 
 (
   ECHO use %database%; 
