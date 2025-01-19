@@ -11,11 +11,13 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   const model_enable_auto_fix = useSelector((state) => state.model.system_controls.enable_auto_fix);
   const model_enable_auto_search = useSelector((state) => state.model.system_controls.enable_auto_search);
   const model_show_units = useSelector((state) => state.model.system_controls.show_units);
+  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
+  const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const [valueChanged, setValueChanged] = useState(false);
   const dispatch = useDispatch();
 
   const onChangeValidLocal = (event) => {
-    console.log('In NameValueUnitsRowIndependentVariable.onChangeValid event.target.value=', event.target.value);
+//    console.log('In NameValueUnitsRowIndependentVariable.onChangeValid event.target.value=', event.target.value);
     var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
     if (model_enable_auto_fix) {
       auto_fixed = true;
@@ -25,48 +27,50 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
       }
     }
     dispatch(changeSymbolValue(element.name, parseFloat(event.target.value))); // Update the model
+    setValueChanged(true);
     logValue(element.name, event.target.value);
     if (auto_fixed) {
       dispatch(changeResultTerminationCondition('The value of ' + element.name + ' has been automatically fixed.'));
     }
-    setValueChanged(true);
     if (typeof onChangeValid === "function") onChangeValid(event);
   }
 
   const onBlurLocal = (event) => {
-    console.log('In NameValueUnitsRowIndependentVariable.onBlur event.target.value=', event.target.value);
-    if (model_enable_auto_search && valueChanged) {
+//    console.log('In NameValueUnitsRowIndependentVariable.onBlur event.target.value=', event.target.value);
+    if (model_enable_auto_search && valueChanged && model_objective_value >= model_objmin) {
       dispatch(search());
+      setValueChanged(false);
     }
     if (typeof onBlur === "function") onBlur(event);
   }
 
   const onKeyPressLocal = (event) => {
-    console.log('In NameValueUnitsRowIndependentVariable.onKeyPress event.keyCode=', event.keyCode, 'event.which=', event.which);
+//    console.log('In NameValueUnitsRowIndependentVariable.onKeyPress event.keyCode=', event.keyCode, 'event.which=', event.which);
     var keyCode = event.keyCode || event.which;
     if (keyCode === 13) { // Carriage return
-      console.log('In NameValueUnitsRowIndependentVariable.onKeyPress keyCode=', keyCode);
-      if (model_enable_auto_search && valueChanged) {
+//      console.log('In NameValueUnitsRowIndependentVariable.onKeyPress keyCode=', keyCode);
+      if (model_enable_auto_search && valueChanged && model_objective_value >= model_objmin) {
         dispatch(search());
+        setValueChanged(false);
       }
     }
     if (typeof onKeyPress === "function") onKeyPress(event);
   }
 
   const onChangeInvalidLocal = (event) => {
-    console.log('In NameValueUnitsRowIndependentVariable.onChangeInvalid event.target.value=', event.target.value);
+//    console.log('In NameValueUnitsRowIndependentVariable.onChangeInvalid event.target.value=', event.target.value);
     if (typeof onChangeInvalid === "function") onChangeInvalid(event);
   }
 
   const onSetLocal = (event) => {
-    console.log('In NameValueUnitsRowIndependentVariable.onSetLocal');
+//    console.log('In NameValueUnitsRowIndependentVariable.onSetLocal');
     dispatch(fixSymbolValue(element.name));
     logValue(element.name, 'FIXED', 'FixedFlag', false);
     if (typeof onSet === "function") onSet(event);
   }
 
   const onResetLocal = (event) => {
-    console.log('In NameValueUnitsRowIndependentVariable.onResetLocal');
+//    console.log('In NameValueUnitsRowIndependentVariable.onResetLocal');
     dispatch(freeSymbolValue(element.name));
     logValue(element.name, 'FREE', 'FixedFlag', false);
     setValueChanged(true);
@@ -74,9 +78,10 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   }
 
   const onBlurFixLocal = (event) => {
-    console.log('In NameValueUnitsRowIndependentVariable.onBlurFix event.target.value=', event.target.value);
-    if (model_enable_auto_search && valueChanged) {
+//    console.log('In NameValueUnitsRowIndependentVariable.onBlurFix event.target.value=', event.target.value);
+    if (model_enable_auto_search && valueChanged && model_objective_value >= model_objmin) {
       dispatch(search());
+      setValueChanged(false);
     }
     if (typeof onBlurFix === "function") onBlurFix(event);
   }
