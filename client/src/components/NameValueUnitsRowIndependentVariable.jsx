@@ -76,7 +76,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
 //    console.log('In NameValueUnitsRowIndependentVariable.onResetLocal');
     dispatch(freeSymbolValue(element.name));
     logValue(element.name, 'FREE', 'FixedFlag', false);
-    console.log('In NameValueUnitsRowIndependentVariable.onBlurFixLocal','model_enable_auto_fix=', model_enable_auto_fix,'valueChanged=',valueChanged,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+    console.log('In NameValueUnitsRowIndependentVariable.onBlurFixLocal','model_enable_auto_fix=', model_enable_auto_fix,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     if (model_enable_auto_search && model_objective_value >= model_objmin) {
       dispatch(search());
     }
