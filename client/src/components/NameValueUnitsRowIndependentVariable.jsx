@@ -17,7 +17,8 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   const dispatch = useDispatch();
 
   const onChangeValidLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onChangeValid event.target.value=', event.target.value);
+//    console.log('In NameValueUnitsRowIndependentVariable.onChangeValidLocal event.target.value=', event.target.value);
+    console.log('In NameValueUnitsRowIndependentVariable.onChangeValidLocal','model_enable_auto_fix=', model_enable_auto_fix,'valueChanged=',valueChanged,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
     if (model_enable_auto_fix) {
       auto_fixed = true;
@@ -36,7 +37,8 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   }
 
   const onBlurLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onBlur event.target.value=', event.target.value);
+//    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal event.target.value=', event.target.value);
+    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal','model_enable_auto_fix=', model_enable_auto_fix,'valueChanged=',valueChanged,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     if (model_enable_auto_search && valueChanged && model_objective_value >= model_objmin) {
       dispatch(search());
       setValueChanged(false);
@@ -45,10 +47,11 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   }
 
   const onKeyPressLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onKeyPress event.keyCode=', event.keyCode, 'event.which=', event.which);
+//    console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal event.keyCode=', event.keyCode, 'event.which=', event.which);
+    console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal','model_enable_auto_fix=', model_enable_auto_fix,'valueChanged=',valueChanged,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     var keyCode = event.keyCode || event.which;
     if (keyCode === 13) { // Carriage return
-//      console.log('In NameValueUnitsRowIndependentVariable.onKeyPress keyCode=', keyCode);
+//      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal keyCode=', keyCode);
       if (model_enable_auto_search && valueChanged && model_objective_value >= model_objmin) {
         dispatch(search());
         setValueChanged(false);
@@ -58,7 +61,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   }
 
   const onChangeInvalidLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onChangeInvalid event.target.value=', event.target.value);
+//    console.log('In NameValueUnitsRowIndependentVariable.onChangeInvalidLocal event.target.value=', event.target.value);
     if (typeof onChangeInvalid === "function") onChangeInvalid(event);
   }
 
@@ -78,7 +81,8 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   }
 
   const onBlurFixLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onBlurFix event.target.value=', event.target.value);
+//    console.log('In NameValueUnitsRowIndependentVariable.onBlurFixLocal event.target.value=', event.target.value);
+    console.log('In NameValueUnitsRowIndependentVariable.onBlurFixLocal','model_enable_auto_fix=', model_enable_auto_fix,'valueChanged=',valueChanged,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     if (model_enable_auto_search && valueChanged && model_objective_value >= model_objmin) {
       dispatch(search());
       setValueChanged(false);
