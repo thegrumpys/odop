@@ -161,7 +161,7 @@ export default function AlertsAccordion() {
                   <p>Applies only to future value changes. Does not affect any existing variables already in "Fixed" status.</p>
                   <p>The behavior is the same as the File : Preferences enable_auto_fix value.</p>
                 </Tooltip>}>
-                <span className="text-primary px-2 pt-2"><i className="fas fa-info-circle"></i></span>
+                <span className="text-primary px-2 pt-2 pe-5"><i className="fas fa-info-circle"></i></span>
               </OverlayTrigger>
 
               <InputGroup.Text>Auto Search</InputGroup.Text>
