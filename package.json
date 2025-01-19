@@ -2,13 +2,14 @@
   "name": "odop-server",
   "version": "0.0.0",
   "description": "Open Design Optimization Platform (ODOP) Server",
-  "main": "server.js",
+  "main": "src/server.js",
+  "type": "module",
   "engines": {
     "node": "20.x"
   },
   "scripts": {
-    "start": "node server.js",
-    "server": "nodemon server.js",
+    "start": "node src/server.js",
+    "server": "nodemon src/server.js",
     "heroku-postbuild": "cd client && npm install && npm run build && harp docs build/docs && cd .. && node ./scripts/build_index.js client/build/docs",
     "test": "mocha --timeout 10000",
     "coverage": "nyc --reporter=html node_modules/mocha/bin/_mocha --timeout 10000",
@@ -41,6 +42,7 @@
     "dotenv": "^6.1.0",
     "express": "^4.17.1",
     "lunr": "^2.3.9",
-    "node-mysql": "^0.4.2"
+    "node-mysql": "^0.4.2",
+    "redux": "^5.0.1"
   }
 }

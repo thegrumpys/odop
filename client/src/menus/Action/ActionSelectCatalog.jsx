@@ -8,6 +8,7 @@ import store from "../../store/store";
 export default function ActionSelectCatalog() {
   //  console.log('ActionSelectCatalog - Mounting...');
 
+  const model_model = useSelector((state) => state.model);
   const model_type = useSelector((state) => state.model.type);
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const model_viol_wt = useSelector((state) => state.model.system_controls.viol_wt);
@@ -63,9 +64,34 @@ export default function ActionSelectCatalog() {
   }
 
   const toggle = () => {
-    //        console.log('In ActionSelectCatalog.toggle');
-    updateCatalogNames();
-    setShow(!show);
+//      console.log('ActionSelectCatalog starting');
+      fetch('/api/v1/select_catalog', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(model_model)
+      })
+      .then(res => {
+        if (!res.ok) {
+          console.error('ActionSelectCatalog not OK res.statusText=',res.statusText);
+          throw Error(res.statusText);
+        }
+//        console.log('ActionSelectCatalog OK res.json=',res.json);
+        return res.json()
+      })
+      .then(entries => {
+        setEntries(entries);
+//        console.log('ActionSelectCatalog entries=',entries);
+      })
+      .catch(error => {
+//        console.log('ActionSelectCatalog failed with message: \'' + error.message + '\'');
+      })
+      .finally(() => {
+        setShow(!show);
+//        console.log('ActionSelectCatalog ended');
+      });
   }
 
   const onSelectCatalogName = (event) => {
@@ -114,12 +140,10 @@ export default function ActionSelectCatalog() {
     setShow(!show);
   }
 
-//  updateCatalogNames();
-
   return (
     <>
-      <NavDropdown.Item onClick={toggle} disabled={names.length === 0}>
-        Select Catalog&hellip;
+      <NavDropdown.Item onClick={toggle}>
+        Select Catalog
       </NavDropdown.Item>
       {show && <Modal show={show} size="lg" onHide={onCancel}>
         <Modal.Header closeButton>

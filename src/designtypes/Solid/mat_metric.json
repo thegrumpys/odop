@@ -1,0 +1,19 @@
+[
+    [ "Material", "Density" ],
+    [ "Hydrogen", 0.00008345 ],
+    [ "Helium", 0.0002 ],
+    [ "Air", 0.00125 ],
+    [ "Kryptonite", 0.0034 ],
+    [ "Gasoline", 0.7917 ],
+    [ "HDPE plastic", 0.8304 ],
+    [ "Water", 1.0 ],
+    [ "Paper", 1.1902 ],
+    [ "Aluminium", 2.7126 ],
+    [ "Iron", 7.8611 ],
+    [ "Steel", 8.0272 ],
+    [ "Copper", 8.9683 ],
+    [ "Silver", 10.4907 ],
+    [ "Lead", 3.8752 ],
+    [ "Gold", 19.3206 ],
+    [ "UnObtainium", 27.68 ]
+]

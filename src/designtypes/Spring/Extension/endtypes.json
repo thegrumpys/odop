@@ -1,0 +1,9 @@
+[
+    [ "End_Type","Inactive_Coils","End_Dia","HookDefAll" ],
+    [ "Full_Loop",        0.0,     1.00,      0.4],
+    [ "75%_Loop",         0.0,     0.75,      0.2],
+    [ "Full_Hook",        0.0,     1.00,      0.4],
+    [ "75%_Hook",         0.0,     0.75,      0.2],
+    [ "Close_Wound_Coil", 0.0,     0.00,      0.0],
+    [ "User_Specified",   0.0,     0.00,      0.0]
+]

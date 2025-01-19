@@ -1,12 +1,24 @@
-require('dotenv').config();
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
-const mysql = require('mysql');
-var cors = require('cors');
-var lunr = require("lunr");
-var lunr_index = require("./lunr_index.json");
-var lunr_pages = require("./lunr_pages.json");
+import dotenv from 'dotenv';
+import express from 'express';
+import path from 'path';
+import bodyParser from 'body-parser';
+import mysql from 'mysql';
+import cors from 'cors';
+import lunr from "lunr";
+import lunr_index from "../lunr_index.json" with { type: "json" };
+import lunr_pages from "../lunr_pages.json" with { type: "json" };
+import store from "./store/store.js";
+import { load } from "./store/actions.js";
+import { init } from './designtypes/Spring/Compression/init.js';
+import { eqnset } from './designtypes/Spring/Compression/eqnset.js';
+import * as o from "./designtypes/Spring/Compression/symbol_table_offsets.js"
+import m_tab from './designtypes/Spring/mat_us.json' with { type: "json" };
+import * as mo from './designtypes/Spring/mat_offsets.js';
+import et_tab from './designtypes/Spring/Compression/endtypes.json' with { type: "json" };
+import * as eo from './designtypes/Spring/Compression/endtypes_offsets.js';
+import { CONSTRAINED, FIXED } from './store/actionTypes.js';
+dotenv.config();
+const __dirname = import.meta.dirname;
 
 /**
  * A simple middleware that asserts valid user name and sends 401 responses
@@ -518,6 +530,261 @@ function adjustSat(sat1, sat2, score) {
   return `hsl(122, ${newSat}%, 35%)`;
 }
 
+app.post('/api/v1/redux', (req, res) => {
+    var value;
+//    console.log('SERVER: In POST /api/v1/redux','user=',user,'req.uid=',req.uid,'req.body=',req.body,'req.body.length=',req.body.length);
+    if (req.body === undefined || req.body.length === 0) {
+        res.status(400).end();
+        console.log('SERVER: 400 - BAD REQUEST');
+    } else {
+//        console.log('SERVER: In POST /api/v1/redux','req.body=',req.body,'req.body.type=',req.body.type);
+//        console.log('SERVER: In POST /api/v1/redux','store=',store);
+//        console.log('SERVER: In POST /api/v1/redux','store.getState()=',store.getState());
+        store.dispatch(req.body);
+//        console.log('SERVER: In POST /api/v1/redux','store.getState()=',store.getState());
+        value = {};
+        res.status(200).json(value);
+    }
+});
+
+function getObjectiveValue(st, viol_wt) {
+//    console.log('In getObjectiveValue st=',st,'viol_wt=',viol_wt);
+    var element;
+    var vmin;
+    var vmax;
+    var viol_sum = 0.0;
+    var result;
+
+    for (let i = 0; i < st.length; i++) {
+        element = st[i];
+        if (element.type === "equationset" && element.input) {
+            vmin = 0.0;
+            vmax = 0.0;
+            if (element.lmin & CONSTRAINED ) { // TODO: || element.lmin < FREESTAT) {
+                vmin = (-element.value + element.cmin) / element.smin;
+            }
+            if (element.lmax & CONSTRAINED ) { // TODO: || element.lmax < FREESTAT) {
+                vmax = ( element.value - element.cmax) / element.smax;
+            }
+            if (vmin > 0.0) {
+                viol_sum = viol_sum + vmin * vmin;
+            }
+            if (vmax > 0.0) {
+                viol_sum = viol_sum + vmax * vmax;
+            }
+        }
+    }
+    for (let i = 0; i < st.length; i++) {
+        element = st[i];
+        if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
+            vmin = 0.0;
+            vmax = 0.0;
+            /* State variable fix levels. */
+            /*
+             * The fix_wt's are automatically incorporated in the scaling denominators
+             * S(I+N) by the main routine.
+             *
+             * This version reduces penalty of large fix violations.
+             */
+            if (element.lmin & FIXED) {
+                vmin = (-element.value + element.cmin) / element.smin;
+                vmax = -vmin;
+                if (vmin > 1.0) {
+                    viol_sum = viol_sum + vmin;
+                } else if (vmin < -1.0) {
+                    viol_sum = viol_sum - vmin;
+                } else {
+                    viol_sum = viol_sum + vmin * vmin;
+                }
+            } else {
+                if (element.lmin & CONSTRAINED ) {
+                    vmin = (-element.value + element.cmin) / element.smin;
+//                console.log('name=',element.name,' vmin=',vmin,' value=',element.value,' cmin=',element.cmin,' smin=',element.smin);
+                }
+                if (element.lmax & CONSTRAINED ) {
+                    vmax = ( element.value - element.cmax) / element.smax;
+//                console.log('name=',element.name,' vmax=',vmax,' value=',element.value,' cmax=',element.cmax,' smax=',element.smax);
+                }
+                if (vmin > 0.0) {
+                    viol_sum = viol_sum + vmin * vmin;
+                }
+                if (vmax > 0.0) {
+                    viol_sum = viol_sum + vmax * vmax;
+                }
+            }
+        }
+    }
+
+    // Return Objective Value
+    result = viol_wt * viol_sum;
+//    console.log('In getObjectiveValue result=',result);
+    return result;
+}
+
+function convertToResultArray(entry) {
+//    console.log('In convertToResultArray entry=',entry);
+    var result;
+    var entry_select = entry[0].replace('-', '\u2011');
+    var entry_table = `OD_Free:\u00A0${entry[1]}, Wire_Dia:\u00A0${entry[2]}, L_Free:\u00A0${entry[3]}, Coils_T:\u00A0${entry[4]}, Material_Type:\u00A0${entry[5]}, End_Type:\u00A0${entry[6]}, Obj:\u00A0${entry[9]}`;
+    // Convert to changeSymbolValue array
+    var entry_symbol_values = [];
+    entry_symbol_values.push(['OD_Free',entry[1]]);
+    entry_symbol_values.push(['Wire_Dia',entry[2]]);
+    entry_symbol_values.push(['L_Free',entry[3]]);
+    entry_symbol_values.push(['Coils_T',entry[4]]);
+    entry_symbol_values.push(['Material_Type',entry[7]]);
+    entry_symbol_values.push(['End_Type',entry[8]]);
+    result = [entry_select, entry_table, entry_symbol_values];
+//    console.log('In convertToResultArray result=',result);
+    return result;
+}
+
+export function getCatalogEntries(name, store, st, viol_wt) {
+//    console.log('Entering getCatalogEntries name=',name,' store=',store,' st=',st,' viol_wt=',viol_wt);
+    var catalog, entry;
+    var result = [];
+    var p, x, offset;
+    var objective_value;
+    var cat0, cat1, cat2, cat3;
+    function findMaterialTypeIndex(element, index) {
+//        console.log('In findMaterialTypeIndex element=',element,' index=',index,' element[mo.matnam]=',element[mo.matnam],' entry[5]=',entry[5]);
+        return index > 0 && element[mo.matnam] === entry[5];
+    }
+    function findEndTypeIndex(element, index) {
+//        console.log('In findEndTypeIndex element=',element,' index=',index,' element[0]=',element[0],' entry[6]=',entry[6]);
+        return index > 0 && element[eo.end_type] === entry[6];
+    }
+    function pPush(element) {
+        if (element.type === "equationset" && element.input) {
+            p.push(element.value);
+        }
+    }
+    function xPush(element) {
+        if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
+            x.push(element.value)
+        }
+    }
+    function xPull(element) {
+        if ((element.type === "equationset" && !element.input) || (element.type === "calcinput")) {
+            element.value = x[offset++];
+        }
+    }
+
+    // Create implied constraints between half and twice
+    var cmin_OD_Free = st[o.OD_Free].value/2;
+    var cmax_OD_Free = st[o.OD_Free].value*2;
+//    console.log('cmin_OD_Free=',cmin_OD_Free,'cmax_OD_Free=',cmax_OD_Free);
+    var cmin_Wire_Dia = st[o.Wire_Dia].value/2;
+    var cmax_Wire_Dia = st[o.Wire_Dia].value*2;
+//    console.log('cmin_Wire_Dia=',cmin_Wire_Dia,'cmax_Wire_Dia=',cmax_Wire_Dia);
+    var cmin_L_Free = st[o.L_Free].value/2;
+    var cmax_L_Free = st[o.L_Free].value*2;
+//    console.log('cmin_L_Free=',cmin_L_Free,'cmax_L_Free=',cmax_L_Free);
+    var cmin_Coils_T = st[o.Coils_T].value/2;
+    var cmax_Coils_T = st[o.Coils_T].value*2;
+//    console.log('cmin_Coils_T=',cmin_Coils_T,'cmax_Coils_T=',cmax_Coils_T);
+
+    // Load catalog table
+    catalog = [
+        ["Name","OD_Free","Wire_Dia","L_Free","Coils_T","Material_Type","End_Type"],
+        ["115-S", 0.906, 0.105,  2.750, 11.660, "HARD_DRAWN_WIRE", "Closed"       ],
+        ["128-S", 1.375, 0.120,  2.750,  7.500, "HARD_DRAWN_WIRE", "Closed&Ground"],
+        ["140-S", 1.187, 0.120,  2.750,  9.000, "HARD_DRAWN_WIRE", "Closed&Ground"],
+        ["430-S", 0.625, 0.091,  1.750, 11.000, "HARD_DRAWN_WIRE", "Closed"       ]
+    ];
+    //    console.log('In getCatalogEntries catalog=',catalog);
+    // scan through catalog
+    for (let i = 1; i < catalog.length; i++) { // Skip column headers at zeroth entry
+        entry = Object.assign({},catalog[i]); // Make copy so we can modify it without affecting catalog
+        console.log('entry=',entry);
+
+        // Skip catalog entry if it's less than half the constraint value or greater than twice the constraint value
+        if (entry[1] < cmin_OD_Free  || entry[1] > cmax_OD_Free ) continue;
+        if (entry[2] < cmin_Wire_Dia || entry[2] > cmax_Wire_Dia) continue;
+        if (entry[3] < cmin_L_Free   || entry[3] > cmax_L_Free  ) continue;
+        if (entry[4] < cmin_Coils_T  || entry[4] > cmax_Coils_T ) continue;
+
+        entry[7] = m_tab.findIndex(findMaterialTypeIndex); // Set matching Material Type index
+        entry[8] = et_tab.findIndex(findEndTypeIndex); // Set matching End Type index
+
+//        console.log('In getCatalogEntries 0: entry = ', entry);
+
+        // Update symbol table with catalog entries
+        st[o.OD_Free].value = entry[1];
+        st[o.Wire_Dia].value = entry[2];
+        st[o.L_Free].value = entry[3];
+        st[o.Coils_T].value = entry[4];
+        st[o.Material_Type].value = entry[7]; // Use Material Type index
+        st[o.End_Type].value = entry[8]; // Use End Type index
+//        console.log('In getCatalogEntries 0 st=',st);
+
+        // Invoke init function
+        p = [];
+        st.forEach(pPush);
+        x = [];
+        st.forEach(xPush);
+        x = init(store, p, x);
+        offset = 0;
+        st.forEach(xPull);
+//        console.log('In getCatalogEntries 1 st=',st);
+
+        // Invoke eqnset function
+        p = [];
+        st.forEach(pPush);
+        x = [];
+        st.forEach(xPush);
+        x = eqnset(p, x);
+        offset = 0;
+        st.forEach(xPull);
+//        console.log('In getCatalogEntries 2 st=',st);
+
+        // Invoke violations & objective value function
+        objective_value = getObjectiveValue(st, viol_wt);
+//        console.log('In getCatalogEntries 3 objective_value=',objective_value);
+
+        entry[9] = objective_value.toFixed(6); // Set Objective Value
+//        console.log('In getCatalogEntries 4: entry = ', entry);
+
+        // get four lowest objective values as candidate entries
+        if (cat0 === undefined || entry[9] < cat0[9]) { cat3 = cat2; cat2 = cat1; cat1 = cat0; cat0 = entry; }
+        else if (cat1 === undefined || entry[9] < cat1[9]) { cat3 = cat2; cat2 = cat1; cat1 = entry; }
+        else if (cat2 === undefined || entry[9] < cat2[9]) { cat3 = cat2; cat2 = entry; }
+        else if (cat3 === undefined || entry[9] < cat3[9]) { cat3 = entry; }
+//        console.log('In getCatalogEntries 4 cat0=',cat0,' cat1=',cat1,' cat2=',cat2,' cat3=',cat3);
+    }
+    if (cat0 !== undefined) {
+        result.push(convertToResultArray(cat0));
+    }
+    if (cat1 !== undefined) {
+        result.push(convertToResultArray(cat1));
+    }
+    if (cat2 !== undefined) {
+        result.push(convertToResultArray(cat2));
+    }
+    if (cat3 !== undefined) {
+        result.push(convertToResultArray(cat3));
+    }
+//    console.log('Exiting getCatalogEntries result=',result);
+    return result;
+}
+
+app.post('/api/v1/select_catalog', (req, res) => {
+//    console.log('SERVER: In POST /api/v1/select_catalog','req.body=',req.body,'req.body.length=',req.body.length);
+    if (req.body === undefined || req.body.length === 0) {
+        res.status(400).end();
+//        console.log('SERVER: 400 - BAD REQUEST');
+    } else {
+//      console.log('SERVER: In POST /api/v1/select_catalog','req.body=',req.body);
+      store.dispatch(load(req.body));
+      var name = "generic_compression_catalog";
+      var st = req.body.symbol_table;
+      var viol_wt = req.body.system_controls.viol_wt;
+      var result = getCatalogEntries(name, store, st, viol_wt);
+//      console.log('SERVER: In POST /api/v1/select_catalog','result=',result);
+      res.status(200).json(result);
+    }
+});
+
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
 //    console.log('process.env.NODE_ENV == production or staging');
     // If it’s not https already, redirect the same url on https.
@@ -544,9 +811,9 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')
 }
 
 const port = process.env.PORT || 5000;
-if (!module.parent) { // If not in a testcase then start listening
+//if (!module.parent) { // If not in a testcase then start listening
     console.log('SERVER: PUBLIC_URL =', process.env.PUBLIC_URL, 'NODE_ENV =', process.env.NODE_ENV, 'starting on port =', port, 'node version =', process.version);
     app.listen(port);
-}
+//}
 
-module.exports = app; // for testing
+//module.exports = app; // for testing

@@ -1,0 +1,10 @@
+[
+    [ "End_Type","Inactive_Coils","Add_Coils@Solid" ],
+    [ "Open",           0.0,       1.0],
+    [ "Open&Ground",    1.0,       0.0],
+    [ "Closed",         2.0,       1.0],
+    [ "Closed&Ground",  2.0,       0.0],
+    [ "Tapered_C&G",    2.0,      -0.5],
+    [ "Pig-tail",       2.0,       0.0],
+    [ "User_Specified", 0.0,       0.0]
+]
