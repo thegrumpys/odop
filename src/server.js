@@ -740,7 +740,33 @@ export function getCatalogEntries(catalog, store, st, viol_wt) {
     return result;
 }
 
-app.post('/api/v1/select_catalog', (req, res) => {
+  app.post('/api/v1/catalogs', (req, res) => {
+    var connection = startConnection();
+    var stmt =
+      'SELECT c.name AS catalog_name, ca.name AS catalog_alias_name, c.id as catalog_id \
+       FROM catalog c \
+       LEFT JOIN catalog_alias ca \
+       ON c.id = ca.catalog_id \
+       ORDER BY c.name';
+    console.log('SERVER: stmt=' + stmt);
+    connection.query(stmt, function(err, rows) {
+      console.log('SERVER: After SELECT err=', err, ' rows=', rows);
+      if (err) {
+        res.status(500).end();
+        connection.end();
+        console.log('SERVER: 500 - INTERNAL SERVER ERROR');
+        throw err;
+      } else {
+        var value = rows.map((row) => { return [row.catalog_name + (row.catalog_alias_name!==null ? ' ('+row.catalog_alias_name+')' : ''), row.catalog_id] });
+        console.log('SERVER: After SELECT DISTINCT value=', value);
+        res.status(200).json(value);
+        connection.end();
+        console.log('SERVER: 200 - OK');
+      }
+    });
+  });
+
+  app.post('/api/v1/select_catalog', (req, res) => {
 //    console.log('SERVER: In POST /api/v1/select_catalog','req.body=',req.body,'req.body.length=',req.body.length);
     if (req.body === undefined || req.body.length === 0) {
         res.status(400).end();

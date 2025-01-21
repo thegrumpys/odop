@@ -27,6 +27,34 @@ export default function ActionSelectCatalog() {
 
   const updateCatalogNames = () => {
     //        console.log('In ActionSelectCatalog.updateCatalogNames');
+    fetch('/api/v1/catalogs', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(res => {
+      if (!res.ok) {
+        console.error('ActionSelectCatalog not OK res.statusText=',res.statusText);
+        throw Error(res.statusText);
+      }
+      console.log('ActionSelectCatalog OK res.json=',res.json);
+      return res.json()
+    })
+    .then(catalogs => {
+//      setNames(entries);
+      console.log('ActionSelectCatalog catalogs=',catalogs);
+    })
+    .catch(error => {
+       console.log('ActionSelectCatalog failed with message: \'' + error.message + '\'');
+    });
+    
+    
+    
+    
+    
+    
     var { getCatalogNames, getCatalogEntries } = require('../../designtypes/' + model_type + '/catalog.js'); // Dynamically load getCatalogNames & getCatalogEntries
     var localNames = getCatalogNames();
     //        console.log('In ActionSelectCatalog.toggle names=',names);
