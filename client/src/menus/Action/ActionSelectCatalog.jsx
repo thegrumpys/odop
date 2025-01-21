@@ -120,19 +120,19 @@ export default function ActionSelectCatalog() {
     //        console.log('In ActionSelectCatalog.onSelect');
     setShow(!show);
     // Do select catalog entry
-    logUsage('event', 'ActionSelectCatalog', { event_label: name + ' ' + entries[entry][0] });
+    logUsage('event', 'ActionSelectCatalog', { event_label: entries[entry][0] + ' ' + entries[entry][1] });
     dispatch(saveAutoSave());
     //        console.log('In ActionSelectCatalog.onSelect entries=',entries);
-    entries[entry][2].forEach((element) => {
+    entries[entry][3].forEach((element) => {
       //            console.log('In ActionSelectCatalog.onSelect element=',element);
       dispatch(changeSymbolValue(element[0], element[1]));
       logValue(element[0], element[1]);
     });
     // The catalog name and number must be set after setting the affected symbols table entries
-    dispatch(changeSymbolValue('Catalog_Name', name));
-    logValue('Catalog_Name', name);
-    dispatch(changeSymbolValue('Catalog_Number', entries[entry][0]));
-    logValue('Catalog_Number', entries[entry][0]);
+    dispatch(changeSymbolValue('Catalog_Name', entries[entry][0]));
+    logValue('Catalog_Name', entries[entry][0]);
+    dispatch(changeSymbolValue('Catalog_Number', entries[entry][1]));
+    logValue('Catalog_Number', entries[entry][1]);
   }
 
   const onCancel = () => {
@@ -174,8 +174,8 @@ export default function ActionSelectCatalog() {
                 <tbody>
                   {entries.map((element, index) => (
                     <tr key={index}>
-                      <td><Form.Check type='radio' name="catalogEntrySelect" id="catalogEntrySelect" checked={index === entry} label={element[0]} onChange={onSelectCatalogEntry} value={index}></Form.Check></td>
-                      <td>{element[1]}</td>
+                      <td><Form.Check type='radio' name="catalogEntrySelect" id="catalogEntrySelect" checked={index === entry} label={element[0]+' '+element[1]} onChange={onSelectCatalogEntry} value={index}></Form.Check></td>
+                      <td>{element[2]}</td>
                     </tr>
                   ))}
                 </tbody>

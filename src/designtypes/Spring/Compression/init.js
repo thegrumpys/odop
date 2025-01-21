@@ -31,7 +31,7 @@ export function init(store, p, x) {
  //
     i = x[o.Material_Type];
 //    x[o.Material_Index] = i;
-    console.log('Material_Index = x[o.Material_Type] =', x[o.Material_Type]);
+//    console.log('Material_Index = x[o.Material_Type] =', x[o.Material_Type]);
 //    console.log('Material_Index = x[o.Material_Index] =', x[o.Material_Index]);
 
      /*  taken from READMAT.PLI
