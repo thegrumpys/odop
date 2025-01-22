@@ -530,23 +530,6 @@ function adjustSat(sat1, sat2, score) {
   return `hsl(122, ${newSat}%, 35%)`;
 }
 
-app.post('/api/v1/redux', (req, res) => {
-    var value;
-//    console.log('SERVER: In POST /api/v1/redux','user=',user,'req.uid=',req.uid,'req.body=',req.body,'req.body.length=',req.body.length);
-    if (req.body === undefined || req.body.length === 0) {
-        res.status(400).end();
-        console.log('SERVER: 400 - BAD REQUEST');
-    } else {
-//        console.log('SERVER: In POST /api/v1/redux','req.body=',req.body,'req.body.type=',req.body.type);
-//        console.log('SERVER: In POST /api/v1/redux','store=',store);
-//        console.log('SERVER: In POST /api/v1/redux','store.getState()=',store.getState());
-        store.dispatch(req.body);
-//        console.log('SERVER: In POST /api/v1/redux','store.getState()=',store.getState());
-        value = {};
-        res.status(200).json(value);
-    }
-});
-
 app.post('/api/v1/catalogs', (req, res) => {
   var connection = startConnection();
   var stmt =

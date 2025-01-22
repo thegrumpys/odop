@@ -27,7 +27,6 @@ import ActionTrade from '../menus/Action/ActionTrade';
 import ActionSelectSize from '../menus/Action/ActionSelectSize';
 import ActionSelectCatalog from '../menus/Action/ActionSelectCatalog';
 import ActionExecute from '../menus/Action/ActionExecute';
-import ActionRedux from '../menus/Action/ActionRedux';
 import ViewCADModel from '../menus/View/ViewCADModel';
 import ViewSelect from '../menus/View/ViewSelect';
 import ViewOffsets from '../menus/View/ViewOffsets';
@@ -156,8 +155,6 @@ export default function MainPage() {
               <ActionSelectCatalog />
               <NavDropdown.Divider />
               <ActionExecute />
-              <NavDropdown.Divider />
-              <ActionRedux />
             </NavDropdown>
             <NavDropdown title="View">
               {model_type === "Spring/Extension" && <ViewCADModel />}
