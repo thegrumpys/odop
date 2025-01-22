@@ -13,22 +13,24 @@ export default function ActionSelectCatalog() {
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const model_viol_wt = useSelector((state) => state.model.system_controls.viol_wt);
   const [show, setShow] = useState(false);
-  const [names, setNames] = useState([]);
-  const [name, setName] = useState(undefined);
-  const [entries, setEntries] = useState([]);
-  const [entry, setEntry] = useState(undefined);
+  const [catalogs, setCatalogs] = useState([]);
+  const [catalogName, setCatalogName] = useState(undefined);
+  const [catalogNumber, setCatalogNumber] = useState(undefined);
+  const [catalogEntries, setCatalogEntries] = useState([]);
+  const [catalogEntryName, setCatalogEntryName] = useState(undefined);
+  const [catalogEntryNumber, setCatalogEntryNumber] = useState(undefined);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    //    console.log('ActionSelectCatalog - Mounted','model_type=',model_type);
-    updateCatalogNames();
+    console.log('ActionSelectCatalog.useEffect - Mounted','model_type=',model_type);
+    getCatalogNames();
     return () => { };
   }, [model_type]);
 
-  const updateCatalogNames = () => {
-    //        console.log('In ActionSelectCatalog.updateCatalogNames');
-    fetch('/api/v1/catalogs', {
-      method: 'POST',
+  const getCatalogNames = () => {
+    console.log('ActionSelectCatalog.getCatalogNames','model_type=',model_type);
+    fetch('/api/v1/catalogs/'+encodeURIComponent(model_type), {
+      method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -36,135 +38,137 @@ export default function ActionSelectCatalog() {
     })
     .then(res => {
       if (!res.ok) {
-        console.error('ActionSelectCatalog not OK res.statusText=',res.statusText);
+        console.error('ActionSelectCatalog.getCatalogNames not OK','res.statusText=',res.statusText);
         throw Error(res.statusText);
       }
-      console.log('ActionSelectCatalog OK res.json=',res.json);
+      console.log('ActionSelectCatalog.getCatalogNames OK','res.json=',res.json);
       return res.json()
     })
-    .then(catalogs => {
-//      setNames(entries);
-      console.log('ActionSelectCatalog catalogs=',catalogs);
+    .then(localCatalogs => {
+      console.log('ActionSelectCatalog.getCatalogNames','localCatalogs=',localCatalogs);
+
+      setCatalogs(localCatalogs);
+
+      var localCatalogName = localCatalogs[0].name; // Default to first catalog name
+      var localCatalogNumber = localCatalogs[0].number; // Default to first catalog number
+      console.log('ActionSelectCatalog.getCatalogNames Default Catalog','localCatalogName=',localCatalogName,'localCatalogNumber=',localCatalogNumber);
+      model_symbol_table.forEach((element) => {
+        if (element.name === "Catalog_Name") {
+          if (element.value !== "") {
+            localCatalogName = element.value;
+            console.log('ActionSelectCatalog.getCatalogNames Override','localCatalogName=',localCatalogName);
+          }
+        }
+      });
+      setCatalogName(localCatalogName);
+      catalogs.forEach((element) => {
+        if (element.name.startsWith(localCatalogName)) {
+          localCatalogNumber = element.number;
+          console.log('ActionSelectCatalog.getCatalogNames Override','localCatalogNumber=',localCatalogNumber);
+        }
+      });
+      setCatalogNumber(localCatalogNumber);
+
+      getCatalogEntries(localCatalogName);
     })
     .catch(error => {
-       console.log('ActionSelectCatalog failed with message: \'' + error.message + '\'');
+       console.log('ActionSelectCatalog.getCatalogNames failed with message: \'' + error.message + '\'');
     });
-    
-    
-    
-    
-    
-    
-    var { getCatalogNames, getCatalogEntries } = require('../../designtypes/' + model_type + '/catalog.js'); // Dynamically load getCatalogNames & getCatalogEntries
-    var localNames = getCatalogNames();
-    //        console.log('In ActionSelectCatalog.toggle names=',names);
-    var localName;
-    var entry_string;
-    // Loop to create st from model_symbol_table, and initialize names/name and entries/entry
-    var st = [];
-    model_symbol_table.forEach((element) => {
-      st.push(Object.assign({}, element));
-      if (element.name === "Catalog_Name") {
-        localName = localNames[0]; // Default to first name
-        if (element.value !== "") {
-          localName = element.value;
-        }
-      }
-      if (element.name === "Catalog_Number") {
-        entry_string = ""; // Default to blank entry string
-        if (element.value !== "") {
-          entry_string = element.value;
-        }
-      }
-    });
-    var localEntries = getCatalogEntries(localName, store, st, model_viol_wt);
-    var localEntry = 0; // Default to first entry
-    localEntries.forEach((element, index) => {
-      if (element[0] === entry_string) {
-        localEntry = index;
-      }
-    });
-    //        console.log('names=',names,'name=',name,'entries=',entries,'entry=',entry);
-    setNames(localNames);
-    setName(localName);
-    setEntries(localEntries);
-    setEntry(localEntry);
   }
-
-  const toggle = () => {
-//      console.log('ActionSelectCatalog starting');
+  
+  const getCatalogEntries = (localCatalogName) => {
+      console.log('ActionSelectCatalog.getCatalogEntries','localCatalogName=',localCatalogName,'model_model=',model_model);
       fetch('/api/v1/select_catalog', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(model_model)
+        body: JSON.stringify({ catalog_name: localCatalogName, model: model_model })
       })
       .then(res => {
         if (!res.ok) {
-          console.error('ActionSelectCatalog not OK res.statusText=',res.statusText);
+          console.error('ActionSelectCatalog.getCatalogEntries not OK','res.statusText=',res.statusText);
           throw Error(res.statusText);
         }
-//        console.log('ActionSelectCatalog OK res.json=',res.json);
+        console.log('ActionSelectCatalog.getCatalogEntries OK','res.json=',res.json);
         return res.json()
       })
-      .then(entries => {
-        setEntries(entries);
-//        console.log('ActionSelectCatalog entries=',entries);
+      .then(localCatalogEntries => {
+        setCatalogEntries(localCatalogEntries);
+        console.log('ActionSelectCatalog.getCatalogEntries','localCatalogEntries=',localCatalogEntries);
+        if (localCatalogEntries.length > 0) {
+          var localCatalogEntryName = localCatalogEntries[0][1]; // Default to first catalog entry name
+          var localCatalogEntryNumber = 0; // Default to first catalog entry number
+          console.log('ActionSelectCatalog.getCatalogEntries Default Catalog Entry','localCatalogEntryName=',localCatalogEntryName,'localCatalogEntryNumber=',localCatalogEntryNumber);
+          model_symbol_table.forEach((element, index) => {
+           if (element.name === "Catalog_Number") {
+              if (element.value !== "") {
+                localCatalogEntryName = element.value;
+                localCatalogEntryNumber = index;
+                console.log('ActionSelectCatalog.getCatalogEntries Override','localCatalogEntryName=',localCatalogEntryName,'localCatalogEntryNumber=',localCatalogEntryNumber);
+              }
+            }
+          });
+          setCatalogEntryName(localCatalogEntryName);
+          setCatalogEntryNumber(localCatalogEntryNumber);
+        } else {
+          setCatalogEntryName(undefined);
+          setCatalogEntryNumber(undefined);
+        }
       })
       .catch(error => {
-//        console.log('ActionSelectCatalog failed with message: \'' + error.message + '\'');
-      })
-      .finally(() => {
-        setShow(!show);
-//        console.log('ActionSelectCatalog ended');
+        console.log('ActionSelectCatalog.getCatalogEntries failed with message: \'' + error.message + '\'');
       });
   }
 
+  const toggle = (event) => {
+      console.log('ActionSelectCatalog.toggle','event.target.value=',event.target.value);
+      getCatalogEntries(catalogName);
+      setShow(!show);
+  }
+
   const onSelectCatalogName = (event) => {
-    //        console.log('In ActionSelectCatalog.onSelectCatalogName event.target.value=',event.target.value);
-    var localName = event.target.value;
-    var { getCatalogEntries } = require('../../designtypes/' + model_type + '/catalog.js'); // Dynamically load getCatalogEntries
-    // Loop to create p and x from model_symbol_table
-    var st = [];
-    model_symbol_table.forEach((element) => {
-      st.push(Object.assign({}, element));
-    });
-    var localEntries = getCatalogEntries(localName, store, st, model_viol_wt);
-    var localEntry = 0; // Default to first entry
-    setName(localName);
-    setEntries(localEntries);
-    setEntry(localEntry);
+    console.log('ActionSelectCatalog.onSelectCatalogName','event.target.value=',event.target.value);
+    var localCatalogName = event.target.value;
+    setCatalogName(localCatalogName);
+    getCatalogEntries(localCatalogName);
   }
 
   const onSelectCatalogEntry = (event) => {
-    //        console.log('In ActionSelectCatalog.onSelectCatalogEntry event.target.value=',event.target.value);
+    console.log('ActionSelectCatalog.onSelectCatalogEntry','event.target.value=',event.target.value);
     var entry = parseFloat(event.target.value);
-    setEntry(entry);
+    var localCatalogEntryName = catalogEntries[entry][1]
+    var localCatalogEntryNumber = entry;
+    console.log('ActionSelectCatalog.onSelectCatalogEntry','localCatalogEntryName=',localCatalogEntryName,'localCatalogEntryNumber=',localCatalogEntryNumber);
+    setCatalogEntryName(localCatalogEntryName);
+    setCatalogEntryNumber(localCatalogEntryNumber);
   }
 
   const onSelect = () => {
-    //        console.log('In ActionSelectCatalog.onSelect');
+    console.log('ActionSelectCatalog.onSelect','catalogEntries=',catalogEntries);
     setShow(!show);
     // Do select catalog entry
-    logUsage('event', 'ActionSelectCatalog', { event_label: entries[entry][0] + ' ' + entries[entry][1] });
+    console.log('ActionSelectCatalog.onSelect','catalogEntryNumber=',catalogEntryNumber,'catalogEntries[catalogEntryNumber][0]=',catalogEntries[catalogEntryNumber][0],'catalogEntries[catalogEntryNumber][1]=',catalogEntries[catalogEntryNumber][1]);
+    logUsage('event', 'ActionSelectCatalog', { event_label: catalogEntries[catalogEntryNumber][0] + ' ' + catalogEntries[catalogEntryNumber][1] });
     dispatch(saveAutoSave());
-    //        console.log('In ActionSelectCatalog.onSelect entries=',entries);
-    entries[entry][3].forEach((element) => {
-      //            console.log('In ActionSelectCatalog.onSelect element=',element);
+    catalogEntries[catalogEntryNumber][3].forEach((element) => {
+      console.log('ActionSelectCatalog.onSelect element=',element);
       dispatch(changeSymbolValue(element[0], element[1]));
       logValue(element[0], element[1]);
     });
     // The catalog name and number must be set after setting the affected symbols table entries
-    dispatch(changeSymbolValue('Catalog_Name', entries[entry][0]));
-    logValue('Catalog_Name', entries[entry][0]);
-    dispatch(changeSymbolValue('Catalog_Number', entries[entry][1]));
-    logValue('Catalog_Number', entries[entry][1]);
+    var localCatalogName = catalogEntries[catalogEntryNumber][0];
+    var localCatalogEntryName = catalogEntries[catalogEntryNumber][1];
+    console.log('ActionSelectCatalog.onSelect','localCatalogName=',localCatalogName,'localCatalogEntryName=',localCatalogEntryName);
+    dispatch(changeSymbolValue('Catalog_Name', localCatalogName));
+    logValue('Catalog_Name', localCatalogName);
+    dispatch(changeSymbolValue('Catalog_Number', localCatalogEntryName));
+    logValue('Catalog_Number', localCatalogEntryName);
   }
 
   const onCancel = () => {
-    //        console.log('In ActionSelectCatalog.onCancel');
+    console.log('ActionSelectCatalog.onCancel');
     setShow(!show);
   }
 
@@ -181,13 +185,13 @@ export default function ActionSelectCatalog() {
         </Modal.Header>
         <Modal.Body>
           <Form.Label htmlFor="catalogNameSelect">Select catalog name:</Form.Label>
-          <Form.Control as="select" id="catalogNameSelect" onChange={onSelectCatalogName} value={name}>
-            {names.map((element, index) =>
-              <option key={index} value={element}>{element}</option>
+          <Form.Control as="select" id="catalogNameSelect" onChange={onSelectCatalogName} value={catalogName}>
+            {catalogs.map((element, index) =>
+              <option key={index} value={element.name}>{element.name}</option>
             )}
           </Form.Control>
           <br />
-          {entries.length === 0 ?
+          {catalogEntries.length === 0 ?
             <Form.Label htmlFor="catalogEntrySelect">No acceptable entries were found in this catalog</Form.Label>
             :
             <>
@@ -200,9 +204,9 @@ export default function ActionSelectCatalog() {
                   </tr>
                 </thead>
                 <tbody>
-                  {entries.map((element, index) => (
+                  {catalogEntries.map((element, index) => (
                     <tr key={index}>
-                      <td><Form.Check type='radio' name="catalogEntrySelect" id="catalogEntrySelect" checked={index === entry} label={element[0]+' '+element[1]} onChange={onSelectCatalogEntry} value={index}></Form.Check></td>
+                      <td><Form.Check type='radio' name="catalogEntrySelect" id="catalogEntrySelect" checked={index === catalogEntryNumber} label={element[0]+' '+element[1]} onChange={onSelectCatalogEntry} value={index}></Form.Check></td>
                       <td>{element[2]}</td>
                     </tr>
                   ))}
@@ -213,7 +217,7 @@ export default function ActionSelectCatalog() {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>
-          <Button variant="primary" onClick={onSelect} disabled={entries.length === 0}>Select</Button>
+          <Button variant="primary" onClick={onSelect} disabled={catalogEntries.length === 0}>Select</Button>
         </Modal.Footer>
       </Modal>}
     </>

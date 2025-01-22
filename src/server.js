@@ -530,13 +530,20 @@ function adjustSat(sat1, sat2, score) {
   return `hsl(122, ${newSat}%, 35%)`;
 }
 
-app.post('/api/v1/catalogs', (req, res) => {
+app.get('/api/v1/catalogs/:type', (req, res) => {
+  var type = req.params['type'];
+  console.log('SERVER: In GET /api/v1/catalogs/'+type);
   var connection = startConnection();
   var stmt =
-    'SELECT c.name AS catalog_name, ca.name AS catalog_alias_name, c.id as catalog_id \
+    'SELECT DISTINCT c.name AS catalog_name, ca.name AS catalog_alias_name, c.id as catalog_id \
      FROM catalog c \
      LEFT JOIN catalog_alias ca \
      ON c.id = ca.catalog_id \
+     LEFT JOIN catalog_entry ce \
+     ON c.id = ce.catalog_id \
+     LEFT JOIN spring_type st \
+     ON ce.spring_type_id = st.id \
+     WHERE st.name = \''+type+'\' \
      ORDER BY c.name';
   console.log('SERVER: stmt=' + stmt);
   connection.query(stmt, function(err, rows) {
@@ -547,7 +554,7 @@ app.post('/api/v1/catalogs', (req, res) => {
       console.log('SERVER: 500 - INTERNAL SERVER ERROR');
       throw err;
     } else {
-      var value = rows.map((row) => { return [row.catalog_name + (row.catalog_alias_name!==null ? ' ('+row.catalog_alias_name+')' : ''), row.catalog_id] });
+      var value = rows.map((row) => { return { name: row.catalog_name, alias: (row.catalog_alias_name!==null ? row.catalog_alias_name : ''), number: row.catalog_id } });
       console.log('SERVER: After SELECT DISTINCT value=', value);
       res.status(200).json(value);
       connection.end();
@@ -750,16 +757,17 @@ export function getCatalogEntries(catalog, store, st, viol_wt) {
 }
 
 app.post('/api/v1/select_catalog', (req, res) => {
-//    console.log('SERVER: In POST /api/v1/select_catalog','req.body=',req.body,'req.body.length=',req.body.length);
+    console.log('SERVER: In POST /api/v1/select_catalog','req.body=',req.body,'req.body.length=',req.body.length);
     if (req.body === undefined || req.body.length === 0) {
         res.status(400).end();
-//        console.log('SERVER: 400 - BAD REQUEST');
+        console.log('SERVER: 400 - BAD REQUEST');
     } else {
 //      console.log('SERVER: In POST /api/v1/select_catalog','req.body=',req.body);
-      store.dispatch(load(req.body));
-      var st = req.body.symbol_table;
-      var viol_wt = req.body.system_controls.viol_wt;
-      var type = req.body.type;
+      var catalog_name = req.body.catalog_name
+      store.dispatch(load(req.body.model));
+      var st = req.body.model.symbol_table;
+      var viol_wt = req.body.model.system_controls.viol_wt;
+      var type = req.body.model.type;
 
       // Create implied constraints between half and twice
       var cmin_OD_Free = st[o.OD_Free].value/2;
@@ -788,7 +796,7 @@ app.post('/api/v1/select_catalog', (req, res) => {
         ON ce.material_type_id = mt.id \
         LEFT JOIN end_type et \
         ON ce.end_type_id = et.id \
-        WHERE st.name = \''+type+'\' \
+        WHERE c.name = \''+catalog_name+'\' AND st.name = \''+type+'\' \
         AND ce.OD_Free BETWEEN '+cmin_OD_Free+' AND '+cmax_OD_Free+' \
         AND ce.Wire_Dia BETWEEN '+cmin_Wire_Dia+' AND '+cmax_Wire_Dia+' \
         AND ce.L_Free BETWEEN '+cmin_L_Free+' AND '+cmax_L_Free+' \
