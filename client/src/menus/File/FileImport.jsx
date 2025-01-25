@@ -33,14 +33,14 @@ export default function FileImport() {
     setShow(!show);
     dispatch(executeStopOnLoad());
     displaySpinner(true);
-    fileReader.onloadend = onLoadEnd; // On Load End callback
-    fileReader.onError = onError; // On Error callback
+    fileReader.onload = onLoad; // On Load callback
+    fileReader.onerror = onError; // On Error callback
     fileReader.readAsText(selectedFile); // Begin Reading Text File
 
   };
 
-  const onLoadEnd = (event) => {
-//    console.log('In FileImport.onLoadEnd event.target.value=',event.target.value);
+  const onLoad = (event) => {
+//    console.log('In FileImport.onLoad event=',event);
     var design = JSON.parse(fileReader.result); // Convert file contents to JSON object
     var filename = basename(selectedFile.name, '.json'); // Drop prefix directories and suffix extension
     var { migrate } = require('../../designtypes/' + design.type + '/migrate.js'); // Dynamically load migrate
@@ -59,6 +59,7 @@ export default function FileImport() {
   const onError = (e) => {
 //    console.log('In FileImport.onError e=',e);
     displayMessage('Read of Import File failed with message: \'' + fileReader.error.message + '\'');
+    setSelectedFile(null);
     displaySpinner(false);
   }
 
