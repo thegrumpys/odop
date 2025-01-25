@@ -1,1 +1,1 @@
-node scanner.js
+node ./src/scanner.js

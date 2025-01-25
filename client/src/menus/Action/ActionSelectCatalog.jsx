@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, NavDropdown, Table, Form } from 'react-bootstrap';
 import { changeSymbolValue, saveAutoSave } from '../../store/actions';
 import { logUsage, logValue } from '../../logUsage';
-import store from "../../store/store";
+import { displaySpinner } from '../../components/Spinner';
 
 export default function ActionSelectCatalog() {
   //  console.log('ActionSelectCatalog - Mounting...');
@@ -11,7 +11,6 @@ export default function ActionSelectCatalog() {
   const model_model = useSelector((state) => state.model);
   const model_type = useSelector((state) => state.model.type);
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
-  const model_viol_wt = useSelector((state) => state.model.system_controls.viol_wt);
   const [show, setShow] = useState(false);
   const [catalogs, setCatalogs] = useState([]);
   const [catalogName, setCatalogName] = useState('');
@@ -29,6 +28,7 @@ export default function ActionSelectCatalog() {
 
   const getCatalogNames = () => {
     console.log('ActionSelectCatalog.getCatalogNames','model_type=',model_type);
+    displaySpinner(true);
     fetch('/api/v1/catalogs/'+encodeURIComponent(model_type), {
       method: 'GET',
       headers: {
@@ -75,11 +75,15 @@ export default function ActionSelectCatalog() {
     })
     .catch(error => {
        console.log('ActionSelectCatalog.getCatalogNames failed with message: \'' + error.message + '\'');
+    })
+    .finally(() => {
+      displaySpinner(false);
     });
   }
   
   const getCatalogEntries = (localCatalogName) => {
       console.log('ActionSelectCatalog.getCatalogEntries','localCatalogName=',localCatalogName,'model_model=',model_model);
+      displaySpinner(true);
       fetch('/api/v1/select_catalog', {
         method: 'POST',
         headers: {
@@ -121,6 +125,9 @@ export default function ActionSelectCatalog() {
       })
       .catch(error => {
         console.log('ActionSelectCatalog.getCatalogEntries failed with message: \'' + error.message + '\'');
+      })
+      .finally(() => {
+        displaySpinner(false);
       });
   }
 

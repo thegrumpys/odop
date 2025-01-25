@@ -802,9 +802,9 @@ app.post('/api/v1/select_catalog', (req, res) => {
         AND ce.L_Free BETWEEN '+cmin_L_Free+' AND '+cmax_L_Free+' \
         AND ce.Coils_T BETWEEN '+cmin_Coils_T+' AND '+cmax_Coils_T;
 //        WHERE c.name = \''+name+'\' AND st.name = \''+type+'\'';
-      console.log('SERVER: stmt='+stmt);
+//      console.log('SERVER: stmt='+stmt);
       connection.query(stmt, function(err, rows) {
-      console.log('SERVER: After SELECT err=', err, 'rows=', rows, 'rows.length=', rows.length);
+//      console.log('SERVER: After SELECT err=', err, 'rows=', rows, 'rows.length=', rows.length);
         if (err) {
           res.status(500).end();
           connection.end();
@@ -812,7 +812,7 @@ app.post('/api/v1/select_catalog', (req, res) => {
           throw err;
         } else {
           var catalog = rows.map((row) => {return [row.catalog_name, row.catalog_entry_name, row.OD_Free, row.Wire_Dia, row.L_Free, row.Coils_T, row.material_type_name, row.end_type_name]});
-          console.log('SERVER: After SELECT catalog=', catalog);
+          console.log('SERVER: After SELECT catalog.length=', catalog.length);
           var result = getCatalogEntries(catalog, store, st, viol_wt);
           res.status(200).json(result);
           console.log('SERVER: In POST /api/v1/select_catalog','result=',result);
