@@ -7,18 +7,18 @@ import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
-export default function NameValueUnitsRowIndependentVariable({ element, index, onChangeValid, onChangeInvalid, onSet, onReset }) {
+export default function NameValueUnitsRowIndependentVariable({ element, index, onChangeValid, onChangeInvalid, onFocus, onBlur, onKeyPress, onSetFix, onResetFix, onFocusFix, onBlurFix, onKeyPressFix }) {
   const model_enable_auto_fix = useSelector((state) => state.model.system_controls.enable_auto_fix);
   const model_enable_auto_search = useSelector((state) => state.model.system_controls.enable_auto_search);
   const model_show_units = useSelector((state) => state.model.system_controls.show_units);
   const model_objmin = useSelector((state) => state.model.system_controls.objmin);
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
-  const [valueChanged, setValueChanged] = useState(false);
+  const [value, setValue] = useState(false);
+  const [fixFreeFlag, setFixFreeFlag] = useState(false);
   const dispatch = useDispatch();
 
   const onChangeValidLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onChangeValidLocal event.target.value=', event.target.value);
-    console.log('In NameValueUnitsRowIndependentVariable.onChangeValidLocal','model_enable_auto_fix=', model_enable_auto_fix,'valueChanged=',valueChanged,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
     if (model_enable_auto_fix) {
       auto_fixed = true;
@@ -28,7 +28,6 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
       }
     }
     dispatch(changeSymbolValue(element.name, parseFloat(event.target.value))); // Update the model
-    setValueChanged(true);
     logValue(element.name, event.target.value);
     if (auto_fixed) {
       dispatch(changeResultTerminationCondition('The value of ' + element.name + ' has been automatically fixed.'));
@@ -36,56 +35,81 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
     if (typeof onChangeValid === "function") onChangeValid(event);
   }
 
+  const onChangeInvalidLocal = (event) => {
+//    console.log('In NameValueUnitsRowIndependentVariable.onChangeInvalidLocal event.target.value=', event.target.value);
+    if (typeof onChangeInvalid === "function") onChangeInvalid(event);
+  }
+
+  const onFocusLocal = (event) => {
+//    console.log('In NameValueUnitsRowIndependentVariable.onFocusLocal event.target.value=', event.target.value);
+    console.log('In NameValueUnitsRowIndependentVariable.onFocusLocal element.value=', element.value);
+    setValue(element.value);
+    if (typeof onFocus === "function") onFocus(event);
+  }
+
   const onBlurLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal event.target.value=', event.target.value);
-    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal','model_enable_auto_fix=', model_enable_auto_fix,'valueChanged=',valueChanged,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
-    if (model_enable_auto_search && valueChanged && model_objective_value >= model_objmin) {
+    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal','model_enable_auto_fix=', model_enable_auto_fix,'value !== element.value=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+    if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
       dispatch(search());
-      setValueChanged(false);
     }
     if (typeof onBlur === "function") onBlur(event);
   }
 
   const onKeyPressLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal event.keyCode=', event.keyCode, 'event.which=', event.which);
-    console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal','model_enable_auto_fix=', model_enable_auto_fix,'valueChanged=',valueChanged,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     var keyCode = event.keyCode || event.which;
     if (keyCode === 13) { // Carriage return
 //      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal keyCode=', keyCode);
-      if (model_enable_auto_search && valueChanged && model_objective_value >= model_objmin) {
+      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal','model_enable_auto_fix=', model_enable_auto_fix,'value !== element.value=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+      if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
         dispatch(search());
-        setValueChanged(false);
       }
     }
     if (typeof onKeyPress === "function") onKeyPress(event);
   }
 
-  const onChangeInvalidLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onChangeInvalidLocal event.target.value=', event.target.value);
-    if (typeof onChangeInvalid === "function") onChangeInvalid(event);
-  }
-
-  const onSetLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onSetLocal');
+  const onSetFixLocal = (event) => {
+//    console.log('In NameValueUnitsRowIndependentVariable.onSetLocal' event.target.value=', event.target.value);
     dispatch(fixSymbolValue(element.name));
     logValue(element.name, 'FIXED', 'FixedFlag', false);
-    if (typeof onSet === "function") onSet(event);
+    if (typeof onSetFix === "function") onSetFix(event);
   }
 
-  const onResetLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onResetLocal');
+  const onResetFixLocal = (event) => {
+//    console.log('In NameValueUnitsRowIndependentVariable.onResetLocal' event.target.value=', event.target.value);
     dispatch(freeSymbolValue(element.name));
     logValue(element.name, 'FREE', 'FixedFlag', false);
-    console.log('In NameValueUnitsRowIndependentVariable.onBlurFixLocal','model_enable_auto_fix=', model_enable_auto_fix,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
-    if (model_enable_auto_search && model_objective_value >= model_objmin) {
-      dispatch(search());
-    }
-    if (typeof onReset === "function") onReset(event);
+    if (typeof onResetFix === "function") onResetFix(event);
+  }
+
+  const onFocusFixLocal = (event) => {
+//    console.log('In NameValueUnitsRowIndependentVariable.onFocusFixLocal' event.target.value=', event.target.value);
+    console.log('In NameValueUnitsRowIndependentVariable.onFocusFixLocal element.lmin & FIXED=', element.lmin & FIXED);
+    setFixFreeFlag(element.lmin & FIXED);
+    if (typeof onFocusFix === "function") onFocusFix(event);
   }
 
   const onBlurFixLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onBlurFixLocal event.target.value=', event.target.value);
+    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal','model_enable_auto_fix=', model_enable_auto_fix,'fixFreeFlag !== (element.lmin & FIXED)=',fixFreeFlag !== (element.lmin & FIXED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+    if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && model_objective_value >= model_objmin) {
+      dispatch(search());
+    }
     if (typeof onBlurFix === "function") onBlurFix(event);
+  }
+
+  const onKeyPressFixLocal = (event) => {
+//    console.log('In NameValueUnitsRowIndependentVariable.onKeyPressFixLocal event.keyCode=', event.keyCode, 'event.which=', event.which);
+    var keyCode = event.keyCode || event.which;
+    if (keyCode === 13) { // Carriage return
+//      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressFixLocal keyCode=', keyCode);
+      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressFixLocal','model_enable_auto_fix=', model_enable_auto_fix,'fixFreeFlag !== (element.lmin & FIXED)=',fixFreeFlag !== (element.lmin & FIXED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+      if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && model_objective_value >= model_objmin) {
+        dispatch(search());
+      }
+    }
+    if (typeof onKeyPressFix === "function") onKeyPressFix(event);
   }
 
   var results = getAlertsByName(element.name);
@@ -127,12 +151,12 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
         </td>
         <td className="align-middle">
           <InputGroup>
-            <FormControlTypeNumber id={'nvuriv_value_' + element.name} icon_alerts={icon_alerts} className={className} value={element.value} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidLocal} onChangeInvalid={onChangeInvalidLocal} onBlur={onBlurLocal} onKeyPress={onKeyPressLocal}/>
+            <FormControlTypeNumber id={'nvuriv_value_' + element.name} icon_alerts={icon_alerts} className={className} value={element.value} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidLocal} onChangeInvalid={onChangeInvalidLocal} onFocus={onFocusLocal} onBlur={onBlurLocal} onKeyPress={onKeyPressLocal}/>
           </InputGroup>
         </td>
         <td className="align-middle text-center">
           <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>
-            <Form.Check id={'nvuriv_checkbox_' + element.name} type="checkbox" aria-label="Checkbox for fixed value" checked={element.lmin & FIXED} onChange={element.lmin & FIXED ? onResetLocal : onSetLocal} onBlur={onBlurFixLocal} />
+            <Form.Check id={'nvuriv_checkbox_' + element.name} type="checkbox" aria-label="Checkbox for fixed value" checked={element.lmin & FIXED} onChange={element.lmin & FIXED ? onResetFixLocal : onSetFixLocal} onFocus={onFocusFixLocal}  onBlur={onBlurFixLocal} onKeyPress={onKeyPressFixLocal} />
           </OverlayTrigger>
         </td>
         <td id={'nvuriv_units_' + element.name} className={"text-nowrap align-middle small " + (model_show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
