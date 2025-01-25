@@ -4,6 +4,7 @@ import * as o from './symbol_table_offsets';
 import m_tab from '../mat_us';
 import * as mo from '../mat_offsets';
 import et_tab from './endtypes.json';
+import * as eo from './endtypes_offsets';
 import { CONSTRAINED, FIXED } from '../../../store/actionTypes';
 
 export function getCatalogNames() {
@@ -121,7 +122,7 @@ export function getCatalogEntries(name, store, st, viol_wt) {
     }
     function findEndTypeIndex(element, index) {
 //        console.log('In findEndTypeIndex element=',element,' index=',index,' element[0]=',element[0],' entry[6]=',entry[6]);
-        return index > 0 && element[0] === entry[6];
+        return index > 0 && element[eo.end_type] === entry[6];
     }
     function pPush(element) {
         if (element.type === "equationset" && element.input) {
@@ -142,12 +143,16 @@ export function getCatalogEntries(name, store, st, viol_wt) {
     // Create implied constraints between half and twice
     var cmin_OD_Free = st[o.OD_Free].value/2;
     var cmax_OD_Free = st[o.OD_Free].value*2;
+//    console.log('cmin_OD_Free=',cmin_OD_Free,'cmax_OD_Free=',cmax_OD_Free);
     var cmin_Wire_Dia = st[o.Wire_Dia].value/2;
     var cmax_Wire_Dia = st[o.Wire_Dia].value*2;
+//    console.log('cmin_Wire_Dia=',cmin_Wire_Dia,'cmax_Wire_Dia=',cmax_Wire_Dia);
     var cmin_Coils_T = st[o.Coils_T].value/2;
     var cmax_Coils_T = st[o.Coils_T].value*2;
+//    console.log('cmin_Coils_T=',cmin_Coils_T,'cmax_Coils_T=',cmax_Coils_T);
     var cmin_Initial_Tension = st[o.Initial_Tension].value/2;
     var cmax_Initial_Tension = st[o.Initial_Tension].value*2;
+//    console.log('cmin_Initial_Tension=',cmin_Initial_Tension,'cmax_Initial_Tension=',cmax_Initial_Tension);
 
     // Load catalog table
     catalog = require('./'+name+'.json');
@@ -184,7 +189,9 @@ export function getCatalogEntries(name, store, st, viol_wt) {
         entry[7] = m_tab.findIndex(findMaterialTypeIndex); // Set matching Material Type index
         entry[8] = et_tab.findIndex(findEndTypeIndex); // Set matching End Type index
 
-        // Update with catalog entries
+//        console.log('In getCatalogEntries 0: entry = ', entry);
+
+        // Update symbol table with catalog entries
         st[o.OD_Free].value = entry[1];
         st[o.Wire_Dia].value = entry[2];
         st[o.Coils_T].value = entry[3];

@@ -545,16 +545,16 @@ app.get('/api/v1/catalogs/:type', (req, res) => {
      ON ce.spring_type_id = st.id \
      WHERE st.name = \''+type+'\' \
      ORDER BY c.name';
-  console.log('SERVER: stmt=' + stmt);
+//  console.log('SERVER: stmt=' + stmt);
   connection.query(stmt, function(err, rows) {
-    console.log('SERVER: After SELECT err=', err, ' rows=', rows);
+//    console.log('SERVER: After SELECT err=', err, ' rows=', rows);
     if (err) {
       res.status(500).end();
       connection.end();
       console.log('SERVER: 500 - INTERNAL SERVER ERROR');
       throw err;
     } else {
-      var value = rows.map((row) => { return { name: row.catalog_name, alias: (row.catalog_alias_name!==null ? row.catalog_alias_name : ''), number: row.catalog_id } });
+      var value = rows.map((row) => { return { name: row.catalog_name, alias: (row.catalog_alias_name!==null ? row.catalog_alias_name : ''), id: row.catalog_id } });
       console.log('SERVER: After SELECT DISTINCT value=', value);
       res.status(200).json(value);
       connection.end();
@@ -757,7 +757,7 @@ export function getCatalogEntries(catalog, store, st, viol_wt) {
 }
 
 app.post('/api/v1/select_catalog', (req, res) => {
-    console.log('SERVER: In POST /api/v1/select_catalog','req.body=',req.body,'req.body.length=',req.body.length);
+//    console.log('SERVER: In POST /api/v1/select_catalog','req.body=',req.body);
     if (req.body === undefined || req.body.length === 0) {
         res.status(400).end();
         console.log('SERVER: 400 - BAD REQUEST');
@@ -802,9 +802,9 @@ app.post('/api/v1/select_catalog', (req, res) => {
         AND ce.L_Free BETWEEN '+cmin_L_Free+' AND '+cmax_L_Free+' \
         AND ce.Coils_T BETWEEN '+cmin_Coils_T+' AND '+cmax_Coils_T;
 //        WHERE c.name = \''+name+'\' AND st.name = \''+type+'\'';
-//      console.log('SERVER: stmt='+stmt);
+      console.log('SERVER: stmt='+stmt);
       connection.query(stmt, function(err, rows) {
-//      console.log('SERVER: After SELECT err=', err, 'rows=', rows, 'rows.length=', rows.length);
+      console.log('SERVER: After SELECT err=', err, 'rows=', rows, 'rows.length=', rows.length);
         if (err) {
           res.status(500).end();
           connection.end();
@@ -812,10 +812,10 @@ app.post('/api/v1/select_catalog', (req, res) => {
           throw err;
         } else {
           var catalog = rows.map((row) => {return [row.catalog_name, row.catalog_entry_name, row.OD_Free, row.Wire_Dia, row.L_Free, row.Coils_T, row.material_type_name, row.end_type_name]});
-//          console.log('SERVER: After SELECT value=', value);
+          console.log('SERVER: After SELECT catalog=', catalog);
           var result = getCatalogEntries(catalog, store, st, viol_wt);
           res.status(200).json(result);
-//          console.log('SERVER: In POST /api/v1/select_catalog','result=',result);
+          console.log('SERVER: In POST /api/v1/select_catalog','result=',result);
           connection.end();
           console.log('SERVER: 200 - OK');
         }

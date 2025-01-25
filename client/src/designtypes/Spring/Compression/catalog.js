@@ -157,15 +157,16 @@ export function getCatalogEntries(name, store, st, viol_wt) {
     // Load catalog table
     catalog = require('./'+name+'.json');
 //    console.log('In getCatalogEntries catalog=',catalog);
+
     // scan through catalog
     for (let i = 1; i < catalog.length; i++) { // Skip column headers at zeroth entry
         entry = Object.assign({},catalog[i]); // Make copy so we can modify it without affecting catalog
 
         // Skip catalog entry if it's less than half the constraint value or greater than twice the constraint value
-        if (entry[1] < cmin_OD_Free  || entry[1] > cmax_OD_Free ) continue;
-        if (entry[2] < cmin_Wire_Dia || entry[2] > cmax_Wire_Dia) continue;
-        if (entry[3] < cmin_L_Free   || entry[3] > cmax_L_Free  ) continue;
-        if (entry[4] < cmin_Coils_T  || entry[4] > cmax_Coils_T ) continue;
+        if (entry[1] < cmin_OD_Free         || entry[1] > cmax_OD_Free        ) continue;
+        if (entry[2] < cmin_Wire_Dia        || entry[2] > cmax_Wire_Dia       ) continue;
+        if (entry[3] < cmin_L_Free          || entry[3] > cmax_L_Free         ) continue;
+        if (entry[4] < cmin_Coils_T         || entry[4] > cmax_Coils_T        ) continue;
 
         entry[7] = m_tab.findIndex(findMaterialTypeIndex); // Set matching Material Type index
         entry[8] = et_tab.findIndex(findEndTypeIndex); // Set matching End Type index

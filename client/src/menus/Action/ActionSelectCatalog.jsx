@@ -14,11 +14,11 @@ export default function ActionSelectCatalog() {
   const model_viol_wt = useSelector((state) => state.model.system_controls.viol_wt);
   const [show, setShow] = useState(false);
   const [catalogs, setCatalogs] = useState([]);
-  const [catalogName, setCatalogName] = useState(undefined);
-  const [catalogNumber, setCatalogNumber] = useState(undefined);
+  const [catalogName, setCatalogName] = useState('');
+  const [catalogId, setCatalogId] = useState(-1);
   const [catalogEntries, setCatalogEntries] = useState([]);
-  const [catalogEntryName, setCatalogEntryName] = useState(undefined);
-  const [catalogEntryNumber, setCatalogEntryNumber] = useState(undefined);
+  const [catalogEntryName, setCatalogEntryName] = useState('');
+  const [catalogEntryNumber, setCatalogEntryNumber] = useState(-1);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -50,8 +50,8 @@ export default function ActionSelectCatalog() {
       setCatalogs(localCatalogs);
 
       var localCatalogName = localCatalogs[0].name; // Default to first catalog name
-      var localCatalogNumber = localCatalogs[0].number; // Default to first catalog number
-      console.log('ActionSelectCatalog.getCatalogNames Default Catalog','localCatalogName=',localCatalogName,'localCatalogNumber=',localCatalogNumber);
+      var localCatalogId = localCatalogs[0].id; // Default to first catalog id
+      console.log('ActionSelectCatalog.getCatalogNames Default Catalog','localCatalogName=',localCatalogName,'localCatalogId=',localCatalogId);
       model_symbol_table.forEach((element) => {
         if (element.name === "Catalog_Name") {
           if (element.value !== "") {
@@ -62,14 +62,16 @@ export default function ActionSelectCatalog() {
       });
       setCatalogName(localCatalogName);
       catalogs.forEach((element) => {
-        if (element.name.startsWith(localCatalogName)) {
-          localCatalogNumber = element.number;
-          console.log('ActionSelectCatalog.getCatalogNames Override','localCatalogNumber=',localCatalogNumber);
+        if (element.name === localCatalogName) {
+          localCatalogId = element.id;
+          console.log('ActionSelectCatalog.getCatalogNames Override','localCatalogId=',localCatalogId);
         }
       });
-      setCatalogNumber(localCatalogNumber);
+      setCatalogId(localCatalogId);
 
-      getCatalogEntries(localCatalogName);
+      setCatalogEntries([]);
+      setCatalogEntryName('');
+      setCatalogEntryNumber(-1);
     })
     .catch(error => {
        console.log('ActionSelectCatalog.getCatalogNames failed with message: \'' + error.message + '\'');
@@ -123,7 +125,7 @@ export default function ActionSelectCatalog() {
   }
 
   const toggle = (event) => {
-      console.log('ActionSelectCatalog.toggle','event.target.value=',event.target.value);
+      console.log('ActionSelectCatalog.toggle');
       getCatalogEntries(catalogName);
       setShow(!show);
   }
