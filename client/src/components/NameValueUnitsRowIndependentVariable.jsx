@@ -14,7 +14,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   const model_objmin = useSelector((state) => state.model.system_controls.objmin);
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const [value, setValue] = useState(false);
-  const [fixFreeFlag, setFixFreeFlag] = useState(false);
+  const [fixFreeFlag, setFixFreeFlag] = useState(0);
   const dispatch = useDispatch();
 
   const onChangeValidLocal = (event) => {
@@ -49,7 +49,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
 
   const onBlurLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal event.target.value=', event.target.value);
-    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal','model_enable_auto_fix=', model_enable_auto_fix,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
       dispatch(search());
     }
@@ -61,7 +61,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
     var keyCode = event.keyCode || event.which;
     if (keyCode === 13) { // Carriage return
 //      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal keyCode=', keyCode);
-      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal','model_enable_auto_fix=', model_enable_auto_fix,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
       if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
         dispatch(search());
       }

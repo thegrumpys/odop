@@ -367,7 +367,7 @@ export default function SymbolValue({ className, element, index }) {
             {element.type === "equationset" && element.input && !element.hidden &&
               <>
                 <NameValueUnitsHeaderIndependentVariable />
-                <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidValue} onChangeInvalid={onChangeInvalidValue} onSet={onModifiedFlag} onReset={onModifiedFlag} />
+                <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidValue} onChangeInvalid={onChangeInvalidValue} onSetFix={onModifiedFlag} onResetFix={onModifiedFlag} />
               </>}
             {element.type === "equationset" && !element.input && !element.hidden &&
               <>
