@@ -161,7 +161,7 @@ export default function ConstraintsMaxRowIndependentVariable({ element, index, o
   var className = results.className;
   var icon_alerts = results.alerts;
   return (
-    <tbody id={'cmnriv_' + element.name}>
+    <tbody id={'cmxriv_' + element.name}>
       <tr key={element.name}>
         <td className="align-middle d-lg-none" id={'cmxriv_name_' + element.name}>
           <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip className="d-lg-none"><div dangerouslySetInnerHTML={{__html: element.tooltip}}></div></Tooltip>}>
