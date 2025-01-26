@@ -113,16 +113,16 @@ INNER JOIN (
 ON s.schema_name = sp.table_schema
 GROUP BY s.schema_name, sp.grantee, sp.has_insert`;
 //    console.log('SERVER: stmt='+stmt);
-    connection.query(stmt, function(err, rows, fields) {
-//        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
+    connection.query(stmt, function(err, rows) {
+        console.log('SERVER: After SELECT err=', err, ' rows=', rows);
         if (err) {
             res.status(500).end();
             connection.end();
             console.log('SERVER: 500 - INTERNAL SERVER ERROR');
             throw err;
         } else {
-            value = rows.map((row) => {return row.db_size_mb});
-//            console.log('SERVER: After SELECT DISTINCT value=', value);
+            value = rows.map((row) => {return {user: connection.config.user, host: connection.config.host, port: connection.config.port, database: connection.config.database, size: row.db_size_mb}});
+            console.log('SERVER: After SELECT DISTINCT value=', value);
             res.status(200).json(value);
             connection.end();
             console.log('SERVER: 200 - OK');

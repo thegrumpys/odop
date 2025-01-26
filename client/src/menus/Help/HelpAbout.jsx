@@ -12,6 +12,10 @@ export default function HelpAbout() {
 //  console.log('HelpAbout - Mounting...');
   const [show, setShow] = useState(false);
   const [sizes, setSizes] = useState('');
+  const [user, setUser] = useState('');
+  const [host, setHost] = useState('');
+  const [port, setPort] = useState('');
+  const [database, setDatabase] = useState('');
   const [size, setSize] = useState('');
   const model_user = useSelector((state) => state.user);
   const model_type = useSelector((state) => state.model.type);
@@ -35,7 +39,7 @@ export default function HelpAbout() {
   }
 
   const getDBSize = (user) => {
-//    console.log('In HelpAbout.getDBSize');
+    console.log('In HelpAbout.getDBSize');
     displaySpinner(true);
     fetch('/api/v1/db_size', {
       headers: {
@@ -43,21 +47,35 @@ export default function HelpAbout() {
       }
     })
     .then(res => {
+      console.log('res=',res);
       if (!res.ok) {
         throw Error(res.statusText);
       }
+      console.log('In HelpAbout.getCatalogNames OK','res.json=',res.json);
       return res.json()
     })
     .then(sizes => {
-//        console.log('In HelpAbout.getSize sizes=', sizes);
+      console.log('In HelpAbout.getSize sizes=', sizes);
       setSizes(sizes);
+      var user = '';
+      var host = '';
+      var port = '';
+      var database = '';
       var size = '';
       if (sizes.length > 0) {
-        size = sizes[0]; // Default to first name
+        user = sizes[0].user;
+        host = sizes[0].host;
+        port = sizes[0].port;
+        database = sizes[0].database;
+        size = sizes[0].size;
       }
-//        console.log('In HelpAbout.getSize size=', size);
+      console.log('In HelpAbout.getSize','user=', user,'host=', host,'port=', port,'database=', database,'size=', size);
+      setUser(user);
+      setHost(host);
+      setPort(port);
+      setDatabase(database);
       setSize(size);
-      logUsage('event', 'HelpAbout', { event_label: 'getDBSize: ' + size });
+      logUsage('event', 'HelpAbout', { event_label: 'User: ' + user + ' Host: ' + host + ' Post: ' + port + ' Database: ' + database + ' Size: ' + size });
     })
     .catch(error => {
       displayMessage('GET of DB Size failed with message: \'' + error.message + '\'');
@@ -102,7 +120,11 @@ export default function HelpAbout() {
           Model: {model_jsontype} {model_type}<br />
           Model Units: {model_units}<br />
           Model Version: {model_version}<br />
-          {config.node.env !== "production" && <span>DB Size: {size} MB</span>}
+          {config.node.env !== "production" && <span>DB User: {user}<br /></span>}
+          {config.node.env !== "production" && <span>DB Host: {host}<br /></span>}
+          {config.node.env !== "production" && <span>DB Port: {port}<br /></span>}
+          {config.node.env !== "production" && <span>DB Database: {database}<br /></span>}
+          {config.node.env !== "production" && <span>DB Size: {size} MB<br /></span>}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={toggle}>Close</Button>
