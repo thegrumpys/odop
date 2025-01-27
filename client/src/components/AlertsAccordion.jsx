@@ -169,6 +169,8 @@ export default function AlertsAccordion() {
               <OverlayTrigger placement="bottom" overlay={
                 <Tooltip className="tooltip-lg">
                   <p>When checked, enables Auto Search.</p>
+                  <p>When Auto Search is enabled, a Search is automatically triggered when the current design is not feasible and the changed field "loses focus".  
+                     Specifically, when the cursor focuses on some other field.</p>
                   <p>The behavior is the same as the File : Preferences enable_auto_search value.</p>
                 </Tooltip>}>
                 <span className="text-primary px-2 py-2 pt-2"><i className="fas fa-info-circle"></i></span>
