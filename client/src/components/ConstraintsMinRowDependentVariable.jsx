@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { InputGroup, ButtonGroup, OverlayTrigger, Tooltip, Modal, Button, Form, Table } from 'react-bootstrap';
 import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
-import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actions';
+import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag, search } from '../store/actions';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
@@ -13,7 +13,12 @@ export default function ConstraintsMinRowDependentVariable({ element, index, onC
   const [show, setShow] = useState(false);
   const [isInvalidValue, setIsInvalidValue] = useState(false);
   const [valueString, setValueString] = useState(false);
+  const [value, setValue] = useState(false);
+  const [constrainedFlag, setConstrainedFlag] = useState(0);
   const model_show_violations = useSelector((state) => state.model.system_controls.show_violations);
+  const model_enable_auto_search = useSelector((state) => state.model.system_controls.enable_auto_search);
+  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
+  const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const dispatch = useDispatch();
 
   const onSetFlagMinConstrained = (event) => {
@@ -28,6 +33,35 @@ export default function ConstraintsMinRowDependentVariable({ element, index, onC
     dispatch(resetSymbolFlag(element.name, MIN, CONSTRAINED));
     logValue(element.name, 'Disabled', 'MinConstraintFlag', false);
     if (typeof onReset === "function") onReset(event);
+  }
+
+  const onFocusFlagMinConstrained = (event) => {
+//    console.log('In ConstraintsMinRowDependentVariable.onFocusFlagMinConstrained','event.target.value=', event.target.value);
+    console.log('In ConstraintsMinRowDependentVariable.onFocusFlagMinConstrained element.lmin & CONSTRAINED=', element.lmin & CONSTRAINED);
+    setConstrainedFlag(element.lmin & CONSTRAINED);
+    if (typeof onFocusFlag === "function") onFocusFlag(event);
+  }
+
+  const onBlurFlagMinConstrained = (event) => {
+//    console.log('In ConstraintsMinRowDependentVariable.onBlurFlagMinConstrained','event.target.value=', event.target.value);
+    console.log('In ConstraintsMinRowDependentVariable.onBlurFlagMinConstrained','model_enable_auto_search=', model_enable_auto_search,'constrainedFlagChanged=',constrainedFlag !== (element.lmin & CONSTRAINED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+    if (model_enable_auto_search && constrainedFlag !== (element.lmin & CONSTRAINED) && model_objective_value >= model_objmin) {
+      dispatch(search());
+    }
+    if (typeof onBlurFlag === "function") onBlurFlag(event);
+  }
+
+  const onKeyPressFlagMinConstrained = (event) => {
+//    console.log('In ConstraintsMinRowDependentVariable.onKeyPressFlagMinConstrained event.keyCode=', event.keyCode, 'event.which=', event.which);
+    var keyCode = event.keyCode || event.which;
+    if (keyCode === 13) { // Carriage return
+//      console.log('In ConstraintsMinRowDependentVariable.onKeyPressFlagMinConstrained keyCode=', keyCode);
+      console.log('In ConstraintsMinRowDependentVariable.onKeyPressFlagMinConstrained','model_enable_auto_search=', model_enable_auto_search,'constrainedFlagChanged=',constrainedFlag !== (element.lmin & CONSTRAINED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+      if (model_enable_auto_search && constrainedFlag !== (element.lmin & CONSTRAINED) && model_objective_value >= model_objmin) {
+        dispatch(search());
+      }
+    }
+    if (typeof onKeyPressFlag === "function") onKeyPressFlag(event);
   }
 
   const onChangeValidMinConstraint = (event) => {
@@ -46,6 +80,35 @@ export default function ConstraintsMinRowDependentVariable({ element, index, onC
   const onChangeInvalidMinConstraint = (event) => {
 //    console.log('In ConstraintsMinRowDependentVariable.onChangeInvalidMinConstraint','event.target.value=', event.target.value);
     if (typeof onChangeInvalid === "function") onChangeInvalid(event);
+  }
+
+  const onFocusMinConstraint = (event) => {
+//    console.log('In ConstraintsMinRowDependentVariable.onFocusMinConstraint event.target.value=', event.target.value);
+    console.log('In ConstraintsMinRowDependentVariable.onFocusMinConstraint element.cmin=', element.cmin);
+    setValue(element.cmin);
+    if (typeof onFocus === "function") onFocus(event);
+  }
+
+  const onBlurMinConstraint = (event) => {
+//    console.log('In ConstraintsMinRowDependentVariable.onBlurMinConstraint event.target.value=', event.target.value);
+    console.log('In ConstraintsMinRowDependentVariable.onBlurMinConstraint','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.cmin,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+    if (model_enable_auto_search && value !== element.cmin && model_objective_value >= model_objmin) {
+      dispatch(search());
+    }
+    if (typeof onBlur === "function") onBlur(event);
+  }
+
+  const onKeyPressMinConstraint = (event) => {
+//    console.log('In ConstraintsMinRowIndeConstraintsMinRowDependentVariablependentVariable.onKeyPressMinConstraint event.keyCode=', event.keyCode, 'event.which=', event.which);
+    var keyCode = event.keyCode || event.which;
+    if (keyCode === 13) { // Carriage return
+//      console.log('In ConstraintsMinRowDependentVariable.onKeyPressMinConstraint keyCode=', keyCode);
+      console.log('In ConstraintsMinRowDependentVariable.onKeyPressMinConstraint','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.cmin,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+      if (model_enable_auto_search && value !== element.cmin && model_objective_value >= model_objmin) {
+        dispatch(search());
+      }
+    }
+    if (typeof onKeyPress === "function") onKeyPress(event);
   }
 
   const onClick = (event) => {
@@ -113,9 +176,9 @@ export default function ConstraintsMinRowDependentVariable({ element, index, onC
         <td className="align-middle" colSpan="2">
           <InputGroup>
             <InputGroup.Text>
-              <Form.Check id={'cmnrdv_checkbox_' + element.name} type="checkbox" aria-label="Checkbox for minimum value" checked={element.lmin & CONSTRAINED} onChange={element.lmin & CONSTRAINED ? onResetFlagMinConstrained : onSetFlagMinConstrained} disabled={element.lmin & FIXED ? true : false} />
+              <Form.Check id={'cmnrdv_checkbox_' + element.name} type="checkbox" aria-label="Checkbox for minimum value" checked={element.lmin & CONSTRAINED} disabled={element.lmin & FIXED ? true : false} onChange={element.lmin & CONSTRAINED ? onResetFlagMinConstrained : onSetFlagMinConstrained} onFocus={onFocusFlagMinConstrained} onBlur={onBlurFlagMinConstrained} onKeyPress={onKeyPressFlagMinConstrained} />
             </InputGroup.Text>
-            <FormControlTypeNumber id={'cmnrdv_cmin_' + element.name} icon_alerts={icon_alerts} className={className} value={element.cmin} validmin={element.validmin} validmax={element.validmax} disabled={element.lmin & FIXED || element.lmin & CONSTRAINED ? false : true} disabledText={element.lmin & CONSTRAINED ? false : true} onChangeValid={onChangeValidMinConstraint} onChangeInvalid={onChangeInvalidMinConstraint} onClick={onClick} />
+            <FormControlTypeNumber id={'cmnrdv_cmin_' + element.name} icon_alerts={icon_alerts} className={className} value={element.cmin} validmin={element.validmin} validmax={element.validmax} disabled={element.lmin & FIXED || element.lmin & CONSTRAINED ? false : true} disabledText={element.lmin & CONSTRAINED ? false : true} onChangeValid={onChangeValidMinConstraint} onChangeInvalid={onChangeInvalidMinConstraint} onFocus={onFocusMinConstraint} onBlur={onBlurMinConstraint} onKeyPress={onKeyPressMinConstraint} onClick={onClick} />
           </InputGroup>
           {element.cminchoices !== undefined && element.cminchoices.length > 0 && show &&
             <Modal show={show} size="lg" onHide={onCancel}>

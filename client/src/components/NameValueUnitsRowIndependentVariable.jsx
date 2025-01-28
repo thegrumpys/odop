@@ -92,7 +92,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
 
   const onBlurFixLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onBlurFixLocal event.target.value=', event.target.value);
-    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal','model_enable_auto_fix=', model_enable_auto_fix,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && model_objective_value >= model_objmin) {
       dispatch(search());
     }
@@ -104,7 +104,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
     var keyCode = event.keyCode || event.which;
     if (keyCode === 13) { // Carriage return
 //      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressFixLocal keyCode=', keyCode);
-      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressFixLocal','model_enable_auto_fix=', model_enable_auto_fix,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressFixLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
       if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && model_objective_value >= model_objmin) {
         dispatch(search());
       }
