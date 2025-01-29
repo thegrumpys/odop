@@ -156,7 +156,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
         </td>
         <td className="align-middle text-center">
           <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>
-            <Form.Check id={'nvuriv_checkbox_' + element.name} type="checkbox" aria-label="Checkbox for fixed value" checked={element.lmin & FIXED} onChange={element.lmin & FIXED ? onResetFixLocal : onSetFixLocal} onFocus={onFocusFixLocal}  onBlur={onBlurFixLocal} onKeyPress={onKeyPressFixLocal} />
+            <Form.Check id={'nvuriv_checkbox_' + element.name} type="checkbox" aria-label="Checkbox for fixed value" checked={element.lmin & FIXED} onChange={element.lmin & FIXED ? onResetFixLocal : onSetFixLocal} onFocus={onFocusFixLocal} onBlur={onBlurFixLocal} onKeyPress={onKeyPressFixLocal} />
           </OverlayTrigger>
         </td>
         <td id={'nvuriv_units_' + element.name} className={"text-nowrap align-middle small " + (model_show_units ? "" : "d-none")} colSpan="1">{element.units}</td>
