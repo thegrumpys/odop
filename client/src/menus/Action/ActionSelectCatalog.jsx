@@ -129,11 +129,11 @@ export default function ActionSelectCatalog() {
         </Modal.Header>
         <Modal.Body>
           <Form.Label htmlFor="catalogNameSelect">Select catalog name:</Form.Label>
-          <Form.Control as="select" id="catalogNameSelect" onChange={onSelectCatalogName} value={name}>
+          <Form.Select id="catalogNameSelect" onChange={onSelectCatalogName} value={name}>
             {names.map((element, index) =>
               <option key={index} value={element}>{element}</option>
             )}
-          </Form.Control>
+          </Form.Select>
           <br />
           {entries.length === 0 ?
             <Form.Label htmlFor="catalogEntrySelect">No acceptable entries were found in this catalog</Form.Label>

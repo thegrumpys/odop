@@ -80,11 +80,11 @@ export default function HelpDemo() {
         <Modal.Body>
           <br />
           <Form.Label htmlFor="tutorialSelect">Select demo/tutorial to execute:</Form.Label>
-          <Form.Control as="select" id="tutorialSelect" onChange={onSelect} value={executeName}>
+          <Form.Select id="tutorialSelect" onChange={onSelect} value={executeName}>
             {executeNames !== undefined && executeNames.map((element, index) => (
               <option key={index} value={element}>{element}</option>
             ))}
-          </Form.Control>
+          </Form.Select>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>{' '}

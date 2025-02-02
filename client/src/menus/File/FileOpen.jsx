@@ -194,18 +194,18 @@ export default function FileOpen() {
           <br />
           {/* {!this.props.authState.isAuthenticated && <Alert variant="info">You are not signed in. Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>} */}
           <Form.Label htmlFor="fileOpenSelectType">Select design type to open:</Form.Label>
-          <Form.Control as="select" id="fileOpenSelectType" onChange={onSelectType} value={type}>
+          <Form.Select id="fileOpenSelectType" onChange={onSelectType} value={type}>
             {types.map((designtype, index) =>
               <option key={index} value={designtype}>{designtype}</option>
             )}
-          </Form.Control>
+          </Form.Select>
           <br />
           <Form.Label htmlFor="fileOpenSelectName">Select {/* {!this.props.authState.isAuthenticated ? "system" : "private or system"} */} design to open:</Form.Label>
-          <Form.Control as="select" id="fileOpenSelectName" onChange={onSelectName} value={name}>
+          <Form.Select id="fileOpenSelectName" onChange={onSelectName} value={name}>
             {names.filter((design, index, self) => { return self.map(design => { return design.name }).indexOf(design.name) === index }).map((design, index) =>
               <option key={index} value={design.name}>{design.name}{design.user === null ? ' [ReadOnly]' : ''}</option>
             )}
-          </Form.Control>
+          </Form.Select>
         </Modal.Body>
         <Modal.Footer>
           {!authState.isAuthenticated && <Button variant="info" onClick={onSignIn}>Sign In...</Button>}{' '}

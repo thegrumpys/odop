@@ -520,9 +520,9 @@ export default function SymbolValueWireDia({ className, element, index }) {
                         {(valueInput ?
                           <FormControlTypeNumber id={'svwd_' + element.name} icon_alerts={nvu_icon_alerts} className={nvu_value_class} step="any" value={element.value} validmin={element.validmin} validmax={element.validmax} onChange={onChangeValid} />
                           :
-                          <Form.Control as="select" id={'svwd_' + element.name} disabled={!element.input} className={nvu_value_class} value={default_value === undefined ? element.value : default_value[0]} onChange={onSelect} >
+                          <Form.Select id={'svwd_' + element.name} disabled={!element.input} className={nvu_value_class} value={default_value === undefined ? element.value : default_value[0]} onChange={onSelect} >
                             {sorted_wire_dia_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}
-                          </Form.Control>
+                          </Form.Select>
                         )}
                         <InputGroup.Text>
                           <OverlayTrigger placement="top" overlay={<Tooltip>{nvu_value_fix_free_text}</Tooltip>}>
