@@ -94,10 +94,13 @@ export function init(store, p, x) {
             x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb8];
     }
 
-//    pc_tensile_stat  = m_tab(i).fy;
-    x[o.PC_Ten_Bnd_Stat]  = m_tab[i][mo.ptb1];
-//    pc_tensile_bend  = m_tab(i).ptb(life_catagory);
-//
+        if (x[o.Heat_Treat] === 2){     //  Stress Relieve
+            x[o.PC_Ten_Bnd_Stat]  = m_tab[i][mo.t_sr];
+        }
+        else {                          //  No Stress Relieve
+            x[o.PC_Ten_Bnd_Stat]  = m_tab[i][mo.t_nosr];
+        }
+        
 //    wire_dia=p(2);
 //    const_term=log10(tbase010);
     x[o.const_term] = Math.log10(x[o.tbase010]);
