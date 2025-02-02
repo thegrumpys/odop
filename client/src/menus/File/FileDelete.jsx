@@ -147,18 +147,18 @@ export default function FileDelete() {
           <br />
           {!authState.isAuthenticated && <Alert variant="info">You are not signed in. Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>}
           <Form.Label htmlFor="fileDeleteSelectType">Select design type for delete:</Form.Label>
-          <Form.Control as="select" id="fileDeleteSelectType" onChange={onSelectType} value={type} disabled={!authState.isAuthenticated}>
+          <Form.Select id="fileDeleteSelectType" onChange={onSelectType} value={type} disabled={!authState.isAuthenticated}>
             {types.map((designtype, index) =>
               <option key={index} value={designtype}>{designtype}</option>
             )}
-          </Form.Control>
+          </Form.Select>
           <br />
           <Form.Label htmlFor="fileDeleteSelectName">Select design to delete:</Form.Label>
-          <Form.Control as="select" id="fileDeleteSelectName" onChange={onSelectName} disabled={!authState.isAuthenticated}>
+          <Form.Select id="fileDeleteSelectName" onChange={onSelectName} disabled={!authState.isAuthenticated}>
             {names.map((design, index) => {
               return <option key={index} value={design.name}>{design.name}</option>
             })}
-          </Form.Control>
+          </Form.Select>
         </Modal.Body>
         <Modal.Footer>
           {!authState.isAuthenticated && <Button variant="info" onClick={onSignIn}>Sign In...</Button>}{' '}

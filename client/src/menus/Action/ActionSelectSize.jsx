@@ -127,18 +127,18 @@ export default function ActionSelectSize() {
         </Modal.Header>
         <Modal.Body>
           <Form.Label htmlFor="sizeTypeSelect">Select size type:</Form.Label>
-          <Form.Control as="select" id="sizeTypeSelect" onChange={onSelectSizeType} value={type}>
+          <Form.Select id="sizeTypeSelect" onChange={onSelectSizeType} value={type}>
             {types.map((element, index) =>
               <option key={index} value={element}>{element}</option>
             )}
-          </Form.Control>
+          </Form.Select>
           <br />
           <Form.Label htmlFor="sizeEntrySelect">Select size:</Form.Label>
-          <Form.Control as="select" id="sizeEntrySelect" onChange={onSelectSizeEntry} value={size}>
+          <Form.Select id="sizeEntrySelect" onChange={onSelectSizeEntry} value={size}>
             {sizes.map((element, index) => (
               <option key={index} value={element}>{element}</option>
             ))}
-          </Form.Control>
+          </Form.Select>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>

@@ -293,11 +293,11 @@ export default function ResultTable() {
             </ButtonGroup>
             &nbsp;
             <InputGroup.Text>Name: </InputGroup.Text>
-            <Form.Control as="select" className="align-middle" onChange={onSeekNameSelect} value={seekName}>
+            <Form.Select className="align-middle" onChange={onSeekNameSelect} value={seekName}>
               {model_symbol_table.map((element, index) =>
                 (element.type === "equationset" && !element.hidden && !(element.lmin & FIXED)) ? <option key={index} value={element.name}>{element.name}</option> : ''
               )}
-            </Form.Control>
+            </Form.Select>
           </InputGroup>
         </Modal.Body>
         <Modal.Footer>
