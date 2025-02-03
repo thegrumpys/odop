@@ -95,10 +95,10 @@ export function init(store, p, x) {
     }
 
         if (x[o.Heat_Treat] === 2){     //  Stress Relieve
-            x[o.PC_Ten_Bnd_Stat]  = m_tab[i][mo.t_sr];
+            x[o.PC_Ten_Bnd_Stat]  = m_tab[i][mo.ptb1sr];
         }
         else {                          //  No Stress Relieve
-            x[o.PC_Ten_Bnd_Stat]  = m_tab[i][mo.t_nosr];
+            x[o.PC_Ten_Bnd_Stat]  = m_tab[i][mo.ptb1nosr];
         }
         
 //    wire_dia=p(2);
