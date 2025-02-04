@@ -381,7 +381,7 @@ export const initialState = {
             "lmin": CONSTRAINED,
             "lmax": CONSTRAINED,
             "cmin": 1.05,
-            "cmax": 1.6,
+            "cmax": 1.8,
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
@@ -1024,7 +1024,7 @@ export const initialState = {
         }
     ],
     "type": "Spring/Torsion",
-    "version": "9",
+    "version": "10",
     "result": {
         "objective_value": 0,
         "termination_condition": ""
