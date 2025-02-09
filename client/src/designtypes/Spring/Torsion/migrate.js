@@ -329,7 +329,8 @@ export function migrate(design) {
               "Default values in the internal materials table have changed to allow higher stresses in torsion springs. Enter \"TorsionStresses\" in Help Lookup and/or contact technical support.",
               'info');
         }
-        migrated_design.version = '11'; // last thing... set the migrated model version
+        // To be defined - presently do nothing
+        // migrated_design.version = '11'; // last thing... set the migrated model version
 
         break; // Do not copy this break
     default: // Unknown
