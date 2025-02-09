@@ -20,7 +20,6 @@ export function migrate(design) {
         design.constants.splice(0, design.constants.length); // Remove all constant entries
       migrated_design.version = '1'; // last thing... set the migrated model version
     case '1':
-        // Current model version
 //        console.log('Convert from 1 to 2');
         // Mark all design_parameters and state_varaibles with equationset: true,
         design.design_parameters.forEach((design_parameter) => {
@@ -91,7 +90,6 @@ export function migrate(design) {
         design.system_controls.enable_auto_fix = 1;
         migrated_design.version = '5'; // last thing... set the migrated model version
     case '5':
-        // Current model version
 // console.log('Convert from 5 to 6');
         // #589 Changes in initialState: remove ioclass; sdlimit mods to support #452
         // Remove ioclass from all Symbol Table entries
@@ -100,7 +98,6 @@ export function migrate(design) {
         });
         migrated_design.version = '6'; // last thing... set the migrated model version
     case '6':
-        // Current model version
 // console.log('Convert from 6 to 7');
         delete design.result.violated_constraint_count; // No longer needed, no need to replace or rename
         design.symbol_table.forEach((element) => { // For each Symbol Table entry

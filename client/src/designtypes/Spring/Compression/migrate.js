@@ -287,7 +287,6 @@ export function migrate(design) {
 
         migrated_design.version = '10'; // last thing... set the migrated model version
     case '10':
-        // Current model version
 // console.log('Convert from 10 to 11');
         // #625 Repair design library problems created by unwanted v4.1 migrate in v4.2 Migrate
 //        console.log('Before: design=',design);
@@ -327,7 +326,6 @@ export function migrate(design) {
 //        console.log('After: design=',design);
         migrated_design.version = '11'; // last thing... set the migrated model version
     case '11':
-        // Current model version
 // console.log('Convert from 11 to 12');
         delete design.result.violated_constraint_count; // No longer needed, no need to replace or rename
         design.symbol_table.forEach((element) => { // For each Symbol Table entry

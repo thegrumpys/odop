@@ -16,7 +16,6 @@ export function migrate(design) {
 //    console.log('In migrate design.version=',design.version);
     switch(design.version) {
     case '1':
-        // Current model version
 // console.log('Convert from 1 to 2');
         // convert material value array to value: 6, type: table and table: material
         design.constants.find((element) => {
@@ -31,7 +30,6 @@ export function migrate(design) {
         });
         migrated_design.version = '2'; // last thing... set the migrated model version
     case '2':
-        // Current model version
 //        console.log('Convert from 2 to 3');
         // Mark all design_parameters and state_varaibles with equationset: true,
         design.design_parameters.forEach((design_parameter) => {
@@ -109,11 +107,9 @@ export function migrate(design) {
         migrated_design.version = '6'; // last thing... set the migrated model version
     case '6':
 // console.log('Convert from 6 to 7');
-        // To be defined - presently do nothing
         design.system_controls.enable_auto_fix = 1;
         migrated_design.version = '7'; // last thing... set the migrated model version
     case '7':
-        // Current model version
 // console.log('Convert from 7 to 8');
         // #589 Changes in initialState: remove ioclass; sdlimit mods to support #452
         // Remove ioclass from all Symbol Table entries
@@ -122,7 +118,6 @@ export function migrate(design) {
         });
         migrated_design.version = '8'; // last thing... set the migrated model version
     case '8':
-        // Current model version
 // console.log('Convert from 8 to 9');
         delete design.result.violated_constraint_count; // No longer needed, no need to replace or rename
         design.symbol_table.forEach((element) => { // For each Symbol Table entry

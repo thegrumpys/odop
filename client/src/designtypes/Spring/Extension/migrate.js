@@ -234,7 +234,6 @@ export function migrate(design) {
         design.labels[22].value = ' _______ ';
         migrated_design.version = '6'; // last thing... set the migrated model version
     case '6':
-        // Current model version
 // console.log('Convert from 6 to 7');
         // #625 Repair design library problems created by unwanted v4.1 migrate in v4.2 Migrate
 //        console.log('Before: design=',design);
@@ -274,7 +273,6 @@ export function migrate(design) {
 //        console.log('After: design=',design);
         migrated_design.version = '7'; // last thing... set the migrated model version
     case '7':
-        // Current model version
 // console.log('Convert from 7 to 8');
         delete design.result.violated_constraint_count; // No longer needed, no need to replace or rename
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
@@ -306,7 +304,6 @@ export function migrate(design) {
             "The new Alert Facility may highlight previously unrecognized issues saved with earlier designs. Enter \"Alerts\" in Help Lookup and/or contact technical support.",
             'info');
     case '8':
-        // Current model version
 // console.log('Convert from 8 to 9');
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
             // Added to migration on 10/21/2023 after finding #855 Issue
