@@ -19,7 +19,7 @@ ___
  - [Calculation Input names](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springCalcInputNames)  
  - [Values in reports](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springOtherValues)  
  - [Torsion spring end types](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springEndTypes)  
- - [TorsionStresses - allowable stress update March 2025](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_allowableStressUpdate)  
+ - [Allowable stress update](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_allowableStressUpdate)  
 <!---  - [Constraints unique to torsion springs](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springConstraints)  --> 
  - [Related topics](/docs/Help/DesignTypes/Spring/Torsion/description.html#relatedTopics)  
 
@@ -253,11 +253,9 @@ ___
 <a id="t_allowableStressUpdate"></a>  
 ___
 
-## TorsionStresses - allowable stress update March 2025  
+## Allowable stress update  
 
-Starting with ODOP:Spring version 5.2 released in March, 2025 
-(torsion spring "Model Version: 11" as shown in Help : About) 
-default values in the internal materials table have changed to allow higher stresses in torsion springs.  
+Default values in the internal materials table have changed to allow higher stresses in torsion springs.  
 
 This change allows higher stresses to be considered "feasible".  
 The Search feature will produce designs that are less conservative (more highly stressed) and 
