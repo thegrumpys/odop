@@ -70,14 +70,14 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   }
 
   const onSetFixLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onSetLocal' event.target.value=', event.target.value);
+//    console.log('In NameValueUnitsRowIndependentVariable.onSetFixLocal' event.target.value=', event.target.value);
     dispatch(fixSymbolValue(element.name));
     logValue(element.name, 'FIXED', 'FixedFlag', false);
     if (typeof onSetFix === "function") onSetFix(event);
   }
 
   const onResetFixLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onResetLocal' event.target.value=', event.target.value);
+//    console.log('In NameValueUnitsRowIndependentVariable.onResetFixLocal' event.target.value=', event.target.value);
     dispatch(freeSymbolValue(element.name));
     logValue(element.name, 'FREE', 'FixedFlag', false);
     if (typeof onResetFix === "function") onResetFix(event);
