@@ -77,9 +77,15 @@ export function init(store, p, x) {
         break;
         case 2:
             x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb2];
+            if (x[o.Heat_Treat] === 2){     //  Stress Relieve
+              x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb2sr];
+              };
         break;
         case 3:
             x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb3];
+            if (x[o.Heat_Treat] === 2){     //  Stress Relieve
+              x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb3sr];
+              };
         break;
         case 4:
             x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb4];
