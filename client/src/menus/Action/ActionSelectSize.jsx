@@ -37,7 +37,7 @@ export default function ActionSelectSize() {
     model_symbol_table.forEach((element) => {
       st.push(element);
     });
-    var localSizes = getSizeEntries(type, st);
+    var localSizes = getSizeEntries(localType, st);
     var localSize;
     if (localSizes.length === 1)
       localSize = localSizes[0]; // Default to first size
@@ -60,20 +60,20 @@ export default function ActionSelectSize() {
   const onSelectSizeType = (event) => {
     //        console.log('In ActionSelectSize.onSelectSizeType event.target.value=',event.target.value);
     var localType = event.target.value;
-    var { getSizeEntries } = require('../../designtypes/' + type + '/size.js'); // Dynamically load getSizeEntries
+    var { getSizeEntries } = require('../../designtypes/' + model_type + '/size.js'); // Dynamically load getSizeEntries
     // Loop to create p and x from model_symbol_table
     var st = [];
     model_symbol_table.forEach((element) => {
       st.push(element);
     });
-    var localSizes = getSizeEntries(type, st);
+    var localSizes = getSizeEntries(localType, st);
     var localSize;
     if (localSizes.length === 1)
-      size = localSizes[0]; // Default to first size
+      localSize = localSizes[0]; // Default to first size
     else if (sizes.length === 2)
-      size = localSizes[1]; // Default to middle size
+      localSize = localSizes[1]; // Default to middle size
     else // if (sizes.length == 3)
-      size = localSizes[1]; // Default to middle size
+      localSize = localSizes[1]; // Default to middle size
     setType(localType);
     setSizes(localSizes);
     setSize(localSize);
