@@ -1,5 +1,6 @@
 import * as o from './symbol_table_offsets';
 import * as mo from '../mat_offsets';
+import { toODOPPrecision } from '../../../toODOPPrecision';
 
 export function getSizeTypes() {
     var result = [
@@ -13,7 +14,7 @@ export function getSizeTypes() {
 export function getSizeEntries(type, st) {
 //    console.log('In getSizeEntries type=',type,' st=',st);
     var wire_dia_filename, od_free_filename, wire_dia_table, od_free_table, wire_dia_entry, od_free_entry;
-    var wire_dia, od_free;
+    var needle;
     var size0, size1, size2;
     var result = [];
     var m_tab, i;
@@ -31,28 +32,33 @@ export function getSizeEntries(type, st) {
 //        console.log('In getSizeEntries wire_dia_filename=',wire_dia_filename);
         wire_dia_table = require('../'+wire_dia_filename+'.json'); // Dynamically load table
 //        console.log('In getSizeEntries wire_dia_table=',wire_dia_table);
-        wire_dia = st[o.Wire_Dia].value;
-//        console.log('In getSizeEntries wire_dia=',wire_dia);
-        // Select one below value less than Wire_Dia and two value greater than Wire_Dia
-        for (let i = 1; i < wire_dia_table.length; i++) { // Skip column headers at zeroth entry
-            wire_dia_entry = wire_dia_table[i];
-            size0 = size1;
-            size1 = size2;
-            size2 = wire_dia_entry[0];
-            if (size1 !== undefined && wire_dia <= size1) {
-//                console.log('In getSizeEntries wire_dia_entry[0]=',wire_dia_entry[0]);
-                break;
-            }
-        };
-        if (size0 !== undefined) {
-            result.push(size0);
+        wire_dia_table = JSON.parse(JSON.stringify(wire_dia_table)); // clone so these updates are fresh
+        wire_dia_table.forEach((element) => {
+          element.push(element[0].toString()); // add labels
+          element.push(false); // add flags
+        });
+//        console.log('In getSizeEntries.render wire_dia_table=',wire_dia_table);
+        needle = st[o.Wire_Dia].value;
+//        console.log('In getSizeEntries.render needle=',needle);
+        var default_value = wire_dia_table.find((element, index) => {
+        if (index > 0) { // skip the column header
+          if (element[0] !== needle)
+            return false; // keep looking
+          else
+            element[2] = true;
+            return true; // were done
+          } else {
+            return false; // keep looking
+          }
+        });
+//        console.log('In getSizeEntries.render default_value=',default_value);
+        if (default_value === undefined) {
+          wire_dia_table[0] = [needle, toODOPPrecision(needle) + " Non-std", true]; // Replace column header with non-std value
+        } else {
+          wire_dia_table.shift(); // Remove column header if there is no non-std value
         }
-        if (size1 !== undefined) {
-            result.push(size1);
-        }
-        if (size2 !== undefined) {
-            result.push(size2);
-        }
+//       console.log('In getSizeEntries.render wire_dia_table=',wire_dia_table);
+        result = wire_dia_table.sort(function(a, b) { return a[0] - b[0]; }); // sort by value
         break;
     case "OD_Free":
         if (st[o.Material_File].value === "mat_metric.json")
@@ -66,28 +72,33 @@ export function getSizeEntries(type, st) {
 //        console.log('In getSizeEntries od_free_filename=',od_free_filename);
         od_free_table = require('../'+od_free_filename+'.json'); // Dynamically load table
 //        console.log('In getSizeEntries od_free_table=',od_free_table);
-        od_free = st[o.OD_Free].value;
-//        console.log('In getSizeEntries od_free=',od_free);
-        // Select one below value less than OD_Free and two value greater than OD_Free
-        for (let i = 1; i < od_free_table.length; i++) { // Skip column headers at zeroth entry
-            od_free_entry = od_free_table[i];
-            size0 = size1;
-            size1 = size2;
-            size2 = od_free_entry[0];
-            if (size1 !== undefined && od_free <= size1) {
-//                console.log('In getSizeEntries od_free_entry[0]=',od_free_entry[0]);
-                break;
-            }
-        };
-        if (size0 !== undefined) {
-            result.push(size0);
+        od_free_table = JSON.parse(JSON.stringify(od_free_table)); // clone so these updates are fresh
+        od_free_table.forEach((element) => {
+          element.push(element[0].toString()); // add labels
+          element.push(false); // add flags
+        });
+//        console.log('In getSizeEntries.render od_free_table=',od_free_table);
+        needle = st[o.OD_Free].value;
+//        console.log('In getSizeEntries.render needle=',needle);
+        var default_value = od_free_table.find((element, index) => {
+        if (index > 0) { // skip the column header
+          if (element[0] !== needle)
+            return false; // keep looking
+          else
+            element[2] = true;
+            return true; // were done
+          } else {
+            return false; // keep looking
+          }
+        });
+//        console.log('In getSizeEntries.render default_value=',default_value);
+        if (default_value === undefined) {
+          od_free_table[0] = [needle, toODOPPrecision(needle) + " Non-std", true]; // Replace column header with non-std value
+        } else {
+          od_free_table.shift(); // Remove column header if there is no non-std value
         }
-        if (size1 !== undefined) {
-            result.push(size1);
-        }
-        if (size2 !== undefined) {
-            result.push(size2);
-        }
+//       console.log('In getSizeEntries.render od_free_table=',od_free_table);
+        result = od_free_table.sort(function(a, b) { return a[0] - b[0]; }); // sort by value
         break;
     default:
         break;

@@ -134,9 +134,9 @@ export default function ActionSelectSize() {
           </Form.Select>
           <br />
           <Form.Label htmlFor="sizeEntrySelect">Select size:</Form.Label>
-          <Form.Select id="sizeEntrySelect" onChange={onSelectSizeEntry} value={size}>
+          <Form.Select id="sizeEntrySelect" onChange={onSelectSizeEntry} >
             {sizes.map((element, index) => (
-              <option key={index} value={element}>{element}</option>
+              <option key={index} value={element[0]} selected={element[2]}>{element[1]}</option>
             ))}
           </Form.Select>
         </Modal.Body>
