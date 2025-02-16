@@ -24,13 +24,14 @@ export function getSizeEntries(type, st) {
             m_tab = require('../mat_metric.json');
         else
             m_tab = require('../mat_us.json');
-//    console.log('In getSizeEntries: st[o.Material_File].value =', st[o.Material_File].value);
+//        console.log('In getSizeEntries: st[o.Material_File].value =', st[o.Material_File].value);
         i = st[o.Material_Type].value;
+//        console.log('In getSizeEntries Material_Type i=',i);
         wire_dia_filename = m_tab[i][mo.wire_dia_filename];
-        wire_dia_table = require('../'+wire_dia_filename+'.json'); // Dynamically load table
-        wire_dia = st[o.Wire_Dia].value;
 //        console.log('In getSizeEntries wire_dia_filename=',wire_dia_filename);
+        wire_dia_table = require('../'+wire_dia_filename+'.json'); // Dynamically load table
 //        console.log('In getSizeEntries wire_dia_table=',wire_dia_table);
+        wire_dia = st[o.Wire_Dia].value;
 //        console.log('In getSizeEntries wire_dia=',wire_dia);
         // Select one below value less than Wire_Dia and two value greater than Wire_Dia
         for (let i = 1; i < wire_dia_table.length; i++) { // Skip column headers at zeroth entry
@@ -64,9 +65,8 @@ export function getSizeEntries(type, st) {
         od_free_filename = m_tab[i][mo.od_free_filename];
 //        console.log('In getSizeEntries od_free_filename=',od_free_filename);
         od_free_table = require('../'+od_free_filename+'.json'); // Dynamically load table
-        od_free = st[o.OD_Free].value;
-//        console.log('In getSizeEntries od_free_filename=',od_free_filename);
 //        console.log('In getSizeEntries od_free_table=',od_free_table);
+        od_free = st[o.OD_Free].value;
 //        console.log('In getSizeEntries od_free=',od_free);
         // Select one below value less than OD_Free and two value greater than OD_Free
         for (let i = 1; i < od_free_table.length; i++) { // Skip column headers at zeroth entry

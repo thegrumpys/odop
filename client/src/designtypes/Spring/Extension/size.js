@@ -24,7 +24,7 @@ export function getSizeEntries(type, st) {
             m_tab = require('../mat_metric.json');
         else
             m_tab = require('../mat_us.json');
-//      console.log('In getSizeEntries: st[o.Material_File].value =', st[o.Material_File].value);
+//        console.log('In getSizeEntries: st[o.Material_File].value =', st[o.Material_File].value);
         i = st[o.Material_Type].value;
 //        console.log('In getSizeEntries Material_Type i=',i);
         wire_dia_filename = m_tab[i][mo.wire_dia_filename];
