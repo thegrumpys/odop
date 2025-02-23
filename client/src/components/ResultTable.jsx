@@ -152,7 +152,7 @@ export default function ResultTable() {
     feasibility_tooltip = 'FEASIBILITY UNDEFINED: computing constraints failed';
     feasibility_class = "text-feasibility-undefined";
     display_search_button = true;
-  } else if (model_objective_value > 4 * model_objmin) {
+  } else if (model_objective_value > 8 * model_objmin) {
     feasibility_status = "NOT FEASIBLE";
     feasibility_tooltip = 'NOT FEASIBLE: constraints significantly violated';
     feasibility_class = "text-not-feasible ";

@@ -201,10 +201,14 @@ export function getCatalogEntries(name, store, st, viol_wt, objmin) {
         objective_value = getObjectiveValue(st, viol_wt);
 //        console.log('In getCatalogEntries 3 objective_value=',objective_value);
 
+        var include_entry = true;
         if (!Number.isFinite(objective_value)) {
+          include_entry = false;
           feasibility_status = "FEASIBILITY UNDEFINED";
           feasibility_class = "text-feasibility-undefined";
-        } else if (objective_value > 4 * objmin) {
+        } else if (objective_value > 10 * objmin) {
+          include_entry = false;
+        } else if (objective_value > 8 * objmin) {
           feasibility_status = "NOT FEASIBLE";
           feasibility_class = "text-not-feasible ";
         } else if (objective_value > objmin) {
@@ -224,7 +228,9 @@ export function getCatalogEntries(name, store, st, viol_wt, objmin) {
 //        console.log('In getCatalogEntries 4: entry = ', entry);
 
         // get four lowest objective values as candidate entries
-        result.push(convertToResultArray(entry));
+        if (include_entry) {
+          result.push(convertToResultArray(entry));
+        }
     }
 //    console.log('Exiting getCatalogEntries result=',result);
     return result.sort((a,b) => a[1][8][1]-b[1][8][1]); // Order by Obj_Value

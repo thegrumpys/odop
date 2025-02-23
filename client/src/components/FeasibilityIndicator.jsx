@@ -27,16 +27,16 @@ export default function FeasibilityIndicator({ width = 242, height = 24 }) {
     x = -blackWidth / 2; // Center of black
   } else if (!Number.isFinite(model_objective_value)) { // Purple
     x = greenWidth + orangeWidth + redWidth + purpleWidth / 2; // Scale and shift it
-  } else if (model_objective_value > 4 * model_objmin) { // Red
-    x = model_objective_value - 4 * model_objmin; // Shift to Zero
+  } else if (model_objective_value > 8 * model_objmin) { // Red
+    x = model_objective_value - 8 * model_objmin; // Shift to Zero
     x = Math.log10(x); // log10
-    var lowBound = Math.log10(4 * model_objmin); // 0.000200 is approx. 10**(-3.7)
+    var lowBound = Math.log10(8 * model_objmin); // 0.000200 is approx. 10**(-3.7)
     var highBound = 8 // 10**8
     if (x < lowBound) x = lowBound;
     else if (x > highBound) x = highBound;
     x = ((x - lowBound) / (highBound - lowBound)) * redWidth + greenWidth + orangeWidth; // Scale and shift it
   } else if (model_objective_value > model_objmin) { // Orange
-    x = ((model_objective_value - model_objmin) / (4 * model_objmin - model_objmin)) * orangeWidth + greenWidth;
+    x = ((model_objective_value - model_objmin) / (8 * model_objmin - model_objmin)) * orangeWidth + greenWidth;
   } else { // Green
     x = (model_objective_value / model_objmin) * greenWidth;
   }
