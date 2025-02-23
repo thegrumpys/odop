@@ -11,6 +11,7 @@ export default function ActionSelectCatalog() {
   const model_type = useSelector((state) => state.model.type);
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const model_viol_wt = useSelector((state) => state.model.system_controls.viol_wt);
+  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
   const [show, setShow] = useState(false);
   const [names, setNames] = useState([]);
   const [name, setName] = useState(undefined);
@@ -48,7 +49,7 @@ export default function ActionSelectCatalog() {
         }
       }
     });
-    var localEntries = getCatalogEntries(localName, store, st, model_viol_wt);
+    var localEntries = getCatalogEntries(localName, store, st, model_viol_wt, model_objmin);
     var localEntry = 0; // Default to first entry
     localEntries.forEach((element, index) => {
       if (element[0] === entry_string) {
@@ -77,7 +78,7 @@ export default function ActionSelectCatalog() {
     model_symbol_table.forEach((element) => {
       st.push(Object.assign({}, element));
     });
-    var localEntries = getCatalogEntries(localName, store, st, model_viol_wt);
+    var localEntries = getCatalogEntries(localName, store, st, model_viol_wt, model_objmin);
     var localEntry = 0; // Default to first entry
     setName(localName);
     setEntries(localEntries);
@@ -97,10 +98,12 @@ export default function ActionSelectCatalog() {
     logUsage('event', 'ActionSelectCatalog', { event_label: name + ' ' + entries[entry][0] });
     dispatch(saveAutoSave());
     //        console.log('In ActionSelectCatalog.onSelect entries=',entries);
-    entries[entry][2].forEach((element) => {
+    entries[entry][1].forEach((element) => {
       //            console.log('In ActionSelectCatalog.onSelect element=',element);
-      dispatch(changeSymbolValue(element[0], element[1]));
-      logValue(element[0], element[1]);
+      if (element[2]) {
+        dispatch(changeSymbolValue(element[0], element[1]));
+        logValue(element[0], element[1]);
+      }
     });
     // The catalog name and number must be set after setting the affected symbols table entries
     dispatch(changeSymbolValue('Catalog_Name', name));
@@ -121,7 +124,7 @@ export default function ActionSelectCatalog() {
       <NavDropdown.Item onClick={toggle} disabled={names.length === 0}>
         Select Catalog&hellip;
       </NavDropdown.Item>
-      {show && <Modal show={show} size="lg" onHide={onCancel}>
+      {show && <Modal show={show} size="xl" onHide={onCancel} scrollable={true}>
         <Modal.Header closeButton>
           <Modal.Title>
             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; Action : Select Catalog
@@ -139,19 +142,33 @@ export default function ActionSelectCatalog() {
             <Form.Label htmlFor="catalogEntrySelect">No acceptable entries were found in this catalog</Form.Label>
             :
             <>
-              <Form.Label htmlFor="catalogEntrySelect">Closest catalog entries:</Form.Label>
+              <Form.Label htmlFor="catalogEntrySelect">{entries.length} catalog entries:</Form.Label>
               <Table className="table-secondary border border-secondary" size="sm">
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th>Values</th>
+                    <th>{entries[0][1][0][0]}</th>
+                    <th>{entries[0][1][1][0]}</th>
+                    <th>{entries[0][1][2][0]}</th>
+                    <th>{entries[0][1][3][0]}</th>
+                    <th>{entries[0][1][4][0]}</th>
+                    <th>{entries[0][1][5][0]}</th>
+                    <th>{entries[0][1][8][0]}</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   {entries.map((element, index) => (
                     <tr key={index}>
                       <td><Form.Check type='radio' name="catalogEntrySelect" id="catalogEntrySelect" checked={index === entry} label={element[0]} onChange={onSelectCatalogEntry} value={index}></Form.Check></td>
-                      <td>{element[1]}</td>
+                      <td>{element[1][0][1]}</td>
+                      <td>{element[1][1][1]}</td>
+                      <td>{element[1][2][1]}</td>
+                      <td>{element[1][3][1]}</td>
+                      <td>{element[1][4][1]}</td>
+                      <td>{element[1][5][1]}</td>
+                      <td>{element[1][8][1]}</td>
+                      <td><span className={element[1][10][1]}>{element[1][9][1]}</span></td>
                     </tr>
                   ))}
                 </tbody>

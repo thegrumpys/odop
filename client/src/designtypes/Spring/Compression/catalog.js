@@ -94,27 +94,30 @@ function convertToResultArray(entry) {
 //    console.log('In convertToResultArray entry=',entry);
     var result;
     var entry_select = entry[0].replace('-', '\u2011');
-    var entry_table = `OD_Free:\u00A0${entry[1]}, Wire_Dia:\u00A0${entry[2]}, L_Free:\u00A0${entry[3]}, Coils_T:\u00A0${entry[4]}, Material_Type:\u00A0${entry[5]}, End_Type:\u00A0${entry[6]}, Obj:\u00A0${entry[9]}`;
     // Convert to changeSymbolValue array
     var entry_symbol_values = [];
-    entry_symbol_values.push(['OD_Free',entry[1]]);
-    entry_symbol_values.push(['Wire_Dia',entry[2]]);
-    entry_symbol_values.push(['L_Free',entry[3]]);
-    entry_symbol_values.push(['Coils_T',entry[4]]);
-    entry_symbol_values.push(['Material_Type',entry[7]]);
-    entry_symbol_values.push(['End_Type',entry[8]]);
-    result = [entry_select, entry_table, entry_symbol_values];
+    entry_symbol_values.push(['OD_Free',entry[1],true]); // Flag true = update symbol table with this value
+    entry_symbol_values.push(['Wire_Dia',entry[2],true]);
+    entry_symbol_values.push(['L_Free',entry[3],true]);
+    entry_symbol_values.push(['Coils_T',entry[4],true]);
+    entry_symbol_values.push(['Material_Type',entry[5],false]); // Flag false = do not update symbol table this value
+    entry_symbol_values.push(['End_Type',entry[6],false]);
+    entry_symbol_values.push(['Material_Type',entry[7],true]);
+    entry_symbol_values.push(['End_Type',entry[8],true]);
+    entry_symbol_values.push(['Obj_Value',entry[9],false]);
+    entry_symbol_values.push(['feasibility_status',entry[10],false]);
+    entry_symbol_values.push(['feasibility_class',entry[11],false]);
+    result = [entry_select, entry_symbol_values];
 //    console.log('In convertToResultArray result=',result);
     return result;
 }
 
-export function getCatalogEntries(name, store, st, viol_wt) {
-//    console.log('Entering getCatalogEntries name=',name,' store=',store,' st=',st,' viol_wt=',viol_wt);
+export function getCatalogEntries(name, store, st, viol_wt, objmin) {
+//    console.log('Entering getCatalogEntries name=',name,' store=',store,' st=',st,' viol_wt=',viol_wt,' objmin=',objmin);
     var catalog, entry;
     var result = [];
     var p, x, offset;
-    var objective_value;
-    var cat0, cat1, cat2, cat3;
+    var objective_value, feasibility_status, feasibility_class;
     function findMaterialTypeIndex(element, index) {
 //        console.log('In findMaterialTypeIndex element=',element,' index=',index,' element[mo.matnam]=',element[mo.matnam],' entry[5]=',entry[5]);
         return index > 0 && element[mo.matnam] === entry[5];
@@ -198,28 +201,31 @@ export function getCatalogEntries(name, store, st, viol_wt) {
         objective_value = getObjectiveValue(st, viol_wt);
 //        console.log('In getCatalogEntries 3 objective_value=',objective_value);
 
+        if (!Number.isFinite(objective_value)) {
+          feasibility_status = "FEASIBILITY UNDEFINED";
+          feasibility_class = "text-feasibility-undefined";
+        } else if (objective_value > 4 * objmin) {
+          feasibility_status = "NOT FEASIBLE";
+          feasibility_class = "text-not-feasible ";
+        } else if (objective_value > objmin) {
+          feasibility_status = "CLOSE TO FEASIBLE";
+          feasibility_class = "text-close-to-feasible ";
+        } else if (objective_value > 0.0) {
+          feasibility_status = "FEASIBLE";
+          feasibility_class = "text-feasible ";
+        } else {
+          feasibility_status = "STRICTLY FEASIBLE";
+          feasibility_class = "text-strictly-feasible ";
+        }
+        
         entry[9] = objective_value.toFixed(6); // Set Objective Value
+        entry[10] = feasibility_status;
+        entry[11] = feasibility_class;
 //        console.log('In getCatalogEntries 4: entry = ', entry);
 
         // get four lowest objective values as candidate entries
-        if (cat0 === undefined || entry[9] < cat0[9]) { cat3 = cat2; cat2 = cat1; cat1 = cat0; cat0 = entry; }
-        else if (cat1 === undefined || entry[9] < cat1[9]) { cat3 = cat2; cat2 = cat1; cat1 = entry; }
-        else if (cat2 === undefined || entry[9] < cat2[9]) { cat3 = cat2; cat2 = entry; }
-        else if (cat3 === undefined || entry[9] < cat3[9]) { cat3 = entry; }
-//        console.log('In getCatalogEntries 4 cat0=',cat0,' cat1=',cat1,' cat2=',cat2,' cat3=',cat3);
-    }
-    if (cat0 !== undefined) {
-        result.push(convertToResultArray(cat0));
-    }
-    if (cat1 !== undefined) {
-        result.push(convertToResultArray(cat1));
-    }
-    if (cat2 !== undefined) {
-        result.push(convertToResultArray(cat2));
-    }
-    if (cat3 !== undefined) {
-        result.push(convertToResultArray(cat3));
+        result.push(convertToResultArray(entry));
     }
 //    console.log('Exiting getCatalogEntries result=',result);
-    return result;
+    return result.sort((a,b) => a[1][8][1]-b[1][8][1]); // Order by Obj_Value
 }
