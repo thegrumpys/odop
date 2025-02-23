@@ -140,8 +140,8 @@ export default function ResultTable() {
   //          OBJ value       Category Term           Color            RGB
   //          zero            STRICTLY FEASIBLE       Black            #343a40
   //          < OBJMIN        FEASIBLE                Green (or cyan)  #28a745
-  //          < 4x OBJMIN     CLOSE TO FEASIBLE       Orange           #fd7e14
-  //          > 4x OBJMIN     NOT FEASIBLE            Red              #dc3545
+  //          < 8x OBJMIN     CLOSE TO FEASIBLE       Orange           #fd7e14
+  //          > 8x OBJMIN     NOT FEASIBLE            Red              #dc3545
   //          > Not finite    FEASIBILITY UNDEFINED   Purple           #8b299e
   var feasibility_status;
   var feasibility_tooltip;
@@ -152,7 +152,7 @@ export default function ResultTable() {
     feasibility_tooltip = 'FEASIBILITY UNDEFINED: computing constraints failed';
     feasibility_class = "text-feasibility-undefined";
     display_search_button = true;
-  } else if (model_objective_value > 4 * model_objmin) {
+  } else if (model_objective_value > 8 * model_objmin) {
     feasibility_status = "NOT FEASIBLE";
     feasibility_tooltip = 'NOT FEASIBLE: constraints significantly violated';
     feasibility_class = "text-not-feasible ";

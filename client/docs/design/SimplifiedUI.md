@@ -86,7 +86,7 @@ The graphic below shows the extension spring "Basic" View with Objective Value =
 Compare with the equivalent view provided in the "Advanced" section below.  
 ![Extension Spring - Basic, FEASIBLE](/docs/design/img/Basic4.png "Extension Spring - Basic, FEASIBLE")   
 
-The graphic below shows the extension spring "Basic" View with Objective Value > OBJMIN and < 4*OBJMIN. 
+The graphic below shows the extension spring "Basic" View with Objective Value > OBJMIN and < 8*OBJMIN. 
 Note how violated constraints get an appropriately colored "Info" indicator in the Info column. 
 This text can carry a tooltip that provides the "outside the range" details 
 similar to how it is handled in the Calculator view.
