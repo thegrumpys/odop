@@ -8,8 +8,8 @@ The indicator provides an at-a-glance interpretation of the [Objective Value](te
  --- | --- | ---  
  ![StrictlyFeasible](/docs/Help/img/FI_StrictlyFeasible2.png "FI StrictlyFeasible") | STRICTLY FEASIBLE | zero    
  ![Feasible](/docs/Help/img/FI_Feasible2.png "FI Feasible") | FEASIBLE | < OBJMIN  
- ![Close To Feasible](/docs/Help/img/FI_CloseToFeasible2.png "FI Close To Feasible") | CLOSE TO FEASIBLE | < 4x OBJMIN  
- ![Not Feasible](/docs/Help/img/FI_NotFeasible2.png "FI Not Feasible") | NOT FEASIBLE | > 4x OBJMIN  
+ ![Close To Feasible](/docs/Help/img/FI_CloseToFeasible2.png "FI Close To Feasible") | CLOSE TO FEASIBLE | < 8x OBJMIN  
+ ![Not Feasible](/docs/Help/img/FI_NotFeasible2.png "FI Not Feasible") | NOT FEASIBLE | > 8x OBJMIN  
  ![Feasibility Undefined](/docs/Help/img/FI_FeasibleUndefined2.png "FI Undefined") | FEASIBILITY UNDEFINED | Infinity  
  &nbsp; | &nbsp; | &nbsp; |   
  

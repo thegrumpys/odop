@@ -117,6 +117,10 @@ export default function ActionSelectCatalog() {
     setShow(!show);
   }
 
+  const onSelectContextHelp = () => {
+  //    console.log('In ActionSelectCatalog.onSearchContinue');
+      window.open('/docs/Help/SpringDesign/selectSizeCatalog.html#catalogs', '_blank');
+  }
 //  updateCatalogNames();
 
   return (
@@ -177,6 +181,7 @@ export default function ActionSelectCatalog() {
           }
         </Modal.Body>
         <Modal.Footer>
+          <Button variant="outline-info" onClick={onSelectContextHelp}>Help</Button>{' '}
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>
           <Button variant="primary" onClick={onSelect} disabled={entries.length === 0}>Select</Button>
         </Modal.Footer>
