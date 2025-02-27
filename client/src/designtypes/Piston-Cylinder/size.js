@@ -1,12 +1,12 @@
-export function getSizeTypes() {
+export function getNames() {
     var result = [];
-//    console.log('In getSizeTypes result=',result);
+//    console.log('In getNames result=',result);
     return result;
 }
 
-export function getSizeEntries(type, st) {
-//    console.log('In getSizeEntries type=',type,' st=',st);
+export function getValues(type, st) {
+//    console.log('In getValues type=',type,' st=',st);
     var result = [];
-//    console.log('In getSizeEntries result=',result);
+//    console.log('In getValues result=',result);
     return result;
 }

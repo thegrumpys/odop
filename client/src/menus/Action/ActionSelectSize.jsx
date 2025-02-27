@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
-import { changeSymbolValue, fixSymbolValue, saveAutoSave, changeResultTerminationCondition } from '../../store/actions';
+import { changeSymbolValue, fixSymbolValue, saveAutoSave, changeResultTerminationCondition, search } from '../../store/actions';
 import { logUsage } from '../../logUsage';
 import { FIXED } from '../../store/actionTypes';
 import { logValue } from '../../logUsage';
@@ -12,98 +12,120 @@ export default function ActionSelectSize() {
   const model_type = useSelector((state) => state.model.type);
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const model_enable_auto_fix = useSelector((state) => state.model.system_controls);
+  const model_enable_auto_search = useSelector((state) => state.model.system_controls.enable_auto_search);
+  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
+  const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const [show, setShow] = useState(false);
-  const [types, setTypes] = useState([]);
-  const [type, setType] = useState(undefined);
-  const [sizes, setSizes] = useState([]);
-  const [size, setSize] = useState(undefined);
+  const [names, setNames] = useState([]);
+  const [name, setName] = useState(undefined);
+  const [values, setValues] = useState([]);
+  const [value, setValue] = useState(undefined);
+  const [initialValues, setInitialValues] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    //    console.log('ActionSelectSize - Mounted','model_type=',model_type);
-    updateSizeTypes();
+    console.log('ActionSelectSize - Mounted','model_type=',model_type);
+    updateNamesAndValues();
     return () => { };
   }, [model_type]);
 
-  const updateSizeTypes = () => {
-    //        console.log('In ActionSelectSize updateSizeTypes');
-    var { getSizeTypes, getSizeEntries } = require('../../designtypes/' + model_type + '/size.js'); // Dynamically load getSizeTypes & getSizeEntries
-    var localTypes = getSizeTypes();
-    var localType;
-    if (localTypes.length > 0)
-      localType = localTypes[0]; // Default to first type
+  const updateNamesAndValues = () => {
+    console.log('In ActionSelectSize updateNamesAndValues');
+    var { getNames, getValues } = require('../../designtypes/' + model_type + '/size.js'); // Dynamically load getNames & getValues
+    var localNames = getNames();
+    var localName;
+    if (localNames.length > 0)
+      localName = localNames[0]; // Default to first name
     // Loop to create st from model_symbol_table
     var st = [];
     model_symbol_table.forEach((element) => {
       st.push(element);
     });
-    var localSizes = getSizeEntries(type, st);
-    var localSize;
-    if (localSizes.length === 1)
-      localSize = localSizes[0]; // Default to first size
-    else if (localSizes.length === 2)
-      localSize = localSizes[1]; // Default to middle size
-    else // if (sizes.length == 3)
-      localSize = localSizes[1]; // Default to middle size
-    setTypes(localTypes);
-    setType(localType);
-    setSizes(localSizes);
-    setSize(localSize);
+    var localValues = getValues(name, st);
+    var localValue;
+    if (localValues.length === 1)
+      localValue = localValues[0]; // Default to first value
+    else if (localValues.length === 2)
+      localValue = localValues[1]; // Default to middle value
+    else // if (values.length == 3)
+      localValue = localValues[1]; // Default to middle value
+    setNames(localNames);
+    setName(localName);
+    setValues(localValues);
+    setValue(localValue);
   }
 
   const toggle = () => {
-    //        console.log('In ActionSelectSize.toggle');
-    updateSizeTypes();
+    console.log('In ActionSelectSize.toggle');
+    var result = [];
+    names.forEach((localName) => {
+      var element = model_symbol_table.find((localElement) => localElement.name === localName);
+      console.log('In ActionSelectSize.onSelect','element.name=',element.name,'element.value=',element.value);
+      result.push({name: element.name, value: element.value, element: element})
+    });
+    console.log('In ActionSelectSize.onSelect','result=',result);
+    setInitialValues(result);
+    updateNamesAndValues();
     setShow(!show);
   }
 
-  const onSelectSizeType = (event) => {
-    //        console.log('In ActionSelectSize.onSelectSizeType event.target.value=',event.target.value);
-    var localType = event.target.value;
-    var { getSizeEntries } = require('../../designtypes/' + type + '/size.js'); // Dynamically load getSizeEntries
+  const onSelectName = (event) => {
+    console.log('In ActionSelectSize.onSelectName event.target.value=',event.target.value);
+    var localName = event.target.value;
+    var { getValues } = require('../../designtypes/' + name + '/size.js'); // Dynamically load getValues
     // Loop to create p and x from model_symbol_table
     var st = [];
     model_symbol_table.forEach((element) => {
       st.push(element);
     });
-    var localSizes = getSizeEntries(type, st);
-    var localSize;
-    if (localSizes.length === 1)
-      size = localSizes[0]; // Default to first size
-    else if (sizes.length === 2)
-      size = localSizes[1]; // Default to middle size
-    else // if (sizes.length == 3)
-      size = localSizes[1]; // Default to middle size
-    setType(localType);
-    setSizes(localSizes);
-    setSize(localSize);
+    var localValues = getValues(name, st);
+    var localValue;
+    if (localValues.length === 1)
+      value = localValues[0]; // Default to first value
+    else if (values.length === 2)
+      value = localValues[1]; // Default to middle value
+    else // if (values.length == 3)
+      value = localValues[1]; // Default to middle value
+    setName(localName);
+    setValues(localValues);
+    setValue(localValue);
   }
 
-  const onSelectSizeEntry = (event) => {
-    //      console.log('In ActionSelectSizeEntry.onSelectSizeEntry event.target.value=',event.target.value);
-    setSize(parseFloat(event.target.value));
+  const onSelectValue = (event) => {
+    console.log('In ActionSelectSize.onSelectValue event.target.value=',event.target.value);
+    setValue(parseFloat(event.target.value));
   }
 
   const onSelect = () => {
-    //        console.log('In ActionSelectSize.onSelect');
+    console.log('In ActionSelectSize.onSelect');
     setShow(!show);
-    logUsage('event', 'ActionSelectSize', { event_label: type + ' ' + size });
-    // Do select size entry
+    logUsage('event', 'ActionSelectSize', { event_label: name + ' ' + value });
+    // Do select value entry
     dispatch(saveAutoSave());
     var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
     if (model_enable_auto_fix) {
       auto_fixed = true;
-      var found = model_symbol_table.find((element) => element.name === type);
+      var found = model_symbol_table.find((element) => element.name === name);
       //            console.log('In ActionSelectSize.onSelect found=',found);
       if (!(found.lmin & FIXED)) {
-        dispatch(fixSymbolValue(type));
-        logValue(type, 'AUTOFIXED', 'FixedFlag', false);
+        dispatch(fixSymbolValue(name));
+        logValue(name, 'AUTOFIXED', 'FixedFlag', false);
       }
     }
-    dispatch(changeSymbolValue(type, size));
-    logValue(type, size);
+    dispatch(changeSymbolValue(name, value));
+    logValue(name, value);
+    var valueChanged = false;
+    initialValues.forEach((initialValue) => {
+      if (initialValue.name === name && initialValue.value !== value) {
+        valueChanged = true;
+      }
+    });
+    console.log('In ActionSelectSize.onSelect','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',valueChanged,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+    if (model_enable_auto_search && valueChanged && model_objective_value >= model_objmin) {
+      dispatch(search());
+    }
     if (auto_fixed) {
-      dispatch(changeResultTerminationCondition('The value of ' + type + ' has been automatically fixed.'));
+      dispatch(changeResultTerminationCondition('The value of ' + name + ' has been automatically fixed.'));
     }
   }
 
@@ -112,11 +134,9 @@ export default function ActionSelectSize() {
     setShow(!show);
   }
 
-//  updateSizeTypes();
-
   return (
     <>
-      <NavDropdown.Item onClick={toggle} disabled={types.length === 0}>
+      <NavDropdown.Item onClick={toggle} disabled={names.length === 0}>
         Select Size&hellip;
       </NavDropdown.Item>
       {show && <Modal show={show} onHide={onCancel}>
@@ -126,16 +146,16 @@ export default function ActionSelectSize() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form.Label htmlFor="sizeTypeSelect">Select size type:</Form.Label>
-          <Form.Select id="sizeTypeSelect" onChange={onSelectSizeType} value={type}>
-            {types.map((element, index) =>
+          <Form.Label htmlFor="sizeTypeSelect">Select name:</Form.Label>
+          <Form.Select id="sizeTypeSelect" onChange={onSelectName} value={name}>
+            {names.map((element, index) =>
               <option key={index} value={element}>{element}</option>
             )}
           </Form.Select>
           <br />
-          <Form.Label htmlFor="sizeEntrySelect">Select size:</Form.Label>
-          <Form.Select id="sizeEntrySelect" onChange={onSelectSizeEntry} value={size}>
-            {sizes.map((element, index) => (
+          <Form.Label htmlFor="sizeEntrySelect">Select value:</Form.Label>
+          <Form.Select id="sizeEntrySelect" onChange={onSelectValue} value={value}>
+            {values.map((element, index) => (
               <option key={index} value={element}>{element}</option>
             ))}
           </Form.Select>
