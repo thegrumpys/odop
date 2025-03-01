@@ -323,18 +323,10 @@ export function migrate(design) {
     case '10':
         // Current model version
 // console.log('Convert from 10 to 11');
-        console.log(design.symbol_table[23].value, design.symbol_table[23].cmax);
-//        design.symbol_table[23].value = 1.75;    // delete me ... uncomment to force first displayMessage
-        if (design.symbol_table[30].value === 1 && design.symbol_table[23].value > design.symbol_table[23].cmax) {
+        if (design.symbol_table[30].value === 1) { // If Prop_Calc_Method is 1
           displayMessage(
-            "Default values in the internal materials table have recently changed to allow higher stresses to be regarded as feasible. Help button below provides more information.",
-            'info', '', '/docs/Help/DesignTypes/Spring/Torsion/t_stressUpdate.html');
-        } else {
-          if (design.symbol_table[30].value === 1) { // If Prop_Calc_Method is 1
-            displayMessage(
-                "Default values in the internal materials table have changed to allow higher stresses in torsion springs. Help button below provides more information.",
-                'info', '', '/docs/Help/DesignTypes/Spring/Torsion/description.html#t_allowableStress');
-          }
+              "Default values in the internal materials table have changed to allow higher stresses in torsion springs. Help button below provides more information.",
+              'info', '', '/docs/Help/DesignTypes/Spring/Torsion/description.html#t_allowableStressUpdate');
         }
         // To be defined - presently do nothing
         // migrated_design.version = '11'; // last thing... set the migrated model version

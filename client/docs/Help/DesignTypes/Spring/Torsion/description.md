@@ -20,6 +20,7 @@ ___
  - [Values in reports](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springOtherValues)  
  - [Torsion spring end types](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springEndTypes)  
  - [Allowable stress values](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_allowableStress)  
+ - [Allowable stress update](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_allowableStressUpdate)  
 <!---  - [Constraints unique to torsion springs](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springConstraints)  --> 
  - [Related topics](/docs/Help/DesignTypes/Spring/Torsion/description.html#relatedTopics)  
 
@@ -254,7 +255,6 @@ ___
 ___
 
 ## Allowable stress values  
-
 This section provides a brief overview of the selection of allowable stresses. 
 More detail is available in [Materials](/docs/Help/SpringDesign/materials.html) and 
 [Advanced Spring Operations](/docs/Help/SpringDesign/advancedSpringOperations.html).  
@@ -289,6 +289,30 @@ The Dependent Variable FS_Cycle_Life is determined by the Soderberg calculation.
 It is available for all values of Prop_Calc_Method and uses 
 the value of the Calculation Input Life_Category as a primary input. 
 For more detail, see: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife).  
+
+&nbsp; 
+  
+___
+
+<a id="t_allowableStressUpdate"></a>  
+___
+
+
+### Allowable Stress Update  
+The current version of ODOP:Spring contains updated default values in the internal materials table 
+to allow higher stresses in torsion springs as compared to earlier versions. 
+This change allows higher stresses to be considered "feasible". 
+Specifically, the Search feature will allow designs that are less conservative (more highly stressed) 
+to be considered feasible and as compared to previous versions, 
+show greater cycle life and/or reduced weight.  
+
+Torsion spring design models saved in prior versions of ODOP:Spring opened in the current version 
+will show increases in factor of safety and cycle life as compared to when they were saved. 
+Only torsion spring designs that rely on the internal material table (Prop_Calc_Method = 1) are affected. 
+It is possible that designs saved in previous versions showing "Feasible" now show "Not Feasible" 
+when opened in the current version because the FS_2 MAX constraint is violated. 
+If this is a concern, simply increase the value of FS_2 MAX constraint. 
+For example, from a value of 1.6 to a value of 1.8 or greater.  
 
 For additional information, please [contact customer support](/docs/About/ContactUs.html).  
 
