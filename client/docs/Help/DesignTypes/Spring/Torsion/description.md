@@ -314,6 +314,9 @@ when opened in the current version because the FS_2 MAX constraint is violated.
 If this is a concern, simply increase the value of FS_2 MAX constraint. 
 For example, from a value of 1.6 to a value of 1.8 or greater.  
 
+Opening an older design in a newer version of ODOP:Spring will produce an informational message. 
+Re-saving the design will prevent this message in the future.
+
 For additional information, please [contact customer support](/docs/About/ContactUs.html).  
 
 &nbsp; 
