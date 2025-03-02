@@ -254,22 +254,22 @@ ___
 <a id="t_allowableStress"></a>  
 ___
 
-## Allowable stress values  
-This section provides a brief overview of the selection of allowable stresses. 
+## Allowable Stress Values: An Overview  
+This section introduces the basics of selecting allowable stress values. 
 More detail is available in [Materials](/docs/Help/SpringDesign/materials.html) and 
 [Advanced Spring Operations](/docs/Help/SpringDesign/advancedSpringOperations.html).  
 
-The body coils of compression and extension springs are loaded in torsion. 
+The coils of compression and extension springs are subjected to torsion (twisting). 
 The related Calculation Inputs include: 
- - Torsion_Modulus  (G; a.k.a. shear modulus or modulus of rigidity) 
- - %_Tensile_Stat   (allowable fraction of tensile strength for torsion static load 
- - %_Tensile_Endur  (allowable fraction of tensile strength for torsion endurance (cyclic load))  
+ - Torsion_Modulus  (G): Also called shear modulus or modulus of rigidity 
+ - %_Tensile_Stat:  allowable fraction of tensile strength for torsion static load 
+ - %_Tensile_Endur: allowable fraction of tensile strength for torsion endurance (cyclic load)  
  
-The body coils of torsion springs are loaded in bending. 
+In torsion springs, the coils experience bending. 
 The related Calculation Inputs include: 
- - Elastic_Modulus  (E; a.k.a. Modulus of Elasticity, Young's Modulus) 
- - %_Ten_Bnd_Stat   (allowable fraction of tensile strength for bending static load) 
- - %_Ten_Bnd_Endur  (allowable fraction of tensile strength for bending endurance (cyclic load))  
+ - Elastic_Modulus  (E): Also known as the modulus of elasticity or Young's modulus 
+ - %_Ten_Bnd_Stat:   allowable fraction of tensile strength for bending static load 
+ - %_Ten_Bnd_Endur:  allowable fraction of tensile strength for bending endurance (cyclic load)  
  
 The selection of these values is controlled by the Calculation Input Prop_Calc_Method. 
  - Prop_Calc_Method = 1, the values above are determined by ODOP:Spring's internal materials table. 
@@ -282,12 +282,12 @@ When Prop_Calc_Method = 2 or Prop_Calc_Method = 3, the Tensile value is determin
 
 The Dependent Variable Cycle_Life is determined by the 
 [Modified Goodman calculation](https://en.wikipedia.org/wiki/Goodman_relation). 
-It is available only when using ODOP:Spring's internal materials table (Prop_Calc_Method = 1). 
-Is is not influenced by the value of the Calculation Input Life_Category.  
+It is available only when using ODOP:Spring's internal materials table (Prop_Calc_Method = 1) 
+and is is not influenced by the value of the Calculation Input Life_Category.  
 
 The Dependent Variable FS_Cycle_Life is determined by the Soderberg calculation. 
-It is available for all values of Prop_Calc_Method and uses 
-the value of the Calculation Input Life_Category as a primary input. 
+It is available for all values of Prop_Calc_Method and uses the value of 
+the Calculation Input Life_Category as a primary input. 
 For more detail, see: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife).  
 
 &nbsp; 
@@ -299,23 +299,27 @@ ___
 
 
 ### Allowable Stress Update  
-The current version of ODOP:Spring contains updated default values in the internal materials table 
-to allow higher stresses in torsion springs as compared to earlier versions. 
-This change allows higher stresses to be considered "feasible". 
-Specifically, the Search feature will allow designs that are less conservative (more highly stressed) 
-to be considered feasible and as compared to previous versions, 
-show greater cycle life and/or reduced weight.  
+The latest version of ODOP:Spring introduces updated default values in its internal materials table, 
+allowing for higher stress levels in torsion springs compared to earlier versions. 
+These changes make it possible for higher-stress designs to be considered "feasible." 
+As a result: 
+ - The Search feature now considers less conservative (more highly stressed) designs as feasible. 
+ - Designs may also display longer cycle life and/or reduced weight compared to previous versions.  
 
-Torsion spring design models saved in prior versions of ODOP:Spring opened in the current version 
-will show increases in factor of safety and cycle life as compared to when they were saved. 
-Only torsion spring designs that rely on the internal material table (Prop_Calc_Method = 1) are affected. 
-It is possible that designs saved in previous versions showing "Feasible" now show "Not Feasible" 
-when opened in the current version because the FS_2 MAX constraint is violated. 
-If this is a concern, simply increase the value of FS_2 MAX constraint. 
-For example, from a value of 1.6 to a value of 1.8 or greater.  
+If you open a torsion spring design created in a previous version of ODOP:Spring using the current version, 
+you might notice: 
+ - Increased Factor of Safety (FS): The updated internal materials table can result in higher FS values. 
+ - Longer Cycle Life: Expect improvements in estimated cycle life for affected designs.
 
-Opening an older design in a newer version of ODOP:Spring will produce an informational message. 
-Re-saving the design will prevent this message in the future.
+Note that these changes apply only to torsion spring designs that use the internal materials table 
+(Prop_Calc_Method = 1).  
+
+In some cases, designs marked as "Feasible" in older versions might now be flagged as "Not Feasible." 
+This usually happens if the FS_2 MAX constraint is violated. 
+To resolve this, Try increasing the value of FS_2 MAX. For instance, raise it from 1.6 to 1.8 (or higher).  
+
+When you open an older design in the new version of ODOP:Spring, an informational message will appear. 
+To prevent this message from showing up again, simply re-save the design in the current version.  
 
 For additional information, please [contact customer support](/docs/About/ContactUs.html).  
 
