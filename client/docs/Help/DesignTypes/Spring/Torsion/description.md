@@ -309,14 +309,15 @@ As a result:
 If you open a torsion spring design created in a previous version of ODOP:Spring using the current version, 
 you might notice: 
  - Increased Factor of Safety (FS): The updated internal materials table can result in higher FS values. 
- - Longer Cycle Life: Expect improvements in estimated cycle life for affected designs.
+ - Longer cycle life: Expect improvements in estimated cycle life for affected designs.
 
 Note that these changes apply only to torsion spring designs that use the internal materials table 
 (Prop_Calc_Method = 1).  
 
-In some cases, designs marked as "Feasible" in older versions might now be flagged as "Not Feasible." 
+In some cases, designs marked as "FEASIBLE" in older versions might now be flagged as "NOT FEASIBLE". 
 This usually happens if the FS_2 MAX constraint is violated. 
-To resolve this, Try increasing the value of FS_2 MAX. For instance, raise it from 1.6 to 1.8 (or higher).  
+To resolve this, Try increasing the value of FS_2 MAX. 
+For example, raise it from 1.6 to 1.8 (or higher).  
 
 When you open an older design in the new version of ODOP:Spring, an informational message will appear. 
 To prevent this message from showing up again, simply re-save the design in the current version.  
