@@ -17,7 +17,7 @@ export function migrate(design) {
 //    console.log('In migrate design.version=',design.version);
     switch(design.version) {
     case '1':
-// console.log('Convert from 1 to 2');
+        // console.log('Convert from 1 to 2');
         design.system_controls.show_units = 1; // Add show_units to system_controls
         design.system_controls.show_violations = 1; // Add show_violations to system_controls
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
@@ -46,12 +46,12 @@ export function migrate(design) {
         design.symbol_table.splice(36,1);
         migrated_design.version = '2'; // last thing... set the migrated model version
     case '2':
-// console.log('Convert from 2 to 3');
+        // console.log('Convert from 2 to 3');
         design.symbol_table[24].tooltip = "Factor of safety to achieve the target cycle life category. See on-line Help.";
         design.symbol_table[25].tooltip = "Rough estimate of the average number of cycles to failure. See on-line Help.";
         migrated_design.version = '3'; // last thing... set the migrated model version
     case '3':
-// console.log('Convert from 3 to 4');
+        // console.log('Convert from 3 to 4');
         design.symbol_table[25].sdlim = 10000;
         // Add Energy calculation
         design.symbol_table.splice(27,0,Object.assign({},design.symbol_table[25]));  //  Duplicate Cycle_Life in target position
@@ -76,7 +76,7 @@ export function migrate(design) {
         design.symbol_table[27].tooltip = "Change in elastic potential energy between 1 and 2";
         migrated_design.version = '4'; // last thing... set the migrated model version
     case '4':
-//        console.log('Convert from 4 to 5');
+        // console.log('Convert from 4 to 5');
         design['jsontype'] = "ODOP"; // Add in model type
         if (design.symbol_table[0].units === "inches") { // Add in units type
             design['units'] = "US";
@@ -157,7 +157,7 @@ export function migrate(design) {
         design.symbol_table[26].tooltip = "Deflection of load point 2 as a percent of total safe deflection";
         migrated_design.version = '5'; // last thing... set the migrated model version
     case '5':
-// console.log('Convert from 5 to 6');
+        // console.log('Convert from 5 to 6');
         design.system_controls.enable_auto_fix = 1;
 
         design.labels[4].name = 'City, State & Zip';
@@ -206,7 +206,7 @@ export function migrate(design) {
 
         migrated_design.version = '6'; // last thing... set the migrated model version
     case '6':
-// console.log('Convert from 6 to 7');
+        // console.log('Convert from 6 to 7');
         // #625 Repair design library problems created by unwanted v4.1 migrate in v4.2 Migrate
 //        console.log('Before: design=',design);
         var contactPersonFound = false; // Start by marking that we haven't found the first "Contact person"
@@ -245,7 +245,7 @@ export function migrate(design) {
 //        console.log('After: design=',design);
         migrated_design.version = '7'; // last thing... set the migrated model version
     case '7':
-// console.log('Convert from 7 to 8');
+        // console.log('Convert from 7 to 8');
         delete design.result.violated_constraint_count; // No longer needed, no need to replace or rename
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
             if (element.format === undefined && typeof element.value === 'number') { // All symbol table numbers, skip strings and tables
@@ -282,7 +282,7 @@ export function migrate(design) {
             "The new Alert Facility may highlight previously unrecognized issues saved with earlier designs. Enter \"Alerts\" in Help Lookup and/or contact technical support.",
             'info');
     case '8':
-// console.log('Convert from 8 to 9');
+        // console.log('Convert from 8 to 9');
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
             // Added to migration on 10/21/2023 after finding #855 Issue
             if (element.lmin === undefined) {
@@ -314,22 +314,26 @@ export function migrate(design) {
         migrated_design.version = '9'; // last thing... set the migrated model version
 
     case '9':
-// console.log('Convert from 9 to 10');
+        // console.log('Convert from 9 to 10');
         if (design.symbol_table[37].value >= 5) { // If Life_Category shot-peened then make it not shot-peened
           design.symbol_table[37].value -= 4;
         }
-        migrated_design.version = '10'; // last thing... set the migrated model version
-
-    case '10':
-        // Current model version
-// console.log('Convert from 10 to 11');
         if (design.symbol_table[30].value === 1) { // If Prop_Calc_Method is 1
           displayMessage(
               "Default values in the internal materials table have changed to allow higher stresses in torsion springs. Help button below provides more information.",
               'info', '', '/docs/Help/DesignTypes/Spring/Torsion/description.html#t_allowableStressUpdate');
         }
-        // To be defined - presently do nothing
-        // migrated_design.version = '11'; // last thing... set the migrated model version
+        migrated_design.version = '10'; // last thing... set the migrated model version
+
+    case '10':
+        // console.log('Convert from 10 to 11');
+        // Nothing to do
+        // migrated_design.version = '11'; // uncomment when there is a case below this line
+
+    // case 'N':
+        // console.log('Convert from N to N+1');
+        // Write the migration code here, but leave the version change line commented
+        // migrated_design.version = 'N+1'; // uncomment when there is a case below this line
 
         break; // Do not copy this break
     default: // Unknown
