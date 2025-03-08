@@ -16,12 +16,11 @@ export function migrate(design) {
 //    console.log('In migrate design.version=',design.version);
     switch(design.version) {
     case '1.2':
-//        console.log('Convert from 1.2 to 1');
+        // console.log('Convert from 1.2 to 1');
         design.constants.splice(0, design.constants.length); // Remove all constant entries
       migrated_design.version = '1'; // last thing... set the migrated model version
     case '1':
-        // Current model version
-//        console.log('Convert from 1 to 2');
+        // console.log('Convert from 1 to 2');
         // Mark all design_parameters and state_varaibles with equationset: true,
         design.design_parameters.forEach((design_parameter) => {
 //            console.log('design_parameter=',design_parameter);
@@ -60,7 +59,7 @@ export function migrate(design) {
         delete design.constants;
         migrated_design.version = '2'; // last thing... set the migrated model version
     case '2':
-// console.log('Convert from 2 to 3');
+        // console.log('Convert from 2 to 3');
         design.system_controls.show_units = 1; // Add show_units to system_controls
         design.system_controls.show_violations = 1; // Add show_violations to system_controls
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
@@ -78,7 +77,7 @@ export function migrate(design) {
         });
         migrated_design.version = '3'; // last thing... set the migrated model version
     case '3':
-//        console.log('Convert from 3 to 4');
+        // console.log('Convert from 3 to 4');
         design['jsontype'] = "ODOP"; // Add in JSON type
         if (design.symbol_table[0].units === "LB/SQ-IN") { // Add in units type
             design['units'] = "US";
@@ -87,12 +86,11 @@ export function migrate(design) {
         }
         migrated_design.version = '4'; // last thing... set the migrated model version
     case '4':
-// console.log('Convert from 4 to 5');
+        // console.log('Convert from 4 to 5');
         design.system_controls.enable_auto_fix = 1;
         migrated_design.version = '5'; // last thing... set the migrated model version
     case '5':
-        // Current model version
-// console.log('Convert from 5 to 6');
+        // console.log('Convert from 5 to 6');
         // #589 Changes in initialState: remove ioclass; sdlimit mods to support #452
         // Remove ioclass from all Symbol Table entries
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
@@ -100,8 +98,7 @@ export function migrate(design) {
         });
         migrated_design.version = '6'; // last thing... set the migrated model version
     case '6':
-        // Current model version
-// console.log('Convert from 6 to 7');
+        // console.log('Convert from 6 to 7');
         delete design.result.violated_constraint_count; // No longer needed, no need to replace or rename
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
             if (element.format === undefined && typeof element.value === 'number') { // All symbol table numbers, skip strings and tables
@@ -116,10 +113,14 @@ export function migrate(design) {
         design.symbol_table[ 5].validmin = -Number.MAX_VALUE; // STRESS
         migrated_design.version = '7'; // last thing... set the migrated model version
     case '7':
-        // Current model version
-// console.log('Convert from 7 to 8');
-        // To be defined - presently do nothing
-        // migrated_design.version = '8'; // last thing... set the migrated model version
+        // console.log('Convert from 7 to 8');
+        // Do nothing
+        // migrated_design.version = '8'; // uncomment when there is a case below this line
+
+    // case 'N':
+        // console.log('Convert from N to N+1');
+        // Write the migration code here, but leave the version change line commented below
+        // migrated_design.version = 'N+1'; // uncomment when there is a case below this line
 
         break; // Do not copy this break
     default: // Unknown

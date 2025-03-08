@@ -77,9 +77,15 @@ export function init(store, p, x) {
         break;
         case 2:
             x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb2];
+            if (x[o.Heat_Treat] === 2){     //  Stress Relieve
+              x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb2sr];
+              };
         break;
         case 3:
             x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb3];
+            if (x[o.Heat_Treat] === 2){     //  Stress Relieve
+              x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb3sr];
+              };
         break;
         case 4:
             x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb4];
@@ -94,10 +100,13 @@ export function init(store, p, x) {
             x[o.PC_Ten_Bnd_Endur] = m_tab[i][mo.ptb8];
     }
 
-//    pc_tensile_stat  = m_tab(i).fy;
-    x[o.PC_Ten_Bnd_Stat]  = m_tab[i][mo.ptb1];
-//    pc_tensile_bend  = m_tab(i).ptb(life_catagory);
-//
+        if (x[o.Heat_Treat] === 2){     //  Stress Relieve
+            x[o.PC_Ten_Bnd_Stat]  = m_tab[i][mo.ptb1sr];
+        }
+        else {                          //  No Stress Relieve
+            x[o.PC_Ten_Bnd_Stat]  = m_tab[i][mo.ptb1nosr];
+        }
+        
 //    wire_dia=p(2);
 //    const_term=log10(tbase010);
     x[o.const_term] = Math.log10(x[o.tbase010]);

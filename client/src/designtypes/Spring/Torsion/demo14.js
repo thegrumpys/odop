@@ -89,7 +89,7 @@ export const execute = {
                     <tbody>
                         <tr><th>material</th><td>&nbsp;=</td><td>&nbsp;</td><td>oil-tempered wire</td><td>&nbsp;</td></tr>
                         <tr><th>ends</th><td>&nbsp;=</td><td>&nbsp;</td><td>tangent</td><td>&nbsp;</td></tr>
-                        <tr><th>inside diameter</th><td>~=</td><td>&nbsp;1.20</td><td>in.</td><td>(1.1 shaft plus approx. 10% clearance)</td></tr>
+                        <tr><th>inside diameter</th><td>~=</td><td>&nbsp;1.21</td><td>in.</td><td>(1.1 shaft plus approx. 10% clearance)</td></tr>
                         <tr><th>length of Arm 2</th><td>&nbsp;=</td><td>9.0</td><td>in.</td><td>&nbsp;</td></tr>
                         <tr><th>Force @ Arm 2</th><td>&nbsp;=</td><td>18.0</td><td>lb.</td><td>&nbsp;</td></tr>
                         <tr><th>Moment in open position</th><td>&nbsp;=</td><td>10.0</td><td>lb-in.</td><td>&nbsp;</td></tr>
@@ -118,7 +118,7 @@ export const execute = {
                     CHANGE  Material_Type  OIL_TEMPERED_MB<br />
                     <br />
                     FIX     M_1  10.0<br />
-                    CHANGE  ID_Free MIN  1.20<br />
+                    CHANGE  ID_Free MIN  1.21<br />
                     CHANGE  ID_Free MAX  1.25<br />
                     <br />
                     FIX  Stroke  110.0<br />
@@ -135,7 +135,7 @@ export const execute = {
                 changeSymbolValue("Material_Type",3),
                 fixSymbolValue('M_1', 10.0),
                 setSymbolFlag('ID_Free', MIN, CONSTRAINED),
-                changeSymbolConstraint('ID_Free', MIN, 1.20),
+                changeSymbolConstraint('ID_Free', MIN, 1.21),
                 setSymbolFlag('ID_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('ID_Free', MAX, 1.25),
                 fixSymbolValue('Stroke', 110.0),

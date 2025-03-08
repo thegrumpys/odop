@@ -19,6 +19,8 @@ ___
  - [Calculation Input names](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springCalcInputNames)  
  - [Values in reports](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springOtherValues)  
  - [Torsion spring end types](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springEndTypes)  
+ - [Allowable stress values](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_allowableStress)  
+ - [Allowable stress update](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_allowableStressUpdate)  
 <!---  - [Constraints unique to torsion springs](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springConstraints)  --> 
  - [Related topics](/docs/Help/DesignTypes/Spring/Torsion/description.html#relatedTopics)  
 
@@ -171,7 +173,7 @@ Process        |        | character string used to identify the manufacturing pr
 Heat_Treat     |        | Selects heat treatment process. Controls use of Kb - stress correction factor 
 Life_Category  |        | This value reflects the user's input about shot peening and required cycle life. It is input to the calculation of FS_CycleLife. See also: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) 
 Density        |        | wire density; weight per unit volume 
-Elastic_Modulus|        | Modulus of Elasticity modulus (E) (a.k.a. Young's Modulus) 
+Elastic_Modulus|        | Modulus of Elasticity (E) (a.k.a. Young's Modulus) 
 Hot_Factor_Kh  |        | empirical correction factor applied to hot wound modulus 
 Tensile        |        | tensile strength 
 %_Ten_Bnd_Endur|        | allowable fraction of tensile strength for bending endurance (cyclic load);  See also: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) 
@@ -244,6 +246,85 @@ describe end conditions.
 This diagram may be helpful. 
 
 ![Torsion Spring Names](/docs/Help/DesignTypes/Spring/Torsion/img/TorsionNames.png "Torsion Spring Names")  
+
+&nbsp; 
+
+___
+
+<a id="t_allowableStress"></a>  
+___
+
+## Allowable Stress Values: An Overview  
+This section introduces the basics of selecting allowable stress values. 
+More detail is available in [Materials](/docs/Help/SpringDesign/materials.html) and 
+[Advanced Spring Operations](/docs/Help/SpringDesign/advancedSpringOperations.html).  
+
+The coils of compression and extension springs are subjected to torsion (twisting). 
+The related Calculation Inputs include: 
+ - Torsion_Modulus  (G): Also called shear modulus or modulus of rigidity 
+ - %_Tensile_Stat:  allowable fraction of tensile strength for torsion static load 
+ - %_Tensile_Endur: allowable fraction of tensile strength for torsion endurance (cyclic load)  
+ 
+In torsion springs, the coils experience bending. 
+The related Calculation Inputs include: 
+ - Elastic_Modulus  (E): Also known as the modulus of elasticity or Young's modulus 
+ - %_Ten_Bnd_Stat:   allowable fraction of tensile strength for bending static load 
+ - %_Ten_Bnd_Endur:  allowable fraction of tensile strength for bending endurance (cyclic load)  
+ 
+The selection of these values is controlled by the Calculation Input Prop_Calc_Method. 
+ - Prop_Calc_Method = 1, the values above are determined by ODOP:Spring's internal materials table. 
+ - Prop_Calc_Method = 2, the values above are determined by user input. 
+ - Prop_Calc_Method = 3, stress limits and modulus values are directly determined by user input.  
+ 
+When using ODOP:Spring's internal materials table (Prop_Calc_Method = 1) the tensile strength values 
+(Calculation Input Tensile) change as a function of wire diameter. 
+When Prop_Calc_Method = 2 or Prop_Calc_Method = 3, the Tensile value is determined by user input.  
+
+The Dependent Variable Cycle_Life is determined by the 
+[Modified Goodman calculation](https://en.wikipedia.org/wiki/Goodman_relation). 
+It is available only when using ODOP:Spring's internal materials table (Prop_Calc_Method = 1) 
+and is is not influenced by the value of the Calculation Input Life_Category.  
+
+The Dependent Variable FS_Cycle_Life is determined by the Soderberg calculation. 
+It is available for all values of Prop_Calc_Method and uses the value of 
+the Calculation Input Life_Category as a primary input. 
+For more detail, see: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife).  
+
+&nbsp; 
+  
+___
+
+<a id="t_allowableStressUpdate"></a>  
+___
+
+
+### Allowable Stress Update  
+The latest version of ODOP:Spring introduces updated default values in its internal materials table, 
+allowing for higher stress levels in torsion springs compared to earlier versions. 
+These changes make it possible for higher-stress designs to be considered "feasible." 
+As a result: 
+ - The Search feature now considers less conservative (more highly stressed) designs as feasible. 
+ - Designs may also display longer cycle life and/or reduced weight compared to previous versions.  
+
+If you open a torsion spring design created in a previous version of ODOP:Spring using the current version, 
+you might notice: 
+ - Increased Factor of Safety (FS): The updated internal materials table can result in higher FS values. 
+ - Longer cycle life: Expect improvements in estimated cycle life for affected designs.
+
+Note that these changes apply only to torsion spring designs that use the internal materials table 
+(Prop_Calc_Method = 1).  
+
+In some cases, designs marked as "FEASIBLE" in older versions might now be flagged as "NOT FEASIBLE". 
+This usually happens if the FS_2 MAX constraint is violated. 
+To resolve this, Try increasing the value of FS_2 MAX. 
+For example, raise it from 1.6 to 1.8 (or higher).  
+
+When you open an older design in the new version of ODOP:Spring, an informational message will appear. 
+To prevent this message from showing up again, simply re-save the design in the current version.  
+
+For additional information, please [contact customer support](/docs/About/ContactUs.html).  
+
+&nbsp; 
 
 ___
 
