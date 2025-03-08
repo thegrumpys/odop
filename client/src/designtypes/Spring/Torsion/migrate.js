@@ -320,7 +320,7 @@ export function migrate(design) {
         }
         if (design.symbol_table[30].value === 1) { // If Prop_Calc_Method is 1
           displayMessage(
-              "Default values in the internal materials table have changed to allow higher stresses in torsion springs. Help button below provides more information.",
+              "Default values in the internal materials table have changed to allow higher stresses in torsion springs. If your previously \"FEASIBLE\" design is now \"NOT FEASIBLE\", use the Help button below for more information.",
               'info', '', '/docs/Help/DesignTypes/Spring/Torsion/description.html#t_allowableStressUpdate');
         }
         migrated_design.version = '10'; // last thing... set the migrated model version
