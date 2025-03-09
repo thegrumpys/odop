@@ -5,7 +5,6 @@ import m_tab from '../mat_us';
 import * as mo from '../mat_offsets';
 import et_tab from './endtypes.json';
 import { CONSTRAINED, FIXED, MIN, MAX, VALID_MIN, VALID_MAX } from '../../../store/actionTypes';
-import { toODOPPrecision } from '../../../toODOPPrecision';
 
 export function getCatalogNames() {
     var result = [
@@ -209,12 +208,12 @@ export function getCatalogEntries(name, store, st, viol_wt, objmin) {
             entry[7] = entry[6]; // Move End Type into slot 7
             entry[6] = entry[5]; // Move Material Type into slot 6
             entry[5] = entry[3]; // Move L_Free entry into slot 5 
-            entry[3] = toODOPPrecision((entry[5] - temp) / entry[2]);  // Corrected value of Coils_T from L_Free, inside diameter and Wire_Dia into slot 3
+            entry[3] = (entry[5] - temp) / entry[2];  // Corrected value of Coils_T from L_Free, inside diameter and Wire_Dia into slot 3
 //            console.log('corrected Coils_T = ', entry[0], entry[3]);
         } else {
             entry[7] = entry[6]; // Move End Type into slot 7
             entry[6] = entry[5]; // Move Material Type into slot 6
-            entry[5] = toODOPPrecision(st[o.L_Free].value); // Move L_Free symbol table value into slot 5
+            entry[5] = st[o.L_Free].value; // Move L_Free symbol table value into slot 5
         }
 
         // Skip catalog entry if it's less than half the constraint value or greater than twice the constraint value

@@ -4,6 +4,7 @@ import { Button, Modal, NavDropdown, Table, Form, OverlayTrigger, Tooltip } from
 import { changeSymbolValue, saveAutoSave } from '../../store/actions';
 import { logUsage, logValue } from '../../logUsage';
 import store from "../../store/store";
+import { toODOPPrecision } from '../../toODOPPrecision';
 
 export default function ActionSelectCatalog() {
   //  console.log('ActionSelectCatalog - Mounting...');
@@ -173,7 +174,7 @@ export default function ActionSelectCatalog() {
                     <tr key={i}>
                       <td><Form.Check type='radio' name="catalogEntrySelect" id="catalogEntrySelect" checked={entry !== undefined && e.catalog_number === entry.catalog_number} label={e.catalog_number} onChange={onSelectCatalogEntry} value={i}></Form.Check></td>
                       {e.catalog_items.map((ee) => 
-                        ee.display ? <td key={ee.name}>{ee.value}</td> : ''
+                        ee.display ? <td key={ee.name}>{toODOPPrecision(ee.value)}</td> : ''
                       )}
                       <td>
                         <OverlayTrigger placement="bottom" overlay={<Tooltip>Objective Value = {e.catalog_items[e.catalog_items.length-3].value}</Tooltip>}>
