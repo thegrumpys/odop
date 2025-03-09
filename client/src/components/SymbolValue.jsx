@@ -258,7 +258,7 @@ export default function SymbolValue({ className, element, index }) {
       feasibility_class = "text-feasibility-undefined";
       display_search_button = true;
       display_seek_button = false;
-    } else if (model_objective_value > 4 * model_objmin) {
+    } else if (model_objective_value > 8 * model_objmin) {
       feasibility_status = "NOT FEASIBLE";
       feasibility_tooltip = 'NOT FEASIBLE: constraints significantly violated';
       feasibility_class = "text-not-feasible ";

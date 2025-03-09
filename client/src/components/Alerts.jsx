@@ -280,7 +280,7 @@ export const getSeverityNumberByNameAndObjValue = (name, severity) => {
 //  console.log('### design=',design)
   var severityNumber = 0;
   if (name !== undefined && (name.endsWith(' MIN') || name.endsWith(' MAX')) && severity !== INFO) {
-    if (design.model.result.objective_value > 4 * design.model.system_controls.objmin) {
+    if (design.model.result.objective_value > 8 * design.model.system_controls.objmin) {
       severityNumber = 3;
     } else if (design.model.result.objective_value > design.model.system_controls.objmin) {
       severityNumber = 2;

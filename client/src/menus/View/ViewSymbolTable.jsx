@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { NavDropdown, Modal, Button } from 'react-bootstrap';
+import { NavDropdown, Modal, Button, Table } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
 
 export default function ViewSymbolTable() {
@@ -30,7 +30,7 @@ export default function ViewSymbolTable() {
         </Modal.Header>
         <Modal.Body>
           <pre className="view-table-fixed-2-columns">
-            <table className="report-table-borders">
+            <Table className="report-table-borders">
               <thead>
                 <tr key="table-head-row">
                   <th>#</th>
@@ -113,7 +113,7 @@ export default function ViewSymbolTable() {
                   );
                 })}
               </tbody>
-            </table>
+            </Table>
           </pre>
         </Modal.Body>
         <Modal.Footer>
