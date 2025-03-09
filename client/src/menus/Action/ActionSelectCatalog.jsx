@@ -5,6 +5,7 @@ import { changeSymbolValue, saveAutoSave } from '../../store/actions';
 import { logUsage, logValue } from '../../logUsage';
 import store from "../../store/store";
 import { toODOPPrecision } from '../../toODOPPrecision';
+import SymbolString from '../../components/SymbolString';
 
 export default function ActionSelectCatalog() {
   //  console.log('ActionSelectCatalog - Mounting...');
@@ -12,6 +13,7 @@ export default function ActionSelectCatalog() {
   const model_type = useSelector((state) => state.model.type);
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const model_viol_wt = useSelector((state) => state.model.system_controls.viol_wt);
+  const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const model_objmin = useSelector((state) => state.model.system_controls.objmin);
   const [show, setShow] = useState(false);
   const [names, setNames] = useState([]);
@@ -121,6 +123,25 @@ export default function ActionSelectCatalog() {
     window.open('/docs/Help/SpringDesign/selectSizeCatalog.html#catalogs', '_blank');
   }
 
+  var feasibility_status;
+  var feasibility_class;
+  if (!Number.isFinite(model_objective_value)) {
+    feasibility_status = "FEASIBILITY UNDEFINED";
+    feasibility_class = "text-feasibility-undefined";
+  } else if (model_objective_value > 8 * model_objmin) {
+    feasibility_status = "NOT FEASIBLE";
+    feasibility_class = "text-not-feasible ";
+  } else if (model_objective_value > model_objmin) {
+    feasibility_status = "CLOSE TO FEASIBLE";
+    feasibility_class = "text-close-to-feasible ";
+  } else if (model_objective_value > 0.0) {
+    feasibility_status = "FEASIBLE";
+    feasibility_class = "text-feasible ";
+  } else {
+    feasibility_status = "STRICTLY FEASIBLE";
+    feasibility_class = "text-strictly-feasible ";
+  }
+  
   return (
     <>
       <NavDropdown.Item onClick={toggle} disabled={names.length === 0}>
@@ -144,11 +165,11 @@ export default function ActionSelectCatalog() {
             <Form.Label htmlFor="catalogEntrySelect">No acceptable entries were found in this catalog</Form.Label>
             :
             <>
-              <Form.Label htmlFor="catalogEntrySelect">{entries.length} catalog entries: (See heading tooltips for details.)</Form.Label>
+              <Form.Label htmlFor="catalogEntrySelect">Existing design and {entries.length} similar catalog entries. See heading and status value tooltips for details.</Form.Label>
               <Table className="table-secondary border border-secondary" size="sm">
                 <thead>
                   <tr>
-                    <th key="Name">
+                    <th key="Number">
                       <OverlayTrigger placement="top" overlay={<Tooltip>Catalog Number</Tooltip>}>
                         <span>Number</span>
                       </OverlayTrigger>
@@ -170,6 +191,17 @@ export default function ActionSelectCatalog() {
                   </tr>
                 </thead>
                 <tbody>
+                  <tr key='Design'>
+                    <td style={{ backgroundColor: 'var(--bs-light)' }}>Design</td>
+                    {entries[0].catalog_items.map((ee) => 
+                      ee.display ? <td key={ee.name} style={{ backgroundColor: 'var(--bs-light)' }}><SymbolString element={model_symbol_table.find((item) => item.name === ee.name)}/></td> : ''
+                    )}
+                    <td style={{ backgroundColor: 'var(--bs-light)' }}>
+                      <OverlayTrigger placement="bottom" overlay={<Tooltip>Objective Value = {model_objective_value.toFixed(7)}</Tooltip>}>
+                        <span className={feasibility_class}>{feasibility_status}</span>
+                      </OverlayTrigger>
+                    </td>
+                  </tr>
                   {entries.map((e, i) => (
                     <tr key={i}>
                       <td><Form.Check type='radio' name="catalogEntrySelect" id="catalogEntrySelect" checked={entry !== undefined && e.catalog_number === entry.catalog_number} label={e.catalog_number} onChange={onSelectCatalogEntry} value={i}></Form.Check></td>
@@ -177,7 +209,7 @@ export default function ActionSelectCatalog() {
                         ee.display ? <td key={ee.name}>{toODOPPrecision(ee.value)}</td> : ''
                       )}
                       <td>
-                        <OverlayTrigger placement="bottom" overlay={<Tooltip>Objective Value = {e.catalog_items[e.catalog_items.length-3].value}</Tooltip>}>
+                        <OverlayTrigger placement="bottom" overlay={<Tooltip>Objective Value = {e.catalog_items[e.catalog_items.length-3].value.toFixed(7)}</Tooltip>}>
                           <span className={e.catalog_items[e.catalog_items.length-1].value}>{e.catalog_items[e.catalog_items.length-2].value}</span>
                         </OverlayTrigger>
                       </td>

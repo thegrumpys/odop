@@ -287,7 +287,7 @@ export function getCatalogEntries(name, store, st, viol_wt, objmin) {
           entry[5] = st[o.L_Free].value; // Move L_Free dependent value into slot 5
         }
 
-        entry[10] = objective_value.toFixed(7); // Set Objective Value
+        entry[10] = objective_value; // Set Objective Value
         entry[11] = feasibility_status;
         entry[12] = feasibility_class;
 //        console.log('In getCatalogEntries 4: entry = ', entry);

@@ -256,7 +256,7 @@ export function getCatalogEntries(name, store, st, viol_wt, objmin) {
           feasibility_class = "text-strictly-feasible ";
         }
         
-        entry[9] = objective_value.toFixed(7); // Set Objective Value
+        entry[9] = objective_value; // Set Objective Value
         entry[10] = feasibility_status;
         entry[11] = feasibility_class;
 //        console.log('In getCatalogEntries 4: entry = ', entry);
