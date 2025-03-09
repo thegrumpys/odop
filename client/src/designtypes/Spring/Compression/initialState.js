@@ -515,7 +515,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": true,
+            "input": false,
             "name": "ASTM/Fed_Spec",
             "value": "Defined in initialState",
             "units": "",
@@ -529,7 +529,7 @@ export const initialState = {
             "hidden": false
         },
         {
-            "input": true,
+            "input": false,
             "name": "Process",
             "value": "Cold_Coiled",
             "units": "",
