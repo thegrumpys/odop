@@ -89,7 +89,7 @@ export const initialState = {
         {
             "input": true,
             "name": "Force_1",
-            "value": 10.0,
+            "value": 12.0,
             "units": "pounds",
             "lmin": CONSTRAINED|FDCL,
             "lmax": 0,
