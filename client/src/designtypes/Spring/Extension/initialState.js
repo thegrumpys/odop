@@ -339,7 +339,7 @@ export const initialState = {
             "cmax": 30,
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
-            "sdlim": 14000.0,
+            "sdlim": 25000.0,
             "tooltip": "Stress resulting from Initial_Tension (FDCL)",
             "type": "equationset",
             "hidden": false,
