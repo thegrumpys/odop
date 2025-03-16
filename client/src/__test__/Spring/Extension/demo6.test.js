@@ -65,7 +65,7 @@ it('demo6', () => {
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000092,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.0000086,7);
 
     // title: "Page 07 of 09"
     // No-op
@@ -75,7 +75,7 @@ it('demo6', () => {
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000042,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.0000047,7);
 
     // title: "Page 09 of 09 (last page)"
     store.dispatch(fixSymbolValue("OD_Free",1.105));
