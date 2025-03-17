@@ -21,8 +21,9 @@ From issue 897:
 * if multiple springs in one image, use light gray to distinguish the "for reference" instances
 * Use open arrows to illustrate forces, curved open arrows for moments; size of arrows to reflect relative size of force
 
-### Example image
-![Coils_T](/designtypes/Spring/Compression/tooltips/Coils_T.png "Coils_T")  
+### Example images
+![Coils_T](/designtypes/Spring/Compression/tooltips/Coils_T_lg.png "Coils_T")  
+![Coils_T](/designtypes/Spring/Extension/tooltips/End_Extension_lg.png "Coils_T")  
 
 ### Procedure
 
@@ -33,5 +34,5 @@ From issue 897:
 * Scale to 160 pixels wide, corresponding height 
 * Save as regular tooltip size (no suffix) 
 
-Place the images in (for example): `/public/designtypes/Spring/Compression/tooltips/`  
+Place the images in (for example): `/public/designtypes/Spring/<type>/tooltips/`  
 
