@@ -90,4 +90,4 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 * [Install a new system](procedures/NewSystem.html) 
 * [New database](procedures/NewDB.html) 
 * [Okta Registration Flow](design/OktaRegistrationFlow.html) 
-
+* [Create tooltip images](procedures/tooltipImages.html) 
