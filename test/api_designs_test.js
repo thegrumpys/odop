@@ -227,7 +227,7 @@ describe('Designs with non-empty DB', () => {
     });
 
     describe('GET /api/v1/designtypes without Authorization with non-empty DB', () => {
-        it('it should GET with 200 OK one design type', (done) => {
+        it('it should GET with 401 UNAUTHORIZED', (done) => {
             chai.request(server)
                 .get('/api/v1/designtypes')
                 .end((err, res) => {
@@ -417,7 +417,7 @@ describe('Designs with multiple DB entries', () => {
     });
 
     describe('GET /api/v1/designtypes without Authorization with multiple DB entries', () => {
-        it('it should GET with 200 OK two design types named Test-Design and Test-Design2', (done) => {
+        it('it should GET with 401 UNAUTHORIZED', (done) => {
             chai.request(server)
                 .get('/api/v1/designtypes')
                 .end((err, res) => {
