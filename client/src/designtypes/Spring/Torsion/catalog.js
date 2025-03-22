@@ -1,4 +1,4 @@
-export function getCatalogNames() {
+export function getCatalogNames(units) {
     var result = [];
 //    console.log('In getCatalogNames result=',result);
     return result;
