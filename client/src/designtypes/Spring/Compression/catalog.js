@@ -6,12 +6,16 @@ import * as mo from '../mat_offsets';
 import et_tab from './endtypes.json';
 import { CONSTRAINED, FIXED, MIN, MAX, VALID_MIN, VALID_MAX } from '../../../store/actionTypes';
 
-export function getCatalogNames() {
-    var result = [
-        'generic_compression_catalog', // Default
-        'MS24585_(SAE-AS24585)_c_stl',
-        'MS24585_(SAE-AS24585)_c_ss'
-    ];
+export function getCatalogNames(units) {
+    if (units === 'US') {
+      var result = [
+          'generic_compression_catalog', // Default
+          'MS24585_(SAE-AS24585)_c_stl',
+          'MS24585_(SAE-AS24585)_c_ss'
+      ];
+    } else {
+      var result = []; // No Metric
+    }
 //    console.log('In getCatalogNames result=',result);
     return result;
 }
@@ -184,7 +188,11 @@ export function getCatalogEntries(name, store, st, viol_wt, objmin) {
     var cmax_Coils_T = st[o.Coils_T].value*2;
 
     // Load catalog table
-    catalog = require('./'+name+'.json');
+    if (name !== undefined) {
+      catalog = require('./'+name+'.json');
+    } else {
+      catalog = [];
+    }
 //    console.log('In getCatalogEntries catalog=',catalog);
 
     // scan through catalog

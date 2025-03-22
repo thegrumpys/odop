@@ -14,6 +14,7 @@ export default function ActionSelectCatalog() {
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const model_viol_wt = useSelector((state) => state.model.system_controls.viol_wt);
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
+  const model_units = useSelector((state) => state.model.units);
   const model_objmin = useSelector((state) => state.model.system_controls.objmin);
   const [show, setShow] = useState(false);
   const [names, setNames] = useState([]);
@@ -31,7 +32,7 @@ export default function ActionSelectCatalog() {
   const updateCatalogNames = () => {
 //    console.log('In ActionSelectCatalog.updateCatalogNames');
     var { getCatalogNames, getCatalogEntries } = require('../../designtypes/' + model_type + '/catalog.js'); // Dynamically load getCatalogNames & getCatalogEntries
-    var localNames = getCatalogNames();
+    var localNames = getCatalogNames(model_units);
 //    console.log('In ActionSelectCatalog.toggle names=',names);
     var localName;
     var catalog_number;
