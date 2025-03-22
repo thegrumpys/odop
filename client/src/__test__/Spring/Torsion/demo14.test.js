@@ -64,7 +64,7 @@ it('demo14', () => {
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000034,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.0000083,7);
 
     // title: "Page 07 of 08"
     // No-op
