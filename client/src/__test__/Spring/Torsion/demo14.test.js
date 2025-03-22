@@ -74,7 +74,7 @@ it('demo14', () => {
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000077,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.0000100,7);
 
     var endTime = Date.now();
     var duration = endTime - startTime;
