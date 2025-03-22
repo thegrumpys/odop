@@ -148,6 +148,7 @@ export function getCatalogEntries(name, store, st, viol_wt, objmin) {
     var result = [];
     var p, x, offset;
     var objective_value, feasibility_status, feasibility_class;
+    var cat0, cat1, cat2, cat3;
     function findMaterialTypeIndex(element, index) {
 //        console.log('In findMaterialTypeIndex element=',element,' index=',index,' element[mo.matnam]=',element[mo.matnam],' entry[5]=',entry[5]);
         return index > 0 && element[mo.matnam] === entry[5];
@@ -242,6 +243,12 @@ export function getCatalogEntries(name, store, st, viol_wt, objmin) {
           feasibility_class = "text-feasibility-undefined";
         } else if (objective_value > 10 * objmin) {
           include_entry = false;
+          if (cat0 === undefined || objective_value < cat0[9]) { cat3 = cat2; cat2 = cat1; cat1 = cat0; cat0 = entry; }
+          else if (cat1 === undefined || objective_value < cat1[9]) { cat3 = cat2; cat2 = cat1; cat1 = entry; }
+          else if (cat2 === undefined || objective_value < cat2[9]) { cat3 = cat2; cat2 = entry; }
+          else if (cat3 === undefined || objective_value < cat3[9]) { cat3 = entry; }
+          feasibility_status = "NOT FEASIBLE";
+          feasibility_class = "text-not-feasible ";
         } else if (objective_value > 8 * objmin) {
           feasibility_status = "NOT FEASIBLE";
           feasibility_class = "text-not-feasible ";
@@ -264,6 +271,24 @@ export function getCatalogEntries(name, store, st, viol_wt, objmin) {
         // get four lowest objective values as candidate entries
         if (include_entry) {
           result.push(convertToResultArray(st, entry));
+        }
+    }
+    if (result.length === 0) {
+        if (cat0 !== undefined) {
+            cat0[10] += '*';
+            result.push(convertToResultArray(st, cat0));
+        }
+        if (cat1 !== undefined) {
+            cat1[10] += '*';
+            result.push(convertToResultArray(st, cat1));
+        }
+        if (cat2 !== undefined) {
+            cat2[10] += '*';
+            result.push(convertToResultArray(st, cat2));
+        }
+        if (cat3 !== undefined) {
+            cat3[10] += '*';
+            result.push(convertToResultArray(st, cat3));
         }
     }
 //    console.log('Exiting getCatalogEntries result=',result);

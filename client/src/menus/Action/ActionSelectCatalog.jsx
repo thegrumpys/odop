@@ -62,6 +62,7 @@ export default function ActionSelectCatalog() {
     setName(localName);
     setEntries(localEntries);
     setEntry(localEntry);
+    logUsage('event', 'ActionSelectCatalog', { event_label: localName + ' ' + (localEntry !== undefined ? localEntry.catalog_number : 'none') + ' update' });
   }
 
   const toggle = () => {
@@ -84,19 +85,21 @@ export default function ActionSelectCatalog() {
     setName(localName);
     setEntries(localEntries);
     setEntry(localEntry);
+    logUsage('event', 'ActionSelectCatalog', { event_label: localName + ' ' + (localEntry !== undefined ? localEntry.catalog_number : 'none') + ' catalog_name' });
   }
 
   const onSelectCatalogEntry = (event) => {
 //    console.log('In ActionSelectCatalog.onSelectCatalogEntry event.target.value=',event.target.value);
     var entry = parseFloat(event.target.value);
     setEntry(entries[entry]);
+    logUsage('event', 'ActionSelectCatalog', { event_label: name + ' ' + entries[entry].catalog_number + ' catalog_number' });
   }
 
   const onSelect = () => {
 //    console.log('In ActionSelectCatalog.onSelect');
     setShow(!show);
     // Do select catalog entry
-    logUsage('event', 'ActionSelectCatalog', { event_label: name + ' ' + entry.catalog_number });
+    logUsage('event', 'ActionSelectCatalog', { event_label: name + ' ' + entry.catalog_number + '  selected' });
     dispatch(saveAutoSave());
 //    console.log('In ActionSelectCatalog.onSelect entries=',entries);
     entry.catalog_items.forEach((item) => {
