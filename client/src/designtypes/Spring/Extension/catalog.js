@@ -314,19 +314,19 @@ export function getCatalogEntries(name, store, st, viol_wt, objmin) {
     }
     if (result.length === 0) {
         if (cat0 !== undefined) {
-            cat0[10] += '*';
+            cat0[11] += '*';
             result.push(convertToResultArray(st, cat0));
         }
         if (cat1 !== undefined) {
-            cat1[10] += '*';
+            cat1[11] += '*';
             result.push(convertToResultArray(st, cat1));
         }
         if (cat2 !== undefined) {
-            cat2[10] += '*';
+            cat2[11] += '*';
             result.push(convertToResultArray(st, cat2));
         }
         if (cat3 !== undefined) {
-            cat3[10] += '*';
+            cat3[11] += '*';
             result.push(convertToResultArray(st, cat3));
         }
     }
