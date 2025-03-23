@@ -124,7 +124,7 @@ function getObjectiveValue(st, viol_wt) {
     return result;
 }
 
-function convertToResultArray(st, entry) {
+function convertToResultArray(st, entry, special_flag = false) {
 //    console.log('In convertToResultArray entry=',entry);
     var result;
     var entry_select = entry[0].replace('-', '\u2011');
@@ -141,7 +141,7 @@ function convertToResultArray(st, entry) {
     entry_symbol_values.push({name: 'Obj_Value', value: entry[9], display: false, set: false});
     entry_symbol_values.push({name: 'feasibility_status', value: entry[10], display: false, set: false});
     entry_symbol_values.push({name: 'feasibility_class', value: entry[11], display: false, set: false});
-    result = {catalog_number: entry_select, catalog_items: entry_symbol_values};
+    result = {catalog_number: entry_select, catalog_items: entry_symbol_values, special_flag: special_flag};
 //    console.log('In convertToResultArray result=',result);
     return result;
 }
@@ -283,20 +283,16 @@ export function getCatalogEntries(name, store, st, viol_wt, objmin) {
     }
     if (result.length === 0) {
         if (cat0 !== undefined) {
-            cat0[10] += '*';
-            result.push(convertToResultArray(st, cat0));
+            result.push(convertToResultArray(st, cat0, true));
         }
         if (cat1 !== undefined) {
-            cat1[10] += '*';
-            result.push(convertToResultArray(st, cat1));
+            result.push(convertToResultArray(st, cat1, true));
         }
         if (cat2 !== undefined) {
-            cat2[10] += '*';
-            result.push(convertToResultArray(st, cat2));
+            result.push(convertToResultArray(st, cat2, true));
         }
         if (cat3 !== undefined) {
-            cat3[10] += '*';
-            result.push(convertToResultArray(st, cat3));
+            result.push(convertToResultArray(st, cat3, true));
         }
     }
 //    console.log('Exiting getCatalogEntries result=',result);
