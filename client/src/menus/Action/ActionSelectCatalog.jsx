@@ -169,7 +169,11 @@ export default function ActionSelectCatalog() {
             <Form.Label htmlFor="catalogEntrySelect">No acceptable entries were found in this catalog</Form.Label>
             :
             <>
-              <Form.Label htmlFor="catalogEntrySelect">Existing design and {entries.length} similar catalog entries. See heading and status value tooltips for details.</Form.Label>
+              {entries.reduce((accumulator, currentValue) => accumulator | currentValue.special_flag, false) ?
+                <Form.Label htmlFor="catalogEntrySelect">No similar catalog entries are available. The entries marked with <b>*</b> are the {entries.length} closest that this catalog has to offer.</Form.Label>
+              :
+                <Form.Label htmlFor="catalogEntrySelect">Existing design and {entries.length} similar catalog entries. See heading and status value tooltips for details.</Form.Label>
+              }
               <Table className="table-secondary border border-secondary" size="sm">
                 <thead>
                   <tr>
@@ -214,7 +218,7 @@ export default function ActionSelectCatalog() {
                       )}
                       <td>
                         <OverlayTrigger placement="bottom" overlay={<Tooltip>Objective Value = {e.catalog_items[e.catalog_items.length-3].value.toFixed(7)}</Tooltip>}>
-                          <span className={e.catalog_items[e.catalog_items.length-1].value}>{e.catalog_items[e.catalog_items.length-2].value}</span>
+                          <span className={e.catalog_items[e.catalog_items.length-1].value}>{e.catalog_items[e.catalog_items.length-2].value}{e.special_flag ? '*' : ''}</span>
                         </OverlayTrigger>
                       </td>
                     </tr>
