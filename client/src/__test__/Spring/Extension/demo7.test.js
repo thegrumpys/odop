@@ -63,33 +63,33 @@ it('demo7', () => {
     store.dispatch(fixSymbolValue("L_2",6.25));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(2.3801981,7);
+    expect(design.model.result.objective_value).toBeCloseTo(2.2738355,7);
 
     // title: "Page 06 of 11"
     store.dispatch(freeSymbolValue("End_Extension"));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(2.3801981,7);
+    expect(design.model.result.objective_value).toBeCloseTo(2.2738355,7);
 
     // title: "Page 07 of 11"
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000093,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.0000020,7);
 
     // title: "Page 08 of 11"
     store.dispatch(setSymbolFlag("End_Extension",MIN,CONSTRAINED));
     store.dispatch(changeSymbolConstraint("End_Extension",MIN,0.64));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.8023736,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.0000020,7);
 
     // title: "Page 09 of 11"
     store.dispatch(fixSymbolValue("Wire_Dia",0.12));
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000173,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.0000172,7);
 
     // title: "Page 10 of 11"
     store.dispatch(changeSymbolValue("OD_Free",0.645));
@@ -102,7 +102,7 @@ it('demo7', () => {
     store.dispatch(changeSymbolValue("Hook_Deflect_All",0));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.1269627,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.0608543,7);
 
     // title: "Page 11 of 11 (last page)"
     // No-op

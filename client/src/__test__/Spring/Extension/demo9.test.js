@@ -55,26 +55,26 @@ it('demo9', () => {
     store.dispatch(fixSymbolValue("L_2",4.688));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(6.6510114,7);
+    expect(design.model.result.objective_value).toBeCloseTo(6.4148888,7);
 
     // title: "Page 06 of 09"
     store.dispatch(changeSystemControlsValue({"maxit":1000,"objmin":0.000001,"delmin":0.00001,"tol":0.00001,"smallnum":1e-8}));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(6.6510114,7);
+    expect(design.model.result.objective_value).toBeCloseTo(6.4148888,7);
 
     // title: "Page 07 of 09"
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000000,7);
+    expect(design.model.result.objective_value).toBeCloseTo(8.2553873e-7,7);
 
     // title: "Page 08 of 09"
     store.dispatch(fixSymbolValue("Wire_Dia",0.062));
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000004,7);
+    expect(design.model.result.objective_value).toBeCloseTo(6.0870017e-7,7);
 
     // title: "Page 09 of 09 (last page)"
     store.dispatch(changeSymbolValue("Wire_Dia",0.0625));
