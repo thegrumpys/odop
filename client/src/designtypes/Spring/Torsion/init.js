@@ -140,65 +140,59 @@ export function init(store, p, x) {
 //inactive_coils  = inact_coil_tbl(end_type_index);
     x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
 
-    store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", false));
     store.dispatch(changeSymbolHidden("Material_Type", false));
+    store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", false));
     store.dispatch(changeSymbolHidden("Process", false));
     store.dispatch(changeSymbolHidden("Life_Category", false));
     store.dispatch(changeSymbolHidden("%_Ten_Bnd_Endur", false));
     store.dispatch(changeSymbolHidden("%_Ten_Bnd_Stat", false));
 
-    store.dispatch(changeSymbolInput("ASTM/Fed_Spec", false));
-    store.dispatch(changeSymbolInput("Process", false));
     store.dispatch(changeSymbolInput("Density", false));
     store.dispatch(changeSymbolInput("Elastic_Modulus", false));
     store.dispatch(changeSymbolInput("Hot_Factor_Kh", false));
     store.dispatch(changeSymbolInput("Tensile", false));
-    store.dispatch(changeSymbolInput("%_Ten_Bnd_Stat", false));
     store.dispatch(changeSymbolInput("%_Ten_Bnd_Endur", false));
-    store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Stat", false));
+    store.dispatch(changeSymbolInput("%_Ten_Bnd_Stat", false));
     store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Endur", false));
+    store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Stat", false));
     break;
 
  case 2:     // Prop_Calc_Method = 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
 //     console.log('case 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur');
-     store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", true));
      store.dispatch(changeSymbolHidden("Material_Type", true));
+     store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", true));
      store.dispatch(changeSymbolHidden("Process", true));
      store.dispatch(changeSymbolHidden("Life_Category", true));
      store.dispatch(changeSymbolHidden("%_Ten_Bnd_Endur", false));
      store.dispatch(changeSymbolHidden("%_Ten_Bnd_Stat", false));
 
-     store.dispatch(changeSymbolInput("ASTM/Fed_Spec", false));
-     store.dispatch(changeSymbolInput("Process", false));
      store.dispatch(changeSymbolInput("Density", true));
      store.dispatch(changeSymbolInput("Elastic_Modulus", true));
      store.dispatch(changeSymbolInput("Hot_Factor_Kh", true));
      store.dispatch(changeSymbolInput("Tensile", true));
      store.dispatch(changeSymbolInput("%_Ten_Bnd_Endur", true));
      store.dispatch(changeSymbolInput("%_Ten_Bnd_Stat", true));
-     store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Stat", false));
      store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Endur", false));
+     store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Stat", false));
      break;
 
  case 3:     // Prop_Calc_Method = 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur
 //     console.log('case 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur');
-     store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", true));
      store.dispatch(changeSymbolHidden("Material_Type", true));
+     store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", true));
      store.dispatch(changeSymbolHidden("Process", true));
      store.dispatch(changeSymbolHidden("Life_Category", true));
      store.dispatch(changeSymbolHidden("%_Ten_Bnd_Endur", true));
      store.dispatch(changeSymbolHidden("%_Ten_Bnd_Stat", true));
 
-     store.dispatch(changeSymbolInput("ASTM/Fed_Spec", false));
-     store.dispatch(changeSymbolInput("Process", false));
      store.dispatch(changeSymbolInput("Density", true));
      store.dispatch(changeSymbolInput("Elastic_Modulus", true));
      store.dispatch(changeSymbolInput("Hot_Factor_Kh", true));
      store.dispatch(changeSymbolInput("Tensile", true));
      store.dispatch(changeSymbolInput("%_Ten_Bnd_Endur", false));
      store.dispatch(changeSymbolInput("%_Ten_Bnd_Stat", false));
-     store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Stat", true));
      store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Endur", true));
+     store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Stat", true));
  }
 
  store.dispatch(changeSymbolHidden("Inactive_Coils", true)); // Always hide Inactive_Coils (pseudo-migration)
