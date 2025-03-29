@@ -151,10 +151,10 @@ export function init(store, p, x) {
     store.dispatch(changeSymbolInput("Elastic_Modulus", false));
     store.dispatch(changeSymbolInput("Hot_Factor_Kh", false));
     store.dispatch(changeSymbolInput("Tensile", false));
-    store.dispatch(changeSymbolInput("%_Ten_Bnd_Stat", false));
     store.dispatch(changeSymbolInput("%_Ten_Bnd_Endur", false));
-    store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Stat", false));
+    store.dispatch(changeSymbolInput("%_Ten_Bnd_Stat", false));
     store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Endur", false));
+    store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Stat", false));
     break;
 
  case 2:     // Prop_Calc_Method = 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
@@ -172,8 +172,8 @@ export function init(store, p, x) {
      store.dispatch(changeSymbolInput("Tensile", true));
      store.dispatch(changeSymbolInput("%_Ten_Bnd_Endur", true));
      store.dispatch(changeSymbolInput("%_Ten_Bnd_Stat", true));
-     store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Stat", false));
      store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Endur", false));
+     store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Stat", false));
      break;
 
  case 3:     // Prop_Calc_Method = 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur
@@ -191,8 +191,8 @@ export function init(store, p, x) {
      store.dispatch(changeSymbolInput("Tensile", true));
      store.dispatch(changeSymbolInput("%_Ten_Bnd_Endur", false));
      store.dispatch(changeSymbolInput("%_Ten_Bnd_Stat", false));
-     store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Stat", true));
      store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Endur", true));
+     store.dispatch(changeSymbolInput("Stress_Lim_Bnd_Stat", true));
  }
 
  store.dispatch(changeSymbolHidden("Inactive_Coils", true)); // Always hide Inactive_Coils (pseudo-migration)
