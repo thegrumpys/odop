@@ -4,8 +4,6 @@ This entry describes the steps necessary to make a new ODOP "release".
 Specifically, this is the process to publish the current development version and its documentation to Heroku. 
 
 Ideally, any system downtime affecting the production system should be announced in advance via messageOfTheDay.md
-
-For background regarding "Major.Minor.Patch" see: [ODOP version numbering](/docs/design/VersionNumbers.html)
    
 Effective with v4.2, documentation (Help, About, design, procedures, etc. but not messageOfTheDay) is hosted on Heroku.
 The build process includes a Harp compile to create html files for end-user viewing. 
@@ -14,22 +12,17 @@ The html files should be referenced via the CNAME: odop.springdesignsoftware.org
 [Document structure](https://odop.springdesignsoftware.org/docs/design/Docs.html). 
 Still maintained on GitHub Pages, messageOfTheDay can be updated independently of the release process.  
 
-&nbsp;
+**A. Initial steps preparing for release**
 
-A. **DEVELOPMENT environment**
-
+1. Confirm that the steps in [Prepare for Development](prep4Development.html) been executed previously.
+1. Confirm that the steps in [Prepare for Release](prep4Release.html) been executed recently.
 1. Verify GitHub Milestone issues are completed.  Ask:   
    "Have we done everything on our milestone list?"   
    "Is there anything else we need to do?"   
    "Are we ready for release?"   
 1. Make sure your development environment is on branch master.   
-1. Check for and deal with security vulnerabilities.
-See GitHub Dependabot alerts.   
-Issue the command:   
-npm audit fix   
-when positioned in the server directory and again when positioned in the client directory.
 1. If this release has no migrate requirement, initialState impact or environment variable changes,
-skip forward to [Test For Console Output](release.html#test4consoleoutput).   
+skip forward to [Run Test Automation](release.html#runTestAutomation).   
 To confirm,
 compare the current master branch against the previous released commit tag branch 
 and check if any of the client/src/designtypes/.../initialState.js files have changed.  
@@ -47,7 +40,7 @@ If they are already started, log off of Okta and re-log into Okta to ensure the 
         1. Do a File > Open > Load Initial State. Run Action > Execute > mk[x] script where x is Startups, Startup & Startup_Metric (ignore all the other mk files), and Close to created each [x] file. Do a File > Sorted Export and rename into the [mk\_x] JSON file.
         1. Separately do a File > Open > Startup which should migrate it followed by a File : Export and rename into a "Migrated\_x" JSON file.
         1. Compare the two JSON files to verify that initial state and migration operate exactly the same. If they don't match then repair them until they do or the changes are as intended.
-1. Create load.sql files: Repeat the following steps or each design type (Piston-Cylinder, Solid, Spring/Compression, Spring/Extension, and Spring/Torsion) with an impacted initialState or initialSystemControls. 
+1. Create load.sql files: Repeat the following steps for each design type (Piston-Cylinder, Solid, Spring/Compression, Spring/Extension, and Spring/Torsion) with an impacted initialState or initialSystemControls. 
     1. Do a File > Open > Load Initial State for each design type that has an impacted Initial State. It is not necessary to Load Initial Metric State, because each mk_ script loads the correct initial state file (US or Metric) when it runs. Do this FOR ALL mk* files: Run Action > Execute > mk[x] script and Close the script to created each [x] file. Do a File > Save into the [x] file.
     1. Using MySqlDump command run the `scripts/dump_db_startup_files.sh` script to dump all newly created design files into their respective load.sql files. You might need to set a different OKTA Userid inside the WHERE clause for the Admin User who saved this file in the previous step.  
     1. Finally, manually edit and add carriage returns before each inserted VALUES section, and delete the 'id' field name and 'id' field value (it should be first in each record),and set the user field to NULL.
@@ -70,42 +63,22 @@ If they are already started, log off of Okta and re-log into Okta to ensure the 
     * REACT\_APP\_DESIGN\_UNITS
     * REACT\_APP\_DESIGN\_VIEW
     * REACT\_APP\_SESSION\_REFRESH
-1. Do a pull or push to get latest version on all systems.
-<a id="test4consoleoutput"></a>  
-&nbsp;
-1. **Test For Console Output** &nbsp; Bring up Google Chrome and enable View Console / Debugger.
-   Test various input and menu functions and verify no unexpected console.log output.
-   Use regular expression search: "^\s*console\." to find non-commented out console.log lines.
-   Most console.log output is acceptable in 
-     * client/public/dynoLoading.js.
-     * client/src/__test__/performance.test.js
-     * client/src/store/middleware/pxUpdateObjectiveValue.js
-     * client/src/store/middleware/seek.js 
-     * client/src/store/middleware/updateObjectiveValue.js 
-     * client/src/logUsage.js 
-     * client/src/registerServiceWorker.js 
-     * scripts/build_index.js 
-     * scanner.js 
-     * server.js 
-1. Shutdown server and client under your development environment.  
-&nbsp;
-1. In server, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully. 
-1. In client, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully.  
-&nbsp;
-1. Update client/src/version.js file to Major.Minor.Patch (for example: 2.3.1). Remove 'dev' suffix. Optionally use 'rc1' or 'rc2'.
+1. Do a pull or push to get latest version on all systems.  
+<a id="runTestAutomation"></a>  
+1. Confirm that **test automation** in [Prepare for Release](prep4Release.html) was recently executed.  
+    1. If necessary, shutdown server and client under your development environment before running tests.  
+1. Update client/src/version.js file to Major.Minor.Patch (for example: 2.3.1). Remove 'dev' suffix. Optionally use 'rc1', 'rc2', etc.
 1. Commit with message "Update version.js to Major.Minor.Patch" and push to origin.
 1. Pull to get latest version on all systems.
-1. Restart server then client under your development environment.
+1. If necessary, restart server then client under your development environment.
 1. Bring up on Windows under Microsoft Chromium Edge and verify Help : About Software Version is as expected (Major.Minor.Patch).
    Bring up on Windows and Mac OS X under Google Chrome and verify Help : About Software Version is as expected.
 
 &nbsp;
 
-B. **DO first for STAGING and then do again for PRODUCTION environments**
+**B. DO first for STAGING and then do again for PRODUCTION environments**  
+
 1. If not logged into Heroku, go to the Heroku Website and log in.
-1. Use the Heroku console settings tab to check the currently configured version of the Heroku stack. 
-   Upgrade the Heroku stack for the staging or production system as appropriate. 
-   The change will not be final until after the next deployment.  
 1. If operating on the production system (ignore for staging), check for active users on the production system; put the production system in maintenance mode.
    Maintenance mode may be enabled in the Heroku console settings tab or from the command line with:  
    heroku maintenance:on -a odop
@@ -137,25 +110,25 @@ to create and format the database tables using the create.sql file.
 Do this for staging and/or production databases as appropriate.   
 See the above link for the easier-to-read table of database names.  
 1. Optionally back up staging database. Back up the production database.
+   Use the ./scripts/dump_db.* script or batch file. 
    For background on backup provided by JAWSDB see: [Heroku docs](https://devcenter.heroku.com/articles/jawsdb#database-backups)
-1. Check the size of the production database as compared to capacity limits (5Mb for JAWSDB free plan). 
-Use the ./scripts/db_size.sh script.  
+1. Check the size of the production database as compared to capacity limits 
+(50MB for production paid kitefin-manifold-mysql; 5MB for JAWSDB free plan). 
+Use the ./scripts/list_db_size.* script or batch file.  
 For details, see the first FAQ question at: https://devcenter.heroku.com/articles/jawsdb#faq   
-If appropriate, dump to off-line storage and re-initialize the log_Usage table.
+If appropriate, dump and archive to off-line storage and re-initialize the usage_log table.
 <a id="runloadscript"></a>
 &nbsp;
 1. If the database already exists but no entries exist or must be recreated, then either
-   modify the script for the particular database and
-   run the configured ./scripts/load_all.sh script
+   run the ./scripts/load_db_startup_files.* script or batch file
    or
    manually run all affected load.sql files to create startup files for each design type in the affected database (for example, do this for Staging and Production).
 1. Delete any old, invalid or development-only designs if necessary.
-1. Optionally, dump and archive, then empty the usage_log table. 
 <a id="publish2Heroku"></a>
 &nbsp;
 1. **Publish to Heroku** &nbsp; If production, update messageOfTheDay.md to announce availability of the new version.
 To do this do the following: Create issue branch, update MOTD file, check-in change to branch and iterate if necessary, then when all is ready merge branch into master.
-Note: Merging will publish the MOTD externally/publically.
+Note: Merging will publish the MOTD externally/publicly.
 1. Do a pull as required to get latest version on all systems.
 1. If not logged into Heroku, login in using the command line "heroku login" which in turn brings up the Heroku website login page in your browser.
 1. Shutdown server and client under your development environment.
@@ -180,7 +153,8 @@ heroku maintenance:off -a odop
 
 &nbsp;
 
-C. **DEVELOPMENT ENVIRONMENT**
+**C. Post Release Steps**  
+
 1. Do a pull as required to get latest version on all systems.
 1. Create Major.Minor.Patch tag (for example, 3.2.1).
    Commit "Release Major.Minor.Patch" and push to origin.
@@ -192,7 +166,6 @@ C. **DEVELOPMENT ENVIRONMENT**
 
 &nbsp;
 
-D. **FUTURES**
-1. Discuss the next release, what work needs to be done and who does it.
-   In other words, set the direction for the upcoming milestone.
+**D. FUTURES**
+1. Looking to the next release, review the steps in [Prepare for Development](prep4Development.html).
 
