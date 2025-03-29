@@ -34,8 +34,8 @@ IF %ERRORLEVEL% NEQ 0 (
   GOTO BYEBYE
 ) ELSE (ECHO mysqldump returned SUCCESS)
 (
-  ECHO use %database%; 
-  ECHO source %filename%;
+  ECHO USE %database%; 
+  ECHO SOURCE %filename%;
 ) > dump_load_db.txt
 mysql --user=%user% --password=%password% --host=%host% < dump_load_db.txt
 IF %ERRORLEVEL% NEQ 0 (ECHO dump_load_db: mysql returned ERRORLEVEL %ERRORLEVEL%) ELSE (ECHO mysql returned SUCCESS)

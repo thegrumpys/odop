@@ -28,9 +28,9 @@ call .\scripts\set_db_access_var %1
 set filename=./data/create.sql
 
 (
-  ECHO create database %database% character set utf8;
-  ECHO use %database%;
-  ECHO source %filename%;
+  ECHO CREATE DATABASE %database% CHARACTER SET utf8;
+  ECHO USE %database%;
+  ECHO SOURCE %filename%;
 ) > create_db.txt
 mysql --user=%user% --password=%password% --host=%host% < create_db.txt
 IF %ERRORLEVEL% NEQ 0 (ECHO create_db: mysql returned ERRORLEVEL %ERRORLEVEL%) ELSE (ECHO mysql returned SUCCESS)

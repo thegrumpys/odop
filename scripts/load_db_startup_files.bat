@@ -29,13 +29,13 @@ SETLOCAL
 call .\scripts\set_db_access_var %1
 
 (
-  ECHO use %database%; 
+  ECHO USE %database%; 
   ECHO DELETE FROM design WHERE user IS NULL;
-  ECHO source ./designtypes/Piston-Cylinder/load.sql;
-  ECHO source ./designtypes/Solid/load.sql;
-  ECHO source ./designtypes/Spring/Compression/load.sql;
-  ECHO source ./designtypes/Spring/Extension/load.sql;
-  ECHO source ./designtypes/Spring/Torsion/load.sql;
+  ECHO SOURCE ./designtypes/Piston-Cylinder/load.sql;
+  ECHO SOURCE ./designtypes/Solid/load.sql;
+  ECHO SOURCE ./designtypes/Spring/Compression/load.sql;
+  ECHO SOURCE ./designtypes/Spring/Extension/load.sql;
+  ECHO SOURCE ./designtypes/Spring/Torsion/load.sql;
 ) > load_db_startup_files.txt
 mysql --user=%user% --password=%password% --host=%host% < load_db_startup_files.txt
 IF %ERRORLEVEL% NEQ 0 (ECHO load_db_startup_files: mysql returned ERRORLEVEL %ERRORLEVEL%) ELSE (ECHO mysql returned SUCCESS)

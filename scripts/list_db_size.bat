@@ -31,7 +31,7 @@ SETLOCAL
 CALL .\scripts\set_db_access_var %1
 
 (
-  ECHO use %database%; 
+  ECHO USE %database%; 
   ECHO select
   ECHO     NOW^(^),
   ECHO     s.schema_name
