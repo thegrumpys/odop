@@ -5,7 +5,7 @@ if [ -z "$1" ]; then
   echo "USAGE:  dump_db type"
   echo "        where \"type\" is the system type: \"local\", \"development\", \"test\", \"staging\" or \"production\""
   echo ""
-  echo "The operation is a simple mysqldump that leaves a .sql file in the current directory."
+  echo "The operation is a simple  that leaves a .sql file in the current directory."
   exit 1
 fi
 
@@ -26,5 +26,5 @@ esac
 
 filename="${type}_$(date +%F).sql"
 
-mysqldump --user=$user --password=$password --host=$host --skip-ssl $database --no-tablespaces --single-transaction > $filename
-if [ $? -ne 0 ]; then echo "dump_db: mysqldump returned $?"; else echo "mysqldump returned SUCCESS"; fi
+ --user=$user --password=$password --host=$host --skip-ssl $database --no-tablespaces --single-transaction > $filename
+if [ $? -ne 0 ]; then echo "dump_db:  returned $?"; else echo " returned SUCCESS"; fi
