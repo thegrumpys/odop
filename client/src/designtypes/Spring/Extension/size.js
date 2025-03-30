@@ -41,11 +41,12 @@ export function getSizeEntries(type, st) {
         needle = st[o.Wire_Dia].value;
 //        console.log('In getSizeEntries.render needle=',needle);
         var default_value = wire_dia_table.find((element, index) => {
-        if (index > 0) { // skip the column header
-          if (element[0] !== needle)
-            return false; // keep looking
-          else
-            element[2] = true;
+          if (index > 0) { // skip the column header
+            if (element[0] !== needle) {
+              return false; // keep looking
+            } else {
+              element[2] = true;
+            }
             return true; // were done
           } else {
             return false; // keep looking
@@ -81,11 +82,12 @@ export function getSizeEntries(type, st) {
         needle = st[o.OD_Free].value;
 //        console.log('In getSizeEntries.render needle=',needle);
         var default_value = od_free_table.find((element, index) => {
-        if (index > 0) { // skip the column header
-          if (element[0] !== needle)
-            return false; // keep looking
-          else
-            element[2] = true;
+          if (index > 0) { // skip the column header
+            if (element[0] !== needle) {
+              return false; // keep looking
+            } else {
+              element[2] = true;
+            }
             return true; // were done
           } else {
             return false; // keep looking
