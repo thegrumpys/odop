@@ -26,5 +26,5 @@ esac
 
 filename="${type}_$(date +%F).sql"
 
- --user=$user --password=$password --host=$host --skip-ssl --no-tablespaces --single-transaction $database > $filename
+mysqldump --user=$user --password=$password --host=$host --skip-ssl --no-tablespaces --single-transaction $database > $filename
 if [ $? -ne 0 ]; then echo "dump_db:  returned $?"; else echo " returned SUCCESS"; fi
