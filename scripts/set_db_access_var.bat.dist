@@ -1,0 +1,52 @@
+REM Create database access variables to be used in other batch files
+REM Include the .BAT file of this name in .gitignore
+
+IF "%1"=="local" GOTO LOCAL
+IF "%1"=="development" GOTO DEVELOPMENT
+IF "%1"=="test" GOTO TEST
+IF "%1"=="staging" GOTO STAGING
+IF "%1"=="production" GOTO PRODUCTION
+ECHO Bad input to set_db_access_var: %1
+GOTO RETURN
+
+:LOCAL
+SET type=local
+SET user==@@@ PUT Development DATABASE USER HERE @@@
+SET password=@@@ PUT Development DATABASE PASSWORD HERE @@@
+SET host=localhost
+SET database=@@@ PUT Development DATABASE NAME HERE @@@
+GOTO RETURN
+
+:DEVELOPMENT
+SET type=development
+SET user=@@@ PUT Development DATABASE USER HERE @@@
+SET password=@@@ PUT Development DATABASE PASSWORD HERE @@@
+SET host=@@@ PUT Development DATABASE HOST HERE @@@
+SET database=@@@ PUT Development DATABASE NAME HERE @@@
+GOTO RETURN
+
+:TEST
+SET type=test
+SET user=@@@ PUT Test DATABASE USER HERE @@@
+SET password=@@@ PUT Test DATABASE PASSWORD HERE @@@
+SET host=@@@ PUT Test DATABASE HOST HERE @@@
+SET database=@@@ PUT Test DATABASE NAME HERE @@@
+GOTO RETURN
+
+:STAGING
+SET type=staging
+SET user=@@@ PUT Staging DATABASE USER HERE @@@
+SET password=@@@ PUT Staging DATABASE PASSWORD HERE @@@
+SET host=@@@ PUT Staging DATABASE HOST HERE @@@
+SET database=@@@ PUT Staging DATABASE NAME HERE @@@
+GOTO RETURN
+
+:PRODUCTION
+SET type=production
+SET user=@@@ PUT Production DATABASE USER HERE @@@
+SET password=@@@ PUT Production DATABASE PASSWORD HERE @@@
+SET host=@@@ PUT Production DATABASE HOST HERE @@@
+SET database=@@@ PUT Production DATABASE NAME HERE @@@
+GOTO RETURN
+
+:RETURN

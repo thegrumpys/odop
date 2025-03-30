@@ -91,5 +91,6 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 * [Install development environment on a new computer](procedures/developmentEnvironment.html) 
 * [Install a new system](procedures/NewSystem.html) 
 * [New database](procedures/NewDB.html) 
+* [Database Full Recovery](procedures/recoverFromDBfull.html) 
 * [Okta Registration Flow](design/OktaRegistrationFlow.html) 
 * [Create tooltip images](procedures/tooltipImages.html) 

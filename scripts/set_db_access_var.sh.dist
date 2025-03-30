@@ -1,0 +1,45 @@
+#!/bin/bash
+# Create database access variables to be used in other batch files
+# Include the .sh file of this name in .gitignore
+
+case "$1" in
+    "local")
+        type=$1
+        user=@@@ PUT Local DATABASE USER HERE @@@
+        password=@@@ PUT Local DATABASE PASSWORD HERE @@@
+        host="localhost"
+        database=@@@ PUT Local DATABASE NAME HERE @@@
+        ;;
+    "development")
+        type=$1
+        user=@@@ PUT Development DATABASE USER HERE @@@
+        password=@@@ PUT Development DATABASE PASSWORD HERE @@@
+        host=@@@ PUT Development DATABASE HOST HERE @@@
+        database=@@@ PUT Development DATABASE NAME HERE @@@
+        ;;
+    "test")
+        type=$1
+        user=@@@ PUT Test DATABASE USER HERE @@@
+        password=@@@ PUT Test DATABASE PASSWORD HERE @@@
+        host=@@@ PUT Test DATABASE HOST HERE @@@
+        database=@@@ PUT Test DATABASE NAME HERE @@@
+        ;;
+    "staging")
+        type=$1
+        user=@@@ PUT Staging DATABASE USER HERE @@@
+        password=@@@ PUT Staging DATABASE PASSWORD HERE @@@
+        host=@@@ PUT Staging DATABASE HOST HERE @@@
+        database=@@@ PUT Staging DATABASE NAME HERE @@@
+        ;;
+    "production")
+        type=$1
+        user=@@@ PUT Production DATABASE USER HERE @@@
+        password=@@@ PUT Production DATABASE PASSWORD HERE @@@
+        host=@@@ PUT Production DATABASE HOST HERE @@@
+        database=@@@ PUT Production DATABASE NAME HERE @@@
+        ;;
+    *)
+        echo "Bad input to set_db_access_var: \"$1\""
+        exit 1
+        ;;
+esac
