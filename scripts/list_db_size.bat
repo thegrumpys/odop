@@ -63,7 +63,7 @@ CALL .\scripts\set_db_access_var %1
   ECHO     ,sp.grantee
   ECHO     ,sp.has_insert;
 ) > list_db_size.txt
-mysql --user=%user% --password=%password% --host=%host% --skip-ssl < list_db_size.txt
+mysql --user=%user% --password=%password% --host=%host% < list_db_size.txt
 IF %ERRORLEVEL% NEQ 0 (ECHO list_db_size: mysql returned %ERRORLEVEL%) ELSE (ECHO mysql returned SUCCESS)
 DEL list_db_size.txt
 ENDLOCAL

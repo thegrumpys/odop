@@ -37,7 +37,7 @@ IF %ERRORLEVEL% NEQ 0 (
   ECHO USE %database%;
   ECHO SOURCE %filename%;
 ) > dump_load_db.txt
-mysql --user=%user% --password=%password% --host=%host% --skip-ssl < dump_load_db.txt
+mysql --user=%user% --password=%password% --host=%host% < dump_load_db.txt
 IF %ERRORLEVEL% NEQ 0 (ECHO dump_load_db: mysql returned %ERRORLEVEL%) ELSE (ECHO mysql returned SUCCESS)
 DEL dump_load_db.txt
 ENDLOCAL

@@ -32,7 +32,7 @@ set filename=./data/create.sql
   ECHO USE %database%;
   ECHO SOURCE %filename%;
 ) > create_db.txt
-mysql --user=%user% --password=%password% --host=%host% --skip-ssl < create_db.txt
+mysql --user=%user% --password=%password% --host=%host% < create_db.txt
 IF %ERRORLEVEL% NEQ 0 (ECHO create_db: mysql returned %ERRORLEVEL%) ELSE (ECHO mysql returned SUCCESS)
 DEL create_db.txt
 ENDLOCAL

@@ -37,7 +37,7 @@ call .\scripts\set_db_access_var %1
   ECHO SOURCE ./designtypes/Spring/Extension/load.sql;
   ECHO SOURCE ./designtypes/Spring/Torsion/load.sql;
 ) > load_db_startup_files.txt
-mysql --user=%user% --password=%password% --host=%host% --skip-ssl < load_db_startup_files.txt
+mysql --user=%user% --password=%password% --host=%host% < load_db_startup_files.txt
 IF %ERRORLEVEL% NEQ 0 (ECHO load_db_startup_files: mysql returned %ERRORLEVEL%) ELSE (ECHO mysql returned SUCCESS)
 DEL load_db_startup_files.txt
 ENDLOCAL

@@ -35,7 +35,7 @@ call .\scripts\set_db_access_var %1
 (
   ECHO DROP DATABASE IF EXISTS %database%;
 ) > delete_db.txt
-mysql --user=%user% --password=%password% --host=%host% --skip-ssl < delete_db.txt
+mysql --user=%user% --password=%password% --host=%host% < delete_db.txt
 IF %ERRORLEVEL% NEQ 0 (ECHO delete_db: mysql returned %ERRORLEVEL%) ELSE (ECHO mysql returned SUCCESS)
 DEL delete_db.txt
 ENDLOCAL
