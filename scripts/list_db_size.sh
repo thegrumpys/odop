@@ -29,7 +29,7 @@ case "$1" in
 esac
 
 mysql --user=$user --password=$password --host=$host --skip-ssl << EOF
-USE $database;
+use $database;
 select
     NOW(),
     s.schema_name
