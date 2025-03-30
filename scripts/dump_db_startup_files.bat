@@ -1,6 +1,7 @@
 @echo off
 REM Perform dump [backup] operation on Startup designs to create load.sql files.
 REM Hard coded for B. Watt oktauserid '00u1itcx44XGp65ln357'
+REM Use during development / release process after running the mk{type}Startups.js execute scripts only !
 
 IF "%1"=="" (
   ECHO USAGE:  dump_db_startup_files type
@@ -8,6 +9,8 @@ IF "%1"=="" (
   ECHO.
   ECHO Perform dump [backup] operation on Startup designs to create load.sql files.
   ECHO Hard coded for B. Watt oktauserid '00u1itcx44XGp65ln357'
+  ECHO Use during development / release process after running the mk{type}Startups.js execute scripts only !
+  
   GOTO BYEBYE
   )
 

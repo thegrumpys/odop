@@ -1,6 +1,7 @@
 #!/bin/bash
 # Perform dump [backup] operation on Startup designs to create load.sql files.
 # Hard coded for B. Watt oktauserid '00u1itcx44XGp65ln357'
+# Use during development / release process after running the mk{type}Startups.js execute scripts only !
 
 if [ -z "$1" ]; then
   ECHO "USAGE:  dump_db_startup_files type"
@@ -8,6 +9,7 @@ if [ -z "$1" ]; then
   ECHO ""
   ECHO "Perform dump [backup] operation on Startup designs to create load.sql files."
   ECHO "Hard coded for B. Watt oktauserid '00u1itcx44XGp65ln357'"
+  ECHO "Use during development / release process after running the mk{type}Startups.js execute scripts only !"
   exit 1
 fi
 
