@@ -28,24 +28,22 @@ GOTO BYEBYE
 SETLOCAL
 call .\scripts\set_db_access_var %1
 
-REM Info@SpringDesignSoftware.org
-SET oktauserid=00u1g7vr21d7yajY4357
-REM bwatt@1fifoto.com
-SET oktauserid=00u1itcx44XGp65ln357
+REM Info@SpringDesignSoftware.org oktauserid=00u1g7vr21d7yajY4357
+REM bwatt@1fifoto.com oktauserid=00u1itcx44XGp65ln357
 
-mysqldump --user=%user% --password=%password% --host=%host% --complete-insert --no-create-info --compact --no-tablespaces --set-gtid-purged=OFF --where="(user='%oktauserid%' AND type='Piston-Cylinder' AND name='Startup') OR (user='%oktauserid%' AND type='Piston-Cylinder' AND name='Startup_Metric')" %database% design > designtypes\Piston-Cylinder\load.sql
+mysqldump --user=%user% --password=%password% --host=%host% --complete-insert --no-create-info --compact --no-tablespaces --set-gtid-purged=OFF --where="(user='00u1itcx44XGp65ln357' AND type='Piston-Cylinder' AND name='Startup') OR (user='00u1itcx44XGp65ln357' AND type='Piston-Cylinder' AND name='Startup_Metric')" %database% design > designtypes\Piston-Cylinder\load.sql
 IF %ERRORLEVEL% NEQ 0 (ECHO dump_db_startup_files: mysqldump returned %ERRORLEVEL%) ELSE (ECHO mysqlsump returned SUCCESS)
 
-mysqldump --user=%user% --password=%password% --host=%host% --complete-insert --no-create-info --compact --no-tablespaces --set-gtid-purged=OFF --where="(user='%oktauserid%' AND type='Solid' AND name='70PoundGoldBar') OR (user='%oktauserid%' AND type='Solid' AND name='StandardGoldBar') OR (user='%oktauserid%' AND type='Solid' AND name='Startup') OR (user='%oktauserid%' AND type='Solid' AND name='Startup_Metric') OR (user='%oktauserid%' AND type='Solid' AND name='USPS_MachinableParcels') OR (user='%oktauserid%' AND type='Solid' AND name='USPS_MaxVolume')" %database% design > designtypes\Solid\load.sql
+mysqldump --user=%user% --password=%password% --host=%host% --complete-insert --no-create-info --compact --no-tablespaces --set-gtid-purged=OFF --where="(user='00u1itcx44XGp65ln357' AND type='Solid' AND name='70PoundGoldBar') OR (user='00u1itcx44XGp65ln357' AND type='Solid' AND name='StandardGoldBar') OR (user='00u1itcx44XGp65ln357' AND type='Solid' AND name='Startup') OR (user='00u1itcx44XGp65ln357' AND type='Solid' AND name='Startup_Metric') OR (user='00u1itcx44XGp65ln357' AND type='Solid' AND name='USPS_MachinableParcels') OR (user='00u1itcx44XGp65ln357' AND type='Solid' AND name='USPS_MaxVolume')" %database% design > designtypes\Solid\load.sql
 IF %ERRORLEVEL% NEQ 0 (ECHO dump_db_startup_files: mysqldump returned %ERRORLEVEL%) ELSE (ECHO mysqlsump returned SUCCESS)
 
-mysqldump --user=%user% --password=%password% --host=%host% --complete-insert --no-create-info --compact --no-tablespaces --set-gtid-purged=OFF --where="(user='%oktauserid%' AND type='Spring/Compression' AND name='Demo') OR (user='%oktauserid%' AND type='Spring/Compression' AND name='HotWound') OR (user='%oktauserid%' AND type='Spring/Compression' AND name='HotWoundMetric') OR (user='%oktauserid%' AND type='Spring/Compression' AND name='Startup') OR (user='%oktauserid%' AND type='Spring/Compression' AND name='Startup_Metric')" %database% design > designtypes\Spring\Compression\load.sql
+mysqldump --user=%user% --password=%password% --host=%host% --complete-insert --no-create-info --compact --no-tablespaces --set-gtid-purged=OFF --where="(user='00u1itcx44XGp65ln357' AND type='Spring/Compression' AND name='Demo') OR (user='00u1itcx44XGp65ln357' AND type='Spring/Compression' AND name='HotWound') OR (user='00u1itcx44XGp65ln357' AND type='Spring/Compression' AND name='HotWoundMetric') OR (user='00u1itcx44XGp65ln357' AND type='Spring/Compression' AND name='Startup') OR (user='00u1itcx44XGp65ln357' AND type='Spring/Compression' AND name='Startup_Metric')" %database% design > designtypes\Spring\Compression\load.sql
 IF %ERRORLEVEL% NEQ 0 (ECHO dump_db_startup_files: mysqldump returned %ERRORLEVEL%) ELSE (ECHO mysqlsump returned SUCCESS)
 
-mysqldump --user=%user% --password=%password% --host=%host% --complete-insert --no-create-info --compact --no-tablespaces --set-gtid-purged=OFF --where="(user='%oktauserid%' AND type='Spring/Extension' AND name='Startup') OR (user='%oktauserid%' AND type='Spring/Extension' AND name='Startup_Metric')" %database% design > designtypes\Spring\Extension\load.sql
+mysqldump --user=%user% --password=%password% --host=%host% --complete-insert --no-create-info --compact --no-tablespaces --set-gtid-purged=OFF --where="(user='00u1itcx44XGp65ln357' AND type='Spring/Extension' AND name='Startup') OR (user='00u1itcx44XGp65ln357' AND type='Spring/Extension' AND name='Startup_Metric')" %database% design > designtypes\Spring\Extension\load.sql
 IF %ERRORLEVEL% NEQ 0 (ECHO dump_db_startup_files: mysqldump returned %ERRORLEVEL%) ELSE (ECHO mysqlsump returned SUCCESS)
 
-mysqldump --user=%user% --password=%password% --host=%host% --complete-insert --no-create-info --compact --no-tablespaces --set-gtid-purged=OFF --where="(user='%oktauserid%' AND type='Spring/Torsion' AND name='Startup') OR (user='%oktauserid%' AND type='Spring/Torsion' AND name='Startup_Metric')" %database% design > designtypes\Spring\Torsion\load.sql
+mysqldump --user=%user% --password=%password% --host=%host% --complete-insert --no-create-info --compact --no-tablespaces --set-gtid-purged=OFF --where="(user='00u1itcx44XGp65ln357' AND type='Spring/Torsion' AND name='Startup') OR (user='00u1itcx44XGp65ln357' AND type='Spring/Torsion' AND name='Startup_Metric')" %database% design > designtypes\Spring\Torsion\load.sql
 IF %ERRORLEVEL% NEQ 0 (ECHO dump_db_startup_files: mysqldump returned %ERRORLEVEL%) ELSE (ECHO mysqlsump returned SUCCESS)
 
 ENDLOCAL
