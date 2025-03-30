@@ -24,7 +24,7 @@ if [ ! -f "./scripts/set_db_access_var.sh" ]; then
   exit 1
 fi
 
-case "$1" in
+case "$2" in
     "local"|"development"|"test"|"staging"|"production")
         source ./scripts/set_db_access_var.sh $2
         ;;

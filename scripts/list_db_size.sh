@@ -17,6 +17,7 @@ fi
 case "$1" in
     "local")
         echo "WARNING:  Results for the local database are known to be incorrect."
+        source ./scripts/set_db_access_var.sh $1
         ;;
     "development"|"test"|"staging"|"production")
         source ./scripts/set_db_access_var.sh $1
