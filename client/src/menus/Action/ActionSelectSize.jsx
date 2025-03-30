@@ -38,13 +38,7 @@ export default function ActionSelectSize() {
       st.push(element);
     });
     var localSizes = getSizeEntries(localType, st);
-    var localSize;
-    if (localSizes.length === 1)
-      localSize = localSizes[0]; // Default to first size
-    else if (localSizes.length === 2)
-      localSize = localSizes[1]; // Default to middle size
-    else // if (sizes.length == 3)
-      localSize = localSizes[1]; // Default to middle size
+    var localSize = localSizes[localSizes.findIndex((element) => element[2])][0];
     setTypes(localTypes);
     setType(localType);
     setSizes(localSizes);
@@ -67,13 +61,7 @@ export default function ActionSelectSize() {
       st.push(element);
     });
     var localSizes = getSizeEntries(localType, st);
-    var localSize;
-    if (localSizes.length === 1)
-      localSize = localSizes[0]; // Default to first size
-    else if (sizes.length === 2)
-      localSize = localSizes[1]; // Default to middle size
-    else // if (sizes.length == 3)
-      localSize = localSizes[1]; // Default to middle size
+    var localSize = localSizes[localSizes.findIndex((element) => element[2])][0];
     setType(localType);
     setSizes(localSizes);
     setSize(localSize);
@@ -134,7 +122,7 @@ export default function ActionSelectSize() {
           </Form.Select>
           <br />
           <Form.Label htmlFor="sizeEntrySelect">Select size:</Form.Label>
-          <Form.Select id="sizeEntrySelect" onChange={onSelectSizeEntry} value={sizes[sizes.findIndex((element) => element[2])][0]}>
+          <Form.Select id="sizeEntrySelect" onChange={onSelectSizeEntry} value={size}>
             {sizes.map((element, index) => (
               <option key={index} value={element[0]}>{element[1]}</option>
             ))}
