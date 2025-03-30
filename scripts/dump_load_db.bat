@@ -28,7 +28,7 @@ SETLOCAL
 CALL .\scripts\set_db_access_var %1
 
 SET filename=%type%_%date:~10,4%-%date:~4,2%-%date:~7,2%.sql
-mysqldump --user=%user% --password=%password% --host=%host% %database% --no-tablespaces --set-gtid-purged=OFF --single-transaction > %filename%
+mysqldump --user=%user% --password=%password% --host=%host% --no-tablespaces --set-gtid-purged=OFF --single-transaction %database% > %filename%
 IF %ERRORLEVEL% NEQ 0 (
   ECHO dump_load_db: mysqldump returned %ERRORLEVEL%. Terminating with no attempt to load [restore].
   GOTO BYEBYE

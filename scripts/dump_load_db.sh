@@ -27,7 +27,7 @@ esac
 
 filename="${type}_$(date +%F).sql"
 
-mysqldump --user=$user --password=$password --host=$host $database --no-tablespaces --single-transaction > $filename
+mysqldump --user=$user --password=$password --host=$host --no-tablespaces --single-transaction $database > $filename
 if [ $? -ne 0 ]; then
   echo "dump_load_db: mysqldump returned $?. Terminating with no attempt to load [restore]."
 else
