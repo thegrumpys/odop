@@ -3,7 +3,7 @@
 
 if [ -z "$1" ]; then
   echo "USAGE:  list_db_size type"
-  echo "        where "type" is the system type: "local", "development", "test", "staging" or "production""
+  echo "        where \"type\" is the system type: \"local\", \"development\", \"test\", \"staging\" or \"production\""
   echo ""
   echo "Creates a simple console listing providing the size of the selected database."
   exit 1

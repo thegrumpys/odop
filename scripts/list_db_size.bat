@@ -2,17 +2,17 @@
 REM Create size listing of specified database
 
 IF "%1"=="" (
-  ECHO USAGE:  list_db_size type 
-  ECHO         where "type" is the system type: "local", "development", "test", "staging" or "production" 
+  ECHO USAGE:  list_db_size type
+  ECHO         where "type" is the system type: "local", "development", "test", "staging" or "production"
   ECHO.
-  ECHO Creates a simple console listing providing the size of the selected database. 
+  ECHO Creates a simple console listing providing the size of the selected database.
   GOTO BYEBYE
   )
 
-IF not exist ".\scripts\set_db_access_var.bat" ( 
-  ECHO This batch file must be run from the ~ git\odop directory ... a.k.a. "server level". 
+IF not exist ".\scripts\set_db_access_var.bat" (
+  ECHO This batch file must be run from the ~ git\odop directory ... a.k.a. "server level".
   GOTO BYEBYE
-  ) 
+  )
 
 
 IF "%1"=="local" (
@@ -31,7 +31,7 @@ SETLOCAL
 CALL .\scripts\set_db_access_var %1
 
 (
-  ECHO USE %database%; 
+  ECHO USE %database%;
   ECHO select
   ECHO     NOW^(^),
   ECHO     s.schema_name
@@ -63,8 +63,8 @@ CALL .\scripts\set_db_access_var %1
   ECHO     ,sp.grantee
   ECHO     ,sp.has_insert;
 ) > list_db_size.txt
-mysql --user=%user% --password=%password% --host=%host% < list_db_size.txt
-IF %ERRORLEVEL% NEQ 0 (ECHO list_db_size: mysql returned ERRORLEVEL %ERRORLEVEL%) ELSE (ECHO mysql returned SUCCESS)
+mysql --user=%user% --password=%password% --host=%host% --skip-ssl < list_db_size.txt
+IF %ERRORLEVEL% NEQ 0 (ECHO list_db_size: mysql returned %ERRORLEVEL%) ELSE (ECHO mysql returned SUCCESS)
 DEL list_db_size.txt
 ENDLOCAL
 
