@@ -34,9 +34,12 @@ Test various input and menu functions and verify no unexpected console.log outpu
      * `scanner.js` 
      * `server.js` 
 
-<!---
-Commented out pending review - Did I get it right?
 1. Run the production build in a test environment to confirm that things are synchronized 
 with the Heroku build environment and assure that the build process goes smoothly during the actual release. 
-One possibility is to build into the staging system with the Heroku environment variables set to "production".  
- -->
+One possibility is to build into the staging system with the Heroku environment variables set to "production".
+
+    1. Set NODE_ENV to "production"
+    1. Set REACT_APP_NODE_ENV to "production"
+    1. Release to staging via `git push heroku-staging master`
+    1. Afterwards reset REACT_APP_NODE_ENV to "staging"
+    1. Leave NODE_ENV to "production"
