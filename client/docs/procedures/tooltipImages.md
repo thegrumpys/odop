@@ -23,7 +23,7 @@ From issue 897:
 
 ### Example images
 ![Coils_T](/designtypes/Spring/Compression/tooltips/Coils_T_lg.png "Coils_T")  
-![Coils_T](/designtypes/Spring/Extension/tooltips/End_Extension_lg.png "Coils_T")  
+![End_Extension](/designtypes/Spring/Extension/tooltips/End_Extension_lg.png "End_Extension")  
 
 ### Procedure
 
@@ -35,4 +35,3 @@ From issue 897:
 * Save as regular tooltip size (no suffix) 
 
 Place the images in (for example): `/public/designtypes/Spring/<type>/tooltips/`  
-
