@@ -38,7 +38,12 @@ export default function ActionSelectSize() {
       st.push(element);
     });
     var localSizes = getSizeEntries(localType, st);
-    var localSize = localSizes[localSizes.findIndex((element) => element[2])][0];
+    var localSize;
+    if (localSizes.length === 0) {
+      localSize = 0;
+    } else {
+      localSize = localSizes[localSizes.findIndex((element) => element[2])][0];
+    }
     setTypes(localTypes);
     setType(localType);
     setSizes(localSizes);
@@ -61,7 +66,12 @@ export default function ActionSelectSize() {
       st.push(element);
     });
     var localSizes = getSizeEntries(localType, st);
-    var localSize = localSizes[localSizes.findIndex((element) => element[2])][0];
+    var localSize;
+    if (localSizes.length === 0) {
+      localSize = 0;
+    } else {
+      localSize = localSizes[localSizes.findIndex((element) => element[2])][0];
+    }
     setType(localType);
     setSizes(localSizes);
     setSize(localSize);
