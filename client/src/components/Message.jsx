@@ -15,7 +15,7 @@ export default function Message() {
   const show = useSelector((state) => state.messageSlice.show);
   const header = useSelector((state) => state.messageSlice.header);
   const messages = useSelector((state) => state.messageSlice.messages);
-  const help_url = useSelector((state) => state.messageSlice.help_url);
+  const help_urls = useSelector((state) => state.messageSlice.help_urls);
   const dispatch = useDispatch();
 //  console.log('MESSAGE - Mounting...','show=',show,'header=',header,'messages=',messages,'help_url=',help_url);
 
@@ -30,10 +30,9 @@ export default function Message() {
     dispatch(disableMessage());
   }
 
-  const onContextHelp = () => {
+  const onContextHelp = (help_url) => {
 //    console.log('MESSAGE.onContextHelp');
 //    logUsage('event', 'Message', { event_label: 'context Help button: ' + this.state.help_url });
-    dispatch(disableMessage());
     window.open(help_url, '_blank');
   }
 
@@ -49,7 +48,7 @@ export default function Message() {
       }
       <Modal.Body>{messages.map((element, index) => {return <Alert key={index} variant={element.variant === '' ? 'primary' : element.variant }>{element.message}</Alert>})}</Modal.Body>
       <Modal.Footer>
-          { help_url !== '' ? <Button variant="outline-info" onClick={onContextHelp}>Help</Button> : '' }
+          {help_urls.map((element, index) => { return element !== '' ? <Button key={index} variant="outline-info" onClick={() => onContextHelp(element)}>Help</Button> : '' })}
           <Button variant="primary" onClick={toggle}>Close</Button>
       </Modal.Footer>
     </Modal>

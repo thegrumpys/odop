@@ -351,7 +351,7 @@ export default function reducers(state = {}, action) {
             show: true,
             header: action.payload.header,
             messages: [{ message: action.payload.message, variant: action.payload.variant }],
-            help_url: action.payload.help_url,
+            help_urls: [action.payload.help_url],
           }
         });
 //        console.log('result1=',result);
@@ -360,7 +360,8 @@ export default function reducers(state = {}, action) {
           ...state,
           messageSlice: {
             ...state.messageSlice,
-            messages: [...state.messageSlice.messages, { message: action.payload.message, variant: action.payload.variant }]
+            messages: [...state.messageSlice.messages, { message: action.payload.message, variant: action.payload.variant }],
+            help_urls: [...state.messageSlice.help_urls, action.payload.help_url],
           }
         });
 //        console.log('result2=',result);

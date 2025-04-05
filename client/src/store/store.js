@@ -32,7 +32,7 @@ const default_state = {
     show: false, // Default: do not display
     header: '', // Default: no header
     messages: [], // Default: no messages
-    help_url: '', // Default: no Help URL
+    help_urls: '', // Default: no Help URL
   },
   user: null,
   name: config.url.name,
