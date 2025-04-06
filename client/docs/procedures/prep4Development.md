@@ -10,7 +10,7 @@ For background regarding "Major.Minor.Patch" see: [ODOP version numbering](/docs
 
 1. Create an issue providing a branch in which to make the following changes.
 
-    1, To-Do notes and other reminders related to making this release can be captured as comments to the issue.
+    1. To-Do notes and other reminders related to making this release can be captured as comments to the issue.
 
     1. Check for and deal with security vulnerabilities.
     See GitHub Dependabot alerts. 
