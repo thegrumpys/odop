@@ -269,7 +269,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, (req,
     var type = req.body.type;
     var name = req.params['name'];
     console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name);
-    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name+' user=',user,' req.body=',req.body);
+//    console.log('SERVER: In PUT /api/v1/designtypes/'+type+'/designs/'+name+' user=',user,' req.body=',req.body);
     if (req.uid === "null" || req.body === undefined || req.body.length === 0 || req.body.type === undefined || req.body.type !== req.params['type']) {
         res.status(400).end();
         console.log('SERVER: 400 - BAD REQUEST');
@@ -376,10 +376,15 @@ app.post('/api/v1/usage_log', (req, res) => {
     ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 //    console.log('SERVER: In POST /api/v1/usage_log ip_address='+ip_address+' req.body=',req.body);
     note = JSON.stringify(req.body); // Convert blob to string
-//    console.log('SERVER: In POST /api/v1/usage_log ip_address='+ip_address+' note=',note);
-    var connection = startConnection();
     note = note.replace(/[']/ig,"''"); // replace one single quote with an two single quotes throughout
-    var stmt = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address+'\',\''+note+'\')';
+    note = note.replace(/[\n]/ig,"\\n"); // replace newline with string '\n' throughout
+    var action = req.body.action !== undefined ? req.body.action.replace(/[']/ig,"''") : '';
+    var event_value = req.body.note.event_value !== undefined ? req.body.note.event_value : 0;
+    var event_datetime = req.body.note.event_datetime !== undefined ? req.body.note.event_datetime : '';
+    var event_label = req.body.note.event_label !== undefined ? req.body.note.event_label.replace(/[']/ig,"''") : '';
+//    console.log('action=', action, 'event_value=', event_value, 'event_datetime=', event_datetime, 'event_label=', event_label)
+var connection = startConnection();
+    var stmt = 'INSERT INTO usage_log (ip_address, note, action, event_value, event_datetime, event_label) VALUES (\''+ip_address+'\',\''+note+'\',\''+action+'\','+event_value+',STR_TO_DATE(\''+event_datetime+'\',"%m/%d/%Y, %H:%i:%s.%f"),\''+event_label+'\')';
 //    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
 //        console.log('SERVER: After INSERT err=', err, ' rows=', rows);
@@ -479,6 +484,7 @@ function createSentenceSearchResult(pageMatch) {
     let ellipsis = ' ... ';
     searchResultText += sentence + ellipsis;
   });
+
 //  console.log('In createSentenceSearchResult searchResultText=',searchResultText);
   return searchResultText;
 }
@@ -519,14 +525,14 @@ function adjustSat(sat1, sat2, score) {
 }
 
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
-//    console.log('process.env.NODE_ENV == production or staging');
+//    console.log('process.env.NODE_ENV == Production or staging');
     // If it’s not https already, redirect the same url on https.
     app.use((req, res, next) => {
       if (req.header('x-forwarded-proto') !== 'https') {
-        console.log('SERVER: In USE Redirect PATH=',path.join(__dirname, 'client/build', 'index.html'));
+        console.log("SERVER: In USE Redirect PATH=",path.join(__dirname, 'client/build', 'index.html'));
         res.redirect(`https://${req.header('host')}${req.url}`);
       } else {
-//        console.log('SERVER: In USE next');
+//        console.log("SERVER: In USE next");
         next();
       }
     })
@@ -536,7 +542,7 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')
     );
     // Handle React routing, return all requests to React app
     app.get('*', function (req, res, next) {
-        console.log('SERVER: In GET * PATH=',path.join(__dirname, 'client/build', 'index.html'));
+        console.log("SERVER: In GET * PATH=",path.join(__dirname, 'client/build', 'index.html'));
         res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
     });
 } else {

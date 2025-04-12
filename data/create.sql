@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `design` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `user` varchar(64) DEFAULT NULL,
@@ -49,9 +49,12 @@ CREATE TABLE `usage_log` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ip_address` varchar(64) NOT NULL,
+  `event_datetime` datetime DEFAULT NULL,
+  `event_value` int DEFAULT NULL,
+  `action` varchar(64) DEFAULT NULL,
+  `event_label` longtext DEFAULT NULL,
   `note` longtext DEFAULT NULL
 );
-
 --
 -- Indexes for dumped tables
 --
@@ -76,13 +79,13 @@ ALTER TABLE `usage_log`
 -- AUTO_INCREMENT for table `design`
 --
 ALTER TABLE `design`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `usage_log`
 --
 ALTER TABLE `usage_log`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
