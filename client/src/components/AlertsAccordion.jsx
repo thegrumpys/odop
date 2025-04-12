@@ -215,7 +215,7 @@ export default function AlertsAccordion() {
                       err_alerts.map((entry, index) => {
 //                        console.log('AlertsAccordion.render entry=',entry,'line=',line);
                         var hidden = config.node.env !== "production" ? false : (entry.element === undefined ? false : entry.element.hidden);
-                        var match;
+                        var match = null;
                         if (entry.help_url !== undefined) {
                           match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
                         }
@@ -230,7 +230,7 @@ export default function AlertsAccordion() {
                             {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                             {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
                             {entry.element === undefined && entry.value === undefined && <td></td>}
-                            <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={onHelpButton}>{match[1]}</Button> : ''}</td>
+                            <td>{match !== null ? <Button variant="outline-info" href={match[2]} onClick={onHelpButton}>{match[1]}</Button> : ''}</td>
                           </tr>
                         );
                       })}
@@ -238,7 +238,7 @@ export default function AlertsAccordion() {
                       warn_alerts.map((entry, index) => {
 //                        console.log('AlertsAccordion.render entry=',entry,'line=',line);
                         var hidden = config.node.env !== "production" ? false : (entry.element === undefined ? false : entry.element.hidden);
-                        var match;
+                        var match = null;
                         if (entry.help_url !== undefined) {
                           match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
                         }
@@ -253,7 +253,7 @@ export default function AlertsAccordion() {
                             {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                             {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
                             {entry.element === undefined && entry.value === undefined && <td></td>}
-                            <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={onHelpButton}>{match[1]}</Button> : ''}</td>
+                            <td>{match !== null ? <Button variant="outline-info" href={match[2]} onClick={onHelpButton}>{match[1]}</Button> : ''}</td>
                           </tr>
                         );
                       })}
@@ -261,7 +261,7 @@ export default function AlertsAccordion() {
                       notice_alerts.map((entry, index) => {
 //                        console.log('AlertsAccordion.render entry=',entry,'line=',line);
                         var hidden = config.node.env !== "production" ? false : (entry.element === undefined ? false : entry.element.hidden);
-                        var match;
+                        var match = null;
                         if (entry.help_url !== undefined) {
                           match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
                         }
@@ -276,7 +276,7 @@ export default function AlertsAccordion() {
                             {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                             {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
                             {entry.element === undefined && entry.value === undefined && <td></td>}
-                            <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={onHelpButton}>{match[1]}</Button> : ''}</td>
+                            <td>{match !== null ? <Button variant="outline-info" href={match[2]} onClick={onHelpButton}>{match[1]}</Button> : ''}</td>
                           </tr>
                         );
                       })}
@@ -284,7 +284,7 @@ export default function AlertsAccordion() {
                       info_alerts.map((entry, index) => {
 //                        console.log('AlertsAccordion.render entry=',entry,'line=',line);
                         var hidden = config.node.env !== "production" ? false : (entry.element === undefined ? false : entry.element.hidden);
-                        var match;
+                        var match = null;
                         if (entry.help_url !== undefined) {
                           match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
                         }
@@ -299,7 +299,7 @@ export default function AlertsAccordion() {
                             {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
                             {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
                             {entry.element === undefined && entry.value === undefined && <td></td>}
-                            <td>{match !== undefined ? <Button variant="outline-info" href={match[2]} onClick={onHelpButton}>{match[1]}</Button> : ''}</td>
+                            <td>{match !== null ? <Button variant="outline-info" href={match[2]} onClick={onHelpButton}>{match[1]}</Button> : ''}</td>
                           </tr>
                         );
                       })}
