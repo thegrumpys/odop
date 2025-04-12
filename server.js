@@ -382,7 +382,7 @@ app.post('/api/v1/usage_log', (req, res) => {
     var event_datetime = req.body.note.event_datetime !== undefined ? req.body.note.event_datetime : '';
     var event_label = req.body.note.event_label !== undefined ? req.body.note.event_label.replace(/[']/ig,"''") : '';
 //    console.log('action=', action, 'event_value=', event_value, 'event_datetime=', event_datetime, 'event_label=', event_label)
-var connection = startConnection();
+    var connection = startConnection();
     var stmt = 'INSERT INTO usage_log (ip_address, note, action, event_value, event_datetime, event_label) VALUES (\''+ip_address+'\',\''+note+'\',\''+action+'\','+event_value+',STR_TO_DATE(\''+event_datetime+'\',"%m/%d/%Y, %H:%i:%s.%f"),\''+event_label+'\')';
 //    console.log('SERVER: stmt='+stmt);
     connection.query(stmt, function(err, rows, fields) {
