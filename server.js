@@ -377,7 +377,6 @@ app.post('/api/v1/usage_log', (req, res) => {
 //    console.log('SERVER: In POST /api/v1/usage_log ip_address='+ip_address+' req.body=',req.body);
     note = JSON.stringify(req.body); // Convert blob to string
     note = note.replace(/[']/ig,"''"); // replace one single quote with an two single quotes throughout
-    note = note.replace(/[\n]/ig,"\\n"); // replace newline with string '\n' throughout
     var action = req.body.action !== undefined ? req.body.action.replace(/[']/ig,"''") : '';
     var event_value = req.body.note.event_value !== undefined ? req.body.note.event_value : 0;
     var event_datetime = req.body.note.event_datetime !== undefined ? req.body.note.event_datetime : '';
