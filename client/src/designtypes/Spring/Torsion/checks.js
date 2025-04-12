@@ -201,7 +201,7 @@ export function checks(store) {        /*    Compression  Spring  */
         store.dispatch(addAlert({
             element: design.model.symbol_table[o.M_2],
             name: design.model.symbol_table[o.M_2].name,
-            message: check_message(design,'RELATIONSHIP',o.M_2,'<',o.M_1),
+            message: check_message(design,'RELATIONSHIP',o.M_2,'<=',o.M_1),
             severity: ERR,
             duplicate: true
         }));

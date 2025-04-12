@@ -201,7 +201,7 @@ export function checks(store) {        /*    Compression  Spring  */
         store.dispatch(addAlert({
             element: design.model.symbol_table[o.Force_2],
             name: design.model.symbol_table[o.Force_2].name,
-            message: check_message(design,'RELATIONSHIP',o.Force_2,'<',o.Force_1),
+            message: check_message(design,'RELATIONSHIP',o.Force_2,'<=',o.Force_1),
             severity: ERR,
             duplicate: true
         }));
@@ -217,7 +217,7 @@ export function checks(store) {        /*    Compression  Spring  */
         store.dispatch(addAlert({
             element: design.model.symbol_table[o.Initial_Tension],
             name: design.model.symbol_table[o.Initial_Tension].name,
-            message: check_message(design,'RELATIONSHIP',o.Initial_Tension,'>',o.Force_1),
+            message: check_message(design,'RELATIONSHIP',o.Initial_Tension,'>=',o.Force_1),
             severity: WARN,
             duplicate: true
         }));
