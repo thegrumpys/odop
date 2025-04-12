@@ -22,7 +22,7 @@ export function invokeEquationSet(store) {
     }
 
     // Compute outputs x from inputs p using equations
-    var { eqnset } = require('../../designtypes/'+design.model.type+'/eqnset.js'); // Dynamically load eqnset
+    var { eqnset } = require('designtypes/'+design.model.type+'/eqnset.js'); // Dynamically load eqnset
 //    console.log('In invokeEquationSet','eqnset=',eqnset);
     x = eqnset(p, x);
 

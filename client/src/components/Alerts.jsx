@@ -1,12 +1,8 @@
-import { CONSTRAINED, MIN, MAX, FIXED, FDCL } from '../store/actionTypes';
+import { CONSTRAINED, MIN, MAX, FIXED, FDCL } from 'store/actionTypes';
 import { toODOPPrecision } from '../toODOPPrecision';
-import { addAlert } from '../store/actions';
-import store from "../store/store";
-
-export const ERR = 'Err';
-export const WARN = 'Warn';
-export const NOTICE = 'Notice';
-export const INFO = 'Info';
+import { addAlert } from 'store/actions';
+import { ERR, WARN, INFO, NOTICE } from 'store/actionTypes';
+import store from "store/store";
 
 export const check_message = (design, prefix, left, op, right, suffix = '') => {
 //  console.log('In Alerts.check_message', 'design=', design, 'prefix=', prefix, 'left=', left, 'op=', op, 'right=', right, 'suffix=', suffix);

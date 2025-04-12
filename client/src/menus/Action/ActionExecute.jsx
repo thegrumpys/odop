@@ -21,7 +21,7 @@ export default function ActionExecute() {
   }, [model_type]);
 
   const updateExecuteNames = () => {
-    var { getExecuteNames } = require('../../designtypes/' + model_type + '/execute.js'); // Dynamically load getExecuteNames
+    var { getExecuteNames } = require('designtypes/' + model_type + '/execute.js'); // Dynamically load getExecuteNames
     var localExecuteNames = getExecuteNames();
 //    console.log('ActionExecute.updateExecuteNames','localExecuteNames=', localExecuteNames);
     var localExecuteName;

@@ -18,7 +18,7 @@ export default function ViewExecuteToTest() {
   }
 
   var pre_lines = `import { initialState } from '../../../designtypes/Spring/Compression/initialState';
-import { initialSystemControls } from '../../../initialSystemControls';
+import { initialSystemControls } from 'store/initialSystemControls';
 import { inject,
          enableDispatcher,
          loadInitialState,

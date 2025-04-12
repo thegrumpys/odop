@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, NavDropdown, Table, Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { changeSymbolValue, saveAutoSave } from '../../store/actions';
+import { changeSymbolValue, saveAutoSave } from 'store/actions';
 import { logUsage, logValue } from '../../logUsage';
-import store from "../../store/store";
+import store from "store/store";
 import { toODOPPrecision } from '../../toODOPPrecision';
 import SymbolString from '../../components/SymbolString';
 
@@ -31,7 +31,7 @@ export default function ActionSelectCatalog() {
 
   const updateCatalogNames = () => {
 //    console.log('In ActionSelectCatalog.updateCatalogNames');
-    var { getCatalogNames, getCatalogEntries } = require('../../designtypes/' + model_type + '/catalog.js'); // Dynamically load getCatalogNames & getCatalogEntries
+    var { getCatalogNames, getCatalogEntries } = require('designtypes/' + model_type + '/catalog.js'); // Dynamically load getCatalogNames & getCatalogEntries
     var localNames = getCatalogNames(model_units);
 //    console.log('In ActionSelectCatalog.toggle names=',names);
     var localName;
@@ -75,7 +75,7 @@ export default function ActionSelectCatalog() {
   const onSelectCatalogName = (event) => {
 //    console.log('In ActionSelectCatalog.onSelectCatalogName event.target.value=',event.target.value);
     var localName = event.target.value;
-    var { getCatalogEntries } = require('../../designtypes/' + model_type + '/catalog.js'); // Dynamically load getCatalogEntries
+    var { getCatalogEntries } = require('designtypes/' + model_type + '/catalog.js'); // Dynamically load getCatalogEntries
     // Loop to create p and x from model_symbol_table
     var st = [];
     model_symbol_table.forEach((element) => {

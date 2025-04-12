@@ -2,7 +2,7 @@ import { toODOPPrecision } from '../toODOPPrecision';
 
 export default function SymbolString({ className, element }) {
   if (element.format === 'table') {
-    var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
+    var tableContents = require('designtypes/' + element.table + '.json'); // Dynamically load table
 //    console.log('SymbolString','Mounting','tableContents=',tableContents);
   }
   return (

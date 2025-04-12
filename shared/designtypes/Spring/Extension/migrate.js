@@ -1,7 +1,7 @@
 import { displayMessage } from '../../../components/Message';
 import { initialState } from './initialState';
-import { initialSystemControls } from '../../../initialSystemControls';
-import { CONSTRAINED, FIXED } from '../../../store/actionTypes';
+import { initialSystemControls } from 'store/initialSystemControls';
+import { MIN, MAX, FIXED, FDCL } from '../../../store/actionTypes';
 
 export function migrate(design) {
     /*
@@ -10,6 +10,8 @@ export function migrate(design) {
      */
 //    console.log('In migrate design=',design);
 
+    var source;
+    var sink;
     var previous_version = design.version;
     var migrated_design = design; // Assume no-op as default
 
@@ -42,41 +44,66 @@ export function migrate(design) {
         });
         // Re-order elements for improved consistency, grouping
         // Note that index values come from symbol_table_offsets.js not offsets.js
-        design.symbol_table.splice(46,0,design.symbol_table[36]);
-        design.symbol_table.splice(36,1);
+        design.symbol_table.splice(57,0,design.symbol_table[42]);  //  End_Type
+        design.symbol_table.splice(42,1);
         migrated_design.version = '2'; // last thing... set the migrated model version
     case '2':
         // console.log('Convert from 2 to 3');
-        design.symbol_table[24].tooltip = "Factor of safety to achieve the target cycle life category. See on-line Help.";
-        design.symbol_table[25].tooltip = "Rough estimate of the average number of cycles to failure. See on-line Help.";
-        migrated_design.version = '3'; // last thing... set the migrated model version
+        design.symbol_table.forEach((element) => { // For each Symbol Table entry
+            if (element.name === "Catalog_Number") { // If it is Catalog_Number
+                element.value = ""; // Reset its value to blanks
+                element.hidden = false; // Force it to be shown
+            }
+        });
+        // Create Catalog_Name and Re-order Catalog_Number
+        design.symbol_table.splice(62,0,Object.assign({},design.symbol_table[39]));  // Duplicate Catalog_Number
+        design.symbol_table[62].name = 'Catalog_Name'; // Rename it to Catalog_Name
+        design.symbol_table[62].tooltip = "Name of the catalog from which the catalog entry was selected";
+        design.symbol_table.splice(63,0,design.symbol_table[39]);  // Re-order Catalog_Number
+        design.symbol_table[63].tooltip = "Catalog entry which was selected from the named catalog";
+        design.symbol_table.splice(39,1); // Remove old Catalog_Number
+        design.symbol_table[25].tooltip = "Factor of safety to achieve the target cycle life category. See on-line Help.";
+        design.symbol_table[26].tooltip = "Factor of safety in the hooks. See on-line Help.";
+        design.symbol_table[27].tooltip = "Rough estimate of the average number of cycles to failure. See on-line Help.";
+        migrated_design.version = '3';
     case '3':
         // console.log('Convert from 3 to 4');
-        design.symbol_table[25].sdlim = 10000;
+        design.symbol_table[27].sdlim = 10000;
         // Add Energy calculation
-        design.symbol_table.splice(27,0,Object.assign({},design.symbol_table[25]));  //  Duplicate Cycle_Life in target position
-        design.symbol_table[27].name = 'Energy'; // Rename it to Energy
-        design.symbol_table[27].value = 0.0;
+        design.symbol_table.splice(34,0,Object.assign({},design.symbol_table[27]));  //  Duplicate Cycle_Life in target position
+        design.symbol_table[34].name = 'Energy'; // Rename it to Energy
         if (design.symbol_table[0].units === 'mm') { // Check for metric units - is there a better approach?
-            design.symbol_table[27].value = 0.0;
-            design.symbol_table[27].units = 'N-mm';
-            design.symbol_table[27].lmin = 0;
-            design.symbol_table[27].lmax = 0;
-            design.symbol_table[27].cmin = 1.0;
-            design.symbol_table[27].cmax = 1000000;
+            design.symbol_table[34].value = 0.0;
+            design.symbol_table[34].units = 'N-mm';
+            design.symbol_table[34].lmin = 0;
+            design.symbol_table[34].lmax = 0;
+            design.symbol_table[34].cmin = 1.0;
+            design.symbol_table[34].cmax = 1000000;
         } else {
-            design.symbol_table[27].value = 0.0;
-            design.symbol_table[27].units = 'in-lb';
-            design.symbol_table[27].lmin = 0;
-            design.symbol_table[27].lmax = 0;
-            design.symbol_table[27].cmin = 1.0;
-            design.symbol_table[27].cmax = 1000000;
+            design.symbol_table[34].value = 0.0;
+            design.symbol_table[34].units = 'in-lb';
+            design.symbol_table[34].lmin = 0;
+            design.symbol_table[34].lmax = 0;
+            design.symbol_table[34].cmin = 1.0;
+            design.symbol_table[34].cmax = 1000000;
         }
-        design.symbol_table[27].sdlim = 0.0;
-        design.symbol_table[27].tooltip = "Change in elastic potential energy between 1 and 2";
+        design.symbol_table[34].sdlim = 0.0;
+        design.symbol_table[34].tooltip = "Change in elastic potential energy between 1 and 2";
+        // Make Catalog_Name and Catalog_Number not available for input
+        design.symbol_table[62].input = false;
+        design.symbol_table[63].input = false;
         migrated_design.version = '4'; // last thing... set the migrated model version
     case '4':
         // console.log('Convert from 4 to 5');
+        if (design.symbol_table[0].units === 'mm') { // Check for units
+            design.symbol_table[23].lmax = FDCL;
+            design.symbol_table[23].cmax = 52;
+            design.symbol_table[23].sdlim = 1000;
+        } else {
+            design.symbol_table[23].lmax = FDCL;
+            design.symbol_table[23].cmax = 52;
+            design.symbol_table[23].sdlim = 150000;
+        }
         design['jsontype'] = "ODOP"; // Add in model type
         if (design.symbol_table[0].units === "inches") { // Add in units type
             design['units'] = "US";
@@ -85,11 +112,28 @@ export function migrate(design) {
         }
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
 //            console.log('In migrate.propgate element=',element);
-            // ***************************************************************
-            // Note no need to migrate FDCL because there has never been any
-            // FDCL definition in initialState for TORSION. The user cannot create
-            // FDCL if it is not already configured in initialState.
-            // ***************************************************************
+            if (element.lmin & FDCL) {
+//                console.log('In migrate.propgate element.lmin&FDCL=',element.lmin&FDCL);
+                source = design.symbol_table[element.cmin];
+                sink = element;
+//                console.log('In migrate.propgate source=',source,'sink=',sink);
+                if (source.propagate === undefined) source.propagate = [];
+                source.propagate.push({ name: sink.name, minmax: MIN });
+//                console.log('In migrate.propgate sink.name=',sink.name,'MIN','source.propagate=',source.propagate);
+                sink.cminchoice = sink.cminchoices.indexOf(source.name);
+//                console.log('In migrate.propgate source.name=',source.name,'sink.cminchoices=',sink.cminchoices,'sink.cminchoice=',sink.cminchoice);
+            }
+            if (element.lmax & FDCL) {
+//                console.log('In migrate.propgate element.lmax&FDCL=',element.lmax&FDCL);
+                source = design.symbol_table[element.cmax];
+                sink = element;
+//                console.log('In migrate.propgate source=',source,'sink=',sink);
+                if (source.propagate === undefined) source.propagate = [];
+                source.propagate.push({ name: sink.name, minmax: MAX });
+//                console.log('In migrate.propgate sink.name=',sink.name,'MAX','source.propagate=',source.propagate);
+                sink.cmaxchoice = sink.cmaxchoices.indexOf(source.name);
+//                console.log('In migrate.propgate source.name=',source.name,'sink.cmaxchoices=',sink.cmaxchoices,'sink.cmaxchoice=',sink.cmaxchoice);
+            }
             if (element.lmin & FIXED || element.lmax & FIXED) { // If one is FIXED
                 element.lmin |= FIXED; // Set them both fixed because they are paired
                 element.lmax |= FIXED;
@@ -132,34 +176,18 @@ export function migrate(design) {
                 delete element.oldvalue
             }
         });
-        // Add %_Safe_Deflect calculation; make it constrained to a max of 95%
-        design.symbol_table.splice(26,0,Object.assign({},design.symbol_table[26]));  //  Duplicate Force_Arm_2 in target position
-        design.symbol_table[26].name = '%_Safe_Deflect'; // Rename it to %_Safe_Deflect
-        design.symbol_table[26].value = 0.0;
-        if (design.symbol_table[0].units === 'mm') { // Check for metric units - is there a better approach?
-            design.symbol_table[26].units = '%';
-            design.symbol_table[26].lmin = 0;
-            design.symbol_table[26].lmax = CONSTRAINED;
-            design.symbol_table[26].cmin = 1.0;
-            design.symbol_table[26].cmax = 95;
-        } else {
-            design.symbol_table[26].units = '%';
-            design.symbol_table[26].lmin = 0;
-            design.symbol_table[26].lmax = CONSTRAINED;
-            design.symbol_table[26].cmin = 1.0;
-            design.symbol_table[26].cmax = 95;
+//        console.log(design.symbol_table[62].value);
+        if (design.symbol_table[62].value === 'catalog_ms_e_s') {
+            design.symbol_table[62].value = 'MS24586_(SAE-AS24586)_e_stl';
+        } else if (design.symbol_table[62].value === 'catalog_ms_e_ss') {
+            design.symbol_table[62].value = 'MS24586_(SAE-AS24586)_e_ss';
+        } else if (design.symbol_table[62].value === 'extencat') {
+            design.symbol_table[62].value = 'generic_extension_catalog';
         }
-        delete design.symbol_table[26].oldlmin;
-        delete design.symbol_table[26].oldlmax;
-        delete design.symbol_table[26].oldcmin;
-        delete design.symbol_table[26].oldcmax;
-        design.symbol_table[26].sdlim = 0.0;
-        design.symbol_table[26].tooltip = "Deflection of load point 2 as a percent of total safe deflection";
         migrated_design.version = '5'; // last thing... set the migrated model version
     case '5':
         // console.log('Convert from 5 to 6');
         design.system_controls.enable_auto_fix = 1;
-
         design.labels[4].name = 'City, State & Zip';
         if (design.labels[4].value !== '' && design.labels[5].value !== '') {
             design.labels[4].value = design.labels[4].value + ', ' + design.labels[5].value;
@@ -179,31 +207,31 @@ export function migrate(design) {
         design.labels[8].name = 'Data Source';
         design.labels[8].value = 'print     sample      verbal';
         design.labels[9].name = 'Mandril';
-        for (let i = 10; i <= 21; i++) {
+        for (let i = 10; i <= 22; i++) {
             design.labels.push(Object.assign({},design.labels[1]));
             design.labels[i].value = '';
         }
         design.labels[10].name = 'Wind';
         design.labels[10].value = 'rh lh opt';
-        design.labels[11].name = 'Relative end pos. & tol.';
-        design.labels[12].name = 'Shot peen';
-        design.labels[12].value = 'yes no; details';
-        design.labels[13].name = 'Stress relieve/HT';
-        design.labels[14].name = 'Finish';
-        design.labels[14].value = design.labels[9].value;
+        design.labels[11].name = 'Relative loop pos. & tol.';
+        design.labels[12].name = 'Gaps';
+        design.labels[13].name = 'Shot peen';
+        design.labels[13].value = 'yes no; details';
+        design.labels[14].name = 'Stress relieve/HT';
+        design.labels[15].name = 'Finish';
+        design.labels[15].value = design.labels[9].value;
         design.labels[9].value = '';
-        design.labels[15].name = 'End use';
-        design.labels[16].name = 'Operating temp';
-        design.labels[17].name = 'Special notes & tol';
-        design.labels[18].name = 'Customer approval';
-        design.labels[18].value = '__________________________ ';
-        design.labels[19].name = 'Customer date';
-        design.labels[19].value = ' _______ ';
-        design.labels[20].name = 'Vendor approval';
-        design.labels[20].value = '__________________________ ';
-        design.labels[21].name = 'Vendor date';
-        design.labels[21].value = ' _______ ';
-
+        design.labels[16].name = 'End use';
+        design.labels[17].name = 'Operating temp';
+        design.labels[18].name = 'Special notes & tol';
+        design.labels[19].name = 'Customer approval';
+        design.labels[19].value = '__________________________ ';
+        design.labels[20].name = 'Customer date';
+        design.labels[20].value = ' _______ ';
+        design.labels[21].name = 'Vendor approval';
+        design.labels[21].value = '__________________________ ';
+        design.labels[22].name = 'Vendor date';
+        design.labels[22].value = ' _______ ';
         migrated_design.version = '6'; // last thing... set the migrated model version
     case '6':
         // console.log('Convert from 6 to 7');
@@ -230,17 +258,17 @@ export function migrate(design) {
             delete element.ioclass;
         });
         // #609 Add standard size table for metric Outside Diameters
-        // Update Material_Type = 31 table and Material_File = 36 value
-//        console.log('Material_File.value=',design.symbol_table[36].value,'Material_Type.table=',design.symbol_table[31].table)
-        if (design.symbol_table[31].table === 'Spring/mat_SI') {
-          design.symbol_table[31].table = 'Spring/mat_metric';
+        // Update Material_Type = 37 table and Material_File = 40 value
+//        console.log('Material_File.value=',design.symbol_table[40].value,'Material_Type.table=',design.symbol_table[37].table)
+        if (design.symbol_table[37].table === 'Spring/mat_SI') {
+          design.symbol_table[37].table = 'Spring/mat_metric';
         } else {
-          design.symbol_table[31].table = 'Spring/mat_us';
+          design.symbol_table[37].table = 'Spring/mat_us';
         }
-        if (design.symbol_table[36].value === 'mat_SI.json') {
-          design.symbol_table[36].value = 'mat_metric.json';
+        if (design.symbol_table[40].value === 'mat_SI.json') {
+          design.symbol_table[40].value = 'mat_metric.json';
         } else {
-          design.symbol_table[36].value = 'mat_us.json';
+          design.symbol_table[40].value = 'mat_us.json';
         }
 //        console.log('After: design=',design);
         migrated_design.version = '7'; // last thing... set the migrated model version
@@ -253,30 +281,24 @@ export function migrate(design) {
                 element.validmax = Number.MAX_VALUE;
             }
         });
-        design.symbol_table[ 3].validmin = -Number.MAX_VALUE; // M_1
-        design.symbol_table[ 5].validmin = -Number.MIN_VALUE; // Coil_Spacing
-        design.symbol_table[10].validmin = -Number.MAX_VALUE; // Deflect_1
-        design.symbol_table[15].validmin = -Number.MIN_VALUE; // End_Angle_Free
-        design.symbol_table[16].validmin = -Number.MIN_VALUE; // Stroke
-        design.symbol_table[18].validmin = 1; // Spring_Index
-        design.symbol_table[19].validmin = -Number.MIN_VALUE; // End_Deflect_All
-        design.symbol_table[20].validmin = -Number.MAX_VALUE; // Stress_1
-        design.symbol_table[22].validmin = -Number.MIN_VALUE; // Stress_End
-        design.symbol_table[25].validmin = -Number.MAX_VALUE; // Cycle_Life
-        design.symbol_table[27].validmin = -Number.MIN_VALUE; // Force_Arm_2
-        design.symbol_table[28].validmin = -Number.MAX_VALUE; // Energy
-        design.symbol_table[38].validmin = -Number.MIN_VALUE; // Inactive_Coils
-        design.symbol_table[48].validmin = -Number.MIN_VALUE; // Arm_1
-        design.symbol_table[49].validmin = -Number.MIN_VALUE; // Arm_2
-        design.symbol_table[50].validmin = -Number.MIN_VALUE; // Xlen_1
-        design.symbol_table[51].validmin = -Number.MIN_VALUE; // Xlen_2
-        design.symbol_table[52].validmin = -Number.MIN_VALUE; // L_End_1
-        design.symbol_table[53].validmin = -Number.MIN_VALUE; // L_End_2
-        design.symbol_table[54].validmin = -Number.MAX_VALUE; // tbase010
-        design.symbol_table[55].validmin = -Number.MAX_VALUE; // tbase400
-        design.symbol_table[56].validmin = -Number.MAX_VALUE; // const_term
-        design.symbol_table[57].validmin = -Number.MAX_VALUE; // slope_term
-        design.symbol_table[58].validmin = -Number.MAX_VALUE; // tensile_010
+        design.symbol_table[ 4].validmin = -Number.MIN_VALUE; // End_Extension
+        design.symbol_table[11].validmin = -Number.MIN_VALUE; // Deflect_1
+        design.symbol_table[17].validmin = -Number.MIN_VALUE; // L_Stroke
+        design.symbol_table[19].validmin = 1;                 // Spring_Index
+        design.symbol_table[27].validmin = -Number.MIN_VALUE; // Cycle_Life
+        design.symbol_table[34].validmin = -Number.MIN_VALUE; // Energy
+        design.symbol_table[57].validmin = -Number.MIN_VALUE; // End_ID
+        design.symbol_table[58].validmin = -Number.MIN_VALUE; // Extended_End_ID
+        design.symbol_table[59].validmin = -Number.MIN_VALUE; // L_End
+        design.symbol_table[60].validmin = -Number.MIN_VALUE; // L_Extended_End
+        design.symbol_table[61].validmin = -Number.MIN_VALUE; // Hook_Deflect_Allow
+        design.symbol_table[64].validmin = -Number.MAX_VALUE; // tbase010
+        design.symbol_table[65].validmin = -Number.MAX_VALUE; // tbase400
+        design.symbol_table[66].validmin = -Number.MAX_VALUE; // const_term
+        design.symbol_table[67].validmin = -Number.MAX_VALUE; // slope_term
+        design.symbol_table[68].validmin = -Number.MAX_VALUE; // tensile_010
+        design.symbol_table.splice(42,1);                     // remove (unused) Inactive_Coils
+        design.symbol_table.splice(31,3);                     // remove (unused) FS_SI_Lo, FS_SI_Hi, F1_IT_Margin
         migrated_design.version = '8'; // last thing... set the migrated model version
         displayMessage(
             "The new Alert Facility may highlight previously unrecognized issues saved with earlier designs. Enter \"Alerts\" in Help Lookup and/or contact technical support.",
@@ -315,24 +337,14 @@ export function migrate(design) {
 
     case '9':
         // console.log('Convert from 9 to 10');
-        if (design.symbol_table[37].value >= 5) { // If Life_Category shot-peened then make it not shot-peened
-          design.symbol_table[37].value -= 4;
+        if (design.symbol_table[38].value >= 5) { // Is Life_Category shot-peened then make it not shot-peened
+          design.symbol_table[38].value -= 4;
         }
-        if (design.symbol_table[30].value === 1) { // If Prop_Calc_Method is 1
-          displayMessage(
-              "Default values in the internal materials table have changed to allow higher stresses in torsion springs. If your previously \"FEASIBLE\" design is now \"NOT FEASIBLE\", use the Help button below for more information.",
-              'info', '', '/docs/Help/DesignTypes/Spring/Torsion/description.html#t_allowableStressUpdate');
-        }
-        migrated_design.version = '10'; // last thing... set the migrated model version
-
-    case '10':
-        // console.log('Convert from 10 to 11');
-        // Nothing to do
-        // migrated_design.version = '11'; // uncomment when there is a case below this line
+        // migrated_design.version = '10'; // uncomment when there is a case below this line
 
     // case 'N':
         // console.log('Convert from N to N+1');
-        // Write the migration code here, but leave the version change line commented
+        // Write the migration code here, but leave the version change line commented below
         // migrated_design.version = 'N+1'; // uncomment when there is a case below this line
 
         break; // Do not copy this break

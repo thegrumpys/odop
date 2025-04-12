@@ -1,14 +1,14 @@
-import { initialState } from '../../designtypes/Piston-Cylinder/initialState';
-import * as sto from '../../designtypes/Piston-Cylinder/symbol_table_offsets';
-import { initialSystemControls } from '../../initialSystemControls';
-import { MAX } from '../../store/actionTypes';
-import { inject, enableDispatcher, changeSymbolValue, changeResultObjectiveValue, changeSymbolConstraint } from '../../store/actions';
-import { invokeInit } from '../../store/middleware/invokeInit';
-import { invokeEquationSet } from '../../store/middleware/invokeEquationSet';
-import { setSclDen } from '../../store/middleware/setSclDen';
-import { updateObjectiveValue } from '../../store/middleware/updateObjectiveValue';
-import { search } from '../../store/middleware/search';
-import store from "../../store/store";
+import { initialState } from 'designtypes/Piston-Cylinder/initialState';
+import * as sto from 'designtypes/Piston-Cylinder/symbol_table_offsets';
+import { initialSystemControls } from 'store/initialSystemControls';
+import { MAX } from 'store/actionTypes';
+import { inject, enableDispatcher, changeSymbolValue, changeResultObjectiveValue, changeSymbolConstraint } from 'store/actions';
+import { invokeInit } from 'store/middleware/invokeInit';
+import { invokeEquationSet } from 'store/middleware/invokeEquationSet';
+import { setSclDen } from 'store/middleware/setSclDen';
+import { updateObjectiveValue } from 'store/middleware/updateObjectiveValue';
+import { search } from 'store/middleware/search';
+import store from "store/store";
 
 //=====================================================================
 // search

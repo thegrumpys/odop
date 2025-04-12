@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavDropdown, Modal, Button, Container, Row, Col, InputGroup } from 'react-bootstrap';
-import { MIN, MAX, CONSTRAINED, FDCL } from '../../store/actionTypes';
+import { MIN, MAX, CONSTRAINED, FDCL } from 'store/actionTypes';
 import {
   changeSymbolConstraint,
   saveInputSymbolValues,
@@ -9,10 +9,10 @@ import {
   changeResultTerminationCondition,
   search,
   saveAutoSave
-} from '../../store/actions';
+} from 'store/actions';
 import { logUsage } from '../../logUsage';
 import FormControlTypeNumber from '../../components/FormControlTypeNumber';
-import store from "../../store/store";
+import store from "store/store";
 
 export default function ActionTrade() {
 //  console.log('ActionTrade - Mounting...');

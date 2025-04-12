@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { NavDropdown, Button, Modal, Alert } from 'react-bootstrap';
-import { deleteAutoSave } from '../../store/actions';
+import { deleteAutoSave } from 'store/actions';
 import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';

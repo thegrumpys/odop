@@ -1,14 +1,14 @@
-import { initialState } from '../../designtypes/Piston-Cylinder/initialState';
+import { initialState } from 'designtypes/Piston-Cylinder/initialState';
 import { initialState as initialStateWithFDCL } from './initialStateWithFDCL';
-import * as sto from '../../designtypes/Piston-Cylinder/symbol_table_offsets';
-import { initialSystemControls } from '../../initialSystemControls';
-import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../store/actionTypes';
+import * as sto from 'designtypes/Piston-Cylinder/symbol_table_offsets';
+import { initialSystemControls } from 'store/initialSystemControls';
+import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from 'store/actionTypes';
 import {
     inject, enableDispatcher, startup,
     changeSymbolValue, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag,
     search, seek,
-    saveAutoSave, restoreAutoSave, deleteAutoSave } from '../../store/actions';
-import store from "../../store/store";
+    saveAutoSave, restoreAutoSave, deleteAutoSave } from 'store/actions';
+import store from "store/store";
 
 //=====================================================================
 // STARTUP

@@ -74,7 +74,7 @@ export const dispatcher = store => next => action => {
 //            console.log('In dispatcher.CHANGE_SYMBOL_VALUE element=',element);
           if (element.format === 'table') {
 //              console.log('in dispatcher.CHANGE_SYMBOL_VALUE file = ../../designtypes/'+element.table+'.json');
-            var table = require('../../designtypes/' + element.table + '.json'); // Dynamically load table
+            var table = require('designtypes/' + element.table + '.json'); // Dynamically load table
             var selectedIndex = element.value;
 //              console.log('in dispatcher.CHANGE_SYMBOL_VALUE table=',table,'selectedIndex=',selectedIndex);
             table[selectedIndex].forEach((value, index) => {

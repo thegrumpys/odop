@@ -1,10 +1,10 @@
-import { initialState } from '../../designtypes/Piston-Cylinder/initialState';
+import { initialState } from 'designtypes/Piston-Cylinder/initialState';
 import { initialState as initialStateWithFDCL } from './initialStateWithFDCL';
 import { initialState as initialStateOld } from './initialStateOld';
-import { initialState as initialStateSpringCompression } from '../../designtypes/Spring/Compression/initialState';
-import * as sto from '../../designtypes/Piston-Cylinder/symbol_table_offsets';
-import { initialSystemControls } from '../../initialSystemControls';
-import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../store/actionTypes';
+import { initialState as initialStateSpringCompression } from 'designtypes/Spring/Compression/initialState';
+import * as sto from 'designtypes/Piston-Cylinder/symbol_table_offsets';
+import { initialSystemControls } from 'store/initialSystemControls';
+import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from 'store/actionTypes';
 import {
     inject, startup, load, changeName, changeUser,
     changeSymbolValue, changeSymbolViolation, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag,
@@ -13,8 +13,8 @@ import {
     changeResultObjectiveValue, changeResultTerminationCondition,
     changeSystemControlsValue, changeLabelsValue, search, seek,
     saveAutoSave, restoreAutoSave, deleteAutoSave
-    } from '../../store/actions';
-import store from "../../store/store";
+    } from 'store/actions';
+import store from "store/store";
 
 //=====================================================================
 // STARTUP

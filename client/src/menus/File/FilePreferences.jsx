@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, NavDropdown, Container, Row, Col } from 'react-bootstrap';
-import { initialSystemControls } from '../../initialSystemControls';
-import { changeSystemControlsValue, saveAutoSave } from '../../store/actions';
+import { initialSystemControls } from 'store/initialSystemControls';
+import { changeSystemControlsValue, saveAutoSave } from 'store/actions';
 import { logUsage, logValue } from '../../logUsage';
 import FormControlTypeNumber from '../../components/FormControlTypeNumber';
 

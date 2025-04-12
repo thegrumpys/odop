@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Table, Button } from 'react-bootstrap';
-import { MIN, MAX, FIXED } from '../../store/actionTypes';
-import { seek, saveAutoSave } from '../../store/actions';
+import { MIN, MAX, FIXED } from 'store/actionTypes';
+import { seek, saveAutoSave } from 'store/actions';
 import { logUsage } from '../../logUsage';
 import * as sto from './symbol_table_offsets';
 

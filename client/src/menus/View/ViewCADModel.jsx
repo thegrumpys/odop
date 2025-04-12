@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { NavDropdown, Modal, Button } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
-import * as sto from '../../designtypes/Spring/Extension/symbol_table_offsets';
+import * as sto from 'designtypes/Spring/Extension/symbol_table_offsets';
 
 export default function ViewCADModel() {
 //  console.log('ViewCADModel - Mounting...');

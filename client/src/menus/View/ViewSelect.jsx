@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
-import { changeView } from '../../store/actions';
+import { changeView } from 'store/actions';
 
 export default function ViewSelect() {
 //  console.log('ViewSelect - Mounting...');
@@ -9,7 +9,7 @@ export default function ViewSelect() {
   const model_type = useSelector((state) => state.model.type);
   const dispatch = useDispatch();
 
-  var { getViewNames } = require('../../designtypes/' + model_type + '/view.js'); // Dynamically load getViewNames
+  var { getViewNames } = require('designtypes/' + model_type + '/view.js'); // Dynamically load getViewNames
 //  console.log('ViewSelect - type changed', 'getViewNames=', getViewNames);
   var viewNames = getViewNames(); // Get them in MainPage render because they are now React Components
 //  console.log('ViewSelect - type changed', 'viewNames=', viewNames);

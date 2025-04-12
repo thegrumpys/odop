@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Table, OverlayTrigger, Tooltip, Modal, InputGroup, ButtonGroup, Button, Form, Alert } from 'react-bootstrap';
-import { CONSTRAINED, FIXED, MIN, MAX } from '../store/actionTypes';
+import { CONSTRAINED, FIXED, MIN, MAX } from 'store/actionTypes';
 import FeasibilityIndicator from './FeasibilityIndicator';
-import { search, seek, saveAutoSave } from '../store/actions';
+import { search, seek, saveAutoSave } from 'store/actions';
 import { logUsage } from '../logUsage';
 import { displayMessage } from '../components/Message';
 import AlertsAccordion from "./AlertsAccordion"
-import store from "../store/store";
+import store from "store/store";
 
 export default function ResultTable() {
 //  console.log('ResultTable - Mounting...');
@@ -174,7 +174,7 @@ export default function ResultTable() {
     display_search_button = false;
   }
 
-  var ResultTableOptimize = require('../designtypes/' + model_type + '/ResultTableOptimize.jsx'); // Dynamically load ResultTableOptimize
+  var ResultTableOptimize = require('designtypes/' + model_type + '/ResultTableOptimize.jsx'); // Dynamically load ResultTableOptimize
 //  console.log('ResultTable','ResultTableOptimize=',ResultTableOptimize);
 
 //      <AlertsAccordion />

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown, Modal, Alert, Button } from 'react-bootstrap';
-import { CONSTRAINED, FIXED } from '../../store/actionTypes';
-import { search, saveAutoSave } from '../../store/actions';
+import { CONSTRAINED, FIXED } from 'store/actionTypes';
+import { search, saveAutoSave } from 'store/actions';
 import { logUsage } from '../../logUsage';
 import { displayMessage } from '../../components/Message';
-import store from '../../store/store';
+import store from 'store/store';
 
 export default function ActionSearch() {
 //  console.log('ActionSearch - Mounting...');

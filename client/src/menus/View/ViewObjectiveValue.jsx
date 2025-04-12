@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { NavDropdown, Modal, Button } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
-import { CONSTRAINED, FIXED } from '../../store/actionTypes';
+import { CONSTRAINED, FIXED } from 'store/actionTypes';
 
 export default function ViewObjectiveValue() {
 //  console.log('ViewObjectiveValue - Mounting...');

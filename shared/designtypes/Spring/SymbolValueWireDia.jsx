@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table, Alert } from 'react-bootstrap';
-import { MIN, MAX, FIXED, CONSTRAINED } from '../../store/actionTypes';
-import { fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from '../../store/actions';
-import { load, search, seek, saveAutoSave, changeSymbolValue } from '../../store/actions';
-import { enableSpinner, disableSpinner } from '../../store/actions';
+import { MIN, MAX, FIXED, CONSTRAINED } from 'store/actionTypes';
+import { fixSymbolValue, freeSymbolValue, changeResultTerminationCondition } from 'store/actions';
+import { load, search, seek, saveAutoSave, changeSymbolValue } from 'store/actions';
+import { enableSpinner, disableSpinner } from 'store/actions';
 import * as mo from './mat_offsets';
 import NameValueUnitsHeaderIndependentVariable from '../../components/NameValueUnitsHeaderIndependentVariable';
 import NameValueUnitsHeaderDependentVariable from '../../components/NameValueUnitsHeaderDependentVariable';
@@ -26,7 +26,7 @@ import { getAlertsByName } from '../../components/Alerts';
 import { displayMessage } from '../../components/Message';
 import FeasibilityIndicator from '../../components/FeasibilityIndicator';
 import { toODOPPrecision } from '../../toODOPPrecision'
-import store from '../../store/store';
+import store from 'store/store';
 
 export default function SymbolValueWireDia({ className, element, index }) {
 // console.log('SymbolValueWireDia - Mounting...','element=',element,'index=',index);

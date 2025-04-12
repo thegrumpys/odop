@@ -21,7 +21,7 @@ export default function HelpTutorial() {
   }, [model_type]);
 
   const updateExecuteNames = () => {
-    var { getTutorialNames } = require('../../designtypes/' + model_type + '/execute.js'); // Dynamically load getTutorialNames
+    var { getTutorialNames } = require('designtypes/' + model_type + '/execute.js'); // Dynamically load getTutorialNames
     var localExecuteNames = getTutorialNames();
 //    console.log('HelpTutorial.updateExecuteNames localExecuteNames=', localExecuteNames);
     var localExecuteName;

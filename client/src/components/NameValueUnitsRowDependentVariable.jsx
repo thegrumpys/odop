@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
-import { CONSTRAINED, FIXED } from '../store/actionTypes';
-import { fixSymbolValue, freeSymbolValue } from '../store/actions';
+import { CONSTRAINED, FIXED } from 'store/actionTypes';
+import { fixSymbolValue, freeSymbolValue } from 'store/actions';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';

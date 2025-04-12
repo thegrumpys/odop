@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavDropdown, Modal, InputGroup, ButtonGroup, Button, Form } from 'react-bootstrap';
-import { CONSTRAINED, FIXED, MIN, MAX } from '../../store/actionTypes';
-import { seek, saveAutoSave } from '../../store/actions';
+import { CONSTRAINED, FIXED, MIN, MAX } from 'store/actionTypes';
+import { seek, saveAutoSave } from 'store/actions';
 import { logUsage } from '../../logUsage';
 import { displayMessage } from '../../components/Message';
 
@@ -78,7 +78,7 @@ export default function ActionSeek() {
         logUsage('event', 'ActionSeek', { event_label: seekMinMax + ' ' + seekName });
     }
 
-        var ResultTableOptimize = require('../../designtypes/'+type+'/ResultTableOptimize.jsx'); // Dynamically load ResultTableOptimize
+        var ResultTableOptimize = require('designtypes/'+type+'/ResultTableOptimize.jsx'); // Dynamically load ResultTableOptimize
 
         var display_search_button;
         if (model_objective_value > model_objmin) {

@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, Button, Container, Row } from 'react-bootstrap';
-import { load, changeResultTerminationCondition } from '../store/actions';
-import { dumpers } from '../store/dumpers';
+import { load, changeResultTerminationCondition } from 'store/actions';
+import { dumpers } from 'store/dumpers';
 import { logUsage } from '../logUsage';
 import config from '../config';
-import { executeStart, executeStop, setExecuteName, setShow, setPrefix, setStates, setStep, setTitle, setText, setStartTime, setTestGenerate, outputStart, outputLine, outputStop } from '../store/actions';
-import store from '../store/store';
+import { executeStart, executeStop, setExecuteName, setShow, setPrefix, setStates, setStep, setTitle, setText, setStartTime, setTestGenerate, outputStart, outputLine, outputStop } from 'store/actions';
+import store from 'store/store';
 
 export const startExecute = (prefix, executeName, run=false) => {
 //  console.log('In startExecute','prefix=',prefix,'executeName=',executeName,'run=',run);
@@ -13,7 +13,7 @@ export const startExecute = (prefix, executeName, run=false) => {
 
   var model = store.getState().model;
   var model_type = model.type;
-  var { execute } = require('../designtypes/' + model_type + '/' + executeName + '.js'); // Dynamically load execute
+  var { execute } = require('designtypes/' + model_type + '/' + executeName + '.js'); // Dynamically load execute
   var steps = execute.steps;
   var states = store.getState().executePanelSlice.states;
   var localStates = Object.assign([...states], { 0: Object.assign({}, states[0], { state: JSON.stringify(model) }) });

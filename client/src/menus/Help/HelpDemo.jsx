@@ -21,7 +21,7 @@ export default function HelpDemo() {
   }, [model_type]);
 
   const updateExecuteNames = () => {
-    var { getDemoNames } = require('../../designtypes/' + model_type + '/execute.js'); // Dynamically load getDemoNames
+    var { getDemoNames } = require('designtypes/' + model_type + '/execute.js'); // Dynamically load getDemoNames
     var localExecuteNames = getDemoNames();
 //    console.log('HelpDemo.updateExecuteNames localExecuteNames=', localExecuteNames);
     var localExecuteName;

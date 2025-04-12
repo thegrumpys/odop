@@ -1,6 +1,6 @@
 import { displayMessage } from '../../components/Message';
 import { initialState } from './initialState';
-import { initialSystemControls } from '../../initialSystemControls';
+import { initialSystemControls } from 'store/initialSystemControls';
 
 export function migrate(design) {
     /*

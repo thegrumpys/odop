@@ -9,7 +9,7 @@ import {
   Tooltip,
   Row
 } from 'react-bootstrap';
-import { changeView, changeUser } from '../store/actions';
+import { changeView, changeUser } from 'store/actions';
 import ExecutePanel from './ExecutePanel';
 import SignIn from '../menus/Session/SignIn';
 import SignOut from '../menus/Session/SignOut';
@@ -73,7 +73,7 @@ export default function MainPage() {
     if (model_type === null) return () => {
 //      console.log('MainPage','Unmounting ...','model_type useEffect');
     }
-    var { getViewNames } = require('../designtypes/'+ model_type + '/view.js'); // Dynamically load getViewNames
+    var { getViewNames } = require('designtypes/'+ model_type + '/view.js'); // Dynamically load getViewNames
 //    console.log('MainPage','model_type useEffect','getViewNames=', getViewNames);
     var viewNames = getViewNames();
 //    console.log('MainPage','model_type useEffect','viewNames=', viewNames);
@@ -100,7 +100,7 @@ export default function MainPage() {
 
   if (model_type === null) return null;
 
-  var { getViewNames } = require('../designtypes/'+model_type+'/view.js'); // Dynamically load getViewNames
+  var { getViewNames } = require('designtypes/'+model_type+'/view.js'); // Dynamically load getViewNames
   var viewNames = getViewNames(); // Get them in MainPage render because they contain React Components
 //  console.log('MainPage','model_type=',model_type,'model_view=',model_view,'config.url.view=',config.url.view,'viewNames[0]=',viewNames[0].name);
   var viewIndex = viewNames.findIndex(element => element.name === model_view)

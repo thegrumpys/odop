@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
-import { changeSymbolValue, fixSymbolValue, saveAutoSave, changeResultTerminationCondition } from '../../store/actions';
+import { changeSymbolValue, fixSymbolValue, saveAutoSave, changeResultTerminationCondition } from 'store/actions';
 import { logUsage } from '../../logUsage';
-import { FIXED } from '../../store/actionTypes';
+import { FIXED } from 'store/actionTypes';
 import { logValue } from '../../logUsage';
 
 export default function ActionSelectSize() {
@@ -27,7 +27,7 @@ export default function ActionSelectSize() {
 
   const updateSizeTypes = () => {
     //        console.log('In ActionSelectSize updateSizeTypes');
-    var { getSizeTypes, getSizeEntries } = require('../../designtypes/' + model_type + '/size.js'); // Dynamically load getSizeTypes & getSizeEntries
+    var { getSizeTypes, getSizeEntries } = require('designtypes/' + model_type + '/size.js'); // Dynamically load getSizeTypes & getSizeEntries
     var localTypes = getSizeTypes();
     var localType;
     if (localTypes.length > 0)
@@ -59,7 +59,7 @@ export default function ActionSelectSize() {
   const onSelectSizeType = (event) => {
     //        console.log('In ActionSelectSize.onSelectSizeType event.target.value=',event.target.value);
     var localType = event.target.value;
-    var { getSizeEntries } = require('../../designtypes/' + model_type + '/size.js'); // Dynamically load getSizeEntries
+    var { getSizeEntries } = require('designtypes/' + model_type + '/size.js'); // Dynamically load getSizeEntries
     // Loop to create p and x from model_symbol_table
     var st = [];
     model_symbol_table.forEach((element) => {

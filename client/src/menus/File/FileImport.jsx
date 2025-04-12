@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Modal, NavDropdown, Form, Table } from 'react-bootstrap';
-import { load, changeName, deleteAutoSave } from '../../store/actions';
-import { executeStopOnLoad } from '../../store/actions';
+import { load, changeName, deleteAutoSave } from 'store/actions';
+import { executeStopOnLoad } from 'store/actions';
 import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
@@ -43,7 +43,7 @@ export default function FileImport() {
 //    console.log('In FileImport.onLoad event=',event);
     var design = JSON.parse(fileReader.result); // Convert file contents to JSON object
     var filename = basename(selectedFile.name, '.json'); // Drop prefix directories and suffix extension
-    var { migrate } = require('../../designtypes/' + design.type + '/migrate.js'); // Dynamically load migrate
+    var { migrate } = require('designtypes/' + design.type + '/migrate.js'); // Dynamically load migrate
     var migrated_design = migrate(design);
     if (migrated_design.jsontype === "ODOP") {
       dispatch(load(migrated_design));

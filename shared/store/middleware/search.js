@@ -1,7 +1,7 @@
 import { FIXED } from '../actionTypes';
 import { inject, changeInputSymbolValues, changeResultTerminationCondition, changeResultSearchCompleted } from '../actions';
 import { patsh } from './patsh';
-import { shadow_store } from '../store';
+import { shadow_store } from 'store';
 
 // Search
 export function search(store, objmin, merit) {

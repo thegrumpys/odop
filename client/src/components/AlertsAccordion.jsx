@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Button, OverlayTrigger, Tooltip, Accordion, Card, ButtonGroup, InputGroup, Badge } from 'react-bootstrap';
-import { getAlertsBySeverity, ERR, WARN, NOTICE, INFO } from './Alerts';
+import { getAlertsBySeverity } from './Alerts';
+import { ERR, WARN, NOTICE, INFO } from 'store/actionTypes';
 import { logUsage } from '../logUsage';
 import SymbolValue from './SymbolValue';
 import Value from './Value';
 import config from '../config';
-import { changeSystemControlsValue } from '../store/actions';
-import { setActiveKey, setCaret, setLevel } from '../store/actions';
+import { changeSystemControlsValue } from 'store/actions';
+import { setActiveKey, setCaret, setLevel } from 'store/actions';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 
 const ContextAwareAccordion = ({ children }) => {

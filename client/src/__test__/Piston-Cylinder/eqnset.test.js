@@ -1,5 +1,5 @@
-import * as o from '../../designtypes/Piston-Cylinder/offsets';
-import { eqnset } from '../../designtypes/Piston-Cylinder/eqnset';
+import * as o from 'designtypes/Piston-Cylinder/offsets';
+import { eqnset } from 'designtypes/Piston-Cylinder/eqnset';
 
 //=====================================================================
 // eqnset

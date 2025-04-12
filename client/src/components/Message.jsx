@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Modal, Button, Alert } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
-import { addMessage, disableMessage } from "../store/actions";
-import store from "../store/store";
+import { addMessage, disableMessage } from "store/actions";
+import store from "store/store";
 
 export const displayMessage = (message, variant = 'danger', header = '', help_url = '') => {
 //  console.log('In displayMessage');

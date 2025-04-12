@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
-import { changeName, loadInitialState, load, restoreAutoSave, deleteAutoSave } from '../../store/actions';
-import { executeStopOnLoad } from '../../store/actions';
+import { changeName, loadInitialState, load, restoreAutoSave, deleteAutoSave } from 'store/actions';
+import { executeStopOnLoad } from 'store/actions';
 import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
@@ -88,7 +88,7 @@ export default function FileOpen() {
     })
     .then((design) => {
 //      console.log('FileOpen.getDesign design=', design);
-      var { migrate } = require('../../designtypes/' + design.type + '/migrate.js'); // Dynamically load migrate
+      var { migrate } = require('designtypes/' + design.type + '/migrate.js'); // Dynamically load migrate
       var migrated_design = migrate(design);
       if (migrated_design.jsontype === "ODOP") {
         dispatch(changeName(name));

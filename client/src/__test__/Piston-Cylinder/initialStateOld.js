@@ -1,4 +1,4 @@
-import { CONSTRAINED } from '../../store/actionTypes';
+import { CONSTRAINED } from 'store/actionTypes';
 export const initialState = {
     "name": "initialState",
     "symbol_table": [

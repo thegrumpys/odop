@@ -23,7 +23,7 @@ export function invokeInit(store) {
     }
 
     // Compute outputs x from inputs p using equations
-    var { init } = require('../../designtypes/'+design.model.type+'/init.js'); // Dynamically load init
+    var { init } = require('designtypes/'+design.model.type+'/init.js'); // Dynamically load init
 //    console.log('In invokeInit','init=',init);
     x = init(store, p, x);
 

@@ -5,7 +5,7 @@ import OktaSignIn from '@okta/okta-signin-widget';
 import '@okta/okta-signin-widget/css/okta-sign-in.min.css';
 import config from '../config';
 import { useOktaAuth } from '@okta/okta-react';
-import { changeUser, saveAutoSave } from '../store/actions';
+import { changeUser, saveAutoSave } from 'store/actions';
 import { logUsage } from '../logUsage';
 
 export default function SignInPageWidget() {

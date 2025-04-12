@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, NavDropdown, Container, Row, Col, Form } from 'react-bootstrap';
-import { changeLabelsValue, saveAutoSave } from '../../store/actions';
+import { changeLabelsValue, saveAutoSave } from 'store/actions';
 import { logUsage, logValue } from '../../logUsage';
 
 export default function FileProperties() {
@@ -35,7 +35,7 @@ export default function FileProperties() {
 
   const onRestoreDefaults = () => {
 //    console.log('FileProperties.onRestoreDefaults');
-    var { initialState } = require('../../designtypes/' + model_type + '/initialState.js'); // Dynamically load initialState
+    var { initialState } = require('designtypes/' + model_type + '/initialState.js'); // Dynamically load initialState
     setLabels(initialState.labels);
     logUsage('event', 'FileProperties', { event_label: 'RestoreDefaults' });
   }

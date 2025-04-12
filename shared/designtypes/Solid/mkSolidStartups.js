@@ -3,7 +3,7 @@ import {
     MIN,
     MAX,
     CONSTRAINED,
-} from '../../store/actionTypes';
+} from 'store/actionTypes';
 import {
     loadInitialState,
     changeName,
@@ -12,7 +12,7 @@ import {
     changeSymbolValue,
     setSymbolFlag,
     startup,
-} from '../../store/actions';
+} from 'store/actions';
 export const execute = {
     steps: [
         {

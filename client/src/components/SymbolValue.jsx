@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table, Alert } from 'react-bootstrap';
-import { MIN, MAX, FIXED, CONSTRAINED } from '../store/actionTypes';
-import { load, search, seek, saveAutoSave } from '../store/actions';
+import { MIN, MAX, FIXED, CONSTRAINED } from 'store/actionTypes';
+import { load, search, seek, saveAutoSave } from 'store/actions';
 import NameValueUnitsHeaderIndependentVariable from './NameValueUnitsHeaderIndependentVariable';
 import NameValueUnitsRowIndependentVariable from './NameValueUnitsRowIndependentVariable';
 import NameValueUnitsHeaderDependentVariable from './NameValueUnitsHeaderDependentVariable';
@@ -22,7 +22,7 @@ import { logUsage } from '../logUsage';
 import { getAlertsByName } from './Alerts';
 import { displayMessage } from '../components/Message';
 import FeasibilityIndicator from './FeasibilityIndicator';
-import store from '../store/store';
+import store from 'store/store';
 
 export default function SymbolValue({ className, element, index }) {
 //  console.log('SymbolValue','Mounting...','element=',element,'index=',index);
@@ -43,7 +43,7 @@ export default function SymbolValue({ className, element, index }) {
 
   if (element.format === 'table') {
 //    console.log('SymbolValue','Mounting','file= ../designtypes/'+element.table+'.json');
-    var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
+    var tableContents = require('designtypes/' + element.table + '.json'); // Dynamically load table
 //    console.log('SymbolValue','Mounting','tableContents=',tableContents);
 //    setTable(tableContents);
   }

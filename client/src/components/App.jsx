@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-import { load, changeName, restoreAutoSave, deleteAutoSave } from "../store/actions";
+import { load, changeName, restoreAutoSave, deleteAutoSave } from "store/actions";
 import MainPage from "./MainPage";
 import SignInPageWidget from './SignInPageWidget';
 import { Button, Modal, Alert } from 'react-bootstrap';
@@ -110,7 +110,7 @@ export default function App() {
     })
     .then((design) => {
 //      console.log('App.getDesign','design=', design);
-      var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
+      var { migrate } = require('designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate
 //      console.log('App.getDesign','migrate=',migrate);
       var migrated_design = migrate(design);
 //      console.log('App.getDesign','migrated_design=',migrated_design);

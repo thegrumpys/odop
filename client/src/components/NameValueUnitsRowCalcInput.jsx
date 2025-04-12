@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
-import { changeSymbolValue } from '../store/actions';
+import { changeSymbolValue } from 'store/actions';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
@@ -17,7 +17,7 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
 //    console.log('SymbolValue - Mounted');
     if (element.format === 'table') {
 //      console.log('NameValueUnitsRowCalcInput useEffect file= ../designtypes/'+element.table+'.json');
-      var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
+      var tableContents = require('designtypes/' + element.table + '.json'); // Dynamically load table
 //      console.log('NameValueUnitsRowCalcInput','tableContents=',tableContents);
       setTable(tableContents);
     }

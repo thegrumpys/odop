@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Modal } from 'react-bootstrap';
-import { disableSpinner, enableSpinner } from "../store/actions";
-import store from "../store/store";
+import { disableSpinner, enableSpinner } from "store/actions";
+import store from "store/store";
 
 export const displaySpinner = (display) => {
 //  console.log('In displaySpinner display=', display);

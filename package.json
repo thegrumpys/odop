@@ -42,5 +42,9 @@
     "express": "^4.17.1",
     "lunr": "^2.3.9",
     "node-mysql": "^0.4.2"
-  }
+  },
+  "workspaces": [
+    "shared/store",
+    "shared/datatypes"
+  ]
 }

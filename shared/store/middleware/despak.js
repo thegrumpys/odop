@@ -23,7 +23,7 @@ export function despak(store, pc, merit) {
         }
     }
 
-    var { eqnset } = require('../../designtypes/'+design.model.type+'/eqnset.js'); // Dynamically load eqnset
+    var { eqnset } = require('designtypes/'+design.model.type+'/eqnset.js'); // Dynamically load eqnset
     x = eqnset(p, x);
 
     pxPropagate(p, x, store);
