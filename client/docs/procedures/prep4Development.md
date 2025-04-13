@@ -12,13 +12,14 @@ For background regarding "Major.Minor.Patch" see: [ODOP version numbering](/docs
    and infrastructure updates associated with the release. 
    For example:
 
-    1. Check for and deal with security vulnerabilities.
-    See GitHub Dependabot alerts. 
-    Issue the command:  `npm audit fix`   
-    when positioned in the server directory and again when positioned in the client directory.
+    1. Check for and deal with security vulnerabilities.  
+    Go to GitHub Dependabot alerts in the GitHub **Pull Requests** menu and process any dependabot entries to Bump/Update dependency versions.  
+    Work from oldest to newest.  
+    Add comment: `@dependabot rebase`
     
-    1. Go to Github's Pull Requests and review and repair any dependabot entries to Bump/Update dependency versions.
-    When complete we are to close these pull requests.
+    1. Issue the command:  `npm audit fix`   
+    when positioned in the server directory and again when positioned in the client directory.  
+    Note that `npm audit fix --force` has a history of creating more problems than it solves.  
     
     1. Use the Heroku console settings tab to check the currently configured version of the Heroku stack. 
     Upgrade the Heroku stack for the staging or production system as appropriate. 
@@ -26,5 +27,5 @@ For background regarding "Major.Minor.Patch" see: [ODOP version numbering](/docs
 
     1. Run: `npx update-browserslist-db@latest` 
 
-    To-Do notes and other reminders related to making this release can be captured as comments to the issue.
+    To-Do notes and other reminders related to the build process and making this release can be captured as comments to the issue.
     
