@@ -46,9 +46,8 @@ CREATE TABLE `design` (
 
 CREATE TABLE `usage_log` (
   `id` int NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ip_address` varchar(64) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `event_datetime` datetime DEFAULT NULL,
   `event_value` int DEFAULT NULL,
   `action` varchar(64) DEFAULT NULL,
