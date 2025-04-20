@@ -112,6 +112,7 @@ export default function ActionSelectSize() {
     }
     dispatch(changeSymbolValue(type, size));
     logValue(type, size);
+    var valueChanged = false;
     initialValues.forEach((initialValue) => {
       if (initialValue.type === type && initialValue.size !== size) {
         valueChanged = true;
