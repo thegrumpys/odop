@@ -2,32 +2,66 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { InputGroup, ButtonGroup, OverlayTrigger, Tooltip, Modal, Button, Form, Table } from 'react-bootstrap';
 import { MIN, MAX, FIXED, CONSTRAINED, FDCL } from '../store/actionTypes';
-import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag } from '../store/actions';
+import { changeSymbolConstraint, setSymbolFlag, resetSymbolFlag, search } from '../store/actions';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 import { toODOPPrecision } from '../toODOPPrecision';
 
-export default function ConstraintsMaxRowIndependentVariable({ element, index, onChangeValid, onChangeInvalid, onSet, onReset }) {
+export default function ConstraintsMaxRowIndependentVariable({ element, index, onChangeValid, onChangeInvalid, onFocus, onBlur, onKeyPress, onSetFlag, onResetFlag, onFocusFlag, onBlurFlag, onKeyPressFlag }) {
 //  console.log('ConstraintsMaxRowIndependentVariable - Mounting...','element=',element,'index=',index);
   const [show, setShow] = useState(false);
   const [isInvalidValue, setIsInvalidValue] = useState(false);
   const [valueString, setValueString] = useState(false);
+  const [value, setValue] = useState(false);
+  const [constrainedFlag, setConstrainedFlag] = useState(0);
   const model_show_violations = useSelector((state) => state.model.system_controls.show_violations);
+  const model_enable_auto_search = useSelector((state) => state.model.system_controls.enable_auto_search);
+  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
+  const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const dispatch = useDispatch();
 
   const onSetFlagMaxConstrained = (event) => {
 //    console.log('In ConstraintsMaxRowIndependentVariable.onSetFlagMaxConstrained', 'event.target.value=', event.target.value);
     dispatch(setSymbolFlag(element.name, MAX, CONSTRAINED));
     logValue(element.name, 'Enabled', 'MaxConstraintFlag', false);
-    if (typeof onSet === "function") onSet(event);
+    if (typeof onSetFlag === "function") onSetFlag(event);
   }
 
   const onResetFlagMaxConstrained = (event) => {
 //    console.log('In ConstraintsMaxRowIndependentVariable.onResetFlagMaxConstrained', 'event.target.value=', event.target.value);
     dispatch(resetSymbolFlag(element.name, MAX, CONSTRAINED));
     logValue(element.name, 'Disabled', 'MaxConstraintFlag', false);
-    if (typeof onReset === "function") onReset(event);
+    if (typeof onResetFlag === "function") onResetFlag(event);
+  }
+
+  const onFocusFlagMaxConstrained = (event) => {
+//    console.log('In ConstraintsMaxRowIndependentVariable.onFocusFlagMaxConstrained','event.target.value=', event.target.value);
+    console.log('In ConstraintsMaxRowIndependentVariable.onFocusFlagMaxConstrained element.lmax & CONSTRAINED=', element.lmax & CONSTRAINED);
+    setConstrainedFlag(element.lmax & CONSTRAINED);
+    if (typeof onFocusFlag === "function") onFocusFlag(event);
+  }
+
+  const onBlurFlagMaxConstrained = (event) => {
+//    console.log('In ConstraintsMaxRowIndependentVariable.onBlurFlagMaxConstrained','event.target.value=', event.target.value);
+    console.log('In ConstraintsMaxRowIndependentVariable.onBlurFlagMaxConstrained','model_enable_auto_search=', model_enable_auto_search,'constrainedFlagChanged=',constrainedFlag !== (element.lmax & CONSTRAINED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+    if (model_enable_auto_search && constrainedFlag !== (element.lmax & CONSTRAINED) && model_objective_value >= model_objmin) {
+      dispatch(search());
+    }
+    if (typeof onBlurFlag === "function") onBlurFlag(event);
+  }
+
+  const onKeyPressFlagMaxConstrained = (event) => {
+//    console.log('In ConstraintsMaxRowIndependentVariable.onKeyPressFlagMaxConstrained event.keyCode=', event.keyCode, 'event.which=', event.which);
+    var keyCode = event.keyCode || event.which;
+    if (keyCode === 13) { // Carriage return
+//      console.log('In ConstraintsMaxRowIndependentVariable.onKeyPressFlagMaxConstrained keyCode=', keyCode);
+      console.log('In ConstraintsMaxRowIndependentVariable.onKeyPressFlagMaxConstrained','model_enable_auto_search=', model_enable_auto_search,'constrainedFlagChanged=',constrainedFlag !== (element.lmax & CONSTRAINED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+      if (model_enable_auto_search && constrainedFlag !== (element.lmax & CONSTRAINED) && model_objective_value >= model_objmin) {
+        dispatch(search());
+      }
+    }
+    if (typeof onKeyPressFlag === "function") onKeyPressFlag(event);
   }
 
   const onChangeValidMaxConstraint = (event) => {
@@ -41,6 +75,35 @@ export default function ConstraintsMaxRowIndependentVariable({ element, index, o
   const onChangeInvalidMaxConstraint = (event) => {
 //    console.log('In ConstraintsMaxRowIndependentVariable.onChangeInvalidMaxConstraint event.target.value=', event.target.value);
     if (typeof onChangeInvalid === "function") onChangeInvalid(event);
+  }
+
+  const onFocusMaxConstraint = (event) => {
+//    console.log('In ConstraintsMaxRowIndependentVariable.onFocusMaxConstraint event.target.value=', event.target.value);
+    console.log('In ConstraintsMaxRowIndependentVariable.onFocusMaxConstraint element.cmax=', element.cmax);
+    setValue(element.cmax);
+    if (typeof onFocus === "function") onFocus(event);
+  }
+
+  const onBlurMaxConstraint = (event) => {
+//    console.log('In ConstraintsMaxRowIndependentVariable.onBlurMaxConstraint event.target.value=', event.target.value);
+    console.log('In ConstraintsMaxRowIndependentVariable.onBlurMaxConstraint','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.cmax,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+    if (model_enable_auto_search && value !== element.cmax && model_objective_value >= model_objmin) {
+      dispatch(search());
+    }
+    if (typeof onBlur === "function") onBlur(event);
+  }
+
+  const onKeyPressMaxConstraint = (event) => {
+//    console.log('In ConstraintsMaxRowIndependentVariable.onKeyPressMaxConstraint event.keyCode=', event.keyCode, 'event.which=', event.which);
+    var keyCode = event.keyCode || event.which;
+    if (keyCode === 13) { // Carriage return
+//      console.log('In ConstraintsMaxRowIndependentVariable.onKeyPressMaxConstraint keyCode=', keyCode);
+      console.log('In ConstraintsMaxRowIndependentVariable.onKeyPressMaxConstraint','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.cmax,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+      if (model_enable_auto_search && value !== element.cmax && model_objective_value >= model_objmin) {
+        dispatch(search());
+      }
+    }
+    if (typeof onKeyPress === "function") onKeyPress(event);
   }
 
   const onClick = (event) => {
@@ -98,7 +161,7 @@ export default function ConstraintsMaxRowIndependentVariable({ element, index, o
   var className = results.className;
   var icon_alerts = results.alerts;
   return (
-    <tbody id={'cmnriv_' + element.name}>
+    <tbody id={'cmxriv_' + element.name}>
       <tr key={element.name}>
         <td className="align-middle d-lg-none" id={'cmxriv_name_' + element.name}>
           <OverlayTrigger placement="top" overlay={element.tooltip !== undefined && <Tooltip className="d-lg-none"><div dangerouslySetInnerHTML={{__html: element.tooltip}}></div></Tooltip>}>
@@ -108,9 +171,9 @@ export default function ConstraintsMaxRowIndependentVariable({ element, index, o
         <td className="align-middle" colSpan="2">
           <InputGroup>
             <InputGroup.Text>
-              <Form.Check id={'cmxriv_checkbox_' + element.name} type="checkbox" aria-label="Checkbox for maximum value" checked={element.lmax & CONSTRAINED} onChange={element.lmax & CONSTRAINED ? onResetFlagMaxConstrained : onSetFlagMaxConstrained} disabled={element.lmax & FIXED ? true : false} />
+              <Form.Check id={'cmxriv_checkbox_' + element.name} type="checkbox" aria-label="Checkbox for maximum value" checked={element.lmax & CONSTRAINED} disabled={element.lmax & FIXED ? true : false} onChange={element.lmax & CONSTRAINED ? onResetFlagMaxConstrained : onSetFlagMaxConstrained} onFocus={onFocusFlagMaxConstrained} onBlur={onBlurFlagMaxConstrained} onKeyPress={onKeyPressFlagMaxConstrained} />
             </InputGroup.Text>
-            <FormControlTypeNumber id={'cmxriv_cmin_' + element.name} icon_alerts={icon_alerts} className={className} value={element.cmax} validmin={element.validmin} validmax={element.validmax} disabled={element.lmax & FIXED ? true : (element.lmax & CONSTRAINED ? false : true)} disabledText={element.lmax & CONSTRAINED ? false : true} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onClick={onClick} />
+            <FormControlTypeNumber id={'cmxriv_cmax_' + element.name} icon_alerts={icon_alerts} className={className} value={element.cmax} validmin={element.validmin} validmax={element.validmax} disabled={element.lmax & FIXED ? true : (element.lmax & CONSTRAINED ? false : true)} disabledText={element.lmax & CONSTRAINED ? false : true} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onFocus={onFocusMaxConstraint} onBlur={onBlurMaxConstraint} onKeyPress={onKeyPressMaxConstraint} onClick={onClick} />
           </InputGroup>
           {element.cmaxchoices !== undefined && element.cmaxchoices.length > 0 && show &&
             <Modal show={show} size="lg" onHide={onCancel}>

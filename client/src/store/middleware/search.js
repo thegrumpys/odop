@@ -5,7 +5,7 @@ import { shadow_store } from '../store';
 
 // Search
 export function search(store, objmin, merit) {
-//    console.log('Entering search store=',store,'objmin=',objmin,'merit=',merit);
+    console.log('Entering search store=',store,'objmin=',objmin,'merit=',merit);
 //    console.trace();
 
     var store_state = store.getState();

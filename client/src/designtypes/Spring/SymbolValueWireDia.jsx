@@ -28,15 +28,18 @@ import FeasibilityIndicator from '../../components/FeasibilityIndicator';
 import { toODOPPrecision } from '../../toODOPPrecision'
 import store from '../../store/store';
 
-export default function SymbolValueWireDia({ className, element, index }) {
-// console.log('SymbolValueWireDia - Mounting...','element=',element,'index=',index);
+export default function SymbolValueWireDia({ className, element, index, onChangeValid, onChangeInvalid, onFocus, onBlur, onKeyPress, onSetFix, onResetFix, onFocusFix, onBlurFix, onKeyPressFix }) {
+//  console.log('SymbolValueWireDia','Mounting...','element=',element,'index=',index);
   const model_type = useSelector((state) => state.model.type);
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const model_enable_auto_fix = useSelector((state) => state.model.system_controls.enable_auto_fix);
-  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
+  const model_enable_auto_search = useSelector((state) => state.model.system_controls.enable_auto_search);
   const model_show_units = useSelector((state) => state.model.system_controls.show_units);
+  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const model_search_completed = useSelector((state) => state.model.result.search_completed);
+  const [value, setValue] = useState(false);
+  const [fixFreeFlag, setFixFreeFlag] = useState(0);
   const [searchInfiniteShow, setSearchInfiniteShow] = useState(false);
   const [editShow, setEditShow] = useState(false);
   const [isInvalidValue, setIsInvalidValue] = useState(false);
@@ -50,9 +53,9 @@ export default function SymbolValueWireDia({ className, element, index }) {
   const dispatch = useDispatch();
 
   if (element.format === 'table') {
-//    console.log('SymbolValueWireDia file= ../designtypes/'+element.table+'.json');
+//    console.log('SymbolValueWireDia','Mounting','file= ../designtypes/'+element.table+'.json');
     var tableContents = require('./' + element.table + '.json'); // Dynamically load table
-//    console.log('SymbolValueWireDia tableContents=',tableContents);
+//    console.log('SymbolValueWireDia','Mounting','tableContents=',tableContents);
 //    setTable(tableContents);
   }
 
@@ -61,8 +64,8 @@ export default function SymbolValueWireDia({ className, element, index }) {
     setValueInput(!valueInput);
   }
 
-  const onSelect = (event) => {
-//    console.log('In SymbolValueWireDia.onSelect event.target.value=',event.target.value);
+  const onSelectLocal = (event) => {
+//    console.log('In SymbolValueWireDia.onSelectLocal event.target.value=',event.target.value);
     var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
     if (model_enable_auto_fix && !(element.lmin & FIXED)) {
       auto_fixed = true;
@@ -80,8 +83,8 @@ export default function SymbolValueWireDia({ className, element, index }) {
     }
   }
 
-  const onChangeValid = (event) => {
-//    console.log('In SymbolValueWireDia.onChangeValid event.target.value=',event.target.value);
+  const onChangeValidLocal = (event) => {
+//    console.log('In SymbolValueWireDia.onChangeValidLocal event.target.value=', event.target.value);
     var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
     if (model_enable_auto_fix) {
       auto_fixed = true;
@@ -95,26 +98,84 @@ export default function SymbolValueWireDia({ className, element, index }) {
     if (auto_fixed) {
       dispatch(changeResultTerminationCondition('The value of ' + element.name + ' has been automatically fixed.'));
     }
-    onChangeValidValue(event);
+    if (typeof onChangeValid === "function") onChangeValid(event);
   }
 
-  const onChangeInvalid = (event) => {
-//    console.log('In SymbolValueWireDia.onChangeInvalid event.target.value=',event.target.value);
-    onChangeInvalidValue(event);
+  const onChangeInvalidLocal = (event) => {
+//    console.log('In SymbolValueWireDia.onChangeInvalidLocal event.target.value=', event.target.value);
+    if (typeof onChangeInvalid === "function") onChangeInvalid(event);
   }
 
-  const onSet = (event) => {
-//    console.log('In SymbolValueWireDia.onSet');
+  const onFocusLocal = (event) => {
+//    console.log('In SymbolValueWireDia.onFocusLocal event.target.value=', event.target.value);
+    console.log('In SymbolValueWireDia.onFocusLocal element.value=', element.value);
+    setValue(element.value);
+    if (typeof onFocus === "function") onFocus(event);
+  }
+
+  const onBlurLocal = (event) => {
+//    console.log('In SymbolValueWireDia.onBlurLocal event.target.value=', event.target.value);
+    console.log('In SymbolValueWireDia.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+    if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
+      dispatch(search());
+    }
+    if (typeof onBlur === "function") onBlur(event);
+  }
+
+  const onKeyPressLocal = (event) => {
+//    console.log('In SymbolValueWireDia.onKeyPressLocal event.keyCode=', event.keyCode, 'event.which=', event.which);
+    var keyCode = event.keyCode || event.which;
+    if (keyCode === 13) { // Carriage return
+//      console.log('In SymbolValueWireDia.onKeyPressLocal keyCode=', keyCode);
+      console.log('In SymbolValueWireDia.onKeyPressLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+      if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
+        dispatch(search());
+      }
+    }
+    if (typeof onKeyPress === "function") onKeyPress(event);
+  }
+
+  const onSetFixLocal = (event) => {
+//    console.log('In SymbolValueWireDia.onSetFixLocal' event.target.value=', event.target.value);
     dispatch(fixSymbolValue(element.name));
     logValue(element.name, 'FIXED', 'FixedFlag', false);
-    onModifiedFlag(event);
+    if (typeof onSetFix === "function") onSetFix(event);
   }
 
-  const onReset = (event) => {
-//    console.log('In SymbolValueWireDia.onReset');
+  const onResetFixLocal = (event) => {
+//    console.log('In SymbolValueWireDia.onResetFixLocal' event.target.value=', event.target.value);
     dispatch(freeSymbolValue(element.name));
     logValue(element.name, 'FREE', 'FixedFlag', false);
-    onModifiedFlag(event);
+    if (typeof onResetFix === "function") onResetFix(event);
+  }
+
+  const onFocusFixLocal = (event) => {
+//    console.log('In SymbolValueWireDia.onFocusFixLocal' event.target.value=', event.target.value);
+    console.log('In SymbolValueWireDia.onFocusFixLocal element.lmin & FIXED=', element.lmin & FIXED);
+    setFixFreeFlag(element.lmin & FIXED);
+    if (typeof onFocusFix === "function") onFocusFix(event);
+  }
+
+  const onBlurFixLocal = (event) => {
+//    console.log('In SymbolValueWireDia.onBlurFixLocal event.target.value=', event.target.value);
+    console.log('In SymbolValueWireDia.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+    if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && model_objective_value >= model_objmin) {
+      dispatch(search());
+    }
+    if (typeof onBlurFix === "function") onBlurFix(event);
+  }
+
+  const onKeyPressFixLocal = (event) => {
+//    console.log('In SymbolValueWireDia.onKeyPressFixLocal event.keyCode=', event.keyCode, 'event.which=', event.which);
+    var keyCode = event.keyCode || event.which;
+    if (keyCode === 13) { // Carriage return
+//      console.log('In SymbolValueWireDia.onKeyPressFixLocal keyCode=', keyCode);
+      console.log('In SymbolValueWireDia.onKeyPressFixLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+      if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && model_objective_value >= model_objmin) {
+        dispatch(search());
+      }
+    }
+    if (typeof onKeyPressFix === "function") onKeyPressFix(event);
   }
 
   const onSearchRequest = (event) => {
@@ -164,9 +225,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
 //    console.log('In SymbolValueWireDia.doSearch');
     var old_objective_value = model_objective_value;
     dispatch(saveAutoSave());
-    dispatch(enableSpinner());
     dispatch(search());
-    dispatch(disableSpinner());
     var design = store.getState();
     var new_objective_value = design.model.result.objective_value;
     logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' Element ' + element.name + ' ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });
@@ -518,15 +577,15 @@ export default function SymbolValueWireDia({ className, element, index }) {
                     <td className="align-middle" colSpan="2">
                       <InputGroup>
                         {(valueInput ?
-                          <FormControlTypeNumber id={'svwd_' + element.name} icon_alerts={nvu_icon_alerts} className={nvu_value_class} step="any" value={element.value} validmin={element.validmin} validmax={element.validmax} onChange={onChangeValid} />
+                          <FormControlTypeNumber id={'svwd_' + element.name} icon_alerts={nvu_icon_alerts} className={nvu_value_class} step="any" value={element.value} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidLocal} onChangeInvalid={onChangeInvalidLocal} onFocus={onFocusLocal} onBlur={onBlurLocal} onKeyPress={onKeyPressLocal} />
                           :
-                          <Form.Select id={'svwd_' + element.name} disabled={!element.input} className={nvu_value_class} value={default_value === undefined ? element.value : default_value[0]} onChange={onSelect} >
+                          <Form.Select id={'svwd_' + element.name} disabled={!element.input} className={nvu_value_class} value={default_value === undefined ? element.value : default_value[0]} onChange={onSelectLocal} onFocus={onFocusLocal} onBlur={onBlurLocal} onKeyPress={onKeyPressLocal} >
                             {sorted_wire_dia_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}
                           </Form.Select>
                         )}
                         <InputGroup.Text>
                           <OverlayTrigger placement="top" overlay={<Tooltip>{nvu_value_fix_free_text}</Tooltip>}>
-                            <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={element.lmin & FIXED} onChange={element.lmin & FIXED ? onReset : onSet} />
+                            <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={element.lmin & FIXED} onChange={element.lmin & FIXED ? onResetFixLocal : onSetFixLocal} onFocus={onFocusFixLocal} onBlur={onBlurFixLocal} onKeyPress={onKeyPressFixLocal} />
                           </OverlayTrigger>
                         </InputGroup.Text>
                       </InputGroup>
@@ -538,7 +597,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
             {element.type === "equationset" && !element.input && !element.hidden &&
               <>
                 <NameValueUnitsHeaderDependentVariable />
-                <NameValueUnitsRowDependentVariable key={element.name} element={element} index={0} onSet={onModifiedFlag} onReset={onModifiedFlag} />
+                <NameValueUnitsRowDependentVariable key={element.name} element={element} index={0} onSetFix={onModifiedFlag} onResetFix={onModifiedFlag} />
               </>}
             {element.type === "calcinput" && !element.hidden &&
               <>
@@ -560,22 +619,22 @@ export default function SymbolValueWireDia({ className, element, index }) {
           {element.type === "equationset" && element.input && !element.hidden &&
             <Table className="table-secondary border border-secondary" size="sm">
               <ConstraintsMinHeaderIndependentVariable />
-              <ConstraintsMinRowIndependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMinConstraint} onChangeInvalid={onChangeInvalidMinConstraint} onSet={onModifiedFlag} onReset={onModifiedFlag} />
+              <ConstraintsMinRowIndependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMinConstraint} onChangeInvalid={onChangeInvalidMinConstraint} onSetFlag={onModifiedFlag} onResetFlag={onModifiedFlag} />
             </Table>}
           {element.type === "equationset" && !element.input && !element.hidden &&
             <Table className="table-secondary border border-secondary" size="sm">
               <ConstraintsMinHeaderDependentVariable />
-              <ConstraintsMinRowDependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMinConstraint} onChangeInvalid={onChangeInvalidMinConstraint} onSet={onModifiedFlag} onReset={onModifiedFlag} />
+              <ConstraintsMinRowDependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMinConstraint} onChangeInvalid={onChangeInvalidMinConstraint} onSetFlag={onModifiedFlag} onResetFlag={onModifiedFlag} />
             </Table>}
           {element.type === "equationset" && element.input && !element.hidden &&
             <Table className="table-secondary border border-secondary" size="sm">
               <ConstraintsMaxHeaderIndependentVariable />
-              <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onSet={onModifiedFlag} onReset={onModifiedFlag} />
+              <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onSetFlag={onModifiedFlag} onResetFlag={onModifiedFlag} />
             </Table>}
           {element.type === "equationset" && !element.input && !element.hidden &&
             <Table className="table-secondary border border-secondary" size="sm">
               <ConstraintsMaxHeaderDependentVariable />
-              <ConstraintsMaxRowDependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onSet={onModifiedFlag} onReset={onModifiedFlag} />
+              <ConstraintsMaxRowDependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onSetFlag={onModifiedFlag} onResetFlag={onModifiedFlag} />
             </Table>}
         </Modal.Body>
         <Modal.Footer>
@@ -583,7 +642,7 @@ export default function SymbolValueWireDia({ className, element, index }) {
           {modified ? <><Button variant="secondary" onClick={onResetButton}>Reset</Button>&nbsp;</> : ''}
           {display_search_button ?
             <>
-              {(element.lmin & FIXED && free_variables.length > 0) ?
+              {element.type === "equationset" && element.input && element.lmin & FIXED && free_variables.length > 0 ?
                 (model_search_completed ?
                   <Button variant="secondary" onClick={onSearchRequest} disabled><b>Search</b> (solve)</Button>
                   :

@@ -367,12 +367,12 @@ export default function SymbolValue({ className, element, index }) {
             {element.type === "equationset" && element.input && !element.hidden &&
               <>
                 <NameValueUnitsHeaderIndependentVariable />
-                <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidValue} onChangeInvalid={onChangeInvalidValue} onSet={onModifiedFlag} onReset={onModifiedFlag} />
+                <NameValueUnitsRowIndependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidValue} onChangeInvalid={onChangeInvalidValue} onSetFix={onModifiedFlag} onResetFix={onModifiedFlag} />
               </>}
             {element.type === "equationset" && !element.input && !element.hidden &&
               <>
                 <NameValueUnitsHeaderDependentVariable />
-                <NameValueUnitsRowDependentVariable key={element.name} element={element} index={0} onSet={onModifiedFlag} onReset={onModifiedFlag} />
+                <NameValueUnitsRowDependentVariable key={element.name} element={element} index={0} onSetFix={onModifiedFlag} onResetFix={onModifiedFlag} />
               </>}
             {element.type === "calcinput" && !element.hidden &&
               <>
@@ -394,22 +394,22 @@ export default function SymbolValue({ className, element, index }) {
           {element.type === "equationset" && element.input && !element.hidden &&
             <Table className="table-secondary border border-secondary" size="sm">
               <ConstraintsMinHeaderIndependentVariable />
-              <ConstraintsMinRowIndependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMinConstraint} onChangeInvalid={onChangeInvalidMinConstraint} onSet={onModifiedFlag} onReset={onModifiedFlag} />
+              <ConstraintsMinRowIndependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMinConstraint} onChangeInvalid={onChangeInvalidMinConstraint} onSetFlag={onModifiedFlag} onResetFlag={onModifiedFlag} />
             </Table>}
           {element.type === "equationset" && !element.input && !element.hidden &&
             <Table className="table-secondary border border-secondary" size="sm">
               <ConstraintsMinHeaderDependentVariable />
-              <ConstraintsMinRowDependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMinConstraint} onChangeInvalid={onChangeInvalidMinConstraint} onSet={onModifiedFlag} onReset={onModifiedFlag} />
+              <ConstraintsMinRowDependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMinConstraint} onChangeInvalid={onChangeInvalidMinConstraint} onSetFlag={onModifiedFlag} onResetFlag={onModifiedFlag} />
             </Table>}
           {element.type === "equationset" && element.input && !element.hidden &&
             <Table className="table-secondary border border-secondary" size="sm">
               <ConstraintsMaxHeaderIndependentVariable />
-              <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onSet={onModifiedFlag} onReset={onModifiedFlag} />
+              <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onSetFlag={onModifiedFlag} onResetFlag={onModifiedFlag} />
             </Table>}
           {element.type === "equationset" && !element.input && !element.hidden &&
             <Table className="table-secondary border border-secondary" size="sm">
               <ConstraintsMaxHeaderDependentVariable />
-              <ConstraintsMaxRowDependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onSet={onModifiedFlag} onReset={onModifiedFlag} />
+              <ConstraintsMaxRowDependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onSetFlag={onModifiedFlag} onResetFlag={onModifiedFlag} />
             </Table>}
         </Modal.Body>
         <Modal.Footer>

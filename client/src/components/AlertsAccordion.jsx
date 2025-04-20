@@ -56,6 +56,7 @@ export default function AlertsAccordion() {
   const level = useSelector((state) => state.alertsSlice.level);
   const model_system_controls = useSelector((state) => state.model.system_controls);
   const model_enable_auto_fix = useSelector((state) => state.model.system_controls.enable_auto_fix);
+  const model_enable_auto_search = useSelector((state) => state.model.system_controls.enable_auto_search);
   const dispatch = useDispatch();
 
   const onHelpButton = (event) => {
@@ -78,6 +79,21 @@ export default function AlertsAccordion() {
     }
     dispatch(changeSystemControlsValue(copy));
     logUsage('event', 'AlertsAccordion', { event_label: 'AutoFixToggle ' + label });
+  }
+
+  const onAutoSearchToggle = (event) => {
+//    console.log('AlertsAccordion.onAutoSearchToggle', 'event=', event);
+    var copy = Object.assign({}, model_system_controls);
+    var label;
+    if (copy.enable_auto_search === 0.0) {
+      copy.enable_auto_search = 1.0;
+      label = "enabled";
+    } else {
+      copy.enable_auto_search = 0.0;
+      label = "disabled";
+    }
+    dispatch(changeSystemControlsValue(copy));
+    logUsage('event', 'AlertsAccordion', { event_label: 'AutoSearchToggle ' + label });
   }
 
   var line = 1;
@@ -136,6 +152,7 @@ export default function AlertsAccordion() {
                 </Tooltip>}>
                 <span className="text-primary px-2 pt-2"><i className="fas fa-info-circle"></i></span>
               </OverlayTrigger>
+              
               <InputGroup.Text className="ms-auto">Auto Fix</InputGroup.Text>
               <InputGroup.Checkbox id="auto_fix" aria-label="Checkbox for enabling Auto Fix" onChange={onAutoFixToggle} checked={model_enable_auto_fix} />
               <OverlayTrigger placement="bottom" overlay={
@@ -144,9 +161,25 @@ export default function AlertsAccordion() {
                   <p>Applies only to future value changes. Does not affect any existing variables already in "Fixed" status.</p>
                   <p>The behavior is the same as the File : Preferences enable_auto_fix value.</p>
                 </Tooltip>}>
-                <span className="text-primary px-2 pt-2"><i className="fas fa-info-circle"></i></span>
+                <span className="text-primary px-2 py-2 pt-2 pe-5"><i className="fas fa-info-circle"></i></span>
               </OverlayTrigger>
-            </InputGroup>
+
+              <InputGroup.Text>Auto Search</InputGroup.Text>
+              <InputGroup.Checkbox id="auto_search" aria-label="Checkbox for enabling Auto Search" onChange={onAutoSearchToggle} checked={model_enable_auto_search} />
+              <OverlayTrigger placement="bottom" overlay={
+                <Tooltip className="tooltip-lg">
+                  <p>When checked, enables Auto Search.</p>
+                  <p>When Auto Search is enabled, a Search is automatically triggered when the current design is not feasible
+                     and the changed field "loses focus".
+                     Specifically, when the cursor moves away from the changed field and focuses on some other field or background.</p>
+                  <p>When Auto Search is not enabled, The Search feature executes only when a Search (solve) button is pushed or the
+                     Action : Search (solve) menu entry is invoked.</p>
+                  <p>The behavior is the same as the File : Preferences enable_auto_search value.</p>
+                </Tooltip>}>
+                <span className="text-primary px-2 py-2 pt-2"><i className="fas fa-info-circle"></i></span>
+              </OverlayTrigger>
+
+              </InputGroup>
           </Card.Header>
           {(level === ERR && (err_alerts.length > 0)) ||
             (level === WARN && (err_alerts.length > 0 || warn_alerts.length > 0)) ||

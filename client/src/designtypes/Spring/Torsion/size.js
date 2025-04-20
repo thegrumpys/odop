@@ -46,8 +46,8 @@ export function getSizeEntries(type, st) {
               return false; // keep looking
             } else {
               element[2] = true;
+              return true; // were done
             }
-            return true; // were done
           } else {
             return false; // keep looking
           }
@@ -87,8 +87,8 @@ export function getSizeEntries(type, st) {
               return false; // keep looking
             } else {
               element[2] = true;
+              return true; // were done
             }
-            return true; // were done
           } else {
             return false; // keep looking
           }
