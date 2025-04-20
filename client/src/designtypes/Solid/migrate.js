@@ -139,6 +139,12 @@ export function migrate(design) {
         // console.log('Convert from 9 to 10');
         // Do nothing
         // migrated_design.version = '10'; // uncomment when there is a case below this line
+        migrated_design.version = '10';
+
+    case '10':
+        // console.log('Convert from 10 to 11');
+        design.system_controls.enable_auto_search = 1; // Default to auto search on
+        // migrated_design.version = '11'; // uncomment when there is a case below this line
 
     // case 'N':
         // console.log('Convert from N to N+1');
