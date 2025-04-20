@@ -386,7 +386,12 @@ export function migrate(design) {
         if (design.result.objective_value === null) {
             design.result.objective_value = 0.0;
         }
-        // migrated_design.version = '13'; // uncomment when there is a case below this line
+        migrated_design.version = '13';
+
+    case '13':
+        // console.log('Convert from 13 to 14');
+        design.system_controls.enable_auto_search = 1; // Default to auto search on
+        // migrated_design.version = '14'; // uncomment when there is a case below this line
 
     // case 'N':
         // console.log('Convert from N to N+1');
