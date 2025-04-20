@@ -57,7 +57,7 @@ export default function ActionSelectSize() {
   const toggle = () => {
     console.log('In ActionSelectSize.toggle');
     var result = [];
-    types.forEach((localName) => {
+    types.forEach((localType) => {
       var element = model_symbol_table.find((localElement) => localElement.name === localType);
       console.log('In ActionSelectSize.onSelect','element.name=',element.name,'element.value=',element.value);
       result.push({type: element.name, size: element.value, element: element})
