@@ -82,6 +82,10 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
     var selectedIndex = parseFloat(event.target.value);
     dispatch(changeSymbolValue(element.name, selectedIndex));
     logValue(element.name, selectedIndex, 'TableIndex');
+    console.log('In NameValueUnitsRowCalcInput.onKeyPressLocal','model_enable_auto_search=', model_enable_auto_search,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+    if (model_enable_auto_search && model_objective_value >= model_objmin) {
+      dispatch(search());
+    }
     if (typeof onSelect === "function") onSelect(event);
   }
 
