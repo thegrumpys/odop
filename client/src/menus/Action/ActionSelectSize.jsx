@@ -57,10 +57,10 @@ export default function ActionSelectSize() {
   const toggle = () => {
     console.log('In ActionSelectSize.toggle');
     var result = [];
-    names.forEach((localName) => {
+    types.forEach((localName) => {
       var element = model_symbol_table.find((localElement) => localElement.name === localType);
       console.log('In ActionSelectSize.onSelect','element.name=',element.name,'element.value=',element.value);
-      result.push({name: element.name, value: element.value, element: element})
+      result.push({type: element.name, size: element.value, element: element})
     });
     console.log('In ActionSelectSize.onSelect','result=',result);
     setInitialValues(result);
@@ -113,7 +113,7 @@ export default function ActionSelectSize() {
     dispatch(changeSymbolValue(type, size));
     logValue(type, size);
     initialValues.forEach((initialValue) => {
-      if (initialValue.name === name && initialValue.value !== value) {
+      if (initialValue.type === type && initialValue.size !== size) {
         valueChanged = true;
       }
     });
@@ -133,7 +133,7 @@ export default function ActionSelectSize() {
 
   return (
     <>
-      <NavDropdown.Item onClick={toggle} disabled={names.length === 0}>
+      <NavDropdown.Item onClick={toggle} disabled={types.length === 0}>
         Select Size&hellip;
       </NavDropdown.Item>
       {show && <Modal show={show} onHide={onCancel}>
