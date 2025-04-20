@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
-import { changeSymbolValue } from '../store/actions';
+import { changeSymbolValue, search } from '../store/actions';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 
 export default function NameValueUnitsRowCalcInput({ element, index, onChangeValid, onChangeInvalid, onChange, onSelect }) {
 //  console.log('NameValueUnitsRowCalcInput - Mounting...','element=',element,'index=',index);
+  const model_enable_auto_search = useSelector((state) => state.model.system_controls.enable_auto_search);
   const model_type = useSelector((state) => state.model.type);
   const model_show_units = useSelector((state) => state.model.system_controls.show_units);
+  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
+  const model_objective_value = useSelector((state) => state.model.result.objective_value);
+  const [value, setValue] = useState(false);
   const [table, setTable] = useState([]);
   const dispatch = useDispatch();
 
@@ -35,6 +39,35 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
   const onChangeInvalidLocal = (event) => {
 //    console.log('In NameValueUnitsRowCalcInput.onChangeInvalid','event.target.value=', event.target.value);
     if (typeof onChangeInvalid === "function") onChangeInvalid(event);
+  }
+
+  const onFocusLocal = (event) => {
+//    console.log('In NameValueUnitsRowCalcInput.onFocusLocal event.target.value=', event.target.value);
+    console.log('In NameValueUnitsRowCalcInput.onFocusLocal element.value=', element.value);
+    setValue(element.value);
+    if (typeof onFocus === "function") onFocus(event);
+  }
+
+  const onBlurLocal = (event) => {
+//    console.log('In NameValueUnitsRowCalcInput.onBlurLocal event.target.value=', event.target.value);
+    console.log('In NameValueUnitsRowCalcInput.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+    if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
+      dispatch(search());
+    }
+    if (typeof onBlur === "function") onBlur(event);
+  }
+
+  const onKeyPressLocal = (event) => {
+//    console.log('In NameValueUnitsRowCalcInput.onKeyPressLocal event.keyCode=', event.keyCode, 'event.which=', event.which);
+    var keyCode = event.keyCode || event.which;
+    if (keyCode === 13) { // Carriage return
+//      console.log('In NameValueUnitsRowCalcInput.onKeyPressLocal keyCode=', keyCode);
+      console.log('In NameValueUnitsRowCalcInput.onKeyPressLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
+      if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
+        dispatch(search());
+      }
+    }
+    if (typeof onKeyPress === "function") onKeyPress(event);
   }
 
   const onChangeLocal = (event) => {
@@ -70,7 +103,7 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
         <td className="align-middle" colSpan="2">
           <InputGroup>
             {element.format === undefined && typeof element.value === 'number' ?
-              <FormControlTypeNumber id={'nvurci_value_' + element.name} disabled={!element.input} icon_alerts={icon_alerts} className={className} value={element.value} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidLocal} onChangeInvalid={onChangeInvalidLocal} /> : ''}
+              <FormControlTypeNumber id={'nvurci_value_' + element.name} disabled={!element.input} icon_alerts={icon_alerts} className={className} value={element.value} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidLocal} onChangeInvalid={onChangeInvalidLocal} onFocus={onFocusLocal} onBlur={onBlurLocal} onKeyPress={onKeyPressLocal} /> : ''}
             {element.format === undefined && typeof element.value === 'string' ?
               <Form.Control id={'nvurci_value_' + element.name} type="text" disabled={!element.input} value={element.value} onChange={onChangeLocal} /> : ''}
             {element.format === 'table' &&
