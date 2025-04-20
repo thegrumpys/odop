@@ -82,10 +82,6 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
     var selectedIndex = parseFloat(event.target.value);
     dispatch(changeSymbolValue(element.name, selectedIndex));
     logValue(element.name, selectedIndex, 'TableIndex');
-    console.log('In NameValueUnitsRowCalcInput.onSelectLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== selectedIndex,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
-    if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
-      dispatch(search());
-    }
     if (typeof onSelect === "function") onSelect(event);
   }
 
@@ -112,7 +108,7 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
               <Form.Control id={'nvurci_value_' + element.name} type="text" disabled={!element.input} value={element.value} onChange={onChangeLocal} /> : ''}
             {element.format === 'table' &&
               (
-                <Form.Select id={'nvurci_value_' + element.name} disabled={!element.input} value={element.value} onChange={onSelectLocal} onFocus={onFocusLocal} onBlur={onBlurLocal} onKeyPress={onKeyPressLocal}>
+                <Form.Select id={'nvurci_value_' + element.name} disabled={!element.input} value={element.value} onChange={onSelectLocal} onFocus={onFocusLocal} onBlur={onBlurLocal}>
                   {table.map((value, index) =>
                     index > 0 ? <option key={index} value={index}>{value[0]}</option> : ''
                   )}

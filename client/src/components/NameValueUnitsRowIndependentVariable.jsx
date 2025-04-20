@@ -99,19 +99,6 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
     if (typeof onBlurFix === "function") onBlurFix(event);
   }
 
-  const onKeyPressFixLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onKeyPressFixLocal event.keyCode=', event.keyCode, 'event.which=', event.which);
-    var keyCode = event.keyCode || event.which;
-    if (keyCode === 13) { // Carriage return
-//      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressFixLocal keyCode=', keyCode);
-      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressFixLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
-      if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && model_objective_value >= model_objmin) {
-        dispatch(search());
-      }
-    }
-    if (typeof onKeyPressFix === "function") onKeyPressFix(event);
-  }
-
   var results = getAlertsByName(element.name);
   var className = results.className;
   var icon_alerts = results.alerts;
@@ -156,7 +143,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
         </td>
         <td className="align-middle text-center">
           <OverlayTrigger placement="top" overlay={<Tooltip>{value_fix_free_text}</Tooltip>}>
-            <Form.Check id={'nvuriv_checkbox_' + element.name} type="checkbox" aria-label="Checkbox for fixed value" checked={element.lmin & FIXED} onChange={element.lmin & FIXED ? onResetFixLocal : onSetFixLocal} onFocus={onFocusFixLocal} onBlur={onBlurFixLocal} onKeyPress={onKeyPressFixLocal} />
+            <Form.Check id={'nvuriv_checkbox_' + element.name} type="checkbox" aria-label="Checkbox for fixed value" checked={element.lmin & FIXED} onChange={element.lmin & FIXED ? onResetFixLocal : onSetFixLocal} onFocus={onFocusFixLocal} onBlur={onBlurFixLocal} />
           </OverlayTrigger>
         </td>
         <td id={'nvuriv_units_' + element.name} className={"text-nowrap align-middle small " + (model_show_units ? "" : "d-none")} colSpan="1">{element.units}</td>

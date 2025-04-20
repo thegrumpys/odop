@@ -28,7 +28,7 @@ import FeasibilityIndicator from '../../components/FeasibilityIndicator';
 import { toODOPPrecision } from '../../toODOPPrecision'
 import store from '../../store/store';
 
-export default function SymbolValueWireDia({ className, element, index, onChangeValid, onChangeInvalid, onFocus, onBlur, onKeyPress, onSetFix, onResetFix, onFocusFix, onBlurFix, onKeyPressFix }) {
+export default function SymbolValueWireDia({ className, element, index, onChangeValid, onChangeInvalid, onFocus, onBlur, onKeyPress, onSetFix, onResetFix, onFocusFix, onBlurFix }) {
 //  console.log('SymbolValueWireDia','Mounting...','element=',element,'index=',index);
   const model_type = useSelector((state) => state.model.type);
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
@@ -163,19 +163,6 @@ export default function SymbolValueWireDia({ className, element, index, onChange
       dispatch(search());
     }
     if (typeof onBlurFix === "function") onBlurFix(event);
-  }
-
-  const onKeyPressFixLocal = (event) => {
-//    console.log('In SymbolValueWireDia.onKeyPressFixLocal event.keyCode=', event.keyCode, 'event.which=', event.which);
-    var keyCode = event.keyCode || event.which;
-    if (keyCode === 13) { // Carriage return
-//      console.log('In SymbolValueWireDia.onKeyPressFixLocal keyCode=', keyCode);
-      console.log('In SymbolValueWireDia.onKeyPressFixLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
-      if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && model_objective_value >= model_objmin) {
-        dispatch(search());
-      }
-    }
-    if (typeof onKeyPressFix === "function") onKeyPressFix(event);
   }
 
   const onSearchRequest = (event) => {
@@ -579,13 +566,13 @@ export default function SymbolValueWireDia({ className, element, index, onChange
                         {(valueInput ?
                           <FormControlTypeNumber id={'svwd_' + element.name} icon_alerts={nvu_icon_alerts} className={nvu_value_class} step="any" value={element.value} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidLocal} onChangeInvalid={onChangeInvalidLocal} onFocus={onFocusLocal} onBlur={onBlurLocal} onKeyPress={onKeyPressLocal} />
                           :
-                          <Form.Select id={'svwd_' + element.name} disabled={!element.input} className={nvu_value_class} value={default_value === undefined ? element.value : default_value[0]} onChange={onSelectLocal} onFocus={onFocusLocal} onBlur={onBlurLocal} onKeyPress={onKeyPressLocal} >
+                          <Form.Select id={'svwd_' + element.name} disabled={!element.input} className={nvu_value_class} value={default_value === undefined ? element.value : default_value[0]} onChange={onSelectLocal} onFocus={onFocusLocal} onBlur={onBlurLocal} >
                             {sorted_wire_dia_table.map((value, index) => <option key={index} value={value[0]}>{value[1]}</option>)}
                           </Form.Select>
                         )}
                         <InputGroup.Text>
                           <OverlayTrigger placement="top" overlay={<Tooltip>{nvu_value_fix_free_text}</Tooltip>}>
-                            <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={element.lmin & FIXED} onChange={element.lmin & FIXED ? onResetFixLocal : onSetFixLocal} onFocus={onFocusFixLocal} onBlur={onBlurFixLocal} onKeyPress={onKeyPressFixLocal} />
+                            <Form.Check type="checkbox" aria-label="Checkbox for fixed value" checked={element.lmin & FIXED} onChange={element.lmin & FIXED ? onResetFixLocal : onSetFixLocal} onFocus={onFocusFixLocal} onBlur={onBlurFixLocal} />
                           </OverlayTrigger>
                         </InputGroup.Text>
                       </InputGroup>
