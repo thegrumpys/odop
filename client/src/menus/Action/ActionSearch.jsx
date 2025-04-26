@@ -57,7 +57,7 @@ export default function ActionSearch() {
 
   const doSearch = (type) => {
 //    console.log('ActionSearch.doSearch');
-    dispatch(search('Menu'));
+    dispatch(search('Menu '+(type === 'NOT FINITE' ? type : '')));
   }
 
   var display_search_button;

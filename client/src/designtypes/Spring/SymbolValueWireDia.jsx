@@ -210,7 +210,7 @@ export default function SymbolValueWireDia({ className, element, index, onChange
 
   const doSearch = (type) => {
 //    console.log('In SymbolValueWireDia.doSearch');
-    dispatch(search('Element ' + element.name));
+    dispatch(search('Element ' + element.name+' '+(type === 'NOT FINITE' ? type : '')));
   }
 
   const onSeekMinRequest = (event) => {

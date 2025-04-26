@@ -66,7 +66,7 @@ export default function ResultTable() {
 
   const doSearch = (type) => {
 //    console.log('In ResultTable.doSearch');
-    dispatch(search('Button'));
+    dispatch(search('Button '+(type === 'NOT FINITE' ? type : '')));
   }
 
   const onSeekRequest = (event) => {

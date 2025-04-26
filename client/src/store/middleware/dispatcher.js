@@ -34,6 +34,7 @@ import { invokeCheck } from './invokeCheck';
 import { resetCatalogSelection } from './resetCatalogSelection';
 import { changeSymbolValue, setSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
          restoreOutputSymbolConstraints, changeResultTerminationCondition, saveAutoSave } from '../actions';
+import { logUsage } from '../../logUsage';
 
 export const dispatcher = store => next => action => {
 //  console.log('start dispatcher before reducer','store=',store,'next=',next,'action=',action);
@@ -222,7 +223,7 @@ export const dispatcher = store => next => action => {
       invokeSearch(store, design.model.system_controls.objmin);
       design = store.getState();
       var new_objective_value = design.model.result.objective_value;
-      logUsage('event', 'ActionSearch', { event_label: (action.payload.context.length>0 ? action.payload.context  + ' ' : '') + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) + (type === 'NOT FINITE' ? ' '+type : '') });
+      logUsage('event', 'ActionSearch', { event_label: (action.payload.context.length>0 ? action.payload.context  + ' ' : '') + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });
     }
       break;
 

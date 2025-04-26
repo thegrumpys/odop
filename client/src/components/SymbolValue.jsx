@@ -93,7 +93,7 @@ export default function SymbolValue({ className, element, index }) {
 
   const doSearch = (type) => {
 //    console.log('In SymbolValue.doSearch');
-    dispatch(search('Element ' + element.name));
+    dispatch(search('Element ' + element.name+' '+(type === 'NOT FINITE' ? type : '')));
   }
 
   const onSeekMinRequest = (event) => {
