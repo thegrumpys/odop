@@ -51,7 +51,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
 //    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal event.target.value=', event.target.value);
     console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
-      dispatch(search());
+      dispatch(search('Auto'));
     }
     if (typeof onBlur === "function") onBlur(event);
   }
@@ -63,7 +63,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
 //      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal keyCode=', keyCode);
       console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
       if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
-        dispatch(search());
+        dispatch(search('Auto'));
       }
     }
     if (typeof onKeyPress === "function") onKeyPress(event);
@@ -94,7 +94,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
 //    console.log('In NameValueUnitsRowIndependentVariable.onBlurFixLocal event.target.value=', event.target.value);
     console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && model_objective_value >= model_objmin) {
-      dispatch(search());
+      dispatch(search('Auto'));
     }
     if (typeof onBlurFix === "function") onBlurFix(event);
   }

@@ -217,7 +217,12 @@ export const dispatcher = store => next => action => {
     case SEARCH: {
 //      console.log('in dispatcher SEARCH','state=',store.getState(),'action=',action);
       design = store.getState();
+      var old_objective_value = design.model.result.objective_value;
+      store.dispatch(saveAutoSave());
       invokeSearch(store, design.model.system_controls.objmin);
+      design = store.getState();
+      var new_objective_value = design.model.result.objective_value;
+      logUsage('event', 'ActionSearch', { event_label: (action.payload.context.length>0 ? action.payload.context  + ' ' : '') + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) + (type === 'NOT FINITE' ? ' '+type : '') });
     }
       break;
 

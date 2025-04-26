@@ -66,7 +66,7 @@ export default function ActionTrade() {
     var localVflag = [];
     var localLdir = [];
     dispatch(saveInputSymbolValues());
-    dispatch(search());
+    dispatch(search('Trade'));
     var design = store.getState();
     for (let i = 0; i < design.model.symbol_table.length; i++) {
       element = design.model.symbol_table[i];
@@ -365,7 +365,7 @@ export default function ActionTrade() {
     }
     design = store.getState();
     if (design.model.result.objective_value > design.model.system_controls.objmin) {
-      dispatch(search());
+      dispatch(search('Trade'));
     }
     design = store.getState();
     if (design.model.result.objective_value <= design.model.system_controls.objmin) {
@@ -393,7 +393,7 @@ export default function ActionTrade() {
         }
       }
       dispatch(restoreInputSymbolValues());
-      dispatch(search());
+      dispatch(search('Trade'));
       design = store.getState();
       if (design.model.result.objective_value <= design.model.system_controls.objmin) {
 // Feasible was found, go show Feasible Modal
@@ -459,7 +459,7 @@ export default function ActionTrade() {
 //                        console.log(element.name + ' MAX ' + value + ' ' + element.units);
         }
       }
-      dispatch(search());
+      dispatch(search('Trade'));
     }
     setSizeShow(!sizeShow);
     setEstablishShow(!establishShow);

@@ -117,7 +117,7 @@ export default function SymbolValueWireDia({ className, element, index, onChange
 //    console.log('In SymbolValueWireDia.onBlurLocal event.target.value=', event.target.value);
     console.log('In SymbolValueWireDia.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
-      dispatch(search());
+      dispatch(search('Auto'));
     }
     if (typeof onBlur === "function") onBlur(event);
   }
@@ -129,7 +129,7 @@ export default function SymbolValueWireDia({ className, element, index, onChange
 //      console.log('In SymbolValueWireDia.onKeyPressLocal keyCode=', keyCode);
       console.log('In SymbolValueWireDia.onKeyPressLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
       if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
-        dispatch(search());
+        dispatch(search('Auto'));
       }
     }
     if (typeof onKeyPress === "function") onKeyPress(event);
@@ -160,7 +160,7 @@ export default function SymbolValueWireDia({ className, element, index, onChange
 //    console.log('In SymbolValueWireDia.onBlurFixLocal event.target.value=', event.target.value);
     console.log('In SymbolValueWireDia.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && model_objective_value >= model_objmin) {
-      dispatch(search());
+      dispatch(search('Auto'));
     }
     if (typeof onBlurFix === "function") onBlurFix(event);
   }
@@ -210,12 +210,7 @@ export default function SymbolValueWireDia({ className, element, index, onChange
 
   const doSearch = (type) => {
 //    console.log('In SymbolValueWireDia.doSearch');
-    var old_objective_value = model_objective_value;
-    dispatch(saveAutoSave());
-    dispatch(search());
-    var design = store.getState();
-    var new_objective_value = design.model.result.objective_value;
-    logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' Element ' + element.name + ' ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });
+    dispatch(search('Element ' + element.name));
   }
 
   const onSeekMinRequest = (event) => {

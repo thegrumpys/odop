@@ -41,7 +41,7 @@ export default function NameValueUnitsRowDependentVariable({ element, index, onS
   //    console.log('In NameValueUnitsRowDependentVariable.onBlurFixLocal event.target.value=', event.target.value);
       console.log('In NameValueUnitsRowDependentVariable.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
       if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && model_objective_value >= model_objmin) {
-        dispatch(search());
+        dispatch(search('Auto'));
       }
       if (typeof onBlurFix === "function") onBlurFix(event);
     }
@@ -53,7 +53,7 @@ export default function NameValueUnitsRowDependentVariable({ element, index, onS
   //      console.log('In NameValueUnitsRowDependentVariable.onKeyPressFixLocal keyCode=', keyCode);
         console.log('In NameValueUnitsRowDependentVariable.onKeyPressFixLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
         if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && model_objective_value >= model_objmin) {
-          dispatch(search());
+          dispatch(search('Auto'));
         }
       }
       if (typeof onKeyPressFix === "function") onKeyPressFix(event);

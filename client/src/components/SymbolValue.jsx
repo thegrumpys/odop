@@ -93,12 +93,7 @@ export default function SymbolValue({ className, element, index }) {
 
   const doSearch = (type) => {
 //    console.log('In SymbolValue.doSearch');
-    var old_objective_value = model_objective_value;
-    dispatch(saveAutoSave());
-    dispatch(search());
-    var design = store.getState();
-    var new_objective_value = design.model.result.objective_value;
-    logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' Element ' + element.name + ' ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });
+    dispatch(search('Element ' + element.name));
   }
 
   const onSeekMinRequest = (event) => {

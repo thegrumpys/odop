@@ -120,7 +120,7 @@ export default function ActionSelectSize() {
     });
     console.log('In ActionSelectSize.onSelect','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',valueChanged,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     if (model_enable_auto_search && valueChanged && model_objective_value >= model_objmin) {
-      dispatch(search());
+      dispatch(search('Auto'));
     }
     if (auto_fixed) {
       dispatch(changeResultTerminationCondition('The value of ' + type + ' has been automatically fixed.'));

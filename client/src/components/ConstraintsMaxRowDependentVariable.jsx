@@ -46,7 +46,7 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
 //    console.log('In ConstraintsMaxRowDependentVariable.onBlurFlagMaxConstrained','event.target.value=', event.target.value);
     console.log('In ConstraintsMaxRowDependentVariable.onBlurFlagMaxConstrained','model_enable_auto_search=', model_enable_auto_search,'constrainedFlagChanged=',constrainedFlag !== (element.lmax & CONSTRAINED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     if (model_enable_auto_search && constrainedFlag !== (element.lmax & CONSTRAINED) && model_objective_value >= model_objmin) {
-      dispatch(search());
+      dispatch(search('Auto'));
     }
     if (typeof onBlurFlag === "function") onBlurFlag(event);
   }
@@ -58,7 +58,7 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
 //      console.log('In ConstraintsMaxRowDependentVariable.onKeyPressFlagMaxConstrained keyCode=', keyCode);
       console.log('In ConstraintsMaxRowDependentVariable.onKeyPressFlagMaxConstrained','model_enable_auto_search=', model_enable_auto_search,'constrainedFlagChanged=',constrainedFlag !== (element.lmax & CONSTRAINED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
       if (model_enable_auto_search && constrainedFlag !== (element.lmax & CONSTRAINED) && model_objective_value >= model_objmin) {
-        dispatch(search());
+        dispatch(search('Auto'));
       }
     }
     if (typeof onKeyPressFlag === "function") onKeyPressFlag(event);
@@ -93,7 +93,7 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
 //    console.log('In ConstraintsMaxRowDependentVariable.onBlurMaxConstraint event.target.value=', event.target.value);
     console.log('In ConstraintsMaxRowDependentVariable.onBlurMaxConstraint','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.cmax,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     if (model_enable_auto_search && value !== element.cmax && model_objective_value >= model_objmin) {
-      dispatch(search());
+      dispatch(search('Auto'));
     }
     if (typeof onBlur === "function") onBlur(event);
   }
@@ -105,7 +105,7 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
 //      console.log('In ConstraintsMaxRowDependentVariable.onKeyPressMaxConstraint keyCode=', keyCode);
       console.log('In ConstraintsMaxRowDependentVariable.onKeyPressMaxConstraint','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.cmax,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
       if (model_enable_auto_search && value !== element.cmax && model_objective_value >= model_objmin) {
-        dispatch(search());
+        dispatch(search('Auto'));
       }
     }
     if (typeof onKeyPress === "function") onKeyPress(event);

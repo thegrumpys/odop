@@ -46,7 +46,7 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
 //    console.log('In ConstraintsMinRowIndependentVariable.onBlurFlagMinConstrained','event.target.value=', event.target.value);
     console.log('In ConstraintsMinRowIndependentVariable.onBlurFlagMinConstrained','model_enable_auto_search=', model_enable_auto_search,'constrainedFlagChanged=',constrainedFlag !== (element.lmin & CONSTRAINED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     if (model_enable_auto_search && constrainedFlag !== (element.lmin & CONSTRAINED) && model_objective_value >= model_objmin) {
-      dispatch(search());
+      dispatch(search('Auto'));
     }
     if (typeof onBlurFlag === "function") onBlurFlag(event);
   }
@@ -58,7 +58,7 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
 //      console.log('In ConstraintsMinRowIndependentVariable.onKeyPressFlagMinConstrained keyCode=', keyCode);
       console.log('In ConstraintsMinRowIndependentVariable.onKeyPressFlagMinConstrained','model_enable_auto_search=', model_enable_auto_search,'constrainedFlagChanged=',constrainedFlag !== (element.lmin & CONSTRAINED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
       if (model_enable_auto_search && constrainedFlag !== (element.lmin & CONSTRAINED) && model_objective_value >= model_objmin) {
-        dispatch(search());
+        dispatch(search('Auto'));
       }
     }
     if (typeof onKeyPressFlag === "function") onKeyPressFlag(event);
@@ -88,7 +88,7 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
 //    console.log('In ConstraintsMinRowIndependentVariable.onBlurMinConstraint event.target.value=', event.target.value);
     console.log('In ConstraintsMinRowIndependentVariable.onBlurMinConstraint','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.cmin,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     if (model_enable_auto_search && value !== element.cmin && model_objective_value >= model_objmin) {
-      dispatch(search());
+      dispatch(search('Auto'));
     }
     if (typeof onBlur === "function") onBlur(event);
   }
@@ -100,7 +100,7 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
 //      console.log('In ConstraintsMinRowIndependentVariable.onKeyPressMinConstraint keyCode=', keyCode);
       console.log('In ConstraintsMinRowIndependentVariable.onKeyPressMinConstraint','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.cmin,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
       if (model_enable_auto_search && value !== element.cmin && model_objective_value >= model_objmin) {
-        dispatch(search());
+        dispatch(search('Auto'));
       }
     }
     if (typeof onKeyPress === "function") onKeyPress(event);

@@ -66,12 +66,7 @@ export default function ResultTable() {
 
   const doSearch = (type) => {
 //    console.log('In ResultTable.doSearch');
-    var old_objective_value = model_objective_value;
-    dispatch(saveAutoSave());
-    dispatch(search());
-    var design = store.getState();
-    var new_objective_value = design.model.result.objective_value;
-    logUsage('event', 'ActionSearch', { event_label: 'Type ' + type + ' Button ' + old_objective_value.toPrecision(4) + ' --> ' + new_objective_value.toPrecision(4) });
+    dispatch(search('Button'));
   }
 
   const onSeekRequest = (event) => {

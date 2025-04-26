@@ -52,7 +52,7 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
 //    console.log('In NameValueUnitsRowCalcInput.onBlurLocal event.target.value=', event.target.value);
     console.log('In NameValueUnitsRowCalcInput.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
     if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
-      dispatch(search());
+      dispatch(search('Auto'));
     }
     if (typeof onBlur === "function") onBlur(event);
   }
@@ -64,7 +64,7 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
 //      console.log('In NameValueUnitsRowCalcInput.onKeyPressLocal keyCode=', keyCode);
       console.log('In NameValueUnitsRowCalcInput.onKeyPressLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
       if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
-        dispatch(search());
+        dispatch(search('Auto'));
       }
     }
     if (typeof onKeyPress === "function") onKeyPress(event);

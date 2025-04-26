@@ -551,9 +551,12 @@ export function changeLabelsValue(labels) {
   }
 }
 
-export function search() {
+export function search(context = '') {
   return {
-    type: SEARCH
+    type: SEARCH,
+    payload: {
+      context
+    }
   }
 }
 
