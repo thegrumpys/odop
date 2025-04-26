@@ -33,7 +33,7 @@ import { updateObjectiveValue } from './updateObjectiveValue';
 import { invokeCheck } from './invokeCheck';
 import { resetCatalogSelection } from './resetCatalogSelection';
 import { changeSymbolValue, setSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints, 
-         restoreOutputSymbolConstraints, changeResultTerminationCondition } from '../actions';
+         restoreOutputSymbolConstraints, changeResultTerminationCondition, saveAutoSave } from '../actions';
 
 export const dispatcher = store => next => action => {
 //  console.log('start dispatcher before reducer','store=',store,'next=',next,'action=',action);
