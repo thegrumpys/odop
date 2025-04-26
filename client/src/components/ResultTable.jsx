@@ -34,7 +34,7 @@ export default function ResultTable() {
       if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
         inverted_constraint = true;
         displayMessage((element.name + ' constraints are inconsistent. Help button provides more information.'), 'danger', 'Errors', '/docs/Help/alerts.html#Constraint_Inconsistency');
-        return;
+        return; // return from forEach
       }
     });
     if (inverted_constraint) {
@@ -85,7 +85,7 @@ export default function ResultTable() {
       if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
         inverted_constraint = true;
         displayMessage((element.name + ' constraints are inconsistent. Help button provides more information.'), 'danger', 'Errors', '/docs/Help/alerts.html#Constraint_Inconsistency');
-        return;
+        return; // return from forEach
       }
     });
     if (inverted_constraint) {

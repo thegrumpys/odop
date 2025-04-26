@@ -1,4 +1,4 @@
-import { FIXED } from '../actionTypes';
+import { CONSTRAINED, FIXED } from '../actionTypes';
 import { inject, changeInputSymbolValues, changeResultTerminationCondition, changeResultSearchCompleted } from '../actions';
 import { patsh } from './patsh';
 import { shadow_store } from '../store';
@@ -23,6 +23,32 @@ export function search(store, objmin, merit) {
                     pc.push(element.value);
                 }
             }
+    }
+
+    var obj = store_state.model.result.objective_value;
+    if (pc.length === 0) {
+      store.dispatch(changeResultTerminationCondition('Cannot Search because there are no free independent variables. See "No free independent variables" Help button in Alerts for more information.'));
+//    console.log('Exiting search p=',p,'ncode=',ncode,'obj=',obj);
+      return obj;
+    }
+    var inverted_constraint_message = '';
+    store_state.model.symbol_table.forEach((element) => { // For each Symbol Table "equationset" entry
+      if (element.type !== undefined && element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
+        inverted_constraint_message += element.name+', ';
+        return; // return from forEach
+      }
+    });
+    if (inverted_constraint_message.length > 0) {
+      inverted_constraint_message = inverted_constraint_message.substring(0, inverted_constraint_message.length-2);
+      inverted_constraint_message += ' constraints are inconsistent. See "INVERTED CONSTRAINT RANGE" Help button in Alerts for more information.';
+      store.dispatch(changeResultTerminationCondition(inverted_constraint_message));
+      var obj = store_state.model.result.objective_value;
+//    console.log('Exiting search p=',p,'ncode=',ncode,'obj=',obj);
+      return obj;
+    }
+    if (!Number.isFinite(obj)) {
+      store.dispatch(changeResultTerminationCondition('This design has numeric issues. Some design variable values are causing the Objective Value to be infinite. See Help "Objective Value is Infinity" button in Alerts for more information.'));
+      return obj;
     }
 
     // Do the pattern search
