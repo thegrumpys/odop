@@ -63,7 +63,7 @@ export default function ActionSelectCatalog() {
     setName(localName);
     setEntries(localEntries);
     setEntry(localEntry);
-    logUsage('event', 'ActionSelectCatalog', { event_label: localName + ' ' + (localEntry !== undefined ? localEntry.catalog_number : 'none') + ' update' });
+    logUsage('event', 'ActionSelectCatalog', { event_label: 'load name:' + localName + ' number:' + (localEntry !== undefined ? localEntry.catalog_number : 'none')});
   }
 
   const toggle = () => {
@@ -86,21 +86,21 @@ export default function ActionSelectCatalog() {
     setName(localName);
     setEntries(localEntries);
     setEntry(localEntry);
-    logUsage('event', 'ActionSelectCatalog', { event_label: localName + ' ' + (localEntry !== undefined ? localEntry.catalog_number : 'none') + ' catalog_name' });
+    logUsage('event', 'ActionSelectCatalog', { event_label: 'change name:' + localName + ' number:' + (localEntry !== undefined ? localEntry.catalog_number : 'none')});
   }
 
   const onSelectCatalogEntry = (event) => {
 //    console.log('In ActionSelectCatalog.onSelectCatalogEntry event.target.value=',event.target.value);
     var entry = parseFloat(event.target.value);
     setEntry(entries[entry]);
-    logUsage('event', 'ActionSelectCatalog', { event_label: name + ' ' + entries[entry].catalog_number + ' catalog_number' });
+    logUsage('event', 'ActionSelectCatalog', { event_label: 'name:' + name + ' change number:' + entries[entry].catalog_number});
   }
 
   const onSelect = () => {
 //    console.log('In ActionSelectCatalog.onSelect');
     setShow(!show);
     // Do select catalog entry
-    logUsage('event', 'ActionSelectCatalog', { event_label: name + ' ' + entry.catalog_number + '  selected' });
+    logUsage('event', 'ActionSelectCatalog', { event_label: 'select name:' + name + ' number:' + entry.catalog_number});
     dispatch(saveAutoSave());
 //    console.log('In ActionSelectCatalog.onSelect entries=',entries);
     entry.catalog_items.forEach((item) => {
