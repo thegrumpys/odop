@@ -184,7 +184,7 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
             <Modal show={show} size="lg" onHide={onCancel}>
               <Modal.Header closeButton>
                 <Modal.Title>
-                  Functionally Determined Constraint Level (FDCL) - Set {element.name} Max Constraint
+                  Functionally Determined Constraint Level (FDCL)
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
@@ -192,6 +192,7 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
                   <tbody>
                     <tr>
                       <td colSpan="2">
+                      <b>{(element.lmax & FDCL ? 'FDCL:' : 'Non-FDCL:')} {element.name} MAX is currently set to the value of {element.lmax & FDCL ? ('the ' + element.cmaxchoices[element.cmaxchoice] + ' variable') : toODOPPrecision(element.cmax)}.</b><br/><br/>
                         Select constraint variable or enter constraint value.
                       </td>
                     </tr>

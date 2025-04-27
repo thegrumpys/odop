@@ -242,7 +242,7 @@ export const checks = (store) => {
         store.dispatch(addAlert({
           element: element,
           name: element.name + ' MIN',
-          message: element.lmin & FDCL ? ('FDCL: ' + element.name + ' MIN set to ' + element.cminchoices[element.cminchoice]) : ('Non-FDCL: ' + element.name + ' MIN set to ' + element.cmin),
+          message: (element.lmin & FDCL ? 'FDCL: ' : 'Non-FDCL: ') + element.name + ' MIN is currently set to the value of ' + (element.lmin & FDCL ? ('the ' + element.cminchoices[element.cminchoice] + ' variable') : toODOPPrecision(element.cmin)),
           severity: INFO,
           help_url: '[Help](/docs/Help/alerts.html#FDCL)'
         }));
@@ -253,7 +253,7 @@ export const checks = (store) => {
         store.dispatch(addAlert({
           element: element,
           name: element.name + ' MAX',
-          message: element.lmax & FDCL ? ('FDCL: ' + element.name + ' MAX set to ' + element.cmaxchoices[element.cmaxchoice]) : ('Non-FDCL: ' + element.name + ' MAX set to ' + element.cmax),
+          message: (element.lmax & FDCL ? 'FDCL: ' : 'Non-FDCL: ') + element.name + ' MAX is currently set to the value of ' + (element.lmax & FDCL ? ('the ' + element.cmaxchoices[element.cmaxchoice] + ' variable') : toODOPPrecision(element.cmax)),
           severity: INFO,
           help_url: '[Help](/docs/Help/alerts.html#FDCL)'
         }));

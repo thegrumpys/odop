@@ -150,6 +150,12 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
     }
   }
 
+  const  onFDCLModalContextHelpButton = (event) => {
+//        console.log('In ActionSeek.onSeekContextHelpButton','event=',event);
+    window.open('/docs/Help/terminology.html#fdcl', '_blank');
+  }
+
+
   const onCancel = (event) => {
 //    console.log('In ConstraintsMinRowIndependentVariable.onCancel', 'event.target.value=', event.target.value);
     setShow(!show);
@@ -180,7 +186,7 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
             <Modal show={show} size="lg" onHide={onCancel}>
               <Modal.Header closeButton>
                 <Modal.Title>
-                  Functionally Determined Constraint Level (FDCL) - Set {element.name} Min Constraint
+                  Functionally Determined Constraint Level (FDCL)
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
@@ -188,7 +194,8 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
                   <tbody>
                     <tr>
                       <td colSpan="2">
-                        Select constraint variable or enter constraint value.
+                        <b>{(element.lmin & FDCL ? 'FDCL:' : 'Non-FDCL:')} {element.name} MIN is currently set to the value of {element.lmin & FDCL ? ('the ' + element.cminchoices[element.cminchoice] + ' variable') : toODOPPrecision(element.cmin)}.</b><br/><br/>
+                        Select variable or enter value.
                       </td>
                     </tr>
                     <tr>
@@ -218,6 +225,7 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
                 </Table>
               </Modal.Body>
               <Modal.Footer>
+                <Button key={index} variant="outline-info" onClick={onFDCLModalContextHelpButton}>Help</Button>
                 <Button variant="secondary" onClick={onCancel}>Cancel</Button>
               </Modal.Footer>
             </Modal>}

@@ -184,7 +184,7 @@ export default function ConstraintsMinRowDependentVariable({ element, index, onC
             <Modal show={show} size="lg" onHide={onCancel}>
               <Modal.Header closeButton>
                 <Modal.Title>
-                  Functionally Determined Constraint Level (FDCL) - Set {element.name} Min Constraint
+                  Functionally Determined Constraint Level (FDCL)
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
@@ -192,6 +192,7 @@ export default function ConstraintsMinRowDependentVariable({ element, index, onC
                   <tbody>
                     <tr>
                       <td colSpan="2">
+                        <b>{(element.lmin & FDCL ? 'FDCL:' : 'Non-FDCL:')} {element.name} MIN is currently set to the value of {element.lmin & FDCL ? ('the ' + element.cminchoices[element.cminchoice] + ' variable') : toODOPPrecision(element.cmin)}.</b><br/><br/>
                         Select constraint variable or enter constraint value.
                       </td>
                     </tr>
