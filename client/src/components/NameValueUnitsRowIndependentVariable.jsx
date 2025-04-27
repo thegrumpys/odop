@@ -6,6 +6,7 @@ import { changeSymbolValue, fixSymbolValue, freeSymbolValue, changeResultTermina
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
+import store from "../store/store";
 
 export default function NameValueUnitsRowIndependentVariable({ element, index, onChangeValid, onChangeInvalid, onFocus, onBlur, onKeyPress, onSetFix, onResetFix, onFocusFix, onBlurFix, onKeyPressFix }) {
   const model_enable_auto_fix = useSelector((state) => state.model.system_controls.enable_auto_fix);
@@ -49,8 +50,9 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
 
   const onBlurLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal event.target.value=', event.target.value);
-    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
-    if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
+    var state = store.getState();
+    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+    if (model_enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin) {
       dispatch(search('Auto'));
     }
     if (typeof onBlur === "function") onBlur(event);
@@ -61,8 +63,9 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
     var keyCode = event.keyCode || event.which;
     if (keyCode === 13) { // Carriage return
 //      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal keyCode=', keyCode);
-      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
-      if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
+      var state = store.getState();
+      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+      if (model_enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin) {
         dispatch(search('Auto'));
       }
     }
@@ -92,8 +95,9 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
 
   const onBlurFixLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onBlurFixLocal event.target.value=', event.target.value);
-    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
-    if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && model_objective_value >= model_objmin) {
+    var state = store.getState();
+    console.log('In NameValueUnitsRowIndependentVariable.onBlurFixLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+    if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && state.model.result.objective_value >= state.model.system_controls.objmin) {
       dispatch(search('Auto'));
     }
     if (typeof onBlurFix === "function") onBlurFix(event);

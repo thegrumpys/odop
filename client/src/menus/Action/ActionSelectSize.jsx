@@ -5,6 +5,7 @@ import { changeSymbolValue, fixSymbolValue, saveAutoSave, changeResultTerminatio
 import { logUsage } from '../../logUsage';
 import { FIXED } from '../../store/actionTypes';
 import { logValue } from '../../logUsage';
+import store from "../../store/store";
 
 export default function ActionSelectSize() {
   //  console.log('ActionSelectSize - Mounting...');
@@ -112,18 +113,19 @@ export default function ActionSelectSize() {
     }
     dispatch(changeSymbolValue(type, size));
     logValue(type, size);
+    if (auto_fixed) {
+      dispatch(changeResultTerminationCondition('The value of ' + type + ' has been automatically fixed.'));
+    }
     var valueChanged = false;
     initialValues.forEach((initialValue) => {
       if (initialValue.type === type && initialValue.size !== size) {
         valueChanged = true;
       }
     });
-    console.log('In ActionSelectSize.onSelect','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',valueChanged,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
-    if (model_enable_auto_search && valueChanged && model_objective_value >= model_objmin) {
+    var state = store.getState();
+    console.log('In ActionSelectSize.onSelect','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',valueChanged,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+    if (model_enable_auto_search && valueChanged && state.model.result.objective_value >= state.model.system_controls.objmin) {
       dispatch(search('Auto'));
-    }
-    if (auto_fixed) {
-      dispatch(changeResultTerminationCondition('The value of ' + type + ' has been automatically fixed.'));
     }
   }
 

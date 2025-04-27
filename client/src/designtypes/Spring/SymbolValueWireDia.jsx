@@ -115,8 +115,9 @@ export default function SymbolValueWireDia({ className, element, index, onChange
 
   const onBlurLocal = (event) => {
 //    console.log('In SymbolValueWireDia.onBlurLocal event.target.value=', event.target.value);
-    console.log('In SymbolValueWireDia.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
-    if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
+    var state = store.getState();
+    console.log('In SymbolValueWireDia.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+    if (model_enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin) {
       dispatch(search('Auto'));
     }
     if (typeof onBlur === "function") onBlur(event);
@@ -127,8 +128,9 @@ export default function SymbolValueWireDia({ className, element, index, onChange
     var keyCode = event.keyCode || event.which;
     if (keyCode === 13) { // Carriage return
 //      console.log('In SymbolValueWireDia.onKeyPressLocal keyCode=', keyCode);
-      console.log('In SymbolValueWireDia.onKeyPressLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
-      if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
+      var state = store.getState();
+      console.log('In SymbolValueWireDia.onKeyPressLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+      if (model_enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin) {
         dispatch(search('Auto'));
       }
     }
@@ -158,8 +160,9 @@ export default function SymbolValueWireDia({ className, element, index, onChange
 
   const onBlurFixLocal = (event) => {
 //    console.log('In SymbolValueWireDia.onBlurFixLocal event.target.value=', event.target.value);
-    console.log('In SymbolValueWireDia.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
-    if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && model_objective_value >= model_objmin) {
+    var state = store.getState();
+    console.log('In SymbolValueWireDia.onBlurFixLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+    if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && state.model.result.objective_value >= state.model.system_controls.objmin) {
       dispatch(search('Auto'));
     }
     if (typeof onBlurFix === "function") onBlurFix(event);

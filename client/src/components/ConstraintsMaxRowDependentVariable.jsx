@@ -7,6 +7,7 @@ import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
 import { toODOPPrecision } from '../toODOPPrecision';
+import store from "../store/store";
 
 export default function ConstraintsMaxRowDependentVariable({ element, index, onChangeValid, onChangeInvalid, onFocus, onBlur, onKeyPress, onSetFlag, onResetFlag, onFocusFlag, onBlurFlag, onKeyPressFlag }) {
 //  console.log('ConstraintsMaxRowDependentVariable - Mounting...','element=',element,'index=',index);
@@ -44,8 +45,9 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
 
   const onBlurFlagMaxConstrained = (event) => {
 //    console.log('In ConstraintsMaxRowDependentVariable.onBlurFlagMaxConstrained','event.target.value=', event.target.value);
-    console.log('In ConstraintsMaxRowDependentVariable.onBlurFlagMaxConstrained','model_enable_auto_search=', model_enable_auto_search,'constrainedFlagChanged=',constrainedFlag !== (element.lmax & CONSTRAINED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
-    if (model_enable_auto_search && constrainedFlag !== (element.lmax & CONSTRAINED) && model_objective_value >= model_objmin) {
+    var state = store.getState();
+    console.log('In ConstraintsMaxRowDependentVariable.onBlurFlagMaxConstrained','model_enable_auto_search=', model_enable_auto_search,'constrainedFlagChanged=',constrainedFlag !== (element.lmax & CONSTRAINED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+    if (model_enable_auto_search && constrainedFlag !== (element.lmax & CONSTRAINED) && state.model.result.objective_value >= state.model.system_controls.objmin) {
       dispatch(search('Auto'));
     }
     if (typeof onBlurFlag === "function") onBlurFlag(event);
@@ -56,8 +58,9 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
     var keyCode = event.keyCode || event.which;
     if (keyCode === 13) { // Carriage return
 //      console.log('In ConstraintsMaxRowDependentVariable.onKeyPressFlagMaxConstrained keyCode=', keyCode);
-      console.log('In ConstraintsMaxRowDependentVariable.onKeyPressFlagMaxConstrained','model_enable_auto_search=', model_enable_auto_search,'constrainedFlagChanged=',constrainedFlag !== (element.lmax & CONSTRAINED),'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
-      if (model_enable_auto_search && constrainedFlag !== (element.lmax & CONSTRAINED) && model_objective_value >= model_objmin) {
+      var state = store.getState();
+      console.log('In ConstraintsMaxRowDependentVariable.onKeyPressFlagMaxConstrained','model_enable_auto_search=', model_enable_auto_search,'constrainedFlagChanged=',constrainedFlag !== (element.lmax & CONSTRAINED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+      if (model_enable_auto_search && constrainedFlag !== (element.lmax & CONSTRAINED) && state.model.result.objective_value >= state.model.system_controls.objmin) {
         dispatch(search('Auto'));
       }
     }
@@ -91,8 +94,9 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
 
   const onBlurMaxConstraint = (event) => {
 //    console.log('In ConstraintsMaxRowDependentVariable.onBlurMaxConstraint event.target.value=', event.target.value);
-    console.log('In ConstraintsMaxRowDependentVariable.onBlurMaxConstraint','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.cmax,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
-    if (model_enable_auto_search && value !== element.cmax && model_objective_value >= model_objmin) {
+    var state = store.getState();
+    console.log('In ConstraintsMaxRowDependentVariable.onBlurMaxConstraint','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.cmax,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+    if (model_enable_auto_search && value !== element.cmax && state.model.result.objective_value >= state.model.system_controls.objmin) {
       dispatch(search('Auto'));
     }
     if (typeof onBlur === "function") onBlur(event);
@@ -103,8 +107,9 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
     var keyCode = event.keyCode || event.which;
     if (keyCode === 13) { // Carriage return
 //      console.log('In ConstraintsMaxRowDependentVariable.onKeyPressMaxConstraint keyCode=', keyCode);
-      console.log('In ConstraintsMaxRowDependentVariable.onKeyPressMaxConstraint','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.cmax,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
-      if (model_enable_auto_search && value !== element.cmax && model_objective_value >= model_objmin) {
+      var state = store.getState();
+      console.log('In ConstraintsMaxRowDependentVariable.onKeyPressMaxConstraint','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.cmax,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+      if (model_enable_auto_search && value !== element.cmax && state.model.result.objective_value >= state.model.system_controls.objmin) {
         dispatch(search('Auto'));
       }
     }
@@ -135,7 +140,6 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
 
   const onEnterButton = (event) => {
 //    console.log('In ConstraintsMaxRowDependentVariable.onEnterButton', 'event.target.value=', event.target.value);
-    setShow(!show);
     var value = parseFloat(valueString);
     if (element.lmax & FIXED) {
       dispatch(resetSymbolFlag(element.name, MIN, FDCL));
@@ -143,15 +147,26 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
     }
     dispatch(resetSymbolFlag(element.name, MAX, FDCL));
     dispatch(changeSymbolConstraint(element.name, MAX, value));
+    var state = store.getState();
+    console.log('In ConstraintsMaxRowDependentVariable.onEnterButton','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.cmax,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+    if (model_enable_auto_search && value !== element.cmax && state.model.result.objective_value >= state.model.system_controls.objmin) {
+      dispatch(search('Auto'));
+    }
+    setShow(!show);
   }
 
   const onVariableButton = (event, source_name) => {
 //    console.log('In ConstraintsMaxRowDependentVariable.onVariableButton', 'event.target.value=', event.target.value, 'source_name=', source_name);
-    setShow(!show);
     if (element.lmax & FIXED) {
       dispatch(setSymbolFlag(element.name, MIN, FDCL, source_name));
     }
     dispatch(setSymbolFlag(element.name, MAX, FDCL, source_name));
+    var state = store.getState();
+    console.log('In ConstraintsMaxRowDependentVariable.onVariableButton','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.cmax,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+    if (model_enable_auto_search && value !== element.cmax && state.model.result.objective_value >= state.model.system_controls.objmin) {
+      dispatch(search('Auto'));
+    }
+    setShow(!show);
   }
 
   const onCancel = (event) => {

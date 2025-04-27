@@ -5,6 +5,7 @@ import { changeSymbolValue, search } from '../store/actions';
 import { logValue } from '../logUsage';
 import FormControlTypeNumber from './FormControlTypeNumber';
 import { getAlertsByName } from './Alerts';
+import store from "../store/store";
 
 export default function NameValueUnitsRowCalcInput({ element, index, onChangeValid, onChangeInvalid, onChange, onSelect }) {
 //  console.log('NameValueUnitsRowCalcInput - Mounting...','element=',element,'index=',index);
@@ -50,8 +51,9 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
 
   const onBlurLocal = (event) => {
 //    console.log('In NameValueUnitsRowCalcInput.onBlurLocal event.target.value=', event.target.value);
-    console.log('In NameValueUnitsRowCalcInput.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
-    if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
+    var state = store.getState();
+    console.log('In NameValueUnitsRowCalcInput.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+    if (model_enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin) {
       dispatch(search('Auto'));
     }
     if (typeof onBlur === "function") onBlur(event);
@@ -62,8 +64,9 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
     var keyCode = event.keyCode || event.which;
     if (keyCode === 13) { // Carriage return
 //      console.log('In NameValueUnitsRowCalcInput.onKeyPressLocal keyCode=', keyCode);
-      console.log('In NameValueUnitsRowCalcInput.onKeyPressLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'model_objective_value >= model_objmin=',model_objective_value >= model_objmin);
-      if (model_enable_auto_search && value !== element.value && model_objective_value >= model_objmin) {
+      var state = store.getState();
+      console.log('In NameValueUnitsRowCalcInput.onKeyPressLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+      if (model_enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin) {
         dispatch(search('Auto'));
       }
     }
