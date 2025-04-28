@@ -12,8 +12,6 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   const model_enable_auto_fix = useSelector((state) => state.model.system_controls.enable_auto_fix);
   const model_enable_auto_search = useSelector((state) => state.model.system_controls.enable_auto_search);
   const model_show_units = useSelector((state) => state.model.system_controls.show_units);
-  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
-  const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const [value, setValue] = useState(false);
   const [fixFreeFlag, setFixFreeFlag] = useState(0);
   const dispatch = useDispatch();

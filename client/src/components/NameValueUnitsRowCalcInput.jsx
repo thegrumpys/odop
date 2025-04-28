@@ -12,8 +12,6 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
   const model_enable_auto_search = useSelector((state) => state.model.system_controls.enable_auto_search);
   const model_type = useSelector((state) => state.model.type);
   const model_show_units = useSelector((state) => state.model.system_controls.show_units);
-  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
-  const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const [value, setValue] = useState(false);
   const [table, setTable] = useState([]);
   const dispatch = useDispatch();

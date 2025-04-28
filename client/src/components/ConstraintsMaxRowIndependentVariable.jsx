@@ -18,8 +18,6 @@ export default function ConstraintsMaxRowIndependentVariable({ element, index, o
   const [constrainedFlag, setConstrainedFlag] = useState(0);
   const model_show_violations = useSelector((state) => state.model.system_controls.show_violations);
   const model_enable_auto_search = useSelector((state) => state.model.system_controls.enable_auto_search);
-  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
-  const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const dispatch = useDispatch();
 
   const onSetFlagMaxConstrained = (event) => {
