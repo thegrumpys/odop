@@ -170,7 +170,7 @@ export default function AlertsAccordion() {
                 <Tooltip className="tooltip-lg">
                   <p>When checked, a Search is automatically triggered when the current design is not feasible
                      and the cursor moves away from a changed value.
-                     For more detail, enter "AutoSearch" in Help lookup.</p>
+                     Enter <i>AutoSearch</i> in Help lookup (above) for more detail.</p>
                   <p>When unchecked, the Search feature executes only when a Search (solve) button is pushed or the
                      Action : Search (solve) menu entry is invoked.</p>
                   <p>The behavior is the same as the File : Preferences enable_auto_search value.</p>

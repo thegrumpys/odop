@@ -1,6 +1,6 @@
 # Auto Fix, Auto Search
 
-This topic covers the ODOP Auto Fix and Auto Search features.
+This topic covers the ODOP Auto Fix (AutoFix, Auto-Fix) and Auto Search (AutoSearch, Auto-Search) features.
 
 ### On this page:  
  - [Auto Fix](autoFixAutoSearch.html#autoFix)  
@@ -19,9 +19,11 @@ It is enabled by default.
 Auto Fix applies only to future changes.
 It does not affect any existing variables in Fixed status.
 
-The Auto Fix feature may be enabled / disabled via 
-the checkbox to the right of the Alerts feature on a main page (Advanced View or Calculator View) 
-or via the preference value "enable_auto_fix" in File : Preferences. 
+Auto Fix may be enabled or disabled by: 
+ -  a check box on the main pages (Advanced and Calculator Views) to the right of the Alerts feature.   
+ **or** 
+ - the preference value "enable_auto_fix", accessed through the **File : Preferences...** menu. 
+In order to disable Auto Fix, set the value of "enable_auto_fix" to 0. 
 
 The Auto Fix feature is helpful in that it eliminates the surprise experienced by new users 
 when Search modifies a value that they thought they had established. 
@@ -35,21 +37,41 @@ See Also:
  - [Terminology Fix & Free](/docs/Help/terminology.html#fix)  
  - [Design Situations](/docs/Help/designSituations.html)  
 
-
 ___
 
 <a id="autoSearch"></a>  
 ___
 
 ## Auto Search Feature
+The Auto Search feature automatically triggers a [Search](/docs/Help/terminology.html#search) operation after user input.
+It is enabled by default. 
 
-When checked, a Search is automatically triggered when the current design is not feasible and the cursor moves away from a changed value.
-For more detail, enter "AutoSearch" in Help Lookup.
-When unchecked, the Search feature executes only when a Search (solve) button is pushed or the Action : Search (solve) menu entry is invoked.
-The behavior is the same as the File : Preferences enable_auto_search value. 
+When Auto Search is enabled, 
+a Search is automatically triggered when the current design is not feasible and the cursor moves away from a changed value.
+When Auto Search is not enabled, 
+the Search feature executes only when a Search (solve) button is pushed or the Action : Search (solve) menu entry is invoked.
 
-While similar to the default recalc behavior of a spreadsheet, 
-this behavior can insert a delay in the display of Search results in the message field relative to entering the changed value.
+Auto Search may be enabled or disabled by: 
+ -  a check box on the main pages (Advanced and Calculator Views) to the right of the Alerts feature.  
+ **or** 
+ - the preference value "enable_auto_search", accessed through the **File : Preferences...** menu. 
+In order to disable Auto Search, set the value of "enable_auto_search" to 0.
+
+While similar to the familiar default recalc behavior of a spreadsheet, 
+the operation of Auto Search can be a source of user surprise. 
+Specifically, if the user delays moving the input cursor after entering a changed value, 
+the corresponding delay in update of Search results (Message field and Multi-color Feasibility Indicator) may be unexpected.
 
 See Also:
  - [Terminology Search](/docs/Help/terminology.html#search)  
+ - [Search](/docs/Help/search.html)
+ 
+___
+
+&nbsp;
+ 
+[Help](/docs/Help/index.html) 
+
+&nbsp;
+ 
+ 
