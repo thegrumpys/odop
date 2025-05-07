@@ -11,7 +11,8 @@ This topic covers various points that may allow a better user experience with th
  - [Maximizing content visible in Help](htt.html#maxVis)  
  - [NaN = "Not a Number"](htt.html#nan)  
  - [Browser refresh and back / forward](htt.html#browserRefresh)  
- - [AutoFix Feature](htt.html#autoFix)  
+ - [Auto Fix Feature](htt.html#autoFix)  
+ - [Auto Search Feature](htt.html#autoSearch)  
  - [AutoSave Feature](htt.html#autoSave)  
  - [Seek violates constraints](htt.html#SeekViol)  
  - [Off-line Operation](htt.html#offlineOps)  
@@ -188,30 +189,43 @@ ___
 <a id="autoFix"></a>  
 ___
 
-## AutoFix Feature   
-The [AutoFix](/docs/Help/terminology.html#autoFix) feature 
+## Auto Fix Feature   
+The [Auto Fix](/docs/Help/terminology.html#autoFix) feature 
 automatically sets Fixed status on variables modified by the user. 
-It is enabled by default. 
+It is enabled by default.  
 
-AutoFix applies only to future changes.
-It does not affect any existing variables in Fixed status.
+Auto Fix applies only to future changes. 
+It does not affect any existing variables in Fixed status.  
 
-The AutoFix feature may be enabled / disabled via 
-the checkbox to the right of the Alerts feature on a main page (Advanced View or Calculator View) 
-or via the preference value "enable_auto_fix" in File : Preferences. 
-
-The AutoFix feature is helpful in that it eliminates the surprise experienced by new users 
+The Auto Fix feature is helpful in that it eliminates the surprise experienced by new users 
 when Search modifies a value that they thought they had established. 
-The downside of AutoFix is that tends to create over-specified [design situations](/docs/Help/designSituations.html) 
+The downside of Auto Fix is that tends to create over-specified [design situations](/docs/Help/designSituations.html) 
 which can be difficult to recognize. 
-Specifically, the [AutoFix](/docs/Help/terminology.html#autoFix) feature may contribute to unintentionally 
+Specifically, the [Auto Fix](/docs/Help/terminology.html#autoFix) feature may contribute to unintentionally 
 placing [Independent Variables](/docs/Help/terminology.html#independentVar) in [Fixed](/docs/Help/terminology.html#fix) status.
 
 See Also:
- - [Terminology AutoFix](/docs/Help/terminology.html#autoFix)  
+ - [Terminology Auto Fix](/docs/Help/terminology.html#autoFix)  
+ - [Auto Fix](/docs/Help/autoFixAutoSearch.html#autoFix)  
  - [Terminology Fix & Free](/docs/Help/terminology.html#fix)  
  - [Design Situations](/docs/Help/designSituations.html)  
 
+___
+
+<a id="autoSearch"></a>  
+___
+
+## Auto Search Feature   
+The [Auto Search](/docs/Help/terminology.html#autoSearch) feature automatically triggers a Search operation after user input. 
+It is enabled by default.  
+
+Having Search run after every input should allow the user to better understand which of multiple inputs 
+causes the design to become infeasible.
+
+See Also:
+ - [Terminology Auto Search](/docs/Help/terminology.html#autoSearch)  
+ - [Auto Search](/docs/Help/autoFixAutoSearch.html#autoSearch)  
+ 
 ___
 
 <a id="autoSave"></a>  
@@ -238,6 +252,10 @@ Seek is balancing the "reward" gained by violating constraints with the penalty 
 If the remaining constraint violations are undesired, run Search.
 Search will find a nearby feasible design.
 Yet another Seek may (or may not) find a design with slightly smaller constraint violations than the first Seek.
+
+The File : Preferences... value mfn_wt has an impact on the amount of constraint violation produced by Seek. 
+Smaller values of mfn_wt will produce less constraint violation. 
+Very small values of mfn_wt will result in Seek ignoring the contribution of its target variable.   
 
 Finally, if the remaining constraint violations are a problem, 
 try offsetting (tightening) the constraint levels by an amount similar to the violation. 
