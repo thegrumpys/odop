@@ -42,7 +42,7 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
 
   const onFocusLocal = (event) => {
 //    console.log('In NameValueUnitsRowCalcInput.onFocusLocal event.target.value=', event.target.value);
-    console.log('In NameValueUnitsRowCalcInput.onFocusLocal element.value=', element.value);
+//    console.log('In NameValueUnitsRowCalcInput.onFocusLocal element.value=', element.value);
     setValue(element.value);
     if (typeof onFocus === "function") onFocus(event);
   }
@@ -50,7 +50,7 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
   const onBlurLocal = (event) => {
 //    console.log('In NameValueUnitsRowCalcInput.onBlurLocal event.target.value=', event.target.value);
     var state = store.getState();
-    console.log('In NameValueUnitsRowCalcInput.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+//    console.log('In NameValueUnitsRowCalcInput.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
     if (model_enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin) {
       dispatch(search('Auto'));
     }
@@ -63,7 +63,7 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
     if (keyCode === 13) { // Carriage return
 //      console.log('In NameValueUnitsRowCalcInput.onKeyPressLocal keyCode=', keyCode);
       var state = store.getState();
-      console.log('In NameValueUnitsRowCalcInput.onKeyPressLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+//      console.log('In NameValueUnitsRowCalcInput.onKeyPressLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
       if (model_enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin) {
         dispatch(search('Auto'));
       }

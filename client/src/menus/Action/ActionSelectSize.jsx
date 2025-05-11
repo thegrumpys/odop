@@ -54,21 +54,21 @@ export default function ActionSelectSize() {
   }
 
   const toggle = () => {
-    console.log('In ActionSelectSize.toggle');
+//    console.log('In ActionSelectSize.toggle');
     var result = [];
     types.forEach((localType) => {
       var element = model_symbol_table.find((localElement) => localElement.name === localType);
-      console.log('In ActionSelectSize.onSelect','element.name=',element.name,'element.value=',element.value);
+//      console.log('In ActionSelectSize.onSelect','element.name=',element.name,'element.value=',element.value);
       result.push({type: element.name, size: element.value, element: element})
     });
-    console.log('In ActionSelectSize.onSelect','result=',result);
+//    console.log('In ActionSelectSize.onSelect','result=',result);
     setInitialValues(result);
     updateSizeTypes();
     setShow(!show);
   }
 
   const onSelectSizeType = (event) => {
-    console.log('In ActionSelectSize.onSelectSizeType event.target.value=',event.target.value);
+//    console.log('In ActionSelectSize.onSelectSizeType event.target.value=',event.target.value);
     var localType = event.target.value;
     var { getSizeEntries } = require('../../designtypes/' + model_type + '/size.js'); // Dynamically load getSizeEntries
     // Loop to create p and x from model_symbol_table
@@ -94,7 +94,7 @@ export default function ActionSelectSize() {
   }
 
   const onSelect = () => {
-    console.log('In ActionSelectSize.onSelect');
+//    console.log('In ActionSelectSize.onSelect');
     setShow(!show);
     logUsage('event', 'ActionSelectSize', { event_label: type + ' ' + size });
     // Do select size entry
@@ -121,7 +121,7 @@ export default function ActionSelectSize() {
       }
     });
     var state = store.getState();
-    console.log('In ActionSelectSize.onSelect','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',valueChanged,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+//    console.log('In ActionSelectSize.onSelect','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',valueChanged,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
     if (model_enable_auto_search && valueChanged && state.model.result.objective_value >= state.model.system_controls.objmin) {
       dispatch(search('Auto'));
     }

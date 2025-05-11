@@ -31,7 +31,7 @@ export default function NameValueUnitsRowDependentVariable({ element, index, onS
 
     const onFocusFixLocal = (event) => {
   //    console.log('In NameValueUnitsRowDependentVariable.onFocusFixLocal' event.target.value=', event.target.value);
-      console.log('In NameValueUnitsRowDependentVariable.onFocusFixLocal element.lmin & FIXED=', element.lmin & FIXED);
+//      console.log('In NameValueUnitsRowDependentVariable.onFocusFixLocal element.lmin & FIXED=', element.lmin & FIXED);
       setFixFreeFlag(element.lmin & FIXED);
       if (typeof onFocusFix === "function") onFocusFix(event);
     }
@@ -39,7 +39,7 @@ export default function NameValueUnitsRowDependentVariable({ element, index, onS
     const onBlurFixLocal = (event) => {
   //    console.log('In NameValueUnitsRowDependentVariable.onBlurFixLocal event.target.value=', event.target.value);
       var state = store.getState();
-      console.log('In NameValueUnitsRowDependentVariable.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+//      console.log('In NameValueUnitsRowDependentVariable.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
       if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && state.model.result.objective_value >= state.model.system_controls.objmin) {
         dispatch(search('Auto'));
       }
@@ -52,7 +52,7 @@ export default function NameValueUnitsRowDependentVariable({ element, index, onS
       if (keyCode === 13) { // Carriage return
   //      console.log('In NameValueUnitsRowDependentVariable.onKeyPressFixLocal keyCode=', keyCode);
         var state = store.getState();
-        console.log('In NameValueUnitsRowDependentVariable.onKeyPressFixLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+//        console.log('In NameValueUnitsRowDependentVariable.onKeyPressFixLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
         if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && state.model.result.objective_value >= state.model.system_controls.objmin) {
           dispatch(search('Auto'));
         }

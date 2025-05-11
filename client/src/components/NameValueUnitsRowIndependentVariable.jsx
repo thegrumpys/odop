@@ -41,7 +41,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
 
   const onFocusLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onFocusLocal event.target.value=', event.target.value);
-    console.log('In NameValueUnitsRowIndependentVariable.onFocusLocal element.value=', element.value);
+//    console.log('In NameValueUnitsRowIndependentVariable.onFocusLocal element.value=', element.value);
     setValue(element.value);
     if (typeof onFocus === "function") onFocus(event);
   }
@@ -49,7 +49,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   const onBlurLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal event.target.value=', event.target.value);
     var state = store.getState();
-    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+//    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
     if (model_enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin) {
       dispatch(search('Auto'));
     }
@@ -62,7 +62,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
     if (keyCode === 13) { // Carriage return
 //      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal keyCode=', keyCode);
       var state = store.getState();
-      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+//      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
       if (model_enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin) {
         dispatch(search('Auto'));
       }
@@ -86,7 +86,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
 
   const onFocusFixLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onFocusFixLocal' event.target.value=', event.target.value);
-    console.log('In NameValueUnitsRowIndependentVariable.onFocusFixLocal element.lmin & FIXED=', element.lmin & FIXED);
+//    console.log('In NameValueUnitsRowIndependentVariable.onFocusFixLocal element.lmin & FIXED=', element.lmin & FIXED);
     setFixFreeFlag(element.lmin & FIXED);
     if (typeof onFocusFix === "function") onFocusFix(event);
   }
@@ -94,7 +94,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   const onBlurFixLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onBlurFixLocal event.target.value=', event.target.value);
     var state = store.getState();
-    console.log('In NameValueUnitsRowIndependentVariable.onBlurFixLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+//    console.log('In NameValueUnitsRowIndependentVariable.onBlurFixLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
     if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && state.model.result.objective_value >= state.model.system_controls.objmin) {
       dispatch(search('Auto'));
     }
