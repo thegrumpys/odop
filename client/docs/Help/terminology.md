@@ -15,7 +15,8 @@ The terms appear in an order ranked from more general and introductory to more s
  - [CONSTRAINT VIOLATIONS](terminology.html#constraintViol)  
  - [FUNCTION CONSTRAINTS (FDCL)](terminology.html#fdcl)  
  - [FIX](terminology.html#fix)  
- - [AUTOFIX](terminology.html#autoFix)  
+ - [AUTO FIX](terminology.html#autoFix)  
+ - [AUTO SEARCH](terminology.html#autoSearch)  
  - [FEASIBLE REGION](terminology.html#feasibleRegion)  
  - [OBJECTIVE FUNCTION](terminology.html#obj)  
  - [PREFERENCES](terminology.html#preferences)  
@@ -267,31 +268,31 @@ ___
 <a id="autoFix"></a>  
 ___
 
-## AUTOFIX 
+## AUTO FIX 
 
-The AutoFix feature automatically applies ["Fixed"](terminology.html#fix) status 
+Enabled by default, the Auto Fix feature automatically applies ["Fixed"](terminology.html#fix) status 
 to [Independent Variables](terminology.html#independentVar) changed by user entry. 
 
-AutoFix applies only to future changes.
-It does not affect any existing variables in Fixed status.
-
-ODOP [Search](terminology.html#search) (invoked by the Search button or the **Action : Search** menu item) 
-works to hold or achieve values in Fixed status. 
-In order to accomplish its mission to achieve a feasible design, 
-ODOP Search will manipulate the values of variables not in Fixed status 
-(a.k.a. "Free" status). 
-
-AutoFix behavior is enabled by default. 
-
-AutoFix may be controlled by: 
- -  a checkbox on the main pages (Advanced and Calculator Views)  
- **or** 
- - the preference value "enable_auto_fix", accessed through the **File : Preferences...** menu. 
-In order to disable AutoFix, set the value of "enable_auto_fix" to 0. 
+See: [Auto Fix](/docs/Help/autoFixAutoSearch.html#autoFix) for details.
 
 See also: 
  - [Independent Variables](terminology.html#independentVar)
  - [terminology Fix](terminology.html#fix)  
+ - [SEARCH](/docs/Help/search.html)  
+ - [PREFERENCES](terminology.html#preferences)  
+
+___
+
+<a id="autoSearch"></a>  
+___
+
+## AUTO SEARCH 
+
+Enabled by default, the Auto Search feature automatically triggers a [Search](terminology.html#search) operation after user input.  
+ 
+See: [Auto Search](/docs/Help/autoFixAutoSearch.html#autoSearch) for details.
+
+See also: 
  - [SEARCH](/docs/Help/search.html)  
  - [PREFERENCES](terminology.html#preferences)  
 
