@@ -623,41 +623,54 @@ export default function SymbolValueWireDia({ className, element, index, onChange
             </Table>}
         </Modal.Body>
         <Modal.Footer>
-          <><Button variant="outline-info" onClick={onContextHelp}>Help</Button>{' '}&nbsp;</>
-          {modified ? <><Button variant="secondary" onClick={onResetButton}>Reset</Button>&nbsp;</> : ''}
-          {display_search_button ?
-            <>
-              {element.type === "equationset" && element.input && element.lmin & FIXED && free_variables.length > 0 ?
-                (model_search_completed ?
-                  <Button variant="secondary" onClick={onSearchRequest} disabled><b>Search</b> (solve)</Button>
-                  :
-                  <>
-                    <Button variant="primary" onClick={onSearchRequest}><b>Search</b> (solve)</Button>
-                    <OverlayTrigger placement="top" overlay={<Tooltip className="tooltip-lg">
-                      <p>The Independent Variable {element.name} is Fixed.
-                        Search manipulates only the values of Free Independent Variables.
-                        Press <img src="SearchButton.png" alt="SearchButton" /> button to alter
-                        the values, {free_variables} to locate a feasible solution (if available).</p>
-                    </Tooltip>}>
-                      <span><i className="fas fa-info-circle text-primary"></i></span>
-                    </OverlayTrigger>
-                  </>
-                )
-                :
-                <Button variant={model_search_completed ? "secondary" : "primary"} onClick={onSearchRequest} disabled={model_search_completed}><b>Search</b> (solve)</Button>}
-              <Button variant={model_search_completed ? "primary" : "secondary"} disabled={isInvalidValue || isInvalidMinConstraint || isInvalidMaxConstraint} onClick={onClose}>Close</Button>
-            </>
-            :
-            (display_seek_button ?
-              <>
-                {((!valueInput) || (element.lmin & FIXED)) ? '' : <Button variant="secondary" onClick={onSeekMinRequest} disabled={element.lmin & FIXED ? true : false} >Seek MIN {element.name}</Button>}
-                {((!valueInput) || (element.lmin & FIXED)) ? '' : <Button variant="secondary" onClick={onSeekMaxRequest} disabled={element.lmin & FIXED ? true : false} >Seek MAX {element.name}</Button>}
-                <Button variant="primary" disabled={isInvalidValue || isInvalidMinConstraint || isInvalidMaxConstraint} onClick={onClose}>Close</Button>
-              </>
-              :
-              <Button variant="primary" disabled={isInvalidValue || isInvalidMinConstraint || isInvalidMaxConstraint} onClick={onClose}>Close</Button>
-            )
-          }
+          <table>
+            <tbody>
+              <tr>
+                <td style={{ textAlign: 'right' }}>
+                  {modified ? <><Button variant="secondary" onClick={onResetButton}>Reset</Button>{' '}&nbsp;</> : ''}
+                  {display_search_button ?
+                    <>
+                      {element.type === "equationset" && element.input && element.lmin & FIXED && free_variables.length > 0 ?
+                        (model_search_completed ?
+                          <Button variant="secondary" onClick={onSearchRequest} disabled><b>Search</b> (solve)</Button>
+                          :
+                          <>
+                            <Button variant="primary" onClick={onSearchRequest}><b>Search</b> (solve)</Button>
+                            <OverlayTrigger placement="top" overlay={<Tooltip className="tooltip-lg">
+                              <p>The Independent Variable {element.name} is Fixed.
+                                Search manipulates only the values of Free Independent Variables.
+                                Press <img src="SearchButton.png" alt="SearchButton" /> button to alter
+                                the values, {free_variables} to locate a feasible solution (if available).</p>
+                            </Tooltip>}>
+                              <span><i className="fas fa-info-circle text-primary"></i></span>
+                            </OverlayTrigger>
+                          </>
+                        )
+                        :
+                        <Button variant={model_search_completed ? "secondary" : "primary"} onClick={onSearchRequest} disabled={model_search_completed}><b>Search</b> (solve)</Button>}
+                       <>
+                      </>
+                    </>
+                    :
+                    (display_seek_button ?
+                      <>
+                        {(element.lmin & FIXED) ? '' : <Button variant="secondary" onClick={onSeekMinRequest} disabled={element.lmin & FIXED ? true : false} >Seek MIN {element.name}</Button>}{' '}&nbsp;
+                        {(element.lmin & FIXED) ? '' : <Button variant="secondary" onClick={onSeekMaxRequest} disabled={element.lmin & FIXED ? true : false} >Seek MAX {element.name}</Button>}
+                      </>
+                      :
+                      ''
+                    )
+                  }
+                </td>
+              </tr>
+              <tr>
+                <td style={{ textAlign: 'right' }}>
+                  <Button variant="outline-info" onClick={onContextHelp}>Help</Button>{' '}&nbsp;
+                  <Button variant={model_search_completed ? "primary" : "secondary"} disabled={isInvalidValue || isInvalidMinConstraint || isInvalidMaxConstraint} onClick={onClose}>Close</Button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </Modal.Footer>
       </Modal>}
       {searchInfiniteShow && <Modal show={searchInfiniteShow} onHide={onSearchCancel}>
