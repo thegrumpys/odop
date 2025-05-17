@@ -2,7 +2,8 @@ import * as o from './symbol_table_offsets';
 import { clearAlerts, addAlert } from '../../../store/actions';
 import { checks as commonChecks, check_message, check_DCD_alert, ERR, WARN, INFO } from '../../../components/Alerts';
 import { CONSTRAINED, FIXED, MIN, MAX } from '../../../store/actionTypes';
-import { toODOPPrecision } from '../../../toODOPPrecision'
+import { toODOPPrecision } from '../../../toODOPPrecision';
+import { getSizeTypes, getSizeEntries } from './size';
 
 export function checks(store) {        /*    Compression  Spring  */
 //    console.log('@@@@@ Start check store=',store);
@@ -271,6 +272,28 @@ export function checks(store) {        /*    Compression  Spring  */
             severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#FS_Solid_LT_1)'
         }));
+    }
+
+    // Loop to create st from model_symbol_table
+    var st = [];
+    design.model.symbol_table.forEach((element) => {
+      st.push(element);
+    });
+    var localSizes = getSizeEntries('Wire_Dia', st);
+    var localIndex;
+    if (localSizes.length === 0) {
+      localIndex = -1;
+    } else {
+      localIndex = localSizes.findIndex((element) => element[2]);
+    }
+    if (localIndex > 0 && localSizes[localIndex][1].includes('Non-std')) {
+      store.dispatch(addAlert({
+          element: design.model.symbol_table[o.Wire_Dia],
+          name: design.model.symbol_table[o.Wire_Dia].name,
+          message: design.model.symbol_table[o.Wire_Dia].name + ' is not a standard wire diameter',
+          severity: WARN,
+          help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#Wire_Dia_Non_Std)'
+      }));
     }
 
     check_DCD_alert(design.model.symbol_table[o.Deflect_1], MIN, 'C');
