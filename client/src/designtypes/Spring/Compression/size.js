@@ -13,9 +13,8 @@ export function getSizeTypes() {
 
 export function getSizeEntries(type, st) {
 //    console.log('In getSizeEntries type=',type,' st=',st);
-    var wire_dia_filename, od_free_filename, wire_dia_table, od_free_table, wire_dia_entry, od_free_entry;
+    var wire_dia_filename, od_free_filename, wire_dia_table, od_free_table;
     var needle;
-    var size0, size1, size2;
     var result = [];
     var m_tab, i;
     switch(type) {

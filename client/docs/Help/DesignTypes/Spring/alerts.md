@@ -6,6 +6,7 @@ Alerts common to all round-wire coil springs
  - [OD_Free exactly twice Wire_Dia](alerts.html#OD2xWire_Dia)  
  - [OD_Free equal to Wire_Dia](alerts.html#OD_eq_Wire_Dia)  
  - [Wire_Dia > ID_Free](alerts.html#Wire_Dia_GT_ID_Free)  
+ - [Wire_Dia Non-standard](alerts.html#Wire_Dia_Non_Std)  
  - [Material properties for this Wire_Dia may not be accurate](alerts.html#MatPropAccuracy)  
  - [FS_CycleLife MIN not set](alerts.html#FS_CycleLife_MIN_not_set)  
  - [Over-design concern](alerts.html#OverDesign)  
@@ -100,10 +101,30 @@ check with the spring manufacturer regarding capabilities and costs.
 
 ___
 
-<a id="MatPropAccuracy"></a>  
+<a id="Wire_Dia_Non_Std"></a>  
 ___
 
 Alert entry #S54
+## Wire_Dia Non-standard 
+The current wire diameter (Wire_Dia) is not a standard (preferred) value for the selected material. 
+
+Multiple standard wire size tables are built-in to the ODOP:Spring software. 
+A single table provides standard metric sizes for all materials. 
+When working in US Customary units, most materials have unique standard wire size tables.  
+
+When using Advanced View, the standard size table is accessed through the Action : Select Size... menu. 
+When using Calculator View, the standard size table is accessed by selecting the Wire_Dia field which pops up a modal dialog box
+providing a drop-down selection of standard wire sizes associated with the selected material.  
+
+See also:
+ - [Select Size and Select Catalog](/docs/Help/SpringDesign/selectSizeCatalog.html)  
+
+___
+
+<a id="MatPropAccuracy"></a>  
+___
+
+Alert entry #S55
 ## Material properties for this Wire_Dia may not be accurate. 
 This message is provided to warn the user that the current value for wire diameter is well outside 
 the anticipated range for the selected material type and
@@ -132,7 +153,7 @@ ___
 <a id="FS_CycleLife_MIN_not_set"></a>  
 ___
 
-Alert entry #S55
+Alert entry #S56
 ## FS_CycleLife MIN is not set. 
 A more restrictive Life_Category has been selected but 
 the corresponding constraint on FS_CycleLife is not enabled. 
@@ -153,7 +174,7 @@ ___
 <a id="OverDesign"></a>  
 ___
 
-Alert entry #S56
+Alert entry #S57
 ## Over-design concern 
 The term "over-design" implies that this design may be too conservative. 
 The Factor of Safety at operating point 2 exceeds the maximum constraint (FS_2 MAX). 
@@ -180,7 +201,7 @@ ___
 <a id="Coils_A_LT_1"></a>  
 ___
 
-Alert entry #S57
+Alert entry #S58
 ## Coils_A is less than 1 
 A warning alert is produced whenever the current design has less than one active coil.  
 
@@ -194,7 +215,7 @@ ___
 <a id="SI_manufacturability"></a>  
 ___
 
-Alert entry #S58
+Alert entry #S59
 ## Spring Index manufacturability concern 
 Spring_Index is the ratio of Mean Diameter to Wire Diameter. 
 Specifically: Mean_Dia / Wire_Dia. 
@@ -229,7 +250,7 @@ ___
 <a id="Cycle_LifeNA"></a>  
 ___
 
-Alert entry #S59
+Alert entry #S60
 ## Cycle_Life calculation is not available 
 The Cycle_Life variable (Modified Goodman calculation) is available only for materials contained in the internal materials table. 
 The current setting of Prop_Calc_Method indicates that material properties are user supplied, 
@@ -254,7 +275,7 @@ ___
 <a id="Cycle_LifeNA_FS_2"></a>  
 ___
 
-Alert entry #S60
+Alert entry #S61
 ## Cycle_Life not defined beyond yield 
 The load specified in the current design is sufficiently large to cause the wire to yield. 
 The notion of cycle life does not apply. 
@@ -290,7 +311,7 @@ ___
 <a id="Cycle_LifeExtrapolated"></a>  
 ___
 
-Alert entry #S61
+Alert entry #S62
 ##  Cycle_Life value is extrapolated  
 This is an information alert. 
 No action is required.  
@@ -309,7 +330,7 @@ ___
 <a id="OD_ID_BothFixed"></a>  
 ___
 
-Alert entry #S62
+Alert entry #S63
 ##  Over specification concern; Both OD and ID are fixed
 To clear this Alert, remove Fixed status from either OD_Free or ID_Free by unchecking the checkbox
 immediately to the right of the value field. 
@@ -329,7 +350,7 @@ ___
 <a id="DefaultConstraint"></a>  
 ___
 
-Alert entry #S63
+Alert entry #S64
 ## Default constraint not enabled 
 Disabling default constraints is not recommended. 
 Adjust the constraint value instead. 
@@ -371,7 +392,7 @@ ___
 <a id="TensileValueSuspect"></a>  
 ___
 
-Alert entry #S64
+Alert entry #S65
 ## Value of Tensile is suspect 
   
 The value of Tensile strength is close to or less than zero.
