@@ -13,7 +13,6 @@ export default function ActionSelectSize() {
   const model_type = useSelector((state) => state.model.type);
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const model_enable_auto_fix = useSelector((state) => state.model.system_controls);
-  const model_enable_auto_search = useSelector((state) => state.model.system_controls.enable_auto_search);
   const [show, setShow] = useState(false);
   const [types, setTypes] = useState([]);
   const [type, setType] = useState(undefined);
@@ -121,8 +120,8 @@ export default function ActionSelectSize() {
       }
     });
     var state = store.getState();
-//    console.log('In ActionSelectSize.onSelect','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',valueChanged,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
-    if (model_enable_auto_search && valueChanged && state.model.result.objective_value >= state.model.system_controls.objmin) {
+//    console.log('In ActionSelectSize.onSelect','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'valueChanged=',valueChanged,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+    if (state.model.system_controls.enable_auto_search && valueChanged && state.model.result.objective_value >= state.model.system_controls.objmin) {
       dispatch(search('Auto'));
     }
   }

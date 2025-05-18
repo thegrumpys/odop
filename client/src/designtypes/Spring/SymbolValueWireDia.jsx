@@ -33,7 +33,6 @@ export default function SymbolValueWireDia({ className, element, index, onChange
   const model_type = useSelector((state) => state.model.type);
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const model_enable_auto_fix = useSelector((state) => state.model.system_controls.enable_auto_fix);
-  const model_enable_auto_search = useSelector((state) => state.model.system_controls.enable_auto_search);
   const model_show_units = useSelector((state) => state.model.system_controls.show_units);
   const model_objmin = useSelector((state) => state.model.system_controls.objmin);
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
@@ -116,8 +115,8 @@ export default function SymbolValueWireDia({ className, element, index, onChange
   const onBlurLocal = (event) => {
 //    console.log('In SymbolValueWireDia.onBlurLocal event.target.value=', event.target.value);
     var state = store.getState();
-//    console.log('In SymbolValueWireDia.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
-    if (model_enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin) {
+//    console.log('In SymbolValueWireDia.onBlurLocal','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+    if (state.model.system_controls.enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin) {
       dispatch(search('Auto'));
     }
     if (typeof onBlur === "function") onBlur(event);
@@ -129,8 +128,8 @@ export default function SymbolValueWireDia({ className, element, index, onChange
     if (keyCode === 13) { // Carriage return
 //      console.log('In SymbolValueWireDia.onKeyPressLocal keyCode=', keyCode);
       var state = store.getState();
-//      console.log('In SymbolValueWireDia.onKeyPressLocal','model_enable_auto_search=', model_enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
-      if (model_enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin) {
+//      console.log('In SymbolValueWireDia.onKeyPressLocal','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+      if (state.model.system_controls.enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin) {
         dispatch(search('Auto'));
       }
     }
@@ -161,8 +160,8 @@ export default function SymbolValueWireDia({ className, element, index, onChange
   const onBlurFixLocal = (event) => {
 //    console.log('In SymbolValueWireDia.onBlurFixLocal event.target.value=', event.target.value);
     var state = store.getState();
-//    console.log('In SymbolValueWireDia.onBlurFixLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
-    if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && state.model.result.objective_value >= state.model.system_controls.objmin) {
+//    console.log('In SymbolValueWireDia.onBlurFixLocal','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+    if (state.model.system_controls.enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && state.model.result.objective_value >= state.model.system_controls.objmin) {
       dispatch(search('Auto'));
     }
     if (typeof onBlurFix === "function") onBlurFix(event);

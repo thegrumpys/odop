@@ -10,7 +10,6 @@ import store from "../store/store";
 
 export default function NameValueUnitsRowDependentVariable({ element, index, onSetFix, onResetFix, onFocusFix, onBlurFix, onKeyPressFix }) {
 //  console.log('NameValueUnitsRowDependentVariable - Mounting...','element=',element,'index=',index);
-  const model_enable_auto_search = useSelector((state) => state.model.system_controls.enable_auto_search);
   const model_show_units = useSelector((state) => state.model.system_controls.show_units);
   const [fixFreeFlag, setFixFreeFlag] = useState(0);
   const dispatch = useDispatch();
@@ -39,8 +38,8 @@ export default function NameValueUnitsRowDependentVariable({ element, index, onS
     const onBlurFixLocal = (event) => {
   //    console.log('In NameValueUnitsRowDependentVariable.onBlurFixLocal event.target.value=', event.target.value);
       var state = store.getState();
-//      console.log('In NameValueUnitsRowDependentVariable.onBlurLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
-      if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && state.model.result.objective_value >= state.model.system_controls.objmin) {
+//      console.log('In NameValueUnitsRowDependentVariable.onBlurLocal','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+      if (state.model.system_controls.enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && state.model.result.objective_value >= state.model.system_controls.objmin) {
         dispatch(search('Auto'));
       }
       if (typeof onBlurFix === "function") onBlurFix(event);
@@ -52,8 +51,8 @@ export default function NameValueUnitsRowDependentVariable({ element, index, onS
       if (keyCode === 13) { // Carriage return
   //      console.log('In NameValueUnitsRowDependentVariable.onKeyPressFixLocal keyCode=', keyCode);
         var state = store.getState();
-//        console.log('In NameValueUnitsRowDependentVariable.onKeyPressFixLocal','model_enable_auto_search=', model_enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
-        if (model_enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && state.model.result.objective_value >= state.model.system_controls.objmin) {
+//        console.log('In NameValueUnitsRowDependentVariable.onKeyPressFixLocal','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+        if (state.model.system_controls.enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && state.model.result.objective_value >= state.model.system_controls.objmin) {
           dispatch(search('Auto'));
         }
       }

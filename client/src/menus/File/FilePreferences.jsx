@@ -2,9 +2,10 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, NavDropdown, Container, Row, Col } from 'react-bootstrap';
 import { initialSystemControls } from '../../initialSystemControls';
-import { changeSystemControlsValue, saveAutoSave } from '../../store/actions';
+import { changeSystemControlsValue, saveAutoSave, search } from '../../store/actions';
 import { logUsage, logValue } from '../../logUsage';
 import FormControlTypeNumber from '../../components/FormControlTypeNumber';
+import store from "../../store/store";
 
 export default function FilePreferences() {
 //  console.log('FilePreferences - Mounting...');
@@ -45,6 +46,10 @@ export default function FilePreferences() {
     logUsage('event', 'FilePreferences', { event_label: 'ApplyandClose' });
     dispatch(changeSystemControlsValue(systemControls));
     dispatch(saveAutoSave());
+    var state = store.getState();
+    if (state.model.system_controls.enable_auto_search && state.model.result.objective_value >= state.model.system_controls.objmin) {
+      dispatch(search('Auto'));
+    }
   }
 
   return (
