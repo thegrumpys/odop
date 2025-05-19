@@ -108,16 +108,55 @@ Alert entry #S54
 ## Wire_Dia Non-standard 
 The current wire diameter (Wire_Dia) is not a standard (preferred) value for the selected material. 
 
-Multiple standard wire size tables are built-in to the ODOP:Spring software. 
-A single table provides standard metric sizes for all materials. 
-When working in US Customary units, most materials have unique standard wire size tables.  
-
 When using Advanced View, the standard size table is accessed through the Action : Select Size... menu. 
 When using Calculator View, the standard size table is accessed by selecting the Wire_Dia field which pops up a modal dialog box
 providing a drop-down selection of standard wire sizes associated with the selected material.  
 
+Multiple standard wire size tables are built-in to the ODOP:Spring software. 
+A single table provides standard metric sizes for all materials. 
+When working in US Customary units, different materials have unique standard wire size tables.  
+
+### Background  
+
+The evolution of standard or preferred wire sizes began in the early 19th century. 
+Pioneering manufacturers like Washburn and Moen played a key role in establishing standardized practices for wire production. 
+Founded in the 1830s, these companies not only manufactured wire for telegraphy and later for barbed wire but also helped define 
+the sizes and tolerances that would eventually be used to design coil springs for a variety of applications. 
+Their work led to what became known as the Washburn and Moen gauge. 
+In parallel, around the same time, an almost identical system — later known as the Roebling wire gauge 
+(or sometimes the American Steel Wire Gauge) — emerged. 
+In essence, the “Moen & Washburn” gauges and the Roebling gauge refer to the same set of nominal sizes and tolerances 
+that were developed during America’s industrial expansion.
+
+**Powerful economic incentives for utilizing standard (preferred) wire sizes**
+
+1. Availability and Lead Time 
+ - Standard wire sizes are readily available off-the-shelf from suppliers. 
+ - Custom diameters often require special manufacturing runs, leading to longer lead times and potential project delays.  
+2. Cost Efficiency
+ - Standard wire is mass-produced, so it benefits from economies of scale, making it significantly cheaper per unit. 
+ - Custom diameters involve tooling changes or special orders, increasing material and production costs.  
+3. Manufacturing Simplicity
+ - Spring manufacturing equipment is calibrated for standard wire sizes. 
+ - Using custom diameters can require retooling or recalibration, increasing complexity, labor, and risk of errors.  
+4. Design Resources and Predictability 
+ - Standard wire sizes have known material properties and are supported by existing design tables, software, and handbooks. 
+ - This makes it easier to ensure performance, strength, and fatigue life. 
+ - Custom sizes may require additional testing or validation.  
+5. Repair, Replacement, and Maintenance 
+ - If the spring needs to be replaced, using a standard wire diameter makes it easy to source and reproduce. 
+ - Custom sizes can lead to downtime and difficulty sourcing parts later in the product’s lifecycle.  
+6. Waste Reduction 
+ - Standard wire is more likely to be used across multiple products or projects, reducing the chance of scrap or leftover unusable material.  
+ 
+**Conclusion:**  
+While custom wire diameters might seem attractive for ultra-precise designs, 
+the downsides in terms of cost, availability, and complexity usually outweigh the benefits. 
+Standard wire diameters offer a reliable, cost-effective, and practical solution that aligns well with manufacturing and supply chain realities.  
+
 See also:
  - [Select Size and Select Catalog](/docs/Help/SpringDesign/selectSizeCatalog.html)  
+ - [Preferred wire gauges - history](https://www.sizes.com/materials/wire.htm)
 
 ___
 
