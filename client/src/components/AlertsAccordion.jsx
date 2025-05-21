@@ -168,9 +168,13 @@ export default function AlertsAccordion() {
               <InputGroup.Checkbox id="auto_search" aria-label="Checkbox for enabling Auto Search" onChange={onAutoSearchToggle} checked={model_enable_auto_search} />
               <OverlayTrigger placement="bottom" overlay={
                 <Tooltip className="tooltip-lg">
-                  <p>When checked, a Search is automatically triggered when the current design is not feasible
-                     and the cursor moves away from a changed value.
-                     Enter <i>AutoSearch</i> in Help lookup (above) for more detail.</p>
+                <p>When checked, a Search is automatically triggered when the the user changes a value, the current design is not feasible and the user:</p>
+                <ul>
+                  <li>pushes the "Enter" key <br/> or</li>
+                  <li>pushes the "Tab" key <br/> or</li>
+                  <li>clicks out of the field containing the changed value</li>
+                </ul>
+                  <p>Enter <i>AutoSearch</i> in Help lookup (above) for more detail.</p>
                   <p>When unchecked, the Search feature executes only when a Search (solve) button is pushed or the
                      Action : Search (solve) menu entry is invoked.</p>
                   <p>The behavior is the same as the File : Preferences enable_auto_search value.</p>
