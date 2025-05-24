@@ -114,21 +114,26 @@ Multiple standard wire size tables are built-in to the ODOP:Spring software.
 
 ### Accessing Standard Wire Sizes  
 ### - When Auto Std-Size is enabled: 
-{Note: Further details will be provided once the code implementation is complete.}
+{Note: Further details including advice to maintain Wire_Dia in Free status 
+will be provided once the code implementation is complete.}
 
 ### - When Auto Std-Size is disabled: 
  - **Advanced View**: Access the standard-size table through the Action : Select Size... menu. 
  - **Calculator View**: Click on the Wire_Dia field to display a modal dialog box that provides a 
  drop-down selection of standard wire sizes available for the selected material.  
 
-### Historical Background in Wire Gauging  
+### Historical Background of Wire Gauges  
 In the United States, the evolution of standard or preferred wire sizes began in the early 19th century 
-when pioneering manufacturers like Washburn and Moen played a key role in establishing standardized practices for wire production. 
-Founded in the 1830s, these companies not only manufactured wire for telegraphy and later for barbed wire 
-but also helped define the sizes and tolerances that eventually became known as the Washburn and Moen gauge. 
-In parallel, around the same time, an almost identical system — later known as the Roebling wire gauge 
-(or sometimes the American Steel Wire Gauge) — emerged. 
-In essence, the “Moen & Washburn” gauges and the Roebling gauge refer to the same set of nominal sizes and tolerances.   
+with wire industry pioneers like Washburn and Moen initially manufacturing wire for telegraphy 
+and later for barbed wire and coil springs. 
+The active set of wire sizes and tolerances eventually became known as the Washburn and Moen gauge. 
+In parallel, around the same time, a similar system — later known as the Roebling wire gauge 
+(or sometimes the American Steel Wire Gauge) — emerged from wire rope and suspension bridge applications. 
+Both systems assign higher gauge numbers to finer wires, 
+but diverge on the specific mapping from gauge number to physical diameter. 
+Historically, the gauge numbers were tied to the number of drawing operations in the manufacturing process. 
+However, because different manufacturers optimized their drawing processes for distinct applications, 
+a given gauge number (say, “10”) in the Washburn & Moen system might not exactly equal the “10” in the Roebling gauge.  
 
 ### Economic and Practical Incentives for Standard (preferred) Wire Sizes  
 1. **Availability and Lead Time**: 
@@ -147,14 +152,17 @@ Custom sizes may require additional testing or validation.
 If a spring in service needs to be replaced, a design using a standard wire diameter makes it easier to source and reproduce. 
 Custom sizes can lead to downtime and difficulty sourcing parts later in the product’s lifecycle.  
 6. **Waste Reduction**: 
-Standard wire is more likely to be used across multiple products or projects, reducing the chance of scrap or leftover unusable material.  
+Standard wire is more likely to be used across multiple products or projects, 
+reducing the chance of scrap or leftover unusable material.  
  
 **Conclusion:**  
 While custom wire diameters might seem attractive for ultra-precise designs, 
 the downsides in terms of cost, availability, and complexity usually outweigh the benefits. 
-Standard wire diameters offer a reliable, cost-effective, and practical solution that aligns well with manufacturing and supply chain realities.  
+Standard wire diameters offer a reliable, cost-effective, and practical solution that aligns well 
+with manufacturing and supply chain realities.  
 
-See also:
+See also: 
+ - [Auto Fix, Auto Search, Auto Standard Size](/docs/Help/autoFixSearchStdSize.html#AutoStdSize)  
  - [Select Size and Select Catalog](/docs/Help/SpringDesign/selectSizeCatalog.html)  
  - [Preferred wire gauges - history](https://www.sizes.com/materials/wire.htm)  
  - [UK Spring Industry Metrication Report - December, 1971](https://ist.org.uk/wp-content/uploads/_pda/2024/07/Research-Report-196-Metrication-In-The-Spring-Industry.pdf)  

@@ -273,7 +273,7 @@ ___
 Enabled by default, the Auto Fix feature automatically applies ["Fixed"](terminology.html#fix) status 
 to [Independent Variables](terminology.html#independentVar) changed by user entry. 
 
-See: [Auto Fix](/docs/Help/autoFixAutoSearch.html#autoFix) for details.
+See: [Auto Fix](/docs/Help/autoFixSearchStdSize.html#autoFix) for details.
 
 See also: 
  - [Independent Variables](terminology.html#independentVar)
@@ -290,7 +290,7 @@ ___
 
 Enabled by default, the Auto Search feature automatically triggers a [Search](terminology.html#search) operation after user input.  
  
-See: [Auto Search](/docs/Help/autoFixAutoSearch.html#autoSearch) for details.
+See: [Auto Search](/docs/Help/autoFixSearchStdSize.html#autoSearch) for details.
 
 See also: 
  - [SEARCH](/docs/Help/search.html)  

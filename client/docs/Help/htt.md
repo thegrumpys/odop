@@ -206,7 +206,7 @@ placing [Independent Variables](/docs/Help/terminology.html#independentVar) in [
 
 See Also:
  - [Terminology Auto Fix](/docs/Help/terminology.html#autoFix)  
- - [Auto Fix](/docs/Help/autoFixAutoSearch.html#autoFix)  
+ - [Auto Fix](/docs/Help/autoFixSearchStdSize.html#autoFix)  
  - [Terminology Fix & Free](/docs/Help/terminology.html#fix)  
  - [Design Situations](/docs/Help/designSituations.html)  
 
@@ -224,7 +224,7 @@ causes the design to become infeasible.
 
 See Also:
  - [Terminology Auto Search](/docs/Help/terminology.html#autoSearch)  
- - [Auto Search](/docs/Help/autoFixAutoSearch.html#autoSearch)  
+ - [Auto Search](/docs/Help/autoFixSearchStdSize.html#autoSearch)  
  
 ___
 
