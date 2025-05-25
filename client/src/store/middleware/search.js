@@ -58,6 +58,8 @@ export function search(store, objmin, merit) {
     var ncode = patsh(shadow_store, pc, delarg, shadow_store_state.model.system_controls.delmin, objmin, shadow_store_state.model.system_controls.maxit, shadow_store_state.model.system_controls.tol, merit);
 //    console.log('In search ncode=',ncode);
 
+    // objective_value = objective_value
+    // p = get p from shadow_store
     // Expand PC back into store change actions
     var kd = 0;
     var p = [];
@@ -71,6 +73,24 @@ export function search(store, objmin, merit) {
                 }
             }
     }
+    // ncode = ncode
+
+    // If enable_auto_standard size is true (can only be set true if material has a wire size table) in the store
+    // If prop_calc === 1 in the store
+    // If wire_dia is free in the store
+    // If feasible (objective_value < objmin) in shadow_store
+
+    // Create shadow_store_clone_2 from the shadow_store and inject it into the model
+    // Set wire_dia to nearest wire table lower value and set fixed into shadow_store_2
+    // Create updated pc_2 from shadow_store_2
+    // Call PATSH with pc_2 and set ncode_2
+    // if objective_value_2 <= best_objective_value then { objective_value = objective_value_2, p = get p from shadow_store_2, ncode = ncode_2 }
+
+    // Create shadow_store_clone_3 from the shadow_store and inject it into the model
+    // Set wire_dia to nearest wire table higher value and set fixed into shadow_store_3
+    // Create updated pc_3 from shadow_store_3
+    // Call PATSH with pc_3 and set ncode_3
+    // if objective_value_3 <= best_objective_value then { objective_value = objective_value_3, p = get p from shadow_store_3 , ncode = ncode_3 }
 
     store.dispatch(changeInputSymbolValues(p, merit));
     store.dispatch(changeResultSearchCompleted(true));
