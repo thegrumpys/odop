@@ -109,6 +109,12 @@ export const execute = {
                     <p>This is a good time to take a good look at the existing values.
                     Affected values will update immediately as the demo session enters the changes.</p>
 
+                    <p> A quick note about ODOP program operation ... 
+                    When operating in the demo/tutorial environment (text with a light green background), 
+                    changing the <b>Auto Fix</b> and <b>Auto Search</b> checkboxes does not affect the outcome of individual demo and tutorial sessions. 
+                    The operation of various features, including <b>Search</b>, <b>Seek</b>, and <b>Trade</b>, is controlled by the demo/tutorial itself. 
+                    Regardless of the current visual status of these checkboxes, demo and tutorial sessions function as though they are unchecked.</p>
+
                     <p>You can scroll the page down to view the complete set of values.
                     Scroll back up in order to use the Next button to continue.</p>
                     <br /><br />
