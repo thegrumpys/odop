@@ -16,5 +16,6 @@ export const initialSystemControls = {
         "show_units": 1,
         "show_violations": 1,
         "enable_auto_fix": 1,
-        "enable_auto_search": 1
+        "enable_auto_search": 1,
+        "enable_auto_std_size": 1
     };

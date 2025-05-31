@@ -1,6 +1,20 @@
 import * as o from './symbol_table_offsets';
 import * as mo from '../mat_offsets';
 import { toODOPPrecision } from '../../../toODOPPrecision';
+import { FIXED } from '../../../store/actionTypes';
+
+export function shouldSizeAutomatically(store) {
+//  console.log('shouldSizeAutomatically','store=',store);
+  // If wire_dia is free in the store
+  if (store.model.symbol_table[o.Wire_Dia].lmin & FIXED) { // Is Wire_Dia fixed, then return false?
+    return false;
+  }
+  // If feasible (objective_value < objmin) in shadow_store
+  if (store.model.result.objective_value > store.model.system_controls.objmin) { // Is objective value not feasible, then return false?
+    return false;
+  }
+  return true;
+}
 
 export function getSizeTypes() {
     var result = [
@@ -106,4 +120,11 @@ export function getSizeEntries(type, st) {
     }
 //    console.log('In getSizeEntries result=',result);
     return result;
+}
+
+export function getSizeNearestValues(type, value) {
+//  console.log('getSizeNearestValues','type=',type,'value=',value);
+  // Assume value = 0.1055
+  return [0.11, 0.111];
+  
 }
