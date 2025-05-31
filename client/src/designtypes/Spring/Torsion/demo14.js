@@ -147,6 +147,12 @@ export const execute = {
             title: "Page 05 of 08",
             text: (
                 <>
+                    <p> A quick note about ODOP program operation ... 
+                    When operating in this demo/tutorial environment (text with a light green background), 
+                    changing the <b>Auto Fix</b> and <b>Auto Search</b> checkboxes does not affect the outcome of individual demo and tutorial sessions. 
+                    The operation of various features, including <b>Search</b>, <b>Seek</b>, and <b>Trade</b>, is controlled by the demo/tutorial itself. 
+                    Regardless of the current visual status of these checkboxes, demo and tutorial sessions function as though they are unchecked.</p>
+                    
                     <p>
                     Note that the Handbook solution was required to calculate moment in the closed position (180 lb-in).
                     ODOP:Spring was able to accept the specifications for Force_Arm_2 and length of Arm_2 directly and
