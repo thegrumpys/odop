@@ -137,13 +137,19 @@ export const execute = {
             title: "Page 05 of 09",
             text: (
                 <>
-                    <p>
-                    In the process of transitioning to the next page, the demo session will run Search.
-                    </p>
+                <p> A quick note about ODOP program operation ... 
+                When operating in this demo/tutorial environment (text with a light green background), 
+                changing the <b>Auto Fix</b> and <b>Auto Search</b> checkboxes does not affect the outcome of individual demo and tutorial sessions. 
+                The operation of various features, including <b>Search</b>, <b>Seek</b>, and <b>Trade</b>, is controlled by the demo/tutorial itself. 
+                Regardless of the current visual status of these checkboxes, demo and tutorial sessions function as though they are unchecked.</p>
 
-                    <p>
-                    <br /><br />
-                    </p>
+                <p>
+                In the process of transitioning to the next page, the demo session will run Search.
+                </p>
+
+                <p>
+                <br /><br />
+                </p>
                 </>
             ),
             actions: [
