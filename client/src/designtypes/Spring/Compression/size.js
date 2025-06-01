@@ -13,8 +13,6 @@ export function shouldSizeAutomatically(store) {
   if (store.model.result.objective_value > store.model.system_controls.objmin) { // Is objective value not feasible, then return false?
     return false;
   }
-  
-  
   return true;
 }
 
@@ -124,9 +122,78 @@ export function getSizeEntries(type, st) {
     return result;
 }
 
-export function getSizeNearestValues(type, value) {
-//  console.log('getSizeNearestValues','type=',type,'value=',value);
-  // Assume value = 0.1055
-  return [0.11, 0.111];
-  
+export function getSizeNearestValues(type, st) {
+    var wire_dia_filename, od_free_filename, wire_dia_table, od_free_table;
+    var needle;
+    var result;
+    var m_tab, i;
+    switch(type) {
+    case "Wire_Dia":
+        // Find size name, load size table, and get wire diameter value
+        if (st[o.Material_File].value === "mat_metric.json")
+            m_tab = require('../mat_metric.json');
+        else
+            m_tab = require('../mat_us.json');
+//        console.log('In getSizeNearestValues: st[o.Material_File].value =', st[o.Material_File].value);
+        i = st[o.Material_Type].value;
+//        console.log('In getSizeNearestValues Material_Type i=',i);
+        wire_dia_filename = m_tab[i][mo.wire_dia_filename];
+//        console.log('In getSizeNearestValues wire_dia_filename=',wire_dia_filename);
+        wire_dia_table = require('../'+wire_dia_filename+'.json'); // Dynamically load table
+//        console.log('In getSizeNearestValues wire_dia_table=',wire_dia_table);
+        needle = st[o.Wire_Dia].value;
+//        console.log('In getSizeNearestValues.render needle=',needle);
+        var default_value = wire_dia_table.findIndex((element, index) => {
+          if (index > 0) { // skip the column header
+            if (element[0] > needle) {
+              return true; // were done
+            }
+          }
+          return false; // keep looking
+        });
+//        console.log('In getSizeNearestValues.render default_value=',default_value);
+        if (default_value === 1) {
+          result = [undefined, wire_dia_table[default_value][0]];
+        } else if (default_value === -1) {
+          result = [wire_dia_table[wire_dia_table.length-1][0], undefined];
+        } else {
+          result = [wire_dia_table[default_value-1][0], wire_dia_table[default_value][0]];
+        }
+        break;
+    case "OD_Free":
+        if (st[o.Material_File].value === "mat_metric.json")
+            m_tab = require('../mat_metric.json');
+        else
+            m_tab = require('../mat_us.json');
+//        console.log('In getSizeNearestValues: st[o.Material_File].value =', st[o.Material_File].value);
+        i = st[o.Material_Type].value;
+//        console.log('In getSizeNearestValues Material_Type i=',i);
+        od_free_filename = m_tab[i][mo.od_free_filename];
+//        console.log('In getSizeNearestValues od_free_filename=',od_free_filename);
+        od_free_table = require('../'+od_free_filename+'.json'); // Dynamically load table
+//        console.log('In getSizeNearestValues od_free_table=',od_free_table);
+        needle = st[o.OD_Free].value;
+//        console.log('In getSizeNearestValues.render needle=',needle);
+        var default_value = od_free_table.find((element, index) => {
+          if (index > 0) { // skip the column header
+            if (element[0] > needle) {
+              return true; // were done
+            }
+          }
+          return false; // keep looking
+        });
+//        console.log('In getSizeNearestValues.render default_value=',default_value);
+        if (default_value === 1) {
+          result = [undefined, od_free_table[default_value][0]];
+        } else if (default_value === -1) {
+          result = [od_free_table[od_free_table.length-1][0], undefined];
+        } else {
+          result = [od_free_table[default_value-1][0], od_free_table[default_value][0]];
+        }
+        break;
+    default:
+        break;
+    }
+//    console.log('In getSizeNearestValues result=',result);
+    return result;
 }

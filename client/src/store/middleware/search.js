@@ -72,7 +72,7 @@ export function search(store, objmin, merit) {
         }
       }
     }
-    ncode = ncode_1 + ' Wire_Dia set to Non-Standard Size';
+    var ncode = ncode_1 + ' Wire_Dia set to Non-Standard Size';
 //    console.log('After 1','p=',p,'ncode=',ncode);
 
     shadow_store.dispatch(enableDispatcher());
@@ -98,141 +98,143 @@ export function search(store, objmin, merit) {
 //        var shadow_store_state_1 = shadow_store.getState();
 //        console.log('shadow_store_state_1=',shadow_store_state_1);
 
-        var nearest_sizes = getSizeNearestValues("Wire_Dia", 0.110775);
+        var nearest_sizes = getSizeNearestValues("Wire_Dia", shadow_store_state.model.symbol_table);
 //        console.log('nearest_sizes=',nearest_sizes);
-
-        var ncode;
 
         /*==========================*/
         /* Auto Standard Size Lower */
         /*==========================*/
 
-        // Create shadow_store_clone_2 from the shadow_store and inject it into the model
-        shadow_store.dispatch(inject(shadow_store_state_clone_1)); // This turns off the dispatcher!
-        // Set wire_dia to nearest wire table lower value and set fixed into shadow_store
-        shadow_store.dispatch(enableDispatcher(true));
-        shadow_store.dispatch(changeSymbolValue("Wire_Dia", nearest_sizes[0]));
-        shadow_store.dispatch(setSymbolFlag("Wire_Dia", MIN, FIXED));
-        shadow_store.dispatch(setSymbolFlag("Wire_Dia", MAX, FIXED));
-        shadow_store.dispatch(enableDispatcher(false));
-        var shadow_store_state_2 = shadow_store.getState();
-
-        if (shadow_store_state_2.model.result.objective_value > shadow_store_state_2.model.system_controls.objmin) { // If not feasible
-  //        console.log('shadow_store_state_2=',shadow_store_state_2);
-          // Create updated pc_2 from shadow_store_2
-          var pc_2 = [];
-          for (let i = 0; i < shadow_store_state_2.model.symbol_table.length; i++) {
-            element = shadow_store_state_2.model.symbol_table[i];
-            if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
-              if (!(element.lmin & FIXED)) { // Only Free
-                  pc_2.push(element.value);
-              }
-            }
-          }
-          // Call PATSH with pc_2 and set ncode_2
-          var delarg = shadow_store_state_2.model.system_controls.del;
-  //        console.log('In search','shadow_store=',shadow_store,'pc_2=',pc_2,'delarg=',delarg,'shadow_store_state_2.model.system_controls.delmin=',shadow_store_state_2.model.system_controls.delmin,'objmin=',objmin,'shadow_store_state_2.model.system_controls.maxit=',shadow_store_state_2.model.system_controls.maxit,'shadow_store_state_2.model.system_controls.tol=',shadow_store_state_2.model.system_controls.tol);
-          var ncode_2 = patsh(shadow_store, pc_2, delarg, shadow_store_state_2.model.system_controls.delmin, objmin, shadow_store_state_2.model.system_controls.maxit, shadow_store_state_2.model.system_controls.tol, merit);
-          // if objective_value_2 <= objmin then { p = get p from shadow_store_2, ncode = ncode_2 } // Just being feasible is good enough
-          var kd = 0;
-          var p_2 = [];
-          for (let i = 0; i < shadow_store_state_2.model.symbol_table.length; i++) {
-            element = shadow_store_state_2.model.symbol_table[i];
-            if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
-              if (!(element.lmin & FIXED)) { // Only Free
-                  p_2.push(pc_2[kd++]);
-              } else {
-                  p_2.push(element.value);
-              }
-            }
-          }
-  //        console.log('In 2','p_2=',p_2,'ncode_2=',ncode_2);
+        if (nearest_sizes[0] !==  undefined) {
+          // Create shadow_store_clone_2 from the shadow_store and inject it into the model
+          shadow_store.dispatch(inject(shadow_store_state_clone_1)); // This turns off the dispatcher!
+          // Set wire_dia to nearest wire table lower value and set fixed into shadow_store
           shadow_store.dispatch(enableDispatcher(true));
-          shadow_store.dispatch(changeInputSymbolValues(p_2, merit)); // Set search's p_2 into shadow_store
-          shadow_store_state_2 = shadow_store.getState();
-  //        console.log('shadow_store_state_2=',shadow_store_state_2);
-  //        console.log('In 2','shadow_store_state_2.model.result.objective_value=',shadow_store_state_2.model.result.objective_value);
-          if (shadow_store_state_2.model.result.objective_value <= shadow_store_state_2.model.system_controls.objmin) { // If feasible
-            p = [...p_2];
-            ncode = ncode_2 + ' Wire_Dia set to Standard Size 0.11';
+          shadow_store.dispatch(changeSymbolValue("Wire_Dia", nearest_sizes[0]));
+          shadow_store.dispatch(setSymbolFlag("Wire_Dia", MIN, FIXED));
+          shadow_store.dispatch(setSymbolFlag("Wire_Dia", MAX, FIXED));
+          shadow_store.dispatch(enableDispatcher(false));
+          var shadow_store_state_2 = shadow_store.getState();
+  
+          if (shadow_store_state_2.model.result.objective_value > shadow_store_state_2.model.system_controls.objmin) { // If not feasible
+    //        console.log('shadow_store_state_2=',shadow_store_state_2);
+            // Create updated pc_2 from shadow_store_2
+            var pc_2 = [];
+            for (let i = 0; i < shadow_store_state_2.model.symbol_table.length; i++) {
+              element = shadow_store_state_2.model.symbol_table[i];
+              if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
+                if (!(element.lmin & FIXED)) { // Only Free
+                    pc_2.push(element.value);
+                }
+              }
+            }
+            // Call PATSH with pc_2 and set ncode_2
+            var delarg = shadow_store_state_2.model.system_controls.del;
+    //        console.log('In search','shadow_store=',shadow_store,'pc_2=',pc_2,'delarg=',delarg,'shadow_store_state_2.model.system_controls.delmin=',shadow_store_state_2.model.system_controls.delmin,'objmin=',objmin,'shadow_store_state_2.model.system_controls.maxit=',shadow_store_state_2.model.system_controls.maxit,'shadow_store_state_2.model.system_controls.tol=',shadow_store_state_2.model.system_controls.tol);
+            var ncode_2 = patsh(shadow_store, pc_2, delarg, shadow_store_state_2.model.system_controls.delmin, objmin, shadow_store_state_2.model.system_controls.maxit, shadow_store_state_2.model.system_controls.tol, merit);
+            // if objective_value_2 <= objmin then { p = get p from shadow_store_2, ncode = ncode_2 } // Just being feasible is good enough
+            var kd = 0;
+            var p_2 = [];
+            for (let i = 0; i < shadow_store_state_2.model.symbol_table.length; i++) {
+              element = shadow_store_state_2.model.symbol_table[i];
+              if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
+                if (!(element.lmin & FIXED)) { // Only Free
+                    p_2.push(pc_2[kd++]);
+                } else {
+                    p_2.push(element.value);
+                }
+              }
+            }
+    //        console.log('In 2','p_2=',p_2,'ncode_2=',ncode_2);
+            shadow_store.dispatch(enableDispatcher(true));
+            shadow_store.dispatch(changeInputSymbolValues(p_2, merit)); // Set search's p_2 into shadow_store
+            shadow_store_state_2 = shadow_store.getState();
+    //        console.log('shadow_store_state_2=',shadow_store_state_2);
+    //        console.log('In 2','shadow_store_state_2.model.result.objective_value=',shadow_store_state_2.model.result.objective_value);
+            if (shadow_store_state_2.model.result.objective_value <= shadow_store_state_2.model.system_controls.objmin) { // If feasible
+              p = [...p_2];
+              ncode = ncode_2 + ' Wire_Dia set to Standard Size 0.11';
+    //          console.log('After 2','p=',p,'ncode=',ncode);
+            }
+          } else { // If feasible to begin with then no need to call patsh, just set p from symbol table
+            p = [];
+            for (let i = 0; i < shadow_store_state_2.model.symbol_table.length; i++) {
+              element = shadow_store_state_2.model.symbol_table[i];
+              if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
+                p.push(element.value);
+              }
+            }
+            ncode = ncode_1 + ' Wire_Dia set to Standard Size 0.11';
   //          console.log('After 2','p=',p,'ncode=',ncode);
           }
-        } else { // If feasible to begin with then no need to call patsh, just set p from symbol table
-          p = [];
-          for (let i = 0; i < shadow_store_state_2.model.symbol_table.length; i++) {
-            element = shadow_store_state_2.model.symbol_table[i];
-            if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
-              p.push(element.value);
-            }
-          }
-          ncode = ncode_1 + ' Wire_Dia set to Standard Size 0.11';
-//          console.log('After 2','p=',p,'ncode=',ncode);
         }
 
         /*===========================*/
         /* Auto Standard Size Higher */
         /*===========================*/
 
-        // Create shadow_store_clone_3 from the shadow_store and inject it into the model
-        shadow_store.dispatch(inject(shadow_store_state_clone_1)); // This turns off the dispatcher!
-        // Set wire_dia to nearest wire table higher value and set fixed into shadow_store
-        shadow_store.dispatch(enableDispatcher(true));
-        shadow_store.dispatch(changeSymbolValue("Wire_Dia", nearest_sizes[1]));
-        shadow_store.dispatch(setSymbolFlag("Wire_Dia", MIN, FIXED));
-        shadow_store.dispatch(setSymbolFlag("Wire_Dia", MAX, FIXED));
-        shadow_store.dispatch(enableDispatcher(false));
-        var shadow_store_state_3 = shadow_store.getState();
-
-        if (shadow_store_state_3.model.result.objective_value > shadow_store_state_3.model.system_controls.objmin) { // If not feasible
-  //        console.log('shadow_store_state_3=',shadow_store_state_3);
-          // Create updated pc_3 from shadow_store_3
-          var pc_3 = [];
-          for (let i = 0; i < shadow_store_state_3.model.symbol_table.length; i++) {
-            element = shadow_store_state_3.model.symbol_table[i];
-              if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
-                if (!(element.lmin & FIXED)) { // Only Free
-                    pc_3.push(element.value);
-                }
-              }
-          }
-          // Call PATSH with pc_3 and set ncode_3
-          var delarg = shadow_store_state_3.model.system_controls.del;
-  //        console.log('In search','shadow_store=',shadow_store,'pc_3=',pc_3,'delarg=',delarg,'shadow_store_state_3.model.system_controls.delmin=',shadow_store_state_3.model.system_controls.delmin,'objmin=',objmin,'shadow_store_state_3.model.system_controls.maxit=',shadow_store_state_3.model.system_controls.maxit,'shadow_store_state_3.model.system_controls.tol=',shadow_store_state_3.model.system_controls.tol);
-          var ncode_3 = patsh(shadow_store, pc_3, delarg, shadow_store_state_3.model.system_controls.delmin, objmin, shadow_store_state_3.model.system_controls.maxit, shadow_store_state_3.model.system_controls.tol, merit);
-          // if objective_value_3 <= objmin then { p = get p from shadow_store_3 , ncode = ncode_3 } // Just being feasible is good enough
-          var kd = 0;
-          var p_3 = [];
-          for (let i = 0; i < shadow_store_state_3.model.symbol_table.length; i++) {
-            element = shadow_store_state_3.model.symbol_table[i];
-              if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
-                if (!(element.lmin & FIXED)) { // Only Free
-                    p_3.push(pc_3[kd++]);
-                } else {
-                    p_3.push(element.value);
-                }
-              }
-          }
-  //        console.log('In 3','p_3=',p_3,'ncode_3=',ncode_3);
+        if (nearest_sizes[1] !==  undefined) {
+          // Create shadow_store_clone_3 from the shadow_store and inject it into the model
+          shadow_store.dispatch(inject(shadow_store_state_clone_1)); // This turns off the dispatcher!
+          // Set wire_dia to nearest wire table higher value and set fixed into shadow_store
           shadow_store.dispatch(enableDispatcher(true));
-          shadow_store.dispatch(changeInputSymbolValues(p_3, merit)); // Set search's p_3 into shadow_store
-          shadow_store_state_3 = shadow_store.getState();
-  //        console.log('shadow_store_state_3=',shadow_store_state_3);
-  //        console.log('In 3','shadow_store_state_3.model.result.objective_value=',shadow_store_state_3.model.result.objective_value);
-          if (shadow_store_state_3.model.result.objective_value <= shadow_store_state_3.model.system_controls.objmin) { // If feasible
-            p = [...p_3];
-            ncode = ncode_3 + ' Wire_Dia set to Standard Size 0.111';
+          shadow_store.dispatch(changeSymbolValue("Wire_Dia", nearest_sizes[1]));
+          shadow_store.dispatch(setSymbolFlag("Wire_Dia", MIN, FIXED));
+          shadow_store.dispatch(setSymbolFlag("Wire_Dia", MAX, FIXED));
+          shadow_store.dispatch(enableDispatcher(false));
+          var shadow_store_state_3 = shadow_store.getState();
+  
+          if (shadow_store_state_3.model.result.objective_value > shadow_store_state_3.model.system_controls.objmin) { // If not feasible
+    //        console.log('shadow_store_state_3=',shadow_store_state_3);
+            // Create updated pc_3 from shadow_store_3
+            var pc_3 = [];
+            for (let i = 0; i < shadow_store_state_3.model.symbol_table.length; i++) {
+              element = shadow_store_state_3.model.symbol_table[i];
+                if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
+                  if (!(element.lmin & FIXED)) { // Only Free
+                      pc_3.push(element.value);
+                  }
+                }
+            }
+            // Call PATSH with pc_3 and set ncode_3
+            var delarg = shadow_store_state_3.model.system_controls.del;
+    //        console.log('In search','shadow_store=',shadow_store,'pc_3=',pc_3,'delarg=',delarg,'shadow_store_state_3.model.system_controls.delmin=',shadow_store_state_3.model.system_controls.delmin,'objmin=',objmin,'shadow_store_state_3.model.system_controls.maxit=',shadow_store_state_3.model.system_controls.maxit,'shadow_store_state_3.model.system_controls.tol=',shadow_store_state_3.model.system_controls.tol);
+            var ncode_3 = patsh(shadow_store, pc_3, delarg, shadow_store_state_3.model.system_controls.delmin, objmin, shadow_store_state_3.model.system_controls.maxit, shadow_store_state_3.model.system_controls.tol, merit);
+            // if objective_value_3 <= objmin then { p = get p from shadow_store_3 , ncode = ncode_3 } // Just being feasible is good enough
+            var kd = 0;
+            var p_3 = [];
+            for (let i = 0; i < shadow_store_state_3.model.symbol_table.length; i++) {
+              element = shadow_store_state_3.model.symbol_table[i];
+                if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
+                  if (!(element.lmin & FIXED)) { // Only Free
+                      p_3.push(pc_3[kd++]);
+                  } else {
+                      p_3.push(element.value);
+                  }
+                }
+            }
+    //        console.log('In 3','p_3=',p_3,'ncode_3=',ncode_3);
+            shadow_store.dispatch(enableDispatcher(true));
+            shadow_store.dispatch(changeInputSymbolValues(p_3, merit)); // Set search's p_3 into shadow_store
+            shadow_store_state_3 = shadow_store.getState();
+    //        console.log('shadow_store_state_3=',shadow_store_state_3);
+    //        console.log('In 3','shadow_store_state_3.model.result.objective_value=',shadow_store_state_3.model.result.objective_value);
+            if (shadow_store_state_3.model.result.objective_value <= shadow_store_state_3.model.system_controls.objmin) { // If feasible
+              p = [...p_3];
+              ncode = ncode_3 + ' Wire_Dia set to Standard Size 0.111';
+    //          console.log('After 3','p=',p,'ncode=',ncode);
+            }
+          } else { // If feasible to begin with then no need to call patsh, just set p from symbol table
+            p = [];
+            for (let i = 0; i < shadow_store_state_3.model.symbol_table.length; i++) {
+              element = shadow_store_state_3.model.symbol_table[i];
+              if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
+                p.push(element.value);
+              }
+            }
+            ncode = ncode_1 + ' Wire_Dia set to Standard Size 0.111';
   //          console.log('After 3','p=',p,'ncode=',ncode);
           }
-        } else { // If feasible to begin with then no need to call patsh, just set p from symbol table
-          p = [];
-          for (let i = 0; i < shadow_store_state_3.model.symbol_table.length; i++) {
-            element = shadow_store_state_3.model.symbol_table[i];
-            if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
-              p.push(element.value);
-            }
-          }
-          ncode = ncode_1 + ' Wire_Dia set to Standard Size 0.111';
-//          console.log('After 3','p=',p,'ncode=',ncode);
         }
       }
 
