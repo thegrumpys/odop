@@ -13,6 +13,8 @@ export function shouldSizeAutomatically(store) {
   if (store.model.result.objective_value > store.model.system_controls.objmin) { // Is objective value not feasible, then return false?
     return false;
   }
+  
+  
   return true;
 }
 
