@@ -153,7 +153,7 @@ export function search(store, objmin, merit) {
     //        console.log('In 2','shadow_store_state_2.model.result.objective_value=',shadow_store_state_2.model.result.objective_value);
             if (shadow_store_state_2.model.result.objective_value <= shadow_store_state_2.model.system_controls.objmin) { // If feasible
               p = [...p_2];
-              ncode = ncode_2 + ' Wire_Dia set to Standard Size 0.11';
+              ncode = ncode_2 + ' Wire_Dia set to Standard Size ' + nearest_sizes[1].toString();
     //          console.log('After 2','p=',p,'ncode=',ncode);
             }
           } else { // If feasible to begin with then no need to call patsh, just set p from symbol table
@@ -221,7 +221,7 @@ export function search(store, objmin, merit) {
     //        console.log('In 3','shadow_store_state_3.model.result.objective_value=',shadow_store_state_3.model.result.objective_value);
             if (shadow_store_state_3.model.result.objective_value <= shadow_store_state_3.model.system_controls.objmin) { // If feasible
               p = [...p_3];
-              ncode = ncode_3 + ' Wire_Dia set to Standard Size 0.111';
+              ncode = ncode_3 + ' Wire_Dia set to Standard Size ' + nearest_sizes[1].toString();
     //          console.log('After 3','p=',p,'ncode=',ncode);
             }
           } else { // If feasible to begin with then no need to call patsh, just set p from symbol table
