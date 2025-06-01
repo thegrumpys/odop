@@ -164,7 +164,7 @@ export function search(store, objmin, merit) {
                 p.push(element.value);
               }
             }
-            ncode = ncode_1 + ' Wire_Dia set to Standard Size ' + nearest_sizes[0];
+            ncode = ncode_1 + ' Wire_Dia set to Standard Size ' + nearest_sizes[0].toString();
   //          console.log('After 2','p=',p,'ncode=',ncode);
           }
         }
@@ -232,7 +232,7 @@ export function search(store, objmin, merit) {
                 p.push(element.value);
               }
             }
-            ncode = ncode_1 + ' Wire_Dia set to Standard Size ' + nearest_sizes[1];
+            ncode = ncode_1 + ' Wire_Dia set to Standard Size ' + nearest_sizes[1].toString();
   //          console.log('After 3','p=',p,'ncode=',ncode);
           }
         }
