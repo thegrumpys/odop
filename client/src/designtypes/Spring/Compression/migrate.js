@@ -391,6 +391,7 @@ export function migrate(design) {
     case '13':
         // console.log('Convert from 13 to 14');
         design.system_controls.enable_auto_search = 1; // Default to auto search on
+        design.system_controls.enable_auto_std_size = 1; // Default to auto standard size on
         // migrated_design.version = '14'; // uncomment when there is a case below this line
 
     // case 'N':
