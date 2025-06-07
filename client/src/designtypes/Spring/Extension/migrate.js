@@ -342,7 +342,7 @@ export function migrate(design) {
         }
         design.system_controls.enable_auto_search = 1; // Default to auto search on
         design.system_controls.enable_auto_std_size = 1; // Default to auto standard size on
-        migrated_design.version = '10'; // uncomment when there is a case below this line
+        migrated_design.version = '10';
     case '10':
 
     //============BLOCK OF CODE TO REPLICATE============
