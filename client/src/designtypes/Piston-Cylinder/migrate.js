@@ -111,21 +111,20 @@ export function migrate(design) {
         design.symbol_table[ 2].validmin =  Number.MIN_VALUE; // THICKNESS
         design.symbol_table[ 3].validmin = -Number.MAX_VALUE; // FORCE
         design.symbol_table[ 5].validmin = -Number.MAX_VALUE; // STRESS
-        migrated_design.version = '7'; // last thing... set the migrated model version
+        migrated_design.version = '7';
     case '7':
         // console.log('Convert from 7 to 8');
-        // Do nothing
-            migrated_design.version = '8';
-
-    case '8':
-        // console.log('Convert from 8 to 9');
         design.system_controls.enable_auto_search = 1; // Default to auto search on
-        // migrated_design.version = '9'; // uncomment when there is a case below this line
+        design.system_controls.enable_auto_std_size = 1; // Default to auto standard size on
+        migrated_design.version = '8';
+    case '8':
 
-    // case 'N':
-        // console.log('Convert from N to N+1');
-        // Write the migration code here, but leave the version change line commented below
-        // migrated_design.version = 'N+1'; // uncomment when there is a case below this line
+    //============BLOCK OF CODE TO REPLICATE============
+    //     console.log('Convert from N to N+1');
+    //     Write the migration code here
+    //     migrated_design.version = 'N+1';
+    // case 'N+1':
+    //==================================================
 
         break; // Do not copy this break
     default: // Unknown

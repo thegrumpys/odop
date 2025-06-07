@@ -134,22 +134,20 @@ export function migrate(design) {
             ++design.symbol_table[ 3].value;
         };
         design.symbol_table[3].table = 'Solid/mat_us';  // Incorporate revised material file naming
-        migrated_design.version = '9'; // last thing... set the migrated model version
+        migrated_design.version = '9';
     case '9':
-        // console.log('Convert from 9 to 10');
-        // Do nothing
-        // migrated_design.version = '10'; // uncomment when there is a case below this line
-        migrated_design.version = '10';
-
-    case '10':
-        // console.log('Convert from 10 to 11');
+        // console.log('Convert from 7 to 8');
         design.system_controls.enable_auto_search = 1; // Default to auto search on
-        // migrated_design.version = '11'; // uncomment when there is a case below this line
+        design.system_controls.enable_auto_std_size = 1; // Default to auto standard size on
+        migrated_design.version = '10';
+    case '10':
 
-    // case 'N':
-        // console.log('Convert from N to N+1');
-        // Write the migration code here, but leave the version change line commented below
-        // migrated_design.version = 'N+1'; // uncomment when there is a case below this line
+    //============BLOCK OF CODE TO REPLICATE============
+    //     console.log('Convert from N to N+1');
+    //     Write the migration code here
+    //     migrated_design.version = 'N+1';
+    // case 'N+1':
+    //==================================================
 
         break; // Do not copy this break
     default: // Unknown
