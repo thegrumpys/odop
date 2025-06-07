@@ -342,8 +342,8 @@ export function migrate(design) {
         }
         design.system_controls.enable_auto_search = 1; // Default to auto search on
         design.system_controls.enable_auto_std_size = 1; // Default to auto standard size on
-        migrated_design.version = '11'; // uncomment when there is a case below this line
-    case '11':
+        migrated_design.version = '10'; // uncomment when there is a case below this line
+    case '10':
 
     //============BLOCK OF CODE TO REPLICATE============
     //     console.log('Convert from N to N+1');
