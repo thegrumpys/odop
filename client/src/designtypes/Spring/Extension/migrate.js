@@ -340,17 +340,17 @@ export function migrate(design) {
         if (design.symbol_table[38].value >= 5) { // Is Life_Category shot-peened then make it not shot-peened
           design.symbol_table[38].value -= 4;
         }
-        migrated_design.version = '10';
-
-    case '10':
-        // console.log('Convert from 10 to 11');
         design.system_controls.enable_auto_search = 1; // Default to auto search on
-        // migrated_design.version = '11'; // uncomment when there is a case below this line
+        design.system_controls.enable_auto_std_size = 1; // Default to auto standard size on
+        migrated_design.version = '11'; // uncomment when there is a case below this line
+    case '11':
 
-    // case 'N':
-        // console.log('Convert from N to N+1');
-        // Write the migration code here, but leave the version change line commented below
-        // migrated_design.version = 'N+1'; // uncomment when there is a case below this line
+    //============BLOCK OF CODE TO REPLICATE============
+    //     console.log('Convert from N to N+1');
+    //     Write the migration code here
+    //     migrated_design.version = 'N+1';
+    // case 'N+1':
+    //==================================================
 
         break; // Do not copy this break
     default: // Unknown
