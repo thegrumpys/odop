@@ -53,11 +53,11 @@ export function search(store, objmin, merit) {
       return obj;
     }
 
+//    console.log('Before Search_1: obj = ', obj);
     // Do the pattern search
     var delarg = shadow_store_state.model.system_controls.del;
 //    console.log('In search','shadow_store=',shadow_store,'pc=',pc,'delarg=',delarg,'shadow_store_state.model.system_controls.delmin=',shadow_store_state.model.system_controls.delmin,'objmin=',objmin,'shadow_store_state.model.system_controls.maxit=',shadow_store_state.model.system_controls.maxit,'shadow_store_state.model.system_controls.tol=',shadow_store_state.model.system_controls.tol);
     var ncode_1 = patsh(shadow_store, pc, delarg, shadow_store_state.model.system_controls.delmin, objmin, shadow_store_state.model.system_controls.maxit, shadow_store_state.model.system_controls.tol, merit);
-//    console.log('In search ncode=',ncode);
 
     // Expand PC back into store change actions
     var kd = 0;
@@ -80,6 +80,7 @@ export function search(store, objmin, merit) {
     shadow_store_state = shadow_store.getState();
 //    console.log('shadow_store_state=',shadow_store_state);
 //    console.log('In 1','shadow_store_state.model.result.objective_value=',shadow_store_state.model.result.objective_value);
+//    console.log('After Search_1: ncode_1 = ', ncode_1, ' obj = ', shadow_store_state.model.result.objective_value);
 
     /*================================*/
     /* Auto Standard Size Preparation */
@@ -128,6 +129,7 @@ export function search(store, objmin, merit) {
                 }
               }
             }
+    //        console.log('Before Search_2: obj = ', shadow_store_state_2.model.result.objective_value);
             // Call PATSH with pc_2 and set ncode_2
             var delarg = shadow_store_state_2.model.system_controls.del;
     //        console.log('In search','shadow_store=',shadow_store,'pc_2=',pc_2,'delarg=',delarg,'shadow_store_state_2.model.system_controls.delmin=',shadow_store_state_2.model.system_controls.delmin,'objmin=',objmin,'shadow_store_state_2.model.system_controls.maxit=',shadow_store_state_2.model.system_controls.maxit,'shadow_store_state_2.model.system_controls.tol=',shadow_store_state_2.model.system_controls.tol);
@@ -168,7 +170,8 @@ export function search(store, objmin, merit) {
   //          console.log('After 2','p=',p,'ncode=',ncode);
           }
         }
-
+  //      console.log('After Search_2: ncode_2 = ', ncode_2, ' obj = ', shadow_store_state_2.model.result.objective_value);
+        
         /*===========================*/
         /* Auto Standard Size Higher */
         /*===========================*/
@@ -196,6 +199,7 @@ export function search(store, objmin, merit) {
                   }
                 }
             }
+    //        console.log('Before Search_3: obj = ', shadow_store_state_3.model.result.objective_value);
             // Call PATSH with pc_3 and set ncode_3
             var delarg = shadow_store_state_3.model.system_controls.del;
     //        console.log('In search','shadow_store=',shadow_store,'pc_3=',pc_3,'delarg=',delarg,'shadow_store_state_3.model.system_controls.delmin=',shadow_store_state_3.model.system_controls.delmin,'objmin=',objmin,'shadow_store_state_3.model.system_controls.maxit=',shadow_store_state_3.model.system_controls.maxit,'shadow_store_state_3.model.system_controls.tol=',shadow_store_state_3.model.system_controls.tol);
@@ -235,6 +239,7 @@ export function search(store, objmin, merit) {
             ncode = ncode_1 + ' Wire_Dia set to Standard Size ' + nearest_sizes[1].toString();
   //          console.log('After 3','p=',p,'ncode=',ncode);
           }
+  //      console.log('After Search_3: ncode_3 = ', ncode_3, ' obj = ', shadow_store_state_3.model.result.objective_value);
         }
       }
 
