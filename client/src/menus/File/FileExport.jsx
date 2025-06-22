@@ -69,7 +69,7 @@ export default function FileExport() {
     setShow(!show);
   }
 
-  const exportCSV = (model_symbol_table, name, file_type) => {
+  const exportCSV = (model_symbol_table, file_name, file_type) => {
 //        console.log('In FileExport.exportCSV','model_symbol_table=',model_symbol_table,'name=',name,'type=',type);
     const url = window.URL.createObjectURL(new Blob(Object.keys(model_symbol_table).map(key =>
       model_symbol_table[key].name + "," +
@@ -79,7 +79,7 @@ export default function FileExport() {
 //        console.log('In FileExport.exportCSV','url=', url);
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', name + '.' + file_type);
+    link.setAttribute('download', file_name.trim() + '.' + file_type);
 //        console.log('In FileExport.exportCSV','link=', link);
     document.body.appendChild(link);
     link.click();
