@@ -19,7 +19,7 @@ export default function FileDownloadAll() {
 //    console.log('In FileDownloadAll.downloadFile','url=', url);
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', file_name + '.' + file_type);
+    link.setAttribute('download', file_name.trim() + '.' + file_type);
 //    console.log('In FileDownloadAll.downloadFile','link=', link);
     document.body.appendChild(link);
     link.click();
@@ -73,7 +73,7 @@ export default function FileDownloadAll() {
           const fileContent = await response.json(); // or use .arrayBuffer(), etc.
           console.log('fileContent=',fileContent);
           return {
-            fileName: `odop_download_all_${currentDateString}/${type}/${fileName.name}`,
+            fileName: `odop_download_all_${currentDateString}/${type}/${fileName.name.trim()}`,
             fileContent
           };
         });

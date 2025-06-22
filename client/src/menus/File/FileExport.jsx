@@ -12,13 +12,13 @@ export default function FileExport() {
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const [show, setShow] = useState(false);
 
-  const exportFile = (model, name, file_type) => {
+  const exportFile = (model, file_name, file_type) => {
 //        console.log('In FileExport.exportFile model=',model);
     const url = window.URL.createObjectURL(new Blob([JSON.stringify(model, null, 2)]));
 //        console.log('In FileExport.exportFile','url=', url);
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', name + '.' + file_type);
+    link.setAttribute('download', file_name.trim() + '.' + file_type);
 //        console.log('In FileExport.exportFile','link=', link);
     document.body.appendChild(link);
     link.click();
