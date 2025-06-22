@@ -12,6 +12,7 @@ This topic covers the ODOP menu structure.
  - [File : Delete...](menus.html#FileDelete) 
  - [File : Import...](menus.html#FileImport) 
  - [File : Export](menus.html#FileExport) 
+ - [File : DownloadAll](menus.html#FileDownloadAll) 
  - [File : Preferences](menus.html#FilePreferences) 
  - [File : Properties](menus.html#FileProperties) 
 
@@ -121,6 +122,7 @@ ___
 The File : Save As... menu item saves the current design into the cloud-based ODOP Design Library with a new name. 
 It is necessary to be logged into a user account. 
 If not logged in to a user account, a pop-up providing a Sign In opportunity will appear. 
+In the file name, the following characters < > : " / \ | ? * are replaced with an underscore.
 
 See also:   
  - [Default Designs](defaultDesigns.html)   
@@ -170,6 +172,22 @@ ___
 The File : Export menu item saves the current design as a download into a file in the local file system. 
 By default, the file is placed in the user's download folder (directory) with a file name extension of ".json". 
 Use browser settings to control the default download folder or be prompted to specify a folder every time. 
+
+See also:   
+ - [Import and Export](htt.html#fileImportAndExport)   
+ - [File : Import...](menus.html#FileImport)   
+ - [.json files](https://en.wikipedia.org/wiki/JSON)   
+
+___
+
+<a id="FileDownloadAll"></a>  
+___
+
+## File : DownloadAll   
+
+The File : Download All  menu item saves all designs from the ODOP Design Library into a 
+file in .ZIP format in the user's local file system.
+The individual design files have a file name extension of ".json".
 
 See also:   
  - [Import and Export](htt.html#fileImportAndExport)   
