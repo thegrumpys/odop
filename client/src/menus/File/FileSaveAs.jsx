@@ -148,7 +148,7 @@ export default function FileSaveAs() {
 //    console.log('In FileSaveAs.onSaveAs');
     setShow(!show);
     // Save the model
-    postDesign(model_user, model_type, name); // Take name from component state
+    postDesign(model_user, model_type, name.trim()); // Take name from component state
     dispatch(deleteAutoSave());
   }
 
