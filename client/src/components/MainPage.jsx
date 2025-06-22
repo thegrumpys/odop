@@ -21,7 +21,7 @@ import FilePreferences from '../menus/File/FilePreferences';
 import FileProperties from '../menus/File/FileProperties';
 import FileImport from '../menus/File/FileImport';
 import FileExport from '../menus/File/FileExport';
-import FileExportAll from '../menus/File/FileExportAll';
+import FileDownloadAll from '../menus/File/FileDownloadAll';
 import ActionSearch from '../menus/Action/ActionSearch';
 import ActionSeek from '../menus/Action/ActionSeek';
 import ActionTrade from '../menus/Action/ActionTrade';
@@ -61,7 +61,8 @@ export default function MainPage() {
 //    console.log('MainPage','Mounted','All useEffect');
     if (authState && authState.isAuthenticated) {
 //      console.log('MainPage','Mounted','changeUser=',authState.idToken.claims.sub);
-      dispatch(changeUser(authState.idToken.claims.sub));
+      var user = authState.idToken.claims.sub;
+      dispatch(changeUser(user));
     }
     return () => {
 //      console.log('MainPage','Unmounting ...','All useEffect');
@@ -143,7 +144,8 @@ export default function MainPage() {
               <NavDropdown.Divider />
               <FileImport />
               <FileExport />
-              <FileExportAll />
+              <NavDropdown.Divider />
+              <FileDownloadAll />
               <NavDropdown.Divider />
               <FilePreferences />
               <FileProperties />

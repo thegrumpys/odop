@@ -8,26 +8,26 @@ import config from '../../config';
 //import { JSZip } from 'jszip';
 var JSZip = require("jszip");
 
-export default function FileExportAll() {
-//  console.log('FileExportAll - Mounting...');
+export default function FileDownloadAll() {
+//  console.log('FileDownloadAll - Mounting...');
   const user = useSelector((state) => state.user);
   console.log('user=',user);
 
   const downloadFile = (model, file_name, file_type) => {
-//    console.log('In FileExportAll.downloadFile','model=',model,'file_name=',file_name,'file_type=',file_type);
+//    console.log('In FileDownloadAll.downloadFile','model=',model,'file_name=',file_name,'file_type=',file_type);
     const url = window.URL.createObjectURL(model);
-//    console.log('In FileExportAll.downloadFile','url=', url);
+//    console.log('In FileDownloadAll.downloadFile','url=', url);
     const link = document.createElement('a');
     link.href = url;
     link.setAttribute('download', file_name + '.' + file_type);
-//    console.log('In FileExportAll.downloadFile','link=', link);
+//    console.log('In FileDownloadAll.downloadFile','link=', link);
     document.body.appendChild(link);
     link.click();
   }
 
-  const onExportAll = async () => {
+  const onDownloadAll = async () => {
     if (user === null) {
-      displayMessage('You are not signed in so your files to export are not accessible, terminating');
+      displayMessage('Sign in so your files for download are accessible.');
       return;
     }
     try {
@@ -38,7 +38,7 @@ export default function FileExportAll() {
       const hours = currentDate.getHours().toString().padStart(2, '0');
       const minutes = currentDate.getMinutes().toString().padStart(2, '0');
       const seconds = currentDate.getSeconds().toString().padStart(2, '0');
-      const currentDateString = `${year}${month}${day}${hours}${minutes}${seconds}`;
+      const currentDateString = `${year}${month}${day}_${hours}${minutes}${seconds}`;
 
       const allFileContentPromises = [];
 
@@ -73,7 +73,7 @@ export default function FileExportAll() {
           const fileContent = await response.json(); // or use .arrayBuffer(), etc.
           console.log('fileContent=',fileContent);
           return {
-            fileName: `ODOP_${currentDateString}/${type}/${fileName.name}`,
+            fileName: `odop_download_all_${currentDateString}/${type}/${fileName.name}`,
             fileContent
           };
         });
@@ -85,7 +85,7 @@ export default function FileExportAll() {
       const fileData = await Promise.all(allFileContentPromises);
       console.log('fileData=',fileData);
       if (fileData.length === 0) {
-        displayMessage('No files to export were found, terminating');
+        displayMessage('No files for download were found.');
         return;
       }
       for (const fileDatum of fileData) {
@@ -96,18 +96,18 @@ export default function FileExportAll() {
       zip.generateAsync({type:"blob"})
       .then(function(content) {
         console.log('content=',content);
-        downloadFile(content, 'odop_export_all_'+currentDateString, 'zip');
-        logUsage('event', 'FileExportAll', { event_label: '' });
+        downloadFile(content, 'odop_download_all_'+currentDateString, 'zip');
+        logUsage('event', 'FileDownloadAll', { event_label: '' });
       });
     } catch (error) {
-      displayMessage('Error fetching and downloading files to export: ' + error);
+      displayMessage('Error fetching and downloading files for download: ' + error);
     }
   }
 
   return (
     <>
-      <NavDropdown.Item onClick={onExportAll}>
-        Export All
+      <NavDropdown.Item onClick={onDownloadAll}>
+        Download All
       </NavDropdown.Item>
     </>
   );
