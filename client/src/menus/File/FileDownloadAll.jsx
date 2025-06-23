@@ -39,7 +39,7 @@ export default function FileDownloadAll() {
       const hours = currentDate.getHours().toString().padStart(2, '0');
       const minutes = currentDate.getMinutes().toString().padStart(2, '0');
       const seconds = currentDate.getSeconds().toString().padStart(2, '0');
-      const currentDateString = `${year}${month}${day}_${hours}${minutes}${seconds}`;
+      const topLevel = `odop_download_all_${year}${month}${day}_${hours}${minutes}${seconds}`;
 
       const allFileContentPromises = [];
 
@@ -74,7 +74,7 @@ export default function FileDownloadAll() {
           const fileContent = await response.json(); // or use .arrayBuffer(), etc.
           console.log('fileContent=',fileContent);
           return {
-            fileName: `odop_download_all_${currentDateString}/${type}/${fileName.name.trim()}`,
+            fileName: `${topLevel}/${type}/${fileName.name.trim()}`,
             fileContent
           };
         });
@@ -90,14 +90,20 @@ export default function FileDownloadAll() {
         return;
       }
       for (const fileDatum of fileData) {
-        zip.file(fileDatum.fileName + '.json', new Blob([JSON.stringify(fileDatum.fileContent, null, 2)]));
+        zip.file(fileDatum.fileName + '.json', JSON.stringify(fileDatum.fileContent, null, 2));
       }
 
       // Download the Blob
-      zip.generateAsync({type:"blob"})
+      zip.generateAsync({
+        type:"blob",
+        compression: "DEFLATE",
+        compressionOptions: {
+            level: 9
+        }
+      })
       .then(function(content) {
         console.log('content=',content);
-        downloadFile(content, 'odop_download_all_'+currentDateString, 'zip');
+        downloadFile(content, topLevel, 'zip');
         logUsage('event', 'FileDownloadAll', { event_label: '' });
       });
     } catch (error) {
