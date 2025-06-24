@@ -119,10 +119,13 @@ ___
 
 ## File : Save As...   
 
-The File : Save As... menu item saves the current design into the cloud-based ODOP Design Library with a new name. 
+The File : Save As... menu item saves the current design into the cloud-based ODOP Design Library with a new name.  
+
 It is necessary to be logged into a user account. 
-If not logged in to a user account, a pop-up providing a Sign In opportunity will appear. 
-In the file name, the following characters < > : " / \ | ? * are replaced with an underscore.
+If not logged in to a user account, a button providing a Sign In opportunity will appear.  
+
+In order to support an ability to export designs into files in a local file system, 
+when creating names, the following characters < > : " / \ | ? * are replaced with an underscore.
 
 See also:   
  - [Default Designs](defaultDesigns.html)   
@@ -158,6 +161,8 @@ ___
 
 The File : Import menu item restores a previously exported design as the current design.   
 
+The current design will be replaced by the design being imported.
+
 See also:   
  - [Import and Export](htt.html#fileImportAndExport)  
  - [File : Export](menus.html#FileExport)  
@@ -176,6 +181,7 @@ Use browser settings to control the default download folder or be prompted to sp
 See also:   
  - [Import and Export](htt.html#fileImportAndExport)   
  - [File : Import...](menus.html#FileImport)   
+ - [File : Download All](menus.html#FileDownloadAll)   
  - [.json files](https://en.wikipedia.org/wiki/JSON)   
 
 ___
@@ -185,9 +191,21 @@ ___
 
 ## File : DownloadAll   
 
-The File : Download All  menu item saves all designs from the ODOP Design Library into a 
+The File : Download All  menu item saves all designs from the user's ODOP Design Library into a 
 file in .ZIP format in the user's local file system.
-The individual design files have a file name extension of ".json".
+The individual design files have a file name extension of ".json".  
+
+Designs are not migrated to the latest version as part of the DownloadAll operation.
+
+The .ZIP file created by Download All contains a directory structure based on design type (Compression, Extension, Torsion, etc.). 
+For an "extract all" operation, different operating systems and data compression utilities differ in handling this directory structure. 
+ - When using the "Extract all" feature of Microsoft Windows File Explorer, 
+it is necessary to remove the last portion of the proposed directory name (the name of the .ZIP file) 
+before clicking the "Extract all" button in order to avoid a redundant level in the created directory tree. 
+ - When using the Windows "tar" command in a command window, 
+ an "extract all" operation (tar -xf) will not create a redundant level in the created directory tree.  
+
+Once extracted from the .ZIP file, designs may be brought into ODOP:Spring app with the [File : Import...](menus.html#FileImport) menu item. 
 
 See also:   
  - [Import and Export](htt.html#fileImportAndExport)   

@@ -101,9 +101,14 @@ The ODOP app can export the state of the current design as a download into a fil
 By default, the file is placed in the user's download folder (directory) 
 with a file name extension of ".json". 
 Use browser settings to control the default download folder or 
-be prompted to specify a folder every time. 
+to be prompted to specify a folder every time. 
 
-The **File : Import** menu item will restore a previously exported design as the current design. 
+The [File : Import](menus.html#FileImport) menu item will restore a previously exported design as the current design.  
+
+See Also: 
+  - [File : DownloadAll](menus.html#FileDownloadAll)  
+  - [.json files](https://en.wikipedia.org/wiki/JSON)   
+ 
 
 ___
 
