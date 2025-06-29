@@ -1,7 +1,11 @@
 **Message-of-the-day** &nbsp; updated June 29, 2025  
 
 **Summary:**  
-Implemented a File : "Download All" feature that automates the construction of a single .ZIP file containing all a user's designs in the ODOP Design Library (cloud storage) which is then downloaded to the user's local file system.
+Implemented a File : "Download All" feature that automates the construction of a single .ZIP file containing all a user's designs in the ODOP Design Library 
+(cloud storage) which is then downloaded to the user's local file system.  
+The characters < > : " / \ | ? * are not allowed in design names in the ODOP Design Library and have been changed to an underscore (_).  
+
+___
 
 Watch this space for breaking news 
 including recent and impending releases, planned outages, newly discovered issues and work-arounds.  
