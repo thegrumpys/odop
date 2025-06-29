@@ -21,6 +21,7 @@ import FilePreferences from '../menus/File/FilePreferences';
 import FileProperties from '../menus/File/FileProperties';
 import FileImport from '../menus/File/FileImport';
 import FileExport from '../menus/File/FileExport';
+import FileDownloadAll from '../menus/File/FileDownloadAll';
 import ActionSearch from '../menus/Action/ActionSearch';
 import ActionSeek from '../menus/Action/ActionSeek';
 import ActionTrade from '../menus/Action/ActionTrade';
@@ -142,6 +143,8 @@ export default function MainPage() {
               <NavDropdown.Divider />
               <FileImport />
               <FileExport />
+              <NavDropdown.Divider />
+              <FileDownloadAll />
               <NavDropdown.Divider />
               <FilePreferences />
               <FileProperties />

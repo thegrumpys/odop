@@ -127,7 +127,9 @@ export default function FileSaveAs() {
 
   const onTextInput = (event) => {
 //    console.log('In FileSaveAs.onTextInput','event.target.value=',event.target.value);
-    setName(event.target.value); // Change name in component state
+    let value = event.target.value;
+    value = value.replace(/[<>:"/\\|?*]/g, '_'); // replace invalid filename characters with underscore throughout
+    setName(value); // Change name in component state
   }
 
   const onSignIn = () => {
@@ -146,7 +148,7 @@ export default function FileSaveAs() {
 //    console.log('In FileSaveAs.onSaveAs');
     setShow(!show);
     // Save the model
-    postDesign(model_user, model_type, name); // Take name from component state
+    postDesign(model_user, model_type, name.trim()); // Take name from component state
     dispatch(deleteAutoSave());
   }
 
@@ -162,10 +164,13 @@ export default function FileSaveAs() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <p>Saves the current design into the cloud-based
+          ODOP Design Library with a new name.
+          The following characters &lt; &gt; : &quot; / \ | ? * are replaced with an underscore.</p>
           <br />
           {!authState.isAuthenticated && <Alert variant="info">You are not signed in. Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>}
           <Form.Label htmlFor="FileSaveAsText">Save As:</Form.Label>
-          <Form.Control type="text" id="FileSaveAsText" placeholder="Enter design name here" onChange={onTextInput} disabled={!authState.isAuthenticated} />
+          <Form.Control type="text" id="FileSaveAsText" placeholder="Enter design name here" onChange={onTextInput} disabled={!authState.isAuthenticated} value={name}/>
         </Modal.Body>
         <Modal.Footer>
           {!authState.isAuthenticated && <Button variant="info" onClick={onSignIn}>Sign In...</Button>}{' '}
