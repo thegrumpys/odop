@@ -64,8 +64,8 @@ Follow the links below to see change details in GitHub.
 
 Version  | &nbsp; | Date released  
 ---      | ---    | ---  
-[ODOP version 5.2.1](https://github.com/thegrumpys/odop/milestone/76?closed=1)   | &nbsp; | June 29, 2025.  
-[ODOP version 5.2](https://github.com/thegrumpys/odop/milestone/73?closed=1)   | &nbsp; | April 06, 2025.  
+[ODOP version 5.2.1](https://github.com/thegrumpys/odop/milestone/76?closed=1) | &nbsp; | June 29, 2025.  
+[ODOP version 5.2.0](https://github.com/thegrumpys/odop/milestone/73?closed=1) | &nbsp; | April 06, 2025.  
 [ODOP version 5.1](https://github.com/thegrumpys/odop/milestone/75?closed=1)   | &nbsp; | December 29, 2024.  
 [ODOP version 5.0](https://github.com/thegrumpys/odop/milestone/58?closed=1)   | &nbsp; | was never released.  
 [ODOP version 4.5.1](https://github.com/thegrumpys/odop/milestone/69?closed=1) | &nbsp; | December 10, 2023.  
