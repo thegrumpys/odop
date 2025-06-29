@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: u28rhuskh0x5paau.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306
--- Generation Time: Feb 16, 2020 at 09:18 PM
--- Server version: 5.7.23-log
--- PHP Version: 7.3.11
+-- Host: database:3306
+-- Generation Time: Jun 29, 2025 at 11:30 PM
+-- Server version: 10.11.2-MariaDB-1:10.11.2+maria~ubu2204-log
+-- PHP Version: 8.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `s6v0edrsu4v1u49m`
+-- Database: `odop`
 --
 
 -- --------------------------------------------------------
@@ -29,14 +28,14 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `design` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `user` varchar(64) DEFAULT NULL,
   `type` varchar(64) NOT NULL,
   `name` varchar(64) NOT NULL,
-  `value` mediumtext
-);
+  `value` mediumtext DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 -- --------------------------------------------------------
 
@@ -45,12 +44,11 @@ CREATE TABLE `design` (
 --
 
 CREATE TABLE `token` (
-  `id` int NOT NULL,
-  `token` varchar(255),
-  `user_id` int,
-  `type` varchar(50),
-  FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
-);
+  `id` int(11) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `user_id` varchar(255) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 -- --------------------------------------------------------
 
@@ -59,12 +57,12 @@ CREATE TABLE `token` (
 --
 
 CREATE TABLE `usage_log` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `ip_address` varchar(64) NOT NULL,
   `note` longtext DEFAULT NULL
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 -- --------------------------------------------------------
 
@@ -73,15 +71,15 @@ CREATE TABLE `usage_log` (
 --
 
 CREATE TABLE `user` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `role` varchar(50) DEFAULT NULL,
-  `token` varchar(64) UNIQUE,
-  `status` varchar(50)
-);
+  `token` varchar(64) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -97,7 +95,8 @@ ALTER TABLE `design`
 -- Indexes for table `token`
 --
 ALTER TABLE `token`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`) USING BTREE;
 
 --
 -- Indexes for table `usage_log`
@@ -121,27 +120,23 @@ ALTER TABLE `user`
 ALTER TABLE `design`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
--- AUTO_INCREMENT for table `token`
---
-ALTER TABLE `token`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-COMMIT;
-
 --
 -- AUTO_INCREMENT for table `usage_log`
 --
 ALTER TABLE `usage_log`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
 
 --
--- AUTO_INCREMENT for table `user`
+-- Constraints for dumped tables
 --
-ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-COMMIT;
 
 --
+-- Constraints for table `token`
+--
+ALTER TABLE `token`
+  ADD CONSTRAINT `token_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`email`) ON DELETE CASCADE;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
