@@ -41,6 +41,6 @@ One possibility is to build into the staging system with the Heroku environment 
     1. Set NODE_ENV to "production"
     1. Set REACT_APP_NODE_ENV to "production"
     1. Release to staging via `git push heroku-staging master`
-    1. Verify that it is production by starting `https://odop-staging.herokuapp.com/` and checking if "Load Initial State" is in File Open modal.
+    1. Verify that it is production by starting `https://odop-staging.herokuapp.com/` and checking if "Load Initial State" is not in File Open modal.
     1. Afterwards reset REACT_APP_NODE_ENV to "staging"
     1. Leave NODE_ENV to "production"

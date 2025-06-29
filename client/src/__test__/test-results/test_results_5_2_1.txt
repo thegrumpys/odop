@@ -1,0 +1,172 @@
+ PASS  src/__test__/Piston-Cylinder/dispatcher.test.js
+ PASS  src/__test__/Piston-Cylinder/reducers.test.js
+ PASS  src/__test__/Spring/Compression/eqnset.test.js
+ PASS  src/__test__/Spring/Extension/eqnset.test.js
+ PASS  src/__test__/Spring/Torsion/eqnset.test.js
+ PASS  src/__test__/Piston-Cylinder/despak.test.js
+ PASS  src/__test__/Piston-Cylinder/search.test.js
+ PASS  src/__test__/Piston-Cylinder/performance.test.js
+  ● Console
+
+    console.log
+      reducers change symbol value 1000000x duration= 914
+
+      at Object.<anonymous> (src/__test__/Piston-Cylinder/performance.test.js:32:13)
+
+    console.log
+      invokeEquationSet 100000x duration= 377
+
+      at Object.<anonymous> (src/__test__/Piston-Cylinder/performance.test.js:56:13)
+
+    console.log
+      search without merit 1000x duration= 306
+
+      at Object.<anonymous> (src/__test__/Piston-Cylinder/performance.test.js:129:13)
+
+ PASS  src/__test__/Spring/Compression/tutor7.test.js
+  ● Console
+
+    console.log
+      Duration= 238
+
+      at Object.<anonymous> (src/__test__/Spring/Compression/tutor7.test.js:141:13)
+
+ PASS  src/__test__/Spring/Extension/demo7.test.js
+  ● Console
+
+    console.log
+      Duration= 205
+
+      at Object.<anonymous> (src/__test__/Spring/Extension/demo7.test.js:112:13)
+
+ PASS  src/__test__/Spring/Compression/demo10.test.js
+  ● Console
+
+    console.log
+      Duration= 56
+
+      at Object.<anonymous> (src/__test__/Spring/Compression/demo10.test.js:118:13)
+
+ PASS  src/__test__/Spring/Compression/tutor3.test.js
+  ● Console
+
+    console.log
+      Duration= 44
+
+      at Object.<anonymous> (src/__test__/Spring/Compression/tutor3.test.js:112:13)
+
+ PASS  src/__test__/Spring/Extension/demo8.test.js
+  ● Console
+
+    console.log
+      Duration= 98
+
+      at Object.<anonymous> (src/__test__/Spring/Extension/demo8.test.js:97:13)
+
+ PASS  src/__test__/Spring/Compression/demoNewDesign.test.js
+  ● Console
+
+    console.log
+      Duration= 27
+
+      at Object.<anonymous> (src/__test__/Spring/Compression/demoNewDesign.test.js:105:13)
+
+ PASS  src/__test__/Piston-Cylinder/invokeEquationSet.test.js
+ PASS  src/__test__/Spring/Extension/demo9.test.js
+  ● Console
+
+    console.log
+      Duration= 69
+
+      at Object.<anonymous> (src/__test__/Spring/Extension/demo9.test.js:93:13)
+
+ PASS  src/__test__/Piston-Cylinder/invokeInit.test.js
+ PASS  src/__test__/Spring/Extension/demo6.test.js
+  ● Console
+
+    console.log
+      Duration= 63
+
+      at Object.<anonymous> (src/__test__/Spring/Extension/demo6.test.js:92:13)
+
+ PASS  src/__test__/Spring/Compression/demo5.test.js
+  ● Console
+
+    console.log
+      Duration= 28
+
+      at Object.<anonymous> (src/__test__/Spring/Compression/demo5.test.js:100:13)
+
+ PASS  src/__test__/toODOPPrecision.test.js
+ PASS  src/__test__/Spring/Compression/demo1.test.js
+  ● Console
+
+    console.log
+      Duration= 22
+
+      at Object.<anonymous> (src/__test__/Spring/Compression/demo1.test.js:94:13)
+
+ PASS  src/__test__/Spring/Torsion/demo15.test.js
+  ● Console
+
+    console.log
+      Duration= 108
+
+      at Object.<anonymous> (src/__test__/Spring/Torsion/demo15.test.js:87:13)
+
+ PASS  src/__test__/Spring/Compression/tutor8.test.js
+  ● Console
+
+    console.log
+      Duration= 22
+
+      at Object.<anonymous> (src/__test__/Spring/Compression/tutor8.test.js:80:13)
+
+ PASS  src/__test__/Spring/Compression/demo3.test.js
+  ● Console
+
+    console.log
+      Duration= 29
+
+      at Object.<anonymous> (src/__test__/Spring/Compression/demo3.test.js:88:13)
+
+ PASS  src/__test__/Spring/Torsion/demo14.test.js
+  ● Console
+
+    console.log
+      Duration= 27
+
+      at Object.<anonymous> (src/__test__/Spring/Torsion/demo14.test.js:81:13)
+
+ PASS  src/__test__/Spring/Compression/tutor6.test.js
+  ● Console
+
+    console.log
+      Duration= 26
+
+      at Object.<anonymous> (src/__test__/Spring/Compression/tutor6.test.js:77:13)
+
+ PASS  src/__test__/Spring/Compression/demo2.test.js
+  ● Console
+
+    console.log
+      Duration= 25
+
+      at Object.<anonymous> (src/__test__/Spring/Compression/demo2.test.js:75:13)
+
+ PASS  src/__test__/Spring/Compression/demoDesignValidation.test.js
+  ● Console
+
+    console.log
+      Duration= 21
+
+      at Object.<anonymous> (src/__test__/Spring/Compression/demoDesignValidation.test.js:78:13)
+
+ PASS  src/__test__/Piston-Cylinder/MainPage.test.js
+ PASS  src/__test__/Piston-Cylinder/eqnset.test.js
+
+Test Suites: 30 passed, 30 total
+Tests:       117 passed, 117 total
+Snapshots:   0 total
+Time:        5.286 s
+Ran all test suites.
