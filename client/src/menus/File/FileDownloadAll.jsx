@@ -11,7 +11,7 @@ var JSZip = require("jszip");
 export default function FileDownloadAll() {
 //  console.log('FileDownloadAll - Mounting...');
   const user = useSelector((state) => state.user);
-  console.log('user=',user);
+//  console.log('user=',user);
 
   const downloadFile = (model, file_name, file_type) => {
 //    console.log('In FileDownloadAll.downloadFile','model=',model,'file_name=',file_name,'file_type=',file_type);
@@ -46,10 +46,10 @@ export default function FileDownloadAll() {
       var zip = new JSZip();
       // Get a list of all types - config.env.types
       var types = config.env.types;
-      console.log('user=',user,'types=',types);
+//      console.log('user=',user,'types=',types);
       for (const type of types) {
         // For each type
-        console.log('type=',type);
+//        console.log('type=',type);
 
         // Step 1: fetch file names for this type
         const fileListResponse = await fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
@@ -59,20 +59,20 @@ export default function FileDownloadAll() {
         })
         let fileNames = await fileListResponse.json(); // assume array of file names
         fileNames = fileNames.filter(fileName => fileName.user !== null);
-        console.log('fileNames=',fileNames);
+//        console.log('fileNames=',fileNames);
 
         // Step 2: fetch each file and keep filename association
         const fileContentPromises = fileNames.map(async (fileName) => {
-          console.log('fileName=',fileName);
+//          console.log('fileName=',fileName);
           const response = await fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(fileName.name), {
             headers: {
               Authorization: 'Bearer ' + user
             }
           })
-          console.log('response=',response);
+//          console.log('response=',response);
           if (!response.ok) throw new Error(`Failed to fetch ${type}/${fileName.name}`);
           const fileContent = await response.json(); // or use .arrayBuffer(), etc.
-          console.log('fileContent=',fileContent);
+//          console.log('fileContent=',fileContent);
           return {
             fileName: `${topLevel}/${type}/${fileName.name.trim()}`,
             fileContent
@@ -84,7 +84,7 @@ export default function FileDownloadAll() {
 
       // Step 3: resolve all fetches
       const fileData = await Promise.all(allFileContentPromises);
-      console.log('fileData=',fileData);
+//      console.log('fileData=',fileData);
       if (fileData.length === 0) {
         displayMessage('No files for download were found.');
         return;
@@ -102,7 +102,7 @@ export default function FileDownloadAll() {
         }
       })
       .then(function(content) {
-        console.log('content=',content);
+//        console.log('content=',content);
         downloadFile(content, topLevel, 'zip');
         logUsage('event', 'FileDownloadAll', { event_label: '' });
       });
