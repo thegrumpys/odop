@@ -576,9 +576,12 @@ app.get('/confirm', async (req, res) => {
 // LOGIN
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
+  console.log('email=',email,'password=',password);
   const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
+  console.log('rows=',rows);
   const user = rows[0];
   const match = user && await comparePassword(password, user.password);
+  console.log('match=',match);
   if (!match || user.status !== 'active') return res.sendStatus(401);
 
   req.session.user = { email: user.email, token: user.token, first_name: user.first_name, last_name: user.last_name, isAdmin: user.role === 'admin' };

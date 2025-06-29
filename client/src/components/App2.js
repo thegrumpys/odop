@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './AuthContext';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
@@ -14,12 +14,6 @@ import RequireAuth from './RequireAuth';
 import RequireAdmin from './RequireAdmin';
 
 function App2() {
-  const navigate = useNavigate();
-
-//  useEffect(() => {
-//    navigate('/');
-//  }, []);
-
     return (
     <AuthProvider>
       <Nav />
