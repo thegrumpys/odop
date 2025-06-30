@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
-import { AuthContext } from './AuthContext';
+import { AuthContext } from './AuthProvider';
 
 export default function RequireAdmin({ children }) {
   const { authState } = useContext(AuthContext);

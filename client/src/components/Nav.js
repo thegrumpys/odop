@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from '../axiosConfig';
-import { AuthContext } from './AuthContext';
+import { AuthContext } from './AuthProvider';
 
 export default function Nav() {
   const { isAuthenticated, authState, setIsAuthenticated, setAuthState } = useContext(AuthContext);

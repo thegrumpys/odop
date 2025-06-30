@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AuthContext } from '../components/AuthContext';
+import { AuthContext } from '../components/AuthProvider';
 
 export default function HomePage() {
   const { isAuthenticated, authState } = useContext(AuthContext);

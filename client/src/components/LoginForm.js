@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from '../axiosConfig';
-import { AuthContext } from './AuthContext';
+import { AuthContext } from './AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function LoginForm() {
