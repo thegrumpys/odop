@@ -12,8 +12,8 @@ export default function ResetPasswordPage() {
       await axios.post('/reset-password', { email });
       setSubmitted(true);
     } catch (err) {
-      console.error(err);
-      alert('Failed to send reset email');
+      console.error('err=',err);
+      alert('Failed to send reset email: '+err.message);
     }
   };
 

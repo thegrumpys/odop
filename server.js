@@ -541,6 +541,14 @@ app.post('/register', async (req, res) => {
   const confirmationToken = generateToken();
 
   try {
+    // Does email already exists
+    const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
+    console.log('rows=',rows);
+    if (rows.length) {
+      return res.status(409).send('Duplicate email');;
+    }
+
+    // Create new 'conditional' user with email and password, and confirmation token
     const hashed = await hashPassword(password);
     await db.execute('INSERT INTO user (email, password, first_name, last_name, role, token, status) VALUES (?, ?, ?, ?, ?, ?, ?)', [email, hashed, first_name, last_name, 'user', null, 'conditional']);
     await db.execute('INSERT INTO token (token, email, type) VALUES (?, ?, ?)', [confirmationToken, email, 'confirm']);
@@ -554,8 +562,8 @@ app.post('/register', async (req, res) => {
       res.status(500).json({ error: 'Failed to send confirmation email.' });
     }
   } catch (err) {
-    console.error(err);
-    res.status(500).send('Error creating user');
+    console.error('err=',err);
+    res.sendStatus(500);
   }
 });
 
@@ -563,29 +571,42 @@ app.post('/register', async (req, res) => {
 app.get('/confirm', async (req, res) => {
   const { token } = req.query;
   console.log('token=',token);
-  const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ?', [token, 'confirm']);
-  if (!rows.length) return res.send('Token not found, confirmation ignored');
+  try {
+    // Does a matching confirmation token exist
+    const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ?', [token, 'confirm']);
+    if (!rows.length) return res.send('Token not found, confirmation ignored');
 
-  const email = rows[0].email;
-  const userToken = generateUserToken();
-  await db.execute('UPDATE user SET token = ?, status = ? WHERE email = ?', [userToken, 'active', email]);
-  await db.execute('DELETE FROM token WHERE token = ?', [token]);
-  res.send('Email confirmed');
+    // If token is null update with a new one, change the user startus to 'active', and delete the token
+    const email = rows[0].email;
+    const userToken = generateUserToken();
+    await db.execute('UPDATE user SET token = ? WHERE email = ? AND token IS NULL', [userToken, email]);
+    await db.execute('UPDATE user SET status = ? WHERE email = ?', ['active', email]);
+    await db.execute('DELETE FROM token WHERE token = ?', [token]);
+    res.send('Email confirmed');
+  } catch (err) {
+    console.error('err=',err);
+    res.sendStatus(500);
+  }
 });
 
 // LOGIN
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
   console.log('email=',email,'password=',password);
-  const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
-  console.log('rows=',rows);
-  const user = rows[0];
-  const match = user && await comparePassword(password, user.password);
-  console.log('match=',match);
-  if (!match || user.status !== 'active') return res.sendStatus(401);
-
-  req.session.user = { email: user.email, token: user.token, first_name: user.first_name, last_name: user.last_name, isAdmin: user.role === 'admin' };
-  res.sendStatus(200);
+  try {
+    const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
+    console.log('rows=',rows);
+    const user = rows[0];
+    const match = user && await comparePassword(password, user.password);
+    console.log('match=',match);
+    if (!match || user.status !== 'active') return res.sendStatus(401);
+  
+    req.session.user = { email: user.email, token: user.token, first_name: user.first_name, last_name: user.last_name, isAdmin: user.role === 'admin' };
+    res.sendStatus(200);
+  } catch (err) {
+    console.error('err=',err);
+    res.sendStatus(500);
+  }
 });
 
 // CHECK SESSION
@@ -617,13 +638,15 @@ app.post('/reset-password', async (req, res) => {
   console.log('email=',email);
   const resetToken = generateToken();
 
-  const [rows] = await db.execute('SELECT email FROM user WHERE email = ?', [email]);
-  if (!rows.length) return res.sendStatus(200);
-
-  await db.execute('INSERT INTO token (token, email, type) VALUES (?, ?, ?)', [resetToken, email, 'reset']);
-
-  // Send reset email
   try {
+    // Does user exist?
+    const [rows] = await db.execute('SELECT email FROM user WHERE email = ?', [email]);
+    if (!rows.length) return res.sendStatus(200);
+
+    // Create a reset token
+    await db.execute('INSERT INTO token (token, email, type) VALUES (?, ?, ?)', [resetToken, email, 'reset']);
+
+    // Send reset email
     await sendResetEmail(email, resetToken);
     res.status(200).json({ message: 'Reset link sent if email is valid.' });
   } catch (error) {
@@ -636,14 +659,21 @@ app.post('/reset-password', async (req, res) => {
 app.patch('/change-password', async (req, res) => {
   const { token, password } = req.body;
   console.log('token=',token,'password=',password);
-  const [rows] = await db.execute('SELECT email FROM  WHERE token = ? AND type = ?', [token, 'reset']);
-  if (!rows.length) return res.status(400).send('Invalid or expired token');
+  try {
+    // Does a matching reset token exist
+    const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ?', [token, 'reset']);
+    if (!rows.length) return res.status(400).send('Invalid or expired token');
 
-  const email = rows[0].email;
-  const hashed = await hashPassword(password);
-  await db.execute('UPDATE user SET password = ? WHERE email = ?', [hashed, email]);
-  await db.execute('DELETE FROM token WHERE token = ?', [token]);
-  res.sendStatus(200);
+    // Update the password
+    const email = rows[0].email;
+    const hashed = await hashPassword(password);
+    await db.execute('UPDATE user SET password = ? WHERE email = ?', [hashed, email]);
+    await db.execute('DELETE FROM token WHERE token = ?', [token]);
+    res.sendStatus(200);
+  } catch (err) {
+    console.error('err=',err);
+    res.sendStatus(500);
+  }
 });
 
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {

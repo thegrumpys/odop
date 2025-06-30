@@ -17,8 +17,9 @@ export default function LoginForm() {
       setAuthState(res.data.authState);
       setIsAuthenticated(true);
       navigate('/');
-    } catch {
-      alert('Login failed');
+    } catch (err) {
+      console.error('err=', err)
+      alert('Login failed: '+err.message);
     }
   };
 

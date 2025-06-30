@@ -16,8 +16,8 @@ export default function RegisterForm() {
       await axios.post('/register', { email, password, first_name, last_name });
       setSubmitted(true);
     } catch (err) {
-      console.error(err);
-      alert('Registration failed',err);
+      console.error('err=',err);
+      alert('Registration failed: '+err.message);
     }
   };
 
