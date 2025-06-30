@@ -1,7 +1,6 @@
-import config from '../../config';
-export function getExecuteNames() {
+export function getExecuteNames(isAdmin = false) {
     var result;
-    if (config.node.env !== "production") {
+    if (isAdmin) {
       result = [
           'mkSolidStartups',
       ];

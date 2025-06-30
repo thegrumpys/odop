@@ -626,7 +626,8 @@ app.get('/me', (req, res) => {
   } else {
     res.json({
       authState: {
-        isAuthenticated: false
+        isAuthenticated: false,
+        isAdmin: false,
       }
     });
   }

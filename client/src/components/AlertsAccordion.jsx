@@ -4,10 +4,10 @@ import { getAlertsBySeverity, ERR, WARN, NOTICE, INFO } from './Alerts';
 import { logUsage } from '../logUsage';
 import SymbolValue from './SymbolValue';
 import Value from './Value';
-import config from '../config';
 import { changeSystemControlsValue } from '../store/actions';
 import { setActiveKey, setCaret, setLevel } from '../store/actions';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
+import { useAuth } from './AuthProvider';
 
 const ContextAwareAccordion = ({ children }) => {
   const activeKey = useSelector((state) => state.alertsSlice.activeKey);
@@ -57,6 +57,7 @@ export default function AlertsAccordion() {
   const model_system_controls = useSelector((state) => state.model.system_controls);
   const model_enable_auto_fix = useSelector((state) => state.model.system_controls.enable_auto_fix);
   const dispatch = useDispatch();
+  const { authState } = useAuth();
 
   const onHelpButton = (event) => {
 //    console.log('AlertsAccordion.onHelpButton', 'event=', event, 'event.target=', event.target, 'event.target.href=', event.target.href);
@@ -214,7 +215,7 @@ export default function AlertsAccordion() {
                     {(level === ERR || level === WARN || level === NOTICE || level === INFO) &&
                       err_alerts.map((entry, index) => {
 //                        console.log('AlertsAccordion.render entry=',entry,'line=',line);
-                        var hidden = config.node.env !== "production" ? false : (entry.element === undefined ? false : entry.element.hidden);
+                        var hidden = authState.isAdmin ? false : (entry.element === undefined ? false : entry.element.hidden);
                         var match;
                         if (entry.help_url !== undefined) {
                           match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
@@ -237,7 +238,7 @@ export default function AlertsAccordion() {
                     {(level === WARN || level === NOTICE || level === INFO) &&
                       warn_alerts.map((entry, index) => {
 //                        console.log('AlertsAccordion.render entry=',entry,'line=',line);
-                        var hidden = config.node.env !== "production" ? false : (entry.element === undefined ? false : entry.element.hidden);
+                        var hidden = authState.isAdmin ? false : (entry.element === undefined ? false : entry.element.hidden);
                         var match;
                         if (entry.help_url !== undefined) {
                           match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
@@ -260,7 +261,7 @@ export default function AlertsAccordion() {
                     {(level === NOTICE || level === INFO) &&
                       notice_alerts.map((entry, index) => {
 //                        console.log('AlertsAccordion.render entry=',entry,'line=',line);
-                        var hidden = config.node.env !== "production" ? false : (entry.element === undefined ? false : entry.element.hidden);
+                        var hidden = authState.isAdmin ? false : (entry.element === undefined ? false : entry.element.hidden);
                         var match;
                         if (entry.help_url !== undefined) {
                           match = entry.help_url.match(/\[(.*)\]\((.*)\)/);
@@ -283,7 +284,7 @@ export default function AlertsAccordion() {
                     {(level === INFO) &&
                       info_alerts.map((entry, index) => {
 //                        console.log('AlertsAccordion.render entry=',entry,'line=',line);
-                        var hidden = config.node.env !== "production" ? false : (entry.element === undefined ? false : entry.element.hidden);
+                        var hidden = authState.isAdmin ? false : (entry.element === undefined ? false : entry.element.hidden);
                         var match;
                         if (entry.help_url !== undefined) {
                           match = entry.help_url.match(/\[(.*)\]\((.*)\)/);

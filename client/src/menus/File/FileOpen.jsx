@@ -210,8 +210,8 @@ export default function FileOpen() {
         <Modal.Footer>
           {!authState.isAuthenticated && <Button variant="info" onClick={onSignIn}>Sign In...</Button>}{' '}
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>{' '}
-          {config.node.env !== "production" && <Button variant="danger" onClick={onLoadInitialState}>Load Initial State</Button>}{' '}
-          {config.node.env !== "production" && <Button variant="danger" onClick={onLoadMetricInitialState}>Load Metric Initial State</Button>}{' '}
+          {authState.isAdmin && <Button variant="danger" onClick={onLoadInitialState}>Load Initial State</Button>}{' '}
+          {authState.isAdmin && <Button variant="danger" onClick={onLoadMetricInitialState}>Load Metric Initial State</Button>}{' '}
           {typeof (Storage) !== "undefined" && localStorage.getItem('autosave') !== null && <Button variant="secondary" onClick={onLoadAutoSave}>Load Auto Save</Button>}{' '}
           <Button variant="primary" onClick={onOpen} disabled={names.length === 0 ? true : false}>Open</Button>
         </Modal.Footer>

@@ -1,7 +1,6 @@
-import config from '../../../config';
-export function getExecuteNames() {
+export function getExecuteNames(isAdmin = false) {
     var result;
-    if (config.node.env !== "production") {
+    if (isAdmin) {
       result = [
         'Br590TestScript',        // Script providing test cases for Issue / Branch 590 (Model validity determination & response)
         'increasePrecision',      // Script to tweak Preference values for greater precision of search result

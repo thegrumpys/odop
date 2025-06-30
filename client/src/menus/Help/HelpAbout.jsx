@@ -3,10 +3,9 @@ import { useSelector } from "react-redux";
 import { Button, Modal, NavDropdown } from 'react-bootstrap';
 import { version as release_version } from '../../version';
 import { logUsage } from '../../logUsage';
-import { useAuth } from '../../components/AuthProvider';
-import config from '../../config';
 import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
+import { useAuth } from '../../components/AuthProvider';
 
 export default function HelpAbout() {
 //  console.log('HelpAbout - Mounting...');
@@ -92,9 +91,10 @@ export default function HelpAbout() {
           <a href="https://github.com/thegrumpys/odop/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">ODOP License</a>
           <hr />
           ODOP Software Version: {release_version()}<br />
-          {config.node.env !== "production" &&
+          {authState.isAdmin &&
             <>
               User Authenticated: {authState.isAuthenticated ? 'true' : 'false'}<br />
+              User Adminstrator: {authState.isAdmin ? 'true' : 'false'}<br />
               User Email: {authState.isAuthenticated ? authState.email : 'Unknown'}<br />
               User ClientId: {model_user === null ? 'Unknown' : model_user}<br />
             </>
@@ -102,7 +102,7 @@ export default function HelpAbout() {
           Model: {model_jsontype} {model_type}<br />
           Model Units: {model_units}<br />
           Model Version: {model_version}<br />
-          {config.node.env !== "production" && <span>DB Size: {size} MB</span>}
+          {authState.isAdmin && <span>DB Size: {size} MB</span>}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={toggle}>Close</Button>

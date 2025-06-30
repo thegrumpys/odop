@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
 import { startExecute, stopExecute } from "../../components/ExecutePanel";
-import config from '../../config';
+import { useAuth } from '../../components/AuthProvider';
 
 export default function ActionExecute() {
 //  console.log('ActionExecute - Mounting...');
@@ -12,6 +12,7 @@ export default function ActionExecute() {
   const [show, setShow] = useState(false);
   const [executeNames, setExecuteNames] = useState([]);
   const [executeName, setExecuteName] = useState('');
+  const { authState } = useAuth();
 
   useEffect(() => {
 //    console.log('ActionExecute - Mounted','model_type=',model_type);
@@ -22,7 +23,7 @@ export default function ActionExecute() {
 
   const updateExecuteNames = () => {
     var { getExecuteNames } = require('../../designtypes/' + model_type + '/execute.js'); // Dynamically load getExecuteNames
-    var localExecuteNames = getExecuteNames();
+    var localExecuteNames = getExecuteNames(authState.isAdmin);
 //    console.log('ActionExecute.updateExecuteNames','localExecuteNames=', localExecuteNames);
     var localExecuteName;
     if (localExecuteNames.length > 0) {
@@ -88,7 +89,7 @@ export default function ActionExecute() {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>{' '}
-          {config.node.env !== "production" && <Button variant="danger" onClick={onExecuteAndRun}>Execute All</Button>}{' '}
+          {authState.isAdmin && <Button variant="danger" onClick={onExecuteAndRun}>Execute All</Button>}{' '}
           <Button variant="primary" onClick={onExecute}>Execute</Button>
         </Modal.Footer>
       </Modal>}

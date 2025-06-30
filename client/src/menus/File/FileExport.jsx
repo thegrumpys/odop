@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { NavDropdown, Modal, Button } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
-import config from '../../config';
+import { useAuth } from '../../components/AuthProvider';
 
 export default function FileExport() {
 //  console.log('FileExport - Mounting...');
@@ -11,6 +11,7 @@ export default function FileExport() {
   const model_type = useSelector((state) => state.model.type);
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const [show, setShow] = useState(false);
+  const { authState } = useAuth();
 
   const exportFile = (model, name, type) => {
 //        console.log('In FileExport.exportFile model=',model);
@@ -26,7 +27,7 @@ export default function FileExport() {
 
   const onExport = () => {
 //        console.log('In FileExport.onExport');
-    if (config.node.env !== "production" && !show) {
+    if (authState.isAdmin && !show) {
       setShow(!show);
       return;
     }
