@@ -160,7 +160,7 @@ GROUP BY s.schema_name, sp.grantee, sp.has_insert`;
 //  console.log('SERVER:', 'stmt=', stmt);
   try {
     const [rows] = await db.execute(stmt);
-    console.log('SERVER: After SELECT', 'rows=', rows);
+//    console.log('SERVER: After SELECT', 'rows=', rows);
     if (!rows.length) {
       value = [ 'Unknown' ];
       res.status(200).json(value);
@@ -538,13 +538,13 @@ function adjustSat(sat1, sat2, score) {
 // REGISTER
 app.post('/register', async (req, res) => {
   const { email, password, first_name, last_name } = req.body;
-  console.log('email=',email,'password=',password);
+//  console.log('email=',email,'password=',password);
   const confirmationToken = generateToken();
 
   try {
     // Does email already exists
     const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
-    console.log('rows=',rows);
+//    console.log('rows=',rows);
     if (rows.length) {
       return res.status(409).send('Duplicate email');;
     }
@@ -559,11 +559,11 @@ app.post('/register', async (req, res) => {
       await sendConfirmationEmail(email, confirmationToken);
       res.status(200).json({ message: 'Registration successful. Please check your email to confirm your account.' });
     } catch (error) {
-      console.error('Error sending confirmation email:', error);
+//      console.error('Error sending confirmation email:', error);
       res.status(500).json({ error: 'Failed to send confirmation email.' });
     }
   } catch (err) {
-    console.error('err=',err);
+//    console.error('err=',err);
     res.sendStatus(500);
   }
 });
@@ -571,7 +571,7 @@ app.post('/register', async (req, res) => {
 // CONFIRM
 app.get('/confirm', async (req, res) => {
   const { token } = req.query;
-  console.log('token=',token);
+//  console.log('token=',token);
   try {
     // Does a matching confirmation token exist
     const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ?', [token, 'confirm']);
@@ -585,7 +585,7 @@ app.get('/confirm', async (req, res) => {
     await db.execute('DELETE FROM token WHERE token = ?', [token]);
     res.send('Email confirmed');
   } catch (err) {
-    console.error('err=',err);
+//    console.error('err=',err);
     res.sendStatus(500);
   }
 });
@@ -593,19 +593,19 @@ app.get('/confirm', async (req, res) => {
 // LOGIN
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
-  console.log('email=',email,'password=',password);
+//  console.log('email=',email,'password=',password);
   try {
     const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
-    console.log('rows=',rows);
+//    console.log('rows=',rows);
     const user = rows[0];
     const match = user && await comparePassword(password, user.password);
-    console.log('match=',match);
+//    console.log('match=',match);
     if (!match || user.status !== 'active') return res.sendStatus(401);
   
     req.session.user = { email: user.email, token: user.token, first_name: user.first_name, last_name: user.last_name, isAuthenticated: true, isAdmin: user.role === 'admin' };
     res.sendStatus(200);
   } catch (err) {
-    console.error('err=',err);
+//    console.error('err=',err);
     res.sendStatus(500);
   }
 });
@@ -640,7 +640,7 @@ app.post('/logout', (req, res) => {
 // PASSWORD RESET REQUEST
 app.post('/reset-password', async (req, res) => {
   const { email } = req.body;
-  console.log('email=',email);
+//  console.log('email=',email);
   const resetToken = generateToken();
 
   try {
@@ -655,7 +655,7 @@ app.post('/reset-password', async (req, res) => {
     await sendResetEmail(email, resetToken);
     res.status(200).json({ message: 'Reset link sent if email is valid.' });
   } catch (error) {
-    console.error('Error sending reset email:', error);
+//    console.error('Error sending reset email:', error);
     res.status(500).json({ error: 'Failed to send reset email.' });
   }}
 );
@@ -663,7 +663,7 @@ app.post('/reset-password', async (req, res) => {
 // CHANGE PASSWORD
 app.patch('/change-password', async (req, res) => {
   const { token, password } = req.body;
-  console.log('token=',token,'password=',password);
+//  console.log('token=',token,'password=',password);
   try {
     // Does a matching reset token exist
     const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ?', [token, 'reset']);
@@ -676,7 +676,7 @@ app.patch('/change-password', async (req, res) => {
     await db.execute('DELETE FROM token WHERE token = ?', [token]);
     res.sendStatus(200);
   } catch (err) {
-    console.error('err=',err);
+//    console.error('err=',err);
     res.sendStatus(500);
   }
 });

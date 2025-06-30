@@ -6,7 +6,7 @@ import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
-import { useOktaAuth } from '@okta/okta-react';
+import { useAuth } from '../../components/AuthProvider';
 
 export default function FileDelete() {
 //  console.log('FileDelete - Mounting...');
@@ -18,7 +18,7 @@ export default function FileDelete() {
   const [type, setType] = useState(model_type);
   const [name, setName] = useState('');
   const navigate = useNavigate();
-  const { authState } = useOktaAuth();
+  const { authState } = useAuth();
 
   useEffect(() => {
 //    console.log('FileDelete','model_user=',model_user,'model_type=',model_type,'model_name=',model_name);

@@ -19,7 +19,7 @@ export default function HelpAbout() {
   const model_jsontype = useSelector((state) => state.model.jsontype);
   const model_units = useSelector((state) => state.model.units);
   const { authState } = useAuth();
-  console.log('HelpAbout','authState=',authState);
+//  console.log('HelpAbout','authState=',authState);
 
   useEffect(() => {
 //    console.log('HelpAbout - Mounted');

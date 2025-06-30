@@ -8,7 +8,7 @@ import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
-import { useOktaAuth } from '@okta/okta-react';
+import { useAuth } from '../../components/AuthProvider';
 
 export default function FileOpen() {
 //  console.log('FileOpen - Mounting...');
@@ -22,7 +22,7 @@ export default function FileOpen() {
   const [name, setName] = useState(model_name);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { authState } = useOktaAuth();
+  const { authState } = useAuth();
 //  console.log('FileOpen','oktaAuth=',oktaAuth,'authState=',authState);
 
   useEffect(() => {

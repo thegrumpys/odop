@@ -4,17 +4,16 @@ import axios from '../axiosConfig';
 import { useAuth } from './AuthProvider';
 
 export default function Nav() {
-  const { isAuthenticated, authState, setIsAuthenticated, setAuthState } = useAuth();
+  const { authState, setAuthState } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       await axios.post('/logout');
-      setIsAuthenticated(false);
-      setAuthState(null);
+      setAuthState({isAuthenticated: false});
       navigate('/');
     } catch (err) {
-      console.error('Logout failed', err);
+//      console.error('Logout failed', err);
     }
   };
 

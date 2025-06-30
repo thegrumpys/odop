@@ -9,7 +9,7 @@ export default function ConfirmPage() {
 
   useEffect(() => {
     const token = searchParams.get('token');
-    console.log('token=',token);
+//    console.log('token=',token);
     if (!token) {
       setStatus('invalid');
       return;
@@ -19,7 +19,7 @@ export default function ConfirmPage() {
       .catch(() => setStatus('error'));
   }, [searchParams]);
 
-  console.log('status=',status);
+//  console.log('status=',status);
   if (status === 'pending') {
     return <p>Confirming your account...</p>;
   } else if (status === 'success') {

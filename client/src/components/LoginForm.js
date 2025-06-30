@@ -9,7 +9,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { setAuthState, setIsAuthenticated } = useAuth();
-  console.log('In LoginForm','setAuthState=',setAuthState,'setIsAuthenticated=',setIsAuthenticated);
+//  console.log('In LoginForm','setAuthState=',setAuthState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -19,12 +19,11 @@ export default function LoginForm() {
       await axios.post('/login', { email, password });
       const res = await axios.get('/me');
       setAuthState(res.data.authState);
-      setIsAuthenticated(true);
-      console.log('In LoginForm','setAuthState=',res.data.authState,'setIsAuthenticated=',true);
+//      console.log('In LoginForm','setAuthState=',res.data.authState);
       dispatch(changeUser(res.data.authState.token));
       navigate('/');
     } catch (err) {
-      console.error('err=', err)
+//      console.error('err=', err)
       alert('Login failed: '+err.message);
     }
   };

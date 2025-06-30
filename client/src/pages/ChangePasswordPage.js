@@ -24,7 +24,7 @@ export default function ChangePasswordPage() {
       await axios.patch('/change-password', { token, password });
       setStatus('success');
     } catch (err) {
-      console.error('err=',err);
+//      console.error('err=',err);
       setStatus('error');
     }
   };

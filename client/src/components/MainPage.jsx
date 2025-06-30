@@ -42,7 +42,6 @@ import HelpAbout from '../menus/Help/HelpAbout';
 import SearchDocs from './SearchDocs';
 import config from '../config';
 import ResultTable from './ResultTable';
-import { useOktaAuth } from '@okta/okta-react';
 import { useAuth } from './AuthProvider';
 
 export default function MainPage() {
@@ -54,16 +53,14 @@ export default function MainPage() {
 //  console.log('MainPage','Mounting...','model_type=',model_type,'model_name=',model_name,'model_view=',model_view,'model_user=',model_user);
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
-  const { authState } = useOktaAuth();
-//  console.log('MainPage','oktaAuth=',oktaAuth,'authState=',authState);
-  const auth = useAuth();
-  console.log('MainPage','auth=',auth);
+  const { authState } = useAuth();
+//  console.log('MainPage','authState=',authState);
 
   useEffect(() => {
 //    console.log('MainPage','Mounted','All useEffect');
     if (authState && authState.isAuthenticated) {
-//      console.log('MainPage','Mounted','changeUser=',authState.idToken.claims.sub);
-      dispatch(changeUser(authState.idToken.claims.sub));
+//      console.log('MainPage','Mounted','changeUser=',authState.token);
+      dispatch(changeUser(authState.token));
     }
     return () => {
 //      console.log('MainPage','Unmounting ...','All useEffect');
@@ -125,8 +122,8 @@ export default function MainPage() {
   var alt = model_type + ' icon';
 //  console.log('MainPage','src=',src,' alt=',alt);
 
-  const logOnOff = auth && auth.isAuthenticated ? <SignOut /> : <SignIn />;
-  console.log('MainPage','logOnOff=',logOnOff);
+  const logOnOff = authState && authState.isAuthenticated ? <SignOut /> : <SignIn />;
+//  console.log('MainPage','logOnOff=',logOnOff);
   return (
     <>
       <Navbar className="ps-3 pe-3" style={{ backgroundColor: '#eeeeee' }} expand="md" fixed="top">

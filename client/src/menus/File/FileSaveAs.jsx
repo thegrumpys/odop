@@ -6,7 +6,7 @@ import { changeName, deleteAutoSave } from '../../store/actions';
 import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
-import { useOktaAuth } from '@okta/okta-react';
+import { useAuth } from '../../components/AuthProvider';
 
 export default function FileSaveAs() {
 //  console.log('FileSaveAs - Mounting...');
@@ -18,7 +18,7 @@ export default function FileSaveAs() {
   const [name, setName] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { authState } = useOktaAuth();
+  const { authState } = useAuth();
 
   useEffect(() => {
 //    console.log('FileSaveAs','useEffect','model_user=',model_user,'model_type=',model_type);
