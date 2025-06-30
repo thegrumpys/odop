@@ -1,12 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import axios from '../axiosConfig';
-import { AuthContext } from './AuthProvider';
+import { useAuth } from './AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { setAuthState, setIsAuthenticated } = useContext(AuthContext);
+  const { setAuthState, setIsAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {

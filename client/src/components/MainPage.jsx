@@ -43,6 +43,7 @@ import SearchDocs from './SearchDocs';
 import config from '../config';
 import ResultTable from './ResultTable';
 import { useOktaAuth } from '@okta/okta-react';
+import { useAuth } from './AuthProvider';
 
 export default function MainPage() {
 //  console.log('MainPage','Mounting...');
@@ -55,6 +56,8 @@ export default function MainPage() {
   const dispatch = useDispatch();
   const { authState } = useOktaAuth();
 //  console.log('MainPage','oktaAuth=',oktaAuth,'authState=',authState);
+  const { auth } = useAuth();
+//  console.log('MainPage','auth=',auth);
 
   useEffect(() => {
 //    console.log('MainPage','Mounted','All useEffect');

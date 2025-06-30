@@ -12,7 +12,8 @@ import { displayMessage } from "./Message";
 import { logUsage } from '../logUsage';
 import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js'
 import { LoginCallback, Security } from '@okta/okta-react';
-import { startExecute } from "./ExecutePanel";
+import { startExecute } from './ExecutePanel';
+import { AuthProvider } from './AuthProvider'
 
 export default function App() {
 //  console.log('App','Mounting...');
@@ -161,11 +162,13 @@ export default function App() {
       <Security oktaAuth={oktaAuth}
                 onAuthRequired={onAuthRequired}
                 restoreOriginalUri={restoreOriginalUri} >
+      <AuthProvider>
         <Routes>
           <Route path="/" exact="true" element={<MainPage />} />
           <Route path='/login' element={<SignInPageWidget />} />
           <Route path='/implicit/callback' element={<LoginCallback />} />
         </Routes>
+      </AuthProvider>
       </Security>
       {show && <Modal show={show} onHide={loadDefaultDesign}>
           <Modal.Header closeButton><Modal.Title>ODOP Design Recovery</Modal.Title></Modal.Header>

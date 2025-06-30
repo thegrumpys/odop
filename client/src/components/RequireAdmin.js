@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { AuthContext } from './AuthProvider';
+import { useAuth } from './AuthProvider';
 
 export default function RequireAdmin({ children }) {
-  const { authState } = useContext(AuthContext);
+  const { authState } = useAuth();
   return authState?.isAdmin ? children : <Navigate to="/unauthorized" />;
 }

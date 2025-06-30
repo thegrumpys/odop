@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../components/AuthProvider';
+import React from 'react';
+import { useAuth } from '../components/AuthProvider';
 
 export default function AdminPage() {
-  const { authState } = useContext(AuthContext);
+  const { authState } = useAuth();
 
   return (
     <div>
