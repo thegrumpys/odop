@@ -4,6 +4,7 @@ import axios from '../axiosConfig';
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
+//  console.log('In AuthProvider');
   const [authState, setAuthState] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -22,5 +23,7 @@ export function AuthProvider({ children }) {
 }
 
 export const useAuth = () => {
-  return useContext(AuthContext);
+  const auth = useContext(AuthContext);
+//  console.log('In useAuth','auth=',auth);
+  return auth;
 }

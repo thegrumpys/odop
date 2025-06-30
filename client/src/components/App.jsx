@@ -14,6 +14,16 @@ import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js'
 import { LoginCallback, Security } from '@okta/okta-react';
 import { startExecute } from './ExecutePanel';
 import { AuthProvider } from './AuthProvider'
+import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
+import ResetPasswordPage from '../pages/ResetPasswordPage';
+import ChangePasswordPage from '../pages/ChangePasswordPage';
+import ConfirmPage from '../pages/ConfirmPage';
+import ProtectedPage from '../pages/ProtectedPage';
+import AdminPage from '../pages/AdminPage';
+import Nav from './Nav';
+import RequireAuth from './RequireAuth';
+import RequireAdmin from './RequireAdmin';
 
 export default function App() {
 //  console.log('App','Mounting...');
@@ -165,8 +175,18 @@ export default function App() {
       <AuthProvider>
         <Routes>
           <Route path="/" exact="true" element={<MainPage />} />
-          <Route path='/login' element={<SignInPageWidget />} />
-          <Route path='/implicit/callback' element={<LoginCallback />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/register" element={<RegisterForm />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/change-password" element={<ChangePasswordPage />} />
+          <Route path="/confirm" element={<ConfirmPage />} />
+          <Route path="/protected" element={
+            <RequireAuth><ProtectedPage /></RequireAuth>
+          } />
+          <Route path="/admin" element={
+            <RequireAdmin><AdminPage /></RequireAdmin>
+          } />
         </Routes>
       </AuthProvider>
       </Security>

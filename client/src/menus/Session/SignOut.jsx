@@ -4,13 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
 import { useOktaAuth } from '@okta/okta-react';
+import { useAuth } from '../../components/AuthProvider';
 import { changeUser, saveAutoSave } from '../../store/actions';
 
 export default function SignOut() {
+  console.log('In SignOut');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { oktaAuth, authState } = useOktaAuth();
 //  console.log('SignOut','oktaAuth=',oktaAuth,'authState=',authState);
+  const auth = useAuth();
+//  console.log('SignOut','auth=',auth);
 
   const toggle = () => {
 //    console.log('In SignOut.toggle');

@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
+import { useDispatch } from "react-redux";
 import axios from '../axiosConfig';
 import { useAuth } from './AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
+import { changeUser } from '../store/actions';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { setAuthState, setIsAuthenticated } = useAuth();
+  console.log('In LoginForm','setAuthState=',setAuthState,'setIsAuthenticated=',setIsAuthenticated);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -16,6 +20,8 @@ export default function LoginForm() {
       const res = await axios.get('/me');
       setAuthState(res.data.authState);
       setIsAuthenticated(true);
+      console.log('In LoginForm','setAuthState=',res.data.authState,'setIsAuthenticated=',true);
+      dispatch(changeUser(res.data.authState.token));
       navigate('/');
     } catch (err) {
       console.error('err=', err)

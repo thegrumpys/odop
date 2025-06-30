@@ -160,10 +160,11 @@ GROUP BY s.schema_name, sp.grantee, sp.has_insert`;
 //  console.log('SERVER:', 'stmt=', stmt);
   try {
     const [rows] = await db.execute(stmt);
-//    console.log('SERVER: After SELECT', 'rows=', rows);
+    console.log('SERVER: After SELECT', 'rows=', rows);
     if (!rows.length) {
-      res.status(500).end();
-      console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+      value = [ 'Unknown' ];
+      res.status(200).json(value);
+      console.log('SERVER: 500 - INTERNAL SERVER ERROR');
     } else {
       value = rows.map((row) => { return row.db_size_mb });
 //      console.log('SERVER: After SELECT DISTINCT', 'value=', value);
@@ -601,7 +602,7 @@ app.post('/login', async (req, res) => {
     console.log('match=',match);
     if (!match || user.status !== 'active') return res.sendStatus(401);
   
-    req.session.user = { email: user.email, token: user.token, first_name: user.first_name, last_name: user.last_name, isAdmin: user.role === 'admin' };
+    req.session.user = { email: user.email, token: user.token, first_name: user.first_name, last_name: user.last_name, isAuthenticated: true, isAdmin: user.role === 'admin' };
     res.sendStatus(200);
   } catch (err) {
     console.error('err=',err);
@@ -613,17 +614,21 @@ app.post('/login', async (req, res) => {
 app.get('/me', (req, res) => {
   if (req.session.user) {
     res.json({
-      isAuthenticated: true,
       authState: {
         email: req.session.user.email,
         token: req.session.user.token,
         first_name: req.session.user.first_name,
         last_name: req.session.user.last_name,
+        isAuthenticated: true,
         isAdmin: req.session.user.isAdmin
       }
     });
   } else {
-    res.json({ isAuthenticated: false, authState: null });
+    res.json({
+      authState: {
+        isAuthenticated: false
+      }
+    });
   }
 });
 

@@ -56,8 +56,8 @@ export default function MainPage() {
   const dispatch = useDispatch();
   const { authState } = useOktaAuth();
 //  console.log('MainPage','oktaAuth=',oktaAuth,'authState=',authState);
-  const { auth } = useAuth();
-//  console.log('MainPage','auth=',auth);
+  const auth = useAuth();
+  console.log('MainPage','auth=',auth);
 
   useEffect(() => {
 //    console.log('MainPage','Mounted','All useEffect');
@@ -125,8 +125,8 @@ export default function MainPage() {
   var alt = model_type + ' icon';
 //  console.log('MainPage','src=',src,' alt=',alt);
 
-  const logOnOff = authState && authState.isAuthenticated ? <SignOut /> : <SignIn />;
-//  console.log('MainPage','Mounting return');
+  const logOnOff = auth && auth.isAuthenticated ? <SignOut /> : <SignIn />;
+  console.log('MainPage','logOnOff=',logOnOff);
   return (
     <>
       <Navbar className="ps-3 pe-3" style={{ backgroundColor: '#eeeeee' }} expand="md" fixed="top">

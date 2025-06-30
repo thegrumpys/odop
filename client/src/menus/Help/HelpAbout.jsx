@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Button, Modal, NavDropdown } from 'react-bootstrap';
 import { version as release_version } from '../../version';
 import { logUsage } from '../../logUsage';
-import { useOktaAuth } from '@okta/okta-react';
+import { useAuth } from '../../components/AuthProvider';
 import config from '../../config';
 import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
@@ -18,8 +18,8 @@ export default function HelpAbout() {
   const model_version = useSelector((state) => state.model.version);
   const model_jsontype = useSelector((state) => state.model.jsontype);
   const model_units = useSelector((state) => state.model.units);
-  const { authState } = useOktaAuth();
-//  console.log('HelpAbout','oktaAuth=',oktaAuth,'authState=',authState);
+  const { authState } = useAuth();
+  console.log('HelpAbout','authState=',authState);
 
   useEffect(() => {
 //    console.log('HelpAbout - Mounted');
@@ -95,7 +95,7 @@ export default function HelpAbout() {
           {config.node.env !== "production" &&
             <>
               User Authenticated: {authState.isAuthenticated ? 'true' : 'false'}<br />
-              User Email: {authState.isAuthenticated ? authState.idToken.claims.email : 'Unknown'}<br />
+              User Email: {authState.isAuthenticated ? authState.email : 'Unknown'}<br />
               User ClientId: {model_user === null ? 'Unknown' : model_user}<br />
             </>
           }
