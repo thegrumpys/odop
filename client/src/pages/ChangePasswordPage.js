@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from '../axiosConfig';
+import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 
 export default function ChangePasswordPage() {
   const [searchParams] = useSearchParams();
@@ -50,17 +51,31 @@ export default function ChangePasswordPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Change Your Password</h2>
-      <input
-        type="password"
-        value={password}
-        placeholder="New Password"
-        required
-        onChange={(e) => setPassword(e.target.value)}
-        autocomplete="new-password"
-      />
-      <button type="submit">Update Password</button>
-    </form>
+      <Container className="pt-5" style={{ backgroundColor: '#eeeeee', paddingTop: '60px' }}>
+        <Row>
+          <Col lg="4" />
+          <Col lg="4">
+          <form onSubmit={handleSubmit}>
+            <Table border="1" borderless className="p-5">
+              <tbody>
+                <tr>
+                  <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
+                </tr>
+                <tr>
+                  <td className="text-center"><h3>Change Your Password</h3></td>
+                </tr>
+                <tr>
+                  <td className="px-5 text-start"><input type="password" value={password} placeholder="New Password" required onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" /></td>
+                </tr>
+                <tr>
+                  <td className="text-center"><Button type="submit">Update Password</Button></td>
+                </tr>
+              </tbody>
+            </Table>
+            </form>
+          </Col>
+          <Col lg="4" />
+        </Row>
+      </Container>
   );
 }

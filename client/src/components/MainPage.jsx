@@ -190,7 +190,7 @@ export default function MainPage() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Container style={{ backgroundColor: '#eeeeee', paddingTop: '60px' }}>
+      <Container className="pt-5" style={{ backgroundColor: '#eeeeee', paddingTop: '60px' }}>
         <Row>
           <ExecutePanel />
         </Row>

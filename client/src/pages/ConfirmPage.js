@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../axiosConfig';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 
 export default function ConfirmPage() {
   const [searchParams] = useSearchParams();
@@ -27,7 +28,7 @@ export default function ConfirmPage() {
       <div>
         <h2>Account Confirmed ✅</h2>
         <p>Your account is now active. You can log in.</p>
-        <button onClick={() => navigate('/login')}>Go to Login</button>
+        <Button onClick={() => navigate('/login')}>Go to Login</Button>
       </div>
     );
   } else if (status === 'error' || status === 'invalid') {
@@ -35,7 +36,7 @@ export default function ConfirmPage() {
       <div>
         <h2>Confirmation Failed ❌</h2>
         <p>This confirmation link is invalid or has expired.</p>
-        <button onClick={() => navigate('/')}>Go to Home</button>
+        <Button onClick={() => navigate('/')}>Go to Home</Button>
       </div>
     );
   } else {
