@@ -23,7 +23,6 @@ export default function FileOpen() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { authState } = useAuth();
-//  console.log('FileOpen','oktaAuth=',oktaAuth,'authState=',authState);
 
   useEffect(() => {
 //    console.log('FileOpen','model_user=',model_user,'model_type=',model_type);

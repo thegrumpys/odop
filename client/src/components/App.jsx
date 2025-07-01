@@ -4,14 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { load, changeName, restoreAutoSave, deleteAutoSave } from "../store/actions";
 import MainPage from "./MainPage";
-import SignInPageWidget from './SignInPageWidget';
 import { Button, Modal, Alert } from 'react-bootstrap';
 import config from '../config';
 import { displaySpinner } from "./Spinner";
 import { displayMessage } from "./Message";
 import { logUsage } from '../logUsage';
-import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js'
-import { LoginCallback, Security } from '@okta/okta-react';
 import { startExecute } from './ExecutePanel';
 import { AuthProvider } from './AuthProvider'
 import LoginForm from './LoginForm';
@@ -19,9 +16,6 @@ import RegisterForm from './RegisterForm';
 import ResetPasswordPage from '../pages/ResetPasswordPage';
 import ChangePasswordPage from '../pages/ChangePasswordPage';
 import ConfirmPage from '../pages/ConfirmPage';
-import ProtectedPage from '../pages/ProtectedPage';
-import AdminPage from '../pages/AdminPage';
-import Nav from './Nav';
 import RequireAuth from './RequireAuth';
 import RequireAdmin from './RequireAdmin';
 
@@ -128,49 +122,23 @@ export default function App() {
     });
   }
 
-  const onAuthRequired = () => {
-//    console.log('App.onAuthRequired');
-//    console.log('App.navigate('/login')');
-    navigate('/login'); // Must be last
-  }
-
   const onContextHelp = () => {
 //    console.log('App.onContextHelp');
     window.open('/docs/Help/autoSave.html', '_blank');
   }
 
-  const restoreOriginalUri = async (oktaAuth, originalUri) => {
-//    console.log('App.restoreOriginalUri','oktaAuth=',oktaAuth,'originalUri=',originalUri,'window.location.origin=',window.location.origin);
-//    console.log('App.navigate(toRelativeUrl(originalUri || \'/\', window.location.origin), { replace: true })');
-    navigate(toRelativeUrl(originalUri || '/', window.location.origin), { replace: true }); // Must be last
-  };
-
-  const oktaAuth = new OktaAuth({...config.oidc});
-//  console.log('App.render','oktaAuth=',oktaAuth);
-
   return (
     <>
-      <Security oktaAuth={oktaAuth}
-                onAuthRequired={onAuthRequired}
-                restoreOriginalUri={restoreOriginalUri} >
       <AuthProvider>
         <Routes>
           <Route path="/" exact="true" element={<MainPage />} />
-          <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterForm />} />
+          <Route path="/confirm" element={<ConfirmPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/change-password" element={<ChangePasswordPage />} />
-          <Route path="/confirm" element={<ConfirmPage />} />
-          <Route path="/protected" element={
-            <RequireAuth><ProtectedPage /></RequireAuth>
-          } />
-          <Route path="/admin" element={
-            <RequireAdmin><AdminPage /></RequireAdmin>
-          } />
         </Routes>
       </AuthProvider>
-      </Security>
       {show && <Modal show={show} onHide={loadDefaultDesign}>
           <Modal.Header closeButton><Modal.Title>ODOP Design Recovery</Modal.Title></Modal.Header>
           <Modal.Body>
