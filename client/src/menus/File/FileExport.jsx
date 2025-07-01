@@ -27,7 +27,7 @@ export default function FileExport() {
 
   const onExport = () => {
 //        console.log('In FileExport.onExport');
-    if (authState.isAdmin && !show) {
+    if (authState && authState.isAdmin && !show) {
       setShow(!show);
       return;
     }

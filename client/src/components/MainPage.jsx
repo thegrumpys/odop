@@ -161,11 +161,11 @@ export default function MainPage() {
               {model_type === "Spring/Extension" && <NavDropdown.Divider />}
               <ViewSelect viewNames={viewNames}/>
               <NavDropdown.Divider />
-              {authState.isAdmin && <ViewOffsets />}
-              {authState.isAdmin && <ViewSymbolTableOffsets />}
-              {authState.isAdmin && <ViewSymbolTable />}
-              {authState.isAdmin && <ViewObjectiveValue />}
-              {authState.isAdmin && <ViewExecuteToTest />}
+              {authState && authState.isAdmin && <ViewOffsets />}
+              {authState && authState.isAdmin && <ViewSymbolTableOffsets />}
+              {authState && authState.isAdmin && <ViewSymbolTable />}
+              {authState && authState.isAdmin && <ViewObjectiveValue />}
+              {authState && authState.isAdmin && <ViewExecuteToTest />}
             </NavDropdown>
             <NavDropdown title="Help">
               <HelpMotd />

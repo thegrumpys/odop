@@ -91,7 +91,7 @@ export default function HelpAbout() {
           <a href="https://github.com/thegrumpys/odop/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">ODOP License</a>
           <hr />
           ODOP Software Version: {release_version()}<br />
-          {authState.isAdmin &&
+          {authState && authState.isAdmin &&
             <>
               User Authenticated: {authState.isAuthenticated ? 'true' : 'false'}<br />
               User Adminstrator: {authState.isAdmin ? 'true' : 'false'}<br />
@@ -102,7 +102,7 @@ export default function HelpAbout() {
           Model: {model_jsontype} {model_type}<br />
           Model Units: {model_units}<br />
           Model Version: {model_version}<br />
-          {authState.isAdmin && <span>DB Size: {size} MB</span>}
+          {authState && authState.isAdmin && <span>DB Size: {size} MB</span>}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={toggle}>Close</Button>

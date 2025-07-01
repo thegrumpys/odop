@@ -89,7 +89,7 @@ export default function HelpTutorial() {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>{' '}
-          {authState.isAdmin && <Button variant="danger" onClick={onExecuteAndRun}>Execute All</Button>}{' '}
+          {authState && authState.isAdmin && <Button variant="danger" onClick={onExecuteAndRun}>Execute All</Button>}{' '}
           <Button variant="primary" onClick={onExecute}>Execute</Button>
         </Modal.Footer>
       </Modal>}
