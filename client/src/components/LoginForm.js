@@ -32,8 +32,8 @@ export default function LoginForm() {
   return (
     <form onSubmit={handleLogin}>
       <h2>Login</h2>
-      <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
-      <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
+      <input type="text" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" autocomplete="username"/>
+      <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" autocomplete="current-password"/>
       <button type="submit">Login</button>
       <br />
       Don't have an account? <Link to="/register">Sign up</Link>

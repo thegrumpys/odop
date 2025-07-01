@@ -35,6 +35,7 @@ export default function ResetPasswordPage() {
         value={email}
         required
         onChange={(e) => setEmail(e.target.value)}
+        autocomplete="username"
       />
       <button type="submit">Send Reset Email</button>
       <br />

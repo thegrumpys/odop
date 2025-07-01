@@ -34,8 +34,8 @@ export default function RegisterForm() {
   return (
     <form onSubmit={handleRegister}>
       <h2>Register</h2>
-      <input type="email" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)} />
-      <input type="password" placeholder="Password" value={password} required onChange={(e) => setPassword(e.target.value)} />
+      <input type="email" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)} autocomplete="username"/>
+      <input type="password" placeholder="Password" value={password} required onChange={(e) => setPassword(e.target.value)} autocomplete="new-password" />
       <input placeholder="First Name" value={first_name} required onChange={e => setFirstName(e.target.value)} />
       <input placeholder="Last Name" value={last_name} required onChange={e => setLastName(e.target.value)} />
       <button type="submit">Register</button>

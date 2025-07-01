@@ -58,6 +58,7 @@ export default function ChangePasswordPage() {
         placeholder="New Password"
         required
         onChange={(e) => setPassword(e.target.value)}
+        autocomplete="new-password"
       />
       <button type="submit">Update Password</button>
     </form>
