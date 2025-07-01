@@ -39,10 +39,7 @@ export default function App() {
 
   useEffect(() => {
 //    console.log('App.useEffect','Mounted');
-    if (typeof(Storage) !== "undefined" && localStorage.getItem("redirect") !== null) {
-//      console.log('App.useEffect','restore "redirect" file')
-      loadRedirectDesign();
-    } else if (typeof(Storage) !== "undefined" && localStorage.getItem("autosave") !== null) {
+    if (typeof(Storage) !== "undefined" && localStorage.getItem("autosave") !== null) {
 //      console.log('App.useEffect','restore "autosave" file')
       promptLoadAutoSave();
     } else {
@@ -53,22 +50,6 @@ export default function App() {
 //      console.log('App.useEffect','Unmounting ...');
     }
   }, []);
-
-  const loadRedirectDesign = () => {
-//    console.log('App.loadRedirectDesign');
-    dispatch(restoreAutoSave('redirect'));
-    dispatch(deleteAutoSave('redirect'));
-    dispatch(deleteAutoSave()); // Get rid of any AutoSave data too
-//    console.log('App.loadAutoSaveDesign','model_user=',model_user,'model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
-    config.url.prompt = false; // Turn off prompt
-    config.url.name = model_name; // Use model name
-    config.url.view = model_view; // Use model view
-    config.url.type = model_type; // Use model type
-    config.url.execute = undefined; // Turn off execute
-    logUsage('event', 'App', { event_label: 'type: ' + model_type + ' load redirect ' + model_name});
-//    console.log('App.loadRedirectDesign'.'navigate('/')');
-    navigate('/'); // Must be last after logUsage
-  }
 
   const promptLoadAutoSave = () => {
 //    console.log('App.promptLoadAutoSave');

@@ -1,29 +1,33 @@
-import { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
 import { useAuth } from '../../components/AuthProvider';
 import { changeUser, saveAutoSave } from '../../store/actions';
+import axios from '../../axiosConfig';
 
 export default function SignOut() {
 //  console.log('In SignOut');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { authState, setAuthState } = useAuth();
-//  console.log('SignOut','auth=',auth);
+//  console.log('In SignOut','authState=',authState);
 
   const toggle = async () => {
 //    console.log('In SignOut.toggle');
-    dispatch(changeUser(null));
     try {
       await axios.post('/logout');
-      setAuthState({isAuthenticated: false});
+      const res = await axios.get('/me');
+      setAuthState(res.data.authState);
+//      console.log('In SignOut.toggle','setAuthState=',res.data.authState);
+      dispatch(changeUser(null));
       logUsage('event', 'SignOut', { event_label: '' });
+      navigate('/');
     } catch (err) {
 //      console.error('Logout failed', err);
+      alert('Logout failed: '+err.message);
     }
-    navigate('/');
   }
 
   return authState && authState.isAuthenticated ? (

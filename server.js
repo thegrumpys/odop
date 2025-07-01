@@ -635,6 +635,7 @@ app.get('/me', (req, res) => {
 
 // LOGOUT
 app.post('/logout', (req, res) => {
+//  console.log('In /logout');
   req.session.destroy(() => res.sendStatus(200));
 });
 
