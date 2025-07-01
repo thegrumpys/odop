@@ -613,6 +613,7 @@ app.post('/login', async (req, res) => {
 // CHECK SESSION
 app.get('/me', (req, res) => {
   if (req.session.user) {
+    console.log('In /me','req.session.user=',req.session.user);
     res.json({
       authState: {
         email: req.session.user.email,
@@ -624,10 +625,11 @@ app.get('/me', (req, res) => {
       }
     });
   } else {
+    console.log('In /me','no req.session.user');
     res.json({
       authState: {
         isAuthenticated: false,
-        isAdmin: false,
+        isAdmin: false
       }
     });
   }

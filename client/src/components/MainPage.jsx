@@ -54,7 +54,7 @@ export default function MainPage() {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
   const { authState } = useAuth();
-//  console.log('MainPage','authState=',authState);
+  console.log('MainPage','authState=',authState);
 
   useEffect(() => {
 //    console.log('MainPage','Mounted','All useEffect');
