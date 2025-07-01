@@ -4,6 +4,7 @@ import axios from '../axiosConfig';
 import { useAuth } from './AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import { changeUser } from '../store/actions';
+import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -30,14 +31,46 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={handleLogin}>
-      <h2>Login</h2>
-      <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
-      <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
-      <button type="submit">Login</button>
-      <br />
-      Don't have an account? <Link to="/register">Sign up</Link>
-      <br />
-      <Link to="/reset-password">Forgot Password?</Link>
+      <Container className="pt-5">
+      <Row>
+      <Col lg="4" />
+      <Col lg="4">
+      <Table border="1" className="p-5">
+      <tr>
+        <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /><br /><hr /></td>
+      </tr>
+      <tr>
+        <td className="text-center"><h3>Sign in to ODOP</h3></td>
+      </tr>
+        <tr>
+          <td className="px-5 text-start">Username<br /><Form.Control type="email" value={email} onChange={e => setEmail(e.target.value)} /></td>
+        </tr>
+        <tr>
+          <td className="px-5 text-start">Password<br /><Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} /></td>
+        </tr>
+        <tr>
+          <td className="text-center"><Button variant="primary" type="submit">Sign In</Button></td>
+        </tr>
+        <tr>
+          <td className="text-start px-5 pt-3"><Link to="/reset-password">Forgot Password?</Link></td>
+        </tr>
+        <tr>
+          <td className="text-start px-5"><a href="/docs/About/userAccounts.html" target="_blank">About ODOP user accounts</a></td>
+        </tr>
+        <tr>
+          <td className="text-start px-5"><a href="https://thegrumpys.github.io/odop/About/messageOfTheDay.html" target="_blank">ODOP Message Of The Day</a></td>
+        </tr>
+        <tr>
+          <td className="text-start px-5"><a href="/docs/About" target="_blank">Learn about ODOP</a></td>
+        </tr>
+        <tr>
+          <td className="text-start px-5 pb-5"><hr /><br />Don't have an account? <Link to="/register">Sign up</Link></td>
+        </tr>
+      </Table>
+      </Col>
+      <Col lg="4" />
+      </Row>
+      </Container>
     </form>
   );
 }
