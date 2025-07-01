@@ -35,7 +35,7 @@ export default function LoginForm() {
         <Row>
           <Col lg="4" />
           <Col lg="4">
-            <Table border="1" className="p-5">
+            <Table border="1" borderless className="p-5">
               <tbody>
                 <tr>
                   <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
@@ -44,7 +44,7 @@ export default function LoginForm() {
                   <td className="text-center"><h3>Sign in to ODOP</h3></td>
                 </tr>
                 <tr>
-                  <td className="px-5 text-start">Username<br /><Form.Control type="email" value={email} onChange={e => setEmail(e.target.value)} /></td>
+                  <td className="px-5 text-start">Username<br /><Form.Control type="text" value={email} onChange={e => setEmail(e.target.value)} /></td>
                 </tr>
                 <tr>
                   <td className="px-5 text-start">Password<br /><Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} /></td>
