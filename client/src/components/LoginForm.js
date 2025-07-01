@@ -65,7 +65,7 @@ export default function LoginForm() {
                   <td className="text-start px-5"><a href="/docs/About" target="_blank">Learn about ODOP</a></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5 pb-3">Don't have an account? <Link to="/register">Sign up</Link></td>
+                  <td className="text-center p-3">Don't have an account? <Link to="/register">Sign up</Link></td>
                 </tr>
               </tbody>
             </Table>
