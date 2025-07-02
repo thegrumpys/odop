@@ -90,10 +90,10 @@ function generateUserToken() {
 function renderTemplate(templatePath, replacements = {}) {
   let template = fs.readFileSync(templatePath, 'utf8');
   for (const [key, value] of Object.entries(replacements)) {
-    console.log('In renderTemplate','key=',key,'value=',value);
+//    console.log('In renderTemplate','key=',key,'value=',value);
     template = template.replace(new RegExp(`{{${key}}}`, 'g'), value);
   }
-  console.log('In renderTemplate','template=',template);
+//  console.log('In renderTemplate','template=',template);
   return template;
 }
 
@@ -653,7 +653,7 @@ app.post('/reset-password', async (req, res) => {
     // Does user exist?
     const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
     const row = rows[0];
-    console.log('In /reset-password','row=',row);
+//    console.log('In /reset-password','row=',row);
     if (!rows.length) return res.sendStatus(200);
 
     // Create a reset token
