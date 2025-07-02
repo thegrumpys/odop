@@ -5,8 +5,19 @@
   <title>Confirm Your Account</title>
 </head>
 <body style="font-family: sans-serif; color: #333;">
-  <h2>Welcome to Our App</h2>
-  <p>Thank you for registering. Please confirm your email address by clicking the button below:</p>
+  <table>
+  <tbody>
+  <tr>
+  <td style="text-align: center;">
+  <h1><img src="http://localhost:3000/favicon.ico" /></h1>
+  <h2>SpringDesignSoftware.org - ODOP</h2>
+  </td>
+  </tr>
+  <tr>
+  <td style="text-align: left;">
+  <p>Hi {{first_name}},</p>
+  <p>Welcome to SpringDesignSoftware.org - ODOP!</p>
+  <p>To verify your email address and activate your account please click the following link:</p>
   <p>
     <a href="{{confirmUrl}}" style="
       display: inline-block;
@@ -17,6 +28,10 @@
       border-radius: 5px;
     ">Confirm Account</a>
   </p>
-  <p>If you did not request this, please ignore this email.</p>
+  <p>This is an automatically generated message from ODOP. Replies are not monitored or answered.</p>
+  </td>
+  </tr>
+  </tbody>
+  </table>
 </body>
 </html>

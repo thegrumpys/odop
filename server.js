@@ -90,14 +90,16 @@ function generateUserToken() {
 function renderTemplate(templatePath, replacements = {}) {
   let template = fs.readFileSync(templatePath, 'utf8');
   for (const [key, value] of Object.entries(replacements)) {
+    console.log('In renderTemplate','key=',key,'value=',value);
     template = template.replace(new RegExp(`{{${key}}}`, 'g'), value);
   }
+  console.log('In renderTemplate','template=',template);
   return template;
 }
 
-async function sendConfirmationEmail(email, token) {
+async function sendConfirmationEmail(email, first_name, last_name, token) {
   const confirmUrl = `${process.env.FRONT_URL}/confirm?token=${token}`;
-  const html = renderTemplate(path.join(__dirname, 'emails', 'confirm.html'), { email, confirmUrl });
+  const html = renderTemplate(path.join(__dirname, 'emails', 'confirm.html'), { email, first_name, last_name, confirmUrl });
 
   const mailOptions = {
     from: `"Info at SpringDesignSoftware" <${process.env.SMTP_USER}>`,
@@ -109,9 +111,9 @@ async function sendConfirmationEmail(email, token) {
   await transporter.sendMail(mailOptions);
 }
 
-async function sendResetEmail(email, token) {
+async function sendResetEmail(email, first_name, last_name, token) {
   const resetUrl = `${process.env.FRONT_URL}/change-password?token=${token}`;
-  const html = renderTemplate(path.join(__dirname, 'emails', 'reset.html'), { resetUrl });
+  const html = renderTemplate(path.join(__dirname, 'emails', 'reset.html'), { email, first_name, last_name, resetUrl });
 
   const mailOptions = {
     from: `"Info at SpringDesignSoftware" <${process.env.SMTP_USER}>`,
@@ -556,7 +558,7 @@ app.post('/register', async (req, res) => {
 
     // Send confirmation email
     try {
-      await sendConfirmationEmail(email, confirmationToken);
+      await sendConfirmationEmail(email, first_name, last_name, confirmationToken);
       res.status(200).json({ message: 'Registration successful. Please check your email to confirm your account.' });
     } catch (error) {
 //      console.error('Error sending confirmation email:', error);
@@ -649,14 +651,16 @@ app.post('/reset-password', async (req, res) => {
 
   try {
     // Does user exist?
-    const [rows] = await db.execute('SELECT email FROM user WHERE email = ?', [email]);
+    const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
+    const row = rows[0];
+    console.log('In /reset-password','row=',row);
     if (!rows.length) return res.sendStatus(200);
 
     // Create a reset token
     await db.execute('INSERT INTO token (token, email, type) VALUES (?, ?, ?)', [resetToken, email, 'reset']);
 
     // Send reset email
-    await sendResetEmail(email, resetToken);
+    await sendResetEmail(email, row.first_name, row.last_name, resetToken);
     res.status(200).json({ message: 'Reset link sent if email is valid.' });
   } catch (error) {
 //    console.error('Error sending reset email:', error);

@@ -10,7 +10,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { setAuthState, setIsAuthenticated } = useAuth();
-//  console.log('In LoginForm','setAuthState=',setAuthState);
+  //  console.log('In LoginForm','setAuthState=',setAuthState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -25,15 +25,15 @@ export default function LoginForm() {
       navigate('/');
     } catch (err) {
 //      console.error('err=', err)
-      alert('Login failed: '+err.message);
+      alert('Login failed: ' + err.message);
     }
   };
 
   return (
-      <Container className="pt-5" style={{ backgroundColor: '#eeeeee', paddingTop: '60px' }}>
-        <Row>
-          <Col lg="4" />
-          <Col lg="4">
+    <Container className="pt-5">
+      <Row>
+        <Col lg="4" />
+        <Col lg="4">
           <form onSubmit={handleLogin}>
             <Table border="1" borderless className="p-5">
               <tbody>
@@ -69,10 +69,10 @@ export default function LoginForm() {
                 </tr>
               </tbody>
             </Table>
-            </form>
-          </Col>
-          <Col lg="4" />
-        </Row>
-      </Container>
+          </form>
+        </Col>
+        <Col lg="4" />
+      </Row>
+    </Container>
   );
 }

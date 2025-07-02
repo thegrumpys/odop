@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import axios from '../axiosConfig';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
+import { useAuth } from '../components/AuthProvider';
 
 export default function ResetPasswordPage() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const { authState } = useAuth();
 
   const handleResetRequest = async (e) => {
     e.preventDefault();
@@ -13,25 +15,45 @@ export default function ResetPasswordPage() {
       await axios.post('/reset-password', { email });
       setSubmitted(true);
     } catch (err) {
-      console.error('err=',err);
-      alert('Failed to send reset email: '+err.message);
+//      console.error('err=',err);
+      alert('Failed to send reset email: ' + err.message);
     }
   };
 
   if (submitted) {
     return (
-      <div>
-        <h2>Reset Password Email Sent ✅</h2>
-        <p>If that email exists, a reset link has been sent.</p>
-      </div>
+      <Container className="pt-5">
+        <Row>
+          <Col lg="4" />
+          <Col lg="4">
+            <Table border="1" borderless className="p-5">
+              <tbody>
+                <tr>
+                  <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
+                </tr>
+                <tr>
+                  <td className="text-center"><h3>Email sent!</h3></td>
+                </tr>
+                <tr>
+                  <p>Email has been sent to {email} with instructions on resetting your password.</p>
+                </tr>
+                <tr>
+                  <td className="text-center p-3"><Link to="/login">Back to sign in</Link></td>
+                </tr>
+              </tbody>
+            </Table>
+          </Col>
+          <Col lg="4" />
+        </Row>
+      </Container>
     );
   }
 
   return (
-      <Container className="pt-5" style={{ backgroundColor: '#eeeeee', paddingTop: '60px' }}>
-        <Row>
-          <Col lg="4" />
-          <Col lg="4">
+    <Container className="pt-5">
+      <Row>
+        <Col lg="4" />
+        <Col lg="4">
           <form onSubmit={handleResetRequest}>
             <Table border="1" borderless className="p-5">
               <tbody>
@@ -52,10 +74,10 @@ export default function ResetPasswordPage() {
                 </tr>
               </tbody>
             </Table>
-            </form>
-          </Col>
-          <Col lg="4" />
-        </Row>
-      </Container>
+          </form>
+        </Col>
+        <Col lg="4" />
+      </Row>
+    </Container>
   );
 }

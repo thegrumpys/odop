@@ -17,26 +17,45 @@ export default function RegisterForm() {
       await axios.post('/register', { email, password, first_name, last_name });
       setSubmitted(true);
     } catch (err) {
-      console.error('err=',err);
-      alert('Registration failed: '+err.message);
+      //      console.error('err=', err);
+      alert('Registration failed: ' + err.message);
     }
   };
 
   if (submitted) {
     return (
-      <div>
-        <h2>Registration Successful</h2>
-        <p>Please check your email to confirm your account.</p>
-        <button onClick={() => navigate('/')}>Go to Home</button>
-      </div>
+      <Container className="pt-5">
+        <Row>
+          <Col lg="4" />
+          <Col lg="4">
+            <Table border="1" borderless className="p-5">
+              <tbody>
+                <tr>
+                  <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
+                </tr>
+                <tr>
+                  <td className="text-center"><h3>Registration Successful</h3></td>
+                </tr>
+                <tr>
+                  <td className="px-5 text-start"><p>Please check your {email} email to confirm your account.</p></td>
+                </tr>
+                <tr>
+                  <td className="text-center"><Button onClick={() => navigate('/')}>Go to Home</Button></td>
+                </tr>
+              </tbody>
+            </Table>
+          </Col>
+          <Col lg="4" />
+        </Row>
+      </Container>
     );
   }
 
   return (
-      <Container className="pt-5" style={{ backgroundColor: '#eeeeee', paddingTop: '60px' }}>
-        <Row>
-          <Col lg="4" />
-          <Col lg="4">
+    <Container className="pt-5">
+      <Row>
+        <Col lg="4" />
+        <Col lg="4">
           <form onSubmit={handleRegister}>
             <Table border="1" borderless className="p-5">
               <tbody>
@@ -44,13 +63,24 @@ export default function RegisterForm() {
                   <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><h3>Register</h3></td>
+                  <td className="text-center"><h3>Create Account</h3></td>
                 </tr>
                 <tr>
                   <td className="px-5 text-start"><Form.Control type="email" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)} autoComplete="username" /></td>
                 </tr>
                 <tr>
                   <td className="px-5 text-start"><Form.Control type="password" placeholder="Password" value={password} required onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" /></td>
+                </tr>
+                <tr>
+                  <td className="px-5 text-start">
+                    <ul>
+                      <li>At least 8 character(s)</li>
+                      <li>At least 1 number(s)</li>
+                      <li>At least 1 lowercase letter(s)</li>
+                      <li>At least 1 uppercase letter(s)</li>
+                      <li>Does not contain part of username</li>
+                    </ul>
+                  </td>
                 </tr>
                 <tr>
                   <td className="px-5 text-start"><Form.Control placeholder="First Name" value={first_name} required onChange={e => setFirstName(e.target.value)} /></td>
@@ -66,10 +96,10 @@ export default function RegisterForm() {
                 </tr>
               </tbody>
             </Table>
-            </form>
-          </Col>
-          <Col lg="4" />
-        </Row>
-      </Container>
+          </form>
+        </Col>
+        <Col lg="4" />
+      </Row>
+    </Container>
   );
 }
