@@ -20,7 +20,7 @@ export function patsh(store, psi, del, delmin, objmin, maxit, tol, merit) {
     }
 
     function patsh_explore(phi, s, del) {
-//        console.log('In patsh_explore 0 phi=',phi,'s=',s);
+//        console.log('patsh_explore 0 phi=',phi,'s=',s);
         var eps = [];
         var s_phi;
         for (let k = 0; k < phi.length; k++) {
@@ -30,14 +30,14 @@ export function patsh(store, psi, del, delmin, objmin, maxit, tol, merit) {
             }
             phi[k] = phi[k] + eps[k] * del * xflag[k];
             s_phi = despak(store, phi, merit);
-//            console.log('In patsh_explore 1 phi=',phi,'s_phi=',s_phi);
+//            console.log('patsh_explore 1 phi=',phi,'s_phi=',s_phi);
             if (s_phi < s) {
                 s = s_phi;
             } else {
                 xflag[k] = -xflag[k];
                 phi[k] = phi[k] + 2.0 * eps[k] * del * xflag[k];
                 s_phi = despak(store, phi, merit);
-//                console.log('In patsh_explore 2 phi=',phi,'s_phi=',s_phi);
+//                console.log('patsh_explore 2 phi=',phi,'s_phi=',s_phi);
                 if (s_phi < s) {
                     s = s_phi;
                 } else {
@@ -49,7 +49,7 @@ export function patsh(store, psi, del, delmin, objmin, maxit, tol, merit) {
     }
 
     s_psi = despak(store, psi, merit); // AKA despak, s_psi: the functional value at the base point
-//    console.log('In patsh 1 psi=',psi,'s_psi=',s_psi);
+//    console.log('patsh 1 psi=',psi,'s_psi=',s_psi);
     while (s_psi >= objmin) { // start searching/exploring otherwise Leave by door #1
         var s_phi; // [1]
         var phi = []; // phi: base point resulting from the current move
@@ -88,7 +88,7 @@ export function patsh(store, psi, del, delmin, objmin, maxit, tol, merit) {
                     return NCODE;// stop, iteration count exceeded
                 }
                 s_phi = despak(store, phi, merit); // AKA despak, s_phi: the functional value for this move
-//                console.log('In patsh 2 phi=',phi,'s_phi=',s_phi);
+//                console.log('patsh 2 phi=',phi,'s_phi=',s_phi);
                 s = s_phi; // s: the functional value before the move
                 s = patsh_explore(phi, s, del); // explore
 //                console.log('After patsh_explore phi=',phi,'s=',s,'itno=',itno);

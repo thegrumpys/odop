@@ -17,21 +17,21 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
   const dispatch = useDispatch();
 
   const onSetFlagMaxConstrained = (event) => {
-//    console.log('In ConstraintsMaxRowDependentVariable.onSetFlagMaxConstrained', 'event.target.value=', event.target.value);
+//    console.log('ConstraintsMaxRowDependentVariable.onSetFlagMaxConstrained', 'event.target.value=', event.target.value);
     dispatch(setSymbolFlag(element.name, MAX, CONSTRAINED));
     logValue(element.name, 'Enabled', 'MaxConstraintFlag', false);
     if (typeof onSet === "function") onSet(event);
   }
 
   const onResetFlagMaxConstrained = (event) => {
-//    console.log('In ConstraintsMaxRowDependentVariable.onResetFlagMaxConstrained', 'event.target.value=', event.target.value);
+//    console.log('ConstraintsMaxRowDependentVariable.onResetFlagMaxConstrained', 'event.target.value=', event.target.value);
     dispatch(resetSymbolFlag(element.name, MAX, CONSTRAINED));
     logValue(element.name, 'Disabled', 'MaxConstraintFlag', false);
     if (typeof onReset === "function") onReset(event);
   }
 
   const onChangeValidMaxConstraint = (event) => {
-//    console.log('In ConstraintsMaxRowDependentVariable.onChangeValidMaxConstraint', 'event.target.value=', event.target.value);
+//    console.log('ConstraintsMaxRowDependentVariable.onChangeValidMaxConstraint', 'event.target.value=', event.target.value);
     var value = parseFloat(event.target.value);
     if (element.lmax & FIXED) {
       dispatch(changeSymbolConstraint(element.name, MIN, value)); // Update the model
@@ -44,12 +44,12 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
   }
 
   const onChangeInvalidMaxConstraint = (event) => {
-//    console.log('In ConstraintsMaxRowDependentVariable.onChangeInvalidMaxConstraint', 'event.target.value=', event.target.value);
+//    console.log('ConstraintsMaxRowDependentVariable.onChangeInvalidMaxConstraint', 'event.target.value=', event.target.value);
     if (typeof onChangeInvalid === "function") onChangeInvalid();
   }
 
   const onClick = (event) => {
-//    console.log('In ConstraintsMaxRowDependentVariable.onClick', 'event.target.value=', event.target.value);
+//    console.log('ConstraintsMaxRowDependentVariable.onClick', 'event.target.value=', event.target.value);
     // Show modal only if there are cmaxchoices
     if (element.cmaxchoices !== undefined && element.cmaxchoices.length > 0) {
       setValueString(element.cmax.toString());
@@ -58,20 +58,20 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
   }
 
   const onChangeValidValue = (event) => {
-//    console.log('In ConstraintsMaxRowDependentVariable.onChangeValidValue', 'event.target.value=', event.target.value);
+//    console.log('ConstraintsMaxRowDependentVariable.onChangeValidValue', 'event.target.value=', event.target.value);
     setValueString(event.target.value);
     setIsInvalidValue(false);
     if (typeof onChangeValid === "function") onChangeValid(event);
   }
 
   const onChangeInvalidValue = (event) => {
-//    console.log('In ConstraintsMaxRowDependentVariable.onChangeInvalidValue', 'event.target.value=', event.target.value);
+//    console.log('ConstraintsMaxRowDependentVariable.onChangeInvalidValue', 'event.target.value=', event.target.value);
     setIsInvalidValue(true);
     if (typeof onChangeInvalid === "function") onChangeInvalid(event);
   }
 
   const onEnterButton = (event) => {
-//    console.log('In ConstraintsMaxRowDependentVariable.onEnterButton', 'event.target.value=', event.target.value);
+//    console.log('ConstraintsMaxRowDependentVariable.onEnterButton', 'event.target.value=', event.target.value);
     setShow(!show);
     var value = parseFloat(valueString);
     if (element.lmax & FIXED) {
@@ -83,7 +83,7 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
   }
 
   const onVariableButton = (event, source_name) => {
-//    console.log('In ConstraintsMaxRowDependentVariable.onVariableButton', 'event.target.value=', event.target.value, 'source_name=', source_name);
+//    console.log('ConstraintsMaxRowDependentVariable.onVariableButton', 'event.target.value=', event.target.value, 'source_name=', source_name);
     setShow(!show);
     if (element.lmax & FIXED) {
       dispatch(setSymbolFlag(element.name, MIN, FDCL, source_name));
@@ -92,7 +92,7 @@ export default function ConstraintsMaxRowDependentVariable({ element, index, onC
   }
 
   const onCancel = (event) => {
-//    console.log('In ConstraintsMaxRowDependentVariable.onCancel', 'event.target.value=', event.target.value);
+//    console.log('ConstraintsMaxRowDependentVariable.onCancel', 'event.target.value=', event.target.value);
     setShow(!show);
   }
 

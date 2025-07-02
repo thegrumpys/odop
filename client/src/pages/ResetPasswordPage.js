@@ -5,21 +5,23 @@ import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 import { useAuth } from '../components/AuthProvider';
 
 export default function ResetPasswordPage() {
+//  console.log('ResetPasswordPage');
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const { authState } = useAuth();
 
   const handleResetRequest = async (e) => {
+//    console.log('ResetPasswordPage.handleResetRequest','e=',e);
     e.preventDefault();
     try {
       await axios.post('/reset-password', { email });
       setSubmitted(true);
     } catch (err) {
-//      console.error('err=',err);
+      console.error('ResetPasswordPage,handleResetRequest','err=',err);
       alert('Failed to send reset email: ' + err.message);
     }
   };
 
+//  console.log('ResetPasswordPage','submitted=',submitted);
   if (submitted) {
     return (
       <Container className="pt-5">

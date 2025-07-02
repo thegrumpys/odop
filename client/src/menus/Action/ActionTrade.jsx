@@ -44,7 +44,7 @@ export default function ActionTrade() {
 //===========================================================
 
   const strategyToggle = () => {
-//    console.log('In ActionTrade.strategyToggle');
+//    console.log('ActionTrade.strategyToggle');
     logUsage('event', 'ActionTrade', { event_label: 'ActionTrade' });
     dispatch(saveAutoSave());
     var ncode;
@@ -60,7 +60,7 @@ export default function ActionTrade() {
   }
 
   const commonViolationSetup = () => {
-//    console.log('In ActionTrade.commonViolationSetup');
+//    console.log('ActionTrade.commonViolationSetup');
     var element;
     var localNviol = 0;
     var localVflag = [];
@@ -88,7 +88,7 @@ export default function ActionTrade() {
   }
 
   const onNoop = () => { // No-op for onHide
-//    console.log('In ActionTrade.onNoop');
+//    console.log('ActionTrade.onNoop');
   }
 
 //===========================================================
@@ -96,7 +96,7 @@ export default function ActionTrade() {
 //===========================================================
 
   const onStrategyDone = () => { // Option 3
-//    console.log('In ActionTrade.onStrategyDone');
+//    console.log('ActionTrade.onStrategyDone');
     dispatch(restoreInputSymbolValues());
     var ncode;
     ncode = 'TRADE CANCELLED';
@@ -105,7 +105,7 @@ export default function ActionTrade() {
   }
 
   const onStrategyExisting = () => { // Option 2
-//    console.log('In ActionTrade.onStrategyExisting');
+//    console.log('ActionTrade.onStrategyExisting');
     var element;
     var value;
     var ncode;
@@ -127,7 +127,7 @@ export default function ActionTrade() {
   }
 
   const onStrategyArbitrary = () => { // Option 1
-//    console.log('In ActionTrade.onStrategyArbitrary');
+//    console.log('ActionTrade.onStrategyArbitrary');
     var element;
     var localDir = [];
     var localIsArbitraryInvalid = [];
@@ -150,7 +150,7 @@ export default function ActionTrade() {
   }
 
   const onStrategyProportional = () => { // Option 0
-//    console.log('In ActionTrade.onStrategyProportional');
+//    console.log('ActionTrade.onStrategyProportional');
     var element;
     var localDir = [];
     var design = store.getState();
@@ -169,12 +169,12 @@ export default function ActionTrade() {
   }
 
   const onStrategyContextHelp = () => {
-//    console.log('In ActionTrade.onStrategyContextHelp');
+//    console.log('ActionTrade.onStrategyContextHelp');
     window.open('/docs/Help/trade.html', '_blank');
   }
 
   const commonArbitraryOrProportional = (dir) => {
-//    console.log('In ActionTrade.commonArbitraryOrProportional dir=',dir);
+//    console.log('ActionTrade.commonArbitraryOrProportional dir=',dir);
     /**
      * **** CREATE normalized VECTOR IN VIOLATED CONSTRAINT SPACE
      * *****
@@ -259,7 +259,7 @@ export default function ActionTrade() {
 //===========================================================
 
   const onArbitraryCancel = () => {
-//    console.log('In ActionTrade.onArbitraryCancel');
+//    console.log('ActionTrade.onArbitraryCancel');
     dispatch(restoreInputSymbolValues());
     var ncode;
     ncode = 'TRADE CANCELLED';
@@ -268,14 +268,14 @@ export default function ActionTrade() {
   }
 
   const onArbitraryContinue = () => {
-//    console.log('In ActionTrade.onArbitraryContinue');
+//    console.log('ActionTrade.onArbitraryContinue');
     commonArbitraryOrProportional(dir);
     setArbitraryShow(!arbitraryShow); // Hide arbitrary
     setSizeShow(!sizeShow); // Show size
   }
 
   const onArbitraryChangeValid = (i, event) => {
-//    console.log('In ActionTrade.onArbitraryChangeValid i=',i,' event.target.value=',event.target.value);
+//    console.log('ActionTrade.onArbitraryChangeValid i=',i,' event.target.value=',event.target.value);
     var design = store.getState();
     var localDir = ldir.map((element, index) => {
       var value;
@@ -288,9 +288,9 @@ export default function ActionTrade() {
       }
       return value;
     });
-//        console.log('In ActionTrade.onArbitraryChangeValid dir=',dir);
+//        console.log('ActionTrade.onArbitraryChangeValid dir=',dir);
     var greatestValue = localDir.reduce((previousValue, currentValue) => { return Math.abs(currentValue) > previousValue ? Math.abs(currentValue) : previousValue }, 0.0);
-//        console.log('In ActionTrade.onArbitraryChangeValid greatestValue=',greatestValue);
+//        console.log('ActionTrade.onArbitraryChangeValid greatestValue=',greatestValue);
     var localIsArbitraryInvalid = isArbitraryInvalid.map((element, index) => {
       if (index === i) {
         return false;
@@ -298,21 +298,21 @@ export default function ActionTrade() {
         return element;
       }
     });
-//        console.log('In ActionTrade.onArbitraryChangeValid localIsArbitraryInvalid=',localIsArbitraryInvalid);
+//        console.log('ActionTrade.onArbitraryChangeValid localIsArbitraryInvalid=',localIsArbitraryInvalid);
     var notAllArbitraryValid = localIsArbitraryInvalid.reduce((previousValue, currentValue) => { return previousValue || currentValue }, false);
-//        console.log('In ActionTrade.onArbitraryChangeValid notAllNumbers=',notAllArbitraryValid);
+//        console.log('ActionTrade.onArbitraryChangeValid notAllNumbers=',notAllArbitraryValid);
     var localArbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum || notAllArbitraryValid;
-//        console.log('In ActionTrade.onArbitraryChangeValid localArbitraryContinueDisabled=',localArbitraryContinueDisabled);
+//        console.log('ActionTrade.onArbitraryChangeValid localArbitraryContinueDisabled=',localArbitraryContinueDisabled);
     setDir(localDir);
     setIsArbitraryInvalid(localIsArbitraryInvalid);
     setArbitraryContinueDisabled(localArbitraryContinueDisabled);
   }
 
   const onArbitraryChangeInvalid = (i, event) => {
-//    console.log('In ActionTrade.onArbitraryChangeInvalid i=',i,' event.target.value=',event.target.value);
+//    console.log('ActionTrade.onArbitraryChangeInvalid i=',i,' event.target.value=',event.target.value);
     var design = store.getState();
     var greatestValue = dir.reduce((previousValue, currentValue) => { return Math.abs(currentValue) > previousValue ? Math.abs(currentValue) : previousValue }, 0.0);
-//        console.log('In ActionTrade.onArbitraryChangeInvalid greatestValue=',greatestValue);
+//        console.log('ActionTrade.onArbitraryChangeInvalid greatestValue=',greatestValue);
     var localIsArbitraryInvalid = isArbitraryInvalid.map((element, index) => {
       if (index === i) {
         return true;
@@ -320,11 +320,11 @@ export default function ActionTrade() {
         return element;
       }
     });
-//        console.log('In ActionTrade.onArbitraryChangeInvalid localIsArbitraryInvalid=',localIsArbitraryInvalid);
+//        console.log('ActionTrade.onArbitraryChangeInvalid localIsArbitraryInvalid=',localIsArbitraryInvalid);
     var notAllArbitraryValid = localIsArbitraryInvalid.reduce((previousValue, currentValue) => { return previousValue || currentValue }, false);
-//        console.log('In ActionTrade.onArbitraryChangeInvalid notAllNumbers=',notAllArbitraryValid);
+//        console.log('ActionTrade.onArbitraryChangeInvalid notAllNumbers=',notAllArbitraryValid);
     var localArbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum || notAllArbitraryValid;
-//        console.log('In ActionTrade.onArbitraryChangeInvalid localArbitraryContinueDisabled=',localArbitraryContinueDisabled);
+//        console.log('ActionTrade.onArbitraryChangeInvalid localArbitraryContinueDisabled=',localArbitraryContinueDisabled);
     setIsArbitraryInvalid(localIsArbitraryInvalid);
     setArbitraryContinueDisabled(localArbitraryContinueDisabled);
   }
@@ -334,7 +334,7 @@ export default function ActionTrade() {
 //===========================================================
 
   const onSizeCancel = () => {
-//    console.log('In ActionTrade.onSizeCancel');
+//    console.log('ActionTrade.onSizeCancel');
     dispatch(restoreInputSymbolValues());
     var ncode;
     ncode = 'TRADE CANCELLED';
@@ -343,7 +343,7 @@ export default function ActionTrade() {
   }
 
   const onSizeContinue = () => {
-//    console.log('In ActionTrade.onSizeContinue');
+//    console.log('ActionTrade.onSizeContinue');
     var element;
     var c2;
     var c3;
@@ -466,13 +466,13 @@ export default function ActionTrade() {
   }
 
   const onSizeChangeValid = (event) => {
-//    console.log('In ActionTrade.onSizeChangeValid');
+//    console.log('ActionTrade.onSizeChangeValid');
     setDefaultEstPercent(parseFloat(event.target.value));
     setIsSizeInvalid(false);
   }
 
   const onSizeChangeInvalid = (event) => {
-//    console.log('In ActionTrade.onSizeChangeInvalid');
+//    console.log('ActionTrade.onSizeChangeInvalid');
     setIsSizeInvalid(true);
   }
 
@@ -481,7 +481,7 @@ export default function ActionTrade() {
 //===========================================================
 
   const onFeasibleRestart = () => {
-//    console.log('In ActionTrade.onFeasibleRestart');
+//    console.log('ActionTrade.onFeasibleRestart');
     var element;
     var design = store.getState();
     for (let i = 0; i < nviol; i++) {
@@ -501,7 +501,7 @@ export default function ActionTrade() {
   }
 
   const onFeasibleDone = () => {
-//    console.log('In ActionTrade.onFeasibleDone');
+//    console.log('ActionTrade.onFeasibleDone');
     setFeasibleShow(!feasibleShow);
   }
 
@@ -510,7 +510,7 @@ export default function ActionTrade() {
 //===========================================================
 
   const onEstablishAccept = () => {
-//    console.log('In ActionTrade.onEstablishAccept');
+//    console.log('ActionTrade.onEstablishAccept');
     var ncode;
     var design = store.getState(); // Re-access store to get latest element values
     if (design.model.result.objective_value <= design.model.system_controls.objmin) {
@@ -524,7 +524,7 @@ export default function ActionTrade() {
   }
 
   const onEstablishDone = () => {
-//    console.log('In ActionTrade.onEstablishDone');
+//    console.log('ActionTrade.onEstablishDone');
     dispatch(restoreInputSymbolValues());
     var element;
     var ncode;
@@ -549,7 +549,7 @@ export default function ActionTrade() {
 //===========================================================
 
   const onNotFeasibleRestart = () => {
-//    console.log('In ActionTrade.onNotFeasibleRestart');
+//    console.log('ActionTrade.onNotFeasibleRestart');
     var design = store.getState();
     var element;
     for (let i = 0; i < nviol; i++) {
@@ -568,7 +568,7 @@ export default function ActionTrade() {
   }
 
   const onNotFeasibleRepeat = () => {
-//    console.log('In ActionTrade.onNotFeasibleRepeat');
+//    console.log('ActionTrade.onNotFeasibleRepeat');
 //      dispatch(saveInputSymbolValues());
     commonViolationSetup()
     setNotFeasibleShow(!notFeasibleShow);
@@ -576,7 +576,7 @@ export default function ActionTrade() {
   }
 
   const onNotFeasibleDone = () => {
-//    console.log('In ActionTrade.onNotFeasibleDone');
+//    console.log('ActionTrade.onNotFeasibleDone');
     var ncode;
     ncode = 'ACCEPTED TRADE RESULT';
     dispatch(changeResultTerminationCondition(ncode));

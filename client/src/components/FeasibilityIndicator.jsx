@@ -40,7 +40,7 @@ export default function FeasibilityIndicator({ width = 242, height = 24 }) {
   } else { // Green
     x = (model_objective_value / model_objmin) * greenWidth;
   }
-//  console.log('In FeasibilityIndicator.render model_objective_value=', model_objective_value,'x=',x);
+//  console.log('FeasibilityIndicator.render model_objective_value=', model_objective_value,'x=',x);
   return (
     <>
       <svg width={width} height={height}>

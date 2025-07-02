@@ -71,7 +71,7 @@ export const dispatcher = store => next => action => {
       if (index >= 0) {
         element = design.model.symbol_table[index];
         if (element.type === "calcinput") {
-//            console.log('In dispatcher.CHANGE_SYMBOL_VALUE element=',element);
+//            console.log('dispatcher.CHANGE_SYMBOL_VALUE element=',element);
           if (element.format === 'table') {
 //              console.log('in dispatcher.CHANGE_SYMBOL_VALUE file = ../../designtypes/'+element.table+'.json');
             var table = require('../../designtypes/' + element.table + '.json'); // Dynamically load table

@@ -28,7 +28,7 @@ export default function FileDelete() {
   }, [model_user, model_type]);
 
   const getDesignNames = (user, type) => {
-//    console.log('In FileDelete.getDesignNames','user=',user,'type=',type);
+//    console.log('FileDelete.getDesignNames','user=',user,'type=',type);
     // Get the names and store them in state
     displaySpinner(true);
     fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
@@ -44,14 +44,14 @@ export default function FileDelete() {
       return res.json()
     })
     .then(all_names => {
-//      console.log('In FileDelete.getDesignNames','all_names=', all_names);
+//      console.log('FileDelete.getDesignNames','all_names=', all_names);
       var rw_names = all_names.filter(design => { return design.user !== null && design.user !== 'null'});
       setNames(rw_names);
       var name = '';
       if (rw_names.length > 0) {
         name = rw_names[0].name; // Default to first name
       }
-//      console.log('In FileDelete.getDesignNames','name=', name);
+//      console.log('FileDelete.getDesignNames','name=', name);
       setName(name);
     })
     .catch(error => {
@@ -63,7 +63,7 @@ export default function FileDelete() {
   }
 
   const deleteDesign = (user, type, name) => {
-//    console.log('In FileDelete.deleteDesign','user=',user,'type=',type,'name=',name);
+//    console.log('FileDelete.deleteDesign','user=',user,'type=',type,'name=',name);
     displaySpinner(true);
     fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
       method: 'DELETE',
@@ -89,7 +89,7 @@ export default function FileDelete() {
   }
 
   const toggle = () => {
-//    console.log('In FileDelete.toggle');
+//    console.log('FileDelete.toggle');
     if (authState && authState.isAuthenticated) {
       getDesignNames(model_user, model_type);
     }
@@ -98,31 +98,31 @@ export default function FileDelete() {
   }
 
   const onSelectType = (event) => {
-//    console.log('In FileDelete.onSelectType','event.target.value=',event.target.value)
+//    console.log('FileDelete.onSelectType','event.target.value=',event.target.value)
     setType(event.target.value);
     setNames([]);
     getDesignNames(model_user, event.target.value);
   }
 
   const onSelectName = (event) => {
-//    console.log('In FileDelete.onSelectName','event.target.value=',event.target.value);
+//    console.log('FileDelete.onSelectName','event.target.value=',event.target.value);
     setName(event.target.value);
   }
 
   const onSignIn = () => {
-//    console.log('In FileDelete.onSignIn');
+//    console.log('FileDelete.onSignIn');
     setShow(!show);
-//    console.log('In FileDelete.onSignIn - navigate('/login')');
+//    console.log('FileDelete.onSignIn - navigate('/login')');
     navigate('/login'); // Must be last
   }
 
   const onCancel = () => {
-//    console.log('In FileDelete.onCancel');
+//    console.log('FileDelete.onCancel');
     setShow(!show);
   }
 
   const onDelete = () => {
-//    console.log('In FileDelete.onDelete');
+//    console.log('FileDelete.onDelete');
     // Validate name, and delete the database element
     if (name === '') {
       displayMessage("Select design to delete.");

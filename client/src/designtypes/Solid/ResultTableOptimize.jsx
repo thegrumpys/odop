@@ -11,7 +11,7 @@ export default function ResultTableOptimize({ onClick }) {
   const dispatch = useDispatch();
 
   const onOptimizeSeekMAXVolume = (event) => {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMAXVolume','event=',event);
+//        console.log('ResultTableOptimize.onOptimizeSeekMAXVolume','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX Volume button' });
     dispatch(saveAutoSave());
     dispatch(seek('Volume', MAX));
@@ -19,7 +19,7 @@ export default function ResultTableOptimize({ onClick }) {
   }
 
   const onOptimizeSeekMAXWeight = (event) => {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMAXWeight','event=',event);
+//        console.log('ResultTableOptimize.onOptimizeSeekMAXWeight','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX Weight button' });
     dispatch(saveAutoSave());
     dispatch(seek('Weight', MAX));
@@ -27,7 +27,7 @@ export default function ResultTableOptimize({ onClick }) {
   }
 
   const onOptimizeSeekMINLength = (event) => {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINLength','event=',event);
+//        console.log('ResultTableOptimize.onOptimizeSeekMINLength','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Length button' });
     dispatch(saveAutoSave());
     dispatch(seek('Length', MIN));
@@ -35,7 +35,7 @@ export default function ResultTableOptimize({ onClick }) {
   }
 
   const onOptimizeSeekMINWidth = (event) => {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINWidth','event=',event);
+//        console.log('ResultTableOptimize.onOptimizeSeekMINWidth','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Width button' });
     dispatch(saveAutoSave());
     dispatch(seek('Width', MIN));
@@ -43,7 +43,7 @@ export default function ResultTableOptimize({ onClick }) {
   }
 
   const onOptimizeSeekMINHeight = (event) => {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINWidth','event=',event);
+//        console.log('ResultTableOptimize.onOptimizeSeekMINWidth','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Height button' });
     dispatch(saveAutoSave());
     dispatch(seek('Height', MIN));

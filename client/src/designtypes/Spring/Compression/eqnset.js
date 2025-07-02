@@ -95,7 +95,7 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
 //        cycle_life = cl_calc(material_index,life_catagory,1,tensile,stress_1,stress_2);
         x[o.Cycle_Life] = cl_calc(x[o.Material_Type], x[o.Life_Category], 1, x[o.Tensile], x[o.Stress_1], x[o.Stress_2]);
     } else x[o.Cycle_Life] = 0.0;   // Setting to NaN causes problems with File : Open.  See issue 232
-//  console.log('In eqnset','Wire_Dia=',p[o.Wire_Dia],'Cycle_Life=',x[o.Cycle_Life]);
+//  console.log('eqnset','Wire_Dia=',p[o.Wire_Dia],'Cycle_Life=',x[o.Cycle_Life]);
 
         var sq1 = p[o.L_Free];
         var sq2 = p[o.Coils_T] * Math.PI * x[o.Mean_Dia];
@@ -119,7 +119,7 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
     return x;
 
 function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
-//    console.log('In cl_calc:');
+//    console.log('cl_calc:');
 //    console.log('Material_Index = x[o.Material_Type] = mat_idx =', mat_idx);
 //    console.log('Life_Category =  x[o.Life_Category] = cl_idx  =', cl_idx);
 //    console.log('st_code =', st_code, ' x[o.Tensile] = tensile =', tensile);

@@ -6,15 +6,15 @@ import { logUsage } from '../../logUsage';
 import { useAuth } from '../../components/AuthProvider';
 
 export default function SignIn() {
-//  console.log('In SignIn');
+//  console.log('SignIn');
   const navigate = useNavigate();
   const { authState } = useAuth();
 //  console.log('SignIn','auth=',auth);
 
   const toggle = () => {
-//    console.log('In SignIn.toggle');
+//    console.log('SignIn.toggle');
     logUsage('event', 'SignIn', { event_label: '' });
-//    console.log('In SignIn.toggle navigate('/login')');
+//    console.log('SignIn.toggle navigate('/login')');
     navigate('/login'); // Must be last after logUsage
   }
 

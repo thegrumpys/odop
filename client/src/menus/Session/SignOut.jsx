@@ -8,24 +8,24 @@ import { changeUser, saveAutoSave } from '../../store/actions';
 import axios from '../../axiosConfig';
 
 export default function SignOut() {
-//  console.log('In SignOut');
+//  console.log('SignOut');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { authState, setAuthState } = useAuth();
-//  console.log('In SignOut','authState=',authState);
+//  console.log('SignOut','authState=',authState);
 
   const toggle = async () => {
-//    console.log('In SignOut.toggle');
+//    console.log('SignOut.toggle');
     try {
       await axios.post('/logout');
       const res = await axios.get('/me');
       setAuthState(res.data.authState);
-//      console.log('In SignOut.toggle','setAuthState=',res.data.authState);
+//      console.log('SignOut.toggle','setAuthState=',res.data.authState);
       dispatch(changeUser(null));
       logUsage('event', 'SignOut', { event_label: '' });
       navigate('/');
     } catch (err) {
-//      console.error('Logout failed', err);
+      console.error('SignOut', 'err=', err);
       alert('Logout failed: '+err.message);
     }
   }

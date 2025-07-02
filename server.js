@@ -90,16 +90,17 @@ function generateUserToken() {
 function renderTemplate(templatePath, replacements = {}) {
   let template = fs.readFileSync(templatePath, 'utf8');
   for (const [key, value] of Object.entries(replacements)) {
-//    console.log('In renderTemplate','key=',key,'value=',value);
+//    console.log('renderTemplate','key=',key,'value=',value);
     template = template.replace(new RegExp(`{{${key}}}`, 'g'), value);
   }
-//  console.log('In renderTemplate','template=',template);
+//  console.log('renderTemplate','template=',template);
   return template;
 }
 
 async function sendConfirmationEmail(email, first_name, last_name, token) {
+  const frontUrl = process.env.FRONT_URL;
   const confirmUrl = `${process.env.FRONT_URL}/confirm?token=${token}`;
-  const html = renderTemplate(path.join(__dirname, 'emails', 'confirm.html'), { email, first_name, last_name, confirmUrl });
+  const html = renderTemplate(path.join(__dirname, 'emails', 'confirm.html'), { email, first_name, last_name, frontUrl, confirmUrl });
 
   const mailOptions = {
     from: `"Info at SpringDesignSoftware" <${process.env.SMTP_USER}>`,
@@ -112,8 +113,9 @@ async function sendConfirmationEmail(email, first_name, last_name, token) {
 }
 
 async function sendResetEmail(email, first_name, last_name, token) {
+  const frontUrl = process.env.FRONT_URL;
   const resetUrl = `${process.env.FRONT_URL}/change-password?token=${token}`;
-  const html = renderTemplate(path.join(__dirname, 'emails', 'reset.html'), { email, first_name, last_name, resetUrl });
+  const html = renderTemplate(path.join(__dirname, 'emails', 'reset.html'), { email, first_name, last_name, frontUrl, resetUrl });
 
   const mailOptions = {
     from: `"Info at SpringDesignSoftware" <${process.env.SMTP_USER}>`,
@@ -450,74 +452,74 @@ function getSearchResults(query) {
 }
 
 function createSentenceSearchResult(pageMatch) {
-//  console.log('In createSentenceSearchResult', 'pageMatch=', pageMatch);
-//  console.log('In createSentenceSearchResult', 'pageMatch.href=', pageMatch.href);
+//  console.log('createSentenceSearchResult', 'pageMatch=', pageMatch);
+//  console.log('createSentenceSearchResult', 'pageMatch.href=', pageMatch.href);
   let sentenceData = [];
   Object.keys(pageMatch.matchData.metadata).forEach(function(term) {
-//    console.log('In createSentenceSearchResult', 'term=', term);
+//    console.log('createSentenceSearchResult', 'term=', term);
     Object.keys(pageMatch.matchData.metadata[term]).forEach(function(fieldName) {
       if (fieldName === 'sentence_text') { // Only highlight content
-//        console.log('In createSentenceSearchResult', 'fieldName=', fieldName);
+//        console.log('createSentenceSearchResult', 'fieldName=', fieldName);
         let hit = pageMatch[fieldName];
-//        console.log('In createSentenceSearchResult', 'hit=', hit);
+//        console.log('createSentenceSearchResult', 'hit=', hit);
         pageMatch.matchData.metadata[term][fieldName].position.forEach((position) => {
-//          console.log('In createSentenceSearchResult', 'position=', position);
+//          console.log('createSentenceSearchResult', 'position=', position);
           let lio = hit.lastIndexOf(SENTENCE_SEPARATOR, position[0]) + SENTENCE_SEPARATOR.length;
           if (sentenceData[lio] === undefined) {
             sentenceData[lio] = [];
           }
           let position_clone = Object.assign({}, position); // clone it
           position_clone[0] = position_clone[0] - lio;
-//          console.log('In createSentenceSearchResult', 'lio=', lio, 'position=', position);
+//          console.log('createSentenceSearchResult', 'lio=', lio, 'position=', position);
           sentenceData[lio].push(position_clone);
           sentenceData[lio].sort((a, b) => a[0] - b[0]); // Put in position order
         });
       }
     });
   });
-//  console.log('In createSentenceSearchResult', 'sentenceData=', sentenceData);
+//  console.log('createSentenceSearchResult', 'sentenceData=', sentenceData);
   let searchResultText = "";
   let style_color = 'style="color:' + getColorForSearchResult(pageMatch.score) + '"'
   let hit = pageMatch.sentence_text;
   Object.keys(sentenceData).forEach(function(lio) {
     let io = hit.indexOf(SENTENCE_SEPARATOR, lio);
-//    console.log('In createSentenceSearchResult', 'lio=', lio, 'io=', io);
+//    console.log('createSentenceSearchResult', 'lio=', lio, 'io=', io);
     let offset = 0;
     let sentence = hit.slice(lio, io);
     sentenceData[lio].forEach((position) => {
-//      console.log('In createSentenceSearchResult', 'offset=', offset, 'position=', position);
+//      console.log('createSentenceSearchResult', 'offset=', offset, 'position=', position);
       let prefix = sentence.slice(0, offset + position[0]);
       let strong_prefix = `<strong ${style_color}>`;
       let text = sentence.substr(offset + position[0], position[1]);
       let strong_suffix = '</strong>';
       let suffix = sentence.slice(offset + position[0] + position[1]);
-//      console.log('In createSentenceSearchResult', 'prefix=', prefix, 'strong_prefix=', strong_prefix, 'text=', text, ',strong_suffix=', strong_suffix, 'suffix=', suffix);
+//      console.log('createSentenceSearchResult', 'prefix=', prefix, 'strong_prefix=', strong_prefix, 'text=', text, ',strong_suffix=', strong_suffix, 'suffix=', suffix);
       sentence = prefix + strong_prefix + text + strong_suffix + suffix;
       offset += strong_prefix.length + strong_suffix.length;
     });
     let ellipsis = ' ... ';
     searchResultText += sentence + ellipsis;
   });
-//  console.log('In createSentenceSearchResult', 'searchResultText=', searchResultText);
+//  console.log('createSentenceSearchResult', 'searchResultText=', searchResultText);
   return searchResultText;
 }
 
 function createHighlightSearchResult(pageMatch) {
-//  console.log('In createHighlightSearchResult', 'result=', result, 'pageMatch=', pageMatch);
+//  console.log('createHighlightSearchResult', 'result=', result, 'pageMatch=', pageMatch);
   let searchResultHighlights = [];
   Object.keys(pageMatch.matchData.metadata).forEach(function(term) {
-//    console.log('In createHighlightSearchResult', 'term=', term);
+//    console.log('createHighlightSearchResult', 'term=', term);
     Object.keys(pageMatch.matchData.metadata[term]).forEach(function(fieldName) {
-//      console.log('In createHighlightSearchResult', 'fieldName=', fieldName);
+//      console.log('createHighlightSearchResult', 'fieldName=', fieldName);
       if (fieldName === 'highlight_text') {
         pageMatch.matchData.metadata[term][fieldName].position.forEach((position) => {
-//          console.log('In createHighlightSearchResult', 'position=', position);
+//          console.log('createHighlightSearchResult', 'position=', position);
           searchResultHighlights.push(position);
         });
       }
     });
   });
-//  console.log('In createHighlightSearchResult', 'searchResultHighlights=', searchResultHighlights);
+//  console.log('createHighlightSearchResult', 'searchResultHighlights=', searchResultHighlights);
   return searchResultHighlights;
 }
 
@@ -615,7 +617,7 @@ app.post('/login', async (req, res) => {
 // CHECK SESSION
 app.get('/me', (req, res) => {
   if (req.session.user) {
-//    console.log('In /me','req.session.user=',req.session.user);
+//    console.log('/me','req.session.user=',req.session.user);
     res.json({
       authState: {
         email: req.session.user.email,
@@ -627,7 +629,7 @@ app.get('/me', (req, res) => {
       }
     });
   } else {
-//    console.log('In /me','no req.session.user');
+//    console.log('/me','no req.session.user');
     res.json({
       authState: {
         isAuthenticated: false,
@@ -639,21 +641,21 @@ app.get('/me', (req, res) => {
 
 // LOGOUT
 app.post('/logout', (req, res) => {
-//  console.log('In /logout');
+//  console.log('/logout');
   req.session.destroy(() => res.sendStatus(200));
 });
 
 // PASSWORD RESET REQUEST
 app.post('/reset-password', async (req, res) => {
   const { email } = req.body;
-//  console.log('email=',email);
+  console.log('email=',email);
   const resetToken = generateToken();
 
   try {
     // Does user exist?
     const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
     const row = rows[0];
-//    console.log('In /reset-password','row=',row);
+    console.log('/reset-password','row=',row);
     if (!rows.length) return res.sendStatus(200);
 
     // Create a reset token
@@ -663,7 +665,7 @@ app.post('/reset-password', async (req, res) => {
     await sendResetEmail(email, row.first_name, row.last_name, resetToken);
     res.status(200).json({ message: 'Reset link sent if email is valid.' });
   } catch (error) {
-//    console.error('Error sending reset email:', error);
+    console.error('Error sending reset email:', error);
     res.status(500).json({ error: 'Failed to send reset email.' });
   }}
 );

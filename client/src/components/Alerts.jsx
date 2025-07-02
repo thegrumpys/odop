@@ -9,14 +9,14 @@ export const NOTICE = 'Notice';
 export const INFO = 'Info';
 
 export const check_message = (design, prefix, left, op, right, suffix = '') => {
-//  console.log('In Alerts.check_message', 'design=', design, 'prefix=', prefix, 'left=', left, 'op=', op, 'right=', right, 'suffix=', suffix);
+//  console.log('Alerts.check_message', 'design=', design, 'prefix=', prefix, 'left=', left, 'op=', op, 'right=', right, 'suffix=', suffix);
   return prefix + ': ' + design.model.symbol_table[left].name + ' (' + toODOPPrecision(design.model.symbol_table[left].value) + ') ' + op +
     ' ' + design.model.symbol_table[right].name + ' (' + toODOPPrecision(design.model.symbol_table[right].value) + ')' + (suffix !== '' ? suffix : '');
 }
 
 // DCD is Default Constraint Disabled
 export const check_DCD_alert = (element, minmax, urlCode) => {
-//  console.log('In Alerts.check_DCD_alert', 'element=', element, 'minmax=', minmax, 'urlCod', urlCode);
+//  console.log('Alerts.check_DCD_alert', 'element=', element, 'minmax=', minmax, 'urlCod', urlCode);
   if (element.lmin & FIXED) {
     return;
   } else if (minmax === MIN && element.lmin & CONSTRAINED) {
@@ -48,7 +48,7 @@ export const check_DCD_alert = (element, minmax, urlCode) => {
 }
 
 export const checks = (store) => {
-//  console.log('In Alerts.checks','store=',store);
+//  console.log('Alerts.checks','store=',store);
   var design = store.getState();
 
   // OBJECTIVE VALUE CHECKS
@@ -275,7 +275,7 @@ export const checks = (store) => {
 }
 
 export const getSeverityNumberByNameAndObjValue = (name, severity) => {
-//  console.log('In Alerts.getSeverityNumberByNameAndObjValue', 'name=', name, 'severity=', severity);
+//  console.log('Alerts.getSeverityNumberByNameAndObjValue', 'name=', name, 'severity=', severity);
   var design = store.getState();
 //  console.log('### design=',design)
   var severityNumber = 0;
@@ -288,30 +288,30 @@ export const getSeverityNumberByNameAndObjValue = (name, severity) => {
       severityNumber = 1;
     }
   }
-//  console.log('In Alerts.getSeverityNumberByNameAndObjValue', 'severityNumber=', severityNumber);
+//  console.log('Alerts.getSeverityNumberByNameAndObjValue', 'severityNumber=', severityNumber);
   return severityNumber;
 }
 
 export const getFeasibilityClassBySeverityNumber = (severityNumber) => {
-//  console.log('In Alerts.getFeasibilityClassBySeverityNumber', 'severityNumber=', severityNumber);
+//  console.log('Alerts.getFeasibilityClassBySeverityNumber', 'severityNumber=', severityNumber);
   var feasibilityClasses = ["", "text-feasible ", "text-close-to-feasible ", "text-not-feasible "];
   return feasibilityClasses[severityNumber];
 }
 
 export const getFontClassBySeverityNumber = (severityNumber) => {
-//  console.log('In Alerts.getFeasibilityClassBySeverityNumber', 'severityNumber=', severityNumber);
+//  console.log('Alerts.getFeasibilityClassBySeverityNumber', 'severityNumber=', severityNumber);
   var fontClasses = ["text-alert-info ", "text-alert-notice ", "text-alert-warn ", "text-alert-err "];
   return fontClasses[severityNumber];
 }
 
 export const getSeverityNumberBySeverity = (severity) => {
-//  console.log('In Alerts.getSeverityNumberBySeverity', 'severity=', severity);
+//  console.log('Alerts.getSeverityNumberBySeverity', 'severity=', severity);
   var severityNumber = { Err: 3, Warn: 2, Notice: 1, Info: 0 };
   return severityNumber[severity];
 }
 
 export const getAlertsByName = (name, includeViolations = false) => {
-//  console.log('In Alerts.getAlertsByName', 'name=', name, 'includeViolations=', includeViolations);
+//  console.log('Alerts.getAlertsByName', 'name=', name, 'includeViolations=', includeViolations);
   var alerts = [];
   var maxSeverityNumber = 0;
   var alertsSlice = store.getState().alertsSlice;
@@ -352,12 +352,12 @@ export const getAlertsByName = (name, includeViolations = false) => {
       alerts.push(entry);
     }
   });
-//  console.log('In Alerts.getAlertsByName maxSeverityNumber=',maxSeverityNumber,'alerts=',alerts);
+//  console.log('Alerts.getAlertsByName maxSeverityNumber=',maxSeverityNumber,'alerts=',alerts);
   return { className: getFeasibilityClassBySeverityNumber(maxSeverityNumber), alerts: alerts };
 }
 
 export const getAlertsBySeverity = (severity = '*') => {
-//  console.log('In Alerts.getAlertsBySeverity', 'severity=', severity);
+//  console.log('Alerts.getAlertsBySeverity', 'severity=', severity);
   var alertsSlice = store.getState().alertsSlice;
 //  console.log('### alertsSlice=',alertsSlice)
   var results;
@@ -372,6 +372,6 @@ export const getAlertsBySeverity = (severity = '*') => {
       return entry.severity === severity && (entry.duplicate === undefined || entry.duplicate === false);
     });
   }
-//  console.log('In Alerts.getAlertsBySeverity', 'results=', results);
+//  console.log('Alerts.getAlertsBySeverity', 'results=', results);
   return results;
 }

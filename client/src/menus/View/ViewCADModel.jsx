@@ -17,19 +17,19 @@ export default function ViewCADModel() {
   }, [model_type]);
 
   const toggle = () => {
-//    console.log('In ViewCADModel.toggle');
+//    console.log('ViewCADModel.toggle');
     setShow(!show);
     logUsage('event', 'ViewCADModel', { event_label: 'ViewCADModel' });
   }
 
   var od_free = model_symbol_table[sto.OD_Free];
-//  console.log('In ViewCADModel OD_Free=',od_free);
+//  console.log('ViewCADModel OD_Free=',od_free);
   var wire_dia = model_symbol_table[sto.Wire_Dia];
-//  console.log('In ViewCADModel Wire_Dia=',wire_dia);
+//  console.log('ViewCADModel Wire_Dia=',wire_dia);
   var coils_t = model_symbol_table[sto.Coils_T];
-//  console.log('In ViewCADModel Coils_T=',coils_t);
+//  console.log('ViewCADModel Coils_T=',coils_t);
 //        var l_free = model_symbol_table[14];
-////        console.log('In ViewCADModel L_Free=',l_free);
+////        console.log('ViewCADModel L_Free=',l_free);
 //
 //        var l_free_value = l_free.value;
 //        var l_free_table = [
@@ -55,9 +55,9 @@ export default function ViewCADModel() {
 //            4.750,
 //            5.000,
 //        ];
-////        console.log('In ViewCADModel l_free_table=',l_free_table);
+////        console.log('ViewCADModel l_free_table=',l_free_table);
 //        var l_free_fudged = l_free_table[l_free_table.length-1];
-////        console.log('In ViewCADModel l_free_fudged=',l_free_fudged);
+////        console.log('ViewCADModel l_free_fudged=',l_free_fudged);
 //        for (let i = 0; i < l_free_table.length; i++) {
 ////            console.log('i=',i,'l_free_value=',l_free_value,'l_free_table=',l_free_table[i]);
 //            if (l_free_value < l_free_table[i]) {
@@ -72,7 +72,7 @@ export default function ViewCADModel() {
 //                break;
 //            }
 //        }
-////        console.log('In ViewCADModel l_free_fudged=',l_free_fudged);
+////        console.log('ViewCADModel l_free_fudged=',l_free_fudged);
 // Original URL to SAE Extension Spring
 //        var prefix = "https://sae-embedded.qa.partcommunity.com/3d-cad-models/?info=sae%2Fmodeling%2Fsprings%2Fas24586a.prj";
 //        var varset = "varset={MAT=" + (material_type.value === 2 ? 'MW' : 'CRES') + '},{OD=' + (od_free.value) + '},{DD=' + (wire_dia.value) + '},{L=' + (l_free_fudged) + '}';
@@ -80,13 +80,13 @@ export default function ViewCADModel() {
 //          &varset=%7bOD=12%7d,%7bWD=3%7d,%7bNOC=24%7d&hidePortlets=navigation
 //          varset={OD=12},{WD=3},{NOC=24}&hidePortlets=navigation
   var prefix = "https://psdev-embedded.qa.partcommunity.com/3d-cad-models/?info=usa_demo%2Fs%2Fspring_analysis_software%2Fspring_220mm_ss.prj";
-//  console.log('In ViewCADModel prefix=',prefix);
+//  console.log('ViewCADModel prefix=',prefix);
 
   var varset = 'varset={OD=' + (od_free.value.toFixed(2)) + '},{WD=' + (wire_dia.value.toFixed(3)) + '},{NOC=' + (coils_t.value.toFixed(0)) + '}';
-//  console.log('In ViewCADModel varset=',varset);
+//  console.log('ViewCADModel varset=',varset);
 
   var src = prefix + '&' + encodeURI(varset) + '&hidePortlets=navigation';
-//  console.log('In ViewCADModel src=',src);
+//  console.log('ViewCADModel src=',src);
 
   return (
     <>

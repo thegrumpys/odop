@@ -12,7 +12,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   const dispatch = useDispatch();
 
   const onChangeValidLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onChangeValid event.target.value=', event.target.value);
+//    console.log('NameValueUnitsRowIndependentVariable.onChangeValid event.target.value=', event.target.value);
     var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
     if (model_enable_auto_fix) {
       auto_fixed = true;
@@ -30,19 +30,19 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   }
 
   const onChangeInvalidLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onChangeInvalid event.target.value=', event.target.value);
+//    console.log('NameValueUnitsRowIndependentVariable.onChangeInvalid event.target.value=', event.target.value);
     if (typeof onChangeInvalid === "function") onChangeInvalid(event);
   }
 
   const onSetLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onSetLocal');
+//    console.log('NameValueUnitsRowIndependentVariable.onSetLocal');
     dispatch(fixSymbolValue(element.name));
     logValue(element.name, 'FIXED', 'FixedFlag', false);
     if (typeof onSet === "function") onSet(event);
   }
 
   const onResetLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onResetLocal');
+//    console.log('NameValueUnitsRowIndependentVariable.onResetLocal');
     dispatch(freeSymbolValue(element.name));
     logValue(element.name, 'FREE', 'FixedFlag', false);
     if (typeof onReset === "function") onReset(event);
@@ -72,7 +72,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
       value_fix_free_text = <div className="mb-3"><em>Free status allows <img src="SearchButton.png" alt="SearchButton" /> to change the value of this variable.</em></div>; // For Free
     }
   }
-//  console.log('In NameValueUnitsRowIndependentVariable','className=',className);
+//  console.log('NameValueUnitsRowIndependentVariable','className=',className);
 
   // =======================================
   // Table Row

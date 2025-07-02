@@ -12,7 +12,7 @@ export default function ViewExecuteToTest() {
   const [show, setShow] = useState(false);
 
   const toggle = () => {
-//    console.log('In ViewExecuteToTest.toggle');
+//    console.log('ViewExecuteToTest.toggle');
     setShow(!show)
     if (show) logUsage('event', 'ViewExecuteToTest', { event_label: 'ViewExecuteToTest' });
   }

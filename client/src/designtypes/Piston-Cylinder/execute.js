@@ -7,18 +7,18 @@ export function getExecuteNames(isAdmin = false) {
     } else {
       result = [];
     }
-//    console.log('In getExecuteNames result=',result);
+//    console.log('getExecuteNames result=',result);
     return result;
 }
 
 export function getDemoNames() {
     var result = [];
-//    console.log('In getDemoNames result=',result);
+//    console.log('getDemoNames result=',result);
     return result;
 }
 
 export function getTutorialNames() {
     var result = [];
-//    console.log('In getTutorialNames result=',result);
+//    console.log('getTutorialNames result=',result);
     return result;
 }

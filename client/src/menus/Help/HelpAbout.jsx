@@ -28,13 +28,13 @@ export default function HelpAbout() {
   }, []);
 
   const toggle = () => {
-//    console.log('In HelpAbout.toggle');
+//    console.log('HelpAbout.toggle');
     setShow(!show);
     if (show) logUsage('event', 'HelpAbout', { event_label: 'HelpAbout' });
   }
 
   const getDBSize = (user) => {
-//    console.log('In HelpAbout.getDBSize');
+//    console.log('HelpAbout.getDBSize');
     displaySpinner(true);
     fetch('/api/v1/db_size', {
       headers: {
@@ -48,13 +48,13 @@ export default function HelpAbout() {
       return res.json()
     })
     .then(sizes => {
-//        console.log('In HelpAbout.getSize sizes=', sizes);
+//        console.log('HelpAbout.getSize sizes=', sizes);
       setSizes(sizes);
       var size = '';
       if (sizes.length > 0) {
         size = sizes[0]; // Default to first name
       }
-//        console.log('In HelpAbout.getSize size=', size);
+//        console.log('HelpAbout.getSize size=', size);
       setSize(size);
       logUsage('event', 'HelpAbout', { event_label: 'getDBSize: ' + size });
     })

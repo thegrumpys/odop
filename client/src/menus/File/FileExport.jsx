@@ -14,19 +14,19 @@ export default function FileExport() {
   const { authState } = useAuth();
 
   const exportFile = (model, name, type) => {
-//        console.log('In FileExport.exportFile model=',model);
+//        console.log('FileExport.exportFile model=',model);
     const url = window.URL.createObjectURL(new Blob([JSON.stringify(model, null, 2)]));
-//        console.log('In FileExport.exportFile','url=', url);
+//        console.log('FileExport.exportFile','url=', url);
     const link = document.createElement('a');
     link.href = url;
     link.setAttribute('download', name + '.' + type);
-//        console.log('In FileExport.exportFile','link=', link);
+//        console.log('FileExport.exportFile','link=', link);
     document.body.appendChild(link);
     link.click();
   }
 
   const onExport = () => {
-//        console.log('In FileExport.onExport');
+//        console.log('FileExport.onExport');
     if (authState && authState.isAdmin && !show) {
       setShow(!show);
       return;
@@ -40,7 +40,7 @@ export default function FileExport() {
   // with all properties sorted in alphabetical order.
   // It makes it easy to compare/diff two files and find the differences.
   const onSortedExport = () => {
-//        console.log('In FileExport.onSortedExport');
+//        console.log('FileExport.onSortedExport');
 
     function sort(object) {
       if (object instanceof Array) {
@@ -71,34 +71,34 @@ export default function FileExport() {
   }
 
   const exportCSV = (model_symbol_table, name, type) => {
-//        console.log('In FileExport.exportCSV','model_symbol_table=',model_symbol_table,'name=',name,'type=',type);
+//        console.log('FileExport.exportCSV','model_symbol_table=',model_symbol_table,'name=',name,'type=',type);
     const url = window.URL.createObjectURL(new Blob(Object.keys(model_symbol_table).map(key =>
       model_symbol_table[key].name + "," +
       model_symbol_table[key].value + "," +
       model_symbol_table[key].units +
       "\n")));
-//        console.log('In FileExport.exportCSV','url=', url);
+//        console.log('FileExport.exportCSV','url=', url);
     const link = document.createElement('a');
     link.href = url;
     link.setAttribute('download', name + '.' + type);
-//        console.log('In FileExport.exportCSV','link=', link);
+//        console.log('FileExport.exportCSV','link=', link);
     document.body.appendChild(link);
     link.click();
   }
 
   const onCSVExport = () => {
-//        console.log('In FileExport.onCSVExport');
+//        console.log('FileExport.onCSVExport');
 
     function sort(object) {
       if (object instanceof Array) {
-//                console.log('In FileExport.onCSVExport','array=',object);
+//                console.log('FileExport.onCSVExport','array=',object);
         var newArray = [];
         for (var j = 0; j < object.length; j++) {
           newArray.push(sort(object[j]));
         }
         return newArray;
       } else if (typeof object == "object") {
-//                console.log('In FileExport.onCSVExport','object=',object);
+//                console.log('FileExport.onCSVExport','object=',object);
         var keys = Object.keys(object);
         keys.sort();
         var newObject = {};
@@ -130,7 +130,7 @@ export default function FileExport() {
   }
 
   const onCancel = () => {
-//        console.log('In FileExport.onCancel');
+//        console.log('FileExport.onCancel');
     setShow(false);
   }
 

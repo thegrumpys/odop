@@ -4,13 +4,14 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 
 export default function ConfirmPage() {
+//  console.log('ConfirmPage');
   const [searchParams] = useSearchParams();
   const [status, setStatus] = useState('pending');
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = searchParams.get('token');
-    //    console.log('token=',token);
+//    console.log('ConfirmPage.useEffect','token=',token);
     if (!token) {
       setStatus('invalid');
       return;
@@ -20,7 +21,7 @@ export default function ConfirmPage() {
       .catch(() => setStatus('error'));
   }, [searchParams]);
 
-  //  console.log('status=',status);
+//  console.log('ConfirmPage','status=',status);
   if (status === 'pending') {
     return <p>Confirming your account...</p>;
   } else if (status === 'success') {

@@ -7,24 +7,26 @@ import { changeUser } from '../store/actions';
 import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 
 export default function LoginForm() {
+//  console.log('LoginForm');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { setAuthState, setIsAuthenticated } = useAuth();
-  //  console.log('In LoginForm','setAuthState=',setAuthState);
+//  console.log('LoginForm','setAuthState=',setAuthState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
+//    console.log('LoginForm.handleLogin');
     e.preventDefault();
     try {
       await axios.post('/login', { email, password });
       const res = await axios.get('/me');
       setAuthState(res.data.authState);
-//      console.log('In LoginForm','setAuthState=',res.data.authState);
+//      console.log('LoginForm/handleLogin','authState=',res.data.authState);
       dispatch(changeUser(res.data.authState.token));
       navigate('/');
     } catch (err) {
-//      console.error('err=', err)
+      console.error('LoginForm.handleLogin','err=', err)
       alert('Login failed: ' + err.message);
     }
   };

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import axios from '../axiosConfig';
 import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 
 export default function ChangePasswordPage() {
+//  console.log('ChangePasswordPage');
   const [searchParams] = useSearchParams();
   const [token, setToken] = useState('');
   const [password, setPassword] = useState('');
@@ -11,42 +12,88 @@ export default function ChangePasswordPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const t = searchParams.get('token');
-    if (!t) {
+    const token = searchParams.get('token');
+//    console.log('ChangePasswordPage.useEffect', 'token=', token);
+    if (!token) {
       setStatus('error');
     } else {
-      setToken(t);
+      setToken(token);
     }
   }, [searchParams]);
 
   const handleSubmit = async (e) => {
+//    console.log('ChangePasswordPage.handleSubmit');
     e.preventDefault();
     try {
-      await axios.patch('/change-password', { token, password });
-      setStatus('success');
+      await axios.patch('/change-password', { token, password })
+        .then(() => setStatus('success'))
+        .catch(() => setStatus('error'));
     } catch (err) {
-//      console.error('err=',err);
+      console.error('ChangePasswordPage.handleSubmit','err=',err);
       setStatus('error');
     }
   };
 
+//  console.log('ChangePasswordPage', 'status=', status);
   if (status === 'success') {
     return (
-      <div>
-        <h2>Password Updated ✅</h2>
-        <p>You can now log in with your new password.</p>
-        <button onClick={() => navigate('/login')}>Go to Login</button>
-      </div>
+      <Container className="pt-5">
+        <Row>
+          <Col lg="4" />
+          <Col lg="4">
+            <form onSubmit={handleSubmit}>
+              <Table border="1" borderless className="p-5">
+                <tbody>
+                  <tr>
+                    <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
+                  </tr>
+                  <tr>
+                    <td className="text-center"><h3>Password Updated ✅</h3></td>
+                  </tr>
+                  <tr>
+                    <td className="px-5 text-start"><p>You can now log in with your new password.</p></td>
+                  </tr>
+                  <tr>
+                    <td className="text-start px-5"><Button onClick={() => navigate('/login')}>Go to Login</Button></td>
+                  </tr>
+                </tbody>
+              </Table>
+            </form>
+          </Col>
+          <Col lg="4" />
+        </Row>
+      </Container>
     );
   }
 
   if (status === 'error') {
     return (
-      <div>
-        <h2>Error ❌</h2>
-        <p>This link is invalid or has expired.</p>
-        <button onClick={() => navigate('/')}>Go to Home</button>
-      </div>
+      <Container className="pt-5">
+        <Row>
+          <Col lg="4" />
+          <Col lg="4">
+            <form onSubmit={handleSubmit}>
+              <Table border="1" borderless className="p-5">
+                <tbody>
+                  <tr>
+                    <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
+                  </tr>
+                  <tr>
+                    <td className="text-center"><h3>Error ❌</h3></td>
+                  </tr>
+                  <tr>
+                    <td className="px-5 text-start"><p>This link is invalid or has expired.</p></td>
+                  </tr>
+                  <tr>
+                    <td className="text-start px-5"><Button onClick={() => navigate('/')}>Go to Home</Button></td>
+                  </tr>
+                </tbody>
+              </Table>
+            </form>
+          </Col>
+          <Col lg="4" />
+        </Row>
+      </Container>
     );
   }
 

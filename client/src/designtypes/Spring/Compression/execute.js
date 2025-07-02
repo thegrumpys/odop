@@ -14,7 +14,7 @@ export function getExecuteNames(isAdmin = false) {
         'increasePrecision'
       ];
     }
-//    console.log('In getExecuteNames result=',result);
+//    console.log('getExecuteNames result=',result);
     return result;
 }
 
@@ -28,7 +28,7 @@ export function getDemoNames() {
         'demo5',
         'demo10'
     ];
-//    console.log('In getDemoNames result=',result);
+//    console.log('getDemoNames result=',result);
     return result;
 }
 
@@ -45,6 +45,6 @@ export function getTutorialNames() {
         'tutor8',
         'tutor9'
     ];
-//    console.log('In getTutorialNames result=',result);
+//    console.log('getTutorialNames result=',result);
     return result;
 }

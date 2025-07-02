@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 
 export default function RegisterForm() {
+//  console.log('RegisterForm');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [first_name, setFirstName] = useState('');
@@ -12,16 +13,18 @@ export default function RegisterForm() {
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
+//    console.log('RegisterForm.handleRegister');
     e.preventDefault();
     try {
       await axios.post('/register', { email, password, first_name, last_name });
       setSubmitted(true);
     } catch (err) {
-      //      console.error('err=', err);
+      console.error('RegisterForm','err=', err);
       alert('Registration failed: ' + err.message);
     }
   };
 
+//  console.log('RegisterForm', 'submitted=', submitted)
   if (submitted) {
     return (
       <Container className="pt-5">

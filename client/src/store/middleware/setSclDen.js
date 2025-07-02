@@ -6,7 +6,7 @@ export function setSclDen(store) {
 //    console.log('Entering setSclDen');
 
     var design = store.getState();
-//    console.log('In setSclDen design=',design);
+//    console.log('setSclDen design=',design);
 
     // Loop to create cmin and cmax arrays from symbol_table
     var cmin = [];
