@@ -10,7 +10,7 @@ export default function ConfirmPage() {
 
   useEffect(() => {
     const token = searchParams.get('token');
-//    console.log('token=',token);
+    //    console.log('token=',token);
     if (!token) {
       setStatus('invalid');
       return;
@@ -20,24 +20,62 @@ export default function ConfirmPage() {
       .catch(() => setStatus('error'));
   }, [searchParams]);
 
-//  console.log('status=',status);
+  //  console.log('status=',status);
   if (status === 'pending') {
     return <p>Confirming your account...</p>;
   } else if (status === 'success') {
     return (
-      <div>
-        <h2>Account Confirmed ✅</h2>
-        <p>Your account is now active. You can log in.</p>
-        <Button onClick={() => navigate('/login')}>Go to Login</Button>
-      </div>
+      <Container className="pt-5">
+        <Row>
+          <Col lg="4" />
+          <Col lg="4">
+            <Table border="1" borderless className="p-5">
+              <tbody>
+                <tr>
+                  <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
+                </tr>
+                <tr>
+                  <td className="text-center"><h3>Account Confirmed ✅</h3></td>
+                </tr>
+                <tr>
+                  <td className="text-start px-5"><p>Your account is now active. You can log in.</p></td>
+                </tr>
+                <tr>
+                  <td className="text-center p-3"><Button onClick={() => navigate('/login')}>Go to Login</Button></td>
+                </tr>
+              </tbody>
+            </Table>
+          </Col>
+          <Col lg="4" />
+        </Row>
+      </Container>
     );
   } else if (status === 'error' || status === 'invalid') {
     return (
-      <div>
-        <h2>Confirmation Failed ❌</h2>
-        <p>This confirmation link is invalid or has expired.</p>
-        <Button onClick={() => navigate('/')}>Go to Home</Button>
-      </div>
+      <Container className="pt-5">
+        <Row>
+          <Col lg="4" />
+          <Col lg="4">
+            <Table border="1" borderless className="p-5">
+              <tbody>
+                <tr>
+                  <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
+                </tr>
+                <tr>
+                  <td className="text-center"><h3>Confirmation Failed ❌</h3></td>
+                </tr>
+                <tr>
+                  <td className="text-start px-5"><p>This confirmation link is invalid or has expired.</p></td>
+                </tr>
+                <tr>
+                  <td className="text-center p-3"><Button onClick={() => navigate('/')}>Go to Home</Button></td>
+                </tr>
+              </tbody>
+            </Table>
+          </Col>
+          <Col lg="4" />
+        </Row>
+      </Container>
     );
   } else {
     return null;
