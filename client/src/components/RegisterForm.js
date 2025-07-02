@@ -34,13 +34,13 @@ export default function RegisterForm() {
                   <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><h3>Registration Successful</h3></td>
+                  <td className="text-center"><h3>✅<br />Verification email sent</h3></td>
                 </tr>
                 <tr>
-                  <td className="px-5 text-start"><p>Please check your {email} email to confirm your account.</p></td>
+                  <td className="text-center"><p>We just sent a verification email to {email}. Please check your email and verify your account to continue.</p></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><Button onClick={() => navigate('/')}>Go to Home</Button></td>
+                  <td className="text-center"><Button onClick={() => navigate('/login')}>Back to sign in</Button></td>
                 </tr>
               </tbody>
             </Table>
