@@ -13,7 +13,7 @@ export default function ResetPasswordPage() {
 //    console.log('ResetPasswordPage.handleResetRequest','e=',e);
     e.preventDefault();
     try {
-      await axios.post('/reset-password', { email });
+      await axios.post('/api/v1/reset-password', { email });
       setSubmitted(true);
     } catch (err) {
       console.error('ResetPasswordPage,handleResetRequest','err=',err);

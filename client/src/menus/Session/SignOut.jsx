@@ -17,8 +17,8 @@ export default function SignOut() {
   const toggle = async () => {
 //    console.log('SignOut.toggle');
     try {
-      await axios.post('/logout');
-      const res = await axios.get('/me');
+      await axios.post('/api/v1/logout');
+      const res = await axios.get('/api/v1/me');
       setAuthState(res.data.authState);
 //      console.log('SignOut.toggle','setAuthState=',res.data.authState);
       dispatch(changeUser(null));

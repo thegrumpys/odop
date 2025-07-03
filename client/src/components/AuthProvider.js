@@ -9,7 +9,7 @@ export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    axios.get('/me').then(res => {
+    axios.get('/api/v1/me').then(res => {
       setAuthState(res.data.authState);
       setIsAuthenticated(res.data.isAuthenticated);
     });

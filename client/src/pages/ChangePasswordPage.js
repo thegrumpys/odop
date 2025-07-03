@@ -25,7 +25,7 @@ export default function ChangePasswordPage() {
 //    console.log('ChangePasswordPage.handleSubmit');
     e.preventDefault();
     try {
-      await axios.patch('/change-password', { token, password })
+      await axios.patch('/api/v1/change-password', { token, password })
         .then(() => setStatus('success'))
         .catch(() => setStatus('error'));
     } catch (err) {

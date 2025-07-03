@@ -16,7 +16,7 @@ export default function ConfirmPage() {
       setStatus('invalid');
       return;
     }
-    axios.get(`/confirm?token=${token}`)
+    axios.get(`/api/v1/confirm?token=${token}`)
       .then(() => setStatus('success'))
       .catch(() => setStatus('error'));
   }, [searchParams]);

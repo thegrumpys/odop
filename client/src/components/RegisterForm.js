@@ -16,7 +16,7 @@ export default function RegisterForm() {
 //    console.log('RegisterForm.handleRegister');
     e.preventDefault();
     try {
-      await axios.post('/register', { email, password, first_name, last_name });
+      await axios.post('/api/v1/register', { email, password, first_name, last_name });
       setSubmitted(true);
     } catch (err) {
       console.error('RegisterForm','err=', err);

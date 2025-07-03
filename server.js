@@ -103,7 +103,7 @@ async function sendConfirmationEmail(email, first_name, last_name, token) {
   const html = renderTemplate(path.join(__dirname, 'emails', 'confirm.html'), { email, first_name, last_name, frontUrl, confirmUrl });
 
   const mailOptions = {
-    from: `"Info at SpringDesignSoftware" <${process.env.SMTP_USER}>`,
+    from: `"Server NoReply" <${process.env.SMTP_USER}>`,
     to: email,
     subject: 'Confirm your account',
     html,
@@ -118,13 +118,22 @@ async function sendResetEmail(email, first_name, last_name, token) {
   const html = renderTemplate(path.join(__dirname, 'emails', 'reset.html'), { email, first_name, last_name, frontUrl, resetUrl });
 
   const mailOptions = {
-    from: `"Info at SpringDesignSoftware" <${process.env.SMTP_USER}>`,
+    from: `"Server NoReply" <${process.env.SMTP_USER}>`,
     to: email,
     subject: 'Reset your password',
     html,
   };
   
   await transporter.sendMail(mailOptions);
+}
+
+function isValidPassword(password) {
+  const lengthOk = password.length >= 8;
+  const hasLower = /[a-z]/.test(password);
+  const hasUpper = /[A-Z]/.test(password);
+  const hasNumber = /[0-9]/.test(password);
+
+  return lengthOk && hasLower && hasUpper && hasNumber;
 }
 
 // Put all API endpoints under '/api'
@@ -540,46 +549,64 @@ function adjustSat(sat1, sat2, score) {
 }
 
 // REGISTER
-app.post('/register', async (req, res) => {
+app.post('/api/v1/register', async (req, res) => {
   const { email, password, first_name, last_name } = req.body;
-//  console.log('email=',email,'password=',password);
+  
+  if (!isValidPassword(password)) {
+    res.status(400).json({
+      error: 'Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, and one number.'
+    });
+    console.log('SERVER: 400 - BAD REQUEST');
+    return;
+  }
+
+//  console.log('/register',email=',email,'password=',password);
   const confirmationToken = generateToken();
+  const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour from now
+//  console.log('/register','expiresAt=',expiresAt);
 
   try {
     // Does email already exists
     const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
 //    console.log('rows=',rows);
     if (rows.length) {
-      return res.status(409).send('Duplicate email');;
+      res.status(409).send('Duplicate email');;
+      console.log('SERVER: 409 - CONFLICT');
+      return;
     }
 
     // Create new 'conditional' user with email and password, and confirmation token
     const hashed = await hashPassword(password);
     await db.execute('INSERT INTO user (email, password, first_name, last_name, role, token, status) VALUES (?, ?, ?, ?, ?, ?, ?)', [email, hashed, first_name, last_name, 'user', null, 'conditional']);
-    await db.execute('INSERT INTO token (token, email, type) VALUES (?, ?, ?)', [confirmationToken, email, 'confirm']);
+    await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [confirmationToken, email, 'confirm', expiresAt]);
 
     // Send confirmation email
     try {
       await sendConfirmationEmail(email, first_name, last_name, confirmationToken);
       res.status(200).json({ message: 'Registration successful. Please check your email to confirm your account.' });
+      console.log('SERVER: 200 - OK');
     } catch (error) {
-//      console.error('Error sending confirmation email:', error);
       res.status(500).json({ error: 'Failed to send confirmation email.' });
+      console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
     }
   } catch (err) {
-//    console.error('err=',err);
     res.sendStatus(500);
+    console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
   }
 });
 
 // CONFIRM
-app.get('/confirm', async (req, res) => {
+app.get('/api/v1/confirm', async (req, res) => {
   const { token } = req.query;
 //  console.log('token=',token);
   try {
     // Does a matching confirmation token exist
-    const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ?', [token, 'confirm']);
-    if (!rows.length) return res.send('Token not found, confirmation ignored');
+    const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ? AND expires_at > NOW()', [token, 'confirm']);
+    if (!rows.length) {
+      res.status(401).send('Token is invalid or has expired, request ignored');
+      console.log('SERVER: 401 - UNAUTHORIZED');
+      return;
+    }
 
     // If token is null update with a new one, change the user startus to 'active', and delete the token
     const email = rows[0].email;
@@ -587,15 +614,17 @@ app.get('/confirm', async (req, res) => {
     await db.execute('UPDATE user SET token = ? WHERE email = ? AND token IS NULL', [userToken, email]);
     await db.execute('UPDATE user SET status = ? WHERE email = ?', ['active', email]);
     await db.execute('DELETE FROM token WHERE token = ?', [token]);
-    res.send('Email confirmed');
+    res.status(200).send('Email confirmed');
+    console.log('SERVER: 200 - OK');
   } catch (err) {
 //    console.error('err=',err);
     res.sendStatus(500);
+    console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
   }
 });
 
 // LOGIN
-app.post('/login', async (req, res) => {
+app.post('/api/v1/login', async (req, res) => {
   const { email, password } = req.body;
 //  console.log('email=',email,'password=',password);
   try {
@@ -606,16 +635,18 @@ app.post('/login', async (req, res) => {
 //    console.log('match=',match);
     if (!match || user.status !== 'active') return res.sendStatus(401);
   
+    await db.query('UPDATE user SET last_login_at = NOW() WHERE id = ?', [user.id]);
     req.session.user = { email: user.email, token: user.token, first_name: user.first_name, last_name: user.last_name, isAuthenticated: true, isAdmin: user.role === 'admin' };
     res.sendStatus(200);
+    console.log('SERVER: 200 - OK');
   } catch (err) {
-//    console.error('err=',err);
     res.sendStatus(500);
+    console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
   }
 });
 
 // CHECK SESSION
-app.get('/me', (req, res) => {
+app.get('/api/v1/me', (req, res) => {
   if (req.session.user) {
 //    console.log('/me','req.session.user=',req.session.user);
     res.json({
@@ -637,47 +668,70 @@ app.get('/me', (req, res) => {
       }
     });
   }
+  res.status(200);
+  console.log('SERVER: 200 - OK');
 });
 
 // LOGOUT
-app.post('/logout', (req, res) => {
+app.post('/api/v1/logout', (req, res) => {
 //  console.log('/logout');
   req.session.destroy(() => res.sendStatus(200));
+  console.log('SERVER: 200 - OK');
 });
 
 // PASSWORD RESET REQUEST
-app.post('/reset-password', async (req, res) => {
+app.post('/api/v1/reset-password', async (req, res) => {
   const { email } = req.body;
-  console.log('email=',email);
+//  console.log('email=',email);
   const resetToken = generateToken();
+  const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour from now
+//  console.log('/register','expiresAt=',expiresAt);
 
   try {
     // Does user exist?
     const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
     const row = rows[0];
-    console.log('/reset-password','row=',row);
-    if (!rows.length) return res.sendStatus(200);
+//    console.log('/reset-password','row=',row);
+    if (!rows.length) {
+      res.sendStatus(500);
+      console.log('SERVER: 500 - INTERNAL SERVER ERROR');
+      return;
+    }
 
     // Create a reset token
-    await db.execute('INSERT INTO token (token, email, type) VALUES (?, ?, ?)', [resetToken, email, 'reset']);
+    await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [resetToken, email, 'reset', expiresAt]);
 
     // Send reset email
     await sendResetEmail(email, row.first_name, row.last_name, resetToken);
     res.status(200).json({ message: 'Reset link sent if email is valid.' });
+    console.log('SERVER: 200 - OK');
   } catch (error) {
-    console.error('Error sending reset email:', error);
     res.status(500).json({ error: 'Failed to send reset email.' });
+    console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
   }}
 );
 
 // CHANGE PASSWORD
-app.patch('/change-password', async (req, res) => {
+app.patch('/api/v1/change-password', async (req, res) => {
   const { token, password } = req.body;
 //  console.log('token=',token,'password=',password);
+
+if (!isValidPassword(password)) {
+  res.status(400).json({
+    error: 'Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, and one number.'
+  });
+  console.log('SERVER: 400 - BAD REQUEST');
+  return;
+}
+
   try {
     // Does a matching reset token exist
-    const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ?', [token, 'reset']);
-    if (!rows.length) return res.status(400).send('Invalid or expired token');
+    const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ? AND expires_at > NOW()', [token, 'reset']);
+    if (!rows.length) {
+      res.status(400).send('Token is invalid or has expired, request ignored');
+      console.log('SERVER: 400 - BAD REQUEST');
+      return;
+    }
 
     // Update the password
     const email = rows[0].email;
@@ -685,9 +739,25 @@ app.patch('/change-password', async (req, res) => {
     await db.execute('UPDATE user SET password = ? WHERE email = ?', [hashed, email]);
     await db.execute('DELETE FROM token WHERE token = ?', [token]);
     res.sendStatus(200);
+    console.log('SERVER: 200 - OK');
   } catch (err) {
-//    console.error('err=',err);
     res.sendStatus(500);
+    console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+  }
+});
+
+app.delete('/api/v1/cleanup-tokens', async (req, res) => {
+  try {
+    const [result] = await db.query('DELETE FROM tokens WHERE expires_at < NOW()');
+
+    res.json({
+      message: 'Expired tokens cleaned up successfully',
+      deleted: result.affectedRows
+    });
+    console.log('SERVER: 200 - OK');
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to clean up tokens' });
+    console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
   }
 });
 

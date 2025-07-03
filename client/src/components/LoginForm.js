@@ -19,8 +19,8 @@ export default function LoginForm() {
 //    console.log('LoginForm.handleLogin');
     e.preventDefault();
     try {
-      await axios.post('/login', { email, password });
-      const res = await axios.get('/me');
+      await axios.post('/api/v1/login', { email, password });
+      const res = await axios.get('/api/v1/me');
       setAuthState(res.data.authState);
 //      console.log('LoginForm/handleLogin','authState=',res.data.authState);
       dispatch(changeUser(res.data.authState.token));
