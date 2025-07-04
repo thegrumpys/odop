@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import axios from '../axiosConfig';
 import { Link, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
+import MessageAlert from './MessageAlert';
 
 export default function RegisterForm() {
 //  console.log('RegisterForm');
+  const [error, setError] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [first_name, setFirstName] = useState('');
@@ -15,12 +17,15 @@ export default function RegisterForm() {
   const handleRegister = async (e) => {
 //    console.log('RegisterForm.handleRegister');
     e.preventDefault();
+    setError(null);
     try {
-      await axios.post('/api/v1/register', { email, password, first_name, last_name });
+      const res = await axios.post('/api/v1/register', { email, password, first_name, last_name });
+//      console.error('RegisterForm.handleRegister','res=', res);
       setSubmitted(true);
+      setError(res.data.error);
     } catch (err) {
-      console.error('RegisterForm','err=', err);
-      alert('Registration failed: ' + err.message);
+//      console.error('RegisterForm.handleRegister','err=', err);
+      setError(err.response.data.error);
     }
   };
 
@@ -38,6 +43,9 @@ export default function RegisterForm() {
                 </tr>
                 <tr>
                   <td className="text-center"><h3>✅<br />Verification email sent</h3></td>
+                </tr>
+                <tr>
+                  <td className="text-center"><MessageAlert error={error} /></td>
                 </tr>
                 <tr>
                   <td className="text-center"><p>We just sent a verification email to {email}. Please check your email and verify your account to continue.</p></td>
@@ -67,6 +75,9 @@ export default function RegisterForm() {
                 </tr>
                 <tr>
                   <td className="text-center"><h3>Create Account</h3></td>
+                </tr>
+                <tr>
+                  <td className="text-center"><MessageAlert error={error} /></td>
                 </tr>
                 <tr>
                   <td className="px-5 text-start"><Form.Control type="email" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)} autoComplete="username" /></td>

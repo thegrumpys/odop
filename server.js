@@ -136,6 +136,39 @@ function isValidPassword(password) {
   return lengthOk && hasLower && hasUpper && hasNumber;
 }
 
+function sendMessage(res, message, severity = 'error', field = null, status = 400) {
+  console.log('message=',message,'severity=',severity,'field=',field,'status=',status);
+  const httpStatusCodes = {
+    100: "CONTINUE",
+    101: "SWITCHING PROTOCOLS",
+    200: "OK",
+    201: "CREATED",
+    204: "NO CONTENT",
+    400: "BAD REQUEST",
+    401: "UNAUTHORIZED",
+    404: "NOT FOUND",
+    409: "CONFLICT",
+    500: "INTERNAL SERVER ERROR",
+  };
+  console.log('SERVER: ' + status + ' - ' + httpStatusCodes[status]);
+  if (message !== '' && severity !== '') {
+    const response = {
+      error: {
+        message,
+        severity
+      }
+    };
+    if (field) {
+      response.error.field = field;
+    }
+    return res.status(status).json(response);
+  } else if (severity === '') {
+    return res.status(status).json(message);
+  } else if (message === '' && severity === '') {
+    return res.status(status);
+  }
+}
+
 // Put all API endpoints under '/api'
 // GET - retrieve a particular resource's object or list all objects
 // POST - create a new resource's object
@@ -175,7 +208,7 @@ GROUP BY s.schema_name, sp.grantee, sp.has_insert`;
     const [rows] = await db.execute(stmt);
 //    console.log('SERVER: After SELECT', 'rows=', rows);
     if (!rows.length) {
-      value = [ 'Unknown' ];
+      value = ['Unknown'];
       res.status(200).json(value);
       console.log('SERVER: 500 - INTERNAL SERVER ERROR');
     } else {
@@ -551,18 +584,16 @@ function adjustSat(sat1, sat2, score) {
 // REGISTER
 app.post('/api/v1/register', async (req, res) => {
   const { email, password, first_name, last_name } = req.body;
-  
+//  console.log('/register','email=',email,'password=',password,'first_name=',first_name,'last_name=',last_name);
+
   if (!isValidPassword(password)) {
-    res.status(400).json({
-      error: 'Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, and one number.'
-    });
-    console.log('SERVER: 400 - BAD REQUEST');
+    sendMessage(res, 'Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, and one number.', 'error', null, 400);
     return;
   }
 
-//  console.log('/register',email=',email,'password=',password);
   const confirmationToken = generateToken();
-  const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour from now
+  const local = new Date(Date.now() + 60 * 60 * 1000); // UTC + 1 hour
+  const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000); // Fudge
 //  console.log('/register','expiresAt=',expiresAt);
 
   try {
@@ -570,41 +601,37 @@ app.post('/api/v1/register', async (req, res) => {
     const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
 //    console.log('rows=',rows);
     if (rows.length) {
-      res.status(409).send('Duplicate email');;
-      console.log('SERVER: 409 - CONFLICT');
+      sendMessage(res, 'Duplicate email', 'error', null, 409);
       return;
     }
 
-    // Create new 'conditional' user with email and password, and confirmation token
+    // Create new 'inactive' user with email and password, and confirmation token
     const hashed = await hashPassword(password);
-    await db.execute('INSERT INTO user (email, password, first_name, last_name, role, token, status) VALUES (?, ?, ?, ?, ?, ?, ?)', [email, hashed, first_name, last_name, 'user', null, 'conditional']);
+    await db.execute('INSERT INTO user (email, password, first_name, last_name, role, token, status) VALUES (?, ?, ?, ?, ?, ?, ?)', [email, hashed, first_name, last_name, 'user', null, 'inactive']);
     await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [confirmationToken, email, 'confirm', expiresAt]);
 
     // Send confirmation email
     try {
       await sendConfirmationEmail(email, first_name, last_name, confirmationToken);
-      res.status(200).json({ message: 'Registration successful. Please check your email to confirm your account.' });
-      console.log('SERVER: 200 - OK');
-    } catch (error) {
-      res.status(500).json({ error: 'Failed to send confirmation email.' });
-      console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+      sendMessage(res, 'Registration confirmation email sent.', 'info', null, 200);
+    } catch (err) {
+      sendMessage(res, err.response, 'error', null, 500);
     }
   } catch (err) {
-    res.sendStatus(500);
-    console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+    sendMessage(res, err, 'error', null, 500);
   }
 });
 
 // CONFIRM
 app.get('/api/v1/confirm', async (req, res) => {
   const { token } = req.query;
-//  console.log('token=',token);
+  console.log('token=',token);
   try {
     // Does a matching confirmation token exist
     const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ? AND expires_at > NOW()', [token, 'confirm']);
+    console.log('rows=',rows,'rows.length=',rows.length,'!rows.length=',!rows.length);
     if (!rows.length) {
-      res.status(401).send('Token is invalid or has expired, request ignored');
-      console.log('SERVER: 401 - UNAUTHORIZED');
+      sendMessage(res, 'Token is invalid or has expired', 'error', null, 401);
       return;
     }
 
@@ -614,12 +641,9 @@ app.get('/api/v1/confirm', async (req, res) => {
     await db.execute('UPDATE user SET token = ? WHERE email = ? AND token IS NULL', [userToken, email]);
     await db.execute('UPDATE user SET status = ? WHERE email = ?', ['active', email]);
     await db.execute('DELETE FROM token WHERE token = ?', [token]);
-    res.status(200).send('Email confirmed');
-    console.log('SERVER: 200 - OK');
+    sendMessage(res, 'Registration confirmed.', 'info', null, 200);
   } catch (err) {
-//    console.error('err=',err);
-    res.sendStatus(500);
-    console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+    sendMessage(res, err, 'error', null, 500);
   }
 });
 
@@ -633,15 +657,15 @@ app.post('/api/v1/login', async (req, res) => {
     const user = rows[0];
     const match = user && await comparePassword(password, user.password);
 //    console.log('match=',match);
-    if (!match || user.status !== 'active') return res.sendStatus(401);
-  
+    if (!match || user.status !== 'active') {
+      return sendMessage(res, 'Unknown email or password, or inactive account', 'error', null, 401);
+    }
+
     await db.query('UPDATE user SET last_login_at = NOW() WHERE id = ?', [user.id]);
     req.session.user = { email: user.email, token: user.token, first_name: user.first_name, last_name: user.last_name, isAuthenticated: true, isAdmin: user.role === 'admin' };
-    res.sendStatus(200);
-    console.log('SERVER: 200 - OK');
+    sendMessage(res, 'Successful login.', 'info', null, 200);
   } catch (err) {
-    res.sendStatus(500);
-    console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+    sendMessage(res, err, 'error', null, 500);
   }
 });
 
@@ -675,8 +699,7 @@ app.get('/api/v1/me', (req, res) => {
 // LOGOUT
 app.post('/api/v1/logout', (req, res) => {
 //  console.log('/logout');
-  req.session.destroy(() => res.sendStatus(200));
-  console.log('SERVER: 200 - OK');
+  req.session.destroy(() => sendMessage(res, '', '', null, 200));
 });
 
 // PASSWORD RESET REQUEST
@@ -684,7 +707,8 @@ app.post('/api/v1/reset-password', async (req, res) => {
   const { email } = req.body;
 //  console.log('email=',email);
   const resetToken = generateToken();
-  const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour from now
+  const local = new Date(Date.now() + 60 * 60 * 1000); // UTC + 1 hour
+  const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000); // Fudge
 //  console.log('/register','expiresAt=',expiresAt);
 
   try {
@@ -693,8 +717,7 @@ app.post('/api/v1/reset-password', async (req, res) => {
     const row = rows[0];
 //    console.log('/reset-password','row=',row);
     if (!rows.length) {
-      res.sendStatus(500);
-      console.log('SERVER: 500 - INTERNAL SERVER ERROR');
+      sendMessage(res, 'Unknown email', 'error', null, 401);
       return;
     }
 
@@ -702,13 +725,16 @@ app.post('/api/v1/reset-password', async (req, res) => {
     await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [resetToken, email, 'reset', expiresAt]);
 
     // Send reset email
-    await sendResetEmail(email, row.first_name, row.last_name, resetToken);
-    res.status(200).json({ message: 'Reset link sent if email is valid.' });
-    console.log('SERVER: 200 - OK');
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to send reset email.' });
-    console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
-  }}
+    try {
+      await sendResetEmail(email, row.first_name, row.last_name, resetToken);
+      sendMessage(res, 'Reset password email sent.', 'info', null, 200);
+    } catch (err) {
+      sendMessage(res, err.response, 'error', null, 500);
+    }
+  } catch (err) {
+    sendMessage(res, err, 'error', null, 500);
+  }
+}
 );
 
 // CHANGE PASSWORD
@@ -716,20 +742,16 @@ app.patch('/api/v1/change-password', async (req, res) => {
   const { token, password } = req.body;
 //  console.log('token=',token,'password=',password);
 
-if (!isValidPassword(password)) {
-  res.status(400).json({
-    error: 'Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, and one number.'
-  });
-  console.log('SERVER: 400 - BAD REQUEST');
-  return;
-}
-
   try {
     // Does a matching reset token exist
     const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ? AND expires_at > NOW()', [token, 'reset']);
     if (!rows.length) {
-      res.status(400).send('Token is invalid or has expired, request ignored');
-      console.log('SERVER: 400 - BAD REQUEST');
+      sendMessage(res, 'Token is invalid or has expired', 'error', null, 401);
+      return;
+    }
+
+    if (!isValidPassword(password)) {
+      sendMessage(res, 'Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, and one number.', 'error', null, 400);
       return;
     }
 
@@ -738,26 +760,18 @@ if (!isValidPassword(password)) {
     const hashed = await hashPassword(password);
     await db.execute('UPDATE user SET password = ? WHERE email = ?', [hashed, email]);
     await db.execute('DELETE FROM token WHERE token = ?', [token]);
-    res.sendStatus(200);
-    console.log('SERVER: 200 - OK');
+    sendMessage(res, 'Password changed.', 'info', null, 200);
   } catch (err) {
-    res.sendStatus(500);
-    console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+    sendMessage(res, err, 'error', null, 500);
   }
 });
 
 app.delete('/api/v1/cleanup-tokens', async (req, res) => {
   try {
-    const [result] = await db.query('DELETE FROM tokens WHERE expires_at < NOW()');
-
-    res.json({
-      message: 'Expired tokens cleaned up successfully',
-      deleted: result.affectedRows
-    });
-    console.log('SERVER: 200 - OK');
+    await db.query('DELETE FROM token WHERE expires_at < NOW()');
+    sendMessage(res, 'Expired tokens cleaned up successfully', 'info', null, 200);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to clean up tokens' });
-    console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+    sendMessage(res, err, 'error', null, 500);
   }
 });
 

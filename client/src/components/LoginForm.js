@@ -5,9 +5,11 @@ import { useAuth } from './AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import { changeUser } from '../store/actions';
 import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
+import MessageAlert from './MessageAlert';
 
 export default function LoginForm() {
 //  console.log('LoginForm');
+  const [error, setError] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { setAuthState, setIsAuthenticated } = useAuth();
@@ -18,16 +20,19 @@ export default function LoginForm() {
   const handleLogin = async (e) => {
 //    console.log('LoginForm.handleLogin');
     e.preventDefault();
+    setError(null);
     try {
-      await axios.post('/api/v1/login', { email, password });
-      const res = await axios.get('/api/v1/me');
-      setAuthState(res.data.authState);
-//      console.log('LoginForm/handleLogin','authState=',res.data.authState);
-      dispatch(changeUser(res.data.authState.token));
+      const res = await axios.post('/api/v1/login', { email, password });
+      console.error('LoginForm.handleLogin /login','res=', res)
+      setError(res.data.error);
+      const res2 = await axios.get('/api/v1/me');
+      setAuthState(res2.data.authState);
+//      console.log('LoginForm/handleLogin /login','authState=',res2.data.authState);
+      dispatch(changeUser(res2.data.authState.token));
       navigate('/');
     } catch (err) {
-      console.error('LoginForm.handleLogin','err=', err)
-      alert('Login failed: ' + err.message);
+      console.error('LoginForm.handleLogin /login','err=', err)
+      setError(err.response.data.error);
     }
   };
 
@@ -46,7 +51,10 @@ export default function LoginForm() {
                   <td className="text-center"><h3>Sign in to ODOP</h3></td>
                 </tr>
                 <tr>
-                  <td className="px-5 text-start">Username<br /><Form.Control type="text" value={email} onChange={e => setEmail(e.target.value)} /></td>
+                  <td className="text-center"><MessageAlert error={error} /></td>
+                </tr>
+                <tr>
+                  <td className="px-5 text-start">Email<br /><Form.Control type="text" value={email} onChange={e => setEmail(e.target.value)} /></td>
                 </tr>
                 <tr>
                   <td className="px-5 text-start">Password<br /><Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} /></td>

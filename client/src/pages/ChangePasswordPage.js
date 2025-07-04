@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import axios from '../axiosConfig';
 import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
+import MessageAlert from '../components/MessageAlert';
 
 export default function ChangePasswordPage() {
 //  console.log('ChangePasswordPage');
+  const [error, setError] = useState(null);
   const [searchParams] = useSearchParams();
   const [token, setToken] = useState('');
   const [password, setPassword] = useState('');
@@ -24,16 +26,25 @@ export default function ChangePasswordPage() {
   const handleSubmit = async (e) => {
 //    console.log('ChangePasswordPage.handleSubmit');
     e.preventDefault();
+    setError(null);
     try {
       await axios.patch('/api/v1/change-password', { token, password })
-        .then(() => setStatus('success'))
-        .catch(() => setStatus('error'));
+        .then((res) => {
+//          console.log('ChangePasswordPage.handleSubmit /change-password', 'res=', res);
+          setError(res.data.error);
+          setStatus('success')
+        })
+        .catch((err) => {
+//          console.log('ChangePasswordPage.handleSubmit /change-password', 'err=', err);
+          setError(err.response.data.error);
+          setStatus('error')
+        });
     } catch (err) {
-      console.error('ChangePasswordPage.handleSubmit','err=',err);
+//      console.error('ChangePasswordPage.handleSubmit', 'err=', err);
+      setError(err.response.data.error);
       setStatus('error');
     }
   };
-
 //  console.log('ChangePasswordPage', 'status=', status);
   if (status === 'success') {
     return (
@@ -49,6 +60,9 @@ export default function ChangePasswordPage() {
                   </tr>
                   <tr>
                     <td className="text-center"><h3>Password Updated ✅</h3></td>
+                  </tr>
+                  <tr>
+                    <td className="text-center"><MessageAlert error={error} /></td>
                   </tr>
                   <tr>
                     <td className="px-5 text-start"><p>You can now log in with your new password.</p></td>
@@ -82,6 +96,9 @@ export default function ChangePasswordPage() {
                     <td className="text-center"><h3>Error ❌</h3></td>
                   </tr>
                   <tr>
+                    <td className="text-center"><MessageAlert error={error} /></td>
+                  </tr>
+                  <tr>
                     <td className="px-5 text-start"><p>This link is invalid or has expired.</p></td>
                   </tr>
                   <tr>
@@ -110,6 +127,9 @@ export default function ChangePasswordPage() {
                 </tr>
                 <tr>
                   <td className="text-center"><h3>Reset your ODOP password</h3></td>
+                </tr>
+                <tr>
+                  <td className="text-center"><MessageAlert error={error} /></td>
                 </tr>
                 <tr>
                   <td className="px-5 text-start">
