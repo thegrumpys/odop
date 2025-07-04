@@ -1,10 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
 import { load, changeName, restoreAutoSave, deleteAutoSave } from "../store/actions";
 import MainPage from "./MainPage";
-import HomePage from "../pages/HomePage";
 import { Button, Modal, Alert } from 'react-bootstrap';
 import config from '../config';
 import { displaySpinner } from "./Spinner";

@@ -79,6 +79,9 @@ export default function LoginForm() {
                 <tr>
                   <td className="text-center p-3">Don't have an account? <Link to="/register">Sign up</Link></td>
                 </tr>
+                <tr>
+                  <td className="text-center p-3"><Button onClick={() => navigate('/')}>Go to Home</Button></td>
+                </tr>
               </tbody>
             </Table>
           </form>

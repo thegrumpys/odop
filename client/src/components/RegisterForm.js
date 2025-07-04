@@ -92,7 +92,6 @@ export default function RegisterForm() {
                       <li>At least 1 number(s)</li>
                       <li>At least 1 lowercase letter(s)</li>
                       <li>At least 1 uppercase letter(s)</li>
-                      <li>Does not contain part of username</li>
                     </ul>
                   </td>
                 </tr>

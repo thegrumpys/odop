@@ -17,16 +17,15 @@ export default function SignOut() {
   const toggle = async () => {
 //    console.log('SignOut.toggle');
     try {
-      await axios.post('/api/v1/logout');
-      const res = await axios.get('/api/v1/me');
-      setAuthState(res.data.authState);
-//      console.log('SignOut.toggle','setAuthState=',res.data.authState);
+      const res = await axios.post('/api/v1/logout');
+      const res2 = await axios.get('/api/v1/me');
+      setAuthState(res2.data.authState);
+//      console.log('SignOut.toggle','setAuthState=',res2.data.authState);
       dispatch(changeUser(null));
-      logUsage('event', 'SignOut', { event_label: '' });
+      logUsage('event', 'SignOut', { event_label: res2.data.authState });
       navigate('/');
     } catch (err) {
       console.error('SignOut', 'err=', err);
-      alert('Logout failed: '+err.message);
     }
   }
 

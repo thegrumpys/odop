@@ -139,7 +139,6 @@ export default function ChangePasswordPage() {
                       <li>A lowercase letter</li>
                       <li>An uppercase letter</li>
                       <li>A number</li>
-                      <li>No parts of your username</li>
                     </ul>
                   </td>
                 </tr>

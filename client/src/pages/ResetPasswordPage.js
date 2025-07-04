@@ -75,7 +75,7 @@ export default function ResetPasswordPage() {
                   <td className="text-center"><MessageAlert error={error} /></td>
                 </tr>
                 <tr>
-                  <td className="px-5 text-start">Email or Username<br /><Form.Control type="email" value={email} required onChange={(e) => setEmail(e.target.value)} autoComplete="username" /></td>
+                  <td className="px-5 text-start">Email<br /><Form.Control type="email" value={email} required onChange={(e) => setEmail(e.target.value)} autoComplete="username" /></td>
                 </tr>
                 <tr>
                   <td className="text-center"><Button type="submit">Reset via Email</Button></td>
