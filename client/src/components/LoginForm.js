@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { changeUser } from '../store/actions';
 import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 import MessageAlert from './MessageAlert';
+import { logUsage } from '../logUsage';
 
 export default function LoginForm() {
 //  console.log('LoginForm');
@@ -23,12 +24,13 @@ export default function LoginForm() {
     setError(null);
     try {
       const res = await axios.post('/api/v1/login', { email, password });
-      console.error('LoginForm.handleLogin /login','res=', res)
+//      console.error('LoginForm.handleLogin /login','res=', res)
       setError(res.data.error);
       const res2 = await axios.get('/api/v1/me');
       setAuthState(res2.data.authState);
 //      console.log('LoginForm/handleLogin /login','authState=',res2.data.authState);
       dispatch(changeUser(res2.data.authState.token));
+      logUsage('event', 'SignedIn', { event_label: email + ' ' + res2.data.authState.token});
       navigate('/');
     } catch (err) {
       console.error('LoginForm.handleLogin /login','err=', err)
