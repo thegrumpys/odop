@@ -13,7 +13,8 @@ export default function LoginForm() {
   const [error, setError] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { setAuthState, setIsAuthenticated } = useAuth();
+  const [submitted, setSubmitted] = useState(false);
+  const { setAuthState } = useAuth();
 //  console.log('LoginForm','setAuthState=',setAuthState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,20 +24,62 @@ export default function LoginForm() {
     e.preventDefault();
     setError(null);
     try {
-      const res = await axios.post('/api/v1/login', { email, password });
-//      console.error('LoginForm.handleLogin /login','res=', res)
-      setError(res.data.error);
-      const res2 = await axios.get('/api/v1/me');
-      setAuthState(res2.data.authState);
-//      console.log('LoginForm/handleLogin /login','authState=',res2.data.authState);
-      dispatch(changeUser(res2.data.authState.token));
-      logUsage('event', 'SignedIn', { event_label: email + ' ' + res2.data.authState.token});
-      navigate('/');
+      // 🔍 Step 1: Check if the user has a password
+      const checkRes = await axios.get('/api/v1/has-password', { params: { email } });
+//      console.log('LoginForm/handleLogin /login','checkRes=',checkRes);
+      if (!checkRes.data.hasPassword) {
+        const res = await axios.post('/api/v1/reset-password', { email });
+        setError(res.data.error);
+        setSubmitted(true);
+      } else {
+        const res = await axios.post('/api/v1/login', { email, password });
+//        console.error('LoginForm.handleLogin /login','res=', res)
+        setError(res.data.error);
+        const res2 = await axios.get('/api/v1/me');
+        setAuthState(res2.data.authState);
+//        console.log('LoginForm/handleLogin /login','authState=',res2.data.authState);
+        dispatch(changeUser(res2.data.authState.token));
+        logUsage('event', 'SignedIn', { event_label: email + ' ' + res2.data.authState.token});
+        navigate('/');
+      }
     } catch (err) {
       console.error('LoginForm.handleLogin /login','err=', err)
       setError(err.response.data.error);
     }
   };
+
+//  console.log('ResetPasswordPage','submitted=',submitted);
+  if (submitted) {
+    return (
+      <Container className="pt-5">
+        <Row>
+          <Col lg="4" />
+          <Col lg="4">
+            <Table border="1" borderless className="p-5">
+              <tbody>
+                <tr>
+                  <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
+                </tr>
+                <tr>
+                  <td className="text-center"><h3>Email sent!</h3></td>
+                </tr>
+                <tr>
+                  <td className="text-center"><MessageAlert error={error} /></td>
+                </tr>
+                <tr>
+                  <td className="text-start px-5"><p>Email has been sent to {email} with instructions on resetting your password.</p></td>
+                </tr>
+                <tr>
+                  <td className="text-center p-3"><Link to="/login">Back to sign in</Link></td>
+                </tr>
+              </tbody>
+            </Table>
+          </Col>
+          <Col lg="4" />
+        </Row>
+      </Container>
+    );
+  }
 
   return (
     <Container className="pt-5">
@@ -78,9 +121,6 @@ export default function LoginForm() {
                 </tr>
                 <tr>
                   <td className="text-center p-3">Don't have an account? <Link to="/register">Sign up</Link></td>
-                </tr>
-                <tr>
-                  <td className="text-center p-3"><Button onClick={() => navigate('/')}>Go to Home</Button></td>
                 </tr>
               </tbody>
             </Table>

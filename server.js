@@ -123,7 +123,7 @@ async function sendResetEmail(email, first_name, last_name, token) {
     subject: 'Reset your password',
     html,
   };
-  
+
   await transporter.sendMail(mailOptions);
 }
 
@@ -137,7 +137,7 @@ function isValidPassword(password) {
 }
 
 function sendMessage(res, message, severity = 'error', field = null, status = 400) {
-  console.log('message=',message,'severity=',severity,'field=',field,'status=',status);
+//  console.log('sendMessage','message=',message,'severity=',severity,'field=',field,'status=',status);
   const httpStatusCodes = {
     100: "CONTINUE",
     101: "SWITCHING PROTOCOLS",
@@ -151,7 +151,11 @@ function sendMessage(res, message, severity = 'error', field = null, status = 40
     500: "INTERNAL SERVER ERROR",
   };
   console.log('SERVER: ' + status + ' - ' + httpStatusCodes[status]);
-  if (message !== '' && severity !== '') {
+  if (severity === '' && message === '') {
+    return res.status(status); // Return just the status
+  } else if (severity === '' && message !== '') {
+    return res.status(status).json(message); // Return message as data and the status
+  } else if (severity !== '') { // message === '' || message !== ''
     const response = {
       error: {
         message,
@@ -162,10 +166,6 @@ function sendMessage(res, message, severity = 'error', field = null, status = 40
       response.error.field = field;
     }
     return res.status(status).json(response);
-  } else if (severity === '') {
-    return res.status(status).json(message);
-  } else if (message === '' && severity === '') {
-    return res.status(status);
   }
 }
 
@@ -629,7 +629,7 @@ app.get('/api/v1/confirm', async (req, res) => {
   try {
     // Does a matching confirmation token exist
     const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ? AND expires_at > NOW()', [token, 'confirm']);
-    console.log('rows=',rows,'rows.length=',rows.length,'!rows.length=',!rows.length);
+//    console.log('/api/v1/confirm','rows=',rows,'rows.length=',rows.length,'!rows.length=',!rows.length);
     if (!rows.length) {
       sendMessage(res, 'Token is invalid or has expired', 'error', null, 401);
       return;
@@ -647,16 +647,36 @@ app.get('/api/v1/confirm', async (req, res) => {
   }
 });
 
+// HAS PASSWORD
+app.get('/api/v1/has-password', async (req, res) => {
+  const { email } = req.query;
+//  console.log('/api/v1/has-password','email=',email);
+  try {
+    // Does user exist?
+    const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
+    if (!rows.length) {
+      sendMessage(res, 'Unknown email or password, or inactive account', 'error', null, 401);
+      return;
+    }
+    const hasPassword = rows.length > 0 && rows[0].password!== null;
+//    console.log('/api/v1/has-password','hasPassword=',hasPassword);
+    sendMessage(res, { hasPassword }, '', null, 200);
+  } catch (err) {
+    sendMessage(res, err, 'error', null, 500);
+  }
+});
+
 // LOGIN
 app.post('/api/v1/login', async (req, res) => {
   const { email, password } = req.body;
-//  console.log('email=',email,'password=',password);
+//  console.log('/api/v1/login','email=',email,'password=',password);
   try {
+    // Does user exist?
     const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
-//    console.log('rows=',rows);
+//    console.log('/api/v1/login','rows=',rows);
     const user = rows[0];
     const match = user && await comparePassword(password, user.password);
-//    console.log('match=',match);
+//    console.log('/api/v1/login','match=',match);
     if (!match || user.status !== 'active') {
       return sendMessage(res, 'Unknown email or password, or inactive account', 'error', null, 401);
     }
@@ -692,8 +712,7 @@ app.get('/api/v1/me', (req, res) => {
       }
     });
   }
-  res.status(200);
-  console.log('SERVER: 200 - OK');
+  sendMessage(res, '', '', null, 200);
 });
 
 // LOGOUT
@@ -705,28 +724,29 @@ app.post('/api/v1/logout', (req, res) => {
 // PASSWORD RESET REQUEST
 app.post('/api/v1/reset-password', async (req, res) => {
   const { email } = req.body;
-//  console.log('email=',email);
-  const resetToken = generateToken();
-  const local = new Date(Date.now() + 60 * 60 * 1000); // UTC + 1 hour
-  const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000); // Fudge
-//  console.log('/register','expiresAt=',expiresAt);
+//  console.log('/api/v1/reset-password','email=',email);
 
   try {
     // Does user exist?
     const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
-    const row = rows[0];
-//    console.log('/reset-password','row=',row);
     if (!rows.length) {
-      sendMessage(res, 'Unknown email', 'error', null, 401);
+      sendMessage(res, 'Unknown email or password, or inactive account', 'error', null, 401);
       return;
     }
+
+    const user = rows[0];
+//    console.log('/api/v1/reset-password','user=',user);
+    const resetToken = generateToken();
+    const local = new Date(Date.now() + 60 * 60 * 1000); // UTC + 1 hour
+    const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000); // Fudge
+//  console.log('/api/v1/reset-password','expiresAt=',expiresAt);
 
     // Create a reset token
     await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [resetToken, email, 'reset', expiresAt]);
 
     // Send reset email
     try {
-      await sendResetEmail(email, row.first_name, row.last_name, resetToken);
+      await sendResetEmail(email, user.first_name, user.last_name, resetToken);
       sendMessage(res, 'Reset password email sent.', 'info', null, 200);
     } catch (err) {
       sendMessage(res, err.response, 'error', null, 500);
@@ -734,8 +754,7 @@ app.post('/api/v1/reset-password', async (req, res) => {
   } catch (err) {
     sendMessage(res, err, 'error', null, 500);
   }
-}
-);
+});
 
 // CHANGE PASSWORD
 app.patch('/api/v1/change-password', async (req, res) => {
