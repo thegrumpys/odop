@@ -114,7 +114,7 @@ async function sendConfirmationEmail(email, first_name, last_name, token) {
 
 async function sendResetEmail(email, first_name, last_name, token) {
   const frontUrl = process.env.FRONT_URL;
-  const resetUrl = `${process.env.FRONT_URL}/change-password?token=${token}`;
+  const resetUrl = `${process.env.FRONT_URL}/change-password?token=${token}&email=${email}`;
   const html = renderTemplate(path.join(__dirname, 'emails', 'reset.html'), { email, first_name, last_name, frontUrl, resetUrl });
 
   const mailOptions = {
@@ -625,7 +625,7 @@ app.post('/api/v1/register', async (req, res) => {
 // CONFIRM
 app.get('/api/v1/confirm', async (req, res) => {
   const { token } = req.query;
-  console.log('token=',token);
+//  console.log('token=',token);
   try {
     // Does a matching confirmation token exist
     const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ? AND expires_at > NOW()', [token, 'confirm']);
@@ -759,12 +759,12 @@ app.post('/api/v1/reset-password', async (req, res) => {
 
 // CHANGE PASSWORD
 app.patch('/api/v1/change-password', async (req, res) => {
-  const { token, password } = req.body;
-//  console.log('token=',token,'password=',password);
+  const { token, email, password } = req.body;
+//  console.log('/api/v1/change-password','token=',token,'email=',email,'password=',password);
 
   try {
     // Does a matching reset token exist
-    const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ? AND expires_at > NOW()', [token, 'reset']);
+    const [rows] = await db.execute('SELECT email FROM token WHERE email = ? AND token = ? AND type = ? AND expires_at > NOW()', [email, token, 'reset']);
     if (!rows.length) {
       sendMessage(res, 'Token is invalid or has expired', 'error', null, 401);
       return;
@@ -776,9 +776,9 @@ app.patch('/api/v1/change-password', async (req, res) => {
     }
 
     // Update the password
-    const email = rows[0].email;
+    const db_email = rows[0].email;
     const hashed = await hashPassword(password);
-    await db.execute('UPDATE user SET password = ? WHERE email = ?', [hashed, email]);
+    await db.execute('UPDATE user SET password = ? WHERE email = ?', [hashed, db_email]);
     await db.execute('DELETE FROM token WHERE token = ?', [token]);
     sendMessage(res, 'Password changed.', 'info', null, 200);
   } catch (err) {

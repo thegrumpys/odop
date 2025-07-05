@@ -3,15 +3,18 @@ import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import axios from '../axiosConfig';
 import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 import MessageAlert from '../components/MessageAlert';
+import { useAuth } from '../components/AuthProvider';
 
 export default function ChangePasswordPage() {
 //  console.log('ChangePasswordPage');
   const [error, setError] = useState(null);
   const [searchParams] = useSearchParams();
   const [token, setToken] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState('form'); // 'form' | 'success' | 'error'
   const navigate = useNavigate();
+  const authState = useAuth();
 
   useEffect(() => {
     const token = searchParams.get('token');
@@ -21,6 +24,13 @@ export default function ChangePasswordPage() {
     } else {
       setToken(token);
     }
+    const email = searchParams.get('email');
+//    console.log('ChangePasswordPage.useEffect', 'email=', email);
+    if (!email) {
+      setStatus('error');
+    } else {
+      setEmail(email);
+    }
   }, [searchParams]);
 
   const handleSubmit = async (e) => {
@@ -28,7 +38,7 @@ export default function ChangePasswordPage() {
     e.preventDefault();
     setError(null);
     try {
-      await axios.patch('/api/v1/change-password', { token, password })
+      await axios.patch('/api/v1/change-password', { token, email, password })
         .then((res) => {
 //          console.log('ChangePasswordPage.handleSubmit /change-password', 'res=', res);
           setError(res.data.error);
@@ -45,34 +55,32 @@ export default function ChangePasswordPage() {
       setStatus('error');
     }
   };
-//  console.log('ChangePasswordPage', 'status=', status);
+//  console.log('ChangePasswordPage', 'status=', status,'error=',error);
   if (status === 'success') {
     return (
       <Container className="pt-5">
         <Row>
           <Col lg="4" />
           <Col lg="4">
-            <form onSubmit={handleSubmit}>
-              <Table border="1" borderless className="p-5">
-                <tbody>
-                  <tr>
-                    <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
-                  </tr>
-                  <tr>
-                    <td className="text-center"><h3>Password Updated ✅</h3></td>
-                  </tr>
-                  <tr>
-                    <td className="text-center"><MessageAlert error={error} /></td>
-                  </tr>
-                  <tr>
-                    <td className="px-5 text-start"><p>You can now log in with your new password.</p></td>
-                  </tr>
-                  <tr>
-                    <td className="text-center"><Button onClick={() => navigate('/login')}>Go to Login</Button></td>
-                  </tr>
-                </tbody>
-              </Table>
-            </form>
+            <Table border="1" borderless className="p-5">
+              <tbody>
+                <tr>
+                  <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
+                </tr>
+                <tr>
+                  <td className="text-center"><h3>Password Updated ✅</h3></td>
+                </tr>
+                <tr>
+                  <td className="text-center"><MessageAlert error={error} /></td>
+                </tr>
+                <tr>
+                  <td className="px-5 text-start"><p>You can now log in with your new password.</p></td>
+                </tr>
+                <tr>
+                  <td className="text-center"><Button onClick={() => navigate('/login')}>Go to Login</Button></td>
+                </tr>
+              </tbody>
+            </Table>
           </Col>
           <Col lg="4" />
         </Row>
@@ -86,27 +94,25 @@ export default function ChangePasswordPage() {
         <Row>
           <Col lg="4" />
           <Col lg="4">
-            <form onSubmit={handleSubmit}>
-              <Table border="1" borderless className="p-5">
-                <tbody>
-                  <tr>
-                    <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
-                  </tr>
-                  <tr>
-                    <td className="text-center"><h3>Error ❌</h3></td>
-                  </tr>
-                  <tr>
-                    <td className="text-center"><MessageAlert error={error} /></td>
-                  </tr>
-                  <tr>
-                    <td className="px-5 text-start"><p>This link is invalid or has expired.</p></td>
-                  </tr>
-                  <tr>
-                    <td className="text-center"><Button onClick={() => navigate('/')}>Go to Home</Button></td>
-                  </tr>
-                </tbody>
-              </Table>
-            </form>
+            <Table border="1" borderless className="p-5">
+              <tbody>
+                <tr>
+                  <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
+                </tr>
+                <tr>
+                  <td className="text-center"><h3>Error ❌</h3></td>
+                </tr>
+                <tr>
+                  <td className="text-center"><MessageAlert error={error} /></td>
+                </tr>
+                <tr>
+                  <td className="px-5 text-start"><p>This link is invalid.</p></td>
+                </tr>
+                <tr>
+                  <td className="text-center"><Button onClick={() => navigate('/')}>Go to Home</Button></td>
+                </tr>
+              </tbody>
+            </Table>
           </Col>
           <Col lg="4" />
         </Row>
@@ -120,6 +126,7 @@ export default function ChangePasswordPage() {
         <Col lg="4" />
         <Col lg="4">
           <form onSubmit={handleSubmit}>
+            <input type="hidden" value={email} autoComplete="username" />
             <Table border="1" borderless className="p-5">
               <tbody>
                 <tr>
