@@ -718,7 +718,8 @@ app.get('/api/v1/me', (req, res) => {
 // LOGOUT
 app.post('/api/v1/logout', (req, res) => {
 //  console.log('/logout');
-  req.session.destroy(() => sendMessage(res, '', '', null, 200));
+  req.session.destroy(() => res.sendStatus(200));
+  console.log('SERVER: 200 - OK');
 });
 
 // PASSWORD RESET REQUEST

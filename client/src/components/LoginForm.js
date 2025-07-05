@@ -99,10 +99,10 @@ export default function LoginForm() {
                   <td className="text-center"><MessageAlert error={error} /></td>
                 </tr>
                 <tr>
-                  <td className="px-5 text-start">Email<br /><Form.Control type="text" value={email} onChange={e => setEmail(e.target.value)} /></td>
+                  <td className="px-5 text-start">Email<br /><Form.Control type="email" value={email} onChange={e => setEmail(e.target.value)} autoComplete="username" /></td>
                 </tr>
                 <tr>
-                  <td className="px-5 text-start">Password<br /><Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} /></td>
+                  <td className="px-5 text-start">Password<br /><Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} autoComplete="current_password" /></td>
                 </tr>
                 <tr>
                   <td className="text-center"><Button variant="primary" type="submit">Sign In</Button></td>

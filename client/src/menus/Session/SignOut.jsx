@@ -9,6 +9,8 @@ import axios from '../../axiosConfig';
 
 export default function SignOut() {
 //  console.log('SignOut');
+  const model_user = useSelector((state) => state.user);
+//  console.log('SignOut','model_user=',model_user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { authState, setAuthState } = useAuth();
@@ -18,11 +20,12 @@ export default function SignOut() {
 //    console.log('SignOut.toggle');
     try {
       const res = await axios.post('/api/v1/logout');
+//      console.log('SignOut.toggle','res=',res);
       const res2 = await axios.get('/api/v1/me');
+//      console.log('SignOut.toggle','res2=',res2);
       setAuthState(res2.data.authState);
-//      console.log('SignOut.toggle','setAuthState=',res2.data.authState);
+      logUsage('event', 'SignOut', { event_label: model_user });
       dispatch(changeUser(null));
-      logUsage('event', 'SignOut', { event_label: res2.data.authState });
       navigate('/');
     } catch (err) {
       console.error('SignOut', 'err=', err);

@@ -78,7 +78,7 @@ export function logValue(name, value, suffix = '', merge = true) {
 }
 
 export function logUsage(tag, action, note) {
-//    console.log('logUsage tag=',tag,'action=',action,'note=',note);
+//  console.log('logUsage','tag=',tag,'action=',action,'note=',note);
   flushBuffer();
   var sequenced_note = Object.assign(
     {
