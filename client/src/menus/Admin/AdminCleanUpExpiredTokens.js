@@ -20,7 +20,7 @@ export default function AdminCleanUpExpiredTokens() {
       dispatch(changeResultTerminationCondition(res.data.error.message));
 //      navigate('/');
     } catch (err) {
-      console.error('AdminCleanUpExpiredTokens', 'err=', err);
+      dispatch(changeResultTerminationCondition(res.data.error.message));
     }
   }
 

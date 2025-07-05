@@ -43,7 +43,7 @@ export default function LoginForm() {
         navigate('/');
       }
     } catch (err) {
-      console.error('LoginForm.handleLogin /login','err=', err)
+//      console.error('LoginForm.handleLogin /login','err=', err)
       setError(err.response.data.error);
     }
   };
@@ -61,16 +61,16 @@ export default function LoginForm() {
                   <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><h3>Email sent!</h3></td>
+                  <td className="text-center"><h3>Password change required</h3></td>
                 </tr>
                 <tr>
                   <td className="text-center"><MessageAlert error={error} /></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5"><p>Email has been sent to {email} with instructions on resetting your password.</p></td>
+                  <td className="text-start px-5"><p>We have recently changed our security system. Email has been sent to {email} with instructions on resetting your password. See <a href="https://thegrumpys.github.io/odop/About/messageOfTheDay.html" target="_blank">ODOP Message Of The Day</a> for details.</p></td>
                 </tr>
                 <tr>
-                  <td className="text-center p-3"><Link to="/login">Back to sign in</Link></td>
+                  <td className="text-center p-3"><Button onClick={() => navigate('/')}>Go to Home</Button></td>
                 </tr>
               </tbody>
             </Table>
