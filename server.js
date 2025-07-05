@@ -793,7 +793,7 @@ app.delete('/api/v1/cleanup-expired-tokens', async (req, res) => {
 //    console.log('/api/v1/cleanup-expired-tokens','rows=',rows);
 
     if (!rows.affectedRows) {
-      sendMessage(res, '', '', null, 200); // Nothing deleted then no message
+      sendMessage(res, 'No expired tokens cleaned up', 'info', null, 200); // Nothing deleted then no message
     } else {
       const delete_count = rows.affectedRows;
 //      console.log('/api/v1/cleanup-expired-tokens','rows=',delete_count);
