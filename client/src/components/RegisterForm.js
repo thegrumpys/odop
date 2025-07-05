@@ -48,7 +48,7 @@ export default function RegisterForm() {
                   <td className="text-center"><MessageAlert error={error} /></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><p>We just sent a verification email to {email}. Please check your email and verify your account to continue.</p></td>
+                  <td className="text-center"><p>We just sent a verification email to {email}. Please check your email and verify your account to continue. If the message does not appear promptly check your Junk/Spam folder.</p></td>
                 </tr>
                 <tr>
                   <td className="text-center"><Button onClick={() => navigate('/login')}>Back to sign in</Button></td>
@@ -105,7 +105,10 @@ export default function RegisterForm() {
                   <td className="text-center"><Button type="submit">Register</Button></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5"><Link to="/login">Back to Signin</Link></td>
+                  <td className="text-start px-5 pt-3"><Link to="/reset-password">Change Password?</Link></td>
+                </tr>
+                <tr>
+                  <td className="text-start px-5"><Link to="/login">Back to Sign in</Link></td>
                 </tr>
               </tbody>
             </Table>

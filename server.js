@@ -601,7 +601,7 @@ app.post('/api/v1/register', async (req, res) => {
     const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
 //    console.log('rows=',rows);
     if (rows.length) {
-      sendMessage(res, 'Duplicate email', 'error', null, 409);
+      sendMessage(res, 'Duplicate email.', 'error', null, 409);
       return;
     }
 
@@ -631,7 +631,7 @@ app.get('/api/v1/confirm', async (req, res) => {
     const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ? AND expires_at > NOW()', [token, 'confirm']);
 //    console.log('/api/v1/confirm','rows=',rows,'rows.length=',rows.length,'!rows.length=',!rows.length);
     if (!rows.length) {
-      sendMessage(res, 'Token is invalid or has expired', 'error', null, 401);
+      sendMessage(res, 'Token is invalid or has expired.', 'error', null, 401);
       return;
     }
 
@@ -655,7 +655,7 @@ app.get('/api/v1/has-password', async (req, res) => {
     // Does user exist?
     const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
     if (!rows.length) {
-      sendMessage(res, 'Unknown email or password, or inactive account', 'error', null, 401);
+      sendMessage(res, 'Unknown email or password, or inactive account.', 'error', null, 401);
       return;
     }
     const hasPassword = rows.length > 0 && rows[0].password!== null;
@@ -678,7 +678,7 @@ app.post('/api/v1/login', async (req, res) => {
     const match = user && await comparePassword(password, user.password);
 //    console.log('/api/v1/login','match=',match);
     if (!match || user.status !== 'active') {
-      return sendMessage(res, 'Unknown email or password, or inactive account', 'error', null, 401);
+      return sendMessage(res, 'Unknown email or password, or inactive account.', 'error', null, 401);
     }
 
     await db.query('UPDATE user SET last_login_at = NOW() WHERE id = ?', [user.id]);
@@ -731,7 +731,7 @@ app.post('/api/v1/reset-password', async (req, res) => {
     // Does user exist?
     const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
     if (!rows.length) {
-      sendMessage(res, 'Unknown email or password, or inactive account', 'error', null, 401);
+      sendMessage(res, 'Unknown email or password, or inactive account.', 'error', null, 401);
       return;
     }
 
@@ -766,7 +766,7 @@ app.patch('/api/v1/change-password', async (req, res) => {
     // Does a matching reset token exist
     const [rows] = await db.execute('SELECT email FROM token WHERE email = ? AND token = ? AND type = ? AND expires_at > NOW()', [email, token, 'reset']);
     if (!rows.length) {
-      sendMessage(res, 'Token is invalid or has expired', 'error', null, 401);
+      sendMessage(res, 'Token is invalid or has expired.', 'error', null, 401);
       return;
     }
 
@@ -793,11 +793,11 @@ app.delete('/api/v1/cleanup-expired-tokens', async (req, res) => {
 //    console.log('/api/v1/cleanup-expired-tokens','rows=',rows);
 
     if (!rows.affectedRows) {
-      sendMessage(res, 'No expired tokens cleaned up', 'info', null, 200); // Nothing deleted then no message
+      sendMessage(res, 'No expired tokens cleaned up.', 'info', null, 200); // Nothing deleted then no message
     } else {
       const delete_count = rows.affectedRows;
 //      console.log('/api/v1/cleanup-expired-tokens','rows=',delete_count);
-      sendMessage(res, `${delete_count} expired token(s) cleaned up successfully`, 'info', null, 200);
+      sendMessage(res, `${delete_count} expired token(s) cleaned up successfully.`, 'info', null, 200);
     }
   } catch (err) {
     sendMessage(res, err, 'error', null, 500);
