@@ -71,7 +71,7 @@ export default function SearchDocs() {
         <Form.Control type="text" value={text} placeholder="Help lookup" onChange={onChange} onKeyPress={onKeyPress} />
         <Button onClick={onButtonPress} style={{ padding: '0px 24px 16px 8px' }} disabled={text.length === 0}><i className="fas fa-search"></i></Button>
       </InputGroup>
-      {show && <Modal show={show} size="xl" onHide={onCancel}>'
+      {show && <Modal show={show} size="xl" onHide={onCancel}>
         <Modal.Header closeButton>
           <Modal.Title>
             <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; Help lookup for terms '{query}'
