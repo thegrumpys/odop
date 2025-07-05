@@ -43,7 +43,7 @@ export default function ResetPasswordPage() {
                   <td className="text-center"><MessageAlert error={error} /></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5"><p>Email has been sent to {email} with instructions on resetting your password.</p></td>
+                  <td className="text-start px-5"><p>Email has been sent to {email} with instructions on resetting your password. If the message does not appear promptly check your Junk/Spam folder.</p></td>
                 </tr>
                 <tr>
                   <td className="text-center p-3"><Link to="/login">Back to sign in</Link></td>

@@ -47,7 +47,7 @@ export default function ChangePasswordPage() {
         .catch((err) => {
 //          console.log('ChangePasswordPage.handleSubmit /change-password', 'err=', err);
           setError(err.response.data.error);
-          setStatus('error')
+//          setStatus('error')
         });
     } catch (err) {
 //      console.error('ChangePasswordPage.handleSubmit', 'err=', err);
@@ -74,10 +74,10 @@ export default function ChangePasswordPage() {
                   <td className="text-center"><MessageAlert error={error} /></td>
                 </tr>
                 <tr>
-                  <td className="px-5 text-start"><p>You can now log in with your new password.</p></td>
+                  <td className="px-5 text-start"><p>You can now sign in with your new password.</p></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><Button onClick={() => navigate('/login')}>Go to Login</Button></td>
+                  <td className="text-center"><Button onClick={() => navigate('/login')}>Go to Sign In</Button></td>
                 </tr>
               </tbody>
             </Table>
@@ -156,7 +156,7 @@ export default function ChangePasswordPage() {
                   <td className="text-center"><Button type="submit">Reset Password</Button></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5"><Link to="/login">Back to Signin</Link></td>
+                  <td className="text-start px-5"><Link to="/login">Back to Sign in</Link></td>
                 </tr>
               </tbody>
             </Table>

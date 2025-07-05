@@ -60,13 +60,10 @@ CREATE TABLE `token` (
 
 CREATE TABLE `usage_log` (
   `id` int NOT NULL,
-  `ip_address` varchar(64) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `event_datetime` datetime DEFAULT NULL,
-  `event_value` int DEFAULT NULL,
-  `action` varchar(64) DEFAULT NULL,
-  `event_label` longtext,
-  `note` longtext
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ip_address` varchar(64) NOT NULL,
+  `note` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------

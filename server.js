@@ -780,7 +780,7 @@ app.patch('/api/v1/change-password', async (req, res) => {
     const hashed = await hashPassword(password);
     await db.execute('UPDATE user SET password = ? WHERE email = ?', [hashed, db_email]);
     await db.execute('DELETE FROM token WHERE token = ?', [token]);
-    sendMessage(res, 'Password changed.', 'info', null, 200);
+    sendMessage(res, 'Password changed successfully.', 'info', null, 200);
   } catch (err) {
     sendMessage(res, err, 'error', null, 500);
   }

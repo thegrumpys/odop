@@ -54,10 +54,10 @@ export default function ConfirmPage() {
                   <td className="text-center"><MessageAlert error={error} /></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5"><p>Your account is now active. You can log in.</p></td>
+                  <td className="text-start px-5"><p>Your account is now active. You can sign in.</p></td>
                 </tr>
                 <tr>
-                  <td className="text-center p-3"><Button onClick={() => navigate('/login')}>Go to Login</Button></td>
+                  <td className="text-center p-3"><Button onClick={() => navigate('/login')}>Go to Sign in</Button></td>
                 </tr>
               </tbody>
             </Table>
