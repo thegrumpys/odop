@@ -786,10 +786,19 @@ app.patch('/api/v1/change-password', async (req, res) => {
   }
 });
 
-app.delete('/api/v1/cleanup-tokens', async (req, res) => {
+app.delete('/api/v1/cleanup-expired-tokens', async (req, res) => {
+//  console.log('/api/v1/cleanup-expired-tokens');
   try {
-    await db.query('DELETE FROM token WHERE expires_at < NOW()');
-    sendMessage(res, 'Expired tokens cleaned up successfully', 'info', null, 200);
+    const [rows] = await db.query('DELETE FROM token WHERE expires_at < NOW()');
+//    console.log('/api/v1/cleanup-expired-tokens','rows=',rows);
+
+    if (!rows.affectedRows) {
+      sendMessage(res, '', '', null, 200); // Nothing deleted then no message
+    } else {
+      const delete_count = rows.affectedRows;
+//      console.log('/api/v1/cleanup-expired-tokens','rows=',delete_count);
+      sendMessage(res, `${delete_count} expired token(s) cleaned up successfully`, 'info', null, 200);
+    }
   } catch (err) {
     sendMessage(res, err, 'error', null, 500);
   }

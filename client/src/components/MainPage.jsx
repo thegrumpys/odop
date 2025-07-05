@@ -39,10 +39,13 @@ import HelpIndex from '../menus/Help/HelpIndex';
 import HelpDemo from '../menus/Help/HelpDemo';
 import HelpTutorial from '../menus/Help/HelpTutorial';
 import HelpAbout from '../menus/Help/HelpAbout';
+import AdminCleanUpExpiredTokens from '../menus/Admin/AdminCleanUpExpiredTokens';
 import SearchDocs from './SearchDocs';
 import config from '../config';
 import ResultTable from './ResultTable';
 import { useAuth } from './AuthProvider';
+import RequireAuth from './RequireAuth';
+import RequireAdmin from './RequireAdmin';
 
 export default function MainPage() {
 //  console.log('MainPage','Mounting...');
@@ -160,12 +163,14 @@ export default function MainPage() {
               {model_type === "Spring/Extension" && <ViewCADModel />}
               {model_type === "Spring/Extension" && <NavDropdown.Divider />}
               <ViewSelect viewNames={viewNames}/>
-              <NavDropdown.Divider />
-              {authState && authState.isAdmin && <ViewOffsets />}
-              {authState && authState.isAdmin && <ViewSymbolTableOffsets />}
-              {authState && authState.isAdmin && <ViewSymbolTable />}
-              {authState && authState.isAdmin && <ViewObjectiveValue />}
-              {authState && authState.isAdmin && <ViewExecuteToTest />}
+              <RequireAdmin>
+                <NavDropdown.Divider />
+                <ViewOffsets />
+                <ViewSymbolTableOffsets />
+                <ViewSymbolTable />
+                <ViewObjectiveValue />
+                <ViewExecuteToTest />
+              </RequireAdmin>
             </NavDropdown>
             <NavDropdown title="Help">
               <HelpMotd />
@@ -174,6 +179,11 @@ export default function MainPage() {
               <HelpTutorial />
               <HelpAbout />
             </NavDropdown>
+            <RequireAdmin>
+              <NavDropdown title="Admin">
+                <AdminCleanUpExpiredTokens />
+              </NavDropdown>
+            </RequireAdmin>
           </Nav>
           <Nav>
             <Nav.Item>

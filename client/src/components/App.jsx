@@ -15,8 +15,6 @@ import RegisterForm from './RegisterForm';
 import ResetPasswordPage from '../pages/ResetPasswordPage';
 import ChangePasswordPage from '../pages/ChangePasswordPage';
 import ConfirmPage from '../pages/ConfirmPage';
-import RequireAuth from './RequireAuth';
-import RequireAdmin from './RequireAdmin';
 
 export default function App() {
 //  console.log('App');

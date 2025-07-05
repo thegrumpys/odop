@@ -4,5 +4,5 @@ import { useAuth } from './AuthProvider';
 
 export default function RequireAuth({ children }) {
   const { authState } = useAuth();
-  return authState?.isAuthenticated ? children : <Navigate to="/login" />;
+  return authState?.isAuthenticated ? children : null;
 }
