@@ -17,19 +17,19 @@ export default function FileImport() {
   const fileReader = new FileReader();
 
   const toggle = () => {
-//    console.log('In FileImport.toggle');
+//    console.log('FileImport.toggle');
     setShow(!show);
   }
 
   // On file select (from the pop up)
   const onFileChange = (event) => {
-//    console.log('In FileImport.onFileChange event.target.value=',event.target.value,'event.target.files[0].name=',event.target.files[0].name);
+//    console.log('FileImport.onFileChange event.target.value=',event.target.value,'event.target.files[0].name=',event.target.files[0].name);
     setSelectedFile(event.target.files[0]);
   };
 
   // On file upload (click the upload button)
   const onFileImport = () => {
-//    console.log('In FileImport.onFileImport');
+//    console.log('FileImport.onFileImport');
     setShow(!show);
     dispatch(executeStopOnLoad());
     displaySpinner(true);
@@ -40,7 +40,7 @@ export default function FileImport() {
   };
 
   const onLoad = (event) => {
-//    console.log('In FileImport.onLoad event=',event);
+//    console.log('FileImport.onLoad event=',event);
     var design = JSON.parse(fileReader.result); // Convert file contents to JSON object
     var filename = basename(selectedFile.name, '.json'); // Drop prefix directories and suffix extension
     var { migrate } = require('../../designtypes/' + design.type + '/migrate.js'); // Dynamically load migrate
@@ -57,14 +57,14 @@ export default function FileImport() {
   }
 
   const onError = (e) => {
-//    console.log('In FileImport.onError e=',e);
+//    console.log('FileImport.onError e=',e);
     displayMessage('Read of Import File failed with message: \'' + fileReader.error.message + '\'');
     setSelectedFile(null);
     displaySpinner(false);
   }
 
   const onCancel = () => {
-//    console.log('In FileImport.onCancel');
+//    console.log('FileImport.onCancel');
     setShow(!show);
   }
 

@@ -24,7 +24,7 @@ export function updateObjectiveValue(store, merit) {
     var debug = false;
 
     var design = store.getState(); // Re-access store to get latest element values
-//    console.log('In updateObjectiveValue design=',design);
+//    console.log('updateObjectiveValue design=',design);
 
     // Determine all constraint violations
     viol_sum = 0.0;
@@ -32,7 +32,7 @@ export function updateObjectiveValue(store, merit) {
     var infeasible = false;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
-//        console.log('In updateObjectiveValue element=',element);
+//        console.log('updateObjectiveValue element=',element);
         if (element.type === "equationset" && element.input) { // Independent Variable
             if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
                 validity_vmin = (-element.value + element.validmin);
@@ -75,7 +75,7 @@ export function updateObjectiveValue(store, merit) {
                 viol_sum = viol_sum + feasibility_vmax * feasibility_vmax;
                 infeasible |= true;
             }
-//            console.log('In updateObjectiveValue IV    element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum,'invalid=',invalid,'infeasible=',infeasible);
+//            console.log('updateObjectiveValue IV    element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum,'invalid=',invalid,'infeasible=',infeasible);
         } else if ((element.type === "equationset" && !element.input) || element.type === "calcinput") { // Dependent Variable
             /* State variable fix levels. */
             /*
@@ -174,9 +174,9 @@ export function updateObjectiveValue(store, merit) {
                     infeasible |= true;
                 }
             }
-//            console.log('In updateObjectiveValue DV/CI element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum,'invalid=',invalid,'infeasible=',infeasible);
+//            console.log('updateObjectiveValue DV/CI element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum,'invalid=',invalid,'infeasible=',infeasible);
         }
-//        console.log('In updateObjectiveValue at end element=',element);
+//        console.log('updateObjectiveValue at end element=',element);
     }
 
     /* Merit Function */
@@ -204,9 +204,9 @@ export function updateObjectiveValue(store, merit) {
 
     if (debug) {
       if (!invalid && !infeasible) {
-            console.log('In updateObjectiveValue Valid & Feasible obj=',obj);
+            console.log('updateObjectiveValue Valid & Feasible obj=',obj);
         } else if (!invalid && infeasible) {
-            console.log('In updateObjectiveValue Valid & Infeasible obj=',obj);
+            console.log('updateObjectiveValue Valid & Infeasible obj=',obj);
         } else if (invalid && infeasible) {
             console.warn('In updateObjectiveValue Invalid & Infeasible obj=',obj);
         } else if (invalid && !infeasible) {

@@ -7,13 +7,13 @@ export function migrate(design) {
      * When doing a migration also update client's initialState and set its version to the new one.
      * Also update server's load.sql and set its version to the new one.
      */
-//    console.log('In migrate design=',design);
+//    console.log('migrate design=',design);
 
     var previous_version = design.version;
     var migrated_design = design; // Assume no-op as default
 
     /* eslint-disable no-fallthrough */
-//    console.log('In migrate design.version=',design.version);
+//    console.log('migrate design.version=',design.version);
     switch(design.version) {
     case '1.2':
         // console.log('Convert from 1.2 to 1');
@@ -131,8 +131,8 @@ export function migrate(design) {
     if (previous_version !== migrated_design.version) {
         displayMessage("Migrated design from version " + previous_version + " to version " + migrated_design.version,'info');
     }
-//    console.log('In migrate migrated_design.version=',migrated_design.version);
+//    console.log('migrate migrated_design.version=',migrated_design.version);
     /* eslint-enable */
-//    console.log('In migrate migrated_design=',migrated_design);
+//    console.log('migrate migrated_design=',migrated_design);
     return migrated_design;
 }

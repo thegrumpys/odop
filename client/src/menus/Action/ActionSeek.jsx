@@ -18,7 +18,7 @@ export default function ActionSeek() {
   const dispatch = useDispatch();
 
   const  onSeekRequest = () => {
-//       console.log('In ActionSeek.onSeekRequest');
+//       console.log('ActionSeek.onSeekRequest');
         if (model_symbol_table.reduce((total, element)=>{return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total+1 : total+0}, 0) === 0) {
             displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
             return;
@@ -49,28 +49,28 @@ export default function ActionSeek() {
     }
 
   const  onSeekContextHelpButton = (event) => {
-//        console.log('In ActionSeek.onSeekContextHelpButton','event=',event);
+//        console.log('ActionSeek.onSeekContextHelpButton','event=',event);
         setSeekShow(!seekShow);
         window.open('/docs/Help/seek.html', '_blank');
     }
 
   const  onSeekCancelButton = (event) => {
-//        console.log('In ActionSeek.onSeekCancelButton','event=',event);
+//        console.log('ActionSeek.onSeekCancelButton','event=',event);
         setSeekShow(!seekShow);
     }
 
   const  onSeekMinMaxSelect = (seekMinMax) => {
-//        console.log('In ActionSeek.onSeekMinMaxSelect','seekMinMax=',seekMinMax);
+//        console.log('ActionSeek.onSeekMinMaxSelect','seekMinMax=',seekMinMax);
         setSeekMinMax(seekMinMax);
     }
 
   const   onSeekNameSelect = (event) => {
-//        console.log('In ActionSeek.onSeekNameSelect','event=',event);
+//        console.log('ActionSeek.onSeekNameSelect','event=',event);
         setSeekName(event.target.value);
     }
 
   const  onSeekButton = (event) => {
-//        console.log('In ActionSeek.onSeekButton','event=',event);
+//        console.log('ActionSeek.onSeekButton','event=',event);
         setSeekShow(!seekShow);
         // Do seek
         dispatch(saveAutoSave());

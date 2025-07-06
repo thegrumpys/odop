@@ -1,7 +1,6 @@
-import config from '../../../config';
-export function getExecuteNames() {
+export function getExecuteNames(isAdmin = false) {
     var result;
-    if (config.node.env !== "production") {
+    if (isAdmin) {
       result = [
         'mkExtensionStartups',    // Script to make multiple Startup entries from Load Initial State
         'increasePrecision',      // Script to tweak Preference values for greater precision of search result
@@ -13,7 +12,7 @@ export function getExecuteNames() {
         'increasePrecision'
       ];
     }
-//    console.log('In getExecuteNames result=',result);
+//    console.log('getExecuteNames result=',result);
     return result;
 }
 
@@ -24,7 +23,7 @@ export function getDemoNames() {
         'demo8',
         'demo9'
     ];
-//    console.log('In getDemoNames result=',result);
+//    console.log('getDemoNames result=',result);
     return result;
 }
 
@@ -33,6 +32,6 @@ export function getTutorialNames() {
         'tutorTour',
         'guidedDesign'
     ];
-//    console.log('In getTutorialNames result=',result);
+//    console.log('getTutorialNames result=',result);
     return result;
 }

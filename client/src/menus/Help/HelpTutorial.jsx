@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
 import { startExecute, stopExecute } from "../../components/ExecutePanel";
-import config from '../../config';
+import { useAuth } from '../../components/AuthProvider';
 
 export default function HelpTutorial() {
 //  console.log('HelpTutorial - Mounting...');
@@ -12,6 +12,7 @@ export default function HelpTutorial() {
   const model_type = useSelector((state) => state.model.type);
   const [executeNames, setExecuteNames] = useState([]);
   const [executeName, setExecuteName] = useState('');
+  const { authState } = useAuth();
 
   useEffect(() => {
 //    console.log('HelpTutorial - Mounted','model_type=',model_type);
@@ -88,7 +89,7 @@ export default function HelpTutorial() {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>{' '}
-          {config.node.env !== "production" && <Button variant="danger" onClick={onExecuteAndRun}>Execute All</Button>}{' '}
+          {authState && authState.isAdmin && <Button variant="danger" onClick={onExecuteAndRun}>Execute All</Button>}{' '}
           <Button variant="primary" onClick={onExecute}>Execute</Button>
         </Modal.Footer>
       </Modal>}

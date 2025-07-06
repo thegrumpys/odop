@@ -4,7 +4,7 @@ import * as eto from './endtypes_offsets';
 import { changeSymbolInput, changeSymbolHidden } from '../../../store/actions';
 
 export function init(store, p, x) {
-//    console.log('In init store=',store,'p=',p,'x=',x);
+//    console.log('init store=',store,'p=',p,'x=',x);
  var i, j;
  var m_tab;
  const ten3 = 1000.0;

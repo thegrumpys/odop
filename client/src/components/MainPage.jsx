@@ -40,10 +40,13 @@ import HelpIndex from '../menus/Help/HelpIndex';
 import HelpDemo from '../menus/Help/HelpDemo';
 import HelpTutorial from '../menus/Help/HelpTutorial';
 import HelpAbout from '../menus/Help/HelpAbout';
+import AdminCleanUpExpiredTokens from '../menus/Admin/AdminCleanUpExpiredTokens';
 import SearchDocs from './SearchDocs';
 import config from '../config';
 import ResultTable from './ResultTable';
-import { useOktaAuth } from '@okta/okta-react';
+import { useAuth } from './AuthProvider';
+import RequireAuth from './RequireAuth';
+import RequireAdmin from './RequireAdmin';
 
 export default function MainPage() {
 //  console.log('MainPage','Mounting...');
@@ -54,14 +57,14 @@ export default function MainPage() {
 //  console.log('MainPage','Mounting...','model_type=',model_type,'model_name=',model_name,'model_view=',model_view,'model_user=',model_user);
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
-  const { authState } = useOktaAuth();
-//  console.log('MainPage','oktaAuth=',oktaAuth,'authState=',authState);
+  const { authState } = useAuth();
+//  console.log('MainPage','authState=',authState);
 
   useEffect(() => {
 //    console.log('MainPage','Mounted','All useEffect');
     if (authState && authState.isAuthenticated) {
-//      console.log('MainPage','Mounted','changeUser=',authState.idToken.claims.sub);
-      dispatch(changeUser(authState.idToken.claims.sub));
+//      console.log('MainPage','Mounted','changeUser=',authState.token);
+      dispatch(changeUser(authState.token));
     }
     return () => {
 //      console.log('MainPage','Unmounting ...','All useEffect');
@@ -124,7 +127,7 @@ export default function MainPage() {
 //  console.log('MainPage','src=',src,' alt=',alt);
 
   const logOnOff = authState && authState.isAuthenticated ? <SignOut /> : <SignIn />;
-//  console.log('MainPage','Mounting return');
+//  console.log('MainPage','logOnOff=',logOnOff);
   return (
     <>
       <Navbar className="ps-3 pe-3" style={{ backgroundColor: '#eeeeee' }} expand="md" fixed="top">
@@ -163,12 +166,14 @@ export default function MainPage() {
               {model_type === "Spring/Extension" && <ViewCADModel />}
               {model_type === "Spring/Extension" && <NavDropdown.Divider />}
               <ViewSelect viewNames={viewNames}/>
-              <NavDropdown.Divider />
-              {config.node.env !== "production" && <ViewOffsets />}
-              {config.node.env !== "production" && <ViewSymbolTableOffsets />}
-              {config.node.env !== "production" && <ViewSymbolTable />}
-              {config.node.env !== "production" && <ViewObjectiveValue />}
-              {config.node.env !== "production" && <ViewExecuteToTest />}
+              <RequireAdmin>
+                <NavDropdown.Divider />
+                <ViewOffsets />
+                <ViewSymbolTableOffsets />
+                <ViewSymbolTable />
+                <ViewObjectiveValue />
+                <ViewExecuteToTest />
+              </RequireAdmin>
             </NavDropdown>
             <NavDropdown title="Help">
               <HelpMotd />
@@ -177,6 +182,11 @@ export default function MainPage() {
               <HelpTutorial />
               <HelpAbout />
             </NavDropdown>
+            <RequireAdmin>
+              <NavDropdown title="Admin">
+                <AdminCleanUpExpiredTokens />
+              </NavDropdown>
+            </RequireAdmin>
           </Nav>
           <Nav>
             <Nav.Item>
@@ -193,7 +203,7 @@ export default function MainPage() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Container style={{ backgroundColor: '#eeeeee', paddingTop: '60px' }}>
+      <Container className="pt-5" style={{ backgroundColor: '#eeeeee', paddingTop: '60px' }}>
         <Row>
           <ExecutePanel />
         </Row>

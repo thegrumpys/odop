@@ -269,7 +269,7 @@ it('middleware change constraints to force all violations', () => {
 
 it('middleware set/reset symbol flag min FDCL', () => {
     var state = Object.assign({}, initialStateWithFDCL, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-//    console.log('In middleware set symbol flag min FDCL state=',state)
+//    console.log('middleware set symbol flag min FDCL state=',state)
     store.dispatch(inject({name: "initialStateWithFDCL", model: state}));
     store.dispatch(enableDispatcher(true));
 
@@ -299,19 +299,19 @@ it('middleware set/reset symbol flag min FDCL', () => {
     expect(design.model.symbol_table[sto.RADIUS].cminchoices).toEqual(["THICKNESS"]);
     expect(design.model.symbol_table[sto.THICKNESS].propagate).toEqual(undefined);
     expect(design.model.symbol_table[sto.RADIUS].cminchoice).toEqual(undefined);
-//    console.log('In middleware set symbol flag min FDCL design.model.symbol_table[sto.THICKNESS]=',design.model.symbol_table[sto.THICKNESS]);
-//    console.log('In middleware set symbol flag min FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
+//    console.log('middleware set symbol flag min FDCL design.model.symbol_table[sto.THICKNESS]=',design.model.symbol_table[sto.THICKNESS]);
+//    console.log('middleware set symbol flag min FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
 });
 
 it('middleware set/reset symbol flag max FDCL', () => {
     var state = Object.assign({}, initialStateWithFDCL, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-//    console.log('In middleware set symbol flag max FDCL state=',state)
+//    console.log('middleware set symbol flag max FDCL state=',state)
     store.dispatch(inject({name: "initialStateWithFDCL", model: state}));
     store.dispatch(enableDispatcher(true));
 
     var design = store.getState(); // before
-//    console.log('In middleware set symbol flag max FDCL design.model.symbol_table[sto.THICKNESS]=',design.model.symbol_table[sto.THICKNESS]);
-//    console.log('In middleware set symbol flag max FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
+//    console.log('middleware set symbol flag max FDCL design.model.symbol_table[sto.THICKNESS]=',design.model.symbol_table[sto.THICKNESS]);
+//    console.log('middleware set symbol flag max FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.model.symbol_table[sto.RADIUS].lmax).toEqual(CONSTRAINED);
     expect(design.model.symbol_table[sto.RADIUS].cmaxchoices).toEqual(["THICKNESS"]);
@@ -337,8 +337,8 @@ it('middleware set/reset symbol flag max FDCL', () => {
     expect(design.model.symbol_table[sto.RADIUS].cmaxchoices).toEqual(["THICKNESS"]);
     expect(design.model.symbol_table[sto.THICKNESS].propagate).toEqual(undefined);
     expect(design.model.symbol_table[sto.RADIUS].cmaxchoice).toEqual(undefined);
-//    console.log('In middleware set symbol flag max FDCL design.model.symbol_table[sto.THICKNESS]=',design.model.symbol_table[sto.THICKNESS]);
-//    console.log('In middleware set symbol flag max FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
+//    console.log('middleware set symbol flag max FDCL design.model.symbol_table[sto.THICKNESS]=',design.model.symbol_table[sto.THICKNESS]);
+//    console.log('middleware set symbol flag max FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
 });
 //=====================================================================
 // SEARCH
@@ -754,37 +754,37 @@ it('middleware restore auto save', () => {
     store.dispatch(restoreAutoSave());
 
     var design = store.getState(); // after
-// console.log('In middleware restore auto save design.model.symbol_table[sto.PRESSURE]=',design.model.symbol_table[sto.PRESSURE]);
+// console.log('middleware restore auto save design.model.symbol_table[sto.PRESSURE]=',design.model.symbol_table[sto.PRESSURE]);
     expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE");
     expect(design.model.symbol_table[sto.PRESSURE].cmin).toEqual(0);
     expect(design.model.symbol_table[sto.PRESSURE].cmax).toEqual(1500);
     expect(design.model.symbol_table[sto.PRESSURE].smin).toEqual(1);
     expect(design.model.symbol_table[sto.PRESSURE].smax).toEqual(1500.0000001);
-// console.log('In middleware restore auto save design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
+// console.log('middleware restore auto save design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.model.symbol_table[sto.RADIUS].cmin).toEqual(0.04);
     expect(design.model.symbol_table[sto.RADIUS].cmax).toEqual(0.5);
     expect(design.model.symbol_table[sto.RADIUS].smin).toEqual(0.040000100000000004);
     expect(design.model.symbol_table[sto.RADIUS].smax).toEqual(0.5000001);
-// console.log('In middleware restore auto save design.model.symbol_table[sto.THICKNESS]=',design.model.symbol_table[sto.THICKNESS]);
+// console.log('middleware restore auto save design.model.symbol_table[sto.THICKNESS]=',design.model.symbol_table[sto.THICKNESS]);
     expect(design.model.symbol_table[sto.THICKNESS].name).toEqual("THICKNESS");
     expect(design.model.symbol_table[sto.THICKNESS].cmin).toEqual(0.002);
     expect(design.model.symbol_table[sto.THICKNESS].cmax).toEqual(0.05);
     expect(design.model.symbol_table[sto.THICKNESS].smin).toEqual(0.0020001);
     expect(design.model.symbol_table[sto.THICKNESS].smax).toEqual(0.050000100000000006);
-// console.log('In middleware restore auto save design.model.symbol_table[sto.FORCE]=',design.model.symbol_table[sto.FORCE]);
+// console.log('middleware restore auto save design.model.symbol_table[sto.FORCE]=',design.model.symbol_table[sto.FORCE]);
     expect(design.model.symbol_table[sto.FORCE].name).toEqual("FORCE");
     expect(design.model.symbol_table[sto.FORCE].cmin).toEqual(1000);
     expect(design.model.symbol_table[sto.FORCE].cmax).toEqual(10000);
     expect(design.model.symbol_table[sto.FORCE].smin).toEqual(1000.0000001);
     expect(design.model.symbol_table[sto.FORCE].smax).toEqual(10000.0000001);
-// console.log('In middleware restore auto save design.model.symbol_table[sto.AREA]=',design.model.symbol_table[sto.AREA]);
+// console.log('middleware restore auto save design.model.symbol_table[sto.AREA]=',design.model.symbol_table[sto.AREA]);
     expect(design.model.symbol_table[sto.AREA].name).toEqual("AREA");
     expect(design.model.symbol_table[sto.AREA].cmin).toEqual(0);
     expect(design.model.symbol_table[sto.AREA].cmax).toEqual(10);
     expect(design.model.symbol_table[sto.AREA].smin).toEqual(0.1);
     expect(design.model.symbol_table[sto.AREA].smax).toEqual(10.0000001);
-// console.log('In middleware restore auto save design.model.symbol_table[sto.STRESS]=',design.model.symbol_table[sto.STRESS]);
+// console.log('middleware restore auto save design.model.symbol_table[sto.STRESS]=',design.model.symbol_table[sto.STRESS]);
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].cmin).toEqual(0);
     expect(design.model.symbol_table[sto.STRESS].cmax).toEqual(3000);

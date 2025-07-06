@@ -1,12 +1,12 @@
 export function getCatalogNames(units) {
     var result = [];
-//    console.log('In getCatalogNames result=',result);
+//    console.log('getCatalogNames result=',result);
     return result;
 }
 
 export function getCatalogEntries(name, st, viol_wt, objmin) {
-//    console.log('In getCatalogEntries name=',name,' st=',st,' viol_wt=',viol_wt,' objmin=',objmin);
+//    console.log('getCatalogEntries name=',name,' st=',st,' viol_wt=',viol_wt,' objmin=',objmin);
     var result = [];
-//    console.log('In getCatalogEntries result=',result);
+//    console.log('getCatalogEntries result=',result);
     return result;
 }

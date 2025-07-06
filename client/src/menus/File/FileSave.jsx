@@ -6,7 +6,7 @@ import { deleteAutoSave } from '../../store/actions';
 import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
-import { useOktaAuth } from '@okta/okta-react';
+import { useAuth } from '../../components/AuthProvider';
 
 export default function FileSave() {
   const model = useSelector((state) => state.model);
@@ -17,7 +17,7 @@ export default function FileSave() {
   const [names, setNames] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { authState } = useOktaAuth();
+  const { authState } = useAuth();
 //  console.log('FileSave','Mounting...','model_user=',model_user,'model_type=',model_type,'model_name=',model_name);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function FileSave() {
   }, [model_user, model_type]);
 
   const getDesignNames = (user, type) => {
-//    console.log('In FileSave.getDesignNames user=',user,'type=',type);
+//    console.log('FileSave.getDesignNames user=',user,'type=',type);
     // Get the names and store them in state
     displaySpinner(true);
     fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
@@ -42,7 +42,7 @@ export default function FileSave() {
       return res.json()
     })
     .then(names => {
-//      console.log('In FileSave.getDesignNames user=',user,'type=',type,'names=',names);
+//      console.log('FileSave.getDesignNames user=',user,'type=',type,'names=',names);
       setNames(names);
     })
     .catch(error => {
@@ -54,7 +54,7 @@ export default function FileSave() {
   }
 
   const postDesign = (user, type, name) => {
-//    console.log('In FileSave.postDesign user=',user,'type=',type,'name=',name);
+//    console.log('FileSave.postDesign user=',user,'type=',type,'name=',name);
     // First fetch the current list of names
     displaySpinner(true);
     fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
@@ -70,14 +70,14 @@ export default function FileSave() {
     })
     .then(names => {
         // Second create or update the design
-//      console.log('In FileSave.postDesign type=',type,'names=', names);
+//      console.log('FileSave.postDesign type=',type,'names=', names);
       setNames(names);
-//      console.log('In FileSave.postDesign names=',names);
+//      console.log('FileSave.postDesign names=',names);
       var method = 'POST'; // Create it
       if (names.filter(e => e.name === name && e.user === user).length > 0) { // Does it already exist?
         method = 'PUT'; // Update it
       }
-//      console.log('In FileSave.postDesign','method=', method,'type=', type,'name=', name);
+//      console.log('FileSave.postDesign','method=', method,'type=', type,'name=', name);
       displaySpinner(true);
       fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
         method: method,
@@ -95,11 +95,11 @@ export default function FileSave() {
         return res.json()
       })
       .then(names => {
-//        console.log('In FileSave.getDesignNames','names=',names);
+//        console.log('FileSave.getDesignNames','names=',names);
         if (method === 'POST') {
           var names = Array.from(names); // clone it
           names.push({ user: user, name: name }); // If create was successful then add name to the array of names
-//          console.log('In FileSave.postDesign type=',type,'name=',name,'names=', names);
+//          console.log('FileSave.postDesign type=',type,'name=',name,'names=', names);
           setNames(names);
         }
         logUsage('event', 'FileSave', { event_label: type + ' ' + name });
@@ -120,7 +120,7 @@ export default function FileSave() {
   }
 
   const toggle = () => {
-//    console.log('In FileSave.toggle');
+//    console.log('FileSave.toggle');
     // Save the model
     if (authState.isAuthenticated) {
       postDesign(model_user, model_type, model_name);
@@ -131,14 +131,14 @@ export default function FileSave() {
   }
 
   const onSignIn = () => {
-//    console.log('In FileSave.onSignIn');
+//    console.log('FileSave.onSignIn');
     setShow(!show);
-//    console.log('In FileSave.onSignIn - navigate('/login')');
+//    console.log('FileSave.onSignIn - navigate('/login')');
     navigate('/login'); // Must be last
   }
 
   const onCancel = () => {
-//  console.log('In FileSave.onCancel');
+//  console.log('FileSave.onCancel');
     setShow(!show);
   }
 

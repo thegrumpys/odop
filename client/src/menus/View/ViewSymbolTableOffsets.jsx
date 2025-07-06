@@ -11,7 +11,7 @@ export default function ViewSymbolTableOffsets() {
   const [show, setShow] = useState(false);
 
   const toggle = () => {
-//        console.log('In ViewSymbolTableOffsets.toggle');
+//        console.log('ViewSymbolTableOffsets.toggle');
     setShow(!show);
     if (show) logUsage('event', 'ViewSymbolTableOffsets', { event_label: 'ViewSymbolTableOffsets' });
   }

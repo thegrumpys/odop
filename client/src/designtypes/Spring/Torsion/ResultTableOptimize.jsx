@@ -11,7 +11,7 @@ export default function ResultTableOptimize({ onClick }) {
   const dispatch = useDispatch();
 
   const onOptimizeSeekMINWeight = (event) => {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINWeight','event=',event);
+//        console.log('ResultTableOptimize.onOptimizeSeekMINWeight','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Weight button' });
     dispatch(saveAutoSave());
     dispatch(seek('Weight', MIN));
@@ -19,7 +19,7 @@ export default function ResultTableOptimize({ onClick }) {
   }
 
   const onOptimizeSeekMAXCycle_Life = (event) => {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMAXCycle_Life','event=',event);
+//        console.log('ResultTableOptimize.onOptimizeSeekMAXCycle_Life','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX Cycle_Life button' });
     dispatch(saveAutoSave());
     dispatch(seek('Cycle_Life', MAX));
@@ -27,7 +27,7 @@ export default function ResultTableOptimize({ onClick }) {
   }
 
   const onOptimizeSeekMINRate = (event) => {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMINRate','event=',event);
+//        console.log('ResultTableOptimize.onOptimizeSeekMINRate','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Rate button' });
     dispatch(saveAutoSave());
     dispatch(seek('Rate', MIN));
@@ -35,7 +35,7 @@ export default function ResultTableOptimize({ onClick }) {
   }
 
   const onOptimizeSeekMAXStroke = (event) => {
-//        console.log('In ResultTableOptimize.onOptimizeSeekMAXStroke','event=',event);
+//        console.log('ResultTableOptimize.onOptimizeSeekMAXStroke','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX Stroke button' });
     dispatch(saveAutoSave());
     dispatch(seek('Stroke', MAX));

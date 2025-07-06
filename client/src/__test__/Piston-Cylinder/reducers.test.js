@@ -239,7 +239,7 @@ it('reducers set symbol flag min FDCL', () => {
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.model.symbol_table[sto.RADIUS].lmin).toEqual(CONSTRAINED|FDCL);
     expect(design.model.symbol_table[sto.RADIUS].cminchoices).toEqual(["THICKNESS"]);
-//    console.log('In reducers set symbol flag min FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
+//    console.log('reducers set symbol flag min FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
 });
 
 it('reducers set symbol flag max FIXED', () => {
@@ -287,7 +287,7 @@ it('reducers set symbol flag max FDCL', () => {
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.model.symbol_table[sto.RADIUS].lmax).toEqual(CONSTRAINED|FDCL);
     expect(design.model.symbol_table[sto.RADIUS].cmaxchoices).toEqual(["THICKNESS"]);
-//    console.log('In reducers set symbol flag max FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
+//    console.log('reducers set symbol flag max FDCL design.model.symbol_table[sto.RADIUS]=',design.model.symbol_table[sto.RADIUS]);
 });
 
 //=====================================================================
@@ -697,7 +697,7 @@ it('reducers restore old auto save', () => {
     store.dispatch(restoreAutoSave());
 
     var design = store.getState(); // after
-//    console.log('In reducers.test.reducers."restore old auto save design"=',design);
+//    console.log('reducers.test.reducers."restore old auto save design"=',design);
     expect(design.model.type).toEqual("Piston-Cylinder");
     expect(design.name).toEqual("initialState");
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");

@@ -3,7 +3,7 @@ REM Create size listing of specified database
 
 IF "%1"=="" (
   ECHO USAGE:  list_db_size type
-  ECHO         where "type" is the system type: "local", "development", "test", "staging" or "production"
+  ECHO         where "type" is the system type: "local", "unused", "development", "test", "staging" or "production"
   ECHO.
   ECHO Creates a simple console listing providing the size of the selected database.
   GOTO BYEBYE
@@ -19,6 +19,7 @@ IF "%1"=="local" (
   ECHO WARNING:  Results for the local database are known to be incorrect.
   GOTO GETACCESSVAR
   )
+IF "%1"=="unused" GOTO GETACCESSVAR
 IF "%1"=="development" GOTO GETACCESSVAR
 IF "%1"=="test" GOTO GETACCESSVAR
 IF "%1"=="staging" GOTO GETACCESSVAR

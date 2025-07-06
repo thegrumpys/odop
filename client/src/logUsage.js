@@ -5,7 +5,7 @@ var buffer = '';
 var sequence = 0;
 
 function logIt(tag, action, note) {
-//  console.log('In logIt tag=',tag,'action=',action,'note=',note);
+//  console.log('logIt tag=',tag,'action=',action,'note=',note);
   var body = JSON.stringify({ tag: tag, action: action, note: note });
 //  console.log('body=',body);
   fetch('/api/v1/usage_log', {
@@ -30,7 +30,7 @@ function logIt(tag, action, note) {
 }
 
 function flushValue() {
-//    console.log('In flushValue lastName=',lastName,'lastValue=',lastValue,'lastSuffix=',lastSuffix);
+//    console.log('flushValue lastName=',lastName,'lastValue=',lastValue,'lastSuffix=',lastSuffix);
   if (lastName !== '') {
     if (buffer !== '') {
       buffer += '\n';
@@ -47,7 +47,7 @@ function flushValue() {
 }
 
 function flushBuffer() {
-//    console.log('In flushBuffer buffer=',buffer);
+//    console.log('flushBuffer buffer=',buffer);
   flushValue();
   if (buffer !== '') {
     var tag = 'event';
@@ -66,7 +66,7 @@ function flushBuffer() {
 }
 
 export function logValue(name, value, suffix = '', merge = true) {
-//    console.log('In logValue name=',name,'value=',value,'suffix=',suffix);
+//    console.log('logValue name=',name,'value=',value,'suffix=',suffix);
   if (name === lastName && suffix === lastSuffix && merge === true) {
     lastValue = value;
   } else {
@@ -78,7 +78,7 @@ export function logValue(name, value, suffix = '', merge = true) {
 }
 
 export function logUsage(tag, action, note) {
-//    console.log('In logUsage tag=',tag,'action=',action,'note=',note);
+//  console.log('logUsage','tag=',tag,'action=',action,'note=',note);
   flushBuffer();
   var sequenced_note = Object.assign(
     {

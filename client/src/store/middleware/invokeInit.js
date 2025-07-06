@@ -2,13 +2,13 @@ import { changeOutputSymbolValues } from '../actions';
 
 // Invoke Init
 export function invokeInit(store) {
-//    console.log('In invokeInit store=',store);
+//    console.log('invokeInit store=',store);
 //    console.log('Start invokeInit');
 
     var element;
 
     var design = store.getState();
-//    console.log('In invokeInit design=',design);
+//    console.log('invokeInit design=',design);
 
     // Loop to create p and x from symbol_table
     var p = [];
@@ -24,7 +24,7 @@ export function invokeInit(store) {
 
     // Compute outputs x from inputs p using equations
     var { init } = require('../../designtypes/'+design.model.type+'/init.js'); // Dynamically load init
-//    console.log('In invokeInit','init=',init);
+//    console.log('invokeInit','init=',init);
     x = init(store, p, x);
 
     // Compute and dispatch output changes

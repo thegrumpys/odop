@@ -185,11 +185,11 @@ export function eqnset(p, x) {        /*    Extension  Spring  */
     x[o.Stress_Init_Hi] = x[o.SI_Hi_Factor] / temp;
 
      x[o.Energy] = 0.5 * x[o.Rate] * (x[o.Deflect_2] * x[o.Deflect_2] - x[o.Deflect_1] * x[o.Deflect_1]);
-//    console.log('In eqnset p=',p,' x=',x);
+//    console.log('eqnset p=',p,' x=',x);
     return x;
 
 function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
-//    console.log('In cl_calc:');
+//    console.log('cl_calc:');
 //    console.log('Material_Index = x[o.Material_Type] = mat_idx =', mat_idx);
 //    console.log('Life_Category =  x[o.Life_Category] = cl_idx  =', cl_idx);
 //    console.log('st_code =', st_code, ' x[o.Tensile] = tensile =', tensile);
