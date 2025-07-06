@@ -70,8 +70,8 @@ function authenticationRequired(req, res, next) {
 //  console.log('SERVER: In authenticationRequired', 'authHeader=', authHeader);
 //  console.log('SERVER: In authenticationRequired', 'match=', match);
   if (!match) {
-    console.log('SERVER: 401 - UNAUTHORIZED');
-    return res.status(401).end();
+    sendMessage(res,'','',null,401);
+    return;
   }
   req.uid = match[1];
 //  console.log('SERVER: In authenticationRequired', 'req.uid=', req.uid);
@@ -127,6 +127,10 @@ async function sendResetEmail(email, first_name, last_name, token) {
   await transporter.sendMail(mailOptions);
 }
 
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 function isValidPassword(password) {
   const lengthOk = password.length >= 8;
   const hasLower = /[a-z]/.test(password);
@@ -152,9 +156,9 @@ function sendMessage(res, message, severity = 'error', field = null, status = 40
   };
   console.log('SERVER: ' + status + ' - ' + httpStatusCodes[status]);
   if (severity === '' && message === '') {
-    return res.status(status); // Return just the status
+    return res.status(status).end(); // Return just the status
   } else if (severity === '' && message !== '') {
-    return res.status(status).json(message); // Return message as data and the status
+    return res.status(status).json(message).end(); // Return message as data and the status
   } else if (severity !== '') { // message === '' || message !== ''
     const response = {
       error: {
@@ -165,7 +169,7 @@ function sendMessage(res, message, severity = 'error', field = null, status = 40
     if (field) {
       response.error.field = field;
     }
-    return res.status(status).json(response);
+    return res.status(status).json(response).end();
   }
 }
 
@@ -211,17 +215,14 @@ GROUP BY s.schema_name, sp.grantee, sp.has_insert`;
 //    console.log('SERVER: After SELECT', 'rows=', rows);
     if (!rows.length) {
       value = ['Unknown'];
-      res.status(200).json(value);
-      console.log('SERVER: 500 - INTERNAL SERVER ERROR');
+      sendMessage(res, value, '', null, 200);
     } else {
       value = rows.map((row) => { return row.db_size_mb });
 //      console.log('SERVER: After SELECT DISTINCT', 'value=', value);
-      res.status(200).json(value);
-      console.log('SERVER: 200 - OK');
+      sendMessage(res, value, '', null, 200);
     }
   } catch (err) {
-    res.status(500).end();
-    console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+    sendMessage(res, err, 'error', null, 500);
   }
 });
 
@@ -238,11 +239,9 @@ app.get('/api/v1/designtypes', authenticationRequired, async (req, res) => {
 //    console.log('SERVER: After SELECT', 'rows=', rows);
     value = rows.map((row) => { return row.type });
 //    console.log('SERVER: After SELECT DISTINCT', 'value=', value);
-    res.status(200).json(value);
-    console.log('SERVER: 200 - OK');
+    sendMessage(res, value, '', null, 200);
   } catch (err) {
-    res.status(500).end();
-    console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+    sendMessage(res, err, 'error', null, 500);
   }
 });
 
@@ -260,11 +259,9 @@ app.get('/api/v1/designtypes/:type/designs', authenticationRequired, async (req,
 //    console.log('SERVER: After SELECT', 'rows=', rows);
     value = rows.map((row) => { return { user: row.user, name: row.name } });
 //    console.log('SERVER: After SELECT', 'value=', value);
-    res.status(200).json(value);
-    console.log('SERVER: 200 - OK');
+    sendMessage(res, value, '', null, 200);
   } catch (err) {
-    res.status(500).end();
-    console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+    sendMessage(res, err, 'error', null, 500);
   }
 });
 
@@ -283,8 +280,7 @@ app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async
     const [rows] = await db.execute(stmt);
 //    console.log('SERVER: After SELECT', 'rows=', rows);
     if (!rows.length) {
-      res.status(404).end();
-      console.log('SERVER: 404 - NOT FOUND');
+      sendMessage(res, '', '', null, 404);
     } else {
 //      console.log('SERVER: After SELECT', 'rows[0]=', rows[0]);
       type = rows[0].type; // Get type from the JSON blob
@@ -292,12 +288,10 @@ app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async
       value = JSON.parse(rows[0].value); // Get value from the JSON blob
       value.type = type; // Insert type into blob
 //      console.log('SERVER: After SELECT', 'value=', value);
-      res.status(200).json(value);
-      console.log('SERVER: 200 - OK');
+      sendMessage(res, value, '', null, 200);
     }
   } catch (err) {
-    res.status(500).end();
-    console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+    sendMessage(res, err, 'error', null, 500);
   }
 });
 
@@ -310,8 +304,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, asyn
   var name = req.params['name'];
 //  console.log('SERVER: In POST /api/v1/designtypes/' + type + '/designs/' + name, 'user=', user);
   if (req.uid === "null" || req.body === undefined || req.body.length === 0 || req.body.type === undefined || req.body.type !== req.params['type']) {
-    res.status(400).end();
-    console.log('SERVER: 400 - BAD REQUEST');
+    sendMessage(res, '', '', null, 400);
   } else {
     delete req.body.type; // Do not save the type in the blob
     value = JSON.stringify(req.body); // Convert blob to string
@@ -321,8 +314,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, asyn
       const [rows] = await db.execute(stmt);
 //      console.log('SERVER: After SELECT', 'rows=', rows);
       if (rows[0].count > 0) {
-        res.status(400).end();
-        console.log('SERVER: 400 - BAD REQUEST');
+        sendMessage(res, '', '', null, 400);
       } else {
 //        console.log('SERVER: In POST /api/v1/designs/' + name, 'type=', type, 'value=', value);
         value = value.replace(/[']/ig, "''") // replace one single quote with an two single quotes throughout
@@ -341,16 +333,13 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, asyn
 //          console.log('SERVER: After INSERT', 'rows=', rows);
           value = {};
 //          console.log('SERVER: After INSERT', 'value=', value);
-          res.status(200).json(value);
-          console.log('SERVER: 200 - OK');
+          sendMessage(res, value, '', null, 200);
         } catch (err) {
-          res.status(500).end();
-          console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+          sendMessage(res, err, 'error', null, 500);
         }
       }
     } catch (err) {
-      res.status(500).end();
-      console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+      sendMessage(res, err, 'error', null, 500);
     }
   }
 });
@@ -364,8 +353,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async
   var name = req.params['name'];
 //  console.log('SERVER: In PUT /api/v1/designtypes/' + type + '/designs/' + name, 'user=', user);
   if (req.uid === "null" || req.body === undefined || req.body.length === 0 || req.body.type === undefined || req.body.type !== req.params['type']) {
-    res.status(400).end();
-    console.log('SERVER: 400 - BAD REQUEST');
+    sendMessage(res, '', '', null, 400);
   } else {
     delete req.body.type; // Do not save the type in the blob
     value = JSON.stringify(req.body); // Convert blob to string
@@ -376,8 +364,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async
 //      console.log('SERVER: After SELECT', 'rows=', rows);
 //      console.log('SERVER: In PUT /api/v1/designs/' + name, 'type=', type, 'value=', value);
       if (rows[0].count === 0) {
-        res.status(404).end();
-        console.log('SERVER: 404 - NOT FOUND');
+        sendMessage(res, '', '', null, 404);
       } else {
         value = value.replace(/[']/ig, "''") // replace one single quote with an two single quotes throughout
           .replace(/\\n/g, "\\\\n")
@@ -395,16 +382,13 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async
 //          console.log('SERVER: After UPDATE', 'rows=', rows);
           value = {};
 //          console.log('SERVER: After UPDATE', 'value=', value);
-          res.status(200).json(value);
-          console.log('SERVER: 200 - OK');
+          sendMessage(res, value, '', null, 200);
         } catch (err) {
-          res.status(500).end();
-          console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+          sendMessage(res, err, 'error', null, 500);
         }
       }
     } catch (err) {
-      res.status(500).end();
-      console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+      sendMessage(res, err, 'error', null, 500);
     }
   }
 });
@@ -418,8 +402,7 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, as
   var name = req.params['name'];
 //  console.log('SERVER: In DELETE /api/v1/designtypes/' + type + '/designs/' + name, 'user=', user);
   if (req.uid === "null") {
-    res.status(400).end();
-    console.log('SERVER: 400 - BAD REQUEST');
+    sendMessage(res, '', '', null, 400);
   } else {
     var stmt = 'SELECT COUNT(*) AS count FROM design WHERE user = \'' + user + '\' AND type = \'' + type + '\' AND name = \'' + name + '\'';
 //    console.log('SERVER:', 'stmt=', stmt);
@@ -427,8 +410,7 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, as
       const [rows] = await db.execute(stmt);
 //      console.log('SERVER: After SELECT', 'rows=', rows);
       if (rows[0].count === 0) {
-        res.status(404).end();
-        console.log('SERVER: 404 - NOT FOUND');
+        sendMessage(res, '', '', null, 404);
       } else {
         var stmt = 'DELETE FROM design WHERE user = \'' + user + '\' AND type = \'' + type + '\' AND name = \'' + name + '\'';
 //        console.log('SERVER:', 'stmt=', stmt);
@@ -437,16 +419,14 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, as
 //          console.log('SERVER: After DELETE', 'rows=', rows);
           value = {};
 //          console.log('SERVER: After DELETE', 'value=', value);
-          res.status(200).json(value);
-          console.log('SERVER: 200 - OK');
+          sendMessage(res, value, '', null, 200);
         } catch (err) {
           res.status(500).end();
-          console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+          sendMessage(res, err, 'error', null, 500);
         }
       }
     } catch (err) {
-      res.status(500).end();
-      console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+      sendMessage(res, err, 'error', null, 500);
     }
   }
 });
@@ -467,11 +447,9 @@ app.post('/api/v1/usage_log', async (req, res) => {
 //    console.log('SERVER: After INSERT', 'rows=', rows);
     var value = {};
 //    console.log('SERVER: After INSERT', 'value=', value);
-    res.status(200).json(value);
-    console.log('SERVER: 200 - OK');
+    sendMessage(res,value,'',null,200);
   } catch (err) {
-    res.status(500).end();
-    console.log('SERVER: 500 - INTERNAL SERVER ERROR', 'err=', err);
+    sendMessage(res, err, 'error', null, 500);
   }
 });
 
@@ -486,8 +464,7 @@ app.get('/api/v1/search', (req, res) => {
   var terms = req.query.terms;
   const results = searchSite(terms);
 //  console.log('SERVER:', 'results=', results);
-  res.status(200).json(results);
-  console.log('SERVER: 200 - OK');
+  sendMessage(res,results,'',null,200);
 });
 
 function searchSite(query) {
@@ -603,8 +580,13 @@ app.post('/api/v1/register', async (req, res) => {
   const { email, password, first_name, last_name } = req.body;
 //  console.log('/register','email=',email,'password=',password,'first_name=',first_name,'last_name=',last_name);
 
+  if (!isValidEmail(email)) {
+    sendMessage(res, 'Invalid email address format.', 'error', 'email', 400);
+    return;
+  }
+
   if (!isValidPassword(password)) {
-    sendMessage(res, 'Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, and one number.', 'error', null, 400);
+    sendMessage(res, 'Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, and one number.', 'error', 'password', 400);
     return;
   }
 
@@ -690,9 +672,19 @@ app.get('/api/v1/has-password', async (req, res) => {
 app.post('/api/v1/login', async (req, res) => {
   const { email, password } = req.body;
 //  console.log('/api/v1/login','email=',email,'password=',password);
+
+  if (!isValidEmail(email)) {
+    sendMessage(res, 'Invalid email address format.', 'error', 'email', 400);
+    return;
+  }
+
+  if (!isValidPassword(password)) {
+    sendMessage(res, 'Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, and one number.', 'error', 'password', 400);
+    return;
+  }
   try {
     // Does user exist?
-    const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
+    const [rows] = await db.execute('SELECT * FROM user WHERE email = ? AND status = ?', [email, 'active']);
 //    console.log('/api/v1/login','rows=',rows);
     const user = rows[0];
     const match = user && await comparePassword(password, user.password);
@@ -714,7 +706,7 @@ app.post('/api/v1/login', async (req, res) => {
 app.get('/api/v1/me', (req, res) => {
   if (req.session.user) {
 //    console.log('/me','req.session.user=',req.session.user);
-    res.json({
+    sendMessage(res, {
       authState: {
         email: req.session.user.email,
         token: req.session.user.token,
@@ -723,25 +715,23 @@ app.get('/api/v1/me', (req, res) => {
         isAuthenticated: true,
         isAdmin: req.session.user.isAdmin
       }
-    });
+    }, '', null, 200);
   } else {
 //    console.log('/me','no req.session.user');
-    res.json({
+    sendMessage(res, {
       authState: {
         isAuthenticated: false,
         isAdmin: false
       }
-    });
+    }, '', null, 200);
   }
-  sendMessage(res, '', '', null, 200);
 });
 
 //==================================================================================================
 // LOGOUT
 app.post('/api/v1/logout', (req, res) => {
 //  console.log('/logout');
-  req.session.destroy(() => res.sendStatus(200));
-  console.log('SERVER: 200 - OK');
+  req.session.destroy(() => sendMessage(res,'','',null,200));
 });
 
 //==================================================================================================
@@ -749,6 +739,11 @@ app.post('/api/v1/logout', (req, res) => {
 app.post('/api/v1/reset-password', async (req, res) => {
   const { email } = req.body;
 //  console.log('/api/v1/reset-password','email=',email);
+
+  if (!isValidEmail(email)) {
+    sendMessage(res, 'Invalid email address format.', 'error', 'email', 400);
+    return;
+  }
 
   try {
     // Does user exist?

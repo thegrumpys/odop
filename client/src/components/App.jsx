@@ -12,9 +12,9 @@ import { startExecute } from './ExecutePanel';
 import { AuthProvider } from './AuthProvider'
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
-import ResetPasswordPage from '../pages/ResetPasswordPage';
-import ChangePasswordPage from '../pages/ChangePasswordPage';
-import ConfirmPage from '../pages/ConfirmPage';
+import ResetPasswordPage from './ResetPasswordPage';
+import ChangePasswordPage from './ChangePasswordPage';
+import ConfirmPage from './ConfirmPage';
 
 export default function App() {
 //  console.log('App');

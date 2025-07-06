@@ -67,7 +67,15 @@ export default function LoginForm() {
                   <td className="text-center"><MessageAlert error={error} /></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5"><p>We have recently changed our security system. Email has been sent to {email} with instructions on resetting your password. See <a href="https://thegrumpys.github.io/odop/About/messageOfTheDay.html" target="_blank">ODOP Message Of The Day</a> for details. If the message does not appear promptly check your Junk/Spam folder.</p></td>
+                  <td className="text-start px-5"><p>
+                  We have recently changed our user authentication.
+                  Email from <b>Server NoReply &lt;server@springdesignsoftware.com&gt;</b> with
+                  the subject <b>Reset your password</b> has been
+                  sent to <b>{email}</b> with instructions on resetting your password.
+                  See <a href="https://thegrumpys.github.io/odop/About/messageOfTheDay.html" target="_blank">ODOP Message Of The Day</a> for details.
+                  If the message does not appear promptly please check your Junk/Spam folder.
+                  For assistance please <a href="/docs/About/ContactUs.html" target="_blank">contact us</a>
+                  </p></td>
                 </tr>
                 <tr>
                   <td className="text-center p-3"><Button onClick={() => navigate('/')}>Go to Home</Button></td>
