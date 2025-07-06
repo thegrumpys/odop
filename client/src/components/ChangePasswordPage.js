@@ -44,18 +44,18 @@ export default function ChangePasswordPage() {
 //          console.log('ChangePasswordPage.handleSubmit /change-password', 'res=', res);
           setError(res.data.error);
           setStatus('success')
-          logUsage('event', 'ChangePasswordPage', { event_label: 'Success: ' + res.data.error});
+          logUsage('event', 'ChangePasswordPage', { event_label: 'Success: ' + JSON.stringify(res.data.error)});
         })
         .catch((err) => {
 //          console.log('ChangePasswordPage.handleSubmit /change-password', 'err=', err);
           setError(err.response.data.error);
-          logUsage('event', 'ChangePasswordPage', { event_label: 'Error: ' + err.response.data.error});
+          logUsage('event', 'ChangePasswordPage', { event_label: 'Error: ' + JSON.stringify(err.response.data.error)});
         });
     } catch (err) {
 //      console.error('ChangePasswordPage.handleSubmit', 'err=', err);
       setError(err.response.data.error);
       setStatus('error');
-      logUsage('event', 'ChangePasswordPage', { event_label: 'Error: ' + err.response.data.error});
+      logUsage('event', 'ChangePasswordPage', { event_label: 'Error: ' + JSON.stringify(err.response.data.error)});
     }
   };
 //  console.log('ChangePasswordPage', 'status=', status,'error=',error);
