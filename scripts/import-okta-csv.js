@@ -31,17 +31,19 @@ async function main(filePath) {
 
   const insertUser = async (user) => {
     const sql = `
-      INSERT INTO user (token, email, first_name, last_name, last_login_at)
-      VALUES (?, ?, ?, ?, ?)
+      INSERT INTO user (token, email, first_name, last_name, last_login_at, role, status)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
     await db.execute(sql, [
       user.token,
       user.email,
       user.first_name,
       user.last_name,
-      user.last_login_at
+      user.last_login_at,
+      'user',         // role
+      'inactive'      // status
     ]);
-    console.log(`Inserted user: ${user.first_name} ${user.last_name}`);
+    console.log(`Inserted user: ${user.email} (${user.token})`);
   };
 
   const updateUserLoginTime = async (user) => {
@@ -53,7 +55,7 @@ async function main(filePath) {
       user.token,
       user.email
     ]);
-    console.log(`Updated login time for existing user: ${user.token}`);
+    console.log(`Updated login time for existing user: ${user.email} (${user.token})`);
   };
 
   const userExists = async (token, email) => {
@@ -66,37 +68,48 @@ async function main(filePath) {
 
   const processCSV = () => {
     return new Promise((resolve, reject) => {
+      const tasks = [];
+
       fs.createReadStream(filePath)
         .pipe(csv())
-        .on('data', async (row) => {
-          try {
-            if (
-              row['user.status'] &&
-              row['user.status'].toLowerCase() === 'active'
-            ) {
-              const user = mapFields(row);
+        .on('data', (row) => {
+          const task = (async () => {
+            try {
+              if (
+                row['user.status'] &&
+                row['user.status'].toLowerCase() === 'active'
+              ) {
+                const user = mapFields(row);
 
-              if (await userExists(user.token, user.email)) {
-                await updateUserLoginTime(user);
-                updatedCount++;
+                if (await userExists(user.token, user.email)) {
+                  await updateUserLoginTime(user);
+                  updatedCount++;
+                } else {
+                  await insertUser(user);
+                  insertedCount++;
+                }
               } else {
-                await insertUser(user);
-                insertedCount++;
+                skippedCount++;
+                console.log(`Skipped inactive user: ${row['user.email']} (${row['user.id']})`);
               }
-            } else {
-              skippedCount++;
-              console.log(`Skipped inactive user: ${row['user.email']} (${row['user.id']})`);
+            } catch (err) {
+              console.error('Error processing row:', err.message);
             }
-          } catch (err) {
-            console.error('Error processing row:', err.message);
-          }
+          })();
+
+          tasks.push(task);
         })
-        .on('end', () => {
-          console.log('\nCSV import complete.');
-          console.log(`Inserted users: ${insertedCount}`);
-          console.log(`Updated existing users: ${updatedCount}`);
-          console.log(`Skipped users (inactive): ${skippedCount}`);
-          resolve();
+        .on('end', async () => {
+          try {
+            await Promise.all(tasks); // wait for all inserts/updates
+            console.log('\nCSV import complete.');
+            console.log(`Inserted users: ${insertedCount}`);
+            console.log(`Updated existing users: ${updatedCount}`);
+            console.log(`Skipped users (inactive): ${skippedCount}`);
+            resolve();
+          } catch (err) {
+            reject(err);
+          }
         })
         .on('error', reject);
     });
