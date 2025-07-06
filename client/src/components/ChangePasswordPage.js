@@ -4,6 +4,7 @@ import axios from '../axiosConfig';
 import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 import MessageAlert from '../components/MessageAlert';
 import { useAuth } from '../components/AuthProvider';
+import { logUsage } from '../logUsage';
 
 export default function ChangePasswordPage() {
 //  console.log('ChangePasswordPage');
