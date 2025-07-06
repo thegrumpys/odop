@@ -58,7 +58,10 @@ export default function RegisterForm() {
                   </p></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><Button onClick={() => navigate('/login')}>Back to sign in</Button></td>
+                  <td className="text-center px-5"><Link to="/login">Back to Sign in</Link></td>
+                </tr>
+                <tr>
+                  <td className="text-center p3"><Link to="/">Back to Home</Link></td>
                 </tr>
               </tbody>
             </Table>
