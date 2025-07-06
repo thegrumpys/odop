@@ -48,7 +48,14 @@ export default function RegisterForm() {
                   <td className="text-center"><MessageAlert error={error} /></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><p>We just sent a verification email to {email}. Please check your email and verify your account to continue. If the message does not appear promptly check your Junk/Spam folder.</p></td>
+                  <td className="px-5 text-start "><p>
+                  We just sent a verification email message
+                  from <b>Server&nbsp;NoReply&nbsp;&lt;server@springdesignsoftware.com&gt;</b> with
+                  the subject <b>Confirm your account</b> to <b>{email}</b>.
+                  Please check your email and confirm your account to continue.
+                  If the message does not appear promptly, please check your Junk/Spam folder.
+                  For assistance please <a href="/docs/About/ContactUs.html" target="_blank">contact us</a>
+                  </p></td>
                 </tr>
                 <tr>
                   <td className="text-center"><Button onClick={() => navigate('/login')}>Back to sign in</Button></td>

@@ -69,7 +69,7 @@ export default function LoginForm() {
                 <tr>
                   <td className="text-start px-5"><p>
                   We have recently changed our user authentication.
-                  Email from <b>Server NoReply &lt;server@springdesignsoftware.com&gt;</b> with
+                  Email from <b>Server&nbsp;NoReply&nbsp;&lt;server@springdesignsoftware.com&gt;</b> with
                   the subject <b>Reset your password</b> has been
                   sent to <b>{email}</b> with instructions on resetting your password.
                   See <a href="https://thegrumpys.github.io/odop/About/messageOfTheDay.html" target="_blank">ODOP Message Of The Day</a> for details.
