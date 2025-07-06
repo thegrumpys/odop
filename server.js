@@ -182,6 +182,8 @@ function sendMessage(res, message, severity = 'error', field = null, status = 40
 // 404 - NOT FOUND, The requested resource could not be found
 // 500 - INTERNAL SERVER ERROR, Unknown server error has occurred
 
+//==================================================================================================
+// db_size
 app.get('/api/v1/db_size', authenticationRequired, async (req, res) => {
   var value;
   var user = req.uid;
@@ -223,6 +225,8 @@ GROUP BY s.schema_name, sp.grantee, sp.has_insert`;
   }
 });
 
+//==================================================================================================
+// designtypes
 app.get('/api/v1/designtypes', authenticationRequired, async (req, res) => {
   var value;
   var user = req.uid;
@@ -242,6 +246,8 @@ app.get('/api/v1/designtypes', authenticationRequired, async (req, res) => {
   }
 });
 
+//==================================================================================================
+// designtypes/:type/designs
 app.get('/api/v1/designtypes/:type/designs', authenticationRequired, async (req, res) => {
   var value;
   var user = req.uid;
@@ -262,6 +268,8 @@ app.get('/api/v1/designtypes/:type/designs', authenticationRequired, async (req,
   }
 });
 
+//==================================================================================================
+// designtypes/:type/designs/:name
 app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async (req, res) => {
   var type;
   var value;
@@ -293,6 +301,8 @@ app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async
   }
 });
 
+//==================================================================================================
+// designtypes/:type/designs/:name - create new
 app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async (req, res) => { // Create New
   var value;
   var user = req.uid;
@@ -345,6 +355,8 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, asyn
   }
 });
 
+//==================================================================================================
+// designtypes/:type/designs/:name - update existing
 app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async (req, res) => { // Update Existing
   var value;
   var user = req.uid;
@@ -397,6 +409,8 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async
   }
 });
 
+//==================================================================================================
+// designtypes/:type/designs/:name
 app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async (req, res) => {
   var value;
   var user = req.uid;
@@ -437,6 +451,7 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, as
   }
 });
 
+//==================================================================================================
 // usage_log
 app.post('/api/v1/usage_log', async (req, res) => {
   var ip_address;
@@ -460,6 +475,7 @@ app.post('/api/v1/usage_log', async (req, res) => {
   }
 });
 
+//==================================================================================================
 // SEARCH
 const SENTENCE_SEPARATOR = ' <> ';
 
@@ -581,6 +597,7 @@ function adjustSat(sat1, sat2, score) {
   return `hsl(122, ${newSat}%, 35%)`;
 }
 
+//==================================================================================================
 // REGISTER
 app.post('/api/v1/register', async (req, res) => {
   const { email, password, first_name, last_name } = req.body;
@@ -622,6 +639,7 @@ app.post('/api/v1/register', async (req, res) => {
   }
 });
 
+//==================================================================================================
 // CONFIRM
 app.get('/api/v1/confirm', async (req, res) => {
   const { token } = req.query;
@@ -647,6 +665,7 @@ app.get('/api/v1/confirm', async (req, res) => {
   }
 });
 
+//==================================================================================================
 // HAS PASSWORD
 app.get('/api/v1/has-password', async (req, res) => {
   const { email } = req.query;
@@ -666,6 +685,7 @@ app.get('/api/v1/has-password', async (req, res) => {
   }
 });
 
+//==================================================================================================
 // LOGIN
 app.post('/api/v1/login', async (req, res) => {
   const { email, password } = req.body;
@@ -689,6 +709,7 @@ app.post('/api/v1/login', async (req, res) => {
   }
 });
 
+//==================================================================================================
 // CHECK SESSION
 app.get('/api/v1/me', (req, res) => {
   if (req.session.user) {
@@ -715,6 +736,7 @@ app.get('/api/v1/me', (req, res) => {
   sendMessage(res, '', '', null, 200);
 });
 
+//==================================================================================================
 // LOGOUT
 app.post('/api/v1/logout', (req, res) => {
 //  console.log('/logout');
@@ -722,6 +744,7 @@ app.post('/api/v1/logout', (req, res) => {
   console.log('SERVER: 200 - OK');
 });
 
+//==================================================================================================
 // PASSWORD RESET REQUEST
 app.post('/api/v1/reset-password', async (req, res) => {
   const { email } = req.body;
@@ -757,6 +780,7 @@ app.post('/api/v1/reset-password', async (req, res) => {
   }
 });
 
+//==================================================================================================
 // CHANGE PASSWORD
 app.patch('/api/v1/change-password', async (req, res) => {
   const { token, email, password } = req.body;
@@ -786,6 +810,8 @@ app.patch('/api/v1/change-password', async (req, res) => {
   }
 });
 
+//==================================================================================================
+// Cleanup Expired Tokens
 app.delete('/api/v1/cleanup-expired-tokens', async (req, res) => {
 //  console.log('/api/v1/cleanup-expired-tokens');
   try {
@@ -804,6 +830,7 @@ app.delete('/api/v1/cleanup-expired-tokens', async (req, res) => {
   }
 });
 
+//==================================================================================================
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
 //  console.log('process.env.NODE_ENV == production or staging', 'process.env.NODE_ENV=', process.env.NODE_ENV);
   // If it’s not https already, redirect the same url on https.
