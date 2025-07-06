@@ -31,6 +31,7 @@ export default function LoginForm() {
         const res = await axios.post('/api/v1/reset-password', { email });
         setError(res.data.error);
         setSubmitted(true);
+        logUsage('event', 'LoginForm', { event_label: email + ' null password'});
       } else {
         const res = await axios.post('/api/v1/login', { email, password });
 //        console.error('LoginForm.handleLogin /login','res=', res)
@@ -39,7 +40,7 @@ export default function LoginForm() {
         setAuthState(res2.data.authState);
 //        console.log('LoginForm/handleLogin /login','authState=',res2.data.authState);
         dispatch(changeUser(res2.data.authState.token));
-        logUsage('event', 'SignedIn', { event_label: email + ' ' + res2.data.authState.token});
+        logUsage('event', 'LoginForm', { event_label: email + ' ' + res2.data.authState.token});
         navigate('/');
       }
     } catch (err) {

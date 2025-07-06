@@ -18,9 +18,11 @@ export default function ResetPasswordPage() {
       const res = await axios.post('/api/v1/reset-password', { email });
       setError(res.data.error);
       setSubmitted(true);
+      logUsage('event', 'ResetPasswordPage', { event_label: 'Success: ' + res.data.error});
     } catch (err) {
-      console.error('ResetPasswordPage,handleResetRequest','err=',err);
+//      console.error('ResetPasswordPage,handleResetRequest','err=',err);
       setError(err.response.data.error);
+      logUsage('event', 'ResetPasswordPage', { event_label: 'Error: ' + err.response.data.error});
     }
   };
 
