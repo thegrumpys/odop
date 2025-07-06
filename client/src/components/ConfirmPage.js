@@ -24,16 +24,16 @@ export default function ConfirmPage() {
         .then((res) => {
           setError(res.data.error);
           setStatus('success');
-          logUsage('event', 'ConfirmPage', { event_label: 'Success: ' + res.data.error});
+          logUsage('event', 'ConfirmPage', { event_label: 'Success: ' + JSON.stringify(res.data.error)});
         }).catch((err) => {
           setError(err.response.data.error);
           setStatus('error');
-          logUsage('event', 'ConfirmPage', { event_label: 'Error: ' + err.response.data.error});
+          logUsage('event', 'ConfirmPage', { event_label: 'Error: ' + JSON.stringify(err.response.data.error)});
         });
     } catch (err) {
       setError(err.response.data.error);
       setStatus('error');
-      logUsage('event', 'ConfirmPage', { event_label: 'Error: ' + err.response.data.error});
+      logUsage('event', 'ConfirmPage', { event_label: 'Error: ' + JSON.stringify(err.response.data.error)});
     }
   }, [searchParams]);
 
