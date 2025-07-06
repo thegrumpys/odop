@@ -22,14 +22,17 @@ export default function ConfirmPage() {
       axios.get(`/api/v1/confirm?token=${token}`)
         .then((res) => {
           setError(res.data.error);
-          setStatus('success')
+          setStatus('success');
+          logUsage('event', 'ConfirmPage', { event_label: 'Success: ' + res.data.error});
         }).catch((err) => {
           setError(err.response.data.error);
-          setStatus('error')
+          setStatus('error');
+          logUsage('event', 'ConfirmPage', { event_label: 'Error: ' + err.response.data.error});
         });
     } catch (err) {
       setError(err.response.data.error);
       setStatus('error');
+      logUsage('event', 'ConfirmPage', { event_label: 'Error: ' + err.response.data.error});
     }
   }, [searchParams]);
 

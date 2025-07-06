@@ -23,9 +23,11 @@ export default function RegisterForm() {
 //      console.error('RegisterForm.handleRegister','res=', res);
       setSubmitted(true);
       setError(res.data.error);
+      logUsage('event', 'RegisterForm', { event_label: 'Success: ' + res.data.error});
     } catch (err) {
 //      console.error('RegisterForm.handleRegister','err=', err);
       setError(err.response.data.error);
+      logUsage('event', 'RegisterForm', { event_label: 'Error: ' + err.response.data.error});
     }
   };
 
@@ -93,7 +95,7 @@ export default function RegisterForm() {
                   <td className="px-5 text-start"><Form.Control type="email" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)} autoComplete="username" /></td>
                 </tr>
                 <tr>
-                  <td className="px-5 text-start"><Form.Control type="password" placeholder="Password" value={password} required onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" /></td>
+                  <td className="px-5 text-start"><Form.Control type="password" placeholder="Password" value={password} required onChange={(e) => setPassword(e.target.value)} autoComplete="new_password" /></td>
                 </tr>
                 <tr>
                   <td className="px-5 text-start">
