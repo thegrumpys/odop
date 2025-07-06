@@ -3,6 +3,7 @@ import axios from '../axiosConfig';
 import { Link, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 import MessageAlert from './MessageAlert';
+import { logUsage } from '../logUsage';
 
 export default function RegisterForm() {
 //  console.log('RegisterForm');
