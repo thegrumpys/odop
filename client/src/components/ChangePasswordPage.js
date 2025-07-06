@@ -150,7 +150,7 @@ export default function ChangePasswordPage() {
                   </td>
                 </tr>
                 <tr>
-                  <td className="px-5 text-start">New Password<br /><Form.Control type="password" value={password} required onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" /></td>
+                  <td className="px-5 text-start">New Password<br /><Form.Control type="password" value={password} required onChange={(e) => setPassword(e.target.value)} autoComplete="new_password" /></td>
                 </tr>
                 <tr>
                   <td className="text-center"><Button type="submit">Reset Password</Button></td>
