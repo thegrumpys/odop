@@ -49,7 +49,7 @@ export default function LoginForm() {
     }
   };
 
-//  console.log('ResetPasswordPage','submitted=',submitted);
+//  console.log('LoginForm','submitted=',submitted);
   if (submitted) {
     return (
       <Container className="pt-5">
