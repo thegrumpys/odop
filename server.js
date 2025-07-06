@@ -631,7 +631,7 @@ app.get('/api/v1/confirm', async (req, res) => {
     const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ? AND expires_at > NOW()', [token, 'confirm']);
 //    console.log('/api/v1/confirm','rows=',rows,'rows.length=',rows.length,'!rows.length=',!rows.length);
     if (!rows.length) {
-      sendMessage(res, 'Token is invalid or has expired.', 'error', null, 401);
+      sendMessage(res, 'No outstanding registration exists or has expired.', 'error', null, 401);
       return;
     }
 
@@ -785,7 +785,7 @@ app.patch('/api/v1/change-password', async (req, res) => {
     // Does a matching reset token exist
     const [rows] = await db.execute('SELECT email FROM token WHERE email = ? AND token = ? AND type = ? AND expires_at > NOW()', [email, token, 'reset']);
     if (!rows.length) {
-      sendMessage(res, 'Token is invalid or has expired.', 'error', null, 401);
+      sendMessage(res, 'No outstanding password change exists or has expired.', 'error', null, 401);
       return;
     }
 
