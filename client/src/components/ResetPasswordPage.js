@@ -17,11 +17,12 @@ export default function ResetPasswordPage() {
     setError(null);
     try {
       const res = await axios.post('/api/v1/reset-password', { email });
+//      console.log('ResetPasswordPage.handleResetRequest','res=', res);
       setError(res.data.error);
       setSubmitted(true);
       logUsage('event', 'ResetPasswordPage', { event_label: 'Success: ' + JSON.stringify(res.data.error)});
     } catch (err) {
-//      console.error('ResetPasswordPage,handleResetRequest','err=',err);
+//      console.log('ResetPasswordPage,handleResetRequest','err=',err);
       setError(err.response.data.error);
       logUsage('event', 'ResetPasswordPage', { event_label: 'Error: ' + JSON.stringify(err.response.data.error)});
     }
@@ -49,10 +50,10 @@ export default function ResetPasswordPage() {
                   <td className="text-start px-5"><p>Email has been sent to {email} with instructions on resetting your password. If the message does not appear promptly check your Junk/Spam folder.</p></td>
                 </tr>
                 <tr>
-                  <td className="text-center px-5"><Link to="/login">Back to Sign in</Link></td>
+                  <td className="text-center"><Link to="/login">Back to Sign in</Link></td>
                 </tr>
                 <tr>
-                  <td className="text-center p-3"><Link to="/">Back to Home</Link></td>
+                  <td className="text-center"><Link to="/">Back to Home</Link></td>
                 </tr>
               </tbody>
             </Table>
@@ -87,7 +88,7 @@ export default function ResetPasswordPage() {
                   <td className="text-center"><Button type="submit">Reset via Email</Button></td>
                 </tr>
                 <tr>
-                  <td className="text-center p-3"><Link to="/login">Back to Sign in</Link></td>
+                  <td className="text-center"><Link to="/login">Back to Sign in</Link></td>
                 </tr>
               </tbody>
             </Table>

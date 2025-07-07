@@ -21,12 +21,12 @@ export default function RegisterForm() {
     setError(null);
     try {
       const res = await axios.post('/api/v1/register', { email, password, first_name, last_name });
-//      console.error('RegisterForm.handleRegister','res=', res);
+//      console.log('RegisterForm.handleRegister','res=', res);
       setSubmitted(true);
       setError(res.data.error);
       logUsage('event', 'RegisterForm', { event_label: 'Success: ' + JSON.stringify(res.data.error)});
     } catch (err) {
-//      console.error('RegisterForm.handleRegister','err=', err);
+//      console.log('RegisterForm.handleRegister','err=', err);
       setError(err.response.data.error);
       logUsage('event', 'RegisterForm', { event_label: 'Error: ' + JSON.stringify(err.response.data.error)});
     }
@@ -61,10 +61,10 @@ export default function RegisterForm() {
                   </p></td>
                 </tr>
                 <tr>
-                  <td className="text-center px-5"><Link to="/login">Back to Sign in</Link></td>
+                  <td className="text-center"><Link to="/login">Back to Sign in</Link></td>
                 </tr>
                 <tr>
-                  <td className="text-center p3"><Link to="/">Back to Home</Link></td>
+                  <td className="text-center"><Link to="/">Back to Home</Link></td>
                 </tr>
               </tbody>
             </Table>
