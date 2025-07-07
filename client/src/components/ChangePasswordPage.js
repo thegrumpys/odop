@@ -80,7 +80,7 @@ export default function ChangePasswordPage() {
                   <td className="px-5 text-start"><p>You can now sign in with your new password.</p></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><Button onClick={() => navigate('/login')}>Go to Sign In</Button></td>
+                  <td className="text-center p-3"><Button onClick={() => navigate('/login')}>Go to Sign In</Button></td>
                 </tr>
               </tbody>
             </Table>
@@ -112,7 +112,7 @@ export default function ChangePasswordPage() {
                   <td className="px-5 text-start"><p>This link is invalid.</p></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><Button onClick={() => navigate('/')}>Go to Home</Button></td>
+                  <td className="text-center p-3"><Button onClick={() => navigate('/')}>Go to Home</Button></td>
                 </tr>
               </tbody>
             </Table>
