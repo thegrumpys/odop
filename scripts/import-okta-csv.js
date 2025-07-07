@@ -25,6 +25,8 @@ async function main(filePath) {
     process.exit(1);
   }
 
+  console.log('user=',process.env.MYSQL_USER,'password=','<HIDDEN>','host=',process.env.MYSQL_HOST,'host=',process.env.MYSQL_PORT,'host=',process.env.MYSQL_DATABASE);
+
   let insertedCount = 0;
   let updatedCount = 0;
   let skippedCount = 0;

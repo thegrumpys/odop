@@ -40,7 +40,7 @@ import HelpIndex from '../menus/Help/HelpIndex';
 import HelpDemo from '../menus/Help/HelpDemo';
 import HelpTutorial from '../menus/Help/HelpTutorial';
 import HelpAbout from '../menus/Help/HelpAbout';
-import AdminCleanUpExpiredTokens from '../menus/Admin/AdminCleanUpExpiredTokens';
+import { Link } from 'react-router-dom';
 import SearchDocs from './SearchDocs';
 import config from '../config';
 import ResultTable from './ResultTable';
@@ -184,7 +184,8 @@ export default function MainPage() {
             </NavDropdown>
             <RequireAdmin>
               <NavDropdown title="Admin">
-                <AdminCleanUpExpiredTokens />
+                <NavDropdown.Item as={Link} to="/admin/cleanup-expired-tokens">Cleanup Expired Tokens</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/admin/user-search">User Search</NavDropdown.Item>
               </NavDropdown>
             </RequireAdmin>
           </Nav>

@@ -78,6 +78,19 @@ function authenticationRequired(req, res, next) {
   next();
 }
 
+async function adminRequired(req, res, next) {
+  try {
+    const [rows] = await db.execute('SELECT role FROM user WHERE token = ?', [req.uid]);
+    if (!rows.length || rows[0].role !== 'admin') {
+      sendMessage(res, '', '', null, 401);
+      return;
+    }
+    next();
+  } catch (err) {
+    sendMessage(res, err, 'error', null, 500);
+  }
+}
+
 // Token generator
 function generateToken() {
   return crypto.randomBytes(32).toString('hex');
@@ -819,6 +832,63 @@ app.delete('/api/v1/cleanup-expired-tokens', async (req, res) => {
       const delete_count = rows.affectedRows;
 //      console.log('/api/v1/cleanup-expired-tokens','rows=',delete_count);
       sendMessage(res, `${delete_count} expired token(s) cleaned up successfully.`, 'info', null, 200);
+    }
+  } catch (err) {
+    sendMessage(res, err, 'error', null, 500);
+  }
+});
+
+//====================================================================================================================
+// Admin User Search
+app.get('/api/v1/users', authenticationRequired, adminRequired, async (req, res) => {
+  const { email, firstName, lastName, role, status } = req.query;
+  console.log('/api/v1/users','email=',email,'firstName=',firstName,'lastName=',lastName,'role=',role,'status=',status);
+  const conditions = [];
+  const params = [];
+  if (email) {
+    conditions.push('email LIKE ?');
+    params.push(`%${email}%`);
+  }
+  if (firstName) {
+    conditions.push('first_name LIKE ?');
+    params.push(`%${firstName}%`);
+  }
+  if (lastName) {
+    conditions.push('last_name LIKE ?');
+    params.push(`%${lastName}%`);
+  }
+  if (role) {
+    conditions.push('role LIKE ?');
+    params.push(`${role}`);
+  }
+  if (status) {
+    conditions.push('status LIKE ?');
+    params.push(`${status}`);
+  }
+
+  const where = conditions.length ? 'WHERE ' + conditions.join(' AND ') : '';
+  try {
+    const [rows] = await db.execute(
+      `SELECT id, email, first_name, last_name, role, status, created_at, last_login_at FROM user ${where}`,
+      params
+    );
+    sendMessage(res, rows, '', null, 200);
+  } catch (err) {
+    sendMessage(res, err, 'error', null, 500);
+  }
+});
+
+//====================================================================================================================
+// Admin Delete User
+app.delete('/api/v1/users/:id', authenticationRequired, adminRequired, async (req, res) => {
+  const { id } = req.params;
+  console.log('/api/v1/users','id=',id);
+  try {
+    const [rows] = await db.execute('DELETE FROM user WHERE id = ?', [id]);
+    if (rows.affectedRows === 0) {
+      sendMessage(res, '', '', null, 404);
+    } else {
+      sendMessage(res, {}, '', null, 200);
     }
   } catch (err) {
     sendMessage(res, err, 'error', null, 500);
