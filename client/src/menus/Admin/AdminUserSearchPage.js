@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
-import axios from '../../axiosConfig';
-import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
-import MessageAlert from '../../components/MessageAlert';
-import { logUsage } from '../../logUsage';
-import { useAuth } from '../../components/AuthProvider';
+import React, { useState } from "react";
+import axios from "../../axiosConfig";
+import { Container, Row, Col, Form, Button, Table } from "react-bootstrap";
+import MessageAlert from "../../components/MessageAlert";
+import { logUsage } from "../../logUsage";
+import { useAuth } from "../../components/AuthProvider";
+import AdminUserModal from "./AdminUserModal";
 
 export default function AdminUserSearchPage() {
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [role, setRole] = useState('');
-  const [status, setStatus] = useState('');
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [role, setRole] = useState("");
+  const [status, setStatus] = useState("");
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
+  const [modalShow, setModalShow] = useState(false);
+  const [editUser, setEditUser] = useState(null);
   const { authState } = useAuth();
 
   const handleDelete = async (id) => {
@@ -20,34 +23,62 @@ export default function AdminUserSearchPage() {
     try {
       const res = await axios.delete(`/api/v1/users/${id}`, {
         headers: {
-          Authorization: 'Bearer ' + authState.token
+          Authorization: "Bearer " + authState.token,
         },
       });
       setError(res.data.error);
       setResults(results.filter((u) => u.id !== id));
-      logUsage('event', 'AdminUserSearchPage', { event_label: 'delete id:' + id });
+      logUsage("event", "AdminUserSearchPage", {
+        event_label: "delete id:" + id,
+      });
     } catch (err) {
       setError(err.response?.data?.error || err.message);
     }
   };
 
   const handleSearch = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     setError(null);
     try {
-      const res = await axios.get('/api/v1/users', { 
+      const res = await axios.get("/api/v1/users", {
         headers: {
-          Authorization: 'Bearer ' + authState.token
+          Authorization: "Bearer " + authState.token,
         },
-        params: { email, firstName, lastName, role, status }
+        params: { email, firstName, lastName, role, status },
       });
       setError(res.data.error);
       setResults(res.data);
-      logUsage('event', 'AdminUserSearchPage', { event_label: 'search email:' + email + ' firstName:' + firstName + ' lastName:' + lastName+ ' role:' + role+ ' status:' + status });
+      logUsage("event", "AdminUserSearchPage", {
+        event_label:
+          "search email:" +
+          email +
+          " firstName:" +
+          firstName +
+          " lastName:" +
+          lastName +
+          " role:" +
+          role +
+          " status:" +
+          status,
+      });
     } catch (err) {
       setError(err.response?.data?.error || err.message);
       setResults([]);
     }
+  };
+
+  const handleNew = () => {
+    setEditUser(null);
+    setModalShow(true);
+  };
+
+  const handleEdit = (user) => {
+    setEditUser(user);
+    setModalShow(true);
+  };
+
+  const handleSaved = () => {
+    handleSearch();
   };
 
   return (
@@ -55,22 +86,37 @@ export default function AdminUserSearchPage() {
       <Row>
         <Col lg="12">
           <h1>User Search</h1>
+          <Button className="mb-3" onClick={handleNew}>
+            New User
+          </Button>
           <form onSubmit={handleSearch} className="mb-3">
             <Form.Group controlId="searchEmail">
               <Form.Label>Email</Form.Label>
-              <Form.Control value={email} onChange={(e) => setEmail(e.target.value)} />
+              <Form.Control
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </Form.Group>
             <Form.Group controlId="searchFirstName">
               <Form.Label>First Name</Form.Label>
-              <Form.Control value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+              <Form.Control
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
             </Form.Group>
             <Form.Group controlId="searchLastName">
               <Form.Label>LastName</Form.Label>
-              <Form.Control value={lastName} onChange={(e) => setLastName(e.target.value)} />
+              <Form.Control
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
             </Form.Group>
             <Form.Group controlId="searchRole">
               <Form.Label>Role</Form.Label>
-              <Form.Select aria-label="Role Search Input" onChange={(e) => setRole(e.target.value)} >
+              <Form.Select
+                aria-label="Role Search Input"
+                onChange={(e) => setRole(e.target.value)}
+              >
                 <option value=""></option>
                 <option value="admin">admin</option>
                 <option value="user">user</option>
@@ -78,14 +124,32 @@ export default function AdminUserSearchPage() {
             </Form.Group>
             <Form.Group controlId="searchStatus">
               <Form.Label>Status</Form.Label>
-              <Form.Select aria-label="Status Search Input" onChange={(e) => setStatus(e.target.value)} >
+              <Form.Select
+                aria-label="Status Search Input"
+                onChange={(e) => setStatus(e.target.value)}
+              >
                 <option value=""></option>
                 <option value="active">active</option>
                 <option value="inactive">inactive</option>
               </Form.Select>
             </Form.Group>
-            <Button className="mt-2" type="reset" onClick={(e) => {setEmail('');setFirstName('');setLastName('');setRole('');setStatus('');}}>Reset</Button>&nbsp;
-            <Button className="mt-2" type="submit">Search</Button>
+            <Button
+              className="mt-2"
+              type="reset"
+              onClick={(e) => {
+                setEmail("");
+                setFirstName("");
+                setLastName("");
+                setRole("");
+                setStatus("");
+              }}
+            >
+              Reset
+            </Button>
+            &nbsp;
+            <Button className="mt-2" type="submit">
+              Search
+            </Button>
           </form>
           <MessageAlert error={error} />
           <p>Found {results.length} Users</p>
@@ -100,6 +164,7 @@ export default function AdminUserSearchPage() {
                   <th>Status</th>
                   <th>Created</th>
                   <th>Last Login</th>
+                  <th>Edit</th>
                   <th>Delete</th>
                 </tr>
               </thead>
@@ -114,6 +179,11 @@ export default function AdminUserSearchPage() {
                     <td>{u.created_at}</td>
                     <td>{u.last_login_at}</td>
                     <td>
+                      <Button variant="link" onClick={() => handleEdit(u)}>
+                        <i className="fas fa-edit"></i>
+                      </Button>
+                    </td>
+                    <td>
                       <Button variant="link" onClick={() => handleDelete(u.id)}>
                         <i className="fas fa-trash text-danger"></i>
                       </Button>
@@ -123,6 +193,12 @@ export default function AdminUserSearchPage() {
               </tbody>
             </Table>
           )}
+          <AdminUserModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            user={editUser}
+            onSaved={handleSaved}
+          />
         </Col>
       </Row>
     </Container>
