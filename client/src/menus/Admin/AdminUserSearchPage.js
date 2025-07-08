@@ -84,7 +84,7 @@ export default function AdminUserSearchPage() {
                 <option value="inactive">inactive</option>
               </Form.Select>
             </Form.Group>
-            <Button className="mt-2" type="reset" onClick={(e) => {setEmail('');setFirstName('');setLastName('');}}>Reset</Button>&nbsp;
+            <Button className="mt-2" type="reset" onClick={(e) => {setEmail('');setFirstName('');setLastName('');setRole('');setStatus('');}}>Reset</Button>&nbsp;
             <Button className="mt-2" type="submit">Search</Button>
           </form>
           <MessageAlert error={error} />
