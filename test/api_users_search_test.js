@@ -12,7 +12,7 @@ let newUserId;
 
 chai.use(chaiHttp);
 
-describe("Admin User Search", () => {
+describe("Admin User Manager", () => {
   before((done) => {
     var connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
     connection.connect();

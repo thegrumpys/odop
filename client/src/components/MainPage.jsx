@@ -186,7 +186,7 @@ export default function MainPage() {
             <RequireAdmin>
               <NavDropdown title="Admin">
                 <AdminCleanupExpiredTokens />
-                <NavDropdown.Item as={Link} to="/admin/user-search">User Search</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/admin/user-manager">User Manager</NavDropdown.Item>
               </NavDropdown>
             </RequireAdmin>
           </Nav>

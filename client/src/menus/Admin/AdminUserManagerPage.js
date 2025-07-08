@@ -1,12 +1,12 @@
-import React, { useState, useMemo } from "react";
-import axios from "../../axiosConfig";
-import { Container, Row, Col, Form, Button, Table } from "react-bootstrap";
-import MessageAlert from "../../components/MessageAlert";
-import { logUsage } from "../../logUsage";
-import { useAuth } from "../../components/AuthProvider";
+import React, { useState, useMemo } from 'react';
+import axios from '../../axiosConfig';
+import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
+import MessageAlert from '../../components/MessageAlert';
+import { logUsage } from '../../logUsage';
+import { useAuth } from '../../components/AuthProvider';
 import AdminUserModal from "./AdminUserModal";
 
-export default function AdminUserSearchPage() {
+export default function AdminUserManagerPage() {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -29,14 +29,12 @@ export default function AdminUserSearchPage() {
     try {
       const res = await axios.delete(`/api/v1/users/${id}`, {
         headers: {
-          Authorization: "Bearer " + authState.token,
+          Authorization: 'Bearer ' + authState.token
         },
       });
       setError(res.data.error);
       setResults(results.filter((u) => u.id !== id));
-      logUsage("event", "AdminUserSearchPage", {
-        event_label: "delete id:" + id,
-      });
+      logUsage('event', 'AdminUserManagerPage', { event_label: 'delete id:' + id });
     } catch (err) {
       setError(err.response?.data?.error || err.message);
     }
@@ -48,43 +46,13 @@ export default function AdminUserSearchPage() {
     try {
       const res = await axios.get('/api/v1/users', {
         headers: {
-          Authorization: 'Bearer ' + authState.token,
+          Authorization: 'Bearer ' + authState.token
         },
-        params: {
-          email,
-          firstName,
-          lastName,
-          role,
-          status,
-          createStartDate,
-          createEndDate,
-          loginStartDate,
-          loginEndDate,
-        },
+        params: { email, firstName, lastName, role, status, createStartDate, createEndDate, loginStartDate, loginEndDate },
       });
       setError(res.data.error);
       setResults(res.data);
-      logUsage('event', 'AdminUserSearchPage', {
-        event_label:
-          'search email:' +
-          email +
-          ' firstName:' +
-          firstName +
-          ' lastName:' +
-          lastName +
-          ' role:' +
-          role +
-          ' status:' +
-          status +
-          ' createStartDate:' +
-          createStartDate +
-          ' createEndDate:' +
-          createEndDate +
-          ' loginStartDate:' +
-          loginStartDate +
-          ' loginEndDate:' +
-          loginEndDate,
-      });
+      logUsage('event', 'AdminUserManagerPage', { event_label: 'search email:' + email + ' firstName:' + firstName + ' lastName:' + lastName + ' role:' + role + ' status:' + status + ' createStartDate:' + createStartDate + ' createEndDate:' + createEndDate + ' loginStartDate:' + loginStartDate + ' loginEndDate:' + loginEndDate });
     } catch (err) {
       setError(err.response?.data?.error || err.message);
       setResults([]);
@@ -103,6 +71,7 @@ export default function AdminUserSearchPage() {
 
   const handleSaved = () => {
     handleSearch();
+  }
 
   const handleSort = (column) => {
     if (sortColumn === column) {
@@ -143,8 +112,8 @@ export default function AdminUserSearchPage() {
     <Container className="pt-5">
       <Row>
         <Col lg="12">
-          <h1>User Search</h1>
-          <Button className="mb-3" onClick={handleNew}>
+          <h1>User Manager</h1>
+          <Button className="mb-3 float-end" onClick={handleNew}>
             New User
           </Button>
           <form onSubmit={handleSearch} className="mb-3">
@@ -273,9 +242,7 @@ export default function AdminUserSearchPage() {
               Reset
             </Button>
             &nbsp;
-            <Button className="mt-2" type="submit">
-              Search
-            </Button>
+            <Button className="mt-2" type="submit">Search</Button>
           </form>
           <MessageAlert error={error} />
           <p>Found {results.length} Users</p>
@@ -283,6 +250,7 @@ export default function AdminUserSearchPage() {
             <Table bordered hover size="sm" className="mt-3">
               <thead>
                 <tr>
+                  <th>Edit</th>
                   <th onClick={() => handleSort('email')} style={{ cursor: 'pointer' }}>
                     Email{sortIcon('email')}
                   </th>
@@ -310,6 +278,11 @@ export default function AdminUserSearchPage() {
               <tbody>
                 {sortedResults.map((u) => (
                   <tr key={u.id}>
+                    <td>
+                      <Button variant="link" onClick={() => handleEdit(u)}>
+                        <i className="fas fa-edit"></i>
+                      </Button>
+                    </td>
                     <td>{u.email}</td>
                     <td>{u.first_name}</td>
                     <td>{u.last_name}</td>
@@ -317,11 +290,6 @@ export default function AdminUserSearchPage() {
                     <td>{u.status}</td>
                     <td>{u.created_at}</td>
                     <td>{u.last_login_at}</td>
-                    <td>
-                      <Button variant="link" onClick={() => handleEdit(u)}>
-                        <i className="fas fa-edit"></i>
-                      </Button>
-                    </td>
                     <td>
                       <Button variant="link" onClick={() => handleDelete(u.id)}>
                         <i className="fas fa-trash text-danger"></i>

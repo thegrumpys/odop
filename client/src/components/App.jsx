@@ -15,7 +15,7 @@ import RegisterForm from './RegisterForm';
 import ResetPasswordPage from './ResetPasswordPage';
 import ChangePasswordPage from './ChangePasswordPage';
 import ConfirmPage from './ConfirmPage';
-import AdminUserSearchPage from '../menus/Admin/AdminUserSearchPage';
+import AdminUserManagerPage from '../menus/Admin/AdminUserManagerPage';
 import RequireAuth from './RequireAuth';
 import RequireAdmin from './RequireAdmin';
 
@@ -131,7 +131,7 @@ export default function App() {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/confirm" element={<ConfirmPage />} />
-            <Route path="/admin/user-search" element={<RequireAuth><RequireAdmin><AdminUserSearchPage /></RequireAdmin></RequireAuth>} />
+            <Route path="/admin/user-manager" element={<RequireAuth><RequireAdmin><AdminUserManagerPage /></RequireAdmin></RequireAuth>} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
             <Route path="/change-password" element={<ChangePasswordPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />

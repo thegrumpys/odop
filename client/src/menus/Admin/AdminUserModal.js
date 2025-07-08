@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../axiosConfig";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, Table } from "react-bootstrap";
 import MessageAlert from "../../components/MessageAlert";
 import { useAuth } from "../../components/AuthProvider";
 import { logUsage } from "../../logUsage";
@@ -38,24 +38,9 @@ export default function AdminUserModal({ show, onHide, user, onSaved }) {
     setError(null);
     try {
       if (isEdit) {
-        await axios.put(
-          `/api/v1/users/${user.id}`,
-          { email, first_name: firstName, last_name: lastName, role, status },
-          { headers: { Authorization: "Bearer " + authState.token } },
-        );
+        await axios.put(`/api/v1/users/${user.id}`, { email, first_name: firstName, last_name: lastName, role, status }, { headers: { Authorization: "Bearer " + authState.token } });
       } else {
-        await axios.post(
-          "/api/v1/users",
-          {
-            email,
-            password,
-            first_name: firstName,
-            last_name: lastName,
-            role,
-            status,
-          },
-          { headers: { Authorization: "Bearer " + authState.token } },
-        );
+        await axios.post("/api/v1/users", { email, password, first_name: firstName, last_name: lastName, role, status }, { headers: { Authorization: "Bearer " + authState.token } });
       }
       logUsage("event", "AdminUserModal", {
         event_label: isEdit ? "update" : "create",
@@ -75,6 +60,10 @@ export default function AdminUserModal({ show, onHide, user, onSaved }) {
       <Modal.Body>
         <MessageAlert error={error} />
         <Form onSubmit={handleSubmit}>
+          <Table borderless size="sm">
+          <tbody>
+          <tr>
+          <td>
           <Form.Group controlId="userEmail">
             <Form.Label>Email</Form.Label>
             <Form.Control
@@ -82,16 +71,23 @@ export default function AdminUserModal({ show, onHide, user, onSaved }) {
               onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
+          </td>
           {!isEdit && (
+            <td>
             <Form.Group controlId="userPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="new_password"
               />
             </Form.Group>
+            </td>
           )}
+          </tr>
+          <tr>
+          <td>
           <Form.Group controlId="userFirstName">
             <Form.Label>First Name</Form.Label>
             <Form.Control
@@ -99,6 +95,8 @@ export default function AdminUserModal({ show, onHide, user, onSaved }) {
               onChange={(e) => setFirstName(e.target.value)}
             />
           </Form.Group>
+          </td>
+          <td>
           <Form.Group controlId="userLastName">
             <Form.Label>Last Name</Form.Label>
             <Form.Control
@@ -106,6 +104,10 @@ export default function AdminUserModal({ show, onHide, user, onSaved }) {
               onChange={(e) => setLastName(e.target.value)}
             />
           </Form.Group>
+          </td>
+          </tr>
+          <tr>
+          <td>
           <Form.Group controlId="userRole">
             <Form.Label>Role</Form.Label>
             <Form.Select value={role} onChange={(e) => setRole(e.target.value)}>
@@ -113,16 +115,19 @@ export default function AdminUserModal({ show, onHide, user, onSaved }) {
               <option value="user">user</option>
             </Form.Select>
           </Form.Group>
+          </td>
+          <td>
           <Form.Group controlId="userStatus">
             <Form.Label>Status</Form.Label>
-            <Form.Select
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-            >
+            <Form.Select value={status} onChange={(e) => setStatus(e.target.value)}>
               <option value="active">active</option>
               <option value="inactive">inactive</option>
             </Form.Select>
           </Form.Group>
+          </td>
+          </tr>
+          </tbody>
+          </Table>
           <Button className="mt-2" type="submit">
             Save
           </Button>

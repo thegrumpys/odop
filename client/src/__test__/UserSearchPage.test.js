@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 jest.mock('../axiosConfig', () => ({ get: jest.fn(), delete: jest.fn() }));
-import AdminUserSearchPage from '../components/AdminUserSearchPage';
+import AdminUserManagerPage from '../components/AdminUserManagerPage';
 
-it('renders AdminUserSearchPage without crashing', () => {
+it('renders AdminUserManagerPage without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<AdminUserSearchPage />, div);
+  ReactDOM.render(<AdminUserManagerPage />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
