@@ -15,7 +15,6 @@ import RegisterForm from './RegisterForm';
 import ResetPasswordPage from './ResetPasswordPage';
 import ChangePasswordPage from './ChangePasswordPage';
 import ConfirmPage from './ConfirmPage';
-import AdminCleanupExpiredTokens from '../menus/Admin/AdminCleanupExpiredTokens';
 import AdminUserSearchPage from '../menus/Admin/AdminUserSearchPage';
 import RequireAuth from './RequireAuth';
 import RequireAdmin from './RequireAdmin';
@@ -132,7 +131,6 @@ export default function App() {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/confirm" element={<ConfirmPage />} />
-            <Route path="/admin/cleanup-expired-tokens" element={<RequireAuth><RequireAdmin><AdminCleanupExpiredTokens /></RequireAdmin></RequireAuth>} />
             <Route path="/admin/user-search" element={<RequireAuth><RequireAdmin><AdminUserSearchPage /></RequireAdmin></RequireAuth>} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
             <Route path="/change-password" element={<ChangePasswordPage />} />
