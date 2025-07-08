@@ -18,7 +18,7 @@ export default function AdminUserSearchPage() {
   const handleDelete = async (id) => {
     setError(null);
     try {
-      await axios.delete(`/api/v1/users/${id}`, {
+      const res = await axios.delete(`/api/v1/users/${id}`, {
         headers: {
           Authorization: 'Bearer ' + authState.token
         },
