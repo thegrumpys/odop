@@ -1120,24 +1120,53 @@ app.delete("/api/v1/cleanup-expired-tokens", async (req, res) => {
 
 //====================================================================================================================
 // Admin User Search
-app.get(
-  "/api/v1/users",
-  authenticationRequired,
-  adminRequired,
-  async (req, res) => {
-    const { email, firstName, lastName, role, status } = req.query;
-    console.log(
-      "/api/v1/users",
-      "email=",
-      email,
-      "firstName=",
-      firstName,
-      "lastName=",
-      lastName,
-      "role=",
-      role,
-      "status=",
-      status,
+app.get('/api/v1/users', authenticationRequired, adminRequired, async (req, res) => {
+  const { email, firstName, lastName, role, status, createStartDate, createEndDate, loginStartDate, loginEndDate } = req.query;
+  console.log('/api/v1/users','email=',email,'firstName=',firstName,'lastName=',lastName,'role=',role,'status=',status,'createStartDate=',createStartDate,'createEndDate=',createEndDate,'loginStartDate=',loginStartDate,'loginEndDate=',loginEndDate);
+  const conditions = [];
+  const params = [];
+  if (email) {
+    conditions.push('email LIKE ?');
+    params.push(`%${email}%`);
+  }
+  if (firstName) {
+    conditions.push('first_name LIKE ?');
+    params.push(`%${firstName}%`);
+  }
+  if (lastName) {
+    conditions.push('last_name LIKE ?');
+    params.push(`%${lastName}%`);
+  }
+  if (role) {
+    conditions.push('role LIKE ?');
+    params.push(`${role}`);
+  }
+  if (status) {
+    conditions.push('status LIKE ?');
+    params.push(`${status}`);
+  }
+  if (createStartDate) {
+    conditions.push('created_at >= ?');
+    params.push(createStartDate);
+  }
+  if (createEndDate) {
+    conditions.push('created_at <= ?');
+    params.push(createEndDate);
+  }
+  if (loginStartDate) {
+    conditions.push('last_login_at >= ?');
+    params.push(loginStartDate);
+  }
+  if (loginEndDate) {
+    conditions.push('last_login_at <= ?');
+    params.push(loginEndDate);
+  }
+
+  const where = conditions.length ? 'WHERE ' + conditions.join(' AND ') : '';
+  try {
+    const [rows] = await db.execute(
+      `SELECT id, email, first_name, last_name, role, status, created_at, last_login_at FROM user ${where}`,
+      params
     );
     const conditions = [];
     const params = [];

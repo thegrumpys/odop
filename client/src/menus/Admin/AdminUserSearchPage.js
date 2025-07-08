@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import axios from "../../axiosConfig";
 import { Container, Row, Col, Form, Button, Table } from "react-bootstrap";
 import MessageAlert from "../../components/MessageAlert";
@@ -7,13 +7,19 @@ import { useAuth } from "../../components/AuthProvider";
 import AdminUserModal from "./AdminUserModal";
 
 export default function AdminUserSearchPage() {
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [role, setRole] = useState("");
-  const [status, setStatus] = useState("");
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [role, setRole] = useState('');
+  const [status, setStatus] = useState('');
+  const [createStartDate, setCreateStartDate] = useState('');
+  const [createEndDate, setCreateEndDate] = useState('');
+  const [loginStartDate, setLoginStartDate] = useState('');
+  const [loginEndDate, setLoginEndDate] = useState('');
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
+  const [sortColumn, setSortColumn] = useState('');
+  const [sortDirection, setSortDirection] = useState('asc');
   const [modalShow, setModalShow] = useState(false);
   const [editUser, setEditUser] = useState(null);
   const { authState } = useAuth();
@@ -40,26 +46,44 @@ export default function AdminUserSearchPage() {
     if (e) e.preventDefault();
     setError(null);
     try {
-      const res = await axios.get("/api/v1/users", {
+      const res = await axios.get('/api/v1/users', {
         headers: {
-          Authorization: "Bearer " + authState.token,
+          Authorization: 'Bearer ' + authState.token,
         },
-        params: { email, firstName, lastName, role, status },
+        params: {
+          email,
+          firstName,
+          lastName,
+          role,
+          status,
+          createStartDate,
+          createEndDate,
+          loginStartDate,
+          loginEndDate,
+        },
       });
       setError(res.data.error);
       setResults(res.data);
-      logUsage("event", "AdminUserSearchPage", {
+      logUsage('event', 'AdminUserSearchPage', {
         event_label:
-          "search email:" +
+          'search email:' +
           email +
-          " firstName:" +
+          ' firstName:' +
           firstName +
-          " lastName:" +
+          ' lastName:' +
           lastName +
-          " role:" +
+          ' role:' +
           role +
-          " status:" +
-          status,
+          ' status:' +
+          status +
+          ' createStartDate:' +
+          createStartDate +
+          ' createEndDate:' +
+          createEndDate +
+          ' loginStartDate:' +
+          loginStartDate +
+          ' loginEndDate:' +
+          loginEndDate,
       });
     } catch (err) {
       setError(err.response?.data?.error || err.message);
@@ -79,6 +103,40 @@ export default function AdminUserSearchPage() {
 
   const handleSaved = () => {
     handleSearch();
+
+  const handleSort = (column) => {
+    if (sortColumn === column) {
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortColumn(column);
+      setSortDirection('asc');
+    }
+  };
+
+  const sortedResults = useMemo(() => {
+    const sorted = [...results];
+    if (sortColumn) {
+      sorted.sort((a, b) => {
+        const valA = a[sortColumn] || '';
+        const valB = b[sortColumn] || '';
+        if (valA < valB) return -1;
+        if (valA > valB) return 1;
+        return 0;
+      });
+      if (sortDirection === 'desc') {
+        sorted.reverse();
+      }
+    }
+    return sorted;
+  }, [results, sortColumn, sortDirection]);
+
+  const sortIcon = (column) => {
+    if (sortColumn !== column) return null;
+    return sortDirection === 'asc' ? (
+      <i className="fas fa-arrow-up ms-1"></i>
+    ) : (
+      <i className="fas fa-arrow-down ms-1"></i>
+    );
   };
 
   return (
@@ -90,58 +148,126 @@ export default function AdminUserSearchPage() {
             New User
           </Button>
           <form onSubmit={handleSearch} className="mb-3">
-            <Form.Group controlId="searchEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group controlId="searchFirstName">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group controlId="searchLastName">
-              <Form.Label>LastName</Form.Label>
-              <Form.Control
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group controlId="searchRole">
-              <Form.Label>Role</Form.Label>
-              <Form.Select
-                aria-label="Role Search Input"
-                onChange={(e) => setRole(e.target.value)}
-              >
-                <option value=""></option>
-                <option value="admin">admin</option>
-                <option value="user">user</option>
-              </Form.Select>
-            </Form.Group>
-            <Form.Group controlId="searchStatus">
-              <Form.Label>Status</Form.Label>
-              <Form.Select
-                aria-label="Status Search Input"
-                onChange={(e) => setStatus(e.target.value)}
-              >
-                <option value=""></option>
-                <option value="active">active</option>
-                <option value="inactive">inactive</option>
-              </Form.Select>
-            </Form.Group>
+            <Table borderless size="sm">
+              <tbody>
+                <tr>
+                  <td>
+                    <Form.Group controlId="searchEmail">
+                      <Form.Label>Email</Form.Label>
+                      <Form.Control
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </Form.Group>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <Form.Group controlId="searchFirstName">
+                      <Form.Label>First Name</Form.Label>
+                      <Form.Control
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                      />
+                    </Form.Group>
+                  </td>
+                  <td>
+                    <Form.Group controlId="searchLastName">
+                      <Form.Label>LastName</Form.Label>
+                      <Form.Control
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                      />
+                    </Form.Group>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <Form.Group controlId="searchRole">
+                      <Form.Label>Role</Form.Label>
+                      <Form.Select
+                        aria-label="Role Search Input"
+                        onChange={(e) => setRole(e.target.value)}
+                      >
+                        <option value=""></option>
+                        <option value="admin">admin</option>
+                        <option value="user">user</option>
+                      </Form.Select>
+                    </Form.Group>
+                  </td>
+                  <td>
+                    <Form.Group controlId="searchStatus">
+                      <Form.Label>Status</Form.Label>
+                      <Form.Select
+                        aria-label="Status Search Input"
+                        onChange={(e) => setStatus(e.target.value)}
+                      >
+                        <option value=""></option>
+                        <option value="active">active</option>
+                        <option value="inactive">inactive</option>
+                      </Form.Select>
+                    </Form.Group>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <Form.Group controlId="searchCreateStartDate">
+                      <Form.Label>Created After</Form.Label>
+                      <Form.Control
+                        type="datetime-local"
+                        value={createStartDate}
+                        onChange={(e) => setCreateStartDate(e.target.value)}
+                      />
+                    </Form.Group>
+                  </td>
+                  <td>
+                    <Form.Group controlId="searchCreateEndDate">
+                      <Form.Label>Created Before</Form.Label>
+                      <Form.Control
+                        type="datetime-local"
+                        value={createEndDate}
+                        onChange={(e) => setCreateEndDate(e.target.value)}
+                      />
+                    </Form.Group>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <Form.Group controlId="searchLoginStartDate">
+                      <Form.Label>Last Login After</Form.Label>
+                      <Form.Control
+                        type="datetime-local"
+                        value={loginStartDate}
+                        onChange={(e) => setLoginStartDate(e.target.value)}
+                      />
+                    </Form.Group>
+                  </td>
+                  <td>
+                    <Form.Group controlId="searchLoginEndDate">
+                      <Form.Label>Last Login Before</Form.Label>
+                      <Form.Control
+                        type="datetime-local"
+                        value={loginEndDate}
+                        onChange={(e) => setLoginEndDate(e.target.value)}
+                      />
+                    </Form.Group>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
             <Button
               className="mt-2"
               type="reset"
               onClick={(e) => {
-                setEmail("");
-                setFirstName("");
-                setLastName("");
-                setRole("");
-                setStatus("");
+                setEmail('');
+                setFirstName('');
+                setLastName('');
+                setRole('');
+                setStatus('');
+                setCreateStartDate('');
+                setCreateEndDate('');
+                setLoginStartDate('');
+                setLoginEndDate('');
               }}
             >
               Reset
@@ -157,19 +283,32 @@ export default function AdminUserSearchPage() {
             <Table bordered hover size="sm" className="mt-3">
               <thead>
                 <tr>
-                  <th>Email</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Role</th>
-                  <th>Status</th>
-                  <th>Created</th>
-                  <th>Last Login</th>
-                  <th>Edit</th>
+                  <th onClick={() => handleSort('email')} style={{ cursor: 'pointer' }}>
+                    Email{sortIcon('email')}
+                  </th>
+                  <th onClick={() => handleSort('first_name')} style={{ cursor: 'pointer' }}>
+                    First Name{sortIcon('first_name')}
+                  </th>
+                  <th onClick={() => handleSort('last_name')} style={{ cursor: 'pointer' }}>
+                    Last Name{sortIcon('last_name')}
+                  </th>
+                  <th onClick={() => handleSort('role')} style={{ cursor: 'pointer' }}>
+                    Role{sortIcon('role')}
+                  </th>
+                  <th onClick={() => handleSort('status')} style={{ cursor: 'pointer' }}>
+                    Status{sortIcon('status')}
+                  </th>
+                  <th onClick={() => handleSort('created_at')} style={{ cursor: 'pointer' }}>
+                    Created{sortIcon('created_at')}
+                  </th>
+                  <th onClick={() => handleSort('last_login_at')} style={{ cursor: 'pointer' }}>
+                    Last Login{sortIcon('last_login_at')}
+                  </th>
                   <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
-                {results.map((u) => (
+                {sortedResults.map((u) => (
                   <tr key={u.id}>
                     <td>{u.email}</td>
                     <td>{u.first_name}</td>
