@@ -92,81 +92,111 @@ export default function AdminUserSearchPage() {
         <Col lg="12">
           <h1>User Search</h1>
           <form onSubmit={handleSearch} className="mb-3">
-            <Form.Group controlId="searchEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group controlId="searchFirstName">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group controlId="searchLastName">
-              <Form.Label>LastName</Form.Label>
-              <Form.Control
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group controlId="searchRole">
-              <Form.Label>Role</Form.Label>
-              <Form.Select
-                aria-label="Role Search Input"
-                onChange={(e) => setRole(e.target.value)}
-              >
-                <option value=""></option>
-                <option value="admin">admin</option>
-                <option value="user">user</option>
-              </Form.Select>
-            </Form.Group>
-            <Form.Group controlId="searchStatus">
-              <Form.Label>Status</Form.Label>
-              <Form.Select
-                aria-label="Status Search Input"
-                onChange={(e) => setStatus(e.target.value)}
-              >
-                <option value=""></option>
-                <option value="active">active</option>
-                <option value="inactive">inactive</option>
-              </Form.Select>
-            </Form.Group>
-            <Form.Group controlId="searchCreateStartDate">
-              <Form.Label>Created After</Form.Label>
-              <Form.Control
-                type="datetime-local"
-                value={createStartDate}
-                onChange={(e) => setCreateStartDate(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group controlId="searchCreateEndDate">
-              <Form.Label>Created Before</Form.Label>
-              <Form.Control
-                type="datetime-local"
-                value={createEndDate}
-                onChange={(e) => setCreateEndDate(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group controlId="searchLoginStartDate">
-              <Form.Label>Last Login After</Form.Label>
-              <Form.Control
-                type="datetime-local"
-                value={loginStartDate}
-                onChange={(e) => setLoginStartDate(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group controlId="searchLoginEndDate">
-              <Form.Label>Last Login Before</Form.Label>
-              <Form.Control
-                type="datetime-local"
-                value={loginEndDate}
-                onChange={(e) => setLoginEndDate(e.target.value)}
-              />
-            </Form.Group>
+            <Table>
+              <tr>
+                <td>
+                  <Form.Group controlId="searchEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </Form.Group>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <Form.Group controlId="searchFirstName">
+                    <Form.Label>First Name</Form.Label>
+                    <Form.Control
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                    />
+                  </Form.Group>
+                </td>
+                <td>
+                  <Form.Group controlId="searchLastName">
+                    <Form.Label>LastName</Form.Label>
+                    <Form.Control
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                    />
+                  </Form.Group>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <Form.Group controlId="searchRole">
+                    <Form.Label>Role</Form.Label>
+                    <Form.Select
+                      aria-label="Role Search Input"
+                      onChange={(e) => setRole(e.target.value)}
+                    >
+                      <option value=""></option>
+                      <option value="admin">admin</option>
+                      <option value="user">user</option>
+                    </Form.Select>
+                  </Form.Group>
+                </td>
+                <td>
+                  <Form.Group controlId="searchStatus">
+                    <Form.Label>Status</Form.Label>
+                    <Form.Select
+                      aria-label="Status Search Input"
+                      onChange={(e) => setStatus(e.target.value)}
+                    >
+                      <option value=""></option>
+                      <option value="active">active</option>
+                      <option value="inactive">inactive</option>
+                    </Form.Select>
+                  </Form.Group>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <Form.Group controlId="searchCreateStartDate">
+                    <Form.Label>Created After</Form.Label>
+                    <Form.Control
+                      type="datetime-local"
+                      value={createStartDate}
+                      onChange={(e) => setCreateStartDate(e.target.value)}
+                    />
+                  </Form.Group>
+                </td>
+                <td>
+                  <Form.Group controlId="searchCreateEndDate">
+                    <Form.Label>Created Before</Form.Label>
+                    <Form.Control
+                      type="datetime-local"
+                      value={createEndDate}
+                      onChange={(e) => setCreateEndDate(e.target.value)}
+                    />
+                  </Form.Group>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <Form.Group controlId="searchLoginStartDate">
+                    <Form.Label>Last Login After</Form.Label>
+                    <Form.Control
+                      type="datetime-local"
+                      value={loginStartDate}
+                      onChange={(e) => setLoginStartDate(e.target.value)}
+                    />
+                  </Form.Group>
+                </td>
+                <td>
+                  <Form.Group controlId="searchLoginEndDate">
+                    <Form.Label>Last Login Before</Form.Label>
+                    <Form.Control
+                      type="datetime-local"
+                      value={loginEndDate}
+                      onChange={(e) => setLoginEndDate(e.target.value)}
+                    />
+                  </Form.Group>
+                </td>
+              </tr>
+            </Table>
             <Button
               className="mt-2"
               type="reset"
