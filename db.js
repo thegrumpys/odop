@@ -15,7 +15,7 @@ const pool = mysql.createPool({
   password: process.env.NODE_ENV === 'test' ? process.env.MYSQL_TEST_PASSWORD : process.env.MYSQL_PASSWORD,
   database: process.env.NODE_ENV === 'test' ? process.env.MYSQL_TEST_DATABASE : process.env.MYSQL_DATABASE,
   waitForConnections: true,
-  connectionLimit: 10,
+  connectionLimit: 5,
   queueLimit: 0
 });
 
