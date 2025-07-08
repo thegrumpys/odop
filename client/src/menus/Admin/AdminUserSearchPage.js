@@ -11,6 +11,10 @@ export default function AdminUserSearchPage() {
   const [lastName, setLastName] = useState('');
   const [role, setRole] = useState('');
   const [status, setStatus] = useState('');
+  const [createStartDate, setCreateStartDate] = useState('');
+  const [createEndDate, setCreateEndDate] = useState('');
+  const [loginStartDate, setLoginStartDate] = useState('');
+  const [loginEndDate, setLoginEndDate] = useState('');
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
   const { authState } = useAuth();
@@ -20,12 +24,14 @@ export default function AdminUserSearchPage() {
     try {
       const res = await axios.delete(`/api/v1/users/${id}`, {
         headers: {
-          Authorization: 'Bearer ' + authState.token
+          Authorization: 'Bearer ' + authState.token,
         },
       });
       setError(res.data.error);
       setResults(results.filter((u) => u.id !== id));
-      logUsage('event', 'AdminUserSearchPage', { event_label: 'delete id:' + id });
+      logUsage('event', 'AdminUserSearchPage', {
+        event_label: 'delete id:' + id,
+      });
     } catch (err) {
       setError(err.response?.data?.error || err.message);
     }
@@ -35,15 +41,45 @@ export default function AdminUserSearchPage() {
     e.preventDefault();
     setError(null);
     try {
-      const res = await axios.get('/api/v1/users', { 
+      const res = await axios.get('/api/v1/users', {
         headers: {
-          Authorization: 'Bearer ' + authState.token
+          Authorization: 'Bearer ' + authState.token,
         },
-        params: { email, firstName, lastName, role, status }
+        params: {
+          email,
+          firstName,
+          lastName,
+          role,
+          status,
+          createStartDate,
+          createEndDate,
+          loginStartDate,
+          loginEndDate,
+        },
       });
       setError(res.data.error);
       setResults(res.data);
-      logUsage('event', 'AdminUserSearchPage', { event_label: 'search email:' + email + ' firstName:' + firstName + ' lastName:' + lastName+ ' role:' + role+ ' status:' + status });
+      logUsage('event', 'AdminUserSearchPage', {
+        event_label:
+          'search email:' +
+          email +
+          ' firstName:' +
+          firstName +
+          ' lastName:' +
+          lastName +
+          ' role:' +
+          role +
+          ' status:' +
+          status +
+          ' createStartDate:' +
+          createStartDate +
+          ' createEndDate:' +
+          createEndDate +
+          ' loginStartDate:' +
+          loginStartDate +
+          ' loginEndDate:' +
+          loginEndDate,
+      });
     } catch (err) {
       setError(err.response?.data?.error || err.message);
       setResults([]);
@@ -58,19 +94,31 @@ export default function AdminUserSearchPage() {
           <form onSubmit={handleSearch} className="mb-3">
             <Form.Group controlId="searchEmail">
               <Form.Label>Email</Form.Label>
-              <Form.Control value={email} onChange={(e) => setEmail(e.target.value)} />
+              <Form.Control
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </Form.Group>
             <Form.Group controlId="searchFirstName">
               <Form.Label>First Name</Form.Label>
-              <Form.Control value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+              <Form.Control
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
             </Form.Group>
             <Form.Group controlId="searchLastName">
               <Form.Label>LastName</Form.Label>
-              <Form.Control value={lastName} onChange={(e) => setLastName(e.target.value)} />
+              <Form.Control
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
             </Form.Group>
             <Form.Group controlId="searchRole">
               <Form.Label>Role</Form.Label>
-              <Form.Select aria-label="Role Search Input" onChange={(e) => setRole(e.target.value)} >
+              <Form.Select
+                aria-label="Role Search Input"
+                onChange={(e) => setRole(e.target.value)}
+              >
                 <option value=""></option>
                 <option value="admin">admin</option>
                 <option value="user">user</option>
@@ -78,14 +126,68 @@ export default function AdminUserSearchPage() {
             </Form.Group>
             <Form.Group controlId="searchStatus">
               <Form.Label>Status</Form.Label>
-              <Form.Select aria-label="Status Search Input" onChange={(e) => setStatus(e.target.value)} >
+              <Form.Select
+                aria-label="Status Search Input"
+                onChange={(e) => setStatus(e.target.value)}
+              >
                 <option value=""></option>
                 <option value="active">active</option>
                 <option value="inactive">inactive</option>
               </Form.Select>
             </Form.Group>
-            <Button className="mt-2" type="reset" onClick={(e) => {setEmail('');setFirstName('');setLastName('');setRole('');setStatus('');}}>Reset</Button>&nbsp;
-            <Button className="mt-2" type="submit">Search</Button>
+            <Form.Group controlId="searchCreateStartDate">
+              <Form.Label>Created After</Form.Label>
+              <Form.Control
+                type="datetime-local"
+                value={createStartDate}
+                onChange={(e) => setCreateStartDate(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="searchCreateEndDate">
+              <Form.Label>Created Before</Form.Label>
+              <Form.Control
+                type="datetime-local"
+                value={createEndDate}
+                onChange={(e) => setCreateEndDate(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="searchLoginStartDate">
+              <Form.Label>Last Login After</Form.Label>
+              <Form.Control
+                type="datetime-local"
+                value={loginStartDate}
+                onChange={(e) => setLoginStartDate(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="searchLoginEndDate">
+              <Form.Label>Last Login Before</Form.Label>
+              <Form.Control
+                type="datetime-local"
+                value={loginEndDate}
+                onChange={(e) => setLoginEndDate(e.target.value)}
+              />
+            </Form.Group>
+            <Button
+              className="mt-2"
+              type="reset"
+              onClick={(e) => {
+                setEmail('');
+                setFirstName('');
+                setLastName('');
+                setRole('');
+                setStatus('');
+                setCreateStartDate('');
+                setCreateEndDate('');
+                setLoginStartDate('');
+                setLoginEndDate('');
+              }}
+            >
+              Reset
+            </Button>
+            &nbsp;
+            <Button className="mt-2" type="submit">
+              Search
+            </Button>
           </form>
           <MessageAlert error={error} />
           <p>Found {results.length} Users</p>
