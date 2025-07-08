@@ -841,8 +841,8 @@ app.delete('/api/v1/cleanup-expired-tokens', async (req, res) => {
 //====================================================================================================================
 // Admin User Search
 app.get('/api/v1/users', authenticationRequired, adminRequired, async (req, res) => {
-  const { email, firstName, lastName, role, status } = req.query;
-  console.log('/api/v1/users','email=',email,'firstName=',firstName,'lastName=',lastName,'role=',role,'status=',status);
+  const { email, firstName, lastName, role, status, createStartDate, createEndDate, loginStartDate, loginEndDate } = req.query;
+  console.log('/api/v1/users','email=',email,'firstName=',firstName,'lastName=',lastName,'role=',role,'status=',status,'createStartDate=',createStartDate,'createEndDate=',createEndDate,'loginStartDate=',loginStartDate,'loginEndDate=',loginEndDate);
   const conditions = [];
   const params = [];
   if (email) {
@@ -864,6 +864,22 @@ app.get('/api/v1/users', authenticationRequired, adminRequired, async (req, res)
   if (status) {
     conditions.push('status LIKE ?');
     params.push(`${status}`);
+  }
+  if (createStartDate) {
+    conditions.push('created_at >= ?');
+    params.push(createStartDate);
+  }
+  if (createEndDate) {
+    conditions.push('created_at <= ?');
+    params.push(createEndDate);
+  }
+  if (loginStartDate) {
+    conditions.push('last_login_at >= ?');
+    params.push(loginStartDate);
+  }
+  if (loginEndDate) {
+    conditions.push('last_login_at <= ?');
+    params.push(loginEndDate);
   }
 
   const where = conditions.length ? 'WHERE ' + conditions.join(' AND ') : '';
