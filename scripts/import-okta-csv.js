@@ -8,6 +8,7 @@ const FIELD_MAP = {
   "user.email": "email",
   "user.firstName": "first_name",
   "user.lastName": "last_name",
+  "user.created": "created_at",
   "user.lastLogin": "last_login_at"
 };
 
@@ -25,13 +26,16 @@ async function main(filePath) {
     process.exit(1);
   }
 
+  console.log('====================Input Okta CSV====================');
+  console.log('user=',process.env.MYSQL_USER,'password=','<HIDDEN>','host=',process.env.MYSQL_HOST,'host=',process.env.MYSQL_PORT,'host=',process.env.MYSQL_DATABASE);
+
   let insertedCount = 0;
   let updatedCount = 0;
   let skippedCount = 0;
 
   const insertUser = async (user) => {
     const sql = `
-      INSERT INTO user (token, email, first_name, last_name, last_login_at, role, status)
+      INSERT INTO user (token, email, first_name, last_name, created_at, last_login_at, role, status)
       VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
     await db.execute(sql, [
@@ -39,6 +43,7 @@ async function main(filePath) {
       user.email,
       user.first_name,
       user.last_name,
+      user.created_at,
       user.last_login_at,
       'user',         // role
       'inactive'      // status
@@ -48,9 +53,10 @@ async function main(filePath) {
 
   const updateUserLoginTime = async (user) => {
     const sql = `
-      UPDATE user SET last_login_at = ? WHERE token = ? AND email = ?
+      UPDATE user SET created_at = ?, last_login_at = ? WHERE token = ? AND email = ?
     `;
     await db.execute(sql, [
+      user.created_at,
       user.last_login_at,
       user.token,
       user.email
@@ -122,6 +128,8 @@ async function main(filePath) {
   } finally {
     await db.end();
   }
+
+  console.log('======================================================');
 }
 
 const filePath = process.argv[2];
