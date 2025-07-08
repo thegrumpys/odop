@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from '../../axiosConfig';
-import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Table, InputGroup } from 'react-bootstrap';
 import MessageAlert from '../../components/MessageAlert';
 import { logUsage } from '../../logUsage';
 import { useAuth } from '../../components/AuthProvider';
@@ -92,7 +92,7 @@ export default function AdminUserSearchPage() {
         <Col lg="12">
           <h1>User Search</h1>
           <form onSubmit={handleSearch} className="mb-3">
-            <Table>
+            <Table borderless size="sm">
               <tbody>
                 <tr>
                   <td>
