@@ -1,9 +1,10 @@
-import React, { useState, useMemo } from 'react';
-import axios from '../../axiosConfig';
-import { Container, Row, Col, Form, Button, Table, InputGroup } from 'react-bootstrap';
-import MessageAlert from '../../components/MessageAlert';
-import { logUsage } from '../../logUsage';
-import { useAuth } from '../../components/AuthProvider';
+import React, { useState, useMemo } from "react";
+import axios from "../../axiosConfig";
+import { Container, Row, Col, Form, Button, Table } from "react-bootstrap";
+import MessageAlert from "../../components/MessageAlert";
+import { logUsage } from "../../logUsage";
+import { useAuth } from "../../components/AuthProvider";
+import AdminUserModal from "./AdminUserModal";
 
 export default function AdminUserSearchPage() {
   const [email, setEmail] = useState('');
@@ -19,6 +20,8 @@ export default function AdminUserSearchPage() {
   const [error, setError] = useState(null);
   const [sortColumn, setSortColumn] = useState('');
   const [sortDirection, setSortDirection] = useState('asc');
+  const [modalShow, setModalShow] = useState(false);
+  const [editUser, setEditUser] = useState(null);
   const { authState } = useAuth();
 
   const handleDelete = async (id) => {
@@ -26,13 +29,13 @@ export default function AdminUserSearchPage() {
     try {
       const res = await axios.delete(`/api/v1/users/${id}`, {
         headers: {
-          Authorization: 'Bearer ' + authState.token,
+          Authorization: "Bearer " + authState.token,
         },
       });
       setError(res.data.error);
       setResults(results.filter((u) => u.id !== id));
-      logUsage('event', 'AdminUserSearchPage', {
-        event_label: 'delete id:' + id,
+      logUsage("event", "AdminUserSearchPage", {
+        event_label: "delete id:" + id,
       });
     } catch (err) {
       setError(err.response?.data?.error || err.message);
@@ -40,7 +43,7 @@ export default function AdminUserSearchPage() {
   };
 
   const handleSearch = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     setError(null);
     try {
       const res = await axios.get('/api/v1/users', {
@@ -88,6 +91,19 @@ export default function AdminUserSearchPage() {
     }
   };
 
+  const handleNew = () => {
+    setEditUser(null);
+    setModalShow(true);
+  };
+
+  const handleEdit = (user) => {
+    setEditUser(user);
+    setModalShow(true);
+  };
+
+  const handleSaved = () => {
+    handleSearch();
+
   const handleSort = (column) => {
     if (sortColumn === column) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
@@ -128,6 +144,9 @@ export default function AdminUserSearchPage() {
       <Row>
         <Col lg="12">
           <h1>User Search</h1>
+          <Button className="mb-3" onClick={handleNew}>
+            New User
+          </Button>
           <form onSubmit={handleSearch} className="mb-3">
             <Table borderless size="sm">
               <tbody>
@@ -299,6 +318,11 @@ export default function AdminUserSearchPage() {
                     <td>{u.created_at}</td>
                     <td>{u.last_login_at}</td>
                     <td>
+                      <Button variant="link" onClick={() => handleEdit(u)}>
+                        <i className="fas fa-edit"></i>
+                      </Button>
+                    </td>
+                    <td>
                       <Button variant="link" onClick={() => handleDelete(u.id)}>
                         <i className="fas fa-trash text-danger"></i>
                       </Button>
@@ -308,6 +332,12 @@ export default function AdminUserSearchPage() {
               </tbody>
             </Table>
           )}
+          <AdminUserModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            user={editUser}
+            onSaved={handleSaved}
+          />
         </Col>
       </Row>
     </Container>
