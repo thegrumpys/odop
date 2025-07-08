@@ -32,8 +32,7 @@
   ],
   "dependencies": {
     "@mars/heroku-js-runtime-env": "^3.0.2",
-    "@okta/okta-react": "^6.8.0",
-    "@okta/okta-signin-widget": "^7.18.0",
+    "axios": "^1.4.0",
     "bootstrap": "^5.3.3",
     "jszip": "^3.10.1",
     "popper.js": "^1.16.1",
@@ -45,8 +44,7 @@
     "react-router-dom": "^6.22.1",
     "react-scripts": "^5.0.1",
     "redux": "^5.0.1",
-    "util": "^0.12.5",
-    "axios": "^1.4.0"
+    "util": "^0.12.5"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",

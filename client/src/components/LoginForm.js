@@ -102,7 +102,7 @@ export default function LoginForm() {
                   <td className="text-center pt-3 px-5 align-middle"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><h3>Sign in to ODOP</h3></td>
+                  <td className="text-center"><h3 id="odop-form-title">Sign in to ODOP</h3></td>
                 </tr>
                 <tr>
                   <td className="text-center"><MessageAlert error={error} /></td>
