@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import axios from '../../axiosConfig';
 import { Container, Row, Col, Form, Button, Table, InputGroup } from 'react-bootstrap';
 import MessageAlert from '../../components/MessageAlert';
@@ -17,6 +17,8 @@ export default function AdminUserSearchPage() {
   const [loginEndDate, setLoginEndDate] = useState('');
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
+  const [sortColumn, setSortColumn] = useState('');
+  const [sortDirection, setSortDirection] = useState('asc');
   const { authState } = useAuth();
 
   const handleDelete = async (id) => {
@@ -84,6 +86,41 @@ export default function AdminUserSearchPage() {
       setError(err.response?.data?.error || err.message);
       setResults([]);
     }
+  };
+
+  const handleSort = (column) => {
+    if (sortColumn === column) {
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortColumn(column);
+      setSortDirection('asc');
+    }
+  };
+
+  const sortedResults = useMemo(() => {
+    const sorted = [...results];
+    if (sortColumn) {
+      sorted.sort((a, b) => {
+        const valA = a[sortColumn] || '';
+        const valB = b[sortColumn] || '';
+        if (valA < valB) return -1;
+        if (valA > valB) return 1;
+        return 0;
+      });
+      if (sortDirection === 'desc') {
+        sorted.reverse();
+      }
+    }
+    return sorted;
+  }, [results, sortColumn, sortDirection]);
+
+  const sortIcon = (column) => {
+    if (sortColumn !== column) return null;
+    return sortDirection === 'asc' ? (
+      <i className="fas fa-arrow-up ms-1"></i>
+    ) : (
+      <i className="fas fa-arrow-down ms-1"></i>
+    );
   };
 
   return (
@@ -227,18 +264,32 @@ export default function AdminUserSearchPage() {
             <Table bordered hover size="sm" className="mt-3">
               <thead>
                 <tr>
-                  <th>Email</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Role</th>
-                  <th>Status</th>
-                  <th>Created</th>
-                  <th>Last Login</th>
+                  <th onClick={() => handleSort('email')} style={{ cursor: 'pointer' }}>
+                    Email{sortIcon('email')}
+                  </th>
+                  <th onClick={() => handleSort('first_name')} style={{ cursor: 'pointer' }}>
+                    First Name{sortIcon('first_name')}
+                  </th>
+                  <th onClick={() => handleSort('last_name')} style={{ cursor: 'pointer' }}>
+                    Last Name{sortIcon('last_name')}
+                  </th>
+                  <th onClick={() => handleSort('role')} style={{ cursor: 'pointer' }}>
+                    Role{sortIcon('role')}
+                  </th>
+                  <th onClick={() => handleSort('status')} style={{ cursor: 'pointer' }}>
+                    Status{sortIcon('status')}
+                  </th>
+                  <th onClick={() => handleSort('created_at')} style={{ cursor: 'pointer' }}>
+                    Created{sortIcon('created_at')}
+                  </th>
+                  <th onClick={() => handleSort('last_login_at')} style={{ cursor: 'pointer' }}>
+                    Last Login{sortIcon('last_login_at')}
+                  </th>
                   <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
-                {results.map((u) => (
+                {sortedResults.map((u) => (
                   <tr key={u.id}>
                     <td>{u.email}</td>
                     <td>{u.first_name}</td>
