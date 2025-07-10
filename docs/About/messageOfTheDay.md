@@ -1,10 +1,16 @@
-**Message-of-the-day** &nbsp; updated June 29, 2025  
+**Message-of-the-day** &nbsp; updated July 12, 2025  
 
-**Summary:**  
-Implemented a File : "Download All" feature that automates the construction of a single .ZIP file containing all a user's designs in the ODOP Design Library 
-(cloud storage) which is then downloaded to the user's local file system.  
-The characters < > : " / \ | ? * are not allowed in design names in the ODOP Design Library and have been changed to an underscore (_).  
+### Version 6.0.0 Release
+We’re transitioning from Okta, a third-party authentication provider, to a new self-hosted login system.  
+#### For New Users
+• Click the Sign In button  
+• Follow the Sign Up link to create your account  
+#### For Existing Users
+When you log in for the first time under this new system, you’ll be prompted to reset your password. The process is quick, secure, and guided every step of the way. You can even re-enter your current password if you’d like.  
+#### Need Assistance?
+We know changes to authentication can be confusing. If you have any questions or prefer to speak with us directly, please [Contact Us](http://odop.springdesignsoftware.org/docs/About/ContactUs.html).  
 
+Thank you for using the Open Design Optimization Platform and the ODOP:Spring app. We appreciate your continued feedback and support.  
 ___
 
 Watch this space for breaking news 
@@ -14,7 +20,7 @@ including recent and impending releases, planned outages, newly discovered issue
 
 Version  | &nbsp; | Date released  
 ---      | ---    | ---  
-[ODOP version 5.2.1](https://github.com/thegrumpys/odop/milestone/76?closed=1)   | &nbsp; | June 29, 2025.  
+[ODOP version 6.0.0](https://github.com/thegrumpys/odop/milestone/74?closed=1)   | &nbsp; | July 12, 2025.  
 
 Follow the link(s) above to see change details in GitHub.  
 
@@ -64,6 +70,7 @@ Follow the links below to see change details in GitHub.
 
 Version  | &nbsp; | Date released  
 ---      | ---    | ---  
+[ODOP version 6.0.0](https://github.com/thegrumpys/odop/milestone/74?closed=1) | &nbsp; | July 12, 2025.  
 [ODOP version 5.2.1](https://github.com/thegrumpys/odop/milestone/76?closed=1) | &nbsp; | June 29, 2025.  
 [ODOP version 5.2.0](https://github.com/thegrumpys/odop/milestone/73?closed=1) | &nbsp; | April 06, 2025.  
 [ODOP version 5.1](https://github.com/thegrumpys/odop/milestone/75?closed=1)   | &nbsp; | December 29, 2024.  
