@@ -130,8 +130,6 @@ export default function AdminUserManagerPage() {
                       />
                     </Form.Group>
                   </td>
-                </tr>
-                <tr>
                   <td>
                     <Form.Group controlId="searchToken">
                       <Form.Label>Token</Form.Label>

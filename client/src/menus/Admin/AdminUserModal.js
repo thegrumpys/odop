@@ -17,15 +17,6 @@ export default function AdminUserModal({ show, onHide, user, onSaved }) {
   const [error, setError] = useState(null);
   const { authState } = useAuth();
 
-  // Remove stray bootstrap backdrop elements that can block input
-  useEffect(() => {
-    if (!show) {
-      document.body.classList.remove("modal-open");
-      const backdrops = document.querySelectorAll(".modal-backdrop");
-      backdrops.forEach((el) => el.parentNode && el.parentNode.removeChild(el));
-    }
-  }, [show]);
-
   useEffect(() => {
     if (user) {
       setEmail(user.email || "");
@@ -65,98 +56,100 @@ export default function AdminUserModal({ show, onHide, user, onSaved }) {
   };
 
   return (
-    <Modal show={show} onHide={onHide}>
-      <Modal.Header closeButton>
-        <Modal.Title>{isEdit ? "Edit User" : "New User"}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <MessageAlert error={error} />
-        <Form onSubmit={handleSubmit}>
-          <Table borderless size="sm">
-            <tbody>
-              <tr>
-                <td>
-                  <Form.Group controlId="userEmail">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </Form.Group>
-                </td>
-                {!isEdit && (
+    <>
+      {show && <Modal show={show} onHide={onHide}>
+        <Modal.Header closeButton>
+          <Modal.Title>{isEdit ? "Edit User" : "New User"}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <MessageAlert error={error} />
+          <Form onSubmit={handleSubmit}>
+            <Table borderless size="sm">
+              <tbody>
+                <tr>
                   <td>
-                    <Form.Group controlId="userPassword">
-                      <Form.Label>Password</Form.Label>
+                    <Form.Group controlId="userEmail">
+                      <Form.Label>Email</Form.Label>
                       <Form.Control
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        autoComplete="new_password"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </Form.Group>
                   </td>
-                )}
-              </tr>
-              <tr>
-                <td>
-                  <Form.Group controlId="userFirstName">
-                    <Form.Label>First Name</Form.Label>
-                    <Form.Control
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                    />
-                  </Form.Group>
-                </td>
-                <td>
-                  <Form.Group controlId="userLastName">
-                    <Form.Label>Last Name</Form.Label>
-                    <Form.Control
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                    />
-                  </Form.Group>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <Form.Group controlId="userRole">
-                    <Form.Label>Role</Form.Label>
-                    <Form.Select value={role} onChange={(e) => setRole(e.target.value)}>
-                      <option value="admin">admin</option>
-                      <option value="user">user</option>
-                    </Form.Select>
-                  </Form.Group>
-                </td>
-                <td>
-                  <Form.Group controlId="userStatus">
-                    <Form.Label>Status</Form.Label>
-                    <Form.Select value={status} onChange={(e) => setStatus(e.target.value)}>
-                      <option value="active">active</option>
-                      <option value="inactive">inactive</option>
-                    </Form.Select>
-                  </Form.Group>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <Form.Group controlId="userToken">
-                    <Form.Label>Token</Form.Label>
-                    <Form.Control
-                      value={token}
-                      onChange={(e) => setToken(e.target.value)}
-                    />
-                  </Form.Group>
-                </td>
-                <td></td>
-              </tr>
-            </tbody>
-          </Table>
-          <Button className="mt-2" type="submit">
-            Save
-          </Button>
-        </Form>
-      </Modal.Body>
-    </Modal>
+                  {!isEdit && (
+                    <td>
+                      <Form.Group controlId="userPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control
+                          type="password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          autoComplete="new_password"
+                        />
+                      </Form.Group>
+                    </td>
+                  )}
+                </tr>
+                <tr>
+                  <td>
+                    <Form.Group controlId="userFirstName">
+                      <Form.Label>First Name</Form.Label>
+                      <Form.Control
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                      />
+                    </Form.Group>
+                  </td>
+                  <td>
+                    <Form.Group controlId="userLastName">
+                      <Form.Label>Last Name</Form.Label>
+                      <Form.Control
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                      />
+                    </Form.Group>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <Form.Group controlId="userRole">
+                      <Form.Label>Role</Form.Label>
+                      <Form.Select value={role} onChange={(e) => setRole(e.target.value)}>
+                        <option value="admin">admin</option>
+                        <option value="user">user</option>
+                      </Form.Select>
+                    </Form.Group>
+                  </td>
+                  <td>
+                    <Form.Group controlId="userStatus">
+                      <Form.Label>Status</Form.Label>
+                      <Form.Select value={status} onChange={(e) => setStatus(e.target.value)}>
+                        <option value="active">active</option>
+                        <option value="inactive">inactive</option>
+                      </Form.Select>
+                    </Form.Group>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <Form.Group controlId="userToken">
+                      <Form.Label>Token</Form.Label>
+                      <Form.Control
+                        value={token}
+                        onChange={(e) => setToken(e.target.value)}
+                      />
+                    </Form.Group>
+                  </td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </Table>
+            <Button className="mt-2" type="submit">
+              Save
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal>}
+    </>
   );
 }
