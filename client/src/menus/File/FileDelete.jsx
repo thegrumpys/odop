@@ -7,6 +7,7 @@ import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
 import { useOktaAuth } from '@okta/okta-react';
+import axios from 'axios';
 
 export default function FileDelete() {
 //  console.log('FileDelete - Mounting...');
@@ -31,18 +32,12 @@ export default function FileDelete() {
 //    console.log('In FileDelete.getDesignNames','user=',user,'type=',type);
     // Get the names and store them in state
     displaySpinner(true);
-    fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
+    axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
       headers: {
         Authorization: 'Bearer ' + user
       }
     })
-    .then(res => {
-      if (!res.ok) {
-//        console.warn('In FileDelete.getDesignNames res=',res);
-        throw Error(res.statusText);
-      }
-      return res.json()
-    })
+    .then(res => res.data)
     .then(all_names => {
 //      console.log('In FileDelete.getDesignNames','all_names=', all_names);
       var rw_names = all_names.filter(design => { return design.user !== null && design.user !== 'null'});
@@ -65,20 +60,16 @@ export default function FileDelete() {
   const deleteDesign = (user, type, name) => {
 //    console.log('In FileDelete.deleteDesign','user=',user,'type=',type,'name=',name);
     displaySpinner(true);
-    fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
-      method: 'DELETE',
+    axios.delete('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + user
-      },
+      }
     })
     .then(res => {
-      if (!res.ok) {
-        throw Error(res.statusText);
-      }
       logUsage('event', 'FileDelete', { event_label: type + ' ' + name });
-      return res.json()
+      return res.data
     })
     .catch(error => {
       displayMessage('DELETE of \'' + name + '\' design  \'' + type + '\' design type failed with message: \'' + error.message + '\'');

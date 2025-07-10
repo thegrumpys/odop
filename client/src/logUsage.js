@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 var lastName = '';
 var lastValue = '';
 var lastSuffix = '';
@@ -6,23 +8,13 @@ var sequence = 0;
 
 function logIt(tag, action, note) {
 //  console.log('In logIt tag=',tag,'action=',action,'note=',note);
-  var body = JSON.stringify({ tag: tag, action: action, note: note });
-//  console.log('body=',body);
-  fetch('/api/v1/usage_log', {
-    method: 'POST',
+  axios.post('/api/v1/usage_log', { tag: tag, action: action, note: note }, {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-    },
-    body: body
-  })
-  .then(res => {
-//      console.log('res=',res);
-    if (!res.ok) {
-      throw Error(res.statusText);
     }
-    return res.json()
   })
+  .then(res => res.data)
   .catch(error => {
 //      console.log('error=',error);
     console.error('POST of usage_log of note \'' + JSON.stringify(note) + '\' failed with message: \'' + error.message + '\'');

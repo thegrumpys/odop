@@ -5,6 +5,7 @@ import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
+import axios from 'axios';
 //import { JSZip } from 'jszip';
 var JSZip = require("jszip");
 
@@ -52,26 +53,24 @@ export default function FileDownloadAll() {
 //        console.log('type=',type);
 
         // Step 1: fetch file names for this type
-        const fileListResponse = await fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
+        const fileListResponse = await axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
           headers: {
             Authorization: 'Bearer ' + user
           }
         })
-        let fileNames = await fileListResponse.json(); // assume array of file names
+        let fileNames = fileListResponse.data; // assume array of file names
         fileNames = fileNames.filter(fileName => fileName.user !== null);
 //        console.log('fileNames=',fileNames);
 
         // Step 2: fetch each file and keep filename association
         const fileContentPromises = fileNames.map(async (fileName) => {
 //          console.log('fileName=',fileName);
-          const response = await fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(fileName.name), {
+          const response = await axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(fileName.name), {
             headers: {
               Authorization: 'Bearer ' + user
             }
           })
-//          console.log('response=',response);
-          if (!response.ok) throw new Error(`Failed to fetch ${type}/${fileName.name}`);
-          const fileContent = await response.json(); // or use .arrayBuffer(), etc.
+          const fileContent = response.data; // or use .arrayBuffer(), etc.
 //          console.log('fileContent=',fileContent);
           return {
             fileName: `${topLevel}/${type}/${fileName.name.trim()}`,
