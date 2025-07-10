@@ -8,6 +8,7 @@ An [ODOP account](http://odop.springdesignsoftware.org/docs/About/userAccounts.h
 An account is required only if saving designs into the Design Library.  
 • Click the **Sign In** button  (It is toward the left of the menu bar)  
 • Follow the **Sign Up** link to create your account  
+You will receive a confirmation email message containing a link that completes the sign up process.  
 #### For Users With an Existing ODOP Account
 When you log in for the first time under this new system, you will be prompted to reset your password. 
 The process is quick, secure, and guided every step of the way. 
@@ -16,7 +17,7 @@ You can even re-enter your current password if you’d like.
 We know changes to authentication can be confusing. If you have any questions or prefer to speak with us directly, 
 please [Contact Us](http://odop.springdesignsoftware.org/docs/About/ContactUs.html).  
 
-Thank you for using the **O**pen **D**esign **O**ptimization **P**latform and the ODOP:Spring app. 
+Thank you for using the **O**pen **D**esign **O**ptimization **P**latform software and the ODOP:Spring app. 
 We appreciate your continued feedback and support.  
 ___
 
