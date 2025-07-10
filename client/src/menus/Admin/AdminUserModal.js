@@ -13,6 +13,7 @@ export default function AdminUserModal({ show, onHide, user, onSaved }) {
   const [lastName, setLastName] = useState("");
   const [role, setRole] = useState("user");
   const [status, setStatus] = useState("active");
+  const [token, setToken] = useState("");
   const [error, setError] = useState(null);
   const { authState } = useAuth();
 
@@ -32,6 +33,7 @@ export default function AdminUserModal({ show, onHide, user, onSaved }) {
       setLastName(user.last_name || "");
       setRole(user.role || "user");
       setStatus(user.status || "active");
+      setToken(user.token || "");
     } else {
       setEmail("");
       setPassword("");
@@ -39,6 +41,7 @@ export default function AdminUserModal({ show, onHide, user, onSaved }) {
       setLastName("");
       setRole("user");
       setStatus("active");
+      setToken("");
     }
   }, [user, show]);
 
@@ -47,9 +50,9 @@ export default function AdminUserModal({ show, onHide, user, onSaved }) {
     setError(null);
     try {
       if (isEdit) {
-        await axios.put(`/api/v1/users/${user.id}`, { email, first_name: firstName, last_name: lastName, role, status }, { headers: { Authorization: "Bearer " + authState.token } });
+        await axios.put(`/api/v1/users/${user.id}`, { email, first_name: firstName, last_name: lastName, role, status, token }, { headers: { Authorization: "Bearer " + authState.token } });
       } else {
-        await axios.post("/api/v1/users", { email, password, first_name: firstName, last_name: lastName, role, status }, { headers: { Authorization: "Bearer " + authState.token } });
+        await axios.post("/api/v1/users", { email, password, first_name: firstName, last_name: lastName, role, status, token }, { headers: { Authorization: "Bearer " + authState.token } });
       }
       logUsage("event", "AdminUserModal", {
         event_label: isEdit ? "update" : "create",
@@ -134,6 +137,18 @@ export default function AdminUserModal({ show, onHide, user, onSaved }) {
                     </Form.Select>
                   </Form.Group>
                 </td>
+              </tr>
+              <tr>
+                <td>
+                  <Form.Group controlId="userToken">
+                    <Form.Label>Token</Form.Label>
+                    <Form.Control
+                      value={token}
+                      onChange={(e) => setToken(e.target.value)}
+                    />
+                  </Form.Group>
+                </td>
+                <td></td>
               </tr>
             </tbody>
           </Table>
