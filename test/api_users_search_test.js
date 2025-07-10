@@ -9,28 +9,41 @@ let server = require("../server");
 let should = chai.should();
 let userId;
 let newUserId;
+let designId;
 
 chai.use(chaiHttp);
 
 describe("Admin User Manager", () => {
   before((done) => {
-    var connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
+    const connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
     connection.connect();
     const stmt =
       "INSERT INTO user (email, first_name, last_name, role, token, status, last_login_at) VALUES ('search@example.com','First','Last','admin','ADMINTOKEN','active','2000-01-01 00:00:00')";
     connection.query(stmt, function (err, results) {
-      if (!err) userId = results.insertId;
-      connection.end();
-      done(err);
+      if (!err) {
+        userId = results.insertId;
+        const designStmt =
+          "INSERT INTO design (user, type, name, value) VALUES ('ADMINTOKEN','Test','test','{}')";
+        connection.query(designStmt, function (dErr, dRes) {
+          if (!dErr) designId = dRes.insertId;
+          connection.end();
+          done(dErr || err);
+        });
+      } else {
+        connection.end();
+        done(err);
+      }
     });
   });
 
   after((done) => {
-    var connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
+    const connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
     connection.connect();
-    connection.query("DELETE FROM user WHERE id = ?", [userId], function (err) {
-      connection.end();
-      done(err);
+    connection.query('DELETE FROM design WHERE id = ?', [designId], function () {
+      connection.query('DELETE FROM user WHERE id = ?', [userId], function (err) {
+        connection.end();
+        done(err);
+      });
     });
   });
 
@@ -73,6 +86,19 @@ describe("Admin User Manager", () => {
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
+        done(err);
+      });
+  });
+
+  it("should include design count", (done) => {
+    chai
+      .request(server)
+      .get("/api/v1/users?email=search@example.com")
+      .set("Authorization", "Bearer ADMINTOKEN")
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body[0].should.have.property("num_designs");
+        res.body[0].num_designs.should.be.eql(1);
         done(err);
       });
   });

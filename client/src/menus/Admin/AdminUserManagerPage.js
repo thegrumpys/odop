@@ -272,6 +272,9 @@ export default function AdminUserManagerPage() {
                   <th onClick={() => handleSort('last_login_at')} style={{ cursor: 'pointer' }}>
                     Last Login{sortIcon('last_login_at')}
                   </th>
+                  <th onClick={() => handleSort('num_designs')} style={{ cursor: 'pointer' }}>
+                    Number of Designs{sortIcon('num_designs')}
+                  </th>
                   <th>Delete</th>
                 </tr>
               </thead>
@@ -290,6 +293,7 @@ export default function AdminUserManagerPage() {
                     <td>{u.status}</td>
                     <td>{u.created_at}</td>
                     <td>{u.last_login_at}</td>
+                    <td>{u.num_designs}</td>
                     <td>
                       <Button variant="link" onClick={() => handleDelete(u.id)}>
                         <i className="fas fa-trash text-danger"></i>

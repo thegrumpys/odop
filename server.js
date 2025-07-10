@@ -841,51 +841,61 @@ app.delete('/api/v1/cleanup-expired-tokens', async (req, res) => {
 //====================================================================================================================
 // Admin User Search
 app.get('/api/v1/users', authenticationRequired, adminRequired, async (req, res) => {
-  const { email, firstName, lastName, role, status, createStartDate, createEndDate, loginStartDate, loginEndDate } = req.query;
+  const {
+    email,
+    firstName,
+    lastName,
+    role,
+    status,
+    createStartDate,
+    createEndDate,
+    loginStartDate,
+    loginEndDate,
+  } = req.query;
   console.log('/api/v1/users','email=',email,'firstName=',firstName,'lastName=',lastName,'role=',role,'status=',status,'createStartDate=',createStartDate,'createEndDate=',createEndDate,'loginStartDate=',loginStartDate,'loginEndDate=',loginEndDate);
   const conditions = [];
   const params = [];
   if (email) {
-    conditions.push('email LIKE ?');
+    conditions.push('u.email LIKE ?');
     params.push(`%${email}%`);
   }
   if (firstName) {
-    conditions.push('first_name LIKE ?');
+    conditions.push('u.first_name LIKE ?');
     params.push(`%${firstName}%`);
   }
   if (lastName) {
-    conditions.push('last_name LIKE ?');
+    conditions.push('u.last_name LIKE ?');
     params.push(`%${lastName}%`);
   }
   if (role) {
-    conditions.push('role LIKE ?');
+    conditions.push('u.role LIKE ?');
     params.push(`${role}`);
   }
   if (status) {
-    conditions.push('status LIKE ?');
+    conditions.push('u.status LIKE ?');
     params.push(`${status}`);
   }
   if (createStartDate) {
-    conditions.push('created_at >= ?');
+    conditions.push('u.created_at >= ?');
     params.push(createStartDate);
   }
   if (createEndDate) {
-    conditions.push('created_at <= ?');
+    conditions.push('u.created_at <= ?');
     params.push(createEndDate);
   }
   if (loginStartDate) {
-    conditions.push('last_login_at >= ?');
+    conditions.push('u.last_login_at >= ?');
     params.push(loginStartDate);
   }
   if (loginEndDate) {
-    conditions.push('last_login_at <= ?');
+    conditions.push('u.last_login_at <= ?');
     params.push(loginEndDate);
   }
 
   const where = conditions.length ? 'WHERE ' + conditions.join(' AND ') : '';
   try {
     const [rows] = await db.execute(
-      `SELECT id, email, first_name, last_name, role, status, created_at, last_login_at FROM user ${where}`,
+      `SELECT u.id, u.email, u.first_name, u.last_name, u.role, u.status, u.created_at, u.last_login_at, COUNT(d.id) AS num_designs FROM user u LEFT JOIN design d ON u.token = d.user ${where} GROUP BY u.id`,
       params
     );
     sendMessage(res, rows, '', null, 200);
