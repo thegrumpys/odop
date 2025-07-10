@@ -12,6 +12,7 @@ export default function AdminUserManagerPage() {
   const [lastName, setLastName] = useState('');
   const [role, setRole] = useState('');
   const [status, setStatus] = useState('');
+  const [token, setToken] = useState('');
   const [createStartDate, setCreateStartDate] = useState('');
   const [createEndDate, setCreateEndDate] = useState('');
   const [loginStartDate, setLoginStartDate] = useState('');
@@ -48,11 +49,11 @@ export default function AdminUserManagerPage() {
         headers: {
           Authorization: 'Bearer ' + authState.token
         },
-        params: { email, firstName, lastName, role, status, createStartDate, createEndDate, loginStartDate, loginEndDate },
+        params: { email, firstName, lastName, role, status, token, createStartDate, createEndDate, loginStartDate, loginEndDate },
       });
       setError(res.data.error);
       setResults(res.data);
-      logUsage('event', 'AdminUserManagerPage', { event_label: 'search email:' + email + ' firstName:' + firstName + ' lastName:' + lastName + ' role:' + role + ' status:' + status + ' createStartDate:' + createStartDate + ' createEndDate:' + createEndDate + ' loginStartDate:' + loginStartDate + ' loginEndDate:' + loginEndDate });
+      logUsage('event', 'AdminUserManagerPage', { event_label: 'search email:' + email + ' firstName:' + firstName + ' lastName:' + lastName + ' role:' + role + ' status:' + status + ' token:' + token + ' createStartDate:' + createStartDate + ' createEndDate:' + createEndDate + ' loginStartDate:' + loginStartDate + ' loginEndDate:' + loginEndDate });
     } catch (err) {
       setError(err.response?.data?.error || err.message);
       setResults([]);
@@ -126,6 +127,17 @@ export default function AdminUserManagerPage() {
                       <Form.Control
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </Form.Group>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <Form.Group controlId="searchToken">
+                      <Form.Label>Token</Form.Label>
+                      <Form.Control
+                        value={token}
+                        onChange={(e) => setToken(e.target.value)}
                       />
                     </Form.Group>
                   </td>
@@ -233,6 +245,7 @@ export default function AdminUserManagerPage() {
                 setLastName('');
                 setRole('');
                 setStatus('');
+                setToken('');
                 setCreateStartDate('');
                 setCreateEndDate('');
                 setLoginStartDate('');
@@ -263,6 +276,9 @@ export default function AdminUserManagerPage() {
                   <th onClick={() => handleSort('role')} style={{ cursor: 'pointer' }}>
                     Role{sortIcon('role')}
                   </th>
+                  <th onClick={() => handleSort('token')} style={{ cursor: 'pointer' }}>
+                    Token{sortIcon('token')}
+                  </th>
                   <th onClick={() => handleSort('status')} style={{ cursor: 'pointer' }}>
                     Status{sortIcon('status')}
                   </th>
@@ -290,6 +306,7 @@ export default function AdminUserManagerPage() {
                     <td>{u.first_name}</td>
                     <td>{u.last_name}</td>
                     <td>{u.role}</td>
+                    <td>{u.token}</td>
                     <td>{u.status}</td>
                     <td>{u.created_at}</td>
                     <td>{u.last_login_at}</td>

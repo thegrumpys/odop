@@ -69,6 +69,7 @@ describe("Admin User Manager", () => {
         last_name: "User",
         role: "user",
         status: "active",
+        token: "NEWTOKEN",
       })
       .end((err, res) => {
         res.should.have.status(201);
@@ -86,6 +87,7 @@ describe("Admin User Manager", () => {
         res.should.have.status(200);
         res.body.should.be.a("array");
         res.body.length.should.be.eql(1);
+        res.body[0].should.have.property("token");
         done(err);
       });
   });
@@ -111,6 +113,31 @@ describe("Admin User Manager", () => {
       .send({ role: "admin" })
       .end((err, res) => {
         res.should.have.status(200);
+        done(err);
+      });
+  });
+
+  it("should update user token", (done) => {
+    chai
+      .request(server)
+      .put(`/api/v1/users/${newUserId}`)
+      .set("Authorization", "Bearer ADMINTOKEN")
+      .send({ token: "UPDATEDTOKEN" })
+      .end((err, res) => {
+        res.should.have.status(200);
+        done(err);
+      });
+  });
+
+  it("should get user by token", (done) => {
+    chai
+      .request(server)
+      .get("/api/v1/users?token=UPDATEDTOKEN")
+      .set("Authorization", "Bearer ADMINTOKEN")
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a("array");
+        res.body.length.should.be.eql(1);
         done(err);
       });
   });
