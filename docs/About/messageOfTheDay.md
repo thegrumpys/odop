@@ -1,16 +1,23 @@
 **Message-of-the-day** &nbsp; updated July 12, 2025  
 
-### Version 6.0.0 Release
-We’re transitioning from Okta, a third-party authentication provider, to a new self-hosted login system.  
-#### For New Users
-• Click the Sign In button  
-• Follow the Sign Up link to create your account  
-#### For Existing Users
-When you log in for the first time under this new system, you’ll be prompted to reset your password. The process is quick, secure, and guided every step of the way. You can even re-enter your current password if you’d like.  
-#### Need Assistance?
-We know changes to authentication can be confusing. If you have any questions or prefer to speak with us directly, please [Contact Us](http://odop.springdesignsoftware.org/docs/About/ContactUs.html).  
+### Version 6.0.0 Release 
+We’re transitioning authentication for the ODOP [Design Library](http://odop.springdesignsoftware.org/docs/Help/terminology.html#designLib) 
+from Okta, a third-party authentication provider, to a new self-hosted login system.  
+#### For New Users 
+An [ODOP account](http://odop.springdesignsoftware.org/docs/About/userAccounts.html) is not required to design springs. 
+An account is required only if saving designs into the Design Library.  
+• Click the **Sign In** button  (It is toward the left of the menu bar)  
+• Follow the **Sign Up** link to create your account  
+#### For Users With an Existing ODOP Account
+When you log in for the first time under this new system, you will be prompted to reset your password. 
+The process is quick, secure, and guided every step of the way. 
+You can even re-enter your current password if you’d like.  
+#### Need Assistance? 
+We know changes to authentication can be confusing. If you have any questions or prefer to speak with us directly, 
+please [Contact Us](http://odop.springdesignsoftware.org/docs/About/ContactUs.html).  
 
-Thank you for using the Open Design Optimization Platform and the ODOP:Spring app. We appreciate your continued feedback and support.  
+Thank you for using the **O**pen **D**esign **O**ptimization **P**latform and the ODOP:Spring app. 
+We appreciate your continued feedback and support.  
 ___
 
 Watch this space for breaking news 
