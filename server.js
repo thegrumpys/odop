@@ -841,8 +841,8 @@ app.delete('/api/v1/cleanup-expired-tokens', async (req, res) => {
 //====================================================================================================================
 // Admin User Search
 app.get('/api/v1/users', authenticationRequired, adminRequired, async (req, res) => {
-  const { email, firstName, lastName, role, status, createStartDate, createEndDate, loginStartDate, loginEndDate } = req.query;
-  console.log('/api/v1/users','email=',email,'firstName=',firstName,'lastName=',lastName,'role=',role,'status=',status,'createStartDate=',createStartDate,'createEndDate=',createEndDate,'loginStartDate=',loginStartDate,'loginEndDate=',loginEndDate);
+  const { email, firstName, lastName, role, status, token, createStartDate, createEndDate, loginStartDate, loginEndDate } = req.query;
+  console.log('/api/v1/users','email=',email,'firstName=',firstName,'lastName=',lastName,'role=',role,'status=',status,'token=',token,'createStartDate=',createStartDate,'createEndDate=',createEndDate,'loginStartDate=',loginStartDate,'loginEndDate=',loginEndDate);
   const conditions = [];
   const params = [];
   if (email) {
@@ -865,6 +865,10 @@ app.get('/api/v1/users', authenticationRequired, adminRequired, async (req, res)
     conditions.push('status LIKE ?');
     params.push(`${status}`);
   }
+  if (token) {
+    conditions.push('token LIKE ?');
+    params.push(`%${token}%`);
+  }
   if (createStartDate) {
     conditions.push('created_at >= ?');
     params.push(createStartDate);
@@ -885,7 +889,7 @@ app.get('/api/v1/users', authenticationRequired, adminRequired, async (req, res)
   const where = conditions.length ? 'WHERE ' + conditions.join(' AND ') : '';
   try {
     const [rows] = await db.execute(
-      `SELECT id, email, first_name, last_name, role, status, created_at, last_login_at FROM user ${where}`,
+      `SELECT id, email, first_name, last_name, role, token, status, created_at, last_login_at FROM user ${where}`,
       params
     );
     sendMessage(res, rows, '', null, 200);
@@ -897,7 +901,7 @@ app.get('/api/v1/users', authenticationRequired, adminRequired, async (req, res)
 // =============================================================================
 // Admin Create User
 app.post('/api/v1/users', authenticationRequired, adminRequired, async (req, res) => {
-  const { email, password, first_name, last_name, role, status } = req.body;
+  const { email, password, first_name, last_name, role, status, token } = req.body;
   try {
     if (!isValidEmail(email)) {
       sendMessage(res, 'Invalid email address format.', 'error', 'email', 400);
@@ -913,7 +917,7 @@ app.post('/api/v1/users', authenticationRequired, adminRequired, async (req, res
       return;
     }
     const hashed = await hashPassword(password);
-    const [result] = await db.execute('INSERT INTO user (email, password, first_name, last_name, role, status) VALUES (?, ?, ?, ?, ?, ?)', [email, hashed, first_name, last_name, role || 'user', status || 'active']);
+    const [result] = await db.execute('INSERT INTO user (email, password, first_name, last_name, role, token, status) VALUES (?, ?, ?, ?, ?, ?, ?)', [email, hashed, first_name, last_name, role || 'user', token || null, status || 'active']);
     sendMessage(res, { id: result.insertId }, '', null, 201);
   } catch (err) {
     sendMessage(res, err, 'error', null, 500);
@@ -924,7 +928,7 @@ app.post('/api/v1/users', authenticationRequired, adminRequired, async (req, res
 // Admin Update User
 app.put('/api/v1/users/:id', authenticationRequired, adminRequired, async (req, res) => {
   const { id } = req.params;
-  const { email, first_name, last_name, role, status } = req.body;
+  const { email, first_name, last_name, role, status, token } = req.body;
   try {
     const fields = [];
     const params = [];
@@ -951,6 +955,10 @@ app.put('/api/v1/users/:id', authenticationRequired, adminRequired, async (req, 
     if (status) {
       fields.push('status = ?');
       params.push(status);
+    }
+    if (token !== undefined) {
+      fields.push('token = ?');
+      params.push(token);
     }
     if (!fields.length) {
       sendMessage(res, 'No fields provided.', 'error', null, 400);
