@@ -4,6 +4,7 @@ import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
 import MessageAlert from '../../components/MessageAlert';
 import { logUsage } from '../../logUsage';
 import { useAuth } from '../../components/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 import AdminUserModal from "./AdminUserModal";
 
 export default function AdminUserManagerPage() {
@@ -23,7 +24,8 @@ export default function AdminUserManagerPage() {
   const [sortDirection, setSortDirection] = useState('asc');
   const [modalShow, setModalShow] = useState(false);
   const [editUser, setEditUser] = useState(null);
-  const { authState } = useAuth();
+  const navigate = useNavigate();
+  const { authState, setAuthState } = useAuth();
 
   const handleDelete = async (id) => {
     setError(null);
@@ -73,6 +75,20 @@ export default function AdminUserManagerPage() {
   const handleSaved = () => {
     handleSearch();
   }
+
+  const handleLoginAs = async (id) => {
+    setError(null);
+    try {
+      await axios.post(`/api/v1/users/${id}/login-as`, {}, {
+        headers: { Authorization: 'Bearer ' + authState.token }
+      });
+      const res = await axios.get('/api/v1/me');
+      setAuthState(res.data.authState);
+      navigate('/');
+    } catch (err) {
+      setError(err.response?.data?.error || err.message);
+    }
+  };
 
   const handleSort = (column) => {
     if (sortColumn === column) {
@@ -262,6 +278,7 @@ export default function AdminUserManagerPage() {
               <thead>
                 <tr>
                   <th>Edit</th>
+                  <th>Login as User</th>
                   <th onClick={() => handleSort('email')} style={{ cursor: 'pointer' }}>
                     Email{sortIcon('email')}
                   </th>
@@ -298,6 +315,11 @@ export default function AdminUserManagerPage() {
                     <td>
                       <Button variant="link" onClick={() => handleEdit(u)}>
                         <i className="fas fa-edit"></i>
+                      </Button>
+                    </td>
+                    <td>
+                      <Button variant="link" onClick={() => handleLoginAs(u.id)}>
+                        <i className="fas fa-sign-in-alt"></i>
                       </Button>
                     </td>
                     <td>{u.email}</td>
