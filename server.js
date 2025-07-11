@@ -995,6 +995,38 @@ app.delete('/api/v1/users/:id', authenticationRequired, adminRequired, async (re
   }
 });
 
+// ============================================================================
+// Admin Login As User
+app.post('/api/v1/users/:id/login-as', authenticationRequired, adminRequired, async (req, res) => {
+  const { id } = req.params;
+  try {
+    const [rows] = await db.execute(
+      'SELECT email, token, first_name, last_name, role, status FROM user WHERE id = ?',
+      [id]
+    );
+    if (!rows.length) {
+      sendMessage(res, '', '', null, 404);
+      return;
+    }
+    const user = rows[0];
+    if (user.role !== 'user') {
+      sendMessage(res, 'Cannot login as specified user.', 'error', null, 403);
+      return;
+    }
+    req.session.user = {
+      email: user.email,
+      token: user.token,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      isAuthenticated: true,
+      isAdmin: false,
+    };
+    sendMessage(res, '', '', null, 200);
+  } catch (err) {
+    sendMessage(res, err, 'error', null, 500);
+  }
+});
+
 //==================================================================================================
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
 //  console.log('process.env.NODE_ENV == production or staging', 'process.env.NODE_ENV=', process.env.NODE_ENV);
