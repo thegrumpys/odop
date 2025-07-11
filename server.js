@@ -887,6 +887,7 @@ app.get('/api/v1/users', authenticationRequired, adminRequired, async (req, res)
   }
 
   const where = conditions.length ? 'WHERE ' + conditions.join(' AND ') : '';
+//  console.log('/api/v1/users','where=',where,'params=',params);
   try {
     const [rows] = await db.execute(
       `SELECT u.id, u.email, u.first_name, u.last_name, u.role, u.token, u.status, u.created_at, u.last_login_at, COUNT(d.id) AS num_designs FROM user u LEFT JOIN design d ON u.token = d.user ${where} GROUP BY u.id`,
@@ -894,6 +895,7 @@ app.get('/api/v1/users', authenticationRequired, adminRequired, async (req, res)
     );
     sendMessage(res, rows, '', null, 200);
   } catch (err) {
+//    console.log('/api/v1/users','err=',err);
     sendMessage(res, err, 'error', null, 500);
   }
 });
