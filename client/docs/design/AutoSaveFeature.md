@@ -19,8 +19,6 @@ recovery from various operational difficulties and anomalies.
 Unfortunately, using the browser reload (refresh) button or browser back/forward with a 
 single page web app such as ODOP will result in a complete reset of the main page 
 and potential loss of a user's work since the last Save operation.   
- 
-<!--  1. ~~Okta access token lifetime expiration~~   -->
 
 An "AutoSave" feature could work to mitigate the potential loss of work. 
 Different triggers for AutoSave events are possible. 
@@ -65,8 +63,8 @@ AutoSave design names could be based on:
 * the word AutoSave,
 * the currently open design name,
 * menu action words like B4Search, B4Seek, B4Trade, B4Sel, B4Exec, B4Open, B4Del,   
-* a fragment of the current Okta user ID,
-* other session-unique information provided by Okta or quantaties such as the session start time
+* a fragment of the current user ID,
+* other session-unique information or quantities such as the session start time
 or save point creation time
 
 For example:

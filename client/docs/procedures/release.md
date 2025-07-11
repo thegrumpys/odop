@@ -34,7 +34,6 @@ Do this to development, test, staging and/or production databases as appropriate
 See Heroku Dashboard Resources tab for JAWS DB.
 The database names are summarized in [Procedures for creating a new JAWSDB](NewDB.html).   
 1. Start server and client under your development environment. 
-If they are already started, log off of Okta and re-log into Okta to ensure the session is valid and not at risk of time-out.   
 1. Verify initial_state and migrate match: Repeat the following steps for each design type (Piston-Cylinder, Solid, Spring/Compression, Spring/Extension, and Spring/Torsion) with an impacted initialState or initialSystemControls. 
     1. For each design type that has an impacted Initial State 
         1. Do a File > Open > Load Initial State. Run Action > Execute > mk[x] script where x is Startups, Startup & Startup_Metric (ignore all the other mk files), and Close to created each [x] file. Do a File > Sorted Export and rename into the [mk\_x] JSON file.
@@ -42,7 +41,7 @@ If they are already started, log off of Okta and re-log into Okta to ensure the 
         1. Compare the two JSON files to verify that initial state and migration operate exactly the same. If they don't match then repair them until they do or the changes are as intended.
 1. Create load.sql files: Repeat the following steps for each design type (Piston-Cylinder, Solid, Spring/Compression, Spring/Extension, and Spring/Torsion) with an impacted initialState or initialSystemControls. 
     1. Do a File > Open > Load Initial State for each design type that has an impacted Initial State. It is not necessary to Load Initial Metric State, because each mk_ script loads the correct initial state file (US or Metric) when it runs. Do this FOR ALL mk* files: Run Action > Execute > mk[x] script and Close the script to created each [x] file. Do a File > Save into the [x] file.
-    1. Using MySqlDump command run the `scripts/dump_db_startup_files.sh` script to dump all newly created design files into their respective load.sql files. You might need to set a different OKTA Userid inside the WHERE clause for the Admin User who saved this file in the previous step.  
+    1. Using MySqlDump command run the `scripts/dump_db_startup_files.sh` script to dump all newly created design files into their respective load.sql files. You might need to set a different Userid (token?) inside the WHERE clause for the Admin User who saved this file in the previous step.  
     1. Finally, manually edit and add carriage returns before each inserted VALUES section, and delete the 'id' field name and 'id' field value (it should be first in each record),and set the user field to NULL.
     1. **Commit these changes.**  The script to load these changes will be run in a [later step](release.html#runloadscript).
 1. Either modify the script for the development database and

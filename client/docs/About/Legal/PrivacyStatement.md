@@ -1,17 +1,12 @@
 # Privacy Notice
 
-This privacy notice discloses the privacy practices for the odop.springdesignsoftware.org website. 
+This privacy notice discloses the privacy practices for the springdesignsoftware.org website. 
 This privacy notice applies solely to information collected by this website. 
 It will notify you of the following:   
 * What personally identifiable information is collected from you through the website, how it is used and with whom it may be shared.
 * What choices are available to you regarding the use of your data.
 * The security procedures in place to protect the misuse of your information.
 * How you can correct any inaccuracies in the information.   
-   
-## Features provided by Okta   
-Identity, authentication and authorization features (username and password) of odop.springdesignsoftware.org are 
-based on capabilities provided by [Okta.com](https://www.okta.com/).
-The privacy notice for features provided by Okta is available at: [Okta privacy policy](https://www.okta.com/privacy-policy/).  
 
 ## Solicitation of reviews and feedback   
 From time to time we may engage third party services to solicit reviews and other forms of feedback from users.
@@ -21,9 +16,7 @@ The privacy notice for features provided by Capterra are available at:
  - [Capterra Community Guidlines](https://www.capterra.com/reviews/guidelines)   
  - [Gartner / Capterra Permission Based Marketing Policy](https://digital-markets.gartner.com/Permission-Based-Marketing-Policy) 
  - [Gartner / Capterra Digital Markets Software Vendor Privacy Notice](https://www.gartner.com/en/digital-markets/privacy-policy). 
-
-The remainder of this page applies to odop.springdesignsoftware.org features unrelated to Okta and Gartner / Capterra.
-   
+  
 ## Information Collection, Use, and Sharing   
 We are the sole owners of the information collected on this site. 
 We only have access to/collect information that you voluntarily give us via email or other direct contact from you. 
@@ -59,9 +52,9 @@ A "cookie" is a piece of data stored on a site visitor's local storage to help i
 For instance, by using a cookie to identify you, you would not have to log in a password more than once, thereby saving time and effort. 
 Cookies can also enable a site to track and target the interests of its users to enhance the experience on the site. 
 
-The odop.springdesignsoftware.org website does not use cookies. 
+The springdesignsoftware.org website does not use cookies. 
 However, some of our business partners 
-(for example: Okta, Heroku, JawsDB, GitHub Pages, Gartner / Capterra and Google Analytics) 
+(for example: Heroku, JawsDB, GitHub Pages, Gartner / Capterra and Google Analytics) 
 may use cookies related to our site.
 We have no access to or control over these cookies.   
 
@@ -70,18 +63,12 @@ in various situations where it might otherwise be lost.
 This AutoSave feature is not used for user tracking.
 
 ## IP Address   
-In addition to the previously mentioned features of Okta,
-the Okta logs provide IP address information associated with user sessions.
-Also, we collect user IP address information associated with access to our database (a.k.a. the ODOP Design Library) 
+We may collect user IP address information associated with access to our database (a.k.a. the ODOP Design Library) 
 for the purpose of measuring usage of the system.
 Google Analytics is currently under evaluation as an alternative means to measuring usage of the system
-that does not reveal IP address information.
-Note that use of VPN (Virtual Private Network) technology hides the true IP address and physical location of the user.
+that does not reveal IP address information.  
 
-**Public Account   
-Evaluators may sign-in with the username "public" and password "public".
-It is possible to save designs into the public account but keep in mind that all saved information will be completely public.   
-
+Note that use of VPN (Virtual Private Network) technology hides the true IP address and physical location of the user.  
    
 &nbsp;   
 **If you feel that we are not abiding by this privacy policy, please [Contact Us](/docs/About/ContactUs.html) immediately.** 
