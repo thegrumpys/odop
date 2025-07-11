@@ -5,7 +5,8 @@ We’re transitioning authentication for the ODOP [Design Library](http://odop.s
 from Okta, a third-party authentication provider, to a new self-hosted login system.  
 #### For New Users 
 An [ODOP account](http://odop.springdesignsoftware.org/docs/About/userAccounts.html) is not required to design springs. 
-An account is required only if saving designs into the Design Library.  
+An account is required only if saving designs into the Design Library. 
+To get an ODOP account:  
 • Click the **Sign In** button  (It is toward the left of the menu bar)  
 • Follow the **Sign Up** link to create your account  
 You will receive a confirmation email message containing a link that completes the sign up process.  
