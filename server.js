@@ -1007,7 +1007,7 @@ app.post('/api/v1/users/:id/login-as', authenticationRequired, adminRequired, as
       return;
     }
     const user = rows[0];
-    if (user.role !== 'user' || user.status !== 'active') {
+    if (user.role !== 'user') {
       sendMessage(res, 'Cannot login as specified user.', 'error', null, 403);
       return;
     }

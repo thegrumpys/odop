@@ -190,6 +190,9 @@ export default function MainPage() {
               </NavDropdown>
             </RequireAdmin>
           </Nav>
+          <RequireAuth>
+            <Nav className="me-auto">Welcome, {authState.first_name} {authState.last_name}</Nav>
+          </RequireAuth>
           <Nav>
             <Nav.Item>
               <SearchDocs />
