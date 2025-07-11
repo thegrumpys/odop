@@ -6,17 +6,17 @@ import { logUsage } from '../../logUsage';
 import { changeResultTerminationCondition } from '../../store/actions';
 import axios from '../../axiosConfig';
 
-export default function AdminCleanUpExpiredTokens() {
-//  console.log('AdminCleanUpExpiredTokens');
+export default function AdminCleanupExpiredTokens() {
+//  console.log('AdminCleanupExpiredTokens');
   const dispatch = useDispatch();
 //  const navigate = useNavigate();
 
   const toggle = async () => {
-//    console.log('AdminCleanUpExpiredTokens.toggle');
+//    console.log('AdminCleanupExpiredTokens.toggle');
     try {
       const res = await axios.delete('/api/v1/cleanup-expired-tokens');
-//      console.log('AdminCleanUpExpiredTokens.toggle','res=',res);
-      logUsage('event', 'AdminCleanUpExpiredTokens', { event_label: '' });
+//      console.log('AdminCleanupExpiredTokens.toggle','res=',res);
+      logUsage('event', 'AdminCleanupExpiredTokens', { event_label: '' });
       dispatch(changeResultTerminationCondition(res.data.error.message));
 //      navigate('/');
     } catch (err) {
