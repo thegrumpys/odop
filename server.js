@@ -842,7 +842,7 @@ app.delete('/api/v1/cleanup-expired-tokens', async (req, res) => {
 // Admin User Search
 app.get('/api/v1/users', authenticationRequired, adminRequired, async (req, res) => {
   const { email, firstName, lastName, role, status, token, createStartDate, createEndDate, loginStartDate, loginEndDate } = req.query;
-//  console.log('/api/v1/users','email=',email,'firstName=',firstName,'lastName=',lastName,'role=',role,'status=',status,'token=',token,'createStartDate=',createStartDate,'createEndDate=',createEndDate,'loginStartDate=',loginStartDate,'loginEndDate=',loginEndDate);
+  console.log('/api/v1/users','email=',email,'firstName=',firstName,'lastName=',lastName,'role=',role,'status=',status,'token=',token,'createStartDate=',createStartDate,'createEndDate=',createEndDate,'loginStartDate=',loginStartDate,'loginEndDate=',loginEndDate);
   const conditions = [];
   const params = [];
   if (email) {
@@ -887,6 +887,7 @@ app.get('/api/v1/users', authenticationRequired, adminRequired, async (req, res)
   }
 
   const where = conditions.length ? 'WHERE ' + conditions.join(' AND ') : '';
+  console.log('/api/v1/users','where=',where,'params=',params);
   try {
     const [rows] = await db.execute(
       `SELECT u.id, u.email, u.first_name, u.last_name, u.role, u.token, u.status, u.created_at, u.last_login_at, COUNT(d.id) AS num_designs FROM user u LEFT JOIN design d ON u.token = d.user ${where} GROUP BY u.id`,
