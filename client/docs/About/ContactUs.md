@@ -12,7 +12,7 @@ and the ODOP:Spring app.
 
 ## Telephone   
 
-### 650-887-8026   
+### +1 650 887 8026   
 8:00am - 5:00pm Pacific time  
 If necessary, please leave a voice message. 
 We will respond at our first possible opportunity.   

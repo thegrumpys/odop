@@ -11,7 +11,7 @@ ____
 
 These steps assume a start with a fresh Windows install or at least a Windows instance that has not had these utilities previously installed.  
 
-It will be necessary to have or obtain a GitHub account, Heroku account, Okta account with admin privileges and database  provider.   
+It will be necessary to have or obtain a GitHub account, Heroku account, and account with a database provider.   
 
 Anticipate that the user/git/odop directory will require 400 MB or more. 
 Once everything is installed, a Windows 11 Virtual machine will consume in excess of 33 GB.
@@ -238,7 +238,7 @@ Click OK and OK
 
 _____
 
-### Okta  
+### Okta  (historical info only)
 
 SpringDesignSoftware.org-dev-729070  
 
