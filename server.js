@@ -866,7 +866,7 @@ app.get('/api/v1/users', authenticationRequired, adminRequired, async (req, res)
     params.push(`${status}`);
   }
   if (token) {
-    conditions.push('token LIKE ?');
+    conditions.push('u.token LIKE ?');
     params.push(`%${token}%`);
   }
   if (createStartDate) {
@@ -894,6 +894,7 @@ app.get('/api/v1/users', authenticationRequired, adminRequired, async (req, res)
     );
     sendMessage(res, rows, '', null, 200);
   } catch (err) {
+    console.log('/api/v1/users','err=',err);
     sendMessage(res, err, 'error', null, 500);
   }
 });
