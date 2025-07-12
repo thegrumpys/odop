@@ -810,6 +810,7 @@ app.patch('/api/v1/change-password', async (req, res) => {
     // Update the password
     const db_email = rows[0].email;
     const hashed = await hashPassword(password);
+    await db.execute('UPDATE user SET status = ? WHERE email = ? AND password IS NULL', ['active', email]);
     await db.execute('UPDATE user SET password = ? WHERE email = ?', [hashed, db_email]);
     await db.execute('DELETE FROM token WHERE token = ?', [token]);
     sendMessage(res, 'Password changed successfully.', 'info', null, 200);
