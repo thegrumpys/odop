@@ -1,21 +1,21 @@
-"Release","4_5_1","5_1_0","5_2_0","5_2_1"
-"Compression/demo1",60,25,23,22
-"Compression/demo10",405,60,53,56
-"Compression/demo2",109,31,27,25
-"Compression/demo3",140,34,29,29
-"Compression/demo5",63,33,28,28
-"Compression/demoDesignValidation",64,24,21,21
-"Compression/demoNewDesign",90,31,25,27
-"Compression/tutor3",329,49,41,44
-"Compression/tutor6",119,26,25,26
-"Compression/tutor7",1580,238,152,238
-"Compression/tutor8",180,27,22,22
-"Extension/demo6",946,75,62,63
-"Extension/demo7",2964,243,124,205
-"Extension/demo8",1429,91,90,98
-"Extension/demo9",921,76,67,69
-"Piston-Cylinder/performance search without merit 1000x duration",325,386,296,306
-"Piston-Cylinder/performance invokeEquationSet 100000x duration",464,486,377,377
-"Piston-Cylinder/performance reducers change symbol value 1000000x duration",975,1328,887,914
-"Torsion/demo14",38,34,34,27
-"Torsion/demo15",36,112,22,108
+"Release","4_5_1","5_1_0","5_2_0","5_2_1","6_0_0"
+"Compression/demo1",60,25,23,22,22
+"Compression/demo10",405,60,53,56,53
+"Compression/demo2",109,31,27,25,27
+"Compression/demo3",140,34,29,29,29
+"Compression/demo5",63,33,28,28,28
+"Compression/demoDesignValidation",64,24,21,21,21
+"Compression/demoNewDesign",90,31,25,27,24
+"Compression/tutor3",329,49,41,44,41
+"Compression/tutor6",119,26,25,26,27
+"Compression/tutor7",1580,238,152,238,162
+"Compression/tutor8",180,27,22,22,23
+"Extension/demo6",946,75,62,63,63
+"Extension/demo7",2964,243,124,205,129
+"Extension/demo8",1429,91,90,98,92
+"Extension/demo9",921,76,67,69,65
+"Piston-Cylinder/performance search without merit 1000x duration",325,386,296,306,298
+"Piston-Cylinder/performance invokeEquationSet 100000x duration",464,486,377,377,378
+"Piston-Cylinder/performance reducers change symbol value 1000000x duration",975,1328,887,914,888
+"Torsion/demo14",38,34,34,27,39
+"Torsion/demo15",36,112,22,108,22
