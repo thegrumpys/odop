@@ -18,7 +18,7 @@ For example: `test_results_5_1_0.txt`
 Bring up Google Chrome and enable View Console / Debugger.  
 Test various input and menu functions and verify no unexpected console.log output.   
    
-   Use regular expression search: "`^\s*console\.`" to find non-commented out console.log lines.
+   Use regular expression search: "`^\s*console\.log`" to find non-commented out console.log lines.
    Most console.log output is acceptable in: 
      * `client/public/dynoLoading.js` 
      * `client/src/__test__/*.*` 
@@ -31,7 +31,8 @@ Test various input and menu functions and verify no unexpected console.log outpu
      * `client/src/logUsage.js` 
      * `client/src/registerServiceWorker.js` 
      * `scripts/build_index.js` 
-     * `scanner.js` 
+     * `scripts/import-okta-csv.js`
+     * `scripts/scanner.js` 
      * `server.js` 
 
 1. Run the production build in a test environment to confirm that things are synchronized 
