@@ -45,7 +45,7 @@ The database names are summarized in [Procedures for creating a new JAWSDB](NewD
     1. Finally, manually edit and add carriage returns before each inserted VALUES section, and delete the 'id' field name and 'id' field value (it should be first in each record),and set the user field to NULL.
     1. **Commit these changes.**  The script to load these changes will be run in a [later step](release.html#runloadscript).
 1. Either modify the script for the development database and
-   run the configured ./scripts/load_all.sh script
+   run the configured ./scripts/load_db_startup_files.sh script
    or
    manually run all affected load.sql files to create startup files for each design type in the develoment database.  
    This sets the User field to NULL so that these files can be accessed by all development database users.
