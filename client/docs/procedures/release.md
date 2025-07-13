@@ -52,16 +52,36 @@ The database names are summarized in [Procedures for creating a new JAWSDB](NewD
    Optionally load the Staging database with these files too.
 &nbsp;
 1. If there are environment variable changes, update Server's .env and Client's .env with the following for development (localhost). NOTE: No entry for Server's .env or Client's .env is needed for JS\_RUNTIME\_TARGET\_BUNDLE for development (localhost). Assume NODE_ENV="development" for software development environment, or "test" for test case execution environment.
-    * JAWSDB\_URL - For server only
-    * REACT\_APP\_NODE\_ENV=development|test
-    * REACT\_APP\_ISSUER
-    * REACT\_APP\_CLIENT\_ID
-    * REACT\_APP\_DESIGN\_TYPES
-    * REACT\_APP\_DESIGN\_TYPE
-    * REACT\_APP\_DESIGN\_NAME
-    * REACT\_APP\_DESIGN\_UNITS
-    * REACT\_APP\_DESIGN\_VIEW
-    * REACT\_APP\_SESSION\_REFRESH
+    * For server
+        * NODE_ENV=development|test|staging|production
+        * JAWSDB\_URL 
+        * JAWSDB\_TEST_URL
+        * TEST\_USERID
+        * TEST\_PASSWORD
+        * FRONT\_URL
+        * MYSQL\_HOST
+        * MYSQL\_PORT
+        * MYSQL\_DATABASE
+        * MYSQL\_USER
+        * MYSQL\_PASSWORD
+        * MYSQL\_TEST\_HOST
+        * MYSQL\_TEST\_PORT
+        * MYSQL\_TEST\_DATABASE
+        * MYSQL\_TEST\_USER
+        * MYSQL\_TEST\_PASSWORD
+        * SMTP\_HOST
+        * SMTP\_PORT
+        * SMTP\_USER
+        * SMTP\_PASS
+        * SESSION\_SECRET
+    * For client
+        * REACT\_APP\_NODE\_ENV=development|test|staging|production
+        * REACT\_APP\_DESIGN\_TYPES=["Piston-Cylinder","Solid","Spring/Compression","Spring/Extension","Spring/Torsion"]
+        * REACT\_APP\_DESIGN\_TYPE=Spring/Compression
+        * REACT\_APP\_DESIGN\_NAME=Startup
+        * REACT\_APP\_DESIGN\_UNITS=US
+        * REACT\_APP\_DESIGN\_VIEW=Advanced
+        * REACT\_APP\_SESSION\_REFRESH=3600
 1. Do a pull or push to get latest version on all systems.  
 <a id="runTestAutomation"></a>  
 1. Confirm that **test automation** in [Prepare for Release](prep4Release.html) was recently executed.  
@@ -88,17 +108,36 @@ The database names are summarized in [Procedures for creating a new JAWSDB](NewD
    Update Heroku Configuration Variables JS\_RUNTIME\_TARGET\_BUNDLE to "/app/client/build/static/js/*.js" for staging, or production.
 &nbsp;
 1. Update Heroku Configuration Variables with the following for staging (odop-staging), or production (odop).
-    * JAWSDB\_URL
-    * NODE\_ENV="staging" -- only for staging, assume default "production" for production
-    * REACT\_APP\_NODE\_ENV=production|staging -- only for staging, assume default "production" for production
-    * REACT\_APP\_ISSUER
-    * REACT\_APP\_CLIENT\_ID
-    * REACT\_APP\_DESIGN\_TYPES
-    * REACT\_APP\_DESIGN\_TYPE
-    * REACT\_APP\_DESIGN\_NAME
-    * REACT\_APP\_DESIGN\_UNITS
-    * REACT\_APP\_DESIGN\_VIEW
-    * REACT\_APP\_SESSION\_REFRESH
+    * For server
+        * NODE_ENV=development|test|staging|production
+        * JAWSDB\_URL 
+        * JAWSDB\_TEST_URL
+        * TEST\_USERID
+        * TEST\_PASSWORD
+        * FRONT\_URL
+        * MYSQL\_HOST
+        * MYSQL\_PORT
+        * MYSQL\_DATABASE
+        * MYSQL\_USER
+        * MYSQ\L_PASSWORD
+        * MYSQL\_TEST\_HOST
+        * MYSQL\_TEST\_PORT
+        * MYSQL\_TEST\_DATABASE
+        * MYSQL\_TEST\_USER
+        * MYSQL\_TEST\_PASSWORD
+        * SMTP\_HOST
+        * SMTP\_PORT
+        * SMTP\_USER
+        * SMTP\_PASS
+        * SESSION\_SECRET
+    * For client
+        * REACT\_APP\_NODE\_ENV=development|test|staging|production
+        * REACT\_APP\_DESIGN\_TYPES=["Piston-Cylinder","Solid","Spring/Compression","Spring/Extension","Spring/Torsion"]
+        * REACT\_APP\_DESIGN\_TYPE=Spring/Compression
+        * REACT\_APP\_DESIGN\_NAME=Startup
+        * REACT\_APP\_DESIGN\_UNITS=US
+        * REACT\_APP\_DESIGN\_VIEW=Advanced
+        * REACT\_APP\_SESSION\_REFRESH=3600
 1. Update Heroku Buildpack for staging (odop-staging), or production (odop).
    Buildpack configuration is on Heroku Settings tab.
 <a id="databaseStuff"></a>
