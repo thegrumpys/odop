@@ -36,7 +36,7 @@ async function main(filePath) {
   const insertUser = async (user) => {
     const sql = `
       INSERT INTO user (token, email, first_name, last_name, created_at, last_login_at, role, status)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `;
     await db.execute(sql, [
       user.token,
