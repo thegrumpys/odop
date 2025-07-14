@@ -13,6 +13,7 @@ import { logUsage } from '../logUsage';
 import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js'
 import { LoginCallback, Security } from '@okta/okta-react';
 import { startExecute } from "./ExecutePanel";
+import axios from 'axios';
 
 export default function App() {
 //  console.log('App','Mounting...');
@@ -96,18 +97,12 @@ export default function App() {
   const getDesign = (user, type, name) => {
 //    console.log('App.getDesign','user=',user,'type=',type,'name=',name);
     displaySpinner(true);
-    fetch('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
+    axios.get('/api/v1/designtypes/'+encodeURIComponent(type)+'/designs/' + encodeURIComponent(name), {
       headers: {
         Authorization: 'Bearer ' + user
       }
     })
-    .then(res => {
-      if (!res.ok) {
-        throw Error(res.statusText);
-      }
-//      console.log('res.json()=',res.json());
-      return res.json();
-    })
+    .then(res => res.data)
     .then((design) => {
 //      console.log('App.getDesign','design=', design);
       var { migrate } = require('../designtypes/'+design.type+'/migrate.js'); // Dynamically load migrate

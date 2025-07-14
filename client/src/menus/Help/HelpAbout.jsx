@@ -7,6 +7,7 @@ import { useOktaAuth } from '@okta/okta-react';
 import config from '../../config';
 import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
+import axios from 'axios';
 
 export default function HelpAbout() {
 //  console.log('HelpAbout - Mounting...');
@@ -37,17 +38,12 @@ export default function HelpAbout() {
   const getDBSize = (user) => {
 //    console.log('In HelpAbout.getDBSize');
     displaySpinner(true);
-    fetch('/api/v1/db_size', {
+    axios.get('/api/v1/db_size', {
       headers: {
         Authorization: 'Bearer ' + user
       }
     })
-    .then(res => {
-      if (!res.ok) {
-        throw Error(res.statusText);
-      }
-      return res.json()
-    })
+    .then(res => res.data)
     .then(sizes => {
 //        console.log('In HelpAbout.getSize sizes=', sizes);
       setSizes(sizes);

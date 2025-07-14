@@ -9,6 +9,7 @@ import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
 import { useOktaAuth } from '@okta/okta-react';
+import axios from 'axios';
 
 export default function FileOpen() {
 //  console.log('FileOpen - Mounting...');
@@ -36,18 +37,12 @@ export default function FileOpen() {
 //    console.log('FileOpen.getDesignNames user=', user, 'type=', type);
     // Get the names and store them in state
     displaySpinner(true);
-    fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
+    axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
       headers: {
         Authorization: 'Bearer ' + user
       }
     })
-    .then(res => {
-      if (!res.ok) {
-        //                console.warn('FileOpen.getDesignNames res=',res);
-        throw Error(res.statusText);
-      }
-      return res.json()
-    })
+    .then(res => res.data)
     .then(names => {
 //        console.log('FileOpen.getDesignNames user=', user, 'type=', type, 'names=', names);
       var name;
@@ -75,17 +70,12 @@ export default function FileOpen() {
   const getDesign = (user, type, name) => {
 //    console.log('FileOpen.getDesign user=', user, 'type=', type, 'name=', name);
     displaySpinner(true);
-    fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
+    axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
       headers: {
         Authorization: 'Bearer ' + user
       }
     })
-    .then(res => {
-      if (!res.ok) {
-        throw Error(res.statusText);
-      }
-      return res.json()
-    })
+    .then(res => res.data)
     .then((design) => {
 //      console.log('FileOpen.getDesign design=', design);
       var { migrate } = require('../../designtypes/' + design.type + '/migrate.js'); // Dynamically load migrate

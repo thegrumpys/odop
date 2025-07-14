@@ -7,6 +7,7 @@ import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import { useOktaAuth } from '@okta/okta-react';
+import axios from 'axios';
 
 export default function FileSave() {
   const model = useSelector((state) => state.model);
@@ -30,17 +31,12 @@ export default function FileSave() {
 //    console.log('In FileSave.getDesignNames user=',user,'type=',type);
     // Get the names and store them in state
     displaySpinner(true);
-    fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
+    axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
       headers: {
         Authorization: 'Bearer ' + user
       }
     })
-    .then(res => {
-      if (!res.ok) {
-        throw Error(res.statusText);
-      }
-      return res.json()
-    })
+    .then(res => res.data)
     .then(names => {
 //      console.log('In FileSave.getDesignNames user=',user,'type=',type,'names=',names);
       setNames(names);
@@ -57,17 +53,12 @@ export default function FileSave() {
 //    console.log('In FileSave.postDesign user=',user,'type=',type,'name=',name);
     // First fetch the current list of names
     displaySpinner(true);
-    fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
+    axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
       headers: {
         Authorization: 'Bearer ' + user
       }
     })
-    .then(res => {
-      if (!res.ok) {
-        throw Error(res.statusText);
-      }
-      return res.json()
-    })
+    .then(res => res.data)
     .then(names => {
         // Second create or update the design
 //      console.log('In FileSave.postDesign type=',type,'names=', names);
@@ -79,21 +70,17 @@ export default function FileSave() {
       }
 //      console.log('In FileSave.postDesign','method=', method,'type=', type,'name=', name);
       displaySpinner(true);
-      fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
+      axios({
         method: method,
+        url: '/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + user
         },
-        body: JSON.stringify(model)
+        data: model
       })
-      .then(res => {
-        if (!res.ok) {
-          throw Error(res.statusText);
-        }
-        return res.json()
-      })
+      .then(res => res.data)
       .then(names => {
 //        console.log('In FileSave.getDesignNames','names=',names);
         if (method === 'POST') {
