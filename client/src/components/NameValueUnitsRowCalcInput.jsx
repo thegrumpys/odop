@@ -35,7 +35,7 @@ export default function NameValueUnitsRowCalcInput({ element, index, onChangeVal
   }
 
   const onChangeInvalidLocal = (event) => {
-//    console.log('In NameValueUnitsRowCalcInput.onChangeInvalid','event.target.value=', event.target.value);
+//    console.log('NameValueUnitsRowCalcInput.onChangeInvalid','event.target.value=', event.target.value);
     if (typeof onChangeInvalid === "function") onChangeInvalid(event);
   }
 

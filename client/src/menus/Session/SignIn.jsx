@@ -3,19 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
-import { useOktaAuth } from '@okta/okta-react';
+import { useAuth } from '../../components/AuthProvider';
 
 export default function SignIn() {
+//  console.log('SignIn');
   const navigate = useNavigate();
-  const { oktaAuth, authState } = useOktaAuth();
-//  console.log('SignIn','oktaAuth=',oktaAuth,'authState=',authState);
+  const { authState } = useAuth();
+//  console.log('SignIn','auth=',auth);
 
   const toggle = () => {
-//    console.log('In SignIn.toggle');
-    oktaAuth.setOriginalUri();
-//    console.log('In SignIn.toggle oktaAuth.getOriginalUri=', oktaAuth.getOriginalUri());
+//    console.log('SignIn.toggle');
     logUsage('event', 'SignIn', { event_label: '' });
-//    console.log('In SignIn.toggle navigate('/login')');
+//    console.log('SignIn.toggle navigate('/login')');
     navigate('/login'); // Must be last after logUsage
   }
 

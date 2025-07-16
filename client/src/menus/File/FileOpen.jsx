@@ -8,7 +8,7 @@ import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
-import { useOktaAuth } from '@okta/okta-react';
+import { useAuth } from '../../components/AuthProvider';
 
 export default function FileOpen() {
 //  console.log('FileOpen - Mounting...');
@@ -22,8 +22,7 @@ export default function FileOpen() {
   const [name, setName] = useState(model_name);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { authState } = useOktaAuth();
-//  console.log('FileOpen','oktaAuth=',oktaAuth,'authState=',authState);
+  const { authState } = useAuth();
 
   useEffect(() => {
 //    console.log('FileOpen','model_user=',model_user,'model_type=',model_type);
@@ -208,10 +207,10 @@ export default function FileOpen() {
           </Form.Select>
         </Modal.Body>
         <Modal.Footer>
-          {!authState.isAuthenticated && <Button variant="info" onClick={onSignIn}>Sign In...</Button>}{' '}
+          {!(authState && authState.isAuthenticated) && <Button variant="info" onClick={onSignIn}>Sign In...</Button>}{' '}
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>{' '}
-          {config.node.env !== "production" && <Button variant="danger" onClick={onLoadInitialState}>Load Initial State</Button>}{' '}
-          {config.node.env !== "production" && <Button variant="danger" onClick={onLoadMetricInitialState}>Load Metric Initial State</Button>}{' '}
+          {authState && authState.isAdmin && <Button variant="danger" onClick={onLoadInitialState}>Load Initial State</Button>}{' '}
+          {authState && authState.isAdmin && <Button variant="danger" onClick={onLoadMetricInitialState}>Load Metric Initial State</Button>}{' '}
           {typeof (Storage) !== "undefined" && localStorage.getItem('autosave') !== null && <Button variant="secondary" onClick={onLoadAutoSave}>Load Auto Save</Button>}{' '}
           <Button variant="primary" onClick={onOpen} disabled={names.length === 0 ? true : false}>Open</Button>
         </Modal.Footer>

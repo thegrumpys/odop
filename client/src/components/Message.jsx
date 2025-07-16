@@ -6,7 +6,7 @@ import { addMessage, disableMessage } from "../store/actions";
 import store from "../store/store";
 
 export const displayMessage = (message, variant = 'danger', header = '', help_url = '') => {
-//  console.log('In displayMessage');
+//  console.log('displayMessage');
 //  logUsage('event', 'DisplayMessage', { event_label: 'message: ' + message + ', variant: ' + variant});
   store.dispatch(addMessage(message, variant, header, help_url));
 }

@@ -6,7 +6,6 @@ import store from "./store/store";
 import { Provider } from "react-redux";
 import './odop.css';
 import * as ReactDOMClient from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
 import { Beforeunload } from 'react-beforeunload';
 import { logUsage } from './logUsage';
 
@@ -19,8 +18,6 @@ root.render(
     }} />
     <Spinner />
     <Message />
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <App />
   </Provider>
 );

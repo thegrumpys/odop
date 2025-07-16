@@ -134,7 +134,7 @@ export function eqnset(p, x) {        /*    Torsion  Spring  */
     return x;
 
 function cl_calc(mat_idx, cl_idx, st_code, tensile, stress_1, stress_2){
-//    console.log('In cl_calc:');
+//    console.log('cl_calc:');
 //    console.log('Material_Index = x[o.Material_Type] = mat_idx =', mat_idx);
 //    console.log('Life_Category =  x[o.Life_Category] = cl_idx  =', cl_idx);
 //    console.log('st_code =', st_code, ' x[o.Tensile] = tensile =', tensile);

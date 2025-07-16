@@ -16,7 +16,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   const dispatch = useDispatch();
 
   const onChangeValidLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onChangeValidLocal event.target.value=', event.target.value);
+//    console.log('NameValueUnitsRowIndependentVariable.onChangeValidLocal event.target.value=', event.target.value);
     var auto_fixed = false; // Needed because changeSymbolValue resets the termination condition message
     if (model_enable_auto_fix) {
       auto_fixed = true;
@@ -34,7 +34,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   }
 
   const onChangeInvalidLocal = (event) => {
-//    console.log('In NameValueUnitsRowIndependentVariable.onChangeInvalidLocal event.target.value=', event.target.value);
+//    console.log('NameValueUnitsRowIndependentVariable.onChangeInvalidLocal event.target.value=', event.target.value);
     if (typeof onChangeInvalid === "function") onChangeInvalid(event);
   }
 
@@ -124,7 +124,7 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
       value_fix_free_text = <div className="mb-3"><em>Free status allows <img src="SearchButton.png" alt="SearchButton" /> to change the value of this variable.</em></div>; // For Free
     }
   }
-//  console.log('In NameValueUnitsRowIndependentVariable','className=',className);
+//  console.log('NameValueUnitsRowIndependentVariable','className=',className);
 
   // =======================================
   // Table Row

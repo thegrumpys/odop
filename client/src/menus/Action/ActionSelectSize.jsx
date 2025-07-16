@@ -28,7 +28,7 @@ export default function ActionSelectSize() {
   }, [model_type]);
 
   const updateSizeTypes = () => {
-    //        console.log('In ActionSelectSize updateSizeTypes');
+    //        console.log('ActionSelectSize updateSizeTypes');
     var { getSizeTypes, getSizeEntries } = require('../../designtypes/' + model_type + '/size.js'); // Dynamically load getSizeTypes & getSizeEntries
     var localTypes = getSizeTypes();
     var localType;
@@ -88,7 +88,7 @@ export default function ActionSelectSize() {
   }
 
   const onSelectSizeEntry = (event) => {
-    //      console.log('In ActionSelectSizeEntry.onSelectSizeEntry event.target.value=',event.target.value);
+    //      console.log('ActionSelectSizeEntry.onSelectSizeEntry event.target.value=',event.target.value);
     setSize(parseFloat(event.target.value));
   }
 
@@ -102,7 +102,7 @@ export default function ActionSelectSize() {
     if (model_enable_auto_fix) {
       auto_fixed = true;
       var found = model_symbol_table.find((element) => element.name === type);
-      //            console.log('In ActionSelectSize.onSelect found=',found);
+      //            console.log('ActionSelectSize.onSelect found=',found);
       if (!(found.lmin & FIXED)) {
         dispatch(fixSymbolValue(type));
         logValue(type, 'AUTOFIXED', 'FixedFlag', false);
@@ -127,7 +127,7 @@ export default function ActionSelectSize() {
   }
 
   const onCancel = () => {
-    //        console.log('In ActionSelectSize.onCancel');
+    //        console.log('ActionSelectSize.onCancel');
     setShow(!show);
   }
 

@@ -8,7 +8,7 @@ import { executeStart, executeStop, setExecuteName, setShow, setPrefix, setState
 import store from '../store/store';
 
 export const startExecute = (prefix, executeName, run=false) => {
-//  console.log('In startExecute','prefix=',prefix,'executeName=',executeName,'run=',run);
+//  console.log('startExecute','prefix=',prefix,'executeName=',executeName,'run=',run);
   if (executeName === undefined) return;
 
   var model = store.getState().model;
@@ -23,7 +23,7 @@ export const startExecute = (prefix, executeName, run=false) => {
   if (localTestGenerate) store.dispatch(outputStart(executeName));
 //  var startTime = Date.now();
   for (var next = 0; next < steps.length; next++) {
-//    console.log('In startExecute','execute_name=',executeName,'step=',next)
+//    console.log('startExecute','execute_name=',executeName,'step=',next)
     var localStates = Object.assign([...states], { [next]: Object.assign({}, states[next], { state: JSON.stringify(model) }) });
     // Put current store state into steps[next].state - remember this for "back" time travel
     store.dispatch(setStates(localStates));
@@ -56,7 +56,7 @@ export const startExecute = (prefix, executeName, run=false) => {
 }
 
 export const stopExecute = () => {
-//  console.log('In stopExecute');
+//  console.log('stopExecute');
   var executeName = store.getState().executePanelSlice.executeName;
   logUsage('event', 'ExecutePanel', { event_label: 'stop ' + executeName });
   store.dispatch(executeStop());

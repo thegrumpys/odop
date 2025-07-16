@@ -59,7 +59,7 @@ export default function SymbolValueWireDia({ className, element, index, onChange
   }
 
   const onRadio = () => {
-//    console.log('In SymbolValueWireDia.onRadio');
+//    console.log('SymbolValueWireDia.onRadio');
     setValueInput(!valueInput);
   }
 
@@ -74,7 +74,7 @@ export default function SymbolValueWireDia({ className, element, index, onChange
       }
     }
     var wire_dia = parseFloat(event.target.value);
-//    console.log('In SymbolValueWireDia.onSelect wire_dia=',wire_dia);
+//    console.log('SymbolValueWireDia.onSelect wire_dia=',wire_dia);
     dispatch(changeSymbolValue(element.name, wire_dia));
     logValue(element.name, wire_dia, 'TableValue');
     if (auto_fixed) {
@@ -168,7 +168,7 @@ export default function SymbolValueWireDia({ className, element, index, onChange
   }
 
   const onSearchRequest = (event) => {
-//    console.log('In SymbolValueWireDia.onSearchRequest','event=',event);
+//    console.log('SymbolValueWireDia.onSearchRequest','event=',event);
     if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Search cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
       return;
@@ -193,19 +193,19 @@ export default function SymbolValueWireDia({ className, element, index, onChange
   }
 
   const onSearchContextHelp = () => {
-//    console.log('In SymbolValueWireDia.onSearchContinue');
+//    console.log('SymbolValueWireDia.onSearchContinue');
     window.open('/docs/Help/errors.html#objNotFinite', '_blank');
   }
 
   const onSearchContinue = () => {
-//    console.log('In SymbolValueWireDia.onSearchContinue');
+//    console.log('SymbolValueWireDia.onSearchContinue');
     setSearchInfiniteShow(!searchInfiniteShow);
     setEditShow(!editShow);
     doSearch('NOT FINITE');
   }
 
   const onSearchCancel = () => {
-//    console.log('In SymbolValueWireDia.onSearchCancel');
+//    console.log('SymbolValueWireDia.onSearchCancel');
     setSearchInfiniteShow(!searchInfiniteShow);
     setEditShow(!editShow);
   }
@@ -216,7 +216,7 @@ export default function SymbolValueWireDia({ className, element, index, onChange
   }
 
   const onSeekMinRequest = (event) => {
-//    console.log('In SymbolValueWireDia.onSeekMinRequest','event=',event);
+//    console.log('SymbolValueWireDia.onSeekMinRequest','event=',event);
     if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
       return;
@@ -238,7 +238,7 @@ export default function SymbolValueWireDia({ className, element, index, onChange
   }
 
   const onSeekMaxRequest = (event) => {
-//    console.log('In SymbolValueWireDia.onSeekMaxRequest','event=',event);
+//    console.log('SymbolValueWireDia.onSeekMaxRequest','event=',event);
     if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
       return;
@@ -260,7 +260,7 @@ export default function SymbolValueWireDia({ className, element, index, onChange
   }
 
   const onContextMenu = (e) => {
-//    console.log('In SymbolValueWireDia.onContextMenu','e=',e);
+//    console.log('SymbolValueWireDia.onContextMenu','e=',e);
     e.preventDefault();
     var design = store.getState();
     var reset = JSON.stringify(design.model);
@@ -271,7 +271,7 @@ export default function SymbolValueWireDia({ className, element, index, onChange
   }
 
   const onContextHelp = () => {
-//    console.log('In SymbolValueWireDia.onContextHelp');
+//    console.log('SymbolValueWireDia.onContextHelp');
     logUsage('event', 'SymbolValueWireDia', { event_label: 'Context Help button' });
     setEditShow(!editShow);
     setModified(false);
@@ -279,81 +279,81 @@ export default function SymbolValueWireDia({ className, element, index, onChange
   }
 
   const onClose = () => {
-//    console.log('In SymbolValueWireDia.onClose');
+//    console.log('SymbolValueWireDia.onClose');
     setEditShow(false);
     setModified(false);
   }
 
   const onResetButton = () => {
-//    console.log('In SymbolValueWireDia.onResetButton');
+//    console.log('SymbolValueWireDia.onResetButton');
     logUsage('event', 'SymbolValueWireDia', { event_label: 'Reset button' });
     dispatch(load(JSON.parse(reset))); // Yes, we are restoring the ENTIRE model so we can reset ONLY ONE symbol table entry - overkill, but it works!
     setModified(false);
   }
 
   const onChangeValidValue = (event) => {
-//    console.log('In SymbolValueWireDia.onChangeValidValue');
+//    console.log('SymbolValueWireDia.onChangeValidValue');
     setIsInvalidValue(false);
     setModified(true);
   }
 
   const onChangeInvalidValue = (event) => {
-//    console.log('In SymbolValueWireDia.onChangeInvalidValue');
+//    console.log('SymbolValueWireDia.onChangeInvalidValue');
     setIsInvalidValue(true);
     setModified(true);
   }
 
   const onChangeValidMinConstraint = (event) => {
-//    console.log('In SymbolValueWireDia.onChangeValidMinConstraint');
+//    console.log('SymbolValueWireDia.onChangeValidMinConstraint');
     setIsInvalidMinConstraint(false);
     setModified(true);
   }
 
   const onChangeInvalidMinConstraint = (event) => {
-//    console.log('In SymbolValueWireDia.onChangeInvalidMinConstraint');
+//    console.log('SymbolValueWireDia.onChangeInvalidMinConstraint');
     setIsInvalidMinConstraint(true);
     setModified(true);
   }
 
   const onChangeValidMaxConstraint = (event) => {
-//    console.log('In SymbolValueWireDia.onChangeValidMaxConstraint');
+//    console.log('SymbolValueWireDia.onChangeValidMaxConstraint');
     setIsInvalidMaxConstraint(false);
     setModified(true);
   }
 
   const onChangeInvalidMaxConstraint = (event) => {
-//    console.log('In SymbolValueWireDia.onChangeInvalidMaxConstraint');
+//    console.log('SymbolValueWireDia.onChangeInvalidMaxConstraint');
     setIsInvalidMaxConstraint(true);
     setModified(true);
   }
 
   const onModifiedFlag = (event) => {
-//    console.log('In SymbolValueWireDia.onModifiedFlag');
+//    console.log('SymbolValueWireDia.onModifiedFlag');
     setModified(true);
   }
-//        console.log('In SymbolValueWireDia.render ../' + model_type + '/symbol_table_offsets.js');
+//        console.log('SymbolValueWireDia.render ../' + model_type + '/symbol_table_offsets.js');
   var o = require('../' + model_type + '/symbol_table_offsets.js'); // Dynamically load table
-//        console.log('In SymbolValueWireDia.render o =', o);
+//        console.log('SymbolValueWireDia.render o =', o);
 // Find size name, load size table, and get wire diameter value
-//        console.log('In SymbolValueWireDia.render model_symbol_table[o.Material_File].value =', model_symbol_table[o.Material_File].value);
+//        console.log('SymbolValueWireDia.render model_symbol_table[o.Material_File].value =', model_symbol_table[o.Material_File].value);
   var m_tab;
   if (model_symbol_table[o.Material_File].value === "mat_metric.json")
     m_tab = require('./mat_metric.json');
   else
     m_tab = require('./mat_us.json');
-//        console.log('In SymbolValueWireDia.render m_tab =', m_tab);
+//        console.log('SymbolValueWireDia.render m_tab =', m_tab);
   var i = model_symbol_table[o.Material_Type].value;
-//        console.log('In SymbolValueWireDia.render i=',i);
+//        console.log('SymbolValueWireDia.render i=',i);
   var wire_dia_filename = m_tab[i][mo.wire_dia_filename];
-//        console.log('In SymbolValueWireDia.render wire_dia_filename=',wire_dia_filename);
+//        console.log('SymbolValueWireDia.render wire_dia_filename=',wire_dia_filename);
   var wire_dia_table = require('./' + wire_dia_filename + '.json'); // Dynamically load table
   wire_dia_table = JSON.parse(JSON.stringify(wire_dia_table)); // clone so these updates are fresh
   wire_dia_table.forEach((element) => {
     element.push(element[0].toString()); // add labels
   });
-//        console.log('In SymbolValueWireDia.render wire_dia_table=',wire_dia_table);
+//        console.log('SymbolValueWireDia.render wire_dia_table=',wire_dia_table);
   const needle = element.value;
-//        console.log('In SymbolValueWireDia.render needle=',needle);
+//        console.log('SymbolValueWireDia.render needle=',needle);
   var default_value = wire_dia_table.find((element, index) => {
     if (index > 0) { // skip the column header
       if (element[0] !== needle)
@@ -364,15 +364,15 @@ export default function SymbolValueWireDia({ className, element, index, onChange
       return false; // keep looking
     }
   });
-//        console.log('In SymbolValueWireDia.render default_value=',default_value);
+//        console.log('SymbolValueWireDia.render default_value=',default_value);
   if (default_value === undefined) {
     wire_dia_table[0] = [needle, toODOPPrecision(needle) + " Non-std"]; // Replace column header with non-std value
   } else {
     wire_dia_table.shift(); // Remove column header if there is no non-std value
   }
-//        console.log('In SymbolValueWireDia.render wire_dia_table=',wire_dia_table);
+//        console.log('SymbolValueWireDia.render wire_dia_table=',wire_dia_table);
   var sorted_wire_dia_table = wire_dia_table.sort(function(a, b) { return a[0] - b[0]; }); // sort by value
-//        console.log('In SymbolValueWireDia.render sorted_wire_dia_table=',sorted_wire_dia_table);
+//        console.log('SymbolValueWireDia.render sorted_wire_dia_table=',sorted_wire_dia_table);
 
   var sv_results = getAlertsByName(element.name, true);
   var sv_value_class = sv_results.className + ' text-end ';
@@ -388,7 +388,7 @@ export default function SymbolValueWireDia({ className, element, index, onChange
     }
   }
   sv_value_class += "background-white "; // Always white
-//        console.log('In SymbolValueWireDia.render sv_value_class=',sv_value_class);
+//        console.log('SymbolValueWireDia.render sv_value_class=',sv_value_class);
   var sv_icon_tooltip;
   if (sv_icon_alerts.length > 0) {
     sv_icon_tooltip =
@@ -400,13 +400,13 @@ export default function SymbolValueWireDia({ className, element, index, onChange
       </>;
   }
   var sv_icon_class = "fas fa-exclamation-triangle icon-invalid ";
-//        console.log('In SymbolValueWireDia.render sv_value_tooltip=',sv_value_tooltip);
+//        console.log('SymbolValueWireDia.render sv_value_tooltip=',sv_value_tooltip);
 
   var nvu_results = getAlertsByName(element.name);
-//        console.log('In SymbolValueWireDia.render nvu_results=',nvu_results);
+//        console.log('SymbolValueWireDia.render nvu_results=',nvu_results);
   var nvu_icon_alerts = nvu_results.alerts;
   var nvu_value_class = nvu_results.className + ' text-end ';
-//        console.log('In SymbolValueWireDia.render nvu_value_tooltip=',nvu_value_tooltip);
+//        console.log('SymbolValueWireDia.render nvu_value_tooltip=',nvu_value_tooltip);
   var nvu_value_fix_free_text = '';
   if (element.lmin & FIXED) {
     nvu_value_class += "borders-fixed ";
@@ -428,7 +428,7 @@ export default function SymbolValueWireDia({ className, element, index, onChange
       nvu_value_fix_free_text = <div className="mb-3"><em>Free status allows <img src="SearchButton.png" alt="SearchButton" /> to change the value of this variable.</em></div>; // For Free
     }
   }
-//        console.log('In SymbolValueWireDia.render nvu_value_class=',nvu_value_class);
+//        console.log('SymbolValueWireDia.render nvu_value_class=',nvu_value_class);
 
   var feasibility_status;
   var feasibility_tooltip;

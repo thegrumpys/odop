@@ -30,10 +30,10 @@ export default function ActionSelectCatalog() {
   }, [model_type]);
 
   const updateCatalogNames = () => {
-//    console.log('In ActionSelectCatalog.updateCatalogNames');
+//    console.log('ActionSelectCatalog.updateCatalogNames');
     var { getCatalogNames, getCatalogEntries } = require('../../designtypes/' + model_type + '/catalog.js'); // Dynamically load getCatalogNames & getCatalogEntries
     var localNames = getCatalogNames(model_units);
-//    console.log('In ActionSelectCatalog.toggle names=',names);
+//    console.log('ActionSelectCatalog.toggle names=',names);
     var localName;
     var catalog_number;
     // Loop to create st from model_symbol_table, and initialize names/name and entries/entry
@@ -67,13 +67,13 @@ export default function ActionSelectCatalog() {
   }
 
   const toggle = () => {
-//    console.log('In ActionSelectCatalog.toggle');
+//    console.log('ActionSelectCatalog.toggle');
     updateCatalogNames();
     setShow(!show);
   }
 
   const onSelectCatalogName = (event) => {
-//    console.log('In ActionSelectCatalog.onSelectCatalogName event.target.value=',event.target.value);
+//    console.log('ActionSelectCatalog.onSelectCatalogName event.target.value=',event.target.value);
     var localName = event.target.value;
     var { getCatalogEntries } = require('../../designtypes/' + model_type + '/catalog.js'); // Dynamically load getCatalogEntries
     // Loop to create p and x from model_symbol_table
@@ -90,21 +90,21 @@ export default function ActionSelectCatalog() {
   }
 
   const onSelectCatalogEntry = (event) => {
-//    console.log('In ActionSelectCatalog.onSelectCatalogEntry event.target.value=',event.target.value);
+//    console.log('ActionSelectCatalog.onSelectCatalogEntry event.target.value=',event.target.value);
     var entry = parseFloat(event.target.value);
     setEntry(entries[entry]);
     logUsage('event', 'ActionSelectCatalog', { event_label: 'name:' + name + ' change number:' + entries[entry].catalog_number});
   }
 
   const onSelect = () => {
-//    console.log('In ActionSelectCatalog.onSelect');
+//    console.log('ActionSelectCatalog.onSelect');
     setShow(!show);
     // Do select catalog entry
     logUsage('event', 'ActionSelectCatalog', { event_label: 'select name:' + name + ' number:' + entry.catalog_number});
     dispatch(saveAutoSave());
-//    console.log('In ActionSelectCatalog.onSelect entries=',entries);
+//    console.log('ActionSelectCatalog.onSelect entries=',entries);
     entry.catalog_items.forEach((item) => {
-//      console.log('In ActionSelectCatalog.onSelect element=',element);
+//      console.log('ActionSelectCatalog.onSelect element=',element);
       if (item.set) {
         dispatch(changeSymbolValue(item.name, item.value));
         logValue(item.name, item.value);
@@ -118,12 +118,12 @@ export default function ActionSelectCatalog() {
   }
 
   const onCancel = () => {
-//    console.log('In ActionSelectCatalog.onCancel');
+//    console.log('ActionSelectCatalog.onCancel');
     setShow(!show);
   }
 
   const onSelectContextHelp = () => {
-//    console.log('In ActionSelectCatalog.onSearchContinue');
+//    console.log('ActionSelectCatalog.onSearchContinue');
     window.open('/docs/Help/SpringDesign/selectSizeCatalog.html#catalogs', '_blank');
   }
 

@@ -3,10 +3,9 @@ import { useSelector } from "react-redux";
 import { Button, Modal, NavDropdown } from 'react-bootstrap';
 import { version as release_version } from '../../version';
 import { logUsage } from '../../logUsage';
-import { useOktaAuth } from '@okta/okta-react';
-import config from '../../config';
 import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
+import { useAuth } from '../../components/AuthProvider';
 
 export default function HelpAbout() {
 //  console.log('HelpAbout - Mounting...');
@@ -18,8 +17,8 @@ export default function HelpAbout() {
   const model_version = useSelector((state) => state.model.version);
   const model_jsontype = useSelector((state) => state.model.jsontype);
   const model_units = useSelector((state) => state.model.units);
-  const { authState } = useOktaAuth();
-//  console.log('HelpAbout','oktaAuth=',oktaAuth,'authState=',authState);
+  const { authState } = useAuth();
+//  console.log('HelpAbout','authState=',authState);
 
   useEffect(() => {
 //    console.log('HelpAbout - Mounted');
@@ -29,13 +28,13 @@ export default function HelpAbout() {
   }, []);
 
   const toggle = () => {
-//    console.log('In HelpAbout.toggle');
+//    console.log('HelpAbout.toggle');
     setShow(!show);
     if (show) logUsage('event', 'HelpAbout', { event_label: 'HelpAbout' });
   }
 
   const getDBSize = (user) => {
-//    console.log('In HelpAbout.getDBSize');
+//    console.log('HelpAbout.getDBSize');
     displaySpinner(true);
     fetch('/api/v1/db_size', {
       headers: {
@@ -49,13 +48,13 @@ export default function HelpAbout() {
       return res.json()
     })
     .then(sizes => {
-//        console.log('In HelpAbout.getSize sizes=', sizes);
+//        console.log('HelpAbout.getSize sizes=', sizes);
       setSizes(sizes);
       var size = '';
       if (sizes.length > 0) {
         size = sizes[0]; // Default to first name
       }
-//        console.log('In HelpAbout.getSize size=', size);
+//        console.log('HelpAbout.getSize size=', size);
       setSize(size);
       logUsage('event', 'HelpAbout', { event_label: 'getDBSize: ' + size });
     })
@@ -92,17 +91,18 @@ export default function HelpAbout() {
           <a href="https://github.com/thegrumpys/odop/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">ODOP License</a>
           <hr />
           ODOP Software Version: {release_version()}<br />
-          {config.node.env !== "production" &&
+          {authState && authState.isAdmin &&
             <>
               User Authenticated: {authState.isAuthenticated ? 'true' : 'false'}<br />
-              User Email: {authState.isAuthenticated ? authState.idToken.claims.email : 'Unknown'}<br />
+              User Adminstrator: {authState.isAdmin ? 'true' : 'false'}<br />
+              User Email: {authState.isAuthenticated ? authState.email : 'Unknown'}<br />
               User ClientId: {model_user === null ? 'Unknown' : model_user}<br />
             </>
           }
           Model: {model_jsontype} {model_type}<br />
           Model Units: {model_units}<br />
           Model Version: {model_version}<br />
-          {config.node.env !== "production" && <span>DB Size: {size} MB</span>}
+          {authState && authState.isAdmin && <span>DB Size: {size} MB</span>}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={toggle}>Close</Button>

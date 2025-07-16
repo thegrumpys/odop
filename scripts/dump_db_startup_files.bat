@@ -1,6 +1,6 @@
 @echo off
 REM Perform dump [backup] operation on Startup designs to create load.sql files.
-REM Hard coded for B. Watt oktauserid '00u1itcx44XGp65ln357'
+REM Hard coded for B. Watt usertoken '00u1itcx44XGp65ln357'
 REM Use during development / release process after running the mk{type}Startups.js execute scripts only !
 
 IF "%1"=="" (
@@ -8,7 +8,7 @@ IF "%1"=="" (
   ECHO         where "type" is the system type: "local", "development", "test", "staging" or "production"
   ECHO.
   ECHO Perform dump [backup] operation on Startup designs to create load.sql files.
-  ECHO Hard coded for B. Watt oktauserid '00u1itcx44XGp65ln357'
+  ECHO Hard coded for B. Watt usertoken '00u1itcx44XGp65ln357'
   ECHO Use during development / release process after running the mk{type}Startups.js execute scripts only !
   
   GOTO BYEBYE
@@ -31,8 +31,8 @@ GOTO BYEBYE
 SETLOCAL
 call .\scripts\set_db_access_var %1
 
-REM Info@SpringDesignSoftware.org oktauserid=00u1g7vr21d7yajY4357
-REM bwatt@1fifoto.com oktauserid=00u1itcx44XGp65ln357
+REM Info@SpringDesignSoftware.org usertoken=00u1g7vr21d7yajY4357
+REM bwatt@1fifoto.com usertoken=00u1itcx44XGp65ln357
 
 mysqldump --user=%user% --password=%password% --host=%host% --complete-insert --no-create-info --compact --no-tablespaces --set-gtid-purged=OFF --where="(user='00u1itcx44XGp65ln357' AND type='Piston-Cylinder' AND name='Startup') OR (user='00u1itcx44XGp65ln357' AND type='Piston-Cylinder' AND name='Startup_Metric')" %database% design > designtypes\Piston-Cylinder\load.sql
 IF %ERRORLEVEL% NEQ 0 (ECHO dump_db_startup_files: mysqldump returned %ERRORLEVEL%) ELSE (ECHO mysqlsump returned SUCCESS)

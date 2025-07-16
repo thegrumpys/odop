@@ -1,29 +1,35 @@
-import { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 import { logUsage } from '../../logUsage';
-import { useOktaAuth } from '@okta/okta-react';
+import { useAuth } from '../../components/AuthProvider';
 import { changeUser, saveAutoSave } from '../../store/actions';
+import axios from '../../axiosConfig';
 
 export default function SignOut() {
+//  console.log('SignOut');
+  const model_user = useSelector((state) => state.user);
+//  console.log('SignOut','model_user=',model_user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { oktaAuth, authState } = useOktaAuth();
-//  console.log('SignOut','oktaAuth=',oktaAuth,'authState=',authState);
+  const { authState, setAuthState } = useAuth();
+//  console.log('SignOut','authState=',authState);
 
-  const toggle = () => {
-//    console.log('In SignOut.toggle');
-    dispatch(changeUser(null));
-    dispatch(saveAutoSave('redirect'));
-    // Before changing the postSignOutRedirectUri you must go into the Okta Admin UI
-    // And add the new one into the "SignOut redirect URIs" to whitelist it.
-//    oktaAuth.signOut({ postSignOutRedirectUri: window.location.origin + '/' });
-//    console.log('In SignOut.toggle window.location.origin=',window.location.origin);
-    oktaAuth.signOut();
-    logUsage('event', 'SignOut', { event_label: '' });
-//    console.log('In SignOut.toggle navigate('/')');
-    navigate('/'); // Must be last after logUsage
+  const toggle = async () => {
+//    console.log('SignOut.toggle');
+    try {
+      const res = await axios.post('/api/v1/logout');
+//      console.log('SignOut.toggle','res=',res);
+      const res2 = await axios.get('/api/v1/me');
+//      console.log('SignOut.toggle','res2=',res2);
+      setAuthState(res2.data.authState);
+      logUsage('event', 'SignOut', { event_label: model_user });
+      dispatch(changeUser(null));
+      navigate('/');
+    } catch (err) {
+      console.error('SignOut', 'err=', err);
+    }
   }
 
   return authState && authState.isAuthenticated ? (

@@ -8,13 +8,13 @@ export function migrate(design) {
      * When doing a migration also update client's initialState and set its version to the new one.
      * Also update load.sql and set its version to the new one.
      */
-//    console.log('In migrate design=',design);
+//    console.log('migrate design=',design);
 
     var previous_version = design.version;
     var migrated_design = design; // Assume no-op as default
 
     /* eslint-disable no-fallthrough */
-//    console.log('In migrate design.version=',design.version);
+//    console.log('migrate design.version=',design.version);
     switch(design.version) {
     case '1':
         // console.log('Convert from 1 to 2');
@@ -178,7 +178,7 @@ export function migrate(design) {
             design['units'] = "Metric";
         }
         design.symbol_table.forEach((element) => { // For each Symbol Table entry
-//            console.log('In migrate.propgate element=',element);
+//            console.log('migrate.propgate element=',element);
             // ***************************************************************
             // Note no need to migrate FDCL because there has never been any
             // FDCL definition in initialState for COMPRESSION. The user cannot create
@@ -188,41 +188,41 @@ export function migrate(design) {
                 element.lmin |= FIXED; // Set them both fixed because they are paired
                 element.lmax |= FIXED;
                 if (element.oldlmin === undefined) {
-//                    console.log('In migrate create oldlmin element=',element);
+//                    console.log('migrate create oldlmin element=',element);
                     element.oldlmin = element.lmin & ~FIXED; // with FIXED turned off
                 }
                 if (element.oldcmin === undefined) {
-//                    console.log('In migrate create oldcmin element=',element);
+//                    console.log('migrate create oldcmin element=',element);
                     element.oldcmin = element.cmin;
                 }
                 if (element.oldlmax === undefined) {
-//                    console.log('In migrate create oldlmax element=',element);
+//                    console.log('migrate create oldlmax element=',element);
                     element.oldlmax = element.lmax & ~FIXED; // with FIXED turned off
                 }
                 if (element.oldcmax === undefined) {
-//                    console.log('In migrate create oldcmax element=',element);
+//                    console.log('migrate create oldcmax element=',element);
                     element.oldcmax = element.cmax;
                 }
             } else { // Get rid of remnants of non-FIXED elements
                 if (element.oldlmin !== undefined) {
-//                    console.log('In migrate delete oldlmin element=',element);
+//                    console.log('migrate delete oldlmin element=',element);
                     delete element.oldlmin;
                 }
                 if (element.oldcmin !== undefined) {
-//                    console.log('In migrate delete oldcmin element=',element);
+//                    console.log('migrate delete oldcmin element=',element);
                     delete element.oldcmin;
                 }
                 if (element.oldlmax !== undefined) {
-//                    console.log('In migrate delete oldlmax element=',element);
+//                    console.log('migrate delete oldlmax element=',element);
                     delete element.oldlmax;
                 }
                 if (element.oldcmax !== undefined) {
-//                    console.log('In migrate delete oldcmax element=',element);
+//                    console.log('migrate delete oldcmax element=',element);
                     delete element.oldcmax;
                 }
             }
             if (element.oldvalue !== undefined) {
-//                console.log('In migrate delete oldvalue element=',element);
+//                console.log('migrate delete oldvalue element=',element);
                 delete element.oldvalue
             }
         });
@@ -407,8 +407,8 @@ export function migrate(design) {
     if (previous_version !== migrated_design.version) {
         displayMessage("Migrated design from version " + previous_version + " to version " + migrated_design.version,'info');
     }
-//    console.log('In migrate migrated_design.version=',migrated_design.version);
+//    console.log('migrate migrated_design.version=',migrated_design.version);
     /* eslint-enable */
-//    console.log('In migrate migrated_design=',migrated_design);
+//    console.log('migrate migrated_design=',migrated_design);
     return migrated_design;
 }

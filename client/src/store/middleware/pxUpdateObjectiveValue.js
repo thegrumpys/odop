@@ -22,7 +22,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
     var debug = false;
 
     var design = store.getState(); // Re-access store to get latest element values
-//    console.log('In pxUpdateObjectiveValue design=',design);
+//    console.log('pxUpdateObjectiveValue design=',design);
 
     // Determine all constraint violations
     viol_sum = 0.0;
@@ -34,7 +34,7 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
     var infeasible = false;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
-//        console.log('In pxUpdateObjectiveValue element=',element);
+//        console.log('pxUpdateObjectiveValue element=',element);
         if (element.type === "equationset" && element.input) { // Independent Variable
             pp = p[ip++];
             if (element.format === undefined && typeof element.value === 'number') { // Only number, skip string and table
@@ -74,8 +74,8 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
                 viol_sum = viol_sum + feasibility_vmax * feasibility_vmax;
                 infeasible |= true;
             }
-//            console.log('In pxUpdateObjectiveValue IV    element=',element,'ip=',ip,'pp=',pp,'element.cmax=',element.cmax,'element.smax=',element.smax);
-//            console.log('In pxUpdateObjectiveValue IV    ','pp=',pp,'element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum,'invalid=',invalid,'infeasible=',infeasible);
+//            console.log('pxUpdateObjectiveValue IV    element=',element,'ip=',ip,'pp=',pp,'element.cmax=',element.cmax,'element.smax=',element.smax);
+//            console.log('pxUpdateObjectiveValue IV    ','pp=',pp,'element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum,'invalid=',invalid,'infeasible=',infeasible);
         } else if ((element.type === "equationset" && !element.input) || element.type === "calcinput") { // Dependent Variable
             xx = x[ix++];
             /* State variable fix levels. */
@@ -169,10 +169,10 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
                     infeasible |= true;
                 }
             }
-//            console.log('In pxUpdateObjectiveValue DV/CI element=',element,'ix=',ix,'xx=',xx,'element.cmax=',element.cmax,'element.smax=',element.smax);
-//            console.log('In pxUpdateObjectiveValue DV/CI ','xx=',xx,'element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum,'invalid=',invalid,'infeasible=',infeasible);
+//            console.log('pxUpdateObjectiveValue DV/CI element=',element,'ix=',ix,'xx=',xx,'element.cmax=',element.cmax,'element.smax=',element.smax);
+//            console.log('pxUpdateObjectiveValue DV/CI ','xx=',xx,'element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum,'invalid=',invalid,'infeasible=',infeasible);
         }
-//        console.log('In pxUpdateObjectiveValue at end element=',element);
+//        console.log('pxUpdateObjectiveValue at end element=',element);
     }
 
     /* Merit Function */
@@ -187,9 +187,9 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
 
     if (debug) {
         if (!invalid && !infeasible) {
-            console.log('In pxUpdateObjectiveValue Valid & Feasible obj=',obj);
+            console.log('pxUpdateObjectiveValue Valid & Feasible obj=',obj);
         } else if (!invalid && infeasible) {
-            console.log('In pxUpdateObjectiveValue Valid & Infeasible obj=',obj);
+            console.log('pxUpdateObjectiveValue Valid & Infeasible obj=',obj);
         } else if (invalid && infeasible) {
             console.warn('In pxUpdateObjectiveValue Invalid & Infeasible obj=',obj);
         } else if (invalid && !infeasible) {

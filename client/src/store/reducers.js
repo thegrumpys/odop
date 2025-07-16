@@ -100,7 +100,7 @@ import { logUsage as log } from '../logUsage';
 
 export default function reducers(state = {}, action) {
 
-//  console.log('In reducers','state=',state,'action=', action);
+//  console.log('reducers','state=',state,'action=', action);
 //  if (action.payload === undefined || action.payload.name === undefined) {
 //      console.log('<li>','In reducers action=', action.type,'</li>');
 //  } else {
@@ -393,7 +393,7 @@ export default function reducers(state = {}, action) {
       return result;
 
     case STARTUP:
-//        console.log('In reducers.STARTUP state=',state);
+//        console.log('reducers.STARTUP state=',state);
 //        console.log('start reducer startup', 'state=', state, 'action=', action);
       var result = Object.assign({}, state, {
         ...state,
@@ -507,7 +507,7 @@ export default function reducers(state = {}, action) {
           symbol_table: state.model.symbol_table.map((element) => {
             if (element.name === action.payload.name) {
 //                if (element.name === 'Force_2')
-//                  console.log('In reducers.CHANGE_SYMBOL_VALUE element=',element.name,' old value=',element.value,' new value=',action.payload.value);
+//                  console.log('reducers.CHANGE_SYMBOL_VALUE element=',element.name,' old value=',element.value,' new value=',action.payload.value);
               var inner_result = Object.assign({}, element, {
                 value: action.payload.value
               });
@@ -673,8 +673,8 @@ export default function reducers(state = {}, action) {
           },
           symbol_table: state.model.symbol_table.map((element) => {
             if (element.name === action.payload.name) {
-//                console.log('In reducers.SAVE_OUTPUT_SYMBOL_CONSTRAINTS state=',state,'action=', action);
-//                console.log('In reducers.SAVE_OUTPUT_SYMBOL_CONSTRAINTS',
+//                console.log('reducers.SAVE_OUTPUT_SYMBOL_CONSTRAINTS state=',state,'action=', action);
+//                console.log('reducers.SAVE_OUTPUT_SYMBOL_CONSTRAINTS',
 //                            'element.lmin=',element.lmin,
 //                            'element.cmin=',element.cmin,
 //                            'element.lmax=',element.lmax,
@@ -708,8 +708,8 @@ export default function reducers(state = {}, action) {
           },
           symbol_table: state.model.symbol_table.map((element) => {
             if (element.name === action.payload.name) {
-//                console.log('In reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS state=',state,'action=', action);
-//                console.log('In reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS',
+//                console.log('reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS state=',state,'action=', action);
+//                console.log('reducers.RESTORE_OUTPUT_SYMBOL_CONSTRAINTS',
 //                            'element.oldlmin=',element.oldlmin,
 //                            'element.oldcmin=',element.oldcmin,
 //                            'element.oldlmax=',element.oldlmax,
@@ -763,7 +763,7 @@ export default function reducers(state = {}, action) {
                   inner_result.cmaxchoice = inner_result.cmaxchoices.indexOf(action.payload.source);
                 }
               }
-//                console.log('In reducers.SET_SYMBOL_FLAG','element=',element,'inner_result=',inner_result);
+//                console.log('reducers.SET_SYMBOL_FLAG','element=',element,'inner_result=',inner_result);
               return inner_result;
             } else if (action.payload.source !== undefined && element.name === action.payload.source) {
               var inner_result = Object.assign({}, element);
@@ -777,7 +777,7 @@ export default function reducers(state = {}, action) {
                   }
                 }
               }
-//                console.log('In reducers.SET_SYMBOL_FLAG','element=',element,'inner_result=',inner_result);
+//                console.log('reducers.SET_SYMBOL_FLAG','element=',element,'inner_result=',inner_result);
               return inner_result;
             } else {
               return element;
@@ -812,7 +812,7 @@ export default function reducers(state = {}, action) {
                   delete inner_result.cmaxchoice;
                 }
               }
-//                console.log('In reducers.RESET_SYMBOL_FLAG ','element=',element,'inner_result=',inner_result);
+//                console.log('reducers.RESET_SYMBOL_FLAG ','element=',element,'inner_result=',inner_result);
               return inner_result;
             } else if ((action.payload.mask & FDCL) && (element.propagate !== undefined) && (index = element.propagate.findIndex(i => i.name === action.payload.name && i.minmax === action.payload.minmax)) !== -1) {
               var inner_result = Object.assign({}, element);
@@ -822,7 +822,7 @@ export default function reducers(state = {}, action) {
                 inner_result.propagate = undefined; // De-reference the array
                 delete inner_result.propagate; // Delete the property
               }
-//                console.log('In reducers.RESET_SYMBOL_FLAG ','element=',element,'index=',index,'inner_result=',inner_result);
+//                console.log('reducers.RESET_SYMBOL_FLAG ','element=',element,'index=',index,'inner_result=',inner_result);
               return inner_result;
             } else {
               return element;
@@ -844,7 +844,7 @@ export default function reducers(state = {}, action) {
           },
           symbol_table: state.model.symbol_table.map((element) => {
             if (element.name === action.payload.name) {
-//                console.log('In reducers.CHANGE_SYMBOL_INPUT element=',element.name,' old value=',element.input,' new value=',action.payload.value);
+//                console.log('reducers.CHANGE_SYMBOL_INPUT element=',element.name,' old value=',element.input,' new value=',action.payload.value);
               var inner_result = Object.assign({}, element, {
                 input: action.payload.value
               });
@@ -868,7 +868,7 @@ export default function reducers(state = {}, action) {
           },
           symbol_table: state.model.symbol_table.map((element) => {
             if (element.name === action.payload.name) {
-//                console.log('In reducers.CHANGE_SYMBOL_HIDDEN element=',element.name,' old value=',element.hidden,' new value=',action.payload.value);
+//                console.log('reducers.CHANGE_SYMBOL_HIDDEN element=',element.name,' old value=',element.hidden,' new value=',action.payload.value);
               var inner_result = Object.assign({}, element, {
                 hidden: action.payload.value
               });
@@ -925,7 +925,7 @@ export default function reducers(state = {}, action) {
           symbol_table: state.model.symbol_table.map((element) => {
             if (element.type === "equationset" && element.input) {
 //                if (element.name === "Wire_Dia")
-//                  console.log('In reducers.SAVE_INPUT_SYMBOL_VALUES element=',element);
+//                  console.log('reducers.SAVE_INPUT_SYMBOL_VALUES element=',element);
               var inner_result = Object.assign({}, element, {
                 oldvalue: element.value
               });
@@ -952,7 +952,7 @@ export default function reducers(state = {}, action) {
             if (element.type === "equationset" && element.input) {
               if (element.oldvalue !== undefined) {
 //                  if (element.name === "Wire_Dia")
-//                    console.log('In reducers.RESTORE_INPUT_SYMBOL_VALUES oldvalue==defined element=',element);
+//                    console.log('reducers.RESTORE_INPUT_SYMBOL_VALUES oldvalue==defined element=',element);
                 var inner_result = Object.assign({}, element, { // Assign the local
                   value: element.oldvalue
                 });
@@ -960,7 +960,7 @@ export default function reducers(state = {}, action) {
                 return inner_result;
               } else {
 //                  if (element.name === "Wire_Dia")
-//                    console.log('In reducers.RESTORE_INPUT_SYMBOL_VALUES oldvalue==undefined element=',element);
+//                    console.log('reducers.RESTORE_INPUT_SYMBOL_VALUES oldvalue==undefined element=',element);
                 return element;
               }
             } else {
@@ -989,7 +989,7 @@ export default function reducers(state = {}, action) {
               var value = action.payload.values[i++]
               if (value !== undefined) {
 //                if (element.name === "Prop_Calc_Method")
-//                  console.log('In reducers.CHANGE_OUTPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
+//                  console.log('reducers.CHANGE_OUTPUT_SYMBOL_VALUES i=',i-1,' element=',element.name,' old value=',element.value,' new value=',value);
                 var inner_result = Object.assign({}, element, {
                   value: value
                 });
@@ -1133,7 +1133,7 @@ export default function reducers(state = {}, action) {
 //        console.log('in reducer saveAutoSave', 'state.user=', state.user, 'state.name=', state.name, 'state.view=', state.view, 'state.model.type=', state.model.type);
       if (typeof (Storage) !== "undefined") {
         localStorage.setItem(action.payload.name, JSON.stringify(state), null, 2); // create or replace auto save file with current state contents
-//          console.log('In reducers.SAVE_AUTO_SAVE action.payload.name=',action.payload.name,'state=',state);
+//          console.log('reducers.SAVE_AUTO_SAVE action.payload.name=',action.payload.name,'state=',state);
       }
       var result = Object.assign({}, state, {
         ...state,
@@ -1153,11 +1153,11 @@ export default function reducers(state = {}, action) {
       var result;
       if (typeof (Storage) !== "undefined") {
         var autosave = JSON.parse(localStorage.getItem(action.payload.name)); // get auto save file contents
-//        console.log('In reducers.RESTORE_AUTO_SAVE autosave=',autosave);
+//        console.log('reducers.RESTORE_AUTO_SAVE autosave=',autosave);
 // Migrate autosave file from old (no model property) to new (with model property)
         if (autosave.model === undefined) { // Is it the old format
           var name = autosave.name;
-//          console.log('In reducers.RESTORE_AUTO_SAVE name=',name);
+//          console.log('reducers.RESTORE_AUTO_SAVE name=',name);
           delete autosave.name;
           result = Object.assign({}, state, {
             ...state,
@@ -1167,14 +1167,14 @@ export default function reducers(state = {}, action) {
         } else {
           result = Object.assign({}, state, autosave); // New format
         }
-//        console.log('In reducers.RESTORE_AUTO_SAVE result1=',result);
+//        console.log('reducers.RESTORE_AUTO_SAVE result1=',result);
         var { migrate } = require('../designtypes/' + result.model.type + '/migrate.js'); // Dynamically load migrate
         result = Object.assign({}, result, {
           ...result,
           model: migrate(result.model),
         });
-//        console.log('In reducers.RESTORE_AUTO_SAVE result2=',result);
-//          console.log('In reducers.RESTORE_AUTO_SAVE action.payload.name=',action.payload.name,'state=',state);
+//        console.log('reducers.RESTORE_AUTO_SAVE result2=',result);
+//          console.log('reducers.RESTORE_AUTO_SAVE action.payload.name=',action.payload.name,'state=',state);
       }
       result = Object.assign({}, result, {
         ...result,
@@ -1186,7 +1186,7 @@ export default function reducers(state = {}, action) {
           }
         }
       });
-//        console.log('In reducers.RESTORE_AUTO_SAVE result3=',result);
+//        console.log('reducers.RESTORE_AUTO_SAVE result3=',result);
 //        console.log('end reducer restoreAutoSave', 'state=', state, 'action=', action, 'result=', result);
       return result;
 
@@ -1194,7 +1194,7 @@ export default function reducers(state = {}, action) {
 //        console.log('start reducer deleteAutoSave', 'state=', state, 'action=', action);
       if (typeof (Storage) !== "undefined") {
         localStorage.removeItem(action.payload.name); // remove auto save file
-//          console.log('In reducers.DELETE_AUTO_SAVE action.payload.name=',action.payload.name,'state=',state);
+//          console.log('reducers.DELETE_AUTO_SAVE action.payload.name=',action.payload.name,'state=',state);
       }
       var result = Object.assign({}, state, {
         ...state,

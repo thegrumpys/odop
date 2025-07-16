@@ -49,7 +49,7 @@ export default function SymbolValue({ className, element, index }) {
   }
 
   const onSearchRequest = (event) => {
-//    console.log('In SymbolValue.onSearchRequest','event=',event);
+//    console.log('SymbolValue.onSearchRequest','event=',event);
     if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Search cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
       return;
@@ -74,19 +74,19 @@ export default function SymbolValue({ className, element, index }) {
   }
 
   const onSearchContextHelp = () => {
-//    console.log('In SymbolValue.onSearchContinue');
+//    console.log('SymbolValue.onSearchContinue');
     window.open('/docs/Help/errors.html#objNotFinite', '_blank');
   }
 
   const onSearchContinue = () => {
-//    console.log('In SymbolValue.onSearchContinue');
+//    console.log('SymbolValue.onSearchContinue');
     setSearchInfiniteShow(!searchInfiniteShow);
     setEditShow(!editShow);
     doSearch('NOT FINITE');
   }
 
   const onSearchCancel = () => {
-//    console.log('In SymbolValue.onSearchCancel');
+//    console.log('SymbolValue.onSearchCancel');
     setSearchInfiniteShow(!searchInfiniteShow);
     setEditShow(!editShow);
   }
@@ -97,7 +97,7 @@ export default function SymbolValue({ className, element, index }) {
   }
 
   const onSeekMinRequest = (event) => {
-//    console.log('In SymbolValue.onSeekMinRequest','event=',event);
+//    console.log('SymbolValue.onSeekMinRequest','event=',event);
     if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
       return;
@@ -119,7 +119,7 @@ export default function SymbolValue({ className, element, index }) {
   }
 
   const onSeekMaxRequest = (event) => {
-//    console.log('In SymbolValue.onSeekMaxRequest','event=',event);
+//    console.log('SymbolValue.onSeekMaxRequest','event=',event);
     if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
       return;
@@ -141,7 +141,7 @@ export default function SymbolValue({ className, element, index }) {
   }
 
   const onContextMenu = (e) => {
-//    console.log('In SymbolValue.onContextMenu','e=',e);
+//    console.log('SymbolValue.onContextMenu','e=',e);
     e.preventDefault();
     var design = store.getState();
     var reset = JSON.stringify(design.model);
@@ -152,7 +152,7 @@ export default function SymbolValue({ className, element, index }) {
   }
 
   const onContextHelp = () => {
-//    console.log('In SymbolValue.onContextHelp');
+//    console.log('SymbolValue.onContextHelp');
     logUsage('event', 'SymbolValue', { event_label: 'Context Help button' });
     setEditShow(!editShow);
     setModified(false);
@@ -160,56 +160,56 @@ export default function SymbolValue({ className, element, index }) {
   }
 
   const onClose = () => {
-//    console.log('In SymbolValue.onClose');
+//    console.log('SymbolValue.onClose');
     setEditShow(false);
     setModified(false);
   }
 
   const onResetButton = () => {
-//    console.log('In SymbolValue.onResetButton');
+//    console.log('SymbolValue.onResetButton');
     logUsage('event', 'SymbolValue', { event_label: 'Reset button' });
     dispatch(load(JSON.parse(reset))); // Yes, we are restoring the ENTIRE model so we can reset ONLY ONE symbol table entry - overkill, but it works!
     setModified(false);
   }
 
   const onChangeValidValue = (event) => {
-//    console.log('In SymbolValue.onChangeValidValue');
+//    console.log('SymbolValue.onChangeValidValue');
     setIsInvalidValue(false);
     setModified(true);
   }
 
   const onChangeInvalidValue = (event) => {
-//    console.log('In SymbolValue.onChangeInvalidValue');
+//    console.log('SymbolValue.onChangeInvalidValue');
     setIsInvalidValue(true);
     setModified(true);
   }
 
   const onChangeValidMinConstraint = (event) => {
-//    console.log('In SymbolValue.onChangeValidMinConstraint');
+//    console.log('SymbolValue.onChangeValidMinConstraint');
     setIsInvalidMinConstraint(false);
     setModified(true);
   }
 
   const onChangeInvalidMinConstraint = (event) => {
-//    console.log('In SymbolValue.onChangeInvalidMinConstraint');
+//    console.log('SymbolValue.onChangeInvalidMinConstraint');
     setIsInvalidMinConstraint(true);
     setModified(true);
   }
 
   const onChangeValidMaxConstraint = (event) => {
-//    console.log('In SymbolValue.onChangeValidMaxConstraint');
+//    console.log('SymbolValue.onChangeValidMaxConstraint');
     setIsInvalidMaxConstraint(false);
     setModified(true);
   }
 
   const onChangeInvalidMaxConstraint = (event) => {
-//    console.log('In SymbolValue.onChangeInvalidMaxConstraint');
+//    console.log('SymbolValue.onChangeInvalidMaxConstraint');
     setIsInvalidMaxConstraint(true);
     setModified(true);
   }
 
   const onModifiedFlag = (event) => {
-//    console.log('In SymbolValue.onModifiedFlag');
+//    console.log('SymbolValue.onModifiedFlag');
     setModified(true);
   }
 
@@ -231,7 +231,7 @@ export default function SymbolValue({ className, element, index }) {
     disabled = true;
   } else {
     sv_value_class += "background-white "; // Set rest to white background
-//    console.log('In SymbolValue.render sv_value_class=',sv_value_class);
+//    console.log('SymbolValue.render sv_value_class=',sv_value_class);
   }
   var icon_dependent_tag = '';
   if (element.type === "equationset" && !element.input) { // Dependent Variable?

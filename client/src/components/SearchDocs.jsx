@@ -12,22 +12,22 @@ export default function SearchDocs() {
   const [results, setResults] = useState([]);
 
   const onChange = (event) => {
-//        console.log('In SearchDocs.onChange event=',event);
+//        console.log('SearchDocs.onChange event=',event);
     setText(event.target.value);
   }
 
   const onKeyPress = (event) => {
-//        console.log('In SearchDocs.onKeyPress event=',event);
+//        console.log('SearchDocs.onKeyPress event=',event);
     if (event.charCode === 13) {
       onButtonPress(event);
     }
   }
 
   const onButtonPress = (event) => {
-//        console.log('In SearchDocs.onButtonPress event=',event);
+//        console.log('SearchDocs.onButtonPress event=',event);
     var local_text = text;
     var encoded_text = encodeURIComponent(text);
-//        console.log('In SearchDocs.onButtonPress encoded_text=',encoded_text);
+//        console.log('SearchDocs.onButtonPress encoded_text=',encoded_text);
     logUsage('event', 'SearchDocs', { event_label: text });
     setText('');
     setQuery(local_text);
@@ -40,7 +40,7 @@ export default function SearchDocs() {
       return res.json()
     })
     .then((results) => {
-//            console.log('In SearchDocs.onButtonPress results=', results);
+//            console.log('SearchDocs.onButtonPress results=', results);
 //            results.forEach((element) => console.log('element.href=',element.href));
       setShow(!show);
       setResults(results);
@@ -54,13 +54,13 @@ export default function SearchDocs() {
   }
 
   const onContextHelp = () => {
-//        console.log('In SearchDocs.onContextHelp');
+//        console.log('SearchDocs.onContextHelp');
     setShow(!show);
     window.open('/docs/Help/helpLookup.html', '_blank');
   }
 
   const onCancel = (event) => {
-//        console.log('In SearchDocs.onCancel event=',event);
+//        console.log('SearchDocs.onCancel event=',event);
     setShow(!show);
     // Noop - all done
   }

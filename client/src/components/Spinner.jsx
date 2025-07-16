@@ -5,7 +5,7 @@ import { disableSpinner, enableSpinner } from "../store/actions";
 import store from "../store/store";
 
 export const displaySpinner = (display) => {
-//  console.log('In displaySpinner display=', display);
+//  console.log('displaySpinner display=', display);
   if (display) {
     store.dispatch(enableSpinner());
   } else {

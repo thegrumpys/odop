@@ -6,7 +6,7 @@ import { changeName, deleteAutoSave } from '../../store/actions';
 import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
-import { useOktaAuth } from '@okta/okta-react';
+import { useAuth } from '../../components/AuthProvider';
 
 export default function FileSaveAs() {
 //  console.log('FileSaveAs - Mounting...');
@@ -18,7 +18,7 @@ export default function FileSaveAs() {
   const [name, setName] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { authState } = useOktaAuth();
+  const { authState } = useAuth();
 
   useEffect(() => {
 //    console.log('FileSaveAs','useEffect','model_user=',model_user,'model_type=',model_type);
@@ -27,7 +27,7 @@ export default function FileSaveAs() {
   }, [model_user, model_type]);
 
   const getDesignNames = (user, type) => {
-//    console.log('In FileSaveAs.getDesignNames user=',user,'type=',type);
+//    console.log('FileSaveAs.getDesignNames user=',user,'type=',type);
     // Get the names and store them in state
     displaySpinner(true);
     fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
@@ -42,7 +42,7 @@ export default function FileSaveAs() {
       return res.json()
     })
     .then(names => {
-//      console.log('In FileSaveAs.getDesignNames','names=',names);
+//      console.log('FileSaveAs.getDesignNames','names=',names);
       setNames(names);
     })
     .catch(error => {
@@ -54,7 +54,7 @@ export default function FileSaveAs() {
   }
 
   const postDesign = (user, type, name) => {
-//    console.log('In FileSaveAs.postDesign user=',user,'type=',type,'name=',name);
+//    console.log('FileSaveAs.postDesign user=',user,'type=',type,'name=',name);
     dispatch(changeName(name));
     // First fetch the current list of names
     displaySpinner(true);
@@ -71,14 +71,14 @@ export default function FileSaveAs() {
     })
     .then(names => {
         // Second create or update the design
-//      console.log('In FileSaveAs.postDesign type=',type,'names=', names);
+//      console.log('FileSaveAs.postDesign type=',type,'names=', names);
       setNames(names);
-//      console.log('In FileSaveAs.postDesign names=',names);
+//      console.log('FileSaveAs.postDesign names=',names);
       var method = 'POST'; // Create it
       if (names.filter(e => e.name === name && e.user === user).length > 0) { // Does it already exist?
         method = 'PUT'; // Update it
       }
-//      console.log('In FileSaveAs.postDesign method=', method);
+//      console.log('FileSaveAs.postDesign method=', method);
       displaySpinner(true);
       fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
         method: method,
@@ -96,11 +96,11 @@ export default function FileSaveAs() {
         return res.json()
       })
       .then(names => {
-//        console.log('In FileSave.getDesignNames','names=',names);
+//        console.log('FileSave.getDesignNames','names=',names);
         if (method === 'POST') {
           var names = Array.from(names); // clone it
           names.push({ user: user, name: name }); // If create was successful then add name to the array of names
-//          console.log('In FileSaveAs.postDesign type=',type,'name=',name,'names=', names);
+//          console.log('FileSaveAs.postDesign type=',type,'name=',name,'names=', names);
           setNames(names);
         }
         logUsage('event', 'FileSaveAs', { event_label: type + ' ' + name });
@@ -121,31 +121,31 @@ export default function FileSaveAs() {
   }
 
   const toggle = () => {
-//    console.log('In FileSaveAs.toggle');
+//    console.log('FileSaveAs.toggle');
     setShow(!show);
   }
 
   const onTextInput = (event) => {
-//    console.log('In FileSaveAs.onTextInput','event.target.value=',event.target.value);
+//    console.log('FileSaveAs.onTextInput','event.target.value=',event.target.value);
     let value = event.target.value;
     value = value.replace(/[<>:"/\\|?*]/g, '_'); // replace invalid filename characters with underscore throughout
     setName(value); // Change name in component state
   }
 
   const onSignIn = () => {
-//    console.log('In FileSaveAs.onSignIn');
+//    console.log('FileSaveAs.onSignIn');
     setShow(!show);
-//    console.log('In FileSaveAs.onSignIn - navigate(\'/login\')');
+//    console.log('FileSaveAs.onSignIn - navigate(\'/login\')');
     navigate('/login'); // Must be last
   }
 
   const onCancel = () => {
-//  console.log('In FileSaveAs.onCancel');
+//  console.log('FileSaveAs.onCancel');
     setShow(!show);
   }
 
   const onSaveAs = () => {
-//    console.log('In FileSaveAs.onSaveAs');
+//    console.log('FileSaveAs.onSaveAs');
     setShow(!show);
     // Save the model
     postDesign(model_user, model_type, name.trim()); // Take name from component state

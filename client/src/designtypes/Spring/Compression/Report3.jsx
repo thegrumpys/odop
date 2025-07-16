@@ -12,7 +12,7 @@ export default function Report3() {
 //  console.log('Report3','base=',base);
 
   const onClick = (event) => {
-//    console.log('In Report3.onClick event=',event);
+//    console.log('Report3.onClick event=',event);
     window.print();
     return false;
   }

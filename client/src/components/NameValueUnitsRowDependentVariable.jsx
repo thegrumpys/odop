@@ -15,14 +15,14 @@ export default function NameValueUnitsRowDependentVariable({ element, index, onS
   const dispatch = useDispatch();
 
   const onSetFixLocal = (event) => {
-//    console.log('In NameValueUnitsRowDependentVariable.onSetFix');
+//    console.log('In NameValueUnitsRowDependentVariable.onSetFixLocal');
     dispatch(fixSymbolValue(element.name));
     logValue(element.name, 'FIXED', 'FixedFlag', false);
     if (typeof onSetFix === "function") onSetFix(event);
   }
 
   const onResetFixLocal = (event) => {
-//    console.log('In NameValueUnitsRowDependentVariable.onResetFix');
+//    console.log('In NameValueUnitsRowDependentVariable.onResetFixLocal');
     dispatch(freeSymbolValue(element.name));
     logValue(element.name, 'FREE', 'FixedFlag', false);
     if (typeof onResetFix === "function") onResetFix(event);
@@ -83,7 +83,7 @@ export default function NameValueUnitsRowDependentVariable({ element, index, onS
       value_fix_free_text = <div className="mb-3"><em>Free status allows <img src="SearchButton.png" alt="SearchButton" /> to change the value of this variable.</em></div>; // For Free
     }
   }
-//  console.log('In NameValueUnitsRowDependentVariable', 'className=', className);
+//  console.log('NameValueUnitsRowDependentVariable', 'className=', className);
   // =======================================
   // Table Row
   // =======================================
