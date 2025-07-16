@@ -1,45 +1,58 @@
-import React, { useState, useMemo } from 'react';
-import axios from '../../axiosConfig';
-import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
-import MessageAlert from '../../components/MessageAlert';
-import { logUsage } from '../../logUsage';
-import { useAuth } from '../../components/AuthProvider';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useMemo } from "react";
+import axios from "../../axiosConfig";
+import { Container, Row, Col, Form, Button, Table } from "react-bootstrap";
+import MessageAlert from "../../components/MessageAlert";
+import { logUsage } from "../../logUsage";
+import { useAuth } from "../../components/AuthProvider";
+import { useNavigate } from "react-router-dom";
 import AdminUserModal from "./AdminUserModal";
+import ConfirmModal from "../../components/ConfirmModal";
 
 export default function AdminUserManagerPage() {
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [role, setRole] = useState('');
-  const [status, setStatus] = useState('');
-  const [token, setToken] = useState('');
-  const [createStartDate, setCreateStartDate] = useState('');
-  const [createEndDate, setCreateEndDate] = useState('');
-  const [loginStartDate, setLoginStartDate] = useState('');
-  const [loginEndDate, setLoginEndDate] = useState('');
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [role, setRole] = useState("");
+  const [status, setStatus] = useState("");
+  const [token, setToken] = useState("");
+  const [createStartDate, setCreateStartDate] = useState("");
+  const [createEndDate, setCreateEndDate] = useState("");
+  const [loginStartDate, setLoginStartDate] = useState("");
+  const [loginEndDate, setLoginEndDate] = useState("");
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
-  const [sortColumn, setSortColumn] = useState('');
-  const [sortDirection, setSortDirection] = useState('asc');
+  const [sortColumn, setSortColumn] = useState("");
+  const [sortDirection, setSortDirection] = useState("asc");
   const [modalShow, setModalShow] = useState(false);
   const [editUser, setEditUser] = useState(null);
+  const [confirmShow, setConfirmShow] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
   const navigate = useNavigate();
   const { authState, setAuthState } = useAuth();
 
   const handleDelete = async (id) => {
+    setDeleteId(id);
+    setConfirmShow(true);
+  };
+
+  const confirmDelete = async () => {
     setError(null);
     try {
-      const res = await axios.delete(`/api/v1/users/${id}`, {
+      const res = await axios.delete(`/api/v1/users/${deleteId}`, {
         headers: {
-          Authorization: 'Bearer ' + authState.token
+          Authorization: "Bearer " + authState.token,
         },
       });
       setError(res.data.error);
-      setResults(results.filter((u) => u.id !== id));
-      logUsage('event', 'AdminUserManagerPage', { event_label: 'delete id:' + id });
+      setResults(results.filter((u) => u.id !== deleteId));
+      logUsage("event", "AdminUserManagerPage", {
+        event_label: "delete id:" + deleteId,
+      });
     } catch (err) {
       setError(err.response?.data?.error || err.message);
+    } finally {
+      setConfirmShow(false);
+      setDeleteId(null);
     }
   };
 
@@ -47,15 +60,48 @@ export default function AdminUserManagerPage() {
     if (e) e.preventDefault();
     setError(null);
     try {
-      const res = await axios.get('/api/v1/users', {
+      const res = await axios.get("/api/v1/users", {
         headers: {
-          Authorization: 'Bearer ' + authState.token
+          Authorization: "Bearer " + authState.token,
         },
-        params: { email, firstName, lastName, role, status, token, createStartDate, createEndDate, loginStartDate, loginEndDate },
+        params: {
+          email,
+          firstName,
+          lastName,
+          role,
+          status,
+          token,
+          createStartDate,
+          createEndDate,
+          loginStartDate,
+          loginEndDate,
+        },
       });
       setError(res.data.error);
       setResults(res.data);
-      logUsage('event', 'AdminUserManagerPage', { event_label: 'search email:' + email + ' firstName:' + firstName + ' lastName:' + lastName + ' role:' + role + ' status:' + status + ' token:' + token + ' createStartDate:' + createStartDate + ' createEndDate:' + createEndDate + ' loginStartDate:' + loginStartDate + ' loginEndDate:' + loginEndDate });
+      logUsage("event", "AdminUserManagerPage", {
+        event_label:
+          "search email:" +
+          email +
+          " firstName:" +
+          firstName +
+          " lastName:" +
+          lastName +
+          " role:" +
+          role +
+          " status:" +
+          status +
+          " token:" +
+          token +
+          " createStartDate:" +
+          createStartDate +
+          " createEndDate:" +
+          createEndDate +
+          " loginStartDate:" +
+          loginStartDate +
+          " loginEndDate:" +
+          loginEndDate,
+      });
     } catch (err) {
       setError(err.response?.data?.error || err.message);
       setResults([]);
@@ -74,17 +120,21 @@ export default function AdminUserManagerPage() {
 
   const handleSaved = () => {
     handleSearch();
-  }
+  };
 
   const handleLoginAs = async (id) => {
     setError(null);
     try {
-      await axios.post(`/api/v1/users/${id}/login-as`, {}, {
-        headers: { Authorization: 'Bearer ' + authState.token }
-      });
-      const res = await axios.get('/api/v1/me');
+      await axios.post(
+        `/api/v1/users/${id}/login-as`,
+        {},
+        {
+          headers: { Authorization: "Bearer " + authState.token },
+        },
+      );
+      const res = await axios.get("/api/v1/me");
       setAuthState(res.data.authState);
-      navigate('/');
+      navigate("/");
     } catch (err) {
       setError(err.response?.data?.error || err.message);
     }
@@ -92,10 +142,10 @@ export default function AdminUserManagerPage() {
 
   const handleSort = (column) => {
     if (sortColumn === column) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
     } else {
       setSortColumn(column);
-      setSortDirection('asc');
+      setSortDirection("asc");
     }
   };
 
@@ -103,13 +153,13 @@ export default function AdminUserManagerPage() {
     const sorted = [...results];
     if (sortColumn) {
       sorted.sort((a, b) => {
-        const valA = a[sortColumn] || '';
-        const valB = b[sortColumn] || '';
+        const valA = a[sortColumn] || "";
+        const valB = b[sortColumn] || "";
         if (valA < valB) return -1;
         if (valA > valB) return 1;
         return 0;
       });
-      if (sortDirection === 'desc') {
+      if (sortDirection === "desc") {
         sorted.reverse();
       }
     }
@@ -118,7 +168,7 @@ export default function AdminUserManagerPage() {
 
   const sortIcon = (column) => {
     if (sortColumn !== column) return null;
-    return sortDirection === 'asc' ? (
+    return sortDirection === "asc" ? (
       <i className="fas fa-arrow-up ms-1"></i>
     ) : (
       <i className="fas fa-arrow-down ms-1"></i>
@@ -254,22 +304,24 @@ export default function AdminUserManagerPage() {
               className="mt-2"
               type="reset"
               onClick={(e) => {
-                setEmail('');
-                setFirstName('');
-                setLastName('');
-                setRole('');
-                setStatus('');
-                setToken('');
-                setCreateStartDate('');
-                setCreateEndDate('');
-                setLoginStartDate('');
-                setLoginEndDate('');
+                setEmail("");
+                setFirstName("");
+                setLastName("");
+                setRole("");
+                setStatus("");
+                setToken("");
+                setCreateStartDate("");
+                setCreateEndDate("");
+                setLoginStartDate("");
+                setLoginEndDate("");
               }}
             >
               Reset
             </Button>
             &nbsp;
-            <Button className="mt-2" type="submit">Search</Button>
+            <Button className="mt-2" type="submit">
+              Search
+            </Button>
           </form>
           <MessageAlert error={error} />
           <p>Found {results.length} Users</p>
@@ -279,32 +331,59 @@ export default function AdminUserManagerPage() {
                 <tr>
                   <th>Edit</th>
                   <th>Login as User</th>
-                  <th onClick={() => handleSort('email')} style={{ cursor: 'pointer' }}>
-                    Email{sortIcon('email')}
+                  <th
+                    onClick={() => handleSort("email")}
+                    style={{ cursor: "pointer" }}
+                  >
+                    Email{sortIcon("email")}
                   </th>
-                  <th onClick={() => handleSort('first_name')} style={{ cursor: 'pointer' }}>
-                    First Name{sortIcon('first_name')}
+                  <th
+                    onClick={() => handleSort("first_name")}
+                    style={{ cursor: "pointer" }}
+                  >
+                    First Name{sortIcon("first_name")}
                   </th>
-                  <th onClick={() => handleSort('last_name')} style={{ cursor: 'pointer' }}>
-                    Last Name{sortIcon('last_name')}
+                  <th
+                    onClick={() => handleSort("last_name")}
+                    style={{ cursor: "pointer" }}
+                  >
+                    Last Name{sortIcon("last_name")}
                   </th>
-                  <th onClick={() => handleSort('role')} style={{ cursor: 'pointer' }}>
-                    Role{sortIcon('role')}
+                  <th
+                    onClick={() => handleSort("role")}
+                    style={{ cursor: "pointer" }}
+                  >
+                    Role{sortIcon("role")}
                   </th>
-                  <th onClick={() => handleSort('token')} style={{ cursor: 'pointer' }}>
-                    Token{sortIcon('token')}
+                  <th
+                    onClick={() => handleSort("token")}
+                    style={{ cursor: "pointer" }}
+                  >
+                    Token{sortIcon("token")}
                   </th>
-                  <th onClick={() => handleSort('status')} style={{ cursor: 'pointer' }}>
-                    Status{sortIcon('status')}
+                  <th
+                    onClick={() => handleSort("status")}
+                    style={{ cursor: "pointer" }}
+                  >
+                    Status{sortIcon("status")}
                   </th>
-                  <th onClick={() => handleSort('created_at')} style={{ cursor: 'pointer' }}>
-                    Created{sortIcon('created_at')}
+                  <th
+                    onClick={() => handleSort("created_at")}
+                    style={{ cursor: "pointer" }}
+                  >
+                    Created{sortIcon("created_at")}
                   </th>
-                  <th onClick={() => handleSort('last_login_at')} style={{ cursor: 'pointer' }}>
-                    Last Login{sortIcon('last_login_at')}
+                  <th
+                    onClick={() => handleSort("last_login_at")}
+                    style={{ cursor: "pointer" }}
+                  >
+                    Last Login{sortIcon("last_login_at")}
                   </th>
-                  <th onClick={() => handleSort('num_designs')} style={{ cursor: 'pointer' }}>
-                    Number of Designs{sortIcon('num_designs')}
+                  <th
+                    onClick={() => handleSort("num_designs")}
+                    style={{ cursor: "pointer" }}
+                  >
+                    Number of Designs{sortIcon("num_designs")}
                   </th>
                   <th>Delete</th>
                 </tr>
@@ -318,7 +397,10 @@ export default function AdminUserManagerPage() {
                       </Button>
                     </td>
                     <td>
-                      <Button variant="link" onClick={() => handleLoginAs(u.id)}>
+                      <Button
+                        variant="link"
+                        onClick={() => handleLoginAs(u.id)}
+                      >
                         <i className="fas fa-sign-in-alt"></i>
                       </Button>
                     </td>
@@ -346,6 +428,15 @@ export default function AdminUserManagerPage() {
             onHide={() => setModalShow(false)}
             user={editUser}
             onSaved={handleSaved}
+          />
+          <ConfirmModal
+            show={confirmShow}
+            onHide={() => {
+              setConfirmShow(false);
+              setDeleteId(null);
+            }}
+            onConfirm={confirmDelete}
+            message="Are you sure?"
           />
         </Col>
       </Row>
