@@ -159,6 +159,18 @@ describe('Misc API endpoints and empty DB', () => {
         });
     });
 
+    describe('POST /api/v1/resend-confirmation with unknown email', () => {
+        it('it should fail POST with 401 UNAUTHORIZED', (done) => {
+            chai.request(server)
+                .post('/api/v1/resend-confirmation')
+                .send({ email: 'nouser@example.com' })
+                .end((err, res) => {
+                    res.should.have.status(401);
+                    done(err);
+                });
+        });
+    });
+
     describe('PATCH /api/v1/change-password with invalid token', () => {
         it('it should fail PATCH with 401 UNAUTHORIZED', (done) => {
             chai.request(server)

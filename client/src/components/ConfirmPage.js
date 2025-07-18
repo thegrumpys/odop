@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../axiosConfig';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 import MessageAlert from '../components/MessageAlert';
 import { logUsage } from '../logUsage';
@@ -89,6 +89,9 @@ export default function ConfirmPage() {
                 </tr>
                 <tr>
                   <td className="text-start px-5"><p>This confirmation link is invalid or has expired.</p></td>
+                </tr>
+                <tr>
+                  <td className="text-center px-5"><td className="text-start px-5"><Link to="/resend-confirmation">Resend Confirmation Email</Link></td></td>
                 </tr>
                 <tr>
                   <td className="text-center p-3"><Button onClick={() => navigate('/')}>Go to Home</Button></td>

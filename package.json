@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "node server.js",
+    "start-debug": "node inspect server.js",
     "server": "nodemon server.js",
     "heroku-postbuild": "cd client && npm install && npm run build && harp docs build/docs && cd .. && node ./scripts/build_index.js client/build/docs",
     "test": "mocha --timeout 10000",
