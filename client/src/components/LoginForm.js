@@ -117,7 +117,10 @@ export default function LoginForm() {
                   <td className="text-center"><Button variant="primary" type="submit">Sign In</Button></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5 pt-3"><Link to="/reset-password">Forgot Password?</Link></td>
+                  <td className="text-start px-5 pt-3"><Link to="/resend-confirmation">Resend Confirmation Email</Link></td>
+                </tr>
+                <tr>
+                  <td className="text-start px-5"><Link to="/reset-password">Forgot Password?</Link></td>
                 </tr>
                 <tr>
                   <td className="text-start px-5"><a href="/docs/About/userAccounts.html" target="_blank">About ODOP user accounts</a></td>
