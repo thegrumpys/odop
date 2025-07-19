@@ -5,8 +5,8 @@ import MessageAlert from '../../components/MessageAlert';
 import { logUsage } from '../../logUsage';
 import { useAuth } from '../../components/AuthProvider';
 import { useNavigate } from 'react-router-dom';
-import AdminUserModal from "./AdminUserModal";
-import ConfirmModal from "../../components/ConfirmModal";
+import AdminUserModal from './AdminUserModal';
+import ConfirmModal from '../../components/ConfirmModal';
 
 export default function AdminUserManagerPage() {
   const [email, setEmail] = useState('');
