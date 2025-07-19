@@ -12,6 +12,7 @@ The entries appear in an order ranked from more general and introductory to more
 * [Restrictions](Legal/Restrictions.html)
 * [Terms of Service](Legal/TermsOfService.html)
 * [Privacy Statement](Legal/PrivacyStatement.html)
+* [Data Retention Policy](Legal/dataRetentionPolicy.html)
 * [User Accounts](userAccounts.html)
 * [Contact Us](ContactUs.html)
 * [Help topics](/docs/Help/index.html)

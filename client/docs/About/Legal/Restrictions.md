@@ -16,8 +16,8 @@ coil axis.
 
 The current release of ODOP:Spring does not take into consideration any
 effects of stress relaxation or creep.  Do not apply the program to designs
-that are sensitive to reduction of load capacity over time, and/or operate
-at high temperatures and high stress.
+that are sensitive to reduction of load capacity over time, 
+and/or operate for long periods at high temperatures and high stress.
    
 Compression spring stress values produced by the REPORT 2 feature include a
 stress correction factor (Kw2) that is appropriate for use after set removal. 
@@ -38,33 +38,32 @@ into consideration.  All values are "nominal" and should be taken to
 represent the average of a statistically large number of samples.  When
 dealing with design specifications that place a specific limit on a
 value such as outside diameter, inside diameter, solid height, etc.,
-the user is expected to offset the value entered as a constraint level by
+the user is expected to offset the value entered as a constraint by
 the anticipated manufacturing tolerance.
    
 Unless marked otherwise, 
 the standard size tables supplied with the current release of ODOP:Spring 
 do not represent the product offerings of any single manufacturer. 
-These tables are samples intended to illustrate software capabilities.
-Please review the operation of the SELECT SIZE menu entry for a better 
-understanding of how to use these tables.
+These tables are samples intended to illustrate software capabilities. 
+Please review the operation of the 
+[Action : Select Size... menu item](../../Help/menus.html#ActionSelectSize) 
+for a better understanding of how to use these tables. 
 
 Unless marked otherwise, 
-the spring catalogs supplied with the current release of ODOP:Spring are
+the spring catalogs supplied with the current release of ODOP:Spring are 
 intended for demonstration purposes only. 
 The supplied catalogs do not necessarily represent the current offering of 
 any single manufacturer.  
 
-Designs saved in the public account are not assured of long term storage. 
-Notice of impending cleanup of designs saved in the public account will be posted
-at [Message of the Day](https://thegrumpys.github.io/odop/About/messageOfTheDay.html).
-Clean up activity will likely occur just prior to new releases of the
-ODOP software and the ODOP:Spring app.
 While designs saved in private accounts will be preserved and version migrated
 on a best effort basis,
-it should be understood that this data can't be maintained literally forever.
+it should be understood that this data can't be maintained literally forever. 
 To the extent possible, 
 private account holders will be notified by email prior well in advance of 
 any impact to saved designs.
+
+See also: 
+ - [Data Retention Policy](dataRetentionPolicy.html)  
    
 &nbsp;
    
