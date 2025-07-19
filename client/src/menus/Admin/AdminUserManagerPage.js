@@ -6,6 +6,7 @@ import { logUsage } from '../../logUsage';
 import { useAuth } from '../../components/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import AdminUserModal from "./AdminUserModal";
+import ConfirmModal from "../../components/ConfirmModal";
 
 export default function AdminUserManagerPage() {
   const [email, setEmail] = useState('');
@@ -24,22 +25,32 @@ export default function AdminUserManagerPage() {
   const [sortDirection, setSortDirection] = useState('asc');
   const [modalShow, setModalShow] = useState(false);
   const [editUser, setEditUser] = useState(null);
+  const [confirmShow, setConfirmShow] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
   const navigate = useNavigate();
   const { authState, setAuthState } = useAuth();
 
   const handleDelete = async (id) => {
+    setDeleteId(id);
+    setConfirmShow(true);
+  };
+
+  const confirmDelete = async () => {
     setError(null);
     try {
-      const res = await axios.delete(`/api/v1/users/${id}`, {
+      const res = await axios.delete(`/api/v1/users/${deleteId}`, {
         headers: {
           Authorization: 'Bearer ' + authState.token
         },
       });
       setError(res.data.error);
-      setResults(results.filter((u) => u.id !== id));
-      logUsage('event', 'AdminUserManagerPage', { event_label: 'delete id:' + id });
+      setResults(results.filter((u) => u.id !== deleteId));
+      logUsage('event', 'AdminUserManagerPage', { event_label: 'delete id:' + deleteId });
     } catch (err) {
       setError(err.response?.data?.error || err.message);
+    } finally {
+      setConfirmShow(false);
+      setDeleteId(null);
     }
   };
 
@@ -74,7 +85,7 @@ export default function AdminUserManagerPage() {
 
   const handleSaved = () => {
     handleSearch();
-  }
+  };
 
   const handleLoginAs = async (id) => {
     setError(null);
@@ -346,6 +357,15 @@ export default function AdminUserManagerPage() {
             onHide={() => setModalShow(false)}
             user={editUser}
             onSaved={handleSaved}
+          />
+          <ConfirmModal
+            show={confirmShow}
+            onHide={() => {
+              setConfirmShow(false);
+              setDeleteId(null);
+            }}
+            onConfirm={confirmDelete}
+            message="Are you sure you want to delete this user?"
           />
         </Col>
       </Row>
