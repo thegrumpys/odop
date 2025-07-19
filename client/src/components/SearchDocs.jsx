@@ -3,6 +3,7 @@ import { InputGroup, Form, Button, Modal } from 'react-bootstrap';
 import { logUsage } from '../logUsage';
 import { displayMessage } from './Message';
 import { displaySpinner } from './Spinner';
+import axios from '../axiosConfig';
 
 export default function SearchDocs() {
 //  console.log('SearchDocs - Mounting...');
@@ -32,25 +33,20 @@ export default function SearchDocs() {
     setText('');
     setQuery(local_text);
     displaySpinner(true);
-    fetch('/api/v1/search?terms=' + encoded_text)
-    .then(res => {
-      if (!res.ok) {
-        throw Error(res.statusText);
-      }
-      return res.json()
-    })
-    .then((results) => {
+    axios.get('/api/v1/search?terms=' + encoded_text)
+      .then(res => {
+        const results = res.data;
 //            console.log('SearchDocs.onButtonPress results=', results);
 //            results.forEach((element) => console.log('element.href=',element.href));
-      setShow(!show);
-      setResults(results);
-    })
-    .catch(error => {
-      displayMessage('GET of search \'' + text + '\' failed with message: \'' + error.message + '\'');
-    })
-    .finally(() => {
-      displaySpinner(false);
-    });
+        setShow(!show);
+        setResults(results);
+      })
+      .catch(error => {
+        displayMessage('GET of search \'' + text + '\' failed with message: \'' + error.message + '\'');
+      })
+      .finally(() => {
+        displaySpinner(false);
+      });
   }
 
   const onContextHelp = () => {

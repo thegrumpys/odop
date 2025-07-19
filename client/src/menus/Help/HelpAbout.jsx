@@ -6,6 +6,7 @@ import { logUsage } from '../../logUsage';
 import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { useAuth } from '../../components/AuthProvider';
+import axios from '../../axiosConfig';
 
 export default function HelpAbout() {
 //  console.log('HelpAbout - Mounting...');
@@ -36,34 +37,29 @@ export default function HelpAbout() {
   const getDBSize = (user) => {
 //    console.log('HelpAbout.getDBSize');
     displaySpinner(true);
-    fetch('/api/v1/db_size', {
+    axios.get('/api/v1/db_size', {
       headers: {
         Authorization: 'Bearer ' + user
       }
     })
-    .then(res => {
-      if (!res.ok) {
-        throw Error(res.statusText);
-      }
-      return res.json()
-    })
-    .then(sizes => {
+      .then(res => {
+        const sizes = res.data;
 //        console.log('HelpAbout.getSize sizes=', sizes);
-      setSizes(sizes);
-      var size = '';
-      if (sizes.length > 0) {
-        size = sizes[0]; // Default to first name
-      }
+        setSizes(sizes);
+        var size = '';
+        if (sizes.length > 0) {
+          size = sizes[0]; // Default to first name
+        }
 //        console.log('HelpAbout.getSize size=', size);
-      setSize(size);
-      logUsage('event', 'HelpAbout', { event_label: 'getDBSize: ' + size });
-    })
-    .catch(error => {
-      displayMessage('GET of DB Size failed with message: \'' + error.message + '\'');
-    })
-    .finally(() => {
-      displaySpinner(false);
-    });
+        setSize(size);
+        logUsage('event', 'HelpAbout', { event_label: 'getDBSize: ' + size });
+      })
+      .catch(error => {
+        displayMessage('GET of DB Size failed with message: \'' + error.message + '\'');
+      })
+      .finally(() => {
+        displaySpinner(false);
+      });
   }
 
   return (

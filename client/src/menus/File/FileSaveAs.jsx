@@ -7,6 +7,7 @@ import { displayMessage } from '../../components/Message';
 import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import { useAuth } from '../../components/AuthProvider';
+import axios from '../../axiosConfig';
 
 export default function FileSaveAs() {
 //  console.log('FileSaveAs - Mounting...');
@@ -30,16 +31,13 @@ export default function FileSaveAs() {
 //    console.log('FileSaveAs.getDesignNames user=',user,'type=',type);
     // Get the names and store them in state
     displaySpinner(true);
-    fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
+    axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
       headers: {
         Authorization: 'Bearer ' + user
       }
     })
     .then(res => {
-      if (!res.ok) {
-        throw Error(res.statusText);
-      }
-      return res.json()
+      return res.data
     })
     .then(names => {
 //      console.log('FileSaveAs.getDesignNames','names=',names);
@@ -58,16 +56,13 @@ export default function FileSaveAs() {
     dispatch(changeName(name));
     // First fetch the current list of names
     displaySpinner(true);
-    fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
+    axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
       headers: {
         Authorization: 'Bearer ' + user
       }
     })
     .then(res => {
-      if (!res.ok) {
-        throw Error(res.statusText);
-      }
-      return res.json()
+      return res.data
     })
     .then(names => {
         // Second create or update the design
@@ -80,28 +75,24 @@ export default function FileSaveAs() {
       }
 //      console.log('FileSaveAs.postDesign method=', method);
       displaySpinner(true);
-      fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
+      axios({
+        url: '/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name),
         method: method,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + user
         },
-        body: JSON.stringify(model)
+        data: model
       })
       .then(res => {
-        if (!res.ok) {
-          throw Error(res.statusText);
-        }
-        return res.json()
-      })
-      .then(names => {
+        const names = res.data;
 //        console.log('FileSave.getDesignNames','names=',names);
         if (method === 'POST') {
-          var names = Array.from(names); // clone it
-          names.push({ user: user, name: name }); // If create was successful then add name to the array of names
+          var updated_names = Array.from(names); // clone it
+          updated_names.push({ user: user, name: name }); // If create was successful then add name to the array of names
 //          console.log('FileSaveAs.postDesign type=',type,'name=',name,'names=', names);
-          setNames(names);
+          setNames(updated_names);
         }
         logUsage('event', 'FileSaveAs', { event_label: type + ' ' + name });
       })
