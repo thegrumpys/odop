@@ -40,7 +40,7 @@ Please adhere to the following standards when contributing code:
 ## Project-Specific Notes
 
 - Connect to database using mysql2 and axios when and where possible.
-- Use enironment variable: FRONT_URL, MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE, along with JAWS_DB, and more.
+- Use environment variables: FRONT_URL, JAWSDB_URL, and JAWSDB_TEST_URL for database access.
 - Deploy to Heroku
 
 **Note:** Instructions in this file should be prioritized based on the deepest nested `AGENTS.md` file.

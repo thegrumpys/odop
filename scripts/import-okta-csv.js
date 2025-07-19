@@ -27,7 +27,12 @@ async function main(filePath) {
   }
 
   console.log('====================Input Okta CSV====================');
-  console.log('user=',process.env.MYSQL_USER,'password=','<HIDDEN>','host=',process.env.MYSQL_HOST,'host=',process.env.MYSQL_PORT,'host=',process.env.MYSQL_DATABASE);
+  console.log(
+    'database url=',
+    process.env.NODE_ENV === 'test'
+      ? process.env.JAWSDB_TEST_URL
+      : process.env.JAWSDB_URL
+  );
 
   let insertedCount = 0;
   let updatedCount = 0;
