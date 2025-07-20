@@ -9,7 +9,7 @@ import { displaySpinner } from "./Spinner";
 import { displayMessage } from "./Message";
 import { logUsage } from '../logUsage';
 import { startExecute } from './ExecutePanel';
-import { AuthProvider } from './AuthProvider'
+import { AuthProvider, useAuth } from './AuthProvider'
 import axios from '../axiosConfig';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
@@ -31,20 +31,25 @@ export default function App() {
   const model_view = useSelector((state) => state.view);
   const model_type = useSelector((state) => state.model.type);
   const dispatch = useDispatch();
+  const { authState, isAuthenticated } = useAuth();
   //  console.log('App','location=',location);
 
   useEffect(() => {
+    if (authState === null) return;
+    if (isAuthenticated) {
+      dispatch(changeUser(authState.token));
+    }
     if (typeof (Storage) !== "undefined" && localStorage.getItem("autosave") !== null) {
 //      console.log('App.useEffect', 'restore "autosave" file')
       promptLoadAutoSave();
     } else {
 //      console.log('App.useEffect', 'restore default design')
-      loadDefaultDesign();
+      loadDefaultDesign(authState.token);
     }
     return () => {
       //      console.log('App.useEffect','Unmounting ...');
     }
-  }, []);
+  }, [authState]);
 
   const promptLoadAutoSave = () => {
 //    console.log('App.promptLoadAutoSave');
@@ -67,13 +72,13 @@ export default function App() {
     logUsage('event', 'Routes', { event_label: 'type: ' + model_type + ' load autoSave ' + model_name });
   }
 
-  const loadDefaultDesign = () => {
+  const loadDefaultDesign = (user = model_user) => {
 //    console.log('App.loadDefaultDesign', 'config.url.execute=', config.url.execute, 'model_user=', model_user, 'config.url.type=', config.url.type, 'config.url.name=', config.url.name, 'model_view=', model_view);
     setShow(false);
     if (!showWelcome) {
       config.url.execute = undefined; // Turn off execute
     }
-    getDesign(model_user, config.url.type, config.url.name);
+    getDesign(user, config.url.type, config.url.name);
     logUsage('event', 'App', { event_label: 'type: ' + config.url.type + ' load defaultDesign ' + config.url.name });
   }
 
@@ -137,14 +142,14 @@ export default function App() {
           </Routes>
         </BrowserRouter>
       </AuthProvider>
-      {show && <Modal show={show} onHide={loadDefaultDesign}>
+      {show && <Modal show={show} onHide={() => loadDefaultDesign(authState ? authState.token : model_user)}>
         <Modal.Header closeButton><Modal.Title>ODOP Design Recovery</Modal.Title></Modal.Header>
         <Modal.Body>
           <Alert variant="info">AutoSave design available. Recover the design?</Alert>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="outline-info" onClick={onContextHelp}>Help</Button>{' '}
-          <Button variant="secondary" onClick={loadDefaultDesign}>No</Button>{' '}
+          <Button variant="secondary" onClick={() => loadDefaultDesign(authState ? authState.token : model_user)}>No</Button>{' '}
           <Button variant="primary" onClick={loadAutoSaveDesign}>Yes</Button>
         </Modal.Footer>
       </Modal>}
