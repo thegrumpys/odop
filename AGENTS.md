@@ -20,7 +20,7 @@ The project follows a standard structure to separate frontend and backend concer
 ## Coding Standards and Style Guidelines
 
 Please adhere to the following standards when contributing code:
-- **JavaScript:** Follow Airbnb JavaScript Style Guide https://github.com/airbnb/javascript and Prettier code style (pnpm format); 2‑space indent.
+- **JavaScript:** Do not reformat the source programming. Use a 2‑space indent.
 - **React:**  Follow common React best practices. React components live under /src/components
 - **API Endpoints:** Design clear and consistent RESTful API endpoints.
 - **Comments:** Provide clear and concise comments.

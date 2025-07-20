@@ -9,6 +9,7 @@ import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
 import { useAuth } from '../../components/AuthProvider';
+import axios from '../../axiosConfig';
 
 export default function FileOpen() {
 //  console.log('FileOpen - Mounting...');
@@ -35,75 +36,62 @@ export default function FileOpen() {
 //    console.log('FileOpen.getDesignNames user=', user, 'type=', type);
     // Get the names and store them in state
     displaySpinner(true);
-    fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
+    axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
       headers: {
         Authorization: 'Bearer ' + user
       }
     })
-    .then(res => {
-      if (!res.ok) {
-        //                console.warn('FileOpen.getDesignNames res=',res);
-        throw Error(res.statusText);
-      }
-      return res.json()
-    })
-    .then(names => {
-//        console.log('FileOpen.getDesignNames user=', user, 'type=', type, 'names=', names);
-      var name;
-      if (names.length > 0) {
-        var i = names.findIndex(element => element.name === config.url.name)
-        if (i > 0) {
-          name = names[i].name;
+      .then(res => {
+        const names = res.data;
+        var name;
+        if (names.length > 0) {
+          var i = names.findIndex(element => element.name === config.url.name)
+          if (i > 0) {
+            name = names[i].name;
+          } else {
+            name = names[0].name;
+          }
         } else {
-          name = names[0].name;
+          name = '';
         }
-      } else {
-        name = '';
-      }
-      setNames(names);
-      setName(name);
-    })
-    .catch(error => {
-      displayMessage('GET of design names failed with message: \'' + error.message + '\'');
-    })
-    .finally(() => {
-      displaySpinner(false);
-    });
+        setNames(names);
+        setName(name);
+      })
+      .catch(error => {
+        displayMessage('GET of design names failed with message: \'' + error.message + '\'');
+      })
+      .finally(() => {
+        displaySpinner(false);
+      });
   }
 
   const getDesign = (user, type, name) => {
 //    console.log('FileOpen.getDesign user=', user, 'type=', type, 'name=', name);
     displaySpinner(true);
-    fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
+    axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
       headers: {
         Authorization: 'Bearer ' + user
       }
     })
-    .then(res => {
-      if (!res.ok) {
-        throw Error(res.statusText);
-      }
-      return res.json()
-    })
-    .then((design) => {
-//      console.log('FileOpen.getDesign design=', design);
-      var { migrate } = require('../../designtypes/' + design.type + '/migrate.js'); // Dynamically load migrate
-      var migrated_design = migrate(design);
-      if (migrated_design.jsontype === "ODOP") {
-        dispatch(changeName(name));
-        dispatch(load(migrated_design));
-        dispatch(deleteAutoSave());
-        logUsage('event', 'FileOpen', { event_label: type + ' ' + name });
-      } else {
-        displayMessage('Invalid JSON type, function ignored');
-      }
-    })
-    .catch(error => {
-      displayMessage('GET of \'' + name + '\' design failed for type \'' + type + '\' with message: \'' + error.message + '\'');
-    })
-    .finally(() => {
-      displaySpinner(false);
-    });
+      .then(res => {
+        const design = res.data;
+        var { migrate } = require('../../designtypes/' + design.type + '/migrate.js'); // Dynamically load migrate
+        var migrated_design = migrate(design);
+        if (migrated_design.jsontype === "ODOP") {
+          dispatch(changeName(name));
+          dispatch(load(migrated_design));
+          dispatch(deleteAutoSave());
+          logUsage('event', 'FileOpen', { event_label: type + ' ' + name });
+        } else {
+          displayMessage('Invalid JSON type, function ignored');
+        }
+      })
+      .catch(error => {
+        displayMessage('GET of \'' + name + '\' design failed for type \'' + type + '\' with message: \'' + error.message + '\'');
+      })
+      .finally(() => {
+        displaySpinner(false);
+      });
   }
 
   const toggle = () => {

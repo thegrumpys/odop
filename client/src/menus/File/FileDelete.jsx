@@ -7,6 +7,7 @@ import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
 import { useAuth } from '../../components/AuthProvider';
+import axios from '../../axiosConfig';
 
 export default function FileDelete() {
 //  console.log('FileDelete - Mounting...');
@@ -31,61 +32,49 @@ export default function FileDelete() {
 //    console.log('FileDelete.getDesignNames','user=',user,'type=',type);
     // Get the names and store them in state
     displaySpinner(true);
-    fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
+    axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
       headers: {
         Authorization: 'Bearer ' + user
       }
     })
-    .then(res => {
-      if (!res.ok) {
-//        console.warn('In FileDelete.getDesignNames res=',res);
-        throw Error(res.statusText);
-      }
-      return res.json()
-    })
-    .then(all_names => {
-//      console.log('FileDelete.getDesignNames','all_names=', all_names);
-      var rw_names = all_names.filter(design => { return design.user !== null && design.user !== 'null'});
-      setNames(rw_names);
-      var name = '';
-      if (rw_names.length > 0) {
-        name = rw_names[0].name; // Default to first name
-      }
-//      console.log('FileDelete.getDesignNames','name=', name);
-      setName(name);
-    })
-    .catch(error => {
-      displayMessage('GET of design names failed with message: \'' + error.message + '\'');
-    })
-    .finally(() => {
-      displaySpinner(false);
-    });
+      .then(res => {
+        const all_names = res.data;
+        var rw_names = all_names.filter(design => { return design.user !== null && design.user !== 'null' });
+        setNames(rw_names);
+        var name = '';
+        if (rw_names.length > 0) {
+          name = rw_names[0].name; // Default to first name
+        }
+        setName(name);
+      })
+      .catch(error => {
+        displayMessage('GET of design names failed with message: \'' + error.message + '\'');
+      })
+      .finally(() => {
+        displaySpinner(false);
+      });
   }
 
   const deleteDesign = (user, type, name) => {
 //    console.log('FileDelete.deleteDesign','user=',user,'type=',type,'name=',name);
     displaySpinner(true);
-    fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
-      method: 'DELETE',
+    axios.delete('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + user
-      },
-    })
-    .then(res => {
-      if (!res.ok) {
-        throw Error(res.statusText);
       }
-      logUsage('event', 'FileDelete', { event_label: type + ' ' + name });
-      return res.json()
     })
-    .catch(error => {
-      displayMessage('DELETE of \'' + name + '\' design  \'' + type + '\' design type failed with message: \'' + error.message + '\'');
-    })
-    .finally(() => {
-      displaySpinner(false);
-    });
+      .then(res => {
+        logUsage('event', 'FileDelete', { event_label: type + ' ' + name });
+        return res.data;
+      })
+      .catch(error => {
+        displayMessage('DELETE of \'' + name + '\' design  \'' + type + '\' design type failed with message: \'' + error.message + '\'');
+      })
+      .finally(() => {
+        displaySpinner(false);
+      });
   }
 
   const toggle = () => {

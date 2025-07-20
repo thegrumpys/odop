@@ -10,6 +10,7 @@ import { displayMessage } from "./Message";
 import { logUsage } from '../logUsage';
 import { startExecute } from './ExecutePanel';
 import { AuthProvider } from './AuthProvider'
+import axios from '../axiosConfig';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import ResetPasswordPage from './ResetPasswordPage';
@@ -79,19 +80,13 @@ export default function App() {
   const getDesign = (user, type, name) => {
 //    console.log('App.getDesign', 'user=', user, 'type=', type, 'name=', name);
     displaySpinner(true);
-    fetch('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
+    axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
       headers: {
         Authorization: 'Bearer ' + user
       }
     })
       .then(res => {
-        if (!res.ok) {
-          throw Error(res.statusText);
-        }
-        //      console.log('res.json()=',res.json());
-        return res.json();
-      })
-      .then((design) => {
+        const design = res.data;
         //      console.log('App.getDesign','design=', design);
         var { migrate } = require('../designtypes/' + design.type + '/migrate.js'); // Dynamically load migrate
         //      console.log('App.getDesign','migrate=',migrate);

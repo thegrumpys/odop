@@ -7,6 +7,7 @@
 
 // To learn more about the benefits of this model, read https://goo.gl/KwvDNy.
 // This link also includes instructions on opting out of this behavior.
+import axios from './axiosConfig';
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -106,7 +107,7 @@ function registerValidSW(swUrl) {
 
 function checkValidServiceWorker(swUrl) {
   // Check if the service worker can be found. If it can't reload the page.
-  fetch(swUrl)
+  axios.get(swUrl)
     .then(response => {
       // Ensure service worker exists, and that we really are getting a JS file.
       if (
