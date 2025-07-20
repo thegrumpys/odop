@@ -804,7 +804,7 @@ app.post('/api/v1/reset-password', async (req, res) => {
 
   try {
     // Does user exist?
-    const [rows] = await db.execute('SELECT * FROM user WHERE email = ? AND status = ?', [email, 'active']);
+    const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
     if (!rows.length) {
       sendMessage(res, 'Unknown email or password, or inactive account.', 'error', null, 401);
       return;
