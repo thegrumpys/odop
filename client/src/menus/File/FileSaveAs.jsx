@@ -164,9 +164,12 @@ export default function FileSaveAs() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Saves the current design into the cloud-based ODOP Design Library with a new name.</p>
+          <p>
+            Saves the current design into the cloud-based ODOP Design Library with a new name. 
+            Data is maintained per the ODOP &nbsp; 
+            <a href="docs/About/Legal/dataRetentionPolicy.html" target="_blank" rel="noopener noreferrer"><small>Data Retention Policy</small></a>
+          </p>
           <p>To preserve naming compatibility with file systems, the characters <b>&lt; &gt; : &quot; / \ | ? *</b> are replaced with an underscore.</p>
-          <a href="docs/About/Legal/dataRetentionPolicy.html" target="_blank" rel="noopener noreferrer"><small>Data Retention Policy</small></a><br />
           <br />
           {!authState.isAuthenticated && <Alert variant="info">You are not signed in. Optionally Sign In to open your private design and enable Save, Save As, and Delete</Alert>}
           <Form.Label htmlFor="FileSaveAsText">Save As:</Form.Label>
