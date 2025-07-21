@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { load, changeUser, changeName, restoreAutoSave, deleteAutoSave } from "../store/actions";
 import MainPage from "./MainPage";
@@ -32,20 +32,22 @@ export default function App() {
   const model_type = useSelector((state) => state.model.type);
   const dispatch = useDispatch();
   const { authState } = useAuth();
-//  console.log('App','authState=',authState);
+  const isAuthenticated = authState?.isAuthenticated;
+  const didInit = useRef(false);
+//  console.log('App','authState=',authState,'isAuthenticated=',isAuthenticated,'didInit=',didInit);
 
   useEffect(() => {
-    if (!authState) return;
-//    console.log('App.useEffect', 'authState=', authState)
-    if (authState.isAuthenticated) {
+    if (authState === null || didInit.current) return;
+    didInit.current = true;
+    if (isAuthenticated) {
       dispatch(changeUser(authState.token));
     }
     if (typeof (Storage) !== "undefined" && localStorage.getItem("autosave") !== null) {
 //      console.log('App.useEffect', 'restore "autosave" file')
       promptLoadAutoSave();
     } else {
-//      console.log('App.useEffect', 'restore default design','authState.token=', authState.token)
-      loadDefaultDesign(authState.token);
+//      console.log('App.useEffect', 'restore default design','isAuthenticated ? authState.token : undefined=', isAuthenticated ? authState.token : undefined)
+      loadDefaultDesign(isAuthenticated ? authState.token : undefined);
     }
     return () => {
 //      console.log('App.useEffect','Unmounting ...');
