@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { load, changeName, restoreAutoSave, deleteAutoSave } from "../store/actions";
+import { load, changeUser, changeName, restoreAutoSave, deleteAutoSave } from "../store/actions";
 import MainPage from "./MainPage";
 import { Button, Modal, Alert } from 'react-bootstrap';
 import config from '../config';
@@ -31,20 +31,20 @@ export default function App() {
   const model_view = useSelector((state) => state.view);
   const model_type = useSelector((state) => state.model.type);
   const dispatch = useDispatch();
-  const authState = useAuth();
+  const { authState } = useAuth();
 //  console.log('App','authState=',authState);
 
   useEffect(() => {
     if (!authState) return;
-    console.log('App.useEffect', 'authState=', authState)
+//    console.log('App.useEffect', 'authState=', authState)
     if (authState.isAuthenticated) {
       dispatch(changeUser(authState.token));
     }
     if (typeof (Storage) !== "undefined" && localStorage.getItem("autosave") !== null) {
-      console.log('App.useEffect', 'restore "autosave" file')
+//      console.log('App.useEffect', 'restore "autosave" file')
       promptLoadAutoSave();
     } else {
-      console.log('App.useEffect', 'restore default design')
+//      console.log('App.useEffect', 'restore default design','authState.token=', authState.token)
       loadDefaultDesign(authState.token);
     }
     return () => {
@@ -74,7 +74,7 @@ export default function App() {
   }
 
   const loadDefaultDesign = (user = model_user) => {
-    console.log('App.loadDefaultDesign', 'user=', user, 'config.url.execute=', config.url.execute, 'model_user=', model_user, 'config.url.type=', config.url.type, 'config.url.name=', config.url.name, 'model_view=', model_view);
+//    console.log('App.loadDefaultDesign', 'user=', user, 'config.url.execute=', config.url.execute, 'model_user=', model_user, 'config.url.type=', config.url.type, 'config.url.name=', config.url.name, 'model_view=', model_view);
     setShow(false);
     if (!showWelcome) {
       config.url.execute = undefined; // Turn off execute
@@ -84,7 +84,7 @@ export default function App() {
   }
 
   const getDesign = (user, type, name) => {
-    console.log('App.getDesign', 'user=', user, 'type=', type, 'name=', name);
+//    console.log('App.getDesign', 'user=', user, 'type=', type, 'name=', name);
     displaySpinner(true);
     axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
       headers: {
