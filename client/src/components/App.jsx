@@ -9,7 +9,7 @@ import { displaySpinner } from "./Spinner";
 import { displayMessage } from "./Message";
 import { logUsage } from '../logUsage';
 import { startExecute } from './ExecutePanel';
-import { AuthProvider, useAuth } from './AuthProvider'
+import { useAuth } from './AuthProvider'
 import axios from '../axiosConfig';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
@@ -31,23 +31,24 @@ export default function App() {
   const model_view = useSelector((state) => state.view);
   const model_type = useSelector((state) => state.model.type);
   const dispatch = useDispatch();
-  const { authState, isAuthenticated } = useAuth();
-  //  console.log('App','location=',location);
+  const authState = useAuth();
+//  console.log('App','authState=',authState);
 
   useEffect(() => {
-    if (authState === null) return;
-    if (isAuthenticated) {
+    if (!authState) return;
+    console.log('App.useEffect', 'authState=', authState)
+    if (authState.isAuthenticated) {
       dispatch(changeUser(authState.token));
     }
     if (typeof (Storage) !== "undefined" && localStorage.getItem("autosave") !== null) {
-//      console.log('App.useEffect', 'restore "autosave" file')
+      console.log('App.useEffect', 'restore "autosave" file')
       promptLoadAutoSave();
     } else {
-//      console.log('App.useEffect', 'restore default design')
+      console.log('App.useEffect', 'restore default design')
       loadDefaultDesign(authState.token);
     }
     return () => {
-      //      console.log('App.useEffect','Unmounting ...');
+//      console.log('App.useEffect','Unmounting ...');
     }
   }, [authState]);
 
@@ -73,7 +74,7 @@ export default function App() {
   }
 
   const loadDefaultDesign = (user = model_user) => {
-//    console.log('App.loadDefaultDesign', 'config.url.execute=', config.url.execute, 'model_user=', model_user, 'config.url.type=', config.url.type, 'config.url.name=', config.url.name, 'model_view=', model_view);
+    console.log('App.loadDefaultDesign', 'user=', user, 'config.url.execute=', config.url.execute, 'model_user=', model_user, 'config.url.type=', config.url.type, 'config.url.name=', config.url.name, 'model_view=', model_view);
     setShow(false);
     if (!showWelcome) {
       config.url.execute = undefined; // Turn off execute
@@ -83,7 +84,7 @@ export default function App() {
   }
 
   const getDesign = (user, type, name) => {
-//    console.log('App.getDesign', 'user=', user, 'type=', type, 'name=', name);
+    console.log('App.getDesign', 'user=', user, 'type=', type, 'name=', name);
     displaySpinner(true);
     axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
       headers: {
@@ -126,22 +127,20 @@ export default function App() {
 
   return (
     <>
-      <AuthProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" exact="true" element={<MainPage />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/register" element={<RegisterForm />} />
-            <Route path="/confirm" element={<ConfirmPage />} />
-            <Route path="/resend-confirmation" element={<ResendConfirmationPage />} />
-            <Route path="/admin/user-manager" element={<RequireAuth><RequireAdmin><AdminUserManagerPage /></RequireAdmin></RequireAuth>} />
-            <Route path="/admin/cleanup-expired-tokens" element={<RequireAuth><RequireAdmin><AdminCleanupExpiredTokens /></RequireAdmin></RequireAuth>} />
-            <Route path="/reset-password" element={<ResetPasswordPage />} />
-            <Route path="/change-password" element={<ChangePasswordPage />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </BrowserRouter>
-      </AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" exact="true" element={<MainPage />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/register" element={<RegisterForm />} />
+          <Route path="/confirm" element={<ConfirmPage />} />
+          <Route path="/resend-confirmation" element={<ResendConfirmationPage />} />
+          <Route path="/admin/user-manager" element={<RequireAuth><RequireAdmin><AdminUserManagerPage /></RequireAdmin></RequireAuth>} />
+          <Route path="/admin/cleanup-expired-tokens" element={<RequireAuth><RequireAdmin><AdminCleanupExpiredTokens /></RequireAdmin></RequireAuth>} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/change-password" element={<ChangePasswordPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
       {show && <Modal show={show} onHide={() => loadDefaultDesign(authState ? authState.token : model_user)}>
         <Modal.Header closeButton><Modal.Title>ODOP Design Recovery</Modal.Title></Modal.Header>
         <Modal.Body>
