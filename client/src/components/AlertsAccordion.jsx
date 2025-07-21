@@ -263,8 +263,7 @@ export default function AlertsAccordion() {
                             <td className={entry.className}>{entry.severity}</td>
                             <td className={entry.className}>{entry.message}</td>
                             <td>{entry.name}</td>
-                            {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                            {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                            {entry.element !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} valueName={entry.valueName} />}
                             {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
                             {entry.element === undefined && entry.value === undefined && <td></td>}
                             <td>{match !== null ? <Button variant="outline-info" href={match[2]} onClick={onHelpButton}>{match[1]}</Button> : ''}</td>
@@ -286,8 +285,7 @@ export default function AlertsAccordion() {
                             <td className={entry.className}>{entry.severity}</td>
                             <td className={entry.className}>{entry.message}</td>
                             <td>{entry.name}</td>
-                            {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                            {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                            {entry.element !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} valueName={entry.valueName} />}
                             {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
                             {entry.element === undefined && entry.value === undefined && <td></td>}
                             <td>{match !== null ? <Button variant="outline-info" href={match[2]} onClick={onHelpButton}>{match[1]}</Button> : ''}</td>
@@ -309,8 +307,7 @@ export default function AlertsAccordion() {
                             <td className={entry.className}>{entry.severity}</td>
                             <td className={entry.className}>{entry.message}</td>
                             <td>{entry.name}</td>
-                            {entry.element !== undefined && entry.value !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
-                            {entry.element !== undefined && entry.value === undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} />}
+                            {entry.element !== undefined && !hidden && <SymbolValue key={entry.element.name} element={entry.element} index={index} valueName={entry.valueName} />}
                             {entry.element === undefined && entry.value !== undefined && <Value id={entry.name} value={entry.value} />}
                             {entry.element === undefined && entry.value === undefined && <td></td>}
                             <td>{match !== null ? <Button variant="outline-info" href={match[2]} onClick={onHelpButton}>{match[1]}</Button> : ''}</td>

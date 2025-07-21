@@ -24,7 +24,7 @@ import { displayMessage } from '../components/Message';
 import FeasibilityIndicator from './FeasibilityIndicator';
 import store from '../store/store';
 
-export default function SymbolValue({ className, element, index }) {
+export default function SymbolValue({ className, element, index, valueName = 'value' }) {
 //  console.log('SymbolValue','Mounting...','element=',element,'index=',index);
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const model_objmin = useSelector((state) => state.model.system_controls.objmin);
@@ -288,6 +288,15 @@ export default function SymbolValue({ className, element, index }) {
 //  console.log('feasibility_status=',feasibility_status,'feasibility_class=',feasibility_class,'display_search_button=',display_search_button,'display_seek_button=',display_seek_button);
 //  console.log('SymbolValue','Mounting...','table=',table);
 
+  var displayValue;
+  if (valueName === 'cmin') {
+    displayValue = element.cmin;
+  } else if (valueName === 'cmax') {
+    displayValue = element.cmax;
+  } else {
+    displayValue = element.value;
+  }
+
   return (
     <>
       <td className={"align-middle " + (className !== undefined ? className : '')}>
@@ -295,13 +304,13 @@ export default function SymbolValue({ className, element, index }) {
           {element.format === undefined && typeof element.value === 'number' ?
             <>
               {icon_dependent_tag}
-              <FormControlTypeNumber id={'sv_' + element.name} disabled={disabled} readOnly icon_alerts={sv_icon_alerts} className={sv_value_class} value={element.value} validmin={element.validmin} validmax={element.validmax} onClick={onContextMenu} />
+              <FormControlTypeNumber id={'sv_' + element.name} disabled={disabled} readOnly icon_alerts={sv_icon_alerts} className={sv_value_class} value={displayValue} validmin={element.validmin} validmax={element.validmax} onClick={onContextMenu} />
             </>
             : ''}
           {element.format === undefined && typeof element.value === 'string' ?
             <>
               {icon_dependent_tag}
-              <Form.Control id={'sv_' + element.name} type="text" disabled={disabled} readOnly value={element.value} onClick={onContextMenu} />
+              <Form.Control id={'sv_' + element.name} type="text" disabled={disabled} readOnly value={displayValue} onClick={onContextMenu} />
             </>
             : ''}
           {element.format === 'table' ?
