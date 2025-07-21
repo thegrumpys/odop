@@ -109,7 +109,10 @@ export default function ChangePasswordPage() {
                   <td className="text-center"><MessageAlert error={error} /></td>
                 </tr>
                 <tr>
-                  <td className="px-5 text-start"><p>This link is invalid.</p></td>
+                  <td className="text-start px-5"><p>This link is invalid.</p></td>
+                </tr>
+                <tr>
+                  <td className="text-start px-5"><Link to="/resend-change-password">Resend Change Password Email</Link></td>
                 </tr>
                 <tr>
                   <td className="text-center p-3"><Button onClick={() => navigate('/')}>Go to Home</Button></td>

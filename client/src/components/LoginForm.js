@@ -117,10 +117,16 @@ export default function LoginForm() {
                   <td className="text-center"><Button variant="primary" type="submit">Sign In</Button></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5 pt-3"><Link to="/resend-confirmation">Resend Confirmation Email</Link></td>
+                  <td className="text-center p-3">Don't have an account? <Link to="/register">Sign up</Link></td>
                 </tr>
                 <tr>
                   <td className="text-start px-5"><Link to="/reset-password">Forgot Password?</Link></td>
+                </tr>
+                <tr>
+                  <td className="text-start px-5"><Link to="/resend-confirmation">Resend Registration Confirmation Email</Link></td>
+                </tr>
+                <tr>
+                  <td className="text-start px-5"><Link to="/resend-change-password">Resend Reset Password Email</Link></td>
                 </tr>
                 <tr>
                   <td className="text-start px-5"><a href="/docs/About/userAccounts.html" target="_blank">About ODOP user accounts</a></td>
@@ -130,9 +136,6 @@ export default function LoginForm() {
                 </tr>
                 <tr>
                   <td className="text-start px-5"><a href="/docs/About" target="_blank">Learn about ODOP</a></td>
-                </tr>
-                <tr>
-                  <td className="text-center p-3">Don't have an account? <Link to="/register">Sign up</Link></td>
                 </tr>
               </tbody>
             </Table>

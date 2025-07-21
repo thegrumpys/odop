@@ -5,7 +5,7 @@ import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 import MessageAlert from '../components/MessageAlert';
 import { logUsage } from '../logUsage';
 
-export default function ResendConfirmationPage() {
+export default function ResendChangePasswordPage() {
   const [error, setError] = useState(null);
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -14,13 +14,13 @@ export default function ResendConfirmationPage() {
     e.preventDefault();
     setError(null);
     try {
-      const res = await axios.post('/api/v1/resend?type=confirm', { email });
+      const res = await axios.post('/api/v1/resend?type=reset', { email });
       setError(res.data.error);
       setSubmitted(true);
-      logUsage('event', 'ResendConfirmationPage', { event_label: 'Success: ' + JSON.stringify(res.data.error) });
+      logUsage('event', 'ResendChangePasswordPage', { event_label: 'Success: ' + JSON.stringify(res.data.error) });
     } catch (err) {
       setError(err.response.data.error);
-      logUsage('event', 'ResendConfirmationPage', { event_label: 'Error: ' + JSON.stringify(err.response.data.error) });
+      logUsage('event', 'ResendChangePasswordPage', { event_label: 'Error: ' + JSON.stringify(err.response.data.error) });
     }
   };
 
@@ -42,7 +42,7 @@ export default function ResendConfirmationPage() {
                   <td className="text-center"><MessageAlert error={error} /></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5"><p>A new verification email has been sent to {email}. If the message does not appear promptly, check your Junk/Spam folder.</p></td>
+                  <td className="text-start px-5"><p>A password reset email has been sent to {email}. If the message does not appear promptly, check your Junk/Spam folder.</p></td>
                 </tr>
                 <tr>
                   <td className="text-center"><Link to="/login">Back to Sign in</Link></td>
@@ -71,7 +71,7 @@ export default function ResendConfirmationPage() {
                   <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><h3>Resend Confirmation</h3></td>
+                  <td className="text-center"><h3>Resend Password Email</h3></td>
                 </tr>
                 <tr>
                   <td className="text-center"><MessageAlert error={error} /></td>

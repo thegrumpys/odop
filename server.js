@@ -140,6 +140,51 @@ async function sendResetEmail(email, first_name, last_name, token) {
   await transporter.sendMail(mailOptions);
 }
 
+async function resendEmail(req, res) {
+  const { email } = req.body;
+  const type = req.query.type;
+
+  if (!isValidEmail(email)) {
+    sendMessage(res, 'Unknown email or password, or inactive account.', 'error', 'email', 400);
+    return;
+  }
+
+  try {
+    if (type === 'confirm') {
+      const [rows] = await db.execute('SELECT first_name, last_name FROM user WHERE email = ? AND status = ?', [email, 'inactive']);
+      if (!rows.length) {
+        sendMessage(res, 'No outstanding registration exists or has expired.', 'error', null, 401);
+        return;
+      }
+      await db.execute('DELETE FROM token WHERE email = ? AND type = ?', [email, 'confirm']);
+      const token = generateToken();
+      const local = new Date(Date.now() + 60 * 60 * 1000);
+      const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000);
+      await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [token, email, 'confirm', expiresAt]);
+      const { first_name, last_name } = rows[0];
+      await sendConfirmationEmail(email, first_name, last_name, token);
+      sendMessage(res, 'Registration confirmation email sent.', 'info', null, 200);
+    } else if (type === 'reset') {
+      const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
+      if (!rows.length) {
+        sendMessage(res, 'Unknown email or password, or inactive account.', 'error', null, 401);
+        return;
+      }
+      const user = rows[0];
+      const token = generateToken();
+      const local = new Date(Date.now() + 60 * 60 * 1000);
+      const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000);
+      await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [token, email, 'reset', expiresAt]);
+      await sendResetEmail(email, user.first_name, user.last_name, token);
+      sendMessage(res, 'Reset password email sent.', 'info', null, 200);
+    } else {
+      sendMessage(res, 'Invalid resend type.', 'error', 'type', 400);
+    }
+  } catch (err) {
+    sendMessage(res, err, 'error', null, 500);
+  }
+}
+
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
@@ -664,50 +709,6 @@ app.get('/api/v1/confirm', async (req, res) => {
     sendMessage(res, err, 'error', null, 500);
   }
 });
-// ===========================================================================
-// RESEND CONFIRMATION
-app.post('/api/v1/resend-confirmation', async (req, res) => {
-  const { email } = req.body;
-
-  if (!isValidEmail(email)) {
-    sendMessage(res, 'Invalid email address format.', 'error', 'email', 400);
-    return;
-  }
-
-  try {
-    // Is there an inactive user awaiting confirmation?
-    const [rows] = await db.execute(
-      'SELECT first_name, last_name FROM user WHERE email = ? AND status = ?',
-      [email, 'inactive']
-    );
-    if (!rows.length) {
-      sendMessage(res, 'No outstanding registration exists or has expired.', 'error', null, 401);
-      return;
-    }
-
-    // Remove any previous confirmation tokens
-    await db.execute('DELETE FROM token WHERE email = ? AND type = ?', [email, 'confirm']);
-
-    const confirmationToken = generateToken();
-    const local = new Date(Date.now() + 60 * 60 * 1000); // UTC + 1 hour
-    const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000); // Fudge
-
-    await db.execute(
-      'INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)',
-      [confirmationToken, email, 'confirm', expiresAt]
-    );
-
-    const { first_name, last_name } = rows[0];
-    try {
-      await sendConfirmationEmail(email, first_name, last_name, confirmationToken);
-      sendMessage(res, 'Registration confirmation email sent.', 'info', null, 200);
-    } catch (err) {
-      sendMessage(res, err.response, 'error', null, 500);
-    }
-  } catch (err) {
-    sendMessage(res, err, 'error', null, 500);
-  }
-});
 
 //==================================================================================================
 // HAS PASSWORD
@@ -866,6 +867,24 @@ app.patch('/api/v1/change-password', async (req, res) => {
   } catch (err) {
     sendMessage(res, err, 'error', null, 500);
   }
+});
+
+// ===========================================================================
+// RESEND EMAIL
+app.post('/api/v1/resend', resendEmail);
+
+// ===========================================================================
+// RESEND CONFIRMATION
+app.post('/api/v1/resend-confirmation', (req, res) => {
+  req.query.type = 'confirm';
+  resendEmail(req, res);
+});
+
+// ===========================================================================
+// RESEND CHANGE PASSWORD
+app.post('/api/v1/resend-change-password', (req, res) => {
+  req.query.type = 'reset';
+  resendEmail(req, res);
 });
 
 //==================================================================================================
