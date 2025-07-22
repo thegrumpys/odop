@@ -16,6 +16,7 @@ export default function FileOpen() {
   const model_user = useSelector((state) => state.user);
   const model_name = useSelector((state) => state.name);
   const model_type = useSelector((state) => state.model.type);
+  const stopOnFileLoad = useSelector((state) => state.executePanelSlice.stopOnFileLoad);
   const [show, setShow] = useState(config.url.prompt);
   const [types, setTypes] = useState(config.env.types);
   const [names, setNames] = useState([{ user: model_user, name: model_name }]);
@@ -126,7 +127,7 @@ export default function FileOpen() {
   const onLoadInitialState = () => {
 //    console.log('FileOpen.onLoadInitialState');
     setShow(!show);
-    dispatch(executeStopOnLoad()); // Stop execute file
+    if (stopOnFileLoad || type !== model_type) dispatch(executeStopOnLoad()); // Stop execute file on different type
     dispatch(loadInitialState(type, 'US'));
     dispatch(deleteAutoSave());
 //    console.log('FileOpen.onLoadInitialState','model_user=',model_user,'model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
@@ -136,7 +137,7 @@ export default function FileOpen() {
   const onLoadMetricInitialState = () => {
 //    console.log('FileOpen.onLoadMetricInitialState');
     setShow(!show);
-    dispatch(executeStopOnLoad()); // Stop execute file
+    if (stopOnFileLoad || type !== model_type) dispatch(executeStopOnLoad()); // Stop execute file on different type
     dispatch(loadInitialState(type, 'Metric'));
     dispatch(deleteAutoSave());
 //    console.log('FileOpen.onLoadMetricInitialState','model_user=',model_user,'model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
@@ -146,7 +147,12 @@ export default function FileOpen() {
   const onLoadAutoSave = () => {
 //    console.log('FileOpen.onLoadAutoSave');
     setShow(!show);
-    dispatch(executeStopOnLoad()); // Stop execute file
+    var autoSaveType;
+    if (typeof (Storage) !== "undefined" && localStorage.getItem('autosave') !== null) {
+      var autosave = JSON.parse(localStorage.getItem('autosave'));
+      autoSaveType = autosave.model !== undefined ? autosave.model.type : autosave.type;
+    }
+    if (stopOnFileLoad || (autoSaveType !== undefined && autoSaveType !== model_type)) dispatch(executeStopOnLoad());
     dispatch(restoreAutoSave());
     dispatch(deleteAutoSave());
 //    console.log('FileOpen.onLoadAutoSave','model_user=',model_user,'model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
@@ -161,7 +167,7 @@ export default function FileOpen() {
   const onOpen = () => {
 //    console.log('FileOpen.onOpen');
     setShow(!show);
-    dispatch(executeStopOnLoad()); // Stop execute file
+    if (stopOnFileLoad || type !== model_type) dispatch(executeStopOnLoad()); // Stop execute file on different type
 //    console.log('FileOpen.onOpen','model_user=',model_user,'type=',type,'name=',name,'model_view=',model_view);
     getDesign(model_user, type, name); // Load the model
   }

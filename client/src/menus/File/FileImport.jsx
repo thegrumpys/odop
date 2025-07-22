@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, NavDropdown, Form, Table } from 'react-bootstrap';
 import { load, changeName, deleteAutoSave } from '../../store/actions';
 import { executeStopOnLoad } from '../../store/actions';
@@ -13,6 +13,8 @@ export default function FileImport() {
   const [show, setShow] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const dispatch = useDispatch();
+  const model_type = useSelector((state) => state.model.type);
+  const stopOnFileLoad = useSelector((state) => state.executePanelSlice.stopOnFileLoad);
 
   const fileReader = new FileReader();
 
@@ -31,7 +33,6 @@ export default function FileImport() {
   const onFileImport = () => {
 //    console.log('FileImport.onFileImport');
     setShow(!show);
-    dispatch(executeStopOnLoad());
     displaySpinner(true);
     fileReader.onload = onLoad; // On Load callback
     fileReader.onerror = onError; // On Error callback
@@ -46,6 +47,7 @@ export default function FileImport() {
     var { migrate } = require('../../designtypes/' + design.type + '/migrate.js'); // Dynamically load migrate
     var migrated_design = migrate(design);
     if (migrated_design.jsontype === "ODOP") {
+      if (stopOnFileLoad || migrated_design.type !== model_type) dispatch(executeStopOnLoad());
       dispatch(load(migrated_design));
       dispatch(changeName(filename));
       dispatch(deleteAutoSave());
