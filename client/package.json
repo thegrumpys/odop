@@ -32,7 +32,7 @@
   ],
   "dependencies": {
     "@mars/heroku-js-runtime-env": "^3.0.2",
-    "axios": "^1.4.0",
+    "axios": "^1.11.0",
     "bootstrap": "^5.3.3",
     "jszip": "^3.10.1",
     "popper.js": "^1.16.1",
