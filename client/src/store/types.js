@@ -57,6 +57,9 @@ export const CHANGE_INPUT_SYMBOL_VALUES = 'modelSlice/changeInputSymbolValues';
 export const SAVE_INPUT_SYMBOL_VALUES = 'modelSlice/saveInputSymbolValues';
 export const RESTORE_INPUT_SYMBOL_VALUES = 'modelSlice/restoreInputSymbolValues';
 
+export const SAVE_SYMBOL_VALUE = 'modelSlice/saveSymbolValue';
+export const RESTORE_SYMBOL_VALUE = 'modelSlice/restoreSymbolValue';
+
 export const CHANGE_OUTPUT_SYMBOL_VALUES = 'modelSlice/changeOutputSymbolValues';
 export const SAVE_OUTPUT_SYMBOL_CONSTRAINTS = 'modelSlice/SaveOutputSymbolConstraints';
 export const RESTORE_OUTPUT_SYMBOL_CONSTRAINTS = 'modelSlice/restoreOutputSymbolContraints';

@@ -64,6 +64,8 @@ import {
   CHANGE_INPUT_SYMBOL_VALUES,
   SAVE_INPUT_SYMBOL_VALUES,
   RESTORE_INPUT_SYMBOL_VALUES,
+  SAVE_SYMBOL_VALUE,
+  RESTORE_SYMBOL_VALUE,
 
   CHANGE_OUTPUT_SYMBOL_VALUES,
 
@@ -963,6 +965,49 @@ export default function reducers(state = {}, action) {
 //                    console.log('reducers.RESTORE_INPUT_SYMBOL_VALUES oldvalue==undefined element=',element);
                 return element;
               }
+            } else {
+              return element;
+            }
+          }),
+        }
+      });
+      return result;
+
+   case SAVE_SYMBOL_VALUE:
+      var result = Object.assign({}, state, {
+        ...state,
+        model: {
+          ...state.model,
+          result: {
+            ...state.model.result,
+            termination_condition: ''
+          },
+          symbol_table: state.model.symbol_table.map((element) => {
+            if (element.name === action.payload.name) {
+              var inner_result = Object.assign({}, element, { oldvalue: element.value });
+              return inner_result;
+            } else {
+              return element;
+            }
+          }),
+        }
+      });
+      return result;
+
+   case RESTORE_SYMBOL_VALUE:
+      var result = Object.assign({}, state, {
+        ...state,
+        model: {
+          ...state.model,
+          result: {
+            ...state.model.result,
+            termination_condition: ''
+          },
+          symbol_table: state.model.symbol_table.map((element) => {
+            if (element.name === action.payload.name && element.oldvalue !== undefined) {
+              var inner_result = Object.assign({}, element, { value: element.oldvalue });
+              delete inner_result.oldvalue;
+              return inner_result;
             } else {
               return element;
             }
