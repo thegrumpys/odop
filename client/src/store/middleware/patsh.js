@@ -1,4 +1,5 @@
 import { despak } from './despak';
+import { snap } from './snap';
 /**
  * Hooke & Jeeves Pattern Search - find minimum of objective function.
  * This follows the 1961 ACM Paper "Direct Search" Solution of Numerical and Statistical Problems
@@ -8,7 +9,7 @@ import { despak } from './despak';
  * 3. The algorithm demands a minimum improvement of s in each iteration compared to a externally specified tolerance value.
  * 4. The algorithm's explore function alternates the sign of delta for each psi[k] for each successive exploration
  */
-export function patsh(store, psi, del, delmin, objmin, maxit, tol, merit) {
+export function patsh(store, psi, del, delmin, objmin, maxit, tol, merit, tables = []) {
 //    console.log('@@@@@ Start patsh','store=',store,'psi=',psi,'del=',del,'delmin=',delmin,'objmin=',objmin,'maxit=',maxit,'tol=',tol,'merit=',merit);
     var s_psi;
     var NCODE;
@@ -29,6 +30,9 @@ export function patsh(store, psi, del, delmin, objmin, maxit, tol, merit) {
                 eps[k] = 0.05;
             }
             phi[k] = phi[k] + eps[k] * del * xflag[k];
+            if (tables[k] && tables[k].length > 0) {
+                phi[k] = snap(tables[k], phi[k]);
+            }
             s_phi = despak(store, phi, merit);
 //            console.log('patsh_explore 1 phi=',phi,'s_phi=',s_phi);
             if (s_phi < s) {
@@ -36,12 +40,18 @@ export function patsh(store, psi, del, delmin, objmin, maxit, tol, merit) {
             } else {
                 xflag[k] = -xflag[k];
                 phi[k] = phi[k] + 2.0 * eps[k] * del * xflag[k];
+                if (tables[k] && tables[k].length > 0) {
+                    phi[k] = snap(tables[k], phi[k]);
+                }
                 s_phi = despak(store, phi, merit);
 //                console.log('patsh_explore 2 phi=',phi,'s_phi=',s_phi);
                 if (s_phi < s) {
                     s = s_phi;
                 } else {
                     phi[k] = phi[k] - eps[k] * del * xflag[k];
+                    if (tables[k] && tables[k].length > 0) {
+                        phi[k] = snap(tables[k], phi[k]);
+                    }
                 }
             }
         }
@@ -55,6 +65,9 @@ export function patsh(store, psi, del, delmin, objmin, maxit, tol, merit) {
         var phi = []; // phi: base point resulting from the current move
         for (let i = 0; i < psi.length; i++) {
             phi[i] = psi[i];
+            if (tables[i] && tables[i].length > 0) {
+                phi[i] = snap(tables[i], phi[i]);
+            }
         }
         var s = s_psi; // s: the functional value before the move
         s = patsh_explore(phi, s, del); // explore
@@ -67,7 +80,13 @@ export function patsh(store, psi, del, delmin, objmin, maxit, tol, merit) {
                 for (let i = 0; i < psi.length; i++) {
                     tht[i] = psi[i]; // theta: previous base point
                     psi[i] = phi[i]; // psi: current base point
+                    if (tables[i] && tables[i].length > 0) {
+                        psi[i] = snap(tables[i], psi[i]);
+                    }
                     phi[i] = phi[i] + alpha * (phi[i] - tht[i]); // phi: base point resulting from the current move
+                    if (tables[i] && tables[i].length > 0) {
+                        phi[i] = snap(tables[i], phi[i]);
+                    }
                 }
 //                console.log('@@@ itno=',itno,'s=',s,'calc=',s + tol * Math.abs(s_psi),'s_psi=',s_psi,'compare=', s + tol * Math.abs(s_psi) >= s_psi);
                 s_psi = s; // s_psi: the functional value at the base point

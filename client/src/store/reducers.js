@@ -60,6 +60,7 @@ import {
   RESET_SYMBOL_FLAG,
   CHANGE_SYMBOL_INPUT,
   CHANGE_SYMBOL_HIDDEN,
+  CHANGE_SYMBOL_FORMAT,
 
   CHANGE_INPUT_SYMBOL_VALUES,
   SAVE_INPUT_SYMBOL_VALUES,
@@ -856,7 +857,7 @@ export default function reducers(state = {}, action) {
       });
       return result;
 
-   case CHANGE_SYMBOL_HIDDEN:
+  case CHANGE_SYMBOL_HIDDEN:
 //        console.log('start reducer changeSymbolHidden', 'state=', state, 'action=', action);
       var result = Object.assign({}, state, {
         ...state,
@@ -871,6 +872,28 @@ export default function reducers(state = {}, action) {
 //                console.log('reducers.CHANGE_SYMBOL_HIDDEN element=',element.name,' old value=',element.hidden,' new value=',action.payload.value);
               var inner_result = Object.assign({}, element, {
                 hidden: action.payload.value
+              });
+              return inner_result;
+            }
+            return element;
+          }),
+        }
+      });
+      return result;
+
+  case CHANGE_SYMBOL_FORMAT:
+      var result = Object.assign({}, state, {
+        ...state,
+        model: {
+          ...state.model,
+          result: {
+            ...state.model.result,
+            termination_condition: ''
+          },
+          symbol_table: state.model.symbol_table.map((element) => {
+            if (element.name === action.payload.name) {
+              var inner_result = Object.assign({}, element, {
+                format: action.payload.value
               });
               return inner_result;
             }

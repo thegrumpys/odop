@@ -3,6 +3,8 @@ import * as mo from '../mat_offsets';
 import * as eto from './endtypes_offsets';
 import { changeSymbolInput, changeSymbolHidden } from '../../../store/actions';
 
+export let wire_dia_table;
+
 export function init(store, p, x) {
 //    console.log('init store=',store,'p=',p,'x=',x);
  var i, j;
@@ -15,10 +17,13 @@ export function init(store, p, x) {
  if (x[o.Material_File] === "mat_metric.json") m_tab = require('../mat_metric.json');
  else m_tab = require('../mat_us.json');
 //    console.log('m_tab=', m_tab);
- var et_tab = require('./endtypes.json');
+var et_tab = require('./endtypes.json');
 //console.log('et_tab=', et_tab);
- var si_tab = require('./si_range.json');
+var si_tab = require('./si_range.json');
 //console.log('et_tab=', et_tab);
+ i = x[o.Material_Type];
+ var wire_dia_filename = m_tab[i][mo.wire_dia_filename];
+ wire_dia_table = require('../' + wire_dia_filename + '.json');
 
      x[o.Spring_Type] = "Extension";
      j = x[o.End_Type];

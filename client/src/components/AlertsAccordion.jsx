@@ -4,7 +4,7 @@ import { getAlertsBySeverity, ERR, WARN, NOTICE, INFO } from './Alerts';
 import { logUsage } from '../logUsage';
 import SymbolValue from './SymbolValue';
 import Value from './Value';
-import { changeSystemControlsValue } from '../store/actions';
+import { changeSystemControlsValue, changeSymbolFormat } from '../store/actions';
 import { setActiveKey, setCaret, setLevel } from '../store/actions';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 import { useAuth } from './AuthProvider';
@@ -57,6 +57,7 @@ export default function AlertsAccordion() {
   const model_system_controls = useSelector((state) => state.model.system_controls);
   const model_enable_auto_fix = useSelector((state) => state.model.system_controls.enable_auto_fix);
   const model_enable_auto_search = useSelector((state) => state.model.system_controls.enable_auto_search);
+  const symbol_table = useSelector((state) => state.model.symbol_table);
   const dispatch = useDispatch();
   const { authState } = useAuth();
 
@@ -95,6 +96,14 @@ export default function AlertsAccordion() {
     }
     dispatch(changeSystemControlsValue(copy));
     logUsage('event', 'AlertsAccordion', { event_label: 'AutoSearchToggle ' + label });
+  }
+
+  const onFormatToggle = (name) => {
+    const element = symbol_table.find((e) => e.name === name);
+    if (element) {
+      const value = element.format === 'table' ? 'continuous' : 'table';
+      dispatch(changeSymbolFormat(name, value));
+    }
   }
 
   var line = 1;
@@ -183,6 +192,13 @@ export default function AlertsAccordion() {
                 <span className="text-primary px-2 py-2 pt-2"><i className="fas fa-info-circle"></i></span>
               </OverlayTrigger>
 
+              {symbol_table.filter(e => e.formatchoices !== undefined).map((element) => (
+                <span key={element.name} className="ms-3">
+                  <InputGroup.Text>Auto Standard Size {element.name}</InputGroup.Text>
+                  <InputGroup.Checkbox id={element.name + '_format'} aria-label={`Checkbox for ${element.name} format`} onChange={() => onFormatToggle(element.name)} checked={element.format === 'table'} />
+                </span>
+              ))}
+
               </InputGroup>
           </Card.Header>
           {(level === ERR && (err_alerts.length > 0)) ||
@@ -251,7 +267,7 @@ export default function AlertsAccordion() {
                     {(level === ERR || level === WARN || level === NOTICE || level === INFO) &&
                       err_alerts.map((entry, index) => {
 //                        console.log('AlertsAccordion.render entry=',entry,'line=',line);
-                        var hidden = authState.isAdmin                ? false : (entry.element === undefined ? false : entry.element.hidden);
+                        var hidden = authState.isAdmin ? false : (entry.element === undefined ? false : entry.element.hidden);
                         var match = null;
                         if (entry.help_url !== undefined) {
                           match = entry.help_url.match(/\[(.*)\]\((.*)\)/);

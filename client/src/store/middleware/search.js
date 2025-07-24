@@ -17,13 +17,27 @@ export function search(store, objmin, merit) {
     // Compress P into PC
     var element;
     var pc = [];
+    var tables = [];
+    const { wire_dia_table } = require('../../designtypes/' + shadow_store_state.model.type + '/init.js');
     for (let i = 0; i < shadow_store_state.model.symbol_table.length; i++) {
         element = shadow_store_state.model.symbol_table[i];
-            if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
-                if (!(element.lmin & FIXED)) { // Only Free
-                    pc.push(element.value);
+        if (element.type === "equationset" && element.input) { // Only Independent Variable, skip Dependent and Calc Input
+            if (!(element.lmin & FIXED)) { // Only Free
+                pc.push(element.value);
+                if (element.formatchoices !== undefined && element.format === "table") {
+                    if (element.name === "Wire_Dia" && wire_dia_table !== undefined) {
+                        tables.push(wire_dia_table.slice(1).map((row) => row[0]));
+                    } else if (element.table !== undefined) {
+                        const t = require('../../designtypes/' + element.table + '.json');
+                        tables.push(t.slice(1).map((row) => row[0]));
+                    } else {
+                        tables.push([]);
+                    }
+                } else {
+                    tables.push([]);
                 }
             }
+        }
     }
 
     var obj = store_state.model.result.objective_value;
@@ -55,7 +69,7 @@ export function search(store, objmin, merit) {
     // Do the pattern search
     var delarg = shadow_store_state.model.system_controls.del;
 //    console.log('search','shadow_store=',shadow_store,'pc=',pc,'delarg=',delarg,'shadow_store_state.model.system_controls.delmin=',shadow_store_state.model.system_controls.delmin,'objmin=',objmin,'shadow_store_state.model.system_controls.maxit=',shadow_store_state.model.system_controls.maxit,'shadow_store_state.model.system_controls.tol=',shadow_store_state.model.system_controls.tol);
-    var ncode = patsh(shadow_store, pc, delarg, shadow_store_state.model.system_controls.delmin, objmin, shadow_store_state.model.system_controls.maxit, shadow_store_state.model.system_controls.tol, merit);
+    var ncode = patsh(shadow_store, pc, delarg, shadow_store_state.model.system_controls.delmin, objmin, shadow_store_state.model.system_controls.maxit, shadow_store_state.model.system_controls.tol, merit, tables);
 //    console.log('search ncode=',ncode);
 
     // Expand PC back into store change actions

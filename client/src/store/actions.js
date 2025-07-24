@@ -58,6 +58,7 @@ import {
   RESET_SYMBOL_FLAG,
   CHANGE_SYMBOL_INPUT,
   CHANGE_SYMBOL_HIDDEN,
+  CHANGE_SYMBOL_FORMAT,
 
   CHANGE_INPUT_SYMBOL_VALUES,
   SAVE_INPUT_SYMBOL_VALUES,
@@ -447,6 +448,16 @@ export function changeSymbolInput(name, value) {
 export function changeSymbolHidden(name, value) {
   return {
     type: CHANGE_SYMBOL_HIDDEN,
+    payload: {
+      name,
+      value
+    }
+  }
+}
+
+export function changeSymbolFormat(name, value) {
+  return {
+    type: CHANGE_SYMBOL_FORMAT,
     payload: {
       name,
       value
