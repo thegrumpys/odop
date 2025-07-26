@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { InputGroup, OverlayTrigger, Tooltip, Form } from 'react-bootstrap';
 import { CONSTRAINED, FIXED } from '../store/actionTypes';
@@ -9,11 +9,24 @@ import { getAlertsByName } from './Alerts';
 import store from "../store/store";
 
 export default function NameValueUnitsRowIndependentVariable({ element, index, onChangeValid, onChangeInvalid, onFocus, onBlur, onKeyPress, onSetFix, onResetFix, onFocusFix, onBlurFix, onKeyPressFix }) {
+  const model_type = useSelector((state) => state.model.type);
   const model_enable_auto_fix = useSelector((state) => state.model.system_controls.enable_auto_fix);
   const model_show_units = useSelector((state) => state.model.system_controls.show_units);
   const [value, setValue] = useState(false);
   const [fixFreeFlag, setFixFreeFlag] = useState(0);
+  const [table, setTable] = useState([]);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+//    console.log('SymbolValue - Mounted');
+    if (element.format === 'table') {
+//      console.log('NameValueUnitsRowCalcInput useEffect file= ../designtypes/'+element.table+'.json');
+      var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
+//      console.log('NameValueUnitsRowCalcInput','tableContents=',tableContents);
+      setTable(tableContents);
+    }
+    return () => { };
+  }, [element, model_type]);
 
   const onChangeValidLocal = (event) => {
 //    console.log('NameValueUnitsRowIndependentVariable.onChangeValidLocal event.target.value=', event.target.value);
@@ -100,6 +113,14 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
     if (typeof onBlurFix === "function") onBlurFix(event);
   }
 
+  const onSelectLocal = (event) => {
+//    console.log('NameValueUnitsRowCalcInput.onSelect', 'event.target.value=', event.target.value);
+    var selectedIndex = parseFloat(event.target.value);
+    dispatch(changeSymbolValue(element.name, selectedIndex));
+    logValue(element.name, selectedIndex, 'TableIndex');
+    if (typeof onSelect === "function") onSelect(event);
+  }
+
   var results = getAlertsByName(element.name);
   var className = results.className;
   var icon_alerts = results.alerts;
@@ -139,7 +160,17 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
         </td>
         <td className="align-middle">
           <InputGroup>
-            <FormControlTypeNumber id={'nvuriv_value_' + element.name} icon_alerts={icon_alerts} className={className} value={element.value} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidLocal} onChangeInvalid={onChangeInvalidLocal} onFocus={onFocusLocal} onBlur={onBlurLocal} onKeyPress={onKeyPressLocal}/>
+            {element.format === undefined && typeof element.value === 'number' ?
+              <FormControlTypeNumber id={'nvuriv_value_' + element.name} icon_alerts={icon_alerts} className={className} value={element.value} validmin={element.validmin} validmax={element.validmax} onChangeValid={onChangeValidLocal} onChangeInvalid={onChangeInvalidLocal} onFocus={onFocusLocal} onBlur={onBlurLocal} onKeyPress={onKeyPressLocal} /> : ''}
+            {element.format === 'table' &&
+              (
+                <Form.Select id={'nvuriv_value_' + element.name} value={element.value} onChange={onSelectLocal} onFocus={onFocusLocal} onBlur={onBlurLocal}>
+                  {table.map((value, index) =>
+                    index > 0 ? <option key={index} value={index}>{value[0]}</option> : ''
+                  )}
+                </Form.Select>
+              )
+            }
           </InputGroup>
         </td>
         <td className="align-middle text-center">

@@ -892,10 +892,15 @@ export default function reducers(state = {}, action) {
           },
           symbol_table: state.model.symbol_table.map((element) => {
             if (element.name === action.payload.name) {
-              var inner_result = Object.assign({}, element, {
-                format: action.payload.value
-              });
-              return inner_result;
+              if (action.payload.value === 'continuous') {
+                var { format, ...rest } = element;
+                return rest;
+              } else {
+                var inner_result = Object.assign({}, element, {
+                  format: 'table'
+                });
+                return inner_result;
+              }
             }
             return element;
           }),

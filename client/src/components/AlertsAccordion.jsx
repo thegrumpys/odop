@@ -178,26 +178,33 @@ export default function AlertsAccordion() {
               <InputGroup.Checkbox id="auto_search" aria-label="Checkbox for enabling Auto Search" onChange={onAutoSearchToggle} checked={model_enable_auto_search} />
               <OverlayTrigger placement="bottom" overlay={
                 <Tooltip className="tooltip-lg">
-                <p>When checked, a Search is automatically triggered when the the user changes a value, the current design is not feasible and the user:</p>
-                <ul>
-                  <li>pushes the "Enter" key <br/> or</li>
-                  <li>pushes the "Tab" key <br/> or</li>
-                  <li>clicks out of the field containing the changed value</li>
-                </ul>
+                  <p>When checked, a Search is automatically triggered when the the user changes a value, the current design is not feasible and the user:</p>
+                  <ul>
+                    <li>pushes the "Enter" key <br/> or</li>
+                    <li>pushes the "Tab" key <br/> or</li>
+                    <li>clicks out of the field containing the changed value</li>
+                  </ul>
                   <p>Enter <i>AutoSearch</i> in Help lookup (above) for more detail.</p>
                   <p>When unchecked, the Search feature executes only when a Search (solve) button is pushed or the
                      Action : Search (solve) menu entry is invoked.</p>
                   <p>The behavior is the same as the File : Preferences enable_auto_search value.</p>
                 </Tooltip>}>
-                <span className="text-primary px-2 py-2 pt-2"><i className="fas fa-info-circle"></i></span>
+                <span className="text-primary px-2 py-2 pt-2 pe-5"><i className="fas fa-info-circle"></i></span>
               </OverlayTrigger>
 
+              <InputGroup.Text>Auto Std Size</InputGroup.Text>
               {symbol_table.filter(e => e.formatchoices !== undefined).map((element) => (
-                <span key={element.name} className="ms-3">
-                  <InputGroup.Text>Auto Standard Size {element.name}</InputGroup.Text>
+                <>
+                  <InputGroup.Text>{element.name}</InputGroup.Text>
                   <InputGroup.Checkbox id={element.name + '_format'} aria-label={`Checkbox for ${element.name} format`} onChange={() => onFormatToggle(element.name)} checked={element.format === 'table'} />
-                </span>
+                </>
               ))}
+              <OverlayTrigger placement="bottom" overlay={
+                <Tooltip className="tooltip-lg">
+                <p>Blah blah blah</p>
+                </Tooltip>}>
+                <span className="text-primary px-2 py-2 pt-2 pe-5"><i className="fas fa-info-circle"></i></span>
+              </OverlayTrigger>
 
               </InputGroup>
           </Card.Header>
