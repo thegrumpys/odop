@@ -1,5 +1,6 @@
+
 import { registerSymbolCallback } from '../../../store/callbackRegistry';
-import { changeSymbolHidden, changeSymbolInput, changeSymbolValue, saveSymbolValue, restoreSymbolValue } from '../../../store/actions';
+import { changeSymbolHidden, changeSymbolInput, changeSymbolValue, changeSymbolFormat, saveSymbolValue, restoreSymbolValue } from '../../../store/actions';
 import * as sto from './symbol_table_offsets';
 
 export function onPropCalcMethodChange(store, value) {
@@ -10,6 +11,7 @@ export function onPropCalcMethodChange(store, value) {
     case 1:
       if (matState && matState.oldvalue !== undefined) {
         store.dispatch(restoreSymbolValue('Material_Type'));
+        store.dispatch(changeSymbolFormat('Material_Type', 'table'));
       }
 
       store.dispatch(changeSymbolHidden('Material_Type', false));
@@ -32,8 +34,9 @@ export function onPropCalcMethodChange(store, value) {
     case 2:
       if (!matState || matState.oldvalue === undefined) {
         store.dispatch(saveSymbolValue('Material_Type'));
+        store.dispatch(changeSymbolFormat('Material_Type', 'string'));
+        store.dispatch(changeSymbolValue('Material_Type', 'User_Specified'));
       }
-      store.dispatch(changeSymbolValue('Material_Type', 1));
 
       store.dispatch(changeSymbolHidden('Material_Type', false));
       store.dispatch(changeSymbolHidden('ASTM/Fed_Spec', true));
@@ -55,8 +58,9 @@ export function onPropCalcMethodChange(store, value) {
     case 3:
       if (!matState || matState.oldvalue === undefined) {
         store.dispatch(saveSymbolValue('Material_Type'));
+        store.dispatch(changeSymbolFormat('Material_Type', 'string'));
+        store.dispatch(changeSymbolValue('Material_Type', 'User_Specified'));
       }
-      store.dispatch(changeSymbolValue('Material_Type', 1));
 
       store.dispatch(changeSymbolHidden('Material_Type', false));
       store.dispatch(changeSymbolHidden('ASTM/Fed_Spec', true));
