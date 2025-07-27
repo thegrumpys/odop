@@ -145,22 +145,6 @@ export function init(store, p, x) {
         x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
         x[o.Add_Coils_Solid] = et_tab[j][eto.add_coils_solid];
     }
-
-    store.dispatch(changeSymbolHidden("Material_Type", false));
-    store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", false));
-    store.dispatch(changeSymbolHidden("Process", false));
-    store.dispatch(changeSymbolHidden("Life_Category", false));
-    store.dispatch(changeSymbolHidden("%_Tensile_Endur", false));
-    store.dispatch(changeSymbolHidden("%_Tensile_Stat", false));
-
-    store.dispatch(changeSymbolInput("Density", false));
-    store.dispatch(changeSymbolInput("Torsion_Modulus", false));
-    store.dispatch(changeSymbolInput("Hot_Factor_Kh", false));
-    store.dispatch(changeSymbolInput("Tensile", false));
-    store.dispatch(changeSymbolInput("%_Tensile_Endur", false));
-    store.dispatch(changeSymbolInput("%_Tensile_Stat", false));
-    store.dispatch(changeSymbolInput("Stress_Lim_Endur", false));
-    store.dispatch(changeSymbolInput("Stress_Lim_Stat", false));
     break;
 
  case 2:     // Prop_Calc_Method = 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
@@ -170,22 +154,6 @@ export function init(store, p, x) {
         store.dispatch(changeSymbolValue('Material_Type', 1));
     }
     x[o.Material_Type] = 1;
-
-    store.dispatch(changeSymbolHidden("Material_Type", false));
-    store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", true));
-    store.dispatch(changeSymbolHidden("Process", true));
-    store.dispatch(changeSymbolHidden("Life_Category", true));
-    store.dispatch(changeSymbolHidden("%_Tensile_Endur", false));
-    store.dispatch(changeSymbolHidden("%_Tensile_Stat", false));
-
-    store.dispatch(changeSymbolInput("Density", true));
-    store.dispatch(changeSymbolInput("Torsion_Modulus", true));
-    store.dispatch(changeSymbolInput("Hot_Factor_Kh", true));
-    store.dispatch(changeSymbolInput("Tensile", true));
-    store.dispatch(changeSymbolInput("%_Tensile_Endur", true));
-    store.dispatch(changeSymbolInput("%_Tensile_Stat", true));
-    store.dispatch(changeSymbolInput("Stress_Lim_Endur", false));
-    store.dispatch(changeSymbolInput("Stress_Lim_Stat", false));
     break;
 
  case 3:     // Prop_Calc_Method = 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur
@@ -195,22 +163,7 @@ export function init(store, p, x) {
         store.dispatch(changeSymbolValue('Material_Type', 1));
     }
     x[o.Material_Type] = 1;
-
-    store.dispatch(changeSymbolHidden("Material_Type", false));
-    store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", true));
-    store.dispatch(changeSymbolHidden("Process", true));
-    store.dispatch(changeSymbolHidden("Life_Category", true));
-    store.dispatch(changeSymbolHidden("%_Tensile_Endur", true));
-    store.dispatch(changeSymbolHidden("%_Tensile_Stat", true));
-
-    store.dispatch(changeSymbolInput("Density", true));
-    store.dispatch(changeSymbolInput("Torsion_Modulus", true));
-    store.dispatch(changeSymbolInput("Hot_Factor_Kh", true));
-    store.dispatch(changeSymbolInput("Tensile", true));
-    store.dispatch(changeSymbolInput("%_Tensile_Endur", false));
-    store.dispatch(changeSymbolInput("%_Tensile_Stat", false));
-    store.dispatch(changeSymbolInput("Stress_Lim_Stat", true));
-    store.dispatch(changeSymbolInput("Stress_Lim_Endur", true));
+    break;
  }
 
  if (et_tab[j][eto.end_type] === "User_Specified") {
