@@ -892,7 +892,7 @@ export default function reducers(state = {}, action) {
           },
           symbol_table: state.model.symbol_table.map((element) => {
             if (element.name === action.payload.name) {
-              if (action.payload.value === 'continuous') {
+              if (action.payload.value !=== 'table') {
                 var { format, ...rest } = element;
                 return rest;
               } else {
