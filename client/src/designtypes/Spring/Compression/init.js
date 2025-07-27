@@ -4,6 +4,7 @@ import * as eto from './endtypes_offsets';
 import { changeSymbolInput, changeSymbolHidden, changeSymbolValue,
          saveSymbolValue, restoreSymbolValue } from '../../../store/actions';
 import * as sto from './symbol_table_offsets';
+import './callbacks';
 
 export function init(store, p, x) {
 //    console.log('init store=',store,'p=',p,'x=',x);
