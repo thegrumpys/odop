@@ -1,5 +1,5 @@
-import { registerSymbolCallback } from '../../store/callbackRegistry';
-import { changeSymbolHidden, changeSymbolInput, changeSymbolValue, saveSymbolValue, restoreSymbolValue } from '../../store/actions';
+import { registerSymbolCallback } from '../../../store/callbackRegistry';
+import { changeSymbolHidden, changeSymbolInput, changeSymbolValue, saveSymbolValue, restoreSymbolValue } from '../../../store/actions';
 import * as sto from './symbol_table_offsets';
 
 export function onPropCalcMethodChange(store, value) {
