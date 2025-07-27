@@ -16,6 +16,7 @@ import {
   RESET_SYMBOL_FLAG,
   CHANGE_SYMBOL_INPUT,
   CHANGE_SYMBOL_HIDDEN,
+  CHANGE_SYMBOL_FORMAT,
 
   CHANGE_INPUT_SYMBOL_VALUES,
   SAVE_INPUT_SYMBOL_VALUES,
@@ -95,6 +96,9 @@ export function dumpers(action) {
       break;
     case CHANGE_SYMBOL_HIDDEN:
       result = 'changeSymbolHidden(' + JSON.stringify(action.payload.name) + ',' + flags[action.payload.value] + ')'
+      break;
+    case CHANGE_SYMBOL_FORMAT:
+      result = 'changeSymbolFormat(' + JSON.stringify(action.payload.name) + ',' + JSON.stringify(action.payload.value) + ')'
       break;
     case CHANGE_INPUT_SYMBOL_VALUES:
       break;

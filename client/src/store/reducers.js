@@ -60,6 +60,7 @@ import {
   RESET_SYMBOL_FLAG,
   CHANGE_SYMBOL_INPUT,
   CHANGE_SYMBOL_HIDDEN,
+  CHANGE_SYMBOL_FORMAT,
 
   CHANGE_INPUT_SYMBOL_VALUES,
   SAVE_INPUT_SYMBOL_VALUES,
@@ -875,6 +876,33 @@ export default function reducers(state = {}, action) {
                 hidden: action.payload.value
               });
               return inner_result;
+            }
+            return element;
+          }),
+        }
+      });
+      return result;
+
+  case CHANGE_SYMBOL_FORMAT:
+      var result = Object.assign({}, state, {
+        ...state,
+        model: {
+          ...state.model,
+          result: {
+            ...state.model.result,
+            termination_condition: ''
+          },
+          symbol_table: state.model.symbol_table.map((element) => {
+            if (element.name === action.payload.name) {
+              if (action.payload.value !== 'table') {
+                var { format, ...rest } = element;
+                return rest;
+              } else {
+                var inner_result = Object.assign({}, element, {
+                  format: 'table'
+                });
+                return inner_result;
+              }
             }
             return element;
           }),

@@ -52,6 +52,7 @@ export const SET_SYMBOL_FLAG = 'modelSlice/setSymbolFlag';
 export const RESET_SYMBOL_FLAG = 'modelSlice/resetSymbolFlag';
 export const CHANGE_SYMBOL_INPUT = 'modelSlice/changeSymbolInput';
 export const CHANGE_SYMBOL_HIDDEN = 'modelSlice/changeSymbolHidden';
+export const CHANGE_SYMBOL_FORMAT = 'modelSlice/changeSymbolFormat';
 
 export const CHANGE_INPUT_SYMBOL_VALUES = 'modelSlice/changeInputSymbolValues';
 export const SAVE_INPUT_SYMBOL_VALUES = 'modelSlice/saveInputSymbolValues';
