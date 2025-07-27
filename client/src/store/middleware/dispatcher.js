@@ -35,7 +35,6 @@ import { resetCatalogSelection } from './resetCatalogSelection';
 import { changeSymbolValue, setSymbolFlag, changeSymbolConstraint, saveOutputSymbolConstraints,
          restoreOutputSymbolConstraints, changeResultTerminationCondition, saveAutoSave } from '../actions';
 import { logUsage } from '../../logUsage';
-import { invokeSymbolCallbacks } from '../callbackRegistry';
 
 export const dispatcher = store => next => action => {
 //  console.log('start dispatcher before reducer','store=',store,'next=',next,'action=',action);
@@ -102,7 +101,6 @@ export const dispatcher = store => next => action => {
       propagate(store);
       updateObjectiveValue(store, action.payload.merit);
       invokeCheck(store);
-      invokeSymbolCallbacks(store, action.payload.name, action.payload.value);
     }
       break;
 
