@@ -10,6 +10,7 @@ export function onPropCalcMethodChange(store, value) {
       if (matState && matState.oldvalue !== undefined) {
         store.dispatch(restoreSymbolValue('Material_Type'));
       }
+
       store.dispatch(changeSymbolHidden('Material_Type', false));
       store.dispatch(changeSymbolHidden('ASTM/Fed_Spec', false));
       store.dispatch(changeSymbolHidden('Process', false));
@@ -32,6 +33,7 @@ export function onPropCalcMethodChange(store, value) {
         store.dispatch(saveSymbolValue('Material_Type'));
       }
       store.dispatch(changeSymbolValue('Material_Type', 1));
+
       store.dispatch(changeSymbolHidden('Material_Type', false));
       store.dispatch(changeSymbolHidden('ASTM/Fed_Spec', true));
       store.dispatch(changeSymbolHidden('Process', true));
@@ -54,6 +56,7 @@ export function onPropCalcMethodChange(store, value) {
         store.dispatch(saveSymbolValue('Material_Type'));
       }
       store.dispatch(changeSymbolValue('Material_Type', 1));
+
       store.dispatch(changeSymbolHidden('Material_Type', false));
       store.dispatch(changeSymbolHidden('ASTM/Fed_Spec', true));
       store.dispatch(changeSymbolHidden('Process', true));
