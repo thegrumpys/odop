@@ -26,6 +26,7 @@ export function getSizeEntries(type, st) {
             m_tab = require('../mat_us.json');
 //        console.log('getSizeEntries: st[o.Material_File].value =', st[o.Material_File].value);
         i = st[o.Material_Type].value;
+        if (typeof i !== 'number') return result; // Assume User_Specified
 //        console.log('getSizeEntries Material_Type i=',i);
         wire_dia_filename = m_tab[i][mo.wire_dia_filename];
 //        console.log('getSizeEntries wire_dia_filename=',wire_dia_filename);
@@ -67,6 +68,7 @@ export function getSizeEntries(type, st) {
             m_tab = require('../mat_us.json');
 //        console.log('getSizeEntries: st[o.Material_File].value =', st[o.Material_File].value);
         i = st[o.Material_Type].value;
+        if (typeof i !== 'number') return result; // Assume User_Specified
 //        console.log('getSizeEntries Material_Type i=',i);
         od_free_filename = m_tab[i][mo.od_free_filename];
 //        console.log('getSizeEntries od_free_filename=',od_free_filename);

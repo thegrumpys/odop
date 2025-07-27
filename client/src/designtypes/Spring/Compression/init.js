@@ -1,16 +1,18 @@
 import * as o from './offsets';
 import * as mo from '../mat_offsets';
 import * as eto from './endtypes_offsets';
-import { changeSymbolInput, changeSymbolHidden } from '../../../store/actions';
+import { changeSymbolInput, changeSymbolHidden, changeSymbolValue,  saveSymbolValue, restoreSymbolValue, changeSymbolFormat } from '../../../store/actions';
+import * as sto from './symbol_table_offsets';
 
 export function init(store, p, x) {
-  console.log('init store=',store,'p=',p,'x=',x);
+  console.log('init','store=',store,'p=',p,'x=',x);
   var i, j;
   var m_tab;
   const ten3 = 1000.0;
   var tensile_400;
 
   const matState = store.getState().model.symbol_table[sto.Material_Type];
+  console.log('init','matState=',matState);
   /*  Bring in material properties table  */
   if (x[o.Material_File] === "mat_metric.json") m_tab = require('../mat_metric.json');
   else m_tab = require('../mat_us.json');
@@ -25,7 +27,7 @@ export function init(store, p, x) {
   switch (x[o.Prop_Calc_Method]) {
     default:
     case 1:      // Prop_Calc_Method = 1 - Use values from material table
-      //     console.log('case 1 - Use values from material table');
+      console.log('case 1 - Use values from material table');
       /*   Refer to SETIDX.PLI, READMAT.PLI and TAB2D.PLI    */
       //
       i = x[o.Material_Type];
@@ -160,14 +162,14 @@ export function init(store, p, x) {
       break;
 
     case 2:     // Prop_Calc_Method = 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
-      //     console.log('case 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur');
+      console.log('case 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur');
       if (!matState || matState.oldvalue === undefined) {
         store.dispatch(saveSymbolValue('Material_Type'));
         store.dispatch(changeSymbolFormat('Material_Type', 'string'));
         store.dispatch(changeSymbolValue('Material_Type', 'User_Specified'));
       }
 
-      store.dispatch(changeSymbolHidden("Material_Type", true));
+      store.dispatch(changeSymbolHidden("Material_Type", false));
       store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", true));
       store.dispatch(changeSymbolHidden("Process", true));
       store.dispatch(changeSymbolHidden("Life_Category", true));
@@ -185,14 +187,14 @@ export function init(store, p, x) {
       break;
 
     case 3:     // Prop_Calc_Method = 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur
-      //     console.log('case 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur');
+      console.log('case 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur');
       if (!matState || matState.oldvalue === undefined) {
         store.dispatch(saveSymbolValue('Material_Type'));
         store.dispatch(changeSymbolFormat('Material_Type', 'string'));
         store.dispatch(changeSymbolValue('Material_Type', 'User_Specified'));
       }
 
-      store.dispatch(changeSymbolHidden("Material_Type", true));
+      store.dispatch(changeSymbolHidden("Material_Type", false));
       store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", true));
       store.dispatch(changeSymbolHidden("Process", true));
       store.dispatch(changeSymbolHidden("Life_Category", true));

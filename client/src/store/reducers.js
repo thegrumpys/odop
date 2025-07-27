@@ -896,11 +896,13 @@ export default function reducers(state = {}, action) {
             if (element.name === action.payload.name) {
               if (action.payload.value !== 'table') {
                 var { format, ...rest } = element;
+                console.log('CHANGE_SYMBOL_FORMAT','rest=',rest);
                 return rest;
               } else {
                 var inner_result = Object.assign({}, element, {
                   format: 'table'
                 });
+                console.log('CHANGE_SYMBOL_FORMAT','inner_result=',inner_result);
                 return inner_result;
               }
             }
@@ -908,6 +910,7 @@ export default function reducers(state = {}, action) {
           }),
         }
       });
+      console.log('CHANGE_SYMBOL_FORMAT','action=',action,'result=',result);
       return result;
 
 // INPUT SYMBOL
@@ -1013,6 +1016,7 @@ export default function reducers(state = {}, action) {
           symbol_table: state.model.symbol_table.map((element) => {
             if (element.name === action.payload.name) {
               var inner_result = Object.assign({}, element, { oldvalue: element.value });
+              console.log('SAVE_SYMBOL_VALUE','inner_result=',inner_result);
               return inner_result;
             } else {
               return element;
@@ -1020,6 +1024,7 @@ export default function reducers(state = {}, action) {
           }),
         }
       });
+      console.log('SAVE_SYMBOL_VALUE','action=',action,'result=',result);
       return result;
 
    case RESTORE_SYMBOL_VALUE:
@@ -1035,6 +1040,7 @@ export default function reducers(state = {}, action) {
             if (element.name === action.payload.name && element.oldvalue !== undefined) {
               var inner_result = Object.assign({}, element, { value: element.oldvalue });
               delete inner_result.oldvalue;
+              console.log('RESTORE_SYMBOL_VALUE','inner_result=',inner_result);
               return inner_result;
             } else {
               return element;
@@ -1042,6 +1048,7 @@ export default function reducers(state = {}, action) {
           }),
         }
       });
+      console.log('RESTORE_SYMBOL_VALUE','action=',action,'result=',result);
       return result;
 
 // OUTPUT SYMBOL
