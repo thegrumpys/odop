@@ -4,6 +4,7 @@ import * as sto from './symbol_table_offsets';
 
 export function onPropCalcMethodChange(store, value) {
   const matState = store.getState().model.symbol_table[sto.Material_Type];
+  console.log('onPropCalcMethodChange','store=',store,'value=',value,'matState=',matState);
   switch (value) {
     default:
     case 1:
