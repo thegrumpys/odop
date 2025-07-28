@@ -223,7 +223,7 @@ export function init(store, p, x) {
     store.dispatch(changeSymbolInput("Inactive_Coils", false));
     store.dispatch(changeSymbolInput("Add_Coils@Solid", false));
   }
-  console.log('init p=',p,' x=',x);
+//  console.log('init p=',p,' x=',x);
   return x;
 
 }
