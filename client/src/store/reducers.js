@@ -409,8 +409,24 @@ export default function reducers(state = {}, action) {
 
     case LOAD:
 //        console.log('start reducer load', 'state=', state, 'action=', action);
+      var executePanelSlice = state.executePanelSlice;
+      if (!state.executePanelSlice.stopOnFileLoad &&
+          action.payload.model.type !== state.model.type) {
+        executePanelSlice = {
+          ...state.executePanelSlice,
+          show: false,
+          executeName: undefined, // Clear execute name
+          prefix: '',
+          states: [],
+          step: 0,
+          steps: [],
+          stopOnFileLoad: true,
+          testGenerate: false,
+        };
+      }
       var result = Object.assign({}, state, {
         ...state,
+        executePanelSlice,
         model: {
           ...state.model,
           result: {
@@ -431,8 +447,24 @@ export default function reducers(state = {}, action) {
         module = require('../designtypes/' + action.payload.type + '/initialState_metric_units.js'); // Dynamically load initialState
       }
       module = JSON.parse(JSON.stringify(module)); // Make deep clone
+      var executePanelSlice = state.executePanelSlice;
+      if (!state.executePanelSlice.stopOnFileLoad &&
+          module.initialState.type !== state.model.type) {
+        executePanelSlice = {
+          ...state.executePanelSlice,
+          show: false,
+          executeName: undefined, // Clear execute name
+          prefix: '',
+          states: [],
+          step: 0,
+          steps: [],
+          stopOnFileLoad: true,
+          testGenerate: false,
+        };
+      }
       var result = Object.assign({}, state, {
         ...state,
+        executePanelSlice,
         name: action.payload.units === 'US' ? 'initialState' : 'initialState_metric_units',
         model: {
           ...state.model,
