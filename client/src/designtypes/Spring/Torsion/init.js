@@ -1,7 +1,8 @@
 import * as o from './offsets';
 import * as mo from '../mat_offsets';
 import * as eto from './endtypes_offsets';
-import { changeSymbolInput, changeSymbolHidden } from '../../../store/actions';
+import { changeSymbolInput, changeSymbolHidden, changeSymbolValue,  saveSymbolValue, restoreSymbolValue, changeSymbolFormat } from '../../../store/actions';
+import * as sto from './symbol_table_offsets';
 
 export function init(store, p, x) {
 //  console.log('init','store=',store,'p=',p,'x=',x);
@@ -14,9 +15,9 @@ export function init(store, p, x) {
   /*  Bring in material properties table  */
   if (x[o.Material_File] === "mat_metric.json") m_tab = require('../mat_metric.json');
   else m_tab = require('../mat_us.json');
-  //    console.log('m_tab=', m_tab);
+//  console.log('m_tab=', m_tab);
   var et_tab = require('./endtypes.json');
-  //    console.log('et_tab=', et_tab);
+//  console.log('et_tab=', et_tab);
 
 
   x[o.Spring_Type] = "Torsion";
@@ -25,9 +26,16 @@ export function init(store, p, x) {
   switch (x[o.Prop_Calc_Method]) {
     default:
     case 1:      // Prop_Calc_Method = 1 - Use values from material table
-      //     console.log('case 1 - Use values from material table');
+//      console.log('case 1 - Use values from material table');
+//      console.log('init','matState=',matState);
       /*   Refer to SETIDX.PLI, READMAT.PLI and TAB2D.PLI    */
       //
+      if (matState && matState.oldvalue !== undefined) {
+        store.dispatch(restoreSymbolValue('Material_Type'));
+        store.dispatch(changeSymbolFormat('Material_Type', 'table'));
+        x[o.Material_Type] = store.getState().model.symbol_table[sto.Material_Type].value;
+      }
+
       i = x[o.Material_Type];
       //    x[o.Material_Index] = i;
       //    console.log('Material_Index = x[o.Material_Type] =', x[o.Material_Type]);
@@ -153,6 +161,7 @@ export function init(store, p, x) {
       store.dispatch(changeSymbolHidden("%_Ten_Bnd_Endur", false));
       store.dispatch(changeSymbolHidden("%_Ten_Bnd_Stat", false));
 
+      store.dispatch(changeSymbolInput("Material_Type", true));
       store.dispatch(changeSymbolInput("Density", false));
       store.dispatch(changeSymbolInput("Elastic_Modulus", false));
       store.dispatch(changeSymbolInput("Hot_Factor_Kh", false));
@@ -164,20 +173,23 @@ export function init(store, p, x) {
       break;
 
     case 2:     // Prop_Calc_Method = 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur
-      //     console.log('case 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur');
+//      console.log('case 2 - Specify Tensile, %_Tensile_Stat & %_Tensile_Endur');
+//      console.log('init','matState=',matState);
       if (!matState || matState.oldvalue === undefined) {
         store.dispatch(saveSymbolValue('Material_Type'));
         store.dispatch(changeSymbolFormat('Material_Type', 'string'));
         store.dispatch(changeSymbolValue('Material_Type', 'User_Specified'));
+        x[o.Material_Type] = store.getState().model.symbol_table[sto.Material_Type].value;
       }
 
-      store.dispatch(changeSymbolHidden("Material_Type", true));
+      store.dispatch(changeSymbolHidden("Material_Type", false));
       store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", true));
       store.dispatch(changeSymbolHidden("Process", true));
       store.dispatch(changeSymbolHidden("Life_Category", true));
       store.dispatch(changeSymbolHidden("%_Ten_Bnd_Endur", false));
       store.dispatch(changeSymbolHidden("%_Ten_Bnd_Stat", false));
 
+      store.dispatch(changeSymbolInput("Material_Type", false));
       store.dispatch(changeSymbolInput("Density", true));
       store.dispatch(changeSymbolInput("Elastic_Modulus", true));
       store.dispatch(changeSymbolInput("Hot_Factor_Kh", true));
@@ -189,20 +201,23 @@ export function init(store, p, x) {
       break;
 
     case 3:     // Prop_Calc_Method = 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur
-      //     console.log('case 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur');
+//      console.log('case 3 - Specify Stress_Lim_Stat & Stress_Lim_Endur');
+//      console.log('init','matState=',matState);
       if (!matState || matState.oldvalue === undefined) {
         store.dispatch(saveSymbolValue('Material_Type'));
         store.dispatch(changeSymbolFormat('Material_Type', 'string'));
         store.dispatch(changeSymbolValue('Material_Type', 'User_Specified'));
+        x[o.Material_Type] = store.getState().model.symbol_table[sto.Material_Type].value;
       }
 
-      store.dispatch(changeSymbolHidden("Material_Type", true));
+      store.dispatch(changeSymbolHidden("Material_Type", false));
       store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", true));
       store.dispatch(changeSymbolHidden("Process", true));
       store.dispatch(changeSymbolHidden("Life_Category", true));
       store.dispatch(changeSymbolHidden("%_Ten_Bnd_Endur", true));
       store.dispatch(changeSymbolHidden("%_Ten_Bnd_Stat", true));
 
+      store.dispatch(changeSymbolInput("Material_Type", false));
       store.dispatch(changeSymbolInput("Density", true));
       store.dispatch(changeSymbolInput("Elastic_Modulus", true));
       store.dispatch(changeSymbolInput("Hot_Factor_Kh", true));
@@ -214,7 +229,7 @@ export function init(store, p, x) {
   }
 
   store.dispatch(changeSymbolHidden("Inactive_Coils", true)); // Always hide Inactive_Coils (pseudo-migration)
-  //    console.log('Exiting init p=',p,' x=',x);
+//  console.log('init p=',p,' x=',x);
   return x;
 
 }

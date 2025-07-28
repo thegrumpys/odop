@@ -15,9 +15,9 @@ export function init(store, p, x) {
   /*  Bring in material properties table  */
   if (x[o.Material_File] === "mat_metric.json") m_tab = require('../mat_metric.json');
   else m_tab = require('../mat_us.json');
-  //    console.log('m_tab=', m_tab);
+//  console.log('m_tab=', m_tab);
   var et_tab = require('./endtypes.json');
-  //    console.log('et_tab=', et_tab);
+//  console.log('et_tab=', et_tab);
 
 
   x[o.Spring_Type] = "Compression";
@@ -152,6 +152,7 @@ export function init(store, p, x) {
       store.dispatch(changeSymbolHidden("%_Tensile_Endur", false));
       store.dispatch(changeSymbolHidden("%_Tensile_Stat", false));
 
+      store.dispatch(changeSymbolInput("Material_Type", true));
       store.dispatch(changeSymbolInput("Density", false));
       store.dispatch(changeSymbolInput("Torsion_Modulus", false));
       store.dispatch(changeSymbolInput("Hot_Factor_Kh", false));
@@ -179,6 +180,7 @@ export function init(store, p, x) {
       store.dispatch(changeSymbolHidden("%_Tensile_Endur", false));
       store.dispatch(changeSymbolHidden("%_Tensile_Stat", false));
 
+      store.dispatch(changeSymbolInput("Material_Type", false));
       store.dispatch(changeSymbolInput("Density", true));
       store.dispatch(changeSymbolInput("Torsion_Modulus", true));
       store.dispatch(changeSymbolInput("Hot_Factor_Kh", true));
@@ -206,6 +208,7 @@ export function init(store, p, x) {
       store.dispatch(changeSymbolHidden("%_Tensile_Endur", true));
       store.dispatch(changeSymbolHidden("%_Tensile_Stat", true));
 
+      store.dispatch(changeSymbolInput("Material_Type", false));
       store.dispatch(changeSymbolInput("Density", true));
       store.dispatch(changeSymbolInput("Torsion_Modulus", true));
       store.dispatch(changeSymbolInput("Hot_Factor_Kh", true));
