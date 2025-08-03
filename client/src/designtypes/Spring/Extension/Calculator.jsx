@@ -15,6 +15,8 @@ export default function Calculator() {
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const base = useContext(ReportBaseContext);
 //  console.log('Calculator','base=',base);
+  const prop_calc_method = model_symbol_table[o.Prop_Calc_Method];
+//  console.log('Calculator','prop_calc_method=',prop_calc_method);
 
   return (
     <Container>
@@ -106,7 +108,8 @@ export default function Calculator() {
               <SymbolUnits element={model_symbol_table[o.L_Stroke]} index={o.L_Stroke} className="text-start" />
               <td> &nbsp; &nbsp; </td>
               <SymbolName element={model_symbol_table[o.Wire_Dia]} index={o.Wire_Dia} />
-              <SymbolValueWireDia element={model_symbol_table[o.Wire_Dia]} index={o.Wire_Dia} />
+              {prop_calc_method.value ===  1 && <SymbolValueWireDia element={model_symbol_table[o.Wire_Dia]} index={o.Wire_Dia} />}
+              {prop_calc_method.value !==  1 && <SymbolValue element={model_symbol_table[o.Wire_Dia]} index={o.Wire_Dia} />}
               <SymbolUnits element={model_symbol_table[o.Wire_Dia]} index={o.Wire_Dia} className="text-start" />
             </tr>
             <tr>

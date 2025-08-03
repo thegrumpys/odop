@@ -2,11 +2,17 @@ import * as o from './symbol_table_offsets';
 import * as mo from '../mat_offsets';
 import { toODOPPrecision } from '../../../toODOPPrecision';
 
-export function getSizeTypes() {
-    var result = [
-        'Wire_Dia', // Default
-        'OD_Free'
-    ];
+export function getSizeTypes(st) {
+    const prop_calc_method = st[o.Prop_Calc_Method];
+//    console.log('getSizeTypes','prop_calc_method=',prop_calc_method);
+    if (prop_calc_method.value === 1) {
+      var result = [
+          'Wire_Dia', // Default
+          'OD_Free'
+      ];
+    } else {
+      var result = [];
+    }
 //    console.log('getSizeTypes result=',result);
     return result;
 }
