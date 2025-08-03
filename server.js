@@ -669,7 +669,8 @@ app.post('/api/v1/register', async (req, res) => {
 
     // Create new 'inactive' user with email and password, and confirmation token
     const hashed = await hashPassword(password);
-    await db.execute('INSERT INTO user (email, password, first_name, last_name, role, token, status) VALUES (?, ?, ?, ?, ?, ?, ?)', [email, hashed, first_name, last_name, 'user', null, 'inactive']);
+    const userToken = generateUserToken();
+    await db.execute('INSERT INTO user (email, password, first_name, last_name, role, token, status) VALUES (?, ?, ?, ?, ?, ?, ?)', [email, hashed, first_name, last_name, 'user', userToken, 'inactive']);
     await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [confirmationToken, email, 'confirm', expiresAt]);
 
     // Send confirmation email
@@ -700,8 +701,6 @@ app.get('/api/v1/confirm', async (req, res) => {
 
     // If token is null update with a new one, change the user startus to 'active', and delete the token
     const email = rows[0].email;
-    const userToken = generateUserToken();
-    await db.execute('UPDATE user SET token = ? WHERE email = ? AND token IS NULL', [userToken, email]);
     await db.execute('UPDATE user SET status = ? WHERE email = ?', ['active', email]);
     await db.execute('DELETE FROM token WHERE token = ?', [token]);
     sendMessage(res, 'Registration confirmed.', 'info', null, 200);
