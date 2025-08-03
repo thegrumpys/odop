@@ -839,6 +839,26 @@ app.post('/api/v1/reset-password', async (req, res) => {
 });
 
 //==================================================================================================
+// HAS-RESET-TOKEN
+app.get('/api/v1/has-reset-token', async (req, res) => {
+  const { token } = req.query;
+//  console.log('token=',token);
+  try {
+    // Does a matching reset token exist
+    const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ? AND expires_at > NOW()', [token, 'reset']);
+//    console.log('/api/v1/confirm','rows=',rows,'rows.length=',rows.length,'!rows.length=',!rows.length);
+    if (!rows.length) {
+      sendMessage(res, 'No outstanding password change exists or has expired.', 'error', null, 401);
+      return;
+    }
+
+    sendMessage(res, {}, '', null, 200);
+  } catch (err) {
+    sendMessage(res, err, 'error', null, 500);
+  }
+});
+
+//==================================================================================================
 // CHANGE PASSWORD
 app.patch('/api/v1/change-password', async (req, res) => {
   const { token, email, password } = req.body;
