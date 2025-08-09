@@ -386,7 +386,6 @@ export function migrate(design) {
         if (design.result.objective_value === null) {
             design.result.objective_value = 0.0;
         }
-
         design.system_controls.enable_auto_search = 1; // Default to auto search on
         if (design.symbol_table[30].value !== 1) { // If Prop_Calc_Method is not 1 (either 2 or 3)
             design.symbol_table[31].oldvalue = design.symbol_table[31].value; // Save old Material_Type if Prop_Calc_Method was ever set back to 1
@@ -394,14 +393,13 @@ export function migrate(design) {
             design.symbol_table[31].value = 'User_Specified'; // Set Material_Type to User_Specified
         }
         migrated_design.version = '13';
-    case '13':
 
-    //============BLOCK OF CODE TO REPLICATE============
-    //     console.log('Convert from N to N+1');
-    //     Write the migration code here
-    //     migrated_design.version = 'N+1';
-    // case 'N+1':
-    //==================================================
+        //============BLOCK OF CODE TO REPLICATE============
+        // case 'N':
+        //     // console.log('Convert from N to N+1');
+        //     Write the migration code here
+        //     migrated_design.version = 'N+1';
+        //==================================================
 
         break; // Do not copy this break
     default: // Unknown
