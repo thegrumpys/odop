@@ -158,7 +158,7 @@ async function resendEmail(req, res) {
       }
       await db.execute('DELETE FROM token WHERE email = ? AND type = ?', [email, 'confirm']);
       const token = generateToken();
-      const local = new Date(Date.now() + 60 * 60 * 1000);
+      const local = new Date(Date.now() + 24 * 60 * 60 * 1000); // UTC + 24 hour
       const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000);
       await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [token, email, 'confirm', expiresAt]);
       const { first_name, last_name } = rows[0];
@@ -172,7 +172,7 @@ async function resendEmail(req, res) {
       }
       const user = rows[0];
       const token = generateToken();
-      const local = new Date(Date.now() + 60 * 60 * 1000);
+      const local = new Date(Date.now() + 24 * 60 * 60 * 1000); // UTC + 24 hour
       const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000);
       await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [token, email, 'reset', expiresAt]);
       await sendResetEmail(email, user.first_name, user.last_name, token);
@@ -654,7 +654,7 @@ app.post('/api/v1/register', async (req, res) => {
   }
 
   const confirmationToken = generateToken();
-  const local = new Date(Date.now() + 60 * 60 * 1000); // UTC + 1 hour
+  const local = new Date(Date.now() + 24 * 60 * 60 * 1000); // UTC + 24 hour
   const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000); // Fudge
 //  console.log('/register','expiresAt=',expiresAt);
 
@@ -818,7 +818,7 @@ app.post('/api/v1/reset-password', async (req, res) => {
     const user = rows[0];
 //    console.log('/api/v1/reset-password','user=',user);
     const resetToken = generateToken();
-    const local = new Date(Date.now() + 60 * 60 * 1000); // UTC + 1 hour
+    const local = new Date(Date.now() + 24 * 60 * 60 * 1000); // UTC + 24 hour
     const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000); // Fudge
 //  console.log('/api/v1/reset-password','expiresAt=',expiresAt);
 
