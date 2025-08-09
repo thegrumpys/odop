@@ -93,7 +93,7 @@ export default function RegisterForm() {
                   <td className="text-center"><MessageAlert error={error} /></td>
                 </tr>
                 <tr>
-                  <td className="px-5 text-center">Create an <a href="/docs/About/userAccounts.html" target="_blank">ODOP user account</a> with email and password to save designs to the online library.</td>
+                  <td className="px-5 text-center">An <a href="/docs/About/userAccounts.html" target="_blank">ODOP user account</a> allows you to save designs to the online library.</td>
                 </tr>
                 <tr>
                   <td className="px-5 text-start"><Form.Control type="email" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)} autoComplete="username" /></td>
