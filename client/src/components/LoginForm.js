@@ -129,13 +129,7 @@ export default function LoginForm() {
                   <td className="text-start px-5"><Link to="/resend-change-password">Resend Reset Password Email</Link></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5"><a href="/docs/About/userAccounts.html" target="_blank">About ODOP user accounts</a></td>
-                </tr>
-                <tr>
                   <td className="text-start px-5"><a href="https://thegrumpys.github.io/odop/About/messageOfTheDay.html" target="_blank">ODOP Message Of The Day</a></td>
-                </tr>
-                <tr>
-                  <td className="text-start px-5"><a href="/docs/About" target="_blank">Learn about ODOP</a></td>
                 </tr>
               </tbody>
             </Table>
