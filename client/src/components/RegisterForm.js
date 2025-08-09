@@ -121,7 +121,7 @@ export default function RegisterForm() {
                   <td className="text-start px-5 pt-3"><Link to="/reset-password">Change Password?</Link></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5"><Link to="/login">Sign in</Link></td>
+                  <td className="text-center px-5"><Link to="/login">Sign in</Link></td>
                 </tr>
               </tbody>
             </Table>
