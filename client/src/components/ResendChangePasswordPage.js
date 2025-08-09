@@ -45,7 +45,7 @@ export default function ResendChangePasswordPage() {
                   <td className="text-start px-5"><p>A password reset email has been sent to {email}. If the message does not appear promptly, check your Junk/Spam folder.</p></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><Link to="/login">Sign in</Link></td>
+                  <td className="text-center"><Button onClick={() => navigate("/login")}>Sign in</Button></td>
                 </tr>
                 <tr>
                   <td className="text-center"><Link to="/">Home</Link></td>
