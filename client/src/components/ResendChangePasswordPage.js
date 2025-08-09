@@ -45,10 +45,10 @@ export default function ResendChangePasswordPage() {
                   <td className="text-start px-5"><p>A password reset email has been sent to {email}. If the message does not appear promptly, check your Junk/Spam folder.</p></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><Link to="/login">Back to Sign in</Link></td>
+                  <td className="text-center"><Link to="/login">Sign in</Link></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><Link to="/">Back to Home</Link></td>
+                  <td className="text-center"><Link to="/">Home</Link></td>
                 </tr>
               </tbody>
             </Table>
@@ -83,7 +83,7 @@ export default function ResendChangePasswordPage() {
                   <td className="text-center"><Button type="submit">Resend Email</Button></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5"><Link to="/login">Back to Sign in</Link></td>
+                  <td className="text-start px-5"><Link to="/login">Sign in</Link></td>
                 </tr>
               </tbody>
             </Table>
