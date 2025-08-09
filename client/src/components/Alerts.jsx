@@ -134,7 +134,8 @@ export const checks = (store) => {
         name: element.name + ' MIN',
         message: 'INVALID CONSTRAINT VALUE: ' + element.name + ' MIN  (' + toODOPPrecision(element.cmin) + ')' + relational + validmin,
         severity: ERR,
-        help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)'
+        help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)',
+        valueName: 'cmin'
       }));
     } else if (element.type === 'equationset' && element.format === undefined && typeof element.cmin === 'number' && (element.lmin & CONSTRAINED) && element.cmin > element.validmax) {
       let validmax;
@@ -149,7 +150,8 @@ export const checks = (store) => {
         name: element.name + ' MIN',
         message: 'INVALID CONSTRAINT VALUE: ' + element.name + ' MIN  (' + toODOPPrecision(element.cmin) + ')' + relational + validmax,
         severity: ERR,
-        help_url: '[Help](/docs/Help/alerts.html#Constraint_Above)'
+        help_url: '[Help](/docs/Help/alerts.html#Constraint_Above)',
+        valueName: 'cmin'
       }));
     }
     if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax < element.validmin) {
@@ -165,7 +167,8 @@ export const checks = (store) => {
         name: element.name + ' MAX',
         message: 'INVALID CONSTRAINT VALUE: ' + element.name + ' MAX  (' + toODOPPrecision(element.cmax) + ')' + relational + validmin,
         severity: ERR,
-        help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)'
+        help_url: '[Help](/docs/Help/alerts.html#Constraint_Below)',
+        valueName: 'cmax'
       }));
     } else if (element.type === 'equationset' && element.format === undefined && typeof element.cmax === 'number' && (element.lmax & CONSTRAINED) && element.cmax > element.validmax) {
       let validmax;
@@ -180,7 +183,8 @@ export const checks = (store) => {
         name: element.name + ' MAX',
         message: 'INVALID CONSTRAINT VALUE: ' + element.name + ' MAX  (' + toODOPPrecision(element.cmax) + ')' + relational + validmax,
         severity: ERR,
-        help_url: '[Help](/docs/Help/alerts.html#Constraint_Above)'
+        help_url: '[Help](/docs/Help/alerts.html#Constraint_Above)',
+        valueName: 'cmax'
       }));
     }
 
@@ -191,7 +195,8 @@ export const checks = (store) => {
         name: element.name + ' MIN',
         message: 'FIX VIOLATION: ' + element.name + ' (' + toODOPPrecision(element.value) + ') Value < ' + toODOPPrecision(element.cmin),
         severity: NOTICE,
-        help_url: '[Help](/docs/Help/alerts.html#Fix_Violation)'
+        help_url: '[Help](/docs/Help/alerts.html#Fix_Violation)',
+        valueName: 'cmin'
       }));
     } else if (element.type === "equationset" && (element.lmin & CONSTRAINED) && element.vmin > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin) {
       store.dispatch(addAlert({
@@ -199,7 +204,8 @@ export const checks = (store) => {
         name: element.name + ' MIN',
         message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + toODOPPrecision(element.value) + ') Value < ' + toODOPPrecision(element.cmin),
         severity: NOTICE,
-        help_url: '[Help](/docs/Help/alerts.html#MIN_Violation)'
+        help_url: '[Help](/docs/Help/alerts.html#MIN_Violation)',
+        valueName: 'cmin'
       }));
     }
     if (element.type === "equationset" && !element.input && ((element.lmax & FIXED) && element.vmax > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin)) {
@@ -208,7 +214,8 @@ export const checks = (store) => {
         name: element.name + ' MAX',
         message: 'FIX VIOLATION: ' + element.name + ' (' + toODOPPrecision(element.value) + ') Value > ' + toODOPPrecision(element.cmax),
         severity: NOTICE,
-        help_url: '[Help](/docs/Help/alerts.html#Fix_Violation)'
+        help_url: '[Help](/docs/Help/alerts.html#Fix_Violation)',
+        valueName: 'cmax'
       }));
     } else if (element.type === "equationset" && (element.lmax & CONSTRAINED) && element.vmax > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin) {
       store.dispatch(addAlert({
@@ -216,7 +223,8 @@ export const checks = (store) => {
         name: element.name + ' MAX',
         message: 'CONSTRAINT VIOLATION: ' + element.name + ' (' + toODOPPrecision(element.value) + ') Value > ' + toODOPPrecision(element.cmax),
         severity: NOTICE,
-        help_url: '[Help](/docs/Help/alerts.html#MAX_Violation)'
+        help_url: '[Help](/docs/Help/alerts.html#MAX_Violation)',
+        valueName: 'cmax'
       }));
     }
     if (element.type === "equationset" && (element.lmin & CONSTRAINED) && (element.lmax & CONSTRAINED) && element.cmin > element.cmax) {
@@ -225,14 +233,16 @@ export const checks = (store) => {
         name: element.name + ' MIN',
         message: 'INVERTED CONSTRAINT RANGE: from ' + toODOPPrecision(element.cmin) + ' to ' + toODOPPrecision(element.cmax) + ' for ' + element.name + ' (' + toODOPPrecision(element.value) + ')',
         severity: ERR,
-        help_url: '[Help](/docs/Help/alerts.html#Constraint_Inconsistency)'
+        help_url: '[Help](/docs/Help/alerts.html#Constraint_Inconsistency)',
+        valueName: 'cmin'
       }));
       store.dispatch(addAlert({
         element: element,
         name: element.name + ' MAX',
         message: 'INVERTED CONSTRAINT RANGE: from ' + toODOPPrecision(element.cmin) + ' to ' + toODOPPrecision(element.cmax) + ' for ' + element.name + ' (' + toODOPPrecision(element.value) + ')',
         severity: ERR,
-        duplicate: true
+        duplicate: true,
+        valueName: 'cmax'
       }));
     }
 
@@ -244,7 +254,8 @@ export const checks = (store) => {
           name: element.name + ' MIN',
           message: (element.lmin & FDCL ? 'FDCL: ' : 'Non-FDCL: ') + element.name + ' MIN is currently set to the value of ' + (element.lmin & FDCL ? ('the ' + element.cminchoices[element.cminchoice] + ' variable') : toODOPPrecision(element.cmin)),
           severity: INFO,
-          help_url: '[Help](/docs/Help/alerts.html#FDCL)'
+          help_url: '[Help](/docs/Help/alerts.html#FDCL)',
+          valueName: 'cmin'
         }));
       }
     }
@@ -255,7 +266,8 @@ export const checks = (store) => {
           name: element.name + ' MAX',
           message: (element.lmax & FDCL ? 'FDCL: ' : 'Non-FDCL: ') + element.name + ' MAX is currently set to the value of ' + (element.lmax & FDCL ? ('the ' + element.cmaxchoices[element.cmaxchoice] + ' variable') : toODOPPrecision(element.cmax)),
           severity: INFO,
-          help_url: '[Help](/docs/Help/alerts.html#FDCL)'
+          help_url: '[Help](/docs/Help/alerts.html#FDCL)',
+          valueName: 'cmax'
         }));
       }
     }
