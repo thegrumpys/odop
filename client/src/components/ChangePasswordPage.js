@@ -59,6 +59,7 @@ export default function ChangePasswordPage() {
           setError(res.data.error);
           setStatus('success')
           logUsage('event', 'ChangePasswordPage', { event_label: 'Success: ' + JSON.stringify(res.data.error)});
+          window.close();
         })
         .catch((err) => {
 //          console.log('ChangePasswordPage.handleSubmit /change-password', 'err=', err);
@@ -95,7 +96,7 @@ export default function ChangePasswordPage() {
                   <td className="px-5 text-start"><p>You can now sign in with your new password.</p></td>
                 </tr>
                 <tr>
-                <td className="text-center p-3"><Button onClick={onclick="window.close()"}>Close Tab</Button></td>
+                <td className="text-center p-3"><Button onClick={() => {window.close()}}>Close Tab</Button></td>
                 </tr>
               </tbody>
             </Table>
@@ -130,7 +131,7 @@ export default function ChangePasswordPage() {
                   <td className="text-start px-5"><Link to="/resend-change-password">Resend Change Password Email</Link></td>
                 </tr>
                 <tr>
-                <td className="text-center p-3"><Button onClick={onclick="window.close()"}>Close Tab</Button></td>
+                <td className="text-center p-3"><Button onClick={() => {window.close()}}>Close Tab</Button></td>
                 </tr>
               </tbody>
             </Table>
@@ -174,10 +175,7 @@ export default function ChangePasswordPage() {
                   <td className="px-5 text-start">New Password<br /><Form.Control type="password" value={password} required onChange={(e) => setPassword(e.target.value)} autoComplete="new_password" /></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><Button type="submit">Reset Password</Button></td>
-                </tr>
-                <tr>
-                  <td className="text-start px-5"><Link to="/login">Back to Sign in</Link></td>
+                  <td className="text-center"><Button type="submit">Reset Password and Close Tab</Button></td>
                 </tr>
               </tbody>
             </Table>
