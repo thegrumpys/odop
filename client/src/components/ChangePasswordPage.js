@@ -131,7 +131,7 @@ export default function ChangePasswordPage() {
                   <td className="text-center px-5"><Button onClick={() => navigate("/resend-change-password")}>Resend Change Password Email</Button></td>
                 </tr>
                 <tr>
-                <td className="text-center p-3"><a href={() => {window.close()}}>Close Tab</a></td>
+                <td className="text-center p-3"><a href="javascript:window.close();">Close Tab</a></td>
                 </tr>
               </tbody>
             </Table>
