@@ -125,11 +125,14 @@ It is necessary to be logged into a user account.
 If not logged in to a user account, a button providing a Sign In opportunity will appear.  
 
 In order to support an ability to export designs into files in a local file system, 
-when creating names, the following characters < > : " / \ | ? * are replaced with an underscore.
+when creating names, the characters  
+<b> < > : " / \ | ? * </b>  
+are replaced with an underscore.
 
 See also:   
  - [Default Designs](defaultDesigns.html)   
- - [User Accounts](/docs/About/userAccounts.html)   
+ - [User Accounts](/docs/About/userAccounts.html)  
+ - [Data Retention Policy](/docs/About/Legal/dataRetentionPolicy.html)  
 
 ___
 

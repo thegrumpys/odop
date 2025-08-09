@@ -13,6 +13,7 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 * [Restrictions](About/Legal/Restrictions.html)
 * [Terms of Service](About/Legal/TermsOfService.html)
 * [Privacy Statement](About/Legal/PrivacyStatement.html)
+* [Data Retention Policy](About/Legal/dataRetentionPolicy.html)
 * [User Accounts](About/userAccounts.html)
 * [Contact Us](About/ContactUs.html)
 * [Help topics](Help/index.html)   
@@ -50,7 +51,6 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 * [Early Design Decisions](design/EarlyDesignDecisions.html)
 * [URL syntax](design/URLsyntax.html)  
 * [Documentation structure](design/Docs.html)
-* [Okta Registration Flow](design/OktaRegistrationFlow.html)   
 * [ODOP Development Guidelines](design/Guidelines.html) 
 * [Ideas for a web page menu structure](design/menu.html)
 * [Ideas regarding the web user-interface for FIX](design/WebUI_for_Fix.html)
@@ -69,6 +69,7 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 
 <!--- The following topics of this section are already implemented or otherwise no longer relevant.  They are maintained here to keep the thought history.  -->
 <!---  
+* [Okta Registration Flow](design/OktaRegistrationFlow.html)   
 * [Proposed names for the (problem independent) system](design/SysName.html)
 * [Proposed names for quantities previously called "constants"](design/PreviouslyConstants.html) 
 * [Idea for a simple showcase problem](design/GeometricSolidsProblem.html)
