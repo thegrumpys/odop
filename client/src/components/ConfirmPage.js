@@ -61,7 +61,7 @@ export default function ConfirmPage() {
                   <td className="text-start px-5"><p>Your account is now active. You can sign in.</p></td>
                 </tr>
                 <tr>
-                  <td className="text-center p-3"><Button onClick={() => navigate('/login')}>Go to Sign in</Button></td>
+                  <td className="text-center p-3"><Button onClick={onclick="window.close()"}>Close Tab</Button></td>
                 </tr>
               </tbody>
             </Table>
@@ -94,7 +94,7 @@ export default function ConfirmPage() {
                   <td className="text-start px-5"><Link to="/resend-confirmation">Resend Confirmation Email</Link></td>
                 </tr>
                 <tr>
-                  <td className="text-center p-3"><Button onClick={() => navigate('/')}>Go to Home</Button></td>
+                  <td className="text-center p-3"><Button onClick={onclick="window.close()"}>Close Tab</Button></td>
                 </tr>
               </tbody>
             </Table>
