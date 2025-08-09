@@ -326,6 +326,13 @@ export function migrate(design) {
         design.system_controls.enable_auto_search = 1; // Default to auto search on
         migrated_design.version = '10';
     case '10':
+        if (design.symbol_table[30].value !== 1) { // If Prop_Calc_Method is not 1 (either 2 or 3)
+            design.symbol_table[31].oldvalue = design.symbol_table[31].value; // Save old Material_Type if Prop_Calc_Method was ever set back to 1
+            delete design.symbol_table[31].format; // Delete format: 'table'
+            design.symbol_table[31].value = 'User_Specified'; // Set Material_Type to User_Specified
+        }
+        migrated_design.version = '11';
+    case '11':
 
     //============BLOCK OF CODE TO REPLICATE============
     //     console.log('Convert from N to N+1');

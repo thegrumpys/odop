@@ -1,4 +1,4 @@
-export function getSizeTypes() {
+export function getSizeTypes(st) {
     var result = [];
 //    console.log('getSizeTypes result=',result);
     return result;

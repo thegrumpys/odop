@@ -341,6 +341,11 @@ export function migrate(design) {
           design.symbol_table[38].value -= 4;
         }
         design.system_controls.enable_auto_search = 1; // Default to auto search on
+        if (design.symbol_table[33].value !== 1) { // If Prop_Calc_Method is not 1 (either 2 or 3)
+            design.symbol_table[34].oldvalue = design.symbol_table[34].value; // Save old Material_Type if Prop_Calc_Method was ever set back to 1
+            delete design.symbol_table[34].format; // Delete format: 'table'
+            design.symbol_table[34].value = 'User_Specified'; // Set Material_Type to User_Specified
+        }
         migrated_design.version = '10';
     case '10':
 

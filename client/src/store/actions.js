@@ -58,10 +58,13 @@ import {
   RESET_SYMBOL_FLAG,
   CHANGE_SYMBOL_INPUT,
   CHANGE_SYMBOL_HIDDEN,
+  CHANGE_SYMBOL_FORMAT,
 
   CHANGE_INPUT_SYMBOL_VALUES,
   SAVE_INPUT_SYMBOL_VALUES,
   RESTORE_INPUT_SYMBOL_VALUES,
+  SAVE_SYMBOL_VALUE,
+  RESTORE_SYMBOL_VALUE,
 
   CHANGE_OUTPUT_SYMBOL_VALUES,
   SAVE_OUTPUT_SYMBOL_CONSTRAINTS,
@@ -454,6 +457,16 @@ export function changeSymbolHidden(name, value) {
   }
 }
 
+export function changeSymbolFormat(name, value) {
+  return {
+    type: CHANGE_SYMBOL_FORMAT,
+    payload: {
+      name,
+      value
+    }
+  }
+}
+
 export function changeInputSymbolValues(values, merit) {
   return {
     type: CHANGE_INPUT_SYMBOL_VALUES,
@@ -475,6 +488,24 @@ export function restoreInputSymbolValues(merit) {
     type: RESTORE_INPUT_SYMBOL_VALUES,
     payload: {
       merit
+    }
+  }
+}
+
+export function saveSymbolValue(name) {
+  return {
+    type: SAVE_SYMBOL_VALUE,
+    payload: {
+      name
+    }
+  }
+}
+
+export function restoreSymbolValue(name) {
+  return {
+    type: RESTORE_SYMBOL_VALUE,
+    payload: {
+      name
     }
   }
 }

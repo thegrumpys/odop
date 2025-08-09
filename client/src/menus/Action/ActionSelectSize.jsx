@@ -22,23 +22,23 @@ export default function ActionSelectSize() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    //    console.log('ActionSelectSize - Mounted','model_type=',model_type);
+//    console.log('ActionSelectSize - Mounted','model_type=',model_type);
     updateSizeTypes();
     return () => { };
-  }, [model_type]);
+  }, [model_type, model_symbol_table]);
 
   const updateSizeTypes = () => {
-    //        console.log('ActionSelectSize updateSizeTypes');
+//    console.log('ActionSelectSize updateSizeTypes');
     var { getSizeTypes, getSizeEntries } = require('../../designtypes/' + model_type + '/size.js'); // Dynamically load getSizeTypes & getSizeEntries
-    var localTypes = getSizeTypes();
-    var localType;
-    if (localTypes.length > 0)
-      localType = localTypes[0]; // Default to first type
     // Loop to create st from model_symbol_table
     var st = [];
     model_symbol_table.forEach((element) => {
       st.push(element);
     });
+    var localTypes = getSizeTypes(st);
+    var localType;
+    if (localTypes.length > 0)
+      localType = localTypes[0]; // Default to first type
     var localSizes = getSizeEntries(localType, st);
     var localSize;
     if (localSizes.length === 0) {

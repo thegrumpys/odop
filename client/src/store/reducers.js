@@ -60,10 +60,13 @@ import {
   RESET_SYMBOL_FLAG,
   CHANGE_SYMBOL_INPUT,
   CHANGE_SYMBOL_HIDDEN,
+  CHANGE_SYMBOL_FORMAT,
 
   CHANGE_INPUT_SYMBOL_VALUES,
   SAVE_INPUT_SYMBOL_VALUES,
   RESTORE_INPUT_SYMBOL_VALUES,
+  SAVE_SYMBOL_VALUE,
+  RESTORE_SYMBOL_VALUE,
 
   CHANGE_OUTPUT_SYMBOL_VALUES,
 
@@ -543,6 +546,7 @@ export default function reducers(state = {}, action) {
               var inner_result = Object.assign({}, element, {
                 value: action.payload.value
               });
+//              console.log('CHANGE_SYMBOL_VALUE', 'inner_result=', inner_result);
               return inner_result;
             } else {
               return element;
@@ -912,6 +916,36 @@ export default function reducers(state = {}, action) {
       });
       return result;
 
+  case CHANGE_SYMBOL_FORMAT:
+      var result = Object.assign({}, state, {
+        ...state,
+        model: {
+          ...state.model,
+          result: {
+            ...state.model.result,
+            termination_condition: ''
+          },
+          symbol_table: state.model.symbol_table.map((element) => {
+            if (element.name === action.payload.name) {
+              if (action.payload.value !== 'table') {
+                var { format, ...rest } = element;
+//                console.log('CHANGE_SYMBOL_FORMAT','rest=',rest);
+                return rest;
+              } else {
+                var inner_result = Object.assign({}, element, {
+                  format: 'table'
+                });
+//                console.log('CHANGE_SYMBOL_FORMAT','inner_result=',inner_result);
+                return inner_result;
+              }
+            }
+            return element;
+          }),
+        }
+      });
+//      console.log('CHANGE_SYMBOL_FORMAT','action=',action,'result=',result);
+      return result;
+
 // INPUT SYMBOL
 
     case CHANGE_INPUT_SYMBOL_VALUES:
@@ -1001,6 +1035,53 @@ export default function reducers(state = {}, action) {
           }),
         }
       });
+      return result;
+
+   case SAVE_SYMBOL_VALUE:
+      var result = Object.assign({}, state, {
+        ...state,
+        model: {
+          ...state.model,
+          result: {
+            ...state.model.result,
+            termination_condition: ''
+          },
+          symbol_table: state.model.symbol_table.map((element) => {
+            if (element.name === action.payload.name) {
+              var inner_result = Object.assign({}, element, { oldvalue: element.value });
+//              console.log('SAVE_SYMBOL_VALUE','inner_result=',inner_result);
+              return inner_result;
+            } else {
+              return element;
+            }
+          }),
+        }
+      });
+//      console.log('SAVE_SYMBOL_VALUE','action=',action,'result=',result);
+      return result;
+
+   case RESTORE_SYMBOL_VALUE:
+      var result = Object.assign({}, state, {
+        ...state,
+        model: {
+          ...state.model,
+          result: {
+            ...state.model.result,
+            termination_condition: ''
+          },
+          symbol_table: state.model.symbol_table.map((element) => {
+            if (element.name === action.payload.name && element.oldvalue !== undefined) {
+              var inner_result = Object.assign({}, element, { value: element.oldvalue });
+              delete inner_result.oldvalue;
+//              console.log('RESTORE_SYMBOL_VALUE','inner_result=',inner_result);
+              return inner_result;
+            } else {
+              return element;
+            }
+          }),
+        }
+      });
+//      console.log('RESTORE_SYMBOL_VALUE','action=',action,'result=',result);
       return result;
 
 // OUTPUT SYMBOL
