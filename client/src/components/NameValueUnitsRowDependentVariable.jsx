@@ -39,7 +39,8 @@ export default function NameValueUnitsRowDependentVariable({ element, index, onS
   //    console.log('In NameValueUnitsRowDependentVariable.onBlurFixLocal event.target.value=', event.target.value);
       var state = store.getState();
 //      console.log('In NameValueUnitsRowDependentVariable.onBlurLocal','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
-      if (state.model.system_controls.enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && state.model.result.objective_value >= state.model.system_controls.objmin) {
+      var targetId = event.relatedTarget ? event.relatedTarget.id : null;
+      if (state.model.system_controls.enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && state.model.result.objective_value >= state.model.system_controls.objmin && targetId !== 'searchButton' && targetId !== 'seekButton') {
         dispatch(search('Auto'));
       }
       if (typeof onBlurFix === "function") onBlurFix(event);

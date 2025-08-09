@@ -235,7 +235,7 @@ export default function ResultTable() {
                     <OverlayTrigger placement="bottom" overlay={<Tooltip><b>Seek</b> (optimize) if feasible.<br /><b>Search</b> (solve) if not feasible.<br />Same functions as Action menu.</Tooltip>}>
                       <b className="pe-5">Action</b>
                     </OverlayTrigger>
-                    <Button variant="primary" onClick={onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>&nbsp;
+                    <Button id="searchButton" variant="primary" onClick={onSearchRequest} disabled={!display_search_button}><b>Search</b> (solve)</Button>&nbsp;
                     <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
                       <p><b>Search</b> alters the values of any free independent variables to find a design that
                         satisfies all constraints and each fixed dependent
@@ -255,7 +255,7 @@ export default function ResultTable() {
                     <OverlayTrigger placement="bottom" overlay={<Tooltip><b>Seek</b> (optimize) if feasible.<br /><b>Search</b> (solve) if not feasible.<br />Same functions as Action menu.</Tooltip>}>
                       <b className="pe-5">Action</b>
                     </OverlayTrigger>
-                    <Button variant="primary" onClick={onSeekRequest} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
+                    <Button id="seekButton" variant="primary" onClick={onSeekRequest} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
                     <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
                       <p>If one feasible design exists there are likely many more available, each with varying advantages / disadvantages.
                         Seek provides a “goal seeking” capability to optimize your design on the parameter that you specify.</p>

@@ -44,7 +44,8 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
 //    console.log('In ConstraintsMinRowIndependentVariable.onBlurFlagMinConstrained','event.target.value=', event.target.value);
     var state = store.getState();
 //    console.log('In ConstraintsMinRowIndependentVariable.onBlurFlagMinConstrained','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'constrainedFlagChanged=',constrainedFlag !== (element.lmin & CONSTRAINED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
-    if (state.model.system_controls.enable_auto_search && constrainedFlag !== (element.lmin & CONSTRAINED) && state.model.result.objective_value >= state.model.system_controls.objmin) {
+    var targetId = event.relatedTarget ? event.relatedTarget.id : null;
+    if (state.model.system_controls.enable_auto_search && constrainedFlag !== (element.lmin & CONSTRAINED) && state.model.result.objective_value >= state.model.system_controls.objmin && targetId !== 'searchButton' && targetId !== 'seekButton') {
       dispatch(search('Auto'));
     }
     if (typeof onBlurFlag === "function") onBlurFlag(event);
@@ -88,7 +89,8 @@ export default function ConstraintsMinRowIndependentVariable({ element, index, o
 //    console.log('In ConstraintsMinRowIndependentVariable.onBlurMinConstraint event.target.value=', event.target.value);
     var state = store.getState();
 //    console.log('In ConstraintsMinRowIndependentVariable.onBlurMinConstraint','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'valueChanged=',value !== element.cmin,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
-    if (state.model.system_controls.enable_auto_search && value !== element.cmin && state.model.result.objective_value >= state.model.system_controls.objmin) {
+    var targetId = event.relatedTarget ? event.relatedTarget.id : null;
+    if (state.model.system_controls.enable_auto_search && value !== element.cmin && state.model.result.objective_value >= state.model.system_controls.objmin && targetId !== 'searchButton' && targetId !== 'seekButton') {
       dispatch(search('Auto'));
     }
     if (typeof onBlur === "function") onBlur(event);
