@@ -663,7 +663,7 @@ app.post('/api/v1/register', async (req, res) => {
     const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
 //    console.log('rows=',rows);
     if (rows.length) {
-      sendMessage(res, 'Duplicate email.', 'error', null, 409);
+      sendMessage(res, 'Email already exists.', 'error', null, 409);
       return;
     }
 
@@ -1003,7 +1003,7 @@ app.post('/api/v1/users', authenticationRequired, adminRequired, async (req, res
     }
     const [rows] = await db.execute('SELECT id FROM user WHERE email = ?', [email]);
     if (rows.length) {
-      sendMessage(res, 'Duplicate email.', 'error', null, 409);
+      sendMessage(res, 'Email already exists.', 'error', null, 409);
       return;
     }
     const hashed = await hashPassword(password);

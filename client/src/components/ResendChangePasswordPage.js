@@ -84,7 +84,7 @@ export default function ResendChangePasswordPage() {
                   <td className="text-center"><Button type="submit">Resend Email</Button></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5"><Link to="/login">Sign in</Link></td>
+                  <td className="text-center px-5"><Link to="/login">Sign in</Link></td>
                 </tr>
               </tbody>
             </Table>
