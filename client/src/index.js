@@ -8,6 +8,7 @@ import './odop.css';
 import * as ReactDOMClient from "react-dom/client";
 import { Beforeunload } from 'react-beforeunload';
 import { logUsage } from './logUsage';
+import { AuthProvider } from './components/AuthProvider'
 
 const container = document.getElementById('root');
 const root = ReactDOMClient.createRoot(container);
@@ -18,6 +19,8 @@ root.render(
     }} />
     <Spinner />
     <Message />
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </Provider>
 );

@@ -95,6 +95,8 @@ export default function AdminUserManagerPage() {
       });
       const res = await axios.get('/api/v1/me');
       setAuthState(res.data.authState);
+      dispatch(changeUser(res.data.authState.token));
+      logUsage('event', 'LoginAs', { event_label: res.data.authState.email + ' ' + res.data.authState.token });
       navigate('/');
     } catch (err) {
       setError(err.response?.data?.error || err.message);

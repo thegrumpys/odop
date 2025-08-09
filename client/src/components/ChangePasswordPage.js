@@ -15,7 +15,7 @@ export default function ChangePasswordPage() {
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState('form'); // 'form' | 'success' | 'error'
   const navigate = useNavigate();
-  const authState = useAuth();
+  const { authState } = useAuth();
 
   useEffect(() => {
     const token = searchParams.get('token');

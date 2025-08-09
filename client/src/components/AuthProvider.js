@@ -4,19 +4,18 @@ import axios from '../axiosConfig';
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-//  console.log('AuthProvider');
   const [authState, setAuthState] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+//  console.log('AuthProvider','authState=',authState);
 
   useEffect(() => {
     axios.get('/api/v1/me').then(res => {
+//      console.log('res.data.authState=',res.data.authState);
       setAuthState(res.data.authState);
-      setIsAuthenticated(res.data.isAuthenticated);
     });
   }, []);
 
   return (
-    <AuthContext.Provider value={{ authState, isAuthenticated, setAuthState, setIsAuthenticated }}>
+    <AuthContext.Provider value={{ authState, setAuthState }}>
       {children}
     </AuthContext.Provider>
   );
@@ -24,6 +23,6 @@ export function AuthProvider({ children }) {
 
 export const useAuth = () => {
   const auth = useContext(AuthContext);
-//  console.log('useAuth','auth=',auth);
+//  console.log('useAuth','auth',auth);
   return auth;
 }
