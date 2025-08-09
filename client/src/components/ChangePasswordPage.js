@@ -128,7 +128,7 @@ export default function ChangePasswordPage() {
                   <td className="text-start px-5"><p>This change password link is invalid or has expired.</p></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5"><Button onClick={() => navigate("/resend-change-password")}>Resend Change Password Email</Button></td>
+                  <td className="text-center px-5"><Button onClick={() => navigate("/resend-change-password")}>Resend Change Password Email</Button></td>
                 </tr>
                 <tr>
                 <td className="text-center p-3"><Link to={() => {window.close()}}>Close Tab</Link></td>
