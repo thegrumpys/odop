@@ -45,7 +45,7 @@ export default function RegisterForm() {
                   <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><h3>✅<br />Verification email sent</h3></td>
+                  <td className="text-center"><h3>Verification email sent ✅</h3></td>
                 </tr>
                 <tr>
                   <td className="text-center"><MessageAlert error={error} /></td>
@@ -55,16 +55,17 @@ export default function RegisterForm() {
                   We just sent a verification email message
                   from <b>Server&nbsp;NoReply&nbsp;&lt;server@springdesignsoftware.com&gt;</b> with
                   the subject <b>Confirm your account</b> to <b>{email}</b>.
-                  Please check your email and confirm your account to continue.
-                  If the message does not appear promptly, please check your Junk/Spam folder.
-                  For assistance please <a href="/docs/About/ContactUs.html" target="_blank">contact us</a>
+                  Check your inbox and confirm your account to continue.
+                  If it doesn’t arrive soon, look in your Junk/Spam folder.
+                  The message expires in 24 hours.
+                  For help <a href="/docs/About/ContactUs.html" target="_blank">contact us.</a>
                   </p></td>
                 </tr>
                 <tr>
                   <td className="text-center"><Button onClick={() => navigate("/login")}>Sign in</Button></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><Link to="/">Home</Link></td>
+                  <td className="text-center pb-5"><Link to="/">Home</Link></td>
                 </tr>
               </tbody>
             </Table>
@@ -93,7 +94,7 @@ export default function RegisterForm() {
                   <td className="text-center"><MessageAlert error={error} /></td>
                 </tr>
                 <tr>
-                  <td className="px-5 text-start">An <a href="/docs/About/userAccounts.html" target="_blank">ODOP user account</a> allows you to save designs to the online library.</td>
+                  <td className="px-5 text-start pb-4">An <a href="/docs/About/userAccounts.html" target="_blank">ODOP user account</a> allows you to save designs to the online library.</td>
                 </tr>
                 <tr>
                   <td className="px-5 text-start"><Form.Control type="email" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)} autoComplete="username" /></td>
@@ -118,13 +119,13 @@ export default function RegisterForm() {
                   <td className="px-5 text-start"><Form.Control placeholder="Last Name" value={last_name} required onChange={e => setLastName(e.target.value)} /></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><Button type="submit">Register</Button></td>
+                  <td className="text-center"><Button type="submit">Create Account</Button></td>
                 </tr>
                 <tr>
                   <td className="text-center px-5 pt-3"><Link to="/reset-password">Change Password?</Link></td>
                 </tr>
                 <tr>
-                  <td className="text-center px-5"><Link to="/login">Sign in</Link></td>
+                  <td className="text-center px-5 pb-5"><Link to="/login">Sign in</Link></td>
                 </tr>
               </tbody>
             </Table>

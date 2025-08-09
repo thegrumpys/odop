@@ -43,7 +43,15 @@ export default function ResendChangePasswordPage() {
                   <td className="text-center"><MessageAlert error={error} /></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5"><p>A password reset email has been sent to {email}. If the message does not appear promptly, check your Junk/Spam folder.</p></td>
+                  <td className="text-start px-5"><p>
+                  We just sent an email message
+                  from <b>Server&nbsp;NoReply&nbsp;&lt;server@springdesignsoftware.com&gt;</b> with
+                  the subject <b>Reset your password</b> to <b>{email}</b>.
+                  Check your inbox for instructions on resetting your password.
+                  If it doesn’t arrive soon, look in your Junk/Spam folder.
+                  The message expires in 24 hours.
+                  For help <a href="/docs/About/ContactUs.html" target="_blank">contact us</a>
+                  </p></td>
                 </tr>
                 <tr>
                   <td className="text-center"><Button onClick={() => navigate("/login")}>Sign in</Button></td>

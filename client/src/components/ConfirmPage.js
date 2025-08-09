@@ -88,7 +88,7 @@ export default function ConfirmPage() {
                   <td className="text-center"><MessageAlert error={error} /></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5"><p>This confirmation link is invalid or has expired.</p></td>
+                  <td className="text-start px-5"><p>This confirmation is invalid or has expired.</p></td>
                 </tr>
                 <tr>
                   <td className="text-start px-5"><Link to="/resend-confirmation">Resend Confirmation Email</Link></td>
