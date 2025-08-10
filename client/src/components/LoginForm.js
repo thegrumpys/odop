@@ -59,7 +59,7 @@ export default function LoginForm() {
             <Table border="1" borderless className="p-5">
               <tbody>
                 <tr>
-                  <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
+                  <td className="text-center pt-5 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
                 </tr>
                 <tr>
                   <td className="text-center"><h3>Password change required</h3></td>
@@ -69,13 +69,15 @@ export default function LoginForm() {
                 </tr>
                 <tr>
                   <td className="text-start px-5"><p>
-                  We have recently changed our user authentication.
-                  Email from <b>Server&nbsp;NoReply&nbsp;&lt;server@springdesignsoftware.com&gt;</b> with
-                  the subject <b>Reset your password</b> has been
-                  sent to <b>{email}</b> with instructions on resetting your password.
+                  We have recently changed our user authentication. 
                   See <a href="https://thegrumpys.github.io/odop/About/messageOfTheDay.html" target="_blank">ODOP Message Of The Day</a> for details.
-                  If the message does not appear promptly please check your Junk/Spam folder.
-                  For assistance please <a href="/docs/About/ContactUs.html" target="_blank">contact us</a>
+                  We just sent an email message
+                  from <b>Server&nbsp;NoReply&nbsp;&lt;server@springdesignsoftware.com&gt;</b> with
+                  the subject <b>Reset your password</b> to <b>{email}</b>.
+                  Check your inbox for instructions on resetting your password.
+                  If it doesn’t arrive soon, look in your Junk/Spam folder.
+                  The message expires in 24 hours.
+                  For help <a href="/docs/About/ContactUs.html" target="_blank">contact us</a>
                   </p></td>
                 </tr>
                 <tr>
@@ -117,22 +119,19 @@ export default function LoginForm() {
                   <td className="text-center"><Button variant="primary" type="submit">Sign In</Button></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5 pt-3"><Link to="/resend-confirmation">Resend Confirmation Email</Link></td>
+                  <td className="text-center p-3">Don't have an account? <Link to="/register">Sign up</Link></td>
                 </tr>
                 <tr>
                   <td className="text-start px-5"><Link to="/reset-password">Forgot Password?</Link></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5"><a href="/docs/About/userAccounts.html" target="_blank">About ODOP user accounts</a></td>
+                  <td className="text-start px-5"><Link to="/resend-confirmation">Resend Registration Confirmation Email</Link></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5"><a href="https://thegrumpys.github.io/odop/About/messageOfTheDay.html" target="_blank">ODOP Message Of The Day</a></td>
+                  <td className="text-start px-5"><Link to="/resend-change-password">Resend Reset Password Email</Link></td>
                 </tr>
                 <tr>
-                  <td className="text-start px-5"><a href="/docs/About" target="_blank">Learn about ODOP</a></td>
-                </tr>
-                <tr>
-                  <td className="text-center p-3">Don't have an account? <Link to="/register">Sign up</Link></td>
+                  <td className="text-start px-5 pb-5"><a href="https://thegrumpys.github.io/odop/About/messageOfTheDay.html" target="_blank">ODOP Message Of The Day</a></td>
                 </tr>
               </tbody>
             </Table>

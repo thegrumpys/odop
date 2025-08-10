@@ -5,31 +5,26 @@ import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 import MessageAlert from '../components/MessageAlert';
 import { logUsage } from '../logUsage';
 
-export default function ResetPasswordPage() {
-//  console.log('ResetPasswordPage');
+export default function ResendChangePasswordPage() {
   const [error, setError] = useState(null);
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
 
-  const handleResetRequest = async (e) => {
-//    console.log('ResetPasswordPage.handleResetRequest','e=',e);
+  const handleResend = async (e) => {
     e.preventDefault();
     setError(null);
     try {
-      const res = await axios.post('/api/v1/reset-password', { email });
-//      console.log('ResetPasswordPage.handleResetRequest','res=', res);
+      const res = await axios.post('/api/v1/resend?type=reset', { email });
       setError(res.data.error);
       setSubmitted(true);
-      logUsage('event', 'ResetPasswordPage', { event_label: 'Success: ' + JSON.stringify(res.data.error)});
+      logUsage('event', 'ResendChangePasswordPage', { event_label: 'Success: ' + JSON.stringify(res.data.error) });
     } catch (err) {
-//      console.log('ResetPasswordPage,handleResetRequest','err=',err);
       setError(err.response.data.error);
-      logUsage('event', 'ResetPasswordPage', { event_label: 'Error: ' + JSON.stringify(err.response.data.error)});
+      logUsage('event', 'ResendChangePasswordPage', { event_label: 'Error: ' + JSON.stringify(err.response.data.error) });
     }
   };
 
-//  console.log('ResetPasswordPage','submitted=',submitted);
   if (submitted) {
     return (
       <Container className="pt-5">
@@ -78,14 +73,14 @@ export default function ResetPasswordPage() {
       <Row>
         <Col lg="4" />
         <Col lg="4">
-          <form onSubmit={handleResetRequest}>
+          <form onSubmit={handleResend}>
             <Table border="1" borderless className="p-5">
               <tbody>
                 <tr>
                   <td className="text-center pt-3 px-5"><img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><h3>Reset Password</h3></td>
+                  <td className="text-center"><h3>Resend Password Email</h3></td>
                 </tr>
                 <tr>
                   <td className="text-center"><MessageAlert error={error} /></td>
@@ -94,10 +89,10 @@ export default function ResetPasswordPage() {
                   <td className="px-5 text-start">Email<br /><Form.Control type="email" value={email} required onChange={(e) => setEmail(e.target.value)} autoComplete="username" /></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><Button type="submit">Reset via Email</Button></td>
+                  <td className="text-center"><Button type="submit">Resend Email</Button></td>
                 </tr>
                 <tr>
-                  <td className="text-center"><Link to="/login">Sign in</Link></td>
+                  <td className="text-center px-5"><Link to="/login">Sign in</Link></td>
                 </tr>
               </tbody>
             </Table>

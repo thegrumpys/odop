@@ -140,6 +140,51 @@ async function sendResetEmail(email, first_name, last_name, token) {
   await transporter.sendMail(mailOptions);
 }
 
+async function resendEmail(req, res) {
+  const { email } = req.body;
+  const type = req.query.type;
+
+  if (!isValidEmail(email)) {
+    sendMessage(res, 'Unknown email or password, or inactive account.', 'error', 'email', 400);
+    return;
+  }
+
+  try {
+    if (type === 'confirm') {
+      const [rows] = await db.execute('SELECT first_name, last_name FROM user WHERE email = ? AND status = ?', [email, 'inactive']);
+      if (!rows.length) {
+        sendMessage(res, 'No outstanding registration exists or has expired.', 'error', null, 401);
+        return;
+      }
+      await db.execute('DELETE FROM token WHERE email = ? AND type = ?', [email, 'confirm']);
+      const token = generateToken();
+      const local = new Date(Date.now() + 24 * 60 * 60 * 1000); // UTC + 24 hour
+      const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000);
+      await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [token, email, 'confirm', expiresAt]);
+      const { first_name, last_name } = rows[0];
+      await sendConfirmationEmail(email, first_name, last_name, token);
+      sendMessage(res, 'Registration confirmation email sent.', 'info', null, 200);
+    } else if (type === 'reset') {
+      const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
+      if (!rows.length) {
+        sendMessage(res, 'Unknown email or password, or inactive account.', 'error', null, 401);
+        return;
+      }
+      const user = rows[0];
+      const token = generateToken();
+      const local = new Date(Date.now() + 24 * 60 * 60 * 1000); // UTC + 24 hour
+      const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000);
+      await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [token, email, 'reset', expiresAt]);
+      await sendResetEmail(email, user.first_name, user.last_name, token);
+      sendMessage(res, 'Reset password email sent.', 'info', null, 200);
+    } else {
+      sendMessage(res, 'Invalid resend type.', 'error', 'type', 400);
+    }
+  } catch (err) {
+    sendMessage(res, err, 'error', null, 500);
+  }
+}
+
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
@@ -201,7 +246,7 @@ function sendMessage(res, message, severity = 'error', field = null, status = 40
 
 //==================================================================================================
 // db_size
-app.get('/api/v1/db_size', authenticationRequired, async (req, res) => {
+app.get('/api/v1/db_size', authenticationRequired, adminRequired, async (req, res) => {
   var value;
   var user = req.uid;
 //  console.log('SERVER: In GET /api/v1/db_size', 'user=', user);
@@ -609,7 +654,7 @@ app.post('/api/v1/register', async (req, res) => {
   }
 
   const confirmationToken = generateToken();
-  const local = new Date(Date.now() + 60 * 60 * 1000); // UTC + 1 hour
+  const local = new Date(Date.now() + 24 * 60 * 60 * 1000); // UTC + 24 hour
   const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000); // Fudge
 //  console.log('/register','expiresAt=',expiresAt);
 
@@ -618,13 +663,14 @@ app.post('/api/v1/register', async (req, res) => {
     const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
 //    console.log('rows=',rows);
     if (rows.length) {
-      sendMessage(res, 'Duplicate email.', 'error', null, 409);
+      sendMessage(res, 'Email already exists.', 'error', null, 409);
       return;
     }
 
     // Create new 'inactive' user with email and password, and confirmation token
     const hashed = await hashPassword(password);
-    await db.execute('INSERT INTO user (email, password, first_name, last_name, role, token, status) VALUES (?, ?, ?, ?, ?, ?, ?)', [email, hashed, first_name, last_name, 'user', null, 'inactive']);
+    const userToken = generateUserToken();
+    await db.execute('INSERT INTO user (email, password, first_name, last_name, role, token, status) VALUES (?, ?, ?, ?, ?, ?, ?)', [email, hashed, first_name, last_name, 'user', userToken, 'inactive']);
     await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [confirmationToken, email, 'confirm', expiresAt]);
 
     // Send confirmation email
@@ -655,55 +701,9 @@ app.get('/api/v1/confirm', async (req, res) => {
 
     // If token is null update with a new one, change the user startus to 'active', and delete the token
     const email = rows[0].email;
-    const userToken = generateUserToken();
-    await db.execute('UPDATE user SET token = ? WHERE email = ? AND token IS NULL', [userToken, email]);
     await db.execute('UPDATE user SET status = ? WHERE email = ?', ['active', email]);
     await db.execute('DELETE FROM token WHERE token = ?', [token]);
     sendMessage(res, 'Registration confirmed.', 'info', null, 200);
-  } catch (err) {
-    sendMessage(res, err, 'error', null, 500);
-  }
-});
-// ===========================================================================
-// RESEND CONFIRMATION
-app.post('/api/v1/resend-confirmation', async (req, res) => {
-  const { email } = req.body;
-
-  if (!isValidEmail(email)) {
-    sendMessage(res, 'Invalid email address format.', 'error', 'email', 400);
-    return;
-  }
-
-  try {
-    // Is there an inactive user awaiting confirmation?
-    const [rows] = await db.execute(
-      'SELECT first_name, last_name FROM user WHERE email = ? AND status = ?',
-      [email, 'inactive']
-    );
-    if (!rows.length) {
-      sendMessage(res, 'No outstanding registration exists or has expired.', 'error', null, 401);
-      return;
-    }
-
-    // Remove any previous confirmation tokens
-    await db.execute('DELETE FROM token WHERE email = ? AND type = ?', [email, 'confirm']);
-
-    const confirmationToken = generateToken();
-    const local = new Date(Date.now() + 60 * 60 * 1000); // UTC + 1 hour
-    const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000); // Fudge
-
-    await db.execute(
-      'INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)',
-      [confirmationToken, email, 'confirm', expiresAt]
-    );
-
-    const { first_name, last_name } = rows[0];
-    try {
-      await sendConfirmationEmail(email, first_name, last_name, confirmationToken);
-      sendMessage(res, 'Registration confirmation email sent.', 'info', null, 200);
-    } catch (err) {
-      sendMessage(res, err.response, 'error', null, 500);
-    }
   } catch (err) {
     sendMessage(res, err, 'error', null, 500);
   }
@@ -818,7 +818,7 @@ app.post('/api/v1/reset-password', async (req, res) => {
     const user = rows[0];
 //    console.log('/api/v1/reset-password','user=',user);
     const resetToken = generateToken();
-    const local = new Date(Date.now() + 60 * 60 * 1000); // UTC + 1 hour
+    const local = new Date(Date.now() + 24 * 60 * 60 * 1000); // UTC + 24 hour
     const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000); // Fudge
 //  console.log('/api/v1/reset-password','expiresAt=',expiresAt);
 
@@ -832,6 +832,26 @@ app.post('/api/v1/reset-password', async (req, res) => {
     } catch (err) {
       sendMessage(res, err.response, 'error', null, 500);
     }
+  } catch (err) {
+    sendMessage(res, err, 'error', null, 500);
+  }
+});
+
+//==================================================================================================
+// HAS-RESET-TOKEN
+app.get('/api/v1/has-reset-token', async (req, res) => {
+  const { token } = req.query;
+//  console.log('token=',token);
+  try {
+    // Does a matching reset token exist
+    const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ? AND expires_at > NOW()', [token, 'reset']);
+//    console.log('/api/v1/confirm','rows=',rows,'rows.length=',rows.length,'!rows.length=',!rows.length);
+    if (!rows.length) {
+      sendMessage(res, 'No outstanding password change exists or has expired.', 'error', null, 401);
+      return;
+    }
+
+    sendMessage(res, {}, '', null, 200);
   } catch (err) {
     sendMessage(res, err, 'error', null, 500);
   }
@@ -868,9 +888,27 @@ app.patch('/api/v1/change-password', async (req, res) => {
   }
 });
 
+// ===========================================================================
+// RESEND EMAIL
+app.post('/api/v1/resend', resendEmail);
+
+// ===========================================================================
+// RESEND CONFIRMATION
+app.post('/api/v1/resend-confirmation', (req, res) => {
+  req.query.type = 'confirm';
+  resendEmail(req, res);
+});
+
+// ===========================================================================
+// RESEND CHANGE PASSWORD
+app.post('/api/v1/resend-change-password', (req, res) => {
+  req.query.type = 'reset';
+  resendEmail(req, res);
+});
+
 //==================================================================================================
 // Cleanup Expired Tokens
-app.delete('/api/v1/cleanup-expired-tokens', async (req, res) => {
+app.delete('/api/v1/cleanup-expired-tokens', authenticationRequired, adminRequired, async (req, res) => {
 //  console.log('/api/v1/cleanup-expired-tokens');
   try {
     const [rows] = await db.query('DELETE FROM token WHERE expires_at < NOW()');
@@ -965,7 +1003,7 @@ app.post('/api/v1/users', authenticationRequired, adminRequired, async (req, res
     }
     const [rows] = await db.execute('SELECT id FROM user WHERE email = ?', [email]);
     if (rows.length) {
-      sendMessage(res, 'Duplicate email.', 'error', null, 409);
+      sendMessage(res, 'Email already exists.', 'error', null, 409);
       return;
     }
     const hashed = await hashPassword(password);
