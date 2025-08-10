@@ -309,12 +309,7 @@ ___
 ___
 
 ## Password reset 
-If you need to reset the password to your ODOP account: 
- - [launch the ODOP:Spring app](/docs/Help/launchODOP.html) 
- - select the "**Sign In...**" button at the left of the menu bar 
- - select "**Forgot password?**" on the Sign In page 
- - provide your email address on the "**Reset Password**" page and click "**Reset via email**"
- - Check for an email message. If not found, be sure to check your spam/junk mail folder.  
+See: [Password Reset](/docs/About/userAccounts.html#passwordReset) 
 
 Once you have established a password, 
 simply [launch the ODOP:Spring app](/docs/Help/launchODOP.html) 
