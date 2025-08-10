@@ -246,7 +246,7 @@ function sendMessage(res, message, severity = 'error', field = null, status = 40
 
 //==================================================================================================
 // db_size
-app.get('/api/v1/db_size', authenticationRequired, async (req, res) => {
+app.get('/api/v1/db_size', authenticationRequired, adminRequired, async (req, res) => {
   var value;
   var user = req.uid;
 //  console.log('SERVER: In GET /api/v1/db_size', 'user=', user);
@@ -908,7 +908,7 @@ app.post('/api/v1/resend-change-password', (req, res) => {
 
 //==================================================================================================
 // Cleanup Expired Tokens
-app.delete('/api/v1/cleanup-expired-tokens', async (req, res) => {
+app.delete('/api/v1/cleanup-expired-tokens', authenticationRequired, adminRequired, async (req, res) => {
 //  console.log('/api/v1/cleanup-expired-tokens');
   try {
     const [rows] = await db.query('DELETE FROM token WHERE expires_at < NOW()');
