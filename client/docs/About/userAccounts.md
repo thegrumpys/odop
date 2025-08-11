@@ -4,10 +4,16 @@ This topic covers various points related to ODOP user accounts.
 
 ### On this page:  
  - [Overview](userAccounts.html#overview)  
- - [Sign up](userAccounts.html#signup)  
- - [Sign in](userAccounts.html#signin)  
+ - [Sign Up](userAccounts.html#signup)  
+ - [Screen Capture of Sign In Page](userAccounts.html#signinscreencap)  
+ - [Sign In](userAccounts.html#signin)  
  - [User Name](userAccounts.html#username)  
  - [Password Reset](userAccounts.html#passwordReset)  
+ - [Session Duration](userAccounts.html#sessionduration)  
+ - [Saving Designs](userAccounts.html#savingdesigns)  
+ - [Personalize Default Designs](userAccounts.html#defaultdesigns)  
+ - [Troubleshooting Sign In Issues](userAccounts.html#troubleshooting)  
+ - [Sign Out](userAccounts.html#signout)  
 
 ___
 
@@ -30,7 +36,7 @@ ___
 
 ## Sign up  
 You can sign up for a private account within the app. 
-Launch the ODOP software from the SpringDesignSoftware.org home page, 
+[launch the ODOP app](/docs/Help/launchODOP.html) from the SpringDesignSoftware.org home page, 
 Getting Started page or any of the three spring type pages. 
 To establish a free private account, 
 push the "**Sign In...**" button at the left of the menu bar and then 
@@ -46,6 +52,14 @@ The welcome letter includes instructions on how to establish a password and if d
 change it in the future.  
 
 See [Data Retention Policy](Legal/dataRetentionPolicy.html) for long-term data storage policies.  
+
+___
+
+<a id="signinscreencap"></a>  
+___
+
+## Screen capture of the Sign In page: 
+![Sign In screen](/docs/Help/img/SignInScreen.png "Sign In screen") 
 
 ___
 
@@ -69,9 +83,6 @@ your personal information will be secure and not abused.
 If you have any remaining concerns on this point, 
 using an email account different than your primary email account is a reasonable approach. 
 
-## Screen capture of the Sign In page: 
-![Sign In screen](/docs/Help/img/SignInWidgetExpanded.png "Sign In screen") 
-
 ___
 
 <a id="passwordReset"></a>  
@@ -79,35 +90,69 @@ ___
 
 ## Password Reset  
 To change a password or recover from a lost password after account creation is complete: 
- - [launch the ODOP:Spring app](/docs/Help/launchODOP.html) 
+ - [launch the ODOP app](/docs/Help/launchODOP.html) 
  - select the "**Sign In...**" button at the left of the menu bar 
  - select "**Forgot password?**" on the Sign In page 
  - provide your email address on the "**Reset Password**" page and click "**Reset via email**"
  - Check for an email message. If not found, be sure to check your spam/junk mail folder.  
  - **Note:** The validation email message expires after 24 hours.
 
-   
-See [Default Designs](/docs/Help/defaultDesigns.html) for information on how a private design 
-can be used to personalize system provided default designs. 
+___
 
-See [Restrictions](Legal/Restrictions.html) for long term data storage policies 
-in both public and private accounts. 
+<a id="savingdesigns"></a>  
+___
 
+## Saving Designs  
 The **File : Export** menu item allows design data to be preserved in local storage. 
 For details, see: [Save, Save As, Import and Export](/docs/Help/htt.html#fileSaveAndSaveAs). 
+  
+___
+
+<a id="defaultdesigns"></a>  
+___
+
+## Personalize Default Designs  
+See [Personalize Default Designs](/docs/Help/defaultDesigns.html) for information on how a private design 
+can be used to personalize system provided default designs. 
  
+___
+
+<a id="sessionduration"></a>  
+___
+
+## Session Duration  
 Once signed in, your user session will remain active for as long as the browser window (tab) 
 associated with the app exists and your Internet connection is maintained. 
+After multiple hours of inactivity, a browser refresh will require a new login.  
+
 You should save frequently as once the browser window or tab is closed, 
 any unsaved design in progress may be lost. 
-For more information on this point, see: [AutoSave](/docs/Help/autoSave.html). 
+
+See Also:   
+ - [AutoSave](/docs/Help/autoSave.html). 
+
+___
+
+<a id="troubleshooting"></a>  
+___
 
 ## Troubleshooting sign in issues 
 - Be sure to enter your complete email address in the "Email" field of the Sign In page.   
 &nbsp;   
 
+___
+
+<a id="signout"></a>  
+___
+
+## Sign Out
 In order to sign out: 
   - Use the "Sign-out" button to the left of the File menu 
+
+
+See Also:   
+ - [Data Retention Policy](Legal/dataRetentionPolicy.html)   
+ - [Restrictions](Legal/Restrictions.html)  
  
 ___ 
  
