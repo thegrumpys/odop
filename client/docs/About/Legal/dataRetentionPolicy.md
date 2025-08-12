@@ -1,6 +1,7 @@
 # Data Retention Policy
 **Purpose**  
-This policy defines how long we retain user data in the ODOP Design Library (our cloud storage service) and under what conditions data is deleted. 
+This policy defines how long we retain user data in the [ODOP Design Library](/docs/Help/terminology.html#designLib) (our cloud storage service) 
+and under what conditions data is deleted. 
 The intent is to balance operational efficiency, user expectations, and storage costs without requiring indefinite retention of abandoned data. 
 It ensures transparency by explaining retention triggers, notification processes, and user rights. 
 
@@ -38,7 +39,7 @@ Premium | Subscribed to paid retention extension plan | Data retained regardless
  - Log deletion events for audit purposes. 
 
 **Exceptions and Appeals**  
- - Users may request extended or unlimited retention 
+ - Users may request extended or unlimited retention.  [Contact Us](/docs/About/ContactUs.html).  
 <!--
  by upgrading to a Premium plan. 
 -->
