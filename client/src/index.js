@@ -10,17 +10,21 @@ import { Beforeunload } from 'react-beforeunload';
 import { logUsage } from './logUsage';
 import { AuthProvider } from './components/AuthProvider'
 
-const container = document.getElementById('root');
-const root = ReactDOMClient.createRoot(container);
-root.render(
-  <Provider store={store}>
-    <Beforeunload onBeforeunload={(event) => {
-      logUsage('event', 'BeforeUnload', { event_label: ''});
-    }} />
-    <Spinner />
-    <Message />
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-  </Provider>
-);
+try {
+  const container = document.getElementById('root');
+  const root = ReactDOMClient.createRoot(container);
+  root.render(
+    <Provider store={store}>
+      <Beforeunload onBeforeunload={(event) => {
+        logUsage('event', 'BeforeUnload', { event_label: ''});
+      }} />
+      <Spinner />
+      <Message />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </Provider>
+  );
+} catch(error) {
+  console.error(error);
+}
