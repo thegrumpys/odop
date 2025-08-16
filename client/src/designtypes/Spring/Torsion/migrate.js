@@ -327,6 +327,11 @@ export function migrate(design) {
     case '10':
         // console.log('Convert from 10 to 11');
         design.system_controls.enable_auto_search = 1; // Default to auto search on
+        if (design.symbol_table[30].value !== 1) { // If Prop_Calc_Method is not 1 (either 2 or 3)
+            design.symbol_table[31].oldvalue = design.symbol_table[31].value; // Save old Material_Type if Prop_Calc_Method was ever set back to 1
+            delete design.symbol_table[31].format; // Delete format: 'table'
+            design.symbol_table[31].value = 'User_Specified'; // Set Material_Type to User_Specified
+        }
         migrated_design.version = '11';
     case '11':
 
@@ -339,6 +344,7 @@ export function migrate(design) {
 
         break; // Do not copy this break
     default: // Unknown
+        console.err('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.'); // Needed for restore autosave
         displayMessage('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');
         migrated_design = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
         return migrated_design;
