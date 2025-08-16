@@ -393,13 +393,14 @@ export function migrate(design) {
             design.symbol_table[31].value = 'User_Specified'; // Set Material_Type to User_Specified
         }
         migrated_design.version = '13';
+    case '13':
 
-        //============BLOCK OF CODE TO REPLICATE============
-        // case 'N':
-        //     // console.log('Convert from N to N+1');
-        //     Write the migration code here
-        //     migrated_design.version = 'N+1';
-        //==================================================
+    //============BLOCK OF CODE TO REPLICATE============
+    //     console.log('Convert from N to N+1');
+    //     Write the migration code here
+    //     migrated_design.version = 'N+1';
+    // case 'N+1':
+    //==================================================
 
         break; // Do not copy this break
     default: // Unknown
