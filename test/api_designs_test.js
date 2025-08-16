@@ -68,7 +68,7 @@ describe('Designs with empty DB', () => {
         it('it should GET with 200 OK no design types', (done) => {
             chai.request(server)
                 .get('/api/v1/designtypes')
-                .set('Authorization', 'Bearer USERID0123456789')
+                .set('Authorization', 'Bearer null')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(200);
@@ -83,7 +83,7 @@ describe('Designs with empty DB', () => {
         it('it should GET with 200 OK no design names', (done) => {
             chai.request(server)
                 .get('/api/v1/designtypes/Test-Design/designs')
-                .set('Authorization', 'Bearer USERID0123456789')
+                .set('Authorization', 'Bearer null')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(200);
@@ -94,11 +94,11 @@ describe('Designs with empty DB', () => {
         });
     });
 
-    describe('GET /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
+    describe('GET /api/v1/designtypes/Test-Design/designs/test with empty DB and test does not exist', () => {
         it('it should fail GET with 404 NOT FOUND, because test does not exist', (done) => {
             chai.request(server)
                 .get('/api/v1/designtypes/Test-Design/designs/test')
-                .set('Authorization', 'Bearer USERID0123456789')
+                .set('Authorization', 'Bearer null')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(404);
@@ -107,11 +107,11 @@ describe('Designs with empty DB', () => {
         });
     });
 
-    describe('POST /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
+    describe('POST /api/v1/designtypes/Test-Design/designs/test with empty DB and body is empty', () => {
         it('it should fail POST with 400 BAD REQUEST, because body is empty', (done) => {
             chai.request(server)
                 .post('/api/v1/designtypes/Test-Design/designs/test')
-                .set('Authorization', 'Bearer USERID0123456789')
+                .set('Authorization', 'Bearer null')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(400);
@@ -120,37 +120,32 @@ describe('Designs with empty DB', () => {
         });
     });
 
-    describe('POST /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
-        it('it should POST with 200 OK one design named test typed Test-Design, because test does not exist and GET with 200 OK one design named test typed Test-Design', (done) => {
+    describe('POST /api/v1/designtypes/Test-Design/designs/test with empty DB and GET /api/v1/designtypes/Test-Design/designs/test', () => {
+        it('it should POST with 400 BAD REQUEST one design named test typed Test-Design, because userid is null and GET with 400 BAD REQUEST one design named test typed Test-Design', (done) => {
             chai.request(server)
                 .post('/api/v1/designtypes/Test-Design/designs/test')
-                .set('Authorization', 'Bearer USERID0123456789')
+                .set('Authorization', 'Bearer null')
                 .send(testTestDesign)
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
-                    res.should.have.status(200);
+                    res.should.have.status(400);
                     chai.request(server)
                         .get('/api/v1/designtypes/Test-Design/designs/test')
-                        .set('Authorization', 'Bearer USERID0123456789')
+                        .set('Authorization', 'Bearer null')
                         .end((err2, res2) => {
 //                            console.log('TEST: err2=', err2);
-                            res2.should.have.status(200);
-                            res2.body.should.be.a('object');
-                            res2.body.should.not.have.property('user').eql('USERID0123456789');
-                            res2.body.should.not.have.property('name').eql('test');
-                            res2.body.should.have.property('type').eql('Test-Design');
-                            res2.body.should.have.property('version').eql('0.0');
+                            res2.should.have.status(404);
                             done(err2);
                         });
                 });
         });
     });
 
-    describe('PUT /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
+    describe('PUT /api/v1/designtypes/Test-Design/designs/test with empty DB and body is empty', () => {
         it('it should fail PUT with 400 BAD REQUEST, because body is empty', (done) => {
             chai.request(server)
                 .put('/api/v1/designtypes/Test-Design/designs/test')
-                .set('Authorization', 'Bearer USERID0123456789')
+                .set('Authorization', 'Bearer null')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(400);
@@ -159,28 +154,28 @@ describe('Designs with empty DB', () => {
         });
     });
 
-    describe('PUT /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
-        it('it should fail PUT with 404 NOT FOUND, because test does not exist', (done) => {
+    describe('PUT /api/v1/designtypes/Test-Design/designs/test with empty DB and userid is null', () => {
+        it('it should fail PUT with 400 BAD REQUEST, because userid is null', (done) => {
             chai.request(server)
                 .put('/api/v1/designtypes/Test-Design/designs/test')
-                .set('Authorization', 'Bearer USERID0123456789')
+                .set('Authorization', 'Bearer null')
                 .send(testTestDesign)
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
-                    res.should.have.status(404);
+                    res.should.have.status(400);
                     done(err);
                 });
         });
     });
 
-    describe('DELETE /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
-        it('it should fail DELETE with 404 NOT FOUND, because test does not exist', (done) => {
+    describe('DELETE /api/v1/designtypes/Test-Design/designs/test with empty DB abd userid is null', () => {
+        it('it should fail DELETE with 400 BAD REQUEST, because userid is null', (done) => {
             chai.request(server)
                 .delete('/api/v1/designtypes/Test-Design/designs/test')
-                .set('Authorization', 'Bearer USERID0123456789')
+                .set('Authorization', 'Bearer null')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
-                    res.should.have.status(404);
+                    res.should.have.status(400);
                     done(err);
                 });
         });
@@ -212,15 +207,33 @@ describe('Designs with non-empty DB', () => {
             connection.query(stmt, function(err, rows, fields) {
 //                console.log('TEST: After INSERT INTO design err=', err, ' rows=', rows);
                 if (err) throw err;
-                var ip_address = '::ffff:127.0.0.1';
-                var note = JSON.stringify({ note: 'fill'});
-                var stmt = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address+'\',\''+note+'\')';
+                var stmt = 'DELETE FROM usage_log WHERE 1'; // Empty test DB
 //                console.log('TEST: stmt='+stmt);
                 connection.query(stmt, function(err, rows, fields) {
-//                    console.log('TEST: After INSERT INTO usage_log err=', err, ' rows=', rows);
+//                  console.log('TEST: After DELETE FROM usage_log err=', err, ' rows=', rows);
                     if (err) throw err;
-                    done();
-                    connection.end();
+                    var ip_address = '::ffff:127.0.0.1';
+                    var note = JSON.stringify({ note: 'fill'});
+                    var stmt = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address+'\',\''+note+'\')';
+//                    console.log('TEST: stmt='+stmt);
+                    connection.query(stmt, function(err, rows, fields) {
+//                        console.log('TEST: After INSERT INTO usage_log err=', err, ' rows=', rows);
+                        if (err) throw err;
+                        var stmt = 'DELETE FROM user WHERE 1'; // Empty test DB
+//                        console.log('TEST: stmt='+stmt);
+                        connection.query(stmt, function(err, rows, fields) {
+//                            console.log('TEST: After DELETE FROM user err=', err, ' rows=', rows);
+                            if (err) throw err;
+                            var stmt = 'INSERT INTO user (email, password, first_name, last_name, role, token, status, created_at, last_login_at) VALUES ';
+                            stmt += '(\'testuser@example.com\',\'$2b$12$Mz2M7ny.8nvRVIqbhXe9VORFRC/3GkvM.ttv5CRksJXa5hsZxB5gy\',\'Test\',\'User\',\'user\',\'USERID0123456789\',\'active\',\'2025-08-16 15:45:00.000000\',null)';
+                            connection.query(stmt, function(err, rows, fields) {
+//                              console.log('TEST: After INSERT INTO user err=', err, ' rows=', rows);
+                                if (err) throw err;
+                                done();
+                                connection.end();
+                            });
+                        });
+                    });
                 });
             });
         });
@@ -392,22 +405,40 @@ describe('Designs with multiple DB entries', () => {
                     connection.query(stmt3, function(err3, rows3, fields3) {
 //                        console.log('TEST: After INSERT err3=', err3, ' rows3=', rows3);
                         if (err3) throw err3;
-                        var ip_address4 = '::ffff:127.0.0.1';
-                        var note4 = JSON.stringify({ note: 'fill'});
-                        var stmt4 = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address4+'\',\''+note4+'\')';
+                        var stmt4 = 'DELETE FROM usage_log WHERE 1'; // Empty test DB
 //                        console.log('TEST: stmt4='+stmt4);
                         connection.query(stmt4, function(err4, rows4, fields4) {
-//                            console.log('TEST: After INSERT err4=', err4, ' rows4=', rows4);
+//                            console.log('TEST: After DELETE FROM usage_log err4=', err4, ' rows4=', rows4);
                             if (err4) throw err4;
                             var ip_address5 = '::ffff:127.0.0.1';
                             var note5 = JSON.stringify({ note: 'fill'});
                             var stmt5 = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address5+'\',\''+note5+'\')';
-//                            console.log('TEST: stmt5='+stmt5);
+    //                        console.log('TEST: stmt4='+stmt4);
                             connection.query(stmt5, function(err5, rows5, fields5) {
-//                                console.log('TEST: After INSERT err5=', err5, ' rows5=', rows5);
+    //                            console.log('TEST: After INSERT err5=', err5, ' rows5=', rows5);
                                 if (err5) throw err5;
-                                done();
-                                connection.end();
+                                var ip_address6 = '::ffff:127.0.0.1';
+                                var note6 = JSON.stringify({ note: 'fill'});
+                                var stmt6 = 'INSERT INTO usage_log (ip_address, note) VALUES (\''+ip_address6+'\',\''+note6+'\')';
+    //                            console.log('TEST: stmt6='+stmt6);
+                                connection.query(stmt6, function(err6, rows6, fields6) {
+    //                                console.log('TEST: After INSERT err6=', err6, ' rows6=', rows6);
+                                    if (err6) throw err6;
+                                    var stmt7 = 'DELETE FROM user WHERE 1'; // Empty test DB
+    //                                console.log('TEST: stmt7='+stmt7);
+                                    connection.query(stmt7, function(err7, rows7, fields7) {
+    //                                    console.log('TEST: After DELETE FROM user err7=', err7, ' rows7=', rows7);
+                                        if (err7) throw err7;
+                                        var stmt8 = 'INSERT INTO user (email, password, first_name, last_name, role, token, status, created_at, last_login_at) VALUES ';
+                                        stmt8 += '(\'testuser@example.com\',\'$2b$12$Mz2M7ny.8nvRVIqbhXe9VORFRC/3GkvM.ttv5CRksJXa5hsZxB5gy\',\'Test\',\'User\',\'user\',\'USERID0123456789\',\'active\',\'2025-08-16 15:45:00.000000\',null)';
+                                        connection.query(stmt8, function(err8, rows8, fields8) {
+    //                                        console.log('TEST: After INSERT INTO user err8=', err8, ' rows8=', rows8);
+                                            if (err8) throw err8;
+                                            done();
+                                            connection.end();
+                                        });
+                                    });
+                                });
                             });
                         });
                     });

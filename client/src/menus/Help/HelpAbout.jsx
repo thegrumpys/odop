@@ -23,7 +23,9 @@ export default function HelpAbout() {
 
   useEffect(() => {
 //    console.log('HelpAbout - Mounted');
-    getDBSize(model_user);
+    if (authState && authState.isAdmin) {
+      getDBSize(model_user);
+    }
 //    return () => console.log('HelpAbout - Unmounting ...');
     return () => {};
   }, []);
@@ -42,7 +44,7 @@ export default function HelpAbout() {
         Authorization: 'Bearer ' + user
       }
     })
-      .then(res => {
+      .then(res => { // No catch, ignore any errors
         const sizes = res.data;
 //        console.log('HelpAbout.getSize sizes=', sizes);
         setSizes(sizes);
@@ -53,9 +55,6 @@ export default function HelpAbout() {
 //        console.log('HelpAbout.getSize size=', size);
         setSize(size);
         logUsage('event', 'HelpAbout', { event_label: 'getDBSize: ' + size });
-      })
-      .catch(error => {
-        displayMessage('GET of DB Size failed with message: \'' + error.message + '\'');
       })
       .finally(() => {
         displaySpinner(false);

@@ -1,6 +1,6 @@
 const webpack = require("webpack");
 
-module.exports = function override(config) {
+function webpackOverride(config) {
   const fallback = config.resolve.fallback || {};
   Object.assign(fallback, {
     assert: require.resolve("assert"),
@@ -30,4 +30,14 @@ module.exports = function override(config) {
     },
   });
   return config;
+}
+
+function jestOverride(config) {
+  config.transformIgnorePatterns = ["node_modules/(?!(axios)/)"];
+  return config;
+}
+
+module.exports = {
+  webpack: webpackOverride,
+  jest: jestOverride,
 };

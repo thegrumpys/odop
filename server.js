@@ -64,7 +64,7 @@ const transporter = nodemailer.createTransport({
  * if the token is not present.  If the token is present its
  * contents are attached to request
  */
-function authenticationRequired(req, res, next) {
+async function authenticationRequired(req, res, next) {
   const authHeader = req.headers.authorization || '';
   const match = authHeader.match(/Bearer (.+)/);
 //  console.log('SERVER: In authenticationRequired', 'authHeader=', authHeader);
@@ -75,12 +75,28 @@ function authenticationRequired(req, res, next) {
   }
   req.uid = match[1];
 //  console.log('SERVER: In authenticationRequired', 'req.uid=', req.uid);
+  if (req.uid !== 'null') { // 'null' string, not null value!
+    const [rows] = await db.execute('SELECT role FROM user WHERE status = \'active\' AND token = ?', [req.uid]);
+    if (!rows.length || (rows[0].role !== 'user' && rows[0].role !== 'admin')) {
+      sendMessage(res, '', '', null, 401);
+      return;
+    }
+  }
   next();
 }
 
 async function adminRequired(req, res, next) {
   try {
-    const [rows] = await db.execute('SELECT role FROM user WHERE token = ?', [req.uid]);
+    const authHeader = req.headers.authorization || '';
+    const match = authHeader.match(/Bearer (.+)/);
+//  console.log('SERVER: In authenticationRequired', 'authHeader=', authHeader);
+//  console.log('SERVER: In authenticationRequired', 'match=', match);
+    if (!match) {
+      sendMessage(res,'','',null,401);
+      return;
+    }
+    req.uid = match[1];
+    const [rows] = await db.execute('SELECT role FROM user WHERE status = \'active\' AND token = ?', [req.uid]);
     if (!rows.length || rows[0].role !== 'admin') {
       sendMessage(res, '', '', null, 401);
       return;
@@ -246,7 +262,7 @@ function sendMessage(res, message, severity = 'error', field = null, status = 40
 
 //==================================================================================================
 // db_size
-app.get('/api/v1/db_size', authenticationRequired, adminRequired, async (req, res) => {
+app.get('/api/v1/db_size', adminRequired, async (req, res) => {
   var value;
   var user = req.uid;
 //  console.log('SERVER: In GET /api/v1/db_size', 'user=', user);
@@ -500,10 +516,10 @@ app.post('/api/v1/usage_log', async (req, res) => {
   note = note.replace(/[']/ig, "''"); // replace one single quote with an two single quotes throughout
   var action = req.body.action !== undefined ? req.body.action.replace(/[']/ig, "''") : '';
   var event_value = req.body.note.event_value !== undefined ? req.body.note.event_value : 0;
-  var event_datetime = req.body.note.event_datetime !== undefined ? req.body.note.event_datetime : '';
+  var event_datetime = req.body.note.event_datetime !== undefined ? 'STR_TO_DATE(\'' + req.body.note.event_datetime + '\',"%m/%d/%Y, %H:%i:%s.%f")' : '\'\'';
   var event_label = req.body.note.event_label !== undefined ? req.body.note.event_label.replace(/[']/ig, "''") : '';
 //  console.log('action=', action, 'event_value=', event_value, 'event_datetime=', event_datetime, 'event_label=', event_label)
-  var stmt = 'INSERT INTO usage_log (ip_address, note, action, event_value, event_datetime, event_label) VALUES (\'' + ip_address + '\',\'' + note + '\',\'' + action + '\',' + event_value + ',STR_TO_DATE(\'' + event_datetime + '\',"%m/%d/%Y, %H:%i:%s.%f"),\'' + event_label + '\')';
+  var stmt = 'INSERT INTO usage_log (ip_address, note, action, event_value, event_datetime, event_label) VALUES (\'' + ip_address + '\',\'' + note + '\',\'' + action + '\',' + event_value + ',' + event_datetime + ',\'' + event_label + '\')';
 //  console.log('SERVER:', 'stmt=', stmt);
   try {
     const [rows] = await db.execute(stmt);
@@ -908,7 +924,7 @@ app.post('/api/v1/resend-change-password', (req, res) => {
 
 //==================================================================================================
 // Cleanup Expired Tokens
-app.delete('/api/v1/cleanup-expired-tokens', authenticationRequired, adminRequired, async (req, res) => {
+app.delete('/api/v1/cleanup-expired-tokens', adminRequired, async (req, res) => {
 //  console.log('/api/v1/cleanup-expired-tokens');
   try {
     const [rows] = await db.query('DELETE FROM token WHERE expires_at < NOW()');
@@ -928,7 +944,7 @@ app.delete('/api/v1/cleanup-expired-tokens', authenticationRequired, adminRequir
 
 //====================================================================================================================
 // Admin User Search
-app.get('/api/v1/users', authenticationRequired, adminRequired, async (req, res) => {
+app.get('/api/v1/users', adminRequired, async (req, res) => {
   const { email, firstName, lastName, role, status, token, createStartDate, createEndDate, loginStartDate, loginEndDate } = req.query;
 //  console.log('/api/v1/users','email=',email,'firstName=',firstName,'lastName=',lastName,'role=',role,'status=',status,'token=',token,'createStartDate=',createStartDate,'createEndDate=',createEndDate,'loginStartDate=',loginStartDate,'loginEndDate=',loginEndDate);
   const conditions = [];
@@ -990,7 +1006,7 @@ app.get('/api/v1/users', authenticationRequired, adminRequired, async (req, res)
 
 // =============================================================================
 // Admin Create User
-app.post('/api/v1/users', authenticationRequired, adminRequired, async (req, res) => {
+app.post('/api/v1/users', adminRequired, async (req, res) => {
   const { email, password, first_name, last_name, role, status, token } = req.body;
   try {
     if (!isValidEmail(email)) {
@@ -1016,7 +1032,7 @@ app.post('/api/v1/users', authenticationRequired, adminRequired, async (req, res
 
 // =============================================================================
 // Admin Update User
-app.put('/api/v1/users/:id', authenticationRequired, adminRequired, async (req, res) => {
+app.put('/api/v1/users/:id', adminRequired, async (req, res) => {
   const { id } = req.params;
   const { email, first_name, last_name, role, status, token } = req.body;
   try {
@@ -1068,7 +1084,7 @@ app.put('/api/v1/users/:id', authenticationRequired, adminRequired, async (req, 
 
 //====================================================================================================================
 // Admin Delete User
-app.delete('/api/v1/users/:id', authenticationRequired, adminRequired, async (req, res) => {
+app.delete('/api/v1/users/:id', adminRequired, async (req, res) => {
   const { id } = req.params;
 //  console.log('/api/v1/users','id=',id);
   try {
@@ -1085,7 +1101,7 @@ app.delete('/api/v1/users/:id', authenticationRequired, adminRequired, async (re
 
 // ============================================================================
 // Admin Login As User
-app.post('/api/v1/users/:id/login-as', authenticationRequired, adminRequired, async (req, res) => {
+app.post('/api/v1/users/:id/login-as', adminRequired, async (req, res) => {
   const { id } = req.params;
   try {
     const [rows] = await db.execute(
