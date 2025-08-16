@@ -8,23 +8,19 @@ import './odop.css';
 import * as ReactDOMClient from "react-dom/client";
 import { Beforeunload } from 'react-beforeunload';
 import { logUsage } from './logUsage';
-import {ErrorBoundary} from 'react-error-boundary';
-
-const myErrorHandler = (error) => {
-  console.error(error);
-};
+import { AuthProvider } from './components/AuthProvider'
 
 const container = document.getElementById('root');
 const root = ReactDOMClient.createRoot(container);
 root.render(
-  <ErrorBoundary onError={myErrorHandler}>
-    <Provider store={store}>
-      <Beforeunload onBeforeunload={(event) => {
-        logUsage('event', 'BeforeUnload', { event_label: ''});
-      }} />
-      <Spinner />
-      <Message />
+  <Provider store={store}>
+    <Beforeunload onBeforeunload={(event) => {
+      logUsage('event', 'BeforeUnload', { event_label: ''});
+    }} />
+    <Spinner />
+    <Message />
+    <AuthProvider>
       <App />
-    </Provider>
-  </ErrorBoundary>
+    </AuthProvider>
+  </Provider>
 );
