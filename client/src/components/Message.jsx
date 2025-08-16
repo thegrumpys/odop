@@ -4,10 +4,11 @@ import { Modal, Button, Alert } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
 import { addMessage, disableMessage } from "../store/actions";
 import store from "../store/store";
+import { logUsage } from '../logUsage';
 
 export const displayMessage = (message, variant = 'danger', header = '', help_url = '') => {
 //  console.log('displayMessage');
-//  logUsage('event', 'DisplayMessage', { event_label: 'message: ' + message + ', variant: ' + variant});
+  if (variant === 'danger') logUsage('event', 'DisplayMessage', { event_label: 'message: ' + message});
   store.dispatch(addMessage(message, variant, header, help_url));
 }
 
