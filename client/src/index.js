@@ -9,15 +9,19 @@ import * as ReactDOMClient from "react-dom/client";
 import { Beforeunload } from 'react-beforeunload';
 import { logUsage } from './logUsage';
 
-const container = document.getElementById('root');
-const root = ReactDOMClient.createRoot(container);
-root.render(
-  <Provider store={store}>
-    <Beforeunload onBeforeunload={(event) => {
-      logUsage('event', 'BeforeUnload', { event_label: ''});
-    }} />
-    <Spinner />
-    <Message />
-    <App />
-  </Provider>
-);
+try {
+  const container = document.getElementById('root');
+  const root = ReactDOMClient.createRoot(container);
+  root.render(
+    <Provider store={store}>
+      <Beforeunload onBeforeunload={(event) => {
+        logUsage('event', 'BeforeUnload', { event_label: ''});
+      }} />
+      <Spinner />
+      <Message />
+      <App />
+    </Provider>
+  );
+} catch(error) {
+  console.error(error);
+}
