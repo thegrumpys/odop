@@ -67,14 +67,14 @@ const transporter = nodemailer.createTransport({
 async function authenticationRequired(req, res, next) {
   const authHeader = req.headers.authorization || '';
   const match = authHeader.match(/Bearer (.+)/);
-  console.log('SERVER: In authenticationRequired', 'authHeader=', authHeader);
-  console.log('SERVER: In authenticationRequired', 'match=', match);
+//  console.log('SERVER: In authenticationRequired', 'authHeader=', authHeader);
+//  console.log('SERVER: In authenticationRequired', 'match=', match);
   if (!match) {
     sendMessage(res,'','',null,401);
     return;
   }
   req.uid = match[1];
-  console.log('SERVER: In authenticationRequired', 'req.uid=', req.uid);
+//  console.log('SERVER: In authenticationRequired', 'req.uid=', req.uid);
   if (req.uid !== 'null') { // 'null' string, not null value!
     const [rows] = await db.execute('SELECT role FROM user WHERE token = ?', [req.uid]);
     if (!rows.length || (rows[0].role !== 'user' && rows[0].role !== 'admin')) {
