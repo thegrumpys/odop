@@ -61,7 +61,6 @@ CREATE TABLE `token` (
 CREATE TABLE `usage_log` (
   `id` int NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ip_address` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `event_datetime` datetime DEFAULT NULL,
   `event_value` int DEFAULT NULL,

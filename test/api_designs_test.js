@@ -68,7 +68,7 @@ describe('Designs with empty DB', () => {
         it('it should GET with 200 OK no design types', (done) => {
             chai.request(server)
                 .get('/api/v1/designtypes')
-                .set('Authorization', 'Bearer USERID0123456789')
+                .set('Authorization', 'Bearer null')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(200);
@@ -83,7 +83,7 @@ describe('Designs with empty DB', () => {
         it('it should GET with 200 OK no design names', (done) => {
             chai.request(server)
                 .get('/api/v1/designtypes/Test-Design/designs')
-                .set('Authorization', 'Bearer USERID0123456789')
+                .set('Authorization', 'Bearer null')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(200);
@@ -94,11 +94,11 @@ describe('Designs with empty DB', () => {
         });
     });
 
-    describe('GET /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
+    describe('GET /api/v1/designtypes/Test-Design/designs/test with empty DB and test does not exist', () => {
         it('it should fail GET with 404 NOT FOUND, because test does not exist', (done) => {
             chai.request(server)
                 .get('/api/v1/designtypes/Test-Design/designs/test')
-                .set('Authorization', 'Bearer USERID0123456789')
+                .set('Authorization', 'Bearer null')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(404);
@@ -107,11 +107,11 @@ describe('Designs with empty DB', () => {
         });
     });
 
-    describe('POST /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
+    describe('POST /api/v1/designtypes/Test-Design/designs/test with empty DB and body is empty', () => {
         it('it should fail POST with 400 BAD REQUEST, because body is empty', (done) => {
             chai.request(server)
                 .post('/api/v1/designtypes/Test-Design/designs/test')
-                .set('Authorization', 'Bearer USERID0123456789')
+                .set('Authorization', 'Bearer null')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(400);
@@ -120,37 +120,32 @@ describe('Designs with empty DB', () => {
         });
     });
 
-    describe('POST /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
-        it('it should POST with 200 OK one design named test typed Test-Design, because test does not exist and GET with 200 OK one design named test typed Test-Design', (done) => {
+    describe('POST /api/v1/designtypes/Test-Design/designs/test with empty DB and GET /api/v1/designtypes/Test-Design/designs/test', () => {
+        it('it should POST with 400 BAD REQUEST one design named test typed Test-Design, because userid is null and GET with 400 BAD REQUEST one design named test typed Test-Design', (done) => {
             chai.request(server)
                 .post('/api/v1/designtypes/Test-Design/designs/test')
-                .set('Authorization', 'Bearer USERID0123456789')
+                .set('Authorization', 'Bearer null')
                 .send(testTestDesign)
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
-                    res.should.have.status(200);
+                    res.should.have.status(400);
                     chai.request(server)
                         .get('/api/v1/designtypes/Test-Design/designs/test')
-                        .set('Authorization', 'Bearer USERID0123456789')
+                        .set('Authorization', 'Bearer null')
                         .end((err2, res2) => {
 //                            console.log('TEST: err2=', err2);
-                            res2.should.have.status(200);
-                            res2.body.should.be.a('object');
-                            res2.body.should.not.have.property('user').eql('USERID0123456789');
-                            res2.body.should.not.have.property('name').eql('test');
-                            res2.body.should.have.property('type').eql('Test-Design');
-                            res2.body.should.have.property('version').eql('0.0');
+                            res2.should.have.status(404);
                             done(err2);
                         });
                 });
         });
     });
 
-    describe('PUT /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
+    describe('PUT /api/v1/designtypes/Test-Design/designs/test with empty DB and body is empty', () => {
         it('it should fail PUT with 400 BAD REQUEST, because body is empty', (done) => {
             chai.request(server)
                 .put('/api/v1/designtypes/Test-Design/designs/test')
-                .set('Authorization', 'Bearer USERID0123456789')
+                .set('Authorization', 'Bearer null')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(400);
@@ -159,28 +154,28 @@ describe('Designs with empty DB', () => {
         });
     });
 
-    describe('PUT /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
-        it('it should fail PUT with 404 NOT FOUND, because test does not exist', (done) => {
+    describe('PUT /api/v1/designtypes/Test-Design/designs/test with empty DB and userid is null', () => {
+        it('it should fail PUT with 400 BAD REQUEST, because userid is null', (done) => {
             chai.request(server)
                 .put('/api/v1/designtypes/Test-Design/designs/test')
-                .set('Authorization', 'Bearer USERID0123456789')
+                .set('Authorization', 'Bearer null')
                 .send(testTestDesign)
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
-                    res.should.have.status(404);
+                    res.should.have.status(400);
                     done(err);
                 });
         });
     });
 
-    describe('DELETE /api/v1/designtypes/Test-Design/designs/test with empty DB', () => {
-        it('it should fail DELETE with 404 NOT FOUND, because test does not exist', (done) => {
+    describe('DELETE /api/v1/designtypes/Test-Design/designs/test with empty DB abd userid is null', () => {
+        it('it should fail DELETE with 400 BAD REQUEST, because userid is null', (done) => {
             chai.request(server)
                 .delete('/api/v1/designtypes/Test-Design/designs/test')
-                .set('Authorization', 'Bearer USERID0123456789')
+                .set('Authorization', 'Bearer null')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
-                    res.should.have.status(404);
+                    res.should.have.status(400);
                     done(err);
                 });
         });
@@ -219,8 +214,14 @@ describe('Designs with non-empty DB', () => {
                 connection.query(stmt, function(err, rows, fields) {
 //                    console.log('TEST: After INSERT INTO usage_log err=', err, ' rows=', rows);
                     if (err) throw err;
-                    done();
-                    connection.end();
+                    var stmt = 'INSERT INTO user (email, password, first_name, last_name, role, token, status, created_at, last_login_at) VALUES ';
+                    stmt += '(\'testuser@example.com\',\'$2b$12$Mz2M7ny.8nvRVIqbhXe9VORFRC/3GkvM.ttv5CRksJXa5hsZxB5gy\',\'Test\',\'User\',\'user\',\'USERID0123456789\',\'user\',\'2025-08-16 15:45:00.000000\',null)';
+                    connection.query(stmt, function(err, rows, fields) {
+//                      console.log('TEST: After INSERT INTO user err=', err, ' rows=', rows);
+                        if (err) throw err;
+                        done();
+                        connection.end();
+                    });
                 });
             });
         });
@@ -406,8 +407,14 @@ describe('Designs with multiple DB entries', () => {
                             connection.query(stmt5, function(err5, rows5, fields5) {
 //                                console.log('TEST: After INSERT err5=', err5, ' rows5=', rows5);
                                 if (err5) throw err5;
-                                done();
-                                connection.end();
+                                var stmt = 'INSERT INTO user (email, password, first_name, last_name, role, token, status, created_at, last_login_at) VALUES ';
+                                stmt += '(\'testuser@example.com\',\'$2b$12$Mz2M7ny.8nvRVIqbhXe9VORFRC/3GkvM.ttv5CRksJXa5hsZxB5gy\',\'Test\',\'User\',\'user\',\'USERID0123456789\',\'user\',\'2025-08-16 15:45:00.000000\',null)';
+                                connection.query(stmt, function(err, rows, fields) {
+//                                      console.log('TEST: After INSERT INTO user err=', err, ' rows=', rows);
+                                    if (err) throw err;
+                                    done();
+                                    connection.end();
+                                });
                             });
                         });
                     });
