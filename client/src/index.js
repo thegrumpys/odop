@@ -9,11 +9,16 @@ import * as ReactDOMClient from "react-dom/client";
 import { Beforeunload } from 'react-beforeunload';
 import { logUsage } from './logUsage';
 import { AuthProvider } from './components/AuthProvider'
+import {ErrorBoundary} from 'react-error-boundary';
 
-try {
-  const container = document.getElementById('root');
-  const root = ReactDOMClient.createRoot(container);
-  root.render(
+const myErrorHandler = (error) => {
+  console.error(error);
+};
+
+const container = document.getElementById('root');
+const root = ReactDOMClient.createRoot(container);
+root.render(
+  <ErrorBoundary onError={myErrorHandler}>
     <Provider store={store}>
       <Beforeunload onBeforeunload={(event) => {
         logUsage('event', 'BeforeUnload', { event_label: ''});
@@ -24,7 +29,5 @@ try {
         <App />
       </AuthProvider>
     </Provider>
-  );
-} catch(error) {
-  console.error(error);
-}
+  </ErrorBoundary>
+);
