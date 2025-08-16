@@ -35,6 +35,7 @@ export default function HelpAbout() {
   }
 
   const getDBSize = (user) => {
+    if (user === null) return;
 //    console.log('HelpAbout.getDBSize');
     displaySpinner(true);
     axios.get('/api/v1/db_size', {
