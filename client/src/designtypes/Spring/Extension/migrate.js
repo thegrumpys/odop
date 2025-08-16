@@ -358,6 +358,7 @@ export function migrate(design) {
 
         break; // Do not copy this break
     default: // Unknown
+        console.err('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.'); // Needed for restore autosave
         displayMessage('Unknown model version:\''+design.version+'\'. Using builtin initial state instead.');
         migrated_design = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
         return migrated_design;
