@@ -88,7 +88,6 @@ CREATE TABLE `user` (
   `last_login_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
->>>>>>> refs/remotes/origin/master-6.0.0
 --
 -- Indexes for dumped tables
 --

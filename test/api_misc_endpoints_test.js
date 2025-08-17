@@ -104,6 +104,7 @@ describe('Misc API endpoints and empty DB', () => {
         it('it should POST with 200 OK', (done) => {
             chai.request(server)
                 .post('/api/v1/logout')
+                .set('Authorization', 'Bearer USERID0123456789')
                 .end((err, res) => {
                     res.should.have.status(200);
                     done(err);
@@ -195,15 +196,47 @@ describe('Misc API endpoints and empty DB', () => {
         });
     });
 
-    describe('DELETE /api/v1/cleanup-expired-tokens', () => {
-        it('it should DELETE with 200 OK', (done) => {
-            chai.request(server)
-                .delete('/api/v1/cleanup-expired-tokens')
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    done(err);
+    // ============================================================================
+
+    describe('Misc API endpoints with non-empty DB', () => {
+
+        beforeEach((done) => { // Before each test we empty the database
+            var connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
+            connection.connect();
+            var stmt = 'DELETE FROM user WHERE 1'; // Empty test user table
+//            console.log('TEST: stmt='+stmt);
+            connection.query(stmt, function(err, rows, fields) {
+//                console.log('TEST: After DELETE FROM user err=', err, ' rows=', rows);
+                if (err) throw err;
+                var stmt = 'INSERT INTO user (email, password, first_name, last_name, role, token, status, created_at, last_login_at) VALUES ';
+                stmt += '(\'adminuser@example.com\',\'$2b$12$Mz2M7ny.8nvRVIqbhXe9VORFRC/3GkvM.ttv5CRksJXa5hsZxB5gy\',\'Admin\',\'User\',\'admin\',\'ADMIN0123456789\',\'active\',\'2025-08-16 15:45:00.000000\',null)';
+                connection.query(stmt, function(err, rows, fields) {
+//                  console.log('TEST: After INSERT INTO user err=', err, ' rows=', rows);
+                    if (err) throw err;
+                    stmt = 'DELETE FROM token WHERE 1'; // Empty test token table
+//                    console.log('TEST: stmt='+stmt);
+                    connection.query(stmt, function(err, rows, fields) {
+//                        console.log('TEST: After DELETE FROM token err=', err, ' rows=', rows);
+                        if (err) throw err;
+                        done();
+                        connection.end();
+                    });
                 });
+            });
         });
+
+        describe('DELETE /api/v1/cleanup-expired-tokens', () => {
+            it('it should DELETE with 200 OK', (done) => {
+                chai.request(server)
+                    .delete('/api/v1/cleanup-expired-tokens')
+                    .set('Authorization', 'Bearer ADMIN0123456789')
+                    .end((err, res) => {
+                        res.should.have.status(200);
+                        done(err);
+                    });
+            });
+        });
+
     });
 
 });
