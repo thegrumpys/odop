@@ -23,7 +23,9 @@ export default function HelpAbout() {
 
   useEffect(() => {
 //    console.log('HelpAbout - Mounted');
-    getDBSize(model_user);
+    if (authState && authState.isAdmin) {
+      getDBSize(model_user);
+    }
 //    return () => console.log('HelpAbout - Unmounting ...');
     return () => {};
   }, []);
@@ -35,7 +37,6 @@ export default function HelpAbout() {
   }
 
   const getDBSize = (user) => {
-    if (user === null) return;
 //    console.log('HelpAbout.getDBSize');
     displaySpinner(true);
     axios.get('/api/v1/db_size', {
