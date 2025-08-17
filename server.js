@@ -76,7 +76,7 @@ async function authenticationRequired(req, res, next) {
   req.uid = match[1];
 //  console.log('SERVER: In authenticationRequired', 'req.uid=', req.uid);
   if (req.uid !== 'null') { // 'null' string, not null value!
-    const [rows] = await db.execute('SELECT role FROM user WHERE token = ?', [req.uid]);
+    const [rows] = await db.execute('SELECT role FROM user WHERE status = \'active\' AND token = ?', [req.uid]);
     if (!rows.length || (rows[0].role !== 'user' && rows[0].role !== 'admin')) {
       sendMessage(res, '', '', null, 401);
       return;
@@ -96,7 +96,7 @@ async function adminRequired(req, res, next) {
       return;
     }
     req.uid = match[1];
-    const [rows] = await db.execute('SELECT role FROM user WHERE token = ?', [req.uid]);
+    const [rows] = await db.execute('SELECT role FROM user WHERE status = \'active\' AND token = ?', [req.uid]);
     if (!rows.length || rows[0].role !== 'admin') {
       sendMessage(res, '', '', null, 401);
       return;
