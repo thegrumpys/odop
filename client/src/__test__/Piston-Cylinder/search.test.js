@@ -42,7 +42,7 @@ it('search without merit', () => {
 
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
-    expect(design.model.version).toEqual("7");
+    expect(design.model.version).toEqual("8");
 
     expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
     expect(design.model.symbol_table[sto.PRESSURE].value).toEqual(697.7189007950918);
@@ -153,7 +153,7 @@ it('search with merit', () => {
 
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
-    expect(design.model.version).toEqual("7");
+    expect(design.model.version).toEqual("8");
 
     expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
     expect(design.model.symbol_table[sto.PRESSURE].value).toEqual(1218.72160617764);

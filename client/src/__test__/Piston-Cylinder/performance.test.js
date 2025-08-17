@@ -58,7 +58,7 @@ it('invokeEquationSet 100000x', () => {
     var design = store.getState(); // after
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
-    expect(design.model.version).toEqual("7");
+    expect(design.model.version).toEqual("8");
 
     expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
     expect(design.model.symbol_table[sto.PRESSURE].value).toEqual(500);
@@ -133,7 +133,7 @@ it('search without merit 1000x', () => {
 
     expect(design.name).toEqual("initialState");
     expect(design.model.type).toEqual("Piston-Cylinder");
-    expect(design.model.version).toEqual("7");
+    expect(design.model.version).toEqual("8");
 
     expect(design.model.symbol_table[sto.PRESSURE].name).toEqual("PRESSURE"); // p vector
     expect(design.model.symbol_table[sto.PRESSURE].value).toEqual(697.7189007950918);

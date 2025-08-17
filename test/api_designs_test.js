@@ -225,7 +225,7 @@ describe('Designs with non-empty DB', () => {
 //                            console.log('TEST: After DELETE FROM user err=', err, ' rows=', rows);
                             if (err) throw err;
                             var stmt = 'INSERT INTO user (email, password, first_name, last_name, role, token, status, created_at, last_login_at) VALUES ';
-                            stmt += '(\'testuser@example.com\',\'$2b$12$Mz2M7ny.8nvRVIqbhXe9VORFRC/3GkvM.ttv5CRksJXa5hsZxB5gy\',\'Test\',\'User\',\'user\',\'USERID0123456789\',\'user\',\'2025-08-16 15:45:00.000000\',null)';
+                            stmt += '(\'testuser@example.com\',\'$2b$12$Mz2M7ny.8nvRVIqbhXe9VORFRC/3GkvM.ttv5CRksJXa5hsZxB5gy\',\'Test\',\'User\',\'user\',\'USERID0123456789\',\'active\',\'2025-08-16 15:45:00.000000\',null)';
                             connection.query(stmt, function(err, rows, fields) {
 //                              console.log('TEST: After INSERT INTO user err=', err, ' rows=', rows);
                                 if (err) throw err;
