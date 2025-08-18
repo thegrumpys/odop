@@ -9,7 +9,7 @@ This topic covers various points related to ODOP user accounts.
  - [Sign In](userAccounts.html#signin)  
  - [User Name](userAccounts.html#username)  
  - [Session Duration](userAccounts.html#sessionduration)  
- - [Saving Designs](userAccounts.html#savingdesigns)  
+ - [Saving and Restoring Designs](userAccounts.html#savingdesigns)  
  - [Personalize Default Designs](userAccounts.html#defaultdesigns)  
  - [Password Reset](userAccounts.html#passwordReset)  
  - [Troubleshooting Sign In Issues](userAccounts.html#troubleshooting)  
@@ -105,14 +105,18 @@ ___
 <a id="savingdesigns"></a>  
 ___
 
-## Saving Designs  
+## Saving and Restoring Designs  
 Once an ODOP Account is established, it is possible to use the 
 [File : Save As and File : Save](/docs/Help/htt.html#fileSaveAndSaveAs) 
 menu items to save designs into the 
-[ODOP Design Library](/docs/Help/terminology.html#designLib).
+[ODOP Design Library](/docs/Help/terminology.html#designLib). 
+Designs saved while signed in are private and 
+can be accessed with [File : Open](/docs/Help/menus.html#FileOpen) 
+only when signed in with the account (email address and current password) that created them.
 
-Similarly, the [File : Export](/docs/Help/menus.html#FileExport) menu item allows 
-design data to be preserved in the user's local file system.  
+See also:  
+ - [File : Export](/docs/Help/menus.html#FileExport)  
+ - [File : Import](/docs/Help/menus.html#FileImport)  
   
 ___
 
@@ -120,9 +124,17 @@ ___
 ___
 
 ## Personalize Default Designs  
-It is possible to [Personalize Default Designs](/docs/Help/defaultDesigns.html). 
-Specifically, by saving "on top of" a system design (marked "[ReadOnly]"), 
-a private design can take the place of system provided default designs. 
+It is possible to personalize [Default Designs](/docs/Help/defaultDesigns.html). 
+Specifically, by saving "on top of" (using the exact same name) a system default design 
+(one that is marked "[ReadOnly]"), 
+a private design takes the place of system provided default designs. 
+
+For example, if you open the system design named "Startup_Metric", make changes to it, 
+and then **File : Save**, the new default metric design will contain those changes. 
+A system default design is marked "[ReadOnly]".
+A personalized default design is not marked.  
+
+Deleting the personalized default design will restore access to the system default design of that name.
 
 ___
 
