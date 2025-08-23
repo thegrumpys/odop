@@ -1,6 +1,6 @@
 # User Accounts
 
-This topic covers various points related to ODOP user accounts. 
+Everything that you need to know about ODOP user accounts. 
 
 ### On this page:  
  - [Overview](userAccounts.html#overview)  
@@ -8,10 +8,12 @@ This topic covers various points related to ODOP user accounts.
  - [Screen Capture of Sign In Page](userAccounts.html#signinscreencap)  
  - [Sign In](userAccounts.html#signin)  
  - [User Name](userAccounts.html#username)  
+ - [Password](userAccounts.html#passwd)  
  - [Session Duration](userAccounts.html#sessionduration)  
  - [Saving and Restoring Designs](userAccounts.html#savingdesigns)  
  - [Personalize Default Designs](userAccounts.html#defaultdesigns)  
  - [Password Reset](userAccounts.html#passwordReset)  
+ - [Other Account Maintenance](userAccounts.html#acctmaint)  
  - [Troubleshooting Sign In Issues](userAccounts.html#troubleshooting)  
  - [Sign Out](userAccounts.html#signout)  
 
@@ -21,10 +23,11 @@ ___
 ___
 
 ## Overview  
-A user account is **not** required to operate most features of the software. 
-In order to save designs into the cloud-based (on-line) [ODOP Design Library](/docs/Help/terminology.html#designLib), 
-it is necessary to establish a user account with associated email address and password 
-so as to keep those designs private. 
+You can use most ODOP features without creating an account. 
+However, to save designs into the cloud-based (on-line) [ODOP Design Library](/docs/Help/terminology.html#designLib), 
+and keep them private, it is necessary to establish a user account with associated email address and password.  
+
+In addition, having an account also allows you to [Personalize Default Designs](userAccounts.html#defaultdesigns).  
 
 See Also:   
  - [Data Retention Policy](Legal/dataRetentionPolicy.html)   
@@ -36,23 +39,23 @@ ___
 ___
 
 ## Sign up  
-You can sign up for a private account within the app. 
-[launch the ODOP app](/docs/Help/launchODOP.html) from the SpringDesignSoftware.org home page, 
-Getting Started page or any of the three spring type pages. 
-To establish a free private account, 
-push the "**Sign In...**" button at the left of the menu bar and then 
-use the "**Sign up**" (Self-Service Registration) feature at the lower right of the Sign In page. 
-After responding to an activation email message, 
-your account will be ready for immediate sign-in.  
+You can create a free private account directly within the app:  
+1. [launch the ODOP app](/docs/Help/launchODOP.html) from the SpringDesignSoftware.org home page, 
+Getting Started page or any spring type page. 
+1. Push the "**Sign In...**" button at the left of the menu bar.  
+1. Use the "**Sign up**" (Self-Service Registration) feature at the lower right of the Sign In page.  
+1. Follow the prompts and confirm your account via the activation email.
+1. Once confirmed, you can sign in immediately.  
 
-Alternatively, send a request to: **Info@SpringDesignSoftware.org**. 
-You will receive a reply message (welcome letter) with instructions on how to complete creating your account. 
+Alternative sign-up method:  
+Send a message to **Info@SpringDesignSoftware.org** to request an account. 
+You will receive a reply message (welcome letter) with further instructions. 
 This alternative contains one step that is not automated, 
 so expect a delay of hours to a day or so. 
-The welcome letter includes instructions on how to establish a password and if desired, 
-change it in the future.  
+The welcome letter includes instructions on how to establish a password and later  
+change it.  
 
-See the [Data Retention Policy](Legal/dataRetentionPolicy.html) for long-term data storage policies.  
+Tip: Review the [Data Retention Policy](Legal/dataRetentionPolicy.html) for long-term data storage.  
 
 ___
 
@@ -68,9 +71,10 @@ ___
 ___
 
 ## Sign in 
-Once you have established an email address and password, 
-[launch the ODOP app](/docs/Help/launchODOP.html) and push the "**Sign In...**" button at the left of the menu bar 
-in order to get to the Sign In page. 
+Once your account is set up:  
+1. [launch the ODOP app](/docs/Help/launchODOP.html) 
+1. Push the "**Sign In...**" button at the left of the menu bar. 
+1. Enter your email address and password.   
 
 ___
 
@@ -79,10 +83,27 @@ ___
 
 ## User Name  
 An account username must be in the form of an email address. 
+Specifically, it should be in the form of "name@example.com".  
+
 As noted in our [Privacy Notice](Legal/PrivacyStatement.html), 
-your personal information will be secure and not abused. 
-If you have any remaining concerns on this point, 
-using an email account different than your primary email account is a reasonable approach. 
+your personal information is secure and will not be misused. 
+If you prefer, you may use a secondary email address instead of your primary one. 
+
+___
+
+<a id="passwd"></a>  
+___
+
+## Password   
+Passwords must include: 
+ - At least 8 characters
+ - At least one lowercase letter
+ - At least one uppercase letter
+ - At least one number 
+ 
+Passwords are maintained in a one-way encrypted form. 
+While it is not possible to recover an existing password, 
+you can [establish a new one](userAccounts.html#passwordReset).  
  
 ___
 
@@ -90,12 +111,14 @@ ___
 ___
 
 ## Session Duration  
-Once signed in, your user session will remain active for as long as the browser window (tab) 
-associated with the app exists and your Internet connection is maintained. 
+Your session remains active as long as:
+ - The browser browser window (tab) running the app stays open
+ - Your Internet connection is maintained.  
+
 After multiple hours of inactivity, a browser refresh will require a new login.  
 
-You should save frequently as once the browser window or tab is closed, 
-any unsaved design in progress may be lost. 
+**Important:**  
+Save your work frequently. Closing the browser tab or window may lose any unsaved designs.  
 
 See Also:   
  - [AutoSave](/docs/Help/autoSave.html). 
@@ -106,13 +129,13 @@ ___
 ___
 
 ## Saving and Restoring Designs  
-Once an ODOP Account is established, it is possible to use the 
-[File : Save As and File : Save](/docs/Help/htt.html#fileSaveAndSaveAs) 
-menu items to save designs into the 
-[ODOP Design Library](/docs/Help/terminology.html#designLib). 
-Designs saved while signed in are private and 
-can be accessed with [File : Open](/docs/Help/menus.html#FileOpen) 
-only when signed in with the account (email address and current password) that created them.
+With an ODOP account, you can:
+ - Save designs into the [ODOP Design Library](/docs/Help/terminology.html#designLib) using
+ [File : Save As or File : Save](/docs/Help/htt.html#fileSaveAndSaveAs). 
+ - Access saved designs with [File : Open](/docs/Help/menus.html#FileOpen).  
+ 
+Designs saved while signed in are private and can only be accessed when signed in 
+with the account (email address and current password) that created them.
 
 See also:  
  - [File : Export](/docs/Help/menus.html#FileExport)  
@@ -124,17 +147,17 @@ ___
 ___
 
 ## Personalize Default Designs  
-It is possible to personalize [Default Designs](/docs/Help/defaultDesigns.html). 
-Specifically, by saving "on top of" (using the exact same name) a system default design 
-(one that is marked "[ReadOnly]"), 
-a private design takes the place of system provided default designs. 
+You can customize [Default Designs](/docs/Help/defaultDesigns.html) 
+by by saving over them with the same name. 
+ - System default designs are marked **[ReadOnly]**.  
+ - Your personalized version will replace the system default and will not be marked **[ReadOnly]**.
 
-For example, if you open the system design named "Startup_Metric", make changes to it, 
-and then **File : Save**, the new default metric design will contain those changes. 
-A system default design is marked "[ReadOnly]".
-A personalized default design is not marked.  
+**Example:**  
+Open the system design "Startup_Metric", make changes, 
+and use **File : Save As** to save it with the name "Startup". 
+Your metric version will now load by default.
 
-Deleting the personalized default design will restore access to the system default design of that name.
+Deleting the customized default design will restore access to the system default design of that name.
 
 ___
 
@@ -143,15 +166,28 @@ ___
 
 ## Password Reset  
 To change a password or recover from a lost password after account creation is complete: 
- - [launch the ODOP app](/docs/Help/launchODOP.html) 
- - select the "**Sign In...**" button at the left of the menu bar 
- - select "**Forgot password?**" on the Sign In page 
- - provide your email address on the "**Reset Password**" page and click "**Reset via email**"
+ - [Launch the ODOP app](/docs/Help/launchODOP.html) 
+ - Select the "**Sign In...**" button at the left of the menu bar 
+ - Select "**Forgot password?**" on the Sign In page 
+ - provide your email address on the "**Reset Password**" page and click "**Reset via email**" 
  - Check for an email message. If not found, be sure to check your spam/junk mail folder. 
- - Follow the instructions in that email message 
+ - Push the "Reset Password" button in that email message 
+ - A new tab opens.  Enter the new password.  Push the "Reset Password and Close Tab" button 
+ - Confirm that you are on the original tab containing the ODOP app.  Push the "Go to Home" button. 
+ - You can now sign in with the new password
  
  **Note:** The validation email message expires after 24 hours.  
- If necessary, use a "Resend Change Password Email" button to continue.  
+ If expired, use a "Resend Change Password Email" button to continue.  
+___
+
+<a id="acctmaint"></a>  
+___
+
+## Other Account Maintenance
+
+User self-service facilities for deleting accounts, changing user name and email address 
+are not yet available. 
+Please [Contact Us](/docs/About/ContactUs.html)  
 
 ___
 
@@ -159,10 +195,11 @@ ___
 ___
 
 ## Troubleshooting sign in issues 
- - Be sure to enter your complete email address in the "Email" field of the Sign In page.  
- - If you encounter a message referring to an expired password change, click the associated
-  “Resend Change Password Email” button.
- - [Contact Us](/docs/About/ContactUs.html)
+ - Be sure to enter your complete email address in the "Email" field of the Sign In page. 
+ For example, it should be in the form of "name@example.com".  
+ - If you encounter a message referring to an expired registration confirmation or password change, 
+ click the associated “Resend Change Password Email” button.  
+ - [Contact Us](/docs/About/ContactUs.html)  
 
 ___
 
