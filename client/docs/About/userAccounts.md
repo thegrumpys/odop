@@ -165,41 +165,45 @@ ___
 ___
 
 ## Password Reset  
-To change a password or recover from a lost password after account creation is complete: 
- - [Launch the ODOP app](/docs/Help/launchODOP.html) 
- - Select the "**Sign In...**" button at the left of the menu bar 
- - Select "**Forgot password?**" on the Sign In page 
- - provide your email address on the "**Reset Password**" page and click "**Reset via email**" 
- - Check for an email message. If not found, be sure to check your spam/junk mail folder. 
- - Push the "Reset Password" button in that email message 
- - A new tab opens.  Enter the new password.  Push the "Reset Password and Close Tab" button 
- - Confirm that you are on the original tab containing the ODOP app.  Push the "Go to Home" button. 
- - You can now sign in with the new password
+To change a password or recover from a lost password: 
+1. [Launch the ODOP app](/docs/Help/launchODOP.html) 
+1. Push the "**Sign In...**" button at the left of the menu bar 
+1. Select "**Forgot password?**" on the Sign In page 
+1. Enter your email address on the "**Reset Password**" page and click "**Reset via email**" 
+1. Check your inbox (and spam/junk folder) for the reset email message. 
+1. Push the "**Reset Password**" button in that email message 
+1. In the new tab, enter your new password and push the "**Reset Password and Close Tab**" button 
+1. Confirm that you are on the original tab containing the ODOP app and push the "**Go to Home**" button. 
+1. Sign in with your new password
  
- **Note:** The validation email message expires after 24 hours.  
- If expired, use a "Resend Change Password Email" button to continue.  
+ **Note:**  
+ The validation email message expires after 24 hours. 
+ If it has expired, use a "**Resend Change Password Email**" button on the Sign In page to continue.  
+ 
 ___
 
 <a id="acctmaint"></a>  
 ___
 
 ## Other Account Maintenance
-
-User self-service facilities for deleting accounts, changing user name and email address 
-are not yet available. 
-Please [Contact Us](/docs/About/ContactUs.html)  
+Currently, you cannot use self-service to: 
+ - delete your account  
+ - change your user name
+ - change your email address  
+ 
+Please [Contact Us](/docs/About/ContactUs.html) for assistance.  
 
 ___
 
 <a id="troubleshooting"></a>  
 ___
 
-## Troubleshooting sign in issues 
- - Be sure to enter your complete email address in the "Email" field of the Sign In page. 
+## Troubleshooting Sign In Issues 
+ - Be sure to enter your full email address in the "Email" field of the Sign In page. 
  For example, it should be in the form of "name@example.com".  
- - If you encounter a message referring to an expired registration confirmation or password change, 
+ - If you see an expired confirmation or password change message, 
  click the associated “Resend Change Password Email” button.  
- - [Contact Us](/docs/About/ContactUs.html)  
+ - If problems persist, [Contact Us](/docs/About/ContactUs.html)  
 
 ___
 
@@ -207,9 +211,9 @@ ___
 ___
 
 ## Sign Out
-In order to sign out, use the "Sign-out" button to the left of the File menu  
-
-&nbsp;
+Push the "Sign-out" button to the left of the File menu  
+ 
+___ 
 
 See Also:   
  - [Data Retention Policy](Legal/dataRetentionPolicy.html)   
@@ -217,8 +221,8 @@ See Also:
  
 ___ 
  
-When invoked from the ODOP Sign In, this page opens in a new browser tab. 
-Switch tabs in order to return to that Sign In page or simply close this tab. 
+**Note:**  
+If you opened this page from the ODOP Sign In screen, it will appear in a new browser tab. Switch back to the Sign In tab or close this one to return.
 
 &nbsp; 
 
