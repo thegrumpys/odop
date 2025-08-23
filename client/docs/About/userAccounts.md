@@ -101,7 +101,6 @@ Passwords must include:
  - At least one uppercase letter
  - At least one number 
  
-Passwords are maintained in a one-way encrypted form. 
 While it is not possible to recover an existing password, 
 you can [establish a new one](userAccounts.html#passwordReset).  
  
