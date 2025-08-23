@@ -128,7 +128,7 @@ function renderTemplate(templatePath, replacements = {}) {
 
 async function sendConfirmationEmail(email, first_name, last_name, token) {
   const frontUrl = process.env.FRONT_URL;
-  const confirmUrl = `${process.env.FRONT_URL}/confirm?token=${token}`;
+  const confirmUrl = `${process.env.FRONT_URL}/confirm?token=${token}&email=${email}`;
   const html = renderTemplate(path.join(__dirname, 'emails', 'confirm.html'), { email, first_name, last_name, frontUrl, confirmUrl });
 
   const mailOptions = {
@@ -508,6 +508,7 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, as
 //==================================================================================================
 // usage_log
 app.post('/api/v1/usage_log', async (req, res) => {
+//  console.log('@@@/api/v1/usage_log@@@',JSON.stringify(req.session));
   var ip_address;
   var note;
   ip_address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -705,7 +706,7 @@ app.post('/api/v1/register', async (req, res) => {
 // CONFIRM
 app.get('/api/v1/confirm', async (req, res) => {
   const { token } = req.query;
-//  console.log('token=',token);
+//  console.log('/api/v1/confirm','token=',token);
   try {
     // Does a matching confirmation token exist
     const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ? AND expires_at > NOW()', [token, 'confirm']);
@@ -857,11 +858,11 @@ app.post('/api/v1/reset-password', async (req, res) => {
 // HAS-RESET-TOKEN
 app.get('/api/v1/has-reset-token', async (req, res) => {
   const { token } = req.query;
-//  console.log('token=',token);
+//  console.log('/api/v1/has-reset-token',token=',token);
   try {
     // Does a matching reset token exist
     const [rows] = await db.execute('SELECT email FROM token WHERE token = ? AND type = ? AND expires_at > NOW()', [token, 'reset']);
-//    console.log('/api/v1/confirm','rows=',rows,'rows.length=',rows.length,'!rows.length=',!rows.length);
+//    console.log('/api/v1/has-reset-token','rows=',rows,'rows.length=',rows.length,'!rows.length=',!rows.length);
     if (!rows.length) {
       sendMessage(res, 'No outstanding password change exists or has expired.', 'error', null, 401);
       return;
