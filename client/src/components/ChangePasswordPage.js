@@ -146,9 +146,9 @@ export default function ChangePasswordPage() {
                     <p>Password requirements:</p>
                     <ul>
                       <li>At least 8 characters</li>
-                      <li>A lowercase letter</li>
-                      <li>An uppercase letter</li>
-                      <li>A number</li>
+                      <li>At least one lowercase letter</li>
+                      <li>At least one uppercase letter</li>
+                      <li>At least one number</li>
                     </ul>
                   </td>
                 </tr>

@@ -101,10 +101,10 @@ export default function RegisterForm() {
                 <tr>
                   <td className="px-5 text-start">
                     <ul>
-                      <li>At least 8 character(s)</li>
-                      <li>At least 1 number(s)</li>
-                      <li>At least 1 lowercase letter(s)</li>
-                      <li>At least 1 uppercase letter(s)</li>
+                      <li>At least 8 characters</li>
+                      <li>At least one lowercase letter</li>
+                      <li>At least one uppercase letter</li>
+                      <li>At least one number</li>
                     </ul>
                   </td>
                 </tr>
