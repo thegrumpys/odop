@@ -82,15 +82,15 @@ ___
 ## File : Save As and File : Save  
 A design investigation may evolve through a sequence of preliminary or candidate designs. 
 As each candidate design is established, it can be marked with a **File : Properties** comment 
-and saved into the design library with **File : Save As**. 
+and saved into the Design Library with **File : Save As**. 
 In particular, it may be desirable to save the current design before selecting a 
 new standard size or catalog item. 
 
-The design library is a database physically located on an Internet server, 
-a.k.a. "in the cloud". 
-Design information stored in the design library does not appear on the local storage of your computer. 
-In order to save designs into the design library it is necessary to sign into an ODOP user account. 
-See: [User Accounts](/docs/About/userAccounts.html). 
+The [ODOP Design Library](terminology.html#designLib) is a database physically located on 
+an Internet server, a.k.a. "in the cloud". 
+Design information stored in the Design Library does not appear on the local storage of your computer. 
+In order to save designs into the Design Library it is necessary to sign into an 
+[ODOP User Account](/docs/About/userAccounts.html).  
 
 ___
 
@@ -309,12 +309,7 @@ ___
 ___
 
 ## Password reset 
-If you need to reset the password to your ODOP account: 
- - [launch the ODOP:Spring app](/docs/Help/launchODOP.html) 
- - select the "**Sign In...**" button at the left of the menu bar 
- - select "**Forgot password?**" on the Sign In page 
- - provide your email address on the "**Reset Password**" page and click "**Reset via email**"
- - Check for an email message. If not found, be sure to check your spam/junk mail folder.  
+See: [Password Reset](/docs/About/userAccounts.html#passwordReset) 
 
 Once you have established a password, 
 simply [launch the ODOP:Spring app](/docs/Help/launchODOP.html) 

@@ -46,7 +46,7 @@ See: [User Accounts](/docs/About/userAccounts.html) for details on
 how to obtain an account.   
 
 ## Screen capture of the sign-in page:   
-![Sign-in screen](/docs/Help/img/SignInWidgetExpanded.png "Sign-in screen")  
+![Sign-in screen](/docs/Help/img/SignInScreen.png "Sign-in screen")  
   
 &nbsp;
 
