@@ -191,7 +191,7 @@ export default function MainPage() {
             </RequireAdmin>
           </Nav>
           <RequireAuth>
-            <Nav className="me-auto">Welcome, {authState ? authState.first_name : 'Guest'} {authState ? authState.last_name : ''} {authState ? '('+authState.email+')' : ''}</Nav>
+            <Nav className="me-auto">Welcome, {authState ? authState.first_name : 'Guest'} {authState ? authState.last_name : ''}</Nav>
           </RequireAuth>
           <Nav>
             <Nav.Item>
