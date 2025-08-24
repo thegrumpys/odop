@@ -22,13 +22,14 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(session({
+  name: 'odop_session',
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
     secure: false, // set to true if using HTTPS
-    maxAge: 86400 * 1000 // 1 day
+    maxAge: 24 * 60 * 60 * 1000 // 1 day
   }
 }));
 app.use(function(req, res, next) { // Dump debugging output for each request
@@ -812,7 +813,10 @@ app.get('/api/v1/me', (req, res) => {
 // LOGOUT
 app.post('/api/v1/logout', (req, res) => {
 //  console.log('/logout');
-  req.session.destroy(() => sendMessage(res,'','',null,200));
+  req.session.destroy(() => {
+    res.clearCookie("odop_session");
+    sendMessage(res,'','',null,200);
+  });
 });
 
 //==================================================================================================
