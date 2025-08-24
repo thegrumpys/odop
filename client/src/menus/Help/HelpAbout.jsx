@@ -87,14 +87,7 @@ export default function HelpAbout() {
           <a href="https://github.com/thegrumpys/odop/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">ODOP License</a>
           <hr />
           ODOP Software Version: {release_version()}<br />
-          {authState && authState.isAdmin &&
-            <>
-              User Authenticated: {authState.isAuthenticated ? 'true' : 'false'}<br />
-              User Adminstrator: {authState.isAdmin ? 'true' : 'false'}<br />
-              User Email: {authState.isAuthenticated ? authState.email : 'Unknown'}<br />
-              User ClientId: {model_user === null ? 'Unknown' : model_user}<br />
-            </>
-          }
+          {authState && authState.isAuthenticated && <>User Email: {authState.email}<br /></>}
           Model: {model_jsontype} {model_type}<br />
           Model Units: {model_units}<br />
           Model Version: {model_version}<br />
