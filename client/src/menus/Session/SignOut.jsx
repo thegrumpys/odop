@@ -24,7 +24,7 @@ export default function SignOut() {
       const res2 = await axios.get('/api/v1/me');
 //      console.log('SignOut.toggle','res2=',res2);
       setAuthState(res2.data.authState);
-      logUsage('event', 'SignOut', { event_label: model_user });
+      logUsage('event', 'SignOut', { event_label: 'Email: ' + authState.email + ' ' + model_user });
       dispatch(changeUser(null));
       navigate('/');
     } catch (err) {

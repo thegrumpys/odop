@@ -6,7 +6,7 @@ import MessageAlert from '../components/MessageAlert';
 import { logUsage } from '../logUsage';
 
 export default function ChangePasswordPage() {
-//  console.log('ChangePasswordPage');
+  console.log('ChangePasswordPage');
   const [error, setError] = useState(null);
   const [searchParams] = useSearchParams();
   const [token, setToken] = useState('');
@@ -16,35 +16,35 @@ export default function ChangePasswordPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = searchParams.get('token');
-//    console.log('ChangePasswordPage.useEffect', 'token=', token);
-    if (!token) {
+    const token_parm = searchParams.get('token');
+    console.log('ChangePasswordPage.useEffect', 'token_parm=', token_parm);
+    if (!token_parm) {
       setStatus('error');
       return;
     } else {
-      setToken(token);
+      setToken(token_parm);
     }
-    const email = searchParams.get('email');
-//    console.log('ChangePasswordPage.useEffect', 'email=', email);
-    if (!email) {
+    const email_parm = searchParams.get('email');
+    console.log('ChangePasswordPage.useEffect', 'email_parm=', email_parm);
+    if (!email_parm) {
       setStatus('error');
       return;
     } else {
-      setEmail(email);
+      setEmail(email_parm);
     }
     try {
-      axios.get(`/api/v1/has-reset-token?token=${token}`)
+      axios.get(`/api/v1/has-reset-token?token=${token_parm}`)
         .then((res) => {
-          logUsage('event', 'HasResetToken', { event_label: 'Success: ' + JSON.stringify(res.data.error)});
+          logUsage('event', 'HasResetToken', { event_label: 'Email: ' + email_parm + ' Success: ' + JSON.stringify(res.data.error)});
         }).catch((err) => {
           setError(err.response.data.error);
           setStatus('error');
-          logUsage('event', 'HasResetToken', { event_label: 'Error: ' + JSON.stringify(err.response.data.error)});
+          logUsage('event', 'HasResetToken', { event_label: 'Email: ' + email_parm + ' Error: ' + JSON.stringify(err.response.data.error)});
         });
     } catch (err) {
       setError(err.response.data.error);
       setStatus('error');
-      logUsage('event', 'HasResetToken', { event_label: 'Error: ' + JSON.stringify(err.response.data.error)});
+      logUsage('event', 'HasResetToken', { event_label: 'Email: ' + email_parm + ' Error: ' + JSON.stringify(err.response.data.error)});
     }
   }, [searchParams]);
 
@@ -58,20 +58,20 @@ export default function ChangePasswordPage() {
 //          console.log('ChangePasswordPage.handleSubmit /change-password', 'res=', res);
           setError(res.data.error);
           setStatus('success')
-          logUsage('event', 'ChangePasswordPage', { event_label: 'Success: ' + JSON.stringify(res.data.error)});
+          logUsage('event', 'ChangePasswordPage', { event_label: 'Email: ' + email + ' Success: ' + JSON.stringify(res.data.error)});
           window.close();
         })
         .catch((err) => {
 //          console.log('ChangePasswordPage.handleSubmit /change-password', 'err=', err);
           setError(err.response.data.error);
           setStatus('error');
-          logUsage('event', 'ChangePasswordPage', { event_label: 'Error: ' + JSON.stringify(err.response.data.error)});
+          logUsage('event', 'ChangePasswordPage', { event_label: 'Email: ' + email + ' Error: ' + JSON.stringify(err.response.data.error)});
         });
     } catch (err) {
 //      console.error('ChangePasswordPage.handleSubmit', 'err=', err);
       setError(err.response.data.error);
       setStatus('error');
-      logUsage('event', 'ChangePasswordPage', { event_label: 'Error: ' + JSON.stringify(err.response.data.error)});
+      logUsage('event', 'ChangePasswordPage', { event_label: 'Email: ' + email + ' Error: ' + JSON.stringify(err.response.data.error)});
     }
   };
 //  console.log('ChangePasswordPage', 'status=', status,'error=',error);

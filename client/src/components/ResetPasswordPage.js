@@ -21,11 +21,11 @@ export default function ResetPasswordPage() {
 //      console.log('ResetPasswordPage.handleResetRequest','res=', res);
       setError(res.data.error);
       setSubmitted(true);
-      logUsage('event', 'ResetPasswordPage', { event_label: 'Success: ' + JSON.stringify(res.data.error)});
+      logUsage('event', 'ResetPasswordPage', { event_label: 'Email: ' + email + ' Success: ' + JSON.stringify(res.data.error)});
     } catch (err) {
 //      console.log('ResetPasswordPage,handleResetRequest','err=',err);
       setError(err.response.data.error);
-      logUsage('event', 'ResetPasswordPage', { event_label: 'Error: ' + JSON.stringify(err.response.data.error)});
+      logUsage('event', 'ResetPasswordPage', { event_label: 'Email: ' + email + ' Error: ' + JSON.stringify(err.response.data.error)});
     }
   };
 

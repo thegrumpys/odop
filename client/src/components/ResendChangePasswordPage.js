@@ -18,10 +18,10 @@ export default function ResendChangePasswordPage() {
       const res = await axios.post('/api/v1/resend?type=reset', { email });
       setError(res.data.error);
       setSubmitted(true);
-      logUsage('event', 'ResendChangePasswordPage', { event_label: 'Success: ' + JSON.stringify(res.data.error) });
+      logUsage('event', 'ResendChangePasswordPage', { event_label: 'Email: ' + email + ' Success: ' + JSON.stringify(res.data.error) });
     } catch (err) {
       setError(err.response.data.error);
-      logUsage('event', 'ResendChangePasswordPage', { event_label: 'Error: ' + JSON.stringify(err.response.data.error) });
+      logUsage('event', 'ResendChangePasswordPage', { event_label: 'Email: ' + email + ' Error: ' + JSON.stringify(err.response.data.error) });
     }
   };
 

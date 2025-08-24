@@ -24,11 +24,11 @@ export default function RegisterForm() {
 //      console.log('RegisterForm.handleRegister','res=', res);
       setSubmitted(true);
       setError(res.data.error);
-      logUsage('event', 'RegisterForm', { event_label: 'Success: ' + JSON.stringify(res.data.error)});
+      logUsage('event', 'RegisterForm', { event_label: 'Email: ' + email + ' Success: ' + JSON.stringify(res.data.error)});
     } catch (err) {
 //      console.log('RegisterForm.handleRegister','err=', err);
       setError(err.response.data.error);
-      logUsage('event', 'RegisterForm', { event_label: 'Error: ' + JSON.stringify(err.response.data.error)});
+      logUsage('event', 'RegisterForm', { event_label: 'Email: ' + email + ' Error: ' + JSON.stringify(err.response.data.error)});
     }
   };
 
