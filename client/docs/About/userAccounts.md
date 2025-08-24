@@ -74,7 +74,8 @@ ___
 Once your account is set up:  
 1. [launch the ODOP app](/docs/Help/launchODOP.html) 
 1. Push the "**Sign In...**" button at the left of the menu bar. 
-1. Enter your email address and password.   
+1. Enter your email address and password. 
+1. Push the "**Sign In...**" button.  
 
 ___
 
@@ -149,14 +150,29 @@ ___
 You can customize [Default Designs](/docs/Help/defaultDesigns.html) 
 by by saving over them with the same name. 
  - System default designs are marked **[ReadOnly]**.  
- - Your personalized version will replace the system default and will not be marked **[ReadOnly]**.
+ - Your personalized version will replace the system default and will not be marked **[ReadOnly]**.  
 
-**Example:**  
+Deleting the customized default design will restore access to the system default design of that name.  
+
+**Note:**  
+Customized designs are available only when signed in. 
+Designs that you see before sign in are the system default.  
+
+**Basic Example:**  
+Open the system design "Startup_Metric", make changes, 
+and use **File : Save** to save it with the name "Startup_Metric". 
+Once signed in, 
+your customized version will now load when "Startup_Metric" is accessed by **File : Open**  
+
+**Advanced Example:**  
+While the following example may provide a useful shortcut for experienced users,
+it may also provide an opportunity for unexpected behavior and confusion for less experienced users. 
+See [Default Designs](/docs/Help/defaultDesigns.html) for additional insights.  
+
 Open the system design "Startup_Metric", make changes, 
 and use **File : Save As** to save it with the name "Startup". 
-Your metric version will now load by default.
-
-Deleting the customized default design will restore access to the system default design of that name.
+Once signed in, 
+your customized metric version will now load when "Startup" is accessed by **File : Open**.
 
 ___
 
