@@ -376,6 +376,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, asyn
   var user = req.uid;
   var type = req.body.type;
   var name = req.params['name'];
+  name = name.replace(/[']/ig, "''"); // replace one single quote with an two single quotes throughout
 //  console.log('SERVER: In POST /api/v1/designtypes/' + type + '/designs/' + name, 'user=', user);
   if (req.uid === "null" || req.body === undefined || req.body.length === 0 || req.body.type === undefined || req.body.type !== req.params['type']) {
     sendMessage(res, '', '', null, 400);
@@ -425,6 +426,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async
   var user = req.uid;
   var type = req.body.type;
   var name = req.params['name'];
+  name = name.replace(/[']/ig, "''"); // replace one single quote with an two single quotes throughout
 //  console.log('SERVER: In PUT /api/v1/designtypes/' + type + '/designs/' + name, 'user=', user);
   if (req.uid === "null" || req.body === undefined || req.body.length === 0 || req.body.type === undefined || req.body.type !== req.params['type']) {
     sendMessage(res, '', '', null, 400);
