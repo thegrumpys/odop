@@ -6,7 +6,7 @@ import MessageAlert from '../components/MessageAlert';
 import { logUsage } from '../logUsage';
 
 export default function ChangePasswordPage() {
-//  console.log('ChangePasswordPage');
+  console.log('ChangePasswordPage');
   const [error, setError] = useState(null);
   const [searchParams] = useSearchParams();
   const [token, setToken] = useState('');
@@ -17,7 +17,7 @@ export default function ChangePasswordPage() {
 
   useEffect(() => {
     const token_parm = searchParams.get('token');
-//    console.log('ChangePasswordPage.useEffect', 'token=', token);
+    console.log('ChangePasswordPage.useEffect', 'token_parm=', token_parm);
     if (!token_parm) {
       setStatus('error');
       return;
@@ -25,7 +25,7 @@ export default function ChangePasswordPage() {
       setToken(token_parm);
     }
     const email_parm = searchParams.get('email');
-//    console.log('ChangePasswordPage.useEffect', 'email=', email);
+    console.log('ChangePasswordPage.useEffect', 'email_parm=', email_parm);
     if (!email_parm) {
       setStatus('error');
       return;
