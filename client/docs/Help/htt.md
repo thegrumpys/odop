@@ -1,6 +1,7 @@
 # Hints, Tips and Tricks
 
-This topic covers various points that may allow a better user experience with the ODOP software. 
+This page covers various points that may allow a better user experience with the ODOP software. 
+It is not structured as an FAQ, but the content is similar.  
 
 ### On this page:  
  - [How to approach a new design problem](htt.html#newDesign)  
@@ -175,17 +176,16 @@ ___
 <a id="browserRefresh"></a>  
 ___
 
-## Browser refresh and back / forward 
-Unfortunately, using the browser Reload a.k.a. "Refresh" function with a single page 
-web app such as ODOP will likely result in a complete reset of the main page and 
-potential loss of a user's work since the previous Save operation. 
-Similarly, use of the browser "Back" function followed by "Forward" will likely result in 
-reset of the main page. 
+## Browser refresh and back / forward  
+Browser operations such as refresh (reload) and back / forward are particularly challenging 
+for a [Single Page Applications](https://en.wikipedia.org/wiki/Single-page_application) such as ODOP. 
+In these situations, the current release of ODOP may incur a complete reset of the main page and 
+potential loss of a user's work since the previous Save operation.  
 
 The [AutoSave](autoSave.html) feature can partially mitigate the consequences of an unintended 
-browser reset (refresh). 
+browser refresh (reload). 
 
-Note: 
+**Note:**  
 The on-line documentation pages (Help) are not subject to the same concerns about browser refresh 
 and browser back / forward. 
 
