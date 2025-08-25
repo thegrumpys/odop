@@ -4,6 +4,7 @@ export function getExecuteNames(isAdmin = false) {
       result = [
         'Br590TestScript',        // Script providing test cases for Issue / Branch 590 (Model validity determination & response)
         'increasePrecision',      // Script to tweak Preference values for greater precision of search result
+        'isolationProofOfConcept',  // Script to demonstrate running an ODOP script in isolation (a new tab)
         'mkCompressionStartups',  // Script to make multiple Startup entries from Load Initial State
         'tutor8p3_TestCase',      // Script preserving the version of tutor8p3 showing failure in v4.3rc2
         'welcomeAdv',             // Script to guide novice users - Advanced view; spring type neutral
