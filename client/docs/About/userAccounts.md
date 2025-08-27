@@ -11,7 +11,7 @@ Everything that you need to know about ODOP user accounts.
  - [Password](userAccounts.html#passwd)  
  - [Session Duration](userAccounts.html#sessionduration)  
  - [Saving and Restoring Designs](userAccounts.html#savingdesigns)  
- - [Personalize System Provided Designs](userAccounts.html#defaultdesigns)  
+ - [Personalize System-Provided Designs](userAccounts.html#defaultdesigns)  
  - [Password Reset](userAccounts.html#passwordReset)  
  - [Other Account Maintenance](userAccounts.html#acctmaint)  
  - [Troubleshooting Sign In Issues](userAccounts.html#troubleshooting)  
@@ -28,7 +28,7 @@ A free account is required to save designs to the cloud-based (on-line)
 [ODOP Design Library](/docs/Help/terminology.html#designLib) and keep them private. 
 Accounts use an email address and password for secure access.  
 
-Having an account also allows you to [Personalize System Provided Designs](userAccounts.html#defaultdesigns).  
+Having an account also allows you to [Personalize System-Provided Designs](userAccounts.html#defaultdesigns).  
 
 See Also:   
  - [Data Retention Policy](Legal/dataRetentionPolicy.html)   
@@ -149,15 +149,15 @@ ___
 <a id="defaultdesigns"></a>  
 ___
 
-## Personalize System Provided Designs  
-You can customize [System Provided Designs](/docs/Help/defaultDesigns.html) 
+## Personalize System-Provided Designs  
+When signed in, you can customize [System-Provided Designs](/docs/Help/defaultDesigns.html) 
 by by saving over them with the same name. 
- - System provided designs are marked **[ReadOnly]**.  
- - Your personalized version will replace the system default and will **not** be marked **[ReadOnly]**.  
+ - System-provided designs are marked **[ReadOnly]**.  
+ - Your personalized version will replace the system-provided design and will **not** be marked **[ReadOnly]**.  
 
-To restore the original system provided design, delete your customized version.  
+To restore the original system-provided design, delete your customized version.  
 
-See [System Provided Designs](/docs/Help/defaultDesigns.html) for more details.  
+See [System-Provided Designs](/docs/Help/defaultDesigns.html) for more details.  
 
 ___
 
