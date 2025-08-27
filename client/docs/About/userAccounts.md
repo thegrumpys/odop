@@ -11,7 +11,7 @@ Everything that you need to know about ODOP user accounts.
  - [Password](userAccounts.html#passwd)  
  - [Session Duration](userAccounts.html#sessionduration)  
  - [Saving and Restoring Designs](userAccounts.html#savingdesigns)  
- - [Personalize Default Designs](userAccounts.html#defaultdesigns)  
+ - [Personalize System-Provided Designs](userAccounts.html#defaultdesigns)  
  - [Password Reset](userAccounts.html#passwordReset)  
  - [Other Account Maintenance](userAccounts.html#acctmaint)  
  - [Troubleshooting Sign In Issues](userAccounts.html#troubleshooting)  
@@ -23,11 +23,12 @@ ___
 ___
 
 ## Overview  
-You can use most ODOP features without creating an account. 
-However, to save designs into the cloud-based (on-line) [ODOP Design Library](/docs/Help/terminology.html#designLib), 
-and keep them private, it is necessary to establish a user account with associated email address and password.  
+Most ODOP features work without an account.
+A free account is required to save designs to the cloud-based (on-line) 
+[ODOP Design Library](/docs/Help/terminology.html#designLib) and keep them private. 
+Accounts use an email address and password for secure access.  
 
-In addition, having an account also allows you to [Personalize Default Designs](userAccounts.html#defaultdesigns).  
+Having an account also allows you to [Personalize System-Provided Designs](userAccounts.html#defaultdesigns).  
 
 See Also:   
  - [Data Retention Policy](Legal/dataRetentionPolicy.html)   
@@ -39,15 +40,16 @@ ___
 ___
 
 ## Sign up  
-You can create a free private account directly within the app:  
-1. [launch the ODOP app](/docs/Help/launchODOP.html) from the SpringDesignSoftware.org home page, 
-Getting Started page or any spring type page. 
-1. Push the "**Sign In...**" button at the left of the menu bar.  
-1. Use the "**Sign up**" (Self-Service Registration) feature at the lower right of the Sign In page.  
-1. Follow the prompts and confirm your account via the activation email.
-1. Once confirmed, you can sign in immediately.  
+You can create a free private account in two ways:  
 
-Alternative sign-up method:  
+**Option 1 – Self‑Service Registration** from within the app:  
+1. [launch the ODOP app](/docs/Help/launchODOP.html) from the SpringDesignSoftware.org home page, 
+Getting Started page or any spring type page.  
+1. Push the "**Sign In...**" button at the left of the menu bar.  
+1. Use the "**Sign up**" feature at the lower right of the Sign In page.  
+1. Follow the prompts and confirm your account via the activation email. Your account is ready immediately.  
+
+**Option 2 – Email Request**  
 Send a message to **Info@SpringDesignSoftware.org** to request an account. 
 You will receive a reply message (welcome letter) with further instructions. 
 This alternative contains one step that is not automated, 
@@ -55,7 +57,8 @@ so expect a delay of hours to a day or so.
 The welcome letter includes instructions on how to establish a password and later  
 change it.  
 
-Tip: Review the [Data Retention Policy](Legal/dataRetentionPolicy.html) for long-term data storage.  
+See Also:   
+ - [Data Retention Policy](Legal/dataRetentionPolicy.html) 
 
 ___
 
@@ -88,7 +91,7 @@ Specifically, it should be in the form of "name@example.com".
 
 As noted in our [Privacy Notice](Legal/PrivacyStatement.html), 
 your personal information is secure and will not be misused. 
-If you prefer, you may use a secondary email address instead of your primary one. 
+If preferred, you may use a secondary email address instead of your primary one. 
 
 ___
 
@@ -115,7 +118,7 @@ Your session remains active as long as:
  - The browser browser window (tab) running the app stays open
  - Your Internet connection is maintained.  
 
-After multiple hours of inactivity, a browser refresh will require a new login.  
+After multiple hours of inactivity, a browser refresh will require you to sign in again.  
 
 **Important:**  
 Save your work frequently. Closing the browser tab or window may lose any unsaved designs.  
@@ -129,7 +132,7 @@ ___
 ___
 
 ## Saving and Restoring Designs  
-With an ODOP account, you can:
+When signed in, you can:
  - Save designs into the [ODOP Design Library](/docs/Help/terminology.html#designLib) using
  [File : Save As or File : Save](/docs/Help/htt.html#fileSaveAndSaveAs). 
  - Access saved designs with [File : Open](/docs/Help/menus.html#FileOpen).  
@@ -146,33 +149,15 @@ ___
 <a id="defaultdesigns"></a>  
 ___
 
-## Personalize Default Designs  
-You can customize [Default Designs](/docs/Help/defaultDesigns.html) 
+## Personalize System-Provided Designs  
+When signed in, you can customize [System-Provided Designs](/docs/Help/defaultDesigns.html) 
 by by saving over them with the same name. 
- - System default designs are marked **[ReadOnly]**.  
- - Your personalized version will replace the system default and will not be marked **[ReadOnly]**.  
+ - System-provided designs are marked **[ReadOnly]**.  
+ - Your personalized version will replace the system-provided design and will **not** be marked **[ReadOnly]**.  
 
-Deleting the customized default design will restore access to the system default design of that name.  
+To restore the original system-provided design, delete your customized version.  
 
-**Note:**  
-Customized designs are available only when signed in. 
-Designs that you see before sign in are the system default.  
-
-**Basic Example:**  
-Open the system design "Startup_Metric", make changes, 
-and use **File : Save** to save it with the name "Startup_Metric". 
-Once signed in, 
-your customized version will now load when "Startup_Metric" is accessed by **File : Open**  
-
-**Advanced Example:**  
-While the following example may provide a useful shortcut for experienced users,
-it may also provide an opportunity for unexpected behavior and confusion for less experienced users. 
-See [Default Designs](/docs/Help/defaultDesigns.html) for additional insights.  
-
-Open the system design "Startup_Metric", make changes, 
-and use **File : Save As** to save it with the name "Startup". 
-Once signed in, 
-your customized metric version will now load when "Startup" is accessed by **File : Open**.
+See [System-Provided Designs](/docs/Help/defaultDesigns.html) for more details.  
 
 ___
 
@@ -203,10 +188,19 @@ ___
 ## Other Account Maintenance
 Currently, you cannot use self-service to: 
  - delete your account  
- - change your user name
  - change your email address  
+ - change your first name or last name
  
-Please [Contact Us](/docs/About/ContactUs.html) for assistance.  
+Please [Contact Us](/docs/About/ContactUs.html) for assistance with these changes.  
+
+Where relatively few designs are involved, 
+there is an approach to moving to a new email address that can be accomplished without assistance.  
+1. When signed in to the original account, use the [Download All](/docs/Help/menus.html#FileDownloadAll) 
+feature to export all designs to a .ZIP file in local storage.  
+1. Expand the .ZIP file.  
+1. Create a new account with the new email address.  
+1. When signed in to the new account, import each design.  
+1. Sign in to the old account and delete all designs.  
 
 ___
 
@@ -237,7 +231,8 @@ See Also:
 ___ 
  
 **Note:**  
-If you opened this page from the ODOP Sign In screen, it will appear in a new browser tab. Switch back to the Sign In tab or close this one to return.
+When opened from the ODOP Sign In page, this page appears in a new browser tab. 
+Switch tabs or close this tab to return to Sign In.
 
 &nbsp; 
 

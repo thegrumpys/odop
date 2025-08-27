@@ -1,47 +1,81 @@
-# Default Designs
+# Default Designs  
+ODOP begins each session from an **existing design** rather than starting with a blank slate.  
 
-The ODOP software expects to start from an existing design.   
+## Design Types
+As explained in [Getting Started - less technical](/docs/Help/gettingStarted.html), 
+ODOP supports multiple [Design Types](/docs/Help/terminology.html#designTypes) 
+(for example, compression, extension and torsion springs). 
+You must must first choose a Design Type before selecting a specific design to start from.
 
-Looking at the screen capture of the **File : Open** menu below, 
-you can see that each "Design Type" contains one or more system provided designs marked "**[ReadOnly]**". 
-For each Design Type, the system provided design with the name "Startup" is the default starting design. 
-While these default designs named "Startup" utilize US Customary units (inches, pounds), 
-you can select an available system provided design with "_Metric" in the name in order to 
-utilize metric units (mm, newtons).   
+## System-Provided Designs  
+Each Design Type includes one or more **system-provided designs**, 
+identified in the **File : Open** menu marked "**[ReadOnly]**".  
 
-## Compression spring default designs   
+### Example: Compression Spring System-Provided Designs   
 ![Compression spring default designs](/docs/Help/img/FileOpen_defaultDesigns.png "File : Open default designs")  
 
-When logged into an [ODOP user account](/docs/About/userAccounts.html) 
-and saving designs into a private section of the cloud-based ODOP design library, 
-it is possible to save (**File : Save** menu item) a private design "on top of" 
-a system provided design of the same name. 
-This feature allows startup designs to be customized. 
-Your customized version will replace the system default and will not be marked "**[ReadOnly]**"  
+ - Designs named "**Startup**" use **US Customary units** (inches, pounds).  
+ - Designs with **Metric** in the name use **metric units** (millimeters, newtons).  
 
-Once such a private design is deleted, the underlying system design (marked "**[ReadOnly]**") 
-will again be available.  
+System-provided designs include several predefined constraints, but they are intentionally 
+[under-specified](designSituations.html).
 
-While designs carry design type (compression, extension, torsion, etc.) and units (US, metric) information, 
-they do not carry the system view (Advanced, Calculator, Reports) configuration.    
+The constraints established in the system-provided designs serve to guide the solution to realistic results. 
+For example, in coil spring designs, limits on quantities like 
+number of coils, deflection, spring index and factor of safety 
+prevent mathematically possible but physically unrealistic outcomes (for example, a negative inside diameter).  
 
-While the system provided designs have multiple constraints established, 
-as provided, they are "under specified". 
-For more information on this point see: [Design Situations](designSituations.html).   
+## Getting Started with a New Design
+1. Open a system-provided design. 
+1. Add or adjust constraints to reflect your design goals. 
+1. Use the [Search](/docs/Help/search.html) feature (Search button or **Action : Search** menu) 
+to check if a feasible solution is available. 
 
-The constraints established in the default designs serve to guide or contain the solution to 
-reasonable and expected results. 
-For example with coil springs, 
-limiting quanties like inside diameter, number of coils and deflection to be greater than 
-a small positive value reduces the chance of the solution process discovering that 
-while not realistically possible, it is mathematically possible for these quantities to be negative numbers.  
-
-To get started on a new design, open a system provided design and express goals for the new design as constraints. 
-Invoke the Search feature (Search button or **Action : Search** menu) to discover if a feasible solution is available. 
-More information on how to proceed is available in the tutorials (**Help : Tutorial...** menu) 
-and in other on-line Help topics such as 
+For step-by-step guidance, see:  
+ - The tutorials (**Help : Tutorial...** menu)  
+ - On-line Help topics such as 
 [Getting Started With the Spring Tutorial and Demo](gettingStartedSpring.html) and 
 [Intro Pages Overview](/docs/About/introPagesOverview.html).  
+
+**Note:**  
+Design files store their Design Type and units (US or metric), 
+but not the system view (Advanced, Calculator, Reports) configuration.  
+
+## Default Design  
+If ODOP needs to load a design automatically (for example, after a browser refresh), 
+it defaults to the Startup compression spring design in US Customary units.
+
+## Customizing System-Provided Designs  
+If you are signed in to an [ODOP user account](/docs/About/userAccounts.html) 
+you can save designs into the cloud-based [ODOP Design Library](/docs/Help/terminology.html#designLib). 
+
+You can overwrite a system-provided design by saving a private design with the same name:
+ - Your customized version will replace the system-provided version.  
+ - It will **not** be marked "[ReadOnly]".  
+ - If you delete your private version, the original system-provided design will reappear.
+
+**Note:**  
+Customized designs are available only when signed in. 
+Before signing in, you will see the original system-provided designs. 
+
+### Basic Example  
+1. Open Startup_Metric.  
+1. Make your changes.  
+1. Use **File : Save** to save it as Startup_Metric.  
+
+When signed in, your customized version will load whenever you open Startup_Metric.
+
+### Advanced Example &nbsp; (Use with Caution)  
+1. Open Startup_Metric.  
+1. Make changes.  
+1. Use **File : Save As** to save it as Startup.  
+
+When signed in, 
+your customized metric version will now load when "Startup" is accessed by **File : Open**.  
+
+While this example may provide a useful shortcut for experienced users,
+as the name no longer matches the units, 
+it may also provide an opportunity for unexpected behavior and confusion for less experienced users.  
 
 &nbsp;
 
