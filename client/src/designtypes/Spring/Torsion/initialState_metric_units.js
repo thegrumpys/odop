@@ -61,7 +61,7 @@ export const initialState = {
             "validmin": -Number.MAX_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.01,
-            "tooltip": "<Table><tr><td>Minimum operating load (Length L_1)</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/M_1.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Minimum operating load (moment)</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/M_1.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -77,7 +77,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "<Table><tr><td>Maximum operating load</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/M_2.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Maximum operating load (moment)</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/M_2.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
