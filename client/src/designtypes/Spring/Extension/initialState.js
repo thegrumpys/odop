@@ -612,6 +612,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
+            "tooltip": "mat_metric.json for metric units. Anything else for US IPS units",
             "type": "calcinput",
             "hidden": true
         },
