@@ -546,7 +546,7 @@ export const initialState = {
         {
             "input": true,
             "name": "Heat_Treat",
-            "value": "1",
+            "value": 1,
             "units": "",
             "format": "table",
             "table": "Spring/Torsion/heattreat",
