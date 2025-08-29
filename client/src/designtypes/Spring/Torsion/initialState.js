@@ -177,7 +177,7 @@ export const initialState = {
             "validmin": -Number.MAX_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "<Table><tr><td>Deflection from free to load point 1</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Deflect_1.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Deflection from free to operating point 1</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Deflect_1.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -193,7 +193,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "<Table><tr><td>Deflection from free to load point 2</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Deflect_2.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Deflection from free to operating point 2</td></tr><tr><td><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Deflect_2.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -225,7 +225,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Spring length at load point 1",
+            "tooltip": "Spring length at operating point 1",
             "type": "equationset",
             "hidden": false
         },
@@ -241,7 +241,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Spring length at load point 2",
+            "tooltip": "Spring length at operating point 2",
             "type": "equationset",
             "hidden": false
         },
@@ -337,7 +337,7 @@ export const initialState = {
             "validmin": -Number.MAX_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1000.0,
-            "tooltip": "Bending stress in body wire at load point 1",
+            "tooltip": "Bending stress in body wire at operating point 1",
             "type": "equationset",
             "hidden": false
         },
@@ -353,7 +353,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 10000.0,
-            "tooltip": "Bending stress in body wire at load point 2",
+            "tooltip": "Bending stress in body wire at operating point 2",
             "type": "equationset",
             "hidden": false
         },
@@ -385,7 +385,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Factor of safety at load point 2",
+            "tooltip": "Factor of safety at operating point 2",
             "type": "equationset",
             "hidden": false
         },
@@ -401,7 +401,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Factor of safety to achieve the target cycle life category. See on-line Help.",
+            "tooltip": "Factor of safety to achieve the target cycle life category.<br/>Uses Soderberg calculation.<br/>See description in on-line Help.",
             "type": "equationset",
             "hidden": false
         },
@@ -417,7 +417,7 @@ export const initialState = {
             "validmin": -Number.MAX_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 10000.0,
-            "tooltip": "Rough estimate of the average number of cycles to failure when cycling between point 1 and point 2. See on-line Help.",
+            "tooltip": "Rough estimate of the average number of cycles to failure when cycling between point 1 and point 2.<br/>Uses modified Goodman calculation.<br/> See Report 2 & on-line Help.",
             "type": "equationset",
             "hidden": false
         },
@@ -433,7 +433,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 10.0,
-            "tooltip": "Deflection of load point 2 as a percent of total safe deflection",
+            "tooltip": "Deflection of operating point 2 as a percent of total safe deflection",
             "type": "equationset",
             "hidden": false
         },
@@ -495,7 +495,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Property Calculation Method - Controls how material properties are determined and used.  1-Use values from material table  2-Specify Tensile, %_Ten_Bnd_Stat & %_Ten_Bnd_Endur  3-Specify allowable stresses: Stress_Lim_Bnd_Stat & Stress_Lim_Bnd_Endur",
+            "tooltip": "Property Calculation Method - Controls how material properties are determined and used. <br/>1 - Use values from material table <br/>2 - Specify Tensile,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  %_Tensile_Stat & %_Tensile_Endur <br/>3 - Specify allowable stresses: Stress_Lim_Stat & Stress_Lim_Endur",
             "type": "calcinput",
             "hidden": false
         },
@@ -511,7 +511,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Select wire material",
+            "tooltip": "Wire material<br/>Try Help Lookup 'material'",
             "type": "calcinput",
             "hidden": false
         },
@@ -539,7 +539,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Coil winding process temperature - Cold coiled vs. Hot wound",
+            "tooltip": "Coil winding process temperature<br/> - cold coiled vs. hot wound",
             "type": "calcinput",
             "hidden": false
         },
@@ -555,7 +555,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Selects heat treatment process",
+            "tooltip": "Post coiling heat treatment process<br/>See: Help Lookup 'heat'",
             "type": "calcinput",
             "hidden": false
         },
@@ -598,7 +598,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Select cycle life target. Confirm that FS_CycleLife MIN constraint is enabled to utilize the selected %_Tensile_Endur for the material.",
+            "tooltip": "Cycle life target.<br/><b>Important:</b> Confirm that FS_CycleLife MIN constraint is enabled. This is necessary to utilize the selected %_Tensile_Endur for the material.",
             "type": "calcinput",
             "hidden": false
         },
@@ -678,7 +678,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Wire tensile strength (computed as a function of wire diameter when Prop_Calc_Method=1; See on-line Help for details)",
+            "tooltip": "Wire tensile strength (computed as a function of wire diameter when Prop_Calc_Method=1).<br/>See on-line Help for details.",
             "type": "calcinput",
             "hidden": false
         },
