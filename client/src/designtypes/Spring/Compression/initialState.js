@@ -510,7 +510,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Wire material<br/>Try Help Lookup 'material'",
+            "tooltip": "Wire material<br/>Click in the field and then use the dropdown to select a supported material.<br/>See: Help Lookup <b>material</b>",
             "type": "calcinput",
             "hidden": false
         },
@@ -712,7 +712,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Select end type",
+            "tooltip": "End type<br/>Click in the field and then use the dropdown to select a supported end type",
             "type": "calcinput",
             "hidden": false
         },
@@ -744,7 +744,7 @@ export const initialState = {
             "validmin": -Number.MAX_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Adjusts calculation of L_Solid. Depends on End_Type. See on-line Help for details.",
+            "tooltip": "Adjusts calculation of L_Solid. Depends on End_Type.<br/>See on-line Help for details.",
             "type": "calcinput",
             "hidden": false
         },

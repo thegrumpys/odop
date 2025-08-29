@@ -490,7 +490,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 100.0,
-            "tooltip": "Stress Initial range low point - sets lower limit for Initial_Tension",
+            "tooltip": "Stress_Initial range low point<br/>Sets lower limit for Stress_Initial and ultimately, initial tension.",
             "type": "equationset",
             "hidden": false,
             "propagate": [{ name: "Stress_Initial", minmax: MIN }]
@@ -507,7 +507,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 100.0,
-            "tooltip": "Stress Initial range high point - sets upper limit for Initial_Tension",
+            "tooltip": "Stress_Initial range high point<br/>Sets upper limit for Stress_Initial and ultimately, initial tension.",
             "type": "equationset",
             "hidden": false,
             "propagate": [{ name: "Stress_Initial", minmax: MAX }]
@@ -570,7 +570,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Wire material<br/>Try Help Lookup 'material'",
+            "tooltip": "Wire material<br/>Click in the field and then use the dropdown to select a supported material.<br/>See: Help Lookup <b>material</b>",
             "type": "calcinput",
             "hidden": false
         },
@@ -853,7 +853,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Select end type",
+            "tooltip": "End type<br/>Click in the field and then use the dropdown to select a supported end type",
             "type": "calcinput",
             "hidden": false
         },
@@ -933,7 +933,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Hook Deflection Allowance - adds to Coils_A",
+            "tooltip": "Hook Deflection Allowance<br/>Adds to Coils_A",
             "type": "calcinput",
             "hidden": false
         },
