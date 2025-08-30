@@ -13,7 +13,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1,
-            "tooltip": "<Table><tr><td>Longest dimension</td></tr><tr><td><Image fluid src=\"/designtypes/Solid/tooltips/Length.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Longest dimension</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Solid/tooltips/Length.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -29,7 +29,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1,
-            "tooltip": "<Table><tr><td>Width dimension</td></tr><tr><td><Image fluid src=\"/designtypes/Solid/tooltips/Width.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Width dimension</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Solid/tooltips/Width.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -45,7 +45,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1,
-            "tooltip": "<Table><tr><td>Shortest dimension</td></tr><tr><td><Image fluid src=\"/designtypes/Solid/tooltips/Height.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Shortest dimension</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Solid/tooltips/Height.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -141,7 +141,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1,
-            "tooltip": "<Table><tr><td>Perimeter around width and height dimensions</td></tr><tr><td><Image fluid src=\"/designtypes/Solid/tooltips/Girth.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Perimeter around width and height dimensions</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Solid/tooltips/Girth.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -189,7 +189,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "<Table><tr><td>Volume times Density of the selected material. Shippers limit to 70 Lb.</td></tr><tr><td><Image fluid src=\"/designtypes/Solid/tooltips/Weight.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Volume times Density of the selected material. Shippers limit to 70 Lb.</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Solid/tooltips/Weight.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         }
