@@ -42,8 +42,10 @@ Design files store their Design Type and units (US or metric),
 but not the system view (Advanced, Calculator, Reports) configuration.  
 
 ## Default Design  
-If ODOP needs to load a design automatically (for example, after a browser refresh), 
-it defaults to the Startup compression spring design in US Customary units.
+If ODOP needs to automatically load a design (for example, after refreshing the browser), 
+it will open the default Startup compression spring design in U.S. Customary units. 
+This is the same as manually selecting **File : Open** and 
+choosing the Startup design from the Spring / Compression design type.  
 
 ## Customizing System-Provided Designs  
 If you are signed in to an [ODOP user account](/docs/About/userAccounts.html) 
