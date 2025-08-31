@@ -49,7 +49,7 @@ it defaults to the Startup compression spring design in US Customary units.
 If you are signed in to an [ODOP user account](/docs/About/userAccounts.html) 
 you can save designs into the cloud-based [ODOP Design Library](/docs/Help/terminology.html#designLib). 
 
-You can overwrite a system-provided design by saving a private design with the same name:
+You can over-ride a system-provided design by saving a private design with the same name:
  - Your customized version will over-ride the system-provided version.  
  - It will **not** be marked "[ReadOnly]".  
  - If you delete your private version, the original system-provided design will reappear.
