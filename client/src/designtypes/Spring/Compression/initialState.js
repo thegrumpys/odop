@@ -478,7 +478,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Compression spring design",
+            "tooltip": "<Table><tr><td>Compression spring design</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Compression/favicon.ico\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },
