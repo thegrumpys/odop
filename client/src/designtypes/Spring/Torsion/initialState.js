@@ -97,7 +97,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.001,
-            "tooltip": "<Table><tr><td>Empty space between each turn (not the same as pitch)</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Coil_Spacing.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Empty space between each turn<br/>(not the same as pitch)</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Coil_Spacing.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -113,7 +113,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "<Table><tr><td>Average of inside and outside diameters</td></tr><tr><td>Also: OD_Free-Wire_Dia</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Mean_Dia.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Average of inside and outside diameters. Also:<pre>Mean_Dia = OD_Free - Wire_Dia</pre></td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Compression/tooltips/Mean_Dia.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -161,7 +161,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.00001,
-            "tooltip": "<Table><tr><td>Spring rate (spring constant); slope of force-deflection curve</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Rate.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Spring rate (spring constant)<br/>Slope of force-deflection curve</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Torsion/tooltips/Rate.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -305,7 +305,7 @@ export const initialState = {
             "validmin": 1.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "Ratio of mean coil diameter (Mean_Dia) to wire diameter (Wire_Dia)",
+            "tooltip": "Ratio of mean coil diameter (Mean_Dia)<br/>to wire diameter (Wire_Dia)",
             "type": "equationset",
             "hidden": false
         },
@@ -480,6 +480,7 @@ export const initialState = {
             "cmax": 0,
             "sdlim": 0.0,
             "tooltip": "Torsion spring design",
+            "tooltip": "<Table><tr><td>Torsion spring design</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Torsion/favicon.ico\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },
@@ -511,7 +512,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Wire material<br/>Click in the field and then use the dropdown to select a supported material.<br/>See: Help Lookup <b>material</b>",
+            "tooltip": "Wire material<br/>See Help lookup: <b>material</b>",
             "type": "calcinput",
             "hidden": false
         },
@@ -758,7 +759,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "End type<br/>Click in the field and then use the dropdown to select a supported end type",
+            "tooltip": "End type<br/>See Help lookup: <b>End_Type</b>",
             "type": "calcinput",
             "hidden": false
         },

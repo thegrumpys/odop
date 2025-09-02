@@ -109,7 +109,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "<Table><tr><td>Average of inside and outside diameters</td></tr><tr><td>Also: OD_Free-Wire_Dia</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Compression/tooltips/Mean_Dia.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Average of inside and outside diameters. Also:<pre>Mean_Dia = OD_Free - Wire_Dia</pre></td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Compression/tooltips/Mean_Dia.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -141,7 +141,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.01,
-            "tooltip": "<Table><tr><td>Spring rate (spring constant); slope of force-deflection curve</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Compression/tooltips/Rate.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Spring rate (spring constant)<br/>Slope of force-deflection curve</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Compression/tooltips/Rate.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },
@@ -304,7 +304,7 @@ export const initialState = {
             "validmin": 1.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1.0,
-            "tooltip": "Ratio of mean coil diameter (Mean_Dia) to wire diameter (Wire_Dia)",
+            "tooltip": "Ratio of mean coil diameter (Mean_Dia)<br/>to wire diameter (Wire_Dia)",
             "type": "equationset",
             "hidden": false
         },
@@ -478,7 +478,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Compression spring design",
+            "tooltip": "<Table><tr><td>Compression spring design</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Compression/favicon.ico\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },
@@ -494,7 +494,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Property Calculation Method - Controls how material properties are determined and used. <br/>1 - Use values from material table <br/>2 - Specify Tensile,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  %_Tensile_Stat & %_Tensile_Endur <br/>3 - Specify allowable stresses: Stress_Lim_Stat & Stress_Lim_Endur",
+            "tooltip": "<p>Property Calculation Method - Controls how material properties are determined and used.</p><ol><li>Use values from material table</li><li>Specify Tensile, %_Tensile_Stat & %_Tensile_Endur</li><li>Specify allowable stresses: Stress_Lim_Stat & Stress_Lim_Endur</li></ol>",
             "type": "calcinput",
             "hidden": false
         },
@@ -510,7 +510,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Wire material<br/>Click in the field and then use the dropdown to select a supported material.<br/>See: Help Lookup <b>material</b>",
+            "tooltip": "Wire material<br/>See Help lookup: <b>material</b>",
             "type": "calcinput",
             "hidden": false
         },
@@ -712,7 +712,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "End type<br/>Click in the field and then use the dropdown to select a supported end type",
+            "tooltip": "End type<br/>See Help lookup: <b>End_Type</b>",
             "type": "calcinput",
             "hidden": false
         },
@@ -728,7 +728,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Number of coils not contributing to deflection. Depends on End_Type.",
+            "tooltip": "Number of coils not contributing to deflection.<br/>Depends on End_Type.",
             "type": "calcinput",
             "hidden": false
         },

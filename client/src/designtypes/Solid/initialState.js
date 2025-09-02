@@ -157,7 +157,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 1,
-            "tooltip": "Sum of length and girth dimensions. Shippers limit to 108 in.",
+            "tooltip": "Sum of length and girth dimensions.<br/>Shippers may limit to 108 in.",
             "type": "equationset",
             "hidden": false
         },
@@ -189,7 +189,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "<Table><tr><td>Volume times Density of the selected material. Shippers limit to 70 Lb.</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Solid/tooltips/Weight.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Volume times Density of the selected material.<br/>Shippers may limit to 70 Lb.</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Solid/tooltips/Weight.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         }
