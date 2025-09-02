@@ -805,7 +805,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Stress_Initial Range<br/>Select desired range of stress created by Initial_Tension.<br/>See on-line Help for details.",
+            "tooltip": "Stress_Initial Range<br/>Desired range of stress created by Initial_Tension.",
             "type": "calcinput",
             "hidden": false
         },

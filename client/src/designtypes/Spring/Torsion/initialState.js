@@ -321,7 +321,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "End deflection allowance",
+            "tooltip": "End deflection allowance<br/>Adds to Coils_A.",
             "type": "equationset",
             "hidden": false
         },

@@ -805,7 +805,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Stress_Initial Range<br/>Select desired range of stress created by Initial_Tension.<br/>See on-line Help for details.",
+            "tooltip": "Stress_Initial Range<br/>Desired range of stress created by Initial_Tension.",
             "type": "calcinput",
             "hidden": false
         },
@@ -869,7 +869,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "<Table><tr><td>End Inside Diameter. Used in calculation of stress at end.</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Extension/tooltips/End_ID.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>End Inside Diameter.<br/>Used in calculation of stress at end.</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Extension/tooltips/End_ID.png\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },
@@ -885,7 +885,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "<Table><tr><td>Extended End Inside Diameter. Used in calculation of stress at end.</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Extension/tooltips/Extended_End_ID.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Extended End Inside Diameter.<br/>Used in calculation of stress at end.</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Extension/tooltips/Extended_End_ID.png\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },
@@ -901,7 +901,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "<Table><tr><td>Length of End. Used in calculation of L_Free.</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Extension/tooltips/L_End.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Length of End.<br/>Used in calculation of L_Free.</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Extension/tooltips/L_End.png\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },
@@ -917,7 +917,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "<Table><tr><td>Length of Extended End. Used in calculation of L_Free.</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Extension/tooltips/L_Extended_End.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Length of Extended End.<br/>Used in calculation of L_Free.</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Extension/tooltips/L_Extended_End.png\"/></td></tr></Table>",
             "type": "calcinput",
             "hidden": false
         },
