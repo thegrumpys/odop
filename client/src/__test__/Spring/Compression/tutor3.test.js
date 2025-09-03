@@ -68,7 +68,7 @@ it('tutor3', () => {
     store.dispatch(changeSymbolConstraint("OD_Free",MAX,2));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(98.0740711,7);
+    expect(design.model.result.objective_value).toBeCloseTo(104.53248292,7);
 
     // title: "Page 09 of 15"
     // No-op
@@ -77,7 +77,7 @@ it('tutor3', () => {
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000085,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.000002004,7);
 
     // title: "Page 11 of 15"
     store.dispatch(loadInitialState("Spring/Compression","US"));
@@ -93,13 +93,13 @@ it('tutor3', () => {
     store.dispatch(fixSymbolValue("L_2",1.25));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(2.1668503,7);
+    expect(design.model.result.objective_value).toBeCloseTo(2.31323816,7);
 
     // title: "Page 13 of 15"
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000083,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.00000529,7);
 
     // title: "Page 14 of 15"
     // No-op

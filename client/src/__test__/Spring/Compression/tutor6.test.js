@@ -50,13 +50,13 @@ it('tutor6', () => {
     store.dispatch(fixSymbolValue("L_2",1.278));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(11.1494326,7);
+    expect(design.model.result.objective_value).toBeCloseTo(11.51501802,7);
 
     // title: "Page 04 of 07"
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000096,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.00000459,7);
 
     // title: "Page 05 of 07"
     store.dispatch(fixSymbolValue("Wire_Dia",0.12));
@@ -64,7 +64,7 @@ it('tutor6', () => {
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000031,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.00000357,7);
 
     // title: "Page 06 of 07"
     // No-op

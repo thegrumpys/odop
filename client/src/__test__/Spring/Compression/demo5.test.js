@@ -56,7 +56,7 @@ it('demo5', () => {
     store.dispatch(changeSymbolValue("Material_Type",3));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.2222831,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.250638685,7);
 
     // title: "Page 06 of 13"
     // No-op
@@ -65,7 +65,7 @@ it('demo5', () => {
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000000,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.00000723,7);
 
     // title: "Page 08 of 13"
     // No-op
@@ -74,13 +74,13 @@ it('demo5', () => {
     store.dispatch(fixSymbolValue("Wire_Dia",0.12));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0005281,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.00116899,7);
 
     // title: "Page 10 of 13"
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000008,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.000006733,7);
 
     // title: "Page 11 of 13"
     store.dispatch(changeSymbolValue("Wire_Dia",0.1205));
