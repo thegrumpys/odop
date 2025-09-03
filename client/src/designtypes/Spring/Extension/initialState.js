@@ -20,7 +20,7 @@ export const initialState = {
         {
             "input": true,
             "name": "Wire_Dia",
-            "value": 0.1055,
+            "value": 0.105,
             "units": "inch",
             "lmin": 0,
             "lmax": 0,
