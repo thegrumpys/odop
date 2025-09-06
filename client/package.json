@@ -6,7 +6,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "test": "react-app-rewired test --env=jsdom --watchAll=false",
+    "test": "react-app-rewired test --env=jsdom --detectOpenHandles",
     "coverage": "react-app-rewired test --env=jsdom --coverage",
     "eject": "react-scripts eject",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
