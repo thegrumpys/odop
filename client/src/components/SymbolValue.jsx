@@ -45,16 +45,16 @@ const model_type = useSelector((state) => state.model.type);
   const [table, setTable] = useState([]);
   const dispatch = useDispatch();
 
-    useEffect(() => {
-  //    console.log('SymbolValue - Mounted');
-      if (element.format === 'table') {
-  //      console.log('NameValueUnitsRowCalcInput useEffect file= ../designtypes/'+element.table+'.json');
-        var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
-  //      console.log('NameValueUnitsRowCalcInput','tableContents=',tableContents);
-        setTable(tableContents);
-      }
-      return () => { };
-    }, [element, model_type]);
+  useEffect(() => {
+//    console.log('SymbolValue - Mounted');
+    if (element.format === 'table') {
+//      console.log('NameValueUnitsRowCalcInput useEffect file= ../designtypes/'+element.table+'.json');
+      var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
+//      console.log('NameValueUnitsRowCalcInput','tableContents=',tableContents);
+      setTable(tableContents);
+    }
+    return () => { };
+  }, [element, model_type]);
 
   const onSearchRequest = (event) => {
 //    console.log('SymbolValue.onSearchRequest','event=',event);
@@ -221,31 +221,31 @@ const model_type = useSelector((state) => state.model.type);
     setModified(true);
   }
 
-    const onFocusLocal = (event) => {
-  //    console.log('In NameValueUnitsRowCalcInput.onFocusLocal event.target.value=', event.target.value);
-  //    console.log('In NameValueUnitsRowCalcInput.onFocusLocal element.value=', element.value);
-      setValue(element.value);
-      if (typeof onFocus === "function") onFocus(event);
-    }
+  const onFocusLocal = (event) => {
+//    console.log('In NameValueUnitsRowCalcInput.onFocusLocal event.target.value=', event.target.value);
+//    console.log('In NameValueUnitsRowCalcInput.onFocusLocal element.value=', element.value);
+    setValue(element.value);
+    if (typeof onFocus === "function") onFocus(event);
+  }
 
-    const onBlurLocal = (event) => {
-  //    console.log('In NameValueUnitsRowCalcInput.onBlurLocal event.target.value=', event.target.value);
-      var state = store.getState();
-  //    console.log('In NameValueUnitsRowCalcInput.onBlurLocal','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
-      var targetId = event.relatedTarget ? event.relatedTarget.id : null;
-      if (state.model.system_controls.enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin && targetId !== 'searchButton' && targetId !== 'seekButton') {
-        dispatch(search('Auto'));
-      }
-      if (typeof onBlur === "function") onBlur(event);
+  const onBlurLocal = (event) => {
+//    console.log('In NameValueUnitsRowCalcInput.onBlurLocal event.target.value=', event.target.value);
+    var state = store.getState();
+//    console.log('In NameValueUnitsRowCalcInput.onBlurLocal','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+    var targetId = event.relatedTarget ? event.relatedTarget.id : null;
+    if (state.model.system_controls.enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin && targetId !== 'searchButton' && targetId !== 'seekButton') {
+      dispatch(search('Auto'));
     }
+    if (typeof onBlur === "function") onBlur(event);
+  }
 
-    const onSelectLocal = (event) => {
-  //    console.log('NameValueUnitsRowCalcInput.onSelect', 'event.target.value=', event.target.value);
-      var selectedIndex = parseFloat(event.target.value);
-      dispatch(changeSymbolValue(element.name, selectedIndex));
-      logValue(element.name, selectedIndex, 'TableIndex');
-      if (typeof onSelect === "function") onSelect(event);
-    }
+  const onSelectLocal = (event) => {
+//    console.log('NameValueUnitsRowCalcInput.onSelect', 'event.target.value=', event.target.value);
+    var selectedIndex = parseFloat(event.target.value);
+    dispatch(changeSymbolValue(element.name, selectedIndex));
+    logValue(element.name, selectedIndex, 'TableIndex');
+    if (typeof onSelect === "function") onSelect(event);
+  }
 
   var sv_results = getAlertsByName(element.name, true);
   var sv_value_class = sv_results.className;
