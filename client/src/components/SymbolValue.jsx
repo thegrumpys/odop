@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { InputGroup, Form, OverlayTrigger, Tooltip, Modal, Button, Table, Alert } from 'react-bootstrap';
 import { MIN, MAX, FIXED, CONSTRAINED } from '../store/actionTypes';
-import { load, search, seek, saveAutoSave } from '../store/actions';
+import { load, search, seek, saveAutoSave, changeSymbolValue } from '../store/actions';
 import NameValueUnitsHeaderIndependentVariable from './NameValueUnitsHeaderIndependentVariable';
 import NameValueUnitsRowIndependentVariable from './NameValueUnitsRowIndependentVariable';
 import NameValueUnitsHeaderDependentVariable from './NameValueUnitsHeaderDependentVariable';
@@ -23,9 +23,11 @@ import { getAlertsByName } from './Alerts';
 import { displayMessage } from '../components/Message';
 import FeasibilityIndicator from './FeasibilityIndicator';
 import store from '../store/store';
+import { logValue } from '../logUsage';
 
 export default function SymbolValue({ className, element, index, valueName = 'value' }) {
 //  console.log('SymbolValue','Mounting...','element=',element,'index=',index);
+const model_type = useSelector((state) => state.model.type);
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const model_objmin = useSelector((state) => state.model.system_controls.objmin);
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
@@ -39,14 +41,20 @@ export default function SymbolValue({ className, element, index, valueName = 'va
 //  const [table, setTable] = useState(null);
   const [modified, setModified] = useState(false);
   const [reset, setReset] = useState('');
+  const [value, setValue] = useState(false);
+  const [table, setTable] = useState([]);
   const dispatch = useDispatch();
 
-  if (element.format === 'table') {
-//    console.log('SymbolValue','Mounting','file= ../designtypes/'+element.table+'.json');
-    var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
-//    console.log('SymbolValue','Mounting','tableContents=',tableContents);
-//    setTable(tableContents);
-  }
+  useEffect(() => {
+//    console.log('SymbolValue - Mounted');
+    if (element.format === 'table') {
+//      console.log('NameValueUnitsRowCalcInput useEffect file= ../designtypes/'+element.table+'.json');
+      var tableContents = require('../designtypes/' + element.table + '.json'); // Dynamically load table
+//      console.log('NameValueUnitsRowCalcInput','tableContents=',tableContents);
+      setTable(tableContents);
+    }
+    return () => { };
+  }, [element, model_type]);
 
   const onSearchRequest = (event) => {
 //    console.log('SymbolValue.onSearchRequest','event=',event);
@@ -213,6 +221,32 @@ export default function SymbolValue({ className, element, index, valueName = 'va
     setModified(true);
   }
 
+  const onFocusLocal = (event) => {
+//    console.log('In NameValueUnitsRowCalcInput.onFocusLocal event.target.value=', event.target.value);
+//    console.log('In NameValueUnitsRowCalcInput.onFocusLocal element.value=', element.value);
+    setValue(element.value);
+    if (typeof onFocus === "function") onFocus(event);
+  }
+
+  const onBlurLocal = (event) => {
+//    console.log('In NameValueUnitsRowCalcInput.onBlurLocal event.target.value=', event.target.value);
+    var state = store.getState();
+//    console.log('In NameValueUnitsRowCalcInput.onBlurLocal','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+    var targetId = event.relatedTarget ? event.relatedTarget.id : null;
+    if (state.model.system_controls.enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin && targetId !== 'searchButton' && targetId !== 'seekButton') {
+      dispatch(search('Auto'));
+    }
+    if (typeof onBlur === "function") onBlur(event);
+  }
+
+  const onSelectLocal = (event) => {
+//    console.log('NameValueUnitsRowCalcInput.onSelect', 'event.target.value=', event.target.value);
+    var selectedIndex = parseFloat(event.target.value);
+    dispatch(changeSymbolValue(element.name, selectedIndex));
+    logValue(element.name, selectedIndex, 'TableIndex');
+    if (typeof onSelect === "function") onSelect(event);
+  }
+
   var sv_results = getAlertsByName(element.name, true);
   var sv_value_class = sv_results.className;
   var sv_icon_alerts = sv_results.alerts;
@@ -316,7 +350,11 @@ export default function SymbolValue({ className, element, index, valueName = 'va
           {element.format === 'table' ?
             <>
               {icon_dependent_tag}
-              <Form.Control id={'sv_' + element.name} type="text" disabled={disabled} readOnly className={sv_value_class} value={tableContents[element.value][0]} onClick={onContextMenu} />
+              <Form.Select id={'nvurci_value_' + element.name} disabled={!element.input} value={element.value} onChange={onSelectLocal} onFocus={onFocusLocal} onBlur={onBlurLocal}>
+                {table.map((value, index) =>
+                  index > 0 ? <option key={index} value={index}>{value[0]}</option> : ''
+                )}
+              </Form.Select>
             </>
             : ''}
         </InputGroup>
