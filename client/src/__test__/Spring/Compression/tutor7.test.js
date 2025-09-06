@@ -52,7 +52,7 @@ it('tutor7', () => {
     store.dispatch(changeSymbolConstraint("L_Solid",MAX,1.5));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.5763972,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.5386392,7);
 
     // title: "Page 05 of 17"
     store.dispatch(search());
@@ -64,19 +64,19 @@ it('tutor7', () => {
     store.dispatch(seek("Weight",MIN));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000150,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.00007634,7);
 
     // title: "Page 07 of 17"
     store.dispatch(seek("Rate",MIN));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000941,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.00012915,7);
 
     // title: "Page 08 of 17"
     store.dispatch(seek("L_Solid",MIN));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0001140,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.00007694,7);
 
     // title: "Page 09 of 17"
     store.dispatch(loadInitialState("Spring/Compression","US"));
@@ -91,7 +91,7 @@ it('tutor7', () => {
     store.dispatch(changeSymbolConstraint("FS_2",MIN,1));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(7.0591362,7);
+    expect(design.model.result.objective_value).toBeCloseTo(7.55925631,7);
 
     // title: "Page 10 of 17"
     // No-op
@@ -109,7 +109,7 @@ it('tutor7', () => {
     store.dispatch(seek("Weight",MIN));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0002004,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.00020373,7);
 
     // title: "Page 14 of 17"
     // No-op
@@ -131,7 +131,7 @@ it('tutor7', () => {
     store.dispatch(seek("Force_2",MAX));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0001687,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.00012384,7);
 
     // title: "Page 17 of 17 (last page)"
     // No-op

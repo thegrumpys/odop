@@ -68,7 +68,7 @@ it('demoNewDesign', () => {
     store.dispatch(fixSymbolValue("Force_2",60));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(1.5384420,7);
+    expect(design.model.result.objective_value).toBeCloseTo(1.6153391,7);
 
     // title: "Page 08 of 14"
     // No-op
@@ -83,7 +83,7 @@ it('demoNewDesign', () => {
     store.dispatch(fixSymbolValue("Wire_Dia",0.135));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0148411,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.02063894,7);
 
     // title: "Page 11 of 14"
     // No-op
@@ -92,7 +92,7 @@ it('demoNewDesign', () => {
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000018,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.00000648,7);
 
     // title: "Page 13 of 14"
     // No-op

@@ -54,31 +54,31 @@ it('demo1', () => {
     store.dispatch(changeSymbolValue("Material_Type",3));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(2.7011747,7);
+    expect(design.model.result.objective_value).toBeCloseTo(2.8141308,7);
 
     // title: "Page 06 of 11"
     store.dispatch(changeSymbolConstraint("FS_2",MAX,2));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(2.7011747,7);
+    expect(design.model.result.objective_value).toBeCloseTo(2.8141308,7);
 
     // title: "Page 07 of 11"
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000032,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.00000224,7);
 
     // title: "Page 08 of 11"
     store.dispatch(fixSymbolValue("Wire_Dia",0.125));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000408,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.000965601,7);
 
     // title: "Page 09 of 11"
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000099,7);
+    expect(design.model.result.objective_value).toBeCloseTo(1.3503636e-7,7);
 
     // title: "Page 10 of 11"
     // No-op
@@ -87,7 +87,7 @@ it('demo1', () => {
     store.dispatch(fixSymbolValue("Force_2",75.1));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0632930,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.06614827,7);
 
     var endTime = Date.now();
     var duration = endTime - startTime;

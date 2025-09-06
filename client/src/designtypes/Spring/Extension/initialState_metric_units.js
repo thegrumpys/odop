@@ -20,7 +20,7 @@ export const initialState = {
         {
             "input": true,
             "name": "Wire_Dia",
-            "value": 1.5,
+            "value": 1.6,
             "units": "mm",
             "lmin": 0,
             "lmax": 0,
@@ -52,7 +52,7 @@ export const initialState = {
         {
             "input": true,
             "name": "Initial_Tension",
-            "value": 13.0,
+            "value": 14.0,
             "units": "newtons",
             "lmin": 0,
             "lmax": 0,

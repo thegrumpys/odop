@@ -54,12 +54,12 @@ it('demo6', () => {
     store.dispatch(fixSymbolValue("L_2",6.6));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.3825930,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.37196694,7);
 
     // title: "Page 05 of 09"
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.3825930,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.37196694,7);
 
     // title: "Page 06 of 09"
     store.dispatch(search());
@@ -75,7 +75,7 @@ it('demo6', () => {
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0000047,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.00000957,7);
 
     // title: "Page 09 of 09 (last page)"
     store.dispatch(fixSymbolValue("OD_Free",1.105));

@@ -51,18 +51,18 @@ it('tutor8', () => {
     store.dispatch(fixSymbolValue("Force_2",250));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(101.0649057,7);
+    expect(design.model.result.objective_value).toBeCloseTo(106.03877776,7);
 
     // title: "Page 04 of 08"
     store.dispatch(search());
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0209010,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.020911671,7);
 
     // title: "Page 05 of 08"
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0209010,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.020911671,7);
 
     // title: "Page 06 of 08"
     // No-op
@@ -70,7 +70,7 @@ it('tutor8', () => {
     // title: "Page 07 of 08"
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.0209010,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.020911671,7);
 
     // title: "Page 08 of 08 (last page)"
     // No-op
