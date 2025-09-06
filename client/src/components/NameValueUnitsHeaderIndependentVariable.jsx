@@ -16,7 +16,7 @@ export default function NameValueUnitsHeaderIndependentVariable() {
       </tr>
       <tr>
         <th className="text-start" colSpan="2" id="IVNameTitle">
-          <OverlayTrigger placement="top" overlay={<Tooltip>Variable names</Tooltip>}>
+          <OverlayTrigger placement="top" overlay={<Tooltip><p>Variable names</p><p>Click the Design Type icon at the right of the Menu bar for a detailed description.</p></Tooltip>}>
             <span>Name</span>
           </OverlayTrigger>
         </th>

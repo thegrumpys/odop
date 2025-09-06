@@ -332,6 +332,7 @@ export function migrate(design) {
             delete design.symbol_table[31].format; // Delete format: 'table'
             design.symbol_table[31].value = 'User_Specified'; // Set Material_Type to User_Specified
         }
+        design.symbol_table[34].value = Number(design.symbol_table[34].value);  // Issue #878 done in branch #980
         migrated_design.version = '11';
     case '11':
 

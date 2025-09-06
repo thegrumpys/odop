@@ -16,7 +16,7 @@ export default function NameValueUnitsHeaderDependentVariable() {
       </tr>
       <tr>
         <th className="text-start" colSpan="2" id="DVNameTitle">
-          <OverlayTrigger placement="top" overlay={<Tooltip>Variable names</Tooltip>}>
+          <OverlayTrigger placement="top" overlay={<Tooltip><p>Variable names</p><p>Copy/Paste a variable name into Help lookup for more details</p></Tooltip>}>
             <span>Name</span>
           </OverlayTrigger>
         </th>
