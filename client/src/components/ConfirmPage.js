@@ -6,7 +6,7 @@ import MessageAlert from '../components/MessageAlert';
 import { logUsage } from '../logUsage';
 
 export default function ConfirmPage() {
-  console.log('ConfirmPage');
+//  console.log('ConfirmPage');
   const [error, setError] = useState(null);
   const [searchParams] = useSearchParams();
   const [token, setToken] = useState('');
@@ -16,7 +16,7 @@ export default function ConfirmPage() {
 
   useEffect(() => {
     const token_parm = searchParams.get('token');
-    console.log('ConfirmPage.useEffect','token_parm=',token_parm);
+//    console.log('ConfirmPage.useEffect','token_parm=',token_parm);
     if (!token_parm) {
       setStatus('invalid');
       return;
@@ -24,7 +24,7 @@ export default function ConfirmPage() {
       setToken(token_parm);
     }
     const email_parm = searchParams.get('email');
-    console.log('ConfirmPage.useEffect', 'email_parm=', email_parm);
+//    console.log('ConfirmPage.useEffect', 'email_parm=', email_parm);
     if (!email_parm) {
       setStatus('error');
       return;
