@@ -4,9 +4,13 @@ This entry describes steps that should be executed prior to release of a new ver
 These steps are somewhat independent of the actual release procedure and 
 can be optionally executed in advance to make the actual release activity shorter and less prone to distraction or failure.  
 
-1. Create an issue providing a branch in which to make these changes. This issue is to capture test results from below and any errors / fixes during release. Set title to "Release Major.Minor.Patch" 
+1. Review impact of this release's feature changes on the Tutor & Demo scripts and Help topics. 
+If appropriate, create a new issue, make changes and merge to master.  
 
-1. Run test automation on BDW and MKM machines. Do client testing for performance on BDW machine.
+1. If it doesn't already exist, create an issue providing a branch in which to make prep4Release changes. 
+This issue is to capture test results from below and any errors / fixes during release. Set title to "Release Major.Minor.Patch"  
+
+1. Run test automation on BDW and MKM machines. Do client testing for performance on BDW machine. 
     1. In server, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully. 
     1. In client, run "npm test" and verify test cases executed successfully. Repair errors or update tests to run successfully.  
     1. Save results of performance (duration) in:  
