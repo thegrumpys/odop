@@ -19,16 +19,19 @@ Previously: Old Production has no color; staging is AMBER, test is TEAL, and loc
 
 Easier to read summary:  
 
-Role | Old | New | DB name
---- | --- | --- | ---
-Local | &nbsp; | &nbsp; | odop
-Unused | &nbsp; | &nbsp; | pgyb3toxyk59fz2w
-Development | CYAN | GRACEFUL | s6v0edrsu4v1u49m
-Test | TEAL | OPAQUE | cmyr2m3s55btzgvr
-Staging | AMBER | ROUND | d9bw76r236auqu3s
-Old Production | no color | CONVEX | prntcdsszgqddxh8
-New Production | &nbsp; | CUBED | vsm51n2ipc6nvcy6
-Current Production | &nbsp; | &nbsp; | l6yfarb1wjm4a9ri
+Role               | Plan     | JawsName | DB name
+---                | ---      | ---      | ---
+Local              | &nbsp;   | &nbsp;   | odop
+Unused             | Kitefin  | RIGID    | pgyb3toxyk59fz2w
+Development        | Kitefin  | GRACEFUL | s6v0edrsu4v1u49m
+Test               | Kitefin  | OPAQUE   | cmyr2m3s55btzgvr
+Staging            | Kitefin  | ROUND    | d9bw76r236auqu3s
+Old Production     | ?        |was CONVEX| prntcdsszgqddxh8
+New Production     | Leopard  | CUBED    | vsm51n2ipc6nvcy6
+? what is this ?   | ?        | ?        | l6yfarb1wjm4a9ri
+
+Kitefin plan is limited at    5 MB (0.005 GB)  
+Leopard plan is limited at 1000 MB (1.0 GB) 
 
 Caution: The DB username and password are contained in the connection string.   
 Note ".env" appears in .gitignore, editing .env will only modify the local version of the file. 
