@@ -1,13 +1,14 @@
-# Prepare for release
+# Post Development
 
-This entry describes steps that should be executed prior to release of a new version of the ODOP app. 
+This entry describes steps that should be executed at the completion of development, 
+prior to release of a new version of the ODOP app. 
 These steps are somewhat independent of the actual release procedure and 
 can be optionally executed in advance to make the actual release activity shorter and less prone to distraction or failure.  
 
 1. Review impact of this release's feature changes on the Tutor & Demo scripts and Help topics. 
 If appropriate, create a new issue, make changes and merge to master.  
 
-1. If it doesn't already exist, create an issue providing a branch in which to make prep4Release changes. 
+1. If it doesn't already exist, create an issue providing a branch in which to make postDevelopment changes. 
 This issue is to capture test results from below and any errors / fixes during release. Set title to "Release Major.Minor.Patch"  
 
 1. Run test automation on BDW and MKM machines. Do client testing for performance on BDW machine. 
@@ -38,14 +39,3 @@ Test various input and menu functions and verify no unexpected console.log outpu
      * `scripts/import-okta-csv.js`
      * `scripts/scanner.js` 
      * `server.js` 
-
-1. Run the production build in a test environment to confirm that things are synchronized 
-with the Heroku build environment and assure that the build process goes smoothly during the actual release. 
-One possibility is to build into the staging system with the Heroku environment variables set to "production".
-
-    1. Set NODE_ENV to "production"
-    1. Set REACT_APP_NODE_ENV to "production"
-    1. Release to staging via `git push heroku-staging master`
-    1. Verify that it is production by starting `https://odop-staging.herokuapp.com/` and checking if "Load Initial State" is not in File Open modal.
-    1. Afterwards reset REACT_APP_NODE_ENV to "staging"
-    1. Leave NODE_ENV to "production"

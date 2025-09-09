@@ -85,7 +85,7 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 ## Procedures
 
 * [Prepare for Development](procedures/prep4Development.html) 
-* [Prepare for Release](procedures/prep4Release.html) 
+* [Post Development](procedures/postDevelopment.html) 
 * [Release Process](procedures/release.html) 
 * [Guidelines](design/Guidelines.html) 
 * [New Design Type](procedures/NewDesignType.html) 

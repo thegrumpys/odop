@@ -15,7 +15,7 @@ Still maintained on GitHub Pages, messageOfTheDay can be updated independently o
 **A. Initial steps preparing for release**
 
 1. Confirm that the steps in [Prepare for Development](prep4Development.html) been executed previously.
-1. Confirm that the steps in [Prepare for Release](prep4Release.html) been executed recently.
+1. Confirm that the steps in [Prepare for Release](postDevelopment.html) been executed recently.
 1. Verify GitHub Milestone issues are completed.  Ask:   
    "Have we done everything on our milestone list?"   
    "Is there anything else we need to do?"   
@@ -84,7 +84,7 @@ The database names are summarized in [Procedures for creating a new JAWSDB](NewD
         * REACT\_APP\_SESSION\_REFRESH=3600
 1. Do a pull or push to get latest version on all systems.  
 <a id="runTestAutomation"></a>  
-1. Confirm that **test automation** in [Prepare for Release](prep4Release.html) was recently executed.  
+1. Confirm that **test automation** in [Post Development](postDevelopment.html) was recently executed.  
     1. If necessary, shutdown server and client under your development environment before running tests.  
 1. Update client/src/version.js file to Major.Minor.Patch (for example: 2.3.1). Remove 'dev' suffix. Optionally use 'rc1', 'rc2', etc.
 1. Commit with message "Update version.js to Major.Minor.Patch" and push to origin.
@@ -161,7 +161,16 @@ If appropriate, dump and archive to off-line storage and re-initialize the usage
    run the ./scripts/load_db_startup_files.* script or batch file
    or
    manually run all affected load.sql files to create startup files for each design type in the affected database (for example, do this for Staging and Production).
-1. Delete any old, invalid or development-only designs if necessary.
+1. Delete any old, invalid or development-only designs if necessary.  
+1. Run the production build in a test environment to confirm that things are synchronized 
+with the Heroku build environment and assure that the build process goes smoothly during the actual release. 
+One possibility is to build into the staging system with the Heroku environment variables set to "production".  
+    1. Set NODE_ENV to "production"
+    1. Set REACT_APP_NODE_ENV to "production"
+    1. Release to staging via `git push heroku-staging master`
+    1. Verify that it is production by starting `https://odop-staging.herokuapp.com/` and checking if "Load Initial State" is not in File Open modal.
+    1. Afterwards reset REACT_APP_NODE_ENV to "staging"
+    1. Leave NODE_ENV to "production"
 <a id="publish2Heroku"></a>
 &nbsp;
 1. **Publish to Heroku** &nbsp; If production, update messageOfTheDay.md to announce availability of the new version.
