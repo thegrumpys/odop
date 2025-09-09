@@ -15,7 +15,7 @@ Still maintained on GitHub Pages, messageOfTheDay can be updated independently o
 **A. Initial steps preparing for release**
 
 1. Confirm that the steps in [Prepare for Development](prep4Development.html) been executed previously.
-1. Confirm that the steps in [Prepare for Release](postDevelopment.html) been executed recently.
+1. Confirm that the steps in [Post Development](postDevelopment.html) been executed recently.
 1. Verify GitHub Milestone issues are completed.  Ask:   
    "Have we done everything on our milestone list?"   
    "Is there anything else we need to do?"   

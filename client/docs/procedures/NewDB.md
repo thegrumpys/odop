@@ -21,18 +21,22 @@ Easier to read summary:
 
 Role | Old | New | DB name
 --- | --- | --- | ---
-New Production | &nbsp; | CUBED | vsm51n2ipc6nvcy6
-Old Production | no color | CONVEX | prntcdsszgqddxh8
-Staging | AMBER | ROUND | d9bw76r236auqu3s
-Test | TEAL | OPAQUE | cmyr2m3s55btzgvr
+Local | &nbsp; | &nbsp; | odop
+Unused | &nbsp; | &nbsp; | pgyb3toxyk59fz2w
 Development | CYAN | GRACEFUL | s6v0edrsu4v1u49m
+Test | TEAL | OPAQUE | cmyr2m3s55btzgvr
+Staging | AMBER | ROUND | d9bw76r236auqu3s
+Old Production | no color | CONVEX | prntcdsszgqddxh8
+New Production | &nbsp; | CUBED | vsm51n2ipc6nvcy6
+Current Production | &nbsp; | &nbsp; | l6yfarb1wjm4a9ri
 
 Caution: The DB username and password are contained in the connection string.   
 Note ".env" appears in .gitignore, editing .env will only modify the local version of the file. 
 
  . . .   
 
-Run odop/data/create.sql to create the two tables: design and usage_log.   
+Run odop/data/create.sql to create the two tables: design and usage_log. 
+{Authentication tables?}  
 Those tables will then exist but be empty.
 
  . . .   
