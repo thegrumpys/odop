@@ -201,8 +201,8 @@ export const execute = {
 
                     <p>
                     The handbook does its calculations in metric units, later converting to
-                    equivalent English units.
-                    The 0.9 mm wire diameter is approximated as an 0.035 inch English size.
+                    equivalent US Customary units (inches, pounds). 
+                    The 0.9 mm wire diameter is approximated as an 0.035 inch US standard size.
                     The comparison works better if we tell ODOP:Spring the exact decimal inch
                     equivalent of 0.9 mm.
                     </p>

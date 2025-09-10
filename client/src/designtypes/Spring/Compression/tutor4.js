@@ -45,6 +45,7 @@ export const execute = {
                     <p>
                     Note that the ODOP Design Library is a database "in the cloud".
                     It is not a local file.
+                    You must be signed in to an ODOP account in order to access it.
                     If we save our current status into the Design Library,
                     we can use the <b>File : Open</b> menu to return to this point later.
                     There are several reasons why we may want to do this:
