@@ -135,6 +135,7 @@ async function sendConfirmationEmail(email, first_name, last_name, token) {
   const mailOptions = {
     from: `"Server NoReply" <${process.env.SMTP_USER}>`,
     to: email,
+    bcc: `"Server NoReply" <${process.env.SMTP_USER}>`,
     subject: 'Confirm your account',
     html,
   };
@@ -150,6 +151,7 @@ async function sendResetEmail(email, first_name, last_name, token) {
   const mailOptions = {
     from: `"Server NoReply" <${process.env.SMTP_USER}>`,
     to: email,
+    bcc: `"Server NoReply" <${process.env.SMTP_USER}>`,
     subject: 'Reset your password',
     html,
   };
