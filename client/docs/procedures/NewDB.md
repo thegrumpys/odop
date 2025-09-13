@@ -26,9 +26,7 @@ Unused             | Kitefin  | RIGID    | pgyb3toxyk59fz2w
 Development        | Kitefin  | GRACEFUL | s6v0edrsu4v1u49m
 Test               | Kitefin  | OPAQUE   | cmyr2m3s55btzgvr
 Staging            | Kitefin  | ROUND    | d9bw76r236auqu3s
-Old Production     | ?        |was CONVEX| prntcdsszgqddxh8
-New Production     | Leopard  | CUBED    | vsm51n2ipc6nvcy6
-? what is this ?   | ?        | ?        | l6yfarb1wjm4a9ri
+New Production     | Leopard  | CUBED    | l6yfarb1wjm4a9ri
 
 Kitefin plan is limited at    5 MB (0.005 GB)  
 Leopard plan is limited at 1000 MB (1.0 GB) 
