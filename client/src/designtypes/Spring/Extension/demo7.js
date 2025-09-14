@@ -201,7 +201,7 @@ export const execute = {
                     </p>
 
                     <p>
-                    As illustrated on the Report 1 and Report 3 tabs,
+                    As illustrated in the Report 1 and Report 3 views,
                     ODOP:Spring calculates length between hooks as body length plus 75% or
                     100% (depending on End_Type) of a coil inside diameter for each end.
                     End_Extension is an offset in addition to this allowance for the ends.

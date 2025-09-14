@@ -395,7 +395,7 @@ export const execute = {
 
                     <p>
                     The ODOP:Spring solution required an adjustment:<br />
-                    &nbsp; &nbsp;  Wahl stress correction factor kw1 = 1.211  psi &nbsp;  (from Report 2)<br />
+                    &nbsp; &nbsp;  Wahl stress correction factor kw1 = 1.21 &nbsp;  (from Report 2)<br />
                     &nbsp; &nbsp;  stress at solid = 96,880  psi &nbsp;  (corrected)
                     </p>
 

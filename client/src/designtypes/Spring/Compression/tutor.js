@@ -274,7 +274,7 @@ export const execute = {
 
                     <p>
                     Before we get into Search, let's suppose that we really don't want
-                    the Search process to change either the 0.1055 inch value for Wire_Dia or the
+                    the Search process to change either the 0.105 inch value for Wire_Dia or the
                     39 pound value of Force_2 that were established by default (the initialState).
                     When you click Next, the tutorial will check the appropriate Fix checkboxes
                     (positioned between the Value entry fields and the Units fields)
@@ -344,7 +344,7 @@ export const execute = {
 
                     <p>
                     Indeed, the design now utilizes less than 90 percent of its available deflection.
-                    Also, Wire_Dia has remained at 0.1055 inches
+                    Also, Wire_Dia has remained at 0.105 inches
                     and Force_2 at 39 pounds as specified.
                     </p>
 
@@ -413,8 +413,7 @@ export const execute = {
 
                         <li>
                         If constraints are violated, a Search can manipulate values of free
-                        Independent Variables in order to achieve a feasible solution
-                        (if one exists).
+                        Independent Variables in order to achieve a feasible solution (if one exists).
                         </li>
 
                         <li>
