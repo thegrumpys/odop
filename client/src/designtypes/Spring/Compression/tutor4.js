@@ -158,8 +158,8 @@ export const execute = {
                     <p>
                     Now we're set up to consider designs that will have a long cycle life.
                     The 250 pound load has given us an unreasonable start point.
-                    Look for warnings on Report 1.
-                    In this case, we'll ignore the warning.
+                    Look for Alerts.
+                    In this case, we'll momentarily ignore the Alerts.
                     Moving to the next page will execute a search.
                     </p>
                 </>
