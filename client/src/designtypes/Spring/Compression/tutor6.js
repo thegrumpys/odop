@@ -16,9 +16,10 @@ export const execute = {
                     After designing a custom compression spring, we will select an appropriate
                     standard wire size from the ODOP:Spring standard size table.
                     Following another search,
-                    we will use the Select Catalog menu to scan the ODOP:Spring sample compression spring
-                    catalog to determine the four entries closest to our custom spring.
-                    After selecting the best of the four,
+                    we will use the <b>Action : Select Catalog</b> menu to scan the ODOP:Spring default 
+                    compression spring catalog to determine up to four entries closest to 
+                    meeting the same objectives as our custom spring.
+                    After selecting the best of the available catalog entries,
                     we'll compare its performance to our original objectives.
                     </p>
 
@@ -53,12 +54,10 @@ export const execute = {
                     <br />
                     - outside diameter less than 0.925 inch<br />
                     - free length 1.713 inch<br />
-                    - supports 50 pounds static load at length 1.278 inches<br />
-                    - solid height less than 1.060 inches<br />
+                    - supports 50 pounds static load at length 1.28 inches<br />
+                    - solid height less than 1.080 inches<br />
                     - hard drawn wire, closed & ground ends<br />
-                    <br />
-                    (Used with permission of Spring Manufacturers Institute,  Inc.)
-                    </p>
+                     </p>
 
                     <p>
                     We'll solve this problem in three steps:<br />
@@ -68,7 +67,7 @@ export const execute = {
                     - select the nearest standard wire size and re-execute the search to
                     determine the corresponding change in number of coils
                     <br />
-                   - determine the four catalog entries closest to the resulting spring
+                   - determine up to four catalog entries closest to the resulting spring
                    and select the closest one for further examination
                    </p>
                 </>
@@ -88,12 +87,12 @@ export const execute = {
                     <br />
                     CHANGE  Material_Type  HARD_DRAWN_WIRE<br />
                     CHANGE  OD_Free MAX  .920 &nbsp; &#60;--- (0.005 margin)<br />
-                    CHANGE  L_Solid MAX  1.06<br />
+                    CHANGE  L_Solid MAX  1.08<br />
                     <br />
                     FIX  L_Free   1.713<br />
                     FIX  Force_1  0<br />
                     FIX  Force_2 50<br />
-                    FIX  L_2      1.278
+                    FIX  L_2      1.28
                     </p>
 
                     <p>
@@ -119,11 +118,11 @@ export const execute = {
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 0.920),
                 setSymbolFlag('L_Solid', MAX, CONSTRAINED),
-                changeSymbolConstraint('L_Solid', MAX, 1.06),
+                changeSymbolConstraint('L_Solid', MAX, 1.08),
                 fixSymbolValue('L_Free', 1.713),
                 fixSymbolValue('Force_1', 0.0),
                 fixSymbolValue('Force_2', 50.0),
-                fixSymbolValue('L_2', 1.278)
+                fixSymbolValue('L_2', 1.28)
             ]
         },
         {
@@ -153,7 +152,7 @@ export const execute = {
                     consider designs with a slightly larger factor of safety than the default established by
                     this tutorial session's initial conditions: <br />
                     <br />
-                    CHANGE  FS_2  MAX  1.6
+                    CHANGE  FS_2  MAX  1.8
                     </p>
                     <br />
                 </>
@@ -169,7 +168,7 @@ export const execute = {
                     <p>
                     The search is complete.
                     Let's take a look ...
-                    Note the 50 pounds load at 1.278 length is very close to being achieved.
+                    Note the 50 pounds load at 1.28 length is very close to being achieved.
                     </p>
 
                     <p>
@@ -182,7 +181,7 @@ export const execute = {
                     <p>
                     While multiple catalogs are available to select from,
                     this tutorial session expects you to keep the default catalog selected.
-                    The four entries are ordered by the value of their objective function.
+                    The up to four entries are ordered by the value of their objective function.
                     The first entry will have the least constraint violation.
                     </p>
 
@@ -197,7 +196,7 @@ export const execute = {
             ),
             actions: [
                 fixSymbolValue('Wire_Dia', 0.120),
-                changeSymbolConstraint('FS_2', MAX, 1.6),
+                changeSymbolConstraint('FS_2', MAX, 1.8),
                 search()
             ]
         },
@@ -214,7 +213,7 @@ export const execute = {
                     We don't expect that a spring selected from off the shelf will do as well as as a
                     custom designed spring.
                     That requirement of starting with a free length of
-                    1.713 inches and achieving exactly a 50 pound load at a length of 1.278
+                    1.713 inches and achieving exactly a 50 pound load at a length of 1.28
                     inches is a bit unusual.
                     </p>
 
@@ -222,7 +221,7 @@ export const execute = {
                     As you can see, we found a reasonable, but not perfect match in the catalog.
                     This, of course, was partially predetermined.
                     The problem was selected to  have an answer that fell within the range
-                    of spring sizes covered by the  catalog (.125 to 1.75 outside diameter).
+                    of spring sizes covered by the default catalog (.125 to 1.75 outside diameter).
                     If you are designing suspension springs for railway freight cars,
                     a different catalog might be appropriate.
                     &nbsp;<a href="/docs/About/ContactUs.html"
