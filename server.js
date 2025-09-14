@@ -479,6 +479,7 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, as
   var user = req.uid;
   var type = req.params['type'];
   var name = req.params['name'];
+  name = name.replace(/[']/ig, "''"); // replace one single quote with an two single quotes throughout
 //  console.log('SERVER: In DELETE /api/v1/designtypes/' + type + '/designs/' + name, 'user=', user);
   if (req.uid === "null") {
     sendMessage(res, '', '', null, 400);
