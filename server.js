@@ -347,6 +347,7 @@ app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async
   var user = req.uid;
   var type = req.params['type'];
   var name = req.params['name'];
+  name = name.replace(/[']/ig, "''"); // replace one single quote with an two single quotes throughout
 //  console.log('SERVER: In GET /api/v1/designtypes/' + type + '/designs/' + name, 'user=', user);
   var stmt = 'SELECT * FROM design WHERE (user = \'' + user + '\' OR user IS NULL) AND type = \'' + type + '\' AND name = \'' + name + '\' ORDER BY user DESC';
 //  console.log('SERVER:', 'stmt=', stmt);
