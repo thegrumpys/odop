@@ -16,7 +16,7 @@ export function getCatalogNames(units) {
     } else {
       var result = []; // No Metric
     }
-//    console.log('getCatalogNames result=',result);
+    console.log('getCatalogNames','units=',units,'result=',result);
     return result;
 }
 

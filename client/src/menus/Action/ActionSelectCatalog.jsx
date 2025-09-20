@@ -27,7 +27,7 @@ export default function ActionSelectCatalog() {
 //    console.log('ActionSelectCatalog - Mounted','model_type=',model_type);
     updateCatalogNames();
     return () => { };
-  }, [model_type]);
+  }, [model_type, model_units]);
 
   const updateCatalogNames = () => {
 //    console.log('ActionSelectCatalog.updateCatalogNames');
@@ -68,7 +68,6 @@ export default function ActionSelectCatalog() {
 
   const toggle = () => {
 //    console.log('ActionSelectCatalog.toggle');
-    updateCatalogNames();
     setShow(!show);
   }
 
