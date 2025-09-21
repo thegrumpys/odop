@@ -1,5 +1,8 @@
 **Message-of-the-day** &nbsp; updated September 20, 2025  
 
+### Auto Search
+This release contains a new "Auto Search" feature. 
+
 ### Authentication transition 
 Earlier this year, We transitioned authentication for the ODOP 
 [Design Library](http://odop.springdesignsoftware.org/docs/Help/terminology.html#designLib) 
@@ -32,7 +35,6 @@ Version  | &nbsp; | Date released
 ---      | ---    | ---  
 [ODOP version 6.1.0](https://github.com/thegrumpys/odop/milestone/71?closed=1)   | &nbsp; | September 20, 2025.  
 
-This release contains a new "Auto Search" feature. 
 Follow the link(s) above to see change details in GitHub.  
 
 ___
