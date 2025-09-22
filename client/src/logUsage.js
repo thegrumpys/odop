@@ -54,7 +54,7 @@ function flushBuffer() {
     var action = 'Values';
     var sequenced_note = {
       event_value: sequence++, 
-      event_datetime: new Date().toLocaleString([], {year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', fractionalSecondDigits: '3', hour12: false}), 
+      event_datetime: new Date().toISOString(), 
       event_label: buffer
     };
     if (process.env.NODE_ENV === 'production') { // Limit G.A. tracking to production
@@ -83,7 +83,7 @@ export function logUsage(tag, action, note) {
   var sequenced_note = Object.assign(
     {
       event_value: sequence++,
-      event_datetime: new Date().toLocaleString([], {year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', fractionalSecondDigits: '3', hour12: false}), 
+      event_datetime: new Date().toISOString(), 
     }, 
     note
   );
