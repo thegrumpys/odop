@@ -524,7 +524,7 @@ app.post('/api/v1/usage_log', async (req, res) => {
   note = note.replace(/[']/ig, "''"); // replace one single quote with an two single quotes throughout
   var action = req.body.action !== undefined ? req.body.action.replace(/[']/ig, "''") : '';
   var event_value = req.body.note.event_value !== undefined ? req.body.note.event_value : 0;
-  var event_datetime = req.body.note.event_datetime !== undefined ? 'STR_TO_DATE(\'' + req.body.note.event_datetime + '\',"%Y/%m/%dT%H:%i:%s.%fZ")' : '\'\'';
+  var event_datetime = req.body.note.event_datetime !== undefined ? 'STR_TO_DATE(\'' + req.body.note.event_datetime + '\',"%Y-%m-%dT%H:%i:%s.%fZ")' : '\'\'';
   var event_label = req.body.note.event_label !== undefined ? req.body.note.event_label.replace(/[']/ig, "''") : '';
 //  console.log('action=', action, 'event_value=', event_value, 'event_datetime=', event_datetime, 'event_label=', event_label)
   var stmt = 'INSERT INTO usage_log (ip_address, note, action, event_value, event_datetime, event_label) VALUES (\'' + ip_address + '\',\'' + note + '\',\'' + action + '\',' + event_value + ',' + event_datetime + ',\'' + event_label + '\')';
