@@ -1,7 +1,8 @@
 # Welcome Page ideas
 
 For the purpose of this discussion, a "welcome page" is a hypothetical web page or modal dialog box 
-that appears after a visitor to SpringDesignSoftware.org clicks on the "Launch Software" button and before the Okta sign-in widget.
+that appears after a visitor to SpringDesignSoftware.org clicks on the "Launch Software" button and before 
+a main page (Advanced or Calcularor View).
 
 Early experience coming out of the Google Ads campaign suggests that a fair number of users
 click on one of the website's "Launch Software" buttons and view the

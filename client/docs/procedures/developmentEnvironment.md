@@ -238,17 +238,6 @@ Click OK and OK
 
 _____
 
-### Okta  (historical info only)
-
-SpringDesignSoftware.org-dev-729070  
-
-Org URL: https://dev-729070.okta.com  
-
-It is necessary to have an Okta account with administrator privileges.  
-The only necessary software configuration happens with npm install.  
-
-_____
-
 ### Release Procedure
 
 Test a release to the staging system to confirm that Git & Heroku are configured correctly.  

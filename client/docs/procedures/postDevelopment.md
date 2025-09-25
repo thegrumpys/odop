@@ -36,6 +36,5 @@ Test various input and menu functions and verify no unexpected console.log outpu
      * `client/src/logUsage.js` 
      * `client/src/registerServiceWorker.js` 
      * `scripts/build_index.js` 
-     * `scripts/import-okta-csv.js`
      * `scripts/scanner.js` 
      * `server.js` 

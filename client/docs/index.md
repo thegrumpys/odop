@@ -69,7 +69,6 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 
 <!--- The following topics of this section are already implemented or otherwise no longer relevant.  They are maintained here to keep the thought history.  -->
 <!---  
-* [Okta Registration Flow](design/OktaRegistrationFlow.html)   
 * [Proposed names for the (problem independent) system](design/SysName.html)
 * [Proposed names for quantities previously called "constants"](design/PreviouslyConstants.html) 
 * [Idea for a simple showcase problem](design/GeometricSolidsProblem.html)
@@ -94,5 +93,4 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 * [Install a new system](procedures/NewSystem.html) 
 * [New database](procedures/NewDB.html) 
 * [Database Full Recovery](procedures/recoverFromDBfull.html) 
-* [Okta Registration Flow](design/OktaRegistrationFlow.html) 
 * [Create tooltip images](procedures/tooltipImages.html) 
