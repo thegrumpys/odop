@@ -48,6 +48,6 @@
     "lunr": "^2.3.9",
     "mysql2": "^3.6.0",
     "node-mysql": "^0.4.2",
-    "nodemailer": "^7.0.3"
+    "nodemailer": "^7.0.7"
   }
 }
