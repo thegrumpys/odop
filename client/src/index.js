@@ -9,6 +9,10 @@ import * as ReactDOMClient from "react-dom/client";
 import { Beforeunload } from 'react-beforeunload';
 import { logUsage } from './logUsage';
 import { AuthProvider } from './components/AuthProvider'
+import { initAnalytics } from './analytics';
+
+// Initialize analytics (conditionally)
+initAnalytics();
 
 const container = document.getElementById('root');
 const root = ReactDOMClient.createRoot(container);
