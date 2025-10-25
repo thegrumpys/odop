@@ -13,6 +13,7 @@ import { changeView, changeUser } from '../store/actions';
 import ExecutePanel from './ExecutePanel';
 import SignIn from '../menus/Session/SignIn';
 import SignOut from '../menus/Session/SignOut';
+import FileNew from '../menus/File/FileNew';
 import FileOpen from '../menus/File/FileOpen';
 import FileSave from '../menus/File/FileSave';
 import FileSaveAs from '../menus/File/FileSaveAs';
@@ -141,6 +142,9 @@ export default function MainPage() {
           <Nav className="me-auto">
             {logOnOff}
             <NavDropdown title="File" renderMenuOnMount={true}>
+              {disableJawsDB && (
+                <FileNew />
+              )}
               {!disableJawsDB && (
                 <>
                   <FileOpen />
@@ -200,7 +204,7 @@ export default function MainPage() {
           </RequireAuth>
           <Nav>
             <Nav.Item>
-              <SearchDocs />
+              {!disableJawsDB && (<SearchDocs />)}
             </Nav.Item>
             <Nav.Item className="d-flex align-items-center">
               <a href={"/docs/Help/DesignTypes/" + model_type + "/description.html"} target="_blank" rel="noopener noreferrer">
