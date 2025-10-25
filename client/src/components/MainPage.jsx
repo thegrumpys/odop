@@ -127,7 +127,8 @@ export default function MainPage() {
   var alt = model_type + ' icon';
 //  console.log('MainPage','src=',src,' alt=',alt);
 
-  const logOnOff = authState && authState.isAuthenticated ? <SignOut /> : <SignIn />;
+  const disableJawsDB = config.features.disableJawsDB;
+  const logOnOff = !disableJawsDB ? (authState && authState.isAuthenticated ? <SignOut /> : <SignIn />) : null;
 //  console.log('MainPage','logOnOff=',logOnOff);
   return (
     <>
@@ -140,11 +141,15 @@ export default function MainPage() {
           <Nav className="me-auto">
             {logOnOff}
             <NavDropdown title="File" renderMenuOnMount={true}>
-              <FileOpen />
-              <FileSave />
-              <FileSaveAs />
-              <FileDelete />
-              <NavDropdown.Divider />
+              {!disableJawsDB && (
+                <>
+                  <FileOpen />
+                  <FileSave />
+                  <FileSaveAs />
+                  <FileDelete />
+                  <NavDropdown.Divider />
+                </>
+              )}
               <FileImport />
               <FileExport />
               <NavDropdown.Divider />
