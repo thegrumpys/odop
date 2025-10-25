@@ -29,76 +29,17 @@ export default function FileNew() {
   useEffect(() => {
 //    console.log('FileNew','model_user=',model_user,'model_type=',model_type);
     setType(model_type);
-    getDesignNames(model_user, model_type);
     return () => { };
   }, [model_user, model_type]);
 
   const getDesignNames = (user, type) => {
-//    console.log('FileNew.getDesignNames user=', user, 'type=', type);
-    // Get the names and store them in state
-    displaySpinner(true);
-    axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs', {
-      headers: {
-        Authorization: 'Bearer ' + user
-      }
-    })
-      .then(res => {
-        const names = res.data;
-        var name;
-        if (names.length > 0) {
-          var i = names.findIndex(element => element.name === config.url.name)
-          if (i > 0) {
-            name = names[i].name;
-          } else {
-            name = names[0].name;
-          }
-        } else {
-          name = '';
-        }
-        setNames(names);
-        setName(name);
-      })
-      .catch(error => {
-        displayMessage('GET of design names failed with message: \'' + error.message + '\'');
-      })
-      .finally(() => {
-        displaySpinner(false);
-      });
-  }
-
-  const getDesign = (user, type, name) => {
-//    console.log('FileNew.getDesign user=', user, 'type=', type, 'name=', name);
-    displaySpinner(true);
-    axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
-      headers: {
-        Authorization: 'Bearer ' + user
-      }
-    })
-      .then(res => {
-        const design = res.data;
-        var { migrate } = require('../../designtypes/' + design.type + '/migrate.js'); // Dynamically load migrate
-        var migrated_design = migrate(design);
-        if (migrated_design.jsontype === "ODOP") {
-          dispatch(changeName(name));
-          dispatch(load(migrated_design));
-          dispatch(deleteAutoSave());
-          logUsage('event', 'FileNew', { event_label: type + ' ' + name });
-        } else {
-          displayMessage('Invalid JSON type, function ignored');
-        }
-      })
-      .catch(error => {
-        displayMessage('GET of \'' + name + '\' design failed for type \'' + type + '\' with message: \'' + error.message + '\'');
-      })
-      .finally(() => {
-        displaySpinner(false);
-      });
+    setNames(['Startup','Startup_Metric']);
+    setName('Startup');
   }
 
   const toggle = () => {
 //    console.log('FileNew.toggle');
     var type = (types.includes(model_type) ? model_type : config.url.type);
-    getDesignNames(model_user, type);
     var name = (names.includes(model_name) ? model_name : config.url.name);
     setType(type);
     setName(name);
@@ -109,7 +50,6 @@ export default function FileNew() {
 //    console.log('FileNew.onSelectType', 'event.target.value=', event.target.value)
     setType(event.target.value);
     setNames([]);
-    getDesignNames(model_user, event.target.value);
   }
 
   const onSelectName = (event) => {
@@ -117,18 +57,12 @@ export default function FileNew() {
     setName(event.target.value);
   }
 
-  const onSignIn = () => {
-//    console.log('FileNew.onSignIn');
-    setShow(!show);
-//    console.log('FileNew.onSignIn - navigate('/login')');
-    navigate('/login'); // Must be last
-  }
-
   const onLoadInitialState = () => {
 //    console.log('FileNew.onLoadInitialState');
     setShow(!show);
     if (stopOnFileLoad || type !== model_type) dispatch(executeStopOnLoad()); // Stop execute file on different type
     dispatch(loadInitialState(type, 'US'));
+    dispatch((changeName('Startup')));
     dispatch(deleteAutoSave());
 //    console.log('FileNew.onLoadInitialState','model_user=',model_user,'model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
     logUsage('event', 'FileNew', { event_label: type + ' load initialState US' });
@@ -139,6 +73,7 @@ export default function FileNew() {
     setShow(!show);
     if (stopOnFileLoad || type !== model_type) dispatch(executeStopOnLoad()); // Stop execute file on different type
     dispatch(loadInitialState(type, 'Metric'));
+    dispatch((changeName('Startup_Metric')));
     dispatch(deleteAutoSave());
 //    console.log('FileNew.onLoadMetricInitialState','model_user=',model_user,'model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
     logUsage('event', 'FileNew', { event_label: type + ' load initialState Metric' });
@@ -169,18 +104,22 @@ export default function FileNew() {
     setShow(!show);
     if (stopOnFileLoad || type !== model_type) dispatch(executeStopOnLoad()); // Stop execute file on different type
 //    console.log('FileNew.onOpen','model_user=',model_user,'type=',type,'name=',name,'model_view=',model_view);
-    getDesign(model_user, type, name); // Load the model
+    if (units === 'US') {
+      onLoadInitialState();
+    } else {
+      onLoadMetricInitialState();
+    }
   }
 
   return (
     <>
       <NavDropdown.Item onClick={toggle}>
-        Open&hellip;
+        New&hellip;
       </NavDropdown.Item>
       {show && <Modal show={show} onHide={onCancel}>
         <Modal.Header closeButton>
           <Modal.Title>
-            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; File : Open
+            <img src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" /> &nbsp; File : New
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -201,7 +140,6 @@ export default function FileNew() {
           </Form.Select>
         </Modal.Body>
         <Modal.Footer>
-          {!(authState && authState.isAuthenticated) && <Button variant="info" onClick={onSignIn}>Sign In...</Button>}{' '}
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>{' '}
           {authState && authState.isAdmin && <Button variant="danger" onClick={onLoadInitialState}>Load Initial State</Button>}{' '}
           {authState && authState.isAdmin && <Button variant="danger" onClick={onLoadMetricInitialState}>Load Metric Initial State</Button>}{' '}
