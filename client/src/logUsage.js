@@ -1,3 +1,5 @@
+import config from './config';
+
 var lastName = '';
 var lastValue = '';
 var lastSuffix = '';
@@ -6,6 +8,7 @@ var sequence = 0;
 
 function logIt(tag, action, note) {
 //  console.log('In logIt tag=',tag,'action=',action,'note=',note);
+  if (!config.features.enableDB) return;
   var body = JSON.stringify({ tag: tag, action: action, note: note });
 //  console.log('body=',body);
   fetch('/api/v1/usage_log', {
@@ -57,7 +60,7 @@ function flushBuffer() {
       event_datetime: new Date().toISOString(), 
       event_label: buffer
     };
-    if (process.env.NODE_ENV === 'production') { // Limit G.A. tracking to production
+    if (process.env.REACT_APP_ENABLE_ANALYTICS === 'true' && process.env.NODE_ENV === 'production') { // Limit G.A. tracking to production
       window.gtag(tag, action, sequenced_note); // Output to Google Analytics
     }
     logIt(tag, action, sequenced_note);
@@ -87,7 +90,7 @@ export function logUsage(tag, action, note) {
     }, 
     note
   );
-  if (process.env.NODE_ENV === 'production') { // Limit G.A. tracking to production
+  if (process.env.REACT_APP_ENABLE_ANALYTICS === 'true' && process.env.NODE_ENV === 'production') { // Limit G.A. tracking to production
     window.gtag(tag, action, sequenced_note); // Output to Google Analytics
   }
   logIt(tag, action, sequenced_note);

@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { load, changeUser, changeName, restoreAutoSave, deleteAutoSave } from "../store/actions";
+import { load, loadInitialState, changeUser, changeName, restoreAutoSave, deleteAutoSave } from "../store/actions";
 import MainPage from "./MainPage";
 import { Button, Modal, Alert } from 'react-bootstrap';
 import config from '../config';
@@ -48,7 +48,11 @@ export default function App() {
       promptLoadAutoSave();
     } else {
 //      console.log('App.useEffect', 'restore default design','isAuthenticated ? authState.token : undefined=', isAuthenticated ? authState.token : undefined)
-      loadDefaultDesign(isAuthenticated ? authState.token : undefined);
+      if (config.features.enableDB) {
+        loadDefaultDesign(isAuthenticated ? authState.token : undefined);
+      } else {
+        loadInitialDesign();
+      }
     }
     return () => {
 //      console.log('App.useEffect','Unmounting ...');
@@ -84,6 +88,19 @@ export default function App() {
     }
     getDesign(user, config.url.type, config.url.name);
     logUsage('event', 'App', { event_label: 'type: ' + config.url.type + ' load defaultDesign ' + config.url.name });
+  }
+
+  const loadInitialDesign = () => {
+//    console.log('App.loadInitialDesign');
+    setShow(false);
+    if (!showWelcome) {
+      config.url.execute = undefined; // Turn off execute
+    }
+    const units = config.env.units || 'US';
+    dispatch(loadInitialState(config.url.type, units));
+    dispatch(changeName('Startup'));
+    dispatch(deleteAutoSave());
+    logUsage('event', 'App', { event_label: 'type: ' + config.url.type + ' load initialState ' + units });
   }
 
   const getDesign = (user, type, name) => {
@@ -145,14 +162,14 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
-      {show && <Modal show={show} onHide={() => loadDefaultDesign(authState ? authState.token : model_user)}>
+      {show && <Modal show={show} onHide={() => (config.features.enableDB ? loadDefaultDesign(authState ? authState.token : model_user) : loadInitialDesign())}>
         <Modal.Header closeButton><Modal.Title>ODOP Design Recovery</Modal.Title></Modal.Header>
         <Modal.Body>
           <Alert variant="info">AutoSave design available. Recover the design?</Alert>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="outline-info" onClick={onContextHelp}>Help</Button>{' '}
-          <Button variant="secondary" onClick={() => loadDefaultDesign(authState ? authState.token : model_user)}>No</Button>{' '}
+          <Button variant="secondary" onClick={() => (config.features.enableDB ? loadDefaultDesign(authState ? authState.token : model_user) : loadInitialDesign())}>No</Button>{' '}
           <Button variant="primary" onClick={loadAutoSaveDesign}>Yes</Button>
         </Modal.Footer>
       </Modal>}

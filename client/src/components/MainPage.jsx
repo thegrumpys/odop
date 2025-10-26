@@ -13,6 +13,7 @@ import { changeView, changeUser } from '../store/actions';
 import ExecutePanel from './ExecutePanel';
 import SignIn from '../menus/Session/SignIn';
 import SignOut from '../menus/Session/SignOut';
+import FileNew from '../menus/File/FileNew';
 import FileOpen from '../menus/File/FileOpen';
 import FileSave from '../menus/File/FileSave';
 import FileSaveAs from '../menus/File/FileSaveAs';
@@ -127,7 +128,8 @@ export default function MainPage() {
   var alt = model_type + ' icon';
 //  console.log('MainPage','src=',src,' alt=',alt);
 
-  const logOnOff = authState && authState.isAuthenticated ? <SignOut /> : <SignIn />;
+  const enableDB = config.features.enableDB;
+  const logOnOff = enableDB ? (authState && authState.isAuthenticated ? <SignOut /> : <SignIn />) : null;
 //  console.log('MainPage','logOnOff=',logOnOff);
   return (
     <>
@@ -140,11 +142,21 @@ export default function MainPage() {
           <Nav className="me-auto">
             {logOnOff}
             <NavDropdown title="File" renderMenuOnMount={true}>
-              <FileOpen />
-              <FileSave />
-              <FileSaveAs />
-              <FileDelete />
-              <NavDropdown.Divider />
+              {enableDB && (
+                <>
+                  <FileNew />
+                  <FileOpen />
+                  <FileSave />
+                  <FileSaveAs />
+                  <FileDelete />
+                  <NavDropdown.Divider />
+                </>
+              )}
+              {!enableDB && (
+                <>
+                  <FileNew />
+                </>
+              )}
               <FileImport />
               <FileExport />
               <NavDropdown.Divider />
