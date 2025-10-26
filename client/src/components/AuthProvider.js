@@ -9,7 +9,7 @@ export function AuthProvider({ children }) {
 //  console.log('AuthProvider','authState=',authState);
 
   useEffect(() => {
-    if (config.features.disableJawsDB) {
+    if (!config.features.enableDB) {
       setAuthState({ isAuthenticated: false, isAdmin: false });
       return;
     }

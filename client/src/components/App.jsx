@@ -48,10 +48,10 @@ export default function App() {
       promptLoadAutoSave();
     } else {
 //      console.log('App.useEffect', 'restore default design','isAuthenticated ? authState.token : undefined=', isAuthenticated ? authState.token : undefined)
-      if (config.features.disableJawsDB) {
-        loadInitialDesign();
-      } else {
+      if (config.features.enableDB) {
         loadDefaultDesign(isAuthenticated ? authState.token : undefined);
+      } else {
+        loadInitialDesign();
       }
     }
     return () => {
@@ -162,14 +162,14 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
-      {show && <Modal show={show} onHide={() => (config.features.disableJawsDB ? loadInitialDesign() : loadDefaultDesign(authState ? authState.token : model_user))}>
+      {show && <Modal show={show} onHide={() => (config.features.enableDB ? loadDefaultDesign(authState ? authState.token : model_user) : loadInitialDesign())}>
         <Modal.Header closeButton><Modal.Title>ODOP Design Recovery</Modal.Title></Modal.Header>
         <Modal.Body>
           <Alert variant="info">AutoSave design available. Recover the design?</Alert>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="outline-info" onClick={onContextHelp}>Help</Button>{' '}
-          <Button variant="secondary" onClick={() => (config.features.disableJawsDB ? loadInitialDesign() : loadDefaultDesign(authState ? authState.token : model_user))}>No</Button>{' '}
+          <Button variant="secondary" onClick={() => (config.features.enableDB ? loadDefaultDesign(authState ? authState.token : model_user) : loadInitialDesign())}>No</Button>{' '}
           <Button variant="primary" onClick={loadAutoSaveDesign}>Yes</Button>
         </Modal.Footer>
       </Modal>}

@@ -23,10 +23,10 @@ app.use(cors({
 app.use(express.json());
 
 // --- DB status logging ---
-if (process.env.DISABLE_JAWSDB === 'true') {
-  console.warn('⚠️  JAWSDB connections are DISABLED (DISABLE_JAWSDB=true)');
-} else {
+if (process.env.ENABLE_DB === 'true') {
   console.log('✅ JAWSDB connection ENABLED');
+} else {
+  console.warn('⚠️  JAWSDB connections are DISABLED (ENABLE_DB=false)');
 }
 
 app.use(session({
@@ -274,7 +274,7 @@ function sendMessage(res, message, severity = 'error', field = null, status = 40
 //==================================================================================================
 // db_size
 app.get('/api/v1/db_size', adminRequired, async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   var value;
   var user = req.uid;
 //  console.log('SERVER: In GET /api/v1/db_size', 'user=', user);
@@ -315,7 +315,7 @@ GROUP BY s.schema_name, sp.grantee, sp.has_insert`;
 //==================================================================================================
 // designtypes
 app.get('/api/v1/designtypes', authenticationRequired, async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   var value;
   var user = req.uid;
 //  console.log('SERVER: In GET /api/v1/designtypes', 'user=', user);
@@ -335,7 +335,7 @@ app.get('/api/v1/designtypes', authenticationRequired, async (req, res) => {
 //==================================================================================================
 // designtypes/:type/designs
 app.get('/api/v1/designtypes/:type/designs', authenticationRequired, async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   var value;
   var user = req.uid;
   var type = req.params['type'];
@@ -356,7 +356,7 @@ app.get('/api/v1/designtypes/:type/designs', authenticationRequired, async (req,
 //==================================================================================================
 // designtypes/:type/designs/:name
 app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   var type;
   var value;
   var user = req.uid;
@@ -388,7 +388,7 @@ app.get('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async
 //==================================================================================================
 // designtypes/:type/designs/:name - create new
 app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async (req, res) => { // Create New
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   var value;
   var user = req.uid;
   var type = req.body.type;
@@ -439,7 +439,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, asyn
 //==================================================================================================
 // designtypes/:type/designs/:name - update existing
 app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async (req, res) => { // Update Existing
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   var value;
   var user = req.uid;
   var type = req.body.type;
@@ -490,7 +490,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async
 //==================================================================================================
 // designtypes/:type/designs/:name
 app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   var value;
   var user = req.uid;
   var type = req.params['type'];
@@ -530,7 +530,7 @@ app.delete('/api/v1/designtypes/:type/designs/:name', authenticationRequired, as
 //==================================================================================================
 // usage_log
 app.post('/api/v1/usage_log', async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
 //  console.log('@@@/api/v1/usage_log@@@',JSON.stringify(req.session));
   var ip_address;
   var note;
@@ -680,7 +680,7 @@ function adjustSat(sat1, sat2, score) {
 //==================================================================================================
 // REGISTER
 app.post('/api/v1/register', async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   const { email, password, first_name, last_name } = req.body;
 //  console.log('/register','email=',email,'password=',password,'first_name=',first_name,'last_name=',last_name);
 
@@ -729,7 +729,7 @@ app.post('/api/v1/register', async (req, res) => {
 //==================================================================================================
 // CONFIRM
 app.get('/api/v1/confirm', async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   const { token } = req.query;
 //  console.log('/api/v1/confirm','token=',token);
   try {
@@ -754,7 +754,7 @@ app.get('/api/v1/confirm', async (req, res) => {
 //==================================================================================================
 // HAS PASSWORD
 app.get('/api/v1/has-password', async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   const { email } = req.query;
 //  console.log('/api/v1/has-password','email=',email);
   try {
@@ -775,7 +775,7 @@ app.get('/api/v1/has-password', async (req, res) => {
 //==================================================================================================
 // LOGIN
 app.post('/api/v1/login', async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   const { email, password } = req.body;
 //  console.log('/api/v1/login','email=',email,'password=',password);
 
@@ -810,7 +810,7 @@ app.post('/api/v1/login', async (req, res) => {
 //==================================================================================================
 // CHECK SESSION
 app.get('/api/v1/me', (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   if (req.session.user) {
 //    console.log('/me','req.session.user=',req.session.user);
     sendMessage(res, {
@@ -837,7 +837,7 @@ app.get('/api/v1/me', (req, res) => {
 //==================================================================================================
 // LOGOUT
 app.post('/api/v1/logout', (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
 //  console.log('/logout');
   req.session.destroy(() => {
     res.clearCookie("odop_session");
@@ -848,7 +848,7 @@ app.post('/api/v1/logout', (req, res) => {
 //==================================================================================================
 // PASSWORD RESET REQUEST
 app.post('/api/v1/reset-password', async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   const { email } = req.body;
 //  console.log('/api/v1/reset-password','email=',email);
 
@@ -890,7 +890,7 @@ app.post('/api/v1/reset-password', async (req, res) => {
 //==================================================================================================
 // HAS-RESET-TOKEN
 app.get('/api/v1/has-reset-token', async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   const { token } = req.query;
 //  console.log('/api/v1/has-reset-token',token=',token);
   try {
@@ -911,7 +911,7 @@ app.get('/api/v1/has-reset-token', async (req, res) => {
 //==================================================================================================
 // CHANGE PASSWORD
 app.patch('/api/v1/change-password', async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   const { token, email, password } = req.body;
 //  console.log('/api/v1/change-password','token=',token,'email=',email,'password=',password);
 
@@ -943,14 +943,14 @@ app.patch('/api/v1/change-password', async (req, res) => {
 // ===========================================================================
 // RESEND EMAIL
 app.post('/api/v1/resend', (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   resendEmail(req, res);
 });
 
 // ===========================================================================
 // RESEND CONFIRMATION
 app.post('/api/v1/resend-confirmation', (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   req.query.type = 'confirm';
   resendEmail(req, res);
 });
@@ -958,7 +958,7 @@ app.post('/api/v1/resend-confirmation', (req, res) => {
 // ===========================================================================
 // RESEND CHANGE PASSWORD
 app.post('/api/v1/resend-change-password', (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   req.query.type = 'reset';
   resendEmail(req, res);
 });
@@ -966,7 +966,7 @@ app.post('/api/v1/resend-change-password', (req, res) => {
 //==================================================================================================
 // Cleanup Expired Tokens
 app.delete('/api/v1/cleanup-expired-tokens', adminRequired, async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
 //  console.log('/api/v1/cleanup-expired-tokens');
   try {
     const [rows] = await db.query('DELETE FROM token WHERE expires_at < NOW()');
@@ -987,7 +987,7 @@ app.delete('/api/v1/cleanup-expired-tokens', adminRequired, async (req, res) => 
 //====================================================================================================================
 // Admin User Search
 app.get('/api/v1/users', adminRequired, async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   const { email, firstName, lastName, role, status, token, createStartDate, createEndDate, loginStartDate, loginEndDate } = req.query;
 //  console.log('/api/v1/users','email=',email,'firstName=',firstName,'lastName=',lastName,'role=',role,'status=',status,'token=',token,'createStartDate=',createStartDate,'createEndDate=',createEndDate,'loginStartDate=',loginStartDate,'loginEndDate=',loginEndDate);
   const conditions = [];
@@ -1050,7 +1050,7 @@ app.get('/api/v1/users', adminRequired, async (req, res) => {
 // =============================================================================
 // Admin Create User
 app.post('/api/v1/users', adminRequired, async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   const { email, password, first_name, last_name, role, status, token } = req.body;
   try {
     if (!isValidEmail(email)) {
@@ -1077,7 +1077,7 @@ app.post('/api/v1/users', adminRequired, async (req, res) => {
 // =============================================================================
 // Admin Update User
 app.put('/api/v1/users/:id', adminRequired, async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   const { id } = req.params;
   const { email, first_name, last_name, role, status, token } = req.body;
   try {
@@ -1130,7 +1130,7 @@ app.put('/api/v1/users/:id', adminRequired, async (req, res) => {
 //====================================================================================================================
 // Admin Delete User
 app.delete('/api/v1/users/:id', adminRequired, async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   const { id } = req.params;
 //  console.log('/api/v1/users','id=',id);
   try {
@@ -1148,7 +1148,7 @@ app.delete('/api/v1/users/:id', adminRequired, async (req, res) => {
 // ============================================================================
 // Admin Login As User
 app.post('/api/v1/users/:id/login-as', adminRequired, async (req, res) => {
-  if (!db) return res.status(503).json({ error: 'JAWSDB disabled' });
+  if (!db) return res.status(503).json({ error: 'Database disabled' });
   const { id } = req.params;
   try {
     const [rows] = await db.execute(

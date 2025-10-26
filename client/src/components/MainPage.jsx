@@ -128,8 +128,8 @@ export default function MainPage() {
   var alt = model_type + ' icon';
 //  console.log('MainPage','src=',src,' alt=',alt);
 
-  const disableJawsDB = config.features.disableJawsDB;
-  const logOnOff = !disableJawsDB ? (authState && authState.isAuthenticated ? <SignOut /> : <SignIn />) : null;
+  const enableDB = config.features.enableDB;
+  const logOnOff = enableDB ? (authState && authState.isAuthenticated ? <SignOut /> : <SignIn />) : null;
 //  console.log('MainPage','logOnOff=',logOnOff);
   return (
     <>
@@ -142,18 +142,18 @@ export default function MainPage() {
           <Nav className="me-auto">
             {logOnOff}
             <NavDropdown title="File" renderMenuOnMount={true}>
-              {disableJawsDB && (
-                <>
-                  <FileNew />
-                </>
-              )}
-              {!disableJawsDB && (
+              {enableDB && (
                 <>
                   <FileOpen />
                   <FileSave />
                   <FileSaveAs />
                   <FileDelete />
                   <NavDropdown.Divider />
+                </>
+              )}
+              {!enableDB && (
+                <>
+                  <FileNew />
                 </>
               )}
               <FileImport />
