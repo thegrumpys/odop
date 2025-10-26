@@ -144,6 +144,7 @@ export default function MainPage() {
             <NavDropdown title="File" renderMenuOnMount={true}>
               {enableDB && (
                 <>
+                  <FileNew />
                   <FileOpen />
                   <FileSave />
                   <FileSaveAs />
