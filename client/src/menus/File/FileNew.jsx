@@ -4,12 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { Button, Modal, NavDropdown, Form } from 'react-bootstrap';
 import { changeName, loadInitialState, load, restoreAutoSave, deleteAutoSave } from '../../store/actions';
 import { executeStopOnLoad } from '../../store/actions';
-import { displayMessage } from '../../components/Message';
-import { displaySpinner } from '../../components/Spinner';
 import { logUsage } from '../../logUsage';
 import config from '../../config';
 import { useAuth } from '../../components/AuthProvider';
-import axios from '../../axiosConfig';
 
 export default function FileNew() {
 //  console.log('FileNew - Mounting...');
