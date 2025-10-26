@@ -176,8 +176,8 @@ export default function MainPage() {
               <ActionExecute />
             </NavDropdown>
             <NavDropdown title="View">
-              {model_type === "Spring/Extension" && <ViewCADModel />}
-              {model_type === "Spring/Extension" && <NavDropdown.Divider />}
+              {process.env.REACT_APP_ENABLE_CAD_VIEW_MODEL === 'true' && model_type === "Spring/Extension" && <ViewCADModel />}
+              {process.env.REACT_APP_ENABLE_CAD_VIEW_MODEL === 'true' && model_type === "Spring/Extension" && <NavDropdown.Divider />}
               <ViewSelect viewNames={viewNames}/>
               <RequireAdmin>
                 <NavDropdown.Divider />
