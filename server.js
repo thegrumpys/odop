@@ -21,17 +21,52 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
-app.use(session({
+
+// --- DB status logging ---
+if (process.env.ENABLE_DB === 'true') {
+  console.log('✅ JAWSDB connection ENABLED');
+} else {
+  console.warn('⚠️  JAWSDB connections are DISABLED (ENABLE_DB=false)');
+}
+
+let sessionStore = null;
+
+if (process.env.ENABLE_DB === 'true') {
+  if (db) {
+    sessionStore = new MySQLStore({
+      clearExpired: true,
+      checkExpirationInterval: 15 * 60 * 1000,
+      expiration: 24 * 60 * 60 * 1000
+    }, db);
+    sessionStore.on('error', (err) => {
+      console.error('SESSION STORE ERROR', err);
+    });
+  } else {
+    console.warn('⚠️  Session store not initialized because database pool is unavailable.');
+  }
+} else {
+  console.warn('⚠️  Session store using memory store because ENABLE_DB=false.');
+}
+
+const sessionConfig = {
   name: 'odop_session',
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: false, // set to true if using HTTPS
+    secure: process.env.NODE_ENV === 'production',
     maxAge: 24 * 60 * 60 * 1000 // 1 day
   }
-}));
+};
+
+if (sessionStore) {
+  sessionConfig.store = sessionStore;
+} else {
+  console.warn('⚠️  Using default in-memory session store. This should not be used in production.');
+}
+
+app.use(session(sessionConfig));
 app.use(function(req, res, next) { // Dump debugging output for each request
   console.log('SERVER: ===========================================================');
   console.log('SERVER: In USE', 'req.originalUrl=', req.originalUrl, 'req.ip=', req.ip, 'req.method=', req.method);
