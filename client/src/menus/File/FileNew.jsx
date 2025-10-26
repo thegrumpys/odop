@@ -29,17 +29,29 @@ export default function FileNew() {
   useEffect(() => {
 //    console.log('FileNew','model_user=',model_user,'model_type=',model_type);
     setType(model_type);
+    getDesignNames(model_user, model_type);
     return () => { };
   }, [model_user, model_type]);
 
   const getDesignNames = (user, type) => {
-    setNames(['Startup','Startup_Metric']);
+    console.log('FileNew.getDesignNames user=', user, 'type=', type);
+    setNames([{user:null,name:'Startup'},{user:null,name:'Startup_Metric'}]);
     setName('Startup');
+  }
+
+  const getDesign = (user, type, name) => {
+    console.log('FileNew.getDesign user=', user, 'type=', type, 'name=', name);
+    if (name === 'Startup') {
+      onLoadInitialState();
+    } else if (name === 'Startup_Metric') {
+      onLoadMetricInitialState();
+    }
   }
 
   const toggle = () => {
 //    console.log('FileNew.toggle');
     var type = (types.includes(model_type) ? model_type : config.url.type);
+    getDesignNames(model_user, type);
     var name = (names.includes(model_name) ? model_name : config.url.name);
     setType(type);
     setName(name);
@@ -50,6 +62,7 @@ export default function FileNew() {
 //    console.log('FileNew.onSelectType', 'event.target.value=', event.target.value)
     setType(event.target.value);
     setNames([]);
+    getDesignNames(model_user, event.target.value);
   }
 
   const onSelectName = (event) => {
@@ -104,11 +117,7 @@ export default function FileNew() {
     setShow(!show);
     if (stopOnFileLoad || type !== model_type) dispatch(executeStopOnLoad()); // Stop execute file on different type
 //    console.log('FileNew.onOpen','model_user=',model_user,'type=',type,'name=',name,'model_view=',model_view);
-    if (units === 'US') {
-      onLoadInitialState();
-    } else {
-      onLoadMetricInitialState();
-    }
+    getDesign(model_user, type, name); // Load the model
   }
 
   return (

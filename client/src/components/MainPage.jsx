@@ -143,10 +143,14 @@ export default function MainPage() {
             {logOnOff}
             <NavDropdown title="File" renderMenuOnMount={true}>
               {disableJawsDB && (
-                <FileNew />
+                <>
+                  <FileNew />
+                  <FileOpen />
+                </>
               )}
               {!disableJawsDB && (
                 <>
+                  <FileNew />
                   <FileOpen />
                   <FileSave />
                   <FileSaveAs />
@@ -204,7 +208,7 @@ export default function MainPage() {
           </RequireAuth>
           <Nav>
             <Nav.Item>
-              {!disableJawsDB && (<SearchDocs />)}
+              <SearchDocs />
             </Nav.Item>
             <Nav.Item className="d-flex align-items-center">
               <a href={"/docs/Help/DesignTypes/" + model_type + "/description.html"} target="_blank" rel="noopener noreferrer">
