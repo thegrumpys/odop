@@ -145,12 +145,10 @@ export default function MainPage() {
               {disableJawsDB && (
                 <>
                   <FileNew />
-                  <FileOpen />
                 </>
               )}
               {!disableJawsDB && (
                 <>
-                  <FileNew />
                   <FileOpen />
                   <FileSave />
                   <FileSaveAs />
