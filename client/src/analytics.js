@@ -1,7 +1,7 @@
 // src/utils/analytics.js
 export function initAnalytics() {
   if (process.env.REACT_APP_ENABLE_ANALYTICS !== 'true') {
-    console.log('[GA] Google Analytics & Ads disabled by environment config.');
+//    console.log('[GA] Google Analytics & Ads disabled by environment config.');
     return;
   }
 
@@ -10,7 +10,7 @@ export function initAnalytics() {
   const GA_CONVERSION_EVENT =
     process.env.REACT_APP_GA_CONVERSION_EVENT || 'AW-659158420/fPTOCOiopNQBEJTrp7oC';
 
-  console.log(`[GA] Initializing Google tags for ${GA_MEASUREMENT_ID} and ${GA_ADS_ID}`);
+//  console.log(`[GA] Initializing Google tags for ${GA_MEASUREMENT_ID} and ${GA_ADS_ID}`);
 
   // --- Load both GA & Ads scripts dynamically ---
   [GA_MEASUREMENT_ID, GA_ADS_ID].forEach(id => {
@@ -40,7 +40,7 @@ export function initAnalytics() {
     const el = document.querySelector('#odop-form-title');
     if (el && el.offsetParent !== null) {
       gtag('event', 'conversion', { send_to: GA_CONVERSION_EVENT });
-      console.log('[GA] Conversion event sent:', GA_CONVERSION_EVENT);
+//      console.log('[GA] Conversion event sent:', GA_CONVERSION_EVENT);
       return true;
     }
     return false;
