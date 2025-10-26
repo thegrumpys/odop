@@ -34,13 +34,13 @@ export default function FileNew() {
   }, [model_user, model_type]);
 
   const getDesignNames = (user, type) => {
-    console.log('FileNew.getDesignNames user=', user, 'type=', type);
+//    console.log('FileNew.getDesignNames user=', user, 'type=', type);
     setNames([{user:null,name:'Startup'},{user:null,name:'Startup_Metric'}]);
     setName('Startup');
   }
 
   const getDesign = (user, type, name) => {
-    console.log('FileNew.getDesign user=', user, 'type=', type, 'name=', name);
+//    console.log('FileNew.getDesign user=', user, 'type=', type, 'name=', name);
     if (name === 'Startup') {
       onLoadInitialState();
     } else if (name === 'Startup_Metric') {
