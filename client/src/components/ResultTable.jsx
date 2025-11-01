@@ -17,7 +17,7 @@ export default function ResultTable() {
   const [seekMinMax, setSeekMinMax] = useState(MIN);
   const model_type = useSelector((state) => state.model.type);
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
-  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
+  const model_objmin = useSelector((state) => state.model.system_controls.objmin.value);
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const model_termination_condition = useSelector((state) => state.model.result.termination_condition);
   const model_search_completed = useSelector((state) => state.model.result.search_completed);

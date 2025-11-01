@@ -13,7 +13,7 @@ export default function ActionSeek() {
   const [seekMinMax, setSeekMinMax] = useState(MIN);
   const type = useSelector((state) => state.model.type);
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
-  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
+  const model_objmin = useSelector((state) => state.model.system_controls.objmin.value);
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const dispatch = useDispatch();
 

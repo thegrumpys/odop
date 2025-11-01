@@ -67,22 +67,22 @@ it('despak without merit', () => {
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(789); // DESPAK DOES NOT UPDATE THE MODEL
 
-    expect(design.model.system_controls.ioopt).toEqual(3);
-    expect(design.model.system_controls.maxit).toEqual(600);
-    expect(design.model.system_controls.weapon).toEqual(1);
-    expect(design.model.system_controls.nmerit).toEqual(1);
-    expect(design.model.system_controls.fix_wt).toEqual(1.5);
-    expect(design.model.system_controls.con_wt).toEqual(1.0);
-    expect(design.model.system_controls.zero_wt).toEqual(10.0);
-    expect(design.model.system_controls.viol_wt).toEqual(1.0);
-    expect(design.model.system_controls.mfn_wt).toEqual(0.01);
-    expect(design.model.system_controls.objmin).toEqual(0.00001);
-    expect(design.model.system_controls.del).toEqual(1.0);
-    expect(design.model.system_controls.delmin).toEqual(0.0001);
-    expect(design.model.system_controls.tol).toEqual(0.0001);
-    expect(design.model.system_controls.smallnum).toEqual(1.0e-07);
-    expect(design.model.system_controls.show_units).toEqual(1);
-    expect(design.model.system_controls.show_violations).toEqual(1);
+    expect(design.model.system_controls.ioopt.value).toEqual(3);
+    expect(design.model.system_controls.maxit.value).toEqual(600);
+    expect(design.model.system_controls.weapon.value).toEqual(1);
+    expect(design.model.system_controls.nmerit.value).toEqual(1);
+    expect(design.model.system_controls.fix_wt.value).toEqual(1.5);
+    expect(design.model.system_controls.con_wt.value).toEqual(1.0);
+    expect(design.model.system_controls.zero_wt.value).toEqual(10.0);
+    expect(design.model.system_controls.viol_wt.value).toEqual(1.0);
+    expect(design.model.system_controls.mfn_wt.value).toEqual(0.01);
+    expect(design.model.system_controls.objmin.value).toEqual(0.00001);
+    expect(design.model.system_controls.del.value).toEqual(1.0);
+    expect(design.model.system_controls.delmin.value).toEqual(0.0001);
+    expect(design.model.system_controls.tol.value).toEqual(0.0001);
+    expect(design.model.system_controls.smallnum.value).toEqual(1.0e-07);
+    expect(design.model.system_controls.show_units.value).toEqual(1);
+    expect(design.model.system_controls.show_violations.value).toEqual(1);
 
     expect(design.model.result.objective_value).toEqual(0.00005); // DESPAK DOES NOT UPDATE THE MODEL
     expect(design.model.result.termination_condition).toEqual("");
@@ -114,8 +114,8 @@ it('despak with merit', () => {
     var SDIR = -1; // MIN
     var temp = design.model.symbol_table[sto.STRESS].value;
     var M_NUM = temp + 0.1 * SDIR * temp;
-    var M_DEN = Math.abs(M_NUM) / design.model.system_controls.mfn_wt;
-    if (M_DEN < design.model.system_controls.smallnum) {
+    var M_DEN = Math.abs(M_NUM) / design.model.system_controls.mfn_wt.value;
+    if (M_DEN < design.model.system_controls.smallnum.value) {
         M_DEN = 1.0;
     }
     var element;
@@ -150,7 +150,7 @@ it('despak with merit', () => {
                 m_funct = (-value + M_NUM) / M_DEN;
             }
         }
-//        if (design.model.system_controls.ioopt > 5) {
+//        if (design.model.system_controls.ioopt.value > 5) {
 //            console.log('15 In merit SOUGHT=',SOUGHT,'SDIR=', SDIR,'value=', value,'m_funct=', m_funct);
 //        }
         return m_funct;
@@ -189,22 +189,22 @@ it('despak with merit', () => {
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(2500); // UPDATED BY changeSymbolConstraint ABOVE
 
-    expect(design.model.system_controls.ioopt).toEqual(3);
-    expect(design.model.system_controls.maxit).toEqual(600);
-    expect(design.model.system_controls.weapon).toEqual(1);
-    expect(design.model.system_controls.nmerit).toEqual(1);
-    expect(design.model.system_controls.fix_wt).toEqual(1.5);
-    expect(design.model.system_controls.con_wt).toEqual(1.0);
-    expect(design.model.system_controls.zero_wt).toEqual(10.0);
-    expect(design.model.system_controls.viol_wt).toEqual(1.0);
-    expect(design.model.system_controls.mfn_wt).toEqual(0.01);
-    expect(design.model.system_controls.objmin).toEqual(0.00001);
-    expect(design.model.system_controls.del).toEqual(1.0);
-    expect(design.model.system_controls.delmin).toEqual(0.0001);
-    expect(design.model.system_controls.tol).toEqual(0.0001);
-    expect(design.model.system_controls.smallnum).toEqual(1.0e-07);
-    expect(design.model.system_controls.show_units).toEqual(1);
-    expect(design.model.system_controls.show_violations).toEqual(1);
+    expect(design.model.system_controls.ioopt.value).toEqual(3);
+    expect(design.model.system_controls.maxit.value).toEqual(600);
+    expect(design.model.system_controls.weapon.value).toEqual(1);
+    expect(design.model.system_controls.nmerit.value).toEqual(1);
+    expect(design.model.system_controls.fix_wt.value).toEqual(1.5);
+    expect(design.model.system_controls.con_wt.value).toEqual(1.0);
+    expect(design.model.system_controls.zero_wt.value).toEqual(10.0);
+    expect(design.model.system_controls.viol_wt.value).toEqual(1.0);
+    expect(design.model.system_controls.mfn_wt.value).toEqual(0.01);
+    expect(design.model.system_controls.objmin.value).toEqual(0.00001);
+    expect(design.model.system_controls.del.value).toEqual(1.0);
+    expect(design.model.system_controls.delmin.value).toEqual(0.0001);
+    expect(design.model.system_controls.tol.value).toEqual(0.0001);
+    expect(design.model.system_controls.smallnum.value).toEqual(1.0e-07);
+    expect(design.model.system_controls.show_units.value).toEqual(1);
+    expect(design.model.system_controls.show_violations.value).toEqual(1);
 
     expect(design.model.result.objective_value).toEqual(0.5605106434805028); // UPDATED BY changeSymbolConstraint ABOVE
     expect(design.model.result.termination_condition).toEqual("");

@@ -53,9 +53,9 @@ export function search(store, objmin, merit) {
     }
 
     // Do the pattern search
-    var delarg = shadow_store_state.model.system_controls.del;
-//    console.log('search','shadow_store=',shadow_store,'pc=',pc,'delarg=',delarg,'shadow_store_state.model.system_controls.delmin=',shadow_store_state.model.system_controls.delmin,'objmin=',objmin,'shadow_store_state.model.system_controls.maxit=',shadow_store_state.model.system_controls.maxit,'shadow_store_state.model.system_controls.tol=',shadow_store_state.model.system_controls.tol);
-    var ncode = patsh(shadow_store, pc, delarg, shadow_store_state.model.system_controls.delmin, objmin, shadow_store_state.model.system_controls.maxit, shadow_store_state.model.system_controls.tol, merit);
+    var delarg = shadow_store_state.model.system_controls.del.value;
+//    console.log('search','shadow_store=',shadow_store,'pc=',pc,'delarg=',delarg,'shadow_store_state.model.system_controls.delmin.value=',shadow_store_state.model.system_controls.delmin.value,'objmin=',objmin,'shadow_store_state.model.system_controls.maxit.value=',shadow_store_state.model.system_controls.maxit.value,'shadow_store_state.model.system_controls.tol.value=',shadow_store_state.model.system_controls.tol.value);
+    var ncode = patsh(shadow_store, pc, delarg, shadow_store_state.model.system_controls.delmin.value, objmin, shadow_store_state.model.system_controls.maxit.value, shadow_store_state.model.system_controls.tol.value, merit);
 //    console.log('search ncode=',ncode);
 
     // Expand PC back into store change actions

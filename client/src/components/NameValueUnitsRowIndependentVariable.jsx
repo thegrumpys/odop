@@ -10,7 +10,7 @@ import store from "../store/store";
 
 export default function NameValueUnitsRowIndependentVariable({ element, index, onChangeValid, onChangeInvalid, onFocus, onBlur, onKeyPress, onSetFix, onResetFix, onFocusFix, onBlurFix, onKeyPressFix }) {
   const model_enable_auto_fix = useSelector((state) => state.model.system_controls.enable_auto_fix);
-  const model_show_units = useSelector((state) => state.model.system_controls.show_units);
+  const model_show_units = useSelector((state) => state.model.system_controls.show_units.value);
   const [value, setValue] = useState(false);
   const [fixFreeFlag, setFixFreeFlag] = useState(0);
   const dispatch = useDispatch();
@@ -48,9 +48,9 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   const onBlurLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal event.target.value=', event.target.value);
     var state = store.getState();
-//    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+//    console.log('In NameValueUnitsRowIndependentVariable.onBlurLocal','state.model.system_controls.enable_auto_search.value=', state.model.system_controls.enable_auto_search.value,'valueChanged=',value !== element.value,'objective_value >= objmin.value=',state.model.result.objective_value>= state.model.system_controls.objmin.value);
     var targetId = event.relatedTarget ? event.relatedTarget.id : null;
-    if (state.model.system_controls.enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin && targetId !== 'searchButton' && targetId !== 'seekButton') {
+    if (state.model.system_controls.enable_auto_search.value && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin.value && targetId !== 'searchButton' && targetId !== 'seekButton') {
       dispatch(search('Auto'));
     }
     if (typeof onBlur === "function") onBlur(event);
@@ -62,8 +62,8 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
     if (keyCode === 13) { // Carriage return
 //      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal keyCode=', keyCode);
       var state = store.getState();
-//      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
-      if (state.model.system_controls.enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin) {
+//      console.log('In NameValueUnitsRowIndependentVariable.onKeyPressLocal','state.model.system_controls.enable_auto_search.value=', state.model.system_controls.enable_auto_search.value,'valueChanged=',value !== element.value,'objective_value >= objmin.value=',state.model.result.objective_value>= state.model.system_controls.objmin.value);
+      if (state.model.system_controls.enable_auto_search.value && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin.value) {
         dispatch(search('Auto'));
       }
     }
@@ -94,9 +94,9 @@ export default function NameValueUnitsRowIndependentVariable({ element, index, o
   const onBlurFixLocal = (event) => {
 //    console.log('In NameValueUnitsRowIndependentVariable.onBlurFixLocal event.target.value=', event.target.value);
     var state = store.getState();
-//    console.log('In NameValueUnitsRowIndependentVariable.onBlurFixLocal','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+//    console.log('In NameValueUnitsRowIndependentVariable.onBlurFixLocal','state.model.system_controls.enable_auto_search.value=', state.model.system_controls.enable_auto_search.value,'fixFreeFlagChanged=',fixFreeFlag !== (element.lmin & FIXED),'objective_value >= objmin.value=',state.model.result.objective_value>= state.model.system_controls.objmin.value);
     var targetId = event.relatedTarget ? event.relatedTarget.id : null;
-    if (state.model.system_controls.enable_auto_search && fixFreeFlag !== (element.lmin & FIXED) && state.model.result.objective_value >= state.model.system_controls.objmin && targetId !== 'searchButton' && targetId !== 'seekButton') {
+    if (state.model.system_controls.enable_auto_search.value && fixFreeFlag !== (element.lmin & FIXED) && state.model.result.objective_value >= state.model.system_controls.objmin.value && targetId !== 'searchButton' && targetId !== 'seekButton') {
       dispatch(search('Auto'));
     }
     if (typeof onBlurFix === "function") onBlurFix(event);

@@ -394,6 +394,16 @@ export function migrate(design) {
         }
         migrated_design.version = '13';
     case '13':
+      console.log('Convert from 13 to 14');
+      for (const key in design.system_controls) {
+        if (Object.prototype.hasOwnProperty.call(design.system_controls, key)) {
+          console.log('key=',key,'value=',design.system_controls[key]);
+          design.system_controls[key] = { value: design.system_controls[key] };
+        }
+      }
+      console.log('design.system_controls=',design.system_controls);
+      migrated_design.version = '14';
+    case '14':
 
     //============BLOCK OF CODE TO REPLICATE============
     //     console.log('Convert from N to N+1');

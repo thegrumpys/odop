@@ -3,7 +3,7 @@ import { OverlayTrigger, Tooltip  } from 'react-bootstrap';
 
 export default function NameValueUnitsHeaderIndependentVariable() {
 //  console.log('NameValueUnitsHeaderIndependentVariable - Mounting...');
-  const model_show_units = useSelector((state) => state.model.system_controls.show_units);
+  const model_show_units = useSelector((state) => state.model.system_controls.show_units.value);
 
   return (
     <thead id="nvuhiv">

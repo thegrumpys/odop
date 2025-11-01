@@ -89,7 +89,7 @@ export function checks(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#FS_CycleLife_MIN_not_set)'
         }));
     }
-    if (design.model.symbol_table[o.FS_2].lmax & CONSTRAINED && design.model.symbol_table[o.FS_2].value > design.model.symbol_table[o.FS_2].cmax && design.model.result.objective_value > design.model.system_controls.objmin) {
+    if (design.model.symbol_table[o.FS_2].lmax & CONSTRAINED && design.model.symbol_table[o.FS_2].value > design.model.symbol_table[o.FS_2].cmax && design.model.result.objective_value > design.model.system_controls.objmin.value) {
         store.dispatch(addAlert({
             element: design.model.symbol_table[o.FS_2],
             name: design.model.symbol_table[o.FS_2].name,
@@ -201,11 +201,11 @@ export function checks(store) {        /*    Compression  Spring  */
     check_DCD_alert(design.model.symbol_table[o.FS_2], MIN, '');
     check_DCD_alert(design.model.symbol_table[o.FS_2], MAX, '');
 
-    if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum) {
+    if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum.value) {
         store.dispatch(addAlert({
             element: design.model.symbol_table[o.Tensile],
             name: design.model.symbol_table[o.Tensile].name,
-            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Tensile].name + ' (' + toODOPPrecision(design.model.symbol_table[o.Tensile].value) + ') <= ' + toODOPPrecision(design.model.system_controls.smallnum),
+            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Tensile].name + ' (' + toODOPPrecision(design.model.symbol_table[o.Tensile].value) + ') <= ' + toODOPPrecision(design.model.system_controls.smallnum.value),
             severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)'
         }));
@@ -303,7 +303,7 @@ export function checks(store) {        /*    Compression  Spring  */
     var deflectRatio = design.model.symbol_table[o.Deflect_2].value / design.model.symbol_table[o.L_Free].value;
     var sq1 = 1.4 * design.model.symbol_table[o.Slenderness].value - 4.0;
     var buckleMsg;
-    if (sq1 > design.model.system_controls.smallnum) {  /* structured to avoid div by 0 */
+    if (sq1 > design.model.system_controls.smallnum.value) {  /* structured to avoid div by 0 */
         if (deflectRatio > 0.76 / sq1) {
             buckleMsg = "Given fixed/free  ends, a deflection ratio of " + deflectRatio.toFixed(3) +
                        "  and a Slenderness ratio of " + design.model.symbol_table[o.Slenderness].value.toFixed(1) + ", " +
@@ -318,7 +318,7 @@ export function checks(store) {        /*    Compression  Spring  */
         }
     }
     sq1 = 2.0 * design.model.symbol_table[o.Slenderness].value - 8.0;
-    if (sq1 > design.model.system_controls.smallnum) {  /* structured to avoid div by 0 */
+    if (sq1 > design.model.system_controls.smallnum.value) {  /* structured to avoid div by 0 */
         if (deflectRatio > 1.6 / sq1) {
             buckleMsg = "Given fixed/fixed ends, this spring also tends to buckle.";
             store.dispatch(addAlert({

@@ -55,8 +55,6 @@ export default function AlertsAccordion() {
   const caret = useSelector((state) => state.alertsSlice.caret);
   const level = useSelector((state) => state.alertsSlice.level);
   const model_system_controls = useSelector((state) => state.model.system_controls);
-  const model_enable_auto_fix = useSelector((state) => state.model.system_controls.enable_auto_fix);
-  const model_enable_auto_search = useSelector((state) => state.model.system_controls.enable_auto_search);
   const dispatch = useDispatch();
   const { authState } = useAuth();
 
@@ -69,31 +67,31 @@ export default function AlertsAccordion() {
 
   const onAutoFixToggle = (event) => {
 //    console.log('AlertsAccordion.onAutoFixToggle', 'event=', event);
-    var copy = Object.assign({}, model_system_controls);
+    var copy_enable_auto_fix_value = model_system_controls.enable_auto_fix.value;
     var label;
-    if (copy.enable_auto_fix === 0.0) {
-      copy.enable_auto_fix = 1.0;
+    if (copy_enable_auto_fix_value === 0.0) {
+      copy_enable_auto_fix_value = 1.0;
       label = "enabled";
     } else {
-      copy.enable_auto_fix = 0.0;
+      copy_enable_auto_fix_value = 0.0;
       label = "disabled";
     }
-    dispatch(changeSystemControlsValue(copy));
+    dispatch(changeSystemControlsValue({ enable_auto_fix: copy_enable_auto_fix_value}));
     logUsage('event', 'AlertsAccordion', { event_label: 'AutoFixToggle ' + label });
   }
 
   const onAutoSearchToggle = (event) => {
 //    console.log('AlertsAccordion.onAutoSearchToggle', 'event=', event);
-    var copy = Object.assign({}, model_system_controls);
+    var copy_enable_auto_search_value = model_system_controls.enable_auto_search.value;
     var label;
-    if (copy.enable_auto_search === 0.0) {
-      copy.enable_auto_search = 1.0;
+    if (copy_enable_auto_search_value === 0.0) {
+      copy_enable_auto_search_value = 1.0;
       label = "enabled";
     } else {
-      copy.enable_auto_search = 0.0;
+      copy_enable_auto_search_value = 0.0;
       label = "disabled";
     }
-    dispatch(changeSystemControlsValue(copy));
+    dispatch(changeSystemControlsValue({ enable_auto_search: copy_enable_auto_search_value}));
     logUsage('event', 'AlertsAccordion', { event_label: 'AutoSearchToggle ' + label });
   }
 
@@ -155,7 +153,7 @@ export default function AlertsAccordion() {
               </OverlayTrigger>
               
               <InputGroup.Text className="ms-auto">Auto Fix</InputGroup.Text>
-              <InputGroup.Checkbox id="auto_fix" aria-label="Checkbox for enabling Auto Fix" onChange={onAutoFixToggle} checked={model_enable_auto_fix} />
+              <InputGroup.Checkbox id="auto_fix" aria-label="Checkbox for enabling Auto Fix" onChange={onAutoFixToggle} checked={model_system_controls.enable_auto_fix.value} />
               <OverlayTrigger placement="bottom" overlay={
                 <Tooltip className="tooltip-lg">
                   <p>When checked, sets "Fixed" status of Independent Variables whose values are changed by user input.</p>
@@ -166,7 +164,7 @@ export default function AlertsAccordion() {
               </OverlayTrigger>
 
               <InputGroup.Text>Auto Search</InputGroup.Text>
-              <InputGroup.Checkbox id="auto_search" aria-label="Checkbox for enabling Auto Search" onChange={onAutoSearchToggle} checked={model_enable_auto_search} />
+              <InputGroup.Checkbox id="auto_search" aria-label="Checkbox for enabling Auto Search" onChange={onAutoSearchToggle} checked={model_system_controls.enable_auto_search.value} />
               <OverlayTrigger placement="bottom" overlay={
                 <Tooltip className="tooltip-lg">
                 <p>When checked, a Search is automatically triggered when the the user changes a value, the current design is not feasible and the user:</p>

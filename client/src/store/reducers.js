@@ -1178,8 +1178,79 @@ export default function reducers(state = {}, action) {
           },
           system_controls: {
             ...state.model.system_controls,
-            ...action.payload.system_controls
-          },
+            ioopt: {
+               ...state.model.system_controls.ioopt,
+               value: action.payload.system_controls.ioopt
+            },
+            maxit: {
+               ...state.model.system_controls.maxit,
+               value: action.payload.system_controls.maxit
+            },
+            weapon: {
+               ...state.model.system_controls.weapon,
+               value: action.payload.system_controls.weapon
+            },
+            nmerit: {
+               ...state.model.system_controls.nmerit,
+               value: action.payload.system_controls.nmerit
+            },
+            fix_wt: {
+               ...state.model.system_controls.fix_wt,
+               value: action.payload.system_controls.fix_wt
+            },
+            con_wt: {
+               ...state.model.system_controls.con_wt,
+               value: action.payload.system_controls.con_wt
+            },
+            zero_wt: {
+               ...state.model.system_controls.zero_wt,
+               value: action.payload.system_controls.zero_wt
+            },
+            viol_wt: {
+               ...state.model.system_controls.viol_wt,
+               value: action.payload.system_controls.viol_wt
+            },
+            mfn_wt: {
+               ...state.model.system_controls.mfn_wt,
+               value: action.payload.system_controls.mfn_wt
+            },
+            objmin: {
+               ...state.model.system_controls.objmin,
+               value: action.payload.system_controls.maxit
+            },
+            del: {
+               ...state.model.system_controls.del,
+               value: action.payload.system_controls.del
+            },
+            delmin: {
+               ...state.model.system_controls.delmin,
+               value: action.payload.system_controls.delmin
+            },
+            tol: {
+               ...state.model.system_controls.tol,
+               value: action.payload.system_controls.tol
+            },
+            smallnum: {
+               ...state.model.system_controls.smallnum,
+               value: action.payload.system_controls.smallnum
+            },
+            show_units: {
+               ...state.model.system_controls.show_units,
+               value: action.payload.system_controls.show_units
+            },
+            show_violations: {
+               ...state.model.system_controls.show_violations,
+               value: action.payload.system_controls.show_violations
+            },
+            enable_auto_fix: {
+               ...state.model.system_controls.enable_auto_fix,
+               value: action.payload.system_controls.enable_auto_fix
+            },
+            enable_auto_search: {
+               ...state.model.system_controls.enable_auto_search,
+               value: action.payload.system_controls.enable_auto_search
+            },
+          }
         }
       });
       return result;

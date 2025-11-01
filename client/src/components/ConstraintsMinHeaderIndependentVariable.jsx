@@ -3,7 +3,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function ConstraintsMinHeaderIndependentVariable() {
 //  console.log('ConstraintsMinHeaderIndependentVariable - Mounting...');
-  const model_show_violations = useSelector((state) => state.model.system_controls.show_violations);
+  const model_show_violations = useSelector((state) => state.model.system_controls.show_violations.value);
 
   return (
     <thead id="cmnhiv">

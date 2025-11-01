@@ -120,8 +120,8 @@ export default function ActionSelectSize() {
       }
     });
     var state = store.getState();
-//    console.log('In ActionSelectSize.onSelect','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'valueChanged=',valueChanged,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
-    if (state.model.system_controls.enable_auto_search && valueChanged && state.model.result.objective_value >= state.model.system_controls.objmin) {
+//    console.log('In ActionSelectSize.onSelect','state.model.system_controls.enable_auto_search.value=', state.model.system_controls.enable_auto_search.value,'valueChanged=',valueChanged,'objective_value >= objmin.value=',state.model.result.objective_value>= state.model.system_controls.objmin.value);
+    if (state.model.system_controls.enable_auto_search.value && valueChanged && state.model.result.objective_value >= state.model.system_controls.objmin.value) {
       dispatch(search('Auto'));
     }
   }

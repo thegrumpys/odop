@@ -73,22 +73,22 @@ it('invokeEquationSet 100000x', () => {
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(2500);
 
-    expect(design.model.system_controls.ioopt).toEqual(3);
-    expect(design.model.system_controls.maxit).toEqual(600);
-    expect(design.model.system_controls.weapon).toEqual(1);
-    expect(design.model.system_controls.nmerit).toEqual(1);
-    expect(design.model.system_controls.fix_wt).toEqual(1.5);
-    expect(design.model.system_controls.con_wt).toEqual(1.0);
-    expect(design.model.system_controls.zero_wt).toEqual(10.0);
-    expect(design.model.system_controls.viol_wt).toEqual(1.0);
-    expect(design.model.system_controls.mfn_wt).toEqual(0.01);
-    expect(design.model.system_controls.objmin).toEqual(0.00001);
-    expect(design.model.system_controls.del).toEqual(1.0);
-    expect(design.model.system_controls.delmin).toEqual(0.0001);
-    expect(design.model.system_controls.tol).toEqual(0.0001);
-    expect(design.model.system_controls.smallnum).toEqual(1.0e-07);
-    expect(design.model.system_controls.show_units).toEqual(1);
-    expect(design.model.system_controls.show_violations).toEqual(1);
+    expect(design.model.system_controls.ioopt.value).toEqual(3);
+    expect(design.model.system_controls.maxit.value).toEqual(600);
+    expect(design.model.system_controls.weapon.value).toEqual(1);
+    expect(design.model.system_controls.nmerit.value).toEqual(1);
+    expect(design.model.system_controls.fix_wt.value).toEqual(1.5);
+    expect(design.model.system_controls.con_wt.value).toEqual(1.0);
+    expect(design.model.system_controls.zero_wt.value).toEqual(10.0);
+    expect(design.model.system_controls.viol_wt.value).toEqual(1.0);
+    expect(design.model.system_controls.mfn_wt.value).toEqual(0.01);
+    expect(design.model.system_controls.objmin.value).toEqual(0.00001);
+    expect(design.model.system_controls.del.value).toEqual(1.0);
+    expect(design.model.system_controls.delmin.value).toEqual(0.0001);
+    expect(design.model.system_controls.tol.value).toEqual(0.0001);
+    expect(design.model.system_controls.smallnum.value).toEqual(1.0e-07);
+    expect(design.model.system_controls.show_units.value).toEqual(1);
+    expect(design.model.system_controls.show_violations.value).toEqual(1);
 
     expect(design.model.result.objective_value).toEqual(0);
     expect(design.model.result.termination_condition).toEqual("");
@@ -119,11 +119,11 @@ it('search without merit 1000x', () => {
 
     var design = store.getState(); // before
 
-//    var obj = search(store, design.model.system_controls.objmin);
+//    var obj = search(store, design.model.system_controls.objmin.value);
     var obj;
     const start = Date.now();
     for (let i = 0; i < 1000; i++) {
-        obj = search(store, design.model.system_controls.objmin);
+        obj = search(store, design.model.system_controls.objmin.value);
     }
     const duration = Date.now()-start;
     console.log('search without merit 1000x duration=',duration);
@@ -148,22 +148,22 @@ it('search without merit 1000x', () => {
     expect(design.model.symbol_table[sto.STRESS].name).toEqual("STRESS");
     expect(design.model.symbol_table[sto.STRESS].value).toEqual(3491.6783974103414);
 
-    expect(design.model.system_controls.ioopt).toEqual(3);
-    expect(design.model.system_controls.maxit).toEqual(600);
-    expect(design.model.system_controls.weapon).toEqual(1);
-    expect(design.model.system_controls.nmerit).toEqual(1);
-    expect(design.model.system_controls.fix_wt).toEqual(1.5);
-    expect(design.model.system_controls.con_wt).toEqual(1.0);
-    expect(design.model.system_controls.zero_wt).toEqual(10.0);
-    expect(design.model.system_controls.viol_wt).toEqual(1.0);
-    expect(design.model.system_controls.mfn_wt).toEqual(0.01);
-    expect(design.model.system_controls.objmin).toEqual(0.00001);
-    expect(design.model.system_controls.del).toEqual(1.0);
-    expect(design.model.system_controls.delmin).toEqual(0.0001);
-    expect(design.model.system_controls.tol).toEqual(0.0001);
-    expect(design.model.system_controls.smallnum).toEqual(1.0e-07);
-    expect(design.model.system_controls.show_units).toEqual(1);
-    expect(design.model.system_controls.show_violations).toEqual(1);
+    expect(design.model.system_controls.ioopt.value).toEqual(3);
+    expect(design.model.system_controls.maxit.value).toEqual(600);
+    expect(design.model.system_controls.weapon.value).toEqual(1);
+    expect(design.model.system_controls.nmerit.value).toEqual(1);
+    expect(design.model.system_controls.fix_wt.value).toEqual(1.5);
+    expect(design.model.system_controls.con_wt.value).toEqual(1.0);
+    expect(design.model.system_controls.zero_wt.value).toEqual(10.0);
+    expect(design.model.system_controls.viol_wt.value).toEqual(1.0);
+    expect(design.model.system_controls.mfn_wt.value).toEqual(0.01);
+    expect(design.model.system_controls.objmin.value).toEqual(0.00001);
+    expect(design.model.system_controls.del.value).toEqual(1.0);
+    expect(design.model.system_controls.delmin.value).toEqual(0.0001);
+    expect(design.model.system_controls.tol.value).toEqual(0.0001);
+    expect(design.model.system_controls.smallnum.value).toEqual(1.0e-07);
+    expect(design.model.system_controls.show_units.value).toEqual(1);
+    expect(design.model.system_controls.show_violations.value).toEqual(1);
 
     expect(design.model.result.objective_value).toEqual(0.14664205223346785);
     expect(design.model.result.termination_condition).toEqual("Search terminated when step size reached the minimum limit (DELMIN). Low iteration count may produce low precision results.");

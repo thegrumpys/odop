@@ -23,7 +23,10 @@ export default function FilePreferences() {
   const onChangePropertyValid = (name, value) => {
     var newSystemControls = {
       ...systemControls,
-      [name]: parseFloat(value)
+      [name]: {
+        ...systemControls[name],
+        value: parseFloat(value)
+      }
     }
     setSystemControls(newSystemControls);
     setIsInvalidValue(false);
@@ -47,7 +50,7 @@ export default function FilePreferences() {
     dispatch(changeSystemControlsValue(systemControls));
     dispatch(saveAutoSave());
     var state = store.getState();
-    if (state.model.system_controls.enable_auto_search && state.model.result.objective_value >= state.model.system_controls.objmin) {
+    if (state.model.system_controls.enable_auto_search.value && state.model.result.objective_value >= state.model.system_controls.objmin.value) {
       dispatch(search('Auto'));
     }
   }
@@ -75,7 +78,7 @@ export default function FilePreferences() {
                   <Row key={property_name}>
                     <Col className="align-middle text-start">{property_name}</Col>
                     <Col className="align-middle text-end">
-                      <FormControlTypeNumber id={property_name} value={systemControls[property_name]} onChangeValid={(event) => { onChangePropertyValid(property_name, event.target.value) }} onChangeInvalid={onChangePropertyInvalid} />
+                      <FormControlTypeNumber id={property_name} value={systemControls[property_name].value} onChangeValid={(event) => { onChangePropertyValid(property_name, event.target.value) }} onChangeInvalid={onChangePropertyInvalid} />
                     </Col>
                   </Row>
                 );

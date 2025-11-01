@@ -89,7 +89,7 @@ export function checks(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#FS_CycleLife_MIN_not_set)'
         }));
     }
-    if (design.model.symbol_table[o.FS_2].lmax & CONSTRAINED && design.model.symbol_table[o.FS_2].value > design.model.symbol_table[o.FS_2].cmax && design.model.result.objective_value > design.model.system_controls.objmin) {
+    if (design.model.symbol_table[o.FS_2].lmax & CONSTRAINED && design.model.symbol_table[o.FS_2].value > design.model.symbol_table[o.FS_2].cmax && design.model.result.objective_value > design.model.system_controls.objmin.value) {
         store.dispatch(addAlert({
             element: design.model.symbol_table[o.FS_2],
             name: design.model.symbol_table[o.FS_2].name,
@@ -201,11 +201,11 @@ export function checks(store) {        /*    Compression  Spring  */
     check_DCD_alert(design.model.symbol_table[o.FS_2], MIN, '');
     check_DCD_alert(design.model.symbol_table[o.FS_2], MAX, '');
 
-    if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum) {
+    if (design.model.symbol_table[o.Tensile].value <= design.model.system_controls.smallnum.value) {
         store.dispatch(addAlert({
             element: design.model.symbol_table[o.Tensile],
             name: design.model.symbol_table[o.Tensile].name,
-            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Tensile].name + ' (' + toODOPPrecision(design.model.symbol_table[o.Tensile].value) + ') <= ' + toODOPPrecision(design.model.system_controls.smallnum),
+            message: 'RELATIONSHIP: ' + design.model.symbol_table[o.Tensile].name + ' (' + toODOPPrecision(design.model.symbol_table[o.Tensile].value) + ') <= ' + toODOPPrecision(design.model.system_controls.smallnum.value),
             severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#TensileValueSuspect)'
         }));

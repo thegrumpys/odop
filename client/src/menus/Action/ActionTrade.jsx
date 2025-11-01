@@ -35,7 +35,7 @@ export default function ActionTrade() {
   const [smallEst, setSmallEst] = useState(undefined);
   const [bigEst, setBigEst] = useState(undefined);
   const [defaultEstPercent, setDefaultEstPercent] = useState(undefined);
-  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
+  const model_objmin = useSelector((state) => state.model.system_controls.objmin.value);
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const dispatch = useDispatch();
 
@@ -50,7 +50,7 @@ export default function ActionTrade() {
     var ncode;
     var design = store.getState();
     var localNviol = commonViolationSetup();
-    if (design.model.result.objective_value <= design.model.system_controls.objmin || localNviol === 0) {
+    if (design.model.result.objective_value <= design.model.system_controls.objmin.value || localNviol === 0) {
       dispatch(restoreInputSymbolValues());
       ncode = 'OBJ < OBJMIN - USE OF TRADE IS NOT APPROPRIATE';
       dispatch(changeResultTerminationCondition(ncode));
@@ -217,19 +217,19 @@ export default function ActionTrade() {
       let j = vflag[i];
       element = design.model.symbol_table[j];
       if (ldir[i] < 0) {
-        if (temp2 > design.model.system_controls.smallnum) {
+        if (temp2 > design.model.system_controls.smallnum.value) {
           temp = element.vmin / temp2;
         } else {
           temp = element.vmin;
         }
       } else {
-        if (temp2 > design.model.system_controls.smallnum) {
+        if (temp2 > design.model.system_controls.smallnum.value) {
           temp = element.vmax / temp2;
         } else {
           temp = element.vmax;
         }
       }
-      if (temp > design.model.system_controls.smallnum && temp < localSmallEst) {
+      if (temp > design.model.system_controls.smallnum.value && temp < localSmallEst) {
         localSmallEst = temp;
       }
       if (temp > localBigEst) {
@@ -243,8 +243,8 @@ export default function ActionTrade() {
     } else {
       localDefaultEstPercent = 90 * element.vmax; // 90% of vmax
     }
-    if (localDefaultEstPercent / 100.0 < design.model.system_controls.smallnum) {
-      localDefaultEstPercent = design.model.system_controls.smallnum * 100.0;
+    if (localDefaultEstPercent / 100.0 < design.model.system_controls.smallnum.value) {
+      localDefaultEstPercent = design.model.system_controls.smallnum.value * 100.0;
     }
     setDir(dir);
     setTc(tc);
@@ -301,7 +301,7 @@ export default function ActionTrade() {
 //        console.log('ActionTrade.onArbitraryChangeValid localIsArbitraryInvalid=',localIsArbitraryInvalid);
     var notAllArbitraryValid = localIsArbitraryInvalid.reduce((previousValue, currentValue) => { return previousValue || currentValue }, false);
 //        console.log('ActionTrade.onArbitraryChangeValid notAllNumbers=',notAllArbitraryValid);
-    var localArbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum || notAllArbitraryValid;
+    var localArbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum.value || notAllArbitraryValid;
 //        console.log('ActionTrade.onArbitraryChangeValid localArbitraryContinueDisabled=',localArbitraryContinueDisabled);
     setDir(localDir);
     setIsArbitraryInvalid(localIsArbitraryInvalid);
@@ -323,7 +323,7 @@ export default function ActionTrade() {
 //        console.log('ActionTrade.onArbitraryChangeInvalid localIsArbitraryInvalid=',localIsArbitraryInvalid);
     var notAllArbitraryValid = localIsArbitraryInvalid.reduce((previousValue, currentValue) => { return previousValue || currentValue }, false);
 //        console.log('ActionTrade.onArbitraryChangeInvalid notAllNumbers=',notAllArbitraryValid);
-    var localArbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum || notAllArbitraryValid;
+    var localArbitraryContinueDisabled = greatestValue < design.model.system_controls.smallnum.value || notAllArbitraryValid;
 //        console.log('ActionTrade.onArbitraryChangeInvalid localArbitraryContinueDisabled=',localArbitraryContinueDisabled);
     setIsArbitraryInvalid(localIsArbitraryInvalid);
     setArbitraryContinueDisabled(localArbitraryContinueDisabled);
@@ -364,17 +364,17 @@ export default function ActionTrade() {
       }
     }
     design = store.getState();
-    if (design.model.result.objective_value > design.model.system_controls.objmin) {
+    if (design.model.result.objective_value > design.model.system_controls.objmin.value) {
       dispatch(search('Trade'));
     }
     design = store.getState();
-    if (design.model.result.objective_value <= design.model.system_controls.objmin) {
+    if (design.model.result.objective_value <= design.model.system_controls.objmin.value) {
 // Feasible was found, go show Feasible Modal
       setSizeShow(!sizeShow);
       setFeasibleShow(!feasibleShow);
       return;
     } else {
-//            if (design.model.system_controls.ioopt > 1) {
+//            if (design.model.system_controls.ioopt.value > 1) {
 //                console.log('TRIAL (FULL STEP) CONSTRAINTS:');
 //                clister();
 //            }
@@ -395,7 +395,7 @@ export default function ActionTrade() {
       dispatch(restoreInputSymbolValues());
       dispatch(search('Trade'));
       design = store.getState();
-      if (design.model.result.objective_value <= design.model.system_controls.objmin) {
+      if (design.model.result.objective_value <= design.model.system_controls.objmin.value) {
 // Feasible was found, go show Feasible Modal
         setSizeShow(!sizeShow);
         setFeasibleShow(!feasibleShow);
@@ -413,7 +413,7 @@ export default function ActionTrade() {
       var capb;
       var capc;
       var arg;
-//            if (design.model.system_controls.ioopt > 1) {
+//            if (design.model.system_controls.ioopt.value > 1) {
 //                console.log('TRIAL (HALF STEP) CONSTRAINTS:');
 //                clister();
 //            }
@@ -513,7 +513,7 @@ export default function ActionTrade() {
 //    console.log('ActionTrade.onEstablishAccept');
     var ncode;
     var design = store.getState(); // Re-access store to get latest element values
-    if (design.model.result.objective_value <= design.model.system_controls.objmin) {
+    if (design.model.result.objective_value <= design.model.system_controls.objmin.value) {
       ncode = 'ACCEPTED TRADE RESULT';
       dispatch(changeResultTerminationCondition(ncode));
       setEstablishShow(!establishShow);
@@ -616,7 +616,7 @@ export default function ActionTrade() {
             element = design.model.symbol_table[j];
             if (ldir[i] < 0) {
 //                                console.log(element.name + ' MIN ' + element.vmin * 100.0 + ' ' + element.cmin + ' ' + element.units);
-              if (design.model.result.objective_value < design.model.system_controls.objmin) {
+              if (design.model.result.objective_value < design.model.system_controls.objmin.value) {
                 constraint_class = (element.lmin & CONSTRAINED && element.vmin > 0.0) ? 'text-low-danger align-middle text-end' : 'text-end';
               } else {
                 constraint_class = (element.lmin & CONSTRAINED && element.vmin > 0.0) ? 'text-danger align-middle text-end font-weight-bold' : 'text-end';
@@ -632,7 +632,7 @@ export default function ActionTrade() {
               );
             } else {
 //                                console.log(element.name + ' MAX ' + element.vmax * 100.0 + ' ' + element.cmax + ' ' + element.units);
-              if (design.model.result.objective_value < design.model.system_controls.objmin) {
+              if (design.model.result.objective_value < design.model.system_controls.objmin.value) {
                 constraint_class = (element.lmax & CONSTRAINED && element.vmax > 0.0) ? 'text-low-danger align-middle text-end' : 'text-end';
               } else {
                 constraint_class = (element.lmax & CONSTRAINED && element.vmax > 0.0) ? 'text-danger align-middle text-end font-weight-bold' : 'text-end';
@@ -748,7 +748,7 @@ export default function ActionTrade() {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onSizeCancel}>Cancel</Button>{' '}
-          <Button variant="primary" disabled={isSizeInvalid || defaultEstPercent / 100.0 < design.model.system_controls.smallnum} onClick={onSizeContinue}>Continue</Button>
+          <Button variant="primary" disabled={isSizeInvalid || defaultEstPercent / 100.0 < design.model.system_controls.smallnum.value} onClick={onSizeContinue}>Continue</Button>
         </Modal.Footer>
       </Modal>}
       {/*==================================================*/}

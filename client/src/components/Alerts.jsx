@@ -189,7 +189,7 @@ export const checks = (store) => {
     }
 
     // CONSTRAINT CHECKS (ONLY FOR INDEPENDENT AND DEPENDENT VARIABLES, NOT FOR CALC INPUTS)
-    if (element.type === "equationset" && !element.input && ((element.lmin & FIXED) && element.vmin > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin)) {
+    if (element.type === "equationset" && !element.input && ((element.lmin & FIXED) && element.vmin > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin.value)) {
       store.dispatch(addAlert({
         element: element,
         name: element.name + ' MIN',
@@ -198,7 +198,7 @@ export const checks = (store) => {
         help_url: '[Help](/docs/Help/alerts.html#Fix_Violation)',
         valueName: 'cmin'
       }));
-    } else if (element.type === "equationset" && (element.lmin & CONSTRAINED) && element.vmin > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin) {
+    } else if (element.type === "equationset" && (element.lmin & CONSTRAINED) && element.vmin > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin.value) {
       store.dispatch(addAlert({
         element: element,
         name: element.name + ' MIN',
@@ -208,7 +208,7 @@ export const checks = (store) => {
         valueName: 'cmin'
       }));
     }
-    if (element.type === "equationset" && !element.input && ((element.lmax & FIXED) && element.vmax > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin)) {
+    if (element.type === "equationset" && !element.input && ((element.lmax & FIXED) && element.vmax > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin.value)) {
       store.dispatch(addAlert({
         element: element,
         name: element.name + ' MAX',
@@ -217,7 +217,7 @@ export const checks = (store) => {
         help_url: '[Help](/docs/Help/alerts.html#Fix_Violation)',
         valueName: 'cmax'
       }));
-    } else if (element.type === "equationset" && (element.lmax & CONSTRAINED) && element.vmax > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin) {
+    } else if (element.type === "equationset" && (element.lmax & CONSTRAINED) && element.vmax > 0.0 && design.model.result.objective_value > design.model.system_controls.objmin.value) {
       store.dispatch(addAlert({
         element: element,
         name: element.name + ' MAX',
@@ -292,9 +292,9 @@ export const getSeverityNumberByNameAndObjValue = (name, severity) => {
 //  console.log('### design=',design)
   var severityNumber = 0;
   if (name !== undefined && (name.endsWith(' MIN') || name.endsWith(' MAX')) && severity !== INFO) {
-    if (design.model.result.objective_value > 8 * design.model.system_controls.objmin) {
+    if (design.model.result.objective_value > 8 * design.model.system_controls.objmin.value) {
       severityNumber = 3;
-    } else if (design.model.result.objective_value > design.model.system_controls.objmin) {
+    } else if (design.model.result.objective_value > design.model.system_controls.objmin.value) {
       severityNumber = 2;
     } else if (design.model.result.objective_value > 0.0) {
       severityNumber = 1;

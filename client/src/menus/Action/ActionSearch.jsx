@@ -11,7 +11,7 @@ export default function ActionSearch() {
 //  console.log('ActionSearch - Mounting...');
   const [searchInfiniteShow, setSearchInfiniteShow] = useState(false);
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
-  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
+  const model_objmin = useSelector((state) => state.model.system_controls.objmin.value);
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const dispatch = useDispatch();
 

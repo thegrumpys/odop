@@ -3,7 +3,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function FeasibilityIndicator({ width = 242, height = 24 }) {
 //  console.log('FeasibilityIndicator - Mounting...');
-  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
+  const model_objmin = useSelector((state) => state.model.system_controls.objmin.value);
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
 
   // Coordinate system is 4th quadrant ---x-->

@@ -12,10 +12,10 @@ export default function ActionSelectCatalog() {
 
   const model_type = useSelector((state) => state.model.type);
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
-  const model_viol_wt = useSelector((state) => state.model.system_controls.viol_wt);
+  const model_viol_wt = useSelector((state) => state.model.system_controls.viol_wt.value);
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const model_units = useSelector((state) => state.model.units);
-  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
+  const model_objmin = useSelector((state) => state.model.system_controls.objmin.value);
   const [show, setShow] = useState(false);
   const [names, setNames] = useState([]);
   const [name, setName] = useState(undefined);

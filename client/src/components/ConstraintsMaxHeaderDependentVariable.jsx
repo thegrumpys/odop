@@ -3,7 +3,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default function ConstraintsMaxHeaderDependentVariable() {
 //  console.log('ConstraintsMaxHeaderDependentVariable - Mounting...');
-  const model_show_violations = useSelector((state) => state.model.system_controls.show_violations);
+  const model_show_violations = useSelector((state) => state.model.system_controls.show_violations.value);
 
   return (
     <thead>

@@ -29,7 +29,7 @@ export default function SymbolValue({ className, element, index, valueName = 'va
 //  console.log('SymbolValue','Mounting...','element=',element,'index=',index);
 const model_type = useSelector((state) => state.model.type);
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
-  const model_objmin = useSelector((state) => state.model.system_controls.objmin);
+  const model_objmin = useSelector((state) => state.model.system_controls.objmin.value);
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const model_search_completed = useSelector((state) => state.model.result.search_completed);
   const [searchInfiniteShow, setSearchInfiniteShow] = useState(false);
@@ -231,9 +231,9 @@ const model_type = useSelector((state) => state.model.type);
   const onBlurLocal = (event) => {
 //    console.log('In NameValueUnitsRowCalcInput.onBlurLocal event.target.value=', event.target.value);
     var state = store.getState();
-//    console.log('In NameValueUnitsRowCalcInput.onBlurLocal','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
+//    console.log('In NameValueUnitsRowCalcInput.onBlurLocal','state.model.system_controls.enable_auto_search.value=', state.model.system_controls.enable_auto_search.value,'valueChanged=',value !== element.value,'objective_value >= objmin.value=',state.model.result.objective_value>= state.model.system_controls.objmin.value);
     var targetId = event.relatedTarget ? event.relatedTarget.id : null;
-    if (state.model.system_controls.enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin && targetId !== 'searchButton' && targetId !== 'seekButton') {
+    if (state.model.system_controls.enable_auto_search.value && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin.value && targetId !== 'searchButton' && targetId !== 'seekButton') {
       dispatch(search('Auto'));
     }
     if (typeof onBlur === "function") onBlur(event);

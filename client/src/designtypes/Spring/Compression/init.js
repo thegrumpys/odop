@@ -123,7 +123,7 @@ export function init(store, p, x) {
       //    /*  copy from end type table to constants  */
       //    /*  check these values.     See AS Design Hdbk. p52  */
       //    /*    VVVVVVVVVVVVV          Kludge for Torsion  */
-      //if end_type_index > 0 & nmerit ^= 3 then
+      //if end_type_index > 0 & nmerit.value ^= 3 then
       //do;
       //if end_calc_method ^= 1 then              /*   debug  */
       //       put skip list('TAB2D:  END_CALC_METHOD SET TO 1.');
