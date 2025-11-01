@@ -3,7 +3,7 @@ export const initialSystemControls = [
     {name: "maxit", value: 600, tooltip: "Iteration limit for Search. Default = 600. See on-line Help entry on Search"},
     {name: "weapon", value: 1, tooltip: "Reserved for future use"},
     {name: "nmerit", value: 1, tooltip: "Reserved for future use"},
-    {name: "fix_wt", value: 1.5, tooltip: "Weight factor for contribution of dependent variable violations to Objective Value. Default = 1.5."},
+    {name: "fix_wt", value: 1.5, tooltip: "Weight factor for contribution of fixed dependent variable violations to Objective Value. Default = 1.5."},
     {name: "con_wt", value: 1.0, tooltip: "Weight factor for constraint violations in calculation of Objective Value. Default = 1.0"},
     {name: "zero_wt", value: 10.0, tooltip: "Reserved for future use"},
     {name: "viol_wt", value: 1.0, tooltip: "Weight factor for sum of constraint violations relative to the Merit Function in calculation of Objective Value. Default = 1.0"},
