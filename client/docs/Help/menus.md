@@ -227,26 +227,26 @@ ODOP operation.
 Most of these values control behavior of the numerical search algorithm. 
 A few control aspects of the on-screen display for Advanced View. 
 
-Name    | Description 
---------|------------
-ioopt   | IO option. Influences detail of output in the user interface. Default = 3. Open browser console and increase this value to see more.  Decrease to see less.
-maxit   | Iteration limit for Search. Default = 600. See on-line Help entry on Search
-weapon  | Reserved for future use
-nmerit  | Reserved for future use
-fix_wt  | Weight factor for contribution of fixed dependent variable violations to Objective Value. Default = 1.5.
-con_wt  | Weight factor for constraint violations in calculation of Objective Value. Default = 1.0
-zero_wt | Reserved for future use
-viol_wt | Weight factor for sum of constraint violations relative to the Merit Function in calculation of Objective Value. Default = 1.0
-mfn_wt  | Weight factor for Merit Function. Influences contribution of the Merit Function relative to constraint violations in calculation of Objective Value. Influences degree of constraint violation in outcome of Seek. Default = 0.005.
-objmin  | Convergence criterion for Search. Default = 0.00001. See on-line Help entry on Search
-del     | Starting value of the local exploration size. Default = 1.0. See on-line Help entry on Search
-delmin  | Convergence criterion for Search. Default = 0.0001. See on-line Help entry on Search
-tol     | Pattern Search's pattern break and step cut criterion. Default = 0.0001. See on-line Help entry on Search
-smallnum   | Used as test to avoid division by zero. Used to detect unreasonably small values. Default = 1.0e-07
-show_units | Setting value to 0 suppresses the units column in Advanced View. Default = 1. Use to reduce the need for horizontal scrolling on small displays.
-show_violations | Setting value to 0 suppresses the constraint violations column in Advanced View. Default = 1. Setting value to 2 shows degree of constraint satisfaction as a negative number.
-enable_auto_fix | Automatically applies Fixed status to independent variables whose values are changed by user input. Default = 1. Set value to 0 to disable this behavior.
-enable_auto_search | When enabled, the Auto Search feature automatically triggers a Search operation after user input. Default = 1. Set value to 0 to disable this behavior.
+| Name | Description | Default |
+|------|-------------|---------|
+| ioopt | Controls the level of diagnostic output in the UI/console. Increase for more detail, decrease for less. | 3 |
+| maxit | Maximum iterations allowed during Search. | 600 |
+| weapon | Reserved for future use. | — |
+| nmerit | Reserved for future use. | — |
+| fix_wt | Weight applied to violations of fixed dependent variables when computing the Objective Value. | 1.5 |
+| con_wt | Weight applied to constraint violations in the Objective Value. | 1.0 |
+| zero_wt | Reserved for future use. | — |
+| viol_wt | Weight applied to the total constraint violation term relative to the Merit Function. | 1.0 |
+| mfn_wt | Weight applied to the Merit Function relative to constraint violations. Affects how strictly constraints are enforced in Search. | 0.005 |
+| objmin | Convergence threshold based on improvement in the Objective Value during Search. | 0.00001 |
+| del | Initial step size used for local search exploration. | 1.0 |
+| delmin | Minimum step size before Search stops (convergence threshold). | 0.0001 |
+| tol | Pattern Search tolerance for pattern break and step size reduction. | 0.0001 |
+| smallnum | Threshold to avoid divide-by-zero and detect extremely small values. | 1.0e-07 |
+| show_units | Controls display of units column in Advanced View (0 hides it). Useful for narrow screens. | 1 |
+| show_violations | Controls display of constraint violations: 0 = hidden, 1 = shown, 2 = show satisfaction as negative. | 1 |
+| enable_auto_fix | Automatically marks variables as Fixed when the user changes them. | 1 |
+| enable_auto_search | Automatically runs Search after each user input change. | 1 |
 
 See also:   
  - [Search](search.html)   
