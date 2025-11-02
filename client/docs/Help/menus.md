@@ -224,7 +224,7 @@ ___
 
 The File : Preferences menu item provides access to a group of values that control various aspects of 
 ODOP operation. 
-Most of these values control behavior of the numerical search algorithm. 
+Many of these values control behavior of the numerical search algorithm. 
 A few control aspects of the on-screen display for Advanced View. 
 
 | Name | Description | Default |
@@ -245,12 +245,14 @@ A few control aspects of the on-screen display for Advanced View.
 | smallnum | Threshold to avoid divide-by-zero and detect extremely small values. | 1.0e-07 |
 | show_units | Controls display of units column in Advanced View (0 hides it). Useful for narrow screens. | 1 |
 | show_violations | Controls display of constraint violations: 0 = hidden, 1 = shown, 2 = show satisfaction as negative. | 1 |
-| enable_auto_fix | Automatically marks variables as Fixed when the user changes them. | 1 |
+| enable_auto_fix | Automatically marks independent variables as Fixed when the user changes them. | 1 |
 | enable_auto_search | Automatically runs Search after each user input change. | 1 |
 
 See also:   
- - [Search](search.html)   
  - [Terminology - Preferences](terminology.html#preferences)   
+ - [Search](search.html)   
+ - [Auto Fix](autoFixSearchStdSize.html#autoFix)
+ - [Auto Search](autoFixSearchStdSize.html#autoSearch)  
 
 ___
 
