@@ -224,12 +224,35 @@ ___
 
 The File : Preferences menu item provides access to a group of values that control various aspects of 
 ODOP operation. 
-Most of these values control behavior of the numerical search algorithm. 
+Many of these values control behavior of the numerical search algorithm. 
 A few control aspects of the on-screen display for Advanced View. 
 
+| Name | Description | Default |
+|------|-------------|---------|
+| ioopt | Controls the level of diagnostic output in the UI/console. Increase for more detail, decrease for less. | 3 |
+| maxit | Maximum iterations allowed during Search. | 600 |
+| weapon | Reserved for future use. | — |
+| nmerit | Reserved for future use. | — |
+| fix_wt | Weight applied to violations of fixed dependent variables when computing the Objective Value. | 1.5 |
+| con_wt | Weight applied to constraint violations in the Objective Value. | 1.0 |
+| zero_wt | Reserved for future use. | — |
+| viol_wt | Weight applied to the total constraint violation term relative to the Merit Function. | 1.0 |
+| mfn_wt | Weight applied to the Merit Function relative to constraint violations. Affects how strictly constraints are enforced in Search. | 0.005 |
+| objmin | Convergence threshold based on improvement in the Objective Value during Search. | 0.00001 |
+| del | Initial step size used for local search exploration. | 1.0 |
+| delmin | Minimum step size before Search stops (convergence threshold). | 0.0001 |
+| tol | Pattern Search tolerance for pattern break and step size reduction. | 0.0001 |
+| smallnum | Threshold to avoid divide-by-zero and detect extremely small values. | 1.0e-07 |
+| show_units | Controls display of units column in Advanced View (0 hides it). Useful for narrow screens. | 1 |
+| show_violations | Controls display of constraint violations: 0 = hidden, 1 = shown, 2 = show satisfaction as negative. | 1 |
+| enable_auto_fix | Automatically marks independent variables as Fixed when the user changes them. | 1 |
+| enable_auto_search | Automatically runs Search after each user input change. | 1 |
+
 See also:   
- - [Search](search.html)   
  - [Terminology - Preferences](terminology.html#preferences)   
+ - [Search](search.html)   
+ - [Auto Fix](autoFixSearchStdSize.html#autoFix)
+ - [Auto Search](autoFixSearchStdSize.html#autoSearch)  
 
 ___
 
