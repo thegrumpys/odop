@@ -6,6 +6,7 @@ This topic covers the ODOP menu structure.
  * [ODOP logo](menus.html#ODOPlogo) 
  * [Sign In...](menus.html#SignIn) 
 
+ - [File : New...](menus.html#FileNew) 
  - [File : Open...](menus.html#FileOpen) 
  - [File : Save](menus.html#FileSave) 
  - [File : Save As...](menus.html#FileSaveAs) 
@@ -72,28 +73,57 @@ See also:
 
 ___
 
+<a id="FileNew"></a>  
+___
+
+## File : New...   
+
+File : New starts a new design of a desired Design Type 
+(for example, compression, extension or torsion springs) and units, 
+for example, US Customary units (inches, pounds) 
+or metric units (mm, newtons).  
+
+While visually and operationally similar to File : Open (below), 
+File : New operates from ODOP's built-in initialState designs. 
+As a result, only Startup and Startup_Metric designs are available 
+to File : New where additional designs may be available with File : Open.  
+
+File : New is available for all ODOP deployments, including "self-hosted" deployments 
+that are configured to operate without the cloud-based ODOP Design Library.  
+
+See also:   
+ - [Default Designs](defaultDesigns.html)   
+ - [User Accounts](/docs/About/userAccounts.html)   
+ - [Units: US Customary and metric](SpringDesign/unitsUSmetric.html)   
+ - [Import and Export](htt.html#fileImportAndExport)   
+ - [ODOP Design Library](terminology.html#designLib)   
+
+___
+
 <a id="FileOpen"></a>  
 ___
 
 ## File : Open...   
 
-The File : Open... menu item produces a dialog box that allows the selection of design type 
-(for example, compression, extension and torsion springs) and 
-a specific starting design. 
+The File : Open... menu item produces a dialog box that allows the selection of Design Type 
+(for example, compression, extension and torsion springs) and a specific starting design. 
 The selected design comes from the cloud-based ODOP Design Library and replaces the current design. 
 This starting design may be system provided or a private design saved in a user account. 
-System provided designs are marked "[ReadOnly]". 
+System provided designs are marked "[ReadOnly]" and are accessible by users that are not signed in.  
 
-The dialog also offers a Sign In opportunity to create a new user account 
-or to log into an existing account. 
+If not already signed in, the File : Open dialog also offers a Sign In opportunity 
+to create a new user account or to sign into an existing account.  
 
 The units system, for example, US Customary units (inches, pounds) 
-or metric units (mm, newtons) is established by the selected starting design. 
+or metric units (mm, newtons) is established by the selected starting design.  
+
+File : Open is not available for "self-hosted" ODOP deployments 
+configured to operate without the cloud-based ODOP Design Library.  
 
 See also:   
  - [Default Designs](defaultDesigns.html)   
  - [User Accounts](/docs/About/userAccounts.html)   
- - [Units: US customary and metric](SpringDesign/unitsUSmetric.html)   
+ - [Units: US Customary and metric](SpringDesign/unitsUSmetric.html)   
  - [Import and Export](htt.html#fileImportAndExport)   
  - [ODOP Design Library](terminology.html#designLib)   
 
@@ -105,8 +135,8 @@ ___
 ## File : Save   
 
 The File : Save menu item updates the current design into the cloud-based ODOP Design Library. 
-It is necessary to be logged into a user account. 
-If not logged in to a user account, a pop-up providing a Sign In opportunity will appear. 
+It is necessary to be signed into a user account. 
+If not signed in to a user account, a pop-up providing a Sign In opportunity will appear. 
 
 See also:   
  - [Default Designs](defaultDesigns.html)   
@@ -121,8 +151,8 @@ ___
 
 The File : Save As... menu item saves the current design into the cloud-based ODOP Design Library with a new name.  
 
-It is necessary to be logged into a user account. 
-If not logged in to a user account, a button providing a Sign In opportunity will appear.  
+It is necessary to be signed into a user account. 
+If not signed in to a user account, a button providing a Sign In opportunity will appear.  
 
 In order to support an ability to export designs into files in a local file system, 
 when creating names, the characters  
@@ -142,8 +172,8 @@ ___
 ## File : Delete...   
 
 The File : Delete... menu item removes the selected design. 
-It is necessary to be logged into a user account. 
-If not logged in to a user account, a pop-up providing a Sign In opportunity will appear. 
+It is necessary to be signed into a user account. 
+If not signed in to a user account, a pop-up providing a Sign In opportunity will appear. 
 
 After deleting a design with the same name as a system supplied design, 
 the system supplied design is revealed. 
@@ -237,7 +267,7 @@ A few control aspects of the on-screen display for Advanced View.
 | con_wt | Weight applied to constraint violations in the Objective Value. | 1.0 |
 | zero_wt | Reserved for future use. | — |
 | viol_wt | Weight applied to the total constraint violation term relative to the Merit Function. | 1.0 |
-| mfn_wt | Weight applied to the Merit Function relative to constraint violations. Affects how strictly constraints are enforced in Search. | 0.005 |
+| mfn_wt | Weight applied to the Merit Function relative to constraint violations. Affects how strictly constraints are enforced in Search. | 0.01 |
 | objmin | Convergence threshold based on improvement in the Objective Value during Search. | 0.00001 |
 | del | Initial step size used for local search exploration. | 1.0 |
 | delmin | Minimum step size before Search stops (convergence threshold). | 0.0001 |
