@@ -1,38 +1,42 @@
 # ODOP Menus &nbsp; 
 
-This topic covers the ODOP menu structure. 
+This topic describes the ODOP menu structure and the function of each option.  
 
 ### On this page:   
- * [ODOP logo](menus.html#ODOPlogo) 
- * [Sign In...](menus.html#SignIn) 
+- [ODOP logo](menus.html#ODOPlogo)  
+- [Sign In...](menus.html#SignIn)  
 
- - [File : New...](menus.html#FileNew) 
- - [File : Open...](menus.html#FileOpen) 
- - [File : Save](menus.html#FileSave) 
- - [File : Save As...](menus.html#FileSaveAs) 
- - [File : Delete...](menus.html#FileDelete) 
- - [File : Import...](menus.html#FileImport) 
- - [File : Export](menus.html#FileExport) 
- - [File : DownloadAll](menus.html#FileDownloadAll) 
- - [File : Preferences](menus.html#FilePreferences) 
- - [File : Properties](menus.html#FileProperties) 
+**File Menu**
+- [New...](menus.html#FileNew)  
+- [Open...](menus.html#FileOpen)  
+- [Save](menus.html#FileSave)  
+- [Save As...](menus.html#FileSaveAs)  
+- [Delete...](menus.html#FileDelete)  
+- [Import...](menus.html#FileImport)  
+- [Export](menus.html#FileExport)  
+- [Download All](menus.html#FileDownloadAll)  
+- [Preferences](menus.html#FilePreferences)  
+- [Properties](menus.html#FileProperties)  
 
- * [Action : Search](menus.html#ActionSearch) 
- * [Action : Seek...](menus.html#ActionSeek) 
- * [Action : Trade...](menus.html#ActionTrade) 
- * [Action : Select Size...](menus.html#ActionSelectSize) 
- * [Action : Select Catalog...](menus.html#ActionSelectCatalog) 
- * [Action : Execute...](menus.html#ActionExecute) 
+**Action Menu**
+- [Search](menus.html#ActionSearch)  
+- [Seek...](menus.html#ActionSeek)  
+- [Trade...](menus.html#ActionTrade)  
+- [Select Size...](menus.html#ActionSelectSize)  
+- [Select Catalog...](menus.html#ActionSelectCatalog)  
+- [Execute...](menus.html#ActionExecute)  
 
- - [View : Advanced](menus.html#ViewAdvanced) 
- - [View : Calculator](menus.html#ViewCalculator) 
- - [View : Reports](menus.html#ViewReports) 
+**View Menu**
+- [Advanced](menus.html#ViewAdvanced)  
+- [Calculator](menus.html#ViewCalculator)  
+- [Reports](menus.html#ViewReports)  
 
- * [Help : Message of the Day](menus.html#HelpMotD) 
- * [Help : Index](menus.html#HelpIndex) 
- * [Help : Demo...](menus.html#HelpDemo) 
- * [Help : Tutorial...](menus.html#HelpTutorial) 
- * [Help : About](menus.html#HelpAbout/index.html) 
+**Help Menu**
+- [Message of the Day](menus.html#HelpMotD)  
+- [Index](menus.html#HelpIndex)  
+- [Demo...](menus.html#HelpDemo)  
+- [Tutorial...](menus.html#HelpTutorial)  
+- [About](menus.html#HelpAbout)  
 
 ___
 
