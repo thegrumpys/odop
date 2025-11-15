@@ -796,7 +796,8 @@ app.post('/api/v1/login', async (req, res) => {
     const match = user && await comparePassword(password, user.password);
 //    console.log('/api/v1/login','match=',match);
     if (!match) {
-      return sendMessage(res, 'Unknown email or password, or inactive account.', 'error', null, 401);
+      sendMessage(res, 'Unknown email or password, or inactive account.', 'error', null, 401);
+      return;
     }
 
     await db.query('UPDATE user SET last_login_at = NOW() WHERE id = ?', [user.id]);
