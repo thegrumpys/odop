@@ -61,7 +61,6 @@ function flushBuffer() {
       event_label: buffer
     };
     if (process.env.REACT_APP_ENABLE_ANALYTICS === 'true' && process.env.NODE_ENV === 'production') { // Limit G.A. tracking to production
-      console.log('calling 1 window.gtag(tag, action, sequenced_note);');
       window.gtag(tag, action, sequenced_note); // Output to Google Analytics
     }
     logIt(tag, action, sequenced_note);
@@ -92,7 +91,6 @@ export function logUsage(tag, action, note) {
     note
   );
   if (process.env.REACT_APP_ENABLE_ANALYTICS === 'true' && process.env.NODE_ENV === 'production') { // Limit G.A. tracking to production
-    console.log('calling 2 window.gtag(tag, action, sequenced_note);');
     window.gtag(tag, action, sequenced_note); // Output to Google Analytics
   }
   logIt(tag, action, sequenced_note);
