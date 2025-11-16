@@ -74,6 +74,7 @@ The database names are summarized in [Procedures for creating a new JAWSDB](NewD
         * SMTP\_USER
         * SMTP\_PASS
         * SESSION\_SECRET
+        * ENABLE_DB=true
     * For client
         * REACT\_APP\_NODE\_ENV=development|test|staging|production
         * REACT\_APP\_DESIGN\_TYPES=["Piston-Cylinder","Solid","Spring/Compression","Spring/Extension","Spring/Torsion"]
@@ -82,6 +83,12 @@ The database names are summarized in [Procedures for creating a new JAWSDB](NewD
         * REACT\_APP\_DESIGN\_UNITS=US
         * REACT\_APP\_DESIGN\_VIEW=Advanced
         * REACT\_APP\_SESSION\_REFRESH=3600
+        * REACT_APP_ENABLE_DB=true
+        * REACT_APP_ENABLE_ANALYTICS=true
+        * REACT_APP_GA_ID='G-XXXXXXXXXX'
+        * REACT_APP_GA_ADS_ID='AW-XXXXXXXXX'
+        * REACT_APP_GA_CONVERSION_EVENT='AW-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+        * REACT_APP_ENABLE_CAD_VIEW_MODEL=true
 1. Do a pull or push to get latest version on all systems.  
 <a id="runTestAutomation"></a>  
 1. Confirm that **test automation** in [Post Development](postDevelopment.html) was recently executed.  
