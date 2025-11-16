@@ -1,12 +1,12 @@
-**Message-of-the-day** &nbsp; updated September 20, 2025  
+**Message-of-the-day** &nbsp; updated November 16, 2025  
 
-### Auto Search
-This release contains a new "Auto Search" feature. 
+### Self-hosted Operation
+This release contains new features and improved documentation to support "self-hosted" operation of the ODOP app. 
 
 ### Authentication transition 
-Earlier this year, We transitioned authentication for the ODOP 
+Earlier this year, we transitioned authentication for the ODOP 
 [Design Library](http://odop.springdesignsoftware.org/docs/Help/terminology.html#designLib) 
-from Okta, a third-party authentication provider, to a new self-hosted login system.  
+from Okta, a third-party authentication provider, to a new locally developed authentication and login system.  
 #### For New Users 
 An [ODOP account](http://odop.springdesignsoftware.org/docs/About/userAccounts.html) is not required to design springs. 
 An account is required only if saving designs into the Design Library. 
@@ -33,7 +33,7 @@ including recent and impending releases, planned outages, newly discovered issue
 
 Version  | &nbsp; | Date released  
 ---      | ---    | ---  
-[ODOP version 6.1.0](https://github.com/thegrumpys/odop/milestone/71?closed=1)   | &nbsp; | September 20, 2025.  
+[ODOP version 6.2.0](https://github.com/thegrumpys/odop/milestone/79?closed=1)   | &nbsp; | November 16, 2025.  
 
 Follow the link(s) above to see change details in GitHub.  
 
@@ -83,6 +83,7 @@ Follow the links below to see change details in GitHub.
 
 Version  | &nbsp; | Date released  
 ---      | ---    | ---  
+[ODOP version 6.2.0](https://github.com/thegrumpys/odop/milestone/79?closed=1) | &nbsp; | November 16, 2025.  
 [ODOP version 6.1.0](https://github.com/thegrumpys/odop/milestone/71?closed=1) | &nbsp; | September 20, 2025  
 [ODOP version 6.0.0](https://github.com/thegrumpys/odop/milestone/74?closed=1) | &nbsp; | July 13, 2025  
 [ODOP version 5.2.1](https://github.com/thegrumpys/odop/milestone/76?closed=1) | &nbsp; | June 29, 2025  
