@@ -44,7 +44,7 @@
     "csv-parser": "^3.2.0",
     "dotenv": "^16.0.0",
     "express": "^4.18.2",
-    "express-session": "^1.17.3",
+    "express-session": "^1.18.2",
     "lunr": "^2.3.9",
     "mysql2": "^3.6.0",
     "node-mysql": "^0.4.2",
