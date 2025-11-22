@@ -47,7 +47,9 @@ export default function AdminUserManagerPage() {
       setResults(results.filter((u) => u.id !== deleteId));
       logUsage('event', 'AdminUserManagerPage', { event_label: 'delete id:' + deleteId });
     } catch (err) {
-      setError(err.response?.data?.error || err.message);
+      const backendError = err.response?.data?.error || err.message || "Unknown error";
+      setError(backendError);
+      logUsage('event', 'AdminUserManagerPage', { event_label: `Error: ${JSON.stringify(backendError)}`});
     } finally {
       setConfirmShow(false);
       setDeleteId(null);
@@ -99,7 +101,9 @@ export default function AdminUserManagerPage() {
       logUsage('event', 'LoginAs', { event_label: res.data.authState.email + ' ' + res.data.authState.token });
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.error || err.message);
+      const backendError = err.response?.data?.error || err.message || "Unknown error";
+      setError(backendError);
+      logUsage('event', 'ResetPasswordPage', { event_label: `Error: ${JSON.stringify(backendError)}`});
     }
   };
 

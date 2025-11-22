@@ -29,7 +29,9 @@ export default function AdminCleanupExpiredTokens() {
       logUsage('event', 'AdminCleanupExpiredTokens', { event_label: '' });
       dispatch(changeResultTerminationCondition(res.data.error.message));
     } catch (err) {
-      dispatch(changeResultTerminationCondition(res.data.error.message));
+      const backendError = err.response?.data?.error || err.message || "Unknown error";
+      dispatch(changeResultTerminationCondition(backendError));
+      logUsage('event', 'AdminCleanupExpiredTokens', { event_label: `Error: ${JSON.stringify(backendError)}`});
     } finally {
       setConfirmShow(false);
     }
