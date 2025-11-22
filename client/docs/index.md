@@ -95,3 +95,4 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 * [New database](procedures/NewDB.html) 
 * [Database Full Recovery](procedures/recoverFromDBfull.html) 
 * [Create tooltip images](procedures/tooltipImages.html) 
+* [Test Plan](procedures/testPlan.html) 

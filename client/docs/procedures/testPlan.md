@@ -157,38 +157,20 @@ plus [Release Procedures](https://odop.springdesignsoftware.org/docs/procedures/
 - **Interactive Steps:** Step through script. Confirm that narrative text matches observed results. 
 - **Test Automation Expected Result:** Matches expected value to 7 significant figures; each interactive step completes in < 2 seconds. 
 
-## Demo2 – Compression Spring with Constraints
+## Demo2 – Compression Spring
 - **Case:** SMI HANDBOOK of SPRING DESIGN - Refer to page 15 of the second printing (1983). 
 - **Interactive execution:** Load [Demo2](https://odop.springdesignsoftware.org/?type=Spring%2FCompression&view=Advanced&execute=demo2). 
 - **Interactive Steps:** Step through script. Confirm that narrative text matches observed results. 
-- **Test Automation Expected Result:** Objective Value matches within 7 significant figures; each interactive step completes in < 3 seconds. 
-
-## Demo3 – Compression Spring
-- **Objective:** Confirm Trade operation produces reproducible results and respects constraints. 
-- **Preconditions:** Load [Demo3](https://odop.springdesignsoftware.org/docs/Help/SpringDesign/demo3.html). 
-- **Steps:** Run Trade → Compare outputs to expected reference. 
-- **Expected Result:** Objective Value matches within tolerance; constraints enforced; completes in < 3 seconds. 
+- **Test Automation Expected Result:** Objective Value matches expected value within 7 significant figures; each interactive step completes in < 3 seconds. 
 
 ## Demo6 – Extension Spring
-- **Objective:** Validate Search across multiple independent variables. 
-- **Preconditions:** Load [Demo6](https://odop.springdesignsoftware.org/docs/Help/SpringDesign/demo6.html). 
-- **Steps:** Run Search → Observe convergence. 
-- **Expected Result:** Converges within expected iterations; Objective Value matches within 7 significant figures; completes in < 2 seconds. 
-
-## Demo7 – Extension Spring
-- **Objective:** Ensure blocking constraints are detected and communicated. 
-- **Preconditions:** Load [Demo7](https://odop.springdesignsoftware.org/docs/Help/SpringDesign/demo7.html). 
-- **Steps:** Run Seek. 
-- **Expected Result:** Pop-up/message bar shows blocking condition; no design applied; completes in < 3 seconds. 
+- **Case:** SMI HANDBOOK of SPRING DESIGN - Refer to page 18 of the second printing (1983). 
+- **Interactive execution:** Load [Demo6](https://odop.springdesignsoftware.org/?type=Spring%2FExtension&view=Advanced&execute=demo6). 
+- **Interactive Steps:** Step through script. Confirm that narrative text matches observed results. 
+- **Test Automation Expected Result:** Objective Value matches expected value within 7 significant figures; each interactive step completes in < 3 seconds. 
 
 ## Demo14 – Torsion Spring
-- **Objective:** Validate end-to-end optimization with multiple steps. 
-- **Preconditions:** Load [Demo14](https://odop.springdesignsoftware.org/docs/Help/SpringDesign/demo14.html). 
-- **Steps:** Run Search → Seek → Trade sequentially. 
-- **Expected Result:** Each step produces expected Objective Value within tolerance; performance thresholds met; no UI desyncs. 
-
-## Demo15 – Torsion Spring
-- **Objective:** Confirm Import/Export transactions meet performance and integrity requirements. 
-- **Preconditions:** Load [Demo15](https://odop.springdesignsoftware.org/docs/Help/SpringDesign/demo15.html). 
-- **Steps:** Export design → Import design → Compare. 
-- **Expected Result:** Round-trip integrity preserved; operations complete in < 3 seconds; Objective Value matches within tolerance. 
+- **Case:** SMI HANDBOOK of SPRING DESIGN - Refer to page 25 of the 1991 edition. 
+- **Interactive execution:** Load [Demo14](https://odop.springdesignsoftware.org/?type=Spring%2FTorsion&view=Advanced&execute=demo14). 
+- **Interactive Steps:** Step through script. Confirm that narrative text matches observed results. 
+- **Test Automation Expected Result:** Objective Value matches expected value within 7 significant figures; each interactive step completes in < 3 seconds. 
