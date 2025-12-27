@@ -394,13 +394,61 @@ export function migrate(design) {
         }
         migrated_design.version = '13';
     case '13':
+        console.log('Convert from 13 to 14');
+        // Update End_Type
+        // Old End_Type Table
+        [ "End_Type","Inactive_Coils","Add_Coils@Solid" ],
+        [ 1, "Open",           0.0,       1.0],
+        [ 2, "Open&Ground",    1.0,       0.0],
+        [ 3, "Closed",         2.0,       1.0],
+        [ 4, "Closed&Ground",  2.0,       0.0],
+        [ 5, "Tapered_C&G",    2.0,      -0.5],
+        [ 6, "Pig-tail",       2.0,       0.0],
+        [ 7, "User_Specified", 0.0,       0.0]
+        // New End_Type table
+        [ "End_Type","Inactive_Coils","Add_Coils@Solid", "GrindAmount" ],
+        [ 1, "Open",                   0.0,       1.0,             0.0],
+        [ 2, "Open&Ground",            1.0,       0.0,             1.0],
+        [ 3, "Closed",                 2.0,       1.0,             0.0],
+        [ 4, "Closed&Ground",          2.0,       0.0,             1.0],
+        [ 5, "DoubleClosed",           4.0,       1.0,             0.0],
+        [ 6, "DoubleClosed&Ground",    4.0,       0.0,             1.0],
+        [ 7, "TaperedClosed",          2.0,      -0.5,             0.0],
+        [ 8, "TaperedClosed&Ground",   2.0,      -0.5,             1.0],
+        [ 9, "Pigtail",                2.0,       1.0,             0.0],
+        [ 10, "Pigtail&Ground",         2.0,       0.0,             1.0],
+        [ 11, "UserSpecified",          0.0,       1.0,             0.0],
+        [ 12, "UserSpecified&Ground",   0.0,       0.0,             1.0]
 
-    //============BLOCK OF CODE TO REPLICATE============
-    //     console.log('Convert from N to N+1');
-    //     Write the migration code here
-    //     migrated_design.version = 'N+1';
-    // case 'N+1':
-    //==================================================
+        if (design.symbol_table[44].value === 5) { // Old "Tapered_C&G"
+            design.symbol_table[44].value = 8; // New "TaperedClosed&Ground"
+        } else if (design.symbol_table[44].value === 6) { // Old "Pig-tail"
+            design.symbol_table[44].value = 10; // New "Pigtail&Ground"
+        } else if (design.symbol_table[44].value === 7) { // Old "User_Specified"
+            design.symbol_table[44].value = 12; // New "UserSpecified&Ground"
+        }
+        // Add Grid_Amount calculation
+        design.symbol_table.splice(47,0,Object.assign({},design.symbol_table[46])); // Duplicate Add_Coils_Solid in target position
+        design.symbol_table[47].name = 'Grind_Amount'; // Rename it to Grind_Amount
+        design.symbol_table[47].value = 0.0;
+        design.symbol_table[47].units = 'Wire_Dia';
+        design.symbol_table[47].lmin = 0;
+        design.symbol_table[47].lmax = 0;
+        design.symbol_table[47].cmin = 0.0;
+        design.symbol_table[47].cmax = 1.0;
+        design.symbol_table[47].validmin = 0.0;
+        design.symbol_table[47].validmax = 2.0;
+        design.symbol_table[47].sdlim = 0.0;
+        design.symbol_table[47].tooltip = "Fraction of Wire_Dia to grind from top and bottom. For example, 1.0 Wire_Dia split across 0.5 ground from top and 0.5 ground from bottom";
+        migrated_design.version = '14';
+    case '14':
+
+        //============BLOCK OF CODE TO REPLICATE============
+        //     console.log('Convert from N to N+1');
+        //     Write the migration code here
+        //     migrated_design.version = 'N+1';
+        // case 'N+1':
+        //==================================================
 
         break; // Do not copy this break
     default: // Unknown

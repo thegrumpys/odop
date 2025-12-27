@@ -749,6 +749,22 @@ export const initialState = {
             "hidden": false
         },
         {
+            "input": true,
+            "name": "Grind_Amount",
+            "value": 0.0,
+            "units": "Wire_Dia",
+            "lmin": 0,
+            "lmax": 0,
+            "cmin": 0,
+            "cmax": 0,
+            "validmin": 0.0,
+            "validmax": 2.0,
+            "sdlim": 0.0,
+            "tooltip": "Fraction of Wire_Dia to grind from top and bottom. For example, 1.0 Wire_Dia split across 0.5 ground from top and 0.5 ground from bottom",
+            "type": "calcinput",
+            "hidden": false
+        },
+        {
             "input": false,
             "name": "Catalog_Name",
             "value": "",
@@ -951,7 +967,7 @@ export const initialState = {
         }
     ],
     "type": "Spring/Compression",
-    "version": "13",
+    "version": "14",
     "result": {
         "objective_value": 0,
         "termination_condition": "Use the File : Open menu item to select a different design type (Compression, Extension, Torsion) or units (US, metric)."

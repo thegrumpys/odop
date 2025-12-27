@@ -140,9 +140,10 @@ export function init(store, p, x) {
       //else
       //  hook_deflect_all=0.0;
 
-      if (et_tab[j][eto.end_type] !== "User_Specified") {
+      if (et_tab[j][eto.end_type] !== "UserSpecified" && et_tab[j][eto.end_type] !== "UserSpecified&Ground") {
         x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
         x[o.Add_Coils_Solid] = et_tab[j][eto.add_coils_solid];
+        x[o.Grind_Amount] = et_tab[j][eto.grind_amount];
       }
 
       store.dispatch(changeSymbolHidden("Material_Type", false));
@@ -219,12 +220,14 @@ export function init(store, p, x) {
       store.dispatch(changeSymbolInput("Stress_Lim_Endur", true));
   }
 
-  if (et_tab[j][eto.end_type] === "User_Specified") {
+  if (et_tab[j][eto.end_type] === "UserSpecified" || et_tab[j][eto.end_type] === "UserSpecified&Ground") {
     store.dispatch(changeSymbolInput("Inactive_Coils", true));
     store.dispatch(changeSymbolInput("Add_Coils@Solid", true));
+    store.dispatch(changeSymbolInput("Grind_Amount", true));
   } else {
     store.dispatch(changeSymbolInput("Inactive_Coils", false));
     store.dispatch(changeSymbolInput("Add_Coils@Solid", false));
+    store.dispatch(changeSymbolInput("Grind_Amount", false));
   }
 //  console.log('init p=',p,' x=',x);
   return x;
