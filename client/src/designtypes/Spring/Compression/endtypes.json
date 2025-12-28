@@ -1,15 +1,15 @@
 [
-    [ "End_Type","Inactive_Coils","Add_Coils@Solid", "Grind_Amount", "Taper_Amount" ],
-    [ "Open",                   0.0,       1.0,             0.0,          0.0],
-    [ "Open&Ground",            1.0,       0.0,             1.0,          0.0],
-    [ "Closed",                 2.0,       1.0,             0.0,          0.0],
-    [ "Closed&Ground",          2.0,       0.0,             1.0,          0.0],
-    [ "DoubleClosed",           4.0,       1.0,             0.0,          0.0],
-    [ "DoubleClosed&Ground",    4.0,       0.0,             1.0,          0.0],
-    [ "TaperedClosed",          2.0,       0.0,             0.0,          0.5],
-    [ "TaperedClosed&Ground",   2.0,      -0.5,             0.5,          0.5],
-    [ "PigtailClosed",          2.0,       1.0,             0.0,          0.0],
-    [ "PigtailClosed&Ground",   2.0,       0.0,             1.0,          0.0],
-    [ "UserSpecified",          0.0,       1.0,             0.0,          0.0],
-    [ "UserSpecified&Ground",   0.0,       0.0,             1.0,          0.0]
+    [ "End_Type","Inactive_Coils", "Grind_Amount", "Taper_Amount" ],
+    [ "Open",                   0.0,     0.0,          0.0],
+    [ "Open&Ground",            1.0,     1.0,          0.0],
+    [ "Closed",                 2.0,     0.0,          0.0],
+    [ "Closed&Ground",          2.0,     1.0,          0.0],
+    [ "DoubleClosed",           4.0,     0.0,          0.0],
+    [ "DoubleClosed&Ground",    4.0,     1.0,          0.0],
+    [ "TaperedClosed",          2.0,     0.0,          0.5],
+    [ "TaperedClosed&Ground",   2.0,     0.5,          0.5],
+    [ "PigtailClosed",          2.0,     0.0,          0.0],
+    [ "PigtailClosed&Ground",   2.0,     1.0,          0.0],
+    [ "UserSpecified",          0.0,     0.0,          0.0],
+    [ "UserSpecified&Ground",   0.0,     1.0,          0.0]
 ]

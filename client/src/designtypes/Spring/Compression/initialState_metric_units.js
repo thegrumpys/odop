@@ -734,22 +734,6 @@ export const initialState = {
         },
         {
             "input": true,
-            "name": "Add_Coils@Solid",
-            "value": 0.0,
-            "units": "coils",
-            "lmin": 0,
-            "lmax": 0,
-            "cmin": 0,
-            "cmax": 0,
-            "validmin": -Number.MAX_VALUE,
-            "validmax": Number.MAX_VALUE,
-            "sdlim": 0.0,
-            "tooltip": "Adjusts calculation of L_Solid. Depends on End_Type.<br/>See on-line Help for details.",
-            "type": "calcinput",
-            "hidden": false
-        },
-        {
-            "input": true,
             "name": "Grind_Amount",
             "value": 0.0,
             "units": "Wire_Dia",

@@ -122,27 +122,9 @@ export function init(store, p, x) {
 
       //    /*  copy from end type table to constants  */
       //    /*  check these values.     See AS Design Hdbk. p52  */
-      //    /*    VVVVVVVVVVVVV          Kludge for Torsion  */
-      //if end_type_index > 0 & nmerit ^= 3 then
-      //do;
-      //if end_calc_method ^= 1 then              /*   debug  */
-      //       put skip list('TAB2D:  END_CALC_METHOD SET TO 1.');
-      //end_calc_method=1;
-      //
-      //end_type        = end_name(end_type_index);
-      //inactive_coils  = inact_coil_tbl(end_type_index);
-      //if end_type_index <= c_end_num then
-      //  add_coils_solid=acs_tbl(end_type_index);
-      //else
-      //  add_coils_solid=0.0;
-      //if end_type_index > c_end_num then
-      //  hook_deflect_all=hda_tbl(end_type_index-c_end_num);
-      //else
-      //  hook_deflect_all=0.0;
 
       if (et_tab[j][eto.end_type] !== "UserSpecified" && et_tab[j][eto.end_type] !== "UserSpecified&Ground") {
         x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
-        x[o.Add_Coils_Solid] = et_tab[j][eto.add_coils_solid];
         x[o.Grind_Amount] = et_tab[j][eto.grind_amount];
         x[o.Taper_Amount] = et_tab[j][eto.taper_amount];
       }
@@ -243,12 +225,10 @@ export function init(store, p, x) {
 
   if (et_tab[j][eto.end_type] === "UserSpecified" || et_tab[j][eto.end_type] === "UserSpecified&Ground") {
     store.dispatch(changeSymbolInput("Inactive_Coils", true));
-    store.dispatch(changeSymbolInput("Add_Coils@Solid", true));
     store.dispatch(changeSymbolInput("Grind_Amount", true));
     store.dispatch(changeSymbolInput("Taper_Amount", true));
   } else {
     store.dispatch(changeSymbolInput("Inactive_Coils", false));
-    store.dispatch(changeSymbolInput("Add_Coils@Solid", false));
     store.dispatch(changeSymbolInput("Grind_Amount", false));
     store.dispatch(changeSymbolInput("Taper_Amount", false));
   }

@@ -396,30 +396,6 @@ export function migrate(design) {
     case '13':
         console.log('Convert from 13 to 14');
         // Update End_Type
-        // Old End_Type Table
-//        [ "End_Type","Inactive_Coils","Add_Coils@Solid" ],
-//        [ 1, "Open",           0.0,       1.0],
-//        [ 2, "Open&Ground",    1.0,       0.0],
-//        [ 3, "Closed",         2.0,       1.0],
-//        [ 4, "Closed&Ground",  2.0,       0.0],
-//        [ 5, "Tapered_C&G",    2.0,      -0.5],
-//        [ 6, "Pig-tail",       2.0,       0.0],
-//        [ 7, "User_Specified", 0.0,       0.0]
-        // New End_Type table
-//        [ "End_Type","Inactive_Coils","Add_Coils@Solid", "Grind_Amount" ],
-//        [ 1, "Open",                   0.0,       1.0,             0.0],
-//        [ 2, "Open&Ground",            1.0,       0.0,             1.0],
-//        [ 3, "Closed",                 2.0,       1.0,             0.0],
-//        [ 4, "Closed&Ground",          2.0,       0.0,             1.0],
-//        [ 5, "DoubleClosed",           4.0,       1.0,             0.0],
-//        [ 6, "DoubleClosed&Ground",    4.0,       0.0,             1.0],
-//        [ 7, "TaperedClosed",          2.0,      -0.5,             0.0],
-//        [ 8, "TaperedClosed&Ground",   2.0,      -0.5,             1.0],
-//        [ 9, "PigtailClosed",          2.0,       1.0,             0.0],
-//        [ 10, "PigtailClosed&Ground",  2.0,       0.0,             1.0],
-//        [ 11, "UserSpecified",         0.0,       1.0,             0.0],
-//        [ 12, "UserSpecified&Ground",  0.0,       0.0,             1.0]
-
         if (design.symbol_table[44].value === 5) { // Old "Tapered_C&G"
             design.symbol_table[44].value = 8; // New "TaperedClosed&Ground"
         } else if (design.symbol_table[44].value === 6) { // Old "Pig-tail"
@@ -451,6 +427,7 @@ export function migrate(design) {
         design.symbol_table[48].validmax = 1.0;
         design.symbol_table[48].sdlim = 0.0;
         design.symbol_table[48].tooltip = "Fraction of Wire_Dia to taper the end. For example, 0.5 Wire_Dia cuts the wire in half.";
+        design.symbol_table.splice(46,1); // Delete Add_Coils_Solid (replaced by equation using Grind_Amount and Taper_Amount)
         migrated_design.version = '14';
     case '14':
 
