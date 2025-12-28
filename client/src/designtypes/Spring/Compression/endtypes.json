@@ -11,5 +11,5 @@
     [ "Pigtail",                2.0,       1.0,             0.0],
     [ "Pigtail&Ground",         2.0,       0.0,             1.0],
     [ "UserSpecified",          0.0,       1.0,             0.0],
-    [ "UserSpecified&Ground",   0.0,       0.0,             1.0]
+    [ "UserSpecified&Ground",   1.0,       0.0,             1.0]
 ]
