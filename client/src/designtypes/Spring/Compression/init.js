@@ -144,6 +144,7 @@ export function init(store, p, x) {
         x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
         x[o.Add_Coils_Solid] = et_tab[j][eto.add_coils_solid];
         x[o.Grind_Amount] = et_tab[j][eto.grind_amount];
+        x[o.Taper_Amount] = et_tab[j][eto.taper_amount];
       }
 
       store.dispatch(changeSymbolHidden("Material_Type", false));
@@ -220,14 +221,36 @@ export function init(store, p, x) {
       store.dispatch(changeSymbolInput("Stress_Lim_Endur", true));
   }
 
+  if (et_tab[j][eto.end_type] === "Open&Ground" || 
+      et_tab[j][eto.end_type] === "Closed&Ground" ||
+      et_tab[j][eto.end_type] === "DoubleClosed&Ground" ||
+      et_tab[j][eto.end_type] === "TaperedClosed&Ground" ||
+      et_tab[j][eto.end_type] === "PigtailClosed&Ground" ||
+      et_tab[j][eto.end_type] === "UserSpecified&Ground") {
+    store.dispatch(changeSymbolHidden("Grind_Amount", false));
+  } else {
+    store.dispatch(changeSymbolHidden("Grind_Amount", true));
+  }
+
+  if (et_tab[j][eto.end_type] === "TaperedClosed" ||
+      et_tab[j][eto.end_type] === "TaperedClosed&Ground" ||
+      et_tab[j][eto.end_type] === "UserSpecified" ||
+      et_tab[j][eto.end_type] === "UserSpecified&Ground") {
+    store.dispatch(changeSymbolHidden("Taper_Amount", false));
+  } else {
+    store.dispatch(changeSymbolHidden("Taper_Amount", true));
+  }
+
   if (et_tab[j][eto.end_type] === "UserSpecified" || et_tab[j][eto.end_type] === "UserSpecified&Ground") {
     store.dispatch(changeSymbolInput("Inactive_Coils", true));
     store.dispatch(changeSymbolInput("Add_Coils@Solid", true));
     store.dispatch(changeSymbolInput("Grind_Amount", true));
+    store.dispatch(changeSymbolInput("Taper_Amount", true));
   } else {
     store.dispatch(changeSymbolInput("Inactive_Coils", false));
     store.dispatch(changeSymbolInput("Add_Coils@Solid", false));
     store.dispatch(changeSymbolInput("Grind_Amount", false));
+    store.dispatch(changeSymbolInput("Taper_Amount", false));
   }
 //  console.log('init p=',p,' x=',x);
   return x;

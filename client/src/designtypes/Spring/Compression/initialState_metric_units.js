@@ -765,6 +765,22 @@ export const initialState = {
             "hidden": false
         },
         {
+            "input": true,
+            "name": "Taper_Amount",
+            "value": 0.0,
+            "units": "Wire_Dia",
+            "lmin": 0,
+            "lmax": 0,
+            "cmin": 0,
+            "cmax": 0,
+            "validmin": 0.0,
+            "validmax": 1.0,
+            "sdlim": 0.0,
+            "tooltip": "Fraction of Wire_Dia to taper the end. For example, 0.5 Wire_Dia cuts the wire in half.",
+            "type": "calcinput",
+            "hidden": false
+        },
+        {
             "input": false,
             "name": "Catalog_Name",
             "value": "",

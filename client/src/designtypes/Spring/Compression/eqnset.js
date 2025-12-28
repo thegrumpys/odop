@@ -45,7 +45,7 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
 
     x[o.Slenderness] = p[o.L_Free] / x[o.Mean_Dia];
 
-    x[o.L_Solid] = p[o.Wire_Dia] * (p[o.Coils_T] + x[o.Add_Coils_Solid]);
+    x[o.L_Solid] = p[o.Wire_Dia] * (p[o.Coils_T] + (1.0 - x[o.Grind_Amount] - 2.0 * x[o.Taper_Amount]));
 
     x[o.Force_Solid] = x[o.Rate] * (p[o.L_Free] - x[o.L_Solid]);
 

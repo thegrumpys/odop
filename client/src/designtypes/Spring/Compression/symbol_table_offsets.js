@@ -47,13 +47,14 @@ export const End_Type = 44;
 export const Inactive_Coils = 45;
 export const Add_Coils_Solid = 46;
 export const Grind_Amount = 47;
-export const Catalog_Name = 48;
-export const Catalog_Number = 49;
-export const tbase010 = 50;
-export const tbase400 = 51;
-export const const_term = 52;
-export const slope_term = 53;
-export const tensile_010 = 54;
+export const Taper_Amount = 48;
+export const Catalog_Name = 49;
+export const Catalog_Number = 50;
+export const tbase010 = 51;
+export const tbase400 = 52;
+export const const_term = 53;
+export const slope_term = 54;
+export const tensile_010 = 55;
 
 // Labels (Properties)
 export const COMMENT = 0;

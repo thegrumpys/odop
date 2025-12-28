@@ -428,7 +428,7 @@ export function migrate(design) {
             design.symbol_table[44].value = 12; // New "UserSpecified&Ground"
         }
         // Add Grid_Amount calculation
-        design.symbol_table.splice(47,0,Object.assign({},design.symbol_table[46])); // Duplicate Add_Coils_Solid in target position
+        design.symbol_table.splice(47,0,Object.assign({},design.symbol_table[46]),Object.assign({},design.symbol_table[46])); // Duplicate Add_Coils_Solid twice in target position
         design.symbol_table[47].name = 'Grind_Amount'; // Rename it to Grind_Amount
         design.symbol_table[47].value = 0.0;
         design.symbol_table[47].units = 'Wire_Dia';
@@ -440,6 +440,17 @@ export function migrate(design) {
         design.symbol_table[47].validmax = 2.0;
         design.symbol_table[47].sdlim = 0.0;
         design.symbol_table[47].tooltip = "Fraction of Wire_Dia to grind from top and bottom. For example, 1.0 Wire_Dia split across 0.5 ground from top and 0.5 ground from bottom";
+        design.symbol_table[48].name = 'Taper_Amount'; // Rename it to Grind_Amount
+        design.symbol_table[48].value = 0.0;
+        design.symbol_table[48].units = 'Wire_Dia';
+        design.symbol_table[48].lmin = 0;
+        design.symbol_table[48].lmax = 0;
+        design.symbol_table[48].cmin = 0.0;
+        design.symbol_table[48].cmax = 1.0;
+        design.symbol_table[48].validmin = 0.0;
+        design.symbol_table[48].validmax = 1.0;
+        design.symbol_table[48].sdlim = 0.0;
+        design.symbol_table[48].tooltip = "Fraction of Wire_Dia to taper the end. For example, 0.5 Wire_Dia cuts the wire in half.";
         migrated_design.version = '14';
     case '14':
 
