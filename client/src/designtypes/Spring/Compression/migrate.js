@@ -397,33 +397,33 @@ export function migrate(design) {
         console.log('Convert from 13 to 14');
         // Update End_Type
         // Old End_Type Table
-        [ "End_Type","Inactive_Coils","Add_Coils@Solid" ],
-        [ 1, "Open",           0.0,       1.0],
-        [ 2, "Open&Ground",    1.0,       0.0],
-        [ 3, "Closed",         2.0,       1.0],
-        [ 4, "Closed&Ground",  2.0,       0.0],
-        [ 5, "Tapered_C&G",    2.0,      -0.5],
-        [ 6, "Pig-tail",       2.0,       0.0],
-        [ 7, "User_Specified", 0.0,       0.0]
+//        [ "End_Type","Inactive_Coils","Add_Coils@Solid" ],
+//        [ 1, "Open",           0.0,       1.0],
+//        [ 2, "Open&Ground",    1.0,       0.0],
+//        [ 3, "Closed",         2.0,       1.0],
+//        [ 4, "Closed&Ground",  2.0,       0.0],
+//        [ 5, "Tapered_C&G",    2.0,      -0.5],
+//        [ 6, "Pig-tail",       2.0,       0.0],
+//        [ 7, "User_Specified", 0.0,       0.0]
         // New End_Type table
-        [ "End_Type","Inactive_Coils","Add_Coils@Solid", "GrindAmount" ],
-        [ 1, "Open",                   0.0,       1.0,             0.0],
-        [ 2, "Open&Ground",            1.0,       0.0,             1.0],
-        [ 3, "Closed",                 2.0,       1.0,             0.0],
-        [ 4, "Closed&Ground",          2.0,       0.0,             1.0],
-        [ 5, "DoubleClosed",           4.0,       1.0,             0.0],
-        [ 6, "DoubleClosed&Ground",    4.0,       0.0,             1.0],
-        [ 7, "TaperedClosed",          2.0,      -0.5,             0.0],
-        [ 8, "TaperedClosed&Ground",   2.0,      -0.5,             1.0],
-        [ 9, "Pigtail",                2.0,       1.0,             0.0],
-        [ 10, "Pigtail&Ground",         2.0,       0.0,             1.0],
-        [ 11, "UserSpecified",          0.0,       1.0,             0.0],
-        [ 12, "UserSpecified&Ground",   0.0,       0.0,             1.0]
+//        [ "End_Type","Inactive_Coils","Add_Coils@Solid", "Grind_Amount" ],
+//        [ 1, "Open",                   0.0,       1.0,             0.0],
+//        [ 2, "Open&Ground",            1.0,       0.0,             1.0],
+//        [ 3, "Closed",                 2.0,       1.0,             0.0],
+//        [ 4, "Closed&Ground",          2.0,       0.0,             1.0],
+//        [ 5, "DoubleClosed",           4.0,       1.0,             0.0],
+//        [ 6, "DoubleClosed&Ground",    4.0,       0.0,             1.0],
+//        [ 7, "TaperedClosed",          2.0,      -0.5,             0.0],
+//        [ 8, "TaperedClosed&Ground",   2.0,      -0.5,             1.0],
+//        [ 9, "PigtailClosed",          2.0,       1.0,             0.0],
+//        [ 10, "PigtailClosed&Ground",  2.0,       0.0,             1.0],
+//        [ 11, "UserSpecified",         0.0,       1.0,             0.0],
+//        [ 12, "UserSpecified&Ground",  0.0,       0.0,             1.0]
 
         if (design.symbol_table[44].value === 5) { // Old "Tapered_C&G"
             design.symbol_table[44].value = 8; // New "TaperedClosed&Ground"
         } else if (design.symbol_table[44].value === 6) { // Old "Pig-tail"
-            design.symbol_table[44].value = 10; // New "Pigtail&Ground"
+            design.symbol_table[44].value = 10; // New "PigtailClosed&Ground"
         } else if (design.symbol_table[44].value === 7) { // Old "User_Specified"
             design.symbol_table[44].value = 12; // New "UserSpecified&Ground"
         }
