@@ -172,7 +172,8 @@ Stress_Lim_Endur |      | allowable stress limit; cyclic application (torsion)
 Stress_Lim_Stat  |      | allowable stress limit; static application (torsion) 
 End_Type       |        | character string that is used to determine calculations for Inactive_Coils, L_Solid and Pitch;  See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes)
 Inactive_Coils |        | number of inactive coils (depends on End_Type) 
-Add_Coils@Solid|        | extra coils included in solid height calculation;  See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes) 
+Grind_Amount   |        | number of wire diameters removed by a grinding operation;  See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes) 
+Taper_Amount   |        | number of wire diameters removed by a tapering operation on the first and last coil(s) of a hot-wound compression spring
 Catalog_Name   |        | name of the catalog containing the most recently selected catalog entry 
 Catalog_Number |        | catalog number of the most recent catalog entry 
 
@@ -235,60 +236,66 @@ ___
 <a id="c_springEndTypes"></a>  
 ___
 
-## End Types 
+## Compression Spring End Types 
 
-ODOP:Spring currently implements six spring end types for compression springs. 
+ODOP:Spring currently implements ten spring end types for compression springs. 
 In addition, the user can define specialized end conditions. 
 For compression springs, the Calculation Input End\_Type has the following possible values: 
 
-&nbsp; | Compression spring end types 
- ---   | ---         
-1      | Open    
-2      | Open&Ground   
-3      | Closed   
-4      | Closed&Ground  
-5      | Tapered_C&G  
-6      | Pig-Tail
-7      | User_Specified  
+&nbsp;| Compression spring end types 
+ --- | ---         
+1    | Open      
+2    | Open&Ground    
+3    | Closed  
+4    | Closed&Ground   
+5    | DoubleClosed  
+6    | DoubleClosed&Ground  
+7    | TaperedClosed  
+8    | TaperedClosed&Ground  
+9    | PigtailClosed  
+10   | PigtailClosed&Ground 
+11   | UserSpecified  
+12   | UserSpecified&Ground 
 
 For a compression spring, the end type selection directly impacts the value of
-Inactive\_Coils and Add\_Coils@Solid. 
+Inactive\_Coils plus Grind\_Amount and/or Taper\_Amount as appropriate. 
 L\_Solid, Pitch and other variables are impacted indirectly. 
 
 <!--- Additional information may be found in the documentation sections for EQNSET.  -->
 
-When End\_Type is set to one of the standard (non User_Specified) selections, 
-Inactive\_Coils and Add\_Coils@Solid will be set by the 
-program from values contained in internal tables. 
-When the value of End\_Type is User_Specified, 
+When End\_Type is set to one of the standard (non UserSpecified) selections, 
+Inactive\_Coils, Grind\_Amount and Taper\_Amount will be set by the 
+program from values contained in an internal table. 
+When the value of End\_Type is UserSpecified (UserSpecified&Ground), 
 the user may set these values by making an entry in the corresponding 
 numeric entry field. 
 
-#### Add_Coils@Solid 
+#### Grind\_Amount, Taper\_Amount 
 In order to facilitate the treatment of less common compression spring end 
-types such as the "Tapered, Closed and Ground" configuration associated with hot 
-wound springs, ODOP:Spring has added an extra term into the solid height 
+types such as the "Tapered, Closed and Ground" configuration associated with 
+hot-wound springs, ODOP:Spring has added extra terms into the solid height 
 calculation. 
-Add\_Coils@Solid is a constant that is normally determined by 
-the value of End\_Type. 
-It is used to separate the solid height calculation from the rate equation which 
-is dependent on the value of Inactive\_Coils. 
-Add\_Coils@Solid represents the number of wire diameters added into the solid 
-height beyond Coils\_T. 
-For Open and Closed end types, it has a value of +1.0. 
-For Open&Ground and Closed&Ground end types, it has a value of 0.0. 
-For the Tapered\_C&G end type, Add\_Coils@Solid has a value of -0.5. 
+Grind\_Amount and Taper\_Amount are Calculation Inputs that are normally 
+determined by the value of End\_Type. 
+They are used to separate the solid height calculation from the rate equation 
+which is dependent on the value of Inactive\_Coils. 
+Grind\_Amount is the number of wire diameters removed by a grinding operation. 
+Taper\_Amount is the number of wire diameters removed by a tapering operation 
+on the first and last coil(s) of a hot-wound compression spring.
+For the TaperedClosed&Ground end type, Grind\_Amount and Taper\_Amount each 
+have a value of 0.5.  
 
-Note that the Add\_Coils@Solid term is not included in Coils\_T or the wire 
-length and weight calculations. 
-It is only an adjustment for the solid height calculation and is not the 
-correct way to represent 
+Note that the Grind\_Amount and Taper\_Amount terms are not included in Coils\_T 
+or the wire length and weight calculations. 
+They are only an adjustment for the solid height calculation and must be used with 
+Inactive\_Coils to represent 
 [Dead Coils](/docs/Help/DesignTypes/Spring/Compression/description.html#deadCoils). 
 
-The Add_Coils@Solid term may be used to represent unusual end configurations. 
+The Grind\_Amount and Taper\_Amount terms may be used with Inactive\_Coils to represent 
+unusual end configurations. 
 For example, springs that have a different end type at each end. 
-To establish the value of Inactive\_Coils and/or Add_Coils@Solid directly, 
-first select a value of End\_Type of User_Specified. 
+To establish the value of Inactive\_Coils or Grind\_Amount or Taper\_Amount directly, 
+first select a value of UserSpecified (UserSpecified&Ground) for End\_Type. 
 
 &nbsp; 
 
@@ -303,7 +310,7 @@ In a compression spring, "dead coils" are additional close wound coils,
 typically placed at each end. 
 Dead coils can be effective in preventing tangling. 
 
-The appropriate way to handle dead coils is to select the "User_Specified" end type 
+The appropriate way to handle dead coils is to select the "UserSpecified" end type 
 and increase the value of Inactive_Coils by the desired number of dead coils.
 
 &nbsp; 
@@ -318,16 +325,21 @@ ___
 To represent a spring with one end Closed 
 and with the other end Closed&Ground: 
 
-    CHANGE  End_Type  User_Specified
+    CHANGE  End_Type  UserSpecified
     CHANGE  Inactive_Coils   2.0
-    CHANGE  Add_Coils@Solid  0.5
+    CHANGE  Grind_Amount  0.5
 
 To represent a spring with ten active coils, two dead coils and closed ends: 
 
-    CHANGE  End_Type  User_Specified
     FIX Coils_T     14.0
-    CHANGE  Inactive_Coils   4.0
-    CHANGE  Add_Coils@Solid  1.0
+    CHANGE  End_Type  DoubleClosed
+
+To represent a spring with ten active coils, four dead coils and closed & ground ends: 
+
+    FIX Coils_T     16.0
+    CHANGE  End_Type  UserSpecified&Ground
+    CHANGE  Inactive_Coils   6.0
+    CHANGE  Grind_Amount  1.0
 
 &nbsp;  
 

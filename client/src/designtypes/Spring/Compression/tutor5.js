@@ -236,20 +236,20 @@ export const execute = {
                     </p>
 
                     <p>
-                    Note the "Tapered, Closed & Ground" and "Pig-tail" end types that
+                    Note the "Tapered, Closed & Ground" and "Pigtail" end types that
                     are common in hot-wound springs.
                     Refer to the discussion in the on-line documentation (Help entry) on
                     &nbsp;<a href="/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes" target="_blank" rel="noopener noreferrer">Compression Spring End Types</a>&nbsp;
-                    for information on Add_Coils@Solid and the
+                    for information on Grind_Amount, Taper_Amount and the
                     calculation of solid height for these end types.
                     </p>
 
                     <p>
-                    Note the "User Specified" end type.
-                    This entry is provided in order to label unusual end configurations
-                    (for example, a spring with extra dead coils or with two different end types)
-                    where the designer has provided custom values for Inactive_Coils and
-                    Add_Coils@Solid.
+                    Note the "UserSpecified" and "UserSpecified&Ground" end types.
+                    These entrries are provided in order to accommodate unusual end configurations
+                    (for example, a spring with extra dead coils or with two different end types). 
+                    The designer can provide custom values for Inactive_Coils, 
+                    Grind_Amount and Taper_Amount.
                     Additional information is available in the same on-line documentation section for
                     the Compression Spring design type.
                     </p>

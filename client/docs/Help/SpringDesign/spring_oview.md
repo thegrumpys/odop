@@ -465,22 +465,27 @@ ___
 <a id="EndTypes"></a>  
 ___
 
-## End Types 
-The current version of the ODOP:Spring program implements six spring end types 
+## End Types (End_Type)
+The current version of the ODOP:Spring program implements ten spring end types 
 for compression springs and five different end types for extension springs. 
 In addition, the user can define specialized end conditions. 
 These end types are represented by the Calculation Input End\_Type which 
 has the following possible values: 
 
- &nbsp; | Compression | &nbsp; | &nbsp; | Extension  
- --- | ---            | ---    | --- | ---  
-1    | OPEN           | &nbsp; | 1   | FULL_LOOP  
-2    | OPEN&GROUND    |        | 2   |  75%_LOOP  
-3    | CLOSED         |        | 3   | FULL_HOOK  
-4    | CLOSED&GROUND  |        | 4   |  75%_HOOK  
-5    | TAPERED_C&G    |        | 5   | CLOSE_WOUND_COIL  
-6    | PIG-TAIL       |        |     |  
-7    | USER_SPECIFIED |        | 6   | USER_SPECIFIED  
+&nbsp;| Compression        | &nbsp; |&nbsp;| Extension  
+ --- | ---                 | ---    | ---  | ---  
+1    | Open                | &nbsp; | 1    | FULL_LOOP  
+2    | Open&Ground         |        | 2    |  75%_LOOP  
+3    | Closed              |        | 3    | FULL_HOOK  
+4    | Closed&Ground       |        | 4    |  75%_HOOK  
+5    | DoubleClosed        |        | 5    | CLOSE_WOUND_COIL  
+6    | DoubleClosed&Ground |        |      |  
+7    | TaperedClosed       |        | 6    | USER_SPECIFIED  
+8    | TaperedClosed&Ground|        |      |    
+9    | PigtailClosed       |        |      |    
+10   | PigtailClosed&Ground|        |      |    
+11   | UserSpecified       |        |      |    
+12   | UserSpecified&Ground|        |      |    
 
 For a compression spring, the end type directly impacts calculation of 
 Inactive\_Coils. 

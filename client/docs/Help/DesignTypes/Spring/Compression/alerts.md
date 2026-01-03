@@ -24,7 +24,7 @@ Alert entry #C101
 This situation creates numerical difficulties. 
 In mathematics, this is sometimes referred to as a "[pathological](https://en.wikipedia.org/wiki/Pathological_(mathematics))" case.  
 
-To resolve this Alert, select a different end_type or increase the value of Coils_T. 
+To resolve this Alert, select a different End_Type or increase the value of Coils_T. 
 In most cases, the value of Coils_T should be large enough to provide a number of active coils (Coils_A) 
 that is perhaps less than one but in any case, significantly greater than zero. 
 
