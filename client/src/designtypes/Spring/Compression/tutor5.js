@@ -53,7 +53,7 @@ export const execute = {
                     &nbsp;<a href="/docs/Help/SpringDesign/index.html" target="_blank" rel="noopener noreferrer">Spring Design</a>&nbsp; 
                     and 
                     &nbsp;<a href="/docs/Help/DesignTypes/Spring/Compression/description.html" target="_blank" rel="noopener noreferrer">Compression Spring</a>&nbsp; 
-                    provide more detailed definitions for each of the Calculation Inputs.                      
+                    provide more detailed definitions for each of the Calculation Inputs. 
                     While reviewing every quantity here would make this tutorial unnecessarily long, 
                     it is important to understand that <b>Stress_Lim_Stat</b> and <b>Stress_Lim_Endur </b> 
                     are the allowable stress limits for static load and endurance, respectively. 
