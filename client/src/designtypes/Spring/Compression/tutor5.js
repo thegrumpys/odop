@@ -7,9 +7,8 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    This section of the tutorial will cover the use of the ODOP:Spring
-                    Calculation Inputs, material selection, material properties
-                    (like allowable stresses) and spring end types.
+                    This section of the tutorial covers ODOP:Spring Calculation Inputs related to material
+                    selection, material properties (including allowable stresses), and spring end types.
                     </p>
 
                     <p>
@@ -25,7 +24,7 @@ export const execute = {
                     </p>
 
                     <p>
-                    To continue with this session, just click the "Next" button as you finish
+                    To continue with this session, click the "Next" button as you finish
                     reading each page (step).
                     </p>
                     <br />
@@ -42,11 +41,11 @@ export const execute = {
 
                     <p>
                     Let's start with a quick review of the Compression Spring Calculation Inputs and their
-                    current values.
+                    current values. 
+                    Confirm that you are in ODOP's Advanced View. 
                     If you are not already familiar with the list,
-                    please take a moment to scroll down and look at the items under the Calculation Inputs
-                    heading.
-                    Review the tooltips for additional insights.
+                    scroll down and look at the items under the Calculation Inputs heading.
+                    Hover over the tooltips for additional insight into each quantity.
                     </p>
 
                     <p>
@@ -54,12 +53,11 @@ export const execute = {
                     &nbsp;<a href="/docs/Help/SpringDesign/index.html" target="_blank" rel="noopener noreferrer">Spring Design</a>&nbsp; 
                     and 
                     &nbsp;<a href="/docs/Help/DesignTypes/Spring/Compression/description.html" target="_blank" rel="noopener noreferrer">Compression Spring</a>&nbsp; 
-                    provide a more detailed definition for each of the Calculation Inputs.  
-                    It would make the tutorial too long (and boring !) to review each quantity here.
-                    However, it is important to make sure that you understand that
-                    Stress_Lim_Stat and Stress_Lim_Endur are the allowable
-                    stress limits for static load and endurance respectively.
-                    The factor of safety numbers are calculated directly from Stress_Lim_Stat and Stress_Lim_Endur.
+                    provide more detailed definitions for each of the Calculation Inputs.                      
+                    While reviewing every quantity here would make this tutorial unnecessarily long, 
+                    it is important to understand that <b>Stress_Lim_Stat</b> and <b>Stress_Lim_Endur </b> 
+                    are the allowable stress limits for static load and endurance, respectively. 
+                    The factor of safety values are calculated directly from these allowable stresses.
                    </p>
                 </>
             ),
@@ -74,29 +72,30 @@ export const execute = {
                 <>
                     <p>
                     ODOP:Spring provides flexibility in how material properties are determined.
-                    There are three different capabilities:
+                    There are three different approaches:
                     </p>
 
                     <ol>
                         <li>
-                        By default, the selected Material_Type is used to get values from
-                        an internal table. These values
-                        are combined with the current Wire_Dia and the cycle life target to
-                        calculate the values of the allowable stresses: Stress_Lim_Endur and
-                        Stress_Lim_Stat.  Thus, every time the user or the search changes the
-                        value of Wire_Dia, a new set of allowable stresses is calculated,
-                        resulting in new factor of safety values.
+                        By default, the selected <b>Material_Type</b> is used to get values from
+                        an internal table. 
+                        These values are combined with the current <b>Wire_Dia</b> and the 
+                        cycle life target to calculate the allowable stresses: 
+                        <b> Stress_Lim_Endur</b> and <b>Stress_Lim_Stat</b>.  
+                        Each time the user or the search changes the
+                        value of <b>Wire_Dia</b>, a new set of allowable stresses is calculated,
+                        resulting in updated factor of safety values.
                         </li>
                         <li>
-                        It is possible to use a material that is not in the supplied table,
-                        or to use values that are different than those in the table.
+                        You can use a material that is not in the supplied table, or specify values that
+                        differ from those in the table.
                         </li>
                         <li>
-                        It is possible to directly specify the allowable stresses to be used.
+                        You can directly specify the allowable stresses to be used.
                         </li>
                     </ol>
                     <p>
-                    The later two options eliminate the dependence on Wire_Dia.
+                    The later two options eliminate the dependence on <b> Wire_Dia</b>.
                     </p>
                     <br /><br />
                 </>
@@ -112,34 +111,32 @@ export const execute = {
                     </p>
 
                     <p>
-                    Take a moment to scroll down to the Calculation Inputs section.
-                    Locate Material_Type.
-                    Click on the downward pointing triangle to drop down the selection list.
+                    Scroll down to the Calculation Inputs section and locate <b>Material_Type</b>. 
+                    Click the downward pointing arrow (triangle) to drop down the selection list.
                     The on-line documentation (Help entry) on
                     &nbsp;<a href="/docs/Help/SpringDesign/materials.html" target="_blank" rel="noopener noreferrer">Spring Materials</a>&nbsp;
                     provides additional descriptive information on each of the entries in this table.
                     </p>
 
                     <p>
-                    Observe how selecting different materials changes the values of
-                    Torsion_Modulus, Tensile, %_Tensile_Stat and %_Tensile_Endur.
-                    Observe how changes in Wire_Dia impact the values of
-                    the allowable stresses Stress_Lim_Endur and Stress_Lim_Stat.
+                    Observe how selecting different materials changes the values of 
+                    <b> Torsion_Modulus</b>, <b>Tensile</b>, <b>%_Tensile_Stat</b>, and <b> %_Tensile_Endur</b>.
+                    Also observe how changes in <b>Wire_Dia</b> affect the allowable stresses 
+                    <b> Stress_Lim_Endur</b> and <b>Stress_Lim_Stat</b>.
                     </p>
 
                     <p>
-                    Now, look at the drop down for Life_Category.
-                    When a static Life_Category is selected, the values of
-                    %_Tensile_Stat and %_Tensile_Endur are identical.
-                    When a longer target life Life_Category is selected, the value of
-                    %_Tensile_Endur is reduced.
-                    In summary ... by default, Material_Type is used
-                    to get the values of Torsion_Modulus, Tensile,
-                    %_Tensile_Endur and %_Tensile_Stat from the material table.  These
-                    values are combined with the current Wire_Dia to calculate the values of
-                    the allowable stresses Stress_Lim_Endur and Stress_Lim_Stat.
-                    In turn, those allowable stress values are used to calculate the
-                    Factor of Safety numbers that can be used as constraints on the design.
+                    Next, look at the drop down for <b>Life_Category</b>. 
+                    When a static life category is selected, the values of 
+                    <b> %_Tensile_Stat</b> and <b>%_Tensile_Endur</b> are identical. 
+                    When a non-static target life is selected, the value of <b> %_Tensile_Endur</b> is reduced. 
+                    In summary, by default, <b>Material_Type</b> is used to obtain the values of 
+                    <b> Torsion_Modulus</b>, <b>Tensile</b>, <b>%_Tensile_Endur</b>, and <b> %_Tensile_Stat </b> 
+                    from the material table. 
+                    These values are combined with the current <b>Wire_Dia</b> to calculate 
+                    <b> Stress_Lim_Endur</b> and <b>Stress_Lim_Stat</b>.
+                    Those allowable stress values are then used to calculate the
+                    Factor of Safety values, which can be used as constraints on the design.
                     </p>
                 </>
             )
@@ -153,11 +150,12 @@ export const execute = {
                     </p>
 
                     <p>
-                    Notice that currently it it not possible to change any
-                    of the values that are determined by the materials table.
-                    Specifically, these include
-                    Torsion_Modulus, Tensile, %_Tensile_Endur, %_Tensile_Stat
-                    Stress_Lim_Endur and Stress_Lim_Stat.
+                    Notice that, in the default configuration 
+                    (<b>Prop_Calc_Method</b> = "1-Use values from material table"), 
+                    it is not possible to change any of the 
+                    values that are determined by the material table. Specifically, these include 
+                    <b> Torsion_Modulus</b>, <b>Tensile</b>, <b>%_Tensile_Endur</b>, 
+                    <b> %_Tensile_Stat</b>, <b>Stress_Lim_Endur</b>, and <b>Stress_Lim_Stat</b>. 
                     </p>
                     <br /><br />
                 </>
@@ -168,24 +166,25 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    For the case where there is a desire to specify a material that is
-                    not in the material table, or to specify values that do not match those in
-                    the table, change Prop_Calc_Method to indicate that the
-                    material table should no longer be used.
-                    Specifically, setting Prop_Calc_Method to <b>"2-Use Tensile & %_Tensile_..."</b>
-                    will allow the user to establish arbitrary values for
-                    Torsion_Modulus, Tensile, %_Tensile_Endur and %_Tensile_Stat.
-                    Wire_Dia will no longer be a factor in the calculation of allowable stresses
-                    Stress_Lim_Endur and Stress_Lim_Stat.
+                    When you need to specify a material that is not in the material table, or to use values
+                    that do not match those in the table, change <b>Prop_Calc_Method</b> to
+                    indicate that the material table should no longer be used. 
+                    Specifically, setting 
+                    <b> Prop_Calc_Method</b> to <b>“2-Use Tensile &amp; %_Tensile_...”</b> 
+                    allows you to establish arbitrary values for 
+                    <b> Torsion_Modulus</b>, <b>Tensile</b>, <b>%_Tensile_Endur</b>, and <b>%_Tensile_Stat</b>. 
+                    In this mode, <b> Wire_Dia</b> is no longer a factor in the calculation of allowable stresses 
+                    <b> Stress_Lim_Endur</b> and <b>Stress_Lim_Stat</b>. 
                     </p>
 
                     <p>
                     Please take this opportunity to change the value of
                     Prop_Calc_Method to "2-Use Tensile & %_Tensile_...".
-                    Experiment with changing the values listed above.
-                    Observe that Stress_Lim_Endur and Stress_Lim_Stat are now determined by the
-                    user specified values of Tensile, %_Tensile_Endur and %_Tensile_Stat
-                    and are no longer dependent on Wire_Dia.
+                    Then experiment with changing the values listed above.
+                    Observe that <b>Stress_Lim_Endur</b> and <b> Stress_Lim_Stat </b> 
+                    are now determined by the user specified values of 
+                    <b> Tensile</b>, <b>%_Tensile_Endur</b>, and <b>%_Tensile_Stat</b>,
+                    and are no longer dependent on <b>Wire_Dia</b>.
                     </p>
                     <br />
                 </>
@@ -196,24 +195,24 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Finally, the user may directly establish values of the allowable stresses.
-                    This is accomplished by changing the value of Prop_Calc_Method to
+                    Finally, you may choose to directly specify the allowable stresses themselves.
+                    This is accomplished by changing the value of <b>Prop_Calc_Method</b> to
                     <b> "3-Use Stress_Lim_..."</b>.
                     </p>
 
                     <p>
-                    In the case that Prop_Calc_Method is set to "3-Use Stress_Lim_..."
-                    ODOP:Spring will assume that the allowable stresses
-                    (Stress_Lim_Endur and Stress_Lim_Stat) are directly set by the user.
-                    There is no relationship to Wire_Dia.
+                    When <b>Prop_Calc_Method</b> is set to "3-Use Stress_Lim_..."
+                    ODOP:Spring assumes that the allowable stresses
+                    (<b>Stress_Lim_Endur</b> and <b>Stress_Lim_Stat</b>) are set directly by the user.
+                    In this case, there is no relationship between allowable stress and <b>Wire_Dia</b>.
                     </p>
 
                     <p>
                     Please take this opportunity to change the value of
                     Prop_Calc_Method to "3-Use Stress_Lim_...".
-                    Experiment with changing the values listed above.
-                    Observe that Stress_Lim_Endur and Stress_Lim_Stat are now directly determined by the
-                    user specified values and are no longer dependent on Wire_Dia.
+                    Then experiment with changing the allowable stress values.
+                    Observe that <b>Stress_Lim_Endur</b> and <b> Stress_Lim_Stat</b> are now directly 
+                    determined by the user-specified values and are no longer dependent on <b>Wire_Dia</b>.
                     </p>
                     <br />
                 </>
@@ -224,33 +223,33 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    It is time to move on to a discussion of End_Types
+                    It is time to move on to a discussion of <b>End_Type</b>
                     </p>
 
                     <p>
-                    Locate End_Type.
-                    Click to drop down the selection list.
-                    Make a few changes and observe the effect on
-                    the number of inactive coils.  Of course, changes in the number
-                    of active coils changes Rate and many other aspects of the spring.
+                    Locate <b>End_Type</b>.
+                    Open the selection list and make a few changes. 
+                    Observe the effect on the number of inactive coils.  
+                    Changes in the number of active coils changes <b>Rate </b> 
+                    and many other aspects of the design.
                     </p>
 
                     <p>
-                    Note the "Tapered, Closed & Ground" and "Pigtail" end types that
+                    Note the "Tapered, Closed &amp; Ground" and "Pigtail" end types that
                     are common in hot-wound springs.
                     Refer to the discussion in the on-line documentation (Help entry) on
                     &nbsp;<a href="/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes" target="_blank" rel="noopener noreferrer">Compression Spring End Types</a>&nbsp;
-                    for information on Grind_Amount, Taper_Amount and the
-                    calculation of solid height for these end types.
+                    for information on <b>Grind_Amount</b>, <b>Taper_Amount</b>, 
+                    and the calculation of solid height for these end types.
                     </p>
 
                     <p>
-                    Note the "UserSpecified" and "UserSpecified&Ground" end types.
-                    These entrries are provided in order to accommodate unusual end configurations
+                    Note the "UserSpecified" and "UserSpecified&Ground" end types. 
+                    These entries are provided in order to accommodate unusual end configurations 
                     (for example, a spring with extra dead coils or with two different end types). 
-                    The designer can provide custom values for Inactive_Coils, 
-                    Grind_Amount and Taper_Amount.
-                    Additional information is available in the same on-line documentation section for
+                    The designer can provide custom values for 
+                    <b> Inactive_Coils</b>, <b>Grind_Amount</b>, and <b>Taper_Amount</b>. 
+                    Additional information is available in the same on-line documentation section for 
                     the Compression Spring design type.
                     </p>
                 </>
@@ -262,13 +261,12 @@ export const execute = {
                 <>
                     <p>
                     Congratulations, you've finished another section of the tutorial.
-                    You should feel confident about selecting materials and changing
-                    end types.
+                    You should now feel confident about selecting materials and changing end types.
                     Take a few minutes at this point to experiment on your own.
                     </p>
 
                     <p>
-                    Also, look in the on-line documentation section (Help entry) titled
+                    You may also want to review the on-line documentation (Help entry) titled
                     &nbsp;<a href="/docs/Help/SpringDesign/materials.html" target="_blank" rel="noopener noreferrer">Spring Materials</a>.&nbsp;
                     </p>
 
