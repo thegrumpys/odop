@@ -173,7 +173,7 @@ Stress_Lim_Stat  |      | allowable stress limit; static application (torsion)
 End_Type       |        | character string that is used to determine calculations for Inactive_Coils, L_Solid and Pitch;  See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes)
 Inactive_Coils |        | number of inactive coils (depends on End_Type) 
 Grind_Amount   |        | number of wire diameters removed by a grinding operation;  See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes) 
-Taper_Amount   |        | number of wire diameters removed by a tapering operation on the first and last coil(s) of a hot-wound compression spring
+Taper_Amount   |        | the solid height reduction, measured in wire diameters, created by a tapering operation on the first and last coil(s) of a hot-wound compression spring.
 Catalog_Name   |        | name of the catalog containing the most recently selected catalog entry 
 Catalog_Number |        | catalog number of the most recent catalog entry 
 
@@ -238,24 +238,25 @@ ___
 
 ## Compression Spring End Types 
 
-ODOP:Spring currently implements ten spring end types for compression springs. 
-In addition, the user can define specialized end conditions. 
+The current version of ODOP:Spring implements twelve compression spring end types 
+(two of those are user customizable alternatives). 
 For compression springs, the Calculation Input End\_Type has the following possible values: 
 
 &nbsp;| Compression spring end types 
- --- | ---         
-1    | Open      
-2    | Open&Ground    
-3    | Closed  
-4    | Closed&Ground   
-5    | DoubleClosed  
-6    | DoubleClosed&Ground  
-7    | TaperedClosed  
-8    | TaperedClosed&Ground  
-9    | PigtailClosed  
-10   | PigtailClosed&Ground 
-11   | UserSpecified  
-12   | UserSpecified&Ground 
+ ---  | ---         
+1     | Open      
+2     | Open&Ground    
+3     | Closed  
+4     | Closed&Ground   
+5     | DoubleClosed  
+6     | DoubleClosed&Ground  
+7     | TaperedClosed  
+8     | TaperedClosed&Ground  
+9     | PigtailClosed  
+10    | PigtailClosed&Ground 
+&nbsp;| 
+11    | UserSpecified  
+12    | UserSpecified&Ground 
 
 For a compression spring, the end type selection directly impacts the value of
 Inactive\_Coils plus Grind\_Amount and/or Taper\_Amount as appropriate. 
@@ -264,8 +265,8 @@ L\_Solid, Pitch and other variables are impacted indirectly.
 <!--- Additional information may be found in the documentation sections for EQNSET.  -->
 
 When End\_Type is set to one of the standard (non UserSpecified) selections, 
-Inactive\_Coils, Grind\_Amount and Taper\_Amount will be set by the 
-program from values contained in an internal table. 
+Inactive\_Coils, Grind\_Amount and Taper\_Amount will be set by ODOP from 
+values contained in an internal table. 
 When the value of End\_Type is UserSpecified (UserSpecified&Ground), 
 the user may set these values by making an entry in the corresponding 
 numeric entry field. 
@@ -273,21 +274,29 @@ numeric entry field.
 #### Grind\_Amount, Taper\_Amount 
 In order to facilitate the treatment of less common compression spring end 
 types such as the "Tapered, Closed and Ground" configuration associated with 
-hot-wound springs, ODOP:Spring has added extra terms into the solid height 
-calculation. 
+hot-wound springs, ODOP:Spring has added extra terms into the solid height calculation. 
 Grind\_Amount and Taper\_Amount are Calculation Inputs that are normally 
 determined by the value of End\_Type. 
 They are used to separate the solid height calculation from the rate equation 
 which is dependent on the value of Inactive\_Coils. 
 Grind\_Amount is the number of wire diameters removed by a grinding operation. 
-Taper\_Amount is the number of wire diameters removed by a tapering operation 
-on the first and last coil(s) of a hot-wound compression spring.
-For the TaperedClosed&Ground end type, Grind\_Amount and Taper\_Amount each 
-have a value of 0.5.  
+Taper\_Amount is the solid height reduction, measured in wire diameters,
+created by a tapering operation on the first and last coil(s) of a 
+hot-wound compression spring.
 
-Note that the Grind\_Amount and Taper\_Amount terms are not included in Coils\_T 
-or the wire length and weight calculations. 
-They are only an adjustment for the solid height calculation and must be used with 
+The terminology here can be prone to mis-interpretation. 
+The "tapered" end type has no connection to a conical (non-cylindric) shaped coil.
+
+For the TaperedClosed&Ground end type, Grind\_Amount and Taper\_Amount each 
+have a value of 0.5. 
+This value implies that 25% of a wire diameter is removed from each end of the 
+spring by the grinding operation. 
+In addition, the solid height is reduced by 25% of a wire diameter on each end 
+by the tapering operation. 
+
+Note that the Grind\_Amount and Taper\_Amount terms are not included in the wire length 
+and weight calculations. 
+These values are only an adjustment for the solid height calculation and must be used with 
 Inactive\_Coils to represent 
 [Dead Coils](/docs/Help/DesignTypes/Spring/Compression/description.html#deadCoils). 
 
