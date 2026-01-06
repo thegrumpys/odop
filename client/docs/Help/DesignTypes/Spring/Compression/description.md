@@ -1,8 +1,8 @@
 # Compression Spring Design Type
 ![Compression spring image](/docs/Help/DesignTypes/Spring/img/SpringCompression_.png "Compression spring image") 
 
-The Compression Spring design type is a full-featured mathematical model enabling 
-the engineering design of round wire helical coil compression springs. 
+The Compression Spring design type is a full-featured mathematical model for engineering round-wire 
+helical coil compression springs.  
 
 This section presents material unique to the Compression Spring design type. 
 The more general material available at [Spring Design Topics](/docs/Help/SpringDesign/index.html) 
@@ -79,7 +79,7 @@ ___
 
 ## Compression spring Force-Deflection point names 
 
- The compression spring Force-Deflection points and associated names are: 
+ The compression spring force-deflection points and their associated names are: 
  &nbsp;           | length  | force       | outside diameter | inside diameter | stress       | factor of safety 
  ---              | ---     | ---         | ---              |  ---            | ---          |  ---             
 **free:**         | L_Free  |             | OD_Free          | ID_Free         |              |                  
@@ -87,7 +87,7 @@ ___
 **point&nbsp;2:** | L_2     | Force_2     |                  |                 | Stress_2     | FS_2             
 **solid:**        | L_Solid | Force_Solid |                  |                 | Stress_Solid | FS_Solid         
 
-**point 1** = minimum operating load &nbsp; &nbsp; **point 2** = maximum operating load 
+**point 1** – minimum operating load &nbsp; &nbsp; **point 2** – maximum operating load 
 
 &nbsp;
    
@@ -127,7 +127,7 @@ L_1          |        | spring length at minimum operating load  (Force_1)
 L_2          |        | spring length at maximum operating load  (Force_2) 
 L_Stroke     |        | net deflection between point 1 and point 2 
 L_Solid      |        | solid height 
-Slenderness  |        | ratio of L_Free to Mean_Dia.  The "form factor" that governs a spring's tendency to buckle 
+Slenderness  |        | ratio of L_Free to Mean_Dia.  This "form factor" governs a spring's tendency to buckle 
 ID_Free      |        | inside  diameter in free condition 
 Weight       |        | weight of spring; wire density * wire volume 
 Spring_Index |        | spring index;  the ratio Mean_Dia/Wire_Dia 
@@ -137,7 +137,7 @@ Stress_2     |        | torsional stress at point 2
 Stress_Solid |        | torsional stress in the solid condition 
 FS_2         |        | static factor of safety at point 2.  This is the ratio of allowable stress to the calculated stress induced by the load at point 2  (Stress_Lim_Stat/Stress_2). 
 FS_Solid     |        | static factor of safety at solid condition  (Stress_Lim_Stat/Stress_Solid) 
-FS_CycleLife |        | factor of safety based on the Soderberg endurance limit calculation.  This figure uses the allowable endurance stress (Stress_Lim_Endur) to include fatigue considerations. Refer to additional discussion in the [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) topic. 
+FS_CycleLife |        | factor of safety based on the Soderberg endurance limit calculation.  It uses the allowable endurance stress (Stress_Lim_Endur) to account for fatigue effects. Refer to additional discussion in the [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) topic. 
 Cycle_Life   |        | expected cycle life based on a calculation using the "modified Goodman method".  This value is approximate.  Refer to additional discussion in the  [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) topic. 
 %_Avail_Deflect |     | the percentage of available deflection consumed at load point 2. 
 Energy       |        | change in elastic potential energy between point 1 and point 2. 
@@ -212,14 +212,12 @@ ___
 ## Constraints unique to compression springs:    
 
 #### Slenderness 
-Slenderness is a compression spring's ratio of free length (L\_Free) to 
-mean coil diameter (Mean\_Dia). 
-If this ratio exceeds 4 for a compression spring, that spring will have a 
+Slenderness is the ratio of free length (L\_Free) to mean coil diameter (Mean\_Dia). 
+When this ratio exceeds about 4 for a compression spring, that spring will have a 
 tendency to buckle under load. 
-In that case, the spring will usually need support in the form of 
-a sleeve or post. 
-In order to restrain the search to select designs that do not have a tendency to buckle, 
-set the value of Slenderness MAX to a value of 4.0 or less. 
+In that case, the spring will usually need support in the form of a sleeve or post. 
+To restrict the search to designs that are unlikely to buckle, 
+set the Slenderness MAX constraint to a value of 4.0 or less. 
 
 For additional information, see: [Buckling](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springBuckling) 
 
@@ -258,9 +256,9 @@ For compression springs, the Calculation Input End\_Type has the following possi
 11    | UserSpecified  
 12    | UserSpecified&Ground 
 
-For a compression spring, the end type selection directly impacts the value of
-Inactive\_Coils plus Grind\_Amount and/or Taper\_Amount as appropriate. 
-L\_Solid, Pitch and other variables are impacted indirectly. 
+For a compression spring, the end type selection directly determines the value of
+Inactive\_Coils and, when applicable, Grind\_Amount and/or Taper\_Amount. 
+L\_Solid, Pitch and other variables are then affected indirectly. 
 
 <!--- Additional information may be found in the documentation sections for EQNSET.  -->
 
@@ -284,8 +282,9 @@ Taper\_Amount is the solid height reduction, measured in wire diameters,
 created by a tapering operation on the first and last coil(s) of a 
 hot-wound compression spring.
 
-The terminology here can be prone to mis-interpretation. 
-The "tapered" end type has no connection to a conical (non-cylindric) shaped coil.
+The terminology here can be misinterpreted. 
+The “tapered” end type does not refer to a conical (non-cylindrical) spring; 
+it refers only to local tapering of the end coil's Wire\_Dia to reduce solid height.
 
 For the TaperedClosed&Ground end type, Grind\_Amount and Taper\_Amount each 
 have a value of 0.5. 
@@ -366,9 +365,9 @@ For designs with a greater Slenderness ratio, lateral support is usually
 provided by operation in a sleeve or over a post. 
 
 
-                     free length          L_Free
-    Slenderness = ----------------  =  -------------
-                    coil diameter        Mean_Dia
+                     free length  
+    Slenderness = ----------------  =  L_Free / Mean_Dia 
+                    coil diameter  
 
 The constraint Slenderness MAX can be used to restrict the search to 
 designs that will not tend to buckle. 
@@ -376,8 +375,7 @@ Note that Slenderness is not constrained in the default startup design.
 Thus, unless this constraint is established, 
 a search may produce designs that are subject to buckling. 
 
-The Report tabs will provide an indication as to the possibility of 
-bucking for each specific design and loading condition. 
+The Report tabs indicate the likelihood of bucking for each specific design and loading condition. 
 Both the fixed-free and fixed-fixed end conditions are covered.
 
 More precise treatments of this subject are available in the resources listed 
@@ -398,12 +396,11 @@ This improves cycle life at the cost of a secondary operation during manufacturi
 The Calculation Input **Life_Category** allows the user to specify that the 
 spring will be shot peened.  
 
-Selecting a non-default Life_Category that describes a shot peened spring in a 
-cyclic application works with the built-in materials table to select a value for 
-Stress_Lim_Endur.
+Selecting a non-default Life_Category that describes a shot peened spring in 
+cyclic service works with the built-in materials table to choose a value for Stress_Lim_Endur. 
 As described in [Cycle Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife), 
-to get the desired impact on the final spring design, 
-it is important to also enable the constraint on **FS_CycleLife**.
+to realize the desired impact of shot peening on the final spring design, 
+you should also enable the minimum constraint on **FS_CycleLife**.
 
 See also: 
  - [Cycle Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
