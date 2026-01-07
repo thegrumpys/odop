@@ -113,7 +113,7 @@ FS_Solid     |        | static factor of safety at solid condition  `(Stress_Lim
 FS_CycleLife |        | factor of safety based on the Soderberg endurance limit calculation.  It uses the allowable endurance stress (Stress_Lim_Endur) to account for fatigue effects. Refer to additional discussion in the [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) topic. 
 Cycle_Life   |        | expected cycle life based on a calculation using the "modified Goodman method".  This value is approximate.  Refer to additional discussion in the  [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) topic. 
 %_Avail_Deflect |     | the percentage of available deflection consumed at load point 2. 
-Energy       |        | change in elastic potential energy between point 1 and point 2. 
+Energy       |        | change in elastic potential energy between point 1 and point 2.  
 
 &nbsp; 
 
@@ -128,13 +128,13 @@ Name           | &nbsp; | Description
  ---           | ---    | ---         
 Spring_Type    |        | character string used only as a label 
 Prop_Calc_Method |      | Property Calculation Method controls how material properties and allowable stresses are determined. See also: [Materials](/docs/Help/SpringDesign/materials.html). 
-&nbsp;           |      | **1** - indicates values come from materials table; allowable stresses will be calculated as a function of Wire_Dia. 
+&nbsp;           |      | **1** - indicates values come from materials table; allowable stresses will be calculated as a function of `Wire_Dia`. 
 &nbsp;           |      | **2** - indicates tensile and allowable % are supplied by the user; allowable stresses are calculated. 
 &nbsp;           |      | **3** - indicates allowable stresses are supplied directly by the user. 
-Material_Type  |        | selects an entry in the material table. Is used to determine allowable stresses when Prop_Calc_Method is 1. Otherwise is ignored. 
+Material_Type  |        | selects an entry in the material table. Is used to determine allowable stresses when `Prop_Calc_Method` is 1. Otherwise is ignored. 
 ASTM/Fed-Spec  |        | character string used only as a label to further identify the origin of material property data 
-Process        |        | character string used to identify the manufacturing process.  It is normally controlled by the material selected from the material table. Values are usually Cold_Coiled or Hot_Wound. See also: Hot_Factor_Kh (below). 
-Life_Category  |        | This value reflects the user's input about shot peening and required cycle life. It is input to the calculation of FS_CycleLife. See also: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) 
+Process        |        | character string used to identify the manufacturing process.  It is normally controlled by the material selected from the material table. Values are usually `Cold_Coiled` or `Hot_Wound`. See also: `Hot_Factor_Kh` (below). 
+Life_Category  |        | This value reflects the user's input about shot peening and required cycle life. It is input to the calculation of `FS_CycleLife`. See also: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) 
 Density        |        | wire density; weight per unit volume 
 Torsion_Modulus|        | torsional modulus (G); a.k.a. shear modulus or modulus of rigidity 
 Hot_Factor_Kh  |        | empirical correction factor applied to hot wound modulus 
@@ -143,9 +143,9 @@ Tensile        |        | tensile strength
 %_Tensile_Stat |        | allowable fraction of tensile strength for torsion static load 
 Stress_Lim_Endur |      | allowable stress limit; cyclic application (torsion) 
 Stress_Lim_Stat  |      | allowable stress limit; static application (torsion) 
-End_Type       |        | character string that is used to determine calculations for Inactive_Coils, L_Solid and Pitch;  See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes)
-Inactive_Coils |        | number of inactive coils (depends on End_Type) 
-Grind_Amount   |        | number of wire diameters removed by a grinding operation;  See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes) 
+End_Type       |        | character string that is used to determine values for `Inactive_Coils`, `L_Solid` and `Pitch`;  See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes)
+Inactive_Coils |        | number of inactive coils <br/> (depends on `End_Type`) 
+Grind_Amount   |        | number of wire diameters removed by a grinding operation; <br/> See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes) 
 Taper_Amount   |        | the solid height reduction, measured in wire diameters, created by a tapering operation on the wire diameter of the first and last coil(s) of a hot-wound compression spring.
 Catalog_Name   |        | name of the catalog containing the most recently selected catalog entry 
 Catalog_Number |        | catalog number of the most recent catalog entry 
@@ -167,13 +167,13 @@ Other values calculated and displayed in the Reports include:
 Name           | &nbsp; | Description  
  ---           | ---    | ---         
 Wire&nbsp;Length |      | total length of wire required to manufacture the spring, not including any waste 
-Safe Load      |        | The load supported by the spring in the solid condition or at a stress equal to the Stress_Lim_Stat value, whichever is lower. 
+Safe Load      |        | The load supported by the spring in the solid condition or at a stress equal to the `Stress_Lim_Stat` value, whichever is lower. 
 Pitch          |        | distance between the wire centers of adjacent coils, measured in the free state 
 Weight         |        | weight of 1,000 springs 
 Buckling       |        | indication of tendency to buckle given the current design and loading conditions 
-Stress Ratio   |        | ratio of minimum stress to maximum stress (Stress_1/Stress_2) 
+Stress Ratio   |        | ratio of minimum stress to maximum stress `(Stress_1/Stress_2)` 
 Kw1, Kw2       |        | stress correction factors due to curvature 
-Helix Angle    |        | angle, in degrees, of the spring helix relative to a perpendicular to the spring axis 
+Helix Angle    |        | angle, in degrees, of the spring helix relative to a perpendicular to the spring axis  
 
 &nbsp;
 
@@ -213,25 +213,25 @@ The current version of ODOP:Spring implements twelve compression spring end type
 (two of those are user customizable alternatives). 
 For compression springs, the Calculation Input `End_Type` has the following possible values: 
 
-&nbsp;| Compression spring end types 
- ---  | ---         
-1     | Open      
-2     | Open&Ground    
-3     | Closed  
-4     | Closed&Ground   
-5     | DoubleClosed  
-6     | DoubleClosed&Ground  
-7     | TaperedClosed  
-8     | TaperedClosed&Ground  
-9     | PigtailClosed  
-10    | PigtailClosed&Ground 
-&nbsp;| 
-11    | UserSpecified  
-12    | UserSpecified&Ground 
+&nbsp;| &nbsp; |Compression spring end types 
+ ---  | ---    | ---         
+1     | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | Open      
+2     | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | Open&Ground    
+3     | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | Closed  
+4     | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | Closed&Ground   
+5     | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | DoubleClosed  
+6     | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | DoubleClosed&Ground  
+7     | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | TaperedClosed  
+8     | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | TaperedClosed&Ground  
+9     | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | PigtailClosed  
+10    | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | PigtailClosed&Ground 
+&nbsp;|        | 
+11    |        | UserSpecified  
+12    |        | UserSpecified&Ground 
 
 For a compression spring, the end type selection directly determines the value of
 `Inactive_Coils` and, when applicable, `Grind_Amount` and/or `Taper_Amount`. 
-`L_Solid`, `Pitch` and other variables are then affected indirectly. 
+`L_Solid`, `Pitch` and other variables are then affected indirectly.  
 
 <!--- Additional information may be found in the documentation sections for EQNSET.  -->
 
@@ -274,7 +274,7 @@ The `Grind_Amount` and `Taper_Amount` terms may be used with `Inactive_Coils` to
 unusual end configurations. 
 For example, springs that have a different end type at each end. 
 To establish the value of `Inactive_Coils` or `Grind_Amount` or `Taper_Amount` directly, 
-first select a value of UserSpecified (UserSpecified&Ground) for `End_Type`.  
+first select a value of `UserSpecified` (`UserSpecified&Ground)` for `End_Type`.  
 
 &nbsp; 
 
