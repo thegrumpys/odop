@@ -71,6 +71,8 @@ ___
 
 ## Independent Variable Names: 
 
+*Click on a thumbnail image to see a larger version of that image.  Use the browser "Back" button in order to return to this page.*  
+
 Name | <span style="font-weight: normal; font-size: 0.85em; display:block; text-align:center;">Thumbnail <br/> Image</span> | Description  
 --- | :---: | ---         
 Wire_Dia | [<img src="/designtypes/Spring/Compression/tooltips/Wire_Dia.png" alt="Wire_Dia" title="Wire_Dia" style="display:block; margin:0 auto; width:33%;">](/designtypes/Spring/Compression/tooltips/Wire_Dia_lg.png "Wire_Dia") | wire diameter 
@@ -91,7 +93,7 @@ ___
 
 Name         | <span style="font-weight: normal; font-size: 0.85em;">Thumbnail <br/> Image</span> | Description  
  ---         | ---    | ---         
-Mean_Dia     | [<img src="/designtypes/Spring/Compression/tooltips/Mean_Dia.png"  alt="Mean_Dia"  title="Mean_Dia"  width="85%">](/designtypes/Spring/Compression/tooltips/Mean_Dia_lg.png  "Mean_Dia")  | mean diameter of spring coil in free condition <br/>`(OD_Free + ID_Free)/2` 
+Mean_Dia     | [<img src="/designtypes/Spring/Compression/tooltips/Mean_Dia.png"  alt="Mean_Dia"  title="Mean_Dia"  width="85%">](/designtypes/Spring/Compression/tooltips/Mean_Dia_lg.png  "Mean_Dia")  | mean diameter of spring coil in free condition <br/>Also: `(OD_Free + ID_Free)/2` 
 Coils_A      |        | number of active coils (turns) 
 Rate         | [<img src="/designtypes/Spring/Compression/tooltips/Rate.png"      alt="Rate"      title="Rate"     >](/designtypes/Spring/Compression/tooltips/Rate_lg.png      "Rate")      | spring constant - force per unit deflection 
 Deflect_1    | [<img src="/designtypes/Spring/Compression/tooltips/Deflect_1.png" alt="Deflect_1" title="Deflect_1">](/designtypes/Spring/Compression/tooltips/Deflect_1_lg.png "Deflect_1") | deflection at `Force_1` 
@@ -100,11 +102,11 @@ L_1          | [<img src="/designtypes/Spring/Compression/tooltips/L_1.png"     
 L_2          | [<img src="/designtypes/Spring/Compression/tooltips/L_2.png"       alt="L_2"       title="L_2">](/designtypes/Spring/Compression/tooltips/L_2_lg.png       "L_2")       | spring length at maximum operating load  (`Force_2`) 
 L_Stroke     | [<img src="/designtypes/Spring/Compression/tooltips/L_Stroke.png"  alt="L_Stroke"  title="L_Stroke" >](/designtypes/Spring/Compression/tooltips/L_Stroke_lg.png  "L_Stroke")  | net deflection between point 1 and point 2 
 L_Solid      | [<img src="/designtypes/Spring/Compression/tooltips/L_Solid.png"   alt="L_Solid"   title="L_Solid"  >](/designtypes/Spring/Compression/tooltips/L_Solid_lg.png "L_Solid")     | solid height 
-Slenderness  |        | ratio of `L_Free` to `Mean_Dia`.  This "form factor" governs a spring's tendency to buckle 
+Slenderness  |        | ratio of `L_Free` to `Mean_Dia`. <br/> This "form factor" governs a spring's tendency to buckle 
 ID_Free      | [<img src="/designtypes/Spring/Compression/tooltips/ID_Free.png"   alt="ID_Free"   title="ID_Free"  >](/designtypes/Spring/Compression/tooltips/ID_Free_lg.png "ID_Free")     | inside diameter in free condition 
-Weight       | [<img src="/designtypes/Spring/Compression/tooltips/Weight.png" alt="Weight" title="Weight">](/designtypes/Spring/Compression/tooltips/Weight_lg.png "Weight") | weight of spring; wire density * wire volume 
-Spring_Index |        | spring index;  the ratio `Mean_Dia/Wire_Dia` 
-Force_Solid  | [<img src="/designtypes/Spring/Compression/tooltips/Force_Solid.png" alt="Force_Solid" title="Force_Solid">](/designtypes/Spring/Compression/tooltips/Force_Solid_lg.png "Force_Solid") | force produced in solid condition 
+Weight       | [<img src="/designtypes/Spring/Compression/tooltips/Weight.png" alt="Weight" title="Weight">](/designtypes/Spring/Compression/tooltips/Weight_lg.png "Weight") | weight of spring <br/> wire density * wire volume 
+Spring_Index |        | spring index <br/> the ratio: `Mean_Dia/Wire_Dia` 
+Force_Solid  | [<img src="/designtypes/Spring/Compression/tooltips/Force_Solid.png" alt="Force_Solid" title="Force_Solid">](/designtypes/Spring/Compression/tooltips/Force_Solid_lg.png "Force_Solid") | force produced in the solid condition 
 Stress_1     |        | torsional stress at point 1 
 Stress_2     |        | torsional stress at point 2 
 Stress_Solid |        | torsional stress in the solid condition 
@@ -168,7 +170,7 @@ Name           | &nbsp; | Description
  ---           | ---    | ---         
 Wire&nbsp;Length |      | total length of wire required to manufacture the spring, not including any waste 
 Safe Load      |        | The load supported by the spring in the solid condition or at a stress equal to the `Stress_Lim_Stat` value, whichever is lower. 
-Pitch          |        | distance between the wire centers of adjacent coils, measured in the free state 
+Pitch          |        | distance between the wire centers of adjacent body coils, measured in the free state 
 Weight         |        | weight of 1,000 springs 
 Buckling       |        | indication of tendency to buckle given the current design and loading conditions 
 Stress Ratio   |        | ratio of minimum stress to maximum stress `(Stress_1/Stress_2)` 
@@ -213,21 +215,23 @@ The current version of ODOP:Spring implements twelve compression spring end type
 (two of those are user customizable alternatives). 
 For compression springs, the Calculation Input `End_Type` has the following possible values: 
 
-&nbsp;| &nbsp; |Compression spring end types 
- ---  | ---    | ---         
-1     | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringOpenEnd.png" alt="C_SpringOpenEnd" title="C_SpringOpenEnd" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringOpenEnd_lg.png "C_SpringOpenEnd") | Open      
-2     | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringOpenGndEnd.png" alt="C_SpringOpenGndEnd" title="C_SpringOpenGndEnd" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringOpenGndEnd_lg.png "C_SpringOpenGndEnd") | Open&Ground    
-3     | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringClosedEnd.png" alt="C_SpringClosedEnd" title="C_SpringClosedEnd" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringClosedEnd_lg.png "C_SpringClosedEnd") | Closed  
-4     | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringClosedGndEnd.png" alt="C_SpringClosedGndEnd" title="C_SpringClosedGndEnd" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringClosedGndEnd_lg.png "C_SpringClosedGndEnd") | Closed&Ground   
-5     | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | DoubleClosed  
-6     | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | DoubleClosed&Ground  
-7     | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | TaperedClosed  
-8     | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | TaperedClosed&Ground  
-9     | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | PigtailClosed  
-10    | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" width="25%">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | PigtailClosed&Ground 
-&nbsp;|        | 
-11    |        | UserSpecified  
-12    |        | UserSpecified&Ground 
+*Click on a thumbnail image to see a larger version of that image.  Use the browser "Back" button in order to return to this page.*  
+
+&nbsp; | <span style="font-weight: normal; font-size: 0.85em; display:block; text-align:center;">Thumbnail <br/> Image</span> | Compression spring end types
+--- | :---: | ---
+1 | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringOpenEnd.png" alt="C_SpringOpenEnd" title="C_SpringOpenEnd" style="display:block; margin:0 auto; width:25%;">](/designtypes/Spring/Compression/tooltips/C_SpringOpenEnd_lg.png "C_SpringOpenEnd") | Open
+2 | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringOpenGndEnd.png" alt="C_SpringOpenGndEnd" title="C_SpringOpenGndEnd" style="display:block; margin:0 auto; width:25%;">](/designtypes/Spring/Compression/tooltips/C_SpringOpenGndEnd_lg.png "C_SpringOpenGndEnd") | Open&Ground
+3 | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringClosedEnd.png" alt="C_SpringClosedEnd" title="C_SpringClosedEnd" style="display:block; margin:0 auto; width:25%;">](/designtypes/Spring/Compression/tooltips/C_SpringClosedEnd_lg.png "C_SpringClosedEnd") | Closed
+4 | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringClosedGndEnd.png" alt="C_SpringClosedGndEnd" title="C_SpringClosedGndEnd" style="display:block; margin:0 auto; width:25%;">](/designtypes/Spring/Compression/tooltips/C_SpringClosedGndEnd_lg.png "C_SpringClosedGndEnd") | Closed&Ground
+5 | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" style="display:block; margin:0 auto; width:25%;">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | DoubleClosed
+6 | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" style="display:block; margin:0 auto; width:25%;">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | DoubleClosed&Ground
+7 | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" style="display:block; margin:0 auto; width:25%;">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | TaperedClosed
+8 | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" style="display:block; margin:0 auto; width:25%;">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | TaperedClosed&Ground
+9 | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" style="display:block; margin:0 auto; width:25%;">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | PigtailClosed
+10 | [<img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" alt="C_SpringPlaceholder" title="C_SpringPlaceholder" style="display:block; margin:0 auto; width:25%;">](/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png "C_SpringPlaceholder") | PigtailClosed&Ground
+&nbsp; | &nbsp; | 
+11 | &nbsp; | UserSpecified
+12 | &nbsp; | UserSpecified&Ground
 
 For a compression spring, the end type selection directly determines the value of
 `Inactive_Coils` and, when applicable, `Grind_Amount` and/or `Taper_Amount`. 
