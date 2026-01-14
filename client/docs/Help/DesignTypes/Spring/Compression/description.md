@@ -71,14 +71,14 @@ ___
 
 ## Independent Variable Names: 
 
-Name     | &nbsp; | Description  
- ---     | ---    | ---         
+Name     | <span style="font-weight: normal; font-size: 0.85em;">Thumbnail <br/> Image</span> | Description  
+ ---     | :---:  | ---         
 Wire_Dia | [<img src="/designtypes/Spring/Compression/tooltips/Wire_Dia.png" alt="Wire_Dia" title="Wire_Dia" width="33%">](/designtypes/Spring/Compression/tooltips/Wire_Dia_lg.png "Wire_Dia") | wire diameter 
-OD_Free  | [<img src="/designtypes/Spring/Compression/tooltips/OD_Free.png"  alt="OD_Free"  title="OD_Free"  width="35%">](/designtypes/Spring/Compression/tooltips/OD_Free_lg.png  "OD_Free")  | outside diameter in the free condition 
+OD_Free  | [<img src="/designtypes/Spring/Compression/tooltips/OD_Free.png"  alt="OD_Free"  title="OD_Free"  width="33%">](/designtypes/Spring/Compression/tooltips/OD_Free_lg.png  "OD_Free")  | outside diameter in the free condition 
 Coils_T  | [<img src="/designtypes/Spring/Compression/tooltips/Coils_T.png"  alt="Coils_T"  title="Coils_T"  width="33%">](/designtypes/Spring/Compression/tooltips/Coils_T_lg.png  "Coils_T")  | total number of coils, <br/> including inactive coils 
 L_Free   | [<img src="/designtypes/Spring/Compression/tooltips/L_Free.png"   alt="L_Free"   title="L_Free"   width="33%">](/designtypes/Spring/Compression/tooltips/L_Free_lg.png   "L_Free")   | length in the free condition <br/> (free length) 
 Force_1  | [<img src="/designtypes/Spring/Compression/tooltips/Force_1.png"  alt="Force_1"  title="Force_1"  width="33%">](/designtypes/Spring/Compression/tooltips/Force_1_lg.png  "Force_1")  | load at point 1 <br/> (minimum operating load) 
-Force_2  | [<img src="/designtypes/Spring/Compression/tooltips/Force_1.png"  alt="Force_2"  title="Force_2"  width="33%">](/designtypes/Spring/Compression/tooltips/Force_2_lg.png   "Force_2") | load at point 2 <br/> (maximum operating load) 
+Force_2  | [<img src="/designtypes/Spring/Compression/tooltips/Force_1.png"  alt="Force_2"  title="Force_2"  width="33%">](/designtypes/Spring/Compression/tooltips/Force_2_lg.png  "Force_2")  | load at point 2 <br/> (maximum operating load) 
 
 &nbsp;
 
@@ -89,22 +89,22 @@ ___
 
 ## Dependent Variable Names:   
 
-Name         | &nbsp; | Description  
+Name         | <span style="font-weight: normal; font-size: 0.85em;">Thumbnail <br/> Image</span> | Description  
  ---         | ---    | ---         
-Mean_Dia     | [<img src="/designtypes/Spring/Compression/tooltips/Mean_Dia.png"  alt="Mean_Dia"  title="Mean_Dia"  width="100%">](/designtypes/Spring/Compression/tooltips/Mean_Dia_lg.png  "Mean_Dia")  | mean diameter of spring coil in free condition <br/>`(OD_Free + ID_Free)/2` 
+Mean_Dia     | [<img src="/designtypes/Spring/Compression/tooltips/Mean_Dia.png"  alt="Mean_Dia"  title="Mean_Dia"  width="85%">](/designtypes/Spring/Compression/tooltips/Mean_Dia_lg.png  "Mean_Dia")  | mean diameter of spring coil in free condition <br/>`(OD_Free + ID_Free)/2` 
 Coils_A      |        | number of active coils (turns) 
-Rate         | [<img src="/designtypes/Spring/Compression/tooltips/Rate.png"      alt="Rate"      title="Rate"      width="100%">](/designtypes/Spring/Compression/tooltips/Rate_lg.png      "Rate")      | spring constant - force per unit deflection 
-Deflect_1    | [<img src="/designtypes/Spring/Compression/tooltips/Deflect_1.png" alt="Deflect_1" title="Deflect_1" width="100%">](/designtypes/Spring/Compression/tooltips/Deflect_1_lg.png "Deflect_1") | deflection at `Force_1` 
-Deflect_2    | [<img src="/designtypes/Spring/Compression/tooltips/Deflect_2.png" alt="Deflect_2" title="Deflect_2" width="100%">](/designtypes/Spring/Compression/tooltips/Deflect_2_lg.png "Deflect_2") | deflection at `Force_2` 
-L_1          | [<img src="/designtypes/Spring/Compression/tooltips/L_1.png"       alt="L_1"       title="L_1"       width="100%">](/designtypes/Spring/Compression/tooltips/L_1_lg.png       "L_1")       | spring length at minimum operating load  (`Force_1`) 
-L_2          | [<img src="/designtypes/Spring/Compression/tooltips/L_2.png"       alt="L_2"       title="L_2"       width="100%">](/designtypes/Spring/Compression/tooltips/L_2_lg.png       "L_2")       | spring length at maximum operating load  (`Force_2`) 
-L_Stroke     | [<img src="/designtypes/Spring/Compression/tooltips/L_Stroke.png"  alt="L_Stroke"  title="L_Stroke"  width="100%">](/designtypes/Spring/Compression/tooltips/L_Stroke_lg.png  "L_Stroke")  | net deflection between point 1 and point 2 
-L_Solid      | [<img src="/designtypes/Spring/Compression/tooltips/L_Solid.png"   alt="L_Solid"   title="L_Solid"   width="100%">](/designtypes/Spring/Compression/tooltips/L_Solid_lg.png "L_Solid")     | solid height 
+Rate         | [<img src="/designtypes/Spring/Compression/tooltips/Rate.png"      alt="Rate"      title="Rate"     >](/designtypes/Spring/Compression/tooltips/Rate_lg.png      "Rate")      | spring constant - force per unit deflection 
+Deflect_1    | [<img src="/designtypes/Spring/Compression/tooltips/Deflect_1.png" alt="Deflect_1" title="Deflect_1">](/designtypes/Spring/Compression/tooltips/Deflect_1_lg.png "Deflect_1") | deflection at `Force_1` 
+Deflect_2    | [<img src="/designtypes/Spring/Compression/tooltips/Deflect_2.png" alt="Deflect_2" title="Deflect_2">](/designtypes/Spring/Compression/tooltips/Deflect_2_lg.png "Deflect_2") | deflection at `Force_2` 
+L_1          | [<img src="/designtypes/Spring/Compression/tooltips/L_1.png"       alt="L_1"       title="L_1"      >](/designtypes/Spring/Compression/tooltips/L_1_lg.png       "L_1")       | spring length at minimum operating load  (`Force_1`) 
+L_2          | [<img src="/designtypes/Spring/Compression/tooltips/L_2.png"       alt="L_2"       title="L_2">](/designtypes/Spring/Compression/tooltips/L_2_lg.png       "L_2")       | spring length at maximum operating load  (`Force_2`) 
+L_Stroke     | [<img src="/designtypes/Spring/Compression/tooltips/L_Stroke.png"  alt="L_Stroke"  title="L_Stroke" >](/designtypes/Spring/Compression/tooltips/L_Stroke_lg.png  "L_Stroke")  | net deflection between point 1 and point 2 
+L_Solid      | [<img src="/designtypes/Spring/Compression/tooltips/L_Solid.png"   alt="L_Solid"   title="L_Solid"  >](/designtypes/Spring/Compression/tooltips/L_Solid_lg.png "L_Solid")     | solid height 
 Slenderness  |        | ratio of `L_Free` to `Mean_Dia`.  This "form factor" governs a spring's tendency to buckle 
-ID_Free      | [<img src="/designtypes/Spring/Compression/tooltips/ID_Free.png"   alt="ID_Free"   title="ID_Free"   width="100%">](/designtypes/Spring/Compression/tooltips/ID_Free_lg.png "ID_Free")     | inside diameter in free condition 
-Weight       | [<img src="/designtypes/Spring/Compression/tooltips/Weight.png" alt="Weight" title="Weight" width="100%">](/designtypes/Spring/Compression/tooltips/Weight_lg.png "Weight") | weight of spring; wire density * wire volume 
+ID_Free      | [<img src="/designtypes/Spring/Compression/tooltips/ID_Free.png"   alt="ID_Free"   title="ID_Free"  >](/designtypes/Spring/Compression/tooltips/ID_Free_lg.png "ID_Free")     | inside diameter in free condition 
+Weight       | [<img src="/designtypes/Spring/Compression/tooltips/Weight.png" alt="Weight" title="Weight">](/designtypes/Spring/Compression/tooltips/Weight_lg.png "Weight") | weight of spring; wire density * wire volume 
 Spring_Index |        | spring index;  the ratio `Mean_Dia/Wire_Dia` 
-Force_Solid  | [<img src="/designtypes/Spring/Compression/tooltips/Force_Solid.png" alt="Force_Solid" title="Force_Solid" width="100%">](/designtypes/Spring/Compression/tooltips/Force_Solid_lg.png "Force_Solid") | force produced in solid condition 
+Force_Solid  | [<img src="/designtypes/Spring/Compression/tooltips/Force_Solid.png" alt="Force_Solid" title="Force_Solid">](/designtypes/Spring/Compression/tooltips/Force_Solid_lg.png "Force_Solid") | force produced in solid condition 
 Stress_1     |        | torsional stress at point 1 
 Stress_2     |        | torsional stress at point 2 
 Stress_Solid |        | torsional stress in the solid condition 
