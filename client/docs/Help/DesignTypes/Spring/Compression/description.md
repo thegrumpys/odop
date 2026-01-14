@@ -71,14 +71,14 @@ ___
 
 ## Independent Variable Names: 
 
-Name     | <span style="font-weight: normal; font-size: 0.85em;">Thumbnail <br/> Image</span> | Description  
- ---     | :---:  | ---         
-Wire_Dia | [<img src="/designtypes/Spring/Compression/tooltips/Wire_Dia.png" alt="Wire_Dia" title="Wire_Dia" width="33%">](/designtypes/Spring/Compression/tooltips/Wire_Dia_lg.png "Wire_Dia") | wire diameter 
-OD_Free  | [<img src="/designtypes/Spring/Compression/tooltips/OD_Free.png"  alt="OD_Free"  title="OD_Free"  width="33%">](/designtypes/Spring/Compression/tooltips/OD_Free_lg.png  "OD_Free")  | outside diameter in the free condition 
-Coils_T  | [<img src="/designtypes/Spring/Compression/tooltips/Coils_T.png"  alt="Coils_T"  title="Coils_T"  width="33%">](/designtypes/Spring/Compression/tooltips/Coils_T_lg.png  "Coils_T")  | total number of coils, <br/> including inactive coils 
-L_Free   | [<img src="/designtypes/Spring/Compression/tooltips/L_Free.png"   alt="L_Free"   title="L_Free"   width="33%">](/designtypes/Spring/Compression/tooltips/L_Free_lg.png   "L_Free")   | length in the free condition <br/> (free length) 
-Force_1  | [<img src="/designtypes/Spring/Compression/tooltips/Force_1.png"  alt="Force_1"  title="Force_1"  width="33%">](/designtypes/Spring/Compression/tooltips/Force_1_lg.png  "Force_1")  | load at point 1 <br/> (minimum operating load) 
-Force_2  | [<img src="/designtypes/Spring/Compression/tooltips/Force_1.png"  alt="Force_2"  title="Force_2"  width="33%">](/designtypes/Spring/Compression/tooltips/Force_2_lg.png  "Force_2")  | load at point 2 <br/> (maximum operating load) 
+Name | <span style="font-weight: normal; font-size: 0.85em; display:block; text-align:center;">Thumbnail <br/> Image</span> | Description  
+--- | :---: | ---         
+Wire_Dia | [<img src="/designtypes/Spring/Compression/tooltips/Wire_Dia.png" alt="Wire_Dia" title="Wire_Dia" style="display:block; margin:0 auto; width:33%;">](/designtypes/Spring/Compression/tooltips/Wire_Dia_lg.png "Wire_Dia") | wire diameter 
+OD_Free  | [<img src="/designtypes/Spring/Compression/tooltips/OD_Free.png"  alt="OD_Free"  title="OD_Free"  style="display:block; margin:0 auto; width:33%;">](/designtypes/Spring/Compression/tooltips/OD_Free_lg.png  "OD_Free")  | outside diameter in the free condition 
+Coils_T  | [<img src="/designtypes/Spring/Compression/tooltips/Coils_T.png"  alt="Coils_T"  title="Coils_T"  style="display:block; margin:0 auto; width:33%;">](/designtypes/Spring/Compression/tooltips/Coils_T_lg.png  "Coils_T")  | total number of coils, <br/> including inactive coils 
+L_Free   | [<img src="/designtypes/Spring/Compression/tooltips/L_Free.png"   alt="L_Free"   title="L_Free"   style="display:block; margin:0 auto; width:33%;">](/designtypes/Spring/Compression/tooltips/L_Free_lg.png   "L_Free")   | length in the free condition <br/> (free length) 
+Force_1  | [<img src="/designtypes/Spring/Compression/tooltips/Force_1.png"  alt="Force_1"  title="Force_1"  style="display:block; margin:0 auto; width:33%;">](/designtypes/Spring/Compression/tooltips/Force_1_lg.png  "Force_1")  | load at point 1 <br/> (minimum operating load) 
+Force_2  | [<img src="/designtypes/Spring/Compression/tooltips/Force_1.png"  alt="Force_2"  title="Force_2"  style="display:block; margin:0 auto; width:33%;">](/designtypes/Spring/Compression/tooltips/Force_2_lg.png  "Force_2")  | load at point 2 <br/> (maximum operating load) 
 
 &nbsp;
 
