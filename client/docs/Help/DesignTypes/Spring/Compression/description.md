@@ -212,7 +212,7 @@ ___
 ## Compression Spring End Types 
 
 The current version of ODOP:Spring implements twelve compression spring end types 
-(two of those are user customizable alternatives). 
+(ten pre-defined end types plus two user customizable alternatives). 
 For compression springs, the Calculation Input `End_Type` has the following possible values: 
 
 *Click on a thumbnail image to see a larger version of that image.  Use the browser "Back" button in order to return to this page.*  
@@ -235,34 +235,34 @@ For compression springs, the Calculation Input `End_Type` has the following poss
 
 For a compression spring, the end type selection directly determines the value of
 `Inactive_Coils` and, when applicable, `Grind_Amount` and/or `Taper_Amount`. 
-`L_Solid`, `Pitch` and other variables are then affected indirectly.  
+Other variables such as `L_Solid` and `Pitch` are then affected indirectly.  
 
 <!--- Additional information may be found in the documentation sections for EQNSET.  -->
 
-When `End_Type` is set to one of the standard (non UserSpecified) selections, 
+When `End_Type` is set to one of the pre-defined (non UserSpecified) selections, 
 `Inactive_Coils`, `Grind_Amount` and `Taper_Amount` will be set by ODOP:Spring 
 from values contained in an internal table. 
-When the value of `End_Type` is UserSpecified (UserSpecified&Ground), 
+When the value of `End_Type` is UserSpecified or UserSpecified&Ground, 
 the user may set these values by making an entry in the corresponding numeric entry field.  
 #### Grind_Amount, Taper_Amount 
-In order to facilitate the treatment of less common compression spring end types such as 
-the "Tapered, Closed and Ground" configuration associated with hot-wound springs, 
+In order to enable user customization plus facilitate the treatment of less common compression 
+spring end types such as the "Tapered, Closed and Ground" configuration associated with hot-wound springs, 
 ODOP:Spring has added the extra (Calculation Input) terms `Grind_Amount` and `Taper_Amount` 
 into the solid height calculation. 
 This is done to separate the solid height calculation from the rate equation.  
 
-The `End_Type` drop-down selection list sets the values of `Inactive_Coils`,
+As mentioned previously, the `End_Type` drop-down selection list sets the values of `Inactive_Coils`,
 `Grind_Amount` and `Taper_Amount` from an internal table. 
 `Grind_Amount` is the number of wire diameters removed by a grinding operation. 
-`Taper_Amount` is the solid height reduction, measured in wire diameters,
-created by a tapering operation on the wire diameter of the first and last coils of a 
-hot-wound compression spring. 
+`Taper_Amount` is the solid height reduction, measured in wire diameters, 
+created by tapering the wire diameter of the first and last coils of a hot-wound compression spring.  
 
 The terminology here can be misinterpreted. 
 The “tapered” end type does not refer to a conical (non-cylindrical) spring; 
 it refers only to local tapering of the end coil's `Wire_Dia` to reduce solid height.
 
-<!--- Introduce Closed&Ground here.  -->
+The Open&Ground and Closed&Ground end types each have a `Grind_Amount` value of 1.0. 
+This value comes from removing 50% of a wire diameter at each end.  
 
 For the TaperedClosed&Ground end type, `Grind_Amount` and `Taper_Amount` each 
 have a value of 0.5. 
@@ -278,7 +278,7 @@ The `Grind_Amount` and `Taper_Amount` terms may be used with `Inactive_Coils` to
 unusual end configurations. 
 For example, springs that have a different end type at each end. 
 To establish the value of `Inactive_Coils` or `Grind_Amount` or `Taper_Amount` directly, 
-first select a value of `UserSpecified` (`UserSpecified&Ground)` for `End_Type`.  
+first select a value of UserSpecified or UserSpecified&Ground for `End_Type`.  
 
 &nbsp; 
 
