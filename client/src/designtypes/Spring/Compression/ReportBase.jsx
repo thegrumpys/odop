@@ -34,27 +34,45 @@ export default function ReportBase(props) {
   base.len_lbl = "Wire Length";
 
   switch (model_symbol_table[o.End_Type].value) {
-    case 4:        //  Closed & Ground
-      base.pitch = (model_symbol_table[o.L_Free].value - 2.0 * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
-      break;
-    case 3:        //  Closed
-      base.pitch = (model_symbol_table[o.L_Free].value - 3.0 * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
-      break;
-    case 2:        //  Open & Ground
-      base.pitch = model_symbol_table[o.L_Free].value / model_symbol_table[o.Coils_T].value;
-      break;
-    case 1:        //  Open
+    case 1:        // Open
       base.pitch = (model_symbol_table[o.L_Free].value - model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
       break;
-    case 5:        //  Tapered Closed & Ground
-      base.pitch = (model_symbol_table[o.L_Free].value - 1.5 * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
+    case 2:        // Open & Ground
+      base.pitch = model_symbol_table[o.L_Free].value / model_symbol_table[o.Coils_T].value;
+      break;
+    case 3:        // Closed
+      base.pitch = (model_symbol_table[o.L_Free].value - (model_symbol_table[o.Inactive_Coils].value + 1.0) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
+      break;
+    default:
+    case 4:        // Closed & Ground
+      base.pitch = (model_symbol_table[o.L_Free].value - model_symbol_table[o.Inactive_Coils].value * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
+      break;
+    case 5:        // Double Closed
+      base.pitch = (model_symbol_table[o.L_Free].value - (2.0 * model_symbol_table[o.Inactive_Coils].value + 1.0) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
+      break;
+    case 6:        // Double Closed & Ground
+      base.pitch = (model_symbol_table[o.L_Free].value - (2.0 * model_symbol_table[o.Inactive_Coils].value) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
+      break;
+    case 7:        // Tapered Closed
+      base.pitch = (model_symbol_table[o.L_Free].value - ((9.0 + 3.0 * model_symbol_table[o.Taper_Amount].value) / 4.0) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
       base.len_lbl = "Bar cut len.";
       break;
-    case 6:        //  Pig-tail
-      base.pitch = (model_symbol_table[o.L_Free].value - 2.0 * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
+    case 8:        // Tapered Closed & Ground
+      base.pitch = (model_symbol_table[o.L_Free].value - ((3.0 + model_symbol_table[o.Taper_Amount].value) / 2.0) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
+      base.len_lbl = "Bar cut len.";
       break;
-    default:        //  User Specified
+    case 9:        // Pig-tail Closed
       base.pitch = (model_symbol_table[o.L_Free].value - (model_symbol_table[o.Inactive_Coils].value + 1.0) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
+      break;
+    case 10:       // Pig-tail Closed & Ground
+      base.pitch = (model_symbol_table[o.L_Free].value - model_symbol_table[o.Inactive_Coils].value * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
+      break;
+    case 11:       // User Specified
+      base.pitch = (model_symbol_table[o.L_Free].value - (model_symbol_table[o.Inactive_Coils].value + 1.0) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
+      break;
+    case 12:       // User Specified Closed & Ground
+      base.pitch = (model_symbol_table[o.L_Free].value - model_symbol_table[o.Inactive_Coils].value * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
+      break;
   }
 
   var sq1 = model_symbol_table[o.L_Free].value;
