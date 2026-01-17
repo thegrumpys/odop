@@ -32,8 +32,9 @@ ___
 <a id="c_springFD_Diag"></a>  
 ___
 
-## Compression Spring Variable Names on Force-Deflection Diagram  
+## Compression Spring Variable Names on a Force-Deflection Diagram  
 
+A Force-Deflection diagram is used to identify key geometric and load‑related variables used throughout the compression‑spring model. 
 [<img src="/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png" alt="Compression Spring Variable Names on Force - Deflection Diagram">](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png "Compression Spring Variable Names on Force - Deflection Diagram")  
 
 ___
@@ -43,6 +44,7 @@ ___
 
 ## Compression Spring Variable Names on Image of Physical Spring
 
+An image of a compression spring is used to identify geometric variables used by the compression spring model. 
 ![Compression Spring Variable Names on on image of physical spring](/docs/Help/DesignTypes/Spring/img/AnnotatedCSpring.png "Compression Spring Variable Names on on image of physical spring")  
 
 ___
@@ -71,6 +73,8 @@ ___
 
 ## Independent Variable Names: 
 
+[Independent variables](/docs/Help/terminology.html#independentVar) are the inputs of the design equations.  
+
 *Click on a thumbnail image to see a larger version of that image.  Use the browser "Back" button in order to return to this page.*  
 
 Name | <span style="font-weight: normal; font-size: 0.85em; display:block; text-align:center;">Thumbnail <br/> Image</span> | Description  
@@ -91,7 +95,9 @@ ___
 
 ## Dependent Variable Names:   
 
-Name         | <span style="font-weight: normal; font-size: 0.85em;">Thumbnail <br/> Image</span> | Description  
+[Dependent variables](/docs/Help/terminology.html#dependentVar) are the outputs of the design equations.  
+
+Name         | <span style="font-weight: normal; font-size: 0.85em; display:block; text-align:center;">Thumbnail <br/> Image</span> | Description  
  ---         | ---    | ---         
 Mean_Dia     | [<img src="/designtypes/Spring/Compression/tooltips/Mean_Dia.png"  alt="Mean_Dia"  title="Mean_Dia"  width="85%">](/designtypes/Spring/Compression/tooltips/Mean_Dia_lg.png  "Mean_Dia")  | mean diameter of spring coil in free condition <br/>Also: `(OD_Free + ID_Free)/2` 
 Coils_A      |        | number of active coils (turns) 
@@ -125,6 +131,9 @@ ___
 ___
 
 ## Calculation Input Names 
+
+[Calculation Inputs](/docs/Help/terminology.html#calcInputs) are inputs to the design equations and are 
+adjustable by the user, but are not manipulated by the search algorithm or subject to Fix or constraints..  
 
 Name           | &nbsp; | Description  
  ---           | ---    | ---         
@@ -233,17 +242,21 @@ For compression springs, the Calculation Input `End_Type` has the following poss
 11 | &nbsp; | UserSpecified
 12 | &nbsp; | UserSpecified&Ground
 
-For a compression spring, the end type selection directly determines the value of
+For a compression spring, "inactive coils" are coils that do not contribute to spring rate. 
+"Dead coils" are a subset of inactive coils typically added for handling or tangling prevention. 
+End types determine the baseline number of inactive coils, which the user may override 
+when `End_Type` is set to UserSpecified. 
+Specifically, the end type selection directly determines the value of
 `Inactive_Coils` and, when applicable, `Grind_Amount` and/or `Taper_Amount`. 
-Other variables such as `L_Solid` and `Pitch` are then affected indirectly.  
-
-<!--- Additional information may be found in the documentation sections for EQNSET.  -->
-
+Other variables such as `L_Solid` and `Pitch` are then affected indirectly. 
 When `End_Type` is set to one of the pre-defined (non UserSpecified) selections, 
-`Inactive_Coils`, `Grind_Amount` and `Taper_Amount` will be set by ODOP:Spring 
+`Inactive_Coils`, `Grind_Amount` and `Taper_Amount` are set by ODOP:Spring 
 from values contained in an internal table. 
 When the value of `End_Type` is UserSpecified or UserSpecified&Ground, 
 the user may set these values by making an entry in the corresponding numeric entry field.  
+
+<!--- Additional information may be found in the documentation sections for EQNSET.  --> 
+
 #### Grind_Amount, Taper_Amount 
 In order to enable user customization plus facilitate the treatment of less common compression 
 spring end types such as the "Tapered, Closed and Ground" configuration associated with hot-wound springs, 
@@ -257,9 +270,9 @@ As mentioned previously, the `End_Type` drop-down selection list sets the values
 `Taper_Amount` is the solid height reduction, measured in wire diameters, 
 created by tapering the wire diameter of the first and last coils of a hot-wound compression spring.  
 
-The terminology here can be misinterpreted. 
-The “tapered” end type does not refer to a conical (non-cylindrical) spring; 
-it refers only to local tapering of the end coil's `Wire_Dia` to reduce solid height.
+The "tapered" terminology used here refers only to local wire‑diameter reduction, not to a conical spring shape. 
+Specifically, the “tapered” end types do not refer to a conical (non-cylindrical) spring; 
+the term refers only to tapering of the end coil's `Wire_Dia` to reduce solid height.
 
 The Open&Ground and Closed&Ground end types each have a `Grind_Amount` value of 1.0. 
 This value comes from removing 50% of a wire diameter at each end.  
