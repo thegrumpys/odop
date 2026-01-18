@@ -401,7 +401,7 @@ export function migrate(design) {
         } else if (design.symbol_table[44].value === 6) { // Old "Pig-tail"
             design.symbol_table[44].value = 10; // New "PigtailClosed&Ground"
         } else if (design.symbol_table[44].value === 7) { // Old "User_Specified"
-            design.symbol_table[44].value = 12; // New "UserSpecified&Ground"
+            design.symbol_table[44].value = 11; // New "UserSpecified&Ground"
         }
         // Add Grid_Amount calculation
         design.symbol_table.splice(47,0,Object.assign({},design.symbol_table[46]),Object.assign({},design.symbol_table[46])); // Duplicate Add_Coils_Solid twice in target position

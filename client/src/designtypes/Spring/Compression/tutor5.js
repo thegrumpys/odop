@@ -244,7 +244,7 @@ export const execute = {
                     </p>
 
                     <p>
-                    Note the "UserSpecified" and "UserSpecified&Ground" end types. 
+                    Note the "UserSpecifiedOpen", "UserSpecifiedOpen&Ground", "UserSpecifiedClosed" and "UserSpecifiedClosed&Ground" end types. 
                     These entries are provided in order to accommodate unusual end configurations 
                     (for example, a spring with extra dead coils or with two different end types). 
                     The designer can provide custom values for 

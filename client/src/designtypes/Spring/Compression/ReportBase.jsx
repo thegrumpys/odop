@@ -67,10 +67,16 @@ export default function ReportBase(props) {
     case 10:       // Pig-tail Closed & Ground
       base.pitch = (model_symbol_table[o.L_Free].value - model_symbol_table[o.Inactive_Coils].value * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
       break;
-    case 11:       // User Specified
+    case 11:       // User Specified Open
+      base.pitch = (model_symbol_table[o.L_Free].value - model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
+      break;
+    case 12:       // User Specified Open & Ground
+      base.pitch = model_symbol_table[o.L_Free].value / model_symbol_table[o.Coils_T].value;
+      break;
+    case 13:       // User Specified Closed
       base.pitch = (model_symbol_table[o.L_Free].value - (model_symbol_table[o.Inactive_Coils].value + 1.0) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
       break;
-    case 12:       // User Specified Closed & Ground
+    case 14:       // User Specified Closed & Ground
       base.pitch = (model_symbol_table[o.L_Free].value - model_symbol_table[o.Inactive_Coils].value * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
       break;
   }
