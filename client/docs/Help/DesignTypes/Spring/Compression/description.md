@@ -222,27 +222,66 @@ ___
 
 ## Cross-system translate table for variable names
 
-| Quantity | ODOP:Spring | ISO | JIS | US / Handbook |
-|----------|-------------|-----|-----|---------------|
-| Wire diameter | Wire_Dia | d | d | d |
-| Mean coil diameter | Mean_Dia | D | D | D or Dm |
-| Outer coil diameter | OD_Free | De | D2 | OD |
-| Inner coil diameter | ID_Free | Di | D1 | ID |
-| Spring index | Spring_Index | w | c | C |
-| Total coils | Coils_T | n2 | Nt | Nt |
-| Active coils | Coils_A | n1 | Na | Na |
-| Free length | L_Free | L0 | L | Lf |
-| Solid length | L_Solid | Lc | Hs | Ls |
-| Pitch | Pitch | p | p | p |
-| Load (point 1) | Force_1 | F1 | f1 | F1 |
-| Load (point 2) | Force_2 | F2 | f2 | F2 |
-| Deflection | Deflect_ | s | y | δ |
-| Spring rate | Rate | R | k | k |
-| Shear modulus | Torsion_Modulus | G | G | G |
-| Torsional stress | &nbsp; | τ | τ | τ |
-| Corrected stress | Stress_ | τk | τk | τc |
-| Stress correction factor | kw1, kw2 | k | K | Kw |
-| Natural frequency | &nbsp; | f0 | f0 | fn |
+There is not a single world-wide “alphabet” for coil spring symbols.
+Internationally, ISO 2162 (and in Europe, EN ISO 2162) governs how springs (especially cylindrical helical compression springs), 
+are represented and how data is presented on drawings, 
+ISO symbols are widely used in Europe and often appear in CAD libraries and catalog data sheets. 
+In Japan, JIS B 2704 defines calculation formulas and a full symbol set for helical springs; 
+it explicitly lists a mapping between JIS symbols and ISO equivalents. 
+Many US manufacturers and design handbooks use a “de facto” set of symbols, 
+sometimes influenced by SAE/ASTM practice even if not formally standardized.  
+
+### Compression Spring — Independent Variables
+
+| Quantity | ODOP:Spring | ISO&nbsp;&nbsp; | JIS&nbsp;&nbsp; | US / Handbook | 
+|----------|:-----------:|:---:|:---:|:--------------:| 
+| Wire diameter | `Wire_Dia` | d | d | d | 
+| Outside diameter (free) | `OD_Free` | De | D2 | OD | 
+| Total coils | `Coils_T` | n2 | Nt | Nt | 
+| Free length | `L_Free` | L0 | L | Lf | 
+| Load at point 1 | `Force_1` | F1 | f1 | F1 | 
+| Load at point 2 | `Force_2` | F2 | f2 | F2 |  
+
+### Compression Spring — Dependent Variables
+
+| Quantity | ODOP:Spring | ISO&nbsp;&nbsp; | JIS&nbsp;&nbsp; | US / Handbook | 
+|----------|:-----------:|:---:|:---:|:--------------:| 
+| Mean coil diameter | `Mean_Dia` | D | D | D or Dm | 
+| Active coils | `Coils_A` | n1 | Na | Na | 
+| Spring rate | `Rate` | R | k | k | 
+| Deflection <br/> at point 1 | `Deflect_1` | s1 | y1 | δ₁ | 
+| Deflection <br/> at point 2 | `Deflect_2` | s2 | y2 | δ₂ | 
+| Length at point 1 | `L_1` | L1 | — | L₁ | 
+| Length at point 2 | `L_2` | L2 | — | L₂ | 
+| Stroke (Δ between points 1 & 2) | `L_Stroke` | — | — | Stroke | 
+| Solid height | `L_Solid` | Lc | Hs | Ls | 
+| Slenderness ratio | `Slenderness` | — | — | Lf/Dm | 
+| Inside diameter (free) | `ID_Free` | Di | D1 | ID | 
+| Weight (mass) | `Weight` | m | m | m | 
+| Spring index | `Spring_Index` | w | c | C | 
+| Force at solid height | `Force_Solid` | — | — | Fs | 
+| Stress at point 1 | `Stress_1` | τ1 | τ1 | τ₁ | 
+| Stress at point 2 | `Stress_2` | τ2 | τ2 | τ₂ | 
+| Stress at solid | `Stress_Solid` | τs | — | τ_solid | 
+| Factor of safety <br/> at point 2 | `FS_2` | — | — | FS₂ | 
+| Factor of safety <br/> at solid | `FS_Solid` | — | — | FS_solid | 
+| Fatigue safety factor | `FS_CycleLife` | — | — | FS_fatigue | 
+| Estimated cycle life | `Cycle_Life` | — | — | N_cycles | 
+| % available deflection used | `%_Avail_Deflect` | — | — | % deflect | 
+| Energy between points 1 & 2 | `Energy` | U | U | U |  
+
+### Compression Spring — Calculation Inputs & Additional Quantities
+
+| Quantity | ODOP:Spring | ISO&nbsp;&nbsp; | JIS&nbsp;&nbsp; | US / Handbook | 
+|----------|:-----------:|:---:|:---:|:--------------:| 
+| Density | `Density` | ρ | γ | ρ | 
+| Torsion&nbsp;modulus (shear&nbsp;modulus) | `Torsion_Modulus` | G | G | G | 
+| Tensile strength | `Tensile` | σᵤ | σB | Sut | 
+| Allowable static stress | `Stress_Lim_Stat` | — | τ_allow | τ_allow | 
+| Allowable endurance stress | `Stress_Lim_Endur` | — | τe | τ_endurance | 
+| Helix angle | Helix angle | α | — | α | 
+| Wire length | Wire length | — | — | L_wire | 
+| Safe load | Safe load | — | — | F_safe |  
 
 &nbsp; 
 
