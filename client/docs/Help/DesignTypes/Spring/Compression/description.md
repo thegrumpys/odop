@@ -19,7 +19,9 @@ ___
  - [Calculation Input names](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springCalcInputNames)  
  - [Values in reports](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springOtherValues)  
  - [Constraints unique to compression springs](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)  
+ - [Cross-system translate table for variable names](/docs/Help/DesignTypes/Spring/Compression/description.html#transTable)  
  - [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes)  
+ - [Pitch calculation](/docs/Help/DesignTypes/Spring/Compression/description.html#pitch)  
  - [Dead Coils](/docs/Help/DesignTypes/Spring/Compression/description.html#deadCoils)  
  - [User specified end type examples](/docs/Help/DesignTypes/Spring/Compression/description.html#userEndTypes)  
  - [Buckling](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springBuckling)  
@@ -215,6 +217,37 @@ between load point 2 and the solid condition.
 
 ___
 
+<a id="transTable"></a>  
+___
+
+## Cross-system translate table for variable names
+
+| Quantity | ODOP:Spring | ISO | JIS | US / Handbook |
+|----------|-------------|-----|-----|---------------|
+| Wire diameter | Wire_Dia | d | d | d |
+| Mean coil diameter | Mean_Dia | D | D | D or Dm |
+| Outer coil diameter | OD_Free | De | D2 | OD |
+| Inner coil diameter | ID_Free | Di | D1 | ID |
+| Spring index | Spring_Index | w | c | C |
+| Total coils | Coils_T | n2 | Nt | Nt |
+| Active coils | Coils_A | n1 | Na | Na |
+| Free length | L_Free | L0 | L | Lf |
+| Solid length | L_Solid | Lc | Hs | Ls |
+| Pitch | Pitch | p | p | p |
+| Load (point 1) | Force_1 | F1 | f1 | F1 |
+| Load (point 2) | Force_2 | F2 | f2 | F2 |
+| Deflection | Deflect_ | s | y | δ |
+| Spring rate | Rate | R | k | k |
+| Shear modulus | Torsion_Modulus | G | G | G |
+| Torsional stress | &nbsp; | τ | τ | τ |
+| Corrected stress | Stress_ | τk | τk | τc |
+| Stress correction factor | kw1, kw2 | k | K | Kw |
+| Natural frequency | &nbsp; | f0 | f0 | fn |
+
+&nbsp; 
+
+___
+
 <a id="c_springEndTypes"></a>  
 ___
 
@@ -262,9 +295,10 @@ In order to enable user customization plus facilitate the treatment of less comm
 spring end types such as the "Tapered, Closed and Ground" configuration associated with hot-wound springs, 
 ODOP:Spring has added the extra (Calculation Input) terms `Grind_Amount` and `Taper_Amount` 
 into the solid height calculation. 
+These terms each have units of wire diameter. 
 This is done to separate the solid height calculation from the rate equation.  
 
-As mentioned previously, the `End_Type` drop-down selection list sets the values of `Inactive_Coils`,
+As mentioned previously, the `End_Type` drop-down selection list sets the values of `Inactive_Coils`, 
 `Grind_Amount` and `Taper_Amount` from an internal table. 
 `Grind_Amount` is the number of wire diameters removed by a grinding operation. 
 `Taper_Amount` is the solid height reduction, measured in wire diameters, 
@@ -275,13 +309,17 @@ Specifically, the “tapered” end types do not refer to a conical (non-cylindr
 the term refers only to tapering of the end coil's `Wire_Dia` to reduce solid height.
 
 The Open&Ground and Closed&Ground end types each have a `Grind_Amount` value of 1.0. 
-This value comes from removing 50% of a wire diameter at each end.  
+This value results from removing 50% of a wire diameter at each end.  
 
 For the TaperedClosed&Ground end type, `Grind_Amount` and `Taper_Amount` each 
 have a value of 0.5. 
 The tapering operation reduces the solid height by 25% of a wire diameter at each end. 
-The grinding operation removes 25% of a nominal wire diameter (50% of the tapered dimension) 
-from each end of the spring.  
+Another 25% of a wire diameter reduction on solid height is due to the tapered end conforming to the previous coil. 
+Thus, the tapered section becomes a skewed, truncated cone. 
+Finally, the grinding operation removes 25% of a nominal wire diameter (50% of the tapered dimension) 
+from each end of the spring. 
+In summary, the TaperedClosed&Ground end type has a solid height of 1.5 wire diameters less than the Closed end type
+and 0.5 wire diameters less than the Closed&Ground end type.  
 
 Note that the `Grind_Amount` and `Taper_Amount` terms are not included in the wire length 
 and weight calculations. 
@@ -292,6 +330,28 @@ unusual end configurations.
 For example, springs that have a different end type at each end. 
 To establish the value of `Inactive_Coils` or `Grind_Amount` or `Taper_Amount` directly, 
 first select a value of UserSpecified or UserSpecified&Ground for `End_Type`.  
+
+&nbsp; 
+
+___
+
+<a id="pitch"></a>  
+___
+
+## Pitch calculation 
+
+ODOP:Spring displays a value for compression spring body coil pitch in Calculator View, 
+Report 1 and Report 3. 
+These values are calculated with the formulas found in many industry standard 
+[Spring Design References](/docs/Help/SpringDesign/references.html).  
+
+For open end types, there is no issue.  
+
+For closed end types, there is a possibility that the industry standard calculation will produce 
+a value of pitch for body coils that is slightly greater than found in practice. 
+The difference is due to the standard calculations not including an allowance for a transition 
+section between body coils and end coils. 
+This difference is expected to increase as the pitch angle of the spring increases.  
 
 &nbsp; 
 
@@ -402,9 +462,10 @@ ___
 
 ## Related topics 
 
- - [Design Types](/docs/Help/DesignTypes/index.html)   
- - [Spring Design Topics](/docs/Help/SpringDesign/index.html)   
- - [Restrictions](/docs/About/Legal/Restrictions.html)   
+ - [Design Types](/docs/Help/DesignTypes/index.html)  
+ - [Spring Design Topics](/docs/Help/SpringDesign/index.html)  
+ - [Spring Design References](/docs/Help/SpringDesign/references.html)  
+ - [Restrictions](/docs/About/Legal/Restrictions.html)  
  - [Help](/docs/Help/index.html)   
 
 &nbsp;  
