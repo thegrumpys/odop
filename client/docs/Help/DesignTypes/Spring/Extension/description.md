@@ -19,6 +19,7 @@ ___
  - [Calculation Input names](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springCalcInputNames)  
  - [Values in reports](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springOtherValues)  
  - [Constraints unique to extension springs](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springConstraints)  
+ - [Cross-system translate table for variable names](/docs/Help/DesignTypes/Spring/Extension/description.html#transTable)  
  - [Initial tension range](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springIT_Range)  
  - [Hook Stress](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springHookStress)  
  - [Extension spring cycle life](/docs/Help/DesignTypes/Spring/Extension/description.html#e_springCycleLife)  
@@ -272,6 +273,78 @@ In the default extension spring start point ("Startup"), Force\_1 MIN is
 a function of Initial\_Tension. 
 The constraint relationship says that Force\_1, the force at the first 
 load point, should be greater than the value of Initial\_Tension. 
+
+&nbsp; 
+
+___
+
+<a id="transTable"></a>  
+___
+
+## Cross-system translate table for variable names
+
+There is not a single world-wide “alphabet” for coil spring symbols.
+Internationally, ISO 2162 (and in Europe, EN ISO 2162) governs how springs 
+are represented and how data is presented on drawings, 
+ISO symbols are widely used in Europe and often appear in CAD libraries and catalog data sheets. 
+In Japan, JIS B 2704 defines calculation formulas and a full symbol set for helical springs; 
+it explicitly lists a mapping between JIS symbols and ISO equivalents. 
+Many US manufacturers and design handbooks use a “de facto” set of symbols, 
+sometimes influenced by SAE/ASTM practice even if not formally standardized.  
+
+### Extension Spring — Independent Variables
+
+| Quantity | ODOP:Spring | ISO&nbsp;&nbsp; | JIS&nbsp;&nbsp; | US / Handbook |
+|----------|:-----------:|:---:|:---:|:--------------:|
+| Wire diameter | `Wire_Dia` | d | d | d |
+| Outside diameter (free) | `OD_Free` | De | D2 | OD |
+| Total coils | `Coils_T` | n2 | Nt | Nt |
+| Initial tension | `Initial_Tension` | F0 | Pi | F0 |
+| End extension (total) | `End_Extension` | — | — | End ext. |
+| Load at point 1 | `Force_1` | F1 | f1 | F1 |
+| Load at point 2 | `Force_2` | F2 | f2 | F2 |
+
+### Extension Spring — Dependent Variables
+
+| Quantity | ODOP:Spring | ISO&nbsp;&nbsp; | JIS&nbsp;&nbsp; | US / Handbook |
+|----------|:-----------:|:---:|:---:|:--------------:|
+| Mean coil diameter | `Mean_Dia` | D | D | D or Dm |
+| Inside diameter (free) | `ID_Free` | Di | D1 | ID |
+| Active coils | `Coils_A` | n1 | Na | Na |
+| Spring rate | `Rate` | R | k | k |
+| Deflection <br/> at point 1 | `Deflect_1` | s1 | y1 | δ₁ |
+| Deflection <br/> at point 2 | `Deflect_2` | s2 | y2 | δ₂ |
+| Body length (free) | `L_Body` | — | — | LBODY |
+| Free length (with ends) | `L_Free` | L0 | L | Lf |
+| Length at point 1 | `L_1` | L1 | — | L₁ |
+| Length at point 2 | `L_2` | L2 | — | L₂ |
+| Stroke (Δ between points 1 & 2) | `L_Stroke` | — | — | Stroke |
+| Weight (mass) | `Weight` | m | m | m |
+| Spring index | `Spring_Index` | w | c | C |
+| Stress from initial tension | `Stress_Initial` | τ0 | — | τ₀ |
+| Stress at point 1 | `Stress_1` | τ1 | τ1 | τ₁ |
+| Stress at point 2 | `Stress_2` | τ2 | τ2 | τ₂ |
+| Hook bending stress | `Stress_Hook` | — | — | σ_hook |
+| Factor of safety <br/> at point 2 | `FS_2` | — | — | FS₂ |
+| Fatigue safety factor | `FS_Cycle_Life` | — | — | FS_fatigue |
+| Estimated cycle life | `Cycle_Life` | — | — | N_cycles |
+| Initial stress lower limit | `Stress_Init_Lo` | — | — | τ_init_lo |
+| Initial stress upper limit | `Stress_Init_Hi` | — | — | τ_init_hi |
+| Energy between points 1 & 2 | `Energy` | U | U | U |
+
+### Extension Spring — Calculation Inputs & Additional Quantities
+
+| Quantity | ODOP:Spring | ISO&nbsp;&nbsp; | JIS&nbsp;&nbsp; | US / Handbook |
+|----------|:-----------:|:---:|:---:|:--------------:|
+| Density | `Density` | ρ | γ | ρ |
+| Torsion&nbsp;modulus (shear&nbsp;modulus) | `Torsion_Modulus` | G | G | G |
+| Tensile strength | `Tensile` | σᵤ | σB | Sut |
+| Allowable static stress | `Stress_Lim_Stat` | — | τ_allow | τ_allow |
+| Allowable endurance stress | `Stress_Lim_Endur` | — | τe | τ_endurance |
+| Allowable bending stress | `Stress_Lim_Bend` | — | σ_allow | σ_allow |
+| Helix angle | Helix angle | α | — | α |
+| Wire length | Wire length | — | — | L_wire |
+| Safe load | Safe load | — | — | F_safe |
 
 &nbsp; 
 

@@ -18,6 +18,7 @@ ___
  - [Dependent Variable names](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springDV_Names)  
  - [Calculation Input names](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springCalcInputNames)  
  - [Values in reports](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springOtherValues)  
+ - [Cross-system translate table for variable names](/docs/Help/DesignTypes/Spring/Torsion/description.html#transTable)  
  - [Torsion spring end types](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_springEndTypes)  
  - [Allowable stress values](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_allowableStress)  
  - [Allowable stress update](/docs/Help/DesignTypes/Spring/Torsion/description.html#t_allowableStressUpdate)  
@@ -221,6 +222,75 @@ Weight/1000    |        | weight of 1,000 springs
 Stress Ratio   |        | ratio of minimum stress to maximum stress (Stress_1/Stress_2) 
 Kb             |        | stress correction factor; (see: Heat_Treat above) 
 Helix Angle    |        | angle, in degrees, of the spring helix relative to a perpendicular to the spring axis 
+
+&nbsp; 
+
+___
+
+<a id="transTable"></a>  
+___
+
+## Cross-system translate table for variable names
+
+There is not a single world-wide “alphabet” for coil spring symbols.
+Internationally, ISO 2162 (and in Europe, EN ISO 2162) governs how springs 
+are represented and how data is presented on drawings, 
+ISO symbols are widely used in Europe and often appear in CAD libraries and catalog data sheets. 
+In Japan, JIS B 2704 defines calculation formulas and a full symbol set for helical springs; 
+it explicitly lists a mapping between JIS symbols and ISO equivalents. 
+Many US manufacturers and design handbooks use a “de facto” set of symbols, 
+sometimes influenced by SAE/ASTM practice even if not formally standardized.  
+
+### Torsion Spring — Independent Variables
+
+| Quantity | ODOP:Spring | ISO&nbsp;&nbsp; | JIS&nbsp;&nbsp; | US / Handbook |
+|----------|:-----------:|:---:|:---:|:--------------:|
+| Wire diameter | `Wire_Dia` | d | d | d |
+| Outside diameter (free) | `OD_Free` | De | D2 | OD |
+| Total coils | `Coils_T` | n2 | Nt | Nt |
+| Moment at point 1 | `M_1` | M1 | M1 | M₁ |
+| Moment at point 2 | `M_2` | M2 | M2 | M₂ |
+| Coil spacing | `Coil_Spacing` | — | — | coil spacing |
+
+### Torsion Spring — Dependent Variables
+
+| Quantity | ODOP:Spring | ISO&nbsp;&nbsp; | JIS&nbsp;&nbsp; | US / Handbook |
+|----------|:-----------:|:---:|:---:|:--------------:|
+| Mean coil diameter | `Mean_Dia` | D | D | D or Dm |
+| Inside diameter (free) | `ID_Free` | Di | D1 | ID |
+| Active coils | `Coils_A` | n1 | Na | Na |
+| Spring rate | `Rate` | Rφ | k | kθ |
+| Deflection <br/> at point 1 | `Deflect_1` | φ1 | φ1 | θ₁ |
+| Deflection <br/> at point 2 | `Deflect_2` | φ2 | φ2 | θ₂ |
+| Body length (free) | `L_Body` | — | — | LBODY |
+| Length at point 1 | `L_1` | L1 | — | L₁ |
+| Length at point 2 | `L_2` | L2 | — | L₂ |
+| Free end angle | `End_Angle_Free` | α0 | α | free angle |
+| Stroke <br/> (angular Δ between points 1 & 2) | `Stroke` | — | — | angular stroke |
+| Weight (mass) | `Weight` | m | m | m |
+| Spring index | `Spring_Index` | w | c | C |
+| End deflection allowance | `End_Deflect_All` | — | — | end allowance |
+| Stress at point 1 | `Stress_1` | σ1 | σ1 | σ₁ |
+| Stress at point 2 | `Stress_2` | σ2 | σ2 | σ₂ |
+| Factor of safety <br/> at point 2 | `FS_2` | — | — | FS₂ |
+| Fatigue safety factor | `FS_Cycle_Life` | — | — | FS_fatigue |
+| Estimated cycle life | `Cycle_Life` | — | — | N_cycles |
+| % available deflection used | `%_Safe_Deflect` | — | — | % deflect |
+| Force at arm 2 | `Force_Arm_2` | — | — | F_arm |
+| Energy between points 1 & 2 | `Energy` | U | U | U |
+
+### Torsion Spring — Calculation Inputs & Additional Quantities
+
+| Quantity | ODOP:Spring | ISO&nbsp;&nbsp; | JIS&nbsp;&nbsp; | US / Handbook |
+|----------|:-----------:|:---:|:---:|:--------------:|
+| Density | `Density` | ρ | γ | ρ |
+| Elastic modulus (Young’s modulus) | `Elastic_Modulus` | E | E | E |
+| Tensile strength | `Tensile` | σᵤ | σB | Sut |
+| Allowable bending endurance stress | `Stress_Lim_Bnd_Endur` | — | σe | σ_endurance |
+| Allowable bending static stress | `Stress_Lim_Bnd_Stat` | — | σ_allow | σ_allow |
+| Helix angle | Helix angle | α | — | α |
+| Wire length | Wire length | — | — | L_wire |
+| Safe load | Safe load | — | — | M_safe |
    
 &nbsp; 
 
