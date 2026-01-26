@@ -232,14 +232,25 @@ ___
 
 ## Cross-system translate table for variable names
 
-There is not a single world-wide “alphabet” for coil spring symbols.
-Internationally, ISO 2162 (and in Europe, EN ISO 2162) governs how springs 
-are represented and how data is presented on drawings, 
-ISO symbols are widely used in Europe and often appear in CAD libraries and catalog data sheets. 
-In Japan, JIS B 2704 defines calculation formulas and a full symbol set for helical springs; 
-it explicitly lists a mapping between JIS symbols and ISO equivalents. 
-Many US manufacturers and design handbooks use a “de facto” set of symbols, 
-sometimes influenced by SAE/ASTM practice even if not formally standardized.  
+A single, unified “alphabet” for coil‑spring symbols does not exist. 
+Instead, several regional and industry conventions coexist: 
+
+- [ISO](https://en.wikipedia.org/wiki/International_Organization_for_Standardization) 16249 
+defines symbols for helical spring calculations, while ISO 2162 governs how springs — especially 
+cylindrical compression springs—are represented on technical drawings. 
+- In Europe, where [EN](https://en.wikipedia.org/wiki/European_Standard) ISO 16249 and EN ISO 2162 apply, 
+ISO symbols are widely adopted and often appear in CAD libraries and catalog data sheets. 
+- In Japan, [JIS](https://en.wikipedia.org/wiki/Japanese_Industrial_Standards) B 2704 provides a complete 
+symbol set and calculation framework for helical springs, including an explicit mapping to ISO symbols. 
+- In the United States, no single formal standard dominates. 
+Instead, manufacturers and handbooks (e.g., SMI, Machinery’s Handbook) use a “de facto” notation system influenced by long-standing 
+[SAE](https://en.wikipedia.org/wiki/SAE_International)/[ASTM](https://en.wikipedia.org/wiki/ASTM_International) practice.  
+
+The tables below present a cross-system translation of common coil spring quantities. 
+Symbol columns are ordered from the most formally standardized (ISO) to the least standardized (US / Handbook).  
+
+Only ODOP:Spring variable names that have a clear counterpart in at least one of the ISO, JIS, or U.S. symbol 
+systems appear in these tables.
 
 ### Torsion Spring — Independent Variables
 
@@ -250,7 +261,6 @@ sometimes influenced by SAE/ASTM practice even if not formally standardized.
 | Total coils | `Coils_T` | n2 | Nt | Nt |
 | Moment at point 1 | `M_1` | M1 | M1 | M₁ |
 | Moment at point 2 | `M_2` | M2 | M2 | M₂ |
-| Coil spacing | `Coil_Spacing` | — | — | coil spacing |
 
 ### Torsion Spring — Dependent Variables
 
@@ -259,24 +269,19 @@ sometimes influenced by SAE/ASTM practice even if not formally standardized.
 | Mean coil diameter | `Mean_Dia` | D | D | D or Dm |
 | Inside diameter (free) | `ID_Free` | Di | D1 | ID |
 | Active coils | `Coils_A` | n1 | Na | Na |
-| Spring rate | `Rate` | Rφ | k | kθ |
-| Deflection <br/> at point 1 | `Deflect_1` | φ1 | φ1 | θ₁ |
-| Deflection <br/> at point 2 | `Deflect_2` | φ2 | φ2 | θ₂ |
+| Spring rate | `Rate` | R<sub>φ</sub> | k | k<sub>θ</sub> |
+| Deflection <br/> at point 1 | `Deflect_1` | φ1 | φ1 | θ<sub>1</sub> |
+| Deflection <br/> at point 2 | `Deflect_2` | φ2 | φ2 | θ<sub>2</sub> |
 | Body length (free) | `L_Body` | — | — | LBODY |
 | Length at point 1 | `L_1` | L1 | — | L₁ |
 | Length at point 2 | `L_2` | L2 | — | L₂ |
-| Free end angle | `End_Angle_Free` | α0 | α | free angle |
-| Stroke <br/> (angular Δ between points 1 & 2) | `Stroke` | — | — | angular stroke |
+| Free end angle | `End_Angle_Free` | α0 | α | α₀ |
+| Stroke <br/> (angular Δ between points 1 & 2) | `Stroke` | Δφ | — | Δθ |
 | Weight (mass) | `Weight` | m | m | m |
 | Spring index | `Spring_Index` | w | c | C |
-| End deflection allowance | `End_Deflect_All` | — | — | end allowance |
 | Stress at point 1 | `Stress_1` | σ1 | σ1 | σ₁ |
 | Stress at point 2 | `Stress_2` | σ2 | σ2 | σ₂ |
 | Factor of safety <br/> at point 2 | `FS_2` | — | — | FS₂ |
-| Fatigue safety factor | `FS_Cycle_Life` | — | — | FS_fatigue |
-| Estimated cycle life | `Cycle_Life` | — | — | N_cycles |
-| % available deflection used | `%_Safe_Deflect` | — | — | % deflect |
-| Force at arm 2 | `Force_Arm_2` | — | — | F_arm |
 | Energy between points 1 & 2 | `Energy` | U | U | U |
 
 ### Torsion Spring — Calculation Inputs & Additional Quantities
@@ -286,11 +291,9 @@ sometimes influenced by SAE/ASTM practice even if not formally standardized.
 | Density | `Density` | ρ | γ | ρ |
 | Elastic modulus (Young’s modulus) | `Elastic_Modulus` | E | E | E |
 | Tensile strength | `Tensile` | σᵤ | σB | Sut |
-| Allowable bending endurance stress | `Stress_Lim_Bnd_Endur` | — | σe | σ_endurance |
-| Allowable bending static stress | `Stress_Lim_Bnd_Stat` | — | σ_allow | σ_allow |
+| Allowable bending endurance stress | `Stress_Lim_Bnd_Endur` | — | σe | S<sub>b,e</sub> |
+| Allowable bending static stress | `Stress_Lim_Bnd_Stat` | — | σa | S<sub>b,allow</sub> |
 | Helix angle | Helix angle | α | — | α |
-| Wire length | Wire length | — | — | L_wire |
-| Safe load | Safe load | — | — | M_safe |
    
 &nbsp; 
 

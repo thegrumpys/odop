@@ -222,14 +222,25 @@ ___
 
 ## Cross-system translate table for variable names
 
-There is not a single world-wide “alphabet” for coil spring symbols.
-Internationally, ISO 2162 (and in Europe, EN ISO 2162) governs how springs (especially cylindrical helical compression springs), 
-are represented and how data is presented on drawings, 
-ISO symbols are widely used in Europe and often appear in CAD libraries and catalog data sheets. 
-In Japan, JIS B 2704 defines calculation formulas and a full symbol set for helical springs; 
-it explicitly lists a mapping between JIS symbols and ISO equivalents. 
-Many US manufacturers and design handbooks use a “de facto” set of symbols, 
-sometimes influenced by SAE/ASTM practice even if not formally standardized.  
+A single, unified “alphabet” for coil‑spring symbols does not exist. 
+Instead, several regional and industry conventions coexist: 
+
+- [ISO](https://en.wikipedia.org/wiki/International_Organization_for_Standardization) 16249 
+defines symbols for helical spring calculations, while ISO 2162 governs how springs — especially 
+cylindrical compression springs—are represented on technical drawings. 
+- In Europe, where [EN](https://en.wikipedia.org/wiki/European_Standard) ISO 16249 and EN ISO 2162 apply, 
+ISO symbols are widely adopted and often appear in CAD libraries and catalog data sheets. 
+- In Japan, [JIS](https://en.wikipedia.org/wiki/Japanese_Industrial_Standards) B 2704 provides a complete 
+symbol set and calculation framework for helical springs, including an explicit mapping to ISO symbols. 
+- In the United States, no single formal standard dominates. 
+Instead, manufacturers and handbooks (e.g., SMI, Machinery’s Handbook) use a “de facto” notation system influenced by long-standing 
+[SAE](https://en.wikipedia.org/wiki/SAE_International)/[ASTM](https://en.wikipedia.org/wiki/ASTM_International) practice.  
+
+The tables below present a cross-system translation of common coil spring quantities. 
+Symbol columns are ordered from the most formally standardized (ISO) to the least standardized (US / Handbook).  
+
+Only ODOP:Spring variable names that have a clear counterpart in at least one of the ISO, JIS, or U.S. symbol 
+systems appear in these tables.
 
 ### Compression Spring — Independent Variables
 
@@ -253,22 +264,23 @@ sometimes influenced by SAE/ASTM practice even if not formally standardized.
 | Deflection <br/> at point 2 | `Deflect_2` | s2 | y2 | δ₂ | 
 | Length at point 1 | `L_1` | L1 | — | L₁ | 
 | Length at point 2 | `L_2` | L2 | — | L₂ | 
-| Stroke (Δ between points 1 & 2) | `L_Stroke` | — | — | Stroke | 
+| Stroke (Δ between points 1 & 2) | `L_Stroke` | Δs | — | ΔL (*1) | 
 | Solid height | `L_Solid` | Lc | Hs | Ls | 
-| Slenderness ratio | `Slenderness` | — | — | Lf/Dm | 
+| Slenderness ratio | `Slenderness` | — | — | Lf/Dm (*2) | 
 | Inside diameter (free) | `ID_Free` | Di | D1 | ID | 
 | Weight (mass) | `Weight` | m | m | m | 
 | Spring index | `Spring_Index` | w | c | C | 
 | Force at solid height | `Force_Solid` | — | — | Fs | 
-| Stress at point 1 | `Stress_1` | τ1 | τ1 | τ₁ | 
-| Stress at point 2 | `Stress_2` | τ2 | τ2 | τ₂ | 
-| Stress at solid | `Stress_Solid` | τs | — | τ_solid | 
+| Stress at point 1 | `Stress_1` | τ1 | τ1 | τ<sub>1</sub> | 
+| Stress at point 2 | `Stress_2` | τ2 | τ2 | τ<sub>2</sub> | 
+| Stress at solid | `Stress_Solid` | τs | — | τ<sub>s</sub> | 
 | Factor of safety <br/> at point 2 | `FS_2` | — | — | FS₂ | 
-| Factor of safety <br/> at solid | `FS_Solid` | — | — | FS_solid | 
-| Fatigue safety factor | `FS_CycleLife` | — | — | FS_fatigue | 
-| Estimated cycle life | `Cycle_Life` | — | — | N_cycles | 
-| % available deflection used | `%_Avail_Deflect` | — | — | % deflect | 
 | Energy between points 1 & 2 | `Energy` | U | U | U |  
+
+*Note 1: U.S. spring handbooks generally do not define a symbol for “stroke” in compression springs. 
+<b>ΔL</b> is a generic mechanics symbol, not a spring-specific U.S. notation.  
+*Note 2: U.S. spring handbooks generally do not define a symbol for “slenderness” in compression springs. 
+However, the expression <b>Lf/Dm</b> is commonly used.  
 
 ### Compression Spring — Calculation Inputs & Additional Quantities
 
@@ -277,11 +289,9 @@ sometimes influenced by SAE/ASTM practice even if not formally standardized.
 | Density | `Density` | ρ | γ | ρ | 
 | Torsion&nbsp;modulus (shear&nbsp;modulus) | `Torsion_Modulus` | G | G | G | 
 | Tensile strength | `Tensile` | σᵤ | σB | Sut | 
-| Allowable static stress | `Stress_Lim_Stat` | — | τ_allow | τ_allow | 
-| Allowable endurance stress | `Stress_Lim_Endur` | — | τe | τ_endurance | 
+| Allowable static stress | `Stress_Lim_Stat` | — | τa | τa | 
+| Allowable endurance stress | `Stress_Lim_Endur` | — | τe | τe | 
 | Helix angle | Helix angle | α | — | α | 
-| Wire length | Wire length | — | — | L_wire | 
-| Safe load | Safe load | — | — | F_safe |  
 
 &nbsp; 
 
