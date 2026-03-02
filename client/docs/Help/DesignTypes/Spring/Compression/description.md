@@ -321,7 +321,7 @@ For compression springs, the Calculation Input `End_Type` has the following poss
 9 | PigtailClosed | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
 10 | PigtailClosed&Ground | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
 | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
-11 | UserSpecified | &nbsp; | &nbsp; |
+11 | UserSpecified | See<br/>discussion<br/>below | &nbsp; |
 12 | UserSpecified&Ground | &nbsp; | &nbsp; |
 
 For a compression spring, "inactive coils" are coils that do not contribute to spring rate. 
