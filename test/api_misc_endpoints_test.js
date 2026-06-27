@@ -100,6 +100,28 @@ describe('Misc API endpoints and empty DB', () => {
         });
     });
 
+    describe('POST /api/v1/register with duplicate email', () => {
+        it('it should fail POST with 409 CONFLICT', (done) => {
+            var connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
+            connection.connect();
+            connection.query(
+                "INSERT INTO user (email, role, token, status) VALUES ('duplicate@example.com','user','DUPTOKEN','active')",
+                function(err) {
+                    connection.end();
+                    if (err) return done(err);
+
+                    chai.request(server)
+                        .post('/api/v1/register')
+                        .send({ email: 'duplicate@example.com', password: 'Valid123', first_name: 'F', last_name: 'L' })
+                        .end((err, res) => {
+                            res.should.have.status(409);
+                            done(err);
+                        });
+                }
+            );
+        });
+    });
+
     describe('POST /api/v1/logout', () => {
         it('it should POST with 200 OK', (done) => {
             chai.request(server)

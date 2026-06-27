@@ -216,6 +216,10 @@ function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+function isDuplicateKeyError(err) {
+  return err && err.code === 'ER_DUP_ENTRY';
+}
+
 function isValidPassword(password) {
   const lengthOk = password.length >= 8;
   const hasLower = /[a-z]/.test(password);
@@ -699,20 +703,32 @@ app.post('/api/v1/register', async (req, res) => {
   const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000); // Fudge
 //  console.log('/register','expiresAt=',expiresAt);
 
+  let conn;
+
   try {
+    conn = await db.getConnection();
+    await conn.beginTransaction();
+
     // Does email already exists
-    const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
-//    console.log('rows=',rows);
-    if (rows.length) {
-      sendMessage(res, 'Email already exists.', 'error', null, 409);
-      return;
-    }
+    // The UNIQUE KEY on user.email is now the authority for this check.
+    // This avoids the race condition where two registrations can both pass a separate SELECT
+    // before either INSERT has completed.
 
     // Create new 'inactive' user with email and password, and confirmation token
     const hashed = await hashPassword(password);
     const userToken = generateUserToken();
-    await db.execute('INSERT INTO user (email, password, first_name, last_name, role, token, status) VALUES (?, ?, ?, ?, ?, ?, ?)', [email, hashed, first_name, last_name, 'user', userToken, 'inactive']);
-    await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [confirmationToken, email, 'confirm', expiresAt]);
+
+    await conn.execute(
+      'INSERT INTO user (email, password, first_name, last_name, role, token, status) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [email, hashed, first_name, last_name, 'user', userToken, 'inactive']
+    );
+
+    await conn.execute(
+      'INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)',
+      [confirmationToken, email, 'confirm', expiresAt]
+    );
+
+    await conn.commit();
 
     // Send confirmation email
     try {
@@ -722,7 +738,16 @@ app.post('/api/v1/register', async (req, res) => {
       sendMessage(res, err.response, 'error', null, 500);
     }
   } catch (err) {
+    if (conn) await conn.rollback();
+
+    if (isDuplicateKeyError(err)) {
+      sendMessage(res, 'Email already exists.', 'error', null, 409);
+      return;
+    }
+
     sendMessage(res, err, 'error', null, 500);
+  } finally {
+    if (conn) conn.release();
   }
 });
 
@@ -743,8 +768,18 @@ app.get('/api/v1/confirm', async (req, res) => {
 
     // If token is null update with a new one, change the user startus to 'active', and delete the token
     const email = rows[0].email;
-    await db.execute('UPDATE user SET status = ? WHERE email = ?', ['active', email]);
-    await db.execute('DELETE FROM token WHERE token = ?', [token]);
+    const [updateResult] = await db.execute(
+      'UPDATE user SET status = ? WHERE email = ? AND status = ?',
+      ['active', email, 'inactive']
+    );
+
+    if (updateResult.affectedRows !== 1) {
+      await db.execute('DELETE FROM token WHERE token = ? AND type = ?', [token, 'confirm']);
+      sendMessage(res, 'No inactive registration found for this confirmation.', 'error', null, 401);
+      return;
+    }
+
+    await db.execute('DELETE FROM token WHERE token = ? AND type = ?', [token, 'confirm']);
     sendMessage(res, 'Registration confirmed.', 'info', null, 200);
   } catch (err) {
     sendMessage(res, err, 'error', null, 500);
@@ -1071,6 +1106,10 @@ app.post('/api/v1/users', adminRequired, async (req, res) => {
     const [result] = await db.execute('INSERT INTO user (email, password, first_name, last_name, role, token, status) VALUES (?, ?, ?, ?, ?, ?, ?)', [email, hashed, first_name, last_name, role || 'user', token || null, status || 'active']);
     sendMessage(res, { id: result.insertId }, '', null, 201);
   } catch (err) {
+    if (isDuplicateKeyError(err)) {
+      sendMessage(res, 'Email already exists.', 'error', null, 409);
+      return;
+    }
     sendMessage(res, err, 'error', null, 500);
   }
 });
@@ -1124,6 +1163,10 @@ app.put('/api/v1/users/:id', adminRequired, async (req, res) => {
       sendMessage(res, {}, '', null, 200);
     }
   } catch (err) {
+    if (isDuplicateKeyError(err)) {
+      sendMessage(res, 'Email already exists.', 'error', null, 409);
+      return;
+    }
     sendMessage(res, err, 'error', null, 500);
   }
 });
