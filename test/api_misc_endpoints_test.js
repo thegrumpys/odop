@@ -100,6 +100,20 @@ describe('Misc API endpoints and empty DB', () => {
         });
     });
 
+    describe('POST /api/v1/register with leading password space', () => {
+        it('it should fail POST with 400 BAD REQUEST', (done) => {
+            chai.request(server)
+                .post('/api/v1/register')
+                .send({ email: 'space@example.com', password: ' Valid123', first_name: 'F', last_name: 'L' })
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.have.nested.property('error.message', 'Password cannot begin or end with spaces.');
+                    res.body.should.have.nested.property('error.field', 'password');
+                    done(err);
+                });
+        });
+    });
+
     describe('POST /api/v1/register with duplicate email', () => {
         it('it should fail POST with 409 CONFLICT', (done) => {
             var connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);

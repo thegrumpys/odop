@@ -274,6 +274,10 @@ function isValidPassword(password) {
   return lengthOk && hasLower && hasUpper && hasNumber;
 }
 
+function hasPasswordBoundaryWhitespace(password) {
+  return password !== password.trim();
+}
+
 function sendMessage(res, message, severity = 'error', field = null, status = 400) {
 //  console.log('sendMessage','message=',message,'severity=',severity,'field=',field,'status=',status);
   const httpStatusCodes = {
@@ -743,6 +747,11 @@ app.post('/api/v1/register', async (req, res) => {
     return;
   }
 
+  if (hasPasswordBoundaryWhitespace(password)) {
+    sendMessage(res, 'Password cannot begin or end with spaces.', 'error', 'password', 400);
+    return;
+  }
+
   const confirmationToken = generateToken();
   const local = new Date(Date.now() + 24 * 60 * 60 * 1000); // UTC + 24 hour
   const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000); // Fudge
@@ -1000,6 +1009,10 @@ app.patch('/api/v1/change-password', async (req, res) => {
       sendMessage(res, 'Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, and one number.', 'error', null, 400);
       return;
     }
+    if (hasPasswordBoundaryWhitespace(password)) {
+      sendMessage(res, 'Password cannot begin or end with spaces.', 'error', 'password', 400);
+      return;
+    }
 
     // Update the password
     const db_email = rows[0].email;
@@ -1132,6 +1145,10 @@ app.post('/api/v1/users', adminRequired, async (req, res) => {
     }
     if (!isValidPassword(password)) {
       sendMessage(res, 'Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, and one number.', 'error', 'password', 400);
+      return;
+    }
+    if (hasPasswordBoundaryWhitespace(password)) {
+      sendMessage(res, 'Password cannot begin or end with spaces.', 'error', 'password', 400);
       return;
     }
     const [rows] = await db.execute('SELECT id FROM user WHERE email = ?', [email]);
