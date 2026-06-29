@@ -167,6 +167,48 @@ async function sendResetEmail(email, first_name, last_name, token) {
   await transporter.sendMail(mailOptions);
 }
 
+async function createResetToken(email) {
+  let conn;
+
+  try {
+    conn = await db.getConnection();
+    await conn.beginTransaction();
+
+    const [rows] = await conn.execute('SELECT * FROM user WHERE email = ? FOR UPDATE', [email]);
+    if (!rows.length) {
+      await conn.rollback();
+      return { user: null, token: null, shouldSendEmail: false };
+    }
+
+    const user = rows[0];
+    const [recentTokens] = await conn.execute(
+      'SELECT token FROM token WHERE email = ? AND type = ? AND expires_at > NOW() AND created_at > DATE_SUB(NOW(), INTERVAL 60 SECOND) ORDER BY created_at DESC LIMIT 1',
+      [email, 'reset']
+    );
+
+    if (recentTokens.length) {
+      await conn.commit();
+      return { user, token: recentTokens[0].token, shouldSendEmail: false };
+    }
+
+    await conn.execute('DELETE FROM token WHERE email = ? AND type = ?', [email, 'reset']);
+
+    const token = generateToken();
+    const local = new Date(Date.now() + 24 * 60 * 60 * 1000); // UTC + 24 hour
+    const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000); // Fudge
+
+    await conn.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [token, email, 'reset', expiresAt]);
+    await conn.commit();
+
+    return { user, token, shouldSendEmail: true };
+  } catch (err) {
+    if (conn) await conn.rollback();
+    throw err;
+  } finally {
+    if (conn) conn.release();
+  }
+}
+
 async function resendEmail(req, res) {
   const { email } = req.body;
   const type = req.query.type;
@@ -192,17 +234,20 @@ async function resendEmail(req, res) {
       await sendConfirmationEmail(email, first_name, last_name, token);
       sendMessage(res, 'Registration confirmation email sent.', 'info', null, 200);
     } else if (type === 'reset') {
-      const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
-      if (!rows.length) {
+      const { user, token, shouldSendEmail } = await createResetToken(email);
+      if (!user) {
         sendMessage(res, 'Unknown email or password, or inactive account.', 'error', null, 401);
         return;
       }
-      const user = rows[0];
-      const token = generateToken();
-      const local = new Date(Date.now() + 24 * 60 * 60 * 1000); // UTC + 24 hour
-      const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000);
-      await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [token, email, 'reset', expiresAt]);
-      await sendResetEmail(email, user.first_name, user.last_name, token);
+      if (shouldSendEmail) {
+        try {
+          await sendResetEmail(email, user.first_name, user.last_name, token);
+        } catch (err) {
+          await db.execute('DELETE FROM token WHERE token = ? AND type = ?', [token, 'reset']);
+          sendMessage(res, err.response, 'error', null, 500);
+          return;
+        }
+      }
       sendMessage(res, 'Reset password email sent.', 'info', null, 200);
     } else {
       sendMessage(res, 'Invalid resend type.', 'error', 'type', 400);
@@ -894,30 +939,22 @@ app.post('/api/v1/reset-password', async (req, res) => {
   }
 
   try {
-    // Does user exist?
-    const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
-    if (!rows.length) {
+    const { user, token, shouldSendEmail } = await createResetToken(email);
+    if (!user) {
       sendMessage(res, 'Unknown email or password, or inactive account.', 'error', null, 401);
       return;
     }
 
-    const user = rows[0];
-//    console.log('/api/v1/reset-password','user=',user);
-    const resetToken = generateToken();
-    const local = new Date(Date.now() + 24 * 60 * 60 * 1000); // UTC + 24 hour
-    const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000); // Fudge
-//  console.log('/api/v1/reset-password','expiresAt=',expiresAt);
-
-    // Create a reset token
-    await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [resetToken, email, 'reset', expiresAt]);
-
-    // Send reset email
-    try {
-      await sendResetEmail(email, user.first_name, user.last_name, resetToken);
-      sendMessage(res, 'Reset password email sent.', 'info', null, 200);
-    } catch (err) {
-      sendMessage(res, err.response, 'error', null, 500);
+    if (shouldSendEmail) {
+      try {
+        await sendResetEmail(email, user.first_name, user.last_name, token);
+      } catch (err) {
+        await db.execute('DELETE FROM token WHERE token = ? AND type = ?', [token, 'reset']);
+        sendMessage(res, err.response, 'error', null, 500);
+        return;
+      }
     }
+    sendMessage(res, 'Reset password email sent.', 'info', null, 200);
   } catch (err) {
     sendMessage(res, err, 'error', null, 500);
   }

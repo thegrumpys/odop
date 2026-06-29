@@ -182,6 +182,46 @@ describe('Misc API endpoints and empty DB', () => {
         });
     });
 
+    describe('POST /api/v1/reset-password with recent reset token', () => {
+        it('it should not create a duplicate reset token', (done) => {
+            var connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
+            connection.connect();
+            connection.query(
+                "INSERT INTO user (email, first_name, last_name, role, token, status) VALUES ('reset@example.com','Reset','User','user','RESETUSER','active')",
+                function(err) {
+                    if (err) { connection.end(); return done(err); }
+                    connection.query(
+                        "INSERT INTO token (token, email, type, expires_at) VALUES ('existing-reset-token','reset@example.com','reset',DATE_ADD(NOW(), INTERVAL 1 HOUR))",
+                        function(err) {
+                            connection.end();
+                            if (err) return done(err);
+
+                            chai.request(server)
+                                .post('/api/v1/reset-password')
+                                .send({ email: 'reset@example.com' })
+                                .end((err, res) => {
+                                    if (err) return done(err);
+                                    res.should.have.status(200);
+
+                                    var verifyConnection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
+                                    verifyConnection.connect();
+                                    verifyConnection.query(
+                                        "SELECT COUNT(*) AS count FROM token WHERE email = 'reset@example.com' AND type = 'reset'",
+                                        function(err, rows) {
+                                            verifyConnection.end();
+                                            if (err) return done(err);
+                                            rows[0].count.should.be.eql(1);
+                                            done();
+                                        }
+                                    );
+                                });
+                        }
+                    );
+                }
+            );
+        });
+    });
+
     describe('POST /api/v1/resend?type=confirm with unknown email', () => {
         it('it should fail POST with 401 UNAUTHORIZED', (done) => {
             chai.request(server)
