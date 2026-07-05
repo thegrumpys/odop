@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
 const fs = require('fs');
 const path = require('path');
 const nodemailer = require('nodemailer');
@@ -1335,5 +1336,11 @@ if (!module.parent) { // If not in a testcase then start listening
     console.log('SERVER:', 'PUBLIC_URL=', process.env.PUBLIC_URL, 'NODE_ENV=', process.env.NODE_ENV, 'starting on port=', port, 'node version=', process.version);
   });
 }
+
+app.closeSessionStore = async function closeSessionStore() {
+  if (sessionStore && typeof sessionStore.close === 'function') {
+    await sessionStore.close();
+  }
+};
 
 module.exports = app; // for testing
