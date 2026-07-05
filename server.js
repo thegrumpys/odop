@@ -56,7 +56,7 @@ const sessionConfig = {
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: 'auto',
     maxAge: 24 * 60 * 60 * 1000 // 1 day
   }
 };
@@ -111,6 +111,9 @@ async function authenticationRequired(req, res, next) {
     return;
   }
   req.uid = match[1];
+  if (req.uid === 'undefined') {
+    req.uid = 'null';
+  }
 //  console.log('SERVER: In authenticationRequired', 'req.uid=', req.uid);
   if (req.uid !== 'null') { // 'null' string, not null value!
     const [rows] = await db.execute('SELECT role FROM user WHERE status = \'active\' AND token = ?', [req.uid]);
