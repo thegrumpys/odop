@@ -37,14 +37,16 @@ export default function ChangePasswordPage() {
         .then((res) => {
           logUsage('event', 'HasResetToken', { event_label: 'Email: ' + email_parm + ' Success: ' + JSON.stringify(res.data.error)});
         }).catch((err) => {
-          setError(err.response.data.error);
+          const backendError = err.response?.data?.error || err.message || "Unknown error";
+          setError(backendError);
           setStatus('error');
-          logUsage('event', 'HasResetToken', { event_label: 'Email: ' + email_parm + ' Error: ' + JSON.stringify(err.response.data.error)});
+          logUsage('event', 'HasResetToken', { event_label: `Email: ${email_parm} Error: ${JSON.stringify(backendError)}`});
         });
     } catch (err) {
-      setError(err.response.data.error);
+      const backendError = err.response?.data?.error || err.message || "Unknown error";
+      setError(backendError);
       setStatus('error');
-      logUsage('event', 'HasResetToken', { event_label: 'Email: ' + email_parm + ' Error: ' + JSON.stringify(err.response.data.error)});
+      logUsage('event', 'HasResetToken', { event_label: `Email: ${email_parm} Error: ${JSON.stringify(backendError)}`});
     }
   }, [searchParams]);
 
@@ -63,15 +65,17 @@ export default function ChangePasswordPage() {
         })
         .catch((err) => {
 //          console.log('ChangePasswordPage.handleSubmit /change-password', 'err=', err);
-          setError(err.response.data.error);
+          const backendError = err.response?.data?.error || err.message || "Unknown error";
+          setError(backendError);
           setStatus('error');
-          logUsage('event', 'ChangePasswordPage', { event_label: 'Email: ' + email + ' Error: ' + JSON.stringify(err.response.data.error)});
+          logUsage('event', 'ChangePasswordPage', { event_label: `Email: ${email} Error: ${JSON.stringify(backendError)}`});
         });
     } catch (err) {
 //      console.error('ChangePasswordPage.handleSubmit', 'err=', err);
-      setError(err.response.data.error);
+      const backendError = err.response?.data?.error || err.message || "Unknown error";
+      setError(backendError);
       setStatus('error');
-      logUsage('event', 'ChangePasswordPage', { event_label: 'Email: ' + email + ' Error: ' + JSON.stringify(err.response.data.error)});
+      logUsage('event', 'ChangePasswordPage', { event_label: `Email: ${email} Error: ${JSON.stringify(backendError)}`});
     }
   };
 //  console.log('ChangePasswordPage', 'status=', status,'error=',error);

@@ -28,7 +28,8 @@ export default function SignOut() {
       dispatch(changeUser(null));
       navigate('/');
     } catch (err) {
-      console.error('SignOut', 'err=', err);
+      const backendError = err.response?.data?.error || err.message || "Unknown error";
+      logUsage('event', 'SignOut', { event_label: `Email: ${authState.email} Error: ${JSON.stringify(backendError)}`});
     }
   }
 
