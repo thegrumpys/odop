@@ -114,7 +114,8 @@ ALTER TABLE `usage_log`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uq_user_email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables

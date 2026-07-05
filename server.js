@@ -194,6 +194,48 @@ async function sendResetEmail(email, first_name, last_name, token) {
   await transporter.sendMail(mailOptions);
 }
 
+async function createResetToken(email) {
+  let conn;
+
+  try {
+    conn = await db.getConnection();
+    await conn.beginTransaction();
+
+    const [rows] = await conn.execute('SELECT * FROM user WHERE email = ? FOR UPDATE', [email]);
+    if (!rows.length) {
+      await conn.rollback();
+      return { user: null, token: null, shouldSendEmail: false };
+    }
+
+    const user = rows[0];
+    const [recentTokens] = await conn.execute(
+      'SELECT token FROM token WHERE email = ? AND type = ? AND expires_at > NOW() AND created_at > DATE_SUB(NOW(), INTERVAL 60 SECOND) ORDER BY created_at DESC LIMIT 1',
+      [email, 'reset']
+    );
+
+    if (recentTokens.length) {
+      await conn.commit();
+      return { user, token: recentTokens[0].token, shouldSendEmail: false };
+    }
+
+    await conn.execute('DELETE FROM token WHERE email = ? AND type = ?', [email, 'reset']);
+
+    const token = generateToken();
+    const local = new Date(Date.now() + 24 * 60 * 60 * 1000); // UTC + 24 hour
+    const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000); // Fudge
+
+    await conn.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [token, email, 'reset', expiresAt]);
+    await conn.commit();
+
+    return { user, token, shouldSendEmail: true };
+  } catch (err) {
+    if (conn) await conn.rollback();
+    throw err;
+  } finally {
+    if (conn) conn.release();
+  }
+}
+
 async function resendEmail(req, res) {
   const { email } = req.body;
   const type = req.query.type;
@@ -219,17 +261,20 @@ async function resendEmail(req, res) {
       await sendConfirmationEmail(email, first_name, last_name, token);
       sendMessage(res, 'Registration confirmation email sent.', 'info', null, 200);
     } else if (type === 'reset') {
-      const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
-      if (!rows.length) {
+      const { user, token, shouldSendEmail } = await createResetToken(email);
+      if (!user) {
         sendMessage(res, 'Unknown email or password, or inactive account.', 'error', null, 401);
         return;
       }
-      const user = rows[0];
-      const token = generateToken();
-      const local = new Date(Date.now() + 24 * 60 * 60 * 1000); // UTC + 24 hour
-      const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000);
-      await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [token, email, 'reset', expiresAt]);
-      await sendResetEmail(email, user.first_name, user.last_name, token);
+      if (shouldSendEmail) {
+        try {
+          await sendResetEmail(email, user.first_name, user.last_name, token);
+        } catch (err) {
+          await db.execute('DELETE FROM token WHERE token = ? AND type = ?', [token, 'reset']);
+          sendMessage(res, err.response, 'error', null, 500);
+          return;
+        }
+      }
       sendMessage(res, 'Reset password email sent.', 'info', null, 200);
     } else {
       sendMessage(res, 'Invalid resend type.', 'error', 'type', 400);
@@ -243,6 +288,10 @@ function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+function isDuplicateKeyError(err) {
+  return err && err.code === 'ER_DUP_ENTRY';
+}
+
 function isValidPassword(password) {
   const lengthOk = password.length >= 8;
   const hasLower = /[a-z]/.test(password);
@@ -250,6 +299,10 @@ function isValidPassword(password) {
   const hasNumber = /[0-9]/.test(password);
 
   return lengthOk && hasLower && hasUpper && hasNumber;
+}
+
+function hasPasswordBoundaryWhitespace(password) {
+  return password !== password.trim();
 }
 
 function sendMessage(res, message, severity = 'error', field = null, status = 400) {
@@ -721,25 +774,42 @@ app.post('/api/v1/register', async (req, res) => {
     return;
   }
 
+  if (hasPasswordBoundaryWhitespace(password)) {
+    sendMessage(res, 'Password cannot begin or end with spaces.', 'error', 'password', 400);
+    return;
+  }
+
   const confirmationToken = generateToken();
   const local = new Date(Date.now() + 24 * 60 * 60 * 1000); // UTC + 24 hour
   const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000); // Fudge
 //  console.log('/register','expiresAt=',expiresAt);
 
+  let conn;
+
   try {
+    conn = await db.getConnection();
+    await conn.beginTransaction();
+
     // Does email already exists
-    const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
-//    console.log('rows=',rows);
-    if (rows.length) {
-      sendMessage(res, 'Email already exists.', 'error', null, 409);
-      return;
-    }
+    // The UNIQUE KEY on user.email is now the authority for this check.
+    // This avoids the race condition where two registrations can both pass a separate SELECT
+    // before either INSERT has completed.
 
     // Create new 'inactive' user with email and password, and confirmation token
     const hashed = await hashPassword(password);
     const userToken = generateUserToken();
-    await db.execute('INSERT INTO user (email, password, first_name, last_name, role, token, status) VALUES (?, ?, ?, ?, ?, ?, ?)', [email, hashed, first_name, last_name, 'user', userToken, 'inactive']);
-    await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [confirmationToken, email, 'confirm', expiresAt]);
+
+    await conn.execute(
+      'INSERT INTO user (email, password, first_name, last_name, role, token, status) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [email, hashed, first_name, last_name, 'user', userToken, 'inactive']
+    );
+
+    await conn.execute(
+      'INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)',
+      [confirmationToken, email, 'confirm', expiresAt]
+    );
+
+    await conn.commit();
 
     // Send confirmation email
     try {
@@ -749,7 +819,16 @@ app.post('/api/v1/register', async (req, res) => {
       sendMessage(res, err.response, 'error', null, 500);
     }
   } catch (err) {
+    if (conn) await conn.rollback();
+
+    if (isDuplicateKeyError(err)) {
+      sendMessage(res, 'Email already exists.', 'error', null, 409);
+      return;
+    }
+
     sendMessage(res, err, 'error', null, 500);
+  } finally {
+    if (conn) conn.release();
   }
 });
 
@@ -770,8 +849,18 @@ app.get('/api/v1/confirm', async (req, res) => {
 
     // If token is null update with a new one, change the user startus to 'active', and delete the token
     const email = rows[0].email;
-    await db.execute('UPDATE user SET status = ? WHERE email = ?', ['active', email]);
-    await db.execute('DELETE FROM token WHERE token = ?', [token]);
+    const [updateResult] = await db.execute(
+      'UPDATE user SET status = ? WHERE email = ? AND status = ?',
+      ['active', email, 'inactive']
+    );
+
+    if (updateResult.affectedRows !== 1) {
+      await db.execute('DELETE FROM token WHERE token = ? AND type = ?', [token, 'confirm']);
+      sendMessage(res, 'No inactive registration found for this confirmation.', 'error', null, 401);
+      return;
+    }
+
+    await db.execute('DELETE FROM token WHERE token = ? AND type = ?', [token, 'confirm']);
     sendMessage(res, 'Registration confirmed.', 'info', null, 200);
   } catch (err) {
     sendMessage(res, err, 'error', null, 500);
@@ -886,30 +975,22 @@ app.post('/api/v1/reset-password', async (req, res) => {
   }
 
   try {
-    // Does user exist?
-    const [rows] = await db.execute('SELECT * FROM user WHERE email = ?', [email]);
-    if (!rows.length) {
+    const { user, token, shouldSendEmail } = await createResetToken(email);
+    if (!user) {
       sendMessage(res, 'Unknown email or password, or inactive account.', 'error', null, 401);
       return;
     }
 
-    const user = rows[0];
-//    console.log('/api/v1/reset-password','user=',user);
-    const resetToken = generateToken();
-    const local = new Date(Date.now() + 24 * 60 * 60 * 1000); // UTC + 24 hour
-    const expiresAt = new Date(local.getTime() + local.getTimezoneOffset() * 60000); // Fudge
-//  console.log('/api/v1/reset-password','expiresAt=',expiresAt);
-
-    // Create a reset token
-    await db.execute('INSERT INTO token (token, email, type, expires_at) VALUES (?, ?, ?, ?)', [resetToken, email, 'reset', expiresAt]);
-
-    // Send reset email
-    try {
-      await sendResetEmail(email, user.first_name, user.last_name, resetToken);
-      sendMessage(res, 'Reset password email sent.', 'info', null, 200);
-    } catch (err) {
-      sendMessage(res, err.response, 'error', null, 500);
+    if (shouldSendEmail) {
+      try {
+        await sendResetEmail(email, user.first_name, user.last_name, token);
+      } catch (err) {
+        await db.execute('DELETE FROM token WHERE token = ? AND type = ?', [token, 'reset']);
+        sendMessage(res, err.response, 'error', null, 500);
+        return;
+      }
     }
+    sendMessage(res, 'Reset password email sent.', 'info', null, 200);
   } catch (err) {
     sendMessage(res, err, 'error', null, 500);
   }
@@ -953,6 +1034,10 @@ app.patch('/api/v1/change-password', async (req, res) => {
 
     if (!isValidPassword(password)) {
       sendMessage(res, 'Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, and one number.', 'error', null, 400);
+      return;
+    }
+    if (hasPasswordBoundaryWhitespace(password)) {
+      sendMessage(res, 'Password cannot begin or end with spaces.', 'error', 'password', 400);
       return;
     }
 
@@ -1089,6 +1174,10 @@ app.post('/api/v1/users', adminRequired, async (req, res) => {
       sendMessage(res, 'Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, and one number.', 'error', 'password', 400);
       return;
     }
+    if (hasPasswordBoundaryWhitespace(password)) {
+      sendMessage(res, 'Password cannot begin or end with spaces.', 'error', 'password', 400);
+      return;
+    }
     const [rows] = await db.execute('SELECT id FROM user WHERE email = ?', [email]);
     if (rows.length) {
       sendMessage(res, 'Email already exists.', 'error', null, 409);
@@ -1098,6 +1187,10 @@ app.post('/api/v1/users', adminRequired, async (req, res) => {
     const [result] = await db.execute('INSERT INTO user (email, password, first_name, last_name, role, token, status) VALUES (?, ?, ?, ?, ?, ?, ?)', [email, hashed, first_name, last_name, role || 'user', token || null, status || 'active']);
     sendMessage(res, { id: result.insertId }, '', null, 201);
   } catch (err) {
+    if (isDuplicateKeyError(err)) {
+      sendMessage(res, 'Email already exists.', 'error', null, 409);
+      return;
+    }
     sendMessage(res, err, 'error', null, 500);
   }
 });
@@ -1151,6 +1244,10 @@ app.put('/api/v1/users/:id', adminRequired, async (req, res) => {
       sendMessage(res, {}, '', null, 200);
     }
   } catch (err) {
+    if (isDuplicateKeyError(err)) {
+      sendMessage(res, 'Email already exists.', 'error', null, 409);
+      return;
+    }
     sendMessage(res, err, 'error', null, 500);
   }
 });

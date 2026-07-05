@@ -78,6 +78,26 @@ describe("Admin User Manager", () => {
       });
   });
 
+  it("should reject duplicate user email on create", (done) => {
+    chai
+      .request(server)
+      .post("/api/v1/users")
+      .set("Authorization", "Bearer ADMINTOKEN")
+      .send({
+        email: "search@example.com",
+        password: "Valid123",
+        first_name: "Duplicate",
+        last_name: "User",
+        role: "user",
+        status: "active",
+        token: "DUPTOKEN",
+      })
+      .end((err, res) => {
+        res.should.have.status(409);
+        done(err);
+      });
+  });
+
   it("should get user list by email", (done) => {
     chai
       .request(server)
@@ -125,6 +145,18 @@ describe("Admin User Manager", () => {
       .send({ token: "UPDATEDTOKEN" })
       .end((err, res) => {
         res.should.have.status(200);
+        done(err);
+      });
+  });
+
+  it("should reject duplicate user email on update", (done) => {
+    chai
+      .request(server)
+      .put(`/api/v1/users/${newUserId}`)
+      .set("Authorization", "Bearer ADMINTOKEN")
+      .send({ email: "search@example.com" })
+      .end((err, res) => {
+        res.should.have.status(409);
         done(err);
       });
   });

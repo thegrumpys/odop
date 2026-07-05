@@ -11,9 +11,9 @@
     "start-debug": "node --inspect-brk server.js",
     "server": "nodemon server.js",
     "heroku-postbuild": "cd client && npm install && npm run build && harp docs build/docs && cd .. && node ./scripts/build_index.js client/build/docs",
-    "test": "mocha --timeout 10000",
-    "test-debug": "node --inspect-brk ./node_modules/.bin/mocha",
-    "coverage": "nyc --reporter=html node_modules/mocha/bin/_mocha --timeout 10000",
+    "test": "mocha --require ./test/setup.js --timeout 10000",
+    "test-debug": "node --inspect-brk ./node_modules/.bin/mocha --require ./test/setup.js",
+    "coverage": "nyc --reporter=html node_modules/mocha/bin/_mocha --require ./test/setup.js --timeout 10000",
     "showcoverage": "open coverage/index.html",
     "harp-compile": "cd client && harp docs public/docs && cd .. && node ./scripts/build_index.js client/public/docs",
     "harp-server": "cd client && harp . --port 8080"

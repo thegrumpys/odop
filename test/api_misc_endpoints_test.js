@@ -100,6 +100,42 @@ describe('Misc API endpoints and empty DB', () => {
         });
     });
 
+    describe('POST /api/v1/register with leading password space', () => {
+        it('it should fail POST with 400 BAD REQUEST', (done) => {
+            chai.request(server)
+                .post('/api/v1/register')
+                .send({ email: 'space@example.com', password: ' Valid123', first_name: 'F', last_name: 'L' })
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.have.nested.property('error.message', 'Password cannot begin or end with spaces.');
+                    res.body.should.have.nested.property('error.field', 'password');
+                    done(err);
+                });
+        });
+    });
+
+    describe('POST /api/v1/register with duplicate email', () => {
+        it('it should fail POST with 409 CONFLICT', (done) => {
+            var connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
+            connection.connect();
+            connection.query(
+                "INSERT INTO user (email, role, token, status) VALUES ('duplicate@example.com','user','DUPTOKEN','active')",
+                function(err) {
+                    connection.end();
+                    if (err) return done(err);
+
+                    chai.request(server)
+                        .post('/api/v1/register')
+                        .send({ email: 'duplicate@example.com', password: 'Valid123', first_name: 'F', last_name: 'L' })
+                        .end((err, res) => {
+                            res.should.have.status(409);
+                            done(err);
+                        });
+                }
+            );
+        });
+    });
+
     describe('POST /api/v1/logout', () => {
         it('it should POST with 200 OK', (done) => {
             chai.request(server)
@@ -157,6 +193,46 @@ describe('Misc API endpoints and empty DB', () => {
                     res.should.have.status(401);
                     done(err);
                 });
+        });
+    });
+
+    describe('POST /api/v1/reset-password with recent reset token', () => {
+        it('it should not create a duplicate reset token', (done) => {
+            var connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
+            connection.connect();
+            connection.query(
+                "INSERT INTO user (email, first_name, last_name, role, token, status) VALUES ('reset@example.com','Reset','User','user','RESETUSER','active')",
+                function(err) {
+                    if (err) { connection.end(); return done(err); }
+                    connection.query(
+                        "INSERT INTO token (token, email, type, expires_at) VALUES ('existing-reset-token','reset@example.com','reset',DATE_ADD(NOW(), INTERVAL 1 HOUR))",
+                        function(err) {
+                            connection.end();
+                            if (err) return done(err);
+
+                            chai.request(server)
+                                .post('/api/v1/reset-password')
+                                .send({ email: 'reset@example.com' })
+                                .end((err, res) => {
+                                    if (err) return done(err);
+                                    res.should.have.status(200);
+
+                                    var verifyConnection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
+                                    verifyConnection.connect();
+                                    verifyConnection.query(
+                                        "SELECT COUNT(*) AS count FROM token WHERE email = 'reset@example.com' AND type = 'reset'",
+                                        function(err, rows) {
+                                            verifyConnection.end();
+                                            if (err) return done(err);
+                                            rows[0].count.should.be.eql(1);
+                                            done();
+                                        }
+                                    );
+                                });
+                        }
+                    );
+                }
+            );
         });
     });
 
