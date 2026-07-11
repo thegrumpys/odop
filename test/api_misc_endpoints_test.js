@@ -114,6 +114,20 @@ describe('Misc API endpoints and empty DB', () => {
         });
     });
 
+    describe('POST /api/v1/register with trailing password space', () => {
+        it('it should fail POST with 400 BAD REQUEST', (done) => {
+            chai.request(server)
+                .post('/api/v1/register')
+                .send({ email: 'space@example.com', password: 'Valid123 ', first_name: 'F', last_name: 'L' })
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.have.nested.property('error.message', 'Password cannot begin or end with spaces.');
+                    res.body.should.have.nested.property('error.field', 'password');
+                    done(err);
+                });
+        });
+    });
+
     describe('POST /api/v1/register with duplicate email', () => {
         it('it should fail POST with 409 CONFLICT', (done) => {
             var connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
@@ -267,6 +281,50 @@ describe('Misc API endpoints and empty DB', () => {
                 .send({ email: 'nouser@example.com', token: 'bad', password: 'Valid123' })
                 .end((err, res) => {
                     res.should.have.status(401);
+                    done(err);
+                });
+        });
+    });
+
+    describe('PATCH /api/v1/change-password with password boundary whitespace', () => {
+        beforeEach((done) => {
+            var connection = mysql.createConnection(process.env.JAWSDB_TEST_URL);
+            connection.connect();
+            connection.query(
+                "INSERT INTO user (email, first_name, last_name, role, token, status) VALUES ('change@example.com','Change','User','user','CHANGEUSER','active')",
+                function(err) {
+                    if (err) { connection.end(); return done(err); }
+                    connection.query(
+                        "INSERT INTO token (token, email, type, expires_at) VALUES ('change-reset-token','change@example.com','reset',DATE_ADD(NOW(), INTERVAL 1 HOUR))",
+                        function(err) {
+                            connection.end();
+                            done(err);
+                        }
+                    );
+                }
+            );
+        });
+
+        it('it should reject a leading password space', (done) => {
+            chai.request(server)
+                .patch('/api/v1/change-password')
+                .send({ email: 'change@example.com', token: 'change-reset-token', password: ' Valid123' })
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.have.nested.property('error.message', 'Password cannot begin or end with spaces.');
+                    res.body.should.have.nested.property('error.field', 'password');
+                    done(err);
+                });
+        });
+
+        it('it should reject a trailing password space', (done) => {
+            chai.request(server)
+                .patch('/api/v1/change-password')
+                .send({ email: 'change@example.com', token: 'change-reset-token', password: 'Valid123 ' })
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.have.nested.property('error.message', 'Password cannot begin or end with spaces.');
+                    res.body.should.have.nested.property('error.field', 'password');
                     done(err);
                 });
         });
