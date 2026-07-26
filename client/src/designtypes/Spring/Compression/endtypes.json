@@ -9,7 +9,7 @@
     [ "TaperedClosed",              2.0,            0.0,          0.5],
     [ "TaperedClosed&Ground",       2.0,            0.5,          0.5],
     [ "PigtailClosed",              2.0,            0.0,          2.0],
-    [ "PigtailClosed&Ground",       2.0,            1.0,          1.0],
+    [ "PigtailClosed&Ground",       2.0,            1.0,          2.0],
     [ "UserSpecifiedOpen",          0.0,            0.0,          0.0],
     [ "UserSpecifiedOpen&Ground",   1.0,            1.0,          0.0],
     [ "UserSpecifiedClosed",        2.0,            0.0,          0.0],
