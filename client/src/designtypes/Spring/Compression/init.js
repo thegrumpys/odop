@@ -123,7 +123,7 @@ export function init(store, p, x) {
       //    /*  copy from end type table to constants  */
       //    /*  check these values.     See AS Design Hdbk. p52  */
 
-//      if (!et_tab[j][eto.end_type].startWith("UserSpecified")) {
+//      if (!(et_tab[j][eto.end_type]).startsWith("UserSpecified")) {
 //        x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
 //        x[o.Grind_Amount] = et_tab[j][eto.grind_amount];
 //        x[o.Closed_Reduction] = et_tab[j][eto.Closed_Reduction];
@@ -217,13 +217,15 @@ export function init(store, p, x) {
 
   if (et_tab[j][eto.end_type] === "TaperedClosed" ||
       et_tab[j][eto.end_type] === "TaperedClosed&Ground" ||
-      et_tab[j][eto.end_type].startWith("UserSpecified")) {
+      et_tab[j][eto.end_type] === "PigtailClosed" ||
+      et_tab[j][eto.end_type] === "PigtailClosed&Ground" ||
+      (et_tab[j][eto.end_type]).startsWith("UserSpecified")) {
     store.dispatch(changeSymbolHidden("Closed_Reduction", false));
   } else {
     store.dispatch(changeSymbolHidden("Closed_Reduction", true));
   }
 
-  if (et_tab[j][eto.end_type].startWith("UserSpecified")) {
+  if ((et_tab[j][eto.end_type]).startsWith("UserSpecified")) {
     store.dispatch(changeSymbolInput("Inactive_Coils", true));
     store.dispatch(changeSymbolInput("Grind_Amount", true));
     store.dispatch(changeSymbolInput("Closed_Reduction", true));
