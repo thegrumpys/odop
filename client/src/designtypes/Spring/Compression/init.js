@@ -123,11 +123,11 @@ export function init(store, p, x) {
       //    /*  copy from end type table to constants  */
       //    /*  check these values.     See AS Design Hdbk. p52  */
 
-      if (et_tab[j][eto.end_type] !== "UserSpecified" && et_tab[j][eto.end_type] !== "UserSpecified&Ground") {
-        x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
-        x[o.Grind_Amount] = et_tab[j][eto.grind_amount];
-        x[o.Taper_Amount] = et_tab[j][eto.taper_amount];
-      }
+//      if (!et_tab[j][eto.end_type].startWith("UserSpecified")) {
+//        x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
+//        x[o.Grind_Amount] = et_tab[j][eto.grind_amount];
+//        x[o.Closed_Reduction] = et_tab[j][eto.Closed_Reduction];
+//      }
 
       store.dispatch(changeSymbolHidden("Material_Type", false));
       store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", false));
@@ -208,7 +208,8 @@ export function init(store, p, x) {
       et_tab[j][eto.end_type] === "DoubleClosed&Ground" ||
       et_tab[j][eto.end_type] === "TaperedClosed&Ground" ||
       et_tab[j][eto.end_type] === "PigtailClosed&Ground" ||
-      et_tab[j][eto.end_type] === "UserSpecified&Ground") {
+      et_tab[j][eto.end_type] === "UserSpecifiedOpen&Ground" ||
+      et_tab[j][eto.end_type] === "UserSpecifiedClosed&Ground") {
     store.dispatch(changeSymbolHidden("Grind_Amount", false));
   } else {
     store.dispatch(changeSymbolHidden("Grind_Amount", true));
@@ -216,21 +217,20 @@ export function init(store, p, x) {
 
   if (et_tab[j][eto.end_type] === "TaperedClosed" ||
       et_tab[j][eto.end_type] === "TaperedClosed&Ground" ||
-      et_tab[j][eto.end_type] === "UserSpecified" ||
-      et_tab[j][eto.end_type] === "UserSpecified&Ground") {
-    store.dispatch(changeSymbolHidden("Taper_Amount", false));
+      et_tab[j][eto.end_type].startWith("UserSpecified")) {
+    store.dispatch(changeSymbolHidden("Closed_Reduction", false));
   } else {
-    store.dispatch(changeSymbolHidden("Taper_Amount", true));
+    store.dispatch(changeSymbolHidden("Closed_Reduction", true));
   }
 
-  if (et_tab[j][eto.end_type] === "UserSpecified" || et_tab[j][eto.end_type] === "UserSpecified&Ground") {
+  if (et_tab[j][eto.end_type].startWith("UserSpecified")) {
     store.dispatch(changeSymbolInput("Inactive_Coils", true));
     store.dispatch(changeSymbolInput("Grind_Amount", true));
-    store.dispatch(changeSymbolInput("Taper_Amount", true));
+    store.dispatch(changeSymbolInput("Closed_Reduction", true));
   } else {
     store.dispatch(changeSymbolInput("Inactive_Coils", false));
     store.dispatch(changeSymbolInput("Grind_Amount", false));
-    store.dispatch(changeSymbolInput("Taper_Amount", false));
+    store.dispatch(changeSymbolInput("Closed_Reduction", false));
   }
 //  console.log('init p=',p,' x=',x);
   return x;

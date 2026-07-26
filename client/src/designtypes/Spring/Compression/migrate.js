@@ -416,7 +416,7 @@ export function migrate(design) {
         design.symbol_table[47].validmax = 2.0;
         design.symbol_table[47].sdlim = 0.0;
         design.symbol_table[47].tooltip = "Fraction of Wire_Dia to grind from top and bottom. For example, 1.0 Wire_Dia split across 0.5 ground from top and 0.5 ground from bottom";
-        design.symbol_table[48].name = 'Taper_Amount'; // Rename it to Grind_Amount
+        design.symbol_table[48].name = 'Closed_Reduction'; // Rename it to Grind_Amount
         design.symbol_table[48].value = 0.0;
         design.symbol_table[48].units = 'Wire_Dia';
         design.symbol_table[48].lmin = 0;
@@ -424,10 +424,10 @@ export function migrate(design) {
         design.symbol_table[48].cmin = 0.0;
         design.symbol_table[48].cmax = 1.0;
         design.symbol_table[48].validmin = 0.0;
-        design.symbol_table[48].validmax = 1.0;
+        design.symbol_table[48].validmax = 2.0;
         design.symbol_table[48].sdlim = 0.0;
-        design.symbol_table[48].tooltip = "Fraction of Wire_Dia to taper the end. For example, 0.5 Wire_Dia cuts the wire in half.";
-        design.symbol_table.splice(46,1); // Delete Add_Coils_Solid (replaced by equation using Grind_Amount and Taper_Amount)
+        design.symbol_table[48].tooltip = "Fraction of Wire_Dia to reduce the end for a closed spring. For example, 0.5 Wire_Dia reduces the end to one half.";
+        design.symbol_table.splice(46,1); // Delete Add_Coils_Solid (replaced by equation using Grind_Amount and Closed_Reduction)
         migrated_design.version = '14';
     case '14':
 

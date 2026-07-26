@@ -750,7 +750,7 @@ export const initialState = {
         },
         {
             "input": true,
-            "name": "Taper_Amount",
+            "name": "Closed_Reduction",
             "value": 0.0,
             "units": "Wire_Dia",
             "lmin": 0,
@@ -758,9 +758,9 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "validmin": 0.0,
-            "validmax": 1.0,
+            "validmax": 2.0,
             "sdlim": 0.0,
-            "tooltip": "Fraction of Wire_Dia to taper the end. For example, 0.5 Wire_Dia cuts the wire in half.",
+            "tooltip": "Fraction of Wire_Dia to reduce the end for a closed spring. For example, 0.5 Wire_Dia reduces the end to one half.",
             "type": "calcinput",
             "hidden": false
         },

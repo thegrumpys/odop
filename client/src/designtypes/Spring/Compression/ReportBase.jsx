@@ -54,11 +54,11 @@ export default function ReportBase(props) {
       base.pitch = (model_symbol_table[o.L_Free].value - (2.0 * model_symbol_table[o.Inactive_Coils].value) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
       break;
     case 7:        // Tapered Closed
-      base.pitch = (model_symbol_table[o.L_Free].value - ((9.0 + 3.0 * model_symbol_table[o.Taper_Amount].value) / 4.0) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
+      base.pitch = (model_symbol_table[o.L_Free].value - ((9.0 + 3.0 * model_symbol_table[o.Closed_Reduction].value) / 8.0) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
       base.len_lbl = "Bar cut len.";
       break;
     case 8:        // Tapered Closed & Ground
-      base.pitch = (model_symbol_table[o.L_Free].value - ((3.0 + model_symbol_table[o.Taper_Amount].value) / 2.0) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
+      base.pitch = (model_symbol_table[o.L_Free].value - ((3.0 + model_symbol_table[o.Closed_Reduction].value) / 4.0) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
       base.len_lbl = "Bar cut len.";
       break;
     case 9:        // Pig-tail Closed
