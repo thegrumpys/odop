@@ -123,11 +123,11 @@ export function init(store, p, x) {
       //    /*  copy from end type table to constants  */
       //    /*  check these values.     See AS Design Hdbk. p52  */
 
-//      if (!(et_tab[j][eto.end_type]).startsWith("UserSpecified")) {
-//        x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
-//        x[o.Grind_Amount] = et_tab[j][eto.grind_amount];
-//        x[o.Closed_Reduction] = et_tab[j][eto.Closed_Reduction];
-//      }
+      if (!(et_tab[j][eto.end_type]).startsWith("UserSpecified")) {
+        x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
+        x[o.Grind_Amount] = et_tab[j][eto.grind_amount];
+        x[o.Closed_Reduction] = et_tab[j][eto.closed_reduction];
+      }
 
       store.dispatch(changeSymbolHidden("Material_Type", false));
       store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", false));
