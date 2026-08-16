@@ -120,15 +120,6 @@ export function init(store, p, x) {
       //    stress_lim_stat =tensile*pc_tensile_stat /100.0;
       x[o.Stress_Lim_Stat] = x[o.Tensile] * x[o.PC_Tensile_Stat] / 100.0;
 
-      //    /*  copy from end type table to constants  */
-      //    /*  check these values.     See AS Design Hdbk. p52  */
-
-      if (!(et_tab[j][eto.end_type]).startsWith("UserSpecified")) {
-        x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
-        x[o.Grind_Amount] = et_tab[j][eto.grind_amount];
-        x[o.Closed_Reduction] = et_tab[j][eto.closed_reduction];
-      }
-
       store.dispatch(changeSymbolHidden("Material_Type", false));
       store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", false));
       store.dispatch(changeSymbolHidden("Process", false));
@@ -203,37 +194,52 @@ export function init(store, p, x) {
       store.dispatch(changeSymbolInput("Stress_Lim_Endur", true));
   }
 
-  if (et_tab[j][eto.end_type] === "Open&Ground" || 
-      et_tab[j][eto.end_type] === "Closed&Ground" ||
-      et_tab[j][eto.end_type] === "DoubleClosed&Ground" ||
-      et_tab[j][eto.end_type] === "TaperedClosed&Ground" ||
-      et_tab[j][eto.end_type] === "PigtailClosed&Ground" ||
-      et_tab[j][eto.end_type] === "UserSpecifiedOpen&Ground" ||
-      et_tab[j][eto.end_type] === "UserSpecifiedClosed&Ground") {
-    store.dispatch(changeSymbolHidden("Grind_Amount", false));
-  } else {
-    store.dispatch(changeSymbolHidden("Grind_Amount", true));
+  //    /*  copy from end type table to constants  */
+  //    /*  check these values.     See AS Design Hdbk. p52  */
+
+  switch (x[o.End_Type_Method]) {
+    default:
+    case 1: // Standard: Override values from end type table
+      x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
+      x[o.Grind_Amount] = et_tab[j][eto.grind_amount];
+      x[o.Closed_Reduction] = et_tab[j][eto.closed_reduction];
+
+      store.dispatch(changeSymbolHidden("End_Type", false));
+      if (et_tab[j][eto.end_type] === "Open&Ground" || 
+          et_tab[j][eto.end_type] === "Closed&Ground" ||
+          et_tab[j][eto.end_type] === "DoubleClosed&Ground" ||
+          et_tab[j][eto.end_type] === "TaperedClosed&Ground" ||
+          et_tab[j][eto.end_type] === "PigtailClosed&Ground") {
+        store.dispatch(changeSymbolHidden("Grind_Amount", false));
+      } else {
+        store.dispatch(changeSymbolHidden("Grind_Amount", true));
+      }
+      if (et_tab[j][eto.end_type] === "TaperedClosed" ||
+          et_tab[j][eto.end_type] === "TaperedClosed&Ground" ||
+          et_tab[j][eto.end_type] === "PigtailClosed" ||
+          et_tab[j][eto.end_type] === "PigtailClosed&Ground") {
+        store.dispatch(changeSymbolHidden("Closed_Reduction", false));
+      } else {
+        store.dispatch(changeSymbolHidden("Closed_Reduction", true));
+      }
+
+      store.dispatch(changeSymbolInput("Inactive_Coils", false));
+      store.dispatch(changeSymbolInput("Grind_Amount", false));
+      store.dispatch(changeSymbolInput("Closed_Reduction", false));
+
+      break;
+
+    case 2: // User specified: Do not override values from end type table
+      store.dispatch(changeSymbolHidden("End_Type", true));
+      store.dispatch(changeSymbolHidden("Grind_Amount", false));
+      store.dispatch(changeSymbolHidden("Closed_Reduction", false));
+
+      store.dispatch(changeSymbolInput("Inactive_Coils", true));
+      store.dispatch(changeSymbolInput("Grind_Amount", true));
+      store.dispatch(changeSymbolInput("Closed_Reduction", true));
+      break;
   }
 
-  if (et_tab[j][eto.end_type] === "TaperedClosed" ||
-      et_tab[j][eto.end_type] === "TaperedClosed&Ground" ||
-      et_tab[j][eto.end_type] === "PigtailClosed" ||
-      et_tab[j][eto.end_type] === "PigtailClosed&Ground" ||
-      (et_tab[j][eto.end_type]).startsWith("UserSpecified")) {
-    store.dispatch(changeSymbolHidden("Closed_Reduction", false));
-  } else {
-    store.dispatch(changeSymbolHidden("Closed_Reduction", true));
-  }
-
-  if ((et_tab[j][eto.end_type]).startsWith("UserSpecified")) {
-    store.dispatch(changeSymbolInput("Inactive_Coils", true));
-    store.dispatch(changeSymbolInput("Grind_Amount", true));
-    store.dispatch(changeSymbolInput("Closed_Reduction", true));
-  } else {
-    store.dispatch(changeSymbolInput("Inactive_Coils", false));
-    store.dispatch(changeSymbolInput("Grind_Amount", false));
-    store.dispatch(changeSymbolInput("Closed_Reduction", false));
-  }
 //  console.log('init p=',p,' x=',x);
   return x;
 

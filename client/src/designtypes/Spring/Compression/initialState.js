@@ -702,6 +702,22 @@ export const initialState = {
         },
         {
             "input": true,
+            "name": "End_Type_Method",
+            "value": 1,
+            "units": "",
+            "format": "table",
+            "table": "Spring/Compression/endtype_method",
+            "lmin": 0,
+            "lmax": 0,
+            "cmin": 0,
+            "cmax": 0,
+            "sdlim": 0.0,
+            "tooltip": "<p>End Type Method - Controls how end types are determined and used.</p><ol><li>Use values from end type table</li><li>User specified end type values</li></ol>",
+            "type": "calcinput",
+            "hidden": false
+        },
+        {
+            "input": true,
             "name": "End_Type",
             "value": 4,
             "units": "",

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import ReportBaseContext from './ReportBaseContext';
 import { Button } from 'react-bootstrap';
 import * as o from './symbol_table_offsets';
+import * as eto from './endtypes_offsets';
 import { getAlertsBySeverity, ERR, WARN, NOTICE, INFO } from '../../../components/Alerts';
 
 export default function Report1() {
@@ -54,7 +55,13 @@ export default function Report1() {
             <td />
             <td>{model_symbol_table[o.End_Type].name}</td>
             <td>=</td>
-            <td className="text-start" colSpan="2">{base.et_tab[model_symbol_table[o.End_Type].value][0]}</td>
+            <td className="text-start" colSpan="2">
+              {model_symbol_table[o.End_Type_Method].value === 1 ?
+                base.et_tab[model_symbol_table[o.End_Type].value][eto.end_type]
+                :
+                base.endTypeValue
+              }
+            </td>
           </tr>
           <tr>
             <td>{model_symbol_table[o.Spring_Index].name}</td>

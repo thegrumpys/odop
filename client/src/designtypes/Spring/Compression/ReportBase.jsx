@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import * as o from './symbol_table_offsets';
 import * as mo from '../mat_offsets';
+import * as eto from './endtypes_offsets';
 import { getAlertsBySeverity } from '../../../components/Alerts';
 import ReportBaseContext from './ReportBaseContext';
 
@@ -194,6 +195,11 @@ export default function ReportBase(props) {
     base.matTypeValue = "User_Specified";
     base.astmFedSpecValue = "N/A";
     base.clWarnString = "Cycle_Life is not computed for User_Specified materials.";
+  }
+  if (model_symbol_table[o.End_Type_Method].value === 1 && model_symbol_table[o.End_Type].value !== 0) {
+    base.endTypeValue = base.et_tab[model_symbol_table[o.End_Type].value][eto.end_type];
+  } else {
+    base.endTypeValue = "User_Specified";
   }
 //        console.log('base.matTypeValue, base.astmFedSpecValue = ', base.matTypeValue, base.astmFedSpecValue);
 

@@ -395,28 +395,25 @@ export function migrate(design) {
         migrated_design.version = '13';
     case '13':
         console.log('Convert from 13 to 14');
-        // Update End_Type
-        if (design.symbol_table[44].value === 5) { // Old "Tapered_C&G"
-            design.symbol_table[44].value = 8; // New "TaperedClosed&Ground"
-        } else if (design.symbol_table[44].value === 6) { // Old "Pig-tail"
-            design.symbol_table[44].value = 10; // New "PigtailClosed&Ground"
-        } else if (design.symbol_table[44].value === 7) { // Old "User_Specified"
-            design.symbol_table[44].value = 11; // New "UserSpecified&Ground"
-        }
-        // Add Grid_Amount calculation
-        design.symbol_table.splice(47,0,Object.assign({},design.symbol_table[46]),Object.assign({},design.symbol_table[46])); // Duplicate Add_Coils_Solid twice in target position
-        design.symbol_table[47].name = 'Grind_Amount'; // Rename it to Grind_Amount
-        design.symbol_table[47].value = 0.0;
-        design.symbol_table[47].units = 'Wire_Dia';
-        design.symbol_table[47].lmin = 0;
-        design.symbol_table[47].lmax = 0;
-        design.symbol_table[47].cmin = 0.0;
-        design.symbol_table[47].cmax = 1.0;
-        design.symbol_table[47].validmin = 0.0;
-        design.symbol_table[47].validmax = 2.0;
-        design.symbol_table[47].sdlim = 0.0;
-        design.symbol_table[47].tooltip = "Fraction of Wire_Dia to grind from top and bottom. For example, 1.0 Wire_Dia split across 0.5 ground from top and 0.5 ground from bottom";
-        design.symbol_table[48].name = 'Closed_Reduction'; // Rename it to Grind_Amount
+        // Add End_Type_Method immediately before End_Type
+        design.symbol_table.splice(44,0,Object.assign({},design.symbol_table[44])); // Duplicate End_Type in target position
+        design.symbol_table[44].input = true;
+        design.symbol_table[44].name = 'End_Type_Method';
+        design.symbol_table[44].value = 1;
+        design.symbol_table[44].units = '';
+        design.symbol_table[44].format = 'table';
+        design.symbol_table[44].table = 'Spring/Compression/endtype_method';
+        design.symbol_table[44].lmin = 0;
+        design.symbol_table[44].lmax = 0;
+        design.symbol_table[44].cmin = 0;
+        design.symbol_table[44].cmax = 0;
+        design.symbol_table[44].sdlim = 0.0;
+        design.symbol_table[44].tooltip = '<p>End Type Method - Controls how end types are determined and used.</p><ol><li>Use values from end type table</li><li>User specified end type values</li></ol>';
+        design.symbol_table[44].type = 'calcinput';
+        design.symbol_table[44].hidden = false;
+        // Add Grind_Amount calculation
+        design.symbol_table.splice(48,0,Object.assign({},design.symbol_table[47]),Object.assign({},design.symbol_table[47])); // Duplicate Add_Coils_Solid twice in target position
+        design.symbol_table[48].name = 'Grind_Amount'; // Rename it to Grind_Amount
         design.symbol_table[48].value = 0.0;
         design.symbol_table[48].units = 'Wire_Dia';
         design.symbol_table[48].lmin = 0;
@@ -426,8 +423,28 @@ export function migrate(design) {
         design.symbol_table[48].validmin = 0.0;
         design.symbol_table[48].validmax = 2.0;
         design.symbol_table[48].sdlim = 0.0;
-        design.symbol_table[48].tooltip = "Fraction of Wire_Dia to reduce the end for a closed spring. For example, 0.5 Wire_Dia reduces the end to one half.";
-        design.symbol_table.splice(46,1); // Delete Add_Coils_Solid (replaced by equation using Grind_Amount and Closed_Reduction)
+        design.symbol_table[48].tooltip = "Fraction of Wire_Dia to grind from top and bottom. For example, 1.0 Wire_Dia split across 0.5 ground from top and 0.5 ground from bottom";
+        design.symbol_table[49].name = 'Closed_Reduction'; // Rename it to Closed_Reduction
+        design.symbol_table[49].value = 0.0;
+        design.symbol_table[49].units = 'Wire_Dia';
+        design.symbol_table[49].lmin = 0;
+        design.symbol_table[49].lmax = 0;
+        design.symbol_table[49].cmin = 0.0;
+        design.symbol_table[49].cmax = 1.0;
+        design.symbol_table[49].validmin = 0.0;
+        design.symbol_table[49].validmax = 2.0;
+        design.symbol_table[49].sdlim = 0.0;
+        design.symbol_table[49].tooltip = "Fraction of Wire_Dia to reduce the end for a closed spring. For example, 0.5 Wire_Dia reduces the end to one half.";
+        design.symbol_table.splice(47,1); // Delete Add_Coils_Solid (replaced by equation using Grind_Amount and Closed_Reduction)
+        // Update End_Type
+        if (design.symbol_table[45].value === 5) { // Old "Tapered_C&G"
+            design.symbol_table[45].value = 8; // New "TaperedClosed&Ground"
+        } else if (design.symbol_table[44].value === 6) { // Old "Pig-tail"
+            design.symbol_table[45].value = 10; // New "PigtailClosed&Ground"
+        } else if (design.symbol_table[44].value === 7) { // Old "User_Specified"
+            design.symbol_table[44].value = 2; // New "UserSpecified"
+            design.symbol_table[45].value = 4; // Old "Closed&Ground"
+        }
         migrated_design.version = '14';
     case '14':
 
