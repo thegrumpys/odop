@@ -159,7 +159,7 @@ Stress_Lim_Stat  |      | allowable stress limit; static application (torsion)
 End_Type       |        | character string that is used to determine values for `Inactive_Coils`, `L_Solid` and `Pitch`;  See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes)
 Inactive_Coils |        | number of inactive coils <br/> (depends on `End_Type`) 
 Grind_Amount   |        | number of wire diameters removed by a grinding operation; <br/> See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes) 
-Closed_Reduction   |        | the solid height reduction, measured in wire diameters, created by a tapering operation on the wire diameter of the first and last coil(s) of a hot-wound compression spring.
+End_Reduction  |        | the solid height reduction, measured in wire diameters, created by a tapering operation on the wire diameter of the first and last coil(s) of a hot-wound compression spring.
 Catalog_Name   |        | name of the catalog containing the most recently selected catalog entry 
 Catalog_Number |        | catalog number of the most recent catalog entry 
 
@@ -329,27 +329,27 @@ For a compression spring, "inactive coils" are coils that do not contribute to s
 End types determine the baseline number of inactive coils, which the user may override 
 when `End_Type` is set to UserSpecified. 
 Specifically, the end type selection directly determines the value of
-`Inactive_Coils` and,Closed_Reductionable, `Grind_Amount` and/or `Closed_Reduction`. 
+`Inactive_Coils` and,End_Reductionable, `Grind_Amount` and/or `End_Reduction`. 
 Other variables such as `L_Solid` and `Pitch` are then affected indirectly. 
-When `End_Type` is set to one of the pre-defined (non UserSpecified) selectClosed_Reductiontive_Coils`, `Grind_Amount` and `Closed_Reduction` are set by ODOP:Spring 
+When `End_Type` is set to one of the pre-defined (non UserSpecified) selectEnd_Reductiontive_Coils`, `Grind_Amount` and `End_Reduction` are set by ODOP:Spring 
 from values contained in an internal table. 
 When the value of `End_Type` is UserSpecified or UserSpecified&Ground, 
 the user may set these values by making an entry in the corresponding numeric entry field.  
 
-<!--- Additional information may be found in the documentatioClosed_Reductionor EQNSET.  --> 
+<!--- Additional information may be found in the documentatioEnd_Reductionor EQNSET.  --> 
 
-#### Grind_Amount, Closed_Reduction 
+#### Grind_Amount, End_Reduction 
 In order to enable user customization plus facilitate the treatment of less common compression 
 spring end types such as the "Tapered, Closed and Ground" configuration associated with hot-wound springs, 
-ODOP:Spring has added theClosed_Reductionulation Input) terms `Grind_Amount` and `Closed_Reduction` 
+ODOP:Spring has added theEnd_Reductionulation Input) terms `Grind_Amount` and `End_Reduction` 
 into the solid height calculation. 
 These terms each have units of wire diameter. 
 This is done to separate the solid height calculation from the rate equation.  
 
-As mentioned previously, the `End_Type` drop-down selection list sClosed_Reductiones of `Inactive_Coils`, 
-`Grind_Amount` and `Closed_Reduction` from an internal table. 
-`Grind_Amount` is theClosed_Reductionire diameters removed by a grinding operation. 
-`Closed_Reduction` is the solid height reduction, measured in wire diameters, 
+As mentioned previously, the `End_Type` drop-down selection list sEnd_Reductiones of `Inactive_Coils`, 
+`Grind_Amount` and `End_Reduction` from an internal table. 
+`Grind_Amount` is theEnd_Reductionire diameters removed by a grinding operation. 
+`End_Reduction` is the solid height reduction, measured in wire diameters, 
 created by tapering the wire diameter of the first and last coils of a hot-wound compression spring.  
 
 The "tapered" terminology used here refers only to local wire‑diameter reduction, not to a conical spring shape. 
@@ -357,7 +357,7 @@ Specifically, the “tapered” end types do not refer to a conical (non-cylindr
 the term refers only to tapering of the end coil's `Wire_Dia` to reduce solid height.
 
 The Open&Ground and Closed&Ground end types each have a `Grind_Amount` value of 1.0. 
-This value results from removing 50% of a wire diameter at each enClosed_Reductione TaperedClosed&Ground end type, `Grind_Amount` and `Closed_Reduction` each 
+This value results from removing 50% of a wire diameter at each enEnd_Reductione TaperedClosed&Ground end type, `Grind_Amount` and `End_Reduction` each 
 have a value of 0.5. 
 The tapering operation reduces the solid height by 25% of a wire diameter at each end. 
 Another 25% of a wire diameter reduction on solid height is due to the tapered end conforming to the previous coil. 
@@ -365,15 +365,15 @@ Thus, the tapered section becomes a skewed, truncated cone.
 Finally, the grinding operation removes 25% of a nominal wire diameter (50% of the tapered dimension) 
 from each end of the spring. 
 In summary, the TaperedClosed&Ground end type has a solid height of 1.5 wire diameters less than the Closed end type
-and 0.5 wire diameters less tClosed_Reductioned&Ground end type.  
+and 0.5 wire diameters less tEnd_Reductioned&Ground end type.  
 
-Note that the `Grind_Amount` and `Closed_Reduction` terms are not included in the wire length 
+Note that the `Grind_Amount` and `End_Reduction` terms are not included in the wire length 
 and weight calculations. 
-These values are only anClosed_Reductionfor the solid height calculation.  
+These values are only anEnd_Reductionfor the solid height calculation.  
 
-The `Grind_Amount` and `Closed_Reduction` terms may be used with `Inactive_Coils` to represent 
+The `Grind_Amount` and `End_Reduction` terms may be used with `Inactive_Coils` to represent 
 unusual end configurations. 
-For example, springs that have a different end type atClosed_ReductionTo establish the value of `Inactive_Coils` or `Grind_Amount` or `Closed_Reduction` directly, 
+For example, springs that have a different end type atEnd_ReductionTo establish the value of `Inactive_Coils` or `Grind_Amount` or `End_Reduction` directly, 
 first select a value of UserSpecified or UserSpecified&Ground for `End_Type`.  
 
 &nbsp; 
@@ -543,4 +543,3 @@ Commented out ... transferred from early in this file ... Preserving for possibl
                  D E F L E C T I O N
 &nbsp;   
  -->
-

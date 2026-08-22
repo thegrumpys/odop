@@ -766,7 +766,7 @@ export const initialState = {
         },
         {
             "input": true,
-            "name": "Closed_Reduction",
+            "name": "End_Reduction",
             "value": 0.0,
             "units": "Wire_Dia",
             "lmin": 0,

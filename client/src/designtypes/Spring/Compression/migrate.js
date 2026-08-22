@@ -424,7 +424,7 @@ export function migrate(design) {
         design.symbol_table[48].validmax = 2.0;
         design.symbol_table[48].sdlim = 0.0;
         design.symbol_table[48].tooltip = "Fraction of Wire_Dia to grind from top and bottom. For example, 1.0 Wire_Dia split across 0.5 ground from top and 0.5 ground from bottom";
-        design.symbol_table[49].name = 'Closed_Reduction'; // Rename it to Closed_Reduction
+        design.symbol_table[49].name = 'End_Reduction'; // Rename it to End_Reduction
         design.symbol_table[49].value = 0.0;
         design.symbol_table[49].units = 'Wire_Dia';
         design.symbol_table[49].lmin = 0;
@@ -435,7 +435,7 @@ export function migrate(design) {
         design.symbol_table[49].validmax = 2.0;
         design.symbol_table[49].sdlim = 0.0;
         design.symbol_table[49].tooltip = "Fraction of Wire_Dia to reduce the end for a closed spring. For example, 0.5 Wire_Dia reduces the end to one half.";
-        design.symbol_table.splice(47,1); // Delete Add_Coils_Solid (replaced by equation using Grind_Amount and Closed_Reduction)
+        design.symbol_table.splice(47,1); // Delete Add_Coils_Solid (replaced by equation using Grind_Amount and End_Reduction)
         // Update End_Type
         if (design.symbol_table[45].value === 5) { // Old "Tapered_C&G"
             design.symbol_table[45].value = 8; // New "TaperedClosed&Ground"

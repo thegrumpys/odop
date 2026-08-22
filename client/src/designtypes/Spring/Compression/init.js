@@ -202,7 +202,7 @@ export function init(store, p, x) {
     case 1: // Standard: Override values from end type table
       x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
       x[o.Grind_Amount] = et_tab[j][eto.grind_amount];
-      x[o.Closed_Reduction] = et_tab[j][eto.closed_reduction];
+      x[o.End_Reduction] = et_tab[j][eto.end_reduction];
 
       store.dispatch(changeSymbolHidden("End_Type", false));
       if (et_tab[j][eto.end_type] === "Open&Ground" || 
@@ -218,25 +218,25 @@ export function init(store, p, x) {
           et_tab[j][eto.end_type] === "TaperedClosed&Ground" ||
           et_tab[j][eto.end_type] === "PigtailClosed" ||
           et_tab[j][eto.end_type] === "PigtailClosed&Ground") {
-        store.dispatch(changeSymbolHidden("Closed_Reduction", false));
+        store.dispatch(changeSymbolHidden("End_Reduction", false));
       } else {
-        store.dispatch(changeSymbolHidden("Closed_Reduction", true));
+        store.dispatch(changeSymbolHidden("End_Reduction", true));
       }
 
       store.dispatch(changeSymbolInput("Inactive_Coils", false));
       store.dispatch(changeSymbolInput("Grind_Amount", false));
-      store.dispatch(changeSymbolInput("Closed_Reduction", false));
+      store.dispatch(changeSymbolInput("End_Reduction", false));
 
       break;
 
     case 2: // User specified: Do not override values from end type table
       store.dispatch(changeSymbolHidden("End_Type", true));
       store.dispatch(changeSymbolHidden("Grind_Amount", false));
-      store.dispatch(changeSymbolHidden("Closed_Reduction", false));
+      store.dispatch(changeSymbolHidden("End_Reduction", false));
 
       store.dispatch(changeSymbolInput("Inactive_Coils", true));
       store.dispatch(changeSymbolInput("Grind_Amount", true));
-      store.dispatch(changeSymbolInput("Closed_Reduction", true));
+      store.dispatch(changeSymbolInput("End_Reduction", true));
       break;
   }
 
