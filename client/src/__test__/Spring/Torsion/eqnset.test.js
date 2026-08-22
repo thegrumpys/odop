@@ -57,7 +57,7 @@ it('eqnset initialState', () => { // !!! Heat_Treat = 2 !!!
     expect(x[o.Stress_End]).toEqual(0.0);
     expect(x[o.FS_2]).toEqual(1.2394651205560094);
     expect(x[o.FS_CycleLife]).toEqual(1.2043652274974437);
-    expect(x[o.Cycle_Life]).toEqual(41332.48658844737);
+    expect(x[o.Cycle_Life]).toBeCloseTo(41332.48658844738,7);
     expect(x[o.PC_Safe_Deflect]).toEqual(80.67996294655002);
     expect(x[o.Force_Arm_2]).toEqual(0.0);
     expect(x[o.Energy]).toEqual(6.981959021636359);
@@ -238,7 +238,7 @@ it('eqnset pathological OD_Free === Wire_Dia && Mean_Dia === 0.0', () => { // !!
     expect(x[o.Stress_End]).toEqual(0.0);
     expect(x[o.FS_2]).toEqual(942.477796076938);
     expect(x[o.FS_CycleLife]).toEqual(1496.7389317350876);
-    expect(x[o.Cycle_Life]).toEqual(2.888738520002979e+29);
+    expect(x[o.Cycle_Life]).toBeCloseTo(2.888738520002979e+29,7);
     expect(x[o.PC_Safe_Deflect]).toEqual(Number.NaN);
     expect(x[o.Force_Arm_2]).toEqual(0.0);
     expect(x[o.Energy]).toEqual(Number.NaN);

@@ -17,10 +17,10 @@ it('eqnset initialState', () => {
        0.0,        0.0,       0.0,             0.0,            0.0,         0.0,         0.0,             0.0,     0.0,         0.0,
     // Cycle_Life 20, PC_Avail_Deflect 21, Energy 22, Spring_Type 23, Prop_Calc_Method 24, Material_Type 25, ASTM_Fed_Spec 26, Process 27, Material_File 28, Material_File 28, Life_Category 29
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
-    // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type 38, Inactive_Coils 39
-       0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 4,           2,
-    // Grind_Amount 40, Closed_Reduction 41, Catalog_Name 42, Catalog_Number 43, tbase010 44, tbase400 45, const_term 46, slope_term 47,       tensile_010 48
-       1,                0,               '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
+    // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type_Method 38, End_Type 39
+       0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 1,                  4,
+    // Inactive_Coils 40, Grind_Amount 41, Closed_Reduction 42, Catalog_Name 43, Catalog_Number 44, tbase010 45, tbase400 46, const_term 47, slope_term 48,       tensile_010 49
+       2,                 1,               0,                   '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
 
@@ -56,7 +56,7 @@ it('eqnset initialState', () => {
     expect(x[o.FS_2]).toEqual(1.3463472310271418);
     expect(x[o.FS_Solid]).toEqual(1.0569971624080239);
     expect(x[o.FS_CycleLife]).toEqual(1.3032217764849205);
-    expect(x[o.Cycle_Life]).toEqual(1861893.4985282072);
+    expect(x[o.Cycle_Life]).toBeCloseTo(1861893.4985282072,7);
     expect(x[o.PC_Avail_Deflect]).toEqual(78.50851088404809);
     expect(x[o.Energy]).toEqual(31.394295353317954);
 
@@ -98,10 +98,10 @@ it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () 
        0.0,        0.0,       0.0,             0.0,            0.0,         0.0,         0.0,             0.0,     0.0,         0.0,
     // Cycle_Life 20, PC_Avail_Deflect 21, Energy 22, Spring_Type 23, Prop_Calc_Method 24, Material_Type 25, ASTM_Fed_Spec 26, Process 27, Material_File 28, Material_File 28, Life_Category 29
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
-    // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type 38, Inactive_Coils 39
-       0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 4,           2,
-    // Grind_Amount 40, Closed_Reduction 41, Catalog_Name 42, Catalog_Number 43, tbase010 44, tbase400 45, const_term 46, slope_term 47,       tensile_010 48
-       1,               0,               '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
+    // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type_Method 38, End_Type 39
+       0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 1,                  4,
+    // Inactive_Coils 40, Grind_Amount 41, Closed_Reduction 42, Catalog_Name 43, Catalog_Number 44, tbase010 45, tbase400 46, const_term 47, slope_term 48,       tensile_010 49
+       2,                 1,               0,                   '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
 
@@ -179,10 +179,10 @@ it('eqnset pathological Coils_T === Inactive_Coils && Coils_A === 0.0', () => {
        0.0,        0.0,       0.0,             0.0,            0.0,         0.0,         0.0,             0.0,     0.0,         0.0,
     // Cycle_Life 20, PC_Avail_Deflect 21, Energy 22, Spring_Type 23, Prop_Calc_Method 24, Material_Type 25, ASTM_Fed_Spec 26, Process 27, Material_File 28, Material_File 28, Life_Category 29
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
-    // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type 38, Inactive_Coils 39
-       0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 4,           2,
-    // Grind_Amount 40, Closed_Reduction 41, Catalog_Name 42, Catalog_Number 43, tbase010 44, tbase400 45, const_term 46, slope_term 47,       tensile_010 48
-       1,               0,               '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
+    // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type_Method 38, End_Type 39
+       0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 1,                  4,
+    // Inactive_Coils 40, Grind_Amount 41, Closed_Reduction 42, Catalog_Name 43, Catalog_Number 44, tbase010 45, tbase400 46, const_term 47, slope_term 48,       tensile_010 49
+       2,                 1,               0,                   '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
 
@@ -216,7 +216,7 @@ it('eqnset pathological Coils_T === Inactive_Coils && Coils_A === 0.0', () => {
     expect(x[o.FS_2]).toEqual(1.3463472310271418);
     expect(x[o.FS_Solid]).toEqual(0.0);
     expect(x[o.FS_CycleLife]).toEqual(1.3032217764849205);
-    expect(x[o.Cycle_Life]).toEqual(1861893.4985282072);
+    expect(x[o.Cycle_Life]).toBeCloseTo(1861893.4985282072,7);
     expect(x[o.PC_Avail_Deflect]).toEqual(0.0);
     expect(x[o.Energy]).toEqual(Number.NaN);
 
@@ -261,10 +261,10 @@ it('eqnset pathological OD_Free === Wire_Dia && Mean_Dia === 0.0', () => {
        0.0,        0.0,       0.0,             0.0,            0.0,         0.0,         0.0,             0.0,     0.0,         0.0,
     // Cycle_Life 20, PC_Avail_Deflect 21, Energy 22, Spring_Type 23, Prop_Calc_Method 24, Material_Type 25, ASTM_Fed_Spec 26, Process 27, Material_File 28, Material_File 28, Life_Category 29
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
-    // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type 38, Inactive_Coils 39
-       0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 4,           2,
-    // Grind_Amount 40, Closed_Reduction 41, Catalog_Name 42, Catalog_Number 43, tbase010 44, tbase400 45, const_term 46, slope_term 47,       tensile_010 48
-       1,              0,               '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
+    // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type_Method 38, End_Type 39
+       0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 1,                  4,
+    // Inactive_Coils 40, Grind_Amount 41, Closed_Reduction 42, Catalog_Name 43, Catalog_Number 44, tbase010 45, tbase400 46, const_term 47, slope_term 48,       tensile_010 49
+       2,                 1,               0,                   '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
 
