@@ -37,6 +37,12 @@ Please adhere to the following standards when contributing code:
 - **Pull Requests:** Submit well-described pull requests.
 - **Commit Messages:** Use descriptive commit messages.
 
+## Quality Assurance
+
+- **Verification:** Always verify that your changes are complete and correct after making modifications. Do not assume a task is finished without confirming the results.
+- **Cross-checking:** When renaming variables, file names, or references, search the entire workspace to ensure all occurrences have been updated.
+- **Final Checks:** Perform a final verification at the end of each task to confirm completion before reporting results.
+
 ## Project-Specific Notes
 
 - Connect to database using mysql2 and axios when and where possible.

@@ -19,8 +19,8 @@ it('eqnset initialState', () => {
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
     // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type_Method 38, End_Type 39
        0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 1,                  4,
-    // Inactive_Coils 40, Grind_Amount 41, End_Reduction 42, Catalog_Name 43, Catalog_Number 44, tbase010 45, tbase400 46, const_term 47, slope_term 48,       tensile_010 49
-       2,                 1,               0,                   '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
+    // End_Geometry, Inactive_Coils 40, Grind_Amount 41, End_Reduction 42, Catalog_Name 43, Catalog_Number 44, tbase010 45, tbase400 46, const_term 47, slope_term 48,       tensile_010 49
+       2,            2,                 1,               0,                   '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
 
@@ -100,8 +100,8 @@ it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () 
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
     // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type_Method 38, End_Type 39
        0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 1,                  4,
-    // Inactive_Coils 40, Grind_Amount 41, End_Reduction 42, Catalog_Name 43, Catalog_Number 44, tbase010 45, tbase400 46, const_term 47, slope_term 48,       tensile_010 49
-       2,                 1,               0,                   '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
+    // End_Geometry, Inactive_Coils 40, Grind_Amount 41, End_Reduction 42, Catalog_Name 43, Catalog_Number 44, tbase010 45, tbase400 46, const_term 47, slope_term 48,       tensile_010 49
+       2,            2,                 1,               0,                   '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
 
@@ -181,8 +181,8 @@ it('eqnset pathological Coils_T === Inactive_Coils && Coils_A === 0.0', () => {
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
     // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type_Method 38, End_Type 39
        0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 1,                  4,
-    // Inactive_Coils 40, Grind_Amount 41, End_Reduction 42, Catalog_Name 43, Catalog_Number 44, tbase010 45, tbase400 46, const_term 47, slope_term 48,       tensile_010 49
-       2,                 1,               0,                   '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
+    // End_Geometry, Inactive_Coils 40, Grind_Amount 41, End_Reduction 42, Catalog_Name 43, Catalog_Number 44, tbase010 45, tbase400 46, const_term 47, slope_term 48,       tensile_010 49
+       4,            2,                 1,               0,                   '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
 
@@ -263,8 +263,8 @@ it('eqnset pathological OD_Free === Wire_Dia && Mean_Dia === 0.0', () => {
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
     // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type_Method 38, End_Type 39
        0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 1,                  4,
-    // Inactive_Coils 40, Grind_Amount 41, End_Reduction 42, Catalog_Name 43, Catalog_Number 44, tbase010 45, tbase400 46, const_term 47, slope_term 48,       tensile_010 49
-       2,                 1,               0,                   '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
+    // End_Geometry, Inactive_Coils 40, Grind_Amount 41, End_Reduction 42, Catalog_Name 43, Catalog_Number 44, tbase010 45, tbase400 46, const_term 47, slope_term 48,       tensile_010 49
+       4,            2,                 1,               0,                   '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
 

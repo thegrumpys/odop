@@ -200,11 +200,15 @@ export function init(store, p, x) {
   switch (x[o.End_Type_Method]) {
     default:
     case 1: // Standard: Override values from end type table
+      // Set End_Geometry based on End_Type (using index from endgeometry.json)
+      x[o.End_Geometry] = et_tab[j][eto.end_geometry];
       x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
       x[o.Grind_Amount] = et_tab[j][eto.grind_amount];
       x[o.End_Reduction] = et_tab[j][eto.end_reduction];
 
       store.dispatch(changeSymbolHidden("End_Type", false));
+      store.dispatch(changeSymbolHidden("End_Geometry", true));
+      store.dispatch(changeSymbolHidden("Inactive_Coils", false));
       if (et_tab[j][eto.end_type] === "Open&Ground" || 
           et_tab[j][eto.end_type] === "Closed&Ground" ||
           et_tab[j][eto.end_type] === "DoubleClosed&Ground" ||
@@ -223,6 +227,7 @@ export function init(store, p, x) {
         store.dispatch(changeSymbolHidden("End_Reduction", true));
       }
 
+      store.dispatch(changeSymbolInput("End_Geometry", false));
       store.dispatch(changeSymbolInput("Inactive_Coils", false));
       store.dispatch(changeSymbolInput("Grind_Amount", false));
       store.dispatch(changeSymbolInput("End_Reduction", false));
@@ -231,9 +236,12 @@ export function init(store, p, x) {
 
     case 2: // User specified: Do not override values from end type table
       store.dispatch(changeSymbolHidden("End_Type", true));
+      store.dispatch(changeSymbolHidden("End_Geometry", false));
+      store.dispatch(changeSymbolHidden("Inactive_Coils", false));
       store.dispatch(changeSymbolHidden("Grind_Amount", false));
       store.dispatch(changeSymbolHidden("End_Reduction", false));
 
+      store.dispatch(changeSymbolInput("End_Geometry", true));
       store.dispatch(changeSymbolInput("Inactive_Coils", true));
       store.dispatch(changeSymbolInput("Grind_Amount", true));
       store.dispatch(changeSymbolInput("End_Reduction", true));

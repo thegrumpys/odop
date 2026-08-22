@@ -45,16 +45,17 @@ export const Stress_Lim_Endur = 42;
 export const Stress_Lim_Stat = 43;
 export const End_Type_Method = 44;
 export const End_Type = 45;
-export const Inactive_Coils = 46;
-export const Grind_Amount = 47;
-export const End_Reduction = 48;
-export const Catalog_Name = 49;
-export const Catalog_Number = 50;
-export const tbase010 = 51;
-export const tbase400 = 52;
-export const const_term = 53;
-export const slope_term = 54;
-export const tensile_010 = 55;
+export const End_Geometry = 46;
+export const Inactive_Coils = 47;
+export const Grind_Amount = 48;
+export const End_Reduction = 49;
+export const Catalog_Name = 50;
+export const Catalog_Number = 51;
+export const tbase010 = 52;
+export const tbase400 = 53;
+export const const_term = 54;
+export const slope_term = 55;
+export const tensile_010 = 56;
 
 // Labels (Properties)
 export const COMMENT = 0;

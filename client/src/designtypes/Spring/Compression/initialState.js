@@ -734,6 +734,22 @@ export const initialState = {
         },
         {
             "input": true,
+            "name": "End_Geometry",
+            "value": 1,
+            "units": "",
+            "format": "table",
+            "table": "Spring/Compression/endgeometry",
+            "lmin": 0,
+            "lmax": 0,
+            "cmin": 0,
+            "cmax": 0,
+            "sdlim": 0.0,
+            "tooltip": "End geometry of the spring<br/>Open, Closed, Tapered, or Pigtail",
+            "type": "calcinput",
+            "hidden": false
+        },
+        {
+            "input": true,
             "name": "Inactive_Coils",
             "value": 2.0,
             "units": "coils",

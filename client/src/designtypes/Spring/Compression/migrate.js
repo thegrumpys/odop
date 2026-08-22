@@ -395,8 +395,8 @@ export function migrate(design) {
         migrated_design.version = '13';
     case '13':
         console.log('Convert from 13 to 14');
-        // Add End_Type_Method immediately before End_Type
-        design.symbol_table.splice(44,0,Object.assign({},design.symbol_table[44])); // Duplicate End_Type in target position
+        // Add End_Type_Method immediately after Stress_Lim_Stat
+        design.symbol_table.splice(43,0,Object.assign({},design.symbol_table[43])); // Duplicate Stress_Lim_Stat at index 43 and rename index 44 to End_Type_Method
         design.symbol_table[44].input = true;
         design.symbol_table[44].name = 'End_Type_Method';
         design.symbol_table[44].value = 1;
@@ -411,9 +411,24 @@ export function migrate(design) {
         design.symbol_table[44].tooltip = '<p>End Type Method - Controls how end types are determined and used.</p><ol><li>Use values from end type table</li><li>User specified end type values</li></ol>';
         design.symbol_table[44].type = 'calcinput';
         design.symbol_table[44].hidden = false;
-        // Add Grind_Amount calculation
-        design.symbol_table.splice(48,0,Object.assign({},design.symbol_table[47]),Object.assign({},design.symbol_table[47])); // Duplicate Add_Coils_Solid twice in target position
-        design.symbol_table[48].name = 'Grind_Amount'; // Rename it to Grind_Amount
+        // Add End_Geometry immediately after End_Type
+        design.symbol_table.splice(45,0,Object.assign({},design.symbol_table[45])); // Duplicate End_Type at index 45 and rename index 46 to End_Geometry
+        design.symbol_table[46].name = 'End_Geometry';
+        design.symbol_table[46].value = 1;
+        design.symbol_table[46].units = '';
+        design.symbol_table[46].format = 'table';
+        design.symbol_table[46].table = 'Spring/Compression/endgeometry';
+        design.symbol_table[46].lmin = 0;
+        design.symbol_table[46].lmax = 0;
+        design.symbol_table[46].cmin = 0;
+        design.symbol_table[46].cmax = 0;
+        design.symbol_table[46].sdlim = 0.0;
+        design.symbol_table[46].tooltip = 'End geometry of the spring<br/>Open, Closed, Tapered, or Pigtail';
+        design.symbol_table[46].type = 'calcinput';
+        design.symbol_table[46].hidden = false;
+        // Add Grind_Amount immediately after Inactive_Coils
+        design.symbol_table.splice(47,0,Object.assign({},design.symbol_table[47])); // Duplicate Inactive_Coils at index 47 and rename index 48 to Grind_Amount
+        design.symbol_table[48].name = 'Grind_Amount';
         design.symbol_table[48].value = 0.0;
         design.symbol_table[48].units = 'Wire_Dia';
         design.symbol_table[48].lmin = 0;
@@ -424,7 +439,11 @@ export function migrate(design) {
         design.symbol_table[48].validmax = 2.0;
         design.symbol_table[48].sdlim = 0.0;
         design.symbol_table[48].tooltip = "Fraction of Wire_Dia to grind from top and bottom. For example, 1.0 Wire_Dia split across 0.5 ground from top and 0.5 ground from bottom";
-        design.symbol_table[49].name = 'End_Reduction'; // Rename it to End_Reduction
+        design.symbol_table[48].type = 'calcinput';
+        design.symbol_table[48].hidden = false;
+        // Add End_Reduction immediately after Grind_Amount
+        design.symbol_table.splice(48,0,Object.assign({},design.symbol_table[48])); // Duplicate Grind_Amount at index 48 and rename index 49 to End_Reduction
+        design.symbol_table[49].name = 'End_Reduction';
         design.symbol_table[49].value = 0.0;
         design.symbol_table[49].units = 'Wire_Dia';
         design.symbol_table[49].lmin = 0;
@@ -435,15 +454,39 @@ export function migrate(design) {
         design.symbol_table[49].validmax = 2.0;
         design.symbol_table[49].sdlim = 0.0;
         design.symbol_table[49].tooltip = "Fraction of Wire_Dia to reduce the end for a closed spring. For example, 0.5 Wire_Dia reduces the end to one half.";
-        design.symbol_table.splice(47,1); // Delete Add_Coils_Solid (replaced by equation using Grind_Amount and End_Reduction)
-        // Update End_Type
-        if (design.symbol_table[45].value === 5) { // Old "Tapered_C&G"
-            design.symbol_table[45].value = 8; // New "TaperedClosed&Ground"
-        } else if (design.symbol_table[44].value === 6) { // Old "Pig-tail"
-            design.symbol_table[45].value = 10; // New "PigtailClosed&Ground"
-        } else if (design.symbol_table[44].value === 7) { // Old "User_Specified"
-            design.symbol_table[44].value = 2; // New "UserSpecified"
-            design.symbol_table[45].value = 4; // Old "Closed&Ground"
+        design.symbol_table[49].type = 'calcinput';
+        design.symbol_table[49].hidden = false;
+        // Update End_Geometry and End_Type
+        switch (design.symbol_table[45].value) {
+          case 1: // Old "Open"
+            design.symbol_table[45].value = 1; // New End_Type "Open"
+            design.symbol_table[46].value = 1; // New End_Geometry "Open"
+            break;
+          case 2: // Old "Open&Ground"
+            design.symbol_table[45].value = 2; // New End_Type "Open&Ground"
+            design.symbol_table[46].value = 1; // New End_Geometry "Open"
+            break;
+          case 3: // Old "Closed"
+            design.symbol_table[45].value = 3; // New End_Type "Closed"
+            design.symbol_table[46].value = 2; // New End_Geometry "Closed"
+            break;
+          case 4: // Old "Closed&Ground"
+            design.symbol_table[45].value = 4; // New End_Type "Closed&Ground"
+            design.symbol_table[46].value = 2; // New End_Geometry "Closed"
+            break;
+          case 5: // Old "Tapered_C&G"
+            design.symbol_table[45].value = 8; // New End_Type "TaperedClosed&Ground"
+            design.symbol_table[46].value = 3; // New End_Geometry "Tapered"
+            break;
+          case 6: // Old "Pig-tail"
+            design.symbol_table[45].value = 10; // New End_Type "PigtailClosed&Ground"
+            design.symbol_table[46].value = 4; // New End_Geometry "Pigtail"
+            break;
+          case 7: // Old "User_Specified"
+            design.symbol_table[44].value = 2; // New "UserSpecified" End_Type_Method
+            design.symbol_table[45].value = 4; // New End_Type "Closed&Ground" (default for user specified)
+            design.symbol_table[46].value = 2; // New End_Geometry "Closed" (default for user specified)
+            break;
         }
         migrated_design.version = '14';
     case '14':

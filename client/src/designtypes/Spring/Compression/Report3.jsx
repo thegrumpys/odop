@@ -369,3 +369,13 @@ export default function Report3() {
     </>
   );
 }
+
+// Component to display end type value after migrating old End_Type values
+function EndTypeDisplay({ endTypeValue, base, eto }) {
+  // Map old End_Type values to new End_Type values for table lookup
+  var endTypeValue_temp = endTypeValue;
+  if (endTypeValue_temp === 5) endTypeValue_temp = 8;  // Tapered_C&G → TaperedClosed&Ground
+  else if (endTypeValue_temp === 6) endTypeValue_temp = 10;  // Pig-tail → PigtailClosed&Ground
+  // End_Type 1-4 and 7 don't need conversion (but 7 should not be reached since End_Type_Method=2)
+  return base.et_tab[endTypeValue_temp][eto.end_type];
+}
