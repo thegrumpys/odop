@@ -49,10 +49,10 @@ export default function ReportBase(props) {
       base.pitch = (model_symbol_table[o.L_Free].value - model_symbol_table[o.Inactive_Coils].value * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
       break;
     case 5:        // Double Closed
-      base.pitch = (model_symbol_table[o.L_Free].value - (2.0 * model_symbol_table[o.Inactive_Coils].value + 1.0) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
+      base.pitch = (model_symbol_table[o.L_Free].value - (model_symbol_table[o.Inactive_Coils].value + 1.0) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
       break;
     case 6:        // Double Closed & Ground
-      base.pitch = (model_symbol_table[o.L_Free].value - (2.0 * model_symbol_table[o.Inactive_Coils].value) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
+      base.pitch = (model_symbol_table[o.L_Free].value - (model_symbol_table[o.Inactive_Coils].value) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
       break;
     case 7:        // Tapered Closed
       base.pitch = (model_symbol_table[o.L_Free].value - ((9.0 + 3.0 * model_symbol_table[o.End_Reduction].value) / 8.0) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
@@ -85,8 +85,8 @@ export default function ReportBase(props) {
   var sq1 = model_symbol_table[o.L_Free].value;
   var sq2 = model_symbol_table[o.Coils_T].value * Math.PI * model_symbol_table[o.Mean_Dia].value;
   base.wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2);
-  if (model_symbol_table[o.End_Type].value === 5)  /*  calculate developed length of tapered ends based on 2 ends * pi * wire diameter * 0.625 */
-    base.wire_len_t = base.wire_len_t - 3.926 * model_symbol_table[o.Wire_Dia].value;
+  if (model_symbol_table[o.End_Geometry].value === 3)  /*  calculate developed length of Tapered ends based on 2 ends * pi * wire diameter * 0.625 */
+    base.wire_len_t = base.wire_len_t - 3.92699082 * model_symbol_table[o.Wire_Dia].value;
 
   base.wgt1000 = 1000.0 * model_symbol_table[o.Weight].value;
 

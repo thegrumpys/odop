@@ -719,7 +719,7 @@ export const initialState = {
         {
             "input": true,
             "name": "End_Type",
-            "value": 4,
+            "value": 4, // Closed&Ground
             "units": "",
             "format": "table",
             "table": "Spring/Compression/endtypes",
@@ -735,7 +735,7 @@ export const initialState = {
         {
             "input": true,
             "name": "End_Geometry",
-            "value": 1,
+            "value": 2, // Closed
             "units": "",
             "format": "table",
             "table": "Spring/Compression/endgeometry",
@@ -767,7 +767,7 @@ export const initialState = {
         {
             "input": true,
             "name": "Grind_Amount",
-            "value": 0.0,
+            "value": 1.0,
             "units": "Wire_Dia",
             "lmin": 0,
             "lmax": 0,
