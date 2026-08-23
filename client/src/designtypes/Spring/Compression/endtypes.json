@@ -6,8 +6,8 @@
     [ "Closed&Ground",         2,              2.0,              1.0,            0.0],
     [ "DoubleClosed",          2,              4.0,              0.0,            0.0],
     [ "DoubleClosed&Ground",   2,              4.0,              1.0,            0.0],
-    [ "TaperedClosed",         3,              2.0,              0.0,            0.5],
-    [ "TaperedClosed&Ground",  3,              2.0,              0.5,            0.5],
+    [ "TaperedClosed",         3,              2.0,              0.0,            1.0],
+    [ "TaperedClosed&Ground",  3,              2.0,              0.5,            1.0],
     [ "PigtailClosed",         4,              2.0,              0.0,            2.0],
     [ "PigtailClosed&Ground",  4,              2.0,              1.0,            2.0]
 ]

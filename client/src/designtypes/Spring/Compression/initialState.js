@@ -792,7 +792,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": 2.0,
             "sdlim": 0.0,
-            "tooltip": "Fraction of Wire_Dia to reduce the end for a closed spring. For example, 0.5 Wire_Dia reduces the end to one half.",
+            "tooltip": "Fraction of Wire_Dia to reduce the end to reach coil closure. Applies to TaperedClosed, TaperedClosed&Ground, PigtailClosed and PigtailClosed&Ground standard end types only. Look up 'End Type' in Help for more details.",
             "type": "calcinput",
             "hidden": false
         },

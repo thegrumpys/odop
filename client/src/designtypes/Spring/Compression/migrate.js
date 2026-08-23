@@ -456,22 +456,21 @@ export function migrate(design) {
         design.symbol_table[49].tooltip = "Fraction of Wire_Dia to reduce the end for a closed spring. For example, 0.5 Wire_Dia reduces the end to one half.";
         design.symbol_table[49].type = 'calcinput';
         design.symbol_table[49].hidden = false;
+        // Delete Add_Coils_Solid (replaced by equation using Grind_Amount and Closed_Reduction)
+        design.symbol_table.splice(50,1);
+
         // Update End_Geometry and End_Type
         switch (design.symbol_table[45].value) {
           case 1: // Old "Open"
-            design.symbol_table[45].value = 1; // New End_Type "Open"
             design.symbol_table[46].value = 1; // New End_Geometry "Open"
             break;
           case 2: // Old "Open&Ground"
-            design.symbol_table[45].value = 2; // New End_Type "Open&Ground"
             design.symbol_table[46].value = 1; // New End_Geometry "Open"
             break;
           case 3: // Old "Closed"
-            design.symbol_table[45].value = 3; // New End_Type "Closed"
             design.symbol_table[46].value = 2; // New End_Geometry "Closed"
             break;
           case 4: // Old "Closed&Ground"
-            design.symbol_table[45].value = 4; // New End_Type "Closed&Ground"
             design.symbol_table[46].value = 2; // New End_Geometry "Closed"
             break;
           case 5: // Old "Tapered_C&G"
