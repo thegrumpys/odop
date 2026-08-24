@@ -416,7 +416,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.1,
-            "tooltip": "Factor of safety to achieve the target cycle life category.<br/>Uses Soderberg calculation.<br/>See description in on-line Help.",
+            "tooltip": "Factor of safety to achieve the target cycle life category.<br/>Uses Soderberg calculation.<br/>See description in on-line Help",
             "type": "equationset",
             "hidden": false
         },
@@ -432,7 +432,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 10000.0,
-            "tooltip": "Rough estimate of the average number of cycles to failure when cycling between point 1 and point 2.<br/>Uses modified Goodman calculation.<br/> See Report 2 & on-line Help.",
+            "tooltip": "Rough estimate of the average number of cycles to failure when cycling between point 1 and point 2.<br/>Uses modified Goodman calculation.<br/> See Report 2 & on-line Help",
             "type": "equationset",
             "hidden": false
         },
@@ -568,7 +568,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "Cycle life target.<br/><b>Important:</b> Confirm that FS_CycleLife MIN constraint is enabled. This is necessary to utilize the selected %_Tensile_Endur for the material.",
+            "tooltip": "Cycle life target.<br/><b>Important:</b> Confirm that FS_CycleLife MIN constraint is enabled. This is necessary to utilize the selected %_Tensile_Endur for the material",
             "type": "calcinput",
             "hidden": false
         },
@@ -632,7 +632,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Wire tensile strength (computed as a function of wire diameter when Prop_Calc_Method=1).<br/>See on-line Help for details.",
+            "tooltip": "Wire tensile strength (computed as a function of wire diameter when Prop_Calc_Method=1).<br/>See on-line Help for details",
             "type": "calcinput",
             "hidden": false
         },
@@ -734,17 +734,33 @@ export const initialState = {
         },
         {
             "input": true,
-            "name": "End_Geometry",
+            "name": "End_Closure",
             "value": 2, // Closed
             "units": "",
             "format": "table",
-            "table": "Spring/Compression/endgeometry",
+            "table": "Spring/Compression/endclosure",
             "lmin": 0,
             "lmax": 0,
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "End geometry of the spring<br/>Open, Closed, Tapered, or Pigtail",
+            "tooltip": "End closure of the spring<br/>Open or Closed",
+            "type": "calcinput",
+            "hidden": false
+        },
+        {
+            "input": true,
+            "name": "Closed_End_Geometry",
+            "value": 1, // Single
+            "units": "",
+            "format": "table",
+            "table": "Spring/Compression/closedendgeometry",
+            "lmin": 0,
+            "lmax": 0,
+            "cmin": 0,
+            "cmax": 0,
+            "sdlim": 0.0,
+            "tooltip": "End closed coil geometry of the spring<br/>Single, Double, Tapered, or Pigtail",
             "type": "calcinput",
             "hidden": false
         },
@@ -760,7 +776,7 @@ export const initialState = {
             "validmin": -Number.MIN_VALUE,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Number of coils not contributing to deflection.<br/>Depends on End_Type.",
+            "tooltip": "Number of coils not contributing to deflection.<br/>Depends on End_Type",
             "type": "calcinput",
             "hidden": false
         },
@@ -776,13 +792,13 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": 2.0,
             "sdlim": 0.0,
-            "tooltip": "Fraction of Wire_Dia to grind from top and bottom. For example, 1.0 Wire_Dia split across 0.5 ground from top and 0.5 ground from bottom",
+            "tooltip": "Total axial amount ground from both ends, expressed in units of Wire_Dia and divided equally between them. For example, 1.0 removes 0.5 × Wire_Dia from each end",
             "type": "calcinput",
             "hidden": false
         },
         {
             "input": true,
-            "name": "End_Reduction",
+            "name": "Taper_Amount",
             "value": 0.0,
             "units": "Wire_Dia",
             "lmin": 0,
@@ -792,7 +808,23 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": 2.0,
             "sdlim": 0.0,
-            "tooltip": "Fraction of Wire_Dia to reduce the end to reach coil closure. Applies to TaperedClosed, TaperedClosed&Ground, PigtailClosed and PigtailClosed&Ground standard end types only. Look up 'End Type' in Help for more details.",
+            "tooltip": "Total wire-diameter reduction distributed equally across both ends, expressed in units of Wire_Dia. For example, 1.0 reduces the wire diameter by 0.5 × Wire_Dia at each end",
+            "type": "calcinput",
+            "hidden": false
+        },
+        {
+            "input": true,
+            "name": "Pigtail_Amount",
+            "value": 0.0,
+            "units": "Wire_Dia",
+            "lmin": 0,
+            "lmax": 0,
+            "cmin": 0,
+            "cmax": 0,
+            "validmin": 0.0,
+            "validmax": 2.0,
+            "sdlim": 0.0,
+            "tooltip": "Total axial collapse of the pigtail coils across both ends, expressed in units of wire diameter. A value of 2.0 represents one wire diameter collapsing into each end",
             "type": "calcinput",
             "hidden": false
         },

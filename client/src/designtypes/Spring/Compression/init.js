@@ -200,14 +200,16 @@ export function init(store, p, x) {
   switch (x[o.End_Type_Method]) {
     default:
     case 1: // Standard: Override values from end type table
-      // Set End_Geometry based on End_Type (using index from endgeometry.json)
-      x[o.End_Geometry] = et_tab[j][eto.end_geometry];
+      x[o.End_Closure] = et_tab[j][eto.end_closure];
+      x[o.Closed_End_Geometry] = et_tab[j][eto.closed_end_geometry];
       x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
       x[o.Grind_Amount] = et_tab[j][eto.grind_amount];
-      x[o.End_Reduction] = et_tab[j][eto.end_reduction];
+      x[o.Taper_Amount] = et_tab[j][eto.taper_amount];
+      x[o.Pigtail_Amount] = et_tab[j][eto.pigtail_amount];
 
       store.dispatch(changeSymbolHidden("End_Type", false));
-      store.dispatch(changeSymbolHidden("End_Geometry", true));
+      store.dispatch(changeSymbolHidden("End_Closure", true));
+      store.dispatch(changeSymbolHidden("Closed_End_Geometry", true));
       store.dispatch(changeSymbolHidden("Inactive_Coils", false));
       if (et_tab[j][eto.end_type] === "Open&Ground" || 
           et_tab[j][eto.end_type] === "Closed&Ground" ||
@@ -219,32 +221,46 @@ export function init(store, p, x) {
         store.dispatch(changeSymbolHidden("Grind_Amount", true));
       }
       if (et_tab[j][eto.end_type] === "TaperedClosed" ||
-          et_tab[j][eto.end_type] === "TaperedClosed&Ground" ||
-          et_tab[j][eto.end_type] === "PigtailClosed" ||
-          et_tab[j][eto.end_type] === "PigtailClosed&Ground") {
-        store.dispatch(changeSymbolHidden("End_Reduction", false));
+          et_tab[j][eto.end_type] === "TaperedClosed&Ground") {
+        store.dispatch(changeSymbolHidden("Taper_Amount", false));
       } else {
-        store.dispatch(changeSymbolHidden("End_Reduction", true));
+        store.dispatch(changeSymbolHidden("Taper_Amount", true));
+      }
+      if (et_tab[j][eto.end_type] === "PigtailClosed" ||
+          et_tab[j][eto.end_type] === "PigtailClosed&Ground") {
+        store.dispatch(changeSymbolHidden("Pigtail_Amount", false));
+      } else {
+        store.dispatch(changeSymbolHidden("Pigtail_Amount", true));
       }
 
-      store.dispatch(changeSymbolInput("End_Geometry", false));
+      store.dispatch(changeSymbolInput("End_Closure", false));
+      store.dispatch(changeSymbolInput("Closed_End_Geometry", false));
       store.dispatch(changeSymbolInput("Inactive_Coils", false));
       store.dispatch(changeSymbolInput("Grind_Amount", false));
-      store.dispatch(changeSymbolInput("End_Reduction", false));
+      store.dispatch(changeSymbolInput("Taper_Amount", false));
+      store.dispatch(changeSymbolInput("Pigtail_Amount", false));
 
       break;
 
     case 2: // User specified: Do not override values from end type table
       store.dispatch(changeSymbolHidden("End_Type", true));
-      store.dispatch(changeSymbolHidden("End_Geometry", false));
+      store.dispatch(changeSymbolHidden("End_Closure", false));
+      if (x[o.End_Closure] === 1) { // Open
+        store.dispatch(changeSymbolHidden("Closed_End_Geometry", true));
+      } else {
+        store.dispatch(changeSymbolHidden("Closed_End_Geometry", false));
+      }
       store.dispatch(changeSymbolHidden("Inactive_Coils", false));
       store.dispatch(changeSymbolHidden("Grind_Amount", false));
-      store.dispatch(changeSymbolHidden("End_Reduction", false));
+      store.dispatch(changeSymbolHidden("Taper_Amount", false));
+      store.dispatch(changeSymbolHidden("Pigtail_Amount", false));
 
-      store.dispatch(changeSymbolInput("End_Geometry", true));
+      store.dispatch(changeSymbolInput("End_Closure", true));
+      store.dispatch(changeSymbolInput("Closed_End_Geometry", true));
       store.dispatch(changeSymbolInput("Inactive_Coils", true));
       store.dispatch(changeSymbolInput("Grind_Amount", true));
-      store.dispatch(changeSymbolInput("End_Reduction", true));
+      store.dispatch(changeSymbolInput("Taper_Amount", true));
+      store.dispatch(changeSymbolInput("Pigtail_Amount", true));
       break;
   }
 

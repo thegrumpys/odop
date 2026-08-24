@@ -1,13 +1,18 @@
 [
-    [ "End_Type",             "End_Geometry", "Inactive_Coils", "Grind_Amount", "End_Reduction" ],
-    [ "Open",                  1,              0.0,              0.0,            0.0],
-    [ "Open&Ground",           1,              1.0,              1.0,            0.0],
-    [ "Closed",                2,              2.0,              0.0,            0.0],
-    [ "Closed&Ground",         2,              2.0,              1.0,            0.0],
-    [ "DoubleClosed",          2,              4.0,              0.0,            0.0],
-    [ "DoubleClosed&Ground",   2,              4.0,              1.0,            0.0],
-    [ "TaperedClosed",         3,              2.0,              0.0,            1.0],
-    [ "TaperedClosed&Ground",  3,              2.0,              0.5,            1.0],
-    [ "PigtailClosed",         4,              2.0,              0.0,            2.0],
-    [ "PigtailClosed&Ground",  4,              2.0,              1.0,            2.0]
+  [ "End_Type",             "End_Closure", "Closed_End_Geometry", "Inactive_Coils", "Grind_Amount", "Taper_Amount", "Pigtail_Amount" ],
+
+  [ "Open",                  1,             1,                     0.0,              0.0,            0.0,            0.0 ],
+  [ "Open&Ground",           1,             1,                     1.0,              1.0,            0.0,            0.0 ],
+
+  [ "Closed",                2,             1,                     2.0,              0.0,            0.0,            0.0 ],
+  [ "Closed&Ground",         2,             1,                     2.0,              1.0,            0.0,            0.0 ],
+
+  [ "DoubleClosed",          2,             2,                     4.0,              0.0,            0.0,            0.0 ],
+  [ "DoubleClosed&Ground",   2,             2,                     4.0,              1.0,            0.0,            0.0 ],
+
+  [ "TaperedClosed",         2,             3,                     2.0,              0.0,            1.0,            0.0 ],
+  [ "TaperedClosed&Ground",  2,             3,                     2.0,              0.5,            1.0,            0.0 ],
+
+  [ "PigtailClosed",         2,             4,                     2.0,              0.0,            0.0,            2.0 ],
+  [ "PigtailClosed&Ground",  2,             4,                     2.0,              1.0,            0.0,            2.0 ]
 ]
