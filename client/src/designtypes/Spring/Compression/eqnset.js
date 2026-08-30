@@ -6,84 +6,59 @@ import * as eco from './endclosure_offsets';
 export function wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils, closedEndGeometry, endClosure, inactiveCoils, taperAmount = 0.0, pigtailAmount = 0.0, grindAmount = 0.0) {
     const meanDiameter = outsideDiameter - wireDiameter;
     const circumference = Math.PI * meanDiameter;
+    let length;
 
     switch (endClosure) {
-    case eco.closed:
-        break;
     case eco.open:
     default:
-        return Math.hypot(freeLength, totalCoils * circumference);
-    }
+        length = Math.hypot(freeLength, totalCoils * circumference);
+        break;
+    case eco.closed: {
+        const endWireDiameter = closedEndGeometry === cego.tapered ?
+            wireDiameter * (1.0 - taperAmount / 2.0) : wireDiameter;
+        let endPitch = (wireDiameter + endWireDiameter) / 2.0;
+        let endAllowance = endWireDiameter;
+        let endMeanDiameter = meanDiameter;
+        let endCoils = inactiveCoils / 2.0; // Per end
+        let transitionTurns = 0.5; // Per end
 
-    let transitionTurns = 0.5; // Per end
+        if (closedEndGeometry === cego.pigtail) {
+            const springIndex = meanDiameter / wireDiameter;
+            endMeanDiameter = meanDiameter * 0.5;
+            endPitch = wireDiameter * (1.0 - pigtailAmount / 2.0);
+            endAllowance = (1.0 - grindAmount) * wireDiameter;
 
-    if (closedEndGeometry === cego.pigtail) {
-        const springIndex = meanDiameter / wireDiameter;
-        const pigtailMeanDiameter = meanDiameter * 0.5;
-        const pigtailRadius = pigtailMeanDiameter / 2.0;
-        const bodyRadius = meanDiameter / 2.0;
-        let endCoils;
-
-        if (springIndex >= 7.0) {
-            endCoils = 0.65;
-            transitionTurns = 0.5;
-        } else if (springIndex <= 4.5) {
-            endCoils = 0.25;
-            transitionTurns = 1.0;
-        } else {
-            const indexReduction = 7.0 - springIndex;
-            endCoils = 0.65 - 0.07 * indexReduction - 0.036 * indexReduction * indexReduction;
-            transitionTurns = 0.5 + 0.2 * indexReduction;
+            if (springIndex >= 7.0) {
+                endCoils = 0.65;
+            } else if (springIndex <= 4.5) {
+                endCoils = 0.25;
+                transitionTurns = 1.0;
+            } else {
+                const indexReduction = 7.0 - springIndex;
+                endCoils = 0.65 - 0.07 * indexReduction - 0.036 * indexReduction * indexReduction;
+                transitionTurns = 0.5 + 0.2 * indexReduction;
+            }
         }
 
         const middleCoils = totalCoils - 2.0 * endCoils - 2.0 * transitionTurns;
-        const freeLengthAdjustment =
-            (inactiveCoils + 1.0 - grindAmount - pigtailAmount) * wireDiameter;
         const bodyPitch =
-            (freeLength - freeLengthAdjustment) /
+            (freeLength - endAllowance - (2.0 * endCoils + transitionTurns) * endPitch) /
             (middleCoils + transitionTurns);
-        const endLength = 2.0 * endCoils * Math.PI * pigtailMeanDiameter;
+        const endLength = 2.0 * endCoils * Math.hypot(Math.PI * endMeanDiameter, endPitch);
+        const transitionPitch = (endPitch + bodyPitch) / 2.0;
+        // Approximate each transition using mean pitch/diameter and its radial change.
+        const transitionLength = 2.0 * Math.hypot(
+            transitionTurns * Math.PI * (endMeanDiameter + meanDiameter) / 2.0,
+            (meanDiameter - endMeanDiameter) / 2.0,
+            transitionTurns * transitionPitch
+        );
         const middleLength = middleCoils * Math.hypot(circumference, bodyPitch);
-        const transitionSteps = 64;
-        let transitionSum = 0.0;
-
-        for (let i = 0; i <= transitionSteps; ++i) {
-            const s = i / transitionSteps;
-            const smoothRadius = s * s * s * (10.0 + s * (-15.0 + 6.0 * s));
-            const radius = pigtailRadius + (bodyRadius - pigtailRadius) * smoothRadius;
-            const radiusDerivative =
-                (bodyRadius - pigtailRadius) * 30.0 * s * s * (1.0 - s) * (1.0 - s);
-            const pitch = bodyPitch * (3.0 * s * s - 2.0 * s * s * s);
-            const speed = Math.hypot(
-                radiusDerivative,
-                radius * 2.0 * Math.PI * transitionTurns,
-                transitionTurns * pitch
-            );
-            const coefficient = i === 0 || i === transitionSteps ? 1.0 : (i % 2 === 0 ? 2.0 : 4.0);
-            transitionSum += coefficient * speed;
-        }
-
-        const transitionLength =
-            2.0 * transitionSum / (3.0 * transitionSteps);
-
-        return endLength + transitionLength + middleLength;
+        length = endLength + transitionLength + middleLength;
+        break;
+    }
     }
 
-    const endWireDiameter = closedEndGeometry === cego.tapered ?
-        wireDiameter * (1.0 - taperAmount / 2.0) : wireDiameter;
-    const endPitch = (wireDiameter + endWireDiameter) / 2.0;
-    const middleCoils = totalCoils - inactiveCoils - 2.0 * transitionTurns;
-    const pitchDenominator = totalCoils - inactiveCoils - transitionTurns;
-
-    const bodyPitch =
-        (freeLength - endWireDiameter - (inactiveCoils + transitionTurns) * endPitch) /
-        pitchDenominator;
-    const endLength = inactiveCoils * Math.hypot(circumference, endPitch);
-    const transitionPitch = (endPitch + bodyPitch) / 2.0;
-    const transitionLength = 2.0 * transitionTurns * Math.hypot(circumference, transitionPitch);
-    const middleLength = middleCoils * Math.hypot(circumference, bodyPitch);
-
-    return endLength + transitionLength + middleLength;
+    return length;
 }
 
 export function eqnset(p, x) {        /*    Compression  Spring  */

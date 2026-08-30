@@ -22,8 +22,40 @@ it('wireLength uses pigtail geometry and axial collapse', () => {
     const uncollapsedLength = wireLength(1.1, 0.1055, 3.25, 10.0, 4, 2, 2.0, 0.0, 0.0, 0.0);
     const collapsedLength = wireLength(1.1, 0.1055, 3.25, 10.0, 4, 2, 2.0, 0.0, 2.0, 0.0);
 
-    expect(collapsedLength).toBeCloseTo(28.696322412947232, 12);
+    expect(collapsedLength).toBeCloseTo(28.671629157532642, 12);
     expect(collapsedLength).toBeGreaterThan(uncollapsedLength);
+});
+
+it.each([
+    [1.0, 0.65, 0.5],
+    [0.7, 0.544, 0.7],
+    [0.54, 0.25, 1.0]
+])('wireLength averages pigtail pitch with outside diameter %s', (outsideDiameter, endTurns, transitionTurns) => {
+    const wireDiameter = 0.1;
+    const bodyDiameter = outsideDiameter - wireDiameter;
+    const endDiameter = bodyDiameter / 2.0;
+    const middleTurns = 10.0 - 2.0 * (endTurns + transitionTurns);
+
+    for (const pigtailAmount of [0.0, 1.0, 2.0]) {
+        for (const grindAmount of [0.0, 1.0]) {
+            const endPitch = wireDiameter * (1.0 - pigtailAmount / 2.0);
+            const endRise = endTurns * endPitch;
+            const centerlineHeight = 3.25 - (1.0 - grindAmount) * wireDiameter;
+            const bodyPitch = (centerlineHeight - 2.0 * endRise - transitionTurns * endPitch) /
+                (middleTurns + transitionTurns);
+            const transitionRise = transitionTurns * (endPitch + bodyPitch) / 2.0;
+            const middleRise = centerlineHeight - 2.0 * (endRise + transitionRise);
+            const endLength = Math.sqrt((endTurns * Math.PI * endDiameter) ** 2 + endRise ** 2);
+            const transitionLength = Math.sqrt(
+                (transitionTurns * Math.PI * (bodyDiameter + endDiameter) / 2.0) ** 2 +
+                ((bodyDiameter - endDiameter) / 2.0) ** 2 + transitionRise ** 2
+            );
+            const middleLength = Math.sqrt((middleTurns * Math.PI * bodyDiameter) ** 2 + middleRise ** 2);
+
+            expect(wireLength(outsideDiameter, wireDiameter, 3.25, 10.0, 4, 2, 2.0, 0.0, pigtailAmount, grindAmount))
+                .toBeCloseTo(2.0 * (endLength + transitionLength) + middleLength, 12);
+        }
+    }
 });
 
 it('eqnset initialState', () => {
@@ -119,7 +151,7 @@ it('eqnset initialState', () => {
     x[o.Pigtail_Amount] = 2.0;
     x[o.Grind_Amount] = 0.0;
     x = eqnset(p, x);
-    expect(x[o.Weight]).toBeCloseTo(0.07124253818184084, 15);
+    expect(x[o.Weight]).toBeCloseTo(0.07118123380400479, 15);
 });
 
 it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () => {
