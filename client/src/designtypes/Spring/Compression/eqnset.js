@@ -1,5 +1,91 @@
 import * as o from './offsets';
 import * as mo from '../mat_offsets';
+import * as cego from './closedendgeometry_offsets';
+import * as eco from './endclosure_offsets';
+
+export function wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils, closedEndGeometry, endClosure, inactiveCoils, taperAmount = 0.0, pigtailAmount = 0.0, grindAmount = 0.0) {
+    const meanDiameter = outsideDiameter - wireDiameter;
+    const circumference = Math.PI * meanDiameter;
+
+    switch (endClosure) {
+    case eco.closed:
+        break;
+    case eco.open:
+    default:
+        return Math.hypot(freeLength, totalCoils * circumference);
+    }
+
+    let transitionTurns = 0.5; // Per end
+
+    if (closedEndGeometry === cego.pigtail) {
+        const springIndex = meanDiameter / wireDiameter;
+        const pigtailMeanDiameter = meanDiameter * 0.5;
+        const pigtailRadius = pigtailMeanDiameter / 2.0;
+        const bodyRadius = meanDiameter / 2.0;
+        let endCoils;
+
+        if (springIndex >= 7.0) {
+            endCoils = 0.65;
+            transitionTurns = 0.5;
+        } else if (springIndex <= 4.5) {
+            endCoils = 0.25;
+            transitionTurns = 1.0;
+        } else {
+            const indexReduction = 7.0 - springIndex;
+            endCoils = 0.65 - 0.07 * indexReduction - 0.036 * indexReduction * indexReduction;
+            transitionTurns = 0.5 + 0.2 * indexReduction;
+        }
+
+        const middleCoils = totalCoils - 2.0 * endCoils - 2.0 * transitionTurns;
+        const freeLengthAdjustment =
+            (inactiveCoils + 1.0 - grindAmount - pigtailAmount) * wireDiameter;
+        const bodyPitch =
+            (freeLength - freeLengthAdjustment) /
+            (middleCoils + transitionTurns);
+        const endLength = 2.0 * endCoils * Math.PI * pigtailMeanDiameter;
+        const middleLength = middleCoils * Math.hypot(circumference, bodyPitch);
+        const transitionSteps = 64;
+        let transitionSum = 0.0;
+
+        for (let i = 0; i <= transitionSteps; ++i) {
+            const s = i / transitionSteps;
+            const smoothRadius = s * s * s * (10.0 + s * (-15.0 + 6.0 * s));
+            const radius = pigtailRadius + (bodyRadius - pigtailRadius) * smoothRadius;
+            const radiusDerivative =
+                (bodyRadius - pigtailRadius) * 30.0 * s * s * (1.0 - s) * (1.0 - s);
+            const pitch = bodyPitch * (3.0 * s * s - 2.0 * s * s * s);
+            const speed = Math.hypot(
+                radiusDerivative,
+                radius * 2.0 * Math.PI * transitionTurns,
+                transitionTurns * pitch
+            );
+            const coefficient = i === 0 || i === transitionSteps ? 1.0 : (i % 2 === 0 ? 2.0 : 4.0);
+            transitionSum += coefficient * speed;
+        }
+
+        const transitionLength =
+            2.0 * transitionSum / (3.0 * transitionSteps);
+
+        return endLength + transitionLength + middleLength;
+    }
+
+    const endWireDiameter = closedEndGeometry === cego.tapered ?
+        wireDiameter * (1.0 - taperAmount / 2.0) : wireDiameter;
+    const endPitch = (wireDiameter + endWireDiameter) / 2.0;
+    const middleCoils = totalCoils - inactiveCoils - 2.0 * transitionTurns;
+    const pitchDenominator = totalCoils - inactiveCoils - transitionTurns;
+
+    const bodyPitch =
+        (freeLength - endWireDiameter - (inactiveCoils + transitionTurns) * endPitch) /
+        pitchDenominator;
+    const endLength = inactiveCoils * Math.hypot(circumference, endPitch);
+    const transitionPitch = (endPitch + bodyPitch) / 2.0;
+    const transitionLength = 2.0 * transitionTurns * Math.hypot(circumference, transitionPitch);
+    const middleLength = middleCoils * Math.hypot(circumference, bodyPitch);
+
+    return endLength + transitionLength + middleLength;
+}
+
 export function eqnset(p, x) {        /*    Compression  Spring  */
 //    console.log('@@@@@ Start eqnset p=',p,'x=',x);
     const zero = 0.0;
@@ -97,11 +183,18 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
     } else x[o.Cycle_Life] = 0.0;   // Setting to NaN causes problems with File : Open.  See issue 232
 //  console.log('eqnset','Wire_Dia=',p[o.Wire_Dia],'Cycle_Life=',x[o.Cycle_Life]);
 
-        var sq1 = p[o.L_Free];
-        var sq2 = p[o.Coils_T] * Math.PI * x[o.Mean_Dia];
-        var wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2);
-        if (x[o.Closed_End_Geometry] === 3 && x[o.End_Closure] === 2)  /* calculate developed length of Closed Tapered ends based on 2 ends * pi * wire diameter * 0.625 */
-            wire_len_t = wire_len_t - 3.92699082 * p[o.Wire_Dia];
+        var wire_len_t = wireLength(
+            p[o.OD_Free],
+            p[o.Wire_Dia],
+            p[o.L_Free],
+            p[o.Coils_T],
+            x[o.Closed_End_Geometry],
+            x[o.End_Closure],
+            x[o.Inactive_Coils],
+            x[o.Taper_Amount],
+            x[o.Pigtail_Amount],
+            x[o.Grind_Amount]
+        );
 
         x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * wire_len_t;
 
