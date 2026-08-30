@@ -203,23 +203,14 @@ export function init(store, p, x) {
       x[o.End_Closure] = et_tab[j][eto.end_closure];
       x[o.Closed_End_Geometry] = et_tab[j][eto.closed_end_geometry];
       x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
-      x[o.Grind_Amount] = et_tab[j][eto.grind_amount];
       x[o.Taper_Amount] = et_tab[j][eto.taper_amount];
       x[o.Pigtail_Amount] = et_tab[j][eto.pigtail_amount];
+      x[o.Grind_Amount] = et_tab[j][eto.grind_amount];
 
       store.dispatch(changeSymbolHidden("End_Type", false));
       store.dispatch(changeSymbolHidden("End_Closure", true));
       store.dispatch(changeSymbolHidden("Closed_End_Geometry", true));
       store.dispatch(changeSymbolHidden("Inactive_Coils", false));
-      if (et_tab[j][eto.end_type] === "Open&Ground" || 
-          et_tab[j][eto.end_type] === "Closed&Ground" ||
-          et_tab[j][eto.end_type] === "DoubleClosed&Ground" ||
-          et_tab[j][eto.end_type] === "TaperedClosed&Ground" ||
-          et_tab[j][eto.end_type] === "PigtailClosed&Ground") {
-        store.dispatch(changeSymbolHidden("Grind_Amount", false));
-      } else {
-        store.dispatch(changeSymbolHidden("Grind_Amount", true));
-      }
       if (et_tab[j][eto.end_type] === "TaperedClosed" ||
           et_tab[j][eto.end_type] === "TaperedClosed&Ground") {
         store.dispatch(changeSymbolHidden("Taper_Amount", false));
@@ -232,13 +223,22 @@ export function init(store, p, x) {
       } else {
         store.dispatch(changeSymbolHidden("Pigtail_Amount", true));
       }
+      if (et_tab[j][eto.end_type] === "Open&Ground" ||
+          et_tab[j][eto.end_type] === "Closed&Ground" ||
+          et_tab[j][eto.end_type] === "DoubleClosed&Ground" ||
+          et_tab[j][eto.end_type] === "TaperedClosed&Ground" ||
+          et_tab[j][eto.end_type] === "PigtailClosed&Ground") {
+        store.dispatch(changeSymbolHidden("Grind_Amount", false));
+      } else {
+        store.dispatch(changeSymbolHidden("Grind_Amount", true));
+      }
 
       store.dispatch(changeSymbolInput("End_Closure", false));
       store.dispatch(changeSymbolInput("Closed_End_Geometry", false));
       store.dispatch(changeSymbolInput("Inactive_Coils", false));
-      store.dispatch(changeSymbolInput("Grind_Amount", false));
       store.dispatch(changeSymbolInput("Taper_Amount", false));
       store.dispatch(changeSymbolInput("Pigtail_Amount", false));
+      store.dispatch(changeSymbolInput("Grind_Amount", false));
 
       break;
 
@@ -251,16 +251,16 @@ export function init(store, p, x) {
         store.dispatch(changeSymbolHidden("Closed_End_Geometry", false));
       }
       store.dispatch(changeSymbolHidden("Inactive_Coils", false));
-      store.dispatch(changeSymbolHidden("Grind_Amount", false));
       store.dispatch(changeSymbolHidden("Taper_Amount", false));
       store.dispatch(changeSymbolHidden("Pigtail_Amount", false));
+      store.dispatch(changeSymbolHidden("Grind_Amount", false));
 
       store.dispatch(changeSymbolInput("End_Closure", true));
       store.dispatch(changeSymbolInput("Closed_End_Geometry", true));
       store.dispatch(changeSymbolInput("Inactive_Coils", true));
-      store.dispatch(changeSymbolInput("Grind_Amount", true));
       store.dispatch(changeSymbolInput("Taper_Amount", true));
       store.dispatch(changeSymbolInput("Pigtail_Amount", true));
+      store.dispatch(changeSymbolInput("Grind_Amount", true));
       break;
   }
 

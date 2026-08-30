@@ -406,9 +406,9 @@ export function migrate(design) {
         design.symbol_table.splice(44,0,initialSymbol('End_Type_Method'));
         design.symbol_table.splice(46,0,initialSymbol('End_Closure'));
         design.symbol_table.splice(47,0,initialSymbol('Closed_End_Geometry'));
-        design.symbol_table.splice(49,0,initialSymbol('Grind_Amount'));
-        design.symbol_table.splice(50,0,initialSymbol('Taper_Amount'));
-        design.symbol_table.splice(51,0,initialSymbol('Pigtail_Amount'));
+        design.symbol_table.splice(49,0,initialSymbol('Taper_Amount'));
+        design.symbol_table.splice(50,0,initialSymbol('Pigtail_Amount'));
+        design.symbol_table.splice(51,0,initialSymbol('Grind_Amount'));
 
         design.symbol_table[49].value = 0.0;
         design.symbol_table[50].value = 0.0;
@@ -423,7 +423,7 @@ export function migrate(design) {
           case 2: // Old "Open&Ground"
             design.symbol_table[46].value = 1; // End_Closure "Open"
             design.symbol_table[47].value = 0; // Closed_End_Geometry not applicable
-            design.symbol_table[49].value = 1.0;
+            design.symbol_table[51].value = 1.0;
             break;
           case 3: // Old "Closed"
             design.symbol_table[46].value = 2; // End_Closure "Closed"
@@ -432,21 +432,21 @@ export function migrate(design) {
           case 4: // Old "Closed&Ground"
             design.symbol_table[46].value = 2; // End_Closure "Closed"
             design.symbol_table[47].value = 1; // Closed_End_Geometry "Single"
-            design.symbol_table[49].value = 1.0;
+            design.symbol_table[51].value = 1.0;
             break;
           case 5: // Old "Tapered_C&G"
             design.symbol_table[45].value = 8; // End_Type "TaperedClosed&Ground"
             design.symbol_table[46].value = 2; // End_Closure "Closed"
             design.symbol_table[47].value = 3; // Closed_End_Geometry "Tapered"
-            design.symbol_table[49].value = 0.5;
-            design.symbol_table[50].value = 1.0;
+            design.symbol_table[49].value = 1.0;
+            design.symbol_table[51].value = 0.5;
             break;
           case 6: // Old "Pig-tail"
             design.symbol_table[45].value = 10; // End_Type "PigtailClosed&Ground"
             design.symbol_table[46].value = 2; // End_Closure "Closed"
             design.symbol_table[47].value = 4; // Closed_End_Geometry "Pigtail"
-            design.symbol_table[49].value = 1.0;
-            design.symbol_table[51].value = 2.0;
+            design.symbol_table[50].value = 2.0;
+            design.symbol_table[51].value = 1.0;
             break;
           case 7: // Old "User_Specified"
             design.symbol_table[44].value = 2; // End_Type_Method "UserSpecified"

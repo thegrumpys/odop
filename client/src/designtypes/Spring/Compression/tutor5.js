@@ -239,7 +239,7 @@ export const execute = {
                     are common in hot-wound springs.
                     Refer to the discussion in the on-line documentation (Help entry) on
                     &nbsp;<a href="/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes" target="_blank" rel="noopener noreferrer">Compression Spring End Types</a>&nbsp;
-                    for information on <b>Grind_Amount</b>, <b>Taper_Amount</b>, <b>Pigtail_Amount</b>, 
+                    for information on <b>Taper_Amount</b>, <b>Pigtail_Amount</b>, <b>Grind_Amount</b>,
                     and the calculation of solid height for these end types.
                     </p>
 
@@ -248,7 +248,7 @@ export const execute = {
                     These entries are provided in order to accommodate unusual end configurations 
                     (for example, a spring with extra dead coils or with two different end types). 
                     The designer can provide custom values for 
-                    <b> End_Closure</b>, <b> Closed_End_Geometry</b>, <b> Inactive_Coils</b>, <b>Grind_Amount</b>, <b>Taper_Amount</b>, and <b>Pigtail_Amount</b>. 
+                    <b> End_Closure</b>, <b> Closed_End_Geometry</b>, <b> Inactive_Coils</b>, <b>Taper_Amount</b>, <b>Pigtail_Amount</b>, and <b>Grind_Amount</b>.
                     Additional information is available in the same on-line documentation section for 
                     the Compression Spring design type.
                     </p>
