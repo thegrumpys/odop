@@ -248,7 +248,7 @@ export const execute = {
                     These entries are provided in order to accommodate unusual end configurations 
                     (for example, a spring with extra dead coils or with two different end types). 
                     The designer can provide custom values for 
-                    <b> End_Closure</b>, <b> Closed_End_Geometry</b>, <b> Inactive_Coils</b>, <b>Taper_Amount</b>, <b>Pigtail_Amount</b>, and <b>Grind_Amount</b>.
+                    <b> Closed_End_Geometry</b>, <b> End_Closure</b>, <b> Inactive_Coils</b>, <b>Taper_Amount</b>, <b>Pigtail_Amount</b>, and <b>Grind_Amount</b>.
                     Additional information is available in the same on-line documentation section for 
                     the Compression Spring design type.
                     </p>

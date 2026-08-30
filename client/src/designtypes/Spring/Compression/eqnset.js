@@ -100,7 +100,7 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
         var sq1 = p[o.L_Free];
         var sq2 = p[o.Coils_T] * Math.PI * x[o.Mean_Dia];
         var wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2);
-        if (x[o.End_Closure] === 2 && x[o.Closed_End_Geometry] === 3)  /* calculate developed length of Closed Tapered ends based on 2 ends * pi * wire diameter * 0.625 */
+        if (x[o.Closed_End_Geometry] === 3 && x[o.End_Closure] === 2)  /* calculate developed length of Closed Tapered ends based on 2 ends * pi * wire diameter * 0.625 */
             wire_len_t = wire_len_t - 3.92699082 * p[o.Wire_Dia];
 
         x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * wire_len_t;

@@ -200,16 +200,16 @@ export function init(store, p, x) {
   switch (x[o.End_Type_Method]) {
     default:
     case 1: // Standard: Override values from end type table
-      x[o.End_Closure] = et_tab[j][eto.end_closure];
       x[o.Closed_End_Geometry] = et_tab[j][eto.closed_end_geometry];
+      x[o.End_Closure] = et_tab[j][eto.end_closure];
       x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
       x[o.Taper_Amount] = et_tab[j][eto.taper_amount];
       x[o.Pigtail_Amount] = et_tab[j][eto.pigtail_amount];
       x[o.Grind_Amount] = et_tab[j][eto.grind_amount];
 
       store.dispatch(changeSymbolHidden("End_Type", false));
-      store.dispatch(changeSymbolHidden("End_Closure", true));
       store.dispatch(changeSymbolHidden("Closed_End_Geometry", true));
+      store.dispatch(changeSymbolHidden("End_Closure", true));
       store.dispatch(changeSymbolHidden("Inactive_Coils", false));
       if (et_tab[j][eto.end_type] === "TaperedClosed" ||
           et_tab[j][eto.end_type] === "TaperedClosed&Ground") {
@@ -233,8 +233,8 @@ export function init(store, p, x) {
         store.dispatch(changeSymbolHidden("Grind_Amount", true));
       }
 
-      store.dispatch(changeSymbolInput("End_Closure", false));
       store.dispatch(changeSymbolInput("Closed_End_Geometry", false));
+      store.dispatch(changeSymbolInput("End_Closure", false));
       store.dispatch(changeSymbolInput("Inactive_Coils", false));
       store.dispatch(changeSymbolInput("Taper_Amount", false));
       store.dispatch(changeSymbolInput("Pigtail_Amount", false));
@@ -244,19 +244,19 @@ export function init(store, p, x) {
 
     case 2: // User specified: Do not override values from end type table
       store.dispatch(changeSymbolHidden("End_Type", true));
-      store.dispatch(changeSymbolHidden("End_Closure", false));
       if (x[o.End_Closure] === 1) { // Open
         store.dispatch(changeSymbolHidden("Closed_End_Geometry", true));
       } else {
         store.dispatch(changeSymbolHidden("Closed_End_Geometry", false));
       }
+      store.dispatch(changeSymbolHidden("End_Closure", false));
       store.dispatch(changeSymbolHidden("Inactive_Coils", false));
       store.dispatch(changeSymbolHidden("Taper_Amount", false));
       store.dispatch(changeSymbolHidden("Pigtail_Amount", false));
       store.dispatch(changeSymbolHidden("Grind_Amount", false));
 
-      store.dispatch(changeSymbolInput("End_Closure", true));
       store.dispatch(changeSymbolInput("Closed_End_Geometry", true));
+      store.dispatch(changeSymbolInput("End_Closure", true));
       store.dispatch(changeSymbolInput("Inactive_Coils", true));
       store.dispatch(changeSymbolInput("Taper_Amount", true));
       store.dispatch(changeSymbolInput("Pigtail_Amount", true));

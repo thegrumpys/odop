@@ -9,8 +9,8 @@ import * as o from '../../../designtypes/Spring/Compression/symbol_table_offsets
 
 const newSymbolNames = new Set([
   'End_Type_Method',
-  'End_Closure',
   'Closed_End_Geometry',
+  'End_Closure',
   'Taper_Amount',
   'Pigtail_Amount',
   'Grind_Amount'
@@ -38,21 +38,21 @@ function version13Design(endType) {
 }
 
 describe.each([
-  ['Open', 1, 1, 1, 0, 0.0, 0.0, 0.0],
-  ['Open&Ground', 2, 2, 1, 0, 0.0, 0.0, 1.0],
-  ['Closed', 3, 3, 2, 1, 0.0, 0.0, 0.0],
-  ['Closed&Ground', 4, 4, 2, 1, 0.0, 0.0, 1.0],
-  ['Tapered_C&G', 5, 8, 2, 3, 1.0, 0.0, 0.5],
-  ['Pig-tail', 6, 10, 2, 4, 0.0, 2.0, 1.0]
-])('version 13 %s migration', (name, oldEndType, endType, endClosure, closedEndGeometry, taperAmount, pigtailAmount, grindAmount) => {
+  ['Open', 1, 1, 0, 1, 0.0, 0.0, 0.0],
+  ['Open&Ground', 2, 2, 0, 1, 0.0, 0.0, 1.0],
+  ['Closed', 3, 3, 1, 2, 0.0, 0.0, 0.0],
+  ['Closed&Ground', 4, 4, 1, 2, 0.0, 0.0, 1.0],
+  ['Tapered_C&G', 5, 8, 3, 2, 1.0, 0.0, 0.5],
+  ['Pig-tail', 6, 10, 4, 2, 0.0, 2.0, 1.0]
+])('version 13 %s migration', (name, oldEndType, endType, closedEndGeometry, endClosure, taperAmount, pigtailAmount, grindAmount) => {
   it('converts the complete end-type model', () => {
     var migrated = migrate(version13Design(oldEndType));
 
     expect(migrated.version).toBe('14');
     expect(migrated.symbol_table[o.End_Type_Method].value).toBe(1);
     expect(migrated.symbol_table[o.End_Type].value).toBe(endType);
-    expect(migrated.symbol_table[o.End_Closure].value).toBe(endClosure);
     expect(migrated.symbol_table[o.Closed_End_Geometry].value).toBe(closedEndGeometry);
+    expect(migrated.symbol_table[o.End_Closure].value).toBe(endClosure);
     expect(migrated.symbol_table[o.Inactive_Coils].value).toBe(450045);
     expect(migrated.symbol_table[o.Taper_Amount].value).toBe(taperAmount);
     expect(migrated.symbol_table[o.Pigtail_Amount].value).toBe(pigtailAmount);
@@ -77,8 +77,8 @@ it('converts the old User_Specified choice to current user-specified controls', 
 
   expect(migrated.symbol_table[o.End_Type_Method].value).toBe(2);
   expect(migrated.symbol_table[o.End_Type].value).toBe(4);
-  expect(migrated.symbol_table[o.End_Closure].value).toBe(2);
   expect(migrated.symbol_table[o.Closed_End_Geometry].value).toBe(1);
+  expect(migrated.symbol_table[o.End_Closure].value).toBe(2);
   expect(migrated.symbol_table[o.Taper_Amount].value).toBe(0.0);
   expect(migrated.symbol_table[o.Pigtail_Amount].value).toBe(0.0);
   expect(migrated.symbol_table[o.Grind_Amount].value).toBe(0.0);

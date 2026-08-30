@@ -734,22 +734,6 @@ export const initialState = {
         },
         {
             "input": true,
-            "name": "End_Closure",
-            "value": 2, // Closed
-            "units": "",
-            "format": "table",
-            "table": "Spring/Compression/endclosure",
-            "lmin": 0,
-            "lmax": 0,
-            "cmin": 0,
-            "cmax": 0,
-            "sdlim": 0.0,
-            "tooltip": "End closure of the spring<br/>Open or Closed",
-            "type": "calcinput",
-            "hidden": false
-        },
-        {
-            "input": true,
             "name": "Closed_End_Geometry",
             "value": 1, // Single
             "units": "",
@@ -761,6 +745,22 @@ export const initialState = {
             "cmax": 0,
             "sdlim": 0.0,
             "tooltip": "End closed coil geometry of the spring<br/>Single, Double, Tapered, or Pigtail",
+            "type": "calcinput",
+            "hidden": false
+        },
+        {
+            "input": true,
+            "name": "End_Closure",
+            "value": 2, // Closed
+            "units": "",
+            "format": "table",
+            "table": "Spring/Compression/endclosure",
+            "lmin": 0,
+            "lmax": 0,
+            "cmin": 0,
+            "cmax": 0,
+            "sdlim": 0.0,
+            "tooltip": "End closure of the spring<br/>Open or Closed",
             "type": "calcinput",
             "hidden": false
         },

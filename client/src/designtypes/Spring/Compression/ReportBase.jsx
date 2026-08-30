@@ -68,7 +68,7 @@ export default function ReportBase(props) {
   var sq1 = model_symbol_table[o.L_Free].value;
   var sq2 = model_symbol_table[o.Coils_T].value * Math.PI * model_symbol_table[o.Mean_Dia].value;
   base.wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2);
-  if (model_symbol_table[o.End_Closure].value === 2 && model_symbol_table[o.Closed_End_Geometry].value === 3)  /*  calculate developed length of Closed Tapered ends based on 2 ends * pi * wire diameter * 0.625 */
+  if (model_symbol_table[o.Closed_End_Geometry].value === 3 && model_symbol_table[o.End_Closure].value === 2)  /*  calculate developed length of Closed Tapered ends based on 2 ends * pi * wire diameter * 0.625 */
     base.wire_len_t = base.wire_len_t - 3.92699082 * model_symbol_table[o.Wire_Dia].value;
 
   base.wgt1000 = 1000.0 * model_symbol_table[o.Weight].value;
