@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import * as o from './symbol_table_offsets';
 import * as mo from '../mat_offsets';
 import * as eto from './endtypes_offsets';
+import { wireLength } from './eqnset';
 import { getAlertsBySeverity } from '../../../components/Alerts';
 import ReportBaseContext from './ReportBaseContext';
 
@@ -65,11 +66,18 @@ export default function ReportBase(props) {
       model_symbol_table[o.Inactive_Coils].value
     );
 
-  var sq1 = model_symbol_table[o.L_Free].value;
-  var sq2 = model_symbol_table[o.Coils_T].value * Math.PI * model_symbol_table[o.Mean_Dia].value;
-  base.wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2);
-  if (model_symbol_table[o.Closed_End_Geometry].value === 3 && model_symbol_table[o.End_Closure].value === 2)  /*  calculate developed length of Closed Tapered ends based on 2 ends * pi * wire diameter * 0.625 */
-    base.wire_len_t = base.wire_len_t - 3.92699082 * model_symbol_table[o.Wire_Dia].value;
+  base.wire_len_t = wireLength(
+    model_symbol_table[o.OD_Free].value,
+    model_symbol_table[o.Wire_Dia].value,
+    model_symbol_table[o.L_Free].value,
+    model_symbol_table[o.Coils_T].value,
+    model_symbol_table[o.Closed_End_Geometry].value,
+    model_symbol_table[o.End_Closure].value,
+    model_symbol_table[o.Inactive_Coils].value,
+    model_symbol_table[o.Taper_Amount].value,
+    model_symbol_table[o.Pigtail_Amount].value,
+    model_symbol_table[o.Grind_Amount].value
+  );
 
   base.wgt1000 = 1000.0 * model_symbol_table[o.Weight].value;
 
@@ -77,8 +85,8 @@ export default function ReportBase(props) {
    * intermediate dia. calcs. assume no wire stretch
    * note that value of base.wire_len_a is actually square of active wire length
    */
-  sq1 = model_symbol_table[o.L_Free].value;
-  sq2 = model_symbol_table[o.Coils_A].value * Math.PI * model_symbol_table[o.Mean_Dia].value;
+  var sq1 = model_symbol_table[o.L_Free].value;
+  var sq2 = model_symbol_table[o.Coils_A].value * Math.PI * model_symbol_table[o.Mean_Dia].value;
   base.wire_len_a = sq1 * sq1 + sq2 * sq2;
 
   base.dhat = def_dia(model_symbol_table[o.L_1].value);
