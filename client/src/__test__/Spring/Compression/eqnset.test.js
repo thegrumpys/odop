@@ -39,28 +39,35 @@ it.each([
     for (const pigtailAmount of [0.0, 1.0, 2.0]) {
         const endPitch = wireDiameter * (1.0 - pigtailAmount / 2.0);
         const endRise = endTurns * endPitch;
-        const centerlineHeight = 3.25 - wireDiameter;
-        const bodyPitch = (centerlineHeight - 2.0 * endRise - transitionTurns * endPitch) /
-            (middleTurns + transitionTurns);
-        const transitionRise = transitionTurns * (endPitch + bodyPitch) / 2.0;
-        const middleRise = centerlineHeight - 2.0 * (endRise + transitionRise);
-        const endLength = Math.sqrt((endTurns * Math.PI * endDiameter) ** 2 + endRise ** 2);
-        const transitionLength = Math.sqrt(
-            (transitionTurns * Math.PI * (bodyDiameter + endDiameter) / 2.0) ** 2 +
-            ((bodyDiameter - endDiameter) / 2.0) ** 2 + transitionRise ** 2
-        );
-        const middleLength = Math.sqrt((middleTurns * Math.PI * bodyDiameter) ** 2 + middleRise ** 2);
+        for (const grindAmount of [0.0, 1.0]) {
+            const centerlineHeight = 3.25 - (1.0 - grindAmount) * wireDiameter;
+            const bodyPitch = (centerlineHeight - 2.0 * endRise - transitionTurns * endPitch) /
+                (middleTurns + transitionTurns);
+            const transitionRise = transitionTurns * (endPitch + bodyPitch) / 2.0;
+            const middleRise = centerlineHeight - 2.0 * (endRise + transitionRise);
+            const endLength = Math.sqrt((endTurns * Math.PI * endDiameter) ** 2 + endRise ** 2);
+            const transitionLength = Math.sqrt(
+                (transitionTurns * Math.PI * (bodyDiameter + endDiameter) / 2.0) ** 2 +
+                ((bodyDiameter - endDiameter) / 2.0) ** 2 + transitionRise ** 2
+            );
+            const middleLength = Math.sqrt((middleTurns * Math.PI * bodyDiameter) ** 2 + middleRise ** 2);
 
-        expect(wireLength(outsideDiameter, wireDiameter, 3.25, 10.0, 4, 2, 2.0, 0.0, pigtailAmount))
-            .toBeCloseTo(2.0 * (endLength + transitionLength) + middleLength, 12);
+            expect(wireLength(outsideDiameter, wireDiameter, 3.25, 10.0, 4, 2, 2.0, 0.0, pigtailAmount, grindAmount))
+                .toBeCloseTo(2.0 * (endLength + transitionLength) + middleLength, 12);
+        }
     }
 });
 
-it('wireLength ignores grinding when determining starting wire length', () => {
-    const ungroundLength = wireLength(1.1, 0.105, 3.25, 10.0, 4, 2, 2.0, 0.0, 2.0, 0.0);
-    const groundLength = wireLength(1.1, 0.105, 3.25, 10.0, 4, 2, 2.0, 0.0, 2.0, 1.0);
+it.each([
+    [1, 2.0, 0.0, 1.0],
+    [2, 4.0, 0.0, 1.0],
+    [3, 2.0, 0.0, 0.5],
+    [4, 2.0, 2.0, 1.0]
+])('wireLength uses grinding only to compensate geometry %s pitch for the finished free length', (geometry, inactiveCoils, pigtailAmount, grindAmount) => {
+    const ungroundLength = wireLength(1.1, 0.105, 3.25, 10.0, geometry, 2, inactiveCoils, geometry === 3 ? 1.0 : 0.0, pigtailAmount, 0.0);
+    const groundLength = wireLength(1.1, 0.105, 3.25, 10.0, geometry, 2, inactiveCoils, geometry === 3 ? 1.0 : 0.0, pigtailAmount, grindAmount);
 
-    expect(groundLength).toBe(ungroundLength);
+    expect(groundLength).toBeGreaterThan(ungroundLength);
 });
 
 it('eqnset initialState', () => {
@@ -107,7 +114,7 @@ it('eqnset initialState', () => {
     expect(x[o.L_Solid]).toEqual(1.055);
     expect(x[o.Slenderness]).toEqual(3.2679738562091503);
     expect(x[o.ID_Free]).toEqual(0.889);
-    expect(x[o.Weight]).toBeCloseTo(0.07800674693073592, 15);
+    expect(x[o.Weight]).toBeCloseTo(0.07803849685445749, 15);
     expect(x[o.Spring_Index]).toEqual(9.42654028436019);
     expect(x[o.Force_Solid]).toEqual(49.67614282940665);
     expect(x[o.Stress_1]).toEqual(24893.49275531675);
@@ -200,7 +207,7 @@ it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () 
     expect(x[o.L_Solid]).toEqual(2);
     expect(x[o.Slenderness]).toEqual(16.25);
     expect(x[o.ID_Free]).toEqual(0.0);
-    expect(x[o.Weight]).toEqual(0.06248626867174658);
+    expect(x[o.Weight]).toEqual(0.06335044485536057);
     expect(x[o.Spring_Index]).toEqual(1);
     expect(x[o.Force_Solid]).toEqual(44921.875);
     expect(x[o.Stress_1]).toEqual(Number.POSITIVE_INFINITY);
@@ -285,7 +292,7 @@ it('eqnset pathological Coils_T === Inactive_Coils && Coils_A === 0.0', () => {
     expect(x[o.L_Solid]).toEqual(0.211);
     expect(x[o.Slenderness]).toEqual(3.2679738562091503);
     expect(x[o.ID_Free]).toEqual(0.889);
-    expect(x[o.Weight]).toEqual(0.009712628478289404);
+    expect(x[o.Weight]).toEqual(0.009427816305672135);
     expect(x[o.Spring_Index]).toEqual(9.42654028436019);
     expect(x[o.Force_Solid]).toEqual(Number.POSITIVE_INFINITY);
     expect(x[o.Stress_1]).toEqual(24893.49275531675);
@@ -373,7 +380,7 @@ it('eqnset pathological OD_Free === Wire_Dia && Mean_Dia === 0.0', () => {
     expect(x[o.L_Solid]).toEqual(4);
     expect(x[o.Slenderness]).toEqual(Number.POSITIVE_INFINITY);
     expect(x[o.ID_Free]).toEqual(-0.4);
-    expect(x[o.Weight]).toEqual(0.10171220375262316);
+    expect(x[o.Weight]).toEqual(0.11598760077053516);
     expect(x[o.Spring_Index]).toEqual(0.0);
     expect(x[o.Force_Solid]).toEqual(Number.NaN);
     expect(x[o.Stress_1]).toEqual(Number.NaN);

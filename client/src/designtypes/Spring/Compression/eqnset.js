@@ -3,7 +3,7 @@ import * as mo from '../mat_offsets';
 import * as cego from './closedendgeometry_offsets';
 import * as eco from './endclosure_offsets';
 
-export function wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils, closedEndGeometry, endClosure, inactiveCoils, taperAmount = 0.0, pigtailAmount = 0.0) {
+export function wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils, closedEndGeometry, endClosure, inactiveCoils, taperAmount = 0.0, pigtailAmount = 0.0, grindAmount = 0.0) {
     const meanDiameter = outsideDiameter - wireDiameter;
     const circumference = Math.PI * meanDiameter;
     let length;
@@ -17,7 +17,7 @@ export function wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils
         const endWireDiameter = closedEndGeometry === cego.tapered ?
             wireDiameter * (1.0 - taperAmount / 2.0) : wireDiameter;
         let endPitch = (wireDiameter + endWireDiameter) / 2.0;
-        let endAllowance = endWireDiameter;
+        const endAllowance = endWireDiameter - grindAmount * wireDiameter;
         let endMeanDiameter = meanDiameter;
         let endCoils = inactiveCoils / 2.0; // Per end
         let transitionTurns = 0.5; // Per end
@@ -26,8 +26,6 @@ export function wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils
             const springIndex = meanDiameter / wireDiameter;
             endMeanDiameter = meanDiameter * 0.5;
             endPitch = wireDiameter * (1.0 - pigtailAmount / 2.0);
-            endAllowance = wireDiameter;
-
             if (springIndex >= 7.0) {
                 endCoils = 0.65;
             } else if (springIndex <= 4.5) {
@@ -167,7 +165,8 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
             x[o.End_Closure],
             x[o.Inactive_Coils],
             x[o.Taper_Amount],
-            x[o.Pigtail_Amount]
+            x[o.Pigtail_Amount],
+            x[o.Grind_Amount]
         );
 
         x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * wire_len_t;

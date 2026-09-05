@@ -75,7 +75,8 @@ export default function ReportBase(props) {
     model_symbol_table[o.End_Closure].value,
     model_symbol_table[o.Inactive_Coils].value,
     model_symbol_table[o.Taper_Amount].value,
-    model_symbol_table[o.Pigtail_Amount].value
+    model_symbol_table[o.Pigtail_Amount].value,
+    model_symbol_table[o.Grind_Amount].value
   );
 
   base.wgt1000 = 1000.0 * model_symbol_table[o.Weight].value;
