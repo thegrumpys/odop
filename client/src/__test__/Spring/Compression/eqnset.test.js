@@ -19,8 +19,8 @@ it('wireLength uses taper amount to reduce the end pitch', () => {
 });
 
 it('wireLength uses pigtail geometry and axial collapse', () => {
-    const uncollapsedLength = wireLength(1.1, 0.1055, 3.25, 10.0, 4, 2, 2.0, 0.0, 0.0, 0.0);
-    const collapsedLength = wireLength(1.1, 0.1055, 3.25, 10.0, 4, 2, 2.0, 0.0, 2.0, 0.0);
+    const uncollapsedLength = wireLength(1.1, 0.1055, 3.25, 10.0, 4, 2, 2.0, 0.0, 0.0);
+    const collapsedLength = wireLength(1.1, 0.1055, 3.25, 10.0, 4, 2, 2.0, 0.0, 2.0);
 
     expect(collapsedLength).toBeCloseTo(28.671629157532642, 12);
     expect(collapsedLength).toBeGreaterThan(uncollapsedLength);
@@ -37,25 +37,30 @@ it.each([
     const middleTurns = 10.0 - 2.0 * (endTurns + transitionTurns);
 
     for (const pigtailAmount of [0.0, 1.0, 2.0]) {
-        for (const grindAmount of [0.0, 1.0]) {
-            const endPitch = wireDiameter * (1.0 - pigtailAmount / 2.0);
-            const endRise = endTurns * endPitch;
-            const centerlineHeight = 3.25 - (1.0 - grindAmount) * wireDiameter;
-            const bodyPitch = (centerlineHeight - 2.0 * endRise - transitionTurns * endPitch) /
-                (middleTurns + transitionTurns);
-            const transitionRise = transitionTurns * (endPitch + bodyPitch) / 2.0;
-            const middleRise = centerlineHeight - 2.0 * (endRise + transitionRise);
-            const endLength = Math.sqrt((endTurns * Math.PI * endDiameter) ** 2 + endRise ** 2);
-            const transitionLength = Math.sqrt(
-                (transitionTurns * Math.PI * (bodyDiameter + endDiameter) / 2.0) ** 2 +
-                ((bodyDiameter - endDiameter) / 2.0) ** 2 + transitionRise ** 2
-            );
-            const middleLength = Math.sqrt((middleTurns * Math.PI * bodyDiameter) ** 2 + middleRise ** 2);
+        const endPitch = wireDiameter * (1.0 - pigtailAmount / 2.0);
+        const endRise = endTurns * endPitch;
+        const centerlineHeight = 3.25 - wireDiameter;
+        const bodyPitch = (centerlineHeight - 2.0 * endRise - transitionTurns * endPitch) /
+            (middleTurns + transitionTurns);
+        const transitionRise = transitionTurns * (endPitch + bodyPitch) / 2.0;
+        const middleRise = centerlineHeight - 2.0 * (endRise + transitionRise);
+        const endLength = Math.sqrt((endTurns * Math.PI * endDiameter) ** 2 + endRise ** 2);
+        const transitionLength = Math.sqrt(
+            (transitionTurns * Math.PI * (bodyDiameter + endDiameter) / 2.0) ** 2 +
+            ((bodyDiameter - endDiameter) / 2.0) ** 2 + transitionRise ** 2
+        );
+        const middleLength = Math.sqrt((middleTurns * Math.PI * bodyDiameter) ** 2 + middleRise ** 2);
 
-            expect(wireLength(outsideDiameter, wireDiameter, 3.25, 10.0, 4, 2, 2.0, 0.0, pigtailAmount, grindAmount))
-                .toBeCloseTo(2.0 * (endLength + transitionLength) + middleLength, 12);
-        }
+        expect(wireLength(outsideDiameter, wireDiameter, 3.25, 10.0, 4, 2, 2.0, 0.0, pigtailAmount))
+            .toBeCloseTo(2.0 * (endLength + transitionLength) + middleLength, 12);
     }
+});
+
+it('wireLength ignores grinding when determining starting wire length', () => {
+    const ungroundLength = wireLength(1.1, 0.105, 3.25, 10.0, 4, 2, 2.0, 0.0, 2.0, 0.0);
+    const groundLength = wireLength(1.1, 0.105, 3.25, 10.0, 4, 2, 2.0, 0.0, 2.0, 1.0);
+
+    expect(groundLength).toBe(ungroundLength);
 });
 
 it('eqnset initialState', () => {
