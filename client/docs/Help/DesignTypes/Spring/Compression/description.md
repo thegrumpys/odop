@@ -112,7 +112,7 @@ L_Stroke     | [<img src="/designtypes/Spring/Compression/tooltips/L_Stroke.png"
 L_Solid      | [<img src="/designtypes/Spring/Compression/tooltips/L_Solid.png"   alt="L_Solid"   title="L_Solid"  >](/designtypes/Spring/Compression/tooltips/L_Solid_lg.png "L_Solid")     | solid height 
 Slenderness  |        | ratio of `L_Free` to `Mean_Dia`. <br/> This "form factor" governs a spring's tendency to buckle 
 ID_Free      | [<img src="/designtypes/Spring/Compression/tooltips/ID_Free.png"   alt="ID_Free"   title="ID_Free"  >](/designtypes/Spring/Compression/tooltips/ID_Free_lg.png "ID_Free")     | inside diameter in free condition 
-Weight       | [<img src="/designtypes/Spring/Compression/tooltips/Weight.png" alt="Weight" title="Weight">](/designtypes/Spring/Compression/tooltips/Weight_lg.png "Weight") | weight of spring <br/> wire density * wire volume 
+Weight       | [<img src="/designtypes/Spring/Compression/tooltips/Weight.png" alt="Weight" title="Weight">](/designtypes/Spring/Compression/tooltips/Weight_lg.png "Weight") | weight of spring <br/> (wire density * wire volume reduced by adjustments for Grind_Amount and/or Taper_Amount) <br/> See Stock Weight in [Reports](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springOtherValues) 
 Spring_Index |        | spring index <br/> the ratio: `Mean_Dia/Wire_Dia` 
 Force_Solid  | [<img src="/designtypes/Spring/Compression/tooltips/Force_Solid.png" alt="Force_Solid" title="Force_Solid">](/designtypes/Spring/Compression/tooltips/Force_Solid_lg.png "Force_Solid") | force produced in the solid condition 
 Stress_1     |        | torsional stress at point 1 
@@ -156,15 +156,17 @@ Tensile        |        | tensile strength
 %_Tensile_Stat |        | allowable fraction of tensile strength for torsion static load 
 Stress_Lim_Endur |      | allowable stress limit; cyclic application (torsion) 
 Stress_Lim_Stat  |      | allowable stress limit; static application (torsion) 
-End_Type       |        | character string that is used to determine values for `Inactive_Coils`, `L_Solid` and `Pitch`;  See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes)
-Inactive_Coils |        | number of inactive coils <br/> (depends on `End_Type`) 
-Grind_Amount   |        | number of wire diameters removed by a grinding operation; <br/> See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes) 
-End_Reduction  |        | the solid height reduction, measured in wire diameters, created by a tapering operation on the wire diameter of the first and last coil(s) of a hot-wound compression spring.
-Catalog_Name   |        | name of the catalog containing the most recently selected catalog entry 
-Catalog_Number |        | catalog number of the most recent catalog entry 
+End_Type_Method  |      | End Type Method controls how end types are determined and used. 
+&nbsp;           |      | **1** - Use values from table of standard end types. 
+&nbsp;           |      | **2** - User specified end type values. 
+End_Type       |        | when End_Type_Method is **1**, <br/> select desired end type from table of standard end types. See: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes)
+Closed_End_Geometry |   | when End_Type_Method is **2** and End_Closure is "Closed", <br/> select end closed coil geometry of the spring: Single, Double, Tapered, or Pigtail. The selection applies to each end of the spring. `Single` is a single closed coil at each end. 
+End_Closure    |        | when End_Type_Method is **2**, <br/> select end closure of the spring: Open or Closed. 
+Inactive_Coils |        | number of inactive coils <br/> (depends on `End_Type`) Taper_Amount   |        | the solid height reduction, measured in wire diameters, created by a tapering operation on the wire diameter of the first and last coil(s) of a hot-wound compression spring. For example, a value of 1.0 corresponds to a reduction of 0.5 × Wire_Dia at each end
+Pigtail_Amount |        | Total axial collapse of the pigtail coils across both ends, expressed in units of wire diameter. A value of 2.0 represents one wire diameter collapsing into each end
+Grind_Amount   |        | number of wire diameters removed by a grinding operation; <br/> See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes) Catalog_Name   |        | name of the catalog containing the most recently selected catalog entry Catalog_Number |        | catalog number of the most recent catalog entry 
 
-<!---     Material_File -  character string containing the material table name. -->
-<!---                      It is normally established by the initialState.js file. -->
+<!---     Material_File -  character string containing the material table name. --><!---                      It is normally established by the initialState.js file. -->
 
 &nbsp; 
 
@@ -180,9 +182,9 @@ Other values calculated and displayed in the Reports include:
 Name           | &nbsp; | Description  
  ---           | ---    | ---         
 Wire&nbsp;Length |      | total length of wire required to manufacture the spring, not including any waste 
-Safe Load      |        | The load supported by the spring in the solid condition or at a stress equal to the `Stress_Lim_Stat` value, whichever is lower. 
+Safe Load      |        | load supported by the spring in the solid condition or at a stress equal to the `Stress_Lim_Stat` value, whichever is lower. 
 Pitch          |        | distance between the wire centers of adjacent body coils, measured in the free state 
-Weight         |        | weight of 1,000 springs 
+Stock&nbsp;Weight |     | material required to produce 1,000 springs. Not reduced by allowance for Grind_Amount 
 Buckling       |        | indication of tendency to buckle given the current design and loading conditions 
 Stress Ratio   |        | ratio of minimum stress to maximum stress `(Stress_1/Stress_2)` 
 Kw1, Kw2       |        | stress correction factors due to curvature 
