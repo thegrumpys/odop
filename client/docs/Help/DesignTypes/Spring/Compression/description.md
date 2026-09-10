@@ -112,7 +112,7 @@ L_Stroke     | [<img src="/designtypes/Spring/Compression/tooltips/L_Stroke.png"
 L_Solid      | [<img src="/designtypes/Spring/Compression/tooltips/L_Solid.png"   alt="L_Solid"   title="L_Solid"  >](/designtypes/Spring/Compression/tooltips/L_Solid_lg.png "L_Solid")     | solid height 
 Slenderness  |        | ratio of `L_Free` to `Mean_Dia`. <br/> This "form factor" governs a spring's tendency to buckle 
 ID_Free      | [<img src="/designtypes/Spring/Compression/tooltips/ID_Free.png"   alt="ID_Free"   title="ID_Free"  >](/designtypes/Spring/Compression/tooltips/ID_Free_lg.png "ID_Free")     | inside diameter in free condition 
-Weight       | [<img src="/designtypes/Spring/Compression/tooltips/Weight.png" alt="Weight" title="Weight">](/designtypes/Spring/Compression/tooltips/Weight_lg.png "Weight") | weight of spring <br/> (wire density * wire volume reduced by adjustments for Grind_Amount and/or Taper_Amount) <br/> See Stock Weight in [Reports](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springOtherValues) 
+Weight       | [<img src="/designtypes/Spring/Compression/tooltips/Weight.png" alt="Weight" title="Weight">](/designtypes/Spring/Compression/tooltips/Weight_lg.png "Weight") | weight of spring <br/> (wire density * wire volume reduced by adjustments for `Grind_Amount` and/or `Taper_Amount`) <br/> See Stock Weight in [Reports](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springOtherValues) 
 Spring_Index |        | spring index <br/> the ratio: `Mean_Dia/Wire_Dia` 
 Force_Solid  | [<img src="/designtypes/Spring/Compression/tooltips/Force_Solid.png" alt="Force_Solid" title="Force_Solid">](/designtypes/Spring/Compression/tooltips/Force_Solid_lg.png "Force_Solid") | force produced in the solid condition 
 Stress_1     |        | torsional stress at point 1 
@@ -120,7 +120,7 @@ Stress_2     |        | torsional stress at point 2
 Stress_Solid |        | torsional stress in the solid condition 
 FS_2         |        | static factor of safety at point 2.  This is the ratio of allowable stress to the calculated stress induced by the load at point 2  `(Stress_Lim_Stat/Stress_2)`. 
 FS_Solid     |        | static factor of safety at solid condition  `(Stress_Lim_Stat/Stress_Solid)` 
-FS_CycleLife |        | factor of safety based on the Soderberg endurance limit calculation.  It uses the allowable endurance stress (Stress_Lim_Endur) to account for fatigue effects. Refer to additional discussion in the [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) topic. 
+FS_CycleLife |        | factor of safety based on the Soderberg endurance limit calculation.  It uses the allowable endurance stress (`Stress_Lim_Endur`) to account for fatigue effects. Refer to additional discussion in the [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) topic. 
 Cycle_Life   |        | expected cycle life based on a calculation using the "modified Goodman method".  This value is approximate.  Refer to additional discussion in the  [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) topic. 
 %_Avail_Deflect |     | the percentage of available deflection consumed at load point 2. 
 Energy       |        | change in elastic potential energy between point 1 and point 2.  
@@ -162,11 +162,15 @@ End_Type_Method  |      | End Type Method controls how end types are determined 
 End_Type       |        | when End_Type_Method is **1**, <br/> select desired end type from table of standard end types. See: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes)
 Closed_End_Geometry |   | when End_Type_Method is **2** and End_Closure is "Closed", <br/> select end closed coil geometry of the spring: Single, Double, Tapered, or Pigtail. The selection applies to each end of the spring. `Single` is a single closed coil at each end. 
 End_Closure    |        | when End_Type_Method is **2**, <br/> select end closure of the spring: Open or Closed. 
-Inactive_Coils |        | number of inactive coils <br/> (depends on `End_Type`) Taper_Amount   |        | the solid height reduction, measured in wire diameters, created by a tapering operation on the wire diameter of the first and last coil(s) of a hot-wound compression spring. For example, a value of 1.0 corresponds to a reduction of 0.5 × Wire_Dia at each end
+Inactive_Coils |        | number of inactive coils <br/> (depends on `End_Type`) 
+Taper_Amount   |        | the solid height reduction, measured in wire diameters, created by a tapering operation on the wire diameter of the first and last coil(s) of a hot-wound compression spring. For example, a value of 1.0 corresponds to a reduction of 0.5 × Wire_Dia at each end
 Pigtail_Amount |        | Total axial collapse of the pigtail coils across both ends, expressed in units of wire diameter. A value of 2.0 represents one wire diameter collapsing into each end
-Grind_Amount   |        | number of wire diameters removed by a grinding operation; <br/> See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes) Catalog_Name   |        | name of the catalog containing the most recently selected catalog entry Catalog_Number |        | catalog number of the most recent catalog entry 
+Grind_Amount   |        | number of wire diameters removed by a grinding operation; <br/> See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes) 
+Catalog_Name   |        | name of the catalog containing the most recently selected catalog entry 
+Catalog_Number |        | catalog number of the most recent catalog entry 
 
-<!---     Material_File -  character string containing the material table name. --><!---                      It is normally established by the initialState.js file. -->
+<!---     Material_File -  character string containing the material table name. -->
+<!---                      It is normally established by the initialState.js file. -->
 
 &nbsp; 
 
@@ -184,7 +188,7 @@ Name           | &nbsp; | Description
 Wire&nbsp;Length |      | total length of wire required to manufacture the spring, not including any waste 
 Safe Load      |        | load supported by the spring in the solid condition or at a stress equal to the `Stress_Lim_Stat` value, whichever is lower. 
 Pitch          |        | distance between the wire centers of adjacent body coils, measured in the free state 
-Stock&nbsp;Weight |     | material required to produce 1,000 springs. Not reduced by allowance for Grind_Amount 
+Stock&nbsp;Weight |     | material required to produce 1,000 springs. Not reduced by allowance for `Grind_Amount` 
 Buckling       |        | indication of tendency to buckle given the current design and loading conditions 
 Stress Ratio   |        | ratio of minimum stress to maximum stress `(Stress_1/Stress_2)` 
 Kw1, Kw2       |        | stress correction factors due to curvature 
@@ -304,8 +308,7 @@ ___
 
 ## Compression Spring End Types 
 
-The current version of ODOP:Spring implements twelve compression spring end types 
-(ten pre-defined end types plus two user customizable alternatives). 
+The current version of ODOP:Spring implements multiple pre-defined compression spring end types plus a user customizable alternative. 
 For compression springs, the Calculation Input `End_Type` has the following possible values: 
 
 *Click on a thumbnail image to see a larger version of that image. Use the browser "Back" button in order to return to this page.*
@@ -324,59 +327,86 @@ For compression springs, the Calculation Input `End_Type` has the following poss
 10 | PigtailClosed&Ground | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
 | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
 11 | UserSpecified | See<br/>discussion<br/>below | &nbsp; |
-12 | UserSpecified&Ground | &nbsp; | &nbsp; |
 
+&nbsp;
+
+#### Using End Type Values
+To support user customization and to accommodate less common compression spring end types — 
+such as the “Pigtail” and "TaperedClosed&Ground" configurations used with hot‑wound springs —  
+ODOP:Spring incorporates the terms `Taper_Amount`, `Pigtail_Amount`, and `Grind_Amount` 
+in addition to `Inactive_Coils` in the calculation of pitch, and solid height. 
+Each term is expressed in units of wire diameter. 
+This approach keeps pitch and solid height calculations independent from the rate equation.  
+
+These terms also allow representation of unusual end configurations, 
+including springs that use different end types at each end.  
+
+When End_Type_Method is **1** (Use values from end type table), the selected `End_Type` directly determines the values of 
+`Inactive_Coils`, `Taper_Amount`, `Pigtail_Amount` and `Grind_Amount`. 
+Dependent quantities such as `L_Solid` and `Pitch` are then affected indirectly.  
+
+When End_Type_Method is **2** (User specified end type values), 
+the user enters values directly in the corresponding numeric fields.  
+
+Switching End_Type_Method from **1** to End_Type_Method  **2**, retains the current values, 
+allowing users to begin with a close approximation and then refine it. 
+Switching from End_Type_Method  **2** back to End_Type_Method  **1**, restores the values 
+from the internal table associated with the selected `End_Type`.  
+
+
+#### Inactive_Coils
 For a compression spring, "inactive coils" are coils that do not contribute to spring rate. 
-"Dead coils" are a subset of inactive coils typically added for handling or tangling prevention. 
-End types determine the baseline number of inactive coils, which the user may override 
-when `End_Type` is set to UserSpecified. 
-Specifically, the end type selection directly determines the value of
-`Inactive_Coils` and,End_Reductionable, `Grind_Amount` and/or `End_Reduction`. 
-Other variables such as `L_Solid` and `Pitch` are then affected indirectly. 
-When `End_Type` is set to one of the pre-defined (non UserSpecified) selectEnd_Reductiontive_Coils`, `Grind_Amount` and `End_Reduction` are set by ODOP:Spring 
-from values contained in an internal table. 
-When the value of `End_Type` is UserSpecified or UserSpecified&Ground, 
-the user may set these values by making an entry in the corresponding numeric entry field.  
+The term [Dead Coils](/docs/Help/DesignTypes/Spring/Compression/description.html#deadCoils) 
+can be thought of as a subset of inactive coils, typically added for handling or to 
+reduce tangling during manufacturing operations.  
 
-<!--- Additional information may be found in the documentatioEnd_Reductionor EQNSET.  --> 
+`DoubleClosed` and `DoubleClosed&Ground` are included in the `End_Type` table to represent 
+the common case where a spring has two closed coils at each end. 
 
-#### Grind_Amount, End_Reduction 
-In order to enable user customization plus facilitate the treatment of less common compression 
-spring end types such as the "Tapered, Closed and Ground" configuration associated with hot-wound springs, 
-ODOP:Spring has added theEnd_Reductionulation Input) terms `Grind_Amount` and `End_Reduction` 
-into the solid height calculation. 
-These terms each have units of wire diameter. 
-This is done to separate the solid height calculation from the rate equation.  
+<!--- Additional information may be found in the documentation for Calculation Input Names above or EQNSET.  --> 
 
-As mentioned previously, the `End_Type` drop-down selection list sEnd_Reductiones of `Inactive_Coils`, 
-`Grind_Amount` and `End_Reduction` from an internal table. 
-`Grind_Amount` is theEnd_Reductionire diameters removed by a grinding operation. 
-`End_Reduction` is the solid height reduction, measured in wire diameters, 
-created by tapering the wire diameter of the first and last coils of a hot-wound compression spring.  
 
-The "tapered" terminology used here refers only to local wire‑diameter reduction, not to a conical spring shape. 
-Specifically, the “tapered” end types do not refer to a conical (non-cylindrical) spring; 
-the term refers only to tapering of the end coil's `Wire_Dia` to reduce solid height.
+#### Taper_Amount
+Taper amount is the solid height reduction, measured in wire diameters, 
+created by a tapering operation on the wire diameter of the first and last coil(s) of a hot-wound compression spring. 
+For example, a value of 1.0 corresponds to a reduction of 0.5 × Wire_Dia at each end. 
 
-The Open&Ground and Closed&Ground end types each have a `Grind_Amount` value of 1.0. 
-This value results from removing 50% of a wire diameter at each enEnd_Reductione TaperedClosed&Ground end type, `Grind_Amount` and `End_Reduction` each 
-have a value of 0.5. 
-The tapering operation reduces the solid height by 25% of a wire diameter at each end. 
-Another 25% of a wire diameter reduction on solid height is due to the tapered end conforming to the previous coil. 
-Thus, the tapered section becomes a skewed, truncated cone. 
-Finally, the grinding operation removes 25% of a nominal wire diameter (50% of the tapered dimension) 
+The term "tapered" used here refers only to local wire diameter reduction, not to a conical spring shape. 
+Tapered end types do **not** refer to a conical (non-cylindrical) spring; 
+the term refers only to tapering of the end coil's `Wire_Dia` to reduce solid height. 
+This operation is commonly associated with hot-wound springs.
+
+For the `TaperedClosed&Ground` end type, the default values are:
+- `Taper_Amount` = 1.0  
+- `Grind_Amount` = 0.5  
+
+With these values, the tapering operation reduces the solid height by 50% of a wire diameter at each end. 
+<!--- check the next two lines  --> 
+<!--- Another 25% of a wire diameter reduction on solid height is due to the tapered end conforming to the previous coil. --> 
+<!--- Thus, the tapered section becomes a skewed, truncated cone. --> 
+The grinding operation then removes an additional 25% of a nominal wire diameter (50% of the tapered dimension) 
 from each end of the spring. 
-In summary, the TaperedClosed&Ground end type has a solid height of 1.5 wire diameters less than the Closed end type
-and 0.5 wire diameters less tEnd_Reductioned&Ground end type.  
 
-Note that the `Grind_Amount` and `End_Reduction` terms are not included in the wire length 
-and weight calculations. 
-These values are only anEnd_Reductionfor the solid height calculation.  
+In summary, the `TaperedClosed&Ground` end type produces a solid height:
+- 1.5 wire diameters less than the `Closed` end type  
+- 0.5 wire diameters less than the `TaperedClosed` end type  
 
-The `Grind_Amount` and `End_Reduction` terms may be used with `Inactive_Coils` to represent 
-unusual end configurations. 
-For example, springs that have a different end type atEnd_ReductionTo establish the value of `Inactive_Coils` or `Grind_Amount` or `End_Reduction` directly, 
-first select a value of UserSpecified or UserSpecified&Ground for `End_Type`.  
+
+#### Pigtail_Amount
+Pigtail amount reflects the total axial collapse of the pigtail coils across both ends, expressed in units of wire diameter. 
+A value of 2.0 represents one wire diameter collapsing into each end. 
+
+#### Grind_Amount, 
+Grind amount reflects the number of wire diameters removed by a grinding operation. 
+As noted earlier, 
+when End_Type_Method is **1** (Use values from end type table), the values are determined by the `End_Type` selected from the table. 
+
+The Open&Ground and Closed&Ground end types each have a `Grind_Amount` value of 1.0, 
+corresponding to removing 50% of a wire diameter at each end.  
+
+`Grind_Amount` is included as a reduction in the weight calculation. 
+See "Stock Weight" in the Reports for the material required to produce 1,000 springs (not reduced by the `Grind_Amount`). 
+
 
 &nbsp; 
 
@@ -409,11 +439,13 @@ ___
 
 ## Dead Coils 
 
-In a compression spring, "dead coils" are additional close wound coils, 
-typically placed at each end. 
+In a compression spring, "dead coils" are additional close wound coils, typically placed at each end. 
 Dead coils can be effective in preventing individual springs from tangling after coiling.  
 
-The appropriate way to handle dead coils is to select the "UserSpecified" end type 
+"DoubleClosed" and "DoubleClosed&Ground" are provided in the `End_type` table to cover the common situation
+where a spring has two closed coils at each end. 
+
+The appropriate way to handle a custom number of dead coils is to set End_Type_Method to **2** (User specified end type values) 
 and increase the value of `Inactive_Coils` by the desired number of dead coils.
 
 &nbsp; 
