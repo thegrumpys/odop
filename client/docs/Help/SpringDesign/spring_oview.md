@@ -155,9 +155,9 @@ The included table of material properties contains values for
 tensile strength at two wire diameters, (.010 inch and .400 inch) 
 plus conversion factors to produce estimates of allowable stresses 
 for both static and cyclic (endurance) applications. 
-The allowable shear stresses (Stress\_Lim\_Endur and Stress\_Lim\_Stat) are calculated 
+The allowable shear stresses (`Stress_Lim_Endur` and `Stress_Lim_Stat`) are calculated 
 from the tabulated values of tensile strength and the conversion factors 
-(%\_Tensile\_Endur and %\_Tensile\_Stat) for each new wire diameter. 
+(`%_Tensile_Endur` and `%_Tensile_Stat`) for each new wire diameter. 
 
 Because allowable stresses change for each new wire diameter considered, 
 ODOP:Spring works in terms of a "factor of safety". 
@@ -169,7 +169,7 @@ when that spring supports a load that generates 50,000 psi of stress,
 the factor of safety is 2.00. 
 
 The factor of safety concept applies to both static loads and cycle life. 
-The calculation of FS\_CycleLife includes the material's endurance limit (Stress\_Lim\_Endur), 
+The calculation of `FS_CycleLife` includes the material's endurance limit (`Stress_Lim_Endur`), 
 static load and fluctuating component of stress in a calculation originally developed by Soderberg. 
 Additional information on this calculation is available in the sources 
 listed in [Spring Design References](/docs/Help/SpringDesign/references.html). 
@@ -196,7 +196,7 @@ The [Report](/docs/Help/reports.html) tabs present crucial information about the
 performance of a design in a specialized, compact format. 
 
 In general, a finished design should not have significant remaining constraint violations. 
-In particular, L\_2 below L\_Solid in a compression spring is a sign of problems that 
+In particular, `L_2` below `L_Solid` in a compression spring is a sign of problems that 
 need to be resolved. 
    
 The force-deflection characteristics of a coil spring are approximately 
@@ -206,9 +206,9 @@ effects of end coils and non-uniform coil pitch influence the accuracy of analyt
 
 For compression springs, the Report tabs will produce an 
 informational message any time that more than 80 % of available 
-deflection (%\_Avail_Deflect) is used at the second load point. 
+deflection (`%_Avail_Deflect`) is used at the second load point. 
 Note that the default start point ("Startup") supplied with ODOP:Spring has 
-%\_Avail_Deflect constrained to be less than 90.0 per cent. 
+`%_Avail_Deflect` constrained to be less than 90.0 per cent. 
 Thus in the "as supplied" condition, 
 ODOP:Spring will frequently select designs that produce this informational message. 
 
@@ -222,13 +222,13 @@ If minimum weight is desired, the spring needs to operate at relatively high str
 Unless the design of a compression spring is constrained 
 by rate or solid height considerations, the factor of safety at point 2, 
 solid and cycle life should all be close to 1.0. 
-If a long cycle life is not necessary, the FS\_CycleLife may actually be less than 1.0. 
-A minimum weight design should have the value of %\_Avail_Deflect close to 
+If a long cycle life is not necessary, the `FS_CycleLife` may actually be less than 1.0. 
+A minimum weight design should have the value of `%_Avail_Deflect` close to 
 the maximum value for allowable for the application. 
 
 If low risk of failure or a long cycle life is desired, the spring 
 should operate at relatively low stresses. 
-The spring should have factors of safety, including FS\_CycleLife, 
+The spring should have factors of safety, including `FS_CycleLife`, 
 that are significantly greater than 1.0. 
 
 If a compression spring is intended for operation without lateral 
@@ -272,13 +272,13 @@ to have ODOP:Spring select values for the free Independent Variables that reduce
 (and hopefully eliminate) constraint violations thus achieving a feasible design. 
 
 Typically, the process of designing a completely new spring should start 
-with (at least) Wire\_Dia and Coils\_T in free status. 
+with (at least) `Wire_Dia` and `Coils_T` in free status. 
 Once a feasible design is established, 
 the **Action : Select Size** menu item can be used to select 
 the nearest standard wire size from the appropriate standard sizes table. 
 After the selection, an additional search should be executed to 
 adjust values of the remaining Independent Variables to compensate for 
-the change in Wire\_Dia. 
+the change in `Wire_Dia`. 
 
 Additional information on operating techniques is presented in the 
 documentation sections [Introduction](/docs/Help/introduction.html), 
@@ -304,8 +304,8 @@ ___
  In general, the names are constructed for consistency and to have common prefixes. 
  Names frequently have multiple words, or abbreviations hooked together with the 
  underscore (_) character. 
- For example, the free length is named L\_Free to be consistent with other length 
- names (L\_Solid, L\_1, and L\_2). 
+ For example, the free length is named `L_Free` to be consistent with other length 
+ names (`L_Solid`, `L_1`, and `L_2`). 
 
  The names for Independent Variables, Dependent Variables, Calculation Inputs 
  and Properties are defined in the initialState.js file. 
@@ -328,7 +328,7 @@ ___
  In fact, because the force-deflection equations don't know anything about 
  the spring's solid condition, point 2 can be set to represent an impossible 
  situation requiring the spring to be compressed beyond solid. 
- In this situation, the constraint on %\_Avail_Deflect will be violated. 
+ In this situation, the constraint on `%_Avail_Deflect` will be violated. 
  The search feature will attempt to resolve the conflict.
 
 For specifics on names associated with each spring type, see:   
@@ -360,39 +360,39 @@ ___
 
 ## Constraints common to both compression and extension springs 
 
-L\_Stroke MIN is a lower constraint on L\_Stroke, the length difference 
+`L_Stroke` MIN is a lower constraint on `L_Stroke`, the length difference 
 between point 1 and point 2. 
 Refer to the force-deflection diagram in the documentation section for each 
-specific spring type for an illustration of L\_Stroke. 
+specific spring type for an illustration of `L_Stroke`. 
 
-ID\_Free MIN is established by the default start point ("Startup") because it 
+`ID_Free` MIN is established by the default start point ("Startup") because it 
 discourages the search from investigating designs with a zero or 
 negative inside diameter, and there by encountering numerical difficulties. 
 
-FS\_2 MIN and FS\_2 MAX work together to keep the design in a reasonable 
+`FS_2` MIN and `FS_2` MAX work together to keep the design in a reasonable 
 range of working stress. 
-FS\_2 MIN works to keep the design from being overstressed. 
-FS\_2 MAX works to keep the design from being understressed and overweight. 
+`FS_2` MIN works to keep the design from being overstressed. 
+`FS_2` MAX works to keep the design from being understressed and overweight. 
 
-FS\_CycleLife is the factor of safety produced by the Soderberg cycle life calculation. 
-If a design has FS\_CycleLife greater than 1.0, then the 
+`FS_CycleLife` is the factor of safety produced by the Soderberg cycle life calculation. 
+If a design has `FS_CycleLife` greater than 1.0, then the 
 combination of average stress and the fluctuating component of stress for 
 that design is reasonably small compared to the endurance limit. 
 In this situation, an application cycling between point 1 and point 2 may expect a 
-life that exceeds the value selected for Life\_Category. 
+life that exceeds the value selected for `Life_Category`. 
 Remember that the endurance limit will vary as a function of the material selected, 
 the surface treatment (shot peening), and the selected cycle life. 
 
 As described in the documentation section on [Cycle Life](spring_oview.html#cycleLife) below, 
-ODOP:Spring is capable of directly calculating Cycle\_Life only for materials contained in 
+ODOP:Spring is capable of directly calculating `Cycle_Life` only for materials contained in 
 the materials table. 
-The FS\_CycleLife variable is the only way of gaging cycle life for user defined 
-material properties (Prop\_Calc\_Method = 2 and 3). 
+The `FS_CycleLife` variable is the only way of gaging cycle life for user defined 
+material properties (`Prop_Calc_Method` = 2 and 3). 
 
-FS\_CycleLife MIN is a lower constraint level associated with FS\_CycleLife. 
+`FS_CycleLife` MIN is a lower constraint level associated with `FS_CycleLife`. 
 A value less than 1.0 will permit designs that risk failure in high cycle applications. 
 
-For additional information about Prop_Calc_Method, see:
+For additional information about `Prop_Calc_Method`, see:
 [Spring Materials and Material Properties](/docs/Help/SpringDesign/materials.html) and
 [Advanced Spring Operations](/docs/Help/SpringDesign/advancedSpringOperations.html). 
 
@@ -430,12 +430,11 @@ specific stress limits, ODOP:Spring also permits a
 approach. 
 
 The factor of safety concept applies to both static loads and cycle life. 
-The calculation of FS\_CycleLife includes the material's endurance limit 
-(Stress\_Lim\_Endur), plus static and fluctuating components of stress in a 
+The calculation of `FS_CycleLife` includes the material's endurance limit 
+(`Stress_Lim_Endur`), plus static and fluctuating components of stress in a 
 calculation originally developed by Soderberg. 
-Stress\_Lim\_Endur is normally determined by the materials table and the 
-user's selection of cycle life and surface treatment (shot peening) 
-with Life\_Category. 
+`Stress_Lim_Endur` is normally determined by the materials table and the 
+user's selection of cycle life and surface treatment (shot peening) with `Life_Category`. 
 Additional information on the cycle life calculation is 
 available in the documentation sections for the specific spring types 
 and also in the resources listed in 
@@ -466,12 +465,12 @@ ___
 ___
 
 ## End Types (End_Type)
-The current version of ODOP:Spring implements twelve compression spring end types 
-(two of those are user customizable alternatives)
-plus six extension spring end types 
-(one of those is a user customizable alternative). 
-These end types are represented by the Calculation Input End\_Type which 
-has the following possible values: 
+The current version of ODOP:Spring allows the user to select from multiple standard compression spring end types. 
+In addition, it is possible for the user to define custom end types. 
+
+Similarly, multiple standard extension spring end types are available with an ability to define custom end types.
+
+The Calculation Input `End_Type` has the following possible values: 
 
 &nbsp;| Compression  
  ---  | ---          
@@ -486,8 +485,6 @@ has the following possible values:
 9     | PigtailClosed        
 10    | PigtailClosed&Ground
 &nbsp;| 
-11    | UserSpecified 
-12    | UserSpecified&Ground
 
 &nbsp;| Extension  
  ---  | ---  
@@ -499,12 +496,11 @@ has the following possible values:
 &nbsp;|
  6    | USER_SPECIFIED  
 
-For a compression spring, the end type directly impacts calculation of 
-Inactive\_Coils. 
-L\_Solid, pitch and other variables are affected indirectly.  
+For a compression spring, the end type directly impacts calculation of `Inactive_Coils`. 
+`L_Solid`, pitch and other variables are affected indirectly.  
 
 For an extension spring, the end type directly impacts calculation of 
-Hook\_Deflect\_All, End\_ID, Extended\_End\_ID, L\_End and L\_Extended\_End. 
+`Hook_Deflect_All`, `End_ID`, `Extended_End_ID`, `L_End` and `L_Extended_End`. 
 Other variables are impacted indirectly. 
 
 More detail on how to handle end types is provided in the 
@@ -524,12 +520,12 @@ ___
 ## Cycle Life 
 This section presents a discussion of cycle life considerations and 
 describes the Soderberg calculation and the ODOP:Spring interpretation of 
-FS\_CycleLife. 
+`FS_CycleLife`. 
 A discussion of hook stresses in extension springs appears in 
 the Extension Spring section. 
 
 ODOP:Spring provides two different approaches to the cycle life issue. 
-For materials contained in the materials table (Prop\_Calc\_Method=1), 
+For materials contained in the materials table (`Prop_Calc_Method` = 1), 
 ODOP:Spring will calculate cycle life directly. 
 This calculation is based on the "modified Goodman method". 
 Note that the value produced by this calculation applies only to body coils 
@@ -542,24 +538,24 @@ cycle life value predicted.
 For more information, 
 see: [Goodman relation](https://en.wikipedia.org/wiki/Goodman_relation) 
 
-For materials not contained in the materials table (Prop\_Calc\_Method=2 or 3), 
+For materials not contained in the materials table (`Prop_Calc_Method` = 2 or 3), 
 ODOP:Spring does not have enough information available to directly 
-calculate cycle life and so the Cycle\_Life variable is set to zero. 
-In this case, the FS\_CycleLife variable described here can be used to get 
+calculate cycle life and so the `Cycle_Life` variable is set to zero. 
+In this case, the `FS_CycleLife` variable described here can be used to get 
 some indication of a design's life in a specific cyclic application. 
 
-Use the Calculation Input Life\_Category to select one of eight possible 
+Use the Calculation Input `Life_Category` to select one of eight possible 
 combinations of "cycle life conditions" and surface treatments (shot peening) 
 expected in the application of the spring being designed. 
-The selection is used to determine a value for %\_Tensile\_Endur 
+The selection is used to determine a value for `%_Tensile_Endur` 
 from the materials table which then is applied to the 
 interpolated value of tensile strength for that material and wire diameter 
-to produce a value for the material's endurance limit (Stress\_Lim\_Endur). 
+to produce a value for the material's endurance limit (`Stress_Lim_Endur`). 
 
 As illustrated in the tutorial section TUTOR4, the default start point ("Startup") 
-supplied with ODOP:Spring does not provide default constraints for Cycle\_Life 
-or FS\_CycleLife. 
-Simply designating a Life\_Category is not enough to have ODOP:Spring search 
+supplied with ODOP:Spring does not provide default constraints for `Cycle_Life` 
+or `FS_CycleLife`. 
+Simply designating a `Life_Category` is not enough to have ODOP:Spring search 
 for designs with a long cycle life. 
 To have ODOP:Spring search for designs with a long cycle life, 
 alter constraint values such as: 
@@ -567,15 +563,15 @@ alter constraint values such as:
     CHANGE  Cycle_Life  MIN  nnnnnn
     CHANGE  FS_CycleLife  MIN  1.0
 
-FS\_CycleLife is the factor of safety produced in a calculation originally 
+`FS_CycleLife` is the factor of safety produced in a calculation originally 
 developed by Soderberg. 
-The calculation of FS\_CycleLife includes the material's endurance limit 
-(Stress\_Lim\_Endur), plus static and fluctuating components of stress. 
+The calculation of `FS_CycleLife` includes the material's endurance limit 
+(`Stress_Lim_Endur`), plus static and fluctuating components of stress. 
 
-If a design has FS\_CycleLife greater than 1.0, then the combination of 
+If a design has `FS_CycleLife` greater than 1.0, then the combination of 
 average stress and the fluctuating component of stress for that design is 
 reasonably small compared to the endurance limit. 
-A life that exceeds the value selected in Life\_Category may be expected in an application 
+A life that exceeds the value selected in `Life_Category` may be expected in an application 
 cycling between point 1 and point 2. 
 
 Remember that the endurance limit will vary as a function of the material 
@@ -601,7 +597,7 @@ Considering that coil springs of uniform pitch and cylindric shape
 have a linear relationship between force and deflection, 
 specifying both force and deflection at any two points will determine 
 the spring constant. 
-An additional "fix" on Rate or an active L\_Stroke MIN 
+An additional "fix" on Rate or an active `L_Stroke` MIN 
 constraint will then cause the problem to be over specified and it may 
 be impossible to find any set of independent variables that will not 
 violate the constraints. 
@@ -613,21 +609,21 @@ If it is violated, are you really concerned about buckling ?
 The feasible region will be substantially greater if you are willing 
 to accept a spring that would buckle without additional support. 
 
-#### Check fatigue life constraints, Cycle\_Life and FS\_CycleLife. 
+#### Check fatigue life constraints, Cycle_Life and FS_CycleLife. 
 If either is violated, are you really concerned about fatigue life ? 
 The feasible region will be somewhat larger if you are willing to 
 accept a spring that does not have a great cycle life. 
 
-#### Check for a conflict between FS\_2 MAX and another constraint such as FS\_Solid MIN. 
-The FS\_2 MAX constraint is intended to prevent the search 
+#### Check for a conflict between FS_2 MAX and another constraint such as FS_Solid MIN. 
+The `FS_2` MAX constraint is intended to prevent the search 
 from stopping at an overly conservative design. 
 However in some cases, 
 particularly where force and deflection are specified at two points, 
 it is not possible to find a feasible solution without increasing the value 
-of FS\_2 MAX. 
-If you find that your design violates FS\_2 MAX in addition to other constraints, 
+of `FS_2` MAX. 
+If you find that your design violates `FS_2` MAX in addition to other constraints, 
 and you are willing to accept a more conservative design, 
-increase the value of FS\_2 MAX or disable the constraint entirely. 
+increase the value of FS_2 MAX or disable the constraint entirely. 
 
 #### If FIXed variables do not take on the proper values: 
 Confirm that you have executed a Search after establishing the FIX. 
@@ -641,7 +637,7 @@ In the case that one or more constraints are also violated,
 Search will find a compromise between violations of the constraints and 
 failure to achieve the desired value for FIXed state variables. 
 The nature of this compromise is influenced the values of the internal 
-variables **(File : Preferences)** FIX\_WT, CON\_WT, and ZERO\_WT. 
+variables **(File : Preferences)** `FIX_WT`, `CON_WT`, and `ZERO_WT`. 
 
 #### If the program terminates abnormally: 
 If you can repeat the problem, please report it. 
