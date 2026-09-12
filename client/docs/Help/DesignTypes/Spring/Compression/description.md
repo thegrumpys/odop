@@ -425,11 +425,16 @@ These values are calculated with the formulas found in many industry standard
 
 For open end types, there is no issue.  
 
-For closed end types, there is a possibility that the industry standard calculation will produce 
-a value of pitch for body coils that is slightly greater than found in practice. 
-The difference is due to the standard calculations not including an allowance for a transition 
-section between body coils and end coils. 
-This difference is expected to increase as the pitch angle of the spring increases.  
+For closed end types, ODOP:Spring uses the industry standard body-pitch calculation.
+The end coil is one complete transition from the body helix to the closed end: it begins closing
+at the start of the end coil and touches the preceding coil at the end of that turn. It is not
+assumed to be in contact with the preceding coil throughout its length, and no separate transition
+coil is subtracted from the body coils. Additional inactive coils, as in a double-closed end, are
+treated as fully closed coils.
+
+Wire length and weight calculations use the standard body pitch and integrate the continuously
+changing pitch across the complete transitioning end coil. For pigtail ends, the change from body
+diameter to pigtail diameter also occurs across that same end coil.
 
 &nbsp; 
 

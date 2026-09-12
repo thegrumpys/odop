@@ -3,6 +3,43 @@ import * as mo from '../mat_offsets';
 import * as cego from './closedendgeometry_offsets';
 import * as eco from './endclosure_offsets';
 
+export function pitch(freeLength, wireDiameter, totalCoils, endClosure, inactiveCoils, taperAmount = 0.0, pigtailAmount = 0.0, grindAmount = 0.0) {
+    if (endClosure === eco.open) {
+        return (freeLength - (1.0 - grindAmount) * wireDiameter) / totalCoils;
+    }
+
+    const endAllowance = ((inactiveCoils + 1.0) * (1.0 - taperAmount / 2.0) - grindAmount - pigtailAmount) * wireDiameter;
+    return (freeLength - endAllowance) / (totalCoils - inactiveCoils);
+}
+
+const endCoilQuadrature = [
+    [0.1834346424956498, 0.3626837833783620],
+    [0.5255324099163290, 0.3137066458778873],
+    [0.7966664774136267, 0.2223810344533745],
+    [0.9602898564975363, 0.1012285362903763]
+];
+
+function endCoilLength(bodyMeanDiameter, endMeanDiameter, bodyPitch, endPitch, turns = 1.0) {
+    if (turns === 0.0) return 0.0;
+
+    // Integrate one continuous helix whose pitch and diameter change linearly
+    // from the body geometry to the terminal geometry.
+    const radialChange = (endMeanDiameter - bodyMeanDiameter) / (2.0 * turns);
+    const speed = (turn) => {
+        const fraction = turn / turns;
+        const diameter = bodyMeanDiameter + fraction * (endMeanDiameter - bodyMeanDiameter);
+        const localPitch = bodyPitch + fraction * (endPitch - bodyPitch);
+        return Math.hypot(Math.PI * diameter, radialChange, localPitch);
+    };
+    let sum = 0.0;
+
+    for (const [node, weight] of endCoilQuadrature) {
+        const offset = turns * node / 2.0;
+        sum += weight * (speed(turns / 2.0 - offset) + speed(turns / 2.0 + offset));
+    }
+    return turns * sum / 2.0;
+}
+
 export function wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils, endClosure, closedEndGeometry, inactiveCoils, taperAmount = 0.0, pigtailAmount = 0.0, grindAmount = 0.0) {
     const meanDiameter = outsideDiameter - wireDiameter;
     const circumference = Math.PI * meanDiameter;
@@ -17,41 +54,27 @@ export function wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils
         const endWireDiameter = closedEndGeometry === cego.tapered ?
             wireDiameter * (1.0 - taperAmount / 2.0) : wireDiameter;
         let endPitch = (wireDiameter + endWireDiameter) / 2.0;
-        const endAllowance = endWireDiameter - grindAmount * wireDiameter;
         let endMeanDiameter = meanDiameter;
-        let endCoils = inactiveCoils / 2.0; // Per end
-        let transitionTurns = 0.5; // Per end
 
         if (closedEndGeometry === cego.pigtail) {
-            const springIndex = meanDiameter / wireDiameter;
             endMeanDiameter = meanDiameter * 0.5;
             endPitch = wireDiameter * (1.0 - pigtailAmount / 2.0);
-            if (springIndex >= 7.0) {
-                endCoils = 0.65;
-            } else if (springIndex <= 4.5) {
-                endCoils = 0.25;
-                transitionTurns = 1.0;
-            } else {
-                const indexReduction = 7.0 - springIndex;
-                endCoils = 0.65 - 0.07 * indexReduction - 0.036 * indexReduction * indexReduction;
-                transitionTurns = 0.5 + 0.2 * indexReduction;
-            }
         }
 
-        const middleCoils = totalCoils - 2.0 * endCoils - 2.0 * transitionTurns;
-        const bodyPitch =
-            (freeLength - endAllowance - (2.0 * endCoils + transitionTurns) * endPitch) /
-            (middleCoils + transitionTurns);
-        const endLength = 2.0 * endCoils * Math.hypot(Math.PI * endMeanDiameter, endPitch);
-        const transitionPitch = (endPitch + bodyPitch) / 2.0;
-        // Approximate each transition using mean pitch/diameter and its radial change.
-        const transitionLength = 2.0 * Math.hypot(
-            transitionTurns * Math.PI * (endMeanDiameter + meanDiameter) / 2.0,
-            (meanDiameter - endMeanDiameter) / 2.0,
-            transitionTurns * transitionPitch
+        const endTurns = inactiveCoils / 2.0; // Per end
+        const transitioningEndTurns = Math.min(1.0, Math.max(0.0, endTurns));
+        const fullyClosedTurns = Math.max(0.0, endTurns - transitioningEndTurns);
+        const bodyTurns = totalCoils - inactiveCoils;
+        const bodyPitch = bodyTurns === 0.0 ? endPitch :
+            pitch(freeLength, wireDiameter, totalCoils, endClosure,
+                inactiveCoils, taperAmount, pigtailAmount, grindAmount);
+        const fullyClosedLength = 2.0 * fullyClosedTurns *
+            Math.hypot(Math.PI * endMeanDiameter, endPitch);
+        const transitioningEndLength = 2.0 * endCoilLength(
+            meanDiameter, endMeanDiameter, bodyPitch, endPitch, transitioningEndTurns
         );
-        const middleLength = middleCoils * Math.hypot(circumference, bodyPitch);
-        length = endLength + transitionLength + middleLength;
+        const bodyLength = bodyTurns * Math.hypot(circumference, bodyPitch);
+        length = fullyClosedLength + transitioningEndLength + bodyLength;
         break;
     }
     }
@@ -84,9 +107,21 @@ export function wireVolume(outsideDiameter, wireDiameter, freeLength, totalCoils
         }
     }
 
-    // Grinding and tapering affect the terminal turn at each end. Grind_Amount
-    // is the total axial depth removed across both ends.
-    const terminalLength = 2.0 * Math.hypot(Math.PI * endMeanDiameter, endPitch);
+    // Grinding and tapering affect the terminal coil at each end.
+    // Grind_Amount is the total axial depth removed across both ends.
+    let terminalLength = 2.0 * Math.hypot(Math.PI * endMeanDiameter, endPitch);
+    if (endClosure === eco.closed) {
+        const endTurns = inactiveCoils / 2.0;
+        const bodyTurns = totalCoils - inactiveCoils;
+        const bodyPitch = bodyTurns === 0.0 ? endPitch :
+            pitch(freeLength, wireDiameter, totalCoils, endClosure,
+                inactiveCoils, taperAmount, pigtailAmount, grindAmount);
+        if (endTurns <= 1.0) {
+            terminalLength = 2.0 * endCoilLength(
+                meanDiameter, endMeanDiameter, bodyPitch, endPitch, endTurns
+            );
+        }
+    }
     const endRadius = endWireDiameter / 2.0;
     const grindDepth = Math.max(0.0, Math.min(2.0 * endRadius, grindAmount * wireDiameter / 2.0));
     let groundArea = 0.0;

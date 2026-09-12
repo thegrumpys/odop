@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import * as o from './symbol_table_offsets';
 import * as mo from '../mat_offsets';
 import * as eto from './endtypes_offsets';
-import { wireLength } from './eqnset';
+import { pitch, wireLength } from './eqnset';
 import { getAlertsBySeverity } from '../../../components/Alerts';
 import ReportBaseContext from './ReportBaseContext';
 
@@ -35,36 +35,16 @@ export default function ReportBase(props) {
 
   base.len_lbl = "Wire Length";
 
-  var Closed_Flag = model_symbol_table[o.End_Closure].value -  1; // Make origin 0
-  base.pitch =
-    (
-      model_symbol_table[o.L_Free].value -
-      (
-        (
-          1.0 - Closed_Flag
-        ) *
-        (
-          1.0 - model_symbol_table[o.Grind_Amount].value
-        ) +
-        Closed_Flag *
-        (
-          (
-            model_symbol_table[o.Inactive_Coils].value + 1.0
-          ) *
-          (
-            1.0 - model_symbol_table[o.Taper_Amount].value / 2.0
-          ) -
-          model_symbol_table[o.Grind_Amount].value -
-          model_symbol_table[o.Pigtail_Amount].value
-        )
-      ) *
-      model_symbol_table[o.Wire_Dia].value
-    ) /
-    (
-      model_symbol_table[o.Coils_T].value -
-      Closed_Flag *
-      model_symbol_table[o.Inactive_Coils].value
-    );
+  base.pitch = pitch(
+    model_symbol_table[o.L_Free].value,
+    model_symbol_table[o.Wire_Dia].value,
+    model_symbol_table[o.Coils_T].value,
+    model_symbol_table[o.End_Closure].value,
+    model_symbol_table[o.Inactive_Coils].value,
+    model_symbol_table[o.Taper_Amount].value,
+    model_symbol_table[o.Pigtail_Amount].value,
+    model_symbol_table[o.Grind_Amount].value
+  );
 
   base.wire_len_t = wireLength(
     model_symbol_table[o.OD_Free].value,
