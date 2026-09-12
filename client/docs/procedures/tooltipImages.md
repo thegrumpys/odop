@@ -44,9 +44,13 @@ Place the images in: `/public/designtypes/Spring/<type>/tooltips/`
 `    L_Free = 60 mm`  
 `    Wire_dia = 5 mm`  
 * Set Orthographic view 
-* Orient the spring to obtain an oblique view from above 
-* Screen capture into .png format following the image size guidelines listed above 
-* place the images in the same location as the tooltip images 
+* Set deviation = 0.10 
+* Orient the spring to obtain front and oblique views 
+(oblique: start from Front view. Click left.  Click curved arrow left&down. Click up triangle.) 
+* Screen capture or Tools:Save Image into .png format 
+* Transfer from Linux VM to Windows 11 host 
+* Use imaged editor to resize following the image size guidelines listed above 
+* import the images to github in the same location as the tooltip images 
 
 ### Example images  (large)
 ![Compression - Open](/designtypes/Spring/Compression/tooltips/C_SpringOpenEnd_lg.png "Compression - Open")  
