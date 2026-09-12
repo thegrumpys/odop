@@ -160,8 +160,8 @@ End_Type_Method  |      | End Type Method controls how end types are determined 
 &nbsp;           |      | **1** - Use values from table of standard end types. 
 &nbsp;           |      | **2** - User specified end type values. 
 End_Type       |        | when End_Type_Method is **1**, <br/> select desired end type from table of standard end types. See: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes)
-Closed_End_Geometry |   | when End_Type_Method is **2** and End_Closure is "Closed", <br/> select end closed coil geometry of the spring: Single, Double, Tapered, or Pigtail. The selection applies to each end of the spring. `Single` is a single closed coil at each end. 
 End_Closure    |        | when End_Type_Method is **2**, <br/> select end closure of the spring: Open or Closed. 
+Closed_End_Geometry |   | when End_Type_Method is **2** and End_Closure is "Closed", <br/> select end closed coil geometry of the spring: Single, Double, Tapered, or Pigtail. The selection applies to each end of the spring. `Single` is a single closed coil at each end.
 Inactive_Coils |        | number of inactive coils <br/> (depends on `End_Type`) 
 Taper_Amount   |        | the solid height reduction, measured in wire diameters, created by a tapering operation on the wire diameter of the first and last coil(s) of a hot-wound compression spring. For example, a value of 1.0 corresponds to a reduction of 0.5 × Wire_Dia at each end
 Pigtail_Amount |        | Total axial collapse of the pigtail coils across both ends, expressed in units of wire diameter. A value of 2.0 represents one wire diameter collapsing into each end

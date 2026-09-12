@@ -3,7 +3,7 @@ import * as mo from '../mat_offsets';
 import * as cego from './closedendgeometry_offsets';
 import * as eco from './endclosure_offsets';
 
-export function wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils, closedEndGeometry, endClosure, inactiveCoils, taperAmount = 0.0, pigtailAmount = 0.0, grindAmount = 0.0) {
+export function wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils, endClosure, closedEndGeometry, inactiveCoils, taperAmount = 0.0, pigtailAmount = 0.0, grindAmount = 0.0) {
     const meanDiameter = outsideDiameter - wireDiameter;
     const circumference = Math.PI * meanDiameter;
     let length;
@@ -161,8 +161,8 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
             p[o.Wire_Dia],
             p[o.L_Free],
             p[o.Coils_T],
-            x[o.Closed_End_Geometry],
             x[o.End_Closure],
+            x[o.Closed_End_Geometry],
             x[o.Inactive_Coils],
             x[o.Taper_Amount],
             x[o.Pigtail_Amount],
