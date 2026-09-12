@@ -79,7 +79,9 @@ export default function ReportBase(props) {
     model_symbol_table[o.Grind_Amount].value
   );
 
-  base.wgt1000 = 1000.0 * model_symbol_table[o.Weight].value;
+  base.stock_wgt1000 = 1000.0 * model_symbol_table[o.Density].value *
+    (Math.PI * model_symbol_table[o.Wire_Dia].value * model_symbol_table[o.Wire_Dia].value / 4.0) *
+    base.wire_len_t;
 
   /*
    * intermediate dia. calcs. assume no wire stretch

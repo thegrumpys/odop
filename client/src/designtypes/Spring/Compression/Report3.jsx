@@ -156,14 +156,25 @@ export default function Report3() {
             <td />
             <td>{model_symbol_table[o.Weight].name}</td>
             <td>=</td>
-            <td>{base.wgt1000.toFixed(3)}</td>
-            <td className="text-start">{model_symbol_table[o.Weight].units + "/1000"}</td>
+            <td>{model_symbol_table[o.Weight].value.toFixed(6)}</td>
+            <td className="text-start">{model_symbol_table[o.Weight].units + "/spring"}</td>
           </tr>
           <tr>
             <td>Safe Travel</td>
             <td>=</td>
             <td>{base.safe_travel.toFixed(3)}</td>
             <td className="text-start">{model_symbol_table[o.L_Free].units}</td>
+            <td />
+            <td>Stock Weight</td>
+            <td>=</td>
+            <td>{base.stock_wgt1000.toFixed(3)}</td>
+            <td className="text-start">{model_symbol_table[o.Weight].units + "/1000 springs"}</td>
+          </tr>
+          <tr>
+            <td />
+            <td />
+            <td />
+            <td />
             <td />
             <td>{model_symbol_table[o.Cycle_Life].name}</td>
             <td>=</td>

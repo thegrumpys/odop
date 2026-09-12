@@ -176,8 +176,8 @@ export default function Report1() {
             <td />
             <td>{model_symbol_table[o.Weight].name}</td>
             <td>=</td>
-            <td>{base.wgt1000.toFixed(3)}</td>
-            <td className="text-start">{model_symbol_table[o.Weight].units + "/1000"}</td>
+            <td>{model_symbol_table[o.Weight].value.toFixed(6)}</td>
+            <td className="text-start">{model_symbol_table[o.Weight].units + "/spring"}</td>
           </tr>
           <tr>
             <td>Pitch</td>
@@ -185,11 +185,21 @@ export default function Report1() {
             <td>{base.pitch.toFixed(3)}</td>
             <td className="text-start">{model_symbol_table[o.L_Free].units}</td>
             <td />
+            <td>Stock Weight</td>
+            <td>=</td>
+            <td>{base.stock_wgt1000.toFixed(3)}</td>
+            <td className="text-start">{model_symbol_table[o.Weight].units + "/1000 springs"}</td>
+          </tr>
+          <tr>
+            <td />
+            <td />
+            <td />
+            <td />
+            <td />
             <td>{model_symbol_table[o.Cycle_Life].name}</td>
             <td>=</td>
             <td>{model_symbol_table[o.Cycle_Life].value.toFixed(0)}</td>
             <td className="text-start">{model_symbol_table[o.Cycle_Life].units + " (estimate)"}</td>
-            <td />
           </tr>
         </tbody>
       </table>

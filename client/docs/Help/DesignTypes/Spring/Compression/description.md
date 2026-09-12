@@ -188,7 +188,7 @@ Name           | &nbsp; | Description
 Wire&nbsp;Length |      | total length of wire required to manufacture the spring, not including any waste 
 Safe Load      |        | load supported by the spring in the solid condition or at a stress equal to the `Stress_Lim_Stat` value, whichever is lower. 
 Pitch          |        | distance between the wire centers of adjacent body coils, measured in the free state 
-Stock&nbsp;Weight |     | material required to produce 1,000 springs. Not reduced by allowance for `Grind_Amount` 
+Stock&nbsp;Weight |     | gross material required to produce 1,000 springs. Not reduced by allowances for `Grind_Amount` or `Taper_Amount`
 Buckling       |        | indication of tendency to buckle given the current design and loading conditions 
 Stress Ratio   |        | ratio of minimum stress to maximum stress `(Stress_1/Stress_2)` 
 Kw1, Kw2       |        | stress correction factors due to curvature 
@@ -406,7 +406,7 @@ The Open&Ground and Closed&Ground end types each have a `Grind_Amount` value of 
 corresponding to removing 50% of a wire diameter at each end.  
 
 `Grind_Amount` is included as a reduction in the weight calculation. 
-See "Stock Weight" in the Reports for the material required to produce 1,000 springs (not reduced by the `Grind_Amount`).  
+See "Stock Weight" in the Reports for the gross material required to produce 1,000 springs (not reduced by `Grind_Amount` or `Taper_Amount`).
 
 
 &nbsp; 

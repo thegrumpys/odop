@@ -1,5 +1,5 @@
 import * as o from '../../../designtypes/Spring/Compression/offsets';
-import { wireLength, eqnset } from '../../../designtypes/Spring/Compression/eqnset';
+import { wireLength, wireVolume, eqnset } from '../../../designtypes/Spring/Compression/eqnset';
 
 //=====================================================================
 // eqnset
@@ -70,6 +70,28 @@ it.each([
     expect(groundLength).toBeGreaterThan(ungroundLength);
 });
 
+it('wireVolume returns full stock volume without grinding or tapering', () => {
+    const wireDiameter = 0.105;
+    const length = wireLength(1.1, wireDiameter, 3.25, 10.0, 2, 1, 2.0);
+
+    expect(wireVolume(1.1, wireDiameter, 3.25, 10.0, 2, 1, 2.0))
+        .toBeCloseTo(length * Math.PI * wireDiameter * wireDiameter / 4.0, 12);
+});
+
+it('wireVolume subtracts material removed by grinding', () => {
+    const unground = wireVolume(1.1, 0.105, 3.25, 10.0, 2, 1, 2.0, 0.0, 0.0, 0.0);
+    const ground = wireVolume(1.1, 0.105, 3.25, 10.0, 2, 1, 2.0, 0.0, 0.0, 1.0);
+
+    expect(ground).toBeLessThan(unground);
+});
+
+it('wireVolume subtracts material removed by tapering', () => {
+    const untapered = wireVolume(1.1, 0.105, 3.25, 10.0, 2, 3, 2.0, 0.0, 0.0, 0.0);
+    const tapered = wireVolume(1.1, 0.105, 3.25, 10.0, 2, 3, 2.0, 1.0, 0.0, 0.0);
+
+    expect(tapered).toBeLessThan(untapered);
+});
+
 it('eqnset initialState', () => {
     var p = []; // p vector
     var x = []; // x vector
@@ -114,7 +136,7 @@ it('eqnset initialState', () => {
     expect(x[o.L_Solid]).toEqual(1.055);
     expect(x[o.Slenderness]).toEqual(3.2679738562091503);
     expect(x[o.ID_Free]).toEqual(0.889);
-    expect(x[o.Weight]).toBeCloseTo(0.07803849685445749, 15);
+    expect(x[o.Weight]).toBeCloseTo(0.0702775401733257, 15);
     expect(x[o.Spring_Index]).toEqual(9.42654028436019);
     expect(x[o.Force_Solid]).toEqual(49.67614282940665);
     expect(x[o.Stress_1]).toEqual(24893.49275531675);
@@ -207,7 +229,7 @@ it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () 
     expect(x[o.L_Solid]).toEqual(2);
     expect(x[o.Slenderness]).toEqual(16.25);
     expect(x[o.ID_Free]).toEqual(0.0);
-    expect(x[o.Weight]).toEqual(0.06335044485536057);
+    expect(x[o.Weight]).toBeCloseTo(0.057467360474183375, 15);
     expect(x[o.Spring_Index]).toEqual(1);
     expect(x[o.Force_Solid]).toEqual(44921.875);
     expect(x[o.Stress_1]).toEqual(Number.POSITIVE_INFINITY);
@@ -292,7 +314,7 @@ it('eqnset pathological Coils_T === Inactive_Coils && Coils_A === 0.0', () => {
     expect(x[o.L_Solid]).toEqual(0.211);
     expect(x[o.Slenderness]).toEqual(3.2679738562091503);
     expect(x[o.ID_Free]).toEqual(0.889);
-    expect(x[o.Weight]).toEqual(0.009427816305672135);
+    expect(x[o.Weight]).toBeCloseTo(0.0016668596245403315, 15);
     expect(x[o.Spring_Index]).toEqual(9.42654028436019);
     expect(x[o.Force_Solid]).toEqual(Number.POSITIVE_INFINITY);
     expect(x[o.Stress_1]).toEqual(24893.49275531675);
@@ -380,7 +402,7 @@ it('eqnset pathological OD_Free === Wire_Dia && Mean_Dia === 0.0', () => {
     expect(x[o.L_Solid]).toEqual(4);
     expect(x[o.Slenderness]).toEqual(Number.POSITIVE_INFINITY);
     expect(x[o.ID_Free]).toEqual(-0.4);
-    expect(x[o.Weight]).toEqual(0.11598760077053516);
+    expect(x[o.Weight]).toBeCloseTo(0.10171220375262315, 15);
     expect(x[o.Spring_Index]).toEqual(0.0);
     expect(x[o.Force_Solid]).toEqual(Number.NaN);
     expect(x[o.Stress_1]).toEqual(Number.NaN);

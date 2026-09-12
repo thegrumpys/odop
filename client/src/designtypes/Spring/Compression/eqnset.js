@@ -59,6 +59,47 @@ export function wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils
     return length;
 }
 
+export function wireVolume(outsideDiameter, wireDiameter, freeLength, totalCoils, endClosure, closedEndGeometry, inactiveCoils, taperAmount = 0.0, pigtailAmount = 0.0, grindAmount = 0.0) {
+    const length = wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils, endClosure, closedEndGeometry, inactiveCoils, taperAmount, pigtailAmount, grindAmount);
+    const wireArea = Math.PI * wireDiameter * wireDiameter / 4.0;
+
+    if (taperAmount === 0.0 && grindAmount === 0.0) {
+        return length * wireArea;
+    }
+
+    const meanDiameter = outsideDiameter - wireDiameter;
+    let endWireDiameter = wireDiameter;
+    let endMeanDiameter = meanDiameter;
+    let endPitch = totalCoils === 0.0 ? 0.0 : freeLength / totalCoils;
+
+    if (endClosure === eco.closed) {
+        if (closedEndGeometry === cego.tapered) {
+            endWireDiameter = wireDiameter * (1.0 - taperAmount / 2.0);
+        }
+        if (closedEndGeometry === cego.pigtail) {
+            endMeanDiameter = meanDiameter * 0.5;
+            endPitch = wireDiameter * (1.0 - pigtailAmount / 2.0);
+        } else {
+            endPitch = (wireDiameter + endWireDiameter) / 2.0;
+        }
+    }
+
+    // Grinding and tapering affect the terminal turn at each end. Grind_Amount
+    // is the total axial depth removed across both ends.
+    const terminalLength = 2.0 * Math.hypot(Math.PI * endMeanDiameter, endPitch);
+    const endRadius = endWireDiameter / 2.0;
+    const grindDepth = Math.max(0.0, Math.min(2.0 * endRadius, grindAmount * wireDiameter / 2.0));
+    let groundArea = 0.0;
+    if (endRadius > 0.0 && grindDepth > 0.0) {
+        const offset = endRadius - grindDepth;
+        groundArea = endRadius * endRadius * Math.acos(offset / endRadius) -
+            offset * Math.sqrt(Math.max(0.0, 2.0 * endRadius * grindDepth - grindDepth * grindDepth));
+    }
+    const finishedEndArea = Math.max(0.0, Math.PI * endRadius * endRadius - groundArea);
+
+    return Math.max(0.0, length * wireArea - terminalLength * (wireArea - finishedEndArea));
+}
+
 export function eqnset(p, x) {        /*    Compression  Spring  */
 //    console.log('@@@@@ Start eqnset p=',p,'x=',x);
     const zero = 0.0;
@@ -156,7 +197,7 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
     } else x[o.Cycle_Life] = 0.0;   // Setting to NaN causes problems with File : Open.  See issue 232
 //  console.log('eqnset','Wire_Dia=',p[o.Wire_Dia],'Cycle_Life=',x[o.Cycle_Life]);
 
-        var wire_len_t = wireLength(
+        x[o.Weight] = x[o.Density] * wireVolume(
             p[o.OD_Free],
             p[o.Wire_Dia],
             p[o.L_Free],
@@ -168,8 +209,6 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
             x[o.Pigtail_Amount],
             x[o.Grind_Amount]
         );
-
-        x[o.Weight] = x[o.Density] * (Math.PI * p[o.Wire_Dia] * p[o.Wire_Dia] / 4.0) * wire_len_t;
 
     if (p[o.L_Free] > x[o.L_Solid]) {
         x[o.PC_Avail_Deflect] = 100.0 * x[o.Deflect_2] / (p[o.L_Free] - x[o.L_Solid]);

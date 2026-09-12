@@ -288,7 +288,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.001,
-            "tooltip": "<Table><tr><td>Weight of one spring</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Compression/tooltips/Weight.png\"/></td></tr></Table>",
+            "tooltip": "<Table><tr><td>Finished weight of one spring after grinding and tapering</td></tr><tr><td class=\"text-center\"><Image fluid src=\"/designtypes/Spring/Compression/tooltips/Weight.png\"/></td></tr></Table>",
             "type": "equationset",
             "hidden": false
         },

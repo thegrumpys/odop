@@ -64,19 +64,19 @@ it('tutor7', () => {
     store.dispatch(seek("Weight",MIN));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.00005740,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.00008881,7);
 
     // title: "Page 07 of 17"
     store.dispatch(seek("Rate",MIN));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.00055618,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.00009096,7);
 
     // title: "Page 08 of 17"
     store.dispatch(seek("L_Solid",MIN));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.00020227,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.00023408,7);
 
     // title: "Page 09 of 17"
     store.dispatch(loadInitialState("Spring/Compression","US"));
@@ -109,7 +109,7 @@ it('tutor7', () => {
     store.dispatch(seek("Weight",MIN));
 
     design = store.getState();
-    expect(design.model.result.objective_value).toBeCloseTo(0.00020373,7);
+    expect(design.model.result.objective_value).toBeCloseTo(0.00023480,7);
 
     // title: "Page 14 of 17"
     // No-op
