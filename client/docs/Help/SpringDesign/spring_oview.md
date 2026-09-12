@@ -6,7 +6,7 @@ ___
 
 For specifics, see:   
 * [Advanced Spring Operations](/docs/Help/SpringDesign/advancedSpringOperations.html)   
-* [Spring Materials](/docs/Help/SpringDesign/materials.html)   
+* [Spring Materials and Material Properties](/docs/Help/SpringDesign/materials.html)   
 * [Select Size and Select Catalog](/docs/Help/SpringDesign/selectSizeCatalog.html)
 * [Spring Design References](/docs/Help/SpringDesign/references.html)   
 * [Compression Spring](/docs/Help/DesignTypes/Spring/Compression/description.html)   
@@ -41,7 +41,7 @@ ___
 
 ## Spring basics 
  This section provides a limited amount of introductory material on spring
- design in the context of the ODOP:Spring program. 
+ design in the context of the ODOP:Spring program.  
 
  It is not the intent of the ODOP:Spring documentation to teach spring design. 
  The ODOP:Spring program is aimed at experienced spring designers and 
@@ -51,7 +51,7 @@ ___
  This section should be read in conjunction with other sections of the 
  ODOP:Spring documentation. 
  In particular, refer to the specific spring type sections for additional details on 
- variable Names and Force-Deflection Diagrams. 
+ variable Names and Force-Deflection Diagrams.  
 ___
 
 <a id="tesosd"></a>  
@@ -60,7 +60,7 @@ ___
 ## The essential challenge of spring design 
 The challenge of any engineering design problem is to select values for those 
 parameters that are under the designer's control such that the design 
-produces the desired performance. 
+produces the desired performance.  
 
 Even with something as simple as a coil spring, the design problem can be 
 presented in dozens of different ways. 
@@ -69,12 +69,12 @@ requiring X, Y and Z to be calculated.
 Other times the problem is stated in terms that specify X, Y and Z, 
 requiring A, B and C to be calculated. 
 Therefore, it is not realistic to solve the design equations for a single set of inputs and outputs. 
-It is simply not possible to make all design problems fall neatly into a step by step procedure. 
+It is simply not possible to make all design problems fall neatly into a step by step procedure.  
 
 ODOP:Spring approaches this characteristic of design by letting the 
 designer to express what is known about the problem, 
 and what needs to be achieved and then providing an 
-ability for the program to search for an acceptable solution. 
+ability for the program to search for an acceptable solution.  
 
 In coil spring design, it is parameters like outside diameter, wire diameter, 
 free length, and number of coils that are directly under the designer's control. 
@@ -83,18 +83,18 @@ height, initial tension or tendency to buckle are a consequence of the
 selection of the physical parameters. 
 As with any design situation,
 there are significant limitations on the range of values that the 
-various parameters and variables can take on. 
+various parameters and variables can take on.  
 
 Typically a designer can express his goals for the performance of a 
 given design in terms of one-sided limitations that ODOP:Spring refers to as constraints. 
 For example, the outside diameter must be less than X, 
-the inside diameter greater than Y, the solid height less than Z. 
+the inside diameter greater than Y, the solid height less than Z.  
 
 Sometimes the designer's limitations are two sided. 
 For example, it may be necessary to select appropriate values for directly controlled 
 parameters (wire diameter, outside diameter, number of coils) such that 
 another variable (such as spring rate or length at a given load) is 
-exactly equal to a specified value. 
+exactly equal to a specified value.  
 
 Material properties are another good example of a designer's limitations. 
 If massless, infinitely strong materials were available at negligible cost, 
@@ -103,8 +103,9 @@ Because the range of available materials is limited and the spring properties ju
 get better as the material properties improve, 
 ODOP:Spring implements material properties as Calculation Inputs rather than as 
 Independent Variables to be searched over. 
-If material properties were allowed to vary during the search, 
-the program would always select the strongest material that it could find.
+Unless detailed cost information is incorporated into the analysis, 
+if material properties were allowed to vary during the search, 
+the program would always select the strongest material that it could find.  
 
 In summary, the essential challenge of spring design is to take what is known 
 about the problem and select values for the independent variables that 
@@ -112,7 +113,7 @@ achieve the required performance.
 If available materials will not deliver this performance, 
 it is necessary to make some compromises. 
 ODOP:Spring provides tools to assist in the process of making those compromises, 
-but the ultimate responsibility for the design rests with the designer. 
+but the ultimate responsibility for the design rests with the designer.  
 
 ___
 
@@ -128,19 +129,19 @@ the names that ODOP:Spring uses in order to specify a design problem.
 The vertical axis in each diagram is force. 
 The horizontal axis is distance; either deflection or spring length. 
 The force-deflection relationship of a cylindric coil spring of uniform pitch 
-(refer to [Restrictions](/docs/Help/../About/Legal/Restrictions.html) ) 
+(refer to [Restrictions](/docs/Help/../About/Legal/Restrictions.html)) 
 is linear. 
-The slope of the line is the spring Rate measured in force per unit deflection. 
+The slope of the line is the spring `Rate` measured in force per unit deflection.  
 
 ODOP:Spring produces information about four points on the force-deflection curve. 
-As described in the What To Do If section (below), 
+As described in the [What To Do If](spring_oview.html#wtdi) section (below), 
 specifying both force and deflection for any two points will completely 
 specify the force-deflection line. 
-Any additional specification on Rate or one of the other points will 
+Any additional specification on `Rate` or one of the other points will 
 over-specify the problem. 
 Unless the redundant specification is exactly in line with the other values, 
 the conflict will keep ODOP:Spring from finding a feasible solution. 
-Consistent specification of constraints and FIX values is the responsibility of the ODOP:Spring user.
+Consistent specification of constraints and FIX values is the responsibility of the ODOP:Spring user.  
 
 ___
 
@@ -150,37 +151,39 @@ ___
 ## Allowable stresses and Factor of Safety 
 ODOP:Spring can use a table of material properties to determine permissible 
 stress levels for various commonly used spring materials. 
-This process is described in greater detail in the section below titled MATERIALS. 
+This process is described in greater detail in 
+the [Spring Materials and Material Properties](/docs/Help/SpringDesign/materials.html) 
+article of the on-line Help. 
 The included table of material properties contains values for 
 tensile strength at two wire diameters, (.010 inch and .400 inch) 
 plus conversion factors to produce estimates of allowable stresses 
 for both static and cyclic (endurance) applications. 
 The allowable shear stresses (`Stress_Lim_Endur` and `Stress_Lim_Stat`) are calculated 
 from the tabulated values of tensile strength and the conversion factors 
-(`%_Tensile_Endur` and `%_Tensile_Stat`) for each new wire diameter. 
+(`%_Tensile_Endur` and `%_Tensile_Stat`) for each new wire diameter.  
 
 Because allowable stresses change for each new wire diameter considered, 
-ODOP:Spring works in terms of a "factor of safety". 
+ODOP:Spring works in terms of a ["factor of safety"](https://en.wikipedia.org/wiki/Factor_of_safety). 
 A factor of safety may be described as measuring "how much better 
 the design is than it HAS to be". 
 Specifically, factor of safety is allowable stress divided by actual stress. 
 For example, if a spring is made of wire that has an allowable stress of 100,000 psi, 
 when that spring supports a load that generates 50,000 psi of stress, 
-the factor of safety is 2.00. 
+the factor of safety is 2.00.  
 
 The factor of safety concept applies to both static loads and cycle life. 
 The calculation of `FS_CycleLife` includes the material's endurance limit (`Stress_Lim_Endur`), 
 static load and fluctuating component of stress in a calculation originally developed by Soderberg. 
 Additional information on this calculation is available in the sources 
-listed in [Spring Design References](/docs/Help/SpringDesign/references.html). 
+listed in [Spring Design References](/docs/Help/SpringDesign/references.html).  
 
 Additional discussion on these topics is available in the sections 
 below on [Factor Of Safety](/docs/Help/SpringDesign/spring_oview.html#FoS) and 
-[Cycle Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife). 
+[Cycle Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife).  
 
-Selection of materials from the ODOP:Spring materials table is covered 
-below in the [Materials](/docs/Help/SpringDesign/materials.html) section and 
-in the [tutorial](/docs/Help/tutordemo.html). 
+Selection of materials from the ODOP:Spring materials table is covered below in 
+the [Spring Materials and Material Properties](/docs/Help/SpringDesign/materials.html) 
+article of the on-line Help and in the [tutorial](/docs/Help/tutordemo.html).  
 
 ___
 
@@ -204,8 +207,8 @@ linear in the range of 20 to 80 % of available deflection.
 Outside this range, 
 effects of end coils and non-uniform coil pitch influence the accuracy of analytical predictions. 
 
-For compression springs, the Report tabs will produce an 
-informational message any time that more than 80 % of available 
+For compression springs, the Alerts facility and Report tabs will produce 
+informational messages any time that more than 80 % of available 
 deflection (`%_Avail_Deflect`) is used at the second load point. 
 Note that the default start point ("Startup") supplied with ODOP:Spring has 
 `%_Avail_Deflect` constrained to be less than 90.0 per cent. 
@@ -235,12 +238,12 @@ If a compression spring is intended for operation without lateral
 support it should have a ratio of free length to coil diameter 
 (Slenderness) below approximately 4 to avoid buckling. 
 Lateral support is usually provided by operation in a sleeve or over a post. 
-The constraint Slenderness MAX can be used to restrict the search to designs 
+The constraint `Slenderness` MAX can be used to restrict the search to designs 
 that will not tend to buckle. 
 Note that the value of Slenderness is not constrained in the default start point 
 ("Startup") and thus the search may produce designs that are prone to buckling. 
-The compression spring REPORT 1 tab will provide an indication as to the 
-possibility of bucking for your specific design and loading condition. 
+The compression spring Alert facility and REPORT 1 tab will provide an indication 
+as to the possibility of bucking for your specific design and loading condition. 
 
 Please review the discussion in the [Restrictions](/docs/Help/../About/Legal/Restrictions.html) 
 section of the documentation to insure that you apply ODOP:Spring appropriately. 
@@ -458,7 +461,7 @@ ___
 
 ## Materials 
 
-Refer to: [Materials](/docs/Help/SpringDesign/materials.html)   
+Refer to: [Spring Materials and Material Properties](/docs/Help/SpringDesign/materials.html)   
 ___
 
 <a id="EndTypes"></a>  
@@ -597,7 +600,7 @@ Considering that coil springs of uniform pitch and cylindric shape
 have a linear relationship between force and deflection, 
 specifying both force and deflection at any two points will determine 
 the spring constant. 
-An additional "fix" on Rate or an active `L_Stroke` MIN 
+An additional "fix" on `Rate` or an active `L_Stroke` MIN 
 constraint will then cause the problem to be over specified and it may 
 be impossible to find any set of independent variables that will not 
 violate the constraints. 

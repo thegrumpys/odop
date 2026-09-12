@@ -211,7 +211,7 @@ In that case, the spring will usually need support in the form of a sleeve or po
 To restrict the search to designs that are unlikely to buckle, 
 set the `Slenderness` MAX constraint to a value of 4.0 or less. 
 
-For additional information, see: [Buckling](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springBuckling) 
+For additional information, see: [Buckling](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springBuckling)  
 
 #### %_Avail_Deflect 
 `%_Avail_Deflect` is the percentage of available deflection consumed at load point 2. 
@@ -321,12 +321,12 @@ For compression springs, the Calculation Input `End_Type` has the following poss
 4 | Closed&Ground | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringClsdGndFront_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringClsdGndFront.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringClsdGndOblique_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringClsdGndOblique.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
 5 | DoubleClosed | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringDoubleClosedFront_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringDoubleClosedFront.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringDoubleClosedOblique_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringDoubleClosedOblique.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
 6 | DoubleClosed&Ground | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringDoubleClosedGndFront_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringDoubleClosedGndFront.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringDoubleClosedGndOblique_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringDoubleClosedGndOblique.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
-7 | TaperedClosed | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
+7 | TaperedClosed | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringTaperedClosedFront_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringTaperedClosedFront.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringTaperedClosedOblique_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringTaperedClosedOblique.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
 8 | TaperedClosed&Ground | <span style="display:inline-block; width:35px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringTaperClsdGndFront_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringTaperClsdGndFront.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:70px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringTaperClsdGndOblique_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringTaperClsdGndOblique.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
-9 | PigtailClosed | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
-10 | PigtailClosed&Ground | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPlaceholder.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
+9 | PigtailClosed | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPigtailClosedFront_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPigtailClosedFront.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPigtailClosedOblique_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPigtailClosedOblique.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
+10 | PigtailClosed&Ground | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPigtailClosedGndFront_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPigtailClosedGndFront.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPigtailClosedGndOblique_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPigtailClosedGndOblique.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
 | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
-11 | UserSpecified | See<br/>discussion<br/>below | &nbsp; |
+ &nbsp; | UserSpecified | See<br/>discussion<br/>below | &nbsp; |
 
 &nbsp;
 
@@ -361,7 +361,7 @@ can be thought of as a subset of inactive coils, typically added for handling or
 reduce tangling during manufacturing operations.  
 
 `DoubleClosed` and `DoubleClosed&Ground` are included in the `End_Type` table to represent 
-the common case where a spring has two closed coils at each end. 
+the common case where a spring has two closed coils at each end.  
 
 <!--- Additional information may be found in the documentation for Calculation Input Names above or EQNSET.  --> 
 
@@ -394,18 +394,19 @@ In summary, the `TaperedClosed&Ground` end type produces a solid height:
 
 #### Pigtail_Amount
 Pigtail amount reflects the total axial collapse of the pigtail coils across both ends, expressed in units of wire diameter. 
-A value of 2.0 represents one wire diameter collapsing into each end. 
+A value of 2.0 produces a solid height associated with one wire diameter collapsing into each end.  
 
 #### Grind_Amount, 
 Grind amount reflects the number of wire diameters removed by a grinding operation. 
 As noted earlier, 
-when End_Type_Method is **1** (Use values from end type table), the values are determined by the `End_Type` selected from the table. 
+when End_Type_Method is **1** (Use values from end type table), values are 
+determined by the `End_Type` selected from the table. 
 
 The Open&Ground and Closed&Ground end types each have a `Grind_Amount` value of 1.0, 
 corresponding to removing 50% of a wire diameter at each end.  
 
 `Grind_Amount` is included as a reduction in the weight calculation. 
-See "Stock Weight" in the Reports for the material required to produce 1,000 springs (not reduced by the `Grind_Amount`). 
+See "Stock Weight" in the Reports for the material required to produce 1,000 springs (not reduced by the `Grind_Amount`).  
 
 
 &nbsp; 
@@ -446,7 +447,7 @@ Dead coils can be effective in preventing individual springs from tangling after
 where a spring has two closed coils at each end. 
 
 The appropriate way to handle a custom number of dead coils is to set End_Type_Method to **2** (User specified end type values) 
-and increase the value of `Inactive_Coils` by the desired number of dead coils.
+and increase the value of `Inactive_Coils` by the desired number of dead coils. 
 
 &nbsp; 
 
@@ -457,23 +458,27 @@ ___
 
 ## User Specified End Type Examples 
 
-To represent a spring with one end Closed 
-and with the other end Closed&Ground: 
-
-    CHANGE  End_Type  UserSpecified
-    CHANGE  Inactive_Coils   2.0
-    CHANGE  Grind_Amount  0.5
-
 To represent a spring with ten active coils, two dead coils and closed ends: 
 
     FIX Coils_T     14.0
     CHANGE  End_Type  DoubleClosed
 
+To represent a spring with one end Closed 
+and with the other end Closed&Ground: 
+
+    CHANGE  End_Type_Method  2
+    CHANGE  End_Closure  Closed
+    CHANGE  Closed_End_Geometry  Single
+    CHANGE  Inactive_Coils  2.0
+    CHANGE  Grind_Amount  0.5
+
 To represent a spring with ten active coils, four dead coils and closed & ground ends: 
 
-    FIX Coils_T     16.0
-    CHANGE  End_Type  UserSpecified&Ground
-    CHANGE  Inactive_Coils   6.0
+    FIX Coils_T    16.0
+    CHANGE  End_Type_Method  2
+    CHANGE  End_Closure  Closed
+    CHANGE  Closed_End_Geometry  Single
+    CHANGE  Inactive_Coils  6.0
     CHANGE  Grind_Amount  1.0
 
 &nbsp;  
@@ -502,7 +507,8 @@ Note that `Slenderness` is not constrained in the default startup design.
 Thus, unless this constraint is established, 
 a search may produce designs that are subject to buckling. 
 
-The Report tabs indicate the likelihood of bucking for each specific design and loading condition. 
+The Alert facility and Report tabs indicate the likelihood of bucking for 
+a specific design and loading condition. 
 Both the fixed-free and fixed-fixed end conditions are covered.
 
 More precise treatments of this subject are available in the resources listed in the 
