@@ -4,14 +4,14 @@ import { pitch, wireLength, wireVolume, eqnset } from '../../../designtypes/Spri
 
 const endTypes = require('../../../designtypes/Spring/Compression/endtypes.json');
 
-function integratedEndCoilLength(bodyDiameter, endDiameter, bodyPitch, endPitch) {
+function integratedEndCoilLength(bodyDiameter, endDiameter, bodyPitch, endPitch, turns = 1.0) {
     const intervals = 10000;
-    const step = 1.0 / intervals;
-    const radialChange = (endDiameter - bodyDiameter) / 2.0;
+    const step = turns / intervals;
+    const radialChange = (endDiameter - bodyDiameter) / (2.0 * turns);
     let length = 0.0;
 
     for (let i = 0; i < intervals; i++) {
-        const fraction = (i + 0.5) * step;
+        const fraction = (i + 0.5) * step / turns;
         const diameter = bodyDiameter + fraction * (endDiameter - bodyDiameter);
         const localPitch = bodyPitch + fraction * (endPitch - bodyPitch);
         length += step * Math.hypot(Math.PI * diameter, radialChange, localPitch);
@@ -22,6 +22,24 @@ function integratedEndCoilLength(bodyDiameter, endDiameter, bodyPitch, endPitch)
 //=====================================================================
 // eqnset
 //=====================================================================
+
+it.each([
+    ['Open', 0.0],
+    ['Open&Ground', 0.0],
+    ['Closed', 2.0],
+    ['Closed&Ground', 2.0],
+    ['DoubleClosed', 2.0],
+    ['DoubleClosed&Ground', 2.0],
+    ['TaperedClosed', 2.0],
+    ['TaperedClosed&Ground', 2.0],
+    ['PigtailClosed', 1.0],
+    ['PigtailClosed&Ground', 1.0]
+])('%s defines its transition coils', (endTypeName, expected) => {
+    const endType = endTypes.find((row) => row[eto.end_type] === endTypeName);
+
+    expect(endType[eto.transition_coils]).toBe(expected);
+    expect(endType[eto.transition_coils]).toBeLessThanOrEqual(endType[eto.inactive_coils]);
+});
 
 it.each([
     ['Open', 0.3145],
@@ -52,7 +70,7 @@ it('wireLength transitions across the complete end coil', () => {
     );
     const bodyLength = 8.0 * Math.hypot(Math.PI * meanDiameter, bodyPitch);
 
-    expect(wireLength(1.1, wireDiameter, 3.25, 10.0, 2, 1, 2.0))
+    expect(wireLength(1.1, wireDiameter, 3.25, 10.0, 2, 1, 2.0, 2.0))
         .toBeCloseTo(2.0 * endCoilLength + bodyLength, 8);
 });
 
@@ -66,26 +84,26 @@ it('wireLength treats additional inactive turns as fully closed', () => {
     );
     const bodyLength = 6.0 * Math.hypot(Math.PI * meanDiameter, bodyPitch);
 
-    expect(wireLength(1.1, wireDiameter, 3.25, 10.0, 2, 2, 4.0))
+    expect(wireLength(1.1, wireDiameter, 3.25, 10.0, 2, 2, 4.0, 2.0))
         .toBeCloseTo(closedLength + endCoilLength + bodyLength, 8);
 });
 
 it('wireLength uses the pure helix for an open end', () => {
-    expect(wireLength(1.1, 0.1055, 3.25, 10.0, 1, 1, 0.0)).toBeCloseTo(31.411721233021456, 12);
+    expect(wireLength(1.1, 0.1055, 3.25, 10.0, 1, 1, 0.0, 0.0)).toBeCloseTo(31.411721233021456, 12);
 });
 
 it('wireLength uses taper amount to reduce the end pitch', () => {
-    const untaperedLength = wireLength(1.1, 0.1055, 3.25, 10.0, 2, 3, 2.0, 0.0);
-    const taperedLength = wireLength(1.1, 0.1055, 3.25, 10.0, 2, 3, 2.0, 1.0);
+    const untaperedLength = wireLength(1.1, 0.1055, 3.25, 10.0, 2, 3, 2.0, 2.0, 0.0);
+    const taperedLength = wireLength(1.1, 0.1055, 3.25, 10.0, 2, 3, 2.0, 2.0, 1.0);
 
     expect(taperedLength).toBeGreaterThan(untaperedLength);
 });
 
 it('wireLength uses pigtail geometry and axial collapse', () => {
-    const uncollapsedLength = wireLength(1.1, 0.1055, 3.25, 10.0, 2, 4, 2.0, 0.0, 0.0);
-    const collapsedLength = wireLength(1.1, 0.1055, 3.25, 10.0, 2, 4, 2.0, 0.0, 2.0);
+    const uncollapsedLength = wireLength(1.1, 0.1055, 3.25, 10.0, 2, 4, 2.0, 1.0, 0.0, 0.0);
+    const collapsedLength = wireLength(1.1, 0.1055, 3.25, 10.0, 2, 4, 2.0, 1.0, 0.0, 2.0);
 
-    expect(collapsedLength).toBeCloseTo(29.924306540950642, 12);
+    expect(collapsedLength).toBeCloseTo(29.160414712595696, 12);
     expect(collapsedLength).toBeGreaterThan(uncollapsedLength);
 });
 
@@ -100,13 +118,14 @@ it.each([1.0, 0.7, 0.54])('wireLength transitions pigtail pitch and diameter acr
         for (const grindAmount of [0.0, 1.0]) {
             const bodyPitch = pitch(3.25, wireDiameter, 10.0, 2, 2.0, 0.0,
                 pigtailAmount, grindAmount);
-            const endCoilLength = integratedEndCoilLength(
-                bodyDiameter, endDiameter, bodyPitch, endPitch
+            const transitionLength = 2.0 * integratedEndCoilLength(
+                bodyDiameter, endDiameter, bodyPitch, endPitch, 0.5
             );
+            const closedLength = Math.hypot(Math.PI * endDiameter, endPitch);
             const bodyLength = bodyTurns * Math.hypot(Math.PI * bodyDiameter, bodyPitch);
 
-            expect(wireLength(outsideDiameter, wireDiameter, 3.25, 10.0, 2, 4, 2.0, 0.0, pigtailAmount, grindAmount))
-                .toBeCloseTo(2.0 * endCoilLength + bodyLength, 8);
+            expect(wireLength(outsideDiameter, wireDiameter, 3.25, 10.0, 2, 4, 2.0, 1.0, 0.0, pigtailAmount, grindAmount))
+                .toBeCloseTo(transitionLength + closedLength + bodyLength, 8);
         }
     }
 });
@@ -117,30 +136,31 @@ it.each([
     [3, 2.0, 0.0, 0.5],
     [4, 2.0, 2.0, 1.0]
 ])('wireLength uses grinding only to compensate geometry %s pitch for the finished free length', (geometry, inactiveCoils, pigtailAmount, grindAmount) => {
-    const ungroundLength = wireLength(1.1, 0.105, 3.25, 10.0, 2, geometry, inactiveCoils, geometry === 3 ? 1.0 : 0.0, pigtailAmount, 0.0);
-    const groundLength = wireLength(1.1, 0.105, 3.25, 10.0, 2, geometry, inactiveCoils, geometry === 3 ? 1.0 : 0.0, pigtailAmount, grindAmount);
+    const transitionCoils = geometry === 4 ? 1.0 : 2.0;
+    const ungroundLength = wireLength(1.1, 0.105, 3.25, 10.0, 2, geometry, inactiveCoils, transitionCoils, geometry === 3 ? 1.0 : 0.0, pigtailAmount, 0.0);
+    const groundLength = wireLength(1.1, 0.105, 3.25, 10.0, 2, geometry, inactiveCoils, transitionCoils, geometry === 3 ? 1.0 : 0.0, pigtailAmount, grindAmount);
 
     expect(groundLength).toBeGreaterThan(ungroundLength);
 });
 
 it('wireVolume returns full stock volume without grinding or tapering', () => {
     const wireDiameter = 0.105;
-    const length = wireLength(1.1, wireDiameter, 3.25, 10.0, 2, 1, 2.0);
+    const length = wireLength(1.1, wireDiameter, 3.25, 10.0, 2, 1, 2.0, 2.0);
 
-    expect(wireVolume(1.1, wireDiameter, 3.25, 10.0, 2, 1, 2.0))
+    expect(wireVolume(1.1, wireDiameter, 3.25, 10.0, 2, 1, 2.0, 2.0))
         .toBeCloseTo(length * Math.PI * wireDiameter * wireDiameter / 4.0, 12);
 });
 
 it('wireVolume subtracts material removed by grinding', () => {
-    const unground = wireVolume(1.1, 0.105, 3.25, 10.0, 2, 1, 2.0, 0.0, 0.0, 0.0);
-    const ground = wireVolume(1.1, 0.105, 3.25, 10.0, 2, 1, 2.0, 0.0, 0.0, 1.0);
+    const unground = wireVolume(1.1, 0.105, 3.25, 10.0, 2, 1, 2.0, 2.0, 0.0, 0.0, 0.0);
+    const ground = wireVolume(1.1, 0.105, 3.25, 10.0, 2, 1, 2.0, 2.0, 0.0, 0.0, 1.0);
 
     expect(ground).toBeLessThan(unground);
 });
 
 it('wireVolume subtracts material removed by tapering', () => {
-    const untapered = wireVolume(1.1, 0.105, 3.25, 10.0, 2, 3, 2.0, 0.0, 0.0, 0.0);
-    const tapered = wireVolume(1.1, 0.105, 3.25, 10.0, 2, 3, 2.0, 1.0, 0.0, 0.0);
+    const untapered = wireVolume(1.1, 0.105, 3.25, 10.0, 2, 3, 2.0, 2.0, 0.0, 0.0, 0.0);
+    const tapered = wireVolume(1.1, 0.105, 3.25, 10.0, 2, 3, 2.0, 2.0, 1.0, 0.0, 0.0);
 
     expect(tapered).toBeLessThan(untapered);
 });
@@ -159,9 +179,9 @@ it('eqnset initialState', () => {
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
     // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type_Method 38, End_Type 39
        0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 1,                  4,
-    // End_Closure 40, Closed_End_Geometry 41, Inactive_Coils 42, Taper_Amount 43, Pigtail_Amount 44, Grind_Amount 45, Catalog_Name 46, Catalog_Number 47, tbase010 48, tbase400 49
-       2,              1,                     2,                 0,               0,               1,                 '',              '',                0.01,        0.4,
-    // const_term 50, slope_term 51,       tensile_010 52
+    // End_Closure 40, Closed_End_Geometry 41, Inactive_Coils 42, Transition_Coils 43, Taper_Amount 44, Pigtail_Amount 45, Grind_Amount 46, Catalog_Name 47, Catalog_Number 48, tbase010 49, tbase400 50
+       2,              1,                     2,                 2,                   0,               0,                  1,               '',              '',                0.01,        0.4,
+    // const_term 51, slope_term 52,       tensile_010 53
        -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
@@ -223,6 +243,7 @@ it('eqnset initialState', () => {
     expect(x[o.End_Closure]).toEqual(2);
     expect(x[o.Closed_End_Geometry]).toEqual(1);
     expect(x[o.Inactive_Coils]).toEqual(2);
+    expect(x[o.Transition_Coils]).toEqual(2);
     expect(x[o.Taper_Amount]).toEqual(0.0);
     expect(x[o.Pigtail_Amount]).toEqual(0.0);
     expect(x[o.Grind_Amount]).toEqual(1.0);
@@ -235,10 +256,11 @@ it('eqnset initialState', () => {
     expect(x[o.tensile_010]).toEqual(370000);
 
     x[o.Closed_End_Geometry] = 4;
+    x[o.Transition_Coils] = 1.0;
     x[o.Pigtail_Amount] = 2.0;
     x[o.Grind_Amount] = 0.0;
     x = eqnset(p, x);
-    expect(x[o.Weight]).toBeCloseTo(0.07429117643126702, 15);
+    expect(x[o.Weight]).toBeCloseTo(0.07239471067634438, 15);
 });
 
 it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () => {
@@ -252,9 +274,9 @@ it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () 
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
     // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type_Method 38, End_Type 39
        0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 1,                  4,
-    // End_Closure 40, Closed_End_Geometry 41, Inactive_Coils 42, Taper_Amount 43, Pigtail_Amount 44, Grind_Amount 45, Catalog_Name 46, Catalog_Number 47, tbase010 48, tbase400 49
-       2,              1,                     2,                 0,               0,               1,                 '',              '',                0.01,        0.4,
-    // const_term 50, slope_term 51,       tensile_010 52
+    // End_Closure 40, Closed_End_Geometry 41, Inactive_Coils 42, Transition_Coils 43, Taper_Amount 44, Pigtail_Amount 45, Grind_Amount 46, Catalog_Name 47, Catalog_Number 48, tbase010 49, tbase400 50
+       2,              1,                     2,                 2,                   0,               0,                  1,               '',              '',                0.01,        0.4,
+    // const_term 51, slope_term 52,       tensile_010 53
        -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
@@ -316,6 +338,7 @@ it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () 
     expect(x[o.End_Closure]).toEqual(2);
     expect(x[o.Closed_End_Geometry]).toEqual(1);
     expect(x[o.Inactive_Coils]).toEqual(2);
+    expect(x[o.Transition_Coils]).toEqual(2);
     expect(x[o.Taper_Amount]).toEqual(0.0);
     expect(x[o.Pigtail_Amount]).toEqual(0.0);
     expect(x[o.Grind_Amount]).toEqual(1.0);
@@ -339,9 +362,9 @@ it('eqnset pathological Coils_T === Inactive_Coils && Coils_A === 0.0', () => {
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
     // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type_Method 38, End_Type 39
        0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 1,                  4,
-    // End_Closure 40, Closed_End_Geometry 41, Inactive_Coils 42, Taper_Amount 43, Pigtail_Amount 44, Grind_Amount 45, Catalog_Name 46, Catalog_Number 47, tbase010 48, tbase400 49
-       2,              1,                     2,                 0,               0,               1,                 '',              '',                0.01,        0.4,
-    // const_term 50, slope_term 51,       tensile_010 52
+    // End_Closure 40, Closed_End_Geometry 41, Inactive_Coils 42, Transition_Coils 43, Taper_Amount 44, Pigtail_Amount 45, Grind_Amount 46, Catalog_Name 47, Catalog_Number 48, tbase010 49, tbase400 50
+       2,              1,                     2,                 2,                   0,               0,                  1,               '',              '',                0.01,        0.4,
+    // const_term 51, slope_term 52,       tensile_010 53
        -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
@@ -401,6 +424,7 @@ it('eqnset pathological Coils_T === Inactive_Coils && Coils_A === 0.0', () => {
     expect(x[o.End_Closure]).toEqual(2);
     expect(x[o.Closed_End_Geometry]).toEqual(1);
     expect(x[o.Inactive_Coils]).toEqual(2);
+    expect(x[o.Transition_Coils]).toEqual(2);
     expect(x[o.Taper_Amount]).toEqual(0.0);
     expect(x[o.Pigtail_Amount]).toEqual(0.0);
     expect(x[o.Grind_Amount]).toEqual(1.0);
@@ -427,9 +451,9 @@ it('eqnset pathological OD_Free === Wire_Dia && Mean_Dia === 0.0', () => {
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
     // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type_Method 38, End_Type 39
        0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 1,                  4,
-    // End_Closure 40, Closed_End_Geometry 41, Inactive_Coils 42, Taper_Amount 43, Pigtail_Amount 44, Grind_Amount 45, Catalog_Name 46, Catalog_Number 47, tbase010 48, tbase400 49
-       2,              1,                     2,                 0,               0,               1,                 '',              '',                0.01,        0.4,
-    // const_term 50, slope_term 51,       tensile_010 52
+    // End_Closure 40, Closed_End_Geometry 41, Inactive_Coils 42, Transition_Coils 43, Taper_Amount 44, Pigtail_Amount 45, Grind_Amount 46, Catalog_Name 47, Catalog_Number 48, tbase010 49, tbase400 50
+       2,              1,                     2,                 2,                   0,               0,                  1,               '',              '',                0.01,        0.4,
+    // const_term 51, slope_term 52,       tensile_010 53
        -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
@@ -489,6 +513,7 @@ it('eqnset pathological OD_Free === Wire_Dia && Mean_Dia === 0.0', () => {
     expect(x[o.End_Closure]).toEqual(2);
     expect(x[o.Closed_End_Geometry]).toEqual(1);
     expect(x[o.Inactive_Coils]).toEqual(2);
+    expect(x[o.Transition_Coils]).toEqual(2);
     expect(x[o.Taper_Amount]).toEqual(0.0);
     expect(x[o.Pigtail_Amount]).toEqual(0.0);
     expect(x[o.Grind_Amount]).toEqual(1.0);

@@ -163,6 +163,7 @@ End_Type       |        | when End_Type_Method is **1**, <br/> select desired en
 End_Closure    |        | when End_Type_Method is **2**, <br/> select end closure of the spring: Open or Closed. 
 Closed_End_Geometry |   | when End_Type_Method is **2** and End_Closure is "Closed", <br/> select end closed coil geometry of the spring: Single, Double, Tapered, or Pigtail. The selection applies to each end of the spring. `Single` is a single closed coil at each end.
 Inactive_Coils |        | number of inactive coils <br/> (depends on `End_Type`) 
+Transition_Coils |      | total number of inactive coils across both ends over which the end geometry transitions; must be less than or equal to `Inactive_Coils`
 Taper_Amount   |        | the solid height reduction, measured in wire diameters, created by a tapering operation on the wire diameter of the first and last coil(s) of a hot-wound compression spring. For example, a value of 1.0 corresponds to a reduction of 0.5 × Wire_Dia at each end
 Pigtail_Amount |        | Total axial collapse of the pigtail coils across both ends, expressed in units of wire diameter. A value of 2.0 represents one wire diameter collapsing into each end
 Grind_Amount   |        | number of wire diameters removed by a grinding operation; <br/> See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes) 
@@ -333,16 +334,16 @@ For compression springs, the Calculation Input `End_Type` has the following poss
 #### Using End Type Values
 To support user customization and to accommodate less common compression spring end types — 
 such as the “Pigtail” and "TaperedClosed&Ground" configurations used with hot‑wound springs —  
-ODOP:Spring incorporates the terms `Taper_Amount`, `Pigtail_Amount`, and `Grind_Amount` 
-in addition to `Inactive_Coils` in the calculation of pitch, and solid height. 
-Each term is expressed in units of wire diameter. 
+ODOP:Spring incorporates the terms `Transition_Coils`, `Taper_Amount`, `Pigtail_Amount`, and `Grind_Amount`
+in addition to `Inactive_Coils`. `Transition_Coils` is expressed in coils; the other terms are
+expressed in units of wire diameter.
 This approach keeps pitch and solid height calculations independent from the rate equation.  
 
 These terms also allow representation of unusual end configurations, 
 including springs that use different end types at each end.  
 
 When End_Type_Method is **1** (Use values from end type table), the selected `End_Type` directly determines the values of 
-`Inactive_Coils`, `Taper_Amount`, `Pigtail_Amount` and `Grind_Amount`. 
+`Inactive_Coils`, `Transition_Coils`, `Taper_Amount`, `Pigtail_Amount` and `Grind_Amount`.
 Dependent quantities such as `L_Solid` and `Pitch` are then affected indirectly.  
 
 When End_Type_Method is **2** (User specified end type values), 
@@ -364,6 +365,29 @@ reduce tangling during manufacturing operations.
 the common case where a spring has two closed coils at each end.  
 
 <!--- Additional information may be found in the documentation for Calculation Input Names above or EQNSET.  --> 
+
+
+#### Transition_Coils
+`Transition_Coils` is the total number of coils, distributed equally across both ends, over which
+the end geometry changes from the body helix to the terminal geometry. It must be less than or
+equal to `Inactive_Coils`. Any remaining inactive coils are modeled as fully closed.
+
+Open and Open&Ground ends use 0.0 transition coils. Closed, Closed&Ground, DoubleClosed,
+DoubleClosed&Ground, TaperedClosed and TaperedClosed&Ground use 2.0, corresponding to one
+transitioning coil at each end. PigtailClosed and PigtailClosed&Ground use 1.0, corresponding to
+one-half transitioning coil at each end.
+
+The wire-geometry calculation uses:
+
+```text
+transition turns per end = Transition_Coils / 2
+fully closed turns per end = (Inactive_Coils - Transition_Coils) / 2
+body turns = Coils_T - Inactive_Coils
+```
+
+The standard body-pitch equation does not subtract `Transition_Coils`. Instead, the wire-length
+calculation integrates the change from body pitch to terminal pitch over the specified transition
+turns. `Wire_Volume` and `Weight` use the resulting wire length.
 
 
 #### Taper_Amount
@@ -425,12 +449,11 @@ These values are calculated with the formulas found in many industry standard
 
 For open end types, there is no issue.  
 
-For closed end types, ODOP:Spring uses the industry standard body-pitch calculation.
-The end coil is one complete transition from the body helix to the closed end: it begins closing
-at the start of the end coil and touches the preceding coil at the end of that turn. It is not
-assumed to be in contact with the preceding coil throughout its length, and no separate transition
-coil is subtracted from the body coils. Additional inactive coils, as in a double-closed end, are
-treated as fully closed coils.
+For closed end types, ODOP:Spring uses the industry standard body-pitch calculation. The number of
+inactive coils over which the end changes from the body helix to the terminal geometry is specified
+by `Transition_Coils`. This transition is part of the inactive end coils and is not subtracted as a
+separate coil from the body coils. Any inactive coils outside the transition are treated as fully
+closed coils.
 
 Wire length and weight calculations use the standard body pitch and integrate the continuously
 changing pitch across the complete transitioning end coil. For pigtail ends, the change from body

@@ -40,7 +40,7 @@ function endCoilLength(bodyMeanDiameter, endMeanDiameter, bodyPitch, endPitch, t
     return turns * sum / 2.0;
 }
 
-export function wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils, endClosure, closedEndGeometry, inactiveCoils, taperAmount = 0.0, pigtailAmount = 0.0, grindAmount = 0.0) {
+export function wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils, endClosure, closedEndGeometry, inactiveCoils, transitionCoils, taperAmount = 0.0, pigtailAmount = 0.0, grindAmount = 0.0) {
     const meanDiameter = outsideDiameter - wireDiameter;
     const circumference = Math.PI * meanDiameter;
     let length;
@@ -62,7 +62,7 @@ export function wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils
         }
 
         const endTurns = inactiveCoils / 2.0; // Per end
-        const transitioningEndTurns = Math.min(1.0, Math.max(0.0, endTurns));
+        const transitioningEndTurns = transitionCoils / 2.0; // Per end
         const fullyClosedTurns = Math.max(0.0, endTurns - transitioningEndTurns);
         const bodyTurns = totalCoils - inactiveCoils;
         const bodyPitch = bodyTurns === 0.0 ? endPitch :
@@ -82,8 +82,8 @@ export function wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils
     return length;
 }
 
-export function wireVolume(outsideDiameter, wireDiameter, freeLength, totalCoils, endClosure, closedEndGeometry, inactiveCoils, taperAmount = 0.0, pigtailAmount = 0.0, grindAmount = 0.0) {
-    const length = wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils, endClosure, closedEndGeometry, inactiveCoils, taperAmount, pigtailAmount, grindAmount);
+export function wireVolume(outsideDiameter, wireDiameter, freeLength, totalCoils, endClosure, closedEndGeometry, inactiveCoils, transitionCoils, taperAmount = 0.0, pigtailAmount = 0.0, grindAmount = 0.0) {
+    const length = wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils, endClosure, closedEndGeometry, inactiveCoils, transitionCoils, taperAmount, pigtailAmount, grindAmount);
     const wireArea = Math.PI * wireDiameter * wireDiameter / 4.0;
 
     if (taperAmount === 0.0 && grindAmount === 0.0) {
@@ -112,14 +112,16 @@ export function wireVolume(outsideDiameter, wireDiameter, freeLength, totalCoils
     let terminalLength = 2.0 * Math.hypot(Math.PI * endMeanDiameter, endPitch);
     if (endClosure === eco.closed) {
         const endTurns = inactiveCoils / 2.0;
+        const transitioningEndTurns = transitionCoils / 2.0;
+        const fullyClosedTurns = Math.max(0.0, endTurns - transitioningEndTurns);
         const bodyTurns = totalCoils - inactiveCoils;
         const bodyPitch = bodyTurns === 0.0 ? endPitch :
             pitch(freeLength, wireDiameter, totalCoils, endClosure,
                 inactiveCoils, taperAmount, pigtailAmount, grindAmount);
         if (endTurns <= 1.0) {
-            terminalLength = 2.0 * endCoilLength(
-                meanDiameter, endMeanDiameter, bodyPitch, endPitch, endTurns
-            );
+            terminalLength = 2.0 * (endCoilLength(
+                meanDiameter, endMeanDiameter, bodyPitch, endPitch, transitioningEndTurns
+            ) + fullyClosedTurns * Math.hypot(Math.PI * endMeanDiameter, endPitch));
         }
     }
     const endRadius = endWireDiameter / 2.0;
@@ -240,6 +242,7 @@ export function eqnset(p, x) {        /*    Compression  Spring  */
             x[o.End_Closure],
             x[o.Closed_End_Geometry],
             x[o.Inactive_Coils],
+            x[o.Transition_Coils],
             x[o.Taper_Amount],
             x[o.Pigtail_Amount],
             x[o.Grind_Amount]

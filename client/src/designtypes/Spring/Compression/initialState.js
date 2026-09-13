@@ -782,6 +782,22 @@ export const initialState = {
         },
         {
             "input": true,
+            "name": "Transition_Coils",
+            "value": 2.0,
+            "units": "coils",
+            "lmin": 0,
+            "lmax": 0,
+            "cmin": 0,
+            "cmax": 0,
+            "validmin": 0.0,
+            "validmax": Number.MAX_VALUE,
+            "sdlim": 0.0,
+            "tooltip": "Total number of inactive coils across both ends over which the end geometry transitions. Must not exceed Inactive_Coils",
+            "type": "calcinput",
+            "hidden": false
+        },
+        {
+            "input": true,
             "name": "Taper_Amount",
             "value": 0.0,
             "units": "Wire_Dia",

@@ -328,6 +328,14 @@ and run the Search feature (Search button or **Action : Search** menu item).
 See also:
  - [Wikipedia - buckling](https://en.wikipedia.org/wiki/Buckling)  
 
+<a id="Transition_Coils_GT_Inactive_Coils"></a>
+___
+
+## Transition_Coils > Inactive_Coils
+`Transition_Coils` specifies how many of the inactive coils participate in the end transition.
+Reduce `Transition_Coils` or increase `Inactive_Coils` so that `Transition_Coils` is less than or
+equal to `Inactive_Coils`.
+
 ___
 
 <a id="padding"></a>  
@@ -360,5 +368,3 @@ ___
   &nbsp;   
   
   &nbsp;   
-
-

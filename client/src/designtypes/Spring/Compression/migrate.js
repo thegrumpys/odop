@@ -457,6 +457,15 @@ export function migrate(design) {
         }
         migrated_design.version = '14';
     case '14':
+        var transitionCoils = Object.assign({},initialState.symbol_table.find((element) => element.name === 'Transition_Coils'));
+        if (design.symbol_table[46].value === 1) { // End_Closure "Open"
+            transitionCoils.value = 0.0;
+        } else if (design.symbol_table[47].value === 4) { // Closed_End_Geometry "Pigtail"
+            transitionCoils.value = 1.0;
+        } else {
+            transitionCoils.value = 2.0;
+        }
+        design.symbol_table.splice(49,0,transitionCoils);
 
         //============BLOCK OF CODE TO REPLICATE============
         //     console.log('Convert from N to N+1');

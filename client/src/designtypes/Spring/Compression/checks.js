@@ -270,6 +270,22 @@ export function checks(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#Coils_T_eq_Inactive_Coils)'
         }));
     }
+    if (design.model.symbol_table[o.Transition_Coils].value > design.model.symbol_table[o.Inactive_Coils].value) {
+        store.dispatch(addAlert({
+            element: design.model.symbol_table[o.Transition_Coils],
+            name: design.model.symbol_table[o.Transition_Coils].name,
+            message: check_message(design,'RELATIONSHIP',o.Transition_Coils,'>',o.Inactive_Coils),
+            severity: ERR,
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#Transition_Coils_GT_Inactive_Coils)'
+        }));
+        store.dispatch(addAlert({
+            element: design.model.symbol_table[o.Inactive_Coils],
+            name: design.model.symbol_table[o.Inactive_Coils].name,
+            message: check_message(design,'RELATIONSHIP',o.Inactive_Coils,'<',o.Transition_Coils),
+            severity: ERR,
+            duplicate: true
+        }));
+    }
     if (design.model.symbol_table[o.L_2].value < design.model.symbol_table[o.L_Solid].value) {
         store.dispatch(addAlert({
             element: design.model.symbol_table[o.L_2],

@@ -48,16 +48,17 @@ export const End_Type = 45;
 export const End_Closure = 46;
 export const Closed_End_Geometry = 47;
 export const Inactive_Coils = 48;
-export const Taper_Amount = 49;
-export const Pigtail_Amount = 50;
-export const Grind_Amount = 51;
-export const Catalog_Name = 52;
-export const Catalog_Number = 53;
-export const tbase010 = 54;
-export const tbase400 = 55;
-export const const_term = 56;
-export const slope_term = 57;
-export const tensile_010 = 58;
+export const Transition_Coils = 49;
+export const Taper_Amount = 50;
+export const Pigtail_Amount = 51;
+export const Grind_Amount = 52;
+export const Catalog_Name = 53;
+export const Catalog_Number = 54;
+export const tbase010 = 55;
+export const tbase400 = 56;
+export const const_term = 57;
+export const slope_term = 58;
+export const tensile_010 = 59;
 
 // Labels (Properties)
 export const COMMENT = 0;
