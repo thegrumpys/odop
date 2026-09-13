@@ -33,7 +33,11 @@ export default function ReportBase(props) {
   base.errmsg = "";
   base.startpntmsg = "Alert details are available via the Alert button on the main page of Advanced and Calculator Views.";
 
-  base.len_lbl = "Wire Length";
+  if (model_symbol_table[o.Process].value === "Hot_Wound") { // Process is set in init.js
+    base.len_lbl = "Bar cut len.";
+  } else {
+    base.len_lbl = "Wire Length";
+  }
 
   base.pitch = pitch(
     model_symbol_table[o.L_Free].value,
