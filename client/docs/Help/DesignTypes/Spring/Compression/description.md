@@ -334,16 +334,17 @@ For compression springs, the Calculation Input `End_Type` has the following poss
 #### Using End Type Values
 To support user customization and to accommodate less common compression spring end types — 
 such as the “Pigtail” and "TaperedClosed&Ground" configurations used with hot‑wound springs —  
-ODOP:Spring incorporates the terms `Transition_Coils`, `Taper_Amount`, `Pigtail_Amount`, and `Grind_Amount`
-in addition to `Inactive_Coils`. `Transition_Coils` is expressed in coils; the other terms are
-expressed in units of wire diameter.
+ODOP:Spring incorporates the terms `Transition_Coils`, `Taper_Amount`, `Pigtail_Amount`, and `Grind_Amount` 
+in addition to `Inactive_Coils`. 
+`Inactive_Coils` and `Transition_Coils` are expressed in coils; 
+the other terms are expressed in units of wire diameter. 
 This approach keeps pitch and solid height calculations independent from the rate equation.  
 
 These terms also allow representation of unusual end configurations, 
 including springs that use different end types at each end.  
 
 When End_Type_Method is **1** (Use values from end type table), the selected `End_Type` directly determines the values of 
-`Inactive_Coils`, `Transition_Coils`, `Taper_Amount`, `Pigtail_Amount` and `Grind_Amount`.
+`Inactive_Coils`, `Transition_Coils`, `Taper_Amount`, `Pigtail_Amount` and `Grind_Amount`. 
 Dependent quantities such as `L_Solid` and `Pitch` are then affected indirectly.  
 
 When End_Type_Method is **2** (User specified end type values), 
@@ -368,21 +369,22 @@ the common case where a spring has two closed coils at each end.
 
 
 #### Transition_Coils
-`Transition_Coils` is the total number of coils, distributed equally across both ends, over which
-the end geometry changes from the body helix to the terminal geometry. It must be less than or
-equal to `Inactive_Coils`. Any remaining inactive coils are modeled as fully closed.
+`Transition_Coils` is the total number of coils, distributed equally across both ends, over which 
+the end geometry changes from the body helix to the terminal geometry. It must be less than or 
+equal to `Inactive_Coils`. Any remaining inactive coils are modeled as fully closed. 
 
-Open and Open&Ground ends use 0.0 transition coils. Closed, Closed&Ground, DoubleClosed,
-DoubleClosed&Ground, TaperedClosed and TaperedClosed&Ground use 2.0, corresponding to one
-transitioning coil at each end. PigtailClosed and PigtailClosed&Ground use 1.0, corresponding to
-one-half transitioning coil at each end.
+Open and Open&Ground ends use 0.0 transition coils. Closed, Closed&Ground, DoubleClosed, 
+DoubleClosed&Ground, TaperedClosed and TaperedClosed&Ground use 2.0, corresponding to one 
+transitioning coil at each end. PigtailClosed and PigtailClosed&Ground use 1.0, corresponding to 
+one-half transitioning coil at each end.  
 
-The wire-geometry calculation uses:
-
+<!--- check Coils_T - Inactive_Coils  --> 
+The wire-geometry calculation uses: 
 ```text
-transition turns per end = Transition_Coils / 2
-fully closed turns per end = (Inactive_Coils - Transition_Coils) / 2
-body turns = Coils_T - Inactive_Coils
+transition turns per end 
+  = Transition_Coils / 2 fully closed turns per end 
+  = (Inactive_Coils - Transition_Coils) / 2 body turns 
+  = Coils_T - Inactive_Coils 
 ```
 
 The standard body-pitch equation does not subtract `Transition_Coils`. Instead, the wire-length
@@ -391,14 +393,13 @@ turns. `Wire_Volume` and `Weight` use the resulting wire length.
 
 
 #### Taper_Amount
-Taper amount is the solid height reduction, measured in wire diameters, 
-created by a tapering operation on the wire diameter of the first and last coil(s) of a hot-wound compression spring. 
-For example, a value of 1.0 corresponds to a reduction of 0.5 × Wire_Dia at each end. 
+In ODOP:Spring, the value of `Taper_Amount` specifies the reduction in solid height, expressed in wire diameters, 
+resulting from tapering the wire diameter of the first and last coil(s) of a hot-wound compression spring. 
+A value of 1.0 corresponds to reducing the wire diameter by 0.5 × `Wire_Dia` at each end.  
 
-The term "tapered" used here refers only to local wire diameter reduction, not to a conical spring shape. 
-Tapered end types do **not** refer to a conical (non-cylindrical) spring; 
-the term refers only to tapering of the end coil's `Wire_Dia` to reduce solid height. 
-This operation is commonly associated with hot-wound springs.
+The term *tapered* refers only to local reduction of the end coil’s wire diameter. 
+It does **not** indicate a conical or non-cylindrical spring form. 
+
 
 For the `TaperedClosed&Ground` end type, the default values are:
 - `Taper_Amount` = 1.0  
