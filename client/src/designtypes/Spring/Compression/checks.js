@@ -276,7 +276,7 @@ export function checks(store) {        /*    Compression  Spring  */
             name: design.model.symbol_table[o.Transition_Coils].name,
             message: check_message(design,'RELATIONSHIP',o.Transition_Coils,'>',o.Inactive_Coils),
             severity: ERR,
-            help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#Transition_Coils_GT_Inactive_Coils)'
+            help_url: '[Help](/docs/Help/DesignTypes/Spring/Compression/alerts.html#Transition_GT_Inactive)'
         }));
         store.dispatch(addAlert({
             element: design.model.symbol_table[o.Inactive_Coils],

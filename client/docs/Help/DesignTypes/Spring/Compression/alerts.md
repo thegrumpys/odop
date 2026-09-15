@@ -13,6 +13,7 @@ Alerts specific to compression springs.
  - [%_Avail_Deflect @ 2 > 80%](alerts.html#PC_Avail_Deflect2_GT_80)  
  - [%_Avail_Deflect @ 1 < 20%](alerts.html#PC_Avail_Deflect1_LT_20)  
  - [Buckling concern](alerts.html#buckling)  
+ - [Transition_Coils > Inactive_Coils](alerts.html#Transition_GT_Inactive)  
 
 ___
 
@@ -328,13 +329,18 @@ and run the Search feature (Search button or **Action : Search** menu item).
 See also:
  - [Wikipedia - buckling](https://en.wikipedia.org/wiki/Buckling)  
 
-<a id="Transition_Coils_GT_Inactive_Coils"></a>
 ___
 
-## Transition_Coils > Inactive_Coils
-`Transition_Coils` specifies how many of the inactive coils participate in the end transition.
-Reduce `Transition_Coils` or increase `Inactive_Coils` so that `Transition_Coils` is less than or
-equal to `Inactive_Coils`.
+<a id="Transition_GT_Inactive"></a>
+___
+
+Alert entry #C111
+## Transition_Coils > Inactive_Coils 
+`Transition_Coils` specifies how many of the inactive coils participate in the end transition. 
+The value of `Transition_Coils` must be less than or equal to the number of `Inactive_Coils`.  
+
+To resolve this alert, reduce `Transition_Coils` or increase `Coils_T` and `Inactive_Coils` 
+so that `Transition_Coils` is less than or equal to `Inactive_Coils`.  
 
 ___
 
