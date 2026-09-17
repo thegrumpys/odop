@@ -160,7 +160,7 @@ table is not used and it is possible to enter the more accurate value of tensile
 
 Finally, it is possible that the selected wire diameter is so large as to be beyond the range 
 of the "cold coiling" process. 
-If a [Hot Wound](/docs\Help/SpringDesign/advancedSpringOperations.html#HotWound) process is appropriate, 
+If a [Hot Wound](/docs/Help/SpringDesign/advancedSpringOperations.html#HotWound) process is appropriate, 
 be sure to select an appropriate material type, such as 5160H Chromium steel - ASTM A-125. 
 Also, a File : Open operation that selects a default design with `HotWound` as part of the name will configure 
 everything necessary for a hot wound design.  

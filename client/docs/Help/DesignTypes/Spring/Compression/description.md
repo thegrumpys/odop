@@ -26,6 +26,7 @@ ___
  - [User specified end type examples](/docs/Help/DesignTypes/Spring/Compression/description.html#userEndTypes)  
  - [Buckling](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springBuckling)  
  - [Shot Peen](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springShotPeen)  
+ - [Hot Wound](/docs/Help/SpringDesign/advancedSpringOperations.html#HotWound)  
  - [Related topics](/docs/Help/DesignTypes/Spring/Compression/description.html#relatedTopics)  
 
 &nbsp;
@@ -146,11 +147,11 @@ Prop_Calc_Method |      | Property Calculation Method controls how material prop
 &nbsp;           |      | **3** - indicates allowable stresses are supplied directly by the user. 
 Material_Type  |        | selects an entry in the material table. Is used to determine allowable stresses when `Prop_Calc_Method` is 1. Otherwise is ignored. 
 ASTM/Fed-Spec  |        | character string used only as a label to further identify the origin of material property data 
-Process        |        | character string used to identify the manufacturing process.  It is normally controlled by the material selected from the material table. Values are usually `Cold_Coiled` or `Hot_Wound`. See also: `Hot_Factor_Kh` (below). 
+Process        |        | character string used to identify the manufacturing process.  It is normally controlled by the material selected from the material table. Values are usually `Cold_Coiled` or [Hot_Wound](/docs/Help/SpringDesign/advancedSpringOperations.html#HotWound). See also: `Hot_Factor_Kh` (below). 
 Life_Category  |        | This value reflects the user's input about shot peening and required cycle life. It is input to the calculation of `FS_CycleLife`. See also: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) 
 Density        |        | wire density; weight per unit volume 
 Torsion_Modulus|        | torsional modulus (G); a.k.a. shear modulus or modulus of rigidity 
-Hot_Factor_Kh  |        | empirical correction factor applied to hot wound modulus 
+Hot_Factor_Kh  |        | empirical correction factor applied to [Hot Wound](/docs/Help/SpringDesign/advancedSpringOperations.html#HotWound) modulus 
 Tensile        |        | tensile strength 
 %_Tensile_Endur|        | allowable fraction of tensile strength for torsion endurance (cyclic load)  See also: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) 
 %_Tensile_Stat |        | allowable fraction of tensile strength for torsion static load 
@@ -163,8 +164,8 @@ End_Type       |        | when End_Type_Method is **1**, <br/> select desired en
 End_Closure    |        | when End_Type_Method is **2**, <br/> select end closure of the spring: Open or Closed. 
 Closed_End_Geometry |   | when End_Type_Method is **2** and End_Closure is "Closed", <br/> select end closed coil geometry of the spring: Single, Double, Tapered, or Pigtail. The selection applies to each end of the spring. `Single` is a single closed coil at each end.
 Inactive_Coils |        | number of inactive coils <br/> (depends on `End_Type`) 
-Transition_Coils |      | total number of inactive coils across both ends over which the end geometry transitions; must be less than or equal to `Inactive_Coils`
-Taper_Amount   |        | the solid height reduction, measured in wire diameters, created by a tapering operation on the wire diameter of the first and last coil(s) of a hot-wound compression spring. For example, a value of 1.0 corresponds to a reduction of 0.5 × Wire_Dia at each end
+Transition_Coils |      | total number of inactive coils across both ends over which the end geometry transitions; must be less than or equal to `Inactive_Coils` 
+Taper_Amount   |        | the solid height reduction, measured in wire diameters, created by a tapering operation on the wire diameter of the first and last coil(s) of a [Hot Wound](/docs/Help/SpringDesign/advancedSpringOperations.html#HotWound) compression spring. For example, a value of 1.0 corresponds to a reduction of 0.5 × Wire_Dia at each end
 Pigtail_Amount |        | Total axial collapse of the pigtail coils across both ends, expressed in units of wire diameter. A value of 2.0 represents one wire diameter collapsing into each end
 Grind_Amount   |        | number of wire diameters removed by a grinding operation; <br/> See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes) 
 Catalog_Name   |        | name of the catalog containing the most recently selected catalog entry 
@@ -333,7 +334,7 @@ For compression springs, the Calculation Input `End_Type` has the following poss
 
 #### Using End Type Values
 To support user customization and to accommodate less common compression spring end types — 
-such as the “Pigtail” and "TaperedClosed&Ground" configurations used with hot‑wound springs —  
+such as the “Pigtail” and "TaperedClosed&Ground" configurations used with [Hot Wound](/docs/Help/SpringDesign/advancedSpringOperations.html#HotWound) springs —  
 ODOP:Spring incorporates the terms `Transition_Coils`, `Taper_Amount`, `Pigtail_Amount`, and `Grind_Amount` 
 in addition to `Inactive_Coils`. 
 `Inactive_Coils` and `Transition_Coils` are expressed in coils; 
@@ -394,7 +395,7 @@ turns. `Wire_Volume` and `Weight` use the resulting wire length.
 
 #### Taper_Amount
 In ODOP:Spring, the value of `Taper_Amount` specifies the reduction in solid height, expressed in wire diameters, 
-resulting from tapering the wire diameter of the first and last coil(s) of a hot-wound compression spring. 
+resulting from tapering the wire diameter of the first and last coil(s) of a [Hot Wound](/docs/Help/SpringDesign/advancedSpringOperations.html#HotWound) compression spring. 
 A value of 1.0 corresponds to reducing the wire diameter by 0.5 × `Wire_Dia` at each end.  
 
 The term *tapered* refers only to local reduction of the end coil’s wire diameter. 

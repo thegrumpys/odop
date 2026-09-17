@@ -73,7 +73,7 @@ ___
  allowable stresses will be calculated as a function of Wire_Dia.  
 
  `Prop_Calc_Method` = 2 - Use Tensile & %\_Tensile_...  
- indicates `Tensile` and allowable `%_Tensile 
+ indicates `Tensile` and allowable `%_Tensile_...` values 
  (`%_Tensile_Endur`  and  `%_Tensile\_Stat`) 
  are supplied by the user; 
  allowable stresses (`Stress_Lim_Endur`  and  `Stress_Lim_Stat`) are calculated. 
@@ -116,18 +116,21 @@ ___
  The value of `Hot_Factor_Kh` is used to reduce the effective modulus of 
  elasticity and torsional modulus in the design equations. 
 
- For normal cold coiled materials, the value of `Hot_Factor_Kh` is 1.00. 
+ For cold coiled materials, the value of `Hot_Factor_Kh` is 1.00. 
  Thus, it has no effect on the modulus. 
- For materials designated as "hot wound" in the materials table, 
- the value of `Hot_Factor_Kh` is automatically established as appropriate 
- (generally 0.96 for centerless ground materials 
- and 0.91 for not centerless ground materials). 
+ For materials designated as "hot wound" in the materials table,  
+ For example:  
+ - 5160H Chromium steel-centerless ground, &nbsp; &nbsp; &nbsp; hot wound-ASTM A-125  
+ - 5160H Chromium steel-not centerless ground,hot wound-ASTM A-125 
 
-       PROCESS           MATERIAL         HOT_FACTOR_KH
-    
-     COLD_COILED                               1.00
-     HOT_WOUND       CENTERLESS GROUND         0.96
-     HOT_WOUND       NOT   CL   GROUND         0.91
+ the value of `Hot_Factor_Kh` is automatically established as appropriate.  
+
+ &nbsp; | Process     | Material          | Hot_Factor_Kh  
+ ---    | ---         | ---               | ---            
+ &nbsp; | Cold Coiled | &nbsp;            | 1.00           
+ &nbsp; | Hot Wound   | Centerless Ground | 0.96           
+ &nbsp; | Hot Wound   | Not CL Ground     | 0.91           
+  
 
  It is possible to set a different value for `Hot_Factor_Kh` by 
  using `Prop_Calc_Method` = 2 or 3. 
