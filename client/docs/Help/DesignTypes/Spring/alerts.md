@@ -114,11 +114,11 @@ Multiple standard wire size tables are built-in to the ODOP:Spring software.
 
 <!--- check this 
 ### Accessing Standard Wire Sizes  
-### - When Auto Std-Size is enabled: 
+### - When Auto Standard Size is enabled: 
 {Note: Provide advice to maintain Wire_Dia in Free status 
 will be provided once the code implementation is complete.}
 
-### - When Auto Std-Size is disabled: 
+### - When Auto Standard Size is disabled: 
  - **Advanced View**: Access the standard-size table through the Action : Select Size... menu. 
  - **Calculator View**: Click on the Wire_Dia field to display a modal dialog box that provides a 
  drop-down selection of standard wire sizes available for the selected material.  
@@ -131,7 +131,8 @@ will be provided once the code implementation is complete.}
 
 
 See also: 
- - [Auto Fix, Auto Search, Auto Standard Size](/docs/Help/autoFixSearchStdSize.html#AutoStdSize)  
+ - [Auto Fix, Auto Search](/docs/Help/autoFixSearchStdSize.html#AutoStdSize)  
+<!---  - [Auto Fix, Auto Search, Auto Standard Size](/docs/Help/autoFixSearchStdSize.html#AutoStdSize)   --> 
  - [Select Size and Select Catalog](/docs/Help/SpringDesign/selectSizeCatalog.html)  
 
 ___

@@ -41,7 +41,8 @@ Within the **About** and **Help** sections, the entries appear in an order ranke
 * [Help Lookup](Help/helpLookup.html)
 * [Hints, Tips and Tricks](Help/htt.html)
 * [AutoSave](Help/autoSave.html)
-* [Auto Fix, Auto Search, Auto Select Size](Help/autoFixSearchStdSize.html)
+* [Auto Fix, Auto Search](Help/autoFixSearchStdSize.html)
+<!--- * [Auto Fix, Auto Search, Auto Standard Size](Help/autoFixSearchStdSize.html) -->
 * [Design Types](Help/DesignTypes/index.html)
 * [Spring Design](Help/SpringDesign/index.html)
 * [About topics](About/index.html)   

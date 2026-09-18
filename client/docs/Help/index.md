@@ -24,7 +24,8 @@ The entries appear in an order ranked from more general and introductory to more
 * [Help Lookup](/docs/Help/helpLookup.html)
 * [Hints, Tips and Tricks](/docs/Help/htt.html)
 * [AutoSave](/docs/Help/autoSave.html)
-* [Auto Fix, Auto Search, Auto Select Size](/docs/Help/autoFixSearchStdSize.html)
+* [Auto Fix, Auto Search](/docs/Help/autoFixSearchStdSize.html)
+<!--- * [Auto Fix, Auto Search, Auto Standard Size](/docs/Help/autoFixSearchStdSize.html)  -->
 * [Design Types](/docs/Help/DesignTypes/index.html)
 * [Spring Design](/docs/Help/SpringDesign/index.html)
 * [About topics](/docs/About/index.html)

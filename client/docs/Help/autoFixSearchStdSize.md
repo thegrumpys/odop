@@ -1,13 +1,21 @@
-# Auto Fix, Auto Search, Auto Standard Size
+# Auto Fix, Auto Search
 
-This topic covers the ODOP Auto Fix (AutoFix, Auto-Fix), 
-Auto Search (AutoSearch, Auto-Search) and 
-Auto Standard Size (AutoStdSize, Auto-Standard-Size, Auto-StdSize) features.
+<!---  Add back when implementation complete 
+# Auto Fix, Auto Search, Auto Standard Size
+--> 
+
+This topic covers the ODOP Auto Fix (AutoFix, Auto-Fix)  
+and Auto Search (AutoSearch, Auto-Search) features.  
+
+<!---  Add these lines back when Auto Standard Size implementation is complete 
+and Auto Standard Size (AutoStdSize, Auto-Standard-Size, Auto-StdSize) 
+ - [Auto Standard Size](autoFixSearchStdSize.html#AutoStdSize) 
+ --> 
 
 ### On this page:  
  - [Auto Fix](autoFixSearchStdSize.html#autoFix)  
  - [Auto Search](autoFixSearchStdSize.html#autoSearch)  
- - [Auto Standard Size](autoFixSearchStdSize.html#AutoStdSize)  
+
 
 ___
 
@@ -75,6 +83,8 @@ See Also:
  - [Terminology Search](/docs/Help/terminology.html#search)  
  - [Search](/docs/Help/search.html)
  
+ <!---  Add back when implementation complete 
+ 
 ___
 
 <a id="AutoStdSize"></a>  
@@ -99,6 +109,8 @@ See Also:
  - [Terminology Independent Variables](/docs/Help/terminology.html#independentVar)  
  - [Terminology Search](/docs/Help/terminology.html#search)  
  - [Search](/docs/Help/search.html)
+ 
+  --> 
  
 ___
 
