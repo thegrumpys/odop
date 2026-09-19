@@ -243,7 +243,7 @@ export const execute = {
                     </p>
 
                     <p>
-                    The Calculation input <b>End_Type_Method</b> provides a way for the user to specify values 
+                    The Calculation Input <b>End_Type_Method</b> set to "2-Specify end type values" provides a way for the user to specify values 
                     for unusual end configurations 
                     (for example, a spring with extra dead coils or with two different end types). 
                     The designer can provide custom values for 
