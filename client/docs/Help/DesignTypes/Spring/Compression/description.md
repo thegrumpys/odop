@@ -379,14 +379,10 @@ DoubleClosed&Ground, TaperedClosed and TaperedClosed&Ground use 2.0, correspondi
 transitioning coil at each end. PigtailClosed and PigtailClosed&Ground use 1.0, corresponding to 
 one-half transitioning coil at each end.  
 
-<!--- check Coils_T - Inactive_Coils  --> 
 The wire-geometry calculation uses: 
-```text
-transition turns per end 
-  = Transition_Coils / 2 fully closed turns per end 
-  = (Inactive_Coils - Transition_Coils) / 2 body turns 
-  = Coils_T - Inactive_Coils 
-```
+* transition turns per end = Transition_Coils / 2
+* fully closed turns per end = (Inactive_Coils - Transition_Coils) / 2
+* body turns = Coils_T - Inactive_Coils 
 
 The standard body-pitch equation does not subtract `Transition_Coils`. Instead, the wire-length
 calculation integrates the change from body pitch to terminal pitch over the specified transition
@@ -407,9 +403,8 @@ For the `TaperedClosed&Ground` end type, the default values are:
 - `Grind_Amount` = 0.5  
 
 With these values, the tapering operation reduces the solid height by 50% of a wire diameter at each end. 
-<!--- check the next two lines  --> 
-<!--- Another 25% of a wire diameter reduction on solid height is due to the tapered end conforming to the previous coil. --> 
-<!--- Thus, the tapered section becomes a skewed, truncated cone. --> 
+Another 25% of a wire diameter reduction on solid height is due to the tapered end conforming to the previous coil. 
+Thus, the tapered section becomes a skewed, truncated cone. 
 The grinding operation then removes an additional 25% of a nominal wire diameter (50% of the tapered dimension) 
 from each end of the spring. 
 
