@@ -712,7 +712,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "<p>End Type Method - Controls how end types are determined and used.</p><ol><li>Use values from end type table</li><li>User specified end type values</li></ol>",
+            "tooltip": "<p>Controls how end types are determined and used.</p><ol><li>Use values from end type table</li><li>User specified end type values</li></ol>",
             "type": "calcinput",
             "hidden": false
         },
@@ -728,7 +728,7 @@ export const initialState = {
             "cmin": 0,
             "cmax": 0,
             "sdlim": 0.0,
-            "tooltip": "End type<br/>See Help lookup: <b>End_Type</b>",
+            "tooltip": "Use drop-down to select from a table of standard end types<br/>See Help lookup: <b>End_Type</b>",
             "type": "calcinput",
             "hidden": false
         },
@@ -792,7 +792,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Total number of inactive coils across both ends over which the end geometry transitions. Must not exceed Inactive_Coils",
+            "tooltip": "Total number of inactive coils across both ends over which the end geometry transitions. Used in the calculation of body coil Pitch.  Must not exceed Inactive_Coils.",
             "type": "calcinput",
             "hidden": false
         },
@@ -808,7 +808,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": 2.0,
             "sdlim": 0.0,
-            "tooltip": "Total wire-diameter reduction distributed equally across both ends, expressed in units of Wire_Dia. For example, 1.0 reduces the wire diameter by 0.5 × Wire_Dia at each end",
+            "tooltip": "The amount of taper of the spring wire of the first and last coils of a hot wound compression spring, measured in wire diameters. Not to be confused with a conical spring. Used in the calculation of the solid height. For example, a value of 1.0 corresponds to a reduction of 0.5 × Wire_Dia at each end.",
             "type": "calcinput",
             "hidden": false
         },

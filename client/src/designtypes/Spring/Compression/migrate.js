@@ -1,5 +1,6 @@
 import { displayMessage } from '../../../components/Message';
 import { initialState } from './initialState';
+import { initialState as initialStateMetric} from './initialState_metric_units';
 import { initialSystemControls } from '../../../initialSystemControls';
 import { FIXED, VALID_MIN } from '../../../store/actionTypes';
 
@@ -394,36 +395,41 @@ export function migrate(design) {
         }
         migrated_design.version = '13';
     case '13':
-        console.log('Convert from 13 to 14');
+        // console.log('Convert from 13 to 14');
         var oldEndType = design.symbol_table[44].value;
 
         // Delete the version-13 AddCoils@Solid entry at index 46 before inserting new entries.
         design.symbol_table.splice(46,1);
 
-        var initialSymbol = (name) => Object.assign({},initialState.symbol_table.find((element) => element.name === name));
+        var initialSymbol = (name) => Object.assign({},design.units === 'US' ? initialState.symbol_table.find((element) => element.name === name) : initialStateMetric.symbol_table.find((element) => element.name === name));
 
         // Add all entries introduced after version 13 in initialState order.
         design.symbol_table.splice(44,0,initialSymbol('End_Type_Method'));
         design.symbol_table.splice(46,0,initialSymbol('End_Closure'));
         design.symbol_table.splice(47,0,initialSymbol('Closed_End_Geometry'));
-        design.symbol_table.splice(49,0,initialSymbol('Taper_Amount'));
-        design.symbol_table.splice(50,0,initialSymbol('Pigtail_Amount'));
-        design.symbol_table.splice(51,0,initialSymbol('Grind_Amount'));
+        design.symbol_table.splice(49,0,initialSymbol('Transition_Coils'));
+        design.symbol_table.splice(50,0,initialSymbol('Taper_Amount'));
+        design.symbol_table.splice(51,0,initialSymbol('Pigtail_Amount'));
+        design.symbol_table.splice(52,0,initialSymbol('Grind_Amount'));
 
-        design.symbol_table[49].value = 0.0;
-        design.symbol_table[50].value = 0.0;
-        design.symbol_table[51].value = 0.0;
+        design.symbol_table[44].value = 1; // End_Type_Method "1-Use standard values from end type table"
+        design.symbol_table[49].value = 2.0; // Transition_Coils
+        design.symbol_table[50].value = 0.0; // Taper_Amount
+        design.symbol_table[51].value = 0.0; // Pigtail_Amount
+        design.symbol_table[52].value = 0.0; // Grind_Amount
 
         // Convert the seven version-13 End_Type choices to the current end-type model.
         switch (oldEndType) {
           case 1: // Old "Open"
             design.symbol_table[46].value = 1; // End_Closure "Open"
-            design.symbol_table[47].value = 0; // Closed_End_Geometry not applicable
+            design.symbol_table[47].value = 0; // Closed_End_Geometry "Single"
+            design.symbol_table[49].value = 0; // Transition_Coils
             break;
           case 2: // Old "Open&Ground"
             design.symbol_table[46].value = 1; // End_Closure "Open"
-            design.symbol_table[47].value = 0; // Closed_End_Geometry not applicable
-            design.symbol_table[51].value = 1.0;
+            design.symbol_table[47].value = 0; // Closed_End_Geometry "Single"
+            design.symbol_table[49].value = 0; // Transition_Coils
+            design.symbol_table[52].value = 1.0; // Grind_Amount
             break;
           case 3: // Old "Closed"
             design.symbol_table[46].value = 2; // End_Closure "Closed"
@@ -432,40 +438,32 @@ export function migrate(design) {
           case 4: // Old "Closed&Ground"
             design.symbol_table[46].value = 2; // End_Closure "Closed"
             design.symbol_table[47].value = 1; // Closed_End_Geometry "Single"
-            design.symbol_table[51].value = 1.0;
+            design.symbol_table[52].value = 1.0; // Grind_Amount
             break;
           case 5: // Old "Tapered_C&G"
             design.symbol_table[45].value = 8; // End_Type "TaperedClosed&Ground"
             design.symbol_table[46].value = 2; // End_Closure "Closed"
             design.symbol_table[47].value = 3; // Closed_End_Geometry "Tapered"
-            design.symbol_table[49].value = 1.0;
-            design.symbol_table[51].value = 0.5;
+            design.symbol_table[50].value = 1.0; // Taper_Amount
+            design.symbol_table[52].value = 0.5; // Grind_Amount
             break;
           case 6: // Old "Pig-tail"
             design.symbol_table[45].value = 10; // End_Type "PigtailClosed&Ground"
             design.symbol_table[46].value = 2; // End_Closure "Closed"
             design.symbol_table[47].value = 4; // Closed_End_Geometry "Pigtail"
-            design.symbol_table[50].value = 2.0;
-            design.symbol_table[51].value = 1.0;
+            design.symbol_table[49].value = 1.0; // Transition_Coils
+            design.symbol_table[51].value = 2.0; // Pigtail_Amount
+            design.symbol_table[52].value = 1.0; // Grind_Amount
             break;
           case 7: // Old "User_Specified"
-            design.symbol_table[44].value = 2; // End_Type_Method "UserSpecified"
+            design.symbol_table[44].value = 2; // End_Type_Method "2-Specify end type values"
             design.symbol_table[45].value = 4; // End_Type "Closed&Ground" default
             design.symbol_table[46].value = 2; // End_Closure "Closed"
             design.symbol_table[47].value = 1; // Closed_End_Geometry "Single"
             break;
         }
         migrated_design.version = '14';
-    case '14':
-        var transitionCoils = Object.assign({},initialState.symbol_table.find((element) => element.name === 'Transition_Coils'));
-        if (design.symbol_table[46].value === 1) { // End_Closure "Open"
-            transitionCoils.value = 0.0;
-        } else if (design.symbol_table[47].value === 4) { // Closed_End_Geometry "Pigtail"
-            transitionCoils.value = 1.0;
-        } else {
-            transitionCoils.value = 2.0;
-        }
-        design.symbol_table.splice(49,0,transitionCoils);
+     case '14':
 
         //============BLOCK OF CODE TO REPLICATE============
         //     console.log('Convert from N to N+1');

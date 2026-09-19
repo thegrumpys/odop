@@ -148,7 +148,7 @@ export default function Calculator() {
               <SymbolUnits element={model_symbol_table[o.Weight]} index={o.Weight} className="text-start" />
             </tr>
             <tr>
-              <ValueName name="Pitch" tooltip="Pitch is the distance between two adjacent coils" />
+              <ValueName name="Pitch" tooltip="Pitch is the distance between the centerline of two adjacent body coils" />
               <Value id="Pitch" value={base.pitch} />
               <SymbolUnits element={model_symbol_table[o.L_Free]} index={o.L_Free} className="text-start" />
               <td> &nbsp; &nbsp; </td>
