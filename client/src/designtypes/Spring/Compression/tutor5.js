@@ -223,19 +223,18 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    It is time to move on to a discussion of <b>End_Type</b>
+                    It is time to move on to a discussion of <b>End_Type</b>. 
                     </p>
 
                     <p>
-                    Locate <b>End_Type</b>.
-                    Open the selection list and make a few changes. 
-                    Observe the effect on the number of inactive coils.  
-                    Changes in the number of active coils changes <b>Rate </b> 
-                    and many other aspects of the design.
+                    While in Advanced View, locate <b>End_Type</b>, open the selection list and make a few changes. 
+                    Observe how each choice affects the number of inactive coils. 
+                    Remember that changes in the number of active coils changes <b>Rate </b> 
+                    and many other aspects of the design. 
                     </p>
 
                     <p>
-                    Note the "Tapered" and "Pigtail" end types that are common in hot-wound springs.
+                    Notice the "Tapered" and "Pigtail" end types that are common in hot-wound springs.
                     Refer to the discussion in the on-line documentation (Help entry) on
                     &nbsp;<a href="/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes" target="_blank" rel="noopener noreferrer">Compression Spring End Types</a>&nbsp;
                     for information on <b>Transition_Coils</b>, <b>Taper_Amount</b>, <b>Pigtail_Amount</b>, <b>Grind_Amount</b>,
@@ -243,13 +242,12 @@ export const execute = {
                     </p>
 
                     <p>
-                    The Calculation Input <b>End_Type_Method</b> set to "2-Specify end type values" provides a way for the user to specify values 
-                    for unusual end configurations 
-                    (for example, a spring with extra dead coils or with two different end types). 
-                    The designer can provide custom values for 
+                    When the Calculation Input <b>End_Type_Method</b> is set to "2-Specify end type values" it allows the user 
+                    to enter custom values for unusual end configurations — for example, 
+                    springs with extra dead coils or with different end types at each end. 
+                    In this mode, the designer can provide custom values for 
                     <b> End_Closure</b>, <b> Closed_End_Geometry</b>, <b> Inactive_Coils</b>, <b>Transition_Coils</b>, <b>Taper_Amount</b>, <b>Pigtail_Amount</b>, and <b>Grind_Amount</b>.
-                    Additional information is available in the same on-line documentation section for 
-                    the Compression Spring design type.
+                    Additional information is available in the same on-line documentation section for the Compression Spring design type. 
                     </p>
                 </>
             )
