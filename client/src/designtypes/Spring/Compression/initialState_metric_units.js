@@ -792,7 +792,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": Number.MAX_VALUE,
             "sdlim": 0.0,
-            "tooltip": "Total number of inactive coils across both ends over which the end geometry transitions. Used in the calculation of body coil Pitch.  Must not exceed Inactive_Coils.",
+            "tooltip": "Total number of inactive coils across both ends over which the end geometry transitions. Must not exceed Inactive_Coils.",
             "type": "calcinput",
             "hidden": false
         },
@@ -824,7 +824,7 @@ export const initialState = {
             "validmin": 0.0,
             "validmax": 2.0,
             "sdlim": 0.0,
-            "tooltip": "Total axial collapse of the pigtail coils across both ends, expressed in units of wire diameter. A value of 2.0 represents one wire diameter collapsing into each end",
+            "tooltip": "Total pigtail end-coil nesting into the body coil diameter, in units of Wire_Dia across both ends. At 2.0, one Wire_Dia folds fully into the body diameter at each end",
             "type": "calcinput",
             "hidden": false
         },

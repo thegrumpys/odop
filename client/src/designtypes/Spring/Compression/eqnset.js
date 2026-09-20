@@ -8,6 +8,10 @@ export function pitch(freeLength, wireDiameter, totalCoils, endClosure, inactive
         return (freeLength - (1.0 - grindAmount) * wireDiameter) / totalCoils;
     }
 
+    // Industry standard closed-end pitch formulas include this +1 wire diameter
+    // allowance when converting body coil centerline pitch to overall free length.
+    // Transition coils are part of inactiveCoils, not an additional coil here.
+    // With two inactive coils this gives 3d for closed or 2d for closed and ground.
     const endAllowance = ((inactiveCoils + 1.0) * (1.0 - taperAmount / 2.0) - grindAmount - pigtailAmount) * wireDiameter;
     return (freeLength - endAllowance) / (totalCoils - inactiveCoils);
 }
@@ -58,6 +62,10 @@ export function wireLength(outsideDiameter, wireDiameter, freeLength, totalCoils
 
         if (closedEndGeometry === cego.pigtail) {
             endMeanDiameter = meanDiameter * 0.5;
+            // Pigtail_Amount A measures end-coil nesting in units of d across
+            // both ends. Model each end's terminal pitch as d - A*d/2;
+            // A = 2 means one d folds into the body diameter at each end.
+            // The reported pitch() value is for body coils.
             endPitch = wireDiameter * (1.0 - pigtailAmount / 2.0);
         }
 
@@ -101,6 +109,7 @@ export function wireVolume(outsideDiameter, wireDiameter, freeLength, totalCoils
         }
         if (closedEndGeometry === cego.pigtail) {
             endMeanDiameter = meanDiameter * 0.5;
+            // Use the same assumed terminal rise as wireLength().
             endPitch = wireDiameter * (1.0 - pigtailAmount / 2.0);
         } else {
             endPitch = (wireDiameter + endWireDiameter) / 2.0;

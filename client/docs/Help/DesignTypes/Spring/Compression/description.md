@@ -166,7 +166,7 @@ Closed_End_Geometry |   | when End_Type_Method is **2** and End_Closure is "Clos
 Inactive_Coils |        | number of inactive coils <br/> (depends on `End_Type`) 
 Transition_Coils |      | total number of inactive coils across both ends over which the end geometry transitions; must be less than or equal to `Inactive_Coils` 
 Taper_Amount   |        | the solid height reduction, measured in wire diameters, created by a tapering operation on the wire diameter of the first and last coil(s) of a [Hot Wound](/docs/Help/SpringDesign/advancedSpringOperations.html#HotWound) compression spring. For example, a value of 1.0 corresponds to a reduction of 0.5 × Wire_Dia at each end
-Pigtail_Amount |        | Total axial collapse of the pigtail coils across both ends, expressed in units of wire diameter. A value of 2.0 represents one wire diameter collapsing into each end
+Pigtail_Amount |        | total pigtail end-coil nesting into the body coil diameter, in units of `Wire_Dia` across both ends. At 2.0, one wire diameter folds fully into the body diameter at each end
 Grind_Amount   |        | number of wire diameters removed by a grinding operation; <br/> See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes) 
 Catalog_Name   |        | name of the catalog containing the most recently selected catalog entry 
 Catalog_Number |        | catalog number of the most recent catalog entry 
@@ -387,6 +387,8 @@ The wire-geometry calculation uses:
 The standard body-pitch equation does not subtract `Transition_Coils`. Instead, the wire-length
 calculation integrates the change from body pitch to terminal pitch over the specified transition
 turns. `Wire_Volume` and `Weight` use the resulting wire length.
+Changing `Transition_Coils` affects wire length and weight, while the reported `Pitch` remains
+the body coil pitch.
 
 
 #### Taper_Amount
@@ -414,8 +416,19 @@ In summary, the `TaperedClosed&Ground` end type produces a solid height:
 
 
 #### Pigtail_Amount
-Pigtail amount reflects the total axial collapse of the pigtail coils across both ends, expressed in units of wire diameter. 
-A value of 2.0 produces a solid height associated with one wire diameter collapsing into each end.  
+`Pigtail_Amount` is the total amount of pigtail end-coil nesting into the body
+coil diameter, measured in units of `Wire_Dia` across both ends. A value of 2.0
+means one wire diameter folds fully into the body diameter at each end. The
+calculated solid height is reduced by two wire diameters in total.
+
+The reported `Pitch` is the body coil pitch. For wire length and weight, ODOP:Spring
+uses a separate terminal end-coil pitch at each pigtail end. As a modeling
+assumption, it represents this nesting by starting at one wire diameter of
+terminal pitch and subtracting half of `Pigtail_Amount` at each end:
+`Wire_Dia * (1 - Pigtail_Amount / 2)`. At 2.0, the terminal segment has zero
+modeled pitch; the transitioning segment still changes continuously from body
+pitch to this terminal value. This relationship is a geometric modeling
+assumption, not a validated industry.
 
 #### Grind_Amount, 
 Grind amount reflects the number of wire diameters removed by a grinding operation. 
