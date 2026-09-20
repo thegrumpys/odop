@@ -3,7 +3,7 @@ import { clearAlerts, addAlert } from '../../../store/actions';
 import { checks as commonChecks, check_message, check_DCD_alert, ERR, WARN, INFO } from '../../../components/Alerts';
 import { CONSTRAINED, FIXED, MIN, MAX } from '../../../store/actionTypes';
 import { toODOPPrecision } from '../../../toODOPPrecision';
-import { getSizeEntries } from './size';
+import { getSizeEntries, getWireDiaRange } from './size';
 
 export function checks(store) {        /*    Compression  Spring  */
 //    console.log('@@@@@ Start check store=',store);
@@ -62,7 +62,8 @@ export function checks(store) {        /*    Compression  Spring  */
             duplicate: true
         }));
     }
-    if (design.model.symbol_table[o.Wire_Dia].value < 0.5 * design.model.symbol_table[o.tbase010].value && design.model.symbol_table[o.Prop_Calc_Method].value === 1) {
+    const wireDiaRange = getWireDiaRange(design.model.symbol_table);
+    if (wireDiaRange && design.model.symbol_table[o.Wire_Dia].value < wireDiaRange.min && design.model.symbol_table[o.Prop_Calc_Method].value === 1) {
         store.dispatch(addAlert({
             element: design.model.symbol_table[o.Wire_Dia],
             name: design.model.symbol_table[o.Wire_Dia].name,
@@ -71,11 +72,11 @@ export function checks(store) {        /*    Compression  Spring  */
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#MatPropAccuracy)'
         }));
     }
-    if (design.model.symbol_table[o.Wire_Dia].value > 5.0 * design.model.symbol_table[o.tbase400].value && design.model.symbol_table[o.Prop_Calc_Method].value === 1) {
+    if (wireDiaRange && design.model.symbol_table[o.Wire_Dia].value > wireDiaRange.max && design.model.symbol_table[o.Prop_Calc_Method].value === 1) {
         store.dispatch(addAlert({
             element: design.model.symbol_table[o.Wire_Dia],
             name: design.model.symbol_table[o.Wire_Dia].name,
-            message: 'Material properties for this ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + toODOPPrecision(design.model.symbol_table[o.Wire_Dia].value) + ') may not be accurate.',
+            message: 'Material properties for this ' + design.model.symbol_table[o.Wire_Dia].name + ' (' + toODOPPrecision(design.model.symbol_table[o.Wire_Dia].value) + ') may not be accurate. For large wire diameters, start with the ' + (design.model.symbol_table[o.Material_File].value === 'mat_metric.json' ? 'HotWoundMetric' : 'HotWound') + ' compression spring startup design.',
             severity: WARN,
             help_url: '[Help](/docs/Help/DesignTypes/Spring/alerts.html#MatPropAccuracy)'
         }));

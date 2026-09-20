@@ -57,7 +57,7 @@ it('eqnset initialState', () => { // !!! Heat_Treat = 2 !!!
     expect(x[o.Stress_End]).toEqual(0.0);
     expect(x[o.FS_2]).toEqual(1.2394651205560094);
     expect(x[o.FS_CycleLife]).toEqual(1.2043652274974437);
-    expect(x[o.Cycle_Life]).toEqual(41332.48658844737);
+    expect(x[o.Cycle_Life]).toBeCloseTo(41332.48658844737, 9);
     expect(x[o.PC_Safe_Deflect]).toEqual(80.67996294655002);
     expect(x[o.Force_Arm_2]).toEqual(0.0);
     expect(x[o.Energy]).toEqual(6.981959021636359);

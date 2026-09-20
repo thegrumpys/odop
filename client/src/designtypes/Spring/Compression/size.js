@@ -2,6 +2,17 @@ import * as o from './symbol_table_offsets';
 import * as mo from '../mat_offsets';
 import { toODOPPrecision } from '../../../toODOPPrecision';
 
+export function getWireDiaRange(st) {
+    if (typeof st[o.Material_Type].value !== 'number') return null; // User-specified material
+    const m_tab = st[o.Material_File].value === 'mat_metric.json' ? require('../mat_metric.json') : require('../mat_us.json');
+    const material = m_tab[st[o.Material_Type].value];
+    if (!material) return null;
+
+    const sizes = require('../' + material[mo.wire_dia_filename] + '.json').slice(1).map((entry) => entry[0]);
+    if (sizes.length === 0) return null;
+    return { min: Math.min(...sizes), max: Math.max(...sizes) };
+}
+
 export function getSizeTypes(st) {
 //    console.log('getSizeTypes','st=',st);
     const prop_calc_method = st[o.Prop_Calc_Method];
