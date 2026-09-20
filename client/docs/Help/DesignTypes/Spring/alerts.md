@@ -142,29 +142,21 @@ ___
 
 Alert entry #S55
 ## Material properties for this Wire_Dia may not be accurate. 
-This alert message is provided to warn the user that the current value for wire diameter is outside 
-the range of standard wire diameters for the selected material type. 
-Material properties extrapolated from the internal table may not be completely accurate.  
+This alert warns that the material properties calculated from the internal table may not be completely accurate.
+For compression springs, it appears when Wire_Dia is outside the range of standard wire diameters listed for the selected material type.
 
-Specifically, the ODOP:Spring software uses an interpolation / extrapolation mechanism to calculate 
-a new value of tensile strength for each new wire diameter that is evaluated. 
-The specific numbers involved change with each different material in the materials table. 
-In this case, the current value of Wire_Dia requires an extrapolation outside the 
-range of standard wire diameters for the selected material type. 
-Thus, the corresponding values for tensile strength may not be completely accurate.  
+ODOP:Spring calculates tensile strength for each wire diameter using interpolation or extrapolation from material-specific values.
+The resulting tensile strength may be less reliable for a diameter outside the listed sizes.
 
-If possible, select a standard wire size.  
+If possible, select a standard wire size. 
 
-Alternatively, obtain the appropriate value of tensile strength for the wire material and wire diameter in use 
-and then modify the Calculation Input `Prop_Calc_Method` to a value of either 2 or 3 so that the material 
-table is not used and it is possible to enter the more accurate value of tensile strength.  
+Alternatively, obtain the appropriate tensile strength for the wire material and diameter in use.
+Then set the Calculation Input `Prop_Calc_Method` to 2 or 3 to supply material properties directly instead of using the material table.
 
-Finally, it is possible that the selected wire diameter is so large as to be beyond the range 
-of the "cold coiling" process. 
-If a [Hot Wound](/docs/Help/SpringDesign/advancedSpringOperations.html#HotWound) process is appropriate, 
-be sure to select an appropriate material type, such as 5160H Chromium steel - ASTM A-125. 
-Also, a File : Open operation that selects a default design with `HotWound` as part of the name will configure 
-everything necessary for a hot wound design.  
+A large wire diameter may be beyond the range of the cold coiling process.
+If a [hot wound process](/docs/Help/SpringDesign/advancedSpringOperations.html#HotWound) is appropriate, select a suitable material type, such as 5160H Chromium steel (ASTM A-125).
+For compression springs, use File : Open to select the **HotWound** (U.S. units) or **HotWoundMetric** (metric units) startup design.
+These designs provide a hot wound material, end type, and starting values that can be adjusted for the specific spring.
 
  See also: 
  - [Select Size & Select Catalog](/docs/Help/SpringDesign/selectSizeCatalog.html)  
