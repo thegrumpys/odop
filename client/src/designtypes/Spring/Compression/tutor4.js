@@ -129,7 +129,7 @@ export const execute = {
                     very long cycle life ...  say 1,000,000 cycles.
                     Note the constraints that were established in the initialState will
                     permit a design with a short cycle life.
-                    Specifically, Cycle_Life and FS_CycleLife are not constrained.
+                    Specifically, <b>Cycle_Life</b> and <b>FS_CycleLife</b> are not constrained.
                     </p>
 
                     <p>
@@ -146,13 +146,13 @@ export const execute = {
                     <p>
                     In "Tutorial shorthand", the changes just imposed by the tutorial are:<br />
                     <br />
-                        CHANGE Life_Category "1 million cycles - Not Peened" &nbsp; &#60;--- request nearest cycle life category<br />
-                        CHANGE  FS_CycleLife MIN  1.0<br />
-                        CHANGE  OD_Free MAX  1.950 &nbsp; &#60;--- 0.050 margin for hole<br />
-                        CHANGE  L_Solid MAX  1.2<br />
-                        CHANGE  L_Stroke MIN 1.0<br />
-                        FIX  Force_1  0<br />
-                        FIX  Force_2  250<br />
+                        CHANGE <b>Life_Category</b> "1 million cycles - Not Peened" &nbsp; &#60;--- request nearest cycle life category<br />
+                        CHANGE  <b>FS_CycleLife</b> MIN  1.0<br />
+                        CHANGE  <b>OD_Free</b> MAX  1.950 &nbsp; &#60;--- 0.050 margin for hole<br />
+                        CHANGE  <b>L_Solid</b> MAX  1.2<br />
+                        CHANGE  <b>L_Stroke</b> MIN 1.0<br />
+                        FIX  <b>Force_1</b>  0<br />
+                        FIX  <b>Force_2</b>  250<br />
                     </p>
 
                     <p>
@@ -229,10 +229,10 @@ export const execute = {
                     <p>
                     In Tutorial speak, the changes just imposed are:<br />
                     <br />
-                        CHANGE  OD_Free  2.0<br />
-                        CHANGE  Wire_Dia .22<br />
-                        CHANGE  L_Free  3.0<br />
-                        CHANGE  Coils_T   7
+                        CHANGE  <b>OD_Free</b>  2.0<br />
+                        CHANGE  <b>Wire_Dia</b> .22<br />
+                        CHANGE  <b>L_Free</b>  3.0<br />
+                        CHANGE  <b>Coils_T</b>   7
                     </p>
 
                     <p>
@@ -318,8 +318,8 @@ export const execute = {
                     <p>
                     The tutorial just imposed the changes:<br />
                     <br />
-                        CHANGE  L_Solid MAX  2.75<br />
-                        CHANGE  FS_2 MAX  1.75
+                        CHANGE  <b>L_Solid</b> MAX  2.75<br />
+                        CHANGE  <b>FS_2</b> MAX  1.75
                     </p>
 
                     <p>

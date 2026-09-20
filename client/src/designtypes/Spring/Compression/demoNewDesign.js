@@ -129,15 +129,15 @@ export const execute = {
                     The demo has now entered what is known about the problem.
                     In summary, the changes were:<br />
                     </p>
-                    CHANGE  Material_Type OIL_TEMPERED_MB<br />
-                    CHANGE  Life_Category 1 Million cycles - Not peened<br />
-                    CHANGE  FS_CycleLife MIN 1.0<br />
-                    CHANGE  Cycle_Life  MIN  1000000<br />
-                    CHANGE  OD_Free   MAX  1.25<br />
-                    CHANGE  L_Solid   MAX  1.30<br />
-                    CHANGE  L_Stroke  MIN  0.65<br />
-                    FIX  Force_1  30.0<br />
-                    FIX  Force_2  60.0<br />
+                    CHANGE  <b>Material_Type</b> OIL_TEMPERED_MB<br />
+                    CHANGE  <b>Life_Category</b> 1 Million cycles - Not peened<br />
+                    CHANGE  <b>FS_CycleLife</b> MIN 1.0<br />
+                    CHANGE  <b>Cycle_Life</b>  MIN  1000000<br />
+                    CHANGE  <b>OD_Free</b>   MAX  1.25<br />
+                    CHANGE  <b>L_Solid</b>   MAX  1.30<br />
+                    CHANGE  <b>L_Stroke</b>  MIN  0.65<br />
+                    FIX  <b>Force_1</b>  30.0<br />
+                    FIX  <b>Force_2</b>  60.0<br />
                     <br />
                     <p>
                     The remaining Independent Variable values remain as established by the initialState.
@@ -224,7 +224,7 @@ export const execute = {
                     As a general rule, in the first approach to a new problem,
                     let the calculations use an arbitrary (non-standard) wire diameter.
                     As a last step, select a standard wire diameter.
-                    Then with Wire_Dia in FIXed status, execute a search to make any necessary
+                    Then with <b>Wire_Dia</b> in FIXed status, execute a search to make any necessary
                     adjustments in the remaining free Independent Variables.
                     </p>
 
@@ -234,9 +234,9 @@ export const execute = {
                     and see how to chose the nearest standard wire diameter.
                     <br /><br />
                     In Demo / Tutorial speak:<br />
-                    Select  Size  Wire_Dia  0.135<br />
+                    Select  Size  <b>Wire_Dia</b>  0.135<br />
                     <br />
-                    Please confirm that Wire_Dia is FIXed at 0.135 and then click Next
+                    Please confirm that <b>Wire_Dia</b> is FIXed at 0.135 and then click Next
                     to move to the next page.
                     </p>
                 </>

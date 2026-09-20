@@ -182,13 +182,13 @@ export const execute = {
 
                     <p>
                     In the process of moving to the following page, the tutorial will impose a new value
-                    for an input (Independent Variable) ... the free length (L_Free) of our compression spring.
-                    Take note of the current value of %_Avail_Deflect so that you can see the
+                    for an input (Independent Variable) ... the free length (<b>L_Free</b>) of our compression spring.
+                    Take note of the current value of <b>%_Avail_Deflect</b> so that you can see the
                     impact of the change.
                     </p>
 
                     <p>
-                    When you click on Next, the tutorial will set the value of L_Free to 3.0 inches.
+                    When you click on Next, the tutorial will set the value of <b>L_Free</b> to 3.0 inches.
                     </p>
                 </>
             )
@@ -198,13 +198,13 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The tutorial has now entered a value of 3.0 inches for L_Free.
+                    The tutorial has now entered a value of 3.0 inches for <b>L_Free</b>.
                     In the shorthand summary that will be used in the remaining tutorial
                     and demo sessions, the action was:
                     </p>
 
                     <p>
-                    CHANGE  L_Free  3.0<br />
+                    CHANGE  <b>L_Free</b>  3.0<br />
                     </p>
 
                     <p>
@@ -215,9 +215,9 @@ export const execute = {
                     </p>
 
                     <p>
-                    Also notice that this change to L_Free by this tutorial session did not leave it in Fixed status.
+                    Also notice that this change to <b>L_Free</b> by this tutorial session did not leave it in Fixed status.
                     By default, the ODOP AutoFix feature is enabled.
-                    Thus, a user making a change to the value of an independent variable like OD_Free
+                    Thus, a user making a change to the value of an independent variable like <b>OD_Free</b>
                     will leave it in Fixed status.
                     </p>
                 </>
@@ -235,10 +235,10 @@ export const execute = {
                     The objective here is to illustrate how ODOP can do simple analysis.
                     Given the physical description of the object under consideration,
                     ODOP can use the mathematical model to predict aspects of its performance.
-                    For a spring, that is things like spring Rate, stresses,
+                    For a spring, that is things like spring <b>Rate</b>, stresses,
                     factor of safety, cycle life, etc.
                     If working with the Rectangular Solid demonstration case,
-                    we would be speaking in terms of things like Volume, Weight, etc.
+                    we would be speaking in terms of things like Volume, <b>Weight</b>, etc.
                     </p>
 
                     <p>
@@ -246,9 +246,9 @@ export const execute = {
                     </p>
 
                     <p>
-                    When you click on Next, the tutorial will impose a value of 12 coils (turns) on Coils_T.<br />
+                    When you click on Next, the tutorial will impose a value of 12 coils (turns) on <b>Coils_T</b>.<br />
                     <br />
-                    CHANGE Coils_T 12
+                    CHANGE <b>Coils_T</b> 12
                     </p>
                 </>
             )
@@ -263,7 +263,7 @@ export const execute = {
 
                     <p>
                     If you scroll down, you can see that the
-                    design now exceeds the MAX constraint on %_Avail_Deflect
+                    design now exceeds the MAX constraint on <b>%_Avail_Deflect</b>
                     (percentage of available deflection at load point 2).
                     Since a constraint is violated, this design is considered to be
                     "Not Feasible".
@@ -274,11 +274,11 @@ export const execute = {
 
                     <p>
                     Before we get into Search, let's suppose that we really don't want
-                    the Search process to change either the 0.105 inch value for Wire_Dia or the
-                    39 pound value of Force_2 that were established by default (the initialState).
+                    the Search process to change either the 0.105 inch value for <b>Wire_Dia</b> or the
+                    39 pound value of <b>Force_2</b> that were established by default (the initialState).
                     When you click Next, the tutorial will check the appropriate Fix checkboxes
                     (positioned between the Value entry fields and the Units fields)
-                    to put Wire_Dia and Force_2 into Fixed status.
+                    to put <b>Wire_Dia</b> and <b>Force_2</b> into Fixed status.
                     </p>
                 </>
             ),
@@ -291,14 +291,14 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Now, the Fix checkboxes for Wire_Dia and Force_2 are checked.
+                    Now, the Fix checkboxes for <b>Wire_Dia</b> and <b>Force_2</b> are checked.
                     Also, Fixed status is indicated by heavy borders at the right and left of the Value field.
                     </p>
 
                     <p>
-                    By having Wire_Dia and Force_2 in Fixed status, the search will be able to adjust
-                    only the values of OD_Free, Wire_Dia, L_Free and Coils_T to find a design that
-                    does not exceed the maximum on %_Avail_Deflect.
+                    By having <b>Wire_Dia</b> and <b>Force_2</b> in Fixed status, the search will be able to adjust
+                    only the values of <b>OD_Free</b>, <b>Wire_Dia</b>, <b>L_Free</b> and <b>Coils_T</b> to find a design that
+                    does not exceed the maximum on <b>%_Avail_Deflect</b>.
                     Of course, the entire collection of Dependent Variables will respond
                     to any changes in the Independent Variables.
                     </p>
@@ -344,14 +344,14 @@ export const execute = {
 
                     <p>
                     Indeed, the design now utilizes less than 90 percent of its available deflection.
-                    Also, Wire_Dia has remained at 0.105 inches
-                    and Force_2 at 39 pounds as specified.
+                    Also, <b>Wire_Dia</b> has remained at 0.105 inches
+                    and <b>Force_2</b> at 39 pounds as specified.
                     </p>
 
                     <p>
                     Finally, to wrap up this session,
                     the next page will demonstrate how it is possible to specify
-                    the value of L_Stroke, a Dependent Variable.
+                    the value of <b>L_Stroke</b>, a Dependent Variable.
                     We will choose 1.725 inches, a value very close to what was in place
                     prior to making the changes up to this point in this tutorial session.
                     </p>
@@ -367,7 +367,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The tutorial has imposed: Fix L_Stroke 1.725
+                    The tutorial has imposed: Fix <b>L_Stroke</b> 1.725
                     </p>
 
                     <p>
@@ -376,7 +376,7 @@ export const execute = {
 
                     <p>
                     Again, a Search will be required to establish values for the free Independent Variables
-                    such that the Fixed value of L_Stroke is established while simultaneously keeping %_Avail_Deflect
+                    such that the Fixed value of <b>L_Stroke</b> is established while simultaneously keeping <b>%_Avail_Deflect</b>
                     below the maximum.
                     </p>
 

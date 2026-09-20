@@ -67,7 +67,7 @@ export const execute = {
                     For example, without a constraint on inside diameter,
                     the coil outside diameter could be reduced (mathematically, if not physically)
                     to twice the wire diameter or perhaps even less.
-                    Without a constraint on Rate or
+                    Without a constraint on <b>Rate</b> or
                     Stroke (change in length between point 1 and point 2),
                     the number of coils could be reduced to something less than one
                     and free length reduced down to equal the solid height.
@@ -137,11 +137,11 @@ export const execute = {
                     </p>
 
                     <p>
-                    FIX  Force_1   0.0<br />
-                    FIX  Force_2  20.0<br />
-                    CHANGE  OD_Free MAX   1.5<br />
-                    CHANGE  L_Stroke MIN  1.0<br />
-                    CHANGE  L_Solid MAX   1.5
+                    FIX  <b>Force_1</b>   0.0<br />
+                    FIX  <b>Force_2</b>  20.0<br />
+                    CHANGE  <b>OD_Free</b> MAX   1.5<br />
+                    CHANGE  <b>L_Stroke</b> MIN  1.0<br />
+                    CHANGE  <b>L_Solid</b> MAX   1.5
                     </p>
 
                     <p>
@@ -186,11 +186,11 @@ export const execute = {
                     </p>
 
                     <p>
-                    Take note of the current value of Weight.
+                    Take note of the current value of <b>Weight</b>.
                     In the process of moving to the next page the tutorial session will
                     invoke the Seek feature. <br />
                     <br />
-                    SEEK  MIN  Weight
+                    SEEK  MIN  <b>Weight</b>
                     </p>
 
                     <Image fluid src="/docs/Help/img/SeekMinWeight.png" alt="SeekMinWeight"/>
@@ -210,7 +210,7 @@ export const execute = {
                     If you see the Feasibility status shown as "NOT FEASIBLE",
                     It means that the solution point has slightly violated constraints
                     in order to achieve improvements in the result
-                    (minimum Weight in this case).
+                    (minimum <b>Weight</b> in this case).
                     </p>
                     <p>
                     You may see the message:
@@ -227,14 +227,14 @@ export const execute = {
                     Let's try exploring in a different direction.
                     Perhaps this will be a design that prioritizes a softer spring
                     with a reduced spring rate.
-                    Take note of the current value of Rate.
+                    Take note of the current value of <b>Rate</b>.
                     </p>
 
                     <p>
                     In the process of moving to the next page
                     the tutorial will execute:
                     <br /><br />
-                    SEEK  MIN  Rate
+                    SEEK  MIN  <b>Rate</b>
                     </p>
                     <br />
                 </>
@@ -256,8 +256,8 @@ export const execute = {
                     <p>
                     In general, it is the interaction of more than one constraint that
                     limits further progress in achieving even better results.
-                    In this case the constraints on solid height (L_Solid) and
-                    factor of safety in the solid condition (FS_Solid)
+                    In this case the constraints on solid height (<b>L_Solid</b>) and
+                    factor of safety in the solid condition (<b>FS_Solid</b>)
                     prevent further progress in reducing the spring rate.
                     If you are looking for a spring with a good cycle life
                     or no tendency to buckle under load,
@@ -273,7 +273,7 @@ export const execute = {
                     In the process of moving to the next page
                     the tutorial will execute:
                     <br /><br />
-                    SEEK  MIN  L_Solid
+                    SEEK  MIN  <b>L_Solid</b>
                     </p>
                     <br /><br />
                 </>
@@ -327,13 +327,13 @@ export const execute = {
                     <p>
                     The tutorial has just imposed these changes in order to describe this problem:<br />
                     <br />
-                    FIX  Force_1  0<br />
-                    FIX  Force_2  100<br />
-                    CHANGE  L_Stroke  MIN  2.5 &nbsp; &#60;--- use constraint, not FIX<br />
+                    FIX  <b>Force_1</b>  0<br />
+                    FIX  <b>Force_2</b>  100<br />
+                    CHANGE  <b>L_Stroke</b>  MIN  2.5 &nbsp; &#60;--- use constraint, not FIX<br />
                     <br />
-                    CHANGE  Prop_Calc_Method  3  &nbsp;  &#60;--- specify allowable stress<br />
-                    CHANGE  Stress_Lim_Stat  80000<br />
-                    CHANGE  FS_2  MIN  1.0  &nbsp;  &#60;--- more details on next page<br />
+                    CHANGE  <b>Prop_Calc_Method</b>  3  &nbsp;  &#60;--- specify allowable stress<br />
+                    CHANGE  <b>Stress_Lim_Stat</b>  80000<br />
+                    CHANGE  <b>FS_2</b>  MIN  1.0  &nbsp;  &#60;--- more details on next page<br />
                     </p>
                     <br />
                 </>
@@ -356,7 +356,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    If the use of Prop_Calc_Method seems a bit unfamiliar, you may wish to
+                    If the use of <b>Prop_Calc_Method</b> seems a bit unfamiliar, you may wish to
                     review the on-line documentation sections (HELP entries) on
                     &nbsp;<a href="/docs/Help/DesignTypes/Spring/Compression/description.html" target="_blank" rel="noopener noreferrer">Compression Spring Design Type</a>,
                     &nbsp;<a href="/docs/Help/SpringDesign/materials.html" target="_blank" rel="noopener noreferrer">Materials</a> and
@@ -366,7 +366,7 @@ export const execute = {
                     </p>
 
                     <p>
-                    Changing FS_2 MIN to be 1.0 causes the value of Stress_Lim_Stat
+                    Changing <b>FS_2</b> MIN to be 1.0 causes the value of <b>Stress_Lim_Stat</b>
                     (80,000 PSI) to apply at point 2.
                     There will be no additional margin in the factor of safety.
                     </p>
@@ -491,10 +491,10 @@ export const execute = {
                     <p>
                     In "Tutorial Speak" those changes are:<br />
                     <br />
-                    CHANGE  OD_Free MAX  1.5<br />
-                    CHANGE  L_Solid MAX  1.5<br />
-                    CHANGE  L_Stroke MIN 1.0<br />
-                    FIX  Force_1 0
+                    CHANGE  <b>OD_Free</b> MAX  1.5<br />
+                    CHANGE  <b>L_Solid</b> MAX  1.5<br />
+                    CHANGE  <b>L_Stroke</b> MIN 1.0<br />
+                    FIX  <b>Force_1</b> 0
                     </p>
 
                     <p>
@@ -522,7 +522,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Take a moment to browse through the results that Seek MAX Force_2 produced.
+                    Take a moment to browse through the results that Seek MAX <b>Force_2</b> produced.
                     </p>
 
                     <p>

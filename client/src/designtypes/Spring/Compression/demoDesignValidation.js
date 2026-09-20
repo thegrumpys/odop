@@ -135,15 +135,15 @@ export const execute = {
                     This demo session has now entered what is known about the problem.
                     In summary, the changes were:<br />
                     </p>
-                    FIX  Wire_Dia   0.0395<br/>
-                    FIX  OD_Free    0.357<br/>
-                    FIX  L_Free     0.807<br/>
-                    FIX  Coils_T    8<br/>
-                    FIX  L_1 &nbsp; 0.689<br/>
-                    FIX  L_2 &nbsp; 0.394<br/>
+                    FIX  <b>Wire_Dia</b>   0.0395<br/>
+                    FIX  <b>OD_Free</b>    0.357<br/>
+                    FIX  <b>L_Free</b>     0.807<br/>
+                    FIX  <b>Coils_T</b>    8<br/>
+                    FIX  <b>L_1</b> &nbsp; 0.689<br/>
+                    FIX  <b>L_2</b> &nbsp; 0.394<br/>
                     <br />
                     <p>
-                    The current values for Force_1 and Force_2 are left as established by the initialState.
+                    The current values for <b>Force_1</b> and <b>Force_2</b> are left as established by the initialState.
                     </p>
                 </>
             ),
@@ -163,7 +163,7 @@ export const execute = {
                     <p>
                     Now that we have expressed what we want the design to accomplish,
                     we will ask "Search" for a solution.
-                    Specifically, to solve for the Force_1 and Force_2
+                    Specifically, to solve for the <b>Force_1</b> and <b>Force_2</b>
                     values that correspond to the FIXes that have just been established.
                     </p>
 
@@ -223,7 +223,7 @@ export const execute = {
                     Don't forget to switch the view back to a main page (Advanced or Calculator View).
                     <br /><br />
                     Just in case you missed them on the previous screen, you can
-                    scroll down to view the values of <b>Cycle_Life, %_Avail_Deflect</b> and <b>Weight </b>
+                    scroll down to view the values of <b>Cycle_Life</b>, <b>%_Avail_Deflect</b> and <b>Weight</b>{' '}
                     to complete the original problem objectives.
                     </p>
                 </>

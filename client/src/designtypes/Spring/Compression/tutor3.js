@@ -94,13 +94,13 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The tutorial has changed a constraint: CHANGE  OD_Free MAX 0.9<br />
+                    The tutorial has changed a constraint: CHANGE  <b>OD_Free</b> MAX 0.9<br />
                     <br />
                     Take a look at the results.
                     </p>
 
                     <p>
-                    It should be pretty hard to miss the violation of OD_FREE MAX.
+                    It should be pretty hard to miss the violation of <b>OD_FREE</b> MAX.
                     Also, the tool-tip on the "Status" label of the
                     multi-colored Feasibility Status indicator shows that
                     the Objective Value is greater than zero.
@@ -108,7 +108,7 @@ export const execute = {
                     <br />
                     Shall we see if Search can find a design with a smaller (less than
                     0.9 inch OD) spring that can still support the designated load ?
-                    Note that the tutorial has also put Force_2 in FIXed status so that
+                    Note that the tutorial has also put <b>Force_2</b> in FIXed status so that
                     designated load will not be changed by the search process.
                     </p>
 
@@ -214,9 +214,9 @@ export const execute = {
                     <p>
                     In tutorial "shorthand" notation, the tutorial has entered:<br />
                     <br />
-                    FIX  Force_2   280<br />
-                    FIX  Deflect_2   5.5<br />
-                    CHANGE  OD_Free MAX  2.0<br />
+                    FIX  <b>Force_2</b>   280<br />
+                    FIX  <b>Deflect_2</b>   5.5<br />
+                    CHANGE  <b>OD_Free</b> MAX  2.0<br />
                     </p>
                 </>
             ),
@@ -311,7 +311,7 @@ export const execute = {
                     <p>
                     This time, let's see if we can handle a design that has both force and
                     length specified at each of two points.
-                    As long as L_Free (spring length in the free, no load condition) is in FREE status,
+                    As long as <b>L_Free</b> (spring length in the free, no load condition) is in FREE status,
                     this should not be a problem.
                     You may want to review
                     &nbsp;<a href="/docs/Help/designSituations.html" target="_blank" rel="noopener noreferrer">Design Situations</a>&nbsp;
@@ -325,10 +325,10 @@ export const execute = {
 
                     <p>
                     Again, the tutorial has already imposed the changes ...<br />
-                    FIX  Force_1  15<br />
-                    FIX  L_1       2<br />
-                    FIX  Force_2  65<br />
-                    FIX  L_2    1.25<br />
+                    FIX  <b>Force_1</b>  15<br />
+                    FIX  <b>L_1</b>       2<br />
+                    FIX  <b>Force_2</b>  65<br />
+                    FIX  <b>L_2</b>    1.25<br />
                     </p>
 
                     <p>

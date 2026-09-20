@@ -93,14 +93,14 @@ export const execute = {
                     The demo has now entered what is known about the problem.
                     In summary, the changes were:<br />
                     </p>
-                    FIX  OD_Free  1.00<br />
-                    FIX  L_Free   3.25<br />
-                    FIX  l_2      1.75<br />
-                    FIX  Force_1  0.0<br />
-                    FIX  Force_2  60.0<br />
-                    CHANGE  L_Solid   MAX  1.625<br />
-                    CHANGE  End_Type Closed & Ground<br />
-                    CHANGE  Material_Type OIL_TEMPERED_MB<br />
+                    FIX  <b>OD_Free</b>  1.00<br />
+                    FIX  <b>L_Free</b>   3.25<br />
+                    FIX  <b>l_2</b>      1.75<br />
+                    FIX  <b>Force_1</b>  0.0<br />
+                    FIX  <b>Force_2</b>  60.0<br />
+                    CHANGE  <b>L_Solid</b>   MAX  1.625<br />
+                    CHANGE  <b>End_Type</b> Closed & Ground<br />
+                    CHANGE  <b>Material_Type</b> OIL_TEMPERED_MB<br />
                     <br />
                     <p>
                     The remaining Independent Variable values remain as established by the initialState.
@@ -177,11 +177,11 @@ export const execute = {
                     and chose the nearest standard wire diameter.
                     In summary:
                     <br /><br />
-                    SELECT  Wire_Dia 0.120<br />
+                    SELECT  <b>Wire_Dia</b> 0.120<br />
                     <br />
                     In any case, to guarantee the expected outcome, the demo session will
-                    to use a FIX to impose the expected value of Wire_Dia.
-                    Look for the new value of Wire_Dia on the next page.
+                    to use a FIX to impose the expected value of <b>Wire_Dia</b>.
+                    Look for the new value of <b>Wire_Dia</b> on the next page.
                     </p>
                 </>
             )
@@ -247,8 +247,8 @@ export const execute = {
                     <p>
                     The demo session has now imposed the values:<br />
                     <br />
-                    CHANGE  Wire_Dia  .1205<br />
-                    CHANGE  Coils_T  13
+                    CHANGE  <b>Wire_Dia</b>  .1205<br />
+                    CHANGE  <b>Coils_T</b>  13
                     </p>
                     <br />
                 </>

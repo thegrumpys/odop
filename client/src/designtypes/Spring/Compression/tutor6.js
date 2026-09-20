@@ -85,14 +85,14 @@ export const execute = {
                     Okay, first we enter what we know this spring has to do.
                     As usual, we use FIX and constraints to express our objectives for the design.<br />
                     <br />
-                    CHANGE  Material_Type  HARD_DRAWN_WIRE<br />
-                    CHANGE  OD_Free MAX  .920 &nbsp; &#60;--- (0.005 margin)<br />
-                    CHANGE  L_Solid MAX  1.08<br />
+                    CHANGE  <b>Material_Type</b>  HARD_DRAWN_WIRE<br />
+                    CHANGE  <b>OD_Free</b> MAX  .920 &nbsp; &#60;--- (0.005 margin)<br />
+                    CHANGE  <b>L_Solid</b> MAX  1.08<br />
                     <br />
-                    FIX  L_Free   1.713<br />
-                    FIX  Force_1  0<br />
-                    FIX  Force_2 50<br />
-                    FIX  L_2      1.28
+                    FIX  <b>L_Free</b>   1.713<br />
+                    FIX  <b>Force_1</b>  0<br />
+                    FIX  <b>Force_2</b> 50<br />
+                    FIX  <b>L_2</b>      1.28
                     </p>
 
                     <p>
@@ -102,9 +102,9 @@ export const execute = {
                     <p>
                     The alert panel indicates that there is multiple issues with this design..
                     When free length is reduced to 1.713 and the load increased to 50 pounds,
-                    the current values of Wire_Dia and Coils_T
+                    the current values of <b>Wire_Dia</b> and <b>Coils_T</b>
                     (determined from the initial conditions established at the beginning of this tutorial session)
-                    produced a starting point where L_2, the length at load point 2,
+                    produced a starting point where <b>L_2</b>, the length at load point 2,
                     is less than zero.
                     This is an impossible condition and provides a difficult start point for the search.
                     We might get better (and more reliable) search performance if we remedy the situation manually.
@@ -142,17 +142,17 @@ export const execute = {
 
                     <p>
                     Use the <b>Action : Select Size</b> menu item to find the nearest standard wire diameter.
-                    It will return with Wire_Dia in FIXed status.
+                    It will return with <b>Wire_Dia</b> in FIXed status.
                     </p>
 
                     <p>
-                    In the process of moving to the next page, the tutorial will confirm that Wire_Dia is
+                    In the process of moving to the next page, the tutorial will confirm that <b>Wire_Dia</b> is
                     fixed at 0.120 inch and then run another search.
                     But first, we'll make a small change that will allow ODOP:Spring to
                     consider designs with a slightly larger factor of safety than the default established by
                     this tutorial session's initial conditions: <br />
                     <br />
-                    CHANGE  FS_2  MAX  1.8
+                    CHANGE  <b>FS_2</b>  MAX  1.8
                     </p>
                     <br />
                 </>

@@ -113,12 +113,12 @@ export const execute = {
                     </p>
 
                     In summary, the changes were:<br />
-                    FIX OD_Free 0.925<br />
-                    FIX L_Free 1.713<br />
-                    FIX Force_2 50.0<br />
-                    FIX L_2 1.278<br />
-                    CHANGE L_Solid MAX 1.060<br />
-                    CHANGE Material_Type OIL_TEMPERED_MB<br />
+                    FIX <b>OD_Free</b> 0.925<br />
+                    FIX <b>L_Free</b> 1.713<br />
+                    FIX <b>Force_2</b> 50.0<br />
+                    FIX <b>L_2</b> 1.278<br />
+                    CHANGE <b>L_Solid</b> MAX 1.060<br />
+                    CHANGE <b>Material_Type</b> OIL_TEMPERED_MB<br />
                     <br />
                     <p>
                     Again, you can scroll the page down to view the complete set of values.
@@ -148,7 +148,7 @@ export const execute = {
                     But first, we have made a small change that will allow ODOP:Spring to
                     consider designs with a larger than normal factor of safety.
                     Specifically, <br />
-                    CHANGE  FS_2  MAX  2.0
+                    CHANGE  <b>FS_2</b>  MAX  2.0
                     </p>
                     <p>
                     Again, this is a good time to take a good look at the existing values.
@@ -199,11 +199,11 @@ export const execute = {
 
                     <p>
                     In Demo / Tutorial Speak:<br />
-                    SELECT  Wire_Dia  0.125
+                    SELECT  <b>Wire_Dia</b>  0.125
                     </p>
 
                     <p>
-                    Please confirm that Wire_Dia is FIXed at 0.125 inch.
+                    Please confirm that <b>Wire_Dia</b> is FIXed at 0.125 inch.
                     We will need to Search one more time to bring all the numbers into alignment.
                     That Search will happen when you click the Next button.
                     </p>
@@ -265,13 +265,13 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    We can quickly confirm this notion by setting FORCE_2 to the handbook's value.
+                    We can quickly confirm this notion by setting <b>FORCE_2</b> to the handbook's value.
                     Basically,
                     <br /><br />
-                    CHANGE  Force_2  75.1
+                    CHANGE  <b>Force_2</b>  75.1
                     <br /><br />
-                    So, now that the new value for Force_2 is in place,
-                    the value of STRESS_2 is a reasonable match for the corresponding
+                    So, now that the new value for <b>Force_2</b> is in place,
+                    the value of <b>STRESS_2</b> is a reasonable match for the corresponding
                     stress value in the handbook example.
                     </p>
 

@@ -82,13 +82,13 @@ export const execute = {
                     The demo has now entered what is known about the problem.
                     In summary, the changes were:<br />
                     </p>
-                    CHANGE  Material_Type OIL_TEMPERED_MB<br />
-                    CHANGE  End_Type Closed & Ground<br />
-                    CHANGE  od_free max  1.56  &nbsp;(allow margin for dia. tolerance)<br />
-                    FIX  Force_1   61.8<br />
-                    FIX  L_1        2.362<br />
-                    FIX  Force_2  112.0<br />
-                    FIX  L_2        1.969<br />
+                    CHANGE  <b>Material_Type</b> OIL_TEMPERED_MB<br />
+                    CHANGE  <b>End_Type</b> Closed & Ground<br />
+                    CHANGE  <b>od_free</b> max  1.56  &nbsp;(allow margin for dia. tolerance)<br />
+                    FIX  <b>Force_1</b>   61.8<br />
+                    FIX  <b>L_1</b>        2.362<br />
+                    FIX  <b>Force_2</b>  112.0<br />
+                    FIX  <b>L_2</b>        1.969<br />
                     <br />
                     <p>
                     The remaining Independent Variable values remain as established by the initialState.
@@ -115,9 +115,9 @@ export const execute = {
                 Use the View menu to select that Report.
                 <br /><br />
                 Note the warning message.  It says that when applying a 112
-                pound force, the current values of WIRE_DIA, COILS_T and L_FREE
+                pound force, the current values of <b>WIRE_DIA</b>, <b>COILS_T</b> and <b>L_FREE</b>
                 (remaining as established by the initialState) create a starting
-                point where L_2, the length at point 2, is less than the solid length
+                point where <b>L_2</b>, the length at point 2, is less than the solid length
                 (less than zero, actually).
                 This is an impossible condition and provides a difficult start point for the search.
                 However in this case, we'll ignore the message and proceed with the search.
@@ -190,10 +190,10 @@ export const execute = {
                     </p>
 
                     <p>
-                    CHANGE  Wire_Dia  0.189<br />
-                    CHANGE  OD_Free   1.5<br />
-                    CHANGE  L_Free    2.843<br />
-                    CHANGE  Coils_T   8.4<br />
+                    CHANGE  <b>Wire_Dia</b>  0.189<br />
+                    CHANGE  <b>OD_Free</b>   1.5<br />
+                    CHANGE  <b>L_Free</b>    2.843<br />
+                    CHANGE  <b>Coils_T</b>   8.4<br />
                     </p>
 
                     <p>
@@ -241,11 +241,11 @@ export const execute = {
 
                     <p>
                     As you can see by the violation of the upper constraint on the
-                    factor of safety at Point 2 (FS_2),
+                    factor of safety at Point 2 (<b>FS_2</b>),
                     ODOP:Spring is not entirely happy with the handbook design because it is
                     very conservative (low stress).
                     The ODOP compression spring initialState contains an upper
-                    constraint on factor of safety at point 2 (FS_2 MAX = 1.5) that causes
+                    constraint on factor of safety at point 2 (<b>FS_2</b> MAX = 1.5) that causes
                     the program to seek designs that are not excessively conservative.
                     Remember that this constraint is easily adjusted simply by changing the
                     value in that constraint field.
