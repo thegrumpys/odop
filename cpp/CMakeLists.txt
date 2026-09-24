@@ -6,7 +6,10 @@ option(ODOP_BUILD_NATIVE_TESTS "Build native computational-engine smoke tests" O
 option(ODOP_BUILD_WASM "Build the Emscripten smoke module" OFF)
 
 add_library(odop-core STATIC
+  core/src/design_session.cpp
   core/src/piston_cylinder.cpp
+  core/src/compression_spring_state.cpp
+  models/compression_spring/src/compression_spring_model.cpp
 )
 add_library(odop::core ALIAS odop-core)
 
@@ -14,6 +17,7 @@ target_compile_features(odop-core PUBLIC cxx_std_20)
 target_include_directories(odop-core
   PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/core/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/models/compression_spring/include>
 )
 
 if(ODOP_BUILD_NATIVE_TESTS AND NOT ODOP_BUILD_WASM)
@@ -24,6 +28,12 @@ if(ODOP_BUILD_NATIVE_TESTS AND NOT ODOP_BUILD_WASM)
   )
   target_link_libraries(odop-core-smoke-test PRIVATE odop::core)
   add_test(NAME odop-core-smoke-test COMMAND odop-core-smoke-test)
+
+  add_executable(odop-compression-spring-state-test
+    tests/compression_spring_state_test.cpp
+  )
+  target_link_libraries(odop-compression-spring-state-test PRIVATE odop::core)
+  add_test(NAME odop-compression-spring-state-test COMMAND odop-compression-spring-state-test)
 endif()
 
 if(ODOP_BUILD_WASM)

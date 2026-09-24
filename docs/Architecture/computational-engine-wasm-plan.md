@@ -61,7 +61,8 @@ Persisted combined symbol table
                |      storage reference P[n] or X[n]
                |
                +--> C++ computational state
-                      extended P and X slots, resources, compiled objective
+                      session-owned system controls, active model, extended
+                      P and X slots, resources, compiled objective
 ```
 
 The combined symbol table is the portable persistence contract.  At runtime, extended `P` and `X` state is authoritative for calculation and optimization.  React can keep a renderable mirror/snapshot, but it is not an independent calculation source of truth.
@@ -83,11 +84,13 @@ current violations and optional diagnostics
 
 `P` slots are numerical independent variables.  `X` supports numerical and text/configuration slots.  In the initial implementation, the existing `P`/`X` ordering is retained.  `EQNSET` accesses values by named C++ offsets and does not know about symbol names, Redux, or React.
 
+A per-design `DesignSession` owns the active model and `SystemControls`; neither is process-global. System controls are application preferences in UI and persistence terms, but numerical controls such as `smallnum`, objective weights, step/tolerance values, and maximum iterations are explicit C++ inputs. A session exposes control query and atomic replacement/update operations. Presentation controls are preserved and echoed even when they do not affect calculation.
+
 ## C++ component design
 
 ```text
 odop-core                 portable C++20 library
-  state/                  extended P/X state and slot types
+  state/                  DesignSession, system controls, extended P/X slots
   model/                  abstract model contract and model registry
   optimization/           objective, constraints, scales, Hooke-Jeeves
   resources/              immutable material/end-type data interfaces
@@ -105,7 +108,7 @@ client                    existing React application
   Worker client, UI schema/view, Redux result mirror, persistence bridge
 ```
 
-The base model contract should express operations, not UI details:
+The base model contract should express operations, not UI details. `DesignSession` owns one selected model; Stage 2 proves this only with Compression Spring rather than generalizing additional models:
 
 ```text
 initialize(state, resources) -> status
@@ -175,8 +178,10 @@ Use a revision number for every user-visible state change.  Worker responses inc
 The Worker protocol should use typed commands such as:
 
 ```text
-hydrateDesign(flatSymbolTable, schemaVersion)
+hydrateDesign(persistedDesignEnvelope, schemaVersion)
 applyChanges(changes, revision)
+setSystemControls(changes, revision)
+getSystemControls(revision)
 recalculate(revision)
 autosearch(searchControls, revision)
 cancel(jobId)
@@ -211,16 +216,17 @@ Coalesce slider movements and debounce valid text-entry commits.  Do not send in
 
 ## Persistence, loading, and migration
 
-The flat combined table should include a `designType` and `schemaVersion`, plus each symbol's stable ID/name and persisted computational attributes.  Retain unknown fields during migrations where possible so older application extensions do not lose information.
+The persisted design is an envelope containing JSON type, design type, legacy version, units, a combined symbol table, labels, system controls, and result metadata. The normalized computational payload includes a `designType` and `schemaVersion`, plus each symbol's stable ID/name and persisted computational attributes. Retain unknown fields during migrations where possible so older application extensions do not lose information.
 
 Loading sequence:
 
-1. Read the persisted flat symbol table.
-2. Migrate it to the current Compression Spring persistence schema.
-3. Resolve symbols by stable identifier into UI schema entries and `P`/`X` slots.
-4. Load immutable resources required by `INIT`.
-5. Run `INIT`, `EQNSET`, scale construction, objective evaluation, and checks.
-6. Return a reconciled snapshot and diagnostics to the UI.
+1. Read and validate the persisted design envelope.
+2. Migrate its legacy form to the current Compression Spring persistence schema.
+3. Select the US or Metric UI schema and resolve symbols by stable identifier into UI entries and `P`/`X` slots.
+4. Create a `DesignSession` with the selected model and the persisted system controls.
+5. Load immutable resources required by `INIT`.
+6. Run `INIT`, `EQNSET`, scale construction, objective evaluation, and checks.
+7. Return a reconciled snapshot and diagnostics to the UI.
 
 Persisted calculated values may be retained for compatibility, but the result after this reconciliation is authoritative.  Invalid or unavailable resource selections must produce structured diagnostics rather than a browser exception.
 
@@ -336,17 +342,20 @@ The first compatibility milestone is not merely “same final answer.”  It is 
 ### Stage 2 — Define Compression Spring state and persistence hydration
 
 1. Implement the Compression Spring schema mapping from stable flat-symbol identifiers to current `P`/`X` offsets.
-2. Define extended numeric and text `P`/`X` slots.
-3. Implement a hydration compiler that converts a flat combined symbol table into runtime UI view data and C++ computational state.
-4. Implement serialization/snapshot output and schema-version validation.
-5. Write mapping tests that prove representative names map to expected slots, including `Wire_Dia -> P[1]`, `Rate -> X[2]`, and configuration/string values.
+2. Define extended numeric and text `P`/`X` slots, including persisted scale denominators and current violations.
+3. Define the persisted Compression Spring design envelope: JSON type, model type, legacy version, units, symbol table, labels, system controls, and result metadata.
+4. Add a JavaScript migration/normalization adapter from the legacy saved-design envelope to the versioned C++ hydration payload, preserving UI-only envelope data.
+5. Add a portable `DesignSession` that owns one selected model and shared `SystemControls`; it provides control query and atomic update operations. Prove it only with Compression Spring in this stage.
+6. Implement client-owned, versioned US and Metric UI schemas, then hydrate a renderable UI view by combining the selected schema with persisted mutable state.
+7. Implement model-state serialization/snapshot output and schema-version validation.
+8. Write mapping and compatibility tests using representative US and Metric saved designs. Prove `Wire_Dia -> P[1]`, `Rate -> X[2]`, numeric table-index configuration values, system-control preservation, and unit-specific UI-schema selection.
 
-**Exit criterion:** a persisted Compression Spring design can round-trip without changing the intended named values, flags, or constraints.
+**Exit criterion:** a persisted US or Metric Compression Spring design can migrate into a `DesignSession` and round-trip its intended named values, flags, constraints, scale/violation state, and system controls; the client can reconstruct the current unit-appropriate UI view without using C++ for presentation metadata.
 
 ### Stage 3 — Port Compression Spring EQNSET
 
 1. Port `offsets.js` to named C++ offsets with the exact initial layout.
-2. Port the JavaScript compression `eqnset.js` line for line where practical; avoid cleanup changes that obscure numerical comparison.
+2. Port the JavaScript compression `eqnset.js` line for line where practical; evaluate the active Compression Spring model through its `DesignSession`, sourcing numerical tolerances from session controls where the legacy behavior uses them. Avoid cleanup changes that obscure numerical comparison.
 3. Add direct C++ golden tests using current `eqnset.test.js` cases.
 4. Add JavaScript-to-C++ differential tests.
 5. Bind only a narrow `evaluate` smoke API to Wasm and verify the same fixtures through generated Wasm.
@@ -356,7 +365,7 @@ The first compatibility milestone is not merely “same final answer.”  It is 
 ### Stage 4 — Port INIT and model resources
 
 1. Convert material and end-type tables into immutable resources available to C++.
-2. Remove Redux/store interaction from the computational initialization path; return state changes and diagnostics instead.
+2. Remove Redux/store interaction from the computational initialization path; initialize the active model in its `DesignSession` and return state changes and diagnostics instead.
 3. Port Compression Spring `init.js`, preserving current property-method and end-type behavior.
 4. Test initialization independently and then test `INIT -> EQNSET` fixtures.
 5. Define and test the change-impact metadata that decides when `INIT` is needed.
@@ -366,27 +375,29 @@ The first compatibility milestone is not merely “same final answer.”  It is 
 ### Stage 5 — Port objective, constraints, scales, and checks
 
 1. Turn symbol-table constraint data into compiled `OptimizationProblem` descriptors.
-2. Port the current violation and penalty rules from `pxUpdateObjectiveValue.js` before attempting simplification.
-3. Preserve current `smin`/`smax`, weights, validity rules, fixed dependent targets, and check behavior.
-4. Return structured diagnostics rather than dispatching UI actions within calculations.
-5. Compare complete objective results against current JavaScript for valid, infeasible, and invalid fixtures.
+2. Read weights and numerical controls from session-owned `SystemControls`, not from Redux or model-global state.
+3. Port the current violation and penalty rules from `pxUpdateObjectiveValue.js` before attempting simplification.
+4. Preserve current `smin`/`smax`, weights, validity rules, fixed dependent targets, and check behavior.
+5. Return structured diagnostics rather than dispatching UI actions within calculations.
+6. Compare complete objective results against current JavaScript for valid, infeasible, and invalid fixtures.
 
 **Exit criterion:** C++ reproduces objective/violation results without a Redux store or symbol-table traversal in the evaluation loop.
 
 ### Stage 6 — Port Hooke-Jeeves search
 
 1. Port `patsh` and the candidate evaluation path into C++.
-2. Make free/fixed `P` selection part of the compiled optimization problem.
-3. Use initialized `X` as the immutable baseline and a candidate working state per evaluation.
-4. Implement cooperative cancellation checks and evaluation-count limits.
-5. Reproduce current termination conditions and create search regression fixtures.
+2. Read search parameters and evaluation limits from the `DesignSession` `SystemControls`.
+3. Make free/fixed `P` selection part of the compiled optimization problem.
+4. Use initialized `X` as the immutable baseline and a candidate working state per evaluation.
+5. Implement cooperative cancellation checks and evaluation-count limits.
+6. Reproduce current termination conditions and create search regression fixtures.
 
 **Exit criterion:** native C++ search reaches compatible final states/objectives/termination reasons for selected Compression Spring searches.
 
 ### Stage 7 — Add the Wasm Worker and React bridge
 
 1. Build the Wasm artifact in the client build pipeline.
-2. Implement Worker protocol, module initialization, revision IDs, cancellation, and state snapshots.
+2. Implement Worker protocol, module initialization, revision IDs, cancellation, system-control query/update commands, and state snapshots.
 3. Add a Worker-backed calculation client alongside the existing dispatcher path behind a feature flag.
 4. On feature-enabled designs, mirror current React actions into Worker transactions and apply returned patches to Redux.
 5. Test stale results, cancellation, hydration, normal recalculation, and error reporting.
@@ -395,7 +406,7 @@ The first compatibility milestone is not merely “same final answer.”  It is 
 
 ### Stage 8 — Enable autosearch
 
-1. Add user-facing autosearch setting and pending/running/cancelled states.
+1. Expose the session `enable_auto_search` control through the user-facing autosearch setting, plus pending/running/cancelled states.
 2. Define debounce/coalescing behavior for text entry and sliders.
 3. Invoke C++ optimization as a single Worker job after the normal recalculation state is coherent.
 4. Apply an optimizer result only for the current revision.
