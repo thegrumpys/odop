@@ -1,0 +1,33 @@
+{
+  "schema": "compression-spring-stage0/v1",
+  "model": "Spring/Compression",
+  "source": "client/src/__test__/Spring/Compression/eqnset.test.js",
+  "numericTolerance": { "absolute": 1e-10, "relative": 1e-12 },
+  "cases": [
+    {
+      "id": "us-material-table-normal",
+      "description": "Direct EQNSET reference vector using the US music-wire material-table state.",
+      "p": [1.1, 0.1055, 3.25, 10, 10, 39],
+      "xBefore": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Compression", 1, 2, "A228/QQW-470", "Cold_Coiled", "mat_us.json", 1, 0.284, 11500000, 1, 261419.22328169446, 50, 50, 130709.61164084723, 130709.61164084723, 4, 2, 0, "", "", 0.01, 0.4, -2, -106113.37959890341, 370000],
+      "xAfter": [0.9945, 8, 22.631500150071364, 0.4418620035653477, 1.723261813904856, 2.8081379964346525, 1.526738186095144, 1.2813998103395086, 1.055, 3.2679738562091503, 0.889, 0.07798388647498593, 9.42654028436019, 49.67614282940665, 24893.49275531675, 97084.62174573533, 123661.27016359147, 1.3463472310271418, 1.0569971624080239, 1.3032217764849205, 1861893.4985282072, 78.50851088404809, 31.394295353317954, "Compression", 1, 2, "A228/QQW-470", "Cold_Coiled", "mat_us.json", 1, 0.284, 11500000, 1, 261419.2233253764, 50, 50, 130709.6116626882, 130709.6116626882, 4, 2, 0, "", "", 0.01, 0.4, -2, -106113.37959890341, 370000]
+    },
+    {
+      "id": "spring-index-one",
+      "description": "OD_Free = 2 * Wire_Dia; the legacy model intentionally produces infinite stress and NaN life values.",
+      "p": [0.4, 0.2, 3.25, 10, 10, 39],
+      "expectAtOffsets": { "12": 1, "14": "Infinity", "15": "Infinity", "16": "Infinity", "19": "NaN", "20": "NaN" }
+    },
+    {
+      "id": "zero-active-coils",
+      "description": "Coils_T = Inactive_Coils; the legacy model intentionally produces infinite rate and solid force and NaN energy.",
+      "p": [1.1, 0.1055, 3.25, 2, 10, 39],
+      "expectAtOffsets": { "1": 0, "2": "Infinity", "13": "Infinity", "16": "Infinity", "22": "NaN" }
+    },
+    {
+      "id": "zero-mean-diameter",
+      "description": "OD_Free = Wire_Dia; the legacy model intentionally produces NaN rate/deflection and infinite slenderness.",
+      "p": [0.4, 0.4, 3.25, 10, 10, 39],
+      "expectAtOffsets": { "0": 0, "2": "NaN", "3": "NaN", "9": "Infinity", "22": "NaN" }
+    }
+  ]
+}

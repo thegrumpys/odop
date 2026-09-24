@@ -1,0 +1,21 @@
+{
+  "schema": "compression-spring-stage0/v1",
+  "model": "Spring/Compression",
+  "capturedFromCommit": "d1cfc85120db84e981f4c46d2b007f28c3324472",
+  "directEquationFixture": "eqnset.json",
+  "legacyTestFixtures": [
+    { "id": "initial-and-singular-eqnset", "source": "client/src/__test__/Spring/Compression/eqnset.test.js", "covers": ["normal", "spring-index-one", "zero-active-coils", "zero-mean-diameter"] },
+    { "id": "demo1-search", "source": "client/src/__test__/Spring/Compression/demo1.test.js", "objectives": [0, 2.8141308, 0.00000224, 0.000965601, 1.3503636e-7, 0.06614827] },
+    { "id": "demo2-search", "source": "client/src/__test__/Spring/Compression/demo2.test.js", "objectives": [0, 0.1569232, 0.0000062] },
+    { "id": "demo3-search", "source": "client/src/__test__/Spring/Compression/demo3.test.js", "objectives": [0, 9.691965889, 0.00000864, 0.0027744] },
+    { "id": "demo10-property-method-search", "source": "client/src/__test__/Spring/Compression/demo10.test.js", "objectives": [0, 0.2039332, 0.0102917, 9.8438559, 7.4588629, 0.0000007, 0.0000545, 0.0000010] },
+    { "id": "remaining-workflows", "sourceGlob": "client/src/__test__/Spring/Compression/{demo5,demoDesignValidation,demoNewDesign,tutor3,tutor6,tutor7,tutor8}.test.js", "covers": ["catalog", "validation", "new-design", "tutorial-workflows"] }
+  ],
+  "searchTerminationMessages": [
+    "Search terminated when design reached feasibility (Objective value is less than OBJMIN)",
+    "Search terminated when iteration count exceeded the maximum limit (MAXIT)",
+    "Search terminated when step size reached the minimum limit (DELMIN)",
+    "Cannot Search because there are no free independent variables. See \"No free independent variables\" Help button in Alerts for more information.",
+    "This design has numeric issues. Some design variable values are causing the Objective Value to be infinite. See Help \"Objective Value is Infinity\" button in Alerts for more information."
+  ]
+}
