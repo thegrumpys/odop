@@ -33,6 +33,9 @@ bower_components
 build
 build/Release
 
+# CMake build directories for the portable computational engine
+cpp/build/
+
 # Dependency directories
 node_modules/
 jspm_packages/
