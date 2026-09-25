@@ -102,8 +102,8 @@ export const execute = {
                     <p>
                     The alert panel indicates that there is multiple issues with this design..
                     When free length is reduced to 1.713 and the load increased to 50 pounds,
-                    the current values of <b>Wire_Dia</b> and <b>Coils_T</b>
-                    (determined from the initial conditions established at the beginning of this tutorial session)
+                    the current values of <b>Wire_Dia</b> and <b>Coils_T</b> (determined from the initial conditions 
+                    established at the beginning of this tutorial session)
                     produced a starting point where <b>L_2</b>, the length at load point 2,
                     is less than zero.
                     This is an impossible condition and provides a difficult start point for the search.

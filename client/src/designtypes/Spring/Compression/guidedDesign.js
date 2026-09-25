@@ -174,8 +174,8 @@ export const execute = {
                     <p>
                     This is the time to express your objectives (goals, requirements) for the design at hand
                     in terms of minimum and maximum constraints and Fixes.
-                    More information about constraints and Fix is available in the
-                    <a href="/docs/Help/terminology.html" target="_blank" rel="noopener noreferrer"> Terminology </a>
+                    More information about constraints and Fix is available in the&nbsp;
+                    <a href="/docs/Help/terminology.html" target="_blank" rel="noopener noreferrer">Terminology</a>&nbsp;
                     section of the on-line Help.
                     </p>
 
@@ -376,8 +376,8 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    The on-line Help entry on
-                    <a href="/docs/Help/SpringDesign/selectSizeCatalog.html" target="_blank" rel="noopener noreferrer"> Select Size and Select Catalog </a>
+                    The on-line Help entry on&nbsp;
+                    <a href="/docs/Help/SpringDesign/selectSizeCatalog.html" target="_blank" rel="noopener noreferrer">Select Size and Select Catalog</a>&nbsp;
                     provides a more detailed introduction to these features.
                     </p>
 
@@ -462,8 +462,8 @@ export const execute = {
                     There is an on-line Help entry that describes how this can be done for Help content.
                     You can follow the same browser window configuration to work with two
                     ODOP design sessions at the same time.
-                    For additional details see:
-                    <a href="/docs/Help/wideScreen.html" target="_blank" rel="noopener noreferrer"> Side-by-side sessions on a wide-screen monitor </a>
+                    For additional details see:&nbsp;
+                    <a href="/docs/Help/wideScreen.html" target="_blank" rel="noopener noreferrer">Side-by-side sessions on a wide-screen monitor</a>&nbsp;
                     </p>
 
                     <p>
@@ -527,8 +527,8 @@ export const execute = {
                     The display of catalog entries is ranked by objective function value
                     (OBJ is a measure of constraint violation).
                     Selecting a design from the catalog replaces the current design so that you can evaluate it.
-                    As mentioned previously, more detail about standard design catalogs is available in the
-                    <a href="/docs/Help/SpringDesign/selectSizeCatalog.html" target="_blank" rel="noopener noreferrer"> Select Size and Select Catalog </a>
+                    As mentioned previously, more detail about standard design catalogs is available in the&nbsp;
+                    <a href="/docs/Help/SpringDesign/selectSizeCatalog.html" target="_blank" rel="noopener noreferrer">Select Size and Select Catalog</a>&nbsp;
                      entry of on-line Help.
                     </p>
 
@@ -567,8 +567,8 @@ export const execute = {
 
                     <p>
                     Your feedback is welcome.
-                    Use the
-                    <a href="/docs/About/ContactUs.html" target="_blank" rel="noopener noreferrer"> Contact Us </a>
+                    Use the&nbsp;
+                    <a href="/docs/About/ContactUs.html" target="_blank" rel="noopener noreferrer">Contact Us</a>&nbsp;
                     page of the on-line Help to find the appropriate contact information.
                     </p>
                     <br />

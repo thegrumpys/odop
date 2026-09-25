@@ -217,7 +217,7 @@ export const execute = {
                     <p>
                     Also notice that this change to <b>L_Free</b> by this tutorial session did not leave it in Fixed status.
                     By default, the ODOP AutoFix feature is enabled.
-                    Thus, a user making a change to the value of an independent variable like <b>OD_Free</b>
+                    Thus, a user making a change to the value of an independent variable like <b>OD_Free</b>&nbsp;
                     will leave it in Fixed status.
                     </p>
                 </>
@@ -235,10 +235,10 @@ export const execute = {
                     The objective here is to illustrate how ODOP can do simple analysis.
                     Given the physical description of the object under consideration,
                     ODOP can use the mathematical model to predict aspects of its performance.
-                    For a spring, that is things like spring <b>Rate</b>, stresses,
+                    For a spring, that is things like spring Rate, stresses,
                     factor of safety, cycle life, etc.
                     If working with the Rectangular Solid demonstration case,
-                    we would be speaking in terms of things like Volume, <b>Weight</b>, etc.
+                    we would be speaking in terms of things like Volume, Weight, etc.
                     </p>
 
                     <p>
@@ -263,7 +263,7 @@ export const execute = {
 
                     <p>
                     If you scroll down, you can see that the
-                    design now exceeds the MAX constraint on <b>%_Avail_Deflect</b>
+                    design now exceeds the MAX constraint on <b>%_Avail_Deflect</b>&nbsp;
                     (percentage of available deflection at load point 2).
                     Since a constraint is violated, this design is considered to be
                     "Not Feasible".
@@ -376,8 +376,8 @@ export const execute = {
 
                     <p>
                     Again, a Search will be required to establish values for the free Independent Variables
-                    such that the Fixed value of <b>L_Stroke</b> is established while simultaneously keeping <b>%_Avail_Deflect</b>
-                    below the maximum.
+                    such that the Fixed value of <b>L_Stroke</b> is established while simultaneously
+                    keeping <b>%_Avail_Deflect</b> below the maximum.
                     </p>
 
                     <p>
