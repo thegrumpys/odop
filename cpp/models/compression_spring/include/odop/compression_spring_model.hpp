@@ -23,6 +23,15 @@ class Model final : public DesignModel {
   RuntimeState state_;
 };
 
+// Runs the legacy Compression Spring EQNSET against session-owned state.
+// INIT remains intentionally out of scope until Stage 4.
+void evaluate(DesignSession& session);
+
+// Array form for narrow hosts such as the Stage 3 Wasm smoke binding. X uses
+// its established 48-number layout; text configuration is supplied separately.
+void evaluate(std::vector<double>& p, std::vector<double>& x, std::string_view material_file,
+    const SystemControls& controls);
+
 struct SessionHydrationResult {
   std::unique_ptr<DesignSession> session;
   std::vector<std::string> diagnostics;

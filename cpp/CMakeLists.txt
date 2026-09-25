@@ -10,6 +10,7 @@ add_library(odop-core STATIC
   core/src/piston_cylinder.cpp
   core/src/compression_spring_state.cpp
   models/compression_spring/src/compression_spring_model.cpp
+  models/compression_spring/src/compression_spring_eqnset.cpp
 )
 add_library(odop::core ALIAS odop-core)
 
@@ -34,6 +35,12 @@ if(ODOP_BUILD_NATIVE_TESTS AND NOT ODOP_BUILD_WASM)
   )
   target_link_libraries(odop-compression-spring-state-test PRIVATE odop::core)
   add_test(NAME odop-compression-spring-state-test COMMAND odop-compression-spring-state-test)
+
+  add_executable(odop-compression-spring-eqnset-test
+    tests/compression_spring_eqnset_test.cpp
+  )
+  target_link_libraries(odop-compression-spring-eqnset-test PRIVATE odop::core)
+  add_test(NAME odop-compression-spring-eqnset-test COMMAND odop-compression-spring-eqnset-test)
 endif()
 
 if(ODOP_BUILD_WASM)
@@ -41,14 +48,14 @@ if(ODOP_BUILD_WASM)
     message(FATAL_ERROR "ODOP_BUILD_WASM requires Emscripten; configure with emcmake.")
   endif()
 
-  add_executable(odop_wasm wasm/src/piston_cylinder_bindings.cpp)
+  add_executable(odop_wasm wasm/src/piston_cylinder_bindings.cpp wasm/src/compression_spring_bindings.cpp)
   target_link_libraries(odop_wasm PRIVATE odop::core)
   target_compile_features(odop_wasm PRIVATE cxx_std_20)
   target_link_options(odop_wasm PRIVATE
     "-sMODULARIZE=1"
     "-sEXPORT_ES6=1"
     "-sENVIRONMENT=node"
-    "-sEXPORTED_FUNCTIONS=['_malloc','_free','_odop_piston_cylinder_evaluate']"
+    "-sEXPORTED_FUNCTIONS=['_malloc','_free','_odop_piston_cylinder_evaluate','_odop_compression_spring_evaluate']"
   )
   set_target_properties(odop_wasm PROPERTIES SUFFIX ".mjs")
 endif()
