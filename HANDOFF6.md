@@ -21,11 +21,11 @@
 ## Verification so far
 
 ```sh
-cmake --build /private/tmp/odop-stage5-build
-ctest --test-dir /private/tmp/odop-stage5-build --output-on-failure
+cmake --build /private/tmp/odop-stage6-build
+ctest --test-dir /private/tmp/odop-stage6-build --output-on-failure
 ```
 
-The five native tests pass and `git diff --check` passes. The search regression
+The six native tests pass and `git diff --check` passes. The search regression
 proves that Search moves a free P variable to feasibility, preserves a fixed P
 variable, evaluates from its P/X baseline, and returns the no-free-P message.
 
