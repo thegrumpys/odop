@@ -13,7 +13,8 @@ const uiFieldNames = [
     'tooltip',
     'type',
     'validminchoices',
-    'validminchoice'
+    'validminchoice',
+    'propagate'
 ];
 
 // The legacy dispatcher treats the first 54 entries as the P/X calculation
@@ -168,5 +169,6 @@ export function normalizeCompressionSpringSavedDesign(design) {
         labels: hydratedDesign.labels || [],
         result: hydratedDesign.result || {},
         diagnostics: normalizedDiagnostics
+        , propagations: hydratedDesign.symbol_table.flatMap((symbol) => (symbol.propagate || []).map((rule) => ({ source: symbol.name, target: rule.name, targetKind: rule.minmax })))
     };
 }

@@ -81,12 +81,14 @@ void evaluate(std::vector<double>& p, std::vector<double>& x, std::string_view m
 void evaluate(DesignSession& session) {
   auto* model = dynamic_cast<Model*>(&session.model());
   if (!model) throw std::invalid_argument("Compression Spring EQNSET requires a Compression Spring session");
+  const auto before = model->state();
   std::vector<double> p(kPSize), x(kXSize);
   for (std::size_t i = 0; i < kPSize; ++i) p[i] = model->state().p[i].value;
   for (std::size_t i = 0; i < kXSize; ++i) x[i] = model->state().x_numbers[i].value;
   evaluate(p, x, model->state().x_text[28].value, session.controls());
   for (std::size_t i = 0; i < kPSize; ++i) model->state().p[i].value = p[i];
   for (std::size_t i = 0; i < kXSize; ++i) model->state().x_numbers[i].value = x[i];
+  apply_propagations(model->state(), before);
 }
 
 }  // namespace odop::compression_spring

@@ -12,6 +12,7 @@ export function createWasmCompressionSpringAdapter(Module) {
     const clear = call('odop_compression_spring_session_clear', null, ['number']);
     const setNumeric = call('odop_compression_spring_session_set_numeric', 'number', ['number', 'string', ...Array(10).fill('number'), 'number', 'number']);
     const setText = call('odop_compression_spring_session_set_text', 'number', ['number', 'string', 'string']);
+    const setPropagation = call('odop_compression_spring_session_set_propagation', 'number', ['number', 'string', 'string', 'number']);
     const setControl = call('odop_compression_spring_session_set_control', null, ['number', 'number', 'number']);
     const recalculate = call('odop_compression_spring_session_recalculate', 'number', ['number', 'number']);
     const search = call('odop_compression_spring_session_search', 'number', ['number']);
@@ -23,6 +24,8 @@ export function createWasmCompressionSpringAdapter(Module) {
 
     function writeDesign(design) {
         clear(handle);
+        const propagationKinds = { VALID_MIN: 0, VALID_MAX: 1, MIN: 2, MAX: 3 };
+        for (const rule of design.propagations || []) if (!setPropagation(handle, rule.source, rule.target, propagationKinds[rule.targetKind])) return `invalid propagation: ${rule.source}`;
         for (const symbol of design.symbols) {
             if (typeof symbol.numericValue === 'number') {
                 const values = [symbol.numericValue, ...numericFields.slice(1).map((field) => optionalNumber(symbol[field]))];
@@ -37,7 +40,14 @@ export function createWasmCompressionSpringAdapter(Module) {
             ...design,
             symbols: design.symbols.map((symbol) => typeof symbol.numericValue !== 'number'
                 ? { ...symbol, textValue: getText(handle, symbol.id) }
-                : { ...symbol, numericValue: getNumeric(handle, symbol.id, 0), minimumViolation: getNumeric(handle, symbol.id, 1), maximumViolation: getNumeric(handle, symbol.id, 2), minimumScaleDenominator: getNumeric(handle, symbol.id, 3), maximumScaleDenominator: getNumeric(handle, symbol.id, 4) })
+                : { ...symbol,
+                    numericValue: getNumeric(handle, symbol.id, 0),
+                    minimumViolation: getNumeric(handle, symbol.id, 1), maximumViolation: getNumeric(handle, symbol.id, 2),
+                    minimumScaleDenominator: getNumeric(handle, symbol.id, 3), maximumScaleDenominator: getNumeric(handle, symbol.id, 4),
+                    validMinimum: getNumeric(handle, symbol.id, 5), validMaximum: getNumeric(handle, symbol.id, 6),
+                    constraintMinimum: getNumeric(handle, symbol.id, 7), constraintMaximum: getNumeric(handle, symbol.id, 8),
+                    scaleDenominatorLimit: getNumeric(handle, symbol.id, 9),
+                    minimumFlags: getNumeric(handle, symbol.id, 10), maximumFlags: getNumeric(handle, symbol.id, 11) })
         };
     }
     function run(design, operation) {

@@ -1134,10 +1134,17 @@ export default function reducers(state = {}, action) {
             return {
               ...element,
               value: source.numericValue === undefined ? source.textValue : source.numericValue,
+              validmin: source.validMinimum,
+              validmax: source.validMaximum,
+              cmin: source.constraintMinimum,
+              cmax: source.constraintMaximum,
+              sdlim: source.scaleDenominatorLimit,
               vmin: source.minimumViolation,
               vmax: source.maximumViolation,
               smin: source.minimumScaleDenominator,
-              smax: source.maximumScaleDenominator
+              smax: source.maximumScaleDenominator,
+              lmin: source.minimumFlags,
+              lmax: source.maximumFlags
             };
           })
         }
