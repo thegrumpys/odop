@@ -80,12 +80,12 @@ export const execute = {
                     <p>
                     In "Tutorial shorthand", the changes just imposed by the tutorial are:<br />
                     <br />
-                        CHANGE  Cycle_Life MIN  50000<br />
-                        CHANGE  OD_Free MAX  2.0<br />
-                        CHANGE  L_Solid MAX  1.2<br />
-                        CHANGE  L_Stroke MIN 1.0<br />
-                        FIX  Force_1  0<br />
-                        FIX  Force_2  250<br />
+                        CHANGE  <b>Cycle_Life</b> MIN  50000<br />
+                        CHANGE  <b>OD_Free</b> MAX  2.0<br />
+                        CHANGE  <b>L_Solid</b> MAX  1.2<br />
+                        CHANGE  <b>L_Stroke</b> MIN 1.0<br />
+                        FIX  <b>Force_1</b>  0<br />
+                        FIX  <b>Force_2</b>  250<br />
                     </p>
 
                     <p>
@@ -191,7 +191,7 @@ export const execute = {
                     </p>
 
                     <p>
-                    Enter <b>0.0</b> for the weight on each violated constraint except <b>L_Stroke </b>
+                    Enter <b>0.0</b> for the weight on each violated constraint except <b>L_Stroke</b>{' '}
                     which should be set to <b>1.0</b>.
                     Select <b>Continue</b>.
                     </p>
@@ -203,7 +203,7 @@ export const execute = {
                     </p>
 
                     <p>
-                    Observe that Trade predicts a feasible solution if the L_Stroke MIN constraint
+                    Observe that Trade predicts a feasible solution if the <b>L_Stroke</b> MIN constraint
                     is moved from 1.0 inches to something slightly less than 0.8 inches.
                     </p>
 
@@ -224,7 +224,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Ready for another shot at it ?   This time we'll work with OD_FREE MAX.
+                    Ready for another shot at it ?   This time we'll work with <b>OD_FREE</b> MAX.
                     </p>
 
                     <p>
@@ -248,7 +248,7 @@ export const execute = {
                     </p>
 
                     <p>
-                    Enter <b>0.0</b> for the weight on each violated constraint except <b>OD_Free </b>
+                        Enter <b>0.0</b> for the weight on each violated constraint except <b>OD_Free</b>{' '}
                     which should be set to <b>1.0</b>.
                     Select <b>Continue</b>.
                     </p>
@@ -268,7 +268,7 @@ export const execute = {
                     </p>
 
                     <p>
-                    Observe that Trade predicts a feasible solution if the OD_Free MAX constraint
+                    Observe that Trade predicts a feasible solution if the <b>OD_Free</b> MAX constraint
                     is moved from the previous value of 2.0 inches
                     to a new value of approximately 2.6 inches.
                     </p>

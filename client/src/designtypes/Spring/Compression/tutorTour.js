@@ -28,7 +28,7 @@ export const execute = {
                     <p>
                     The remainder of this session will display a sequence of small
                     snippets of the main page and then provide a description of how each
-                    section contributes the the operation of the program.
+                    section contributes to operation of the program.
                     </p>
 
                     <p>
@@ -225,6 +225,9 @@ export const execute = {
                     In order change the value of a Dependent Variable, it is necessary
                     to FIX its value (more about FIX coming soon) and then execute the Search feature
                     (Search button or <b>Action : Search</b> menu).
+                    Auto Search is enabled by default.
+                    With Auto Search enabled, providing a new FIX or new constraint value then
+                    using the Enter key or simply moving the cursor out of the entry field will execute Search. 
                     </p>
 
                     <Image fluid src="/docs/Help/img/DependentSpring.png" alt="Dependent Variable Entry Fields"/>
