@@ -68,4 +68,114 @@ Evaluation evaluate(DesignSession& session, const Problem& problem) {
   result.objective *= session.controls().violation_weight;
   return result;
 }
+
+SearchResult patsh(DesignSession& session, const Problem& problem) {
+  SearchResult result;
+  auto* model = dynamic_cast<compression_spring::Model*>(&session.model());
+  if (!model) {
+    result.termination = "Search requires a Compression Spring session.";
+    result.evaluation.diagnostics.push_back("search requires a Compression Spring session");
+    return result;
+  }
+
+  std::vector<std::size_t> free_offsets;
+  for (const auto& descriptor : problem.descriptors) {
+    if (descriptor.source == Source::p && !(descriptor.min_flags & fixed)) {
+      free_offsets.push_back(descriptor.offset);
+    }
+  }
+  if (free_offsets.empty()) {
+    result.termination = "Cannot Search because there are no free independent variables.";
+    result.evaluation = evaluate(session, problem);
+    return result;
+  }
+
+  const auto baseline = model->state();
+  std::vector<double> psi;
+  psi.reserve(free_offsets.size());
+  for (const auto offset : free_offsets) psi.push_back(baseline.p.at(offset).value);
+
+  const auto candidate = [&](const std::vector<double>& values) {
+    model->state() = baseline;
+    for (std::size_t i = 0; i < free_offsets.size(); ++i) {
+      model->state().p.at(free_offsets[i]).value = values[i];
+    }
+    compression_spring::evaluate(session);
+    ++result.evaluations;
+    return evaluate(session, problem);
+  };
+  const auto feasible_message = [](const unsigned iterations) {
+    std::string message = "Search terminated when design reached feasibility (Objective value is less than OBJMIN)";
+    if (iterations <= 2) return message + ". Low iteration count may produce low precision results.";
+    return message + " after " + std::to_string(iterations) + " iterations.";
+  };
+
+  const auto& controls = session.controls();
+  auto current = candidate(psi);
+  double current_objective = current.objective;
+  double step = controls.initial_step;
+  std::vector<int> signs(psi.size(), 1);
+  constexpr double alpha = 1.05;
+
+  const auto explore = [&](std::vector<double>& phi, double objective) {
+    for (std::size_t k = 0; k < phi.size(); ++k) {
+      double epsilon = .05 * phi[k];
+      if (epsilon == 0.) epsilon = .05;
+      phi[k] += epsilon * step * signs[k];
+      auto attempt = candidate(phi);
+      if (attempt.objective < objective) {
+        objective = attempt.objective;
+        current = std::move(attempt);
+      } else {
+        signs[k] = -signs[k];
+        phi[k] += 2. * epsilon * step * signs[k];
+        attempt = candidate(phi);
+        if (attempt.objective < objective) {
+          objective = attempt.objective;
+          current = std::move(attempt);
+        } else {
+          phi[k] -= epsilon * step * signs[k];
+        }
+      }
+    }
+    return objective;
+  };
+
+  while (current_objective >= controls.objective_minimum) {
+    auto phi = psi;
+    double explored = explore(phi, current_objective);
+    if (explored < current_objective && explored + controls.tolerance * std::abs(current_objective) <= current_objective) {
+      do {
+        ++result.iterations;
+        const auto theta = psi;
+        psi = phi;
+        for (std::size_t i = 0; i < phi.size(); ++i) phi[i] += alpha * (phi[i] - theta[i]);
+        current_objective = explored;
+        if (current_objective < controls.objective_minimum) {
+          result.termination = feasible_message(result.iterations);
+          result.evaluation = candidate(psi);
+          return result;
+        }
+        if (result.iterations > static_cast<unsigned>(controls.max_iterations)) {
+          result.termination = "Search terminated when iteration count exceeded the maximum limit (MAXIT) after " + std::to_string(result.iterations) + " iterations.";
+          result.evaluation = candidate(psi);
+          return result;
+        }
+        current = candidate(phi);
+        explored = explore(phi, current.objective);
+      } while (explored < current_objective && explored + controls.tolerance * std::abs(current_objective) <= current_objective);
+    } else if (step < controls.minimum_step) {
+      result.termination = "Search terminated when step size reached the minimum limit (DELMIN)";
+      if (result.iterations <= 2) result.termination += ". Low iteration count may produce low precision results.";
+      else result.termination += " after " + std::to_string(result.iterations) + " iterations.";
+      result.evaluation = candidate(psi);
+      return result;
+    } else {
+      step /= 1.9;
+    }
+  }
+  result.termination = feasible_message(result.iterations);
+  result.evaluation = candidate(psi);
+  return result;
+}
 }
