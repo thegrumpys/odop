@@ -37,3 +37,22 @@ it('does not let a stale worker response update the caller', async () => {
     await expect(first).resolves.toMatchObject({ stale: true });
     await expect(second).resolves.toMatchObject({ revision: 2 });
 });
+
+it('updates and queries system controls without advancing the visible revision for a read', () => {
+    const replies = [];
+    const runtime = createCompressionSpringWorkerRuntime(fakeAdapter(), (response) => replies.push(response));
+    runtime.handle({ type: compressionSpringCommands.HYDRATE, requestId: 1, baseRevision: 0, revision: 1, design: design() });
+    runtime.handle({ type: compressionSpringCommands.SET_SYSTEM_CONTROLS, requestId: 2, baseRevision: 1, revision: 2, changes: { maxit: 17 } });
+    runtime.handle({ type: compressionSpringCommands.GET_SYSTEM_CONTROLS, requestId: 3, baseRevision: 2, revision: 2 });
+    expect(replies[1].systemControls.maxit).toBe(17);
+    expect(replies[2]).toMatchObject({ revision: 2, systemControls: { maxit: 17 } });
+});
+
+it('exposes system-control queries through the main-thread client', async () => {
+    const worker = { postMessage: jest.fn(), onmessage: null };
+    const client = new CompressionSpringWorkerClient(worker);
+    const result = client.getSystemControls();
+    expect(worker.postMessage).toHaveBeenCalledWith(expect.objectContaining({ type: compressionSpringCommands.GET_SYSTEM_CONTROLS, baseRevision: 0, revision: 0 }));
+    worker.onmessage({ data: { requestId: 1, revision: 0, systemControls: { maxit: 600 } } });
+    await expect(result).resolves.toMatchObject({ systemControls: { maxit: 600 } });
+});

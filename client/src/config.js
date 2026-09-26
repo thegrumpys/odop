@@ -11,6 +11,7 @@ var env_units;
 var env_view;
 var session_refresh;
 var ENABLE_DB;
+var ENABLE_COMPRESSION_SPRING_WASM;
 //console.log('config process.env.NODE_ENV=',process.env.NODE_ENV);
 if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "development" or "test"?
 //  console.log('config process.env.REACT_APP_NODE_ENV=', process.env.REACT_APP_NODE_ENV);
@@ -31,6 +32,7 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "
   env_view = process.env.REACT_APP_DESIGN_VIEW || 'Advanced';
   session_refresh = process.env.REACT_APP_SESSION_REFRESH || 3600;
   ENABLE_DB = process.env.REACT_APP_ENABLE_DB;
+  ENABLE_COMPRESSION_SPRING_WASM = process.env.REACT_APP_ENABLE_COMPRESSION_SPRING_WASM;
 } else { // We are running on Heroku as "production"
   const env = runtimeEnv(); // Load the env object.
 //  console.log('config env.REACT_APP_NODE_ENV=', env.REACT_APP_NODE_ENV);
@@ -51,9 +53,11 @@ if (process.env.NODE_ENV !== "production") { // Are we running on localhost as "
   env_view = env.REACT_APP_DESIGN_VIEW || 'Advanced';
   session_refresh = env.REACT_APP_SESSION_REFRESH || 3600;
   ENABLE_DB = env.REACT_APP_ENABLE_DB;
+  ENABLE_COMPRESSION_SPRING_WASM = env.REACT_APP_ENABLE_COMPRESSION_SPRING_WASM;
 }
 
 const enableDB = (ENABLE_DB || '').toString().toLowerCase() === 'true';
+const enableCompressionSpringWasm = (ENABLE_COMPRESSION_SPRING_WASM || '').toString().toLowerCase() === 'true';
 
 const searchParams = new URLSearchParams(window.location.search);
 var prompt = searchParams.get('prompt');
@@ -109,6 +113,7 @@ export default {
   },
   features: {
       enableDB: enableDB,
+      enableCompressionSpringWasm,
   },
   url: {
       prompt: url_prompt,

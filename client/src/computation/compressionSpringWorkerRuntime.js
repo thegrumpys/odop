@@ -14,6 +14,7 @@ export function createCompressionSpringWorkerRuntime(adapter, postMessage) {
         design = response.design;
         return workerResult(request, {
             snapshot: response.snapshot,
+            objective: response.objective,
             systemControls: design.systemControls,
             diagnostics: response.diagnostics || []
         });
@@ -74,7 +75,7 @@ export function createCompressionSpringWorkerRuntime(adapter, postMessage) {
                     const response = adapter.search(design);
                     if (!response.ok) { postMessage(workerError(request, response.diagnostic || 'Compression Spring search failed.')); return; }
                     design = response.design;
-                    postMessage(workerResult(request, { snapshot: response.snapshot, termination: response.termination, diagnostics: response.diagnostics || [] }));
+                    postMessage(workerResult(request, { snapshot: response.snapshot, objective: response.objective, termination: response.termination, diagnostics: response.diagnostics || [] }));
                     return;
                 }
                 case compressionSpringCommands.SNAPSHOT:

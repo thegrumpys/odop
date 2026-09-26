@@ -37,6 +37,7 @@ export class CompressionSpringWorkerClient {
     hydrate(design) { return this.command(compressionSpringCommands.HYDRATE, { design }); }
     applyChanges(changes) { return this.command(compressionSpringCommands.APPLY_CHANGES, { changes }); }
     setSystemControls(changes) { return this.command(compressionSpringCommands.SET_SYSTEM_CONTROLS, { changes }); }
+    getSystemControls() { return this.command(compressionSpringCommands.GET_SYSTEM_CONTROLS, {}, false); }
     recalculate(initialize = false) { return this.command(compressionSpringCommands.RECALCULATE, { initialize }); }
     search(jobId) { return this.command(compressionSpringCommands.SEARCH, { jobId }); }
     cancel(jobId) { return this.command(compressionSpringCommands.CANCEL, { jobId }, false); }

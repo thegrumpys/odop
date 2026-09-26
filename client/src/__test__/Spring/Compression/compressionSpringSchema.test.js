@@ -9,6 +9,8 @@ import {
     hydrateCompressionSpringDesign,
     normalizeCompressionSpringSavedDesign
 } from '../../../computation/compressionSpringSchema';
+import startup from './fixtures/Startup.json';
+import startupMetric from './fixtures/Startup_Metric.json';
 
 test('derives a versioned 54-symbol UI schema from Compression Spring initial state', () => {
     const initialComputationalSymbols = initialState.symbol_table.slice(0, 54);
@@ -115,4 +117,17 @@ test('hydrates saved mutable state while retaining current UI metadata', () => {
     expect(l2.validminchoices).toEqual(['L_Solid']);
     expect(design.system_controls).toMatchObject({ maxit: 1000, smallnum: 1e-8, fix_wt: 1.5 });
     expect(diagnostics).toEqual(['Ignoring unknown Compression Spring symbol: Unknown']);
+});
+
+test('normalizes exact public US and Metric Startup export fixtures', () => {
+    [[startup, 'US', .105, 22.17204852543568], [startupMetric, 'Metric', 2.8, 4.7586676954732505]].forEach(([saved, units, wireDiameter, rate]) => {
+        const normalized = normalizeCompressionSpringSavedDesign(saved);
+        expect(normalized.diagnostics).toEqual([]);
+        expect(normalized.designType).toBe('Spring/Compression');
+        expect(normalized.units).toBe(units);
+        expect(normalized.symbols).toHaveLength(54);
+        expect(normalized.symbols.find((symbol) => symbol.id === 'Wire_Dia').numericValue).toBe(wireDiameter);
+        expect(normalized.symbols.find((symbol) => symbol.id === 'Rate').numericValue).toBe(rate);
+        expect(normalized.systemControls).toMatchObject({ maxit: 600, objmin: .00001 });
+    });
 });

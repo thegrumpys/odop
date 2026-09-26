@@ -2,6 +2,7 @@
 #include "odop/optimization.hpp"
 
 #include <memory>
+#include <cmath>
 #include <string>
 #include <vector>
 
@@ -16,6 +17,7 @@ struct SessionHost {
   odop::SystemControls controls;
   std::unique_ptr<odop::DesignSession> session;
   std::string diagnostic;
+  double objective = 0.;
 };
 
 FlatSymbol* symbol(SessionHost& host, const char* id) {
@@ -78,12 +80,15 @@ int odop_compression_spring_session_set_numeric(void* raw, const char* id,
     double maximum_violation, unsigned minimum_flags, unsigned maximum_flags) {
   auto* entry = symbol(*static_cast<SessionHost*>(raw), id);
   if (entry == nullptr) return 0;
+  const auto optional = [](double candidate) -> std::optional<double> {
+    return std::isnan(candidate) ? std::nullopt : std::optional<double>{candidate};
+  };
   entry->numeric_value = value; entry->text_value.reset();
-  entry->valid_minimum = valid_minimum; entry->valid_maximum = valid_maximum;
-  entry->constraint_minimum = constraint_minimum; entry->constraint_maximum = constraint_maximum;
-  entry->scale_denominator_limit = scale_limit;
-  entry->minimum_scale_denominator = minimum_scale; entry->maximum_scale_denominator = maximum_scale;
-  entry->minimum_violation = minimum_violation; entry->maximum_violation = maximum_violation;
+  entry->valid_minimum = optional(valid_minimum); entry->valid_maximum = optional(valid_maximum);
+  entry->constraint_minimum = optional(constraint_minimum); entry->constraint_maximum = optional(constraint_maximum);
+  entry->scale_denominator_limit = optional(scale_limit);
+  entry->minimum_scale_denominator = optional(minimum_scale); entry->maximum_scale_denominator = optional(maximum_scale);
+  entry->minimum_violation = optional(minimum_violation); entry->maximum_violation = optional(maximum_violation);
   entry->minimum_flags = minimum_flags; entry->maximum_flags = maximum_flags;
   return 1;
 }
@@ -112,8 +117,9 @@ int odop_compression_spring_session_recalculate(void* raw, int initialize) {
   }
   odop::compression_spring::evaluate(*host.session);
   odop::optimization::recompute_scales(*host.session);
-  [[maybe_unused]] const auto evaluation = odop::optimization::evaluate(
+  const auto evaluation = odop::optimization::evaluate(
       *host.session, odop::optimization::compile_problem(*host.session));
+  host.objective = evaluation.objective;
   return 1;
 }
 int odop_compression_spring_session_search(void* raw) {
@@ -121,6 +127,7 @@ int odop_compression_spring_session_search(void* raw) {
   if (host.session == nullptr && !odop_compression_spring_session_recalculate(raw, 1)) return 0;
   const auto result = odop::optimization::patsh(*host.session, odop::optimization::compile_problem(*host.session));
   host.diagnostic = result.termination;
+  host.objective = result.evaluation.objective;
   return 1;
 }
 double odop_compression_spring_session_get_numeric(void* raw, const char* id, int field) {
@@ -131,6 +138,7 @@ double odop_compression_spring_session_get_numeric(void* raw, const char* id, in
   switch (field) { case 0: return slot.value; case 1: return slot.minimum_violation; case 2: return slot.maximum_violation; case 3: return slot.minimum_scale_denominator; case 4: return slot.maximum_scale_denominator; default: return 0.; }
 }
 const char* odop_compression_spring_session_diagnostic(void* raw) { return static_cast<SessionHost*>(raw)->diagnostic.c_str(); }
+double odop_compression_spring_session_objective(void* raw) { return static_cast<SessionHost*>(raw)->objective; }
 const char* odop_compression_spring_session_get_text(void* raw, const char* id) {
   auto* current = model(*static_cast<SessionHost*>(raw));
   const auto* location = id == nullptr ? nullptr : odop::compression_spring::find_slot(id);

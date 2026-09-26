@@ -73,6 +73,7 @@ import {
   CHANGE_RESULT_OBJECTIVE_VALUE,
   CHANGE_RESULT_TERMINATION_CONDITION,
   CHANGE_RESULT_SEARCH_COMPLETED,
+  APPLY_WASM_COMPUTATION_SNAPSHOT,
 
   CHANGE_SYSTEM_CONTROLS_VALUE,
   CHANGE_LABELS_VALUE,
@@ -1119,6 +1120,29 @@ export default function reducers(state = {}, action) {
       return result;
 
 // RESULT
+
+   case APPLY_WASM_COMPUTATION_SNAPSHOT: {
+      const values = new Map(action.payload.snapshot.map((symbol) => [symbol.id, symbol]));
+      return {
+        ...state,
+        model: {
+          ...state.model,
+          result: { ...state.model.result, objective_value: action.payload.objective_value, termination_condition: action.payload.termination_condition },
+          symbol_table: state.model.symbol_table.map((element) => {
+            const source = values.get(element.name);
+            if (!source) return element;
+            return {
+              ...element,
+              value: source.numericValue === undefined ? source.textValue : source.numericValue,
+              vmin: source.minimumViolation,
+              vmax: source.maximumViolation,
+              smin: source.minimumScaleDenominator,
+              smax: source.maximumScaleDenominator
+            };
+          })
+        }
+      };
+   }
 
    case CHANGE_RESULT_OBJECTIVE_VALUE:
 //        console.log('start reducer changeResultObjectiveValue', 'state=', state, 'action=', action);

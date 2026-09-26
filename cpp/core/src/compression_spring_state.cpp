@@ -1,6 +1,7 @@
 #include "odop/compression_spring_state.hpp"
 
 #include <array>
+#include <limits>
 #include <unordered_map>
 
 namespace odop::compression_spring {
@@ -105,7 +106,15 @@ HydrationResult hydrate(const FlatDesign& design) {
     state.ui_symbols.push_back(std::move(view));
     if (entry->numeric) {
       if (!symbol.numeric_value) { result.diagnostics.emplace_back("numeric value required for " + symbol.id); continue; }
-      NumericSlot slot{*symbol.numeric_value, symbol.valid_minimum.value_or(0), symbol.valid_maximum.value_or(0), symbol.constraint_minimum.value_or(0), symbol.constraint_maximum.value_or(0), symbol.scale_denominator_limit.value_or(0), symbol.minimum_scale_denominator.value_or(0), symbol.maximum_scale_denominator.value_or(0), symbol.minimum_violation.value_or(0), symbol.maximum_violation.value_or(0), symbol.minimum_flags, symbol.maximum_flags};
+      // Some legitimate configuration slots have no validity limits in a
+      // persisted export. Their omitted limits are unbounded, not zero.
+      NumericSlot slot{*symbol.numeric_value,
+          symbol.valid_minimum.value_or(-std::numeric_limits<double>::max()),
+          symbol.valid_maximum.value_or(std::numeric_limits<double>::max()),
+          symbol.constraint_minimum.value_or(0), symbol.constraint_maximum.value_or(0),
+          symbol.scale_denominator_limit.value_or(0), symbol.minimum_scale_denominator.value_or(0),
+          symbol.maximum_scale_denominator.value_or(0), symbol.minimum_violation.value_or(0),
+          symbol.maximum_violation.value_or(0), symbol.minimum_flags, symbol.maximum_flags};
       if (entry->storage == Storage::p) state.p[entry->offset] = slot; else state.x_numbers[entry->offset] = slot;
     } else {
       if (!symbol.text_value) { result.diagnostics.emplace_back("text value required for " + symbol.id); continue; }
