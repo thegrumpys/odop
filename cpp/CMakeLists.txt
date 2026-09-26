@@ -48,6 +48,10 @@ if(ODOP_BUILD_NATIVE_TESTS AND NOT ODOP_BUILD_WASM)
   add_executable(odop-objective-test tests/objective_test.cpp)
   target_link_libraries(odop-objective-test PRIVATE odop::core)
   add_test(NAME odop-objective-test COMMAND odop-objective-test)
+
+  add_executable(odop-search-test tests/search_test.cpp)
+  target_link_libraries(odop-search-test PRIVATE odop::core)
+  add_test(NAME odop-search-test COMMAND odop-search-test)
 endif()
 
 if(ODOP_BUILD_WASM)
