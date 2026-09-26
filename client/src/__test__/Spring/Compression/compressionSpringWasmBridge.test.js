@@ -1,6 +1,6 @@
 import { createCompressionSpringWasmBridge } from '../../../store/middleware/compressionSpringWasmBridge';
-import { changeSymbolValue, fixSymbolValue, setSymbolFlag } from '../../../store/actions';
-import { CHANGE_SYMBOL_VALUE, FIX_SYMBOL_VALUE, SET_SYMBOL_FLAG } from '../../../store/types';
+import { changeSymbolValue, fixSymbolValue, loadInitialState, setSymbolFlag } from '../../../store/actions';
+import { CHANGE_SYMBOL_VALUE, FIX_SYMBOL_VALUE, LOAD_INITIAL_STATE, SET_SYMBOL_FLAG } from '../../../store/types';
 import { MIN, FIXED } from '../../../store/actionTypes';
 import { initialState } from '../../../designtypes/Spring/Compression/initialState';
 
@@ -26,6 +26,7 @@ it('feature-enabled bridge marks legacy calculation handled and hydrates one aut
     expect(client.hydrate).toHaveBeenCalledTimes(1);
     expect(client.applyChanges).not.toHaveBeenCalled();
     expect(store.dispatched[0]).toMatchObject({ type: 'modelSlice/applyWasmComputationSnapshot', payload: { snapshot } });
+    expect(store.dispatched).toContainEqual(expect.objectContaining({ type: 'alertsSlice/clearAlerts' }));
 });
 
 it('feature-disabled bridge leaves actions untouched and does not start a Worker request', () => {
@@ -37,6 +38,19 @@ it('feature-disabled bridge leaves actions untouched and does not start a Worker
     bridge(action);
     expect(forwarded).toEqual([action]);
     expect(client.hydrate).not.toHaveBeenCalled();
+});
+
+it('lets the legacy dispatcher initialize a loaded design before hydrating the Worker', async () => {
+    const snapshot = [{ id: 'Density', numericValue: .284 }];
+    const client = { hydrate: jest.fn(() => Promise.resolve({ snapshot })), applyChanges: jest.fn() };
+    const store = storeFor();
+    const forwarded = [];
+    const bridge = createCompressionSpringWasmBridge(client, () => true)(store)((action) => forwarded.push(action));
+    bridge(loadInitialState('Spring/Compression'));
+    await Promise.resolve();
+    expect(forwarded[0].type).toBe(LOAD_INITIAL_STATE);
+    expect(forwarded[0].meta && forwarded[0].meta.wasmComputationHandled).toBeFalsy();
+    expect(client.hydrate).toHaveBeenCalledTimes(1);
 });
 
 it('synchronizes completed fix and constraint-flag transactions without suppressing their legacy reducer semantics', async () => {
