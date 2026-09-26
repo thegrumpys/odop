@@ -91,6 +91,10 @@ struct HydrationResult {
 };
 
 [[nodiscard]] const SlotLocation* find_slot(std::string_view stable_id);
+// The order is the established 54-entry persisted Compression Spring table.
+// Narrow hosts use it to enumerate a snapshot without depending on offsets.
+[[nodiscard]] std::string_view symbol_id(std::size_t ordinal);
+inline constexpr std::size_t kSymbolCount = 54;
 [[nodiscard]] HydrationResult hydrate(const FlatDesign& design);
 [[nodiscard]] FlatDesign snapshot(const RuntimeState& state);
 

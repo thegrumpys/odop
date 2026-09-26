@@ -82,6 +82,10 @@ const SlotLocation* find_slot(std::string_view stable_id) {
   return found == locations.end() ? nullptr : &found->second;
 }
 
+std::string_view symbol_id(const std::size_t ordinal) {
+  return ordinal < kSchema.size() ? kSchema[ordinal].id : std::string_view{};
+}
+
 HydrationResult hydrate(const FlatDesign& design) {
   HydrationResult result;
   if (design.design_type != kDesignType) result.diagnostics.emplace_back("unsupported design type: " + design.design_type);

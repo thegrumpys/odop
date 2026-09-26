@@ -74,8 +74,13 @@ if(ODOP_BUILD_WASM)
   target_link_options(odop_wasm PRIVATE
     "-sMODULARIZE=1"
     "-sEXPORT_ES6=1"
-    "-sENVIRONMENT=node"
-    "-sEXPORTED_FUNCTIONS=['_malloc','_free','_odop_piston_cylinder_evaluate','_odop_compression_spring_evaluate']"
+    "-sENVIRONMENT=web,worker,node"
+    "-sEXPORTED_FUNCTIONS=['_malloc','_free','_odop_piston_cylinder_evaluate','_odop_compression_spring_evaluate','_odop_compression_spring_session_create','_odop_compression_spring_session_destroy','_odop_compression_spring_session_clear','_odop_compression_spring_session_set_numeric','_odop_compression_spring_session_set_text','_odop_compression_spring_session_set_control','_odop_compression_spring_session_recalculate','_odop_compression_spring_session_search','_odop_compression_spring_session_get_numeric','_odop_compression_spring_session_diagnostic','_odop_compression_spring_session_get_text']"
   )
   set_target_properties(odop_wasm PROPERTIES SUFFIX ".mjs")
+  add_custom_command(TARGET odop_wasm POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_SOURCE_DIR}/../client/src/computation/wasm
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:odop_wasm> ${CMAKE_CURRENT_SOURCE_DIR}/../client/src/computation/wasm/odop_wasm.mjs
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_BINARY_DIR}/odop_wasm.wasm ${CMAKE_CURRENT_SOURCE_DIR}/../client/src/computation/wasm/odop_wasm.wasm
+  )
 endif()
