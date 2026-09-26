@@ -84,7 +84,7 @@ export const execute = {
                         <li>{'changeSymbolValue("Force_1", 400.0),'}</li>
                         <li>{'changeSymbolValue("Force_2", 1200.0),'}</li>
                         <li>{'changeSymbolValue("Material_Type", 16),'}</li>
-                        <li>{'changeSymbolValue("End_Type", 5),'}</li>
+                        <li>{'changeSymbolValue("End_Type", 8),'}</li>
                         <li>{'changeSymbolConstraint("Force_1", MAX, 200.),'}</li>
                         <li>{'changeSymbolConstraint("Force_2", MAX, 5000.),'}</li>
                         <li>{'changeSymbolConstraint("Rate", MAX, 500.),'}</li>
@@ -109,7 +109,7 @@ export const execute = {
                 changeSymbolValue("Force_1", 400.0),
                 changeSymbolValue("Force_2", 1200.0),
                 changeSymbolValue("Material_Type", 16),
-                changeSymbolValue("End_Type", 5),
+                changeSymbolValue("End_Type", 8),
                 changeSymbolConstraint("Force_1", MAX, 200.),
                 changeSymbolConstraint("Force_2", MAX, 5000.),
                 changeSymbolConstraint("Rate", MAX, 500.),
@@ -137,7 +137,7 @@ export const execute = {
                         <li>{'changeSymbolValue("Force_1", 1780),'}</li>
                         <li>{'changeSymbolValue("Force_2", 5300.0),'}</li>
                         <li>{'changeSymbolValue("Material_Type", 16),'}</li>
-                        <li>{'changeSymbolValue("End_Type", 5),'}</li>
+                        <li>{'changeSymbolValue("End_Type", 8),'}</li>
                         <li>{'changeSymbolConstraint("Force_1", MAX, 500.),'}</li>
                         <li>{'changeSymbolConstraint("Force_2", MAX, 10000.),'}</li>
                         <li>{'changeSymbolConstraint("L_Solid", MAX, 500.),'}</li>
@@ -168,7 +168,7 @@ export const execute = {
                 changeSymbolValue("Force_1", 1780),
                 changeSymbolValue("Force_2", 5300.0),
                 changeSymbolValue("Material_Type", 16),
-                changeSymbolValue("End_Type", 5),
+                changeSymbolValue("End_Type", 8),
                 changeSymbolConstraint("Force_1", MAX, 500.),
                 changeSymbolConstraint("Force_2", MAX, 10000.),
                 changeSymbolConstraint("L_Solid", MAX, 500.),

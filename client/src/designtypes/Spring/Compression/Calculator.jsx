@@ -33,7 +33,11 @@ export default function Calculator() {
               <SymbolUnits element={model_symbol_table[o.Material_Type]} index={o.Material_Type} className="text-start" />
               <td> &nbsp; &nbsp; </td>
               <SymbolName element={model_symbol_table[o.End_Type]} index={o.End_Type} />
-              <SymbolValue element={model_symbol_table[o.End_Type]} index={o.End_Type} />
+              {model_symbol_table[o.End_Type_Method].value === 1 ?
+                <SymbolValue element={model_symbol_table[o.End_Type]} index={o.End_Type} />
+                :
+                <Value id="End_Type" value={base.endTypeValue} />
+              }
               <SymbolUnits element={model_symbol_table[o.End_Type]} index={o.End_Type} className="text-start" />
             </tr>
           </tbody>
@@ -144,7 +148,7 @@ export default function Calculator() {
               <SymbolUnits element={model_symbol_table[o.Weight]} index={o.Weight} className="text-start" />
             </tr>
             <tr>
-              <ValueName name="Pitch" tooltip="Pitch is the distance between two adjacent coils" />
+              <ValueName name="Pitch" tooltip="Pitch is the distance between the centerline of two adjacent body coils" />
               <Value id="Pitch" value={base.pitch} />
               <SymbolUnits element={model_symbol_table[o.L_Free]} index={o.L_Free} className="text-start" />
               <td> &nbsp; &nbsp; </td>

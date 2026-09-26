@@ -428,7 +428,7 @@ const model_type = useSelector((state) => state.model.type);
                 <tr>
                   <td>
                     To control the value of a Dependent Variable either FIX it or enable its MIN and/or MAX constraints and then set its constraint values.
-                    This allows this <img src="SearchButton.png" alt="SearchButton" /> to find the Dependent Variable's value that is within this constraint range.
+                    This allows <img src="SearchButton.png" alt="SearchButton" /> to find the Dependent Variable's value that is within this constraint range.
                   </td>
                 </tr>
               </tbody>

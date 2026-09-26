@@ -131,6 +131,7 @@ export const execute = {
                     </p>
                     CHANGE  Material_Type OIL_TEMPERED_MB<br />
                     CHANGE  Life_Category 1 Million cycles - Not peened<br />
+                    CHANGE  End_Type Closed & Ground<br />
                     CHANGE  FS_CycleLife MIN 1.0<br />
                     CHANGE  Cycle_Life  MIN  1000000<br />
                     CHANGE  OD_Free   MAX  1.25<br />

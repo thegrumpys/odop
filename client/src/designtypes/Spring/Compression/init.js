@@ -120,31 +120,6 @@ export function init(store, p, x) {
       //    stress_lim_stat =tensile*pc_tensile_stat /100.0;
       x[o.Stress_Lim_Stat] = x[o.Tensile] * x[o.PC_Tensile_Stat] / 100.0;
 
-      //    /*  copy from end type table to constants  */
-      //    /*  check these values.     See AS Design Hdbk. p52  */
-      //    /*    VVVVVVVVVVVVV          Kludge for Torsion  */
-      //if end_type_index > 0 & nmerit ^= 3 then
-      //do;
-      //if end_calc_method ^= 1 then              /*   debug  */
-      //       put skip list('TAB2D:  END_CALC_METHOD SET TO 1.');
-      //end_calc_method=1;
-      //
-      //end_type        = end_name(end_type_index);
-      //inactive_coils  = inact_coil_tbl(end_type_index);
-      //if end_type_index <= c_end_num then
-      //  add_coils_solid=acs_tbl(end_type_index);
-      //else
-      //  add_coils_solid=0.0;
-      //if end_type_index > c_end_num then
-      //  hook_deflect_all=hda_tbl(end_type_index-c_end_num);
-      //else
-      //  hook_deflect_all=0.0;
-
-      if (et_tab[j][eto.end_type] !== "User_Specified") {
-        x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
-        x[o.Add_Coils_Solid] = et_tab[j][eto.add_coils_solid];
-      }
-
       store.dispatch(changeSymbolHidden("Material_Type", false));
       store.dispatch(changeSymbolHidden("ASTM/Fed_Spec", false));
       store.dispatch(changeSymbolHidden("Process", false));
@@ -219,13 +194,81 @@ export function init(store, p, x) {
       store.dispatch(changeSymbolInput("Stress_Lim_Endur", true));
   }
 
-  if (et_tab[j][eto.end_type] === "User_Specified") {
-    store.dispatch(changeSymbolInput("Inactive_Coils", true));
-    store.dispatch(changeSymbolInput("Add_Coils@Solid", true));
-  } else {
-    store.dispatch(changeSymbolInput("Inactive_Coils", false));
-    store.dispatch(changeSymbolInput("Add_Coils@Solid", false));
+  //    /*  copy from end type table to constants  */
+  //    /*  check these values.     See AS Design Hdbk. p52  */
+
+  switch (x[o.End_Type_Method]) {
+    default:
+    case 1: // Standard: Override values from end type table
+      x[o.End_Closure] = et_tab[j][eto.end_closure];
+      x[o.Closed_End_Geometry] = et_tab[j][eto.closed_end_geometry];
+      x[o.Inactive_Coils] = et_tab[j][eto.inactive_coils];
+      x[o.Transition_Coils] = et_tab[j][eto.transition_coils];
+      x[o.Taper_Amount] = et_tab[j][eto.taper_amount];
+      x[o.Pigtail_Amount] = et_tab[j][eto.pigtail_amount];
+      x[o.Grind_Amount] = et_tab[j][eto.grind_amount];
+
+      store.dispatch(changeSymbolHidden("End_Type", false));
+      store.dispatch(changeSymbolHidden("End_Closure", true));
+      store.dispatch(changeSymbolHidden("Closed_End_Geometry", true));
+      store.dispatch(changeSymbolHidden("Inactive_Coils", false));
+      store.dispatch(changeSymbolHidden("Transition_Coils", false));
+      if (et_tab[j][eto.end_type] === "TaperedClosed" ||
+          et_tab[j][eto.end_type] === "TaperedClosed&Ground") {
+        store.dispatch(changeSymbolHidden("Taper_Amount", false));
+      } else {
+        store.dispatch(changeSymbolHidden("Taper_Amount", true));
+      }
+      if (et_tab[j][eto.end_type] === "PigtailClosed" ||
+          et_tab[j][eto.end_type] === "PigtailClosed&Ground") {
+        store.dispatch(changeSymbolHidden("Pigtail_Amount", false));
+      } else {
+        store.dispatch(changeSymbolHidden("Pigtail_Amount", true));
+      }
+      if (et_tab[j][eto.end_type] === "Open&Ground" ||
+          et_tab[j][eto.end_type] === "Closed&Ground" ||
+          et_tab[j][eto.end_type] === "DoubleClosed&Ground" ||
+          et_tab[j][eto.end_type] === "TaperedClosed&Ground" ||
+          et_tab[j][eto.end_type] === "PigtailClosed&Ground") {
+        store.dispatch(changeSymbolHidden("Grind_Amount", false));
+      } else {
+        store.dispatch(changeSymbolHidden("Grind_Amount", true));
+      }
+
+      store.dispatch(changeSymbolInput("End_Closure", false));
+      store.dispatch(changeSymbolInput("Closed_End_Geometry", false));
+      store.dispatch(changeSymbolInput("Inactive_Coils", false));
+      store.dispatch(changeSymbolInput("Transition_Coils", false));
+      store.dispatch(changeSymbolInput("Taper_Amount", false));
+      store.dispatch(changeSymbolInput("Pigtail_Amount", false));
+      store.dispatch(changeSymbolInput("Grind_Amount", false));
+
+      break;
+
+    case 2: // User specified: Do not override values from end type table
+      store.dispatch(changeSymbolHidden("End_Type", true));
+      store.dispatch(changeSymbolHidden("End_Closure", false));
+      if (x[o.End_Closure] === 1) { // Open
+        store.dispatch(changeSymbolHidden("Closed_End_Geometry", true));
+      } else {
+        store.dispatch(changeSymbolHidden("Closed_End_Geometry", false));
+      }
+      store.dispatch(changeSymbolHidden("Inactive_Coils", false));
+      store.dispatch(changeSymbolHidden("Transition_Coils", false));
+      store.dispatch(changeSymbolHidden("Taper_Amount", false));
+      store.dispatch(changeSymbolHidden("Pigtail_Amount", false));
+      store.dispatch(changeSymbolHidden("Grind_Amount", false));
+
+      store.dispatch(changeSymbolInput("End_Closure", true));
+      store.dispatch(changeSymbolInput("Closed_End_Geometry", true));
+      store.dispatch(changeSymbolInput("Inactive_Coils", true));
+      store.dispatch(changeSymbolInput("Transition_Coils", true));
+      store.dispatch(changeSymbolInput("Taper_Amount", true));
+      store.dispatch(changeSymbolInput("Pigtail_Amount", true));
+      store.dispatch(changeSymbolInput("Grind_Amount", true));
+      break;
   }
+
 //  console.log('init p=',p,' x=',x);
   return x;
 

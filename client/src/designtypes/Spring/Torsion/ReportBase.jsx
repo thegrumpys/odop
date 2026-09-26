@@ -32,17 +32,18 @@ export default function ReportBase(props) {
   base.errmsg = "";
   base.startpntmsg = "Alert details are available via the Alert button on the main page of Advanced and Calculator Views.";
 
-  base.len_lbl = "Wire Length";
+  if (model_symbol_table[o.Process].value === "Hot_Wound") { // Process is set in init.js
+    base.len_lbl = "Bar cut len.";
+  } else {
+    base.len_lbl = "Wire Length";
+  }
 
   switch (model_symbol_table[o.End_Type].value) {
     case 1:        //  Tangent   base.pitch=(l_body-wire_dia)/coils_t
+    default:
       base.pitch = (model_symbol_table[o.L_Body].value - model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_T].value;
       break;
-    case 3:        //  Future hot wound end type ?
-      base.pitch = 0.0;
-      base.len_lbl = "Bar cut len.";
-      break;
-    default:        //  User Specified
+    case 2:        //  User Specified
       base.pitch = 0.0;
   }
 
