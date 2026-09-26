@@ -32,6 +32,19 @@ variable, evaluates from its P/X baseline, and returns the no-free-P message.
 With Emscripten activated, `npm run cpp:test:wasm` rebuilt the module and both
 existing Wasm smoke tests passed.
 
+## Equation-set regression cleanup
+
+- Added `odop-compression-spring-stage0-fixture-test`. It reads the same
+  versioned `docs/Architecture/fixtures/compression-spring/stage0/eqnset.json`
+  used by the JavaScript baseline-fixture test, rather than copying expected
+  values into another source of truth.
+- The C++ fixture test executes the normal vector and all three intentional
+  singular vectors (spring-index-one, zero-active-coils, and
+  zero-mean-diameter), including their NaN/Infinity expectations.
+- The JavaScript direct `eqnset.test.js` and `baseline-fixtures.test.js` also
+  pass. Demo and tutorial tests remain workflow-level Redux/UI scenarios; they
+  are not direct equation-set vectors and belong to the Stage 7 bridge suite.
+
 ## Stage 6 status
 
 Stage 6 is complete for normal Search. `patsh` is the direct C++ port of the
