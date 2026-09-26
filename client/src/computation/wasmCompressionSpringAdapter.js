@@ -1,6 +1,7 @@
 const numericFields = ['value', 'validMinimum', 'validMaximum', 'constraintMinimum', 'constraintMaximum', 'scaleDenominatorLimit', 'minimumScaleDenominator', 'maximumScaleDenominator', 'minimumViolation', 'maximumViolation'];
 const controlFields = ['maxit', 'fix_wt', 'con_wt', 'viol_wt', 'objmin', 'del', 'delmin', 'tol', 'smallnum'];
 const number = (value) => typeof value === 'number' ? value : 0;
+const optionalNumber = (value) => typeof value === 'number' ? value : Number.NaN;
 
 // The Worker sees ordinary design objects. This is the sole owner of the
 // narrow Emscripten ABI and its opaque C++ session handle.
@@ -17,13 +18,14 @@ export function createWasmCompressionSpringAdapter(Module) {
     const getNumeric = call('odop_compression_spring_session_get_numeric', 'number', ['number', 'string', 'number']);
     const getText = call('odop_compression_spring_session_get_text', 'string', ['number', 'string']);
     const diagnostic = call('odop_compression_spring_session_diagnostic', 'string', ['number']);
+    const objective = call('odop_compression_spring_session_objective', 'number', ['number']);
     const handle = create();
 
     function writeDesign(design) {
         clear(handle);
         for (const symbol of design.symbols) {
             if (typeof symbol.numericValue === 'number') {
-                const values = [symbol.numericValue, ...numericFields.slice(1).map((field) => number(symbol[field]))];
+                const values = [symbol.numericValue, ...numericFields.slice(1).map((field) => optionalNumber(symbol[field]))];
                 if (!setNumeric(handle, symbol.id, ...values, number(symbol.minimumFlags), number(symbol.maximumFlags))) return `unknown Compression Spring symbol: ${symbol.id}`;
             } else if (!setText(handle, symbol.id, symbol.textValue || '')) return `unknown Compression Spring symbol: ${symbol.id}`;
         }
@@ -43,7 +45,7 @@ export function createWasmCompressionSpringAdapter(Module) {
         if (writeError) return { ok: false, diagnostic: writeError };
         if (!operation()) return { ok: false, diagnostic: diagnostic(handle) };
         const updated = readDesign(design);
-        return { ok: true, design: updated, snapshot: updated.symbols, diagnostics: [] };
+        return { ok: true, design: updated, snapshot: updated.symbols, objective: objective(handle), diagnostics: [] };
     }
     return {
         recalculate: (design, { initialize }) => run(design, () => recalculate(handle, initialize ? 1 : 0)),

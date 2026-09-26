@@ -49,5 +49,13 @@ int main() {
   const auto fixed_result = odop::optimization::patsh(
       fixed_session, odop::optimization::compile_problem(fixed_session));
   if (fixed_result.termination.find("no free independent variables") == std::string::npos) return EXIT_FAILURE;
+
+  auto cancellable = state();
+  cancellable.p[0].constraint_minimum = 2.;
+  cancellable.p[0].minimum_flags = 1;
+  odop::DesignSession cancelled_session(std::make_unique<odop::compression_spring::Model>(cancellable), controls);
+  const auto cancelled_result = odop::optimization::patsh(
+      cancelled_session, odop::optimization::compile_problem(cancelled_session), [] { return true; });
+  if (cancelled_result.termination != "Search cancelled." || cancelled_result.evaluations != 0) return EXIT_FAILURE;
   return EXIT_SUCCESS;
 }

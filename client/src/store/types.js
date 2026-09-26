@@ -68,6 +68,7 @@ export const RESTORE_OUTPUT_SYMBOL_CONSTRAINTS = 'modelSlice/restoreOutputSymbol
 export const CHANGE_RESULT_OBJECTIVE_VALUE = 'modelSlice/changeResultObjectiveValue';
 export const CHANGE_RESULT_TERMINATION_CONDITION = 'modelSlice/changeResultTerminationCondition';
 export const CHANGE_RESULT_SEARCH_COMPLETED = 'modelSlice/changeResultSearchCompleted';
+export const APPLY_WASM_COMPUTATION_SNAPSHOT = 'modelSlice/applyWasmComputationSnapshot';
 
 export const CHANGE_LABELS_VALUE = 'modelSlice/changeLabelsValue';
 export const CHANGE_SYSTEM_CONTROLS_VALUE = 'modelSlice/changeSystemControlsValue';

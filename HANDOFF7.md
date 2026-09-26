@@ -7,9 +7,9 @@
   `EQNSET`, scale/objective evaluation, and ordinary Hooke–Jeeves Search.
   It exposes opaque handles and stable symbol IDs only; React/Redux and the
   JavaScript `initUI` concern do not enter C++.
-- Changed the modular Emscripten artifact to support `web`, `worker`, and
-  `node`, and copies generated `.mjs`/`.wasm` build artifacts into the ignored
-  client computation asset directory.
+- Builds separate modular Emscripten artifacts for Node contract tests and
+  the browser Worker, and copies generated `.mjs`/`.wasm` build artifacts into
+  the ignored client computation asset directory.
 - Added a Worker protocol with hydrate, transactional change, controls,
   recalculation, snapshot, search, and cancellation commands. Every response
   carries base/result revision IDs. The main-thread client rejects responses
@@ -29,6 +29,36 @@
   `INIT` plus recalculation, and reads calculated numeric/text state back.
   The test found and fixed the missing Emscripten `cwrap` runtime export that
   the Worker adapter depends on.
+- Verified `cd client && npm run build` successfully bundles the generated
+  modular Wasm asset and Worker source. Added a Jest adapter test for stable
+  IDs, extended numeric fields, text slots, and system controls.
+- Added the default-off `REACT_APP_ENABLE_COMPRESSION_SPRING_WASM` gate and
+  the Worker-backed Redux bridge. Feature-enabled calculation actions bypass
+  the legacy dispatcher, hydrate/apply a Worker transaction, and atomically
+  apply only a current revision's returned snapshot. The normal product path
+  remains legacy while the flag is unset.
+- The Wasm build now produces two generated artifacts from the same C++ core:
+  a Node module for contract tests and a browser/Worker module for the client.
+  This prevents Node-only module resolution code from entering the Webpack
+  bundle; the client production build now succeeds with the Worker enabled.
+- Exposed Worker system-control query/update through the client and added
+  protocol round-trip tests. `patsh` now accepts a portable cooperative
+  cancellation probe and native coverage verifies immediate cancellation.
+  The current Worker `cancel` command still guarantees stale-result rejection;
+  mid-loop signalling requires a shared/interruptible browser transport so the
+  synchronous Worker can observe it while calculating.
+- Added feature-bridge Jest coverage: an enabled Compression Spring edit marks
+  the Redux action as Worker-handled, hydrates one authoritative transaction,
+  and applies one returned snapshot; a disabled bridge leaves the legacy action
+  unchanged and makes no Worker request.
+- Checked in the exact unauthenticated public exports at
+  `client/src/__test__/Spring/Compression/fixtures/Startup.json` and
+  `Startup_Metric.json`.  Both have 54 symbols and now contract-test their
+  exported P values, calculated Rate, objective value, and calculation
+  termination text through the generated Wasm module.  Their omission of some
+  numeric metadata also exposed an ABI bug: absent values were being coerced
+  to zero.  The bridge now preserves them as absent (NaN across the narrow ABI)
+  and C++ hydrates missing validity bounds as unbounded.
 
 ## Boundaries retained
 
@@ -36,9 +66,10 @@
   client presentation logic and is not called by the Wasm core.
 - Search continues wholly inside C++ from compiled numerical state; no Redux
   state or symbol-table traversal occurs in its candidate loop.
-- The legacy dispatcher remains the active production path. The Stage 7
-  Worker client is additive and ready for feature-flag middleware wiring;
-  keep the flag rollout separate from numerical compatibility acceptance.
+- The legacy dispatcher remains the active production path unless
+  `REACT_APP_ENABLE_COMPRESSION_SPRING_WASM=true` is set at client build time.
+  With the flag set, the Worker middleware atomically applies only the current
+  calculation snapshot; rollout remains separate from compatibility acceptance.
 - Cancellation makes a queued/finished job stale immediately through revision
   semantics. Cooperative in-loop cancellation needs a cancellation callback in
   `patsh` and is a follow-up if long search latency requires it.
@@ -64,7 +95,8 @@ and Stage 0 fixture Jest tests, and the Wasm contract tests passed.
 
 ## Compatibility oracle
 
-The public `https://odop.herokuapp.com/` page was reachable but its export UI
-requires JavaScript interaction. Stage 7 did not check in a new public
-`Startup.json` fixture; before enabling the Worker path, capture unauthenticated
-exports and compare `objective_value`, P values, and search termination text.
+`Startup.json` and `Startup_Metric.json` are exact unauthenticated public
+File > Export captures supplied for this repository. They are the normal
+recalculation compatibility fixtures. Their `objective_value`, P values and
+calculation termination string are asserted now; ordinary Search termination
+fixtures remain the next compatibility increment before feature rollout.

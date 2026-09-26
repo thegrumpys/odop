@@ -1,6 +1,8 @@
 import { legacy_createStore as createStore, applyMiddleware, compose } from 'redux';
 import reducers from "./reducers";
 import dispatcher from './middleware/dispatcher';
+import { createCompressionSpringWasmBridge } from './middleware/compressionSpringWasmBridge';
+import { CompressionSpringWorkerClient } from '../computation/compressionSpringWorkerClient';
 import { ERR } from '../components/Alerts';
 import { initialSystemControls } from '../initialSystemControls';
 import config from '../config';
@@ -8,7 +10,12 @@ import config from '../config';
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
-const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */dispatcher));
+const middlewareFunctions = [dispatcher];
+if (config.features.enableCompressionSpringWasm && typeof Worker !== 'undefined') {
+  const worker = new Worker(new URL('../computation/compressionSpringWorker.js', import.meta.url));
+  middlewareFunctions.unshift(createCompressionSpringWasmBridge(new CompressionSpringWorkerClient(worker), () => true));
+}
+const middleware = composeEnhancers(applyMiddleware(/* loggerMiddleware, */...middlewareFunctions));
 
 const default_state = {
   alertsSlice: {

@@ -39,6 +39,7 @@ import { logUsage } from '../../logUsage';
 export const dispatcher = store => next => action => {
 //  console.log('start dispatcher before reducer','store=',store,'next=',next,'action=',action);
   const returnValue = next(action); // Invoke reducer
+  if (action.meta && action.meta.wasmComputationHandled) return returnValue;
 //  console.log('start dispatcher after reducer','returnValue=',returnValue);
 
   var design;

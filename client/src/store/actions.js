@@ -73,6 +73,7 @@ import {
   CHANGE_RESULT_OBJECTIVE_VALUE,
   CHANGE_RESULT_TERMINATION_CONDITION,
   CHANGE_RESULT_SEARCH_COMPLETED,
+  APPLY_WASM_COMPUTATION_SNAPSHOT,
 
   CHANGE_SYSTEM_CONTROLS_VALUE,
   CHANGE_LABELS_VALUE,
@@ -562,6 +563,13 @@ export function changeResultSearchCompleted(search_completed = false) {
       search_completed
     }
   }
+}
+
+// A Worker response is authoritative calculation state. It is intentionally
+// one Redux action so a completed transaction never paints an intermediate
+// material/configuration state.
+export function applyWasmComputationSnapshot(snapshot, objective_value, termination_condition = '') {
+  return { type: APPLY_WASM_COMPUTATION_SNAPSHOT, payload: { snapshot, objective_value, termination_condition } };
 }
 
 export function changeSystemControlsValue(system_controls) {

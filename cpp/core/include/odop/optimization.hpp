@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <functional>
 #include <string>
 #include <vector>
 
@@ -26,5 +27,8 @@ struct SearchResult {
 void recompute_scales(DesignSession& session);
 [[nodiscard]] Problem compile_problem(const DesignSession& session);
 [[nodiscard]] Evaluation evaluate(DesignSession& session, const Problem& problem);
-[[nodiscard]] SearchResult patsh(DesignSession& session, const Problem& problem);
+// Hosts may supply a cheap cooperative cancellation probe. The numerical loop
+// remains host-independent and never calls back into UI or Redux state.
+[[nodiscard]] SearchResult patsh(DesignSession& session, const Problem& problem,
+                                 const std::function<bool()>& cancelled = {});
 }

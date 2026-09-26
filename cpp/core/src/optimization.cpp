@@ -69,7 +69,8 @@ Evaluation evaluate(DesignSession& session, const Problem& problem) {
   return result;
 }
 
-SearchResult patsh(DesignSession& session, const Problem& problem) {
+SearchResult patsh(DesignSession& session, const Problem& problem,
+                   const std::function<bool()>& cancelled) {
   SearchResult result;
   auto* model = dynamic_cast<compression_spring::Model*>(&session.model());
   if (!model) {
@@ -111,6 +112,12 @@ SearchResult patsh(DesignSession& session, const Problem& problem) {
   };
 
   const auto& controls = session.controls();
+  const auto cancellation_result = [&]() {
+    result.termination = "Search cancelled.";
+    result.evaluation = evaluate(session, problem);
+    return result;
+  };
+  if (cancelled && cancelled()) return cancellation_result();
   auto current = candidate(psi);
   double current_objective = current.objective;
   double step = controls.initial_step;
@@ -142,10 +149,12 @@ SearchResult patsh(DesignSession& session, const Problem& problem) {
   };
 
   while (current_objective >= controls.objective_minimum) {
+    if (cancelled && cancelled()) return cancellation_result();
     auto phi = psi;
     double explored = explore(phi, current_objective);
     if (explored < current_objective && explored + controls.tolerance * std::abs(current_objective) <= current_objective) {
       do {
+        if (cancelled && cancelled()) return cancellation_result();
         ++result.iterations;
         const auto theta = psi;
         psi = phi;
