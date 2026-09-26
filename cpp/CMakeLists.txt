@@ -7,6 +7,7 @@ option(ODOP_BUILD_WASM "Build the Emscripten smoke module" OFF)
 
 add_library(odop-core STATIC
   core/src/design_session.cpp
+  core/src/optimization.cpp
   core/src/piston_cylinder.cpp
   core/src/compression_spring_state.cpp
   models/compression_spring/src/compression_spring_model.cpp
@@ -43,6 +44,10 @@ if(ODOP_BUILD_NATIVE_TESTS AND NOT ODOP_BUILD_WASM)
   )
   target_link_libraries(odop-compression-spring-eqnset-test PRIVATE odop::core)
   add_test(NAME odop-compression-spring-eqnset-test COMMAND odop-compression-spring-eqnset-test)
+
+  add_executable(odop-objective-test tests/objective_test.cpp)
+  target_link_libraries(odop-objective-test PRIVATE odop::core)
+  add_test(NAME odop-objective-test COMMAND odop-objective-test)
 endif()
 
 if(ODOP_BUILD_WASM)
