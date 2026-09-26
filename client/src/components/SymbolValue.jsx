@@ -21,6 +21,7 @@ import FormControlTypeNumber from './FormControlTypeNumber';
 import { logUsage } from '../logUsage';
 import { getAlertsByName } from './Alerts';
 import { displayMessage } from '../components/Message';
+import { displaySpinner } from '../components/Spinner';
 import FeasibilityIndicator from './FeasibilityIndicator';
 import store from '../store/store';
 import { logValue } from '../logUsage';
@@ -101,7 +102,16 @@ const model_type = useSelector((state) => state.model.type);
 
   const doSearch = (type) => {
 //    console.log('In SymbolValue.doSearch');
-    dispatch(search('Element ' + element.name+' '+(type === 'NOT FINITE' ? type : '')));
+    displaySpinner(true);
+    // Search runs synchronously in Redux middleware. Yield first so the browser
+    // can paint the spinner before the calculation blocks the main thread.
+    setTimeout(() => {
+      try {
+        dispatch(search('Element ' + element.name+' '+(type === 'NOT FINITE' ? type : '')));
+      } finally {
+        displaySpinner(false);
+      }
+    }, 0);
   }
 
   const onSeekMinRequest = (event) => {
@@ -121,9 +131,16 @@ const model_type = useSelector((state) => state.model.type);
     if (inverted_constraint) {
       return;
     }
-    dispatch(saveAutoSave());
-    dispatch(seek(element.name, MIN));
-    logUsage('event', 'ActionSeek', { event_label: 'Element ' + element.name + ' MIN' });
+    displaySpinner(true);
+    setTimeout(() => {
+      try {
+        dispatch(saveAutoSave());
+        dispatch(seek(element.name, MIN));
+        logUsage('event', 'ActionSeek', { event_label: 'Element ' + element.name + ' MIN' });
+      } finally {
+        displaySpinner(false);
+      }
+    }, 0);
   }
 
   const onSeekMaxRequest = (event) => {
@@ -143,9 +160,16 @@ const model_type = useSelector((state) => state.model.type);
     if (inverted_constraint) {
       return;
     }
-    dispatch(saveAutoSave());
-    dispatch(seek(element.name, MAX));
-    logUsage('event', 'ActionSeek', { event_label: 'Element ' + element.name + ' MAX' });
+    displaySpinner(true);
+    setTimeout(() => {
+      try {
+        dispatch(saveAutoSave());
+        dispatch(seek(element.name, MAX));
+        logUsage('event', 'ActionSeek', { event_label: 'Element ' + element.name + ' MAX' });
+      } finally {
+        displaySpinner(false);
+      }
+    }, 0);
   }
 
   const onContextMenu = (e) => {
@@ -234,7 +258,15 @@ const model_type = useSelector((state) => state.model.type);
 //    console.log('In NameValueUnitsRowCalcInput.onBlurLocal','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
     var targetId = event.relatedTarget ? event.relatedTarget.id : null;
     if (state.model.system_controls.enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin && targetId !== 'searchButton' && targetId !== 'seekButton') {
-      dispatch(search('Auto'));
+      // Auto search runs synchronously. Yield so the UI can paint before the heavy work starts.
+      displaySpinner(true);
+      setTimeout(() => {
+        try {
+          dispatch(search('Auto'));
+        } finally {
+          displaySpinner(false);
+        }
+      }, 0);
     }
     if (typeof onBlur === "function") onBlur(event);
   }
@@ -419,7 +451,7 @@ const model_type = useSelector((state) => state.model.type);
             {element.type === "calcinput" && !element.hidden &&
               <>
                 <NameValueUnitsHeaderCalcInput />
-                <NameValueUnitsRowCalcInput key={element.name} element={element} index={0} onChangeValid={onChangeValidValue} onChangeInvalid={onChangeInvalidValue} onChange={onModifiedFlag} onSelect={onModifiedFlag} />
+                <NameValueUnitsRowCalcInput key={element.name} element={element} index={0} onChangeValid={onChangeValidValue} onChangeInvalid={onChangeInvalidValue} onChange={onModifiedFlag} onSetFix={onModifiedFlag} onResetFix={onModifiedFlag} />
               </>}
           </Table>
           {element.type === "equationset" && !element.input && !element.hidden &&
@@ -436,22 +468,22 @@ const model_type = useSelector((state) => state.model.type);
           {element.type === "equationset" && element.input && !element.hidden &&
             <Table className="table-secondary border border-secondary" size="sm">
               <ConstraintsMinHeaderIndependentVariable />
-              <ConstraintsMinRowIndependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMinConstraint} onChangeInvalid={onChangeInvalidMinConstraint} onSetFlag={onModifiedFlag} onResetFlag={onModifiedFlag} />
+              <ConstraintsMinRowIndependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMinConstraint} onChangeInvalid={onChangeInvalidMinConstraint} onSetFix={onModifiedFlag} onResetFix={onModifiedFlag} />
             </Table>}
           {element.type === "equationset" && !element.input && !element.hidden &&
             <Table className="table-secondary border border-secondary" size="sm">
               <ConstraintsMinHeaderDependentVariable />
-              <ConstraintsMinRowDependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMinConstraint} onChangeInvalid={onChangeInvalidMinConstraint} onSetFlag={onModifiedFlag} onResetFlag={onModifiedFlag} />
+              <ConstraintsMinRowDependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMinConstraint} onChangeInvalid={onChangeInvalidMinConstraint} onSetFix={onModifiedFlag} onResetFix={onModifiedFlag} />
             </Table>}
           {element.type === "equationset" && element.input && !element.hidden &&
             <Table className="table-secondary border border-secondary" size="sm">
               <ConstraintsMaxHeaderIndependentVariable />
-              <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onSetFlag={onModifiedFlag} onResetFlag={onModifiedFlag} />
+              <ConstraintsMaxRowIndependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onSetFix={onModifiedFlag} onResetFix={onModifiedFlag} />
             </Table>}
           {element.type === "equationset" && !element.input && !element.hidden &&
             <Table className="table-secondary border border-secondary" size="sm">
               <ConstraintsMaxHeaderDependentVariable />
-              <ConstraintsMaxRowDependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onSetFlag={onModifiedFlag} onResetFlag={onModifiedFlag} />
+              <ConstraintsMaxRowDependentVariable key={element.name} element={element} index={0} onChangeValid={onChangeValidMaxConstraint} onChangeInvalid={onChangeInvalidMaxConstraint} onSetFix={onModifiedFlag} onResetFix={onModifiedFlag} />
             </Table>}
         </Modal.Body>
         <Modal.Footer>
@@ -486,7 +518,7 @@ const model_type = useSelector((state) => state.model.type);
                     :
                     (display_seek_button ?
                       <>
-                        {(element.lmin & FIXED) ? '' : <Button variant="secondary" onClick={onSeekMinRequest} disabled={element.lmin & FIXED ? true : false} >Seek MIN {element.name}</Button>}{' '}&nbsp;
+                        {(element.lmin & FIXED) ? '' : <Button variant="secondary" onClick={onSeekMinRequest} disabled={element.lmin & FIXED ? true : false} >Seek MIN {element.name}</Button>}{' '}
                         {(element.lmin & FIXED) ? '' : <Button variant="secondary" onClick={onSeekMaxRequest} disabled={element.lmin & FIXED ? true : false} >Seek MAX {element.name}</Button>}
                       </>
                       :
