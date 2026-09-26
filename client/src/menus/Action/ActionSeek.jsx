@@ -5,6 +5,7 @@ import { CONSTRAINED, FIXED, MIN, MAX } from '../../store/actionTypes';
 import { seek, saveAutoSave } from '../../store/actions';
 import { logUsage } from '../../logUsage';
 import { displayMessage } from '../../components/Message';
+import { displaySpinner } from '../../components/Spinner';
 
 export default function ActionSeek() {
 //  console.log('ActionSeek - Mounting...');
@@ -73,9 +74,16 @@ export default function ActionSeek() {
 //        console.log('ActionSeek.onSeekButton','event=',event);
         setSeekShow(!seekShow);
         // Do seek
-        dispatch(saveAutoSave());
-        dispatch(seek(seekName, seekMinMax));
-        logUsage('event', 'ActionSeek', { event_label: seekMinMax + ' ' + seekName });
+        displaySpinner(true);
+        setTimeout(() => {
+          try {
+            dispatch(saveAutoSave());
+            dispatch(seek(seekName, seekMinMax));
+            logUsage('event', 'ActionSeek', { event_label: seekMinMax + ' ' + seekName });
+          } finally {
+            displaySpinner(false);
+          }
+        }, 0);
     }
 
         var ResultTableOptimize = require('../../designtypes/'+type+'/ResultTableOptimize.jsx'); // Dynamically load ResultTableOptimize
