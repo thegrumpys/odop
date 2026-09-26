@@ -24,6 +24,11 @@
   `client/src/__test__/Spring/Compression/eqnset.test.js` vectors. It now
   proves all three pathological cases through the generated module, including
   their intentional `Infinity` and `NaN` values.
+- Added a full session-facade Wasm contract test: it sends every one of the
+  54 stable-ID values through the opaque host ABI, invokes calculation-only
+  `INIT` plus recalculation, and reads calculated numeric/text state back.
+  The test found and fixed the missing Emscripten `cwrap` runtime export that
+  the Worker adapter depends on.
 
 ## Boundaries retained
 
