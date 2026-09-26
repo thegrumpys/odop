@@ -20,6 +20,10 @@
   coverage.
 - Added Jest coverage for complete hydration, atomic multi-symbol change
   transactions, stale base-revision errors, and stale response rejection.
+- Expanded the Wasm equation-set contract test from the legacy
+  `client/src/__test__/Spring/Compression/eqnset.test.js` vectors. It now
+  proves all three pathological cases through the generated module, including
+  their intentional `Infinity` and `NaN` values.
 
 ## Boundaries retained
 
@@ -50,8 +54,8 @@ source /Users/brianwatt/Developer/emsdk/emsdk_env.sh
 npm run cpp:test:wasm
 ```
 
-All six native CTests, both Worker Jest tests, and the existing two Wasm
-contract tests passed. `git diff --check` passed.
+All six native CTests, the Worker Jest tests, the legacy direct equation-set
+and Stage 0 fixture Jest tests, and the Wasm contract tests passed.
 
 ## Compatibility oracle
 
