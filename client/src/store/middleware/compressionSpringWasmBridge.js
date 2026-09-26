@@ -3,6 +3,7 @@ import { LOAD, LOAD_INITIAL_STATE, CHANGE_SYMBOL_VALUE, CHANGE_SYSTEM_CONTROLS_V
     FIX_SYMBOL_VALUE, FREE_SYMBOL_VALUE, CHANGE_SYMBOL_CONSTRAINT, CHANGE_SYMBOL_CONSTRAINTS,
     SET_SYMBOL_FLAG, RESET_SYMBOL_FLAG, CHANGE_INPUT_SYMBOL_VALUES } from '../types';
 import { normalizeCompressionSpringSavedDesign } from '../../computation/compressionSpringSchema';
+import { invokeCheck } from './invokeCheck';
 
 // Simple value/control updates can be owned by the Worker immediately. The
 // legacy reducers/dispatcher still assemble the richer fix/constraint state;
@@ -16,7 +17,9 @@ const synchronizedDomainActions = new Set([
 
 // Installed only by a feature-enabled host. It deliberately sends Redux's
 // post-reducer state as a single initial hydration, then sends only domain
-// changes. Legacy dispatcher execution is suppressed via the action marker.
+// changes. Load transactions retain the legacy dispatcher: it establishes
+// material-derived fields and input editability before that completed state is
+// handed to the Worker.
 export function createCompressionSpringWasmBridge(client, enabled = () => false) {
     let hydrated = false;
     return (store) => (next) => (action) => {
@@ -24,7 +27,7 @@ export function createCompressionSpringWasmBridge(client, enabled = () => false)
         const active = enabled() && compression;
         if (!active || action.type === 'modelSlice/applyWasmComputationSnapshot') return next(action);
         const handledByWorker = workerCommands.has(action.type);
-        const result = next({ ...action, meta: { ...action.meta, wasmComputationHandled: handledByWorker || action.type === LOAD || action.type === LOAD_INITIAL_STATE } });
+        const result = next({ ...action, meta: { ...action.meta, wasmComputationHandled: handledByWorker } });
         if (action.type === LOAD || action.type === LOAD_INITIAL_STATE) hydrated = false;
         if (!workerCommands.has(action.type) && !synchronizedDomainActions.has(action.type) && action.type !== LOAD && action.type !== LOAD_INITIAL_STATE) return result;
         const design = normalizeCompressionSpringSavedDesign(store.getState().model);
@@ -38,7 +41,13 @@ export function createCompressionSpringWasmBridge(client, enabled = () => false)
             : client.search(`search-${Date.now()}`);
         hydrated = true;
         request.then((response) => {
-            if (!response.stale && response.snapshot) store.dispatch(applyWasmComputationSnapshot(response.snapshot, response.objective, response.termination));
+            if (!response.stale && response.snapshot) {
+                store.dispatch(applyWasmComputationSnapshot(response.snapshot, response.objective, response.termination));
+                // The Worker result is a complete transaction. Rebuild alerts
+                // from its final snapshot so an alert raised by a pre-search
+                // legacy action cannot survive a successful Wasm search.
+                invokeCheck(store);
+            }
         }).catch(() => { hydrated = false; });
         return result;
     };
