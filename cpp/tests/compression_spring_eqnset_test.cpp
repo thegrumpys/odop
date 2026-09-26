@@ -47,6 +47,30 @@ int main() {
   const auto& session_model = static_cast<const odop::compression_spring::Model&>(session.model());
   ok &= check(close(session_model.state().x_numbers[2].value, expected[2]), "DesignSession evaluation must update its active model state");
 
+  odop::compression_spring::RuntimeState init_runtime;
+  init_runtime.p.resize(odop::compression_spring::kPSize);
+  init_runtime.x_numbers.resize(odop::compression_spring::kXSize);
+  init_runtime.x_text.resize(odop::compression_spring::kXSize);
+  for (std::size_t i = 0; i < p.size(); ++i) init_runtime.p[i].value = p[i];
+  for (std::size_t i = 0; i < input_x().size(); ++i) init_runtime.x_numbers[i].value = input_x()[i];
+  init_runtime.x_text[28].value = "mat_us.json";
+  odop::DesignSession initialized(std::make_unique<odop::compression_spring::Model>(init_runtime), controls);
+  ok &= check(odop::compression_spring::init(initialized).ok(), "material-table calculation init should succeed");
+  const auto& initialized_model = static_cast<const odop::compression_spring::Model&>(initialized.model());
+  ok &= check(initialized_model.state().x_text[26].value == "A228/QQW-470" && initialized_model.state().x_text[27].value == "Cold_Coiled", "init should resolve material text fields");
+  ok &= check(close(initialized_model.state().x_numbers[30].value, .284) && close(initialized_model.state().x_numbers[31].value, 11500000.) && close(initialized_model.state().x_numbers[39].value, 2.), "init should resolve material and end-type numerical inputs");
+  odop::compression_spring::evaluate(initialized);
+  const auto& initialized_after_eqnset = static_cast<const odop::compression_spring::Model&>(initialized.model());
+  ok &= check(close(initialized_after_eqnset.state().x_numbers[2].value, expected[2]), "INIT followed by EQNSET should match Stage 0 rate");
+
+  auto user_runtime = init_runtime;
+  user_runtime.x_numbers[24].value = 3.;
+  user_runtime.x_numbers[30].value = .5;
+  odop::DesignSession user_properties(std::make_unique<odop::compression_spring::Model>(user_runtime), controls);
+  ok &= check(odop::compression_spring::init(user_properties).ok(), "user-property calculation init should succeed");
+  const auto& user_model = static_cast<const odop::compression_spring::Model&>(user_properties.model());
+  ok &= check(user_model.state().x_numbers[30].value == .5, "user-property calculation init must retain entered material properties");
+
   p = {.4,.2,3.25,10.,10.,39.}; x = input_x();
   odop::compression_spring::evaluate(p, x, "mat_us.json", controls);
   ok &= check(x[12] == 1. && std::isinf(x[14]) && std::isnan(x[19]) && std::isnan(x[20]), "spring-index-one singular fixture differs");

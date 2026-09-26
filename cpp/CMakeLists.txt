@@ -10,6 +10,8 @@ add_library(odop-core STATIC
   core/src/piston_cylinder.cpp
   core/src/compression_spring_state.cpp
   models/compression_spring/src/compression_spring_model.cpp
+  models/compression_spring/src/compression_spring_resources.cpp
+  models/compression_spring/src/compression_spring_init.cpp
   models/compression_spring/src/compression_spring_eqnset.cpp
 )
 add_library(odop::core ALIAS odop-core)

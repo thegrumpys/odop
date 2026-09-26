@@ -38,6 +38,15 @@ struct SessionHydrationResult {
   [[nodiscard]] bool ok() const { return session != nullptr && diagnostics.empty(); }
 };
 
+struct InitResult {
+  std::vector<std::string> diagnostics;
+  [[nodiscard]] bool ok() const { return diagnostics.empty(); }
+};
+
+// Calculation-only initialization. It has no UI visibility, input-mode, or
+// Redux concerns; those are owned by client-side initUI.
+[[nodiscard]] InitResult init(DesignSession& session);
+
 // Host adapters normalize their persisted payload into FlatDesign and
 // SystemControls, then use this function to construct the active model/session.
 [[nodiscard]] SessionHydrationResult create_session(const FlatDesign& design, SystemControls controls);
