@@ -5,6 +5,7 @@ import { CONSTRAINED, FIXED } from '../../store/actionTypes';
 import { search, saveAutoSave } from '../../store/actions';
 import { logUsage } from '../../logUsage';
 import { displayMessage } from '../../components/Message';
+import { displaySpinner } from '../../components/Spinner';
 import store from '../../store/store';
 
 export default function ActionSearch() {
@@ -57,7 +58,16 @@ export default function ActionSearch() {
 
   const doSearch = (type) => {
 //    console.log('ActionSearch.doSearch');
-    dispatch(search('Menu '+(type === 'NOT FINITE' ? type : '')));
+    displaySpinner(true);
+    // Search runs synchronously in Redux middleware. Yield first so the browser
+    // can paint the spinner before the calculation blocks the main thread.
+    setTimeout(() => {
+      try {
+        dispatch(search('Menu '+(type === 'NOT FINITE' ? type : '')));
+      } finally {
+        displaySpinner(false);
+      }
+    }, 0);
   }
 
   var display_search_button;
