@@ -45,6 +45,15 @@ if(ODOP_BUILD_NATIVE_TESTS AND NOT ODOP_BUILD_WASM)
   target_link_libraries(odop-compression-spring-eqnset-test PRIVATE odop::core)
   add_test(NAME odop-compression-spring-eqnset-test COMMAND odop-compression-spring-eqnset-test)
 
+  add_executable(odop-compression-spring-stage0-fixture-test
+    tests/compression_spring_stage0_fixture_test.cpp
+  )
+  target_link_libraries(odop-compression-spring-stage0-fixture-test PRIVATE odop::core)
+  target_compile_definitions(odop-compression-spring-stage0-fixture-test PRIVATE
+    ODOP_STAGE0_FIXTURE_PATH="${CMAKE_CURRENT_SOURCE_DIR}/../docs/Architecture/fixtures/compression-spring/stage0/eqnset.json"
+  )
+  add_test(NAME odop-compression-spring-stage0-fixture-test COMMAND odop-compression-spring-stage0-fixture-test)
+
   add_executable(odop-objective-test tests/objective_test.cpp)
   target_link_libraries(odop-objective-test PRIVATE odop::core)
   add_test(NAME odop-objective-test COMMAND odop-objective-test)
