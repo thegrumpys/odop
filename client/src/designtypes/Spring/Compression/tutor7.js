@@ -68,7 +68,7 @@ export const execute = {
                     the coil outside diameter could be reduced (mathematically, if not physically)
                     to twice the wire diameter or perhaps even less.
                     Without a constraint on <b>Rate</b> or
-                    Stroke (change in length between point 1 and point 2),
+                    another variable like <b>L_Stroke</b> (change in length between point 1 and point 2),
                     the number of coils could be reduced to something less than one
                     and free length reduced down to equal the solid height.
                     The result is the mathematical equivalent of a solid bar supporting
@@ -127,9 +127,9 @@ export const execute = {
                 <>
                     <p>
                     We start by adding a few constraints to the compression spring starting point used in other tutorial sessions.
-                    This will leave us with a well formed
-                    &nbsp;<a href="/docs/Help/designSituations.html" target="_blank" rel="noopener noreferrer">Design Situation</a>&nbsp;
-                    and a reasonable feasible region to work in.
+                    This will leave us with a
+                    well formed <a href="/docs/Help/designSituations.html" target="_blank" rel="noopener noreferrer">Design Situation</a> and
+                    a reasonable feasible region to work in.
                     </p>
 
                     <p>
@@ -320,8 +320,8 @@ export const execute = {
                     Now, let's see if we can find the minimum weight spring necessary to
                     support a 100 pound static load at a minimum of 2.5 inches
                     deflection.  Just to make the problem a little bit more interesting,
-                    we'll ignore the material and simply say that we want no more than 80,000
-                    PSI stresses.
+                    we'll ignore the material and simply say that we want 80,000 PSI stresses
+                    at the second load point.
                     </p>
 
                     <p>
@@ -331,9 +331,8 @@ export const execute = {
                     FIX  <b>Force_2</b>  100<br />
                     CHANGE  <b>L_Stroke</b>  MIN  2.5 &nbsp; &#60;--- use constraint, not FIX<br />
                     <br />
-                    CHANGE  <b>Prop_Calc_Method</b>  3  &nbsp;  &#60;--- specify allowable stress<br />
-                    CHANGE  <b>Stress_Lim_Stat</b>  80000<br />
-                    CHANGE  <b>FS_2</b>  MIN  1.0  &nbsp;  &#60;--- more details on next page<br />
+                    FIX  <b>Stress_Lim_Stat</b>  80000<br />
+                    CHANGE <b>FS_2</b>  MAX  1.8  &#60;--- more details on next page
                     </p>
                     <br />
                 </>
@@ -345,10 +344,8 @@ export const execute = {
                 fixSymbolValue('Force_2', 100.0),
                 setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
                 changeSymbolConstraint('L_Stroke', MIN, 2.5),
-                changeSymbolValue("Prop_Calc_Method", 3),
-                changeSymbolValue("Stress_Lim_Stat", 80000.0),
-                setSymbolFlag('FS_2', MIN, CONSTRAINED),
-                changeSymbolConstraint('FS_2', MIN, 1.0)
+                fixSymbolValue('Stress_2', 80000.0),
+                changeSymbolConstraint('FS_2', MAX, 1.8)
                 ]
         },
         {
@@ -356,29 +353,18 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    If the use of <b>Prop_Calc_Method</b> seems a bit unfamiliar, you may wish to
-                    review the on-line documentation sections (HELP entries) on
-                    &nbsp;<a href="/docs/Help/DesignTypes/Spring/Compression/description.html" target="_blank" rel="noopener noreferrer">Compression Spring Design Type</a>,
-                    &nbsp;<a href="/docs/Help/SpringDesign/materials.html" target="_blank" rel="noopener noreferrer">Materials</a> and
-                    &nbsp;<a href="/docs/Help/SpringDesign/advancedSpringOperations.html" target="_blank" rel="noopener noreferrer">Advanced Spring Operations</a>.&nbsp;
-                    Also, an earlier tutorial section (tutor5) and one of the demo problems (demo4)
-                    provide additional details.
-                    </p>
-
-                    <p>
-                    Changing <b>FS_2</b> MIN to be 1.0 causes the value of <b>Stress_Lim_Stat</b>
-                    (80,000 PSI) to apply at point 2.
-                    There will be no additional margin in the factor of safety.
+                    Increasing the upper limit on FS_2 from 1.5 to 1.8 allows the design to be more conservative
+                    (lower stress, heavier).
+                    Also, it allows this presentation to be simplified.
+                    The alternative would involve changing <b>Prop_Calc_Method</b> to a value of 3 and then changing 
+                    the value of <b>Stress_Lim_Stat</b> to 80,000.
                     </p>
 
                     <p>
                     As mentioned previously, while it is not always absolutely necessary,
                     it is best practice to start the optimization process from or near a feasible start point.
                     At the very least, you want to know that a feasible solution is available.
-                    </p>
-
-                    <p>
-                    Moving to the next page will execute a search.
+                    So, even though it may not be necessary for this case, moving to the next page will execute a search.
                     </p>
                 </>
             )
@@ -390,15 +376,6 @@ export const execute = {
                     <p>
                     Yes, a feasible solution is available.
                     You should scan through the details.
-                    </p>
-
-                    <p>
-                    The search stops with the first feasible design it finds.  It is not
-                    necessarily a design that delivers 80,000 PSI stress at point 2.
-                    However, when we ask for a minimum weight design (that is also a
-                    feasible design), we can expect the process to take up the slack
-                    and achieve the desired 80,000 psi stress at
-                    point 2 (100 pound load).
                     </p>
 
                     <p>
