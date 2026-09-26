@@ -1,21 +1,15 @@
 #include "odop/compression_spring_model.hpp"
 #include "odop/compression_spring_offsets.hpp"
+#include "odop/compression_spring_resources.hpp"
 #include <array>
 #include <cmath>
+#include <limits>
 #include <stdexcept>
 
 namespace odop::compression_spring {
 namespace {
 
-constexpr std::array<std::array<double, 7>, 18> kTensileEndurance = {{
-  {{0,0,0,0,0,0,0}}, {{50,36,33,30,42,39,36}}, {{50,36,33,30,42,39,36}}, {{50,36,33,30,42,39,36}},
-  {{50,42,40,38,49,47,46}}, {{50,36,33,30,42,39,36}}, {{50,36,33,30,42,39,36}}, {{36,35,33,30,35,34,33}},
-  {{36,35,33,30,35,34,33}}, {{50,45,44,41,50,47,45}}, {{35,36,33,30,40,39,36}}, {{40,36,33,30,40,39,36}},
-  {{40,36,33,30,40,39,36}}, {{40,36,33,30,40,39,36}}, {{45,36,33,30,42,39,36}}, {{40,36,33,30,40,39,36}},
-  {{50,40,38,35,48,46,43}}, {{50,40,38,35,48,46,43}}
-}};
-
-double cycle_life(int material, double category, double tensile, double stress_1, double stress_2, double small_number) {
+double cycle_life(const MaterialResource& material, double category, double tensile, double stress_1, double stress_2, double small_number) {
   const double temp = .67 * tensile;
   double remaining_1 = temp - stress_1;
   if (remaining_1 < small_number) remaining_1 = small_number;
@@ -29,7 +23,7 @@ double cycle_life(int material, double category, double tensile, double stress_1
   for (int i = 0; i <= 3; ++i) {
     int table_offset = 3 - i + peened;
     if (peened > 0 && table_offset == 3) table_offset = 0;
-    snx[i] = .01 * kTensileEndurance.at(static_cast<std::size_t>(material)).at(static_cast<std::size_t>(table_offset)) * tensile;
+    snx[i] = .01 * material.tensile_endurance.at(static_cast<std::size_t>(table_offset)) * tensile;
   }
   constexpr std::array<double, 4> sny{{7., 6., 5., 4.}};
   auto interpolate = [&](int low, int high) {
@@ -43,7 +37,7 @@ double cycle_life(int material, double category, double tensile, double stress_1
 
 }  // namespace
 
-void evaluate(std::vector<double>& p, std::vector<double>& x, std::string_view, const SystemControls& controls) {
+void evaluate(std::vector<double>& p, std::vector<double>& x, std::string_view material_file, const SystemControls& controls) {
   using namespace offsets;
   if (p.size() != kPSize || x.size() != kXSize) throw std::invalid_argument("Compression Spring EQNSET requires six P and 48 X numeric slots");
   const double zero = 0.;
@@ -70,8 +64,10 @@ void evaluate(std::vector<double>& p, std::vector<double>& x, std::string_view, 
   const double stress_rng = (x[Stress_2] - x[Stress_1]) / 2.;
   const double se2 = x[Stress_Lim_Endur] / 2.;
   x[FS_CycleLife] = x[Stress_Lim_Stat] / (kc * stress_rng * (x[Stress_Lim_Stat] - se2) / se2 + stress_avg);
-  if (x[Prop_Calc_Method] == 1. && x[Material_Type] != 0.) x[Cycle_Life] = cycle_life(static_cast<int>(x[Material_Type]), x[Life_Category], x[Tensile], x[Stress_1], x[Stress_2], controls.small_number);
-  else x[Cycle_Life] = 0.;
+  if (x[Prop_Calc_Method] == 1. && x[Material_Type] != 0.) {
+    const auto* material = material_resource(material_file, static_cast<int>(x[Material_Type]));
+    x[Cycle_Life] = material == nullptr ? std::numeric_limits<double>::quiet_NaN() : cycle_life(*material, x[Life_Category], x[Tensile], x[Stress_1], x[Stress_2], controls.small_number);
+  } else x[Cycle_Life] = 0.;
   double wire_length = std::sqrt(p[L_Free] * p[L_Free] + std::pow(p[Coils_T] * std::acos(-1.) * x[Mean_Dia], 2));
   if (x[End_Type] == 5.) wire_length -= 3.926 * p[Wire_Dia];
   x[Weight] = x[Density] * (std::acos(-1.) * p[Wire_Dia] * p[Wire_Dia] / 4.) * wire_length;

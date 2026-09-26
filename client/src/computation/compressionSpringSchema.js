@@ -49,6 +49,20 @@ export const compressionSpringUiSchemaByUnits = {
 // a saved-design units field.
 export const compressionSpringUiSchema = compressionSpringUiSchemaByUnits.US;
 
+// Calculation scheduling metadata. Presentation-only changes remain in the
+// JavaScript UI layer and do not trigger C++ init or equation evaluation.
+const calculationInputIds = new Set([
+    'Prop_Calc_Method', 'Material_Type', 'Material_File', 'Life_Category',
+    'End_Type', 'tbase010', 'tbase400'
+]);
+
+export function compressionSpringChangeImpact(symbolId) {
+    if (calculationInputIds.has(symbolId)) return 'initialize-and-evaluate';
+    if (['OD_Free', 'Wire_Dia', 'L_Free', 'Coils_T', 'Force_1', 'Force_2'].includes(symbolId)) return 'evaluate';
+    if (['Inactive_Coils', 'Add_Coils@Solid', 'Density', 'Torsion_Modulus', 'Hot_Factor_Kh', 'Tensile', '%_Tensile_Endur', '%_Tensile_Stat', 'Stress_Lim_Endur', 'Stress_Lim_Stat'].includes(symbolId)) return 'evaluate';
+    return 'no-computation';
+}
+
 function schemaForDesign(design) {
     return design && design.units === 'Metric'
         ? compressionSpringUiSchemaByUnits.Metric

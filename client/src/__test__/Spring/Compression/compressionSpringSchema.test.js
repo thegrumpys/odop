@@ -5,6 +5,7 @@ import {
     compressionSpringUiSchema,
     compressionSpringUiSchemaByUnits,
     compressionSpringUiSchemaVersion,
+    compressionSpringChangeImpact,
     hydrateCompressionSpringDesign,
     normalizeCompressionSpringSavedDesign
 } from '../../../computation/compressionSpringSchema';
@@ -25,6 +26,13 @@ test('derives a versioned 54-symbol UI schema from Compression Spring initial st
     });
     expect(l2.validminchoices).toEqual(['L_Solid']);
     expect(l2.validminchoice).toBe(0);
+});
+
+test('classifies calculation changes without treating presentation as calculation state', () => {
+    expect(compressionSpringChangeImpact('Material_Type')).toBe('initialize-and-evaluate');
+    expect(compressionSpringChangeImpact('End_Type')).toBe('initialize-and-evaluate');
+    expect(compressionSpringChangeImpact('Wire_Dia')).toBe('evaluate');
+    expect(compressionSpringChangeImpact('tooltip')).toBe('no-computation');
 });
 
 test('normalizes the legacy Compression Spring envelope for C++ hydration', () => {
