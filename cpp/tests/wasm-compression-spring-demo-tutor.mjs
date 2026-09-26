@@ -43,6 +43,20 @@ const checkpoints = [
       OD_Free: { lmax: 1, cmax: .9 },
       Force_2: { lmin: 2, lmax: 2 }
     })
+  },
+  {
+    name: 'demo2-page-05',
+    expectedObjective: .15692322612703405,
+    symbols: withChanges({
+      Material_Type: { value: 7 },
+      End_Type: { value: 3 },
+      OD_Free: { value: .188, lmin: 2, lmax: 2 },
+      L_Solid: { lmax: 1, cmax: .34 },
+      L_2: { lmin: 3, lmax: 3, cmin: .385, cmax: .385, validmin: .385 },
+      Force_2: { value: 7.2, lmin: 2, lmax: 2 },
+      L_Free: { value: .475, lmin: 2, lmax: 2 },
+      Wire_Dia: { value: .035 }
+    })
   }
 ];
 
