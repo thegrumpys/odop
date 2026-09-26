@@ -127,6 +127,7 @@ HydrationResult hydrate(const FlatDesign& design) {
     }
   }
   if (!result.diagnostics.empty()) return result;
+  state.propagations = design.propagations;
   result.state = std::move(state);
   return result;
 }
@@ -145,7 +146,23 @@ FlatDesign snapshot(const RuntimeState& state) {
     } else symbol.text_value = state.x_text.at(entry.offset).value;
     design.symbols.push_back(std::move(symbol));
   }
+  design.propagations = state.propagations;
   return design;
+}
+
+void apply_propagations(RuntimeState& state, const RuntimeState& before) {
+  for (const auto& rule : state.propagations) {
+    const auto* source = find_slot(rule.source_id); const auto* target = find_slot(rule.target_id);
+    if (source == nullptr || target == nullptr || !source->numeric || !target->numeric) continue;
+    const double value = source->storage == Storage::p ? state.p.at(source->offset).value : state.x_numbers.at(source->offset).value;
+    const double previous = source->storage == Storage::p ? before.p.at(source->offset).value : before.x_numbers.at(source->offset).value;
+    if (value == previous) continue;
+    auto& destination = target->storage == Storage::p ? state.p.at(target->offset) : state.x_numbers.at(target->offset);
+    if (rule.target == PropagationTarget::valid_minimum) destination.valid_minimum = value;
+    else if (rule.target == PropagationTarget::valid_maximum) destination.valid_maximum = value;
+    else if (rule.target == PropagationTarget::constraint_minimum) destination.constraint_minimum = value;
+    else destination.constraint_maximum = value;
+  }
 }
 
 }  // namespace odop::compression_spring

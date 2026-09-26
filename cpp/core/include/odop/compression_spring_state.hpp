@@ -14,6 +14,8 @@ inline constexpr std::size_t kPSize = 6;
 inline constexpr std::size_t kXSize = 48;
 
 enum class Storage { p, x };
+enum class PropagationTarget { valid_minimum, valid_maximum, constraint_minimum, constraint_maximum };
+struct PropagationRule { std::string source_id; std::string target_id; PropagationTarget target; };
 
 struct NumericSlot {
   double value = 0.0;
@@ -63,6 +65,7 @@ struct FlatDesign {
   std::string design_type;
   int schema_version = 0;
   std::vector<FlatSymbol> symbols;
+  std::vector<PropagationRule> propagations;
 };
 
 struct UiSymbolView {
@@ -82,6 +85,7 @@ struct RuntimeState {
   std::vector<NumericSlot> x_numbers;
   std::vector<TextSlot> x_text;
   std::vector<UiSymbolView> ui_symbols;
+  std::vector<PropagationRule> propagations;
 };
 
 struct HydrationResult {
@@ -97,5 +101,6 @@ struct HydrationResult {
 inline constexpr std::size_t kSymbolCount = 54;
 [[nodiscard]] HydrationResult hydrate(const FlatDesign& design);
 [[nodiscard]] FlatDesign snapshot(const RuntimeState& state);
+void apply_propagations(RuntimeState& state, const RuntimeState& before);
 
 }  // namespace odop::compression_spring

@@ -13,7 +13,7 @@ using odop::compression_spring::FlatSymbol;
 
 struct SessionHost {
   FlatDesign design{std::string(odop::compression_spring::kDesignType),
-                    odop::compression_spring::kSchemaVersion, {}};
+                    odop::compression_spring::kSchemaVersion, {}, {}};
   odop::SystemControls controls;
   std::unique_ptr<odop::DesignSession> session;
   std::string diagnostic;
@@ -71,7 +71,12 @@ void* odop_compression_spring_session_create() { return new SessionHost; }
 void odop_compression_spring_session_destroy(void* raw) { delete static_cast<SessionHost*>(raw); }
 void odop_compression_spring_session_clear(void* raw) {
   auto& host = *static_cast<SessionHost*>(raw);
-  host.design.symbols.clear(); host.session.reset(); host.diagnostic.clear();
+  host.design.symbols.clear(); host.design.propagations.clear(); host.session.reset(); host.diagnostic.clear();
+}
+int odop_compression_spring_session_set_propagation(void* raw, const char* source, const char* target, int kind) {
+  if (source == nullptr || target == nullptr || kind < 0 || kind > 3) return 0;
+  static_cast<SessionHost*>(raw)->design.propagations.push_back({source, target, static_cast<odop::compression_spring::PropagationTarget>(kind)});
+  return 1;
 }
 int odop_compression_spring_session_set_numeric(void* raw, const char* id,
     double value, double valid_minimum, double valid_maximum,
@@ -135,7 +140,14 @@ double odop_compression_spring_session_get_numeric(void* raw, const char* id, in
   const auto* location = id == nullptr ? nullptr : odop::compression_spring::find_slot(id);
   if (current == nullptr || location == nullptr || !location->numeric) return 0.;
   const auto& slot = location->storage == odop::compression_spring::Storage::p ? current->state().p.at(location->offset) : current->state().x_numbers.at(location->offset);
-  switch (field) { case 0: return slot.value; case 1: return slot.minimum_violation; case 2: return slot.maximum_violation; case 3: return slot.minimum_scale_denominator; case 4: return slot.maximum_scale_denominator; default: return 0.; }
+  switch (field) {
+    case 0: return slot.value; case 1: return slot.minimum_violation; case 2: return slot.maximum_violation;
+    case 3: return slot.minimum_scale_denominator; case 4: return slot.maximum_scale_denominator;
+    case 5: return slot.valid_minimum; case 6: return slot.valid_maximum;
+    case 7: return slot.constraint_minimum; case 8: return slot.constraint_maximum;
+    case 9: return slot.scale_denominator_limit; case 10: return slot.minimum_flags; case 11: return slot.maximum_flags;
+    default: return 0.;
+  }
 }
 const char* odop_compression_spring_session_diagnostic(void* raw) { return static_cast<SessionHost*>(raw)->diagnostic.c_str(); }
 double odop_compression_spring_session_objective(void* raw) { return static_cast<SessionHost*>(raw)->objective; }

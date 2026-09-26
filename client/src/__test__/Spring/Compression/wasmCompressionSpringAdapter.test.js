@@ -37,6 +37,7 @@ it('marshals stable-ID slots and controls without exposing Wasm details to the W
     expect(Module.calls).toContainEqual(['recalculate', 9, 1]);
     expect(Module.calls.filter((call) => call[0] === 'control')).toHaveLength(9);
     expect(response.design.symbols[0].numericValue).toBe(.1055);
+    expect(response.design.symbols[0]).toMatchObject({ validMinimum: .2, constraintMinimum: .2, minimumFlags: .2 });
     expect(response.objective).toBe(0);
     adapter.dispose();
     expect(Module.calls).toContainEqual(['destroy']);

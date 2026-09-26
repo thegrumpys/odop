@@ -1,6 +1,7 @@
 import { createCompressionSpringWasmBridge } from '../../../store/middleware/compressionSpringWasmBridge';
-import { changeSymbolValue } from '../../../store/actions';
-import { CHANGE_SYMBOL_VALUE } from '../../../store/types';
+import { changeSymbolValue, fixSymbolValue, setSymbolFlag } from '../../../store/actions';
+import { CHANGE_SYMBOL_VALUE, FIX_SYMBOL_VALUE, SET_SYMBOL_FLAG } from '../../../store/types';
+import { MIN, FIXED } from '../../../store/actionTypes';
 import { initialState } from '../../../designtypes/Spring/Compression/initialState';
 
 function storeFor(model = initialState) {
@@ -36,4 +37,19 @@ it('feature-disabled bridge leaves actions untouched and does not start a Worker
     bridge(action);
     expect(forwarded).toEqual([action]);
     expect(client.hydrate).not.toHaveBeenCalled();
+});
+
+it('synchronizes completed fix and constraint-flag transactions without suppressing their legacy reducer semantics', async () => {
+    const snapshot = [{ id: 'Wire_Dia', numericValue: .12 }];
+    const client = { hydrate: jest.fn(() => Promise.resolve({ snapshot })), applyChanges: jest.fn() };
+    const store = storeFor();
+    const forwarded = [];
+    const bridge = createCompressionSpringWasmBridge(client, () => true)(store)((action) => forwarded.push(action));
+    bridge(fixSymbolValue('Wire_Dia', .12));
+    bridge(setSymbolFlag('L_2', MIN, FIXED));
+    await Promise.resolve();
+    expect(forwarded.map((action) => action.type)).toEqual([FIX_SYMBOL_VALUE, SET_SYMBOL_FLAG]);
+    expect(forwarded.every((action) => !action.meta || !action.meta.wasmComputationHandled)).toBe(true);
+    expect(client.hydrate).toHaveBeenCalledTimes(2);
+    expect(client.applyChanges).not.toHaveBeenCalled();
 });
