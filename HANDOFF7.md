@@ -100,3 +100,36 @@ File > Export captures supplied for this repository. They are the normal
 recalculation compatibility fixtures. Their `objective_value`, P values and
 calculation termination string are asserted now; ordinary Search termination
 fixtures remain the next compatibility increment before feature rollout.
+
+## Post-Stage-7 performance baseline
+
+`npm run cpp:benchmark:wasm` reports normal-recalculation timing for the
+public US/Metric exports and pre-Search `demo1`/`tutor3` checkpoints. It is a
+host-reported baseline, not a brittle CI duration threshold. Stage 8 extends
+it with Search, Worker lifecycle, cancellation, and edit-to-visible latency.
+The existing `client/src/__test__/test-results/performance.csv` remains the
+historical whole-workflow legacy benchmark; its timings are intentionally not
+compared directly with the new warmed Wasm-core measurements.
+
+`npm run cpp:test:wasm:jest` is the actual-C++/Wasm Jest integration lane. It
+builds the Node artifact, then replays the pre-Search normal-calculation
+checkpoints from `demo1` and `tutor3` through the session ABI and asserts the
+same legacy objectives. It complements (rather than replaces) the mock-Worker
+Jest protocol tests.
+
+## Critical objective-parity follow-up
+
+Do not enable the Worker path yet. The first expansion of the actual-Wasm
+demo/tutorial lane found a severe objective mismatch at the legacy `demo2`
+page-05 normal-calculation checkpoint: legacy Redux reports
+`0.15692322612703405`; C++/Wasm reports `0.7292557479292445`. The exact
+public `Startup.json` is confirmed to be the legacy US `initialState`, and
+field-by-field inspection shows C++ `INIT` and `EQNSET` agree with legacy for
+material properties, end-type properties, and calculated engineering values.
+The defect is in objective penalty/scaling semantics, not the initial state or
+material lookup. Compare the per-symbol validity/constraint contributions in
+`client/src/store/middleware/updateObjectiveValue.js` with
+`cpp/core/src/optimization.cpp`, particularly fixed dependent `L_2` and
+constrained output scale denominators. Keep the expected legacy assertion
+strict; do not substitute the C++ objective. The two verified pre-Search
+actual-Wasm cases remain `demo1` page 06 and `tutor3` page 04.

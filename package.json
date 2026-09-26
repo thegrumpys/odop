@@ -19,6 +19,8 @@
     "cpp:test:native": "scripts/cpp/test-native.sh",
     "cpp:build:wasm": "scripts/cpp/build-wasm.sh",
     "cpp:test:wasm": "scripts/cpp/test-wasm.sh",
+    "cpp:benchmark:wasm": "scripts/cpp/benchmark-wasm.sh",
+    "cpp:test:wasm:jest": "scripts/cpp/test-wasm-jest.sh",
     "harp-compile": "cd client && harp docs public/docs && cd .. && node ./scripts/build_index.js client/public/docs",
     "harp-server": "cd client && harp . --port 8080"
   },
