@@ -57,7 +57,7 @@ const model_type = useSelector((state) => state.model.type);
     return () => { };
   }, [element, model_type]);
 
-  const onSearchRequest = (event) => {
+  const onSearchRequest = async (event) => {
 //    console.log('SymbolValue.onSearchRequest','event=',event);
     if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Search cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
@@ -79,7 +79,7 @@ const model_type = useSelector((state) => state.model.type);
       setEditShow(!editShow);
       return;
     }
-    doSearch('FINITE');
+    await doSearch('FINITE');
   }
 
   const onSearchContextHelp = () => {
@@ -87,11 +87,11 @@ const model_type = useSelector((state) => state.model.type);
     window.open('/docs/Help/errors.html#objNotFinite', '_blank');
   }
 
-  const onSearchContinue = () => {
+  const onSearchContinue = async () => {
 //    console.log('SymbolValue.onSearchContinue');
     setSearchInfiniteShow(!searchInfiniteShow);
     setEditShow(!editShow);
-    doSearch('NOT FINITE');
+    await doSearch('NOT FINITE');
   }
 
   const onSearchCancel = () => {
@@ -100,21 +100,20 @@ const model_type = useSelector((state) => state.model.type);
     setEditShow(!editShow);
   }
 
-  const doSearch = (type) => {
+  const doSearch = async (type) => {
 //    console.log('In SymbolValue.doSearch');
     displaySpinner(true);
     // Search runs synchronously in Redux middleware. Yield first so the browser
     // can paint the spinner before the calculation blocks the main thread.
-    setTimeout(() => {
-      try {
-        dispatch(search('Element ' + element.name+' '+(type === 'NOT FINITE' ? type : '')));
-      } finally {
-        displaySpinner(false);
-      }
-    }, 0);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
+      dispatch(search('Element ' + element.name+' '+(type === 'NOT FINITE' ? type : '')));
+    } finally {
+      displaySpinner(false);
+    }
   }
 
-  const onSeekMinRequest = (event) => {
+  const onSeekMinRequest = async (event) => {
 //    console.log('SymbolValue.onSeekMinRequest','event=',event);
     if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
@@ -132,18 +131,17 @@ const model_type = useSelector((state) => state.model.type);
       return;
     }
     displaySpinner(true);
-    setTimeout(() => {
-      try {
-        dispatch(saveAutoSave());
-        dispatch(seek(element.name, MIN));
-        logUsage('event', 'ActionSeek', { event_label: 'Element ' + element.name + ' MIN' });
-      } finally {
-        displaySpinner(false);
-      }
-    }, 0);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
+      dispatch(saveAutoSave());
+      dispatch(seek(element.name, MIN));
+      logUsage('event', 'ActionSeek', { event_label: 'Element ' + element.name + ' MIN' });
+    } finally {
+      displaySpinner(false);
+    }
   }
 
-  const onSeekMaxRequest = (event) => {
+  const onSeekMaxRequest = async (event) => {
 //    console.log('SymbolValue.onSeekMaxRequest','event=',event);
     if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Seek cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
@@ -161,15 +159,14 @@ const model_type = useSelector((state) => state.model.type);
       return;
     }
     displaySpinner(true);
-    setTimeout(() => {
-      try {
-        dispatch(saveAutoSave());
-        dispatch(seek(element.name, MAX));
-        logUsage('event', 'ActionSeek', { event_label: 'Element ' + element.name + ' MAX' });
-      } finally {
-        displaySpinner(false);
-      }
-    }, 0);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
+      dispatch(saveAutoSave());
+      dispatch(seek(element.name, MAX));
+      logUsage('event', 'ActionSeek', { event_label: 'Element ' + element.name + ' MAX' });
+    } finally {
+      displaySpinner(false);
+    }
   }
 
   const onContextMenu = (e) => {
@@ -252,23 +249,22 @@ const model_type = useSelector((state) => state.model.type);
     if (typeof onFocus === "function") onFocus(event);
   }
 
-  const onBlurLocal = (event) => {
+  const onBlurLocal = async (event) => {
 //    console.log('In NameValueUnitsRowCalcInput.onBlurLocal event.target.value=', event.target.value);
     var state = store.getState();
 //    console.log('In NameValueUnitsRowCalcInput.onBlurLocal','state.model.system_controls.enable_auto_search=', state.model.system_controls.enable_auto_search,'valueChanged=',value !== element.value,'objective_value >= objmin=',state.model.result.objective_value>= state.model.system_controls.objmin);
     var targetId = event.relatedTarget ? event.relatedTarget.id : null;
+    if (typeof onBlur === "function") onBlur(event);
     if (state.model.system_controls.enable_auto_search && value !== element.value && state.model.result.objective_value >= state.model.system_controls.objmin && targetId !== 'searchButton' && targetId !== 'seekButton') {
       // Auto search runs synchronously. Yield so the UI can paint before the heavy work starts.
       displaySpinner(true);
-      setTimeout(() => {
-        try {
-          dispatch(search('Auto'));
-        } finally {
-          displaySpinner(false);
-        }
-      }, 0);
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      try {
+        dispatch(search('Auto'));
+      } finally {
+        displaySpinner(false);
+      }
     }
-    if (typeof onBlur === "function") onBlur(event);
   }
 
   const onSelectLocal = (event) => {

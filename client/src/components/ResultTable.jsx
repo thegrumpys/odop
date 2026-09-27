@@ -24,7 +24,7 @@ export default function ResultTable() {
   const model_search_completed = useSelector((state) => state.model.result.search_completed);
   const dispatch = useDispatch();
 
-  const onSearchRequest = (event) => {
+  const onSearchRequest = async (event) => {
 //    console.log('ResultTable.onSearchRequest','event=',event);
     if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Search cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
@@ -45,7 +45,7 @@ export default function ResultTable() {
       setSearchInfiniteShow(!searchInfiniteShow);
       return;
     }
-    doSearch('FINITE');
+    await doSearch('FINITE');
   }
 
   const onSearchContextHelp = () => {
@@ -53,10 +53,10 @@ export default function ResultTable() {
     window.open('/docs/Help/errors.html#objNotFinite', '_blank');
   }
 
-  const onSearchContinue = () => {
+  const onSearchContinue = async () => {
 //    console.log('ResultTable.onSearchContinue');
     setSearchInfiniteShow(!searchInfiniteShow);
-    doSearch('NOT FINITE');
+    await doSearch('NOT FINITE');
   }
 
   const onSearchCancel = () => {
@@ -65,18 +65,17 @@ export default function ResultTable() {
     // Noop - all done
   }
 
-  const doSearch = (type) => {
+  const doSearch = async (type) => {
 //    console.log('In ResultTable.doSearch');
     displaySpinner(true);
     // Search runs synchronously in Redux middleware. Yield first so the browser
     // can paint the spinner before the calculation blocks the main thread.
-    setTimeout(() => {
-      try {
-        dispatch(search('Button '+(type === 'NOT FINITE' ? type : '')));
-      } finally {
-        displaySpinner(false);
-      }
-    }, 0);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
+      dispatch(search('Button '+(type === 'NOT FINITE' ? type : '')));
+    } finally {
+      displaySpinner(false);
+    }
   }
 
   const onSeekRequest = (event) => {
@@ -131,20 +130,19 @@ export default function ResultTable() {
     setSeekName(event.target.value);
   }
 
-  const onSeekButton = (event) => {
+  const onSeekButton = async (event) => {
 //    console.log('ResultTable.onSeekButton','event=',event);
     setSeekShow(!seekShow);
     // Do seek
     displaySpinner(true);
-    setTimeout(() => {
-      try {
-        dispatch(saveAutoSave());
-        dispatch(seek(seekName, seekMinMax));
-        logUsage('event', 'ActionSeek', { event_label: 'Button ' + seekMinMax + ' ' + seekName });
-      } finally {
-        displaySpinner(false);
-      }
-    }, 0);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
+      dispatch(saveAutoSave());
+      dispatch(seek(seekName, seekMinMax));
+      logUsage('event', 'ActionSeek', { event_label: 'Button ' + seekMinMax + ' ' + seekName });
+    } finally {
+      displaySpinner(false);
+    }
   }
 
   //      From Issue #365 and #869:

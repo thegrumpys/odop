@@ -70,20 +70,19 @@ export default function ActionSeek() {
         setSeekName(event.target.value);
     }
 
-  const  onSeekButton = (event) => {
+  const  onSeekButton = async (event) => {
 //        console.log('ActionSeek.onSeekButton','event=',event);
         setSeekShow(!seekShow);
         // Do seek
         displaySpinner(true);
-        setTimeout(() => {
-          try {
-            dispatch(saveAutoSave());
-            dispatch(seek(seekName, seekMinMax));
-            logUsage('event', 'ActionSeek', { event_label: seekMinMax + ' ' + seekName });
-          } finally {
-            displaySpinner(false);
-          }
-        }, 0);
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        try {
+          dispatch(saveAutoSave());
+          dispatch(seek(seekName, seekMinMax));
+          logUsage('event', 'ActionSeek', { event_label: seekMinMax + ' ' + seekName });
+        } finally {
+          displaySpinner(false);
+        }
     }
 
         var ResultTableOptimize = require('../../designtypes/'+type+'/ResultTableOptimize.jsx'); // Dynamically load ResultTableOptimize
