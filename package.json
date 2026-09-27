@@ -4,7 +4,7 @@
   "description": "Open Design Optimization Platform (ODOP) Server",
   "main": "server.js",
   "engines": {
-    "node": "20.x"
+    "node": "26.x"
   },
   "scripts": {
     "start": "node server.js",
