@@ -404,6 +404,25 @@ The first compatibility milestone is not merely “same final answer.”  It is 
 
 **Exit criterion:** normal Compression Spring calculation runs in a Worker/Wasm path and produces the same visible result as the legacy JavaScript path.
 
+### Stage 7.5 — Demo and tutorial parity assessment (completed)
+
+1. Build a parity inventory that replays Compression Spring demo and tutorial calculation and Search actions through the C++/Wasm session path.
+2. Compare visible calculation state, objectives, constraints, alerts, search termination, and final design values against the legacy JavaScript path.
+3. Exercise the full demo and tutorial set side by side in Chrome, keeping the Worker/Wasm path opt-in during the assessment.
+4. Record the accepted parity baseline and preserve the benchmark and actual-Wasm Jest lanes for regression use.
+
+**Completion criterion:** all assessed Compression Spring demos and tutorials compare successfully between the legacy JavaScript and Worker/Wasm paths. This criterion is complete.
+
+### Stage 7.8 — Port Seek
+
+1. Port the legacy `seek.js` strategy to the C++ `DesignSession` API.
+2. Preserve target-variable and Min/Max direction semantics, repeated Search calls, constraint-limited outcomes, and user-facing termination messages.
+3. Expose Seek as a cancellable, revision-safe Worker operation.
+4. Add native C++ and actual-Wasm regression fixtures for selected Seek outcomes.
+5. Extend end-to-end parity coverage to Tutor 7, whose five Seek operations are intentionally excluded from the Stage 7.5 Search inventory.
+
+**Exit criterion:** selected Compression Spring Seek workflows reach compatible final states, objectives, constraints, and termination messages through the Worker/Wasm path.
+
 ### Stage 8 — Enable autosearch
 
 1. Expose the session `enable_auto_search` control through the user-facing autosearch setting, plus pending/running/cancelled states.
@@ -423,6 +442,17 @@ The first compatibility milestone is not merely “same final answer.”  It is 
 5. Apply the proven model contract to Extension Spring, Torsion Spring, Solid, and then Piston-Cylinder as appropriate.
 
 **Exit criterion:** Compression Spring calculation and optimization no longer depend on Redux internals, while existing UI and persistence behavior remain supported.
+
+### Stage 10 — Port Trade
+
+1. Port Trade's constraint-relaxation and recommendation calculations from `ActionTrade.jsx` to the C++ session API.
+2. Preserve the existing Trade strategy workflow: existing, arbitrary, size, feasible, and establish modes; repeat/restart; accept/decline; and cancellation.
+3. Run Trade-driven searches as cancellable, revision-safe Worker jobs and apply accepted results atomically.
+4. Add native C++, actual-Wasm, and browser fixtures for recommendations and accepted/declined final states.
+5. Extend end-to-end parity coverage to Compression Spring Tutor 8 and `tutor8p3_TestCase`, including the modal workflow and user-visible messages.
+6. Measure Trade interaction latency and verify that the Worker-backed dialogs remain behaviorally compatible with the legacy feature.
+
+**Exit criterion:** Compression Spring Trade produces compatible recommendations and accepted results through the Worker/Wasm path without stale or cancelled work changing the current design.
 
 ## Risks and mitigations
 
