@@ -129,13 +129,14 @@ export default function MainPage() {
 //  console.log('MainPage','src=',src,' alt=',alt);
 
   const enableDB = config.features.enableDB;
+  const isDevelopmentWasm = config.node.env === 'development' && config.features.enableCompressionSpringWasm;
   const logOnOff = enableDB ? (authState && authState.isAuthenticated ? <SignOut /> : <SignIn />) : null;
 //  console.log('MainPage','logOnOff=',logOnOff);
   return (
     <>
       <Navbar className="ps-3 pe-3" style={{ backgroundColor: '#eeeeee' }} expand="md" fixed="top">
         <OverlayTrigger placement="bottom" overlay={<Tooltip>Reset app.<br />Save your work first!<br />See Help AutoSave.</Tooltip>}>
-          <Navbar.Brand href="/"><img className="d-none d-md-inline" src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" />ODOP</Navbar.Brand>
+          <Navbar.Brand href="/"><img className="d-none d-md-inline" src="favicon.ico" alt="Open Design Optimization Platform (ODOP) icon" />ODOP{isDevelopmentWasm && <span className="badge text-bg-success ms-2">WASM</span>}</Navbar.Brand>
         </OverlayTrigger>
         <Navbar.Toggle onClick={toggle} />
         <Navbar.Collapse in={show}>

@@ -43,4 +43,26 @@ Please adhere to the following standards when contributing code:
 - Use environment variables: FRONT_URL, JAWSDB_URL, and JAWSDB_TEST_URL for database access.
 - Deploy to Heroku
 
+## Branch-Specific Development Runtime
+
+- On the `investigation_of_cpp_and_webasm` branch, always run the local client with
+  `REACT_APP_ENABLE_COMPRESSION_SPRING_WASM=true`. This enables the Compression
+  Spring C++/WebAssembly worker; do not perform development or parity testing on
+  the legacy JavaScript calculation path unless the user explicitly asks for it.
+
+## Side-by-Side Parity Testing
+
+- Use Chrome directly (not the in-app browser) for side-by-side parity checks.
+- Compare Development at `http://localhost:3000` with Staging at
+  `https://odop-staging.herokuapp.com`.
+- The user supplies the macro or execute file that identifies what to run; use it
+  to drive both sessions from the same starting point.
+- When the Design Recovery dialog appears, always select **No** to begin with a
+  clean session.
+- Preserve both Chrome tabs throughout a parity session. Before ending every
+  turn that opened, resumed, observed, or compared those tabs, explicitly mark
+  each tab for handoff so automated cleanup cannot close it. Reading or
+  comparing a page must never end the session or close either tab unless the
+  user explicitly requests that action.
+
 **Note:** Instructions in this file should be prioritized based on the deepest nested `AGENTS.md` file.
