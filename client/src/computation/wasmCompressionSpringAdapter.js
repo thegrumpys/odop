@@ -2,6 +2,7 @@ const numericFields = ['value', 'validMinimum', 'validMaximum', 'constraintMinim
 const controlFields = ['maxit', 'fix_wt', 'con_wt', 'viol_wt', 'objmin', 'del', 'delmin', 'tol', 'smallnum'];
 const number = (value) => typeof value === 'number' ? value : 0;
 const optionalNumber = (value) => typeof value === 'number' ? value : Number.NaN;
+const patshTraceEnabled = process.env.REACT_APP_PATSH_TRACE === 'true';
 
 // The Worker sees ordinary design objects. This is the sole owner of the
 // narrow Emscripten ABI and its opaque C++ session handle.
@@ -14,11 +15,13 @@ export function createWasmCompressionSpringAdapter(Module) {
     const setText = call('odop_compression_spring_session_set_text', 'number', ['number', 'string', 'string']);
     const setPropagation = call('odop_compression_spring_session_set_propagation', 'number', ['number', 'string', 'string', 'number']);
     const setControl = call('odop_compression_spring_session_set_control', null, ['number', 'number', 'number']);
+    const setTrace = call('odop_compression_spring_session_set_trace', null, ['number', 'number']);
     const recalculate = call('odop_compression_spring_session_recalculate', 'number', ['number', 'number']);
     const search = call('odop_compression_spring_session_search', 'number', ['number']);
     const getNumeric = call('odop_compression_spring_session_get_numeric', 'number', ['number', 'string', 'number']);
     const getText = call('odop_compression_spring_session_get_text', 'string', ['number', 'string']);
     const diagnostic = call('odop_compression_spring_session_diagnostic', 'string', ['number']);
+    const trace = call('odop_compression_spring_session_trace', 'string', ['number']);
     const objective = call('odop_compression_spring_session_objective', 'number', ['number']);
     const handle = create();
 
@@ -53,6 +56,7 @@ export function createWasmCompressionSpringAdapter(Module) {
     function run(design, operation) {
         const writeError = writeDesign(design);
         if (writeError) return { ok: false, diagnostic: writeError };
+        setTrace(handle, patshTraceEnabled ? 1 : 0);
         if (!operation()) return { ok: false, diagnostic: diagnostic(handle) };
         const updated = readDesign(design);
         return { ok: true, design: updated, snapshot: updated.symbols, objective: objective(handle), diagnostics: [] };
@@ -61,7 +65,7 @@ export function createWasmCompressionSpringAdapter(Module) {
         recalculate: (design, { initialize }) => run(design, () => recalculate(handle, initialize ? 1 : 0)),
         search: (design) => {
             const response = run(design, () => recalculate(handle, 1) && search(handle));
-            return response.ok ? { ...response, termination: diagnostic(handle) } : response;
+            return response.ok ? { ...response, termination: diagnostic(handle), trace: trace(handle) } : response;
         },
         snapshot: (design) => design.symbols,
         dispose: () => destroy(handle)

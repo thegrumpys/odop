@@ -1,4 +1,5 @@
 import { CONSTRAINED, FIXED } from '../actionTypes';
+import { patshTraceEnabled } from './patshTrace';
 
 // Update Violations and Objective Value
 export function pxUpdateObjectiveValue(p, x, store, merit) {
@@ -32,8 +33,10 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
     var xx;
     var invalid = false;
     var infeasible = false;
+    var traceTerms = patshTraceEnabled() ? [] : undefined;
     for (let i = 0; i < design.model.symbol_table.length; i++) {
         element = design.model.symbol_table[i];
+        var objectiveBefore = viol_sum;
 //        console.log('pxUpdateObjectiveValue element=',element);
         if (element.type === "equationset" && element.input) { // Independent Variable
             pp = p[ip++];
@@ -172,6 +175,19 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
 //            console.log('pxUpdateObjectiveValue DV/CI element=',element,'ix=',ix,'xx=',xx,'element.cmax=',element.cmax,'element.smax=',element.smax);
 //            console.log('pxUpdateObjectiveValue DV/CI ','xx=',xx,'element=',element,'validity_vmin=',validity_vmin,'validity_vmax=',validity_vmax,'feasibility_vmin=',feasibility_vmin,'feasibility_vmax=',feasibility_vmax,'viol_sum=',viol_sum,'invalid=',invalid,'infeasible=',infeasible);
         }
+        if (traceTerms) {
+            traceTerms.push({
+                name: element.name,
+                value: element.type === 'equationset' && element.input ? pp : xx,
+                validity_vmin,
+                validity_vmax,
+                feasibility_vmin,
+                feasibility_vmax,
+                smin: element.smin,
+                smax: element.smax,
+                contribution: viol_sum - objectiveBefore
+            });
+        }
 //        console.log('pxUpdateObjectiveValue at end element=',element);
     }
 
@@ -184,6 +200,8 @@ export function pxUpdateObjectiveValue(p, x, store, merit) {
 
     // Update Objective Value
     obj = design.model.system_controls.viol_wt * viol_sum + m_funct;
+
+    if (traceTerms) console.log('[PATSH_TRACE][LEGACY][CANDIDATE] ' + JSON.stringify({ p, x, violation_sum: viol_sum, violation_weight: design.model.system_controls.viol_wt, merit: m_funct, objective: obj, terms: traceTerms }));
 
     if (debug) {
         if (!invalid && !infeasible) {

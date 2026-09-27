@@ -1,4 +1,5 @@
 import { despak } from './despak';
+import { patshTraceEnabled } from './patshTrace';
 /**
  * Hooke & Jeeves Pattern Search - find minimum of objective function.
  * This follows the 1961 ACM Paper "Direct Search" Solution of Numerical and Statistical Problems
@@ -58,7 +59,7 @@ export function patsh(store, psi, del, delmin, objmin, maxit, tol, merit) {
         }
         var s = s_psi; // s: the functional value before the move
         s = patsh_explore(phi, s, del); // explore
-//        console.log('After patsh_explore phi=',phi,'s=',s,'itno=',itno);
+        if (patshTraceEnabled()) console.log('[PATSH_TRACE][LEGACY] After patsh_explore ' + JSON.stringify({ phi: [...phi], s, itno, del, xflag: [...xflag] }));
 //        console.log('@@@1@@@ itno=',itno,'s=',s,'s_psi=',s_psi,'calc=',s + tol * Math.abs(s_psi),'compare=', s + tol * Math.abs(s_psi) <= s_psi);
         if (s < s_psi && s + tol * Math.abs(s_psi) <= s_psi) { // goto 2
             do { // [2]
@@ -78,20 +79,20 @@ export function patsh(store, psi, del, delmin, objmin, maxit, tol, merit) {
                     } else {
                         NCODE += ' after '+itno+' iterations.';
                     }
-//                    console.log('</ul><li>','@@@@@ End patsh NCODE=',NCODE,'</li>');
+                    if (patshTraceEnabled()) console.log('[PATSH_TRACE][LEGACY] End patsh NCODE=', NCODE);
                     return NCODE; // stop, design reached feasibility
                 }
                 if (itno > maxit) { // Are we done? Leave by door #2
                     NCODE = 'Search terminated when iteration count exceeded the maximum limit (MAXIT)';
                     NCODE += ' after '+itno+' iterations.';
-//                    console.log('</ul><li>','@@@@@ End patsh NCODE=',NCODE,'</li>');
+                    if (patshTraceEnabled()) console.log('[PATSH_TRACE][LEGACY] End patsh NCODE=', NCODE);
                     return NCODE;// stop, iteration count exceeded
                 }
                 s_phi = despak(store, phi, merit); // AKA despak, s_phi: the functional value for this move
 //                console.log('patsh 2 phi=',phi,'s_phi=',s_phi);
                 s = s_phi; // s: the functional value before the move
                 s = patsh_explore(phi, s, del); // explore
-//                console.log('After patsh_explore phi=',phi,'s=',s,'itno=',itno);
+                if (patshTraceEnabled()) console.log('[PATSH_TRACE][LEGACY] After patsh_explore ' + JSON.stringify({ phi: [...phi], s, itno, del, xflag: [...xflag] }));
 //                console.log('@@@2@@@ itno=',itno,'s=',s,'s_psi=',s_psi,'calc=',s + tol * Math.abs(s_psi),'compare=', s + tol * Math.abs(s_psi) <= s_psi);
             } while (s < s_psi && s + tol * Math.abs(s_psi) <= s_psi); // goto 2 else s >= s_psi goto 1
         } else { // s >= s_psi && s + tol * Math.abs(s_psi) >= s_psi goto 3
@@ -101,7 +102,7 @@ export function patsh(store, psi, del, delmin, objmin, maxit, tol, merit) {
                     NCODE += '. Low iteration count may produce low precision results.';
                 else
                     NCODE += ' after '+itno+' iterations.';
-//                console.log('</ul><li>','@@@@@ End patsh NCODE=',NCODE,'</li>');
+                if (patshTraceEnabled()) console.log('[PATSH_TRACE][LEGACY] End patsh NCODE=', NCODE);
                 return NCODE;// stop, step size exhausted
             } else {
                 del = del / 1.9; // del >= delmin && s >= s_psi goto 1
@@ -115,6 +116,6 @@ export function patsh(store, psi, del, delmin, objmin, maxit, tol, merit) {
     } else {
         NCODE += ' after '+itno+' iterations.';
     }
-//    console.log('</ul><li>','@@@@@ End patsh NCODE=',NCODE,'</li>');
+    if (patshTraceEnabled()) console.log('[PATSH_TRACE][LEGACY] End patsh NCODE=', NCODE);
     return NCODE; // stop, design reached feasibility
 }

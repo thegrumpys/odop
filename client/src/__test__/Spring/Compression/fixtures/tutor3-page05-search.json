@@ -1,0 +1,41 @@
+{
+  "id": "tutor3-page05-search",
+  "description": "Tutor 3 immediately before page 06 Search. Derived from the Compression Spring US Startup state by the page 04 actions.",
+  "baseFixture": "Startup.json",
+  "symbolChanges": {
+    "OD_Free": {
+      "maximumFlags": 1,
+      "maximumConstraint": 0.9
+    },
+    "Force_2": {
+      "minimumFlags": 2,
+      "maximumFlags": 2
+    }
+  },
+  "expectedLegacySearch": {
+    "objective": 0,
+    "iterations": 5,
+    "termination": "Search terminated when design reached feasibility (Objective value is less than OBJMIN) after 5 iterations.",
+    "symbols": {
+      "OD_Free": 0.8254193749999995,
+      "Wire_Dia": 0.08977115090574427,
+      "L_Free": 2.384782873969231,
+      "Coils_T": 10,
+      "Force_1": 10.5,
+      "Force_2": 39
+    }
+  },
+  "expectedWasmSearch": {
+    "objective": 0,
+    "iterations": 5,
+    "termination": "Search terminated when design reached feasibility (Objective value is less than OBJMIN) after 5 iterations.",
+    "symbols": {
+      "OD_Free": 0.8254193749999995,
+      "Wire_Dia": 0.08977115090574427,
+      "L_Free": 2.384782873969231,
+      "Coils_T": 10,
+      "Force_1": 10.500000000000002,
+      "Force_2": 39
+    }
+  }
+}

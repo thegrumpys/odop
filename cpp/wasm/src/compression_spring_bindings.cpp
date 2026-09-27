@@ -17,6 +17,8 @@ struct SessionHost {
   odop::SystemControls controls;
   std::unique_ptr<odop::DesignSession> session;
   std::string diagnostic;
+  std::string trace;
+  bool trace_enabled = false;
   double objective = 0.;
 };
 
@@ -113,6 +115,9 @@ void odop_compression_spring_session_set_control(void* raw, int field, double va
     default: break;
   }
 }
+void odop_compression_spring_session_set_trace(void* raw, int enabled) {
+  static_cast<SessionHost*>(raw)->trace_enabled = enabled != 0;
+}
 int odop_compression_spring_session_recalculate(void* raw, int initialize) {
   auto& host = *static_cast<SessionHost*>(raw);
   if (!hydrate(host)) return 0;
@@ -130,8 +135,10 @@ int odop_compression_spring_session_recalculate(void* raw, int initialize) {
 int odop_compression_spring_session_search(void* raw) {
   auto& host = *static_cast<SessionHost*>(raw);
   if (host.session == nullptr && !odop_compression_spring_session_recalculate(raw, 1)) return 0;
-  const auto result = odop::optimization::patsh(*host.session, odop::optimization::compile_problem(*host.session));
+  const auto result = odop::optimization::patsh(*host.session, odop::optimization::compile_problem(*host.session), {}, host.trace_enabled);
   host.diagnostic = result.termination;
+  host.trace.clear();
+  for (const auto& line : result.trace) host.trace += line + '\n';
   host.objective = result.evaluation.objective;
   return 1;
 }
@@ -150,6 +157,7 @@ double odop_compression_spring_session_get_numeric(void* raw, const char* id, in
   }
 }
 const char* odop_compression_spring_session_diagnostic(void* raw) { return static_cast<SessionHost*>(raw)->diagnostic.c_str(); }
+const char* odop_compression_spring_session_trace(void* raw) { return static_cast<SessionHost*>(raw)->trace.c_str(); }
 double odop_compression_spring_session_objective(void* raw) { return static_cast<SessionHost*>(raw)->objective; }
 const char* odop_compression_spring_session_get_text(void* raw, const char* id) {
   auto* current = model(*static_cast<SessionHost*>(raw));

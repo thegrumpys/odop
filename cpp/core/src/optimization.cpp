@@ -4,9 +4,57 @@
 
 #include <algorithm>
 #include <cmath>
+#include <iomanip>
+#include <sstream>
 
 namespace odop::optimization {
 namespace { constexpr unsigned constrained = 1, fixed = 2; }
+namespace {
+std::string trace_explore(const std::vector<double>& phi, const double objective,
+                   const unsigned iterations, const double step,
+                   const std::vector<int>& signs) {
+  std::ostringstream output;
+  output << std::setprecision(17);
+  output << "[PATSH_TRACE][WASM] After patsh_explore {\"phi\":[";
+  for (std::size_t i = 0; i < phi.size(); ++i) {
+    if (i != 0) output << ',';
+    output << phi[i];
+  }
+  output << "],\"s\":" << objective << ",\"itno\":" << iterations
+            << ",\"del\":" << step << ",\"xflag\":[";
+  for (std::size_t i = 0; i < signs.size(); ++i) {
+    if (i != 0) output << ',';
+    output << signs[i];
+  }
+  output << "]}";
+  return output.str();
+}
+
+std::string trace_exit(const std::string& termination) {
+  const std::string output = "[PATSH_TRACE][WASM] End patsh NCODE= " + termination;
+  return output;
+}
+
+std::string trace_candidate(const std::vector<double>& phi, const Evaluation& evaluation,
+                            const unsigned number, const double weight) {
+  std::ostringstream output;
+  output << std::setprecision(17) << "[PATSH_TRACE][WASM][CANDIDATE] {\"number\":" << number
+         << ",\"p\":[";
+  for (std::size_t i = 0; i < phi.size(); ++i) { if (i) output << ','; output << phi[i]; }
+  output << "],\"violation_sum\":" << evaluation.violation_sum << ",\"violation_weight\":" << weight << ",\"objective\":" << evaluation.objective << ",\"terms\":[";
+  for (std::size_t i = 0; i < evaluation.terms.size(); ++i) {
+    const auto& term = evaluation.terms[i];
+    if (i) output << ',';
+    output << "{\"name\":\"" << term.name << "\",\"value\":" << term.value
+           << ",\"validity_vmin\":" << term.valid_min << ",\"validity_vmax\":" << term.valid_max
+           << ",\"feasibility_vmin\":" << term.feasibility_min << ",\"feasibility_vmax\":" << term.feasibility_max
+           << ",\"smin\":" << term.smin << ",\"smax\":" << term.smax
+           << ",\"contribution\":" << term.contribution << '}';
+  }
+  output << "]}";
+  return output.str();
+}
+}
 double scale_denominator(const SystemControls& controls, const double level,
                          const double limit, const unsigned flags) {
   const double weight = (flags & fixed) ? controls.fixed_weight
@@ -27,14 +75,20 @@ Problem compile_problem(const DesignSession& session) {
   const auto* model = dynamic_cast<const compression_spring::Model*>(&session.model());
   if (!model) return {};
   Problem result;
+  const auto name = [&](Source source, std::size_t offset) {
+    for (const auto& symbol : model->state().ui_symbols) {
+      if (symbol.numeric && symbol.location.storage == (source == Source::p ? compression_spring::Storage::p : compression_spring::Storage::x) && symbol.location.offset == offset) return symbol.id;
+    }
+    return std::string(source == Source::p ? "p_" : "x_") + std::to_string(offset);
+  };
   const auto add = [&](Source source, std::size_t offset, const compression_spring::NumericSlot& s) {
-    result.descriptors.push_back({source, offset, s.valid_minimum, s.valid_maximum, s.constraint_minimum, s.constraint_maximum, s.minimum_scale_denominator, s.maximum_scale_denominator, s.minimum_flags, s.maximum_flags});
+    result.descriptors.push_back({source, offset, name(source, offset), s.valid_minimum, s.valid_maximum, s.constraint_minimum, s.constraint_maximum, s.minimum_scale_denominator, s.maximum_scale_denominator, s.minimum_flags, s.maximum_flags});
   };
   for (std::size_t i=0;i<model->state().p.size();++i) add(Source::p,i,model->state().p[i]);
   for (std::size_t i=0;i<model->state().x_numbers.size();++i) add(Source::x,i,model->state().x_numbers[i]);
   return result;
 }
-Evaluation evaluate(DesignSession& session, const Problem& problem) {
+Evaluation evaluate(DesignSession& session, const Problem& problem, const bool trace) {
   Evaluation result;
   auto* model = dynamic_cast<compression_spring::Model*>(&session.model());
   if (!model) { result.diagnostics.push_back("objective requires a Compression Spring session"); return result; }
@@ -51,12 +105,15 @@ Evaluation evaluate(DesignSession& session, const Problem& problem) {
   for (const auto& d : problem.descriptors) {
     auto& slot = d.source == Source::p ? model->state().p.at(d.offset) : model->state().x_numbers.at(d.offset);
     const double value = slot.value;
-    const double valid_min = d.valid_min - value, valid_max = value - d.valid_max;
-    const bool is_fixed = d.source == Source::x && (d.min_flags & fixed);
-    const double min = (is_fixed || (d.min_flags & constrained)) ? (d.constraint_min - value) / d.smin : 0.;
-    const double max = is_fixed ? -min : ((d.max_flags & constrained) ? (value - d.constraint_max) / d.smax : 0.);
+    // Propagated bounds can change with every equation evaluation. Read the
+    // candidate's current slot rather than the initial search descriptor.
+    const double valid_min = slot.valid_minimum - value, valid_max = value - slot.valid_maximum;
+    const bool is_fixed = d.source == Source::x && (slot.minimum_flags & fixed);
+    const double min = (is_fixed || (slot.minimum_flags & constrained)) ? (slot.constraint_minimum - value) / slot.minimum_scale_denominator : 0.;
+    const double max = is_fixed ? -min : ((slot.maximum_flags & constrained) ? (value - slot.constraint_maximum) / slot.maximum_scale_denominator : 0.);
     slot.minimum_violation = min; slot.maximum_violation = max;
     result.invalid |= valid_min > 0. || valid_max > 0.; result.infeasible |= min > 0. || max > 0.;
+    const double before = result.objective;
     if (is_fixed) {
       result.objective += fixed_penalty(valid_min, min);
       result.objective += fixed_penalty(valid_max, max);
@@ -64,13 +121,15 @@ Evaluation evaluate(DesignSession& session, const Problem& problem) {
       const auto add = [&](double valid, double feasibility) { if (valid > 0. && feasibility > 0.) result.objective += penalty(valid + feasibility); else if (valid > 0.) result.objective += penalty(valid); else if (feasibility > 0.) result.objective += penalty(feasibility); };
       add(valid_min, min); add(valid_max, max);
     }
+    if (trace) result.terms.push_back({d.name, value, valid_min, valid_max, min, max, slot.minimum_scale_denominator, slot.maximum_scale_denominator, result.objective - before});
   }
+  result.violation_sum = result.objective;
   result.objective *= session.controls().violation_weight;
   return result;
 }
 
 SearchResult patsh(DesignSession& session, const Problem& problem,
-                   const std::function<bool()>& cancelled) {
+                   const std::function<bool()>& cancelled, const bool trace) {
   SearchResult result;
   auto* model = dynamic_cast<compression_spring::Model*>(&session.model());
   if (!model) {
@@ -103,7 +162,14 @@ SearchResult patsh(DesignSession& session, const Problem& problem,
     }
     compression_spring::evaluate(session);
     ++result.evaluations;
-    return evaluate(session, problem);
+    auto evaluation = evaluate(session, problem, trace);
+    if (trace) {
+      std::vector<double> full_p;
+      full_p.reserve(model->state().p.size());
+      for (const auto& slot : model->state().p) full_p.push_back(slot.value);
+      result.trace.push_back(trace_candidate(full_p, evaluation, result.evaluations, session.controls().violation_weight));
+    }
+    return evaluation;
   };
   const auto feasible_message = [](const unsigned iterations) {
     std::string message = "Search terminated when design reached feasibility (Objective value is less than OBJMIN)";
@@ -152,6 +218,7 @@ SearchResult patsh(DesignSession& session, const Problem& problem,
     if (cancelled && cancelled()) return cancellation_result();
     auto phi = psi;
     double explored = explore(phi, current_objective);
+    if (trace) result.trace.push_back(trace_explore(phi, explored, result.iterations, step, signs));
     if (explored < current_objective && explored + controls.tolerance * std::abs(current_objective) <= current_objective) {
       do {
         if (cancelled && cancelled()) return cancellation_result();
@@ -163,21 +230,25 @@ SearchResult patsh(DesignSession& session, const Problem& problem,
         if (current_objective < controls.objective_minimum) {
           result.termination = feasible_message(result.iterations);
           result.evaluation = candidate(psi);
+          if (trace) result.trace.push_back(trace_exit(result.termination));
           return result;
         }
         if (result.iterations > static_cast<unsigned>(controls.max_iterations)) {
           result.termination = "Search terminated when iteration count exceeded the maximum limit (MAXIT) after " + std::to_string(result.iterations) + " iterations.";
           result.evaluation = candidate(psi);
+          if (trace) result.trace.push_back(trace_exit(result.termination));
           return result;
         }
         current = candidate(phi);
         explored = explore(phi, current.objective);
+        if (trace) result.trace.push_back(trace_explore(phi, explored, result.iterations, step, signs));
       } while (explored < current_objective && explored + controls.tolerance * std::abs(current_objective) <= current_objective);
     } else if (step < controls.minimum_step) {
       result.termination = "Search terminated when step size reached the minimum limit (DELMIN)";
       if (result.iterations <= 2) result.termination += ". Low iteration count may produce low precision results.";
       else result.termination += " after " + std::to_string(result.iterations) + " iterations.";
       result.evaluation = candidate(psi);
+      if (trace) result.trace.push_back(trace_exit(result.termination));
       return result;
     } else {
       step /= 1.9;
@@ -185,6 +256,7 @@ SearchResult patsh(DesignSession& session, const Problem& problem,
   }
   result.termination = feasible_message(result.iterations);
   result.evaluation = candidate(psi);
+  if (trace) result.trace.push_back(trace_exit(result.termination));
   return result;
 }
 }

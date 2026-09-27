@@ -5,6 +5,8 @@ import { LOAD, LOAD_INITIAL_STATE, CHANGE_SYMBOL_VALUE, CHANGE_SYSTEM_CONTROLS_V
 import { normalizeCompressionSpringSavedDesign } from '../../computation/compressionSpringSchema';
 import { invokeCheck } from './invokeCheck';
 
+const patshTraceEnabled = process.env.REACT_APP_PATSH_TRACE === 'true';
+
 // Simple value/control updates can be owned by the Worker immediately. The
 // legacy reducers/dispatcher still assemble the richer fix/constraint state;
 // once complete, that authoritative domain state is synchronized atomically.
@@ -42,6 +44,7 @@ export function createCompressionSpringWasmBridge(client, enabled = () => false)
         hydrated = true;
         request.then((response) => {
             if (!response.stale && response.snapshot) {
+                if (patshTraceEnabled && response.trace) response.trace.trim().split('\n').forEach((line) => console.log(line));
                 store.dispatch(applyWasmComputationSnapshot(response.snapshot, response.objective, response.termination));
                 // The Worker result is a complete transaction. Rebuild alerts
                 // from its final snapshot so an alert raised by a pre-search
