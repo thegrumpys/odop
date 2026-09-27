@@ -40,28 +40,28 @@ export default function ActionTrade() {
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const dispatch = useDispatch();
 
-  const triggerSearch = (source) => {
+  const triggerSearch = async (source) => {
     displaySpinner(true);
-    setTimeout(() => {
-      try {
-        dispatch(search(source));
-      } finally {
-        displaySpinner(false);
-      }
-    }, 0);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
+      dispatch(search(source));
+    } finally {
+      displaySpinner(false);
+    }
   };
 
 //===========================================================
 // Trade Menu Item
 //===========================================================
 
-  const strategyToggle = () => {
+  const strategyToggle = async () => {
 //    console.log('ActionTrade.strategyToggle');
     logUsage('event', 'ActionTrade', { event_label: 'ActionTrade' });
     dispatch(saveAutoSave());
     var ncode;
     var design = store.getState();
-    var localNviol = commonViolationSetup();
+    var localNviol = await commonViolationSetup();
+    design = store.getState();
     if (design.model.result.objective_value <= design.model.system_controls.objmin || localNviol === 0) {
       dispatch(restoreInputSymbolValues());
       ncode = 'OBJ < OBJMIN - USE OF TRADE IS NOT APPROPRIATE';
@@ -71,14 +71,14 @@ export default function ActionTrade() {
     }
   }
 
-  const commonViolationSetup = () => {
+  const commonViolationSetup = async () => {
 //    console.log('ActionTrade.commonViolationSetup');
     var element;
     var localNviol = 0;
     var localVflag = [];
     var localLdir = [];
     dispatch(saveInputSymbolValues());
-    triggerSearch('Trade');
+    await triggerSearch('Trade');
     var design = store.getState();
     for (let i = 0; i < design.model.symbol_table.length; i++) {
       element = design.model.symbol_table[i];
@@ -354,7 +354,7 @@ export default function ActionTrade() {
     setSizeShow(!sizeShow);
   }
 
-  const onSizeContinue = () => {
+  const onSizeContinue = async () => {
 //    console.log('ActionTrade.onSizeContinue');
     var element;
     var c2;
@@ -377,7 +377,7 @@ export default function ActionTrade() {
     }
     design = store.getState();
     if (design.model.result.objective_value > design.model.system_controls.objmin) {
-      triggerSearch('Trade');
+      await triggerSearch('Trade');
     }
     design = store.getState();
     if (design.model.result.objective_value <= design.model.system_controls.objmin) {
@@ -386,6 +386,10 @@ export default function ActionTrade() {
       setFeasibleShow(!feasibleShow);
       return;
     } else {
+//            if (design.model.system_controls.ioopt > 1) {
+//                console.log('TRIAL (FULL STEP) CONSTRAINTS:');
+//                clister();
+//            }
       rk3 = design.model.result.objective_value;
 // MAKE SECOND EXPLORATORY STEP 1/2 WAY TO THE FIRST ONE
       c2 = c3 / 2.0;
@@ -401,7 +405,7 @@ export default function ActionTrade() {
         }
       }
       dispatch(restoreInputSymbolValues());
-      triggerSearch('Trade');
+      await triggerSearch('Trade');
       design = store.getState();
       if (design.model.result.objective_value <= design.model.system_controls.objmin) {
 // Feasible was found, go show Feasible Modal
@@ -421,7 +425,19 @@ export default function ActionTrade() {
       var capb;
       var capc;
       var arg;
+//            if (design.model.system_controls.ioopt > 1) {
+//                console.log('TRIAL (HALF STEP) CONSTRAINTS:');
+//                clister();
+//            }
       rk2 = design.model.result.objective_value;
+      /** ******** QUADRATIC EXTRAPOLATION ****************************** */
+      /* REFER TO THESIS FIGURE 4-2 */
+      /* FOR THE CASE THAT C1 ^= 0 : */
+      /* A=C1-C2; */
+      /* SMC=C1-C3; */
+      /* CAPB= C1*(RK2AB-RK3BC) -C2*(RK1AC+RK3BC) +C3*(RK2AB-RK1AC); */
+      /* CAPC= C2*C3*RK1AC -C1*C3*RK2AB +C1*C2*RK3BC; */
+      /* HOWEVER IN THIS CASE C1=0, SO TERMS DROP OUT */
       a = -c2;
       b = c2 - c3;
       smc = -c3;
@@ -433,9 +449,14 @@ export default function ActionTrade() {
       capc = rk1;
       arg = capb * capb - 4.0 * capa * capc;
       if (arg < 0.0) {
+//                console.log('THERE MAY BE NO FEASIBLE SOLUTION IN THIS DIRECTION.');
+//                console.log('PARABOLA AXIS OF SYMMETRY:');
         c0 = -capb / (2.0 * capa);
       } else {
+        /* TAKE SMALLER ROOT */
         c0 = (-capb - Math.sqrt(arg)) / (2.0 * capa);
+        /** ******************************************************************* */
+//                console.log('EXTRAPOLATION INDICATES A FEASIBLE SOLUTION AT:');
       }
       for (let i = 0; i < nviol; i++) {
         let j = vflag[i];
@@ -443,12 +464,14 @@ export default function ActionTrade() {
         if (ldir[i] < 0) {
           value = tc[i] + dir[i] * tc[i] * c0;
           dispatch(changeSymbolConstraint(element.name, MIN, value));
+//                        console.log(element.name + ' MIN ' + value + ' ' + element.units);
         } else {
           value = tc[i] + dir[i] * tc[i] * c0;
           dispatch(changeSymbolConstraint(element.name, MAX, value));
+//                        console.log(element.name + ' MAX ' + value + ' ' + element.units);
         }
       }
-      triggerSearch('Trade');
+      await triggerSearch('Trade');
     }
     setSizeShow(!sizeShow);
     setEstablishShow(!establishShow);
@@ -572,6 +595,21 @@ export default function ActionTrade() {
     setNotFeasibleShow(!notFeasibleShow);
   }
 
+//    clister() {
+//        var element;
+//        var design = store.getState();
+//        console.log('CONSTRAINT                % VIOLATION           LEVEL');
+//        for (let i = 0; i < nviol; i++) {
+//            let j = vflag[i];
+//            element = design.model.symbol_table[j];
+//            if (ldir[i] < 0) {
+//                console.log(element.name + ' MIN ' + element.vmin * 100.0 + ' ' + element.cmin + ' ' + element.units);
+//            } else {
+//                console.log(element.name + ' MAX ' + element.vmax * 100.0 + ' ' + element.cmax + ' ' + element.units);
+//            }
+//        }
+//    }
+
   const list_constraints = () => {
     return (
       <Container>
@@ -589,6 +627,7 @@ export default function ActionTrade() {
             var design = store.getState();
             element = design.model.symbol_table[j];
             if (ldir[i] < 0) {
+//                                console.log(element.name + ' MIN ' + element.vmin * 100.0 + ' ' + element.cmin + ' ' + element.units);
               if (design.model.result.objective_value < design.model.system_controls.objmin) {
                 constraint_class = (element.lmin & CONSTRAINED && element.vmin > 0.0) ? 'text-low-danger align-middle text-end' : 'text-end';
               } else {
@@ -604,6 +643,7 @@ export default function ActionTrade() {
                 </Row>
               );
             } else {
+//                                console.log(element.name + ' MAX ' + element.vmax * 100.0 + ' ' + element.cmax + ' ' + element.units);
               if (design.model.result.objective_value < design.model.system_controls.objmin) {
                 constraint_class = (element.lmax & CONSTRAINED && element.vmax > 0.0) ? 'text-low-danger align-middle text-end' : 'text-end';
               } else {
@@ -631,6 +671,9 @@ export default function ActionTrade() {
       <NavDropdown.Item onClick={strategyToggle} disabled={model_objective_value <= model_objmin}>
         Trade&hellip;
       </NavDropdown.Item>
+      {/*==================================================*/}
+      {/*=====================strategy=====================*/}
+      {/*==================================================*/}
       {strategyShow && <Modal show={strategyShow} size="lg" onHide={onStrategyDone}>
         <Modal.Header closeButton>
           <Modal.Title>
@@ -655,6 +698,9 @@ export default function ActionTrade() {
           <Button variant="primary" onClick={onStrategyProportional}>Proportional</Button>
         </Modal.Footer>
       </Modal>}
+      {/*==================================================*/}
+      {/*=====================arbitrary====================*/}
+      {/*==================================================*/}
       {arbitraryShow && <Modal show={arbitraryShow} onHide={onNoop}>
         <Modal.Header closeButton>
           <Modal.Title>
@@ -693,6 +739,9 @@ export default function ActionTrade() {
           <Button variant="primary" onClick={onArbitraryContinue} disabled={arbitraryContinueDisabled}>Continue</Button>
         </Modal.Footer>
       </Modal>}
+      {/*==================================================*/}
+      {/*=======================size=======================*/}
+      {/*==================================================*/}
       {sizeShow && <Modal show={sizeShow} onHide={onNoop}>
         <Modal.Header closeButton>
           <Modal.Title>
@@ -714,6 +763,9 @@ export default function ActionTrade() {
           <Button variant="primary" disabled={isSizeInvalid || defaultEstPercent / 100.0 < design.model.system_controls.smallnum} onClick={onSizeContinue}>Continue</Button>
         </Modal.Footer>
       </Modal>}
+      {/*==================================================*/}
+      {/*=====================feasible=====================*/}
+      {/*==================================================*/}
       {feasibleShow && <Modal show={feasibleShow} onHide={onNoop}>
         <Modal.Header closeButton>
           <Modal.Title>
@@ -733,6 +785,9 @@ export default function ActionTrade() {
           <Button variant="primary" onClick={onFeasibleDone}> &nbsp; Done &nbsp; </Button>
         </Modal.Footer>
       </Modal>}
+      {/*==================================================*/}
+      {/*=====================establish====================*/}
+      {/*==================================================*/}
       {establishShow && <Modal show={establishShow} onHide={onNoop}>
         <Modal.Header closeButton>
           <Modal.Title>
@@ -752,6 +807,9 @@ export default function ActionTrade() {
           <Button variant="primary" onClick={onEstablishAccept}>Accept</Button>
         </Modal.Footer>
       </Modal>}
+      {/*==================================================*/}
+      {/*====================notFeasible===================*/}
+      {/*==================================================*/}
       {notFeasibleShow && <Modal show={notFeasibleShow} onHide={onNoop}>
         <Modal.Header closeButton>
           <Modal.Title>
