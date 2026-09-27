@@ -5,6 +5,7 @@ import { CONSTRAINED, FIXED } from '../../store/actionTypes';
 import { search, saveAutoSave } from '../../store/actions';
 import { logUsage } from '../../logUsage';
 import { displayMessage } from '../../components/Message';
+import { displaySpinner } from '../../components/Spinner';
 import store from '../../store/store';
 
 export default function ActionSearch() {
@@ -15,7 +16,7 @@ export default function ActionSearch() {
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const dispatch = useDispatch();
 
-  const onSearchRequest = (event) => {
+  const onSearchRequest = async (event) => {
 //    console.log('ActionSearch.onSearchRequest','event=',event);
     if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Search cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
@@ -36,7 +37,7 @@ export default function ActionSearch() {
       setSearchInfiniteShow(!searchInfiniteShow);
       return;
     }
-    doSearch('FINITE');
+    await doSearch('FINITE');
   }
 
   const onSearchContextHelp = () => {
@@ -44,10 +45,10 @@ export default function ActionSearch() {
     window.open('/docs/Help/errors.html#objNotFinite', '_blank');
   }
 
-  const onSearchContinue = () => {
+  const onSearchContinue = async () => {
 //    console.log('ActionSearch.onSearchContinue');
     setSearchInfiniteShow(!searchInfiniteShow);
-    this.doSearch('NOT FINITE');
+    await doSearch('NOT FINITE');
   }
 
   const onSearchCancel = () => {
@@ -55,9 +56,17 @@ export default function ActionSearch() {
     setSearchInfiniteShow(!searchInfiniteShow);
   }
 
-  const doSearch = (type) => {
+  const doSearch = async (type) => {
 //    console.log('ActionSearch.doSearch');
-    dispatch(search('Menu '+(type === 'NOT FINITE' ? type : '')));
+    displaySpinner(true);
+    // Search runs synchronously in Redux middleware. Yield first so the browser
+    // can paint the spinner before the calculation blocks the main thread.
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
+      dispatch(search('Menu '+(type === 'NOT FINITE' ? type : '')));
+    } finally {
+      displaySpinner(false);
+    }
   }
 
   var display_search_button;
