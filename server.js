@@ -403,10 +403,10 @@ app.get('/api/v1/designtypes', authenticationRequired, async (req, res) => {
   var value;
   var user = req.uid;
 //  console.log('SERVER: In GET /api/v1/designtypes', 'user=', user);
-  var stmt = 'SELECT DISTINCT type FROM design WHERE (user = \'' + user + '\' OR user IS NULL) ORDER BY type';
+  var stmt = 'SELECT DISTINCT type FROM design WHERE (user = ? OR user IS NULL) ORDER BY type';
 //  console.log('SERVER:', 'stmt=', stmt);
   try {
-    const [rows] = await db.execute(stmt);
+    const [rows] = await db.execute(stmt, [user]);
 //    console.log('SERVER: After SELECT', 'rows=', rows);
     value = rows.map((row) => { return row.type });
 //    console.log('SERVER: After SELECT DISTINCT', 'value=', value);
@@ -424,10 +424,10 @@ app.get('/api/v1/designtypes/:type/designs', authenticationRequired, async (req,
   var user = req.uid;
   var type = req.params['type'];
 //  console.log('SERVER: In GET /api/v1/designtypes/' + type + '/designs', 'user=', user);
-  var stmt = 'SELECT user, name FROM design WHERE (user = \'' + user + '\' OR user IS NULL) AND type = \'' + type + '\' ORDER BY name ASC, user DESC';
+  var stmt = 'SELECT user, name FROM design WHERE (user = ? OR user IS NULL) AND type = ? ORDER BY name ASC, user DESC';
 //  console.log('SERVER:', 'stmt=', stmt);
   try {
-    const [rows] = await db.execute(stmt);
+    const [rows] = await db.execute(stmt, [user, type]);
 //    console.log('SERVER: After SELECT', 'rows=', rows);
     value = rows.map((row) => { return { user: row.user, name: row.name } });
 //    console.log('SERVER: After SELECT', 'value=', value);
