@@ -3,6 +3,7 @@ import { Table, Button } from 'react-bootstrap';
 import { MIN, MAX, FIXED } from '../../../store/actionTypes';
 import { seek, saveAutoSave } from '../../../store/actions';
 import { logUsage } from '../../../logUsage';
+import { displaySpinner } from '../../../components/Spinner';
 import * as sto from './symbol_table_offsets';
 
 export default function ResultTableOptimize({ onClick }) {
@@ -10,36 +11,60 @@ export default function ResultTableOptimize({ onClick }) {
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const dispatch = useDispatch();
 
-  const onOptimizeSeekMINWeight = (event) => {
+  const onOptimizeSeekMINWeight = async (event) => {
+    displaySpinner(true);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
 //        console.log('ResultTableOptimize.onOptimizeSeekMINWeight','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Weight button' });
     dispatch(saveAutoSave());
     dispatch(seek('Weight', MIN));
     onClick(event);
+    } finally {
+      displaySpinner(false);
+    }
   }
 
-  const onOptimizeSeekMAXCycle_Life = (event) => {
+  const onOptimizeSeekMAXCycle_Life = async (event) => {
+    displaySpinner(true);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
 //        console.log('ResultTableOptimize.onOptimizeSeekMAXCycle_Life','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX Cycle_Life button' });
     dispatch(saveAutoSave());
     dispatch(seek('Cycle_Life', MAX));
     onClick(event);
+    } finally {
+      displaySpinner(false);
+    }
   }
 
-  const onOptimizeSeekMINRate = (event) => {
+  const onOptimizeSeekMINRate = async (event) => {
+    displaySpinner(true);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
 //        console.log('ResultTableOptimize.onOptimizeSeekMINRate','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Rate button' });
     dispatch(saveAutoSave());
     dispatch(seek('Rate', MIN));
     onClick(event);
+    } finally {
+      displaySpinner(false);
+    }
   }
 
-  const onOptimizeSeekMAXL_Stroke = (event) => {
+  const onOptimizeSeekMAXL_Stroke = async (event) => {
+    displaySpinner(true);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
 //        console.log('ResultTableOptimize.onOptimizeSeekMAXL_Stroke','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX L_Stroke button' });
     dispatch(saveAutoSave());
     dispatch(seek('L_Stroke', MAX));
     onClick(event);
+    } finally {
+      displaySpinner(false);
+    }
   }
 
   return (
