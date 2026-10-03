@@ -78,7 +78,7 @@ export default function Report3() {
             <td>=</td>
             <td className="text-start" colSpan="2">{base.matTypeValue}</td>
           </tr>
-          {model_symbol_table[o.Process].value === "Hot_Wound" &&
+          {model_symbol_table[o.Hot_Factor_Kh].value < 1.0 &&
             <tr>
               <td>{model_symbol_table[o.Process].name}</td>
               <td>=</td>
