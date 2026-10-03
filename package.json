@@ -47,7 +47,7 @@
     "express-mysql-session": "^3.0.3",
     "express-session": "^1.18.2",
     "lunr": "^2.3.9",
-    "mysql2": "^3.6.0",
+    "mysql2": "^3.23.1",
     "node-mysql": "^0.4.2",
     "nodemailer": "^7.0.11"
   }
