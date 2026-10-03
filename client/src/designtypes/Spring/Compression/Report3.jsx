@@ -78,6 +78,17 @@ export default function Report3() {
             <td>=</td>
             <td className="text-start" colSpan="2">{base.matTypeValue}</td>
           </tr>
+          {model_symbol_table[o.Hot_Factor_Kh].value < 1.0 &&
+            <tr>
+              <td>{model_symbol_table[o.Process].name}</td>
+              <td>=</td>
+              <td className="text-start" colSpan="2">{model_symbol_table[o.Process].value}</td>
+              <td />
+              <td>{model_symbol_table[o.Hot_Factor_Kh].name}</td>
+              <td>=</td>
+              <td>{model_symbol_table[o.Hot_Factor_Kh].value.toFixed(2)}</td>
+            </tr>
+          }
           <tr>
             <td>{model_symbol_table[o.Wire_Dia].name}</td>
             <td>=</td>
