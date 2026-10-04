@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 import * as o from './symbol_table_offsets';
 import * as mo from '../mat_offsets';
+import * as eto from './endtypes_offsets';
+import { pitch, wireLength } from './eqnset';
 import { getAlertsBySeverity } from '../../../components/Alerts';
 import ReportBaseContext from './ReportBaseContext';
 
@@ -31,46 +33,47 @@ export default function ReportBase(props) {
   base.errmsg = "";
   base.startpntmsg = "Alert details are available via the Alert button on the main page of Advanced and Calculator Views.";
 
-  base.len_lbl = "Wire Length";
-
-  switch (model_symbol_table[o.End_Type].value) {
-    case 4:        //  Closed & Ground
-      base.pitch = (model_symbol_table[o.L_Free].value - 2.0 * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
-      break;
-    case 3:        //  Closed
-      base.pitch = (model_symbol_table[o.L_Free].value - 3.0 * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
-      break;
-    case 2:        //  Open & Ground
-      base.pitch = model_symbol_table[o.L_Free].value / model_symbol_table[o.Coils_T].value;
-      break;
-    case 1:        //  Open
-      base.pitch = (model_symbol_table[o.L_Free].value - model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
-      break;
-    case 5:        //  Tapered Closed & Ground
-      base.pitch = (model_symbol_table[o.L_Free].value - 1.5 * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
-      base.len_lbl = "Bar cut len.";
-      break;
-    case 6:        //  Pig-tail
-      base.pitch = (model_symbol_table[o.L_Free].value - 2.0 * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
-      break;
-    default:        //  User Specified
-      base.pitch = (model_symbol_table[o.L_Free].value - (model_symbol_table[o.Inactive_Coils].value + 1.0) * model_symbol_table[o.Wire_Dia].value) / model_symbol_table[o.Coils_A].value;
+  if (model_symbol_table[o.Process].value === "Hot_Wound") { // Process is set in init.js
+    base.len_lbl = "Bar cut len.";
+  } else {
+    base.len_lbl = "Wire Length";
   }
 
-  var sq1 = model_symbol_table[o.L_Free].value;
-  var sq2 = model_symbol_table[o.Coils_T].value * Math.PI * model_symbol_table[o.Mean_Dia].value;
-  base.wire_len_t = Math.sqrt(sq1 * sq1 + sq2 * sq2);
-  if (model_symbol_table[o.End_Type].value === 5)  /*  calculate developed length of tapered ends based on 2 ends * pi * wire diameter * 0.625 */
-    base.wire_len_t = base.wire_len_t - 3.926 * model_symbol_table[o.Wire_Dia].value;
+  base.pitch = pitch(
+    model_symbol_table[o.L_Free].value,
+    model_symbol_table[o.Wire_Dia].value,
+    model_symbol_table[o.Coils_T].value,
+    model_symbol_table[o.End_Closure].value,
+    model_symbol_table[o.Inactive_Coils].value,
+    model_symbol_table[o.Taper_Amount].value,
+    model_symbol_table[o.Pigtail_Amount].value,
+    model_symbol_table[o.Grind_Amount].value
+  );
 
-  base.wgt1000 = 1000.0 * model_symbol_table[o.Weight].value;
+  base.wire_len_t = wireLength(
+    model_symbol_table[o.OD_Free].value,
+    model_symbol_table[o.Wire_Dia].value,
+    model_symbol_table[o.L_Free].value,
+    model_symbol_table[o.Coils_T].value,
+    model_symbol_table[o.End_Closure].value,
+    model_symbol_table[o.Closed_End_Geometry].value,
+    model_symbol_table[o.Inactive_Coils].value,
+    model_symbol_table[o.Transition_Coils].value,
+    model_symbol_table[o.Taper_Amount].value,
+    model_symbol_table[o.Pigtail_Amount].value,
+    model_symbol_table[o.Grind_Amount].value
+  );
+
+  base.stock_wgt1000 = 1000.0 * model_symbol_table[o.Density].value *
+    (Math.PI * model_symbol_table[o.Wire_Dia].value * model_symbol_table[o.Wire_Dia].value / 4.0) *
+    base.wire_len_t;
 
   /*
    * intermediate dia. calcs. assume no wire stretch
    * note that value of base.wire_len_a is actually square of active wire length
    */
-  sq1 = model_symbol_table[o.L_Free].value;
-  sq2 = model_symbol_table[o.Coils_A].value * Math.PI * model_symbol_table[o.Mean_Dia].value;
+  var sq1 = model_symbol_table[o.L_Free].value;
+  var sq2 = model_symbol_table[o.Coils_A].value * Math.PI * model_symbol_table[o.Mean_Dia].value;
   base.wire_len_a = sq1 * sq1 + sq2 * sq2;
 
   base.dhat = def_dia(model_symbol_table[o.L_1].value);
@@ -170,6 +173,11 @@ export default function ReportBase(props) {
     base.matTypeValue = "User_Specified";
     base.astmFedSpecValue = "N/A";
     base.clWarnString = "Cycle_Life is not computed for User_Specified materials.";
+  }
+  if (model_symbol_table[o.End_Type_Method].value === 1 && model_symbol_table[o.End_Type].value !== 0) {
+    base.endTypeValue = base.et_tab[model_symbol_table[o.End_Type].value][eto.end_type];
+  } else {
+    base.endTypeValue = "User_Specified";
   }
 //        console.log('base.matTypeValue, base.astmFedSpecValue = ', base.matTypeValue, base.astmFedSpecValue);
 

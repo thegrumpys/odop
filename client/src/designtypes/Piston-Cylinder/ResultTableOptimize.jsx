@@ -2,44 +2,64 @@ import { useDispatch, useSelector } from "react-redux";
 import { Table, Button } from 'react-bootstrap';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek, saveAutoSave } from '../../store/actions';
-import { logUsage } from '../../logUsage';
-import * as sto from './symbol_table_offsets';
+import { logUsage } from '../../logUsage';import * as sto from './symbol_table_offsets';
 
 export default function ResultTableOptimize({onClick}) {
 //  console.log('ResultTableOptimize - Mounting...','onClick=',onClick);
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const dispatch = useDispatch();
 
-  const onOptimizeSeekMAXFORCE = (event) => {
+  const onOptimizeSeekMAXFORCE = async (event) => {
+    displaySpinner(true);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
 //    console.log('ResultTableOptimize.onOptimizeSeekMAXFORCE','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX FORCE button' });
     dispatch(saveAutoSave());
     dispatch(seek('FORCE', MAX));
     onClick(event);
+    } finally {
+      displaySpinner(false);
+    }
   }
-
-  const onOptimizeSeekMINRADIUS = (event) => {
+  const onOptimizeSeekMINRADIUS = async (event) => {
+    displaySpinner(true);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
 //    console.log('ResultTableOptimize.onOptimizeSeekMINRADIUS','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN RADIUS button' });
     dispatch(saveAutoSave());
     dispatch(seek('RADIUS', MIN));
     onClick(event);
+    } finally {
+      displaySpinner(false);
+    }
   }
-
-  const onOptimizeSeekMINPRESSURE = (event) => {
+  const onOptimizeSeekMINPRESSURE = async (event) => {
+    displaySpinner(true);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
 //    console.log('ResultTableOptimize.onOptimizeSeekMINPRESSURE','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN PRESSURE button' });
     dispatch(saveAutoSave());
     dispatch(seek('PRESSURE', MIN));
     onClick(event);
+    } finally {
+      displaySpinner(false);
+    }
   }
-
-  const onOptimizeSeekMINSTRESS = (event) => {
+  const onOptimizeSeekMINSTRESS = async (event) => {
+    displaySpinner(true);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
 //    console.log('ResultTableOptimize.onOptimizeSeekMINSTRESS','event=',event);
     logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN STRESS button' });
     dispatch(saveAutoSave());
     dispatch(seek('STRESS', MIN));
     onClick(event);
+    } finally {
+      displaySpinner(false);
+    }
   }
 
   return (

@@ -6,6 +6,7 @@ import FeasibilityIndicator from './FeasibilityIndicator';
 import { search, seek, saveAutoSave } from '../store/actions';
 import { logUsage } from '../logUsage';
 import { displayMessage } from '../components/Message';
+import { displaySpinner } from '../components/Spinner';
 import AlertsAccordion from "./AlertsAccordion"
 import store from "../store/store";
 
@@ -23,7 +24,7 @@ export default function ResultTable() {
   const model_search_completed = useSelector((state) => state.model.result.search_completed);
   const dispatch = useDispatch();
 
-  const onSearchRequest = (event) => {
+  const onSearchRequest = async (event) => {
 //    console.log('ResultTable.onSearchRequest','event=',event);
     if (model_symbol_table.reduce((total, element) => { return (element.type === "equationset" && element.input) && !(element.lmin & FIXED) ? total + 1 : total + 0 }, 0) === 0) {
       displayMessage('Search cannot continue because there are no free independent variables. Help button provides more information.', 'danger', 'Errors', '/docs/Help/alerts.html#NoFreeIV');
@@ -44,7 +45,7 @@ export default function ResultTable() {
       setSearchInfiniteShow(!searchInfiniteShow);
       return;
     }
-    doSearch('FINITE');
+    await doSearch('FINITE');
   }
 
   const onSearchContextHelp = () => {
@@ -52,10 +53,10 @@ export default function ResultTable() {
     window.open('/docs/Help/errors.html#objNotFinite', '_blank');
   }
 
-  const onSearchContinue = () => {
+  const onSearchContinue = async () => {
 //    console.log('ResultTable.onSearchContinue');
     setSearchInfiniteShow(!searchInfiniteShow);
-    doSearch('NOT FINITE');
+    await doSearch('NOT FINITE');
   }
 
   const onSearchCancel = () => {
@@ -64,9 +65,17 @@ export default function ResultTable() {
     // Noop - all done
   }
 
-  const doSearch = (type) => {
+  const doSearch = async (type) => {
 //    console.log('In ResultTable.doSearch');
-    dispatch(search('Button '+(type === 'NOT FINITE' ? type : '')));
+    displaySpinner(true);
+    // Search runs synchronously in Redux middleware. Yield first so the browser
+    // can paint the spinner before the calculation blocks the main thread.
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
+      dispatch(search('Button '+(type === 'NOT FINITE' ? type : '')));
+    } finally {
+      displaySpinner(false);
+    }
   }
 
   const onSeekRequest = (event) => {
@@ -121,13 +130,19 @@ export default function ResultTable() {
     setSeekName(event.target.value);
   }
 
-  const onSeekButton = (event) => {
+  const onSeekButton = async (event) => {
 //    console.log('ResultTable.onSeekButton','event=',event);
     setSeekShow(!seekShow);
     // Do seek
-    dispatch(saveAutoSave());
-    dispatch(seek(seekName, seekMinMax));
-    logUsage('event', 'ActionSeek', { event_label: 'Button ' + seekMinMax + ' ' + seekName });
+    displaySpinner(true);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
+      dispatch(saveAutoSave());
+      dispatch(seek(seekName, seekMinMax));
+      logUsage('event', 'ActionSeek', { event_label: 'Button ' + seekMinMax + ' ' + seekName });
+    } finally {
+      displaySpinner(false);
+    }
   }
 
   //      From Issue #365 and #869:
@@ -239,15 +254,15 @@ export default function ResultTable() {
                     <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
                       <p><b>Search</b> alters the values of any free independent variables to find a design that
                         satisfies all constraints and each fixed dependent
-                        variable. A feasible result is a solution to the designer’s
+                        variable. A feasible result is a solution to the designer's
                         goals as expressed by constraints and fixed values.</p>
                       <p><b>Search</b> stops when the first feasible solution is found. This happens
                         when the Objective Value ({model_objective_value.toFixed(7)}) falls below
                         OBJMIN ({model_objmin.toFixed(7)}).</p>
                       <p>If <b>Search</b> cannot achieve a feasible result it converges to a compromise.
-                        This compromise tries to minimize violations.</p
-                      ></Tooltip>}>
-                      <span><i className="fas fa-info-circle text-primary"></i></span>
+                        This compromise tries to minimize violations.</p>
+                      </Tooltip>}>
+                       <span><i className="fas fa-info-circle text-primary"></i></span>
                     </OverlayTrigger>
                   </td>
                   :
@@ -258,7 +273,7 @@ export default function ResultTable() {
                     <Button id="seekButton" variant="primary" onClick={onSeekRequest} disabled={display_search_button}><b>Seek</b> (optimize)</Button>&nbsp;
                     <OverlayTrigger placement="bottom" overlay={<Tooltip className="tooltip-lg">
                       <p>If one feasible design exists there are likely many more available, each with varying advantages / disadvantages.
-                        Seek provides a “goal seeking” capability to optimize your design on the parameter that you specify.</p>
+                        Seek provides a "goal seeking" capability to optimize your design on the parameter that you specify.</p>
                       <p>If starting with a default design, additional constraints specific to your application are required to obtain meaningful results.</p>
                     </Tooltip>}>
                       <span><i className="fas fa-info-circle text-primary"></i></span>

@@ -1,16 +1,16 @@
 # Compression Spring Design Type
-![Compression spring image](/docs/Help/DesignTypes/Spring/img/SpringCompression_.png "Compression spring image") 
+![Compression spring image](/docs/Help/DesignTypes/Spring/img/SpringCompression_.png "Compression spring image")  
 
-The Compression Spring design type is a full-featured mathematical model enabling 
-the engineering design of round wire helical coil compression springs. 
+The Compression Spring design type is a full-featured mathematical model for engineering round-wire 
+helical coil compression springs.  
 
 This section presents material unique to the Compression Spring design type. 
 The more general material available at [Spring Design Topics](/docs/Help/SpringDesign/index.html) 
-provides important supplemental information. 
+provides important supplemental information.  
 
 ___
 
-### On this page:   
+### On This Page:   
  - [Compression spring variable names on Force-Deflection diagram](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springFD_Diag)  
  - [Compression Spring Variable Names on image of physical spring](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springImage)  
  - [Compression spring Force-Deflection point names](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springFD_Names)  
@@ -19,11 +19,14 @@ ___
  - [Calculation Input names](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springCalcInputNames)  
  - [Values in reports](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springOtherValues)  
  - [Constraints unique to compression springs](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springConstraints)  
+ - [Cross-system translate table for variable names](/docs/Help/DesignTypes/Spring/Compression/description.html#transTable)  
  - [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes)  
+ - [Pitch calculation](/docs/Help/DesignTypes/Spring/Compression/description.html#pitch)  
  - [Dead Coils](/docs/Help/DesignTypes/Spring/Compression/description.html#deadCoils)  
  - [User specified end type examples](/docs/Help/DesignTypes/Spring/Compression/description.html#userEndTypes)  
  - [Buckling](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springBuckling)  
  - [Shot Peen](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springShotPeen)  
+ - [Hot Wound](/docs/Help/SpringDesign/advancedSpringOperations.html#HotWound)  
  - [Related topics](/docs/Help/DesignTypes/Spring/Compression/description.html#relatedTopics)  
 
 &nbsp;
@@ -32,8 +35,569 @@ ___
 <a id="c_springFD_Diag"></a>  
 ___
 
-## Compression spring variable names on Force-Deflection diagram  
+## Compression Spring Variable Names on a Force-Deflection Diagram  
+
+A Force-Deflection diagram is used to identify key geometric and load‑related variables used throughout the compression‑spring model. 
+[<img src="/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png" alt="Compression Spring Variable Names on Force - Deflection Diagram">](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png "Compression Spring Variable Names on Force - Deflection Diagram")  
+
+___
+
+<a id="c_springImage"></a>  
+___
+
+## Compression Spring Variable Names on Image of Physical Spring
+
+An image of a compression spring is used to identify geometric variables used by the compression spring model. 
+![Compression Spring Variable Names on on image of physical spring](/docs/Help/DesignTypes/Spring/img/AnnotatedCSpring.png "Compression Spring Variable Names on on image of physical spring")  
+
+___
+
+<a id="c_springFD_Names"></a>  
+___
+
+## Compression Spring Variable Names for Force-Deflection Points  
+
+ The compression spring force-deflection points and their associated names are: 
+ &nbsp;           | length  | force       | outside diameter | inside diameter | stress       | factor of safety 
+ ---              | ---     | ---         | ---              |  ---            | ---          |  ---             
+**free:**         | L_Free  |             | OD_Free          | ID_Free         |              |                  
+**point&nbsp;1:** | L_1     | Force_1     |                  |                 | Stress_1     |                  
+**point&nbsp;2:** | L_2     | Force_2     |                  |                 | Stress_2     | FS_2             
+**solid:**        | L_Solid | Force_Solid |                  |                 | Stress_Solid | FS_Solid         
+
+**point 1** – minimum operating load &nbsp; &nbsp; **point 2** – maximum operating load 
+
+&nbsp;
+   
+___
+
+<a id="c_springIV_Names"></a>  
+___
+
+## Independent Variable Names: 
+
+[Independent variables](/docs/Help/terminology.html#independentVar) are the inputs of the design equations.  
+
+*Click on a thumbnail image to see a larger version of that image.  Use the browser "Back" button in order to return to this page.*  
+
+Name | <span style="font-weight: normal; font-size: 0.85em; display:block; text-align:center;">Thumbnail <br/> Image</span> | Description  
+--- | :---: | ---         
+Wire_Dia | [<img src="/designtypes/Spring/Compression/tooltips/Wire_Dia.png" alt="Wire_Dia" title="Wire_Dia" style="display:block; margin:0 auto; width:33%;">](/designtypes/Spring/Compression/tooltips/Wire_Dia_lg.png "Wire_Dia") | wire diameter 
+OD_Free  | [<img src="/designtypes/Spring/Compression/tooltips/OD_Free.png"  alt="OD_Free"  title="OD_Free"  style="display:block; margin:0 auto; width:33%;">](/designtypes/Spring/Compression/tooltips/OD_Free_lg.png  "OD_Free")  | outside diameter in the free condition 
+Coils_T  | [<img src="/designtypes/Spring/Compression/tooltips/Coils_T.png"  alt="Coils_T"  title="Coils_T"  style="display:block; margin:0 auto; width:33%;">](/designtypes/Spring/Compression/tooltips/Coils_T_lg.png  "Coils_T")  | total number of coils, <br/> including inactive coils 
+L_Free   | [<img src="/designtypes/Spring/Compression/tooltips/L_Free.png"   alt="L_Free"   title="L_Free"   style="display:block; margin:0 auto; width:33%;">](/designtypes/Spring/Compression/tooltips/L_Free_lg.png   "L_Free")   | length in the free condition <br/> (free length) 
+Force_1  | [<img src="/designtypes/Spring/Compression/tooltips/Force_1.png"  alt="Force_1"  title="Force_1"  style="display:block; margin:0 auto; width:33%;">](/designtypes/Spring/Compression/tooltips/Force_1_lg.png  "Force_1")  | load at point 1 <br/> (minimum operating load) 
+Force_2  | [<img src="/designtypes/Spring/Compression/tooltips/Force_1.png"  alt="Force_2"  title="Force_2"  style="display:block; margin:0 auto; width:33%;">](/designtypes/Spring/Compression/tooltips/Force_2_lg.png  "Force_2")  | load at point 2 <br/> (maximum operating load) 
+
+&nbsp;
+
+___
+
+<a id="c_springDV_Names"></a>  
+___
+
+## Dependent Variable Names:   
+
+[Dependent variables](/docs/Help/terminology.html#dependentVar) are the outputs of the design equations.  
+
+Name         | <span style="font-weight: normal; font-size: 0.85em; display:block; text-align:center;">Thumbnail <br/> Image</span> | Description  
+ ---         | ---    | ---         
+Mean_Dia     | [<img src="/designtypes/Spring/Compression/tooltips/Mean_Dia.png"  alt="Mean_Dia"  title="Mean_Dia"  width="85%">](/designtypes/Spring/Compression/tooltips/Mean_Dia_lg.png  "Mean_Dia")  | mean diameter of spring coil in free condition <br/>Also: `(OD_Free + ID_Free)/2` 
+Coils_A      |        | number of active coils (turns) 
+Rate         | [<img src="/designtypes/Spring/Compression/tooltips/Rate.png"      alt="Rate"      title="Rate"     >](/designtypes/Spring/Compression/tooltips/Rate_lg.png      "Rate")      | spring constant - force per unit deflection 
+Deflect_1    | [<img src="/designtypes/Spring/Compression/tooltips/Deflect_1.png" alt="Deflect_1" title="Deflect_1">](/designtypes/Spring/Compression/tooltips/Deflect_1_lg.png "Deflect_1") | deflection at `Force_1` 
+Deflect_2    | [<img src="/designtypes/Spring/Compression/tooltips/Deflect_2.png" alt="Deflect_2" title="Deflect_2">](/designtypes/Spring/Compression/tooltips/Deflect_2_lg.png "Deflect_2") | deflection at `Force_2` 
+L_1          | [<img src="/designtypes/Spring/Compression/tooltips/L_1.png"       alt="L_1"       title="L_1"      >](/designtypes/Spring/Compression/tooltips/L_1_lg.png       "L_1")       | spring length at minimum operating load  (`Force_1`) 
+L_2          | [<img src="/designtypes/Spring/Compression/tooltips/L_2.png"       alt="L_2"       title="L_2">](/designtypes/Spring/Compression/tooltips/L_2_lg.png       "L_2")       | spring length at maximum operating load  (`Force_2`) 
+L_Stroke     | [<img src="/designtypes/Spring/Compression/tooltips/L_Stroke.png"  alt="L_Stroke"  title="L_Stroke" >](/designtypes/Spring/Compression/tooltips/L_Stroke_lg.png  "L_Stroke")  | net deflection between point 1 and point 2 
+L_Solid      | [<img src="/designtypes/Spring/Compression/tooltips/L_Solid.png"   alt="L_Solid"   title="L_Solid"  >](/designtypes/Spring/Compression/tooltips/L_Solid_lg.png "L_Solid")     | solid height 
+Slenderness  |        | ratio of `L_Free` to `Mean_Dia`. <br/> This "form factor" governs a spring's tendency to buckle 
+ID_Free      | [<img src="/designtypes/Spring/Compression/tooltips/ID_Free.png"   alt="ID_Free"   title="ID_Free"  >](/designtypes/Spring/Compression/tooltips/ID_Free_lg.png "ID_Free")     | inside diameter in free condition 
+Weight       | [<img src="/designtypes/Spring/Compression/tooltips/Weight.png" alt="Weight" title="Weight">](/designtypes/Spring/Compression/tooltips/Weight_lg.png "Weight") | weight of spring <br/> (wire density * wire volume reduced by adjustments for `Grind_Amount` and/or `Taper_Amount`) <br/> See Stock Weight in [Reports](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springOtherValues) 
+Spring_Index |        | spring index <br/> the ratio: `Mean_Dia/Wire_Dia` 
+Force_Solid  | [<img src="/designtypes/Spring/Compression/tooltips/Force_Solid.png" alt="Force_Solid" title="Force_Solid">](/designtypes/Spring/Compression/tooltips/Force_Solid_lg.png "Force_Solid") | force produced in the solid condition 
+Stress_1     |        | torsional stress at point 1 
+Stress_2     |        | torsional stress at point 2 
+Stress_Solid |        | torsional stress in the solid condition 
+FS_2         |        | static factor of safety at point 2.  This is the ratio of allowable stress to the calculated stress induced by the load at point 2  `(Stress_Lim_Stat/Stress_2)`. 
+FS_Solid     |        | static factor of safety at solid condition  `(Stress_Lim_Stat/Stress_Solid)` 
+FS_CycleLife |        | factor of safety based on the Soderberg endurance limit calculation.  It uses the allowable endurance stress (`Stress_Lim_Endur`) to account for fatigue effects. Refer to additional discussion in the [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) topic. 
+Cycle_Life   |        | expected cycle life based on a calculation using the "modified Goodman method".  This value is approximate.  Refer to additional discussion in the  [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) topic. 
+%_Avail_Deflect |     | the percentage of available deflection consumed at load point 2. 
+Energy       |        | change in elastic potential energy between point 1 and point 2.  
+
+&nbsp; 
+
+___
+
+<a id="c_springCalcInputNames"></a>  
+___
+
+## Calculation Input Names 
+
+[Calculation Inputs](/docs/Help/terminology.html#calcInputs) are inputs to the design equations and are 
+adjustable by the user, but are not manipulated by the search algorithm or subject to Fix or constraints..  
+
+Name           | &nbsp; | Description  
+ ---           | ---    | ---         
+Spring_Type    |        | character string used only as a label 
+Prop_Calc_Method |      | Property Calculation Method controls how material properties and allowable stresses are determined. See also: [Materials](/docs/Help/SpringDesign/materials.html). 
+&nbsp;           |      | **1** - indicates values come from materials table; allowable stresses will be calculated as a function of `Wire_Dia`. 
+&nbsp;           |      | **2** - indicates tensile and allowable % are supplied by the user; allowable stresses are calculated. 
+&nbsp;           |      | **3** - indicates allowable stresses are supplied directly by the user. 
+Material_Type  |        | selects an entry in the material table. Is used to determine allowable stresses when `Prop_Calc_Method` is 1. Otherwise is ignored. 
+ASTM/Fed-Spec  |        | character string used only as a label to further identify the origin of material property data 
+Process        |        | character string used to identify the manufacturing process.  It is normally controlled by the material selected from the material table. Values are usually `Cold_Coiled` or [Hot_Wound](/docs/Help/SpringDesign/advancedSpringOperations.html#HotWound). See also: `Hot_Factor_Kh` (below). 
+Life_Category  |        | This value reflects the user's input about shot peening and required cycle life. It is input to the calculation of `FS_CycleLife`. See also: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) 
+Density        |        | wire density; weight per unit volume 
+Torsion_Modulus|        | torsional modulus (G); a.k.a. shear modulus or modulus of rigidity 
+Hot_Factor_Kh  |        | empirical correction factor applied to [Hot Wound](/docs/Help/SpringDesign/advancedSpringOperations.html#HotWound) modulus 
+Tensile        |        | tensile strength 
+%_Tensile_Endur|        | allowable fraction of tensile strength for torsion endurance (cyclic load)  See also: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) 
+%_Tensile_Stat |        | allowable fraction of tensile strength for torsion static load 
+Stress_Lim_Endur |      | allowable stress limit; cyclic application (torsion) 
+Stress_Lim_Stat  |      | allowable stress limit; static application (torsion) 
+End_Type_Method  |      | End Type Method controls how end types are determined and used. 
+&nbsp;           |      | **1** - Use values from table of standard end types. 
+&nbsp;           |      | **2** - User specified end type values. 
+End_Type       |        | when End_Type_Method is **1**, <br/> select desired end type from table of standard end types. See: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes)
+End_Closure    |        | when End_Type_Method is **2**, <br/> select end closure of the spring: Open or Closed. 
+Closed_End_Geometry |   | when End_Type_Method is **2** and End_Closure is "Closed", <br/> select end closed coil geometry of the spring: Single, Double, Tapered, or Pigtail. The selection applies to each end of the spring. `Single` is a single closed coil at each end.
+Inactive_Coils |        | number of inactive coils <br/> (depends on `End_Type`) 
+Transition_Coils |      | total number of inactive coils across both ends over which the end geometry transitions; must be less than or equal to `Inactive_Coils` 
+Taper_Amount   |        | the solid height reduction, measured in wire diameters, created by a tapering operation on the wire diameter of the first and last coil(s) of a [Hot Wound](/docs/Help/SpringDesign/advancedSpringOperations.html#HotWound) compression spring. For example, a value of 1.0 corresponds to a reduction of 0.5 × Wire_Dia at each end
+Pigtail_Amount |        | total pigtail end-coil nesting into the body coil diameter, in units of `Wire_Dia` across both ends. At 2.0, one wire diameter folds fully into the body diameter at each end
+Grind_Amount   |        | number of wire diameters removed by a grinding operation; <br/> See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes) 
+Catalog_Name   |        | name of the catalog containing the most recently selected catalog entry 
+Catalog_Number |        | catalog number of the most recent catalog entry 
+
+<!---     Material_File -  character string containing the material table name. -->
+<!---                      It is normally established by the initialState.js file. -->
+
+&nbsp; 
+
+___
+
+<a id="c_springOtherValues"></a>  
+___
+
+## Values in Reports    
+
+Other values calculated and displayed in the Reports include:
+
+Name           | &nbsp; | Description  
+ ---           | ---    | ---         
+Wire&nbsp;Length |      | total length of wire required to manufacture the spring, not including any waste 
+Safe Load      |        | load supported by the spring in the solid condition or at a stress equal to the `Stress_Lim_Stat` value, whichever is lower. 
+Pitch          |        | distance between the wire centers of adjacent body coils, measured in the free state 
+Stock&nbsp;Weight |     | gross material required to produce 1,000 springs. Not reduced by allowances for `Grind_Amount` or `Taper_Amount`
+Buckling       |        | indication of tendency to buckle given the current design and loading conditions 
+Stress Ratio   |        | ratio of minimum stress to maximum stress `(Stress_1/Stress_2)` 
+Kw1, Kw2       |        | stress correction factors due to curvature 
+Helix Angle    |        | angle, in degrees, of the spring helix relative to a perpendicular to the spring axis  
+
+&nbsp;
+
+___
+
+<a id="c_springConstraints"></a>  
+___
+
+## Constraints Unique to Compression Springs:    
+
+#### Slenderness 
+Slenderness is the ratio of free length (`L_Free`) to mean coil diameter (`Mean_Dia`). 
+When this ratio exceeds about 4 for a compression spring, that spring will have a 
+tendency to buckle under load. 
+In that case, the spring will usually need support in the form of a sleeve or post. 
+To restrict the search to designs that are unlikely to buckle, 
+set the `Slenderness` MAX constraint to a value of 4.0 or less. 
+
+For additional information, see: [Buckling](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springBuckling)  
+
+#### %_Avail_Deflect 
+`%_Avail_Deflect` is the percentage of available deflection consumed at load point 2. 
+`%_Avail_Deflect` is usually constrained to be less than 85 to 98 percent. 
+Setting `%_Avail_Deflect` MAX in this way influences the search to select designs that provide a small margin 
+between load point 2 and the solid condition. 
+
+&nbsp; 
+
+___
+
+<a id="transTable"></a>  
+___
+
+## Cross-system translate table for variable names
+
+A single, unified “alphabet” for coil‑spring symbols does not exist. 
+Instead, several regional and industry conventions coexist: 
+
+- [ISO](https://en.wikipedia.org/wiki/International_Organization_for_Standardization) 16249 
+defines symbols for helical spring calculations, while ISO 2162 governs how springs — especially 
+cylindrical compression springs—are represented on technical drawings. 
+- In Europe, where [EN](https://en.wikipedia.org/wiki/European_Standard) ISO 16249 and EN ISO 2162 apply, 
+ISO symbols are widely adopted and often appear in CAD libraries and catalog data sheets. 
+- In Japan, [JIS](https://en.wikipedia.org/wiki/Japanese_Industrial_Standards) B 2704 provides a complete 
+symbol set and calculation framework for helical springs, including an explicit mapping to ISO symbols. 
+- In the United States, no single formal standard dominates. 
+Instead, manufacturers and handbooks (e.g., SMI, Machinery’s Handbook) use a “de facto” notation system influenced by long-standing 
+[SAE](https://en.wikipedia.org/wiki/SAE_International)/[ASTM](https://en.wikipedia.org/wiki/ASTM_International) practice.  
+
+The tables below present a cross-system translation of common coil spring quantities. 
+Symbol columns are ordered from the most formally standardized (ISO) to the least standardized (US / Handbook).  
+
+Only ODOP:Spring variable names that have a clear counterpart in at least one of the ISO, JIS, or U.S. symbol 
+systems appear in these tables.
+
+### Compression Spring — Independent Variables
+
+| Quantity | ODOP:Spring | ISO&nbsp;&nbsp; | JIS&nbsp;&nbsp; | US / Handbook | 
+|----------|:-----------:|:---:|:---:|:--------------:| 
+| Wire diameter | `Wire_Dia` | d | d | d | 
+| Outside diameter (free) | `OD_Free` | De | D2 | OD | 
+| Total coils | `Coils_T` | n2 | Nt | Nt | 
+| Free length | `L_Free` | L0 | L | Lf | 
+| Load at point 1 | `Force_1` | F1 | f1 | F1 | 
+| Load at point 2 | `Force_2` | F2 | f2 | F2 |  
+
+### Compression Spring — Dependent Variables
+
+| Quantity | ODOP:Spring | ISO&nbsp;&nbsp; | JIS&nbsp;&nbsp; | US / Handbook | 
+|----------|:-----------:|:---:|:---:|:--------------:| 
+| Mean coil diameter | `Mean_Dia` | D | D | D or Dm | 
+| Active coils | `Coils_A` | n1 | Na | Na | 
+| Spring rate | `Rate` | R | k | k | 
+| Deflection <br/> at point 1 | `Deflect_1` | s1 | y1 | δ₁ | 
+| Deflection <br/> at point 2 | `Deflect_2` | s2 | y2 | δ₂ | 
+| Length at point 1 | `L_1` | L1 | — | L₁ | 
+| Length at point 2 | `L_2` | L2 | — | L₂ | 
+| Stroke (Δ between points 1 & 2) | `L_Stroke` | Δs | — | ΔL (*1) | 
+| Solid height | `L_Solid` | Lc | Hs | Ls | 
+| Slenderness ratio | `Slenderness` | — | — | Lf/Dm (*2) | 
+| Inside diameter (free) | `ID_Free` | Di | D1 | ID | 
+| Weight (mass) | `Weight` | m | m | m | 
+| Spring index | `Spring_Index` | w | c | C | 
+| Force at solid height | `Force_Solid` | — | — | Fs | 
+| Stress at point 1 | `Stress_1` | τ1 | τ1 | τ<sub>1</sub> | 
+| Stress at point 2 | `Stress_2` | τ2 | τ2 | τ<sub>2</sub> | 
+| Stress at solid | `Stress_Solid` | τs | — | τ<sub>s</sub> | 
+| Factor of safety <br/> at point 2 | `FS_2` | — | — | FS₂ | 
+| Energy between points 1 & 2 | `Energy` | U | U | U |  
+
+*Note 1: U.S. spring handbooks generally do not define a symbol for “stroke” in compression springs. 
+<b>ΔL</b> is a generic mechanics symbol, not a spring-specific U.S. notation.  
+*Note 2: U.S. spring handbooks generally do not define a symbol for “slenderness” in compression springs. 
+However, the expression <b>Lf/Dm</b> is commonly used.  
+
+### Compression Spring — Calculation Inputs & Additional Quantities
+
+| Quantity | ODOP:Spring | ISO&nbsp;&nbsp; | JIS&nbsp;&nbsp; | US / Handbook | 
+|----------|:-----------:|:---:|:---:|:--------------:| 
+| Density | `Density` | ρ | γ | ρ | 
+| Torsion&nbsp;modulus (shear&nbsp;modulus) | `Torsion_Modulus` | G | G | G | 
+| Tensile strength | `Tensile` | σᵤ | σB | Sut | 
+| Allowable static stress | `Stress_Lim_Stat` | — | τa | τa | 
+| Allowable endurance stress | `Stress_Lim_Endur` | — | τe | τe | 
+| Helix angle | Helix angle | α | — | α | 
+
+&nbsp; 
+
+___
+
+<a id="c_springEndTypes"></a>  
+___
+
+## Compression Spring End Types 
+
+The current version of ODOP:Spring implements multiple pre-defined compression spring end types plus a user customizable alternative. 
+For compression springs, the Calculation Input `End_Type` has the following possible values: 
+
+*Click on a thumbnail image to see a larger version of that image. Use the browser "Back" button in order to return to this page.*
+
+|   | Compression spring<br/>end type | <span style="font-weight: normal; font-size: 0.85em; display:block; text-align:center;">Thumbnail&nbsp;Image<br/>Front</span> | <span style="font-weight: normal; font-size: 0.85em; display:block; text-align:center;">Thumbnail&nbsp;Image<br/>Oblique</span> |
+|---|---|:---:|:---:|
+1 | Open | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringOpenFront_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringOpenFront.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringOpenOblique_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringOpenOblique.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
+2 | Open&Ground | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringOpenGndFront_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringOpenGndFront.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringOpenGndOblique_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringOpenGndOblique.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
+3 | Closed | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringClosedFront_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringClosedFront.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringClosedOblique_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringClosedOblique.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
+4 | Closed&Ground | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringClsdGndFront_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringClsdGndFront.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringClsdGndOblique_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringClsdGndOblique.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
+5 | DoubleClosed | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringDoubleClosedFront_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringDoubleClosedFront.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringDoubleClosedOblique_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringDoubleClosedOblique.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
+6 | DoubleClosed&Ground | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringDoubleClosedGndFront_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringDoubleClosedGndFront.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringDoubleClosedGndOblique_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringDoubleClosedGndOblique.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
+7 | TaperedClosed | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringTaperedClosedFront_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringTaperedClosedFront.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringTaperedClosedOblique_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringTaperedClosedOblique.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
+8 | TaperedClosed&Ground | <span style="display:inline-block; width:35px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringTaperClsdGndFront_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringTaperClsdGndFront.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:70px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringTaperClsdGndOblique_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringTaperClsdGndOblique.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
+9 | PigtailClosed | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPigtailClosedFront_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPigtailClosedFront.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPigtailClosedOblique_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPigtailClosedOblique.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
+10 | PigtailClosed&Ground | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPigtailClosedGndFront_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPigtailClosedGndFront.png" style="width:100%; display:block; margin:0 auto;"></a></span> | <span style="display:inline-block; width:50px; text-align:center;"><a href="/designtypes/Spring/Compression/tooltips/C_SpringPigtailClosedGndOblique_lg.png"><img src="/designtypes/Spring/Compression/tooltips/C_SpringPigtailClosedGndOblique.png" style="width:100%; display:block; margin:0 auto;"></a></span> |
+| &nbsp; | &nbsp; | &nbsp; | &nbsp; |
+ &nbsp; | UserSpecified | See<br/>discussion<br/>below | &nbsp; |
+
+&nbsp;
+
+#### Using End Type Values
+To support user customization and to accommodate less common compression spring end types — 
+such as the “Pigtail” and "TaperedClosed&Ground" configurations used with [Hot Wound](/docs/Help/SpringDesign/advancedSpringOperations.html#HotWound) springs —  
+ODOP:Spring incorporates the terms `Transition_Coils`, `Taper_Amount`, `Pigtail_Amount`, and `Grind_Amount` 
+in addition to `Inactive_Coils`. 
+`Inactive_Coils` and `Transition_Coils` are expressed in coils; 
+the other terms are expressed in units of wire diameter. 
+This approach keeps pitch and solid height calculations independent from the rate equation.  
+
+These terms also allow representation of unusual end configurations, 
+including springs that use different end types at each end.  
+
+When End_Type_Method is **1** (Use values from end type table), the selected `End_Type` directly determines the values of 
+`Inactive_Coils`, `Transition_Coils`, `Taper_Amount`, `Pigtail_Amount` and `Grind_Amount`. 
+Dependent quantities such as `L_Solid` and `Pitch` are then affected indirectly.  
+
+When End_Type_Method is **2** (User specified end type values), 
+the user enters values directly in the corresponding numeric fields.  
+
+Switching End_Type_Method from **1** to End_Type_Method  **2**, retains the current values, 
+allowing users to begin with a close approximation and then refine it. 
+Switching from End_Type_Method  **2** back to End_Type_Method  **1**, restores the values 
+from the internal table associated with the selected `End_Type`.  
+
+
+#### Inactive_Coils
+For a compression spring, "inactive coils" are coils that do not contribute to spring rate. 
+The term [Dead Coils](/docs/Help/DesignTypes/Spring/Compression/description.html#deadCoils) 
+can be thought of as a subset of inactive coils, typically added for handling or to 
+reduce tangling during manufacturing operations.  
+
+`DoubleClosed` and `DoubleClosed&Ground` are included in the `End_Type` table to represent 
+the common case where a spring has two closed coils at each end.  
+
+<!--- Additional information may be found in the documentation for Calculation Input Names above or EQNSET.  --> 
+
+
+#### Transition_Coils
+`Transition_Coils` is the total number of coils, distributed equally across both ends, over which 
+the end geometry changes from the body helix to the terminal geometry. It must be less than or 
+equal to `Inactive_Coils`. Any remaining inactive coils are modeled as fully closed. 
+
+Open and Open&Ground ends use 0.0 transition coils. Closed, Closed&Ground, DoubleClosed, 
+DoubleClosed&Ground, TaperedClosed and TaperedClosed&Ground use 2.0, corresponding to one 
+transitioning coil at each end. PigtailClosed and PigtailClosed&Ground use 1.0, corresponding to 
+one-half transitioning coil at each end.  
+
+The wire-geometry calculation uses: 
+* transition turns per end = Transition_Coils / 2
+* fully closed turns per end = (Inactive_Coils - Transition_Coils) / 2
+* body turns = Coils_T - Inactive_Coils 
+
+The standard body-pitch equation does not subtract `Transition_Coils`. Instead, the wire-length
+calculation integrates the change from body pitch to terminal pitch over the specified transition
+turns. `Wire_Volume` and `Weight` use the resulting wire length.
+Changing `Transition_Coils` affects wire length and weight, while the reported `Pitch` remains
+the body coil pitch.
+
+
+#### Taper_Amount
+In ODOP:Spring, the value of `Taper_Amount` specifies the reduction in solid height, expressed in wire diameters, 
+resulting from tapering the wire diameter of the first and last coil(s) of a [Hot Wound](/docs/Help/SpringDesign/advancedSpringOperations.html#HotWound) compression spring. 
+A value of 1.0 corresponds to reducing the wire diameter by 0.5 × `Wire_Dia` at each end.  
+
+The term *tapered* refers only to local reduction of the end coil’s wire diameter. 
+It does **not** indicate a conical or non-cylindrical spring form. 
+
+
+For the `TaperedClosed&Ground` end type, the default values are:
+- `Taper_Amount` = 1.0  
+- `Grind_Amount` = 0.5  
+
+With these values, the tapering operation reduces the solid height by 50% of a wire diameter at each end. 
+Another 25% of a wire diameter reduction on solid height is due to the tapered end conforming to the previous coil. 
+Thus, the tapered section becomes a skewed, truncated cone. 
+The grinding operation then removes an additional 25% of a nominal wire diameter (50% of the tapered dimension) 
+from each end of the spring. 
+
+In summary, the `TaperedClosed&Ground` end type produces a solid height:
+- 1.5 wire diameters less than the `Closed` end type  
+- 0.5 wire diameters less than the `TaperedClosed` end type  
+
+
+#### Pigtail_Amount
+`Pigtail_Amount` is the total amount of pigtail end-coil nesting into the body
+coil diameter, measured in units of `Wire_Dia` across both ends. A value of 2.0
+means one wire diameter folds fully into the body diameter at each end. The
+calculated solid height is reduced by two wire diameters in total.
+
+The reported `Pitch` is the body coil pitch. For wire length and weight, ODOP:Spring
+uses a separate terminal end-coil pitch at each pigtail end. As a modeling
+assumption, it represents this nesting by starting at one wire diameter of
+terminal pitch and subtracting half of `Pigtail_Amount` at each end:
+`Wire_Dia * (1 - Pigtail_Amount / 2)`. At 2.0, the terminal segment has zero
+modeled pitch; the transitioning segment still changes continuously from body
+pitch to this terminal value. This relationship is a geometric modeling
+assumption, not a validated industry.
+
+#### Grind_Amount, 
+Grind amount reflects the number of wire diameters removed by a grinding operation. 
+As noted earlier, 
+when End_Type_Method is **1** (Use values from end type table), values are 
+determined by the `End_Type` selected from the table. 
+
+The Open&Ground and Closed&Ground end types each have a `Grind_Amount` value of 1.0, 
+corresponding to removing 50% of a wire diameter at each end.  
+
+`Grind_Amount` is included as a reduction in the weight calculation. 
+See "Stock Weight" in the Reports for the gross material required to produce 1,000 springs (not reduced by `Grind_Amount` or `Taper_Amount`).
+
+
+&nbsp; 
+
+___
+
+<a id="pitch"></a>  
+___
+
+## Pitch calculation 
+
+ODOP:Spring displays a value for compression spring body coil pitch in Calculator View, 
+Report 1 and Report 3. 
+These values are calculated with the formulas found in many industry standard 
+[Spring Design References](/docs/Help/SpringDesign/references.html).  
+
+For open end types, there is no issue.  
+
+For closed end types, ODOP:Spring uses the industry standard body-pitch calculation. The number of
+inactive coils over which the end changes from the body helix to the terminal geometry is specified
+by `Transition_Coils`. This transition is part of the inactive end coils and is not subtracted as a
+separate coil from the body coils. Any inactive coils outside the transition are treated as fully
+closed coils.
+
+Wire length and weight calculations use the standard body pitch and integrate the continuously
+changing pitch across the complete transitioning end coil. For pigtail ends, the change from body
+diameter to pigtail diameter also occurs across that same end coil.
+
+&nbsp; 
+
+___
+
+<a id="deadCoils"></a>  
+___
+
+## Dead Coils 
+
+In a compression spring, "dead coils" are additional close wound coils, typically placed at each end. 
+Dead coils can be effective in preventing individual springs from tangling after coiling.  
+
+"DoubleClosed" and "DoubleClosed&Ground" are provided in the `End_type` table to cover the common situation
+where a spring has two closed coils at each end. 
+
+The appropriate way to handle a custom number of dead coils is to set End_Type_Method to **2** (User specified end type values) 
+and increase the value of `Inactive_Coils` by the desired number of dead coils. 
+
+&nbsp; 
+
+___
+
+<a id="userEndTypes"></a>  
+___
+
+## User Specified End Type Examples 
+
+To represent a spring with ten active coils, two dead coils and closed ends: 
+
+    FIX Coils_T     14.0
+    CHANGE  End_Type  DoubleClosed
+
+To represent a spring with one end Closed 
+and with the other end Closed&Ground: 
+
+    CHANGE  End_Type_Method  2
+    CHANGE  End_Closure  Closed
+    CHANGE  Closed_End_Geometry  Single
+    CHANGE  Inactive_Coils  2.0
+    CHANGE  Grind_Amount  0.5
+
+To represent a spring with ten active coils, four dead coils and closed & ground ends: 
+
+    FIX Coils_T    16.0
+    CHANGE  End_Type_Method  2
+    CHANGE  End_Closure  Closed
+    CHANGE  Closed_End_Geometry  Single
+    CHANGE  Inactive_Coils  6.0
+    CHANGE  Grind_Amount  1.0
+
+&nbsp;  
+
+___
+
+<a id="c_springBuckling"></a>  
+___
+
+## Buckling 
+
+A compression spring intended for operation without lateral support 
+should have a ratio of free length to coil diameter (`Slenderness`) less 
+than approximately 4 to avoid buckling. 
+For designs with a greater `Slenderness` ratio, lateral support is usually 
+provided by operation in a sleeve or over a post. 
+
+
+                     free length  
+    Slenderness = ----------------  =  L_Free / Mean_Dia 
+                    coil diameter  
+
+The constraint `Slenderness` MAX can be used to restrict the search to 
+designs that will not tend to buckle. 
+Note that `Slenderness` is not constrained in the default startup design. 
+Thus, unless this constraint is established, 
+a search may produce designs that are subject to buckling. 
+
+The Alert facility and Report tabs indicate the likelihood of bucking for 
+a specific design and loading condition. 
+Both the fixed-free and fixed-fixed end conditions are covered.
+
+More precise treatments of this subject are available in the resources listed in the 
+[Spring Design References](/docs/Help/SpringDesign/references.html) 
+section of the documentation.  
+
+___
+
+<a id="c_springShotPeen"></a>  
+___
+
+## Shot Peen 
+
+Coil springs may be shot peened in order to introduce favorable (compressive)
+stress at the surface. 
+This improves cycle life at the cost of a secondary operation during manufacturing.  
+
+The Calculation Input `Life_Category` allows the user to specify that the 
+spring will be shot peened.  
+
+Selecting a non-default `Life_Category` that describes a shot peened spring in 
+cyclic service works with the built-in materials table to choose a value for `Stress_Lim_Endur`. 
+As described in 
+[Cycle Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife), 
+to realize the desired impact of shot peening on the final spring design, 
+you should also enable the MIN constraint on `FS_CycleLife`.
+
+See also: 
+ - [Cycle Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
+ - [Wikipedia on shot peening](https://en.wikipedia.org/wiki/Shot_peening)  
+
+___
+
+<a id="relatedTopics"></a>  
+___
+
+## Related topics 
+
+ - [Design Types](/docs/Help/DesignTypes/index.html)  
+ - [Spring Design Topics](/docs/Help/SpringDesign/index.html)  
+ - [Spring Design References](/docs/Help/SpringDesign/references.html)  
+ - [Restrictions](/docs/About/Legal/Restrictions.html)  
+ - [Help](/docs/Help/index.html)   
+
+&nbsp;  
+  
+&nbsp;  
+
 <!---
+Commented out ... transferred from early in this file ... Preserving for possible future use.
+
     Force_Solid -|---------------/.
                  |              / .
      Force_2 ----|-------------/  .
@@ -55,351 +619,5 @@ ___
                  Deflect_1    Deflect_2
      
                  D E F L E C T I O N
-
 &nbsp;   
  -->
-![Compression Spring Variable Names on Force - Deflection Diagram](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png "Compression Spring Variable Names on Force - Deflection Diagram")  
-
-**Full size image:** [Compression Spring Variable Names on Force - Deflection Diagram](/docs/Help/DesignTypes/Spring/img/ForceVsDeflection.png)  
-
-___
-
-<a id="c_springImage"></a>  
-___
-
-## Compression Spring Variable Names on image of physical spring
-
-![Compression Spring Variable Names on on image of physical spring](/docs/Help/DesignTypes/Spring/img/AnnotatedCSpring.png "Compression Spring Variable Names on on image of physical spring")  
-
-
-___
-
-<a id="c_springFD_Names"></a>  
-___
-
-## Compression spring Force-Deflection point names 
-
- The compression spring Force-Deflection points and associated names are: 
- &nbsp;           | length  | force       | outside diameter | inside diameter | stress       | factor of safety 
- ---              | ---     | ---         | ---              |  ---            | ---          |  ---             
-**free:**         | L_Free  |             | OD_Free          | ID_Free         |              |                  
-**point&nbsp;1:** | L_1     | Force_1     |                  |                 | Stress_1     |                  
-**point&nbsp;2:** | L_2     | Force_2     |                  |                 | Stress_2     | FS_2             
-**solid:**        | L_Solid | Force_Solid |                  |                 | Stress_Solid | FS_Solid         
-
-**point 1** = minimum operating load &nbsp; &nbsp; **point 2** = maximum operating load 
-
-&nbsp;
-   
-___
-
-<a id="c_springIV_Names"></a>  
-___
-
-## Independent Variable names: 
-
-Name     | &nbsp; | Description  
- ---     | ---    | ---         
-Wire_Dia |        | wire diameter 
-OD_Free  |        | outside diameter in the free condition 
-Coils_T  |        | total number of coils, including inactive coils 
-L_Free   |        | free length 
-Force_1  |        | load at point 1  (minimum operating load) 
-Force_2  |        | load at point 2  (maximum operating load) 
-
-&nbsp;
-
-___
-
-<a id="c_springDV_Names"></a>  
-___
-
-## Dependent Variable names:   
-
-Name         | &nbsp; | Description  
- ---         | ---    | ---         
-Mean_Dia     |        | mean diameter of spring coil in free condition (OD_Free + ID_Free)/2 
-Coils_A      |        | number of active coils (turns) 
-Rate         |        | spring constant - force per unit deflection 
-Deflect_1    |        | deflection at Force_1 
-Deflect_2    |        | deflection at Force_2 
-L_1          |        | spring length at minimum operating load  (Force_1) 
-L_2          |        | spring length at maximum operating load  (Force_2) 
-L_Stroke     |        | net deflection between point 1 and point 2 
-L_Solid      |        | solid height 
-Slenderness  |        | ratio of L_Free to Mean_Dia.  The "form factor" that governs a spring's tendency to buckle 
-ID_Free      |        | inside  diameter in free condition 
-Weight       |        | weight of spring; wire density * wire volume 
-Spring_Index |        | spring index;  the ratio Mean_Dia/Wire_Dia 
-Force_Solid  |        | force produced in solid condition 
-Stress_1     |        | torsional stress at point 1 
-Stress_2     |        | torsional stress at point 2 
-Stress_Solid |        | torsional stress in the solid condition 
-FS_2         |        | static factor of safety at point 2.  This is the ratio of allowable stress to the calculated stress induced by the load at point 2  (Stress_Lim_Stat/Stress_2). 
-FS_Solid     |        | static factor of safety at solid condition  (Stress_Lim_Stat/Stress_Solid) 
-FS_CycleLife |        | factor of safety based on the Soderberg endurance limit calculation.  This figure uses the allowable endurance stress (Stress_Lim_Endur) to include fatigue considerations. Refer to additional discussion in the [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) topic. 
-Cycle_Life   |        | expected cycle life based on a calculation using the "modified Goodman method".  This value is approximate.  Refer to additional discussion in the  [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) topic. 
-%_Avail_Deflect |     | the percentage of available deflection consumed at load point 2. 
-Energy       |        | change in elastic potential energy between point 1 and point 2. 
-
-&nbsp; 
-
-___
-
-<a id="c_springCalcInputNames"></a>  
-___
-
-## Calculation Input names 
-
-Name           | &nbsp; | Description  
- ---           | ---    | ---         
-Spring_Type    |        | character string used only as a label 
-Prop_Calc_Method |      | Property Calculation Method controls how material properties and allowable stresses are determined. See also: [Materials](/docs/Help/SpringDesign/materials.html). 
-&nbsp;           |      | **1** - indicates values come from materials table; allowable stresses will be calculated as a function of Wire_Dia. 
-&nbsp;           |      | **2** - indicates tensile and allowable % are supplied by the user; allowable stresses are calculated. 
-&nbsp;           |      | **3** - indicates allowable stresses are supplied directly by the user. 
-Material_Type  |        | selects an entry in the material table. Is used to determine allowable stresses when Prop_Calc_Method is 1. Otherwise is ignored. 
-ASTM/Fed-Spec  |        | character string used only as a label to further identify the origin of material property data 
-Process        |        | character string used to identify the manufacturing process.  It is normally controlled by the material selected from the material table. Values are usually Cold_Coiled or Hot_Wound. See also: Hot_Factor_Kh (below). 
-Life_Category  |        | This value reflects the user's input about shot peening and required cycle life. It is input to the calculation of FS_CycleLife. See also: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) 
-Density        |        | wire density; weight per unit volume 
-Torsion_Modulus|        | torsional modulus (G); a.k.a. shear modulus or modulus of rigidity 
-Hot_Factor_Kh  |        | empirical correction factor applied to hot wound modulus 
-Tensile        |        | tensile strength 
-%_Tensile_Endur|        | allowable fraction of tensile strength for torsion endurance (cyclic load)  See also: [Cycle_Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife) 
-%_Tensile_Stat |        | allowable fraction of tensile strength for torsion static load 
-Stress_Lim_Endur |      | allowable stress limit; cyclic application (torsion) 
-Stress_Lim_Stat  |      | allowable stress limit; static application (torsion) 
-End_Type       |        | character string that is used to determine calculations for Inactive_Coils, L_Solid and Pitch;  See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes)
-Inactive_Coils |        | number of inactive coils (depends on End_Type) 
-Add_Coils@Solid|        | extra coils included in solid height calculation;  See also: [Compression spring end types](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springEndTypes) 
-Catalog_Name   |        | name of the catalog containing the most recently selected catalog entry 
-Catalog_Number |        | catalog number of the most recent catalog entry 
-
-<!---     Material_File -  character string containing the material table name. -->
-<!---                      It is normally established by the initialState.js file. -->
-
-&nbsp; 
-
-___
-
-<a id="c_springOtherValues"></a>  
-___
-
-## Values in reports    
-
-Other values calculated and displayed in the Reports include:
-
-Name           | &nbsp; | Description  
- ---           | ---    | ---         
-Wire&nbsp;Length |      | total length of wire required to manufacture the spring, not including any waste 
-Safe Load      |        | The load supported by the spring in the solid condition or at a stress equal to the Stress_Lim_Stat value, whichever is lower. 
-Pitch          |        | distance between the wire centers of adjacent coils, measured in the free state 
-Weight         |        | weight of 1,000 springs 
-Buckling       |        | indication of tendency to buckle given the current design and loading conditions 
-Stress Ratio   |        | ratio of minimum stress to maximum stress (Stress_1/Stress_2) 
-Kw1, Kw2       |        | stress correction factors due to curvature 
-Helix Angle    |        | angle, in degrees, of the spring helix relative to a perpendicular to the spring axis 
-
-&nbsp;
-
-___
-
-<a id="c_springConstraints"></a>  
-___
-
-## Constraints unique to compression springs:    
-
-#### Slenderness 
-Slenderness is a compression spring's ratio of free length (L\_Free) to 
-mean coil diameter (Mean\_Dia). 
-If this ratio exceeds 4 for a compression spring, that spring will have a 
-tendency to buckle under load. 
-In that case, the spring will usually need support in the form of 
-a sleeve or post. 
-In order to restrain the search to select designs that do not have a tendency to buckle, 
-set the value of Slenderness MAX to a value of 4.0 or less. 
-
-For additional information, see: [Buckling](/docs/Help/DesignTypes/Spring/Compression/description.html#c_springBuckling) 
-
-#### %\_Avail\_Deflect 
-%\_Avail\_Deflect is the percentage of available deflection consumed at load point 2. 
-%\_Avail\_Deflect is usually constrained to be less than 85 to 98 percent. 
-Thus, it requires the search to select designs that provide a small margin 
-between load point 2 and the solid condition. 
-
-&nbsp; 
-
-___
-
-<a id="c_springEndTypes"></a>  
-___
-
-## End Types 
-
-ODOP:Spring currently implements six spring end types for compression springs. 
-In addition, the user can define specialized end conditions. 
-For compression springs, the Calculation Input End\_Type has the following possible values: 
-
-&nbsp; | Compression spring end types 
- ---   | ---         
-1      | Open    
-2      | Open&Ground   
-3      | Closed   
-4      | Closed&Ground  
-5      | Tapered_C&G  
-6      | Pig-Tail
-7      | User_Specified  
-
-For a compression spring, the end type selection directly impacts the value of
-Inactive\_Coils and Add\_Coils@Solid. 
-L\_Solid, Pitch and other variables are impacted indirectly. 
-
-<!--- Additional information may be found in the documentation sections for EQNSET.  -->
-
-When End\_Type is set to one of the standard (non User_Specified) selections, 
-Inactive\_Coils and Add\_Coils@Solid will be set by the 
-program from values contained in internal tables. 
-When the value of End\_Type is User_Specified, 
-the user may set these values by making an entry in the corresponding 
-numeric entry field. 
-
-#### Add_Coils@Solid 
-In order to facilitate the treatment of less common compression spring end 
-types such as the "Tapered, Closed and Ground" configuration associated with hot 
-wound springs, ODOP:Spring has added an extra term into the solid height 
-calculation. 
-Add\_Coils@Solid is a constant that is normally determined by 
-the value of End\_Type. 
-It is used to separate the solid height calculation from the rate equation which 
-is dependent on the value of Inactive\_Coils. 
-Add\_Coils@Solid represents the number of wire diameters added into the solid 
-height beyond Coils\_T. 
-For Open and Closed end types, it has a value of +1.0. 
-For Open&Ground and Closed&Ground end types, it has a value of 0.0. 
-For the Tapered\_C&G end type, Add\_Coils@Solid has a value of -0.5. 
-
-Note that the Add\_Coils@Solid term is not included in Coils\_T or the wire 
-length and weight calculations. 
-It is only an adjustment for the solid height calculation and is not the 
-correct way to represent 
-[Dead Coils](/docs/Help/DesignTypes/Spring/Compression/description.html#deadCoils). 
-
-The Add_Coils@Solid term may be used to represent unusual end configurations. 
-For example, springs that have a different end type at each end. 
-To establish the value of Inactive\_Coils and/or Add_Coils@Solid directly, 
-first select a value of End\_Type of User_Specified. 
-
-&nbsp; 
-
-___
-
-<a id="deadCoils"></a>  
-___
-
-## Dead coils 
-
-In a compression spring, "dead coils" are additional close wound coils, 
-typically placed at each end. 
-Dead coils can be effective in preventing tangling. 
-
-The appropriate way to handle dead coils is to select the "User_Specified" end type 
-and increase the value of Inactive_Coils by the desired number of dead coils.
-
-&nbsp; 
-
-___
-
-<a id="userEndTypes"></a>  
-___
-
-## User specified end type examples 
-
-To represent a spring with one end Closed 
-and with the other end Closed&Ground: 
-
-    CHANGE  End_Type  User_Specified
-    CHANGE  Inactive_Coils   2.0
-    CHANGE  Add_Coils@Solid  0.5
-
-To represent a spring with ten active coils, two dead coils and closed ends: 
-
-    CHANGE  End_Type  User_Specified
-    FIX Coils_T     14.0
-    CHANGE  Inactive_Coils   4.0
-    CHANGE  Add_Coils@Solid  1.0
-
-&nbsp;  
-
-___
-
-<a id="c_springBuckling"></a>  
-___
-
-## Buckling 
-
-A compression spring intended for operation without lateral support 
-should have a ratio of free length to coil diameter (Slenderness) less 
-than approximately 4 to avoid buckling. 
-For designs with a greater Slenderness ratio, lateral support is usually 
-provided by operation in a sleeve or over a post. 
-
-
-                     free length          L_Free
-    Slenderness = ----------------  =  -------------
-                    coil diameter        Mean_Dia
-
-The constraint Slenderness MAX can be used to restrict the search to 
-designs that will not tend to buckle. 
-Note that Slenderness is not constrained in the default startup design. 
-Thus, unless this constraint is established, 
-a search may produce designs that are subject to buckling. 
-
-The Report tabs will provide an indication as to the possibility of 
-bucking for each specific design and loading condition. 
-Both the fixed-free and fixed-fixed end conditions are covered.
-
-More precise treatments of this subject are available in the resources listed 
-in the [Spring Design References](/docs/Help/SpringDesign/references.html) section 
-of the documentation. 
-
-___
-
-<a id="c_springShotPeen"></a>  
-___
-
-## Shot Peen 
-
-Coil springs may be shot peened in order to introduce favorable (compressive)
-stress at the surface. 
-This improves cycle life at the cost of a secondary operation during manufacturing.  
-
-The Calculation Input **Life_Category** allows the user to specify that the 
-spring will be shot peened.  
-
-Selecting a non-default Life_Category that describes a shot peened spring in a 
-cyclic application works with the built-in materials table to select a value for 
-Stress_Lim_Endur.
-As described in [Cycle Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife), 
-to get the desired impact on the final spring design, 
-it is important to also enable the constraint on **FS_CycleLife**.
-
-See also: 
- - [Cycle Life](/docs/Help/SpringDesign/spring_oview.html#cycleLife)  
- - [Wikipedia shot peening](https://en.wikipedia.org/wiki/Shot_peening)  
-
-___
-
-<a id="relatedTopics"></a>  
-___
-
-## Related topics 
-
- - [Design Types](/docs/Help/DesignTypes/index.html)   
- - [Spring Design Topics](/docs/Help/SpringDesign/index.html)   
- - [Restrictions](/docs/About/Legal/Restrictions.html)   
- - [Help](/docs/Help/index.html)   
-
-&nbsp;  
-  
-&nbsp;  

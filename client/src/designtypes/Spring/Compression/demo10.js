@@ -130,14 +130,14 @@ export const execute = {
                     </p>
 
                     <p>
-                    CHANGE Material_Type 302_STAINLESS &nbsp; <br />
-                    CHANGE OD_Free 1.142<br />
-                    CHANGE Wire_Dia 0.142
+                    CHANGE <b>Material_Type</b> 302_STAINLESS &nbsp; <br />
+                    CHANGE <b>OD_Free</b> 1.142<br />
+                    CHANGE <b>Wire_Dia</b> 0.142
                     </p>
 
                     <p>
                     Observe that Report 2 displays a kw1 correction factor of 1.211.
-                    Observe that the material table provides a Tensile stress value of 196,938 PSI
+                    Observe that the material table provides a <b>Tensile</b> stress value of 196,938 PSI
                     associated with a wire size of 0.142 inch.
                     </p>
 
@@ -145,10 +145,10 @@ export const execute = {
                     In the process of moving to the next page,
                     this demo session will select a property calculation method that does not utilize the built-in
                     table of material properties.
-                    The values of Density, Torsion Modulus and Tensile for 302 Stainless will carry forward
+                    The values of <b>Density</b>, Torsion Modulus and <b>Tensile</b> for 302 Stainless will carry forward
                     but other properties will be specified separately.
                     Specifically, the stress correction factor adjusted value of allowable stress will be applied.
-                    In the process, the previous values of OD_Free and Wire_Dia will be restored so that the demo session
+                    In the process, the previous values of <b>OD_Free</b> and <b>Wire_Dia</b> will be restored so that the demo session
                     is not able to "cheat" and start the solution with the handbook answer already in place.
                     </p>
                 </>
@@ -168,14 +168,14 @@ export const execute = {
                     </p>
 
                     <p>
-                    CHANGE Prop_Calc_Method 3<br />
-                    CHANGE OD_Free 1.1<br />
-                    CHANGE Wire_Dia 0.1055<br />
-                    CHANGE Stress_Lim_Stat 96880
+                    CHANGE <b>Prop_Calc_Method</b> 3<br />
+                    CHANGE <b>OD_Free</b> 1.1<br />
+                    CHANGE <b>Wire_Dia</b> 0.1055<br />
+                    CHANGE <b>Stress_Lim_Stat</b> 96880
                     </p>
 
                     <p>
-                    Again, the change to Prop_Calc_Method is the key to our "design-to-stress" approach.
+                    Again, the change to <b>Prop_Calc_Method</b> is the key to our "design-to-stress" approach.
                     It is what allows stress limits to be directly specified and not supplied from the materials table.
                     The value of 96,880 is the problem-specified 80,000 PSI with
                     the previously noted stress correction factor applied.
@@ -206,13 +206,13 @@ export const execute = {
                     </p>
 
                     <p>
-                    CHANGE  End_Type Closed<br />
-                    FIX Force_1 0.0<br />
-                    FIX Force_2 90.0<br />
-                    FIX Force_Solid 90.0<br />
-                    FIX L_Stroke 3.0<br />
-                    FIX Mean_Dia 1.0<br />
-                    FIX Stress_Solid 96880<br />
+                    CHANGE  <b>End_Type</b> Closed<br />
+                    FIX <b>Force_1</b> 0.0<br />
+                    FIX <b>Force_2</b> 90.0<br />
+                    FIX <b>Force_Solid</b> 90.0<br />
+                    FIX <b>L_Stroke</b> 3.0<br />
+                    FIX <b>Mean_Dia</b> 1.0<br />
+                    FIX <b>Stress_Solid</b> 96880<br />
                     </p>
                     <br />
 
@@ -243,9 +243,9 @@ export const execute = {
                     </p>
 
                     <p>
-                    Free FS_2<br />
-                    Free FS_Solid<br />
-                    Free %_Avail_Deflect<br />
+                    Free <b>FS_2</b><br />
+                    Free <b>FS_Solid</b><br />
+                    Free <b>%_Avail_Deflect</b><br />
                     &nbsp;
                     <br />
                     The remaining Independent Variable values remain as established by the initialState.
@@ -324,12 +324,12 @@ export const execute = {
 
                     <p>
                     While the difference is quite small, in order to compare with the handbook result,
-                    the demo session will impose the handbook value of Wire_Dia.
+                    the demo session will impose the handbook value of <b>Wire_Dia</b>.
                     Specifically:
                     <br /><br />
-                    FIX Wire_Dia 0.142<br />
+                    FIX <b>Wire_Dia</b> 0.142<br />
                     <br />
-                    Look for the new value of Wire_Dia on the next page.
+                    Look for the new value of <b>Wire_Dia</b> on the next page.
                     </p>
                 </>
             )

@@ -41,7 +41,7 @@ Adding, removing, changing or transposing one character in the word is considere
 Notes:   
 By default, the lookup will match words with a common stem. 
 For example, the term "searching" will also match "searches". 
-"Feasibility" will match "feasibile". 
+"Feasibility" will match "feasible". 
 
 Unlike with Google Search, adding quotes and using operators like AND & OR to combine terms 
 will not produce the desired results. 
