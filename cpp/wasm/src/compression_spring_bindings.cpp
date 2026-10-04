@@ -20,6 +20,7 @@ struct SessionHost {
   std::string trace;
   bool trace_enabled = false;
   double objective = 0.;
+  odop::optimization::SeekResult seek_result;
 };
 
 FlatSymbol* symbol(SessionHost& host, const char* id) {
@@ -112,6 +113,7 @@ void odop_compression_spring_session_set_control(void* raw, int field, double va
     case 3: c.violation_weight = value; break; case 4: c.objective_minimum = value; break;
     case 5: c.initial_step = value; break; case 6: c.minimum_step = value; break;
     case 7: c.tolerance = value; break; case 8: c.small_number = value; break;
+    case 9: c.merit_function_weight = value; break;
     default: break;
   }
 }
@@ -141,6 +143,34 @@ int odop_compression_spring_session_search(void* raw) {
   for (const auto& line : result.trace) host.trace += line + '\n';
   host.objective = result.evaluation.objective;
   return 1;
+}
+int odop_compression_spring_session_seek(void* raw, const char* target, int direction) {
+  auto& host = *static_cast<SessionHost*>(raw);
+  if (target == nullptr) { host.diagnostic = "Seek requires a numeric target."; return 0; }
+  if (host.session == nullptr && !odop_compression_spring_session_recalculate(raw, 1)) return 0;
+  const auto* location = odop::compression_spring::find_slot(target);
+  if (location != nullptr && !location->numeric) { host.diagnostic = "Seek requires a numeric target."; return 0; }
+  host.seek_result = odop::optimization::seek(*host.session,
+      odop::optimization::compile_problem(*host.session), target, direction, {}, host.trace_enabled);
+  host.diagnostic = host.seek_result.termination;
+  host.trace.clear();
+  for (const auto& line : host.seek_result.trace) host.trace += line + '\n';
+  host.objective = host.seek_result.evaluation.objective;
+  return host.seek_result.ok ? 1 : 0;
+}
+const char* odop_compression_spring_session_seek_target(void* raw) {
+  return static_cast<SessionHost*>(raw)->seek_result.target.c_str();
+}
+double odop_compression_spring_session_seek_result(void* raw, int field) {
+  const auto& result = static_cast<SessionHost*>(raw)->seek_result;
+  switch (field) {
+    case 0: return result.starting_value;
+    case 1: return result.ending_value;
+    case 2: return result.percent_improvement;
+    case 3: return result.constraint_limited;
+    case 4: return result.repeat_recommended;
+    default: return 0.;
+  }
 }
 double odop_compression_spring_session_get_numeric(void* raw, const char* id, int field) {
   auto* current = model(*static_cast<SessionHost*>(raw));

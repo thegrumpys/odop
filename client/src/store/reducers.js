@@ -100,6 +100,7 @@ import { getSeverityNumberBySeverity, getFontClassBySeverityNumber } from '../co
 import { VALID_MIN, VALID_MAX, MIN, MAX, FDCL } from './actionTypes';
 import { sclden } from './middleware/sclden';
 import { initialSystemControls } from '../initialSystemControls';
+import { initUI } from '../computation/compressionSpringInitUI';
 import { logUsage as log } from '../logUsage';
 
 export default function reducers(state = {}, action) {
@@ -1128,12 +1129,13 @@ export default function reducers(state = {}, action) {
         model: {
           ...state.model,
           result: { ...state.model.result, objective_value: action.payload.objective_value, termination_condition: action.payload.termination_condition },
-          symbol_table: state.model.symbol_table.map((element) => {
+          symbol_table: initUI(state.model.symbol_table.map((element) => {
             const source = values.get(element.name);
             if (!source) return element;
             return {
               ...element,
-              value: source.numericValue === undefined ? source.textValue : source.numericValue,
+              value: source.displayValue ?? (source.numericValue === undefined ? source.textValue : source.numericValue),
+              ...(source.displayValue === 'User_Specified' ? { oldvalue: source.numericValue, input: false, format: 'string' } : {}),
               validmin: source.validMinimum,
               validmax: source.validMaximum,
               cmin: source.constraintMinimum,
@@ -1146,7 +1148,7 @@ export default function reducers(state = {}, action) {
               lmin: source.minimumFlags,
               lmax: source.maximumFlags
             };
-          })
+          }))
         }
       };
    }

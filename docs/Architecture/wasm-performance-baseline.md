@@ -17,23 +17,22 @@ It deliberately reports timings rather than asserting a fixed duration in CI:
 browser, Node, CPU load, and Wasm compilation differ by host. Calculation
 success, finite Rate, and finite objective are strict checks.
 
-## Stage 7.5 full demo and tutor assessment
+## Stage 7.5 and 7.8 full demo and tutor assessment
 
 The same command also runs `wasm-compression-spring-demo-tutor.mjs`. It
 replays the computational actions in every Compression Spring demo/tutor Jest
-trace that uses calculation and Search only: demo1, demo2, demo3, demo5,
-demo10, demoDesignValidation, demoNewDesign, tutor3, tutor6, and tutor8.
-Every Search checkpoint records its legacy objective, Wasm objective,
+trace that uses calculation, Search, and Seek: demo1, demo2, demo3, demo5,
+demo10, demoDesignValidation, demoNewDesign, tutor3, tutor6, tutor7, and tutor8.
+Every Search or Seek checkpoint records its legacy objective, Wasm objective,
 termination condition, match status (absolute tolerance `5e-7`), and elapsed
 time. It deliberately reports mismatches instead of stopping at the first
 one, so a single run produces an honest compatibility inventory.
 
-Tutor7 is excluded because it includes five legacy Seek operations. Seek has
-not yet been ported to the C++/Wasm session API, and substituting Search would
-not be a valid comparison.
+Stage 7.8 adds Tutor7's five Seek operations and two Search checkpoints. The
+October 4, 2026 inventory passed all 27 checkpoints across 11 workflows.
 
 This lane measures a complete C++/Wasm session transaction (design hydration,
-calculation, and Search) in Node. It is suitable for algorithm parity and
+calculation, Search, and Seek) in Node. It is suitable for algorithm parity and
 relative Wasm performance assessment, but is not a claim about browser
 Worker-to-Redux latency. The latter requires Stage 8 cancellation and UI
 lifecycle work.
@@ -63,7 +62,9 @@ source /Users/brianwatt/Developer/emsdk/emsdk_env.sh
 npm run cpp:test:wasm:jest
 ```
 
-It replays `demo1` page 06 and `tutor3` page 04 normal-calculation checkpoints
-through the opaque C++ session ABI and compares their objectives with the
-legacy action-trace assertions. Search checkpoints are intentionally excluded
-until Stage 8 owns their end-to-end behaviour and cancellation contract.
+It replays normal-calculation checkpoints through the opaque C++ session ABI,
+the Tutor3 full-state Search fixture, and all five Tutor7 Seek fixtures. The
+Seek lane exercises the actual Worker client/runtime and adapter with the real
+Node Wasm module, checking full numerical metadata and exact UI messages.
+Stage 8 still owns browser autosearch scheduling, latency, and cancellation
+inside synchronous Worker calculation loops.

@@ -29,7 +29,7 @@ export class CompressionSpringWorkerClient {
         const requestId = ++this.requestId;
         const request = { type, requestId, baseRevision, revision, ...payload };
         return new Promise((resolve, reject) => {
-            this.pending.set(requestId, { resolve, reject });
+            this.pending.set(requestId, { resolve, reject, jobId: payload.jobId });
             this.worker.postMessage(request);
         });
     }
@@ -40,6 +40,17 @@ export class CompressionSpringWorkerClient {
     getSystemControls() { return this.command(compressionSpringCommands.GET_SYSTEM_CONTROLS, {}, false); }
     recalculate(initialize = false) { return this.command(compressionSpringCommands.RECALCULATE, { initialize }); }
     search(jobId) { return this.command(compressionSpringCommands.SEARCH, { jobId }); }
-    cancel(jobId) { return this.command(compressionSpringCommands.CANCEL, { jobId }, false); }
+    seek(name, minmax, jobId) { return this.command(compressionSpringCommands.SEEK, { name, minmax, jobId }); }
+    cancel(jobId) {
+        // Invalidate locally before the synchronous Worker can send a late
+        // optimization result. Cancellation messages are handled after Wasm exits.
+        for (const [requestId, pending] of this.pending) {
+            if (pending.jobId === jobId) {
+                this.pending.delete(requestId);
+                pending.resolve({ cancelled: true });
+            }
+        }
+        return this.command(compressionSpringCommands.CANCEL, { jobId }, false);
+    }
     snapshot() { return this.command(compressionSpringCommands.SNAPSHOT, {}, false); }
 }

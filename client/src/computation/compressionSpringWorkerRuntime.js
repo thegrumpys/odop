@@ -7,6 +7,7 @@ export function createCompressionSpringWorkerRuntime(adapter, postMessage) {
     let design;
     let revision = 0;
     const cancelledJobs = new Set();
+    let completedOptimization;
 
     function calculate(request, initialize) {
         const response = adapter.recalculate(design, { initialize });
@@ -25,6 +26,10 @@ export function createCompressionSpringWorkerRuntime(adapter, postMessage) {
             if (!request || !request.type) return;
             if (request.type === compressionSpringCommands.CANCEL) {
                 cancelledJobs.add(request.jobId);
+                if (completedOptimization && completedOptimization.jobId === request.jobId && completedOptimization.revision === revision) {
+                    design = completedOptimization.before;
+                    completedOptimization = undefined;
+                }
                 postMessage(workerResult(request, { cancelled: true }));
                 return;
             }
@@ -68,13 +73,18 @@ export function createCompressionSpringWorkerRuntime(adapter, postMessage) {
                     revision = request.revision;
                     postMessage(calculate(request, Boolean(request.initialize)));
                     return;
-                case compressionSpringCommands.SEARCH: {
+                case compressionSpringCommands.SEARCH:
+                case compressionSpringCommands.SEEK: {
                     if (!design) { postMessage(workerError(request, 'design must be hydrated before search')); return; }
                     revision = request.revision;
                     if (cancelledJobs.has(request.jobId)) { postMessage(workerResult(request, { cancelled: true })); return; }
-                    const response = adapter.search(design);
+                    const before = design;
+                    const response = request.type === compressionSpringCommands.SEEK
+                        ? adapter.seek(design, { name: request.name, minmax: request.minmax })
+                        : adapter.search(design);
                     if (!response.ok) { postMessage(workerError(request, response.diagnostic || 'Compression Spring search failed.')); return; }
                     design = response.design;
+                    completedOptimization = { jobId: request.jobId, before, revision };
                     postMessage(workerResult(request, { snapshot: response.snapshot, objective: response.objective, termination: response.termination, trace: response.trace, diagnostics: response.diagnostics || [] }));
                     return;
                 }

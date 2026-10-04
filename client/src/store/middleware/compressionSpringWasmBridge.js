@@ -1,5 +1,5 @@
 import { applyWasmComputationSnapshot } from '../actions';
-import { LOAD, LOAD_INITIAL_STATE, CHANGE_SYMBOL_VALUE, CHANGE_SYSTEM_CONTROLS_VALUE, SEARCH,
+import { LOAD, LOAD_INITIAL_STATE, CHANGE_SYMBOL_VALUE, CHANGE_SYSTEM_CONTROLS_VALUE, SEARCH, SEEK,
     FIX_SYMBOL_VALUE, FREE_SYMBOL_VALUE, CHANGE_SYMBOL_CONSTRAINT, CHANGE_SYMBOL_CONSTRAINTS,
     SET_SYMBOL_FLAG, RESET_SYMBOL_FLAG, CHANGE_INPUT_SYMBOL_VALUES } from '../types';
 import { normalizeCompressionSpringSavedDesign } from '../../computation/compressionSpringSchema';
@@ -10,7 +10,7 @@ const patshTraceEnabled = process.env.REACT_APP_PATSH_TRACE === 'true';
 // Simple value/control updates can be owned by the Worker immediately. The
 // legacy reducers/dispatcher still assemble the richer fix/constraint state;
 // once complete, that authoritative domain state is synchronized atomically.
-const workerCommands = new Set([CHANGE_SYMBOL_VALUE, CHANGE_SYSTEM_CONTROLS_VALUE, SEARCH]);
+const workerCommands = new Set([CHANGE_SYMBOL_VALUE, CHANGE_SYSTEM_CONTROLS_VALUE, SEARCH, SEEK]);
 const synchronizedDomainActions = new Set([
     FIX_SYMBOL_VALUE, FREE_SYMBOL_VALUE, CHANGE_SYMBOL_CONSTRAINT,
     CHANGE_SYMBOL_CONSTRAINTS, SET_SYMBOL_FLAG, RESET_SYMBOL_FLAG,
@@ -37,10 +37,16 @@ export function createCompressionSpringWasmBridge(client, enabled = () => false)
         // transaction. This preserves all flags, bounds, and scale metadata
         // created by the legacy reducer until those actions move into the
         // Worker protocol themselves.
-        const request = !hydrated || synchronizedDomainActions.has(action.type) ? client.hydrate(design) : action.type === CHANGE_SYMBOL_VALUE
+        const needsHydration = !hydrated || synchronizedDomainActions.has(action.type);
+        const runOptimization = () => action.type === SEEK
+            ? client.seek(action.payload.name, action.payload.minmax, `seek-${Date.now()}`)
+            : client.search(`search-${Date.now()}`);
+        const request = needsHydration ? (action.type === SEARCH || action.type === SEEK
+            ? client.hydrate(design).then((response) => response.stale ? response : runOptimization())
+            : client.hydrate(design)) : action.type === CHANGE_SYMBOL_VALUE
             ? client.applyChanges([{ id: action.payload.name, numericValue: action.payload.value }])
             : action.type === CHANGE_SYSTEM_CONTROLS_VALUE ? client.setSystemControls(action.payload.system_controls)
-            : client.search(`search-${Date.now()}`);
+            : runOptimization();
         hydrated = true;
         request.then((response) => {
             if (!response.stale && response.snapshot) {

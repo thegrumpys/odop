@@ -7,6 +7,7 @@ export const compressionSpringCommands = Object.freeze({
     GET_SYSTEM_CONTROLS: 'getSystemControls',
     RECALCULATE: 'recalculate',
     SEARCH: 'search',
+    SEEK: 'seek',
     CANCEL: 'cancel',
     SNAPSHOT: 'snapshot'
 });

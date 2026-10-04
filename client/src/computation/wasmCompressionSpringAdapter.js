@@ -1,5 +1,7 @@
+import { toODOPPrecision } from '../toODOPPrecision';
+
 const numericFields = ['value', 'validMinimum', 'validMaximum', 'constraintMinimum', 'constraintMaximum', 'scaleDenominatorLimit', 'minimumScaleDenominator', 'maximumScaleDenominator', 'minimumViolation', 'maximumViolation'];
-const controlFields = ['maxit', 'fix_wt', 'con_wt', 'viol_wt', 'objmin', 'del', 'delmin', 'tol', 'smallnum'];
+const controlFields = ['maxit', 'fix_wt', 'con_wt', 'viol_wt', 'objmin', 'del', 'delmin', 'tol', 'smallnum', 'mfn_wt'];
 const number = (value) => typeof value === 'number' ? value : 0;
 const optionalNumber = (value) => typeof value === 'number' ? value : Number.NaN;
 const patshTraceEnabled = process.env.REACT_APP_PATSH_TRACE === 'true';
@@ -18,6 +20,9 @@ export function createWasmCompressionSpringAdapter(Module) {
     const setTrace = call('odop_compression_spring_session_set_trace', null, ['number', 'number']);
     const recalculate = call('odop_compression_spring_session_recalculate', 'number', ['number', 'number']);
     const search = call('odop_compression_spring_session_search', 'number', ['number']);
+    const seek = call('odop_compression_spring_session_seek', 'number', ['number', 'string', 'number']);
+    const seekTarget = call('odop_compression_spring_session_seek_target', 'string', ['number']);
+    const seekResult = call('odop_compression_spring_session_seek_result', 'number', ['number', 'number']);
     const getNumeric = call('odop_compression_spring_session_get_numeric', 'number', ['number', 'string', 'number']);
     const getText = call('odop_compression_spring_session_get_text', 'string', ['number', 'string']);
     const diagnostic = call('odop_compression_spring_session_diagnostic', 'string', ['number']);
@@ -35,7 +40,7 @@ export function createWasmCompressionSpringAdapter(Module) {
                 if (!setNumeric(handle, symbol.id, ...values, number(symbol.minimumFlags), number(symbol.maximumFlags))) return `unknown Compression Spring symbol: ${symbol.id}`;
             } else if (!setText(handle, symbol.id, symbol.textValue || '')) return `unknown Compression Spring symbol: ${symbol.id}`;
         }
-        controlFields.forEach((field, index) => setControl(handle, index, number(design.systemControls && design.systemControls[field])));
+        controlFields.forEach((field, index) => setControl(handle, index, field === 'mfn_wt' ? (design.systemControls && design.systemControls[field]) ?? .01 : number(design.systemControls && design.systemControls[field])));
         return undefined;
     }
     function readDesign(design) {
@@ -59,13 +64,30 @@ export function createWasmCompressionSpringAdapter(Module) {
         setTrace(handle, patshTraceEnabled ? 1 : 0);
         if (!operation()) return { ok: false, diagnostic: diagnostic(handle) };
         const updated = readDesign(design);
-        return { ok: true, design: updated, snapshot: updated.symbols, objective: objective(handle), diagnostics: [] };
+        const method = updated.symbols.find((symbol) => symbol.id === 'Prop_Calc_Method')?.numericValue;
+        const snapshot = updated.symbols.map((symbol) => symbol.id === 'Material_Type' && (method === 2 || method === 3)
+            ? { ...symbol, displayValue: 'User_Specified' } : symbol);
+        return { ok: true, design: updated, snapshot, objective: objective(handle), diagnostics: [] };
     }
     return {
         recalculate: (design, { initialize }) => run(design, () => recalculate(handle, initialize ? 1 : 0)),
         search: (design) => {
             const response = run(design, () => recalculate(handle, 1) && search(handle));
             return response.ok ? { ...response, termination: diagnostic(handle), trace: trace(handle) } : response;
+        },
+        seek: (design, { name, minmax }) => {
+            if (minmax !== 'MIN' && minmax !== 'MAX') return { ok: false, diagnostic: 'Seek requires MIN or MAX direction.' };
+            const response = run(design, () => recalculate(handle, 1) && seek(handle, name, minmax === 'MAX' ? 1 : -1));
+            if (!response.ok) return response;
+            let termination = diagnostic(handle);
+            const target = seekTarget(handle);
+            if (termination === 'Seek completed.') {
+                const units = (design.symbolUnits || {})[target] || '';
+                termination = `Seek completed. ${target} ${toODOPPrecision(seekResult(handle, 0))} --> ${toODOPPrecision(seekResult(handle, 1))} ${units}; ${toODOPPrecision(seekResult(handle, 2))}% improvement.`;
+                if (seekResult(handle, 3)) termination += ` The ${minmax} constraint on ${target} is limiting further progress. You may want to relax or disable this constraint and then run Seek again.`;
+                if (seekResult(handle, 4)) termination += ' To further improve result, re-execute Seek.';
+            }
+            return { ...response, termination, trace: trace(handle) };
         },
         snapshot: (design) => design.symbols,
         dispose: () => destroy(handle)

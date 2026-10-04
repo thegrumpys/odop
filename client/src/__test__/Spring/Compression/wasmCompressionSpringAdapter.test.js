@@ -8,7 +8,7 @@ const design = {
     ]
 };
 
-function fakeModule() {
+function fakeModule(overrides = {}) {
     const calls = [];
     const api = {
         odop_compression_spring_session_create: () => 9,
@@ -16,15 +16,21 @@ function fakeModule() {
         odop_compression_spring_session_clear: () => calls.push(['clear']),
         odop_compression_spring_session_set_numeric: (...args) => { calls.push(['numeric', ...args]); return 1; },
         odop_compression_spring_session_set_text: (...args) => { calls.push(['text', ...args]); return 1; },
+        odop_compression_spring_session_set_propagation: (...args) => { calls.push(['propagation', ...args]); return 1; },
         odop_compression_spring_session_set_control: (...args) => calls.push(['control', ...args]),
+        odop_compression_spring_session_set_trace: (...args) => calls.push(['trace', ...args]),
         odop_compression_spring_session_recalculate: (...args) => { calls.push(['recalculate', ...args]); return 1; },
         odop_compression_spring_session_search: () => 1,
+        odop_compression_spring_session_seek: (...args) => { calls.push(['seek', ...args]); return 1; },
+        odop_compression_spring_session_seek_target: () => 'Weight',
+        odop_compression_spring_session_seek_result: (_handle, field) => [10, 5, 50, 1, 1][field],
         odop_compression_spring_session_get_numeric: (_handle, id, field) => id === 'Wire_Dia' && field === 0 ? .1055 : .2,
         odop_compression_spring_session_get_text: () => 'A228/QQW-470',
         odop_compression_spring_session_diagnostic: () => '',
+        odop_compression_spring_session_trace: () => '',
         odop_compression_spring_session_objective: () => 0
     };
-    return { calls, cwrap: (name) => api[name] };
+    return { calls, cwrap: (name) => overrides[name] || api[name] };
 }
 
 it('marshals stable-ID slots and controls without exposing Wasm details to the Worker runtime', () => {
@@ -35,12 +41,33 @@ it('marshals stable-ID slots and controls without exposing Wasm details to the W
     expect(Module.calls).toContainEqual(['numeric', 9, 'Wire_Dia', .1055, .01, 1, .02, .5, .1, .2, .3, 0, 0, 1, 2]);
     expect(Module.calls).toContainEqual(['text', 9, 'ASTM/Fed_Spec', 'A228/QQW-470']);
     expect(Module.calls).toContainEqual(['recalculate', 9, 1]);
-    expect(Module.calls.filter((call) => call[0] === 'control')).toHaveLength(9);
+    expect(Module.calls.filter((call) => call[0] === 'control')).toHaveLength(10);
+    expect(Module.calls).toContainEqual(['control', 9, 9, .01]);
     expect(response.design.symbols[0].numericValue).toBe(.1055);
     expect(response.design.symbols[0]).toMatchObject({ validMinimum: .2, constraintMinimum: .2, minimumFlags: .2 });
     expect(response.objective).toBe(0);
     adapter.dispose();
     expect(Module.calls).toContainEqual(['destroy']);
+});
+
+it('marshals Seek direction and merit weight and formats constraint-limited and repeat advice', () => {
+  const Module = fakeModule({ odop_compression_spring_session_diagnostic: () => 'Seek completed.' });
+  const adapter = createWasmCompressionSpringAdapter(Module);
+  const response = adapter.seek({ ...design, symbolUnits: { Weight: 'pounds' }, systemControls: { ...design.systemControls, mfn_wt: .04 } }, { name: 'Weight', minmax: 'MIN' });
+  expect(Module.calls).toContainEqual(['control', 9, 9, .04]);
+  expect(Module.calls).toContainEqual(['seek', 9, 'Weight', -1]);
+  expect(response.termination).toBe('Seek completed. Weight 10.00 --> 5.000 pounds; 50.00% improvement. The MIN constraint on Weight is limiting further progress. You may want to relax or disable this constraint and then run Seek again. To further improve result, re-execute Seek.');
+  expect(adapter.seek(design, { name: 'Weight', minmax: 'sideways' }).ok).toBe(false);
+  adapter.dispose();
+});
+
+it('keeps user-specified material presentation separate from the numeric Wasm slot', () => {
+  const Module = fakeModule({ odop_compression_spring_session_get_numeric: (_handle, id, field) => field === 0 ? (id === 'Prop_Calc_Method' ? 3 : 2) : .2 });
+  const adapter = createWasmCompressionSpringAdapter(Module);
+  const response = adapter.recalculate({ ...design, symbols: [{ id: 'Prop_Calc_Method', numericValue: 3 }, { id: 'Material_Type', numericValue: 2 }] }, { initialize: true });
+  expect(response.design.symbols[1].numericValue).toBe(2);
+  expect(response.snapshot[1]).toMatchObject({ numericValue: 2, displayValue: 'User_Specified' });
+  adapter.dispose();
 });
 
 it('preserves absent persisted numeric metadata as absent across the Wasm ABI', () => {

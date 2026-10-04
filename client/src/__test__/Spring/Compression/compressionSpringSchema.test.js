@@ -12,6 +12,20 @@ import {
 import startup from './fixtures/Startup.json';
 import startupMetric from './fixtures/Startup_Metric.json';
 
+test('keeps user-specified material presentation separate from its numeric hydration value', () => {
+  [7, undefined].forEach((oldvalue) => {
+    const payload = normalizeCompressionSpringSavedDesign({
+      ...startup,
+      symbol_table: startup.symbol_table.map((symbol) => symbol.name === 'Material_Type'
+        ? { ...symbol, value: 'User_Specified', oldvalue } : symbol)
+    });
+    const material = payload.symbols.find((symbol) => symbol.id === 'Material_Type');
+    expect(material.numericValue).toBe(oldvalue ?? 2);
+    expect(material.textValue).toBeUndefined();
+    expect(payload.symbolUnits.Weight).toBe('pounds');
+  });
+});
+
 test('derives a versioned 54-symbol UI schema from Compression Spring initial state', () => {
     const initialComputationalSymbols = initialState.symbol_table.slice(0, 54);
     const materialType = compressionSpringUiSchema.find((symbol) => symbol.id === 'Material_Type');

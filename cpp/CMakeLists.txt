@@ -18,6 +18,11 @@ add_library(odop-core STATIC
 add_library(odop::core ALIAS odop-core)
 
 target_compile_features(odop-core PUBLIC cxx_std_20)
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
+  # JavaScript and the scalar Wasm path round multiply/add separately. Native
+  # contraction can change Seek's accept/reject decisions near equal objectives.
+  target_compile_options(odop-core PRIVATE "-ffp-contract=off")
+endif()
 target_include_directories(odop-core
   PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/core/include>
@@ -61,6 +66,11 @@ if(ODOP_BUILD_NATIVE_TESTS AND NOT ODOP_BUILD_WASM)
   add_executable(odop-search-test tests/search_test.cpp)
   target_link_libraries(odop-search-test PRIVATE odop::core)
   add_test(NAME odop-search-test COMMAND odop-search-test)
+  add_executable(odop-seek-test tests/seek_test.cpp)
+  target_link_libraries(odop-seek-test PRIVATE odop::core)
+  target_compile_definitions(odop-seek-test PRIVATE
+    ODOP_SEEK_FIXTURE_PATH="${CMAKE_CURRENT_SOURCE_DIR}/../client/src/__test__/Spring/Compression/fixtures/tutor7-seek.json")
+  add_test(NAME odop-seek-test COMMAND odop-seek-test)
 endif()
 
 if(ODOP_BUILD_WASM)
@@ -76,7 +86,7 @@ if(ODOP_BUILD_WASM)
     "-sEXPORT_ES6=1"
     "-sENVIRONMENT=node"
     "-sEXPORTED_RUNTIME_METHODS=['cwrap']"
-    "-sEXPORTED_FUNCTIONS=['_malloc','_free','_odop_piston_cylinder_evaluate','_odop_compression_spring_evaluate','_odop_compression_spring_session_create','_odop_compression_spring_session_destroy','_odop_compression_spring_session_clear','_odop_compression_spring_session_set_numeric','_odop_compression_spring_session_set_text','_odop_compression_spring_session_set_propagation','_odop_compression_spring_session_set_control','_odop_compression_spring_session_set_trace','_odop_compression_spring_session_recalculate','_odop_compression_spring_session_search','_odop_compression_spring_session_get_numeric','_odop_compression_spring_session_diagnostic','_odop_compression_spring_session_trace','_odop_compression_spring_session_get_text','_odop_compression_spring_session_objective']"
+    "-sEXPORTED_FUNCTIONS=['_malloc','_free','_odop_piston_cylinder_evaluate','_odop_compression_spring_evaluate','_odop_compression_spring_session_create','_odop_compression_spring_session_destroy','_odop_compression_spring_session_clear','_odop_compression_spring_session_set_numeric','_odop_compression_spring_session_set_text','_odop_compression_spring_session_set_propagation','_odop_compression_spring_session_set_control','_odop_compression_spring_session_set_trace','_odop_compression_spring_session_recalculate','_odop_compression_spring_session_search','_odop_compression_spring_session_seek','_odop_compression_spring_session_seek_target','_odop_compression_spring_session_seek_result','_odop_compression_spring_session_get_numeric','_odop_compression_spring_session_diagnostic','_odop_compression_spring_session_trace','_odop_compression_spring_session_get_text','_odop_compression_spring_session_objective']"
   )
   set_target_properties(odop_wasm PROPERTIES SUFFIX ".mjs")
   add_executable(odop_wasm_worker wasm/src/piston_cylinder_bindings.cpp wasm/src/compression_spring_bindings.cpp)
@@ -87,7 +97,7 @@ if(ODOP_BUILD_WASM)
     "-sEXPORT_ES6=1"
     "-sENVIRONMENT=web,worker"
     "-sEXPORTED_RUNTIME_METHODS=['cwrap']"
-    "-sEXPORTED_FUNCTIONS=['_malloc','_free','_odop_piston_cylinder_evaluate','_odop_compression_spring_evaluate','_odop_compression_spring_session_create','_odop_compression_spring_session_destroy','_odop_compression_spring_session_clear','_odop_compression_spring_session_set_numeric','_odop_compression_spring_session_set_text','_odop_compression_spring_session_set_propagation','_odop_compression_spring_session_set_control','_odop_compression_spring_session_set_trace','_odop_compression_spring_session_recalculate','_odop_compression_spring_session_search','_odop_compression_spring_session_get_numeric','_odop_compression_spring_session_diagnostic','_odop_compression_spring_session_trace','_odop_compression_spring_session_get_text','_odop_compression_spring_session_objective']"
+    "-sEXPORTED_FUNCTIONS=['_malloc','_free','_odop_piston_cylinder_evaluate','_odop_compression_spring_evaluate','_odop_compression_spring_session_create','_odop_compression_spring_session_destroy','_odop_compression_spring_session_clear','_odop_compression_spring_session_set_numeric','_odop_compression_spring_session_set_text','_odop_compression_spring_session_set_propagation','_odop_compression_spring_session_set_control','_odop_compression_spring_session_set_trace','_odop_compression_spring_session_recalculate','_odop_compression_spring_session_search','_odop_compression_spring_session_seek','_odop_compression_spring_session_seek_target','_odop_compression_spring_session_seek_result','_odop_compression_spring_session_get_numeric','_odop_compression_spring_session_diagnostic','_odop_compression_spring_session_trace','_odop_compression_spring_session_get_text','_odop_compression_spring_session_objective']"
   )
   set_target_properties(odop_wasm_worker PROPERTIES SUFFIX ".mjs" OUTPUT_NAME "odop_wasm" RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/worker")
   add_custom_command(TARGET odop_wasm_worker POST_BUILD

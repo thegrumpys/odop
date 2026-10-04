@@ -1,7 +1,7 @@
 import { createCompressionSpringWasmBridge } from '../../../store/middleware/compressionSpringWasmBridge';
-import { changeSymbolValue, fixSymbolValue, loadInitialState, setSymbolFlag } from '../../../store/actions';
+import { changeSymbolValue, fixSymbolValue, loadInitialState, setSymbolFlag, seek } from '../../../store/actions';
 import { CHANGE_SYMBOL_VALUE, FIX_SYMBOL_VALUE, LOAD_INITIAL_STATE, SET_SYMBOL_FLAG } from '../../../store/types';
-import { MIN, FIXED } from '../../../store/actionTypes';
+import { MIN, MAX, FIXED } from '../../../store/actionTypes';
 import { initialState } from '../../../designtypes/Spring/Compression/initialState';
 
 function storeFor(model = initialState) {
@@ -27,6 +27,27 @@ it('feature-enabled bridge marks legacy calculation handled and hydrates one aut
     expect(client.applyChanges).not.toHaveBeenCalled();
     expect(store.dispatched[0]).toMatchObject({ type: 'modelSlice/applyWasmComputationSnapshot', payload: { snapshot } });
     expect(store.dispatched).toContainEqual(expect.objectContaining({ type: 'alertsSlice/clearAlerts' }));
+});
+
+it('executes Seek after first-use hydration and suppresses the legacy Seek dispatcher', async () => {
+  const client = { hydrate: jest.fn(() => Promise.resolve({ snapshot: [] })), seek: jest.fn(() => Promise.resolve({ snapshot: [], objective: .01, termination: 'Seek completed.' })) };
+  const store = storeFor();
+  const next = jest.fn();
+  const bridge = createCompressionSpringWasmBridge(client, () => true)(store)(next);
+  bridge(seek('Force_2', MAX));
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  expect(next).toHaveBeenCalledWith(expect.objectContaining({ meta: { wasmComputationHandled: true } }));
+  expect(client.hydrate).toHaveBeenCalledTimes(1);
+  expect(client.seek).toHaveBeenCalledWith('Force_2', MAX, expect.stringMatching(/^seek-/));
+  expect(store.dispatched[0].payload.termination_condition).toBe('Seek completed.');
+});
+
+it('does not launch Seek when first-use hydration was superseded by a later edit', async () => {
+  const client = { hydrate: jest.fn(() => Promise.resolve({ stale: true })), seek: jest.fn() };
+  const bridge = createCompressionSpringWasmBridge(client, () => true)(storeFor())(jest.fn());
+  bridge(seek('Weight', MIN));
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  expect(client.seek).not.toHaveBeenCalled();
 });
 
 it('feature-disabled bridge leaves actions untouched and does not start a Worker request', () => {

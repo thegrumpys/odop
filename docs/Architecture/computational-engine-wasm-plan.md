@@ -413,7 +413,7 @@ The first compatibility milestone is not merely “same final answer.”  It is 
 
 **Completion criterion:** all assessed Compression Spring demos and tutorials compare successfully between the legacy JavaScript and Worker/Wasm paths. This criterion is complete.
 
-### Stage 7.8 — Port Seek
+### Stage 7.8 — Port Seek (completed)
 
 1. Port the legacy `seek.js` strategy to the C++ `DesignSession` API.
 2. Preserve target-variable and Min/Max direction semantics, repeated Search calls, constraint-limited outcomes, and user-facing termination messages.
@@ -422,6 +422,11 @@ The first compatibility milestone is not merely “same final answer.”  It is 
 5. Extend end-to-end parity coverage to Tutor 7, whose five Seek operations are intentionally excluded from the Stage 7.5 Search inventory.
 
 **Exit criterion:** selected Compression Spring Seek workflows reach compatible final states, objectives, constraints, and termination messages through the Worker/Wasm path.
+
+Completed October 4, 2026. Native and actual-Wasm fixtures cover all five
+Tutor 7 Seek outcomes, and a fresh Chrome run of all 17 pages matched local
+Worker/Wasm development against staging. See `HANDOFF7_8.md` for validation
+and the synchronous Worker cancellation limitation carried into Stage 8.
 
 ### Stage 8 — Enable autosearch
 

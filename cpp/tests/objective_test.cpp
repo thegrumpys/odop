@@ -30,5 +30,10 @@ int main() {
   x.value=-2;
   auto fixed_large=odop::optimization::evaluate(session,odop::optimization::compile_problem(session));
   if (std::abs(fixed_large.objective-2.1)>1e-6 || fixed_large.invalid || !fixed_large.infeasible) return EXIT_FAILURE;
+  x.value=5;
+  const odop::optimization::Merit minimum{odop::optimization::Source::p, 0, -1, 4., 2.};
+  const odop::optimization::Merit maximum{odop::optimization::Source::p, 0, 1, 4., 2.};
+  if (odop::optimization::evaluate(session,problem,false,minimum).objective != .5) return EXIT_FAILURE;
+  if (odop::optimization::evaluate(session,problem,false,maximum).objective != -.5) return EXIT_FAILURE;
   return EXIT_SUCCESS;
 }

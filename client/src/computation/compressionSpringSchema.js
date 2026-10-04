@@ -149,10 +149,12 @@ export function normalizeCompressionSpringSavedDesign(design) {
         schemaVersion: compressionSpringUiSchemaVersion,
         legacyVersion: hydratedDesign.version,
         units: hydratedDesign.units || 'US',
+        symbolUnits: Object.fromEntries(hydratedDesign.symbol_table.map((symbol) => [symbol.name, symbol.units || ''])),
         symbols: hydratedDesign.symbol_table.map((symbol) => ({
             id: symbol.name,
-            numericValue: typeof symbol.value === 'number' ? symbol.value : undefined,
-            textValue: typeof symbol.value === 'string' ? symbol.value : undefined,
+            numericValue: typeof symbol.value === 'number' ? symbol.value
+                : symbol.name === 'Material_Type' && symbol.value === 'User_Specified' ? symbol.oldvalue ?? 2 : undefined,
+            textValue: typeof symbol.value === 'string' && symbol.name !== 'Material_Type' ? symbol.value : undefined,
             validMinimum: symbol.validmin,
             validMaximum: symbol.validmax,
             constraintMinimum: symbol.cmin,

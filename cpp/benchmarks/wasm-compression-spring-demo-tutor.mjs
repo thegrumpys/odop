@@ -16,11 +16,12 @@ const setText = cwrap('odop_compression_spring_session_set_text', 'number', ['nu
 const setPropagation = cwrap('odop_compression_spring_session_set_propagation', 'number', ['number', 'string', 'string', 'number']);
 const setControl = cwrap('odop_compression_spring_session_set_control', null, ['number', 'number', 'number']);
 const recalculate = cwrap('odop_compression_spring_session_recalculate', 'number', ['number', 'number']);
+const seek = cwrap('odop_compression_spring_session_seek', 'number', ['number', 'string', 'number']);
 const search = cwrap('odop_compression_spring_session_search', 'number', ['number']);
 const getNumber = cwrap('odop_compression_spring_session_get_numeric', 'number', ['number', 'string', 'number']);
 const objective = cwrap('odop_compression_spring_session_objective', 'number', ['number']);
 const diagnostic = cwrap('odop_compression_spring_session_diagnostic', 'string', ['number']);
-const controls = ['maxit', 'fix_wt', 'con_wt', 'viol_wt', 'objmin', 'del', 'delmin', 'tol', 'smallnum'];
+const controls = ['maxit', 'fix_wt', 'con_wt', 'viol_wt', 'objmin', 'del', 'delmin', 'tol', 'smallnum', 'mfn_wt'];
 const MIN = 'MIN'; const MAX = 'MAX'; const CONSTRAINED = 1; const FIXED = 2;
 const absent = (value) => typeof value === 'number' ? value : Number.NaN;
 const clone = () => JSON.parse(JSON.stringify(startup));
@@ -83,10 +84,10 @@ function trace(name, operations) {
           symbols: (operation.symbols || []).map((id) => { const current = symbol(id); return { id, numericValue: current.value, validMinimum: current.validmin, constraintMinimum: current.cmin, constraintMaximum: current.cmax, minimumFlags: current.lmin, maximumFlags: current.lmax }; }) });
         continue;
       }
-      if (operation.kind === 'search') {
+      if (operation.kind === 'search' || operation.kind === 'seek') {
         const started = performance.now(); hydrate(handle, design); assert.equal(recalculate(handle, 1), 1, `${name}: ${operation.label} initialization failed`);
-        assert.equal(search(handle), 1, `${name}: ${operation.label} search failed`); sync(); const actual = objective(handle);
-        timings.push({ label: operation.label, operation: 'search', milliseconds: performance.now() - started, expectedObjective: operation.objective, objective: actual, matchesLegacy: Math.abs(actual - operation.objective) < 5e-7, termination: diagnostic(handle) });
+        assert.equal(operation.kind === 'seek' ? seek(handle, operation.id, operation.side === MAX ? 1 : -1) : search(handle), 1, `${name}: ${operation.label} optimization failed: ${diagnostic(handle)}`); sync(); const actual = objective(handle);
+        timings.push({ label: operation.label, operation: operation.kind, milliseconds: performance.now() - started, expectedObjective: operation.objective, objective: actual, matchesLegacy: Math.abs(actual - operation.objective) < 5e-7, termination: diagnostic(handle) });
       }
     }
     return { name, totalMilliseconds: timings.reduce((sum, entry) => sum + (entry.milliseconds || 0), 0), timings };
@@ -99,6 +100,7 @@ const g = (id, side) => ({ kind: 'flag', id, side, mask: CONSTRAINED, label: `co
 const u = (id, side) => ({ kind: 'unflag', id, side, mask: CONSTRAINED, label: `unconstrain ${id}` });
 const f = (id, value) => ({ kind: 'fix', id, value, label: `fix ${id}` });
 const s = (label, objective) => ({ kind: 'search', label, objective });
+const k = (label, id, side, objective) => ({ kind: 'seek', label, id, side, objective });
 const p = (label, objective, symbols) => ({ kind: 'checkpoint', label, objective, symbols });
 
 const results = [
@@ -111,6 +113,7 @@ const results = [
   trace('demoNewDesign', [v('Material_Type', 3, true), v('Life_Category', 3, true), v('End_Type', 4, true), g('FS_CycleLife', MIN), c('FS_CycleLife', MIN, 1), g('Cycle_Life', MIN), c('Cycle_Life', MIN, 1000000), g('OD_Free', MAX), c('OD_Free', MAX, 1.25), g('L_Solid', MAX), c('L_Solid', MAX, 1.3), g('L_Stroke', MIN), c('L_Stroke', MIN, .65), f('Force_1', 30), f('Force_2', 60), s('page-09', 0), f('Wire_Dia', .135), s('page-12', .00000648)]),
   trace('tutor3', [g('OD_Free', MAX), c('OD_Free', MAX, .9), f('Force_2'), s('page-06', 0), f('Force_2', 280), f('Deflect_2', 5.5), g('OD_Free', MAX), c('OD_Free', MAX, 2), p('page-10 pre-search', 104.53248292, ['OD_Free', 'Wire_Dia', 'L_Free', 'Coils_T', 'Force_1', 'Force_2', 'Deflect_2', 'L_2', 'L_Solid']), s('page-10', .000002004), { kind: 'reset', label: 'page-11 reset' }, f('Force_1', 15), f('L_1', 2), f('Force_2', 65), f('L_2', 1.25), s('page-13', .00000529)]),
   trace('tutor6', [v('Material_Type', 1, true), g('OD_Free', MAX), c('OD_Free', MAX, .92), g('L_Solid', MAX), c('L_Solid', MAX, 1.06), f('L_Free', 1.713), f('Force_1', 0), f('Force_2', 50), f('L_2', 1.278), s('page-04', .00000459), f('Wire_Dia', .12), c('FS_2', MAX, 1.6), s('page-05', .00000357)]),
+  trace('tutor7', [f('Force_1', 0), f('Force_2', 20), g('OD_Free', MAX), c('OD_Free', MAX, 1.5), g('L_Stroke', MIN), c('L_Stroke', MIN, 1), g('L_Solid', MAX), c('L_Solid', MAX, 1.5), s('page-05', 0), k('page-06', 'Weight', MIN, .00007634), k('page-07', 'Rate', MIN, .00012915), k('page-08', 'L_Solid', MIN, .00007694), { kind: 'reset', label: 'page-09 reset' }, f('Force_1', 0), f('Force_2', 100), g('L_Stroke', MIN), c('L_Stroke', MIN, 2.5), v('Prop_Calc_Method', 3, true), v('Stress_Lim_Stat', 80000), g('FS_2', MIN), c('FS_2', MIN, 1), s('page-11', 0), k('page-13', 'Weight', MIN, .00020373), { kind: 'reset', label: 'page-15 reset' }, g('OD_Free', MAX), c('OD_Free', MAX, 1.5), g('L_Solid', MAX), c('L_Solid', MAX, 1.5), g('L_Stroke', MIN), c('L_Stroke', MIN, 1), f('Force_1', 0), k('page-16', 'Force_2', MAX, .00012384)]),
   trace('tutor8', [g('Cycle_Life', MIN), c('Cycle_Life', MIN, 50000), g('OD_Free', MAX), c('OD_Free', MAX, 2), g('L_Solid', MAX), c('L_Solid', MAX, 1.2), g('L_Stroke', MIN), c('L_Stroke', MIN, 1), f('Force_1', 0), f('Force_2', 250), s('page-04', .020911671)])
 ];
 console.log(JSON.stringify({ benchmark: 'compression-spring-wasm-full-demo-tutor', results }, null, 2));

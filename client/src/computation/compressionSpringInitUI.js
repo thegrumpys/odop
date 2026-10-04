@@ -15,7 +15,7 @@ export function initUI(symbolTable) {
     const propCalcMethod = symbols.get('Prop_Calc_Method')?.value;
     const endType = symbols.get('End_Type')?.value;
 
-    set(symbols, 'Material_Type', { hidden: false, input: propCalcMethod === 1 });
+    set(symbols, 'Material_Type', { hidden: false, input: propCalcMethod === 1, format: propCalcMethod === 1 ? 'table' : 'string' });
     set(symbols, 'ASTM/Fed_Spec', { hidden: propCalcMethod !== 1 });
     set(symbols, 'Process', { hidden: propCalcMethod !== 1 });
     set(symbols, 'Life_Category', { hidden: propCalcMethod !== 1 });

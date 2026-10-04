@@ -27,3 +27,10 @@ scripts/cpp/test-wasm.sh
 The Wasm build generates `cpp/build/wasm/odop_wasm.mjs` and its adjacent
 `odop_wasm.wasm`; both are ignored build artifacts. The generated module has a
 narrow C-compatible smoke API and is imported by the Node contract test.
+
+The engine now also provides the Compression Spring session calculation,
+Search, and Seek APIs. Stage 7.8 adds native and actual-Wasm Tutor7 fixtures,
+including full constraint/scale metadata and both optimization directions.
+Run `npm run cpp:test:wasm:jest` for the actual-Wasm client integration lane.
+The browser Worker artifacts are copied into `client/public/wasm/` by the
+Wasm build. See `HANDOFF7_8.md` for the accepted parity baseline and next stage.

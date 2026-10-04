@@ -68,7 +68,12 @@ void recompute_scales(DesignSession& session) {
     slot.minimum_scale_denominator = scale_denominator(session.controls(), slot.constraint_minimum, slot.scale_denominator_limit, slot.minimum_flags);
     slot.maximum_scale_denominator = scale_denominator(session.controls(), slot.constraint_maximum, slot.scale_denominator_limit, slot.maximum_flags);
   };
-  for (auto& slot : model->state().p) update(slot);
+  for (auto& slot : model->state().p) {
+    // Fixing an independent value does not change its constraint levels or
+    // finalized scales in the legacy reducer. Retain those persisted scales.
+    if ((slot.minimum_flags & fixed) && slot.minimum_scale_denominator > 0. && slot.maximum_scale_denominator > 0.) continue;
+    update(slot);
+  }
   for (auto& slot : model->state().x_numbers) update(slot);
 }
 Problem compile_problem(const DesignSession& session) {
@@ -88,7 +93,8 @@ Problem compile_problem(const DesignSession& session) {
   for (std::size_t i=0;i<model->state().x_numbers.size();++i) add(Source::x,i,model->state().x_numbers[i]);
   return result;
 }
-Evaluation evaluate(DesignSession& session, const Problem& problem, const bool trace) {
+Evaluation evaluate(DesignSession& session, const Problem& problem, const bool trace,
+                    const std::optional<Merit>& merit) {
   Evaluation result;
   auto* model = dynamic_cast<compression_spring::Model*>(&session.model());
   if (!model) { result.diagnostics.push_back("objective requires a Compression Spring session"); return result; }
@@ -125,11 +131,17 @@ Evaluation evaluate(DesignSession& session, const Problem& problem, const bool t
   }
   result.violation_sum = result.objective;
   result.objective *= session.controls().violation_weight;
+  if (merit) {
+    const auto& slot = merit->source == Source::p ? model->state().p.at(merit->offset) : model->state().x_numbers.at(merit->offset);
+    result.objective += merit->direction < 0 ? (slot.value - merit->estimate) / merit->denominator
+                                           : (-slot.value + merit->estimate) / merit->denominator;
+  }
   return result;
 }
 
 SearchResult patsh(DesignSession& session, const Problem& problem,
-                   const std::function<bool()>& cancelled, const bool trace) {
+                   const std::function<bool()>& cancelled, const bool trace,
+                   const SearchOptions& options) {
   SearchResult result;
   auto* model = dynamic_cast<compression_spring::Model*>(&session.model());
   if (!model) {
@@ -162,7 +174,7 @@ SearchResult patsh(DesignSession& session, const Problem& problem,
     }
     compression_spring::evaluate(session);
     ++result.evaluations;
-    auto evaluation = evaluate(session, problem, trace);
+    auto evaluation = evaluate(session, problem, trace, options.merit);
     if (trace) {
       std::vector<double> full_p;
       full_p.reserve(model->state().p.size());
@@ -178,6 +190,7 @@ SearchResult patsh(DesignSession& session, const Problem& problem,
   };
 
   const auto& controls = session.controls();
+  const double objective_minimum = options.objective_minimum.value_or(controls.objective_minimum);
   const auto cancellation_result = [&]() {
     result.termination = "Search cancelled.";
     result.evaluation = evaluate(session, problem);
@@ -214,7 +227,7 @@ SearchResult patsh(DesignSession& session, const Problem& problem,
     return objective;
   };
 
-  while (current_objective >= controls.objective_minimum) {
+  while (current_objective >= objective_minimum) {
     if (cancelled && cancelled()) return cancellation_result();
     auto phi = psi;
     double explored = explore(phi, current_objective);
@@ -227,7 +240,7 @@ SearchResult patsh(DesignSession& session, const Problem& problem,
         psi = phi;
         for (std::size_t i = 0; i < phi.size(); ++i) phi[i] += alpha * (phi[i] - theta[i]);
         current_objective = explored;
-        if (current_objective < controls.objective_minimum) {
+        if (current_objective < objective_minimum) {
           result.termination = feasible_message(result.iterations);
           result.evaluation = candidate(psi);
           if (trace) result.trace.push_back(trace_exit(result.termination));
@@ -257,6 +270,83 @@ SearchResult patsh(DesignSession& session, const Problem& problem,
   result.termination = feasible_message(result.iterations);
   result.evaluation = candidate(psi);
   if (trace) result.trace.push_back(trace_exit(result.termination));
+  return result;
+}
+
+SeekResult seek(DesignSession& session, const Problem& problem,
+                const std::string& target, const int direction,
+                const std::function<bool()>& cancelled, const bool trace) {
+  SeekResult result;
+  auto* model = dynamic_cast<compression_spring::Model*>(&session.model());
+  const auto selected = std::find_if(problem.descriptors.begin(), problem.descriptors.end(),
+      [&](const Descriptor& d) {
+        const auto* slot = compression_spring::find_slot(d.name);
+        return !target.empty() && d.name.starts_with(target) && (slot == nullptr || slot->numeric);
+      });
+  if (!model || selected == problem.descriptors.end() || (direction != -1 && direction != 1)) {
+    result.ok = false;
+    result.termination = "Seek requires a numeric target and MIN or MAX direction.";
+    return result;
+  }
+  result.target = selected->name;
+  const auto value = [&]() {
+    return selected->source == Source::p ? model->state().p.at(selected->offset).value
+                                       : model->state().x_numbers.at(selected->offset).value;
+  };
+  result.starting_value = result.ending_value = value();
+  if (std::none_of(problem.descriptors.begin(), problem.descriptors.end(),
+      [](const Descriptor& d) { return d.source == Source::p && !(d.min_flags & fixed); })) {
+    result.termination = "NO FREE INDEPENDENT VARIABLES";
+    result.evaluation = evaluate(session, problem);
+    return result;
+  }
+  const auto& controls = session.controls();
+  if (!std::isfinite(value()) || !std::isfinite(controls.merit_function_weight) || controls.merit_function_weight <= 0.) {
+    result.ok = false;
+    result.termination = "Seek requires a finite target value and positive merit weight.";
+    return result;
+  }
+  const auto original = model->state();
+  const auto denominator = [&](const double estimate) {
+    const double scaled = std::abs(estimate) / controls.merit_function_weight;
+    return scaled < controls.small_number ? 1. : scaled;
+  };
+  Merit merit{selected->source, selected->offset, direction,
+              value() + .1 * direction * value(), 1.};
+  merit.denominator = denominator(merit.estimate);
+  const auto run = [&](const SearchOptions& options) {
+    auto search = patsh(session, problem, cancelled, trace, options);
+    result.iterations += search.iterations;
+    result.evaluations += search.evaluations;
+    result.trace.insert(result.trace.end(), search.trace.begin(), search.trace.end());
+    result.evaluation = search.evaluation;
+    if (search.termination == "Search cancelled.") {
+      model->state() = original;
+      result.evaluation = evaluate(session, problem);
+    }
+    return search.termination != "Search cancelled.";
+  };
+  if (!run({merit, -1.})) { result.termination = "Seek cancelled."; return result; }
+  merit.estimate = value();
+  merit.denominator = denominator(merit.estimate);
+  // The estimate phase is followed by a penalty-only feasibility check. Legacy
+  // restores the original independent values only if that point is feasible.
+  compression_spring::evaluate(session);
+  if (evaluate(session, problem).objective < controls.objective_minimum) {
+    for (std::size_t i = 0; i < original.p.size(); ++i) model->state().p[i].value = original.p[i].value;
+    compression_spring::evaluate(session);
+  } else if (!run({})) { result.termination = "Seek cancelled."; return result; }
+  if (!run({merit, {}})) { result.termination = "Seek cancelled."; return result; }
+  result.ending_value = value();
+  result.percent_improvement = std::abs(result.starting_value - result.ending_value) / result.starting_value * 100.;
+  const auto& slot = selected->source == Source::p ? model->state().p.at(selected->offset) : model->state().x_numbers.at(selected->offset);
+  result.constraint_limited = direction < 0 ? (slot.minimum_flags & constrained) && value() < slot.constraint_minimum
+                                          : (slot.maximum_flags & constrained) && value() > slot.constraint_maximum;
+  result.repeat_recommended = result.evaluation.objective < -controls.objective_minimum;
+  // The public SEEK dispatcher refreshes the visible objective without merit
+  // after composing the completion message. Keep that visible result identical.
+  result.evaluation = evaluate(session, problem);
+  result.termination = "Seek completed.";
   return result;
 }
 }
