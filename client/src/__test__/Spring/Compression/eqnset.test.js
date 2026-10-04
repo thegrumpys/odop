@@ -1,9 +1,169 @@
 import * as o from '../../../designtypes/Spring/Compression/offsets';
-import { eqnset } from '../../../designtypes/Spring/Compression/eqnset';
+import * as eto from '../../../designtypes/Spring/Compression/endtypes_offsets';
+import { pitch, wireLength, wireVolume, eqnset } from '../../../designtypes/Spring/Compression/eqnset';
+
+const endTypes = require('../../../designtypes/Spring/Compression/endtypes.json');
+
+function integratedEndCoilLength(bodyDiameter, endDiameter, bodyPitch, endPitch, turns = 1.0) {
+    const intervals = 10000;
+    const step = turns / intervals;
+    const radialChange = (endDiameter - bodyDiameter) / (2.0 * turns);
+    let length = 0.0;
+
+    for (let i = 0; i < intervals; i++) {
+        const fraction = (i + 0.5) * step / turns;
+        const diameter = bodyDiameter + fraction * (endDiameter - bodyDiameter);
+        const localPitch = bodyPitch + fraction * (endPitch - bodyPitch);
+        length += step * Math.hypot(Math.PI * diameter, radialChange, localPitch);
+    }
+    return length;
+}
 
 //=====================================================================
 // eqnset
 //=====================================================================
+
+it.each([
+    ['Open', 0.0],
+    ['Open&Ground', 0.0],
+    ['Closed', 2.0],
+    ['Closed&Ground', 2.0],
+    ['DoubleClosed', 2.0],
+    ['DoubleClosed&Ground', 2.0],
+    ['TaperedClosed', 2.0],
+    ['TaperedClosed&Ground', 2.0],
+    ['PigtailClosed', 1.0],
+    ['PigtailClosed&Ground', 1.0]
+])('%s defines its transition coils', (endTypeName, expected) => {
+    const endType = endTypes.find((row) => row[eto.end_type] === endTypeName);
+
+    expect(endType[eto.transition_coils]).toBe(expected);
+    expect(endType[eto.transition_coils]).toBeLessThanOrEqual(endType[eto.inactive_coils]);
+});
+
+it.each([
+    ['Open', 0.3145],
+    ['Open&Ground', 0.325],
+    ['Closed', 0.366875],
+    ['Closed&Ground', 0.38],
+    ['DoubleClosed', 0.45416666666666666],
+    ['DoubleClosed&Ground', 0.4716666666666667],
+    ['TaperedClosed', 0.3865625],
+    ['TaperedClosed&Ground', 0.393125],
+    ['PigtailClosed', 0.393125],
+    ['PigtailClosed&Ground', 0.40625]
+])('pitch calculates body-coil spacing for %s', (endTypeName, expected) => {
+    const endType = endTypes.find((row) => row[eto.end_type] === endTypeName);
+
+    expect(pitch(3.25, 0.105, 10.0, endType[eto.end_closure], endType[eto.inactive_coils],
+        endType[eto.taper_amount], endType[eto.pigtail_amount], endType[eto.grind_amount]))
+        .toBeCloseTo(expected, 12);
+});
+
+it('wireLength transitions across the complete end coil', () => {
+    const wireDiameter = 0.1055;
+    const meanDiameter = 1.1 - wireDiameter;
+    const bodyPitch = pitch(3.25, wireDiameter, 10.0, 2, 2.0);
+    const endPitch = wireDiameter;
+    const endCoilLength = integratedEndCoilLength(
+        meanDiameter, meanDiameter, bodyPitch, endPitch
+    );
+    const bodyLength = 8.0 * Math.hypot(Math.PI * meanDiameter, bodyPitch);
+
+    expect(wireLength(1.1, wireDiameter, 3.25, 10.0, 2, 1, 2.0, 2.0))
+        .toBeCloseTo(2.0 * endCoilLength + bodyLength, 8);
+});
+
+it('wireLength treats additional inactive turns as fully closed', () => {
+    const wireDiameter = 0.1055;
+    const meanDiameter = 1.1 - wireDiameter;
+    const bodyPitch = pitch(3.25, wireDiameter, 10.0, 2, 4.0);
+    const closedLength = 2.0 * Math.hypot(Math.PI * meanDiameter, wireDiameter);
+    const endCoilLength = 2.0 * integratedEndCoilLength(
+        meanDiameter, meanDiameter, bodyPitch, wireDiameter
+    );
+    const bodyLength = 6.0 * Math.hypot(Math.PI * meanDiameter, bodyPitch);
+
+    expect(wireLength(1.1, wireDiameter, 3.25, 10.0, 2, 2, 4.0, 2.0))
+        .toBeCloseTo(closedLength + endCoilLength + bodyLength, 8);
+});
+
+it('wireLength uses the pure helix for an open end', () => {
+    expect(wireLength(1.1, 0.1055, 3.25, 10.0, 1, 1, 0.0, 0.0)).toBeCloseTo(31.411721233021456, 12);
+});
+
+it('wireLength uses taper amount to reduce the end pitch', () => {
+    const untaperedLength = wireLength(1.1, 0.1055, 3.25, 10.0, 2, 3, 2.0, 2.0, 0.0);
+    const taperedLength = wireLength(1.1, 0.1055, 3.25, 10.0, 2, 3, 2.0, 2.0, 1.0);
+
+    expect(taperedLength).toBeGreaterThan(untaperedLength);
+});
+
+it('wireLength uses pigtail geometry and axial collapse', () => {
+    const uncollapsedLength = wireLength(1.1, 0.1055, 3.25, 10.0, 2, 4, 2.0, 1.0, 0.0, 0.0);
+    const collapsedLength = wireLength(1.1, 0.1055, 3.25, 10.0, 2, 4, 2.0, 1.0, 0.0, 2.0);
+
+    expect(collapsedLength).toBeCloseTo(29.160414712595696, 12);
+    expect(collapsedLength).toBeGreaterThan(uncollapsedLength);
+});
+
+it.each([1.0, 0.7, 0.54])('wireLength transitions pigtail pitch and diameter across the end coil with outside diameter %s', (outsideDiameter) => {
+    const wireDiameter = 0.1;
+    const bodyDiameter = outsideDiameter - wireDiameter;
+    const endDiameter = bodyDiameter / 2.0;
+    const bodyTurns = 8.0;
+
+    for (const pigtailAmount of [0.0, 1.0, 2.0]) {
+        const endPitch = wireDiameter * (1.0 - pigtailAmount / 2.0);
+        for (const grindAmount of [0.0, 1.0]) {
+            const bodyPitch = pitch(3.25, wireDiameter, 10.0, 2, 2.0, 0.0,
+                pigtailAmount, grindAmount);
+            const transitionLength = 2.0 * integratedEndCoilLength(
+                bodyDiameter, endDiameter, bodyPitch, endPitch, 0.5
+            );
+            const closedLength = Math.hypot(Math.PI * endDiameter, endPitch);
+            const bodyLength = bodyTurns * Math.hypot(Math.PI * bodyDiameter, bodyPitch);
+
+            expect(wireLength(outsideDiameter, wireDiameter, 3.25, 10.0, 2, 4, 2.0, 1.0, 0.0, pigtailAmount, grindAmount))
+                .toBeCloseTo(transitionLength + closedLength + bodyLength, 8);
+        }
+    }
+});
+
+it.each([
+    [1, 2.0, 0.0, 1.0],
+    [2, 4.0, 0.0, 1.0],
+    [3, 2.0, 0.0, 0.5],
+    [4, 2.0, 2.0, 1.0]
+])('wireLength uses grinding only to compensate geometry %s pitch for the finished free length', (geometry, inactiveCoils, pigtailAmount, grindAmount) => {
+    const transitionCoils = geometry === 4 ? 1.0 : 2.0;
+    const ungroundLength = wireLength(1.1, 0.105, 3.25, 10.0, 2, geometry, inactiveCoils, transitionCoils, geometry === 3 ? 1.0 : 0.0, pigtailAmount, 0.0);
+    const groundLength = wireLength(1.1, 0.105, 3.25, 10.0, 2, geometry, inactiveCoils, transitionCoils, geometry === 3 ? 1.0 : 0.0, pigtailAmount, grindAmount);
+
+    expect(groundLength).toBeGreaterThan(ungroundLength);
+});
+
+it('wireVolume returns full stock volume without grinding or tapering', () => {
+    const wireDiameter = 0.105;
+    const length = wireLength(1.1, wireDiameter, 3.25, 10.0, 2, 1, 2.0, 2.0);
+
+    expect(wireVolume(1.1, wireDiameter, 3.25, 10.0, 2, 1, 2.0, 2.0))
+        .toBeCloseTo(length * Math.PI * wireDiameter * wireDiameter / 4.0, 12);
+});
+
+it('wireVolume subtracts material removed by grinding', () => {
+    const unground = wireVolume(1.1, 0.105, 3.25, 10.0, 2, 1, 2.0, 2.0, 0.0, 0.0, 0.0);
+    const ground = wireVolume(1.1, 0.105, 3.25, 10.0, 2, 1, 2.0, 2.0, 0.0, 0.0, 1.0);
+
+    expect(ground).toBeLessThan(unground);
+});
+
+it('wireVolume subtracts material removed by tapering', () => {
+    const untapered = wireVolume(1.1, 0.105, 3.25, 10.0, 2, 3, 2.0, 2.0, 0.0, 0.0, 0.0);
+    const tapered = wireVolume(1.1, 0.105, 3.25, 10.0, 2, 3, 2.0, 2.0, 1.0, 0.0, 0.0);
+
+    expect(tapered).toBeLessThan(untapered);
+});
 
 it('eqnset initialState', () => {
     var p = []; // p vector
@@ -17,10 +177,12 @@ it('eqnset initialState', () => {
        0.0,        0.0,       0.0,             0.0,            0.0,         0.0,         0.0,             0.0,     0.0,         0.0,
     // Cycle_Life 20, PC_Avail_Deflect 21, Energy 22, Spring_Type 23, Prop_Calc_Method 24, Material_Type 25, ASTM_Fed_Spec 26, Process 27, Material_File 28, Material_File 28, Life_Category 29
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
-    // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type 38, Inactive_Coils 39
-       0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 4,           2,
-    // Add_Coils_Solid 40, Catalog_Name 41, Catalog_Number 42, tbase010 43, tbase400 44, const_term 45, slope_term 46,       tensile_010 47
-       0,                  '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
+    // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type_Method 38, End_Type 39
+       0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 1,                  4,
+    // End_Closure 40, Closed_End_Geometry 41, Inactive_Coils 42, Transition_Coils 43, Taper_Amount 44, Pigtail_Amount 45, Grind_Amount 46, Catalog_Name 47, Catalog_Number 48, tbase010 49, tbase400 50
+       2,              1,                     2,                 2,                   0,               0,                  1,               '',              '',                0.01,        0.4,
+    // const_term 51, slope_term 52,       tensile_010 53
+       -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
 
@@ -47,7 +209,7 @@ it('eqnset initialState', () => {
     expect(x[o.L_Solid]).toEqual(1.055);
     expect(x[o.Slenderness]).toEqual(3.2679738562091503);
     expect(x[o.ID_Free]).toEqual(0.889);
-    expect(x[o.Weight]).toEqual(0.07798388647498593);
+    expect(x[o.Weight]).toBeCloseTo(0.07029164355116631, 15);
     expect(x[o.Spring_Index]).toEqual(9.42654028436019);
     expect(x[o.Force_Solid]).toEqual(49.67614282940665);
     expect(x[o.Stress_1]).toEqual(24893.49275531675);
@@ -56,7 +218,7 @@ it('eqnset initialState', () => {
     expect(x[o.FS_2]).toEqual(1.3463472310271418);
     expect(x[o.FS_Solid]).toEqual(1.0569971624080239);
     expect(x[o.FS_CycleLife]).toEqual(1.3032217764849205);
-    expect(x[o.Cycle_Life]).toEqual(1861893.4985282072);
+    expect(x[o.Cycle_Life]).toBeCloseTo(1861893.4985282072,7);
     expect(x[o.PC_Avail_Deflect]).toEqual(78.50851088404809);
     expect(x[o.Energy]).toEqual(31.394295353317954);
 
@@ -76,9 +238,15 @@ it('eqnset initialState', () => {
     expect(x[o.PC_Tensile_Stat]).toEqual(50);
     expect(x[o.Stress_Lim_Endur]).toEqual(130709.6116626882);
     expect(x[o.Stress_Lim_Stat]).toEqual(130709.6116626882);
+    expect(x[o.End_Type_Method]).toEqual(1);
     expect(x[o.End_Type]).toEqual(4);
+    expect(x[o.End_Closure]).toEqual(2);
+    expect(x[o.Closed_End_Geometry]).toEqual(1);
     expect(x[o.Inactive_Coils]).toEqual(2);
-    expect(x[o.Add_Coils_Solid]).toEqual(0.0);
+    expect(x[o.Transition_Coils]).toEqual(2);
+    expect(x[o.Taper_Amount]).toEqual(0.0);
+    expect(x[o.Pigtail_Amount]).toEqual(0.0);
+    expect(x[o.Grind_Amount]).toEqual(1.0);
     expect(x[o.Catalog_Name]).toEqual('');
     expect(x[o.Catalog_Number]).toEqual('');
     expect(x[o.tbase010]).toEqual(0.01);
@@ -86,6 +254,13 @@ it('eqnset initialState', () => {
     expect(x[o.const_term]).toEqual(-2);
     expect(x[o.slope_term]).toEqual(-106113.37959890341);
     expect(x[o.tensile_010]).toEqual(370000);
+
+    x[o.Closed_End_Geometry] = 4;
+    x[o.Transition_Coils] = 1.0;
+    x[o.Pigtail_Amount] = 2.0;
+    x[o.Grind_Amount] = 0.0;
+    x = eqnset(p, x);
+    expect(x[o.Weight]).toBeCloseTo(0.07239471067634438, 15);
 });
 
 it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () => {
@@ -97,10 +272,12 @@ it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () 
        0.0,        0.0,       0.0,             0.0,            0.0,         0.0,         0.0,             0.0,     0.0,         0.0,
     // Cycle_Life 20, PC_Avail_Deflect 21, Energy 22, Spring_Type 23, Prop_Calc_Method 24, Material_Type 25, ASTM_Fed_Spec 26, Process 27, Material_File 28, Material_File 28, Life_Category 29
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
-    // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type 38, Inactive_Coils 39
-       0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 4,           2,
-    // Add_Coils_Solid 40, Catalog_Name 41, Catalog_Number 42, tbase010 43, tbase400 44, const_term 45, slope_term 46,       tensile_010 47
-       0,                  '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
+    // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type_Method 38, End_Type 39
+       0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 1,                  4,
+    // End_Closure 40, Closed_End_Geometry 41, Inactive_Coils 42, Transition_Coils 43, Taper_Amount 44, Pigtail_Amount 45, Grind_Amount 46, Catalog_Name 47, Catalog_Number 48, tbase010 49, tbase400 50
+       2,              1,                     2,                 2,                   0,               0,                  1,               '',              '',                0.01,        0.4,
+    // const_term 51, slope_term 52,       tensile_010 53
+       -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
 
@@ -127,7 +304,7 @@ it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () 
     expect(x[o.L_Solid]).toEqual(2);
     expect(x[o.Slenderness]).toEqual(16.25);
     expect(x[o.ID_Free]).toEqual(0.0);
-    expect(x[o.Weight]).toEqual(0.06311474692460524);
+    expect(x[o.Weight]).toBeCloseTo(0.057696289652687305, 15);
     expect(x[o.Spring_Index]).toEqual(1);
     expect(x[o.Force_Solid]).toEqual(44921.875);
     expect(x[o.Stress_1]).toEqual(Number.POSITIVE_INFINITY);
@@ -156,9 +333,15 @@ it('eqnset pathological OD_Free === Wire_Dia * 2.0 && Spring_Index === 1.0', () 
     expect(x[o.PC_Tensile_Stat]).toEqual(50);
     expect(x[o.Stress_Lim_Endur]).toEqual(115971.65510027415);
     expect(x[o.Stress_Lim_Stat]).toEqual(115971.65510027415);
+    expect(x[o.End_Type_Method]).toEqual(1);
     expect(x[o.End_Type]).toEqual(4);
+    expect(x[o.End_Closure]).toEqual(2);
+    expect(x[o.Closed_End_Geometry]).toEqual(1);
     expect(x[o.Inactive_Coils]).toEqual(2);
-    expect(x[o.Add_Coils_Solid]).toEqual(0.0);
+    expect(x[o.Transition_Coils]).toEqual(2);
+    expect(x[o.Taper_Amount]).toEqual(0.0);
+    expect(x[o.Pigtail_Amount]).toEqual(0.0);
+    expect(x[o.Grind_Amount]).toEqual(1.0);
     expect(x[o.Catalog_Name]).toEqual('');
     expect(x[o.Catalog_Number]).toEqual('');
     expect(x[o.tbase010]).toEqual(0.01);
@@ -177,10 +360,12 @@ it('eqnset pathological Coils_T === Inactive_Coils && Coils_A === 0.0', () => {
        0.0,        0.0,       0.0,             0.0,            0.0,         0.0,         0.0,             0.0,     0.0,         0.0,
     // Cycle_Life 20, PC_Avail_Deflect 21, Energy 22, Spring_Type 23, Prop_Calc_Method 24, Material_Type 25, ASTM_Fed_Spec 26, Process 27, Material_File 28, Material_File 28, Life_Category 29
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
-    // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type 38, Inactive_Coils 39
-       0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 4,           2,
-    // Add_Coils_Solid 40, Catalog_Name 41, Catalog_Number 42, tbase010 43, tbase400 44, const_term 45, slope_term 46,       tensile_010 47
-       0,                  '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
+    // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type_Method 38, End_Type 39
+       0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 1,                  4,
+    // End_Closure 40, Closed_End_Geometry 41, Inactive_Coils 42, Transition_Coils 43, Taper_Amount 44, Pigtail_Amount 45, Grind_Amount 46, Catalog_Name 47, Catalog_Number 48, tbase010 49, tbase400 50
+       2,              1,                     2,                 2,                   0,               0,                  1,               '',              '',                0.01,        0.4,
+    // const_term 51, slope_term 52,       tensile_010 53
+       -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
 
@@ -205,7 +390,7 @@ it('eqnset pathological Coils_T === Inactive_Coils && Coils_A === 0.0', () => {
     expect(x[o.L_Solid]).toEqual(0.211);
     expect(x[o.Slenderness]).toEqual(3.2679738562091503);
     expect(x[o.ID_Free]).toEqual(0.889);
-    expect(x[o.Weight]).toEqual(0.017485914072893908);
+    expect(x[o.Weight]).toBeCloseTo(0.0077609566811318005, 15);
     expect(x[o.Spring_Index]).toEqual(9.42654028436019);
     expect(x[o.Force_Solid]).toEqual(Number.POSITIVE_INFINITY);
     expect(x[o.Stress_1]).toEqual(24893.49275531675);
@@ -214,7 +399,7 @@ it('eqnset pathological Coils_T === Inactive_Coils && Coils_A === 0.0', () => {
     expect(x[o.FS_2]).toEqual(1.3463472310271418);
     expect(x[o.FS_Solid]).toEqual(0.0);
     expect(x[o.FS_CycleLife]).toEqual(1.3032217764849205);
-    expect(x[o.Cycle_Life]).toEqual(1861893.4985282072);
+    expect(x[o.Cycle_Life]).toBeCloseTo(1861893.4985282072,7);
     expect(x[o.PC_Avail_Deflect]).toEqual(0.0);
     expect(x[o.Energy]).toEqual(Number.NaN);
 
@@ -234,9 +419,15 @@ it('eqnset pathological Coils_T === Inactive_Coils && Coils_A === 0.0', () => {
     expect(x[o.PC_Tensile_Stat]).toEqual(50);
     expect(x[o.Stress_Lim_Endur]).toEqual(130709.6116626882);
     expect(x[o.Stress_Lim_Stat]).toEqual(130709.6116626882);
+    expect(x[o.End_Type_Method]).toEqual(1);
     expect(x[o.End_Type]).toEqual(4);
+    expect(x[o.End_Closure]).toEqual(2);
+    expect(x[o.Closed_End_Geometry]).toEqual(1);
     expect(x[o.Inactive_Coils]).toEqual(2);
-    expect(x[o.Add_Coils_Solid]).toEqual(0.0);
+    expect(x[o.Transition_Coils]).toEqual(2);
+    expect(x[o.Taper_Amount]).toEqual(0.0);
+    expect(x[o.Pigtail_Amount]).toEqual(0.0);
+    expect(x[o.Grind_Amount]).toEqual(1.0);
     expect(x[o.Catalog_Name]).toEqual('');
     expect(x[o.Catalog_Number]).toEqual('');
     expect(x[o.tbase010]).toEqual(0.01);
@@ -258,10 +449,12 @@ it('eqnset pathological OD_Free === Wire_Dia && Mean_Dia === 0.0', () => {
        0.0,        0.0,       0.0,             0.0,            0.0,         0.0,         0.0,             0.0,     0.0,         0.0,
     // Cycle_Life 20, PC_Avail_Deflect 21, Energy 22, Spring_Type 23, Prop_Calc_Method 24, Material_Type 25, ASTM_Fed_Spec 26, Process 27, Material_File 28, Material_File 28, Life_Category 29
        0.0,           0.0,                 0.0, 'Compression', 1, 2, 'A228/QQW-470', 'Cold_Coiled', 'mat_us.json', 1,
-    // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type 38, Inactive_Coils 39
-       0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 4,           2,
-    // Add_Coils_Solid 40, Catalog_Name 41, Catalog_Number 42, tbase010 43, tbase400 44, const_term 45, slope_term 46,       tensile_010 47
-       0,                  '',              '',                0.01,        0.4,         -2,            -106113.37959890341, 370000];
+    // Density 30, Torsion_Modulus 31, Hot_Factor_Kh 32, Tensile 33,         PC_Tensile_Endur 34, PC_Tensile_Stat 35, Stress_Lim_Endur 36, Stress_Lim_Stat 37, End_Type_Method 38, End_Type 39
+       0.284,      11500000,           1,                261419.22328169446, 50,                  50,                 130709.61164084723,  130709.61164084723, 1,                  4,
+    // End_Closure 40, Closed_End_Geometry 41, Inactive_Coils 42, Transition_Coils 43, Taper_Amount 44, Pigtail_Amount 45, Grind_Amount 46, Catalog_Name 47, Catalog_Number 48, tbase010 49, tbase400 50
+       2,              1,                     2,                 2,                   0,               0,                  1,               '',              '',                0.01,        0.4,
+    // const_term 51, slope_term 52,       tensile_010 53
+       -2,            -106113.37959890341, 370000];
 //    console.log('p=',p);
 //    console.log('x=',x);
 
@@ -286,7 +479,7 @@ it('eqnset pathological OD_Free === Wire_Dia && Mean_Dia === 0.0', () => {
     expect(x[o.L_Solid]).toEqual(4);
     expect(x[o.Slenderness]).toEqual(Number.POSITIVE_INFINITY);
     expect(x[o.ID_Free]).toEqual(-0.4);
-    expect(x[o.Weight]).toEqual(0.11598760077053516);
+    expect(x[o.Weight]).toBeCloseTo(0.10003930566458658, 15);
     expect(x[o.Spring_Index]).toEqual(0.0);
     expect(x[o.Force_Solid]).toEqual(Number.NaN);
     expect(x[o.Stress_1]).toEqual(Number.NaN);
@@ -315,9 +508,15 @@ it('eqnset pathological OD_Free === Wire_Dia && Mean_Dia === 0.0', () => {
     expect(x[o.PC_Tensile_Stat]).toEqual(50);
     expect(x[o.Stress_Lim_Endur]).toEqual(100000);
     expect(x[o.Stress_Lim_Stat]).toEqual(100000);
+    expect(x[o.End_Type_Method]).toEqual(1);
     expect(x[o.End_Type]).toEqual(4);
+    expect(x[o.End_Closure]).toEqual(2);
+    expect(x[o.Closed_End_Geometry]).toEqual(1);
     expect(x[o.Inactive_Coils]).toEqual(2);
-    expect(x[o.Add_Coils_Solid]).toEqual(0.0);
+    expect(x[o.Transition_Coils]).toEqual(2);
+    expect(x[o.Taper_Amount]).toEqual(0.0);
+    expect(x[o.Pigtail_Amount]).toEqual(0.0);
+    expect(x[o.Grind_Amount]).toEqual(1.0);
     expect(x[o.Catalog_Name]).toEqual('');
     expect(x[o.Catalog_Number]).toEqual('');
     expect(x[o.tbase010]).toEqual(0.01);

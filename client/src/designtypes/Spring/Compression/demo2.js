@@ -105,19 +105,19 @@ export const execute = {
                     The demo has now entered what is known about the problem.
                     In summary, the changes were:<br />
                     <br />
-                    CHANGE  Material_Type  302_STAINLESS<br />
-                    CHANGE  End_Type  Closed<br />
+                    CHANGE  <b>Material_Type</b>  302_STAINLESS<br />
+                    CHANGE  <b>End_Type</b>  Closed<br />
                     <br />
-                    FIX     OD_Free  0.188<br />
-                    CHANGE  L_Solid MAX  0.340<br />
+                    FIX     <b>OD_Free</b>  0.188<br />
+                    CHANGE  <b>L_Solid</b> MAX  0.340<br />
                     <br />
-                    FIX  L_2  0.385<br />
-                    FIX  Force_2  7.2<br />
-                    FIX  L_Free  0.475<br />
+                    FIX  <b>L_2</b>  0.385<br />
+                    FIX  <b>Force_2</b>  7.2<br />
+                    FIX  <b>L_Free</b>  0.475<br />
                     <br />
                     We'll leave wire diameter free, but start at the suggested value of 0.035 inch.
                     <br />
-                    CHANGE  Wire_Dia  0.035<br />
+                    CHANGE  <b>Wire_Dia</b>  0.035<br />
                     </p>
                 </>
             ),
@@ -144,7 +144,7 @@ export const execute = {
                     </p>
 
                     <p>
-                    CHANGE  FS_Solid MIN  0.7
+                    CHANGE  <b>FS_Solid</b> MIN  0.7
                     </p>
 
                     <p>

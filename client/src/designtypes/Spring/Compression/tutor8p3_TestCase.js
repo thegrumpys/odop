@@ -49,12 +49,12 @@ export const execute = {
                     <p>
                     In "Tutorial shorthand", the changes just imposed by the tutorial are:<br />
                     <br />
-                        CHANGE  Cycle_Life MIN  50000<br />
-                        CHANGE  FS_2 MAX 2.0 &nbsp; &#60;--- allow more conservative designs<br/>
-                        CHANGE  L_Solid MAX  1.2<br />
-                        CHANGE  L_Stroke MIN 1.0<br />
-                        FIX  Force_1  0<br />
-                        FIX  Force_2  250<br />
+                        CHANGE  <b>Cycle_Life</b> MIN  50000<br />
+                        CHANGE  <b>FS_2</b> MAX 2.0 &nbsp; &#60;--- allow more conservative designs<br/>
+                        CHANGE  <b>L_Solid</b> MAX  1.2<br />
+                        CHANGE  <b>L_Stroke</b> MIN 1.0<br />
+                        FIX  <b>Force_1</b>  0<br />
+                        FIX  <b>Force_2</b>  250<br />
                     </p>
 
                     <p>

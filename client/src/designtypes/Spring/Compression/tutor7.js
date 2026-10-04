@@ -67,8 +67,8 @@ export const execute = {
                     For example, without a constraint on inside diameter,
                     the coil outside diameter could be reduced (mathematically, if not physically)
                     to twice the wire diameter or perhaps even less.
-                    Without a constraint on Rate or
-                    Stroke (change in length between point 1 and point 2),
+                    Without a constraint on <b>Rate</b> or
+                    another variable like <b>L_Stroke</b> (change in length between point 1 and point 2),
                     the number of coils could be reduced to something less than one
                     and free length reduced down to equal the solid height.
                     The result is the mathematical equivalent of a solid bar supporting
@@ -127,9 +127,9 @@ export const execute = {
                 <>
                     <p>
                     We start by adding a few constraints to the compression spring starting point used in other tutorial sessions.
-                    This will leave us with a well formed
-                    &nbsp;<a href="/docs/Help/designSituations.html" target="_blank" rel="noopener noreferrer">Design Situation</a>&nbsp;
-                    and a reasonable feasible region to work in.
+                    This will leave us with a
+                    well formed <a href="/docs/Help/designSituations.html" target="_blank" rel="noopener noreferrer">Design Situation</a> and
+                    a reasonable feasible region to work in.
                     </p>
 
                     <p>
@@ -137,11 +137,11 @@ export const execute = {
                     </p>
 
                     <p>
-                    FIX  Force_1   0.0<br />
-                    FIX  Force_2  20.0<br />
-                    CHANGE  OD_Free MAX   1.5<br />
-                    CHANGE  L_Stroke MIN  1.0<br />
-                    CHANGE  L_Solid MAX   1.5
+                    FIX  <b>Force_1</b>   0.0<br />
+                    FIX  <b>Force_2</b>  20.0<br />
+                    CHANGE  <b>OD_Free</b> MAX   1.5<br />
+                    CHANGE  <b>L_Stroke</b> MIN  1.0<br />
+                    CHANGE  <b>L_Solid</b> MAX   1.5
                     </p>
 
                     <p>
@@ -186,11 +186,11 @@ export const execute = {
                     </p>
 
                     <p>
-                    Take note of the current value of Weight.
+                    Take note of the current value of <b>Weight</b>.
                     In the process of moving to the next page the tutorial session will
                     invoke the Seek feature. <br />
                     <br />
-                    SEEK  MIN  Weight
+                    SEEK  MIN  <b>Weight</b>
                     </p>
 
                     <Image fluid src="/docs/Help/img/SeekMinWeight.png" alt="SeekMinWeight"/>
@@ -210,7 +210,7 @@ export const execute = {
                     If you see the Feasibility status shown as "NOT FEASIBLE",
                     It means that the solution point has slightly violated constraints
                     in order to achieve improvements in the result
-                    (minimum Weight in this case).
+                    (minimum <b>Weight</b> in this case).
                     </p>
                     <p>
                     You may see the message:
@@ -227,14 +227,14 @@ export const execute = {
                     Let's try exploring in a different direction.
                     Perhaps this will be a design that prioritizes a softer spring
                     with a reduced spring rate.
-                    Take note of the current value of Rate.
+                    Take note of the current value of <b>Rate</b>.
                     </p>
 
                     <p>
                     In the process of moving to the next page
                     the tutorial will execute:
                     <br /><br />
-                    SEEK  MIN  Rate
+                    SEEK  MIN  <b>Rate</b>
                     </p>
                     <br />
                 </>
@@ -256,8 +256,8 @@ export const execute = {
                     <p>
                     In general, it is the interaction of more than one constraint that
                     limits further progress in achieving even better results.
-                    In this case the constraints on solid height (L_Solid) and
-                    factor of safety in the solid condition (FS_Solid)
+                    In this case the constraints on solid height (<b>L_Solid</b>) and
+                    factor of safety in the solid condition (<b>FS_Solid</b>)
                     prevent further progress in reducing the spring rate.
                     If you are looking for a spring with a good cycle life
                     or no tendency to buckle under load,
@@ -273,7 +273,7 @@ export const execute = {
                     In the process of moving to the next page
                     the tutorial will execute:
                     <br /><br />
-                    SEEK  MIN  L_Solid
+                    SEEK  MIN  <b>L_Solid</b>
                     </p>
                     <br /><br />
                 </>
@@ -320,20 +320,19 @@ export const execute = {
                     Now, let's see if we can find the minimum weight spring necessary to
                     support a 100 pound static load at a minimum of 2.5 inches
                     deflection.  Just to make the problem a little bit more interesting,
-                    we'll ignore the material and simply say that we want no more than 80,000
-                    PSI stresses.
+                    we'll ignore the material and simply say that we want 80,000 PSI stresses
+                    at the second load point.
                     </p>
 
                     <p>
                     The tutorial has just imposed these changes in order to describe this problem:<br />
                     <br />
-                    FIX  Force_1  0<br />
-                    FIX  Force_2  100<br />
-                    CHANGE  L_Stroke  MIN  2.5 &nbsp; &#60;--- use constraint, not FIX<br />
+                    FIX  <b>Force_1</b>  0<br />
+                    FIX  <b>Force_2</b>  100<br />
+                    CHANGE  <b>L_Stroke</b>  MIN  2.5 &nbsp; &#60;--- use constraint, not FIX<br />
                     <br />
-                    CHANGE  Prop_Calc_Method  3  &nbsp;  &#60;--- specify allowable stress<br />
-                    CHANGE  Stress_Lim_Stat  80000<br />
-                    CHANGE  FS_2  MIN  1.0  &nbsp;  &#60;--- more details on next page<br />
+                    FIX  <b>Stress_Lim_Stat</b>  80000<br />
+                    CHANGE <b>FS_2</b>  MAX  1.8  &#60;--- more details on next page
                     </p>
                     <br />
                 </>
@@ -345,10 +344,8 @@ export const execute = {
                 fixSymbolValue('Force_2', 100.0),
                 setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
                 changeSymbolConstraint('L_Stroke', MIN, 2.5),
-                changeSymbolValue("Prop_Calc_Method", 3),
-                changeSymbolValue("Stress_Lim_Stat", 80000.0),
-                setSymbolFlag('FS_2', MIN, CONSTRAINED),
-                changeSymbolConstraint('FS_2', MIN, 1.0)
+                fixSymbolValue('Stress_2', 80000.0),
+                changeSymbolConstraint('FS_2', MAX, 1.8)
                 ]
         },
         {
@@ -356,29 +353,18 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    If the use of Prop_Calc_Method seems a bit unfamiliar, you may wish to
-                    review the on-line documentation sections (HELP entries) on
-                    &nbsp;<a href="/docs/Help/DesignTypes/Spring/Compression/description.html" target="_blank" rel="noopener noreferrer">Compression Spring Design Type</a>,
-                    &nbsp;<a href="/docs/Help/SpringDesign/materials.html" target="_blank" rel="noopener noreferrer">Materials</a> and
-                    &nbsp;<a href="/docs/Help/SpringDesign/advancedSpringOperations.html" target="_blank" rel="noopener noreferrer">Advanced Spring Operations</a>.&nbsp;
-                    Also, an earlier tutorial section (tutor5) and one of the demo problems (demo4)
-                    provide additional details.
-                    </p>
-
-                    <p>
-                    Changing FS_2 MIN to be 1.0 causes the value of Stress_Lim_Stat
-                    (80,000 PSI) to apply at point 2.
-                    There will be no additional margin in the factor of safety.
+                    Increasing the upper limit on FS_2 from 1.5 to 1.8 allows the design to be more conservative
+                    (lower stress, heavier).
+                    Also, it allows this presentation to be simplified.
+                    The alternative would involve changing <b>Prop_Calc_Method</b> to a value of 3 and then changing 
+                    the value of <b>Stress_Lim_Stat</b> to 80,000.
                     </p>
 
                     <p>
                     As mentioned previously, while it is not always absolutely necessary,
                     it is best practice to start the optimization process from or near a feasible start point.
                     At the very least, you want to know that a feasible solution is available.
-                    </p>
-
-                    <p>
-                    Moving to the next page will execute a search.
+                    So, even though it may not be necessary for this case, moving to the next page will execute a search.
                     </p>
                 </>
             )
@@ -390,15 +376,6 @@ export const execute = {
                     <p>
                     Yes, a feasible solution is available.
                     You should scan through the details.
-                    </p>
-
-                    <p>
-                    The search stops with the first feasible design it finds.  It is not
-                    necessarily a design that delivers 80,000 PSI stress at point 2.
-                    However, when we ask for a minimum weight design (that is also a
-                    feasible design), we can expect the process to take up the slack
-                    and achieve the desired 80,000 psi stress at
-                    point 2 (100 pound load).
                     </p>
 
                     <p>
@@ -491,10 +468,10 @@ export const execute = {
                     <p>
                     In "Tutorial Speak" those changes are:<br />
                     <br />
-                    CHANGE  OD_Free MAX  1.5<br />
-                    CHANGE  L_Solid MAX  1.5<br />
-                    CHANGE  L_Stroke MIN 1.0<br />
-                    FIX  Force_1 0
+                    CHANGE  <b>OD_Free</b> MAX  1.5<br />
+                    CHANGE  <b>L_Solid</b> MAX  1.5<br />
+                    CHANGE  <b>L_Stroke</b> MIN 1.0<br />
+                    FIX  <b>Force_1</b> 0
                     </p>
 
                     <p>
@@ -522,7 +499,7 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    Take a moment to browse through the results that Seek MAX Force_2 produced.
+                    Take a moment to browse through the results that Seek MAX <b>Force_2</b> produced.
                     </p>
 
                     <p>

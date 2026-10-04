@@ -3,6 +3,7 @@ import { Table, Button } from 'react-bootstrap';
 import { MIN, MAX, FIXED } from '../../store/actionTypes';
 import { seek, saveAutoSave } from '../../store/actions';
 import { logUsage } from '../../logUsage';
+import { displaySpinner } from '../../components/Spinner';
 import * as sto from './symbol_table_offsets';
 
 export default function ResultTableOptimize({ onClick }) {
@@ -10,44 +11,74 @@ export default function ResultTableOptimize({ onClick }) {
   const model_symbol_table = useSelector((state) => state.model.symbol_table);
   const dispatch = useDispatch();
 
-  const onOptimizeSeekMAXVolume = (event) => {
+  const onOptimizeSeekMAXVolume = async (event) => {
+    displaySpinner(true);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
 //        console.log('ResultTableOptimize.onOptimizeSeekMAXVolume','event=',event);
-    logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX Volume button' });
-    dispatch(saveAutoSave());
-    dispatch(seek('Volume', MAX));
-    onClick(event);
+      logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX Volume button' });
+      dispatch(saveAutoSave());
+      dispatch(seek('Volume', MAX));
+      onClick(event);
+    } finally {
+      displaySpinner(false);
+    }
   }
 
-  const onOptimizeSeekMAXWeight = (event) => {
+  const onOptimizeSeekMAXWeight = async (event) => {
+    displaySpinner(true);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
 //        console.log('ResultTableOptimize.onOptimizeSeekMAXWeight','event=',event);
-    logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX Weight button' });
-    dispatch(saveAutoSave());
-    dispatch(seek('Weight', MAX));
-    onClick(event);
+      logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MAX Weight button' });
+      dispatch(saveAutoSave());
+      dispatch(seek('Weight', MAX));
+      onClick(event);
+    } finally {
+      displaySpinner(false);
+    }
   }
 
-  const onOptimizeSeekMINLength = (event) => {
+  const onOptimizeSeekMINLength = async (event) => {
+    displaySpinner(true);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
 //        console.log('ResultTableOptimize.onOptimizeSeekMINLength','event=',event);
-    logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Length button' });
-    dispatch(saveAutoSave());
-    dispatch(seek('Length', MIN));
-    onClick(event);
+      logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Length button' });
+      dispatch(saveAutoSave());
+      dispatch(seek('Length', MIN));
+      onClick(event);
+    } finally {
+      displaySpinner(false);
+    }
   }
 
-  const onOptimizeSeekMINWidth = (event) => {
+  const onOptimizeSeekMINWidth = async (event) => {
+    displaySpinner(true);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
 //        console.log('ResultTableOptimize.onOptimizeSeekMINWidth','event=',event);
-    logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Width button' });
-    dispatch(saveAutoSave());
-    dispatch(seek('Width', MIN));
-    onClick(event);
+      logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Width button' });
+      dispatch(saveAutoSave());
+      dispatch(seek('Width', MIN));
+      onClick(event);
+    } finally {
+      displaySpinner(false);
+    }
   }
 
-  const onOptimizeSeekMINHeight = (event) => {
+  const onOptimizeSeekMINHeight = async (event) => {
+    displaySpinner(true);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
 //        console.log('ResultTableOptimize.onOptimizeSeekMINWidth','event=',event);
-    logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Height button' });
-    dispatch(saveAutoSave());
-    dispatch(seek('Height', MIN));
-    onClick(event);
+      logUsage('event', 'ResultTableOptimize', { event_label: 'optimize Seek MIN Height button' });
+      dispatch(saveAutoSave());
+      dispatch(seek('Height', MIN));
+      onClick(event);
+    } finally {
+      displaySpinner(false);
+    }
   }
 
   return (

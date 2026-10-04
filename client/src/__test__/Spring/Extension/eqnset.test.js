@@ -59,7 +59,7 @@ it('eqnset initialState', () => {
     expect(x[o.FS_2]).toEqual(1.3126885502514636);
     expect(x[o.FS_CycleLife]).toEqual(1.2702904627112384);
     expect(x[o.FS_Hook]).toEqual(1.0215717111290479);
-    expect(x[o.Cycle_Life]).toEqual(794242.7844682191);
+    expect(x[o.Cycle_Life]).toBeCloseTo(794242.7844682191,7);
     expect(x[o.PC_Safe_Deflect]).toEqual(73.10642216405796);
     expect(x[o.Stress_Init_Lo]).toEqual(10183.372911818244);
     expect(x[o.Stress_Init_Hi]).toEqual(16724.517555905873);

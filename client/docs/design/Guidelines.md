@@ -5,7 +5,7 @@ This topic presents various guidelines for ODOP software development.
 ### On this page:   
  * [Version number guidelines](Guidelines.html#verNum) 
  * [Image location guidelines](Guidelines.html#imgLoc) 
- * [Tooltip image guidelines](Guidelines.html#tTImg) 
+ * [Procedure to create tooltip and end type images](Guidelines.html#tTImg) 
 
 ___
 
@@ -78,20 +78,9 @@ ___
 <a id="tTImg"></a>  
 ___
 
-##  Tooltip image guidelines
+##  Tooltip and end type image guidelines
 
-- images to be 160 pixels wide by minimum height necessary to get the job done
-- spring images to correspond with design type (compression, extension, torsion)
-- use the initialState spring dimensions (proportions) with reduced coil count as basis for rendered images
-- coil count should be an integer (not fractional); perhaps 3 or 4
-- to the extent possible, keep spring dimensions, orientation, coil count, etc. consistent between tooltip images
-- to the extent practical, avoid or reduce text in the image
-- use rendered spring images (FreeCAD rendering of imported IGES files?)
-- green witness lines; turquoise dimension lines
-- rendered spring images to be grey
-- if multiple springs in one image, use light grey to distinguish the "for reference" instances
-- Use open arrows to illustrate forces, curved open arrows for moments; size of arrows to reflect relative size of force
-- (other?)  
+See: [Procedure to create tooltip and end type images](/docs/procedures/tooltipimages.html)
 
 ___
 

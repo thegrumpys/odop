@@ -45,7 +45,9 @@ export default function LoginForm() {
       }
     } catch (err) {
 //      console.error('LoginForm.handleLogin /login','err=', err)
-      setError(err.response.data.error);
+      const backendError = err.response?.data?.error || err.message || "Unknown error";
+      setError(backendError);
+      logUsage('event', 'LoginForm', { event_label: `Email: ${email} Error: ${JSON.stringify(backendError)}`});
     }
   };
 

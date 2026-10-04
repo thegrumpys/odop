@@ -45,13 +45,13 @@ export default function AdminUserModal({ show, onHide, user, onSaved }) {
       } else {
         await axios.post("/api/v1/users", { email, password, first_name: firstName, last_name: lastName, role, status, token }, { headers: { Authorization: "Bearer " + authState.token } });
       }
-      logUsage("event", "AdminUserModal", {
-        event_label: isEdit ? "update" : "create",
-      });
+      logUsage("event", "AdminUserModal", { event_label: isEdit ? "update" : "create"});
       onSaved();
       onHide();
     } catch (err) {
-      setError(err.response?.data?.error || err.message);
+      const backendError = err.response?.data?.error || err.message || "Unknown error";
+      setError(backendError);
+      logUsage('event', 'AdminUserModal', { event_label: `Error: ${JSON.stringify(backendError)}`});
     }
   };
 

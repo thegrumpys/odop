@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import ReportBaseContext from './ReportBaseContext';
 import { Button } from 'react-bootstrap';
 import * as o from './symbol_table_offsets';
+import * as eto from './endtypes_offsets';
 
 export default function Report3() {
 //  console.log('Report3 - Mounting...');
@@ -77,6 +78,17 @@ export default function Report3() {
             <td>=</td>
             <td className="text-start" colSpan="2">{base.matTypeValue}</td>
           </tr>
+          {model_symbol_table[o.Hot_Factor_Kh].value < 1.0 &&
+            <tr>
+              <td>{model_symbol_table[o.Process].name}</td>
+              <td>=</td>
+              <td className="text-start" colSpan="2">{model_symbol_table[o.Process].value}</td>
+              <td />
+              <td>{model_symbol_table[o.Hot_Factor_Kh].name}</td>
+              <td>=</td>
+              <td>{model_symbol_table[o.Hot_Factor_Kh].value.toFixed(2)}</td>
+            </tr>
+          }
           <tr>
             <td>{model_symbol_table[o.Wire_Dia].name}</td>
             <td>=</td>
@@ -106,7 +118,13 @@ export default function Report3() {
             <td />
             <td>{model_symbol_table[o.End_Type].name}</td>
             <td>=</td>
-            <td className="text-start" colSpan="2">{base.et_tab[model_symbol_table[o.End_Type].value][0]}</td>
+            <td className="text-start" colSpan="2">
+              {model_symbol_table[o.End_Type_Method].value === 1 ?
+                base.et_tab[model_symbol_table[o.End_Type].value][eto.end_type]
+                :
+                base.endTypeValue
+              }
+            </td>
           </tr>
           <tr>
             <td>{model_symbol_table[o.Rate].name}</td>
@@ -149,14 +167,25 @@ export default function Report3() {
             <td />
             <td>{model_symbol_table[o.Weight].name}</td>
             <td>=</td>
-            <td>{base.wgt1000.toFixed(3)}</td>
-            <td className="text-start">{model_symbol_table[o.Weight].units + "/1000"}</td>
+            <td>{model_symbol_table[o.Weight].value.toFixed(6)}</td>
+            <td className="text-start">{model_symbol_table[o.Weight].units + "/spring"}</td>
           </tr>
           <tr>
             <td>Safe Travel</td>
             <td>=</td>
             <td>{base.safe_travel.toFixed(3)}</td>
             <td className="text-start">{model_symbol_table[o.L_Free].units}</td>
+            <td />
+            <td>Stock Weight</td>
+            <td>=</td>
+            <td>{base.stock_wgt1000.toFixed(3)}</td>
+            <td className="text-start">{model_symbol_table[o.Weight].units + "/1000 springs"}</td>
+          </tr>
+          <tr>
+            <td />
+            <td />
+            <td />
+            <td />
             <td />
             <td>{model_symbol_table[o.Cycle_Life].name}</td>
             <td>=</td>

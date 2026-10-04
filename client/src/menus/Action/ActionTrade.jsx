@@ -11,6 +11,7 @@ import {
   saveAutoSave
 } from '../../store/actions';
 import { logUsage } from '../../logUsage';
+import { displaySpinner } from '../../components/Spinner';
 import FormControlTypeNumber from '../../components/FormControlTypeNumber';
 import store from "../../store/store";
 
@@ -39,17 +40,28 @@ export default function ActionTrade() {
   const model_objective_value = useSelector((state) => state.model.result.objective_value);
   const dispatch = useDispatch();
 
+  const triggerSearch = async (source) => {
+    displaySpinner(true);
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    try {
+      dispatch(search(source));
+    } finally {
+      displaySpinner(false);
+    }
+  };
+
 //===========================================================
 // Trade Menu Item
 //===========================================================
 
-  const strategyToggle = () => {
+  const strategyToggle = async () => {
 //    console.log('ActionTrade.strategyToggle');
     logUsage('event', 'ActionTrade', { event_label: 'ActionTrade' });
     dispatch(saveAutoSave());
     var ncode;
     var design = store.getState();
-    var localNviol = commonViolationSetup();
+    var localNviol = await commonViolationSetup();
+    design = store.getState();
     if (design.model.result.objective_value <= design.model.system_controls.objmin || localNviol === 0) {
       dispatch(restoreInputSymbolValues());
       ncode = 'OBJ < OBJMIN - USE OF TRADE IS NOT APPROPRIATE';
@@ -59,14 +71,14 @@ export default function ActionTrade() {
     }
   }
 
-  const commonViolationSetup = () => {
+  const commonViolationSetup = async () => {
 //    console.log('ActionTrade.commonViolationSetup');
     var element;
     var localNviol = 0;
     var localVflag = [];
     var localLdir = [];
     dispatch(saveInputSymbolValues());
-    dispatch(search('Trade'));
+    await triggerSearch('Trade');
     var design = store.getState();
     for (let i = 0; i < design.model.symbol_table.length; i++) {
       element = design.model.symbol_table[i];
@@ -342,7 +354,7 @@ export default function ActionTrade() {
     setSizeShow(!sizeShow);
   }
 
-  const onSizeContinue = () => {
+  const onSizeContinue = async () => {
 //    console.log('ActionTrade.onSizeContinue');
     var element;
     var c2;
@@ -365,7 +377,7 @@ export default function ActionTrade() {
     }
     design = store.getState();
     if (design.model.result.objective_value > design.model.system_controls.objmin) {
-      dispatch(search('Trade'));
+      await triggerSearch('Trade');
     }
     design = store.getState();
     if (design.model.result.objective_value <= design.model.system_controls.objmin) {
@@ -393,7 +405,7 @@ export default function ActionTrade() {
         }
       }
       dispatch(restoreInputSymbolValues());
-      dispatch(search('Trade'));
+      await triggerSearch('Trade');
       design = store.getState();
       if (design.model.result.objective_value <= design.model.system_controls.objmin) {
 // Feasible was found, go show Feasible Modal
@@ -459,7 +471,7 @@ export default function ActionTrade() {
 //                        console.log(element.name + ' MAX ' + value + ' ' + element.units);
         }
       }
-      dispatch(search('Trade'));
+      await triggerSearch('Trade');
     }
     setSizeShow(!sizeShow);
     setEstablishShow(!establishShow);

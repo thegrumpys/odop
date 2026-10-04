@@ -38,14 +38,16 @@ export default function ConfirmPage() {
           setStatus('success');
           logUsage('event', 'ConfirmPage', { event_label: 'Email: ' + email_parm + ' Success: ' + JSON.stringify(res.data.error)});
         }).catch((err) => {
-          setError(err.response.data.error);
+          const backendError = err.response?.data?.error || err.message || "Unknown error";
+          setError(backendError);
           setStatus('error');
-          logUsage('event', 'ConfirmPage', { event_label: 'Email: ' + email_parm + ' Error: ' + JSON.stringify(err.response.data.error)});
+          logUsage('event', 'ConfirmPage', { event_label: `Email: ${email_parm} Error: ${JSON.stringify(backendError)}`});
         });
     } catch (err) {
-      setError(err.response.data.error);
+      const backendError = err.response?.data?.error || err.message || "Unknown error";
+      setError(backendError);
       setStatus('error');
-      logUsage('event', 'ConfirmPage', { event_label: 'Email: ' + email_parm + ' Error: ' + JSON.stringify(err.response.data.error)});
+      logUsage('event', 'ConfirmPage', { event_label: `Email: ${email_parm} Error: ${JSON.stringify(backendError)}`});
     }
   }, [searchParams]);
 

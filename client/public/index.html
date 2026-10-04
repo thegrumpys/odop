@@ -164,6 +164,15 @@ table[id^=view] td {
   text-align: left;
 }
 /**************************************************/
+/* The application navbar is fixed on screen. A fixed element is
+   repeated over each page by the browser's print layout, obscuring
+   report content after the first page. */
+@media print {
+  .navbar.fixed-top {
+    display: none !important;
+  }
+}
+/**************************************************/
 .form-check-input[type=checkbox] {
   border-color: #767676;
 }
