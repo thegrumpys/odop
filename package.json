@@ -31,7 +31,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
-    "cheerio": "^1.0.0-rc.10",
+    "cheerio": "^1.2.0",
     "harp": "^0.46.1",
     "mocha": "^11.1.0",
     "nodemon": "^1.19.4",
