@@ -32,7 +32,7 @@ it('uses the selected US material wire size range, including its boundaries', ()
 
 it('uses metric wire sizes and recommends the metric startup', () => {
   const symbols = metricInitialState.symbol_table.map((symbol) => ({ ...symbol }));
-  expect(getWireDiaRange(symbols)).toEqual({ min: 0.025, max: 65 });
-  expect(materialAlerts(metricInitialState, symbols[o.Material_Type].value, 65)).toHaveLength(0);
-  expect(materialAlerts(metricInitialState, symbols[o.Material_Type].value, 66)[0].message).toContain('HotWoundMetric');
+  expect(getWireDiaRange(symbols)).toEqual({ min: 0.07, max: 20 });
+  expect(materialAlerts(metricInitialState, symbols[o.Material_Type].value, 20)).toHaveLength(0);
+  expect(materialAlerts(metricInitialState, symbols[o.Material_Type].value, 21)[0].message).toContain('HotWoundMetric');
 });
