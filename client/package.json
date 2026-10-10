@@ -39,7 +39,7 @@
     "react": "^18.2.0",
     "react-beforeunload": "^2.6.0",
     "react-bootstrap": "^2.10.1",
-    "react-dom": "^18.2.0",
+    "react-dom": "^19.3.0",
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.30.6",
     "react-scripts": "^5.0.1",
