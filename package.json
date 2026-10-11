@@ -50,5 +50,11 @@
     "mysql2": "^3.24.5",
     "node-mysql": "^0.4.2",
     "nodemailer": "^7.0.11"
+  },
+  "allowScripts": {
+    "bcrypt@6.0.0": true,
+    "esbuild@0.15.7": true,
+    "nodemon@1.19.4": true,
+    "fsevents@2.3.3": true
   }
 }
