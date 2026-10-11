@@ -12,9 +12,10 @@ DependaBot provides a continuing stream of software updates in the form of Pull 
 
 1. Go to [GitHub ODOP](https://github.com/thegrumpys/odop)
 2. Select **Pull Requests** (third item on main menu)
-3. Select and open a DependaBot Pull Request
-4. Click Merge Pull Request
-5. Click Confirm Merge
+3. Sort oldest first
+4. Select and open a DependaBot Pull Request
+5. Click Merge Pull Request - changes applied to master branch
+6. Click Confirm Merge - master branch is updated no need to push.
 
 ### Steps to confirm no problem stopping launch of the ODOP app
 
