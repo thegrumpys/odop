@@ -39,17 +39,17 @@
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "csv-parser": "^3.2.0",
-    "dotenv": "^18.0.6",
-    "express": "^4.18.2",
+    "body-parser": "^2.3.0",
+    "cors": "^2.8.6",
+    "csv-parser": "^3.2.1",
+    "dotenv": "^18.0.7",
+    "express": "^5.3.0",
     "express-mysql-session": "^3.0.3",
-    "express-session": "^1.18.2",
+    "express-session": "^1.19.0",
     "lunr": "^2.3.9",
     "mysql2": "^3.24.5",
     "node-mysql": "^0.4.2",
-    "nodemailer": "^7.0.11"
+    "nodemailer": "^10.1.0"
   },
   "allowScripts": {
     "bcrypt@6.0.0": true,

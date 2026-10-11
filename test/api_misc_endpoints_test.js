@@ -271,6 +271,24 @@ describe('Misc API endpoints and empty DB', () => {
     });
 
 
+  for (const { route, conflictingType, message } of [
+    { route: 'resend-confirmation', conflictingType: 'reset', message: 'No outstanding registration exists or has expired.' },
+    { route: 'resend-change-password', conflictingType: 'confirm', message: 'Unknown email or password, or inactive account.' }
+  ]) {
+    describe(`POST /api/v1/${route} with unknown email`, () => {
+      for (const query of [{}, { type: conflictingType }]) {
+        it(`uses the route's resend type with query ${JSON.stringify(query)}`, async () => {
+          const res = await chai.request.execute(server)
+            .post(`/api/v1/${route}`)
+            .query(query)
+            .send({ email: 'nouser@example.com' });
+          res.should.have.status(401);
+          res.body.error.message.should.equal(message);
+        });
+      }
+    });
+  }
+
     describe('PATCH /api/v1/change-password with invalid token', () => {
         it('it should fail PATCH with 401 UNAUTHORIZED', (done) => {
             chai.request.execute(server)

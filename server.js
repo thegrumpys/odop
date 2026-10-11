@@ -22,6 +22,11 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
+app.use((req, res, next) => {
+  // Preserve empty-body handling now that Express 5 leaves unparsed bodies undefined.
+  if (req.body === undefined) req.body = {};
+  next();
+});
 
 // --- DB status logging ---
 if (process.env.ENABLE_DB === 'true') {
@@ -240,9 +245,8 @@ async function createResetToken(email) {
   }
 }
 
-async function resendEmail(req, res) {
+async function resendEmail(req, res, type = req.query.type) {
   const { email } = req.body;
-  const type = req.query.type;
 
   if (!isValidEmail(email)) {
     sendMessage(res, 'Unknown email or password, or inactive account.', 'error', 'email', 400);
@@ -1061,23 +1065,21 @@ app.patch('/api/v1/change-password', async (req, res) => {
 // RESEND EMAIL
 app.post('/api/v1/resend', (req, res) => {
   if (!db) return res.status(503).json({ error: 'Database disabled' });
-  resendEmail(req, res);
+  return resendEmail(req, res);
 });
 
 // ===========================================================================
 // RESEND CONFIRMATION
 app.post('/api/v1/resend-confirmation', (req, res) => {
   if (!db) return res.status(503).json({ error: 'Database disabled' });
-  req.query.type = 'confirm';
-  resendEmail(req, res);
+  return resendEmail(req, res, 'confirm');
 });
 
 // ===========================================================================
 // RESEND CHANGE PASSWORD
 app.post('/api/v1/resend-change-password', (req, res) => {
   if (!db) return res.status(503).json({ error: 'Database disabled' });
-  req.query.type = 'reset';
-  resendEmail(req, res);
+  return resendEmail(req, res, 'reset');
 });
 
 //==================================================================================================
@@ -1325,7 +1327,7 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging')
     express.static(path.join(__dirname, 'client/build'))
   );
   // Handle React routing, return all requests to React app
-  app.get('*', function(req, res, next) {
+  app.get('/{*splat}', function(req, res, next) {
 //    console.log('SERVER: In GET * PATH=', path.join(__dirname, 'client/build', 'index.html'));
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
