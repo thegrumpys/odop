@@ -34,6 +34,14 @@ function webpackOverride(config) {
 
 function jestOverride(config) {
   config.transformIgnorePatterns = ["node_modules/(?!(axios)/)"];
+  // Jest 27 cannot resolve React Router 7's package export subpath.
+  config.moduleNameMapper = {
+    ...config.moduleNameMapper,
+    "^react-router/dom$": require("path").join(
+      require("path").dirname(require.resolve("react-router")),
+      "dom-export.js"
+    ),
+  };
   return config;
 }
 
