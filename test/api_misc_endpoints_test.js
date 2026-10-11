@@ -22,11 +22,8 @@ process.env.NODE_ENV = 'test';
 const mysql = require('mysql');
 
 let chai = require('chai');
-let chaiHttp = require('chai-http');
 let server = require('../server');
 let should = chai.should();
-
-chai.use(chaiHttp);
 
 // ============================================================================
 
@@ -53,7 +50,7 @@ describe('Misc API endpoints and empty DB', () => {
 
     describe('GET /api/v1/db_size without Authorization', () => {
         it('it should GET with 401 UNAUTHORIZED', (done) => {
-            chai.request(server)
+            chai.request.execute(server)
                 .get('/api/v1/db_size')
                 .end((err, res) => {
                     res.should.have.status(401);
@@ -64,7 +61,7 @@ describe('Misc API endpoints and empty DB', () => {
 
     describe('GET /api/v1/search', () => {
         it('it should GET with 200 OK', (done) => {
-            chai.request(server)
+            chai.request.execute(server)
                 .get('/api/v1/search')
                 .query({ terms: 'spring' })
                 .end((err, res) => {
@@ -77,7 +74,7 @@ describe('Misc API endpoints and empty DB', () => {
 
     describe('GET /api/v1/me without session', () => {
         it('it should GET with 200 OK unauthenticated', (done) => {
-            chai.request(server)
+            chai.request.execute(server)
                 .get('/api/v1/me')
                 .end((err, res) => {
                     res.should.have.status(200);
@@ -90,7 +87,7 @@ describe('Misc API endpoints and empty DB', () => {
 
     describe('POST /api/v1/register with short password', () => {
         it('it should fail POST with 400 BAD REQUEST', (done) => {
-            chai.request(server)
+            chai.request.execute(server)
                 .post('/api/v1/register')
                 .send({ email: 'test@example.com', password: 'short', first_name: 'F', last_name: 'L' })
                 .end((err, res) => {
@@ -102,7 +99,7 @@ describe('Misc API endpoints and empty DB', () => {
 
     describe('POST /api/v1/register with leading password space', () => {
         it('it should fail POST with 400 BAD REQUEST', (done) => {
-            chai.request(server)
+            chai.request.execute(server)
                 .post('/api/v1/register')
                 .send({ email: 'space@example.com', password: ' Valid123', first_name: 'F', last_name: 'L' })
                 .end((err, res) => {
@@ -116,7 +113,7 @@ describe('Misc API endpoints and empty DB', () => {
 
     describe('POST /api/v1/register with trailing password space', () => {
         it('it should fail POST with 400 BAD REQUEST', (done) => {
-            chai.request(server)
+            chai.request.execute(server)
                 .post('/api/v1/register')
                 .send({ email: 'space@example.com', password: 'Valid123 ', first_name: 'F', last_name: 'L' })
                 .end((err, res) => {
@@ -138,7 +135,7 @@ describe('Misc API endpoints and empty DB', () => {
                     connection.end();
                     if (err) return done(err);
 
-                    chai.request(server)
+                    chai.request.execute(server)
                         .post('/api/v1/register')
                         .send({ email: 'duplicate@example.com', password: 'Valid123', first_name: 'F', last_name: 'L' })
                         .end((err, res) => {
@@ -152,7 +149,7 @@ describe('Misc API endpoints and empty DB', () => {
 
     describe('POST /api/v1/logout', () => {
         it('it should POST with 200 OK', (done) => {
-            chai.request(server)
+            chai.request.execute(server)
                 .post('/api/v1/logout')
                 .set('Authorization', 'Bearer USERID0123456789')
                 .end((err, res) => {
@@ -164,7 +161,7 @@ describe('Misc API endpoints and empty DB', () => {
 
     describe('GET /api/v1/confirm with invalid token', () => {
         it('it should fail GET with 401 UNAUTHORIZED', (done) => {
-            chai.request(server)
+            chai.request.execute(server)
                 .get('/api/v1/confirm')
                 .query({ token: 'invalid-token' })
                 .end((err, res) => {
@@ -176,7 +173,7 @@ describe('Misc API endpoints and empty DB', () => {
 
     describe('GET /api/v1/has-password with unknown email', () => {
         it('it should fail GET with 401 UNAUTHORIZED', (done) => {
-            chai.request(server)
+            chai.request.execute(server)
                 .get('/api/v1/has-password')
                 .query({ email: 'unknown@example.com' })
                 .end((err, res) => {
@@ -188,7 +185,7 @@ describe('Misc API endpoints and empty DB', () => {
 
     describe('POST /api/v1/login with invalid credentials', () => {
         it('it should fail POST with 401 UNAUTHORIZED', (done) => {
-            chai.request(server)
+            chai.request.execute(server)
                 .post('/api/v1/login')
                 .send({ email: 'nouser@example.com', password: 'Badpass1' })
                 .end((err, res) => {
@@ -200,7 +197,7 @@ describe('Misc API endpoints and empty DB', () => {
 
     describe('POST /api/v1/reset-password with unknown email', () => {
         it('it should fail POST with 401 UNAUTHORIZED', (done) => {
-            chai.request(server)
+            chai.request.execute(server)
                 .post('/api/v1/reset-password')
                 .send({ email: 'nouser@example.com' })
                 .end((err, res) => {
@@ -224,7 +221,7 @@ describe('Misc API endpoints and empty DB', () => {
                             connection.end();
                             if (err) return done(err);
 
-                            chai.request(server)
+                            chai.request.execute(server)
                                 .post('/api/v1/reset-password')
                                 .send({ email: 'reset@example.com' })
                                 .end((err, res) => {
@@ -252,7 +249,7 @@ describe('Misc API endpoints and empty DB', () => {
 
     describe('POST /api/v1/resend?type=confirm with unknown email', () => {
         it('it should fail POST with 401 UNAUTHORIZED', (done) => {
-            chai.request(server)
+            chai.request.execute(server)
                 .post('/api/v1/resend?type=confirm')
                 .send({ email: 'nouser@example.com' })
                 .end((err, res) => {
@@ -263,7 +260,7 @@ describe('Misc API endpoints and empty DB', () => {
     });
     describe('POST /api/v1/resend?type=reset with unknown email', () => {
         it('it should fail POST with 401 UNAUTHORIZED', (done) => {
-            chai.request(server)
+            chai.request.execute(server)
                 .post('/api/v1/resend?type=reset')
                 .send({ email: 'nouser@example.com' })
                 .end((err, res) => {
@@ -276,7 +273,7 @@ describe('Misc API endpoints and empty DB', () => {
 
     describe('PATCH /api/v1/change-password with invalid token', () => {
         it('it should fail PATCH with 401 UNAUTHORIZED', (done) => {
-            chai.request(server)
+            chai.request.execute(server)
                 .patch('/api/v1/change-password')
                 .send({ email: 'nouser@example.com', token: 'bad', password: 'Valid123' })
                 .end((err, res) => {
@@ -306,7 +303,7 @@ describe('Misc API endpoints and empty DB', () => {
         });
 
         it('it should reject a leading password space', (done) => {
-            chai.request(server)
+            chai.request.execute(server)
                 .patch('/api/v1/change-password')
                 .send({ email: 'change@example.com', token: 'change-reset-token', password: ' Valid123' })
                 .end((err, res) => {
@@ -318,7 +315,7 @@ describe('Misc API endpoints and empty DB', () => {
         });
 
         it('it should reject a trailing password space', (done) => {
-            chai.request(server)
+            chai.request.execute(server)
                 .patch('/api/v1/change-password')
                 .send({ email: 'change@example.com', token: 'change-reset-token', password: 'Valid123 ' })
                 .end((err, res) => {
@@ -361,7 +358,7 @@ describe('Misc API endpoints and empty DB', () => {
 
         describe('DELETE /api/v1/cleanup-expired-tokens', () => {
             it('it should DELETE with 200 OK', (done) => {
-                chai.request(server)
+                chai.request.execute(server)
                     .delete('/api/v1/cleanup-expired-tokens')
                     .set('Authorization', 'Bearer ADMIN0123456789')
                     .end((err, res) => {
