@@ -42,6 +42,7 @@ import HelpDemo from '../menus/Help/HelpDemo';
 import HelpTutorial from '../menus/Help/HelpTutorial';
 import HelpAbout from '../menus/Help/HelpAbout';
 import AdminCleanupExpiredTokens from '../menus/Admin/AdminCleanupExpiredTokens';
+import AdminLogNote from '../menus/Admin/AdminLogNote';
 import { Link } from 'react-router-dom';
 import SearchDocs from './SearchDocs';
 import config from '../config';
@@ -197,6 +198,7 @@ export default function MainPage() {
             </NavDropdown>
             <RequireAdmin>
               <NavDropdown title="Admin">
+                <AdminLogNote />
                 <AdminCleanupExpiredTokens />
                 <NavDropdown.Item as={Link} to="/admin/user-manager">User Manager</NavDropdown.Item>
               </NavDropdown>
