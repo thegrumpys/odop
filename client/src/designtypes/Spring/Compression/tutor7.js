@@ -207,10 +207,9 @@ export const execute = {
             text: (
                 <>
                     <p>
-                    If you see the Feasibility status shown as "NOT FEASIBLE",
-                    It means that the solution point has slightly violated constraints
-                    in order to achieve improvements in the result
-                    (minimum <b>Weight</b> in this case).
+                    If you see the Feasibility status shown as "NOT FEASIBLE", or "CLOSE TO FEASIBLE",
+                    it means that the solution point has slightly violated constraints
+                    in order to achieve improvements in the result (minimum <b>Weight</b> in this case).
                     </p>
                     <p>
                     You may see the message:
@@ -232,7 +231,7 @@ export const execute = {
 
                     <p>
                     In the process of moving to the next page
-                    the tutorial will execute:
+                    the tutorial will reset the starting conditions and execute:
                     <br /><br />
                     SEEK  MIN  <b>Rate</b>
                     </p>
@@ -255,10 +254,12 @@ export const execute = {
 
                     <p>
                     In general, it is the interaction of more than one constraint that
-                    limits further progress in achieving even better results.
-                    In this case the constraints on solid height (<b>L_Solid</b>) and
-                    factor of safety in the solid condition (<b>FS_Solid</b>)
+                    limits Seek in achieving even better results.
+                    In this case, the constraints on Factor of Safety at Point 2 (<b>FS_2</b>) and
+                    Percent Available Deflection (<b>%_Avail_Deflect</b>)
                     prevent further progress in reducing the spring rate.
+                    Executing Seek MIN <b>Rate</b> a second time would likely encounter the constraints
+                    on Active Coils (<b>Coils_A</b>) and Spring Index (<b>Spring_Index</b>) as well.
                     If you are looking for a spring with a good cycle life
                     or no tendency to buckle under load,
                     additional constraints will be necessary.
@@ -279,8 +280,9 @@ export const execute = {
                 </>
             ),
             actions: [
-//                seek("Rate", MIN),
-                seek("Rate", MIN)
+              loadInitialState('Spring/Compression'),
+              changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}]),
+              seek("Rate", MIN)
             ]
         },
         {
@@ -485,6 +487,7 @@ export const execute = {
             ),
             actions: [
                 loadInitialState('Spring/Compression'),
+                changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}]),
                 setSymbolFlag('OD_Free', MAX, CONSTRAINED),
                 changeSymbolConstraint('OD_Free', MAX, 1.5),
                 setSymbolFlag('L_Solid', MAX, CONSTRAINED),
