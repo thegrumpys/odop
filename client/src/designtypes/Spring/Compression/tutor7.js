@@ -255,11 +255,10 @@ export const execute = {
                     <p>
                     In general, it is the interaction of more than one constraint that
                     limits Seek in achieving even better results.
-                    In this case, the constraints on Factor of Safety at Point 2 (<b>FS_2</b>) and
+                    In this case, the constraints on length at solid (<b>L_Solid</b>),
+                    Factor of Safety at solid (<b>FS_Solid</b>) and
                     Percent Available Deflection (<b>%_Avail_Deflect</b>)
                     prevent further progress in reducing the spring rate.
-                    Executing Seek MIN <b>Rate</b> a second time would likely encounter the constraints
-                    on Active Coils (<b>Coils_A</b>) and Spring Index (<b>Spring_Index</b>) as well.
                     If you are looking for a spring with a good cycle life
                     or no tendency to buckle under load,
                     additional constraints will be necessary.
@@ -282,6 +281,14 @@ export const execute = {
             actions: [
               loadInitialState('Spring/Compression'),
               changeLabelsValue([{name: 'COMMENT', value: 'Compression Spring Demo'}]),
+              fixSymbolValue('Force_1', 0.0),
+              fixSymbolValue('Force_2', 20.0),
+              setSymbolFlag('OD_Free', MAX, CONSTRAINED),
+              changeSymbolConstraint('OD_Free', MAX, 1.5),
+              setSymbolFlag('L_Stroke', MIN, CONSTRAINED),
+              changeSymbolConstraint('L_Stroke', MIN, 1.0),
+              setSymbolFlag('L_Solid', MAX, CONSTRAINED),
+              changeSymbolConstraint('L_Solid', MAX, 1.5),
               seek("Rate", MIN)
             ]
         },
