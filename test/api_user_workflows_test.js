@@ -3,7 +3,7 @@ process.env.NODE_ENV = 'test';
 
 const { expect } = require('chai');
 const chai = require('chai');
-const chaiHttp = require('chai-http');
+const { default: chaiHttp, request } = require('chai-http');
 const { randomUUID } = require('crypto');
 const nodemailer = require('nodemailer');
 const db = require('../db');
@@ -31,7 +31,7 @@ describe('Release user workflows', function () {
   const mailbox = [];
   let ownerId;
 
-  const http = () => chai.request(app);
+  const http = () => request.execute(app);
   const auth = (request, token = ownerToken) => request.set('Authorization', 'Bearer ' + token);
   const model = () => JSON.parse(JSON.stringify(referenceDesign));
 
@@ -62,7 +62,7 @@ describe('Release user workflows', function () {
   });
 
   it('registers, confirms once, signs in, retains a session and signs out', async () => {
-    const agent = chai.request.agent(app);
+    const agent = request.agent(app);
     try {
       let res = await agent.post('/api/v1/register').send({
         email: registrationEmail, password, first_name: 'New', last_name: 'Tester'
@@ -113,7 +113,7 @@ describe('Release user workflows', function () {
     expect(res).to.have.status(401);
     res = await http().post('/api/v1/login').send({ email: ownerEmail, password });
     expect(res).to.have.status(401);
-    const agent = chai.request.agent(app);
+    const agent = request.agent(app);
     try {
       res = await agent.post('/api/v1/login').send({ email: ownerEmail, password: 'Replacement123' });
       expect(res).to.have.status(200);
