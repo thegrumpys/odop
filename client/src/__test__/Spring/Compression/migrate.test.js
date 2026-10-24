@@ -38,17 +38,14 @@ function version13Design(endType) {
   });
 }
 
-function version14Design(endClosure, closedEndGeometry) {
-  var symbolTable = initialState.symbol_table
-    .filter((element) => element.name !== 'Transition_Coils')
-    .map((element) => Object.assign({},element));
-  symbolTable.find((element) => element.name === 'End_Closure').value = endClosure;
-  symbolTable.find((element) => element.name === 'Closed_End_Geometry').value = closedEndGeometry;
-
-  return Object.assign({},initialState,{
-    version: '14',
-    symbol_table: symbolTable
-  });
+function version14Design(endClosure, closedEndGeometry, transitionCoils) {
+  // Version 14 already contains the complete end-type model.
+  var design = JSON.parse(JSON.stringify(initialState));
+  design.version = '14';
+  design.symbol_table[o.End_Closure].value = endClosure;
+  design.symbol_table[o.Closed_End_Geometry].value = closedEndGeometry;
+  design.symbol_table[o.Transition_Coils].value = transitionCoils;
+  return design;
 }
 
 describe.each([
@@ -103,8 +100,13 @@ it.each([
   ['open', 1, 0, 0.0],
   ['closed', 2, 1, 2.0],
   ['pigtail', 2, 4, 1.0]
-])('version 14 %s migration adds transition coils', (name, endClosure, closedEndGeometry, transitionCoils) => {
-  var migrated = migrate(version14Design(endClosure, closedEndGeometry));
+])('version 14 %s design is unchanged', (name, endClosure, closedEndGeometry, transitionCoils) => {
+  var design = version14Design(endClosure, closedEndGeometry, transitionCoils);
+  design.symbol_table[o.Weight].tooltip = 'Preserve version-14 tooltip';
+  var before = JSON.parse(JSON.stringify(design));
+  var migrated = migrate(design);
+
+  expect(migrated).toEqual(before);
 
   expect(migrated.version).toBe('14');
   expect(migrated.symbol_table.map((element) => element.name)).toEqual(initialState.symbol_table.map((element) => element.name));

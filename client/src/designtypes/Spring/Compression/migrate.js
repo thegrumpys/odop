@@ -462,6 +462,13 @@ export function migrate(design) {
             design.symbol_table[47].value = 1; // Closed_End_Geometry "Single"
             break;
         }
+        var currentInitialState = design.units === 'US' ? initialState : initialStateMetric;
+        // Keep the descriptions changed with this model consistent with fresh
+        // startup designs without changing the user's engineering settings.
+        ['Weight', 'FS_CycleLife', 'Cycle_Life', 'Life_Category', 'Tensile', 'End_Type', 'Inactive_Coils'].forEach((name) => {
+            design.symbol_table.find((element) => element.name === name).tooltip = currentInitialState.symbol_table.find((element) => element.name === name).tooltip;
+        });
+
         migrated_design.version = '14';
      case '14':
 

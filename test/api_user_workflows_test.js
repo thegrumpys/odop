@@ -3,12 +3,15 @@ process.env.NODE_ENV = 'test';
 
 const { expect } = require('chai');
 const chai = require('chai');
+const chaiHttp = require('chai-http');
 const { randomUUID } = require('crypto');
 const nodemailer = require('nodemailer');
 const db = require('../db');
 const app = require('../server');
 const { hashPassword } = require('../auth');
 const referenceDesign = require('./fixtures/SimpleSearchStartup.json');
+
+chai.use(chaiHttp);
 
 // Tests real HTTP, MySQL, password hashing and sessions; only SMTP is intercepted.
 // The server suite uses its own fixture and never runs or loads client tests.
@@ -28,7 +31,7 @@ describe('Release user workflows', function () {
   const mailbox = [];
   let ownerId;
 
-  const http = () => chai.request.execute(app);
+  const http = () => chai.request(app);
   const auth = (request, token = ownerToken) => request.set('Authorization', 'Bearer ' + token);
   const model = () => JSON.parse(JSON.stringify(referenceDesign));
 
