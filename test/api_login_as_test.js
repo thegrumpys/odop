@@ -4,10 +4,13 @@ process.env.NODE_ENV = 'test';
 
 const mysql = require('mysql');
 let chai = require('chai');
+let { default: chaiHttp, request } = require('chai-http');
 let server = require('../server');
 let should = chai.should();
 let adminId;
 let userId;
+
+chai.use(chaiHttp);
 
 describe('Admin login-as endpoint', () => {
   before((done) => {
@@ -37,8 +40,8 @@ describe('Admin login-as endpoint', () => {
   });
 
   it('should login as user', (done) => {
-    chai
-      .request.execute(server)
+    request
+      .execute(server)
       .post(`/api/v1/users/${userId}/login-as`)
       .set('Authorization', 'Bearer ADMTEST')
       .end((err, res) => {

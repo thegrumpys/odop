@@ -38,6 +38,16 @@ function version13Design(endType) {
   });
 }
 
+function version14Design(endClosure, closedEndGeometry, transitionCoils) {
+  // Version 14 already contains the complete end-type model.
+  var design = JSON.parse(JSON.stringify(initialState));
+  design.version = '14';
+  design.symbol_table[o.End_Closure].value = endClosure;
+  design.symbol_table[o.Closed_End_Geometry].value = closedEndGeometry;
+  design.symbol_table[o.Transition_Coils].value = transitionCoils;
+  return design;
+}
+
 describe.each([
   ['Open', 1, 1, 1, 0, 0.0, 0.0, 0.0, 0.0],
   ['Open&Ground', 2, 2, 1, 0, 0.0, 0.0, 0.0, 1.0],
@@ -84,6 +94,23 @@ it('converts the old User_Specified choice to current user-specified controls', 
   expect(migrated.symbol_table[o.Taper_Amount].value).toBe(0.0);
   expect(migrated.symbol_table[o.Pigtail_Amount].value).toBe(0.0);
   expect(migrated.symbol_table[o.Grind_Amount].value).toBe(0.0);
+});
+
+it.each([
+  ['open', 1, 0, 0.0],
+  ['closed', 2, 1, 2.0],
+  ['pigtail', 2, 4, 1.0]
+])('version 14 %s design is unchanged', (name, endClosure, closedEndGeometry, transitionCoils) => {
+  var design = version14Design(endClosure, closedEndGeometry, transitionCoils);
+  design.symbol_table[o.Weight].tooltip = 'Preserve version-14 tooltip';
+  var before = JSON.parse(JSON.stringify(design));
+  var migrated = migrate(design);
+
+  expect(migrated).toEqual(before);
+
+  expect(migrated.version).toBe('14');
+  expect(migrated.symbol_table.map((element) => element.name)).toEqual(initialState.symbol_table.map((element) => element.name));
+  expect(migrated.symbol_table[o.Transition_Coils].value).toBe(transitionCoils);
 });
 
 it('keeps US and metric initial-state end-type entries aligned', () => {

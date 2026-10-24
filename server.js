@@ -479,7 +479,7 @@ app.post('/api/v1/designtypes/:type/designs/:name', authenticationRequired, asyn
   if (!db) return res.status(503).json({ error: 'Database disabled' });
   var value;
   var user = req.uid;
-  var type = req.body.type;
+  var type = req.body?.type;
   var name = req.params['name'];
   name = name.replace(/[']/ig, "''"); // replace one single quote with an two single quotes throughout
 //  console.log('SERVER: In POST /api/v1/designtypes/' + type + '/designs/' + name, 'user=', user);
@@ -530,7 +530,7 @@ app.put('/api/v1/designtypes/:type/designs/:name', authenticationRequired, async
   if (!db) return res.status(503).json({ error: 'Database disabled' });
   var value;
   var user = req.uid;
-  var type = req.body.type;
+  var type = req.body?.type;
   var name = req.params['name'];
   name = name.replace(/[']/ig, "''"); // replace one single quote with an two single quotes throughout
 //  console.log('SERVER: In PUT /api/v1/designtypes/' + type + '/designs/' + name, 'user=', user);

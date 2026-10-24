@@ -23,8 +23,11 @@ const mysql = require('mysql');
 
 // Require the dev-dependencies
 let chai = require('chai');
+let { default: chaiHttp, request } = require('chai-http');
 let server = require('../server');
 let should = chai.should();
+
+chai.use(chaiHttp);
 
 //========================================================================================
 
@@ -51,7 +54,7 @@ describe('Designs with empty DB', () => {
 
     describe('GET /api/v1/designtypes without Authorization with empty DB', () => {
         it('it should GET with 401 UNAUTHORIZED', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .get('/api/v1/designtypes')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
@@ -63,7 +66,7 @@ describe('Designs with empty DB', () => {
 
     describe('GET /api/v1/designtypes with empty DB', () => {
         it('it should GET with 200 OK no design types', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .get('/api/v1/designtypes')
                 .set('Authorization', 'Bearer null')
                 .end((err, res) => {
@@ -78,7 +81,7 @@ describe('Designs with empty DB', () => {
 
     describe('GET /api/v1/designtypes/Test-Design/designs with empty DB', () => {
         it('it should GET with 200 OK no design names', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .get('/api/v1/designtypes/Test-Design/designs')
                 .set('Authorization', 'Bearer null')
                 .end((err, res) => {
@@ -93,7 +96,7 @@ describe('Designs with empty DB', () => {
 
     describe('GET /api/v1/designtypes/Test-Design/designs/test with empty DB and test does not exist', () => {
         it('it should fail GET with 404 NOT FOUND, because test does not exist', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .get('/api/v1/designtypes/Test-Design/designs/test')
                 .set('Authorization', 'Bearer null')
                 .end((err, res) => {
@@ -106,7 +109,7 @@ describe('Designs with empty DB', () => {
 
     describe('POST /api/v1/designtypes/Test-Design/designs/test with empty DB and body is empty', () => {
         it('it should fail POST with 400 BAD REQUEST, because body is empty', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .post('/api/v1/designtypes/Test-Design/designs/test')
                 .set('Authorization', 'Bearer null')
                 .end((err, res) => {
@@ -119,14 +122,14 @@ describe('Designs with empty DB', () => {
 
     describe('POST /api/v1/designtypes/Test-Design/designs/test with empty DB and GET /api/v1/designtypes/Test-Design/designs/test', () => {
         it('it should POST with 400 BAD REQUEST one design named test typed Test-Design, because userid is null and GET with 400 BAD REQUEST one design named test typed Test-Design', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .post('/api/v1/designtypes/Test-Design/designs/test')
                 .set('Authorization', 'Bearer null')
                 .send(testTestDesign)
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(400);
-                    chai.request.execute(server)
+                    request.execute(server)
                         .get('/api/v1/designtypes/Test-Design/designs/test')
                         .set('Authorization', 'Bearer null')
                         .end((err2, res2) => {
@@ -140,7 +143,7 @@ describe('Designs with empty DB', () => {
 
     describe('PUT /api/v1/designtypes/Test-Design/designs/test with empty DB and body is empty', () => {
         it('it should fail PUT with 400 BAD REQUEST, because body is empty', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .put('/api/v1/designtypes/Test-Design/designs/test')
                 .set('Authorization', 'Bearer null')
                 .end((err, res) => {
@@ -153,7 +156,7 @@ describe('Designs with empty DB', () => {
 
     describe('PUT /api/v1/designtypes/Test-Design/designs/test with empty DB and userid is null', () => {
         it('it should fail PUT with 400 BAD REQUEST, because userid is null', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .put('/api/v1/designtypes/Test-Design/designs/test')
                 .set('Authorization', 'Bearer null')
                 .send(testTestDesign)
@@ -167,7 +170,7 @@ describe('Designs with empty DB', () => {
 
     describe('DELETE /api/v1/designtypes/Test-Design/designs/test with empty DB abd userid is null', () => {
         it('it should fail DELETE with 400 BAD REQUEST, because userid is null', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .delete('/api/v1/designtypes/Test-Design/designs/test')
                 .set('Authorization', 'Bearer null')
                 .end((err, res) => {
@@ -238,7 +241,7 @@ describe('Designs with non-empty DB', () => {
 
     describe('GET /api/v1/designtypes without Authorization with non-empty DB', () => {
         it('it should GET with 401 UNAUTHORIZED', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .get('/api/v1/designtypes')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
@@ -250,7 +253,7 @@ describe('Designs with non-empty DB', () => {
 
     describe('GET /api/v1/designtypes with non-empty DB', () => {
         it('it should GET with 200 OK one design type', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .get('/api/v1/designtypes')
                 .set('Authorization', 'Bearer USERID0123456789')
                 .end((err, res) => {
@@ -266,7 +269,7 @@ describe('Designs with non-empty DB', () => {
 
     describe('GET /api/v1/designtypes/Test-Design/designs with non-empty DB', () => {
         it('it should GET with 200 OK one design name', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .get('/api/v1/designtypes/Test-Design/designs')
                 .set('Authorization', 'Bearer USERID0123456789')
                 .end((err, res) => {
@@ -282,7 +285,7 @@ describe('Designs with non-empty DB', () => {
 
     describe('GET /api/v1/designtypes/Test-Design/designs/test with non-empty DB', () => {
         it('it should GET with 200 OK one design named test', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .get('/api/v1/designtypes/Test-Design/designs/test')
                 .set('Authorization', 'Bearer USERID0123456789')
                 .end((err, res) => {
@@ -300,7 +303,7 @@ describe('Designs with non-empty DB', () => {
 
     describe('POST /api/v1/designtypes/Test-Design/designs/test with non-empty DB', () => {
         it('it should fail POST with 400 BAD REQUEST, because test already exists', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .post('/api/v1/designtypes/Test-Design/designs/test')
                 .set('Authorization', 'Bearer USERID0123456789')
                 .send(testTestDesign)
@@ -314,14 +317,14 @@ describe('Designs with non-empty DB', () => {
 
     describe('PUT /api/v1/designtypes/Test-Design/designs/test with non-empty DB', () => {
         it('it should PUT with 200 OK one design named test typed Test-Design, because name already exists, and GET with 200 OK one design named test typed Test-Design', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .put('/api/v1/designtypes/Test-Design/designs/test')
                 .set('Authorization', 'Bearer USERID0123456789')
                 .send(testTestDesign)
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
                     res.should.have.status(200);
-                    chai.request.execute(server)
+                    request.execute(server)
                         .get('/api/v1/designtypes/Test-Design/designs/test')
                         .set('Authorization', 'Bearer USERID0123456789')
                         .end((err2, res2) => {
@@ -341,7 +344,7 @@ describe('Designs with non-empty DB', () => {
     describe('DELETE /api/v1/designtypes/Test-Design/designs/test with non-empty DB', () => {
         it('it should DELETE with 200 OK one design named test', (done) => {
             var name = 'test';
-            chai.request.execute(server)
+            request.execute(server)
                 .delete('/api/v1/designtypes/Test-Design/designs/'+name)
                 .set('Authorization', 'Bearer USERID0123456789')
                 .end((err, res) => {
@@ -446,7 +449,7 @@ describe('Designs with multiple DB entries', () => {
 
     describe('GET /api/v1/designtypes without Authorization with multiple DB entries', () => {
         it('it should GET with 401 UNAUTHORIZED', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .get('/api/v1/designtypes')
                 .end((err, res) => {
 //                    console.log('TEST: err=', err);
@@ -458,7 +461,7 @@ describe('Designs with multiple DB entries', () => {
 
     describe('GET /api/v1/designtypes with multiple DB entries', () => {
         it('it should GET with 200 OK two design types named Test-Design and Test-Design2', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .get('/api/v1/designtypes')
                 .set('Authorization', 'Bearer USERID0123456789')
                 .end((err, res) => {
@@ -475,7 +478,7 @@ describe('Designs with multiple DB entries', () => {
 
     describe('GET /api/v1/designtypes/Test-Design/designs with multiple DB entries', () => {
         it('it should GET with 200 OK two design named test and test2', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .get('/api/v1/designtypes/Test-Design/designs')
                 .set('Authorization', 'Bearer USERID0123456789')
                 .end((err, res) => {
@@ -492,7 +495,7 @@ describe('Designs with multiple DB entries', () => {
 
     describe('GET /api/v1/designtypes/Test-Design/designs/test with multiple DB entries', () => {
         it('it should GET with 200 OK one design named test typed Test-Design, GET with 200 OK one design named test typed Test-Design2, AND GET with 200 OK one design named test2 typed Test-Design', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .get('/api/v1/designtypes/Test-Design/designs/test')
                 .set('Authorization', 'Bearer USERID0123456789')
                 .end((err, res) => {
@@ -503,7 +506,7 @@ describe('Designs with multiple DB entries', () => {
                     res.body.should.not.have.property('name').eql('test');
                     res.body.should.have.property('type').eql('Test-Design');
                     res.body.should.have.property('version').eql('0.0');
-                    chai.request.execute(server)
+                    request.execute(server)
                         .get('/api/v1/designtypes/Test-Design2/designs/test')
                         .set('Authorization', 'Bearer USERID0123456789')
                         .end((err2, res2) => {
@@ -514,7 +517,7 @@ describe('Designs with multiple DB entries', () => {
                             res2.body.should.not.have.property('name').eql('test');
                             res2.body.should.have.property('type').eql('Test-Design2');
                             res2.body.should.have.property('version').eql('0.2');
-                            chai.request.execute(server)
+                            request.execute(server)
                                 .get('/api/v1/designtypes/Test-Design/designs/test2')
                                 .set('Authorization', 'Bearer USERID0123456789')
                                 .end((err3, res3) => {
@@ -534,7 +537,7 @@ describe('Designs with multiple DB entries', () => {
 
     describe('POST /api/v1/designtypes/Test-Design/designs/test with multiple DB entries', () => {
         it('it should fail POST with 400 BAD REQUEST, because test already exists', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .post('/api/v1/designtypes/Test-Design/designs/test')
                 .set('Authorization', 'Bearer USERID0123456789')
                 .send(testTestDesign)
@@ -548,7 +551,7 @@ describe('Designs with multiple DB entries', () => {
 
     describe('PUT /api/v1/designtypes/Test-Design/designs/test with multiple DB entries', () => {
         it('it should PUT with 200 OK one design named test', (done) => {
-            chai.request.execute(server)
+            request.execute(server)
                 .put('/api/v1/designtypes/Test-Design/designs/test')
                 .set('Authorization', 'Bearer USERID0123456789')
                 .send(testTestDesign)
@@ -563,7 +566,7 @@ describe('Designs with multiple DB entries', () => {
     describe('DELETE /api/v1/designtypes/Test-Design/designs/test with multiple DB entries', () => {
         it('it should DELETE with 200 OK one design named test', (done) => {
             var name = 'test';
-            chai.request.execute(server)
+            request.execute(server)
                 .delete('/api/v1/designtypes/Test-Design/designs/'+name)
                 .set('Authorization', 'Bearer USERID0123456789')
                 .end((err, res) => {
