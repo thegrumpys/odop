@@ -18,7 +18,7 @@ to be installed and properly configured on the local computer.
 Target System | Base URL
 ---|---
 Development environment | http://localhost:3000/
-Staging system | https://odop-staging.springdesignsoftware.org/
+Staging system | https://odop.springdesignsoftware.org/
 Production system | https://odop.springdesignsoftware.org/
 
 
@@ -76,10 +76,9 @@ Report 3 | view=Report3
 
 
 **Execute Script**  
-Only scripts returned by the selected design type's `execute.js` functions `getExecuteNames(isAdmin)`, `getDemoNames()`, or `getTutorialNames()` may be invoked as ODOP starts.
-The execute list uses the current user's admin status, as in the Action : Execute menu. Demos and tutorials are available as in the Help menus. Unknown or unavailable scripts are ignored with a message.
-Scripts start interactively: the first step runs immediately, and the user clicks Next to advance.
-Admins receive all non-admin scripts plus the admin-only scripts. The welcome scripts below are available to all users for all spring design types.
+Any execute script that is available for the selected design type may be invoked as ODOP starts. 
+Scripts that are in the execute.js !== "production" conditional are not visible in the production Action : Execute menu
+but are still available for execution via query parameter.
 
 View | execute script name
 ---|---
@@ -96,15 +95,15 @@ Examples:
 
 URL|type|name|execute|View
 ---|---|---|---|---
-https://odop.springdesignsoftware.org/?view=Advanced&execute=welcomeAdv | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | welcomeAdv | Advanced
-https://odop.springdesignsoftware.org/?view=Calculator&execute=welcomeCalc | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | welcomeCalc | Calculator
-https://odop.springdesignsoftware.org/?view=Calculator&execute=demo1 | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | demo1 | Calculator
-https://odop.springdesignsoftware.org/?name=Startup&view=Calculator&execute=demo1 | REACT_APP_DESIGN_TYPE = Compression | Startup | demo1 | Calculator
-https://odop.springdesignsoftware.org/?type=Spring%2FCompression&view=Calculator&execute=demo1 | Spring/Compression | REACT_APP_DESIGN_NAME = StartUp | demo1 | Calculator
+https://odop.springdesignsoftware.org/?view=Advanced&execute=welcomeAdv | REACT_APP_DESIGN_TYPE = Spring/Compression | REACT_APP_DESIGN_NAME = Startup | welcomeAdv | Advanced
+https://odop.springdesignsoftware.org/?view=Calculator&execute=welcomeCalc | REACT_APP_DESIGN_TYPE = Spring/Compression | REACT_APP_DESIGN_NAME = Startup | welcomeCalc | Calculator
+https://odop.springdesignsoftware.org/?view=Calculator&execute=demo1 | REACT_APP_DESIGN_TYPE = Spring/Compression | REACT_APP_DESIGN_NAME = Startup | demo1 | Calculator
+https://odop.springdesignsoftware.org/?name=Startup&view=Calculator&execute=demo1 | REACT_APP_DESIGN_TYPE = Spring/Compression | Startup | demo1 | Calculator
+https://odop.springdesignsoftware.org/?type=Spring%2FCompression&view=Calculator&execute=demo1 | Spring/Compression | REACT_APP_DESIGN_NAME = Startup | demo1 | Calculator
 https://odop.springdesignsoftware.org/?type=Spring%2FCompression&name=Startup&view=Calculator&execute=demo1 |  Spring/Compression | Startup | demo1 | Calculator
-https://odop.springdesignsoftware.org/?type=Spring%2FExtension&view=Calculator&execute=demo6 | Spring/Extension | REACT_APP_DESIGN_NAME = StartUp | demo6 | Calculator
+https://odop.springdesignsoftware.org/?type=Spring%2FExtension&view=Calculator&execute=demo6 | Spring/Extension | REACT_APP_DESIGN_NAME = Startup | demo6 | Calculator
 https://odop.springdesignsoftware.org/?type=Spring%2FExtension&name=Startup&view=Calculator&execute=demo6 | Spring/Extension | Startup | demo6 | Calculator
-https://odop.springdesignsoftware.org/?type=Spring%2FTorsion&view=Calculator&execute=demo14 | Spring/Torsion | REACT_APP_DESIGN_NAME = StartUp | demo14 | Calculator
+https://odop.springdesignsoftware.org/?type=Spring%2FTorsion&view=Calculator&execute=demo14 | Spring/Torsion | REACT_APP_DESIGN_NAME = Startup | demo14 | Calculator
 https://odop.springdesignsoftware.org/?type=Spring%2FTorsion&name=Startup&view=Calculator&execute=demo14 | Spring/Torsion | Startup | demo14 | Calculator
-https://odop.springdesignsoftware.org/?prompt | REACT_APP_DESIGN_TYPE = Compression | REACT_APP_DESIGN_NAME = StartUp | {File : Open} | Advanced
+https://odop.springdesignsoftware.org/?prompt | REACT_APP_DESIGN_TYPE = Spring/Compression | REACT_APP_DESIGN_NAME = Startup | {File : Open} | Advanced
 
