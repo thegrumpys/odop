@@ -6,7 +6,7 @@ This file provides instructions and guidelines for AI coding agents working with
 
 This is a full-stack web application built using:
 - **Frontend:** React.js for the user interface.
-- **Backend:** Node.js with Express.js for the server-side logic and API. Use Node 20 LTS.
+- **Backend:** Node.js with Express.js for the server-side logic and API. Use Node 26 LTS.
 - **API:** RESTful API served by Express.js.
 - **Database:** MySQL https://www.mysql.com/ with four tables: design, log_usage, user, and token.
 

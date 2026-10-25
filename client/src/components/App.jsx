@@ -11,6 +11,7 @@ import { logUsage } from '../logUsage';
 import { startExecute } from './ExecutePanel';
 import { useAuth } from './AuthProvider'
 import axios from '../axiosConfig';
+import logDesignFetchError from '../logDesignFetchError';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import ResetPasswordPage from './ResetPasswordPage';
@@ -105,6 +106,8 @@ export default function App() {
 
   const getDesign = (user, type, name) => {
 //    console.log('App.getDesign', 'user=', user, 'type=', type, 'name=', name);
+    let response;
+    let phase = 'fetch';
     displaySpinner(true);
     axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
       headers: {
@@ -112,13 +115,21 @@ export default function App() {
       }
     })
       .then(res => {
+        response = res;
+        phase = 'validate';
         const design = res.data;
+        if (design === null || typeof design !== 'object' || Array.isArray(design) ||
+            typeof design.type !== 'string' || design.type !== type) {
+          throw new Error('Invalid design response from server. Please try again.');
+        }
+        phase = 'migrate';
         //      console.log('App.getDesign','design=', design);
         var { migrate } = require('../designtypes/' + design.type + '/migrate.js'); // Dynamically load migrate
         //      console.log('App.getDesign','migrate=',migrate);
         var migrated_design = migrate(design);
         //      console.log('App.getDesign','migrated_design=',migrated_design);
         if (migrated_design.jsontype === "ODOP") {
+          phase = 'load';
           //        console.log('App.getDesign'.'before load');
           dispatch(load(migrated_design));
           dispatch(changeName(name));
@@ -133,7 +144,8 @@ export default function App() {
         }
       })
       .catch(error => {
-        displayMessage('GET of \'' + name + '\' design failed for type \'' + type + '\' with message: \'' + error.message + '\'');
+        logDesignFetchError(error, response, type, name, 'App', phase);
+        displayMessage('Unable to load design \'' + name + '\' for type \'' + type + '\'. Please try again.');
       })
       .finally(() => {
         displaySpinner(false);

@@ -10,6 +10,7 @@ import { logUsage } from '../../logUsage';
 import config from '../../config';
 import { useAuth } from '../../components/AuthProvider';
 import axios from '../../axiosConfig';
+import logDesignFetchError from '../../logDesignFetchError';
 
 export default function FileOpen() {
 //  console.log('FileOpen - Mounting...');
@@ -68,6 +69,8 @@ export default function FileOpen() {
 
   const getDesign = (user, type, name) => {
 //    console.log('FileOpen.getDesign user=', user, 'type=', type, 'name=', name);
+    let response;
+    let phase = 'fetch';
     displaySpinner(true);
     axios.get('/api/v1/designtypes/' + encodeURIComponent(type) + '/designs/' + encodeURIComponent(name), {
       headers: {
@@ -75,10 +78,18 @@ export default function FileOpen() {
       }
     })
       .then(res => {
+        response = res;
+        phase = 'validate';
         const design = res.data;
+        if (design === null || typeof design !== 'object' || Array.isArray(design) ||
+            typeof design.type !== 'string' || design.type !== type) {
+          throw new Error('Invalid design response from server. Please try again.');
+        }
+        phase = 'migrate';
         var { migrate } = require('../../designtypes/' + design.type + '/migrate.js'); // Dynamically load migrate
         var migrated_design = migrate(design);
         if (migrated_design.jsontype === "ODOP") {
+          phase = 'load';
           dispatch(changeName(name));
           dispatch(load(migrated_design));
           dispatch(deleteAutoSave());
@@ -88,7 +99,8 @@ export default function FileOpen() {
         }
       })
       .catch(error => {
-        displayMessage('GET of \'' + name + '\' design failed for type \'' + type + '\' with message: \'' + error.message + '\'');
+        logDesignFetchError(error, response, type, name, 'FileOpen', phase);
+        displayMessage('Unable to load design \'' + name + '\' for type \'' + type + '\'. Please try again.');
       })
       .finally(() => {
         displaySpinner(false);
