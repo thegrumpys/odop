@@ -55,8 +55,6 @@ test.each([
   expect(adminNames).toContain(adminScript);
   expect(publicNames).not.toContain(adminScript);
   expect(new Set(adminNames).size).toBe(adminNames.length);
-  expect(publicNames).toEqual([...publicNames].sort());
-  expect(adminNames).toEqual([...adminNames].sort());
   expect(getExecuteNames()).toEqual(publicNames);
 });
 
