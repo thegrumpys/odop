@@ -76,9 +76,10 @@ Report 3 | view=Report3
 
 
 **Execute Script**  
-Any execute script that is available for the selected design type may be invoked as ODOP starts. 
-Scripts that are in the execute.js !== "production" conditional are not visible in the production Action : Execute menu
-but are still available for execution via query parameter.
+Only scripts returned by the selected design type's `execute.js` functions `getExecuteNames(isAdmin)`, `getDemoNames()`, or `getTutorialNames()` may be invoked as ODOP starts.
+The execute list uses the current user's admin status, as in the Action : Execute menu. Demos and tutorials are available as in the Help menus. Unknown or unavailable scripts are ignored with a message.
+Scripts start interactively: the first step runs immediately, and the user clicks Next to advance.
+Admins receive all non-admin scripts plus the admin-only scripts. The welcome scripts below are available to all users for all spring design types.
 
 View | execute script name
 ---|---

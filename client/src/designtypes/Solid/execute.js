@@ -1,11 +1,9 @@
 export function getExecuteNames(isAdmin = false) {
-    var result;
+    var result = [];
     if (isAdmin) {
-      result = [
+      result.push(
           'mkSolidStartups',
-      ];
-    } else {
-      result = [];
+      );
     }
 //    console.log('getExecuteNames result=',result);
     return result;

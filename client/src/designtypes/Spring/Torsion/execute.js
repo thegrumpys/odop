@@ -1,16 +1,11 @@
 export function getExecuteNames(isAdmin = false) {
-    var result;
+    var result = [
+      'increasePrecision',      // Script to tweak Preference values for greater precision of search result
+      'welcomeAdv',             // Script to guide novice users - Advanced view; spring type neutral
+      'welcomeCalc'             // Script to guide novice users - Calculator view; spring type neutral
+    ];
     if (isAdmin) {
-      result = [
-        'mkTorsionStartups',      // Script to make multiple Startup entries from Load Initial State
-        'increasePrecision',      // Script to tweak Preference values for greater precision of search result
-        'welcomeAdv',             // Script to guide novice users - Advanced view; spring type neutral
-        'welcomeCalc'             // Script to guide novice users - Calculator view; spring type neutral
-      ];
-    } else {
-      result = [
-        'increasePrecision'
-      ];
+      result.push('mkTorsionStartups'); // Script to make multiple Startup entries from Load Initial State
     }
 //    console.log('getExecuteNames result=',result);
     return result;

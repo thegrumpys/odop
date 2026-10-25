@@ -1,18 +1,15 @@
 export function getExecuteNames(isAdmin = false) {
-    var result;
+    var result = [
+      'increasePrecision',      // Script to tweak Preference values for greater precision of search result
+      'welcomeAdv',             // Script to guide novice users - Advanced view; spring type neutral
+      'welcomeCalc'             // Script to guide novice users - Calculator view; spring type neutral
+    ];
     if (isAdmin) {
-      result = [
+      result.push(
         'Br590TestScript',        // Script providing test cases for Issue / Branch 590 (Model validity determination & response)
-        'increasePrecision',      // Script to tweak Preference values for greater precision of search result
         'mkCompressionStartups',  // Script to make multiple Startup entries from Load Initial State
-        'tutor8p3_TestCase',      // Script preserving the version of tutor8p3 showing failure in v4.3rc2
-        'welcomeAdv',             // Script to guide novice users - Advanced view; spring type neutral
-        'welcomeCalc'             // Script to guide novice users - Calculator view; spring type neutral
-      ];
-    } else {
-      result = [
-        'increasePrecision'
-      ];
+        'tutor8p3_TestCase'       // Script preserving the version of tutor8p3 showing failure in v4.3rc2
+      );
     }
 //    console.log('getExecuteNames result=',result);
     return result;

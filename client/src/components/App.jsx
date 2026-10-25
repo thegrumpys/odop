@@ -137,7 +137,13 @@ export default function App() {
           dispatch(deleteAutoSave());
           logUsage('event', 'App', { event_label: 'type: ' + type + ' name: ' + name });
           if (config.url.execute !== undefined) { // Once the design is loaded then you can run the query parameter execute script
-            startExecute('Execute : ' + config.url.execute, config.url.execute);
+            var { getExecuteNames, getDemoNames, getTutorialNames } = require('../designtypes/' + migrated_design.type + '/execute.js');
+            var executeNames = [...getExecuteNames(authState?.isAdmin), ...getDemoNames(), ...getTutorialNames()];
+            if (executeNames.includes(config.url.execute)) {
+              startExecute('Execute : ' + config.url.execute, config.url.execute);
+            } else {
+              displayMessage('Execute script \'' + config.url.execute + '\' is not available for type \'' + migrated_design.type + '\'.');
+            }
           }
         } else {
           displayMessage('Invalid JSON type, function ignored');
