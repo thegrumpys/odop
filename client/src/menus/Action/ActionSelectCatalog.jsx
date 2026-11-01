@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { legacy_createStore as createStore } from 'redux';
 import { Button, Modal, NavDropdown, Table, Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { changeSymbolValue, saveAutoSave } from '../../store/actions';
 import { logUsage, logValue } from '../../logUsage';
 import store from "../../store/store";
+import reducers from '../../store/reducers';
 import { toODOPPrecision } from '../../toODOPPrecision';
 import SymbolString from '../../components/SymbolString';
 
@@ -24,10 +26,16 @@ export default function ActionSelectCatalog() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    var { getCatalogNames } = require('../../designtypes/' + model_type + '/catalog.js');
+    setNames(getCatalogNames(model_units));
+  }, [model_type, model_units]);
+
+  useEffect(() => {
 //    console.log('ActionSelectCatalog - Mounted','model_type=',model_type);
+    if (!show) return;
     updateCatalogNames();
     return () => { };
-  }, [model_type, model_units]);
+  }, [show, model_type, model_units, model_symbol_table, model_viol_wt, model_objmin]);
 
   const updateCatalogNames = () => {
 //    console.log('ActionSelectCatalog.updateCatalogNames');
@@ -53,7 +61,9 @@ export default function ActionSelectCatalog() {
         }
       }
     });
-    var localEntries = getCatalogEntries(localName, store, st, model_viol_wt, model_objmin);
+    // Candidate initialization must not dispatch changes to the live symbol table.
+    var catalogStore = createStore(reducers, store.getState());
+    var localEntries = getCatalogEntries(localName, catalogStore, st, model_viol_wt, model_objmin);
     var localEntry = localEntries.find((entry) => entry.catalog_number === catalog_number);
     if (localEntry === undefined) {
       localEntry = localEntries[0]; // default to first entry
@@ -80,7 +90,8 @@ export default function ActionSelectCatalog() {
     model_symbol_table.forEach((element) => {
       st.push(Object.assign({}, element));
     });
-    var localEntries = getCatalogEntries(localName, store, st, model_viol_wt, model_objmin);
+    var catalogStore = createStore(reducers, store.getState());
+    var localEntries = getCatalogEntries(localName, catalogStore, st, model_viol_wt, model_objmin);
     var localEntry = localEntries[0]; // Default to first entry
     setName(localName);
     setEntries(localEntries);

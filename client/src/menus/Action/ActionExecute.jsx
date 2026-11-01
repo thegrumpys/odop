@@ -13,17 +13,19 @@ export default function ActionExecute() {
   const [executeNames, setExecuteNames] = useState([]);
   const [executeName, setExecuteName] = useState('');
   const { authState } = useAuth();
+  const isAdmin = !!(authState && authState.isAdmin);
 
   useEffect(() => {
 //    console.log('ActionExecute - Mounted','model_type=',model_type);
+    if (!show) return;
     updateExecuteNames();
 //    return () => console.log('ActionExecute - Unmounting ...');
     return () => {};
-  }, [model_type]);
+  }, [show, model_type, isAdmin]);
 
   const updateExecuteNames = () => {
     var { getExecuteNames } = require('../../designtypes/' + model_type + '/execute.js'); // Dynamically load getExecuteNames
-    var localExecuteNames = getExecuteNames(authState.isAdmin);
+    var localExecuteNames = getExecuteNames(isAdmin);
 //    console.log('ActionExecute.updateExecuteNames','localExecuteNames=', localExecuteNames);
     var localExecuteName;
     if (localExecuteNames.length > 0) {
@@ -69,7 +71,7 @@ export default function ActionExecute() {
 
   return (
     <>
-      <NavDropdown.Item onClick={toggle} disabled={executeNames !== undefined && executeNames.length === 0}>
+      <NavDropdown.Item onClick={toggle} disabled={!model_type}>
         Execute&hellip;
       </NavDropdown.Item>
       {show && <Modal show={show} onHide={onCancel}>
@@ -89,8 +91,8 @@ export default function ActionExecute() {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onCancel}>Cancel</Button>{' '}
-          {authState && authState.isAdmin && <Button variant="danger" onClick={onExecuteAndRun}>Execute All</Button>}{' '}
-          <Button variant="primary" onClick={onExecute}>Execute</Button>
+          {isAdmin && <Button variant="danger" onClick={onExecuteAndRun} disabled={!executeName}>Execute All</Button>}{' '}
+          <Button variant="primary" onClick={onExecute} disabled={!executeName}>Execute</Button>
         </Modal.Footer>
       </Modal>}
     </>
