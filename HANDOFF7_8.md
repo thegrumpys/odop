@@ -2,8 +2,8 @@
 
 Completed October 4, 2026 on `investigation_of_cpp_and_webasm`, starting at
 `898f7344`. This replaces the preparation note and
-can be updated as the handoff evolves. Stage 8 (autosearch lifecycle) is next;
-Stage 10 Trade remains later work.
+can be updated as the handoff evolves. The November 9 update below records
+the rebased baseline for Stage 8. Stage 10 Trade remains later work.
 
 ## Accepted result
 
@@ -85,7 +85,7 @@ Passed:
   network access. The earlier sandboxed attempt failed database DNS resolution.
 - Final `git diff --check`: passed.
 
-## Fresh manual Chrome parity
+## October 4 manual Chrome parity
 
 Used Chrome directly with clean Startup sessions and Help → Tutorial → tutor7.
 No recovery dialog appeared; choose No if it appears in a future session.
@@ -106,7 +106,40 @@ Automated fixtures verified numerical objectives and complete metadata;
 manual comparison used rendered controls and messages. Evidence is saved at
 `/private/tmp/odop-stage78-chrome-parity.json`,
 `/private/tmp/odop-stage78-dev-tutor7.jpg`, and
-`/private/tmp/odop-stage78-staging-tutor7.jpg`. Both tabs remain at page 17.
+`/private/tmp/odop-stage78-staging-tutor7.jpg`. At the end of that run, both tabs were at page 17.
+
+## November 9 rebase and model update
+
+Rebased `investigation_of_cpp_and_webasm` onto `origin/master` at
+`711f84f4`. All 21 commits replayed without conflicts. The rebase produced
+`b027c352`. This handoff accompanies the follow-up model and test changes.
+
+- C++ and WebAssembly now use the current Compression Spring model with six P
+  and 54 X slots. The port includes standard and user-specified end geometry,
+  plus the updated solid-length and wire-volume calculations. Saved designs
+  still go through the existing ODOP migration before Worker hydration.
+- The current US and Metric startup regression runs compiled Wasm in a Node
+  worker thread through the real Worker protocol. It compares startup results,
+  a wire-diameter edit, and standard and custom end-geometry changes against
+  the current JavaScript calculations.
+- All five Tutor 7 Seek checkpoints were refreshed independently from the
+  current JavaScript model. The native and Wasm comparisons now cover 60
+  symbols. The updated Weight Seek messages are 0.05376 → 0.01460 pounds
+  (72.85%) on page 06 and 0.6480 → 0.4628 pounds (28.57%) on page 13. The
+  other three messages match the October 4 results.
+- Passed 376 frontend tests across 54 suites with actual Wasm tests enabled,
+  68 backend tests, all seven native CTests, and the standalone Wasm suite.
+  The Wasm-enabled React production build and both Wasm benchmark runners
+  also completed successfully.
+
+### Open acceptance and build work
+
+- Repeat the side-by-side Chrome walkthrough on the rebased model, including
+  all 17 Tutor 7 pages. The October 4 Chrome evidence predates the model
+  update. The new Node worker test and React build cover automated behavior.
+- Generated client Wasm files and `cpp/build/` outputs are ignored. Run
+  `npm run cpp:build:wasm` before the client build. The normal Heroku build command still needs a Wasm generation step
+  for a clean Wasm-enabled deployment.
 
 ## Stage 8 entry points and limitations
 
@@ -118,8 +151,12 @@ iteration strategy if responsive interruption is required.
 
 Implement autosearch after coherent recalculation, edit/slider debounce and
 coalescing, current-revision-only results, pending/running/cancelled UI states,
-and browser edit-to-visible latency measurements. Retain Tutor3 full-state
-Search and all five Tutor7 fixtures as regression gates.
+and browser edit-to-visible latency measurements. Start from the current
+Worker client, runtime, and Redux bridge. The existing UI already exposes
+`enable_auto_search`; Stage 8 needs the Worker to schedule optimization after
+the recalculation for the same revision. Preserve the current US and Metric
+Worker startup test, Tutor 3 full-state Search, and all five refreshed Tutor 7
+Seek fixtures as regression gates.
 
 Always use Node20 and the Wasm flag for this branch's client:
 
@@ -128,7 +165,8 @@ cd client
 BROWSER=none REACT_APP_ENABLE_COMPRESSION_SPRING_WASM=true npm start
 ```
 
-The user started the backend on port 5000; leave it running. The agent's Wasm
-client remains on port 3000. Follow AGENTS.md and mark both Chrome tabs for
-handoff before ending any turn that observes or compares them.
-Committed at the user's request after verification. No deployment was performed.
+The October 4 run used the backend on port 5000 and the Wasm client on port
+3000. Check the local services before resuming Chrome parity. Follow
+`AGENTS.md` and mark both Chrome tabs for handoff before ending any turn that
+observes or compares them. The original Stage 7.8 work was committed after
+verification. No deployment was performed.

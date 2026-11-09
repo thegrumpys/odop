@@ -1,3 +1,4 @@
+import { migrateStartup } from '../tests/wasm-compression-spring-client.mjs';
 import assert from 'node:assert/strict';
 import { performance } from 'node:perf_hooks';
 import { readFileSync } from 'node:fs';
@@ -6,7 +7,7 @@ import { pathToFileURL } from 'node:url';
 const modulePath = process.argv[2];
 if (!modulePath) throw new Error('Usage: node wasm-compression-spring-demo-tutor.mjs /absolute/path/to/odop_wasm.mjs');
 const Module = await (await import(pathToFileURL(modulePath).href)).default();
-const startup = JSON.parse(readFileSync(new URL('../../client/src/__test__/Spring/Compression/fixtures/Startup.json', import.meta.url)));
+const startup = migrateStartup(JSON.parse(readFileSync(new URL('../../client/src/__test__/Spring/Compression/fixtures/Startup.json', import.meta.url))));
 const cwrap = (name, result, args) => Module.cwrap(name, result, args);
 const create = cwrap('odop_compression_spring_session_create', 'number', []);
 const destroy = cwrap('odop_compression_spring_session_destroy', null, ['number']);

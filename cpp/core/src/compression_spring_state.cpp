@@ -1,4 +1,5 @@
 #include "odop/compression_spring_state.hpp"
+#include "odop/compression_spring_offsets.hpp"
 
 #include <array>
 #include <limits>
@@ -54,16 +55,22 @@ constexpr std::array kSchema = {
   SchemaEntry{"%_Tensile_Stat", Storage::x, 35, true},
   SchemaEntry{"Stress_Lim_Endur", Storage::x, 36, true},
   SchemaEntry{"Stress_Lim_Stat", Storage::x, 37, true},
-  SchemaEntry{"End_Type", Storage::x, 38, true},
-  SchemaEntry{"Inactive_Coils", Storage::x, 39, true},
-  SchemaEntry{"Add_Coils@Solid", Storage::x, 40, true},
-  SchemaEntry{"Catalog_Name", Storage::x, 41, false},
-  SchemaEntry{"Catalog_Number", Storage::x, 42, false},
-  SchemaEntry{"tbase010", Storage::x, 43, true},
-  SchemaEntry{"tbase400", Storage::x, 44, true},
-  SchemaEntry{"const_term", Storage::x, 45, true},
-  SchemaEntry{"slope_term", Storage::x, 46, true},
-  SchemaEntry{"tensile_010", Storage::x, 47, true},
+  SchemaEntry{"End_Type_Method", Storage::x, offsets::End_Type_Method, true},
+  SchemaEntry{"End_Type", Storage::x, offsets::End_Type, true},
+  SchemaEntry{"End_Closure", Storage::x, offsets::End_Closure, true},
+  SchemaEntry{"Closed_End_Geometry", Storage::x, offsets::Closed_End_Geometry, true},
+  SchemaEntry{"Inactive_Coils", Storage::x, offsets::Inactive_Coils, true},
+  SchemaEntry{"Transition_Coils", Storage::x, offsets::Transition_Coils, true},
+  SchemaEntry{"Taper_Amount", Storage::x, offsets::Taper_Amount, true},
+  SchemaEntry{"Pigtail_Amount", Storage::x, offsets::Pigtail_Amount, true},
+  SchemaEntry{"Grind_Amount", Storage::x, offsets::Grind_Amount, true},
+  SchemaEntry{"Catalog_Name", Storage::x, offsets::Catalog_Name, false},
+  SchemaEntry{"Catalog_Number", Storage::x, offsets::Catalog_Number, false},
+  SchemaEntry{"tbase010", Storage::x, offsets::tbase010, true},
+  SchemaEntry{"tbase400", Storage::x, offsets::tbase400, true},
+  SchemaEntry{"const_term", Storage::x, offsets::const_term, true},
+  SchemaEntry{"slope_term", Storage::x, offsets::slope_term, true},
+  SchemaEntry{"tensile_010", Storage::x, offsets::tensile_010, true},
 };
 
 const SchemaEntry* entry_for(std::string_view id) {

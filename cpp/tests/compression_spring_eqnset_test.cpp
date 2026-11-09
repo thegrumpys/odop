@@ -17,7 +17,7 @@ bool check(bool value, const char* message) { if (!value) std::cerr << message <
 std::vector<double> input_x() {
   return {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
     0,1,2,0,0,0,1,.284,11500000,1,261419.22328169446,50,50,130709.61164084723,
-    130709.61164084723,4,2,0,0,0,.01,.4,-2,-106113.37959890341,370000};
+    130709.61164084723,1,4,2,1,2,2,0,0,1,0,0,.01,.4,-2,-106113.37959890341,370000};
 }
 }
 
@@ -29,7 +29,7 @@ int main() {
   odop::compression_spring::evaluate(p, x, "mat_us.json", controls);
   constexpr double expected[] = { .9945,8,22.631500150071364,.4418620035653477,1.723261813904856,
     2.8081379964346525,1.526738186095144,1.2813998103395086,1.055,3.2679738562091503,.889,
-    .07798388647498593,9.42654028436019,49.67614282940665,24893.49275531675,97084.62174573533,
+    .07029164355116631,9.42654028436019,49.67614282940665,24893.49275531675,97084.62174573533,
     123661.27016359147,1.3463472310271418,1.0569971624080239,1.3032217764849205,1861893.4985282072,
     78.50851088404809,31.394295353317954 };
   for (std::size_t i = 0; i < std::size(expected); ++i) ok &= check(close(x[i], expected[i]), "normal Stage 0 fixture output differs");
@@ -58,7 +58,7 @@ int main() {
   ok &= check(odop::compression_spring::init(initialized).ok(), "material-table calculation init should succeed");
   const auto& initialized_model = static_cast<const odop::compression_spring::Model&>(initialized.model());
   ok &= check(initialized_model.state().x_text[26].value == "A228/QQW-470" && initialized_model.state().x_text[27].value == "Cold_Coiled", "init should resolve material text fields");
-  ok &= check(close(initialized_model.state().x_numbers[30].value, .284) && close(initialized_model.state().x_numbers[31].value, 11500000.) && close(initialized_model.state().x_numbers[39].value, 2.), "init should resolve material and end-type numerical inputs");
+  ok &= check(close(initialized_model.state().x_numbers[30].value, .284) && close(initialized_model.state().x_numbers[31].value, 11500000.) && close(initialized_model.state().x_numbers[42].value, 2.), "init should resolve material and end-type numerical inputs");
   odop::compression_spring::evaluate(initialized);
   const auto& initialized_after_eqnset = static_cast<const odop::compression_spring::Model&>(initialized.model());
   ok &= check(close(initialized_after_eqnset.state().x_numbers[2].value, expected[2]), "INIT followed by EQNSET should match Stage 0 rate");

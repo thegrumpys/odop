@@ -1,3 +1,5 @@
+import { migrate } from '../../../designtypes/Spring/Compression/migrate';
+import * as symbolTableOffsets from '../../../designtypes/Spring/Compression/symbol_table_offsets';
 import { initialState } from '../../../designtypes/Spring/Compression/initialState';
 import { initialState as metricInitialState } from '../../../designtypes/Spring/Compression/initialState_metric_units';
 import { initialSystemControls } from '../../../initialSystemControls';
@@ -14,9 +16,10 @@ import startupMetric from './fixtures/Startup_Metric.json';
 
 test('keeps user-specified material presentation separate from its numeric hydration value', () => {
   [7, undefined].forEach((oldvalue) => {
+    const current = migrate(JSON.parse(JSON.stringify(startup)));
     const payload = normalizeCompressionSpringSavedDesign({
-      ...startup,
-      symbol_table: startup.symbol_table.map((symbol) => symbol.name === 'Material_Type'
+      ...current,
+      symbol_table: current.symbol_table.map((symbol) => symbol.name === 'Material_Type'
         ? { ...symbol, value: 'User_Specified', oldvalue } : symbol)
     });
     const material = payload.symbols.find((symbol) => symbol.id === 'Material_Type');
@@ -26,22 +29,28 @@ test('keeps user-specified material presentation separate from its numeric hydra
   });
 });
 
-test('derives a versioned 54-symbol UI schema from Compression Spring initial state', () => {
-    const initialComputationalSymbols = initialState.symbol_table.slice(0, 54);
-    const materialType = compressionSpringUiSchema.find((symbol) => symbol.id === 'Material_Type');
-    const l2 = compressionSpringUiSchema.find((symbol) => symbol.id === 'L_2');
+test('derives the versioned UI schema from Compression Spring initial state', () => {
+    const initialSymbolsByName = new Map(initialState.symbol_table.map((symbol) => [symbol.name, symbol]));
+    const materialType = compressionSpringUiSchema[symbolTableOffsets.Material_Type];
+    const l2 = compressionSpringUiSchema[symbolTableOffsets.L_2];
 
-    expect(compressionSpringUiSchemaVersion).toBe(1);
-    expect(compressionSpringUiSchema).toHaveLength(54);
-    expect(compressionSpringUiSchema.map((symbol) => symbol.id)).toEqual(initialComputationalSymbols.map((symbol) => symbol.name));
+    expect(Number.isInteger(compressionSpringUiSchemaVersion)).toBe(true);
+    expect(compressionSpringUiSchemaVersion).toBeGreaterThan(0);
+    for (const { id, valueKind } of compressionSpringUiSchema) {
+        expect(valueKind).toBe(typeof initialSymbolsByName.get(id)?.value);
+    }
     expect(materialType).toMatchObject({
+        id: 'Material_Type',
         input: true,
         format: 'table',
         table: 'Spring/mat_us',
         valueKind: 'number'
     });
-    expect(l2.validminchoices).toEqual(['L_Solid']);
-    expect(l2.validminchoice).toBe(0);
+    expect(l2).toMatchObject({
+        id: 'L_2',
+        validminchoices: ['L_Solid'],
+        validminchoice: 0
+    });
 });
 
 test('classifies calculation changes without treating presentation as calculation state', () => {
@@ -51,11 +60,11 @@ test('classifies calculation changes without treating presentation as calculatio
     expect(compressionSpringChangeImpact('tooltip')).toBe('no-computation');
 });
 
-test('normalizes the legacy Compression Spring envelope for C++ hydration', () => {
+test('normalizes the current Compression Spring envelope for C++ hydration', () => {
     const payload = normalizeCompressionSpringSavedDesign({
         jsontype: 'ODOP',
         type: 'Spring/Compression',
-        version: '13',
+        version: metricInitialState.version,
         units: 'Metric',
         labels: [{ name: 'Part Number', value: '123' }],
         result: { objective_value: 0 },
@@ -66,8 +75,8 @@ test('normalizes the legacy Compression Spring envelope for C++ hydration', () =
 
     expect(payload).toMatchObject({
         designType: 'Spring/Compression',
-        schemaVersion: 1,
-        legacyVersion: '13',
+        schemaVersion: compressionSpringUiSchemaVersion,
+        legacyVersion: metricInitialState.version,
         units: 'Metric',
         systemControls: { maxit: 1000, smallnum: 1e-8, fix_wt: 1.5 },
         labels: [{ name: 'Part Number', value: '123' }],
@@ -77,15 +86,33 @@ test('normalizes the legacy Compression Spring envelope for C++ hydration', () =
     expect(wire).toMatchObject({ id: 'Wire_Dia', numericValue: 2.5, minimumFlags: 2, maximumScaleDenominator: 10.1 });
 });
 
-test('normalizes complete US and Metric startup-envelope shapes without loss', () => {
+function expectNormalizedStartupSymbols(payload, source) {
+    const schema = compressionSpringUiSchemaByUnits[source.units];
+    const schemaIds = new Set(schema.map(({ id }) => id));
+    const sourceByName = new Map(source.symbol_table.map((symbol) => [symbol.name, symbol]));
+
+    expect(payload.symbols.map(({ id }) => id)).toEqual([...schemaIds]);
+    for (const symbol of payload.symbols) {
+        const original = sourceByName.get(symbol.id);
+        if (original && typeof original.value === 'number') {
+            expect(symbol.numericValue).toBe(original.value);
+        } else if (original && symbol.id !== 'Material_Type') {
+            expect(symbol.textValue).toBe(original.value);
+        }
+    }
+
+    expect(payload.diagnostics).toEqual([]);
+}
+
+test('preserves current US and Metric startup envelopes and shared symbols', () => {
     [initialState, metricInitialState].forEach((startup) => {
         const payload = normalizeCompressionSpringSavedDesign({
             ...startup,
             system_controls: initialSystemControls
         });
 
-        expect(payload.diagnostics).toEqual([]);
-        expect(payload.symbols).toHaveLength(54);
+        expectNormalizedStartupSymbols(payload, startup);
+        expect(payload.legacyVersion).toBe(startup.version);
         expect(payload.labels).toEqual(startup.labels);
         expect(payload.result).toEqual(startup.result);
         expect(payload.systemControls).toEqual(initialSystemControls);
@@ -105,7 +132,6 @@ test('uses the Metric schema for a metric persisted design', () => {
     const odFree = design.symbol_table.find((symbol) => symbol.name === 'OD_Free');
     const materialType = design.symbol_table.find((symbol) => symbol.name === 'Material_Type');
 
-    expect(compressionSpringUiSchemaByUnits.Metric).toHaveLength(54);
     expect(odFree).toMatchObject({ value: 28, units: 'mm' });
     expect(materialType).toMatchObject({ value: 2, table: 'Spring/mat_metric' });
 });
@@ -125,7 +151,7 @@ test('hydrates saved mutable state while retaining current UI metadata', () => {
     const materialType = design.symbol_table.find((symbol) => symbol.name === 'Material_Type');
     const l2 = design.symbol_table.find((symbol) => symbol.name === 'L_2');
 
-    expect(design.symbol_table).toHaveLength(54);
+    expect(design.symbol_table.map(({ name }) => name)).toEqual(compressionSpringUiSchema.map(({ id }) => id));
     expect(wire).toMatchObject({ value: 0.125, cmin: 0.01, units: 'inch', input: true });
     expect(materialType).toMatchObject({ value: 3, format: 'table', table: 'Spring/mat_us' });
     expect(l2.validminchoices).toEqual(['L_Solid']);
@@ -135,11 +161,12 @@ test('hydrates saved mutable state while retaining current UI metadata', () => {
 
 test('normalizes exact public US and Metric Startup export fixtures', () => {
     [[startup, 'US', .105, 22.17204852543568], [startupMetric, 'Metric', 2.8, 4.7586676954732505]].forEach(([saved, units, wireDiameter, rate]) => {
-        const normalized = normalizeCompressionSpringSavedDesign(saved);
-        expect(normalized.diagnostics).toEqual([]);
+        const migrated = migrate(JSON.parse(JSON.stringify(saved)));
+        const normalized = normalizeCompressionSpringSavedDesign(migrated);
+        expectNormalizedStartupSymbols(normalized, migrated);
+        expect(normalized.legacyVersion).toBe(initialState.version);
         expect(normalized.designType).toBe('Spring/Compression');
         expect(normalized.units).toBe(units);
-        expect(normalized.symbols).toHaveLength(54);
         expect(normalized.symbols.find((symbol) => symbol.id === 'Wire_Dia').numericValue).toBe(wireDiameter);
         expect(normalized.symbols.find((symbol) => symbol.id === 'Rate').numericValue).toBe(rate);
         expect(normalized.systemControls).toMatchObject({ maxit: 600, objmin: .00001 });

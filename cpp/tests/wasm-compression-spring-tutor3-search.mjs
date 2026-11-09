@@ -1,3 +1,4 @@
+import { migrateStartup } from './wasm-compression-spring-client.mjs';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
@@ -9,7 +10,7 @@ if (!modulePath) throw new Error('Usage: node wasm-compression-spring-tutor3-sea
 const Module = await (await import(pathToFileURL(modulePath).href)).default();
 const fixtureUrl = new URL('../../client/src/__test__/Spring/Compression/fixtures/tutor3-page05-search.json', import.meta.url);
 const fixture = JSON.parse(readFileSync(fixtureUrl));
-const startup = JSON.parse(readFileSync(new URL(`../../client/src/__test__/Spring/Compression/fixtures/${fixture.baseFixture}`, import.meta.url)));
+const startup = migrateStartup(JSON.parse(readFileSync(new URL(`../../client/src/__test__/Spring/Compression/fixtures/${fixture.baseFixture}`, import.meta.url))));
 const create = Module.cwrap('odop_compression_spring_session_create', 'number', []);
 const destroy = Module.cwrap('odop_compression_spring_session_destroy', null, ['number']);
 const setPropagation = Module.cwrap('odop_compression_spring_session_set_propagation', 'number', ['number', 'string', 'string', 'number']);

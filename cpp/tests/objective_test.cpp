@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <memory>
 int main() {
-  odop::compression_spring::RuntimeState state; state.p.resize(6); state.x_numbers.resize(48); state.x_text.resize(48);
+  odop::compression_spring::RuntimeState state; state.p.resize(odop::compression_spring::kPSize); state.x_numbers.resize(odop::compression_spring::kXSize); state.x_text.resize(odop::compression_spring::kXSize);
   auto& p = state.p[0]; p.value=5; p.valid_minimum=0; p.valid_maximum=10; p.constraint_minimum=2; p.minimum_scale_denominator=1; p.minimum_flags=1;
   odop::DesignSession session(std::make_unique<odop::compression_spring::Model>(state));
   auto problem=odop::optimization::compile_problem(session); auto valid=odop::optimization::evaluate(session,problem);

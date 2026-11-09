@@ -1,5 +1,5 @@
 import { applyWasmComputationSnapshot } from '../actions';
-import { LOAD, LOAD_INITIAL_STATE, CHANGE_SYMBOL_VALUE, CHANGE_SYSTEM_CONTROLS_VALUE, SEARCH, SEEK,
+import { STARTUP, RESTORE_AUTO_SAVE, LOAD, LOAD_INITIAL_STATE, CHANGE_SYMBOL_VALUE, CHANGE_SYSTEM_CONTROLS_VALUE, SEARCH, SEEK,
     FIX_SYMBOL_VALUE, FREE_SYMBOL_VALUE, CHANGE_SYMBOL_CONSTRAINT, CHANGE_SYMBOL_CONSTRAINTS,
     SET_SYMBOL_FLAG, RESET_SYMBOL_FLAG, CHANGE_INPUT_SYMBOL_VALUES } from '../types';
 import { normalizeCompressionSpringSavedDesign } from '../../computation/compressionSpringSchema';
@@ -11,6 +11,7 @@ const patshTraceEnabled = process.env.REACT_APP_PATSH_TRACE === 'true';
 // legacy reducers/dispatcher still assemble the richer fix/constraint state;
 // once complete, that authoritative domain state is synchronized atomically.
 const workerCommands = new Set([CHANGE_SYMBOL_VALUE, CHANGE_SYSTEM_CONTROLS_VALUE, SEARCH, SEEK]);
+const modelLoads = new Set([STARTUP, LOAD, LOAD_INITIAL_STATE, RESTORE_AUTO_SAVE]);
 const synchronizedDomainActions = new Set([
     FIX_SYMBOL_VALUE, FREE_SYMBOL_VALUE, CHANGE_SYMBOL_CONSTRAINT,
     CHANGE_SYMBOL_CONSTRAINTS, SET_SYMBOL_FLAG, RESET_SYMBOL_FLAG,
@@ -25,13 +26,15 @@ const synchronizedDomainActions = new Set([
 export function createCompressionSpringWasmBridge(client, enabled = () => false) {
     let hydrated = false;
     return (store) => (next) => (action) => {
-        const compression = store.getState().model.type === 'Spring/Compression' || (action.payload && action.payload.model && action.payload.model.type === 'Spring/Compression');
-        const active = enabled() && compression;
-        if (!active || action.type === 'modelSlice/applyWasmComputationSnapshot') return next(action);
+        if (!enabled() || action.type === 'modelSlice/applyWasmComputationSnapshot') return next(action);
+        const loading = modelLoads.has(action.type);
+        const compression = store.getState().model.type === 'Spring/Compression';
+        if (!loading && !compression) return next(action);
         const handledByWorker = workerCommands.has(action.type);
         const result = next({ ...action, meta: { ...action.meta, wasmComputationHandled: handledByWorker } });
-        if (action.type === LOAD || action.type === LOAD_INITIAL_STATE) hydrated = false;
-        if (!workerCommands.has(action.type) && !synchronizedDomainActions.has(action.type) && action.type !== LOAD && action.type !== LOAD_INITIAL_STATE) return result;
+        if (loading) hydrated = false;
+        if (store.getState().model.type !== 'Spring/Compression') return result;
+        if (!loading && !handledByWorker && !synchronizedDomainActions.has(action.type)) return result;
         const design = normalizeCompressionSpringSavedDesign(store.getState().model);
         // Rich operations are intentionally sent as a complete domain
         // transaction. This preserves all flags, bounds, and scale metadata
@@ -49,7 +52,7 @@ export function createCompressionSpringWasmBridge(client, enabled = () => false)
             : runOptimization();
         hydrated = true;
         request.then((response) => {
-            if (!response.stale && response.snapshot) {
+            if (!response.stale && response.snapshot && store.getState().model.type === 'Spring/Compression') {
                 if (patshTraceEnabled && response.trace) response.trace.trim().split('\n').forEach((line) => console.log(line));
                 store.dispatch(applyWasmComputationSnapshot(response.snapshot, response.objective, response.termination));
                 // The Worker result is a complete transaction. Rebuild alerts

@@ -11,7 +11,7 @@ namespace odop::compression_spring {
 inline constexpr std::string_view kDesignType = "Spring/Compression";
 inline constexpr int kSchemaVersion = 1;
 inline constexpr std::size_t kPSize = 6;
-inline constexpr std::size_t kXSize = 48;
+inline constexpr std::size_t kXSize = 54;
 
 enum class Storage { p, x };
 enum class PropagationTarget { valid_minimum, valid_maximum, constraint_minimum, constraint_maximum };
@@ -95,10 +95,10 @@ struct HydrationResult {
 };
 
 [[nodiscard]] const SlotLocation* find_slot(std::string_view stable_id);
-// The order is the established 54-entry persisted Compression Spring table.
+// The order is the established 60-entry persisted Compression Spring table.
 // Narrow hosts use it to enumerate a snapshot without depending on offsets.
 [[nodiscard]] std::string_view symbol_id(std::size_t ordinal);
-inline constexpr std::size_t kSymbolCount = 54;
+inline constexpr std::size_t kSymbolCount = kPSize + kXSize;
 [[nodiscard]] HydrationResult hydrate(const FlatDesign& design);
 [[nodiscard]] FlatDesign snapshot(const RuntimeState& state);
 void apply_propagations(RuntimeState& state, const RuntimeState& before);

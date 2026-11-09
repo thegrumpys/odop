@@ -17,10 +17,9 @@ const uiFieldNames = [
     'propagate'
 ];
 
-// The legacy dispatcher treats the first 54 entries as the P/X calculation
-// table. Only its first 29 entries explicitly have `type: "equationset"`; the
-// remaining configuration slots are still X values. Labels begin at index 54.
-const computationalSymbols = (state) => state.symbol_table.slice(0, 54);
+const computationalSymbols = (state) => state.symbol_table.filter(
+    ({ type }) => type === 'equationset' || type === 'calcinput'
+);
 
 function copyUiFields(symbol) {
     const schema = {
@@ -54,13 +53,13 @@ export const compressionSpringUiSchema = compressionSpringUiSchemaByUnits.US;
 // JavaScript UI layer and do not trigger C++ init or equation evaluation.
 const calculationInputIds = new Set([
     'Prop_Calc_Method', 'Material_Type', 'Material_File', 'Life_Category',
-    'End_Type', 'tbase010', 'tbase400'
+    'End_Type_Method', 'End_Type', 'tbase010', 'tbase400'
 ]);
 
 export function compressionSpringChangeImpact(symbolId) {
     if (calculationInputIds.has(symbolId)) return 'initialize-and-evaluate';
     if (['OD_Free', 'Wire_Dia', 'L_Free', 'Coils_T', 'Force_1', 'Force_2'].includes(symbolId)) return 'evaluate';
-    if (['Inactive_Coils', 'Add_Coils@Solid', 'Density', 'Torsion_Modulus', 'Hot_Factor_Kh', 'Tensile', '%_Tensile_Endur', '%_Tensile_Stat', 'Stress_Lim_Endur', 'Stress_Lim_Stat'].includes(symbolId)) return 'evaluate';
+    if (['End_Closure', 'Closed_End_Geometry', 'Inactive_Coils', 'Transition_Coils', 'Taper_Amount', 'Pigtail_Amount', 'Grind_Amount', 'Density', 'Torsion_Modulus', 'Hot_Factor_Kh', 'Tensile', '%_Tensile_Endur', '%_Tensile_Stat', 'Stress_Lim_Endur', 'Stress_Lim_Stat'].includes(symbolId)) return 'evaluate';
     return 'no-computation';
 }
 
@@ -140,7 +139,7 @@ export function normalizeCompressionSpringSavedDesign(design) {
     if (hydratedDesign.type !== 'Spring/Compression') {
         normalizedDiagnostics.push(`Unsupported design type: ${hydratedDesign.type || '<missing>'}`);
     }
-    if (hydratedDesign.version !== undefined && hydratedDesign.version !== '13') {
+    if (hydratedDesign.version !== undefined && hydratedDesign.version !== initialState.version) {
         normalizedDiagnostics.push(`Unsupported Compression Spring legacy version: ${hydratedDesign.version}`);
     }
 

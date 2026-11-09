@@ -23,7 +23,7 @@ it('hydrates, applies a multi-symbol transaction, and rejects an out-of-date bas
     runtime.handle({ type: compressionSpringCommands.HYDRATE, requestId: 1, baseRevision: 0, revision: 1, design: design() });
     runtime.handle({ type: compressionSpringCommands.APPLY_CHANGES, requestId: 2, baseRevision: 1, revision: 2, changes: [{ id: 'Wire_Dia', numericValue: 0.12 }, { id: 'Force_1', numericValue: 25 }] });
     runtime.handle({ type: compressionSpringCommands.RECALCULATE, requestId: 3, baseRevision: 1, revision: 2 });
-    expect(replies[0].snapshot).toHaveLength(54);
+    expect(replies[0].snapshot.map(({ id }) => id)).toEqual(design().symbols.map(({ id }) => id));
     expect(replies[1].snapshot.find((symbol) => symbol.id === 'Wire_Dia').numericValue).toBe(0.12);
     expect(replies[2].error).toMatch(/stale worker transaction/);
 });

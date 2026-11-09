@@ -2,7 +2,7 @@ import { initialState } from '../../../designtypes/Spring/Compression/initialSta
 import { initUI } from '../../../computation/compressionSpringInitUI';
 
 function withValues(values) {
-    return initialState.symbol_table.slice(0, 54).map((symbol) => ({
+    return initialState.symbol_table.map((symbol) => ({
         ...symbol,
         value: Object.prototype.hasOwnProperty.call(values, symbol.name) ? values[symbol.name] : symbol.value
     }));
@@ -20,7 +20,7 @@ test('initUI preserves table values while deriving material-table presentation',
 });
 
 test('initUI exposes user-entered properties for methods two and three', () => {
-    const methodTwo = initUI(withValues({ Prop_Calc_Method: 2, End_Type: 7 }));
+    const methodTwo = initUI(withValues({ Prop_Calc_Method: 2, End_Type_Method: 2 }));
     expect(symbol(methodTwo, 'Density').input).toBe(true);
     expect(symbol(methodTwo, '%_Tensile_Endur').hidden).toBe(false);
     expect(symbol(methodTwo, 'Stress_Lim_Stat').input).toBe(false);

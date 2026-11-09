@@ -1,3 +1,4 @@
+import { migrateStartup } from '../tests/wasm-compression-spring-client.mjs';
 import assert from 'node:assert/strict';
 import { performance } from 'node:perf_hooks';
 import { readFileSync } from 'node:fs';
@@ -9,7 +10,7 @@ if (!modulePath) throw new Error('Usage: node wasm-compression-spring-recalculat
 const Module = await (await import(pathToFileURL(modulePath).href)).default();
 const exports = ['Startup.json', 'Startup_Metric.json'].map((file) => JSON.parse(
   readFileSync(new URL(`../../client/src/__test__/Spring/Compression/fixtures/${file}`, import.meta.url))
-));
+)).map(migrateStartup);
 
 const create = Module.cwrap('odop_compression_spring_session_create', 'number', []);
 const destroy = Module.cwrap('odop_compression_spring_session_destroy', null, ['number']);

@@ -15,7 +15,9 @@ inline constexpr std::size_t FS_Solid = 18, FS_CycleLife = 19, Cycle_Life = 20, 
 inline constexpr std::size_t Prop_Calc_Method = 24, Material_Type = 25, Life_Category = 29;
 inline constexpr std::size_t Density = 30, Torsion_Modulus = 31, Hot_Factor_Kh = 32, Tensile = 33;
 inline constexpr std::size_t PC_Tensile_Endur = 34, PC_Tensile_Stat = 35, Stress_Lim_Endur = 36, Stress_Lim_Stat = 37;
-inline constexpr std::size_t End_Type = 38, Inactive_Coils = 39, Add_Coils_Solid = 40;
-inline constexpr std::size_t tbase010 = 43, tbase400 = 44, const_term = 45, slope_term = 46, tensile_010 = 47;
+inline constexpr std::size_t End_Type_Method = 38, End_Type = 39, End_Closure = 40, Closed_End_Geometry = 41;
+inline constexpr std::size_t Inactive_Coils = 42, Transition_Coils = 43, Taper_Amount = 44, Pigtail_Amount = 45, Grind_Amount = 46;
+inline constexpr std::size_t Catalog_Name = 47, Catalog_Number = 48;
+inline constexpr std::size_t tbase010 = 49, tbase400 = 50, const_term = 51, slope_term = 52, tensile_010 = 53;
 
 }  // namespace odop::compression_spring::offsets

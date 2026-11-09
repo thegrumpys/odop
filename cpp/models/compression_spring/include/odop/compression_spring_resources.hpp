@@ -19,12 +19,17 @@ struct MaterialResource {
 
 struct EndTypeResource {
   std::string_view name;
+  double closure;
+  double geometry;
   double inactive_coils;
-  double add_coils_solid;
+  double transition_coils;
+  double taper;
+  double pigtail;
+  double grind;
 };
 
 inline constexpr std::size_t kMaterialResourceCount = 18;
-inline constexpr std::size_t kEndTypeResourceCount = 8;
+inline constexpr std::size_t kEndTypeResourceCount = 11;
 
 [[nodiscard]] const MaterialResource* material_resource(std::string_view material_file, int index);
 [[nodiscard]] const EndTypeResource* end_type_resource(int index);

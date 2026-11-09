@@ -18,7 +18,17 @@ constexpr std::array<MaterialResource, kMaterialResourceCount> metric{{
   {"A125-52","",.00786,79.293,.91,1.72,1.585,h}, {"A125-52","CL-GND",.00786,79.293,.96,1.72,1.585,h}
 }};
 constexpr std::array<EndTypeResource, kEndTypeResourceCount> ends{{
-  {"End_Type",0,0}, {"Open",0,1}, {"Open&Ground",1,0}, {"Closed",2,1}, {"Closed&Ground",2,0}, {"Tapered_C&G",2,-.5}, {"Pig-tail",2,0}, {"User_Specified",0,0}
+  {"End_Type", 0, 0, 0, 0, 0, 0, 0},
+  {"Open", 1, 1, 0.0, 0.0, 0.0, 0.0, 0.0},
+  {"Open&Ground", 1, 1, 1.0, 0.0, 0.0, 0.0, 1.0},
+  {"Closed", 2, 1, 2.0, 2.0, 0.0, 0.0, 0.0},
+  {"Closed&Ground", 2, 1, 2.0, 2.0, 0.0, 0.0, 1.0},
+  {"DoubleClosed", 2, 2, 4.0, 2.0, 0.0, 0.0, 0.0},
+  {"DoubleClosed&Ground", 2, 2, 4.0, 2.0, 0.0, 0.0, 1.0},
+  {"TaperedClosed", 2, 3, 2.0, 2.0, 1.0, 0.0, 0.0},
+  {"TaperedClosed&Ground", 2, 3, 2.0, 2.0, 1.0, 0.0, 0.5},
+  {"PigtailClosed", 2, 4, 2.0, 1.0, 0.0, 2.0, 0.0},
+  {"PigtailClosed&Ground", 2, 4, 2.0, 1.0, 0.0, 2.0, 1.0},
 }};
 }
 
