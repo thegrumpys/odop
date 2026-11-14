@@ -84,3 +84,7 @@ client/public/docs
 # Lunr generated files
 lunr_index.json
 lunr_pages.json
+
+# Generated WebAssembly files
+/client/src/computation/wasm/odop_wasm.mjs
+/client/src/computation/wasm/odop_wasm.wasm
