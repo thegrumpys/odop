@@ -21,13 +21,15 @@ fixed in cd233e46; its demo2 mismatch did not reproduce. No tracked engine
 files or computation imports were missing. Startup/Metric and regression
 fixtures parsed successfully.
 
-Clean rebuilt native, Node Wasm, and browser Worker Wasm with Node 20.20.2,
+The October 4 run rebuilt native, Node Wasm, and browser Worker Wasm with Node 20.20.2,
 CMake 4.4.3, and Emscripten 3.1.73. Browser artifacts and client copies matched
 SHA256 hashes. Binaries are ignored; copy_if_different can preserve timestamps.
 
+Use the current Node version to repeat the checks:
+
 ```sh
 source /Users/brianwatt/Developer/emsdk/emsdk_env.sh
-export PATH=/Users/brianwatt/.nvm/versions/node/v20.20.2/bin:$PATH
+nvm use 26
 npm run cpp:test:native
 npm run cpp:test:wasm
 npm run cpp:test:wasm:jest
@@ -127,10 +129,18 @@ Rebased `investigation_of_cpp_and_webasm` onto `origin/master` at
   symbols. The updated Weight Seek messages are 0.05376 → 0.01460 pounds
   (72.85%) on page 06 and 0.6480 → 0.4628 pounds (28.57%) on page 13. The
   other three messages match the October 4 results.
-- Passed 376 frontend tests across 54 suites with actual Wasm tests enabled,
-  68 backend tests, all seven native CTests, and the standalone Wasm suite.
-  The Wasm-enabled React production build and both Wasm benchmark runners
-  also completed successfully.
+### November 9 verification rerun
+
+Reran verification at `2159de4d` with Node `26.13.0` and npm `11.20.0`.
+
+- Frontend Jest passed all 376 tests across 54 suites with the compiled Wasm
+  module enabled, including the US/Metric Worker startup, Tutor 3 Search,
+  and Tutor 7 Seek regressions.
+- Backend Mocha passed all 68 tests. Native CTest passed all seven tests.
+- The standalone Wasm suite passed. Both Wasm benchmark runners completed,
+  and the Wasm-enabled React production build compiled successfully.
+
+The October 4 verification above records its original Node 20 environment.
 
 ### Open acceptance and build work
 
@@ -158,9 +168,11 @@ the recalculation for the same revision. Preserve the current US and Metric
 Worker startup test, Tutor 3 full-state Search, and all five refreshed Tutor 7
 Seek fixtures as regression gates.
 
-Always use Node20 and the Wasm flag for this branch's client:
+Use the Node version declared in `package.json` (`26.x` as of this update)
+and enable Wasm for this branch's client:
 
 ```sh
+nvm use 26
 cd client
 BROWSER=none REACT_APP_ENABLE_COMPRESSION_SPRING_WASM=true npm start
 ```
