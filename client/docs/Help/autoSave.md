@@ -16,29 +16,22 @@ ___
 
 ## Background   
 
-Power failure, system crash or loss of network connectivity prevent a Save operation and 
-potentially incur loss of a user's work since the previous Save operation. 
+A power failure, system crash or loss of network connectivity can interrupt a Save operation
+and put work done since the previous Save at risk.
 
-Separately, most browser users are conditioned to use the browser "Reload" a.k.a. "Refresh" button 
-as a means to recovery from various operational difficulties and anomalies. 
-Unfortunately, 
-using the browser Reload function with a single page web app such as ODOP 
-will likely incur a complete reset of the app potentially 
-resulting in loss of work since the previous Save operation. 
-Similarly, use of the browser "Back" function followed by "Forward" or 
-use of the ODOP logo icon at the left of the menu & tab bar 
-will  result in reset of the app.  
+You might use your browser's Reload or Refresh button when a page stops responding.
+Reloading a single-page web app like ODOP resets the app and can discard unsaved work.
+Using the browser's Back button followed by Forward, or clicking the ODOP logo at the
+left of the menu and tab bar, can also reset the app.
 
 *Note:*   
 *The on-line Help documentation pages are not subject to the same concerns about 
 browser Reload, browser Back / Forward and the ODOP logo icon.* 
 
-In order to at least partially address these issues, 
-the ODOP software provides a basic AutoSave feature. 
-AutoSave data is created and stored locally. 
-While not technically a browser "cookie", 
-AutoSave data utilizes a similar mechanism. 
-Only one AutoSave design is available at any point in time. 
+AutoSave gives you a way to recover some of that work.
+ODOP stores AutoSave data in your browser's local storage. Tabs and windows on the same
+ODOP site in the same browser profile share one AutoSave design. Each new AutoSave replaces
+the previous copy.
 ___
 
 <a id="CreateDelete"></a>  
@@ -47,22 +40,28 @@ ___
 ## ODOP features impacting AutoSave data   
 
 
-- Action : Search, Seek, Trade, Select Size and Select Catalog 
-cause AutoSave data to be created before the function. 
+- Action → Search, Seek and Trade create AutoSave data before they run. Automatic Search
+and optimization buttons that run Seek also create AutoSave data.
 
-- File : Preferences and Properties 
-cause AutoSave data to be created after the function. 
+- Action → Select Size and Select Catalog create AutoSave data before applying your choice.
+If Select Size triggers an automatic Search, the Search replaces that copy with one that
+already includes the selected size.
 
-- File : Open, Save and SaveAs 
-cause AutoSave data to be deleted after the function. 
+- File → Preferences and Properties create AutoSave data after you apply changes.
 
-- Sign Out deletes AutoSave data. 
+- File → Open and Import clear AutoSave data after loading a design. Loading a starting
+design through File → New or File → Open also clears it.
 
-- Action : Execute and the Tutorial and Demo features are able to save and / or restore AutoSave data. 
+- File → Save and Save As clear AutoSave data when saving starts. The copy is already gone
+if the save fails.
 
-- Recovery of a design causes that AutoSave data to be deleted. 
+- AutoSave works whether or not you are signed in. Signing out leaves the copy in your browser.
 
-- Other operations do not utilize or affect AutoSave data. 
+- Action → Execute, tutorials and demos can create AutoSave data by running actions such as
+Search. For example, Tutor 6 creates a copy when it runs Search. Starting a script,
+tutorial or demo by itself leaves the current copy alone.
+
+- Recovering a design clears its AutoSave data.
 
 ___
 
@@ -74,8 +73,16 @@ ___
 If AutoSave data exists at the time the app starts, 
 a blue pop-up message will indicate that an AutoSave design is available 
 and provide the opportunity to recover it. 
-Selecting "Yes" will recover the AutoSave design. 
-Selecting "No" will load the default design. 
+Selecting "Yes" recovers the latest available design and clears the copy.
+Selecting "No" loads the default design and clears the AutoSave copy once that design loads.
+
+While ODOP is open, you can also recover the copy through **File → New** or, where available,
+**File → Open**.
+Choose **Load Auto Save** when the button appears. The recovered design replaces the design
+in the current tab.
+
+If the copy was created during a tutorial, demo or script, recovery returns you to the
+saved design. To resume the tutorial, demo or script after restarting ODOP, launch it again.
 
 If the app is started directly from odop.springdesignsoftware.org without parameters as part of the URL, 
 the default is Compression spring, US Customary units and Advanced View. 
@@ -89,13 +96,17 @@ ___
 
 ## Using AutoSave in before / after comparisons   
 
-The AutoSave feature can provide a before / after comparison for Search, Seek and Trade. 
-After completing a one of those operations, open a new browser tab (or window). 
-Launch another instance of the app in that new tab (or window) by copy and paste of 
-the address line (https://odop.springdesignsoftware.org) from the first tab (or window). 
-Respond "Yes" to the prompt to recover AutoSave data in that tab (or window). 
-This will display the state of the design before the Search, Seek or Trade operation. 
-Switch between the two tabs (windows) to compare. 
+The AutoSave feature can provide a before / after comparison for Search and Seek.
+After completing one of those operations, open a new tab or window in the same browser profile
+before another action replaces or clears the AutoSave copy. Copy the ODOP address from the
+original tab into the new one. Respond "Yes" to recover the latest available copy.
+If the operation's copy is still available, the new tab shows the design before the
+operation. Switch between the two tabs to compare. Recovery clears the shared copy for
+both tabs.
+
+Trade also creates an AutoSave copy when it starts. Some Trade strategies run additional
+searches after relaxing constraints. Those searches can replace the original copy with
+an intermediate design.
 
 ___
 
@@ -104,26 +115,21 @@ ___
 
 ## Notes   
 
-The AutoSave feature allows a browser refresh / reload or click on the ODOP logo 
-to be used as an "undo" for the most recent Action : Search, Seek, Trade, 
-Select Size or Select Catalog operation. 
+Recovering the AutoSave copy can serve as a one-time undo. Reload the app or click the
+ODOP logo and choose "Yes" to return to the most recent AutoSave. Any changes made after
+that copy was created are lost in the tab where you recover it.
 
-Restoring AutoSave data clears the data. 
-An additional browser refresh / reload or press on the ODOP logo will replace the design 
-recovered from AutoSave data with the default design. 
+If you reload or click the ODOP logo again before another AutoSave is made, ODOP loads
+the default design.
 
-The AutoSave feature is not intended to be used for long term storage of design information. 
-Use File : Save, File : SaveAs or File : Export to save the design permanently. 
+For long-term storage, use File → Save, Save As or Export.
 
-Not all operations are recoverable by the current AutoSave implementation. 
-Users should save or export frequently and 
-use the browser Reload and Back functions only with the understanding that 
-design changes applied since your last save or export may be lost. 
-The AutoSave feature may assist in recovery but it is not guaranteed to 
-capture all of the latest changes.  
+AutoSave captures the design at specific points. Save or export frequently, and keep in mind
+that using the browser Reload or Back functions can discard changes made since your last
+Save or Export.
 
-The AutoSave feature is not available when operating in "private browsing mode" 
-(Chrome "Incognito", Edge "InPrivate", Firefox "Private Window", etc.). 
+AutoSave can work in private browsing mode if the browser allows ODOP to store data.
+The browser clears the copy when that private session ends.
 
 ___
 See also:   

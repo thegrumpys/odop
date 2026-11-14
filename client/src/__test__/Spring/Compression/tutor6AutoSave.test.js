@@ -10,6 +10,9 @@ import {
 } from '../../../store/actions';
 import store from '../../../store/store';
 
+// Keep best-effort usage logging out of the AutoSave recovery test.
+jest.mock('../../../logUsage', () => ({ logUsage: jest.fn(), logValue: jest.fn() }));
+
 it.each([
   ['after a reload', 'Spring/Compression', true, false],
   ['during a tutorial', 'Spring/Compression', true, false],
