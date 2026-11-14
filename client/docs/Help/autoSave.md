@@ -40,14 +40,16 @@ ___
 ## ODOP features impacting AutoSave data   
 
 
-- Action → Search, Seek and Trade create AutoSave data before they run. Automatic Search
-and optimization buttons that run Seek also create AutoSave data.
+| Trigger | When ODOP saves the copy |
+| --- | --- |
+| **Search** | Immediately before Search runs. This includes Search from the Action menu, the results table, a variable’s menu, and Search steps in tutorials, demos, and scripts. For example, Tutor 6 creates a copy when Search runs on page 4 and again later. Starting a tutorial, demo, or script by itself leaves the current copy alone. |
+| **Automatic Search after an edit** | After applying the edit and before Search runs, if automatic Search is enabled and the edit meets its trigger conditions. This can follow changes to values, fixed/free settings, and constraints. |
+| **Seek from the interface** | Immediately before Seek runs. This includes Seek from the Action menu, the results table, variable controls such as spring wire diameter, and design-specific optimization buttons. A script that runs Seek directly skips this step. |
+| **Trade** | When Trade starts, then again before each Search it runs. A later Search can replace the original copy after constraints have already changed. |
+| **Select Size or Select Catalog** | Before applying your choice. If Select Size then triggers automatic Search, that Search replaces the copy with one that already includes the selected size. |
+| **File → Preferences or Properties** | After applying your changes. Preferences can also trigger automatic Search. |
 
-- Action → Select Size and Select Catalog create AutoSave data before applying your choice.
-If Select Size triggers an automatic Search, the Search replaces that copy with one that
-already includes the selected size.
-
-- File → Preferences and Properties create AutoSave data after you apply changes.
+Opening or saving designs can also affect the recovery copy.
 
 - File → Open and Import clear AutoSave data after loading a design. Loading a starting
 design through File → New or File → Open also clears it.
@@ -56,10 +58,6 @@ design through File → New or File → Open also clears it.
 if the save fails.
 
 - AutoSave works whether or not you are signed in. Signing out leaves the copy in your browser.
-
-- Action → Execute, tutorials and demos can create AutoSave data by running actions such as
-Search. For example, Tutor 6 creates a copy when it runs Search. Starting a script,
-tutorial or demo by itself leaves the current copy alone.
 
 - Recovering a design clears its AutoSave data.
 
@@ -70,16 +68,17 @@ ___
 
 ## Recovering a design from AutoSave data   
 
-If AutoSave data exists at the time the app starts, 
-a blue pop-up message will indicate that an AutoSave design is available 
-and provide the opportunity to recover it. 
-Selecting "Yes" recovers the latest available design and clears the copy.
-Selecting "No" loads the default design and clears the AutoSave copy once that design loads.
+ODOP offers recovery when an AutoSave copy is available.
 
-While ODOP is open, you can also recover the copy through **File → New** or, where available,
-**File → Open**.
-Choose **Load Auto Save** when the button appears. The recovered design replaces the design
-in the current tab.
+| When | What you select |
+| --- | --- |
+| At startup, including after a reload | **Yes** in the **ODOP Design Recovery** prompt. |
+| While the app is open | **File → New → Load Auto Save**. |
+| While the app is open, where File Open is available | **File → Open → Load Auto Save**. |
+
+When you recover a design, ODOP loads the latest available copy into the current tab
+and clears it from shared browser storage. Selecting **No** at startup loads the default
+design and clears the AutoSave copy once that design loads.
 
 If the copy was created during a tutorial, demo or script, recovery returns you to the
 saved design. To resume the tutorial, demo or script after restarting ODOP, launch it again.
