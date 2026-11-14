@@ -159,12 +159,6 @@ export default function FileOpen() {
   const onLoadAutoSave = () => {
 //    console.log('FileOpen.onLoadAutoSave');
     setShow(!show);
-    var autoSaveType;
-    if (typeof (Storage) !== "undefined" && localStorage.getItem('autosave') !== null) {
-      var autosave = JSON.parse(localStorage.getItem('autosave'));
-      autoSaveType = autosave.model !== undefined ? autosave.model.type : autosave.type;
-    }
-    if (stopOnFileLoad || (autoSaveType !== undefined && autoSaveType !== model_type)) dispatch(executeStopOnLoad());
     dispatch(restoreAutoSave());
     dispatch(deleteAutoSave());
 //    console.log('FileOpen.onLoadAutoSave','model_user=',model_user,'model_type=',model_type,'model_name=',model_name,'model_view=',model_view);
