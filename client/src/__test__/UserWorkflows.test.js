@@ -9,6 +9,7 @@ import store from '../store/store';
 import { inject, enableDispatcher } from '../store/actions';
 import { initialSystemControls } from '../initialSystemControls';
 import axios from '../axiosConfig';
+import config from '../config';
 
 jest.mock('../axiosConfig', () => Object.assign(jest.fn(), {
   get: jest.fn(), post: jest.fn(), patch: jest.fn(), delete: jest.fn()
@@ -29,6 +30,7 @@ global.IS_REACT_ACT_ENVIRONMENT = true;
 
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const emptyStore = clone(store.getState());
+const initialUrl = { ...config.url };
 const account = {
   isAuthenticated: true, isAdmin: false, token: 'workflow-user',
   email: 'workflow@example.com', first_name: 'Release', last_name: 'Tester'
@@ -133,6 +135,7 @@ beforeEach(async () => {
   jest.clearAllMocks();
   localStorage.clear();
   window.history.replaceState({}, '', '/');
+  config.url = { ...initialUrl };
   library = {};
   signedIn = true;
   axios.get.mockImplementation((url) => request('GET', url));
@@ -208,6 +211,45 @@ test.each(['button', 'menu'])('Search through the %s reaches feasibility and cle
   expect(store.getState().model.result.objective_value).toBeLessThanOrEqual(initialSystemControls.objmin);
   expect(document.getElementById('seekButton').disabled).toBe(false);
   expect(document.body.textContent).not.toContain('Running...');
+});
+
+test('Tutor 8 recovery followed by Search and File New AutoSave clears the spinner', async () => {
+  await renderApp();
+  await newDesign('Spring/Compression');
+  await menu('Help', 'Tutorial…');
+  await input('#tutorialSelect', 'tutor8');
+  const scrollTo = jest.spyOn(window, 'scrollTo').mockImplementation(() => {});
+  try {
+    await click(button('Execute'));
+  } finally {
+    scrollTo.mockRestore();
+  }
+  await click(button('Next', div));
+  await click(button('Next', div));
+  await click(button('Next', div));
+  expect(div.textContent).toContain('Page 04 of 08');
+  await click(button('Close', div));
+
+  act(() => root.unmount());
+  config.url = { ...initialUrl };
+  store.dispatch(inject(clone(emptyStore)));
+  root = createRoot(div);
+  await renderApp();
+  expect(document.querySelector('.modal.show .modal-title').textContent).toBe('ODOP Design Recovery');
+  await click(button('Yes'));
+  expect(store.getState().executePanelSlice.show).toBe(false);
+  const beforeSearch = symbol('Wire_Dia').value;
+
+  await click(document.getElementById('searchButton'));
+  expect(symbol('Wire_Dia').value).not.toBe(beforeSearch);
+  expect(store.getState().spinnerSlice.show).toBe(false);
+
+  await menu('File', 'New…');
+  await click(button('Load Auto Save'));
+  expect(symbol('Wire_Dia').value).toBe(beforeSearch);
+  expect(localStorage.getItem('autosave')).toBeNull();
+  expect(store.getState().spinnerSlice.show).toBe(false);
+  expect(document.querySelector('.modal.show')).toBeNull();
 });
 
 test.each(['Min', 'Max'])('Seek %s through the menu changes the chosen value and completes', async (direction) => {

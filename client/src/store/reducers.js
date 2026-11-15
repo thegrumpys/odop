@@ -1280,7 +1280,13 @@ export default function reducers(state = {}, action) {
           });
         } else {
           // Apply the file-load rule to the live session. Saved steps contain serialized JSX.
-          result = { ...state, ...autosave, executePanelSlice: state.executePanelSlice };
+          // Search can save while the spinner is visible. Keep the current spinner state.
+          result = {
+            ...state,
+            ...autosave,
+            executePanelSlice: state.executePanelSlice,
+            spinnerSlice: state.spinnerSlice
+          };
         }
 //        console.log('reducers.RESTORE_AUTO_SAVE result1=',result);
         var { migrate } = require('../designtypes/' + result.model.type + '/migrate.js'); // Dynamically load migrate
