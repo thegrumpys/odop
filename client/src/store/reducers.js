@@ -1279,13 +1279,13 @@ export default function reducers(state = {}, action) {
             model: autosave
           });
         } else {
-          // Apply the file-load rule to the live session. Saved steps contain serialized JSX.
-          // Search can save while the spinner is visible. Keep the current spinner state.
+          // We only want name, view and model from the autosave.
+          const { model, name = state.name, view = state.view } = autosave;
           result = {
             ...state,
-            ...autosave,
-            executePanelSlice: state.executePanelSlice,
-            spinnerSlice: state.spinnerSlice
+            model,
+            name,
+            view
           };
         }
 //        console.log('reducers.RESTORE_AUTO_SAVE result1=',result);

@@ -233,6 +233,7 @@ test('Tutor 8 recovery followed by Search and File New AutoSave clears the spinn
   act(() => root.unmount());
   config.url = { ...initialUrl };
   store.dispatch(inject(clone(emptyStore)));
+  store.dispatch(enableDispatcher(true));
   root = createRoot(div);
   await renderApp();
   expect(document.querySelector('.modal.show .modal-title').textContent).toBe('ODOP Design Recovery');

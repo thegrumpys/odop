@@ -6,7 +6,7 @@ import * as sto from '../../designtypes/Piston-Cylinder/symbol_table_offsets';
 import { initialSystemControls } from '../../initialSystemControls';
 import { MIN, MAX, CONSTRAINED, FIXED, FDCL } from '../../store/actionTypes';
 import {
-    inject, startup, load, changeName, changeUser,
+    inject, startup, load, changeName, changeUser, enableDispatcher,
     changeSymbolValue, changeSymbolViolation, changeSymbolConstraint, setSymbolFlag, resetSymbolFlag,
     changeInputSymbolValues, saveInputSymbolValues, restoreInputSymbolValues,
     changeOutputSymbolValues, saveOutputSymbolConstraints, restoreOutputSymbolConstraints,
@@ -648,27 +648,43 @@ it('reducers save auto save', () => {
 
 it('reducers restore auto save', () => {
     var state = Object.assign({}, initialState, { system_controls: initialSystemControls }); // Merge initialState and initialSystemControls
-    store.dispatch(inject({"user": "USERID0123456789", name: "initialState", model: state}));
+    store.dispatch(inject({
+      user: "USERID0123456789",
+      name: "initialState",
+      view: "Advanced",
+      model: state,
+      spinnerSlice: { show: true }
+    }));
+    store.dispatch(enableDispatcher(true));
 
     // Create autosave file and verify it was created
     store.dispatch(saveAutoSave()); // create auto save file with current state contents
     expect(typeof(Storage)).not.toEqual("undefined");
     expect(localStorage.getItem('autosave')).not.toBeNull();
 
-    // Load with an entirely different state before restore and verify it
-    store.dispatch(load({
-        "type": "Test-Design"
+    const savedState = store.getState();
+    store.dispatch(inject({
+      user: "USERIDABCDEFGHIK",
+      name: "currentDesign",
+      view: "Calculator",
+      model: { type: "Test-Design" },
+      spinnerSlice: { show: false },
+      alertsSlice: { ...savedState.alertsSlice, activeKey: '0' },
+      messageSlice: { ...savedState.messageSlice, header: 'Current session' }
     }));
-    var design = store.getState(); // after
-    expect(design.user).toEqual("USERID0123456789");
-    expect(design.name).toEqual("initialState");
-    expect(design.model.type).toEqual("Test-Design");
+    const liveState = store.getState();
 
     store.dispatch(restoreAutoSave());
 
-    var design = store.getState(); // after
+    const design = store.getState();
     expect(design.model.type).toEqual("Piston-Cylinder");
     expect(design.name).toEqual("initialState");
+    expect(design.view).toEqual("Advanced");
+    expect(design.user).toBe(liveState.user);
+    expect(design.enableDispatcher).toBe(false);
+    expect(design.spinnerSlice).toBe(liveState.spinnerSlice);
+    expect(design.alertsSlice).toBe(liveState.alertsSlice);
+    expect(design.messageSlice).toBe(liveState.messageSlice);
     expect(design.model.symbol_table[sto.RADIUS].name).toEqual("RADIUS");
     expect(design.model.symbol_table[sto.RADIUS].value).toEqual(0.4);
     expect(design.model.symbol_table[sto.AREA].name).toEqual("AREA");
