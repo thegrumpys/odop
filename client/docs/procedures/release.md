@@ -170,7 +170,7 @@ See the above link for the easier-to-read table of database names.
    Use the ./scripts/dump_db.* script or batch file. 
    For background on backup provided by JAWSDB see: [Heroku docs](https://devcenter.heroku.com/articles/jawsdb#database-backups)
 1. Check the size of the production database as compared to capacity limits 
-(50MB for production paid kitefin-manifold-mysql; 5MB for JAWSDB free plan). 
+(1024MB for production paid kitefin-manifold-mysql; 5MB for JAWSDB free plan). 
 Use the ./scripts/list_db_size.* script or batch file.  
 For details, see the first FAQ question at: https://devcenter.heroku.com/articles/jawsdb#faq   
 If appropriate, dump and archive to off-line storage and re-initialize the usage_log table.
