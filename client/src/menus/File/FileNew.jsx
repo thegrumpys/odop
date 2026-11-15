@@ -92,12 +92,6 @@ export default function FileNew() {
   const onLoadAutoSave = () => {
 //    console.log('FileNew.onLoadAutoSave');
     setShow(!show);
-    var autoSaveType;
-    if (typeof (Storage) !== "undefined" && localStorage.getItem('autosave') !== null) {
-      var autosave = JSON.parse(localStorage.getItem('autosave'));
-      autoSaveType = autosave.model !== undefined ? autosave.model.type : autosave.type;
-    }
-    if (stopOnFileLoad || (autoSaveType !== undefined && autoSaveType !== model_type)) dispatch(executeStopOnLoad());
     dispatch(restoreAutoSave());
     dispatch(deleteAutoSave());
 //    console.log('FileNew.onLoadAutoSave','model_user=',model_user,'model_type=',model_type,'model_name=',model_name,'model_view=',model_view);

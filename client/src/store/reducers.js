@@ -97,6 +97,7 @@ import {
 
 import { getSeverityNumberBySeverity, getFontClassBySeverityNumber } from '../components/Alerts';
 import { VALID_MIN, VALID_MAX, MIN, MAX, FDCL } from './actionTypes';
+import { executeStop, executeStopOnLoad } from './actions';
 import { sclden } from './middleware/sclden';
 import { initialSystemControls } from '../initialSystemControls';
 import { logUsage as log } from '../logUsage';
@@ -1278,7 +1279,14 @@ export default function reducers(state = {}, action) {
             model: autosave
           });
         } else {
-          result = Object.assign({}, state, autosave); // New format
+          // We only want name, view and model from the autosave.
+          const { model, name = state.name, view = state.view } = autosave;
+          result = {
+            ...state,
+            model,
+            name,
+            view
+          };
         }
 //        console.log('reducers.RESTORE_AUTO_SAVE result1=',result);
         var { migrate } = require('../designtypes/' + result.model.type + '/migrate.js'); // Dynamically load migrate
@@ -1301,7 +1309,7 @@ export default function reducers(state = {}, action) {
       });
 //        console.log('reducers.RESTORE_AUTO_SAVE result3=',result);
 //        console.log('end reducer restoreAutoSave', 'state=', state, 'action=', action, 'result=', result);
-      return result;
+      return reducers(result, state.model.type === result.model.type ? executeStopOnLoad() : executeStop());
 
    case DELETE_AUTO_SAVE:
 //        console.log('start reducer deleteAutoSave', 'state=', state, 'action=', action);
